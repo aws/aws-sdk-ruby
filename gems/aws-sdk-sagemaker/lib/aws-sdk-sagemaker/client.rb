@@ -1843,7 +1843,7 @@ module Aws::SageMaker
     #     subnets
     #
     # @option params [String] :home_efs_file_system_kms_key_id
-    #   This member is deprecated and replaced with `KmsKeyId`.
+    #   Use `KmsKeyId`.
     #
     # @option params [String] :kms_key_id
     #   SageMaker uses Amazon Web Services KMS to encrypt the EFS volume
@@ -5083,8 +5083,13 @@ module Aws::SageMaker
     # @option params [String] :pipeline_display_name
     #   The display name of the pipeline.
     #
-    # @option params [required, String] :pipeline_definition
+    # @option params [String] :pipeline_definition
     #   The JSON pipeline definition of the pipeline.
+    #
+    # @option params [Types::PipelineDefinitionS3Location] :pipeline_definition_s3_location
+    #   The location of the pipeline definition stored in Amazon S3. If
+    #   specified, SageMaker will retrieve the pipeline definition from this
+    #   location.
     #
     # @option params [String] :pipeline_description
     #   A description of the pipeline.
@@ -5104,6 +5109,11 @@ module Aws::SageMaker
     # @option params [Array<Types::Tag>] :tags
     #   A list of tags to apply to the created pipeline.
     #
+    # @option params [Types::ParallelismConfiguration] :parallelism_configuration
+    #   This is the configuration that controls the parallelism of the
+    #   pipeline. If specified, it applies to all runs of this pipeline by
+    #   default.
+    #
     # @return [Types::CreatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePipelineResponse#pipeline_arn #pipeline_arn} => String
@@ -5113,7 +5123,12 @@ module Aws::SageMaker
     #   resp = client.create_pipeline({
     #     pipeline_name: "PipelineName", # required
     #     pipeline_display_name: "PipelineName",
-    #     pipeline_definition: "PipelineDefinition", # required
+    #     pipeline_definition: "PipelineDefinition",
+    #     pipeline_definition_s3_location: {
+    #       bucket: "BucketName", # required
+    #       object_key: "Key", # required
+    #       version_id: "VersionId",
+    #     },
     #     pipeline_description: "PipelineDescription",
     #     client_request_token: "IdempotencyToken", # required
     #     role_arn: "RoleArn", # required
@@ -5123,6 +5138,9 @@ module Aws::SageMaker
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     parallelism_configuration: {
+    #       max_parallel_execution_steps: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -10543,6 +10561,7 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineResponse#last_run_time #last_run_time} => Time
     #   * {Types::DescribePipelineResponse#created_by #created_by} => Types::UserContext
     #   * {Types::DescribePipelineResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #   * {Types::DescribePipelineResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -10568,6 +10587,7 @@ module Aws::SageMaker
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipeline AWS API Documentation
     #
@@ -10626,6 +10646,7 @@ module Aws::SageMaker
     #   * {Types::DescribePipelineExecutionResponse#last_modified_time #last_modified_time} => Time
     #   * {Types::DescribePipelineExecutionResponse#created_by #created_by} => Types::UserContext
     #   * {Types::DescribePipelineExecutionResponse#last_modified_by #last_modified_by} => Types::UserContext
+    #   * {Types::DescribePipelineExecutionResponse#parallelism_configuration #parallelism_configuration} => Types::ParallelismConfiguration
     #
     # @example Request syntax with placeholder values
     #
@@ -10651,6 +10672,7 @@ module Aws::SageMaker
     #   resp.last_modified_by.user_profile_arn #=> String
     #   resp.last_modified_by.user_profile_name #=> String
     #   resp.last_modified_by.domain_id #=> String
+    #   resp.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecution AWS API Documentation
     #
@@ -14861,6 +14883,8 @@ module Aws::SageMaker
     #
     #   resp.pipeline_execution_steps #=> Array
     #   resp.pipeline_execution_steps[0].step_name #=> String
+    #   resp.pipeline_execution_steps[0].step_display_name #=> String
+    #   resp.pipeline_execution_steps[0].step_description #=> String
     #   resp.pipeline_execution_steps[0].start_time #=> Time
     #   resp.pipeline_execution_steps[0].end_time #=> Time
     #   resp.pipeline_execution_steps[0].step_status #=> String, one of "Starting", "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
@@ -14901,6 +14925,10 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.clarify_check.check_job_arn #=> String
     #   resp.pipeline_execution_steps[0].metadata.clarify_check.skip_check #=> Boolean
     #   resp.pipeline_execution_steps[0].metadata.clarify_check.register_new_baseline #=> Boolean
+    #   resp.pipeline_execution_steps[0].metadata.emr.cluster_id #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr.step_id #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr.step_name #=> String
+    #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -16309,6 +16337,10 @@ module Aws::SageMaker
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ParallelismConfiguration] :parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline.
+    #
     # @return [Types::RetryPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RetryPipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
@@ -16318,6 +16350,9 @@ module Aws::SageMaker
     #   resp = client.retry_pipeline_execution({
     #     pipeline_execution_arn: "PipelineExecutionArn", # required
     #     client_request_token: "IdempotencyToken", # required
+    #     parallelism_configuration: {
+    #       max_parallel_execution_steps: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -17102,6 +17137,7 @@ module Aws::SageMaker
     #   resp.results[0].pipeline.last_modified_by.user_profile_arn #=> String
     #   resp.results[0].pipeline.last_modified_by.user_profile_name #=> String
     #   resp.results[0].pipeline.last_modified_by.domain_id #=> String
+    #   resp.results[0].pipeline.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #   resp.results[0].pipeline.tags #=> Array
     #   resp.results[0].pipeline.tags[0].key #=> String
     #   resp.results[0].pipeline.tags[0].value #=> String
@@ -17121,6 +17157,7 @@ module Aws::SageMaker
     #   resp.results[0].pipeline_execution.last_modified_by.user_profile_arn #=> String
     #   resp.results[0].pipeline_execution.last_modified_by.user_profile_name #=> String
     #   resp.results[0].pipeline_execution.last_modified_by.domain_id #=> String
+    #   resp.results[0].pipeline_execution.parallelism_configuration.max_parallel_execution_steps #=> Integer
     #   resp.results[0].pipeline_execution.pipeline_parameters #=> Array
     #   resp.results[0].pipeline_execution.pipeline_parameters[0].name #=> String
     #   resp.results[0].pipeline_execution.pipeline_parameters[0].value #=> String
@@ -17353,6 +17390,10 @@ module Aws::SageMaker
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ParallelismConfiguration] :parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline for this specific run.
+    #
     # @return [Types::StartPipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartPipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
@@ -17370,6 +17411,9 @@ module Aws::SageMaker
     #     ],
     #     pipeline_execution_description: "PipelineExecutionDescription",
     #     client_request_token: "IdempotencyToken", # required
+    #     parallelism_configuration: {
+    #       max_parallel_execution_steps: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -17595,17 +17639,17 @@ module Aws::SageMaker
     #
     # A pipeline execution won't stop while a callback step is running.
     # When you call `StopPipelineExecution` on a pipeline execution with a
-    # running callback step, SageMaker Pipelines sends an additional Amazon
-    # SQS message to the specified SQS queue. The body of the SQS message
-    # contains a "Status" field which is set to "Stopping".
+    # running callback step, Amazon SageMaker Pipelines sends an additional
+    # Amazon SQS message to the specified SQS queue. The body of the SQS
+    # message contains a "Status" field which is set to "Stopping".
     #
     # You should add logic to your Amazon SQS message consumer to take any
     # needed action (for example, resource cleanup) upon receipt of the
     # message followed by a call to `SendPipelineExecutionStepSuccess` or
     # `SendPipelineExecutionStepFailure`.
     #
-    # Only when SageMaker Pipelines receives one of these calls will it stop
-    # the pipeline execution.
+    # Only when Amazon SageMaker Pipelines receives one of these calls will
+    # it stop the pipeline execution.
     #
     # **Lambda Step**
     #
@@ -17704,16 +17748,16 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Stops a transform job.
+    # Stops a batch transform job.
     #
     # When Amazon SageMaker receives a `StopTransformJob` request, the
     # status of the job changes to `Stopping`. After Amazon SageMaker stops
-    # the job, the status is set to `Stopped`. When you stop a transform job
-    # before it is completed, Amazon SageMaker doesn't store the job's
-    # output in Amazon S3.
+    # the job, the status is set to `Stopped`. When you stop a batch
+    # transform job before it is completed, Amazon SageMaker doesn't store
+    # the job's output in Amazon S3.
     #
     # @option params [required, String] :transform_job_name
-    #   The name of the transform job to stop.
+    #   The name of the batch transform job to stop.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -18753,11 +18797,20 @@ module Aws::SageMaker
     # @option params [String] :pipeline_definition
     #   The JSON pipeline definition.
     #
+    # @option params [Types::PipelineDefinitionS3Location] :pipeline_definition_s3_location
+    #   The location of the pipeline definition stored in Amazon S3. If
+    #   specified, SageMaker will retrieve the pipeline definition from this
+    #   location.
+    #
     # @option params [String] :pipeline_description
     #   The description of the pipeline.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) that the pipeline uses to execute.
+    #
+    # @option params [Types::ParallelismConfiguration] :parallelism_configuration
+    #   If specified, it applies to all executions of this pipeline by
+    #   default.
     #
     # @return [Types::UpdatePipelineResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -18769,8 +18822,16 @@ module Aws::SageMaker
     #     pipeline_name: "PipelineName", # required
     #     pipeline_display_name: "PipelineName",
     #     pipeline_definition: "PipelineDefinition",
+    #     pipeline_definition_s3_location: {
+    #       bucket: "BucketName", # required
+    #       object_key: "Key", # required
+    #       version_id: "VersionId",
+    #     },
     #     pipeline_description: "PipelineDescription",
     #     role_arn: "RoleArn",
+    #     parallelism_configuration: {
+    #       max_parallel_execution_steps: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -18797,6 +18858,10 @@ module Aws::SageMaker
     # @option params [String] :pipeline_execution_display_name
     #   The display name of the pipeline execution.
     #
+    # @option params [Types::ParallelismConfiguration] :parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline for this specific run.
+    #
     # @return [Types::UpdatePipelineExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdatePipelineExecutionResponse#pipeline_execution_arn #pipeline_execution_arn} => String
@@ -18807,6 +18872,9 @@ module Aws::SageMaker
     #     pipeline_execution_arn: "PipelineExecutionArn", # required
     #     pipeline_execution_description: "PipelineExecutionDescription",
     #     pipeline_execution_display_name: "PipelineExecutionName",
+    #     parallelism_configuration: {
+    #       max_parallel_execution_steps: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -19375,7 +19443,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.114.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

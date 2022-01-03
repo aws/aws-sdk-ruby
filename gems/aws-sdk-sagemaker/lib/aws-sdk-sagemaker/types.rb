@@ -5137,7 +5137,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   This member is deprecated and replaced with `KmsKeyId`.
+    #   Use `KmsKeyId`.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -8280,7 +8280,12 @@ module Aws::SageMaker
     #       {
     #         pipeline_name: "PipelineName", # required
     #         pipeline_display_name: "PipelineName",
-    #         pipeline_definition: "PipelineDefinition", # required
+    #         pipeline_definition: "PipelineDefinition",
+    #         pipeline_definition_s3_location: {
+    #           bucket: "BucketName", # required
+    #           object_key: "Key", # required
+    #           version_id: "VersionId",
+    #         },
     #         pipeline_description: "PipelineDescription",
     #         client_request_token: "IdempotencyToken", # required
     #         role_arn: "RoleArn", # required
@@ -8290,6 +8295,9 @@ module Aws::SageMaker
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         parallelism_configuration: {
+    #           max_parallel_execution_steps: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -8303,6 +8311,12 @@ module Aws::SageMaker
     # @!attribute [rw] pipeline_definition
     #   The JSON pipeline definition of the pipeline.
     #   @return [String]
+    #
+    # @!attribute [rw] pipeline_definition_s3_location
+    #   The location of the pipeline definition stored in Amazon S3. If
+    #   specified, SageMaker will retrieve the pipeline definition from this
+    #   location.
+    #   @return [Types::PipelineDefinitionS3Location]
     #
     # @!attribute [rw] pipeline_description
     #   A description of the pipeline.
@@ -8326,16 +8340,24 @@ module Aws::SageMaker
     #   A list of tags to apply to the created pipeline.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   This is the configuration that controls the parallelism of the
+    #   pipeline. If specified, it applies to all runs of this pipeline by
+    #   default.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreatePipelineRequest AWS API Documentation
     #
     class CreatePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_display_name,
       :pipeline_definition,
+      :pipeline_definition_s3_location,
       :pipeline_description,
       :client_request_token,
       :role_arn,
-      :tags)
+      :tags,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12806,7 +12828,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] home_efs_file_system_kms_key_id
-    #   This member is deprecated and replaced with `KmsKeyId`.
+    #   Use `KmsKeyId`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_ids
@@ -15137,6 +15159,10 @@ module Aws::SageMaker
     #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   The parallelism configuration applied to the pipeline.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineExecutionResponse AWS API Documentation
     #
     class DescribePipelineExecutionResponse < Struct.new(
@@ -15150,7 +15176,8 @@ module Aws::SageMaker
       :creation_time,
       :last_modified_time,
       :created_by,
-      :last_modified_by)
+      :last_modified_by,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15224,6 +15251,10 @@ module Aws::SageMaker
     #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   Lists the parallelism configuration applied to the pipeline.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribePipelineResponse AWS API Documentation
     #
     class DescribePipelineResponse < Struct.new(
@@ -15238,7 +15269,8 @@ module Aws::SageMaker
       :last_modified_time,
       :last_run_time,
       :created_by,
-      :last_modified_by)
+      :last_modified_by,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17041,6 +17073,36 @@ module Aws::SageMaker
     class DriftCheckModelQuality < Struct.new(
       :statistics,
       :constraints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configurations and outcomes of an Amazon EMR step execution.
+    #
+    # @!attribute [rw] cluster_id
+    #   The identifier of the EMR cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_id
+    #   The identifier of the EMR cluster step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   The name of the EMR cluster step.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_file_path
+    #   The path to the log file where the cluster step's failure root
+    #   cause is recorded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/EMRStepMetadata AWS API Documentation
+    #
+    class EMRStepMetadata < Struct.new(
+      :cluster_id,
+      :step_id,
+      :step_name,
+      :log_file_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21307,11 +21369,17 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] framework_version
-    #   Specifies the framework version to use.
+    #   Specifies the framework version to use. This API field is only
+    #   supported for the PyTorch and TensorFlow frameworks.
     #
-    #   This API field is only supported for PyTorch framework versions
-    #   `1.4`, `1.5`, and `1.6` for cloud instance target devices: `ml_c4`,
-    #   `ml_c5`, `ml_m4`, `ml_m5`, `ml_p2`, `ml_p3`, and `ml_g4dn`.
+    #   For information about framework versions supported for cloud targets
+    #   and edge devices, see [Cloud Supported Instance Types and
+    #   Frameworks][1] and [Edge Supported Frameworks][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-cloud.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-supported-devices-edge-frameworks.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InputConfig AWS API Documentation
@@ -30634,6 +30702,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration that controls the parallelism of the pipeline. By
+    # default, the parallelism configuration specified applies to all
+    # executions of the pipeline unless overridden.
+    #
+    # @note When making an API call, you may pass ParallelismConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         max_parallel_execution_steps: 1, # required
+    #       }
+    #
+    # @!attribute [rw] max_parallel_execution_steps
+    #   The max number of steps that can be executed in parallel.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ParallelismConfiguration AWS API Documentation
+    #
+    class ParallelismConfiguration < Struct.new(
+      :max_parallel_execution_steps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Assigns a value to a named Pipeline parameter.
     #
     # @note When making an API call, you may pass Parameter
@@ -31020,6 +31111,10 @@ module Aws::SageMaker
     #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   The parallelism configuration applied to the pipeline.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @!attribute [rw] tags
     #   A list of tags that apply to the pipeline.
     #   @return [Array<Types::Tag>]
@@ -31038,7 +31133,43 @@ module Aws::SageMaker
       :last_run_time,
       :created_by,
       :last_modified_by,
+      :parallelism_configuration,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The location of the pipeline definition stored in Amazon S3.
+    #
+    # @note When making an API call, you may pass PipelineDefinitionS3Location
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "BucketName", # required
+    #         object_key: "Key", # required
+    #         version_id: "VersionId",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   Name of the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_key
+    #   The object key (or key name) uniquely identifies the object in an S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_id
+    #   Version Id of the pipeline definition file. If not specified, Amazon
+    #   SageMaker will retrieve the latest version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineDefinitionS3Location AWS API Documentation
+    #
+    class PipelineDefinitionS3Location < Struct.new(
+      :bucket,
+      :object_key,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31092,6 +31223,10 @@ module Aws::SageMaker
     #   trial, trial component, lineage group, or project.
     #   @return [Types::UserContext]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   The parallelism configuration applied to the pipeline execution.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @!attribute [rw] pipeline_parameters
     #   Contains a list of pipeline parameters. This list can be empty.
     #   @return [Array<Types::Parameter>]
@@ -31110,6 +31245,7 @@ module Aws::SageMaker
       :last_modified_time,
       :created_by,
       :last_modified_by,
+      :parallelism_configuration,
       :pipeline_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -31119,6 +31255,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] step_name
     #   The name of the step that is executed.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_display_name
+    #   The display name of the step.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_description
+    #   The description of the step.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -31139,6 +31283,12 @@ module Aws::SageMaker
     #   @return [Types::CacheHitResult]
     #
     # @!attribute [rw] attempt_count
+    #   The current attempt of the execution step. For more information, see
+    #   [Retry Policy for Amazon SageMaker Pipelines steps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/sagemaker/latest/dg/pipelines-retry-policy.html
     #   @return [Integer]
     #
     # @!attribute [rw] failure_reason
@@ -31154,6 +31304,8 @@ module Aws::SageMaker
     #
     class PipelineExecutionStep < Struct.new(
       :step_name,
+      :step_display_name,
+      :step_description,
       :start_time,
       :end_time,
       :step_status,
@@ -31263,6 +31415,10 @@ module Aws::SageMaker
     #     `CalculatedBaseline`.
     #   @return [Types::ClarifyCheckStepMetadata]
     #
+    # @!attribute [rw] emr
+    #   The configurations and outcomes of an EMR step execution.
+    #   @return [Types::EMRStepMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PipelineExecutionStepMetadata AWS API Documentation
     #
     class PipelineExecutionStepMetadata < Struct.new(
@@ -31276,7 +31432,8 @@ module Aws::SageMaker
       :callback,
       :lambda,
       :quality_check,
-      :clarify_check)
+      :clarify_check,
+      :emr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34113,6 +34270,9 @@ module Aws::SageMaker
     #       {
     #         pipeline_execution_arn: "PipelineExecutionArn", # required
     #         client_request_token: "IdempotencyToken", # required
+    #         parallelism_configuration: {
+    #           max_parallel_execution_steps: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_execution_arn
@@ -34128,11 +34288,17 @@ module Aws::SageMaker
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RetryPipelineExecutionRequest AWS API Documentation
     #
     class RetryPipelineExecutionRequest < Struct.new(
       :pipeline_execution_arn,
-      :client_request_token)
+      :client_request_token,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35271,6 +35437,9 @@ module Aws::SageMaker
     #         ],
     #         pipeline_execution_description: "PipelineExecutionDescription",
     #         client_request_token: "IdempotencyToken", # required
+    #         parallelism_configuration: {
+    #           max_parallel_execution_steps: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -35298,6 +35467,11 @@ module Aws::SageMaker
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline for this specific run.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StartPipelineExecutionRequest AWS API Documentation
     #
     class StartPipelineExecutionRequest < Struct.new(
@@ -35305,7 +35479,8 @@ module Aws::SageMaker
       :pipeline_execution_display_name,
       :pipeline_parameters,
       :pipeline_execution_description,
-      :client_request_token)
+      :client_request_token,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35562,7 +35737,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] transform_job_name
-    #   The name of the transform job to stop.
+    #   The name of the batch transform job to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StopTransformJobRequest AWS API Documentation
@@ -39259,6 +39434,9 @@ module Aws::SageMaker
     #         pipeline_execution_arn: "PipelineExecutionArn", # required
     #         pipeline_execution_description: "PipelineExecutionDescription",
     #         pipeline_execution_display_name: "PipelineExecutionName",
+    #         parallelism_configuration: {
+    #           max_parallel_execution_steps: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_execution_arn
@@ -39273,12 +39451,18 @@ module Aws::SageMaker
     #   The display name of the pipeline execution.
     #   @return [String]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   This configuration, if specified, overrides the parallelism
+    #   configuration of the parent pipeline for this specific run.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineExecutionRequest AWS API Documentation
     #
     class UpdatePipelineExecutionRequest < Struct.new(
       :pipeline_execution_arn,
       :pipeline_execution_description,
-      :pipeline_execution_display_name)
+      :pipeline_execution_display_name,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39302,8 +39486,16 @@ module Aws::SageMaker
     #         pipeline_name: "PipelineName", # required
     #         pipeline_display_name: "PipelineName",
     #         pipeline_definition: "PipelineDefinition",
+    #         pipeline_definition_s3_location: {
+    #           bucket: "BucketName", # required
+    #           object_key: "Key", # required
+    #           version_id: "VersionId",
+    #         },
     #         pipeline_description: "PipelineDescription",
     #         role_arn: "RoleArn",
+    #         parallelism_configuration: {
+    #           max_parallel_execution_steps: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] pipeline_name
@@ -39318,6 +39510,12 @@ module Aws::SageMaker
     #   The JSON pipeline definition.
     #   @return [String]
     #
+    # @!attribute [rw] pipeline_definition_s3_location
+    #   The location of the pipeline definition stored in Amazon S3. If
+    #   specified, SageMaker will retrieve the pipeline definition from this
+    #   location.
+    #   @return [Types::PipelineDefinitionS3Location]
+    #
     # @!attribute [rw] pipeline_description
     #   The description of the pipeline.
     #   @return [String]
@@ -39326,14 +39524,21 @@ module Aws::SageMaker
     #   The Amazon Resource Name (ARN) that the pipeline uses to execute.
     #   @return [String]
     #
+    # @!attribute [rw] parallelism_configuration
+    #   If specified, it applies to all executions of this pipeline by
+    #   default.
+    #   @return [Types::ParallelismConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/UpdatePipelineRequest AWS API Documentation
     #
     class UpdatePipelineRequest < Struct.new(
       :pipeline_name,
       :pipeline_display_name,
       :pipeline_definition,
+      :pipeline_definition_s3_location,
       :pipeline_description,
-      :role_arn)
+      :role_arn,
+      :parallelism_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2022-01-03)
+------------------
+
+* Feature - Multiple doc-only updates for Relational Database Service (RDS)
+
 1.134.0 (2021-12-21)
 ------------------
 

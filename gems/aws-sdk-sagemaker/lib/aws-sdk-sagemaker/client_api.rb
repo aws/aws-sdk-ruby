@@ -141,6 +141,7 @@ module Aws::SageMaker
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanOperator = Shapes::StringShape.new(name: 'BooleanOperator')
     Branch = Shapes::StringShape.new(name: 'Branch')
+    BucketName = Shapes::StringShape.new(name: 'BucketName')
     CacheHitResult = Shapes::StructureShape.new(name: 'CacheHitResult')
     CallbackStepMetadata = Shapes::StructureShape.new(name: 'CallbackStepMetadata')
     CallbackToken = Shapes::StringShape.new(name: 'CallbackToken')
@@ -552,6 +553,7 @@ module Aws::SageMaker
     DriftCheckExplainability = Shapes::StructureShape.new(name: 'DriftCheckExplainability')
     DriftCheckModelDataQuality = Shapes::StructureShape.new(name: 'DriftCheckModelDataQuality')
     DriftCheckModelQuality = Shapes::StructureShape.new(name: 'DriftCheckModelQuality')
+    EMRStepMetadata = Shapes::StructureShape.new(name: 'EMRStepMetadata')
     Edge = Shapes::StructureShape.new(name: 'Edge')
     EdgeModel = Shapes::StructureShape.new(name: 'EdgeModel')
     EdgeModelStat = Shapes::StructureShape.new(name: 'EdgeModelStat')
@@ -775,6 +777,7 @@ module Aws::SageMaker
     KernelName = Shapes::StringShape.new(name: 'KernelName')
     KernelSpec = Shapes::StructureShape.new(name: 'KernelSpec')
     KernelSpecs = Shapes::ListShape.new(name: 'KernelSpecs')
+    Key = Shapes::StringShape.new(name: 'Key')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     LabelAttributeName = Shapes::StringShape.new(name: 'LabelAttributeName')
     LabelCounter = Shapes::IntegerShape.new(name: 'LabelCounter')
@@ -942,6 +945,7 @@ module Aws::SageMaker
     MaxHumanLabeledObjectCount = Shapes::IntegerShape.new(name: 'MaxHumanLabeledObjectCount')
     MaxNumberOfTests = Shapes::IntegerShape.new(name: 'MaxNumberOfTests')
     MaxNumberOfTrainingJobs = Shapes::IntegerShape.new(name: 'MaxNumberOfTrainingJobs')
+    MaxParallelExecutionSteps = Shapes::IntegerShape.new(name: 'MaxParallelExecutionSteps')
     MaxParallelOfTests = Shapes::IntegerShape.new(name: 'MaxParallelOfTests')
     MaxParallelTrainingJobs = Shapes::IntegerShape.new(name: 'MaxParallelTrainingJobs')
     MaxPayloadInMB = Shapes::IntegerShape.new(name: 'MaxPayloadInMB')
@@ -1127,6 +1131,7 @@ module Aws::SageMaker
     OutputParameter = Shapes::StructureShape.new(name: 'OutputParameter')
     OutputParameterList = Shapes::ListShape.new(name: 'OutputParameterList')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
+    ParallelismConfiguration = Shapes::StructureShape.new(name: 'ParallelismConfiguration')
     Parameter = Shapes::StructureShape.new(name: 'Parameter')
     ParameterKey = Shapes::StringShape.new(name: 'ParameterKey')
     ParameterList = Shapes::ListShape.new(name: 'ParameterList')
@@ -1148,6 +1153,7 @@ module Aws::SageMaker
     Pipeline = Shapes::StructureShape.new(name: 'Pipeline')
     PipelineArn = Shapes::StringShape.new(name: 'PipelineArn')
     PipelineDefinition = Shapes::StringShape.new(name: 'PipelineDefinition')
+    PipelineDefinitionS3Location = Shapes::StructureShape.new(name: 'PipelineDefinitionS3Location')
     PipelineDescription = Shapes::StringShape.new(name: 'PipelineDescription')
     PipelineExecution = Shapes::StructureShape.new(name: 'PipelineExecution')
     PipelineExecutionArn = Shapes::StringShape.new(name: 'PipelineExecutionArn')
@@ -1377,6 +1383,8 @@ module Aws::SageMaker
     StartPipelineExecutionResponse = Shapes::StructureShape.new(name: 'StartPipelineExecutionResponse')
     StatusDetails = Shapes::StringShape.new(name: 'StatusDetails')
     StatusMessage = Shapes::StringShape.new(name: 'StatusMessage')
+    StepDescription = Shapes::StringShape.new(name: 'StepDescription')
+    StepDisplayName = Shapes::StringShape.new(name: 'StepDisplayName')
     StepName = Shapes::StringShape.new(name: 'StepName')
     StepStatus = Shapes::StringShape.new(name: 'StepStatus')
     StopAutoMLJobRequest = Shapes::StructureShape.new(name: 'StopAutoMLJobRequest')
@@ -1588,6 +1596,7 @@ module Aws::SageMaker
     VariantStatus = Shapes::StringShape.new(name: 'VariantStatus')
     VariantStatusMessage = Shapes::StringShape.new(name: 'VariantStatusMessage')
     VariantWeight = Shapes::FloatShape.new(name: 'VariantWeight')
+    VersionId = Shapes::StringShape.new(name: 'VersionId')
     VersionedArnOrName = Shapes::StringShape.new(name: 'VersionedArnOrName')
     Vertex = Shapes::StructureShape.new(name: 'Vertex')
     Vertices = Shapes::ListShape.new(name: 'Vertices')
@@ -2495,11 +2504,13 @@ module Aws::SageMaker
 
     CreatePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
     CreatePipelineRequest.add_member(:pipeline_display_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineDisplayName"))
-    CreatePipelineRequest.add_member(:pipeline_definition, Shapes::ShapeRef.new(shape: PipelineDefinition, required: true, location_name: "PipelineDefinition"))
+    CreatePipelineRequest.add_member(:pipeline_definition, Shapes::ShapeRef.new(shape: PipelineDefinition, location_name: "PipelineDefinition"))
+    CreatePipelineRequest.add_member(:pipeline_definition_s3_location, Shapes::ShapeRef.new(shape: PipelineDefinitionS3Location, location_name: "PipelineDefinitionS3Location"))
     CreatePipelineRequest.add_member(:pipeline_description, Shapes::ShapeRef.new(shape: PipelineDescription, location_name: "PipelineDescription"))
     CreatePipelineRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreatePipelineRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreatePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreatePipelineRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     CreatePipelineRequest.struct_class = Types::CreatePipelineRequest
 
     CreatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -3541,6 +3552,7 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribePipelineExecutionResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     DescribePipelineExecutionResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
+    DescribePipelineExecutionResponse.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     DescribePipelineExecutionResponse.struct_class = Types::DescribePipelineExecutionResponse
 
     DescribePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
@@ -3558,6 +3570,7 @@ module Aws::SageMaker
     DescribePipelineResponse.add_member(:last_run_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastRunTime"))
     DescribePipelineResponse.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     DescribePipelineResponse.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
+    DescribePipelineResponse.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     DescribePipelineResponse.struct_class = Types::DescribePipelineResponse
 
     DescribeProcessingJobRequest.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, required: true, location_name: "ProcessingJobName"))
@@ -3850,6 +3863,12 @@ module Aws::SageMaker
     DriftCheckModelQuality.add_member(:statistics, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Statistics"))
     DriftCheckModelQuality.add_member(:constraints, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Constraints"))
     DriftCheckModelQuality.struct_class = Types::DriftCheckModelQuality
+
+    EMRStepMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String256, location_name: "ClusterId"))
+    EMRStepMetadata.add_member(:step_id, Shapes::ShapeRef.new(shape: String256, location_name: "StepId"))
+    EMRStepMetadata.add_member(:step_name, Shapes::ShapeRef.new(shape: String256, location_name: "StepName"))
+    EMRStepMetadata.add_member(:log_file_path, Shapes::ShapeRef.new(shape: String1024, location_name: "LogFilePath"))
+    EMRStepMetadata.struct_class = Types::EMRStepMetadata
 
     Edge.add_member(:source_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "SourceArn"))
     Edge.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "DestinationArn"))
@@ -5750,6 +5769,9 @@ module Aws::SageMaker
 
     OutputParameterList.member = Shapes::ShapeRef.new(shape: OutputParameter)
 
+    ParallelismConfiguration.add_member(:max_parallel_execution_steps, Shapes::ShapeRef.new(shape: MaxParallelExecutionSteps, required: true, location_name: "MaxParallelExecutionSteps"))
+    ParallelismConfiguration.struct_class = Types::ParallelismConfiguration
+
     Parameter.add_member(:name, Shapes::ShapeRef.new(shape: PipelineParameterName, required: true, location_name: "Name"))
     Parameter.add_member(:value, Shapes::ShapeRef.new(shape: String1024, required: true, location_name: "Value"))
     Parameter.struct_class = Types::Parameter
@@ -5817,8 +5839,14 @@ module Aws::SageMaker
     Pipeline.add_member(:last_run_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastRunTime"))
     Pipeline.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     Pipeline.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
+    Pipeline.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     Pipeline.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Pipeline.struct_class = Types::Pipeline
+
+    PipelineDefinitionS3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+    PipelineDefinitionS3Location.add_member(:object_key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "ObjectKey"))
+    PipelineDefinitionS3Location.add_member(:version_id, Shapes::ShapeRef.new(shape: VersionId, location_name: "VersionId"))
+    PipelineDefinitionS3Location.struct_class = Types::PipelineDefinitionS3Location
 
     PipelineExecution.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
     PipelineExecution.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -5831,10 +5859,13 @@ module Aws::SageMaker
     PipelineExecution.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     PipelineExecution.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "CreatedBy"))
     PipelineExecution.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: UserContext, location_name: "LastModifiedBy"))
+    PipelineExecution.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     PipelineExecution.add_member(:pipeline_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "PipelineParameters"))
     PipelineExecution.struct_class = Types::PipelineExecution
 
     PipelineExecutionStep.add_member(:step_name, Shapes::ShapeRef.new(shape: StepName, location_name: "StepName"))
+    PipelineExecutionStep.add_member(:step_display_name, Shapes::ShapeRef.new(shape: StepDisplayName, location_name: "StepDisplayName"))
+    PipelineExecutionStep.add_member(:step_description, Shapes::ShapeRef.new(shape: StepDescription, location_name: "StepDescription"))
     PipelineExecutionStep.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     PipelineExecutionStep.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     PipelineExecutionStep.add_member(:step_status, Shapes::ShapeRef.new(shape: StepStatus, location_name: "StepStatus"))
@@ -5857,6 +5888,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaStepMetadata, location_name: "Lambda"))
     PipelineExecutionStepMetadata.add_member(:quality_check, Shapes::ShapeRef.new(shape: QualityCheckStepMetadata, location_name: "QualityCheck"))
     PipelineExecutionStepMetadata.add_member(:clarify_check, Shapes::ShapeRef.new(shape: ClarifyCheckStepMetadata, location_name: "ClarifyCheck"))
+    PipelineExecutionStepMetadata.add_member(:emr, Shapes::ShapeRef.new(shape: EMRStepMetadata, location_name: "EMR"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -6259,6 +6291,7 @@ module Aws::SageMaker
 
     RetryPipelineExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
     RetryPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    RetryPipelineExecutionRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     RetryPipelineExecutionRequest.struct_class = Types::RetryPipelineExecutionRequest
 
     RetryPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -6390,6 +6423,7 @@ module Aws::SageMaker
     StartPipelineExecutionRequest.add_member(:pipeline_parameters, Shapes::ShapeRef.new(shape: ParameterList, location_name: "PipelineParameters"))
     StartPipelineExecutionRequest.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
     StartPipelineExecutionRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartPipelineExecutionRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     StartPipelineExecutionRequest.struct_class = Types::StartPipelineExecutionRequest
 
     StartPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -6930,6 +6964,7 @@ module Aws::SageMaker
     UpdatePipelineExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
     UpdatePipelineExecutionRequest.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
     UpdatePipelineExecutionRequest.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
+    UpdatePipelineExecutionRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     UpdatePipelineExecutionRequest.struct_class = Types::UpdatePipelineExecutionRequest
 
     UpdatePipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -6938,8 +6973,10 @@ module Aws::SageMaker
     UpdatePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineName, required: true, location_name: "PipelineName"))
     UpdatePipelineRequest.add_member(:pipeline_display_name, Shapes::ShapeRef.new(shape: PipelineName, location_name: "PipelineDisplayName"))
     UpdatePipelineRequest.add_member(:pipeline_definition, Shapes::ShapeRef.new(shape: PipelineDefinition, location_name: "PipelineDefinition"))
+    UpdatePipelineRequest.add_member(:pipeline_definition_s3_location, Shapes::ShapeRef.new(shape: PipelineDefinitionS3Location, location_name: "PipelineDefinitionS3Location"))
     UpdatePipelineRequest.add_member(:pipeline_description, Shapes::ShapeRef.new(shape: PipelineDescription, location_name: "PipelineDescription"))
     UpdatePipelineRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdatePipelineRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     UpdatePipelineRequest.struct_class = Types::UpdatePipelineRequest
 
     UpdatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))

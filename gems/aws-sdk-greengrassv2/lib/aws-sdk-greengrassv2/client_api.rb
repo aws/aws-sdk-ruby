@@ -18,6 +18,8 @@ module Aws::GreengrassV2
     AssociateClientDeviceWithCoreDeviceEntryList = Shapes::ListShape.new(name: 'AssociateClientDeviceWithCoreDeviceEntryList')
     AssociateClientDeviceWithCoreDeviceErrorEntry = Shapes::StructureShape.new(name: 'AssociateClientDeviceWithCoreDeviceErrorEntry')
     AssociateClientDeviceWithCoreDeviceErrorList = Shapes::ListShape.new(name: 'AssociateClientDeviceWithCoreDeviceErrorList')
+    AssociateServiceRoleToAccountRequest = Shapes::StructureShape.new(name: 'AssociateServiceRoleToAccountRequest')
+    AssociateServiceRoleToAccountResponse = Shapes::StructureShape.new(name: 'AssociateServiceRoleToAccountResponse')
     AssociatedClientDevice = Shapes::StructureShape.new(name: 'AssociatedClientDevice')
     AssociatedClientDeviceList = Shapes::ListShape.new(name: 'AssociatedClientDeviceList')
     BatchAssociateClientDeviceWithCoreDeviceRequest = Shapes::StructureShape.new(name: 'BatchAssociateClientDeviceWithCoreDeviceRequest')
@@ -56,6 +58,7 @@ module Aws::GreengrassV2
     ComponentVersionString = Shapes::StringShape.new(name: 'ComponentVersionString')
     ComponentVisibilityScope = Shapes::StringShape.new(name: 'ComponentVisibilityScope')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectivityInfo = Shapes::StructureShape.new(name: 'ConnectivityInfo')
     CoreDevice = Shapes::StructureShape.new(name: 'CoreDevice')
     CoreDeviceArchitectureString = Shapes::StringShape.new(name: 'CoreDeviceArchitectureString')
     CoreDevicePlatformString = Shapes::StringShape.new(name: 'CoreDevicePlatformString')
@@ -89,6 +92,8 @@ module Aws::GreengrassV2
     DisassociateClientDeviceFromCoreDeviceEntryList = Shapes::ListShape.new(name: 'DisassociateClientDeviceFromCoreDeviceEntryList')
     DisassociateClientDeviceFromCoreDeviceErrorEntry = Shapes::StructureShape.new(name: 'DisassociateClientDeviceFromCoreDeviceErrorEntry')
     DisassociateClientDeviceFromCoreDeviceErrorList = Shapes::ListShape.new(name: 'DisassociateClientDeviceFromCoreDeviceErrorList')
+    DisassociateServiceRoleFromAccountRequest = Shapes::StructureShape.new(name: 'DisassociateServiceRoleFromAccountRequest')
+    DisassociateServiceRoleFromAccountResponse = Shapes::StructureShape.new(name: 'DisassociateServiceRoleFromAccountResponse')
     EffectiveDeployment = Shapes::StructureShape.new(name: 'EffectiveDeployment')
     EffectiveDeploymentExecutionStatus = Shapes::StringShape.new(name: 'EffectiveDeploymentExecutionStatus')
     EffectiveDeploymentsList = Shapes::ListShape.new(name: 'EffectiveDeploymentsList')
@@ -99,10 +104,14 @@ module Aws::GreengrassV2
     GetComponentResponse = Shapes::StructureShape.new(name: 'GetComponentResponse')
     GetComponentVersionArtifactRequest = Shapes::StructureShape.new(name: 'GetComponentVersionArtifactRequest')
     GetComponentVersionArtifactResponse = Shapes::StructureShape.new(name: 'GetComponentVersionArtifactResponse')
+    GetConnectivityInfoRequest = Shapes::StructureShape.new(name: 'GetConnectivityInfoRequest')
+    GetConnectivityInfoResponse = Shapes::StructureShape.new(name: 'GetConnectivityInfoResponse')
     GetCoreDeviceRequest = Shapes::StructureShape.new(name: 'GetCoreDeviceRequest')
     GetCoreDeviceResponse = Shapes::StructureShape.new(name: 'GetCoreDeviceResponse')
     GetDeploymentRequest = Shapes::StructureShape.new(name: 'GetDeploymentRequest')
     GetDeploymentResponse = Shapes::StructureShape.new(name: 'GetDeploymentResponse')
+    GetServiceRoleForAccountRequest = Shapes::StructureShape.new(name: 'GetServiceRoleForAccountRequest')
+    GetServiceRoleForAccountResponse = Shapes::StructureShape.new(name: 'GetServiceRoleForAccountResponse')
     InstalledComponent = Shapes::StructureShape.new(name: 'InstalledComponent')
     InstalledComponentLifecycleState = Shapes::StringShape.new(name: 'InstalledComponentLifecycleState')
     InstalledComponentList = Shapes::ListShape.new(name: 'InstalledComponentList')
@@ -170,6 +179,7 @@ module Aws::GreengrassV2
     OptionalBoolean = Shapes::BooleanShape.new(name: 'OptionalBoolean')
     OptionalInteger = Shapes::IntegerShape.new(name: 'OptionalInteger')
     PlatformAttributesMap = Shapes::MapShape.new(name: 'PlatformAttributesMap')
+    PortNumberInt = Shapes::IntegerShape.new(name: 'PortNumberInt')
     PublisherString = Shapes::StringShape.new(name: 'PublisherString')
     Reason = Shapes::StringShape.new(name: 'Reason')
     RecipeBlob = Shapes::BlobShape.new(name: 'RecipeBlob')
@@ -198,10 +208,13 @@ module Aws::GreengrassV2
     TopicString = Shapes::StringShape.new(name: 'TopicString')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateConnectivityInfoRequest = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoRequest')
+    UpdateConnectivityInfoResponse = Shapes::StructureShape.new(name: 'UpdateConnectivityInfoResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    connectivityInfoList = Shapes::ListShape.new(name: 'connectivityInfoList')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -217,6 +230,12 @@ module Aws::GreengrassV2
     AssociateClientDeviceWithCoreDeviceErrorEntry.struct_class = Types::AssociateClientDeviceWithCoreDeviceErrorEntry
 
     AssociateClientDeviceWithCoreDeviceErrorList.member = Shapes::ShapeRef.new(shape: AssociateClientDeviceWithCoreDeviceErrorEntry)
+
+    AssociateServiceRoleToAccountRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+    AssociateServiceRoleToAccountRequest.struct_class = Types::AssociateServiceRoleToAccountRequest
+
+    AssociateServiceRoleToAccountResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: String, location_name: "AssociatedAt"))
+    AssociateServiceRoleToAccountResponse.struct_class = Types::AssociateServiceRoleToAccountResponse
 
     AssociatedClientDevice.add_member(:thing_name, Shapes::ShapeRef.new(shape: IoTThingName, location_name: "thingName"))
     AssociatedClientDevice.add_member(:association_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associationTimestamp"))
@@ -318,6 +337,12 @@ module Aws::GreengrassV2
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConnectivityInfo.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
+    ConnectivityInfo.add_member(:host_address, Shapes::ShapeRef.new(shape: String, location_name: "HostAddress"))
+    ConnectivityInfo.add_member(:port_number, Shapes::ShapeRef.new(shape: PortNumberInt, location_name: "PortNumber"))
+    ConnectivityInfo.add_member(:metadata, Shapes::ShapeRef.new(shape: String, location_name: "Metadata"))
+    ConnectivityInfo.struct_class = Types::ConnectivityInfo
+
     CoreDevice.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, location_name: "coreDeviceThingName"))
     CoreDevice.add_member(:status, Shapes::ShapeRef.new(shape: CoreDeviceStatus, location_name: "status"))
     CoreDevice.add_member(:last_status_update_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStatusUpdateTimestamp"))
@@ -412,6 +437,11 @@ module Aws::GreengrassV2
 
     DisassociateClientDeviceFromCoreDeviceErrorList.member = Shapes::ShapeRef.new(shape: DisassociateClientDeviceFromCoreDeviceErrorEntry)
 
+    DisassociateServiceRoleFromAccountRequest.struct_class = Types::DisassociateServiceRoleFromAccountRequest
+
+    DisassociateServiceRoleFromAccountResponse.add_member(:disassociated_at, Shapes::ShapeRef.new(shape: String, location_name: "DisassociatedAt"))
+    DisassociateServiceRoleFromAccountResponse.struct_class = Types::DisassociateServiceRoleFromAccountResponse
+
     EffectiveDeployment.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentID, required: true, location_name: "deploymentId"))
     EffectiveDeployment.add_member(:deployment_name, Shapes::ShapeRef.new(shape: DeploymentName, required: true, location_name: "deploymentName"))
     EffectiveDeployment.add_member(:iot_job_id, Shapes::ShapeRef.new(shape: IoTJobId, location_name: "iotJobId"))
@@ -442,6 +472,13 @@ module Aws::GreengrassV2
     GetComponentVersionArtifactResponse.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "preSignedUrl"))
     GetComponentVersionArtifactResponse.struct_class = Types::GetComponentVersionArtifactResponse
 
+    GetConnectivityInfoRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "thingName"))
+    GetConnectivityInfoRequest.struct_class = Types::GetConnectivityInfoRequest
+
+    GetConnectivityInfoResponse.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: connectivityInfoList, location_name: "ConnectivityInfo"))
+    GetConnectivityInfoResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    GetConnectivityInfoResponse.struct_class = Types::GetConnectivityInfoResponse
+
     GetCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
     GetCoreDeviceRequest.struct_class = Types::GetCoreDeviceRequest
 
@@ -471,6 +508,12 @@ module Aws::GreengrassV2
     GetDeploymentResponse.add_member(:is_latest_for_target, Shapes::ShapeRef.new(shape: IsLatestForTarget, location_name: "isLatestForTarget"))
     GetDeploymentResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     GetDeploymentResponse.struct_class = Types::GetDeploymentResponse
+
+    GetServiceRoleForAccountRequest.struct_class = Types::GetServiceRoleForAccountRequest
+
+    GetServiceRoleForAccountResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: String, location_name: "AssociatedAt"))
+    GetServiceRoleForAccountResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
+    GetServiceRoleForAccountResponse.struct_class = Types::GetServiceRoleForAccountResponse
 
     InstalledComponent.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentNameString, location_name: "componentName"))
     InstalledComponent.add_member(:component_version, Shapes::ShapeRef.new(shape: ComponentVersionString, location_name: "componentVersion"))
@@ -703,6 +746,14 @@ module Aws::GreengrassV2
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
+    UpdateConnectivityInfoRequest.add_member(:thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "thingName"))
+    UpdateConnectivityInfoRequest.add_member(:connectivity_info, Shapes::ShapeRef.new(shape: connectivityInfoList, required: true, location_name: "ConnectivityInfo"))
+    UpdateConnectivityInfoRequest.struct_class = Types::UpdateConnectivityInfoRequest
+
+    UpdateConnectivityInfoResponse.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
+    UpdateConnectivityInfoResponse.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+    UpdateConnectivityInfoResponse.struct_class = Types::UpdateConnectivityInfoResponse
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: ValidationExceptionReason, location_name: "reason"))
     ValidationException.add_member(:fields, Shapes::ShapeRef.new(shape: ValidationExceptionFieldList, location_name: "fields"))
@@ -714,6 +765,8 @@ module Aws::GreengrassV2
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    connectivityInfoList.member = Shapes::ShapeRef.new(shape: ConnectivityInfo)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -723,7 +776,6 @@ module Aws::GreengrassV2
       api.metadata = {
         "apiVersion" => "2020-11-30",
         "endpointPrefix" => "greengrass",
-        "jsonVersion" => "1.1",
         "protocol" => "rest-json",
         "serviceAbbreviation" => "AWS GreengrassV2",
         "serviceFullName" => "AWS IoT Greengrass V2",
@@ -731,6 +783,16 @@ module Aws::GreengrassV2
         "signatureVersion" => "v4",
         "uid" => "greengrassv2-2020-11-30",
       }
+
+      api.add_operation(:associate_service_role_to_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateServiceRoleToAccount"
+        o.http_method = "PUT"
+        o.http_request_uri = "/greengrass/servicerole"
+        o.input = Shapes::ShapeRef.new(shape: AssociateServiceRoleToAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateServiceRoleToAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:batch_associate_client_device_with_core_device, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchAssociateClientDeviceWithCoreDevice"
@@ -842,6 +904,15 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:disassociate_service_role_from_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateServiceRoleFromAccount"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/greengrass/servicerole"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateServiceRoleFromAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateServiceRoleFromAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_component, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetComponent"
         o.http_method = "GET"
@@ -865,6 +936,16 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_connectivity_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetConnectivityInfo"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/things/{thingName}/connectivityInfo"
+        o.input = Shapes::ShapeRef.new(shape: GetConnectivityInfoRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetConnectivityInfoResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -892,6 +973,15 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:get_service_role_for_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetServiceRoleForAccount"
+        o.http_method = "GET"
+        o.http_request_uri = "/greengrass/servicerole"
+        o.input = Shapes::ShapeRef.new(shape: GetServiceRoleForAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetServiceRoleForAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:list_client_devices_associated_with_core_device, Seahorse::Model::Operation.new.tap do |o|
@@ -1069,6 +1159,16 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_connectivity_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectivityInfo"
+        o.http_method = "PUT"
+        o.http_request_uri = "/greengrass/things/{thingName}/connectivityInfo"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectivityInfoRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectivityInfoResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end
 

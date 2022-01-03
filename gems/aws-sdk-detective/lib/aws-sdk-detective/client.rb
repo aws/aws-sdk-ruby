@@ -432,47 +432,62 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Sends a request to invite the specified AWS accounts to be member
-    # accounts in the behavior graph. This operation can only be called by
-    # the administrator account for a behavior graph.
+    # `CreateMembers` is used to send invitations to accounts. For the
+    # organization behavior graph, the Detective administrator account uses
+    # `CreateMembers` to enable organization accounts as member accounts.
+    #
+    # For invited accounts, `CreateMembers` sends a request to invite the
+    # specified Amazon Web Services accounts to be member accounts in the
+    # behavior graph. This operation can only be called by the administrator
+    # account for a behavior graph.
     #
     # `CreateMembers` verifies the accounts and then invites the verified
     # accounts. The administrator can optionally specify to not send
     # invitation emails to the member accounts. This would be used when the
     # administrator manages their member accounts centrally.
     #
+    # For organization accounts in the organization behavior graph,
+    # `CreateMembers` attempts to enable the accounts. The organization
+    # accounts do not receive invitations.
+    #
     # The request provides the behavior graph ARN and the list of accounts
-    # to invite.
+    # to invite or to enable.
     #
     # The response separates the requested accounts into two lists:
     #
-    # * The accounts that `CreateMembers` was able to start the verification
-    #   for. This list includes member accounts that are being verified,
-    #   that have passed verification and are to be invited, and that have
-    #   failed verification.
+    # * The accounts that `CreateMembers` was able to process. For invited
+    #   accounts, includes member accounts that are being verified, that
+    #   have passed verification and are to be invited, and that have failed
+    #   verification. For organization accounts in the organization behavior
+    #   graph, includes accounts that can be enabled and that cannot be
+    #   enabled.
     #
     # * The accounts that `CreateMembers` was unable to process. This list
     #   includes accounts that were already invited to be member accounts in
     #   the behavior graph.
     #
     # @option params [required, String] :graph_arn
-    #   The ARN of the behavior graph to invite the member accounts to
-    #   contribute their data to.
+    #   The ARN of the behavior graph.
     #
     # @option params [String] :message
     #   Customized message text to include in the invitation email message to
     #   the invited member accounts.
     #
     # @option params [Boolean] :disable_email_notification
-    #   if set to `true`, then the member accounts do not receive email
-    #   notifications. By default, this is set to `false`, and the member
+    #   if set to `true`, then the invited accounts do not receive email
+    #   notifications. By default, this is set to `false`, and the invited
     #   accounts receive email notifications.
     #
+    #   Organization accounts in the organization behavior graph do not
+    #   receive email notifications.
+    #
     # @option params [required, Array<Types::Account>] :accounts
-    #   The list of AWS accounts to invite to become member accounts in the
-    #   behavior graph. You can invite up to 50 accounts at a time. For each
-    #   invited account, the account list contains the account identifier and
-    #   the AWS account root user email address.
+    #   The list of Amazon Web Services accounts to invite or to enable. You
+    #   can invite or enable up to 50 accounts at a time. For each invited
+    #   account, the account list contains the account identifier and the
+    #   Amazon Web Services account root user email address. For organization
+    #   accounts in the organization behavior graph, the email address is not
+    #   required.
     #
     # @return [Types::CreateMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -509,6 +524,7 @@ module Aws::Detective
     #   resp.members[0].volume_usage_updated_time #=> Time
     #   resp.members[0].percent_of_graph_utilization #=> Float
     #   resp.members[0].percent_of_graph_utilization_updated_time #=> Time
+    #   resp.members[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -523,8 +539,8 @@ module Aws::Detective
     end
 
     # Disables the specified behavior graph and queues it to be deleted.
-    # This operation removes the graph from each member account's list of
-    # behavior graphs.
+    # This operation removes the behavior graph from each member account's
+    # list of behavior graphs.
     #
     # `DeleteGraph` can only be called by the administrator account for a
     # behavior graph.
@@ -549,20 +565,32 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Deletes one or more member accounts from the administrator account's
-    # behavior graph. This operation can only be called by a Detective
-    # administrator account. That account cannot use `DeleteMembers` to
-    # delete their own account from the behavior graph. To disable a
-    # behavior graph, the administrator account uses the `DeleteGraph` API
-    # method.
+    # Removes the specified member accounts from the behavior graph. The
+    # removed accounts no longer contribute data to the behavior graph. This
+    # operation can only be called by the administrator account for the
+    # behavior graph.
+    #
+    # For invited accounts, the removed accounts are deleted from the list
+    # of accounts in the behavior graph. To restore the account, the
+    # administrator account must send another invitation.
+    #
+    # For organization accounts in the organization behavior graph, the
+    # Detective administrator account can always enable the organization
+    # account again. Organization accounts that are not enabled as member
+    # accounts are not included in the `ListMembers` results for the
+    # organization behavior graph.
+    #
+    # An administrator account cannot use `DeleteMembers` to remove their
+    # own account from the behavior graph. To disable a behavior graph, the
+    # administrator account uses the `DeleteGraph` API method.
     #
     # @option params [required, String] :graph_arn
-    #   The ARN of the behavior graph to delete members from.
+    #   The ARN of the behavior graph to remove members from.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of AWS account identifiers for the member accounts to delete
-    #   from the behavior graph. You can delete up to 50 member accounts at a
-    #   time.
+    #   The list of Amazon Web Services account identifiers for the member
+    #   accounts to remove from the behavior graph. You can remove up to 50
+    #   member accounts at a time.
     #
     # @return [Types::DeleteMembersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -593,9 +621,65 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Returns information about the configuration for the organization
+    # behavior graph. Currently indicates whether to automatically enable
+    # new organization accounts as member accounts.
+    #
+    # Can only be called by the Detective administrator account for the
+    # organization.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the organization behavior graph.
+    #
+    # @return [Types::DescribeOrganizationConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_organization_configuration({
+    #     graph_arn: "GraphArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.auto_enable #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
+    #
+    # @overload describe_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def describe_organization_configuration(params = {}, options = {})
+      req = build_request(:describe_organization_configuration, params)
+      req.send_request(options)
+    end
+
+    # Removes the Detective administrator account for the organization in
+    # the current Region. Deletes the behavior graph for that account.
+    #
+    # Can only be called by the organization management account. Before you
+    # can select a different Detective administrator account, you must
+    # remove the Detective administrator account in all Regions.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/DisableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload disable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def disable_organization_admin_account(params = {}, options = {})
+      req = build_request(:disable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
     # Removes the member account from the specified behavior graph. This
-    # operation can only be called by a member account that has the
+    # operation can only be called by an invited member account that has the
     # `ENABLED` status.
+    #
+    # `DisassociateMembership` cannot be called by an organization account
+    # in the organization behavior graph. For the organization behavior
+    # graph, the Detective administrator account determines which
+    # organization accounts to enable or disable as member accounts.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph to remove the member account from.
@@ -620,6 +704,40 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Designates the Detective administrator account for the organization in
+    # the current Region.
+    #
+    # If the account does not have Detective enabled, then enables Detective
+    # for that account and creates a new behavior graph.
+    #
+    # Can only be called by the organization management account.
+    #
+    # The Detective administrator account for an organization must be the
+    # same in all Regions. If you already designated a Detective
+    # administrator account in another Region, then you must designate the
+    # same account.
+    #
+    # @option params [required, String] :account_id
+    #   The Amazon Web Services account identifier of the account to designate
+    #   as the Detective administrator account for the organization.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_organization_admin_account({
+    #     account_id: "AccountId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/EnableOrganizationAdminAccount AWS API Documentation
+    #
+    # @overload enable_organization_admin_account(params = {})
+    # @param [Hash] params ({})
+    def enable_organization_admin_account(params = {}, options = {})
+      req = build_request(:enable_organization_admin_account, params)
+      req.send_request(options)
+    end
+
     # Returns the membership details for specified member accounts for a
     # behavior graph.
     #
@@ -627,9 +745,9 @@ module Aws::Detective
     #   The ARN of the behavior graph for which to request the member details.
     #
     # @option params [required, Array<String>] :account_ids
-    #   The list of AWS account identifiers for the member account for which
-    #   to return member details. You can request details for up to 50 member
-    #   accounts at a time.
+    #   The list of Amazon Web Services account identifiers for the member
+    #   account for which to return member details. You can request details
+    #   for up to 50 member accounts at a time.
     #
     #   You cannot use `GetMembers` to retrieve information about member
     #   accounts that were removed from the behavior graph.
@@ -662,6 +780,7 @@ module Aws::Detective
     #   resp.member_details[0].volume_usage_updated_time #=> Time
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
+    #   resp.member_details[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].reason #=> String
@@ -724,8 +843,8 @@ module Aws::Detective
     end
 
     # Retrieves the list of open and accepted behavior graph invitations for
-    # the member account. This operation can only be called by a member
-    # account.
+    # the member account. This operation can only be called by an invited
+    # member account.
     #
     # Open invitations are invitations that the member account has not
     # responded to.
@@ -775,6 +894,7 @@ module Aws::Detective
     #   resp.invitations[0].volume_usage_updated_time #=> Time
     #   resp.invitations[0].percent_of_graph_utilization #=> Float
     #   resp.invitations[0].percent_of_graph_utilization_updated_time #=> Time
+    #   resp.invitations[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListInvitations AWS API Documentation
@@ -786,8 +906,14 @@ module Aws::Detective
       req.send_request(options)
     end
 
-    # Retrieves the list of member accounts for a behavior graph. Does not
-    # return member accounts that were removed from the behavior graph.
+    # Retrieves the list of member accounts for a behavior graph.
+    #
+    # For invited accounts, the results do not include member accounts that
+    # were removed from the behavior graph.
+    #
+    # For the organization behavior graph, the results do not include
+    # organization accounts that the Detective administrator account has not
+    # enabled as member accounts.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph for which to retrieve the list of member
@@ -834,6 +960,7 @@ module Aws::Detective
     #   resp.member_details[0].volume_usage_updated_time #=> Time
     #   resp.member_details[0].percent_of_graph_utilization #=> Float
     #   resp.member_details[0].percent_of_graph_utilization_updated_time #=> Time
+    #   resp.member_details[0].invitation_type #=> String, one of "INVITATION", "ORGANIZATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListMembers AWS API Documentation
@@ -842,6 +969,49 @@ module Aws::Detective
     # @param [Hash] params ({})
     def list_members(params = {}, options = {})
       req = build_request(:list_members, params)
+      req.send_request(options)
+    end
+
+    # Returns information about the Detective administrator account for an
+    # organization. Can only be called by the organization management
+    # account.
+    #
+    # @option params [String] :next_token
+    #   For requests to get the next page of results, the pagination token
+    #   that was returned with the previous set of results. The initial
+    #   request does not include a pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @return [Types::ListOrganizationAdminAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationAdminAccountsResponse#administrators #administrators} => Array&lt;Types::Administrator&gt;
+    #   * {Types::ListOrganizationAdminAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_admin_accounts({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.administrators #=> Array
+    #   resp.administrators[0].account_id #=> String
+    #   resp.administrators[0].graph_arn #=> String
+    #   resp.administrators[0].delegation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/ListOrganizationAdminAccounts AWS API Documentation
+    #
+    # @overload list_organization_admin_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_organization_admin_accounts(params = {}, options = {})
+      req = build_request(:list_organization_admin_accounts, params)
       req.send_request(options)
     end
 
@@ -875,8 +1045,12 @@ module Aws::Detective
     end
 
     # Rejects an invitation to contribute the account data to a behavior
-    # graph. This operation must be called by a member account that has the
-    # `INVITED` status.
+    # graph. This operation must be called by an invited member account that
+    # has the `INVITED` status.
+    #
+    # `RejectInvitation` cannot be called by an organization account in the
+    # organization behavior graph. In the organization behavior graph,
+    # organization accounts do not receive an invitation.
     #
     # @option params [required, String] :graph_arn
     #   The ARN of the behavior graph to reject the invitation to.
@@ -997,6 +1171,35 @@ module Aws::Detective
       req.send_request(options)
     end
 
+    # Updates the configuration for the Organizations integration in the
+    # current Region. Can only be called by the Detective administrator
+    # account for the organization.
+    #
+    # @option params [required, String] :graph_arn
+    #   The ARN of the organization behavior graph.
+    #
+    # @option params [Boolean] :auto_enable
+    #   Indicates whether to automatically enable new organization accounts as
+    #   member accounts in the organization behavior graph.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_organization_configuration({
+    #     graph_arn: "GraphArn", # required
+    #     auto_enable: false,
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/detective-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
+    #
+    # @overload update_organization_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_organization_configuration(params = {}, options = {})
+      req = build_request(:update_organization_configuration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1010,7 +1213,7 @@ module Aws::Detective
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-detective'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

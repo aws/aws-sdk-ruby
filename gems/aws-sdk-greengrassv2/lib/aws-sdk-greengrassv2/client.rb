@@ -347,7 +347,49 @@ module Aws::GreengrassV2
 
     # @!group API Operations
 
-    # Associate a list of client devices with a core device. Use this API
+    # Associates a Greengrass service role with IoT Greengrass for your
+    # Amazon Web Services account in this Amazon Web Services Region. IoT
+    # Greengrass uses this role to verify the identity of client devices and
+    # manage core device connectivity information. The role must include the
+    # [AWSGreengrassResourceAccessRolePolicy][1] managed policy or a custom
+    # policy that defines equivalent permissions for the IoT Greengrass
+    # features that you use. For more information, see [Greengrass service
+    # role][2] in the *IoT Greengrass Version 2 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy
+    # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the service role to associate with
+    #   IoT Greengrass for your Amazon Web Services account in this Amazon Web
+    #   Services Region.
+    #
+    # @return [Types::AssociateServiceRoleToAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateServiceRoleToAccountResponse#associated_at #associated_at} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_service_role_to_account({
+    #     role_arn: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateServiceRoleToAccount AWS API Documentation
+    #
+    # @overload associate_service_role_to_account(params = {})
+    # @param [Hash] params ({})
+    def associate_service_role_to_account(params = {}, options = {})
+      req = build_request(:associate_service_role_to_account, params)
+      req.send_request(options)
+    end
+
+    # Associates a list of client devices with a core device. Use this API
     # operation to specify which client devices can discover a core device
     # through cloud discovery. With cloud discovery, client devices connect
     # to IoT Greengrass to retrieve associated core devices' connectivity
@@ -405,7 +447,7 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
-    # Disassociate a list of client devices from a core device. After you
+    # Disassociates a list of client devices from a core device. After you
     # disassociate a client device from a core device, the client device
     # won't be able to use cloud discovery to retrieve the core device's
     # connectivity information and certificates.
@@ -935,6 +977,34 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
+    # Disassociates the Greengrass service role from IoT Greengrass for your
+    # Amazon Web Services account in this Amazon Web Services Region.
+    # Without a service role, IoT Greengrass can't verify the identity of
+    # client devices or manage core device connectivity information. For
+    # more information, see [Greengrass service role][1] in the *IoT
+    # Greengrass Version 2 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html
+    #
+    # @return [Types::DisassociateServiceRoleFromAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateServiceRoleFromAccountResponse#disassociated_at #disassociated_at} => String
+    #
+    # @example Response structure
+    #
+    #   resp.disassociated_at #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateServiceRoleFromAccount AWS API Documentation
+    #
+    # @overload disassociate_service_role_from_account(params = {})
+    # @param [Hash] params ({})
+    def disassociate_service_role_from_account(params = {}, options = {})
+      req = build_request(:disassociate_service_role_from_account, params)
+      req.send_request(options)
+    end
+
     # Gets the recipe for a version of a component. Core devices can call
     # this operation to identify the artifacts and requirements to install a
     # component.
@@ -1024,6 +1094,53 @@ module Aws::GreengrassV2
     # @param [Hash] params ({})
     def get_component_version_artifact(params = {}, options = {})
       req = build_request(:get_component_version_artifact, params)
+      req.send_request(options)
+    end
+
+    # Retrieves connectivity information for a Greengrass core device.
+    #
+    # Connectivity information includes endpoints and ports where client
+    # devices can connect to an MQTT broker on the core device. When a
+    # client device calls the [Greengrass discovery API][1], IoT Greengrass
+    # returns connectivity information for all of the core devices where the
+    # client device can connect. For more information, see [Connect client
+    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html
+    # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #
+    # @return [Types::GetConnectivityInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectivityInfoResponse#connectivity_info #connectivity_info} => Array&lt;Types::ConnectivityInfo&gt;
+    #   * {Types::GetConnectivityInfoResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connectivity_info({
+    #     thing_name: "CoreDeviceThingName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connectivity_info #=> Array
+    #   resp.connectivity_info[0].id #=> String
+    #   resp.connectivity_info[0].host_address #=> String
+    #   resp.connectivity_info[0].port_number #=> Integer
+    #   resp.connectivity_info[0].metadata #=> String
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetConnectivityInfo AWS API Documentation
+    #
+    # @overload get_connectivity_info(params = {})
+    # @param [Hash] params ({})
+    def get_connectivity_info(params = {}, options = {})
+      req = build_request(:get_connectivity_info, params)
       req.send_request(options)
     end
 
@@ -1140,6 +1257,36 @@ module Aws::GreengrassV2
     # @param [Hash] params ({})
     def get_deployment(params = {}, options = {})
       req = build_request(:get_deployment, params)
+      req.send_request(options)
+    end
+
+    # Gets the service role associated with IoT Greengrass for your Amazon
+    # Web Services account in this Amazon Web Services Region. IoT
+    # Greengrass uses this role to verify the identity of client devices and
+    # manage core device connectivity information. For more information, see
+    # [Greengrass service role][1] in the *IoT Greengrass Version 2
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html
+    #
+    # @return [Types::GetServiceRoleForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetServiceRoleForAccountResponse#associated_at #associated_at} => String
+    #   * {Types::GetServiceRoleForAccountResponse#role_arn #role_arn} => String
+    #
+    # @example Response structure
+    #
+    #   resp.associated_at #=> String
+    #   resp.role_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetServiceRoleForAccount AWS API Documentation
+    #
+    # @overload get_service_role_for_account(params = {})
+    # @param [Hash] params ({})
+    def get_service_role_for_account(params = {}, options = {})
+      req = build_request(:get_service_role_for_account, params)
       req.send_request(options)
     end
 
@@ -1683,6 +1830,60 @@ module Aws::GreengrassV2
       req.send_request(options)
     end
 
+    # Updates connectivity information for a Greengrass core device.
+    #
+    # Connectivity information includes endpoints and ports where client
+    # devices can connect to an MQTT broker on the core device. When a
+    # client device calls the [Greengrass discovery API][1], IoT Greengrass
+    # returns connectivity information for all of the core devices where the
+    # client device can connect. For more information, see [Connect client
+    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-discover-api.html
+    # [2]: https://docs.aws.amazon.com/greengrass/v2/developerguide/connect-client-devices.html
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #
+    # @option params [required, Array<Types::ConnectivityInfo>] :connectivity_info
+    #   The connectivity information for the core device.
+    #
+    # @return [Types::UpdateConnectivityInfoResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateConnectivityInfoResponse#version #version} => String
+    #   * {Types::UpdateConnectivityInfoResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connectivity_info({
+    #     thing_name: "CoreDeviceThingName", # required
+    #     connectivity_info: [ # required
+    #       {
+    #         id: "String",
+    #         host_address: "String",
+    #         port_number: 1,
+    #         metadata: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.version #=> String
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UpdateConnectivityInfo AWS API Documentation
+    #
+    # @overload update_connectivity_info(params = {})
+    # @param [Hash] params ({})
+    def update_connectivity_info(params = {}, options = {})
+      req = build_request(:update_connectivity_info, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1696,7 +1897,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

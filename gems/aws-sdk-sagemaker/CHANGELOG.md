@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2022-01-03)
+------------------
+
+* Feature - The release allows users to pass pipeline definitions as Amazon S3 locations and control the pipeline execution concurrency using ParallelismConfiguration. It also adds support of EMR jobs as pipeline steps.
+
 1.113.0 (2021-12-21)
 ------------------
 

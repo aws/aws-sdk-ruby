@@ -82,6 +82,41 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateServiceRoleToAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the service role to associate with
+    #   IoT Greengrass for your Amazon Web Services account in this Amazon
+    #   Web Services Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateServiceRoleToAccountRequest AWS API Documentation
+    #
+    class AssociateServiceRoleToAccountRequest < Struct.new(
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] associated_at
+    #   The time when the service role was associated with IoT Greengrass
+    #   for your Amazon Web Services account in this Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/AssociateServiceRoleToAccountResponse AWS API Documentation
+    #
+    class AssociateServiceRoleToAccountResponse < Struct.new(
+      :associated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a client device that is associated to a
     # core device for cloud discovery.
     #
@@ -176,8 +211,8 @@ module Aws::GreengrassV2
     end
 
     # @!attribute [rw] error_entries
-    #   The list of errors (if any) for the entries in the request. Each
-    #   error entry contains the name of the IoT thing that failed to
+    #   The list of any errors for the entries in the request. Each error
+    #   entry contains the name of the IoT thing that failed to
     #   disassociate.
     #   @return [Array<Types::DisassociateClientDeviceFromCoreDeviceErrorEntry>]
     #
@@ -697,6 +732,50 @@ module Aws::GreengrassV2
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about an endpoint and port where client devices
+    # can connect to an MQTT broker on a Greengrass core device.
+    #
+    # @note When making an API call, you may pass ConnectivityInfo
+    #   data as a hash:
+    #
+    #       {
+    #         id: "String",
+    #         host_address: "String",
+    #         port_number: 1,
+    #         metadata: "String",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   An ID for the connectivity information.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_address
+    #   The IP address or DNS address where client devices can connect to an
+    #   MQTT broker on the Greengrass core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] port_number
+    #   The port where the MQTT broker operates on the core device. This
+    #   port is typically 8883, which is the default port for the MQTT
+    #   broker component that runs on core devices.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] metadata
+    #   Additional metadata to provide to client devices that connect to
+    #   this core device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/ConnectivityInfo AWS API Documentation
+    #
+    class ConnectivityInfo < Struct.new(
+      :id,
+      :host_address,
+      :port_number,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1490,6 +1569,26 @@ module Aws::GreengrassV2
       include Aws::Structure
     end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateServiceRoleFromAccountRequest AWS API Documentation
+    #
+    class DisassociateServiceRoleFromAccountRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] disassociated_at
+    #   The time when the service role was disassociated from IoT Greengrass
+    #   for your Amazon Web Services account in this Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/DisassociateServiceRoleFromAccountResponse AWS API Documentation
+    #
+    class DisassociateServiceRoleFromAccountResponse < Struct.new(
+      :disassociated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a deployment job that IoT Greengrass sends
     # to a Greengrass core device.
     #
@@ -1666,6 +1765,42 @@ module Aws::GreengrassV2
     #
     class GetComponentVersionArtifactResponse < Struct.new(
       :pre_signed_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectivityInfoRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "CoreDeviceThingName", # required
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetConnectivityInfoRequest AWS API Documentation
+    #
+    class GetConnectivityInfoRequest < Struct.new(
+      :thing_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connectivity_info
+    #   The connectivity information for the core device.
+    #   @return [Array<Types::ConnectivityInfo>]
+    #
+    # @!attribute [rw] message
+    #   A message about the connectivity information request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetConnectivityInfoResponse AWS API Documentation
+    #
+    class GetConnectivityInfoResponse < Struct.new(
+      :connectivity_info,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1860,6 +1995,33 @@ module Aws::GreengrassV2
       :creation_timestamp,
       :is_latest_for_target,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetServiceRoleForAccountRequest AWS API Documentation
+    #
+    class GetServiceRoleForAccountRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] associated_at
+    #   The time when the service role was associated with IoT Greengrass
+    #   for your Amazon Web Services account in this Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the service role that is associated with IoT Greengrass
+    #   for your Amazon Web Services account in this Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/GetServiceRoleForAccountResponse AWS API Documentation
+    #
+    class GetServiceRoleForAccountResponse < Struct.new(
+      :associated_at,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3372,6 +3534,55 @@ module Aws::GreengrassV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateConnectivityInfoRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "CoreDeviceThingName", # required
+    #         connectivity_info: [ # required
+    #           {
+    #             id: "String",
+    #             host_address: "String",
+    #             port_number: 1,
+    #             metadata: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the core device. This is also the name of the IoT thing.
+    #   @return [String]
+    #
+    # @!attribute [rw] connectivity_info
+    #   The connectivity information for the core device.
+    #   @return [Array<Types::ConnectivityInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UpdateConnectivityInfoRequest AWS API Documentation
+    #
+    class UpdateConnectivityInfoRequest < Struct.new(
+      :thing_name,
+      :connectivity_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] version
+    #   The new version of the connectivity information for the core device.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the connectivity information update request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/greengrassv2-2020-11-30/UpdateConnectivityInfoResponse AWS API Documentation
+    #
+    class UpdateConnectivityInfoResponse < Struct.new(
+      :version,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The request isn't valid. This can occur if your request contains
     # malformed JSON or unsupported characters.

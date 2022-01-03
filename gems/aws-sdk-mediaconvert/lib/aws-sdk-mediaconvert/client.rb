@@ -526,7 +526,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
     #               hls_rendition_group_settings: {
     #                 rendition_group_id: "__string",
     #                 rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -1694,6 +1694,7 @@ module Aws::MediaConvert
     #                     temporal_filter_settings: {
     #                       aggressive_mode: 1,
     #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
+    #                       post_temporal_sharpening_strength: "LOW", # accepts LOW, MEDIUM, HIGH
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -2655,6 +2656,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -2793,7 +2795,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
     #               hls_rendition_group_settings: {
     #                 rendition_group_id: "__string",
     #                 rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -3953,6 +3955,7 @@ module Aws::MediaConvert
     #                     temporal_filter_settings: {
     #                       aggressive_mode: 1,
     #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
+    #                       post_temporal_sharpening_strength: "LOW", # accepts LOW, MEDIUM, HIGH
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -4884,6 +4887,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -5642,6 +5646,7 @@ module Aws::MediaConvert
     #             temporal_filter_settings: {
     #               aggressive_mode: 1,
     #               post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
+    #               post_temporal_sharpening_strength: "LOW", # accepts LOW, MEDIUM, HIGH
     #               speed: 1,
     #               strength: 1,
     #             },
@@ -6222,6 +6227,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -7401,6 +7407,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -8337,6 +8344,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -8956,6 +8964,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -9951,6 +9960,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -10937,6 +10947,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -11573,6 +11584,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -11885,7 +11897,7 @@ module Aws::MediaConvert
     #             "__string" => {
     #               custom_language_code: "__stringMin3Max3PatternAZaZ3",
     #               default_selection: "DEFAULT", # accepts DEFAULT, NOT_DEFAULT
-    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSS",
+    #               external_audio_file_input: "__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEAATTMMOOSSOOGGGGaA",
     #               hls_rendition_group_settings: {
     #                 rendition_group_id: "__string",
     #                 rendition_language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG
@@ -13045,6 +13057,7 @@ module Aws::MediaConvert
     #                     temporal_filter_settings: {
     #                       aggressive_mode: 1,
     #                       post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
+    #                       post_temporal_sharpening_strength: "LOW", # accepts LOW, MEDIUM, HIGH
     #                       speed: 1,
     #                       strength: 1,
     #                     },
@@ -13973,6 +13986,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -14725,6 +14739,7 @@ module Aws::MediaConvert
     #             temporal_filter_settings: {
     #               aggressive_mode: 1,
     #               post_temporal_sharpening: "DISABLED", # accepts DISABLED, ENABLED, AUTO
+    #               post_temporal_sharpening_strength: "LOW", # accepts LOW, MEDIUM, HIGH
     #               speed: 1,
     #               strength: 1,
     #             },
@@ -15302,6 +15317,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.spatial_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.aggressive_mode #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening #=> String, one of "DISABLED", "ENABLED", "AUTO"
+    #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.post_temporal_sharpening_strength #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.speed #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.noise_reducer.temporal_filter_settings.strength #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.partner_watermarking.nexguard_file_marker_settings.license #=> String
@@ -15403,7 +15419,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

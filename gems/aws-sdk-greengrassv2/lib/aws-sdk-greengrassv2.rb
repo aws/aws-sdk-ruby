@@ -28,7 +28,7 @@ require_relative 'aws-sdk-greengrassv2/customizations'
 # structure.
 #
 #     greengrass_v2 = Aws::GreengrassV2::Client.new
-#     resp = greengrass_v2.batch_associate_client_device_with_core_device(params)
+#     resp = greengrass_v2.associate_service_role_to_account(params)
 #
 # See {Client} for more information.
 #
@@ -48,6 +48,6 @@ require_relative 'aws-sdk-greengrassv2/customizations'
 # @!group service
 module Aws::GreengrassV2
 
-  GEM_VERSION = '1.13.0'
+  GEM_VERSION = '1.14.0'
 
 end
