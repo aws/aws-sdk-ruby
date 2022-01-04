@@ -25,6 +25,8 @@ module Aws
           integer: 0,
           long: 0,
           string: "StringShape",
+          string_with_consecutive_spaces: "StringShape",
+          string_with_lf: "StringShape",
           sensitive_string: 'SensitiveStringShape',
           timestamp: now,
         })

@@ -9,10 +9,15 @@ module Aws
       [:ox, :oga, :nokogiri, :libxml, :rexml].each do |engine|
         describe("ENGINE: #{engine}") do
 
-          begin
-            Parser.engine = engine
-          rescue LoadError
-            next
+          around do |example|
+            previous_engine = Parser.engine
+            begin
+              Parser.engine = engine
+              example.run
+            rescue LoadError
+            ensure
+              Parser.engine = previous_engine
+            end
           end
 
           let(:shapes) { ApiHelper.sample_shapes }
@@ -110,6 +115,8 @@ module Aws
               <Integer>123</Integer>
               <Long>321</Long>
               <String>Hello</String>
+              <StringWithConsecutiveSpaces>foo  bar</StringWithConsecutiveSpaces>
+              <StringWithLF>foo\nbar</StringWithLF>
               <Timestamp>123456789</Timestamp>
             </xml>
             XML
@@ -145,6 +152,8 @@ module Aws
               long: 321,
               string: "Hello",
               timestamp: Time.at(123456789),
+              string_with_consecutive_spaces: "foo  bar",
+              string_with_lf: "foo\nbar",
             })
           end
 
