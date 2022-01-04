@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2022-01-04)
+------------------
+
+* Feature - Minor doc-based updates based on feedback bugs received.
+
 1.110.0 (2021-12-21)
 ------------------
 

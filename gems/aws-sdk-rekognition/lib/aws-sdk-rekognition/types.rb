@@ -632,8 +632,12 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Version number of the face detection model associated with the
-    #   collection you are creating.
+    #   Latest face model being used with the collection. For more
+    #   information, see [Model versioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [String]
     #
     class CreateCollectionResponse < Struct.new(
@@ -2332,12 +2336,18 @@ module Aws::Rekognition
     #   different object such as a tree).
     #   @return [Float]
     #
+    # @!attribute [rw] index_faces_model_version
+    #   The version of the face detect and storage model that was used when
+    #   indexing the face vector.
+    #   @return [String]
+    #
     class Face < Struct.new(
       :face_id,
       :bounding_box,
       :image_id,
       :external_image_id,
-      :confidence)
+      :confidence,
+      :index_faces_model_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3684,8 +3694,12 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   The version number of the face detection model that's associated
-    #   with the input collection (`CollectionId`).
+    #   Latest face model being used with the collection. For more
+    #   information, see [Model versioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [String]
     #
     # @!attribute [rw] unindexed_faces
@@ -3926,10 +3940,15 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_versions
-    #   Version numbers of the face detection models associated with the
-    #   collections in the array `CollectionIds`. For example, the value of
-    #   `FaceModelVersions[2]` is the version number for the face detection
-    #   model used by the collection in `CollectionId[2]`.
+    #   Latest face models being used with the corresponding collections in
+    #   the array. For more information, see [Model versioning][1]. For
+    #   example, the value of `FaceModelVersions[2]` is the version number
+    #   for the face detection model used by the collection in
+    #   `CollectionId[2]`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [Array<String>]
     #
     class ListCollectionsResponse < Struct.new(
@@ -4125,8 +4144,12 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Version number of the face detection model associated with the input
-    #   collection (`CollectionId`).
+    #   Latest face model being used with the collection. For more
+    #   information, see [Model versioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [String]
     #
     class ListFacesResponse < Struct.new(
@@ -4991,8 +5014,12 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceMatch>]
     #
     # @!attribute [rw] face_model_version
-    #   Version number of the face detection model associated with the input
-    #   collection (`CollectionId`).
+    #   Latest face model being used with the collection. For more
+    #   information, see [Model versioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [String]
     #
     class SearchFacesByImageResponse < Struct.new(
@@ -5052,8 +5079,12 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceMatch>]
     #
     # @!attribute [rw] face_model_version
-    #   Version number of the face detection model associated with the input
-    #   collection (`CollectionId`).
+    #   Latest face model being used with the collection. For more
+    #   information, see [Model versioning][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
     #   @return [String]
     #
     class SearchFacesResponse < Struct.new(

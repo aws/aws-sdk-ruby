@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-01-04)
+------------------
+
+* Feature - This release introduces a new field IndexFacesModelVersion, which is the version of the face detect and storage model that was used when indexing the face vector.
+
 1.63.0 (2021-12-21)
 ------------------
 

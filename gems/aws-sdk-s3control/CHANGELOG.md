@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-01-04)
+------------------
+
+* Feature - Documentation updates for the renaming of Glacier to Glacier Flexible Retrieval.
+
 1.45.0 (2021-12-21)
 ------------------
 

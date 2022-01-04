@@ -6607,18 +6607,8 @@ module Aws::S3
     #   @return [String]
     #
     # @!attribute [rw] range
-    #   Downloads the specified range bytes of an object. For more
-    #   information about the HTTP Range header, see
-    #   [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35][1].
-    #
-    #   <note markdown="1"> Amazon S3 doesn't support retrieving multiple ranges of data per
-    #   `GET` request.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+    #   Because `HeadObject` returns only the metadata for an object, this
+    #   parameter has no effect.
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -14375,9 +14365,13 @@ module Aws::S3
 
     # Describes the default server-side encryption to apply to new objects
     # in the bucket. If a PUT Object request doesn't specify any
-    # server-side encryption, this default encryption will be applied. For
-    # more information, see [PUT Bucket encryption][1] in the *Amazon S3 API
-    # Reference*.
+    # server-side encryption, this default encryption will be applied. If
+    # you don't specify a customer managed key at configuration, Amazon S3
+    # automatically creates an Amazon Web Services KMS key in your Amazon
+    # Web Services account the first time that you add an object encrypted
+    # with SSE-KMS to a bucket. By default, Amazon S3 uses this KMS key for
+    # SSE-KMS. For more information, see [PUT Bucket encryption][1] in the
+    # *Amazon S3 API Reference*.
     #
     #
     #
@@ -14402,9 +14396,10 @@ module Aws::S3
     #   `aws:kms`.
     #
     #   You can specify the key ID or the Amazon Resource Name (ARN) of the
-    #   KMS key. However, if you are using encryption with cross-account
-    #   operations, you must use a fully qualified KMS key ARN. For more
-    #   information, see [Using encryption for cross-account operations][1].
+    #   KMS key. However, if you are using encryption with cross-account or
+    #   Amazon Web Services service operations you must use a fully
+    #   qualified KMS key ARN. For more information, see [Using encryption
+    #   for cross-account operations][1].
     #
     #   **For example:**
     #

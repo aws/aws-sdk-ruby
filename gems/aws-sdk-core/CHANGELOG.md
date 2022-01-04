@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.125.1 (2022-01-04)
+------------------
+
 * Issue - Parse a response with consecutive spaces correctly when ox is used as the XML parser.
 
 3.125.0 (2021-12-21)

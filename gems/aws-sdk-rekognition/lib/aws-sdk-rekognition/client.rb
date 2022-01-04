@@ -2945,6 +2945,7 @@ module Aws::Rekognition
     #   resp.persons[0].face_matches[0].face.image_id #=> String
     #   resp.persons[0].face_matches[0].face.external_image_id #=> String
     #   resp.persons[0].face_matches[0].face.confidence #=> Float
+    #   resp.persons[0].face_matches[0].face.index_faces_model_version #=> String
     #
     # @overload get_face_search(params = {})
     # @param [Hash] params ({})
@@ -3512,9 +3513,9 @@ module Aws::Rekognition
     # `detectionAttributes` parameter), Amazon Rekognition returns detailed
     # facial attributes, such as facial landmarks (for example, location of
     # eye and mouth) and other facial attributes. If you provide the same
-    # image, specify the same collection, and use the same external ID in
-    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
-    # face metadata.
+    # image, specify the same collection, use the same external ID, and use
+    # the same model version in the `IndexFaces` operation, Amazon
+    # Rekognition doesn't save duplicate face metadata.
     #
     #
     #
@@ -3767,6 +3768,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face.image_id #=> String
     #   resp.face_records[0].face.external_image_id #=> String
     #   resp.face_records[0].face.confidence #=> Float
+    #   resp.face_records[0].face.index_faces_model_version #=> String
     #   resp.face_records[0].face_detail.bounding_box.width #=> Float
     #   resp.face_records[0].face_detail.bounding_box.height #=> Float
     #   resp.face_records[0].face_detail.bounding_box.left #=> Float
@@ -4245,6 +4247,7 @@ module Aws::Rekognition
     #   resp.faces[0].image_id #=> String
     #   resp.faces[0].external_image_id #=> String
     #   resp.faces[0].confidence #=> Float
+    #   resp.faces[0].index_faces_model_version #=> String
     #   resp.next_token #=> String
     #   resp.face_model_version #=> String
     #
@@ -4577,6 +4580,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.index_faces_model_version #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces(params = {})
@@ -4759,6 +4763,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.index_faces_model_version #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces_by_image(params = {})
@@ -5713,7 +5718,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
