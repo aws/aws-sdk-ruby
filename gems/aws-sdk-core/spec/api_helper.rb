@@ -67,6 +67,8 @@ module ApiHelper
             'Integer' => { 'shape' => 'IntegerShape' },
             'Long' => { 'shape' => 'LongShape' },
             'String' => { 'shape' => 'StringShape' },
+            'StringWithConsecutiveSpaces' => { 'shape' => 'StringShape' },
+            'StringWithLF' => { 'shape' => 'StringShape' },
             'Timestamp' => { 'shape' => 'TimestampShape' },
             'EventStream' => { 'shape' => 'EventStream' },
             'DocumentType' => { 'shape' => 'DocumentShape' }
