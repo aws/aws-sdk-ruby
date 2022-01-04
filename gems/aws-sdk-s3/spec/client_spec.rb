@@ -620,7 +620,6 @@ module Aws
               status_code: 200,
               headers: {},
               body: <<-XML)
-                <?xml version="1.0" encoding="UTF-8"?>
                 <ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
                   <Contents>
                     <Key>prefix+suffix</Key>
