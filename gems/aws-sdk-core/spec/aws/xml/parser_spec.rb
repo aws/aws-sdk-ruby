@@ -9,10 +9,15 @@ module Aws
       [:ox, :oga, :nokogiri, :libxml, :rexml].each do |engine|
         describe("ENGINE: #{engine}") do
 
-          begin
-            Parser.engine = engine
-          rescue LoadError
-            next
+          around do |example|
+            previous_engine = Parser.engine
+            begin
+              Parser.engine = engine
+              example.run
+            rescue LoadError
+            ensure
+              Parser.engine = previous_engine
+            end
           end
 
           let(:shapes) { ApiHelper.sample_shapes }
