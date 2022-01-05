@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.94.0 (2022-01-05)
+------------------
+
+* Feature - Documentation update for ticket fixes.
+
 1.93.0 (2021-12-21)
 ------------------
 

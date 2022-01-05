@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-01-05)
+------------------
+
+* Feature - This release adds an automatic retry mechanism for AWS IoT Jobs. You can now define a maximum number of retries for each Job rollout, along with the criteria to trigger the retry for FAILED/TIMED_OUT/ALL(both FAILED an TIMED_OUT) job.
+
 1.82.0 (2021-12-21)
 ------------------
 

@@ -786,7 +786,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates a dataset.
+    # Creates a dataset. This operation doesn't support datasets that
+    # include uploaded files as a source.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -1642,7 +1643,11 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Creates and starts a new SPICE ingestion on a dataset
+    # Creates and starts a new SPICE ingestion for a dataset. You can
+    # manually refresh datasets in an Enterprise edition account 32 times in
+    # a 24-hour period. You can manually refresh datasets in a Standard
+    # edition account 8 times in a 24-hour period. Each 24-hour period is
+    # measured starting 24 hours before the current date and time.
     #
     # Any ingestions operating on tagged datasets inherit the same tags
     # automatically for use in access control. For an example, see [How do I
@@ -3232,7 +3237,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Describes a dataset.
+    # Describes a dataset. This operation doesn't support datasets that
+    # include uploaded files as a source.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -7132,7 +7138,8 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
-    # Updates a dataset.
+    # Updates a dataset. This operation doesn't support datasets that
+    # include uploaded files as a source.
     #
     # @option params [required, String] :aws_account_id
     #   The Amazon Web Services account ID.
@@ -8638,7 +8645,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

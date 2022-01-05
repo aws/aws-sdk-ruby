@@ -755,6 +755,7 @@ module Aws::EKS
     #     },
     #     kubernetes_network_config: {
     #       service_ipv_4_cidr: "String",
+    #       ip_family: "ipv4", # accepts ipv4, ipv6
     #     },
     #     logging: {
     #       cluster_logging: [
@@ -797,6 +798,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
     #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -1372,6 +1375,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
     #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -1568,6 +1573,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
     #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -1808,6 +1815,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
     #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -2628,6 +2637,8 @@ module Aws::EKS
     #   resp.cluster.resources_vpc_config.public_access_cidrs #=> Array
     #   resp.cluster.resources_vpc_config.public_access_cidrs[0] #=> String
     #   resp.cluster.kubernetes_network_config.service_ipv_4_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
+    #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3245,7 +3256,7 @@ module Aws::EKS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

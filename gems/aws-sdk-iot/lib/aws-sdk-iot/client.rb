@@ -1712,7 +1712,7 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #
     # @option params [Types::AbortConfig] :abort_config
-    #   Allows you to create criteria to abort a job.
+    #   Allows you to create the criteria to abort a job.
     #
     # @option params [Types::TimeoutConfig] :timeout_config
     #   Specifies the amount of time each device has to finish its execution
@@ -1739,6 +1739,9 @@ module Aws::IoT
     #
     # @option params [String] :job_template_arn
     #   The ARN of the job template used to create the job.
+    #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
     #
     # @option params [Hash<String,String>] :document_parameters
     #   Parameters of a managed template that you can specify to create the
@@ -1795,6 +1798,14 @@ module Aws::IoT
     #     ],
     #     namespace_id: "NamespaceId",
     #     job_template_arn: "JobTemplateArn",
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #     document_parameters: {
     #       "ParameterKey" => "ParameterValue",
     #     },
@@ -1870,6 +1881,9 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the job template.
     #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobTemplateResponse#job_template_arn #job_template_arn} => String
@@ -1917,6 +1931,14 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -5488,6 +5510,9 @@ module Aws::IoT
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #   resp.job.namespace_id #=> String
     #   resp.job.job_template_arn #=> String
+    #   resp.job.job_executions_retry_config.criteria_list #=> Array
+    #   resp.job.job_executions_retry_config.criteria_list[0].failure_type #=> String, one of "FAILED", "TIMED_OUT", "ALL"
+    #   resp.job.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #   resp.job.document_parameters #=> Hash
     #   resp.job.document_parameters["ParameterKey"] #=> String
     #
@@ -5567,6 +5592,7 @@ module Aws::IoT
     #   * {Types::DescribeJobTemplateResponse#job_executions_rollout_config #job_executions_rollout_config} => Types::JobExecutionsRolloutConfig
     #   * {Types::DescribeJobTemplateResponse#abort_config #abort_config} => Types::AbortConfig
     #   * {Types::DescribeJobTemplateResponse#timeout_config #timeout_config} => Types::TimeoutConfig
+    #   * {Types::DescribeJobTemplateResponse#job_executions_retry_config #job_executions_retry_config} => Types::JobExecutionsRetryConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5595,6 +5621,9 @@ module Aws::IoT
     #   resp.abort_config.criteria_list[0].threshold_percentage #=> Float
     #   resp.abort_config.criteria_list[0].min_number_of_executed_things #=> Integer
     #   resp.timeout_config.in_progress_timeout_in_minutes #=> Integer
+    #   resp.job_executions_retry_config.criteria_list #=> Array
+    #   resp.job_executions_retry_config.criteria_list[0].failure_type #=> String, one of "FAILED", "TIMED_OUT", "ALL"
+    #   resp.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #
     # @overload describe_job_template(params = {})
     # @param [Hash] params ({})
@@ -8580,6 +8609,7 @@ module Aws::IoT
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.execution_summaries[0].job_execution_summary.retry_attempt #=> Integer
     #   resp.next_token #=> String
     #
     # @overload list_job_executions_for_job(params = {})
@@ -8624,6 +8654,9 @@ module Aws::IoT
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
     #
+    # @option params [String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
     # @return [Types::ListJobExecutionsForThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobExecutionsForThingResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForThing&gt;
@@ -8639,6 +8672,7 @@ module Aws::IoT
     #     namespace_id: "NamespaceId",
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     job_id: "JobId",
     #   })
     #
     # @example Response structure
@@ -8650,6 +8684,7 @@ module Aws::IoT
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.execution_summaries[0].job_execution_summary.retry_attempt #=> Integer
     #   resp.next_token #=> String
     #
     # @overload list_job_executions_for_thing(params = {})
@@ -12739,6 +12774,9 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12775,6 +12813,14 @@ module Aws::IoT
     #       in_progress_timeout_in_minutes: 1,
     #     },
     #     namespace_id: "NamespaceId",
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @overload update_job(params = {})
@@ -13535,7 +13581,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

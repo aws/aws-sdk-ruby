@@ -3525,6 +3525,14 @@ module Aws::IoT
     #         ],
     #         namespace_id: "NamespaceId",
     #         job_template_arn: "JobTemplateArn",
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #         document_parameters: {
     #           "ParameterKey" => "ParameterValue",
     #         },
@@ -3584,7 +3592,7 @@ module Aws::IoT
     #   @return [Types::JobExecutionsRolloutConfig]
     #
     # @!attribute [rw] abort_config
-    #   Allows you to create criteria to abort a job.
+    #   Allows you to create the criteria to abort a job.
     #   @return [Types::AbortConfig]
     #
     # @!attribute [rw] timeout_config
@@ -3617,6 +3625,10 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     # @!attribute [rw] document_parameters
     #   Parameters of a managed template that you can specify to create the
     #   job document.
@@ -3636,6 +3648,7 @@ module Aws::IoT
       :tags,
       :namespace_id,
       :job_template_arn,
+      :job_executions_retry_config,
       :document_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -3704,6 +3717,14 @@ module Aws::IoT
     #             value: "TagValue",
     #           },
     #         ],
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] job_template_id
@@ -3765,6 +3786,10 @@ module Aws::IoT
     #   Metadata that can be used to manage the job template.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class CreateJobTemplateRequest < Struct.new(
       :job_template_id,
       :job_arn,
@@ -3775,7 +3800,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :tags)
+      :tags,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7325,6 +7351,11 @@ module Aws::IoT
     #   set to `TIMED_OUT`.
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   The configuration that determines how many retries are allowed for
+    #   each failure type for a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class DescribeJobTemplateResponse < Struct.new(
       :job_template_arn,
       :job_template_id,
@@ -7335,7 +7366,8 @@ module Aws::IoT
       :presigned_url_config,
       :job_executions_rollout_config,
       :abort_config,
-      :timeout_config)
+      :timeout_config,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10137,6 +10169,10 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   The configuration for the criteria to retry the job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     # @!attribute [rw] document_parameters
     #   A key-value map that pairs the patterns that need to be replaced in
     #   a managed template job document schema. You can use the description
@@ -10164,6 +10200,7 @@ module Aws::IoT
       :timeout_config,
       :namespace_id,
       :job_template_arn,
+      :job_executions_retry_config,
       :document_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -10287,12 +10324,18 @@ module Aws::IoT
     #   execution information.
     #   @return [Integer]
     #
+    # @!attribute [rw] retry_attempt
+    #   The number that indicates how many retry attempts have been
+    #   completed for this job on this device.
+    #   @return [Integer]
+    #
     class JobExecutionSummary < Struct.new(
       :status,
       :queued_at,
       :started_at,
       :last_updated_at,
-      :execution_number)
+      :execution_number,
+      :retry_attempt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10328,6 +10371,32 @@ module Aws::IoT
     class JobExecutionSummaryForThing < Struct.new(
       :job_id,
       :job_execution_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that determines how many retries are allowed for
+    # each failure type for a job.
+    #
+    # @note When making an API call, you may pass JobExecutionsRetryConfig
+    #   data as a hash:
+    #
+    #       {
+    #         criteria_list: [ # required
+    #           {
+    #             failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #             number_of_retries: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] criteria_list
+    #   The list of criteria that determines how many retries are allowed
+    #   for each failure type for a job.
+    #   @return [Array<Types::RetryCriteria>]
+    #
+    class JobExecutionsRetryConfig < Struct.new(
+      :criteria_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11783,6 +11852,7 @@ module Aws::IoT
     #         namespace_id: "NamespaceId",
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         job_id: "JobId",
     #       }
     #
     # @!attribute [rw] thing_name
@@ -11816,12 +11886,17 @@ module Aws::IoT
     #   The token to retrieve the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #   @return [String]
+    #
     class ListJobExecutionsForThingRequest < Struct.new(
       :thing_name,
       :status,
       :namespace_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15591,6 +15666,32 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The criteria that determines how many retries are allowed for each
+    # failure type for a job.
+    #
+    # @note When making an API call, you may pass RetryCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #         number_of_retries: 1, # required
+    #       }
+    #
+    # @!attribute [rw] failure_type
+    #   The type of job execution failures that can initiate a job retry.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_retries
+    #   The number of retries allowed for a failure type for the job.
+    #   @return [Integer]
+    #
+    class RetryCriteria < Struct.new(
+      :failure_type,
+      :number_of_retries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Role alias description.
     #
     # @!attribute [rw] role_alias
@@ -19319,6 +19420,14 @@ module Aws::IoT
     #           in_progress_timeout_in_minutes: 1,
     #         },
     #         namespace_id: "NamespaceId",
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -19363,6 +19472,10 @@ module Aws::IoT
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class UpdateJobRequest < Struct.new(
       :job_id,
       :description,
@@ -19370,7 +19483,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :namespace_id)
+      :namespace_id,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end

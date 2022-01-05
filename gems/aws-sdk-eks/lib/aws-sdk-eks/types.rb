@@ -721,6 +721,7 @@ module Aws::EKS
     #         },
     #         kubernetes_network_config: {
     #           service_ipv_4_cidr: "String",
+    #           ip_family: "ipv4", # accepts ipv4, ipv6
     #         },
     #         logging: {
     #           cluster_logging: [
@@ -2186,13 +2187,15 @@ module Aws::EKS
     #
     #       {
     #         service_ipv_4_cidr: "String",
+    #         ip_family: "ipv4", # accepts ipv4, ipv6
     #       }
     #
     # @!attribute [rw] service_ipv_4_cidr
-    #   The CIDR block to assign Kubernetes service IP addresses from. If
-    #   you don't specify a block, Kubernetes assigns addresses from either
-    #   the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that
-    #   you specify a block that does not overlap with resources in other
+    #   Don't specify a value if you select `ipv6` for **ipFamily**. The
+    #   CIDR block to assign Kubernetes service IP addresses from. If you
+    #   don't specify a block, Kubernetes assigns addresses from either the
+    #   10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. We recommend that you
+    #   specify a block that does not overlap with resources in other
     #   networks that are peered or connected to your VPC. The block must
     #   meet the following requirements:
     #
@@ -2208,29 +2211,72 @@ module Aws::EKS
     #   and can't change this value once the cluster is created.
     #   @return [String]
     #
+    # @!attribute [rw] ip_family
+    #   Specify which IP version is used to assign Kubernetes Pod and
+    #   Service IP addresses. If you don't specify a value, `ipv4` is used
+    #   by default. You can only specify an IP family when you create a
+    #   cluster and can't change this value once the cluster is created. If
+    #   you specify `ipv6`, the VPC and subnets that you specify for cluster
+    #   creation must have both IPv4 and IPv6 CIDR blocks assigned to them.
+    #
+    #   You can only specify `ipv6` for 1.21 and later clusters that use
+    #   version 1.10.0 or later of the Amazon VPC CNI add-on. If you specify
+    #   `ipv6`, then ensure that your VPC meets the requirements and that
+    #   you're familiar with the considerations listed in [Assigning IPv6
+    #   addresses to Pods and Services][1] in the Amazon EKS User Guide. If
+    #   you specify `ipv6`, Kubernetes assigns Service and Pod addresses
+    #   from the unique local address range (fc00::/7). You can't specify a
+    #   custom IPv6 CIDR block.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigRequest AWS API Documentation
     #
     class KubernetesNetworkConfigRequest < Struct.new(
-      :service_ipv_4_cidr)
+      :service_ipv_4_cidr,
+      :ip_family)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # The Kubernetes network configuration for the cluster.
+    # The Kubernetes network configuration for the cluster. The response
+    # contains a value for **serviceIpv6Cidr** or **serviceIpv4Cidr**, but
+    # not both.
     #
     # @!attribute [rw] service_ipv_4_cidr
-    #   The CIDR block that Kubernetes service IP addresses are assigned
-    #   from. If you didn't specify a CIDR block when you created the
-    #   cluster, then Kubernetes assigns addresses from either the
-    #   10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this was specified,
-    #   then it was specified when the cluster was created and it cannot be
-    #   changed.
+    #   The CIDR block that Kubernetes Pod and Service IP addresses are
+    #   assigned from. Kubernetes assigns addresses from an IPv4 CIDR block
+    #   assigned to a subnet that the node is in. If you didn't specify a
+    #   CIDR block when you created the cluster, then Kubernetes assigns
+    #   addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR
+    #   blocks. If this was specified, then it was specified when the
+    #   cluster was created and it can't be changed.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_ipv_6_cidr
+    #   The CIDR block that Kubernetes Pod and Service IP addresses are
+    #   assigned from if you created a 1.21 or later cluster with version
+    #   1.10.0 or later of the Amazon VPC CNI add-on and specified `ipv6`
+    #   for **ipFamily** when you created the cluster. Kubernetes assigns
+    #   addresses from the unique local address range (fc00::/7).
+    #   @return [String]
+    #
+    # @!attribute [rw] ip_family
+    #   The IP family used to assign Kubernetes Pod and Service IP
+    #   addresses. The IP family is always `ipv4`, unless you have a `1.21`
+    #   or later cluster running version 1.10.0 or later of the Amazon VPC
+    #   CNI add-on and specified `ipv6` when you created the cluster.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/KubernetesNetworkConfigResponse AWS API Documentation
     #
     class KubernetesNetworkConfigResponse < Struct.new(
-      :service_ipv_4_cidr)
+      :service_ipv_4_cidr,
+      :service_ipv_6_cidr,
+      :ip_family)
       SENSITIVE = []
       include Aws::Structure
     end

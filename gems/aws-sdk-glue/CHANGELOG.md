@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2022-01-05)
+------------------
+
+* Feature - Add Delta Lake target support for Glue Crawler and 3rd Party Support for Lake Formation
+
 1.101.0 (2021-12-21)
 ------------------
 

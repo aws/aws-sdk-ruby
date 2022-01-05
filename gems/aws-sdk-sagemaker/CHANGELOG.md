@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2022-01-05)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.g5 instance types.
+
 1.114.0 (2022-01-03)
 ------------------
 

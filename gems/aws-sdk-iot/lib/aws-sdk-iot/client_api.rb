@@ -628,6 +628,7 @@ module Aws::IoT
     JobExecutionSummaryForJobList = Shapes::ListShape.new(name: 'JobExecutionSummaryForJobList')
     JobExecutionSummaryForThing = Shapes::StructureShape.new(name: 'JobExecutionSummaryForThing')
     JobExecutionSummaryForThingList = Shapes::ListShape.new(name: 'JobExecutionSummaryForThingList')
+    JobExecutionsRetryConfig = Shapes::StructureShape.new(name: 'JobExecutionsRetryConfig')
     JobExecutionsRolloutConfig = Shapes::StructureShape.new(name: 'JobExecutionsRolloutConfig')
     JobId = Shapes::StringShape.new(name: 'JobId')
     JobProcessDetails = Shapes::StructureShape.new(name: 'JobProcessDetails')
@@ -821,6 +822,7 @@ module Aws::IoT
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     Number = Shapes::FloatShape.new(name: 'Number')
     NumberList = Shapes::ListShape.new(name: 'NumberList')
+    NumberOfRetries = Shapes::IntegerShape.new(name: 'NumberOfRetries')
     NumberOfThings = Shapes::IntegerShape.new(name: 'NumberOfThings')
     OTAUpdateArn = Shapes::StringShape.new(name: 'OTAUpdateArn')
     OTAUpdateDescription = Shapes::StringShape.new(name: 'OTAUpdateDescription')
@@ -954,6 +956,10 @@ module Aws::IoT
     ResourceRegistrationFailureException = Shapes::StructureShape.new(name: 'ResourceRegistrationFailureException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     Resources = Shapes::ListShape.new(name: 'Resources')
+    RetryAttempt = Shapes::IntegerShape.new(name: 'RetryAttempt')
+    RetryCriteria = Shapes::StructureShape.new(name: 'RetryCriteria')
+    RetryCriteriaList = Shapes::ListShape.new(name: 'RetryCriteriaList')
+    RetryableFailureType = Shapes::StringShape.new(name: 'RetryableFailureType')
     RoleAlias = Shapes::StringShape.new(name: 'RoleAlias')
     RoleAliasArn = Shapes::StringShape.new(name: 'RoleAliasArn')
     RoleAliasDescription = Shapes::StructureShape.new(name: 'RoleAliasDescription')
@@ -1884,6 +1890,7 @@ module Aws::IoT
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     CreateJobRequest.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
+    CreateJobRequest.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     CreateJobRequest.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
@@ -1902,6 +1909,7 @@ module Aws::IoT
     CreateJobTemplateRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     CreateJobTemplateRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     CreateJobTemplateRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateJobTemplateRequest.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     CreateJobTemplateRequest.struct_class = Types::CreateJobTemplateRequest
 
     CreateJobTemplateResponse.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
@@ -2462,6 +2470,7 @@ module Aws::IoT
     DescribeJobTemplateResponse.add_member(:job_executions_rollout_config, Shapes::ShapeRef.new(shape: JobExecutionsRolloutConfig, location_name: "jobExecutionsRolloutConfig"))
     DescribeJobTemplateResponse.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     DescribeJobTemplateResponse.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
+    DescribeJobTemplateResponse.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     DescribeJobTemplateResponse.struct_class = Types::DescribeJobTemplateResponse
 
     DescribeManagedJobTemplateRequest.add_member(:template_name, Shapes::ShapeRef.new(shape: ManagedJobTemplateName, required: true, location: "uri", location_name: "templateName"))
@@ -3007,6 +3016,7 @@ module Aws::IoT
     Job.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     Job.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location_name: "namespaceId"))
     Job.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
+    Job.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
     Job.struct_class = Types::Job
 
@@ -3031,6 +3041,7 @@ module Aws::IoT
     JobExecutionSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: DateType, location_name: "startedAt"))
     JobExecutionSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobExecutionSummary.add_member(:execution_number, Shapes::ShapeRef.new(shape: ExecutionNumber, location_name: "executionNumber"))
+    JobExecutionSummary.add_member(:retry_attempt, Shapes::ShapeRef.new(shape: RetryAttempt, location_name: "retryAttempt"))
     JobExecutionSummary.struct_class = Types::JobExecutionSummary
 
     JobExecutionSummaryForJob.add_member(:thing_arn, Shapes::ShapeRef.new(shape: ThingArn, location_name: "thingArn"))
@@ -3044,6 +3055,9 @@ module Aws::IoT
     JobExecutionSummaryForThing.struct_class = Types::JobExecutionSummaryForThing
 
     JobExecutionSummaryForThingList.member = Shapes::ShapeRef.new(shape: JobExecutionSummaryForThing)
+
+    JobExecutionsRetryConfig.add_member(:criteria_list, Shapes::ShapeRef.new(shape: RetryCriteriaList, required: true, location_name: "criteriaList"))
+    JobExecutionsRetryConfig.struct_class = Types::JobExecutionsRetryConfig
 
     JobExecutionsRolloutConfig.add_member(:maximum_per_minute, Shapes::ShapeRef.new(shape: MaxJobExecutionsPerMin, location_name: "maximumPerMinute"))
     JobExecutionsRolloutConfig.add_member(:exponential_rate, Shapes::ShapeRef.new(shape: ExponentialRolloutRate, location_name: "exponentialRate"))
@@ -3314,6 +3328,7 @@ module Aws::IoT
     ListJobExecutionsForThingRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
     ListJobExecutionsForThingRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LaserMaxResults, location: "querystring", location_name: "maxResults"))
     ListJobExecutionsForThingRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListJobExecutionsForThingRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location: "querystring", location_name: "jobId"))
     ListJobExecutionsForThingRequest.struct_class = Types::ListJobExecutionsForThingRequest
 
     ListJobExecutionsForThingResponse.add_member(:execution_summaries, Shapes::ShapeRef.new(shape: JobExecutionSummaryForThingList, location_name: "executionSummaries"))
@@ -3995,6 +4010,12 @@ module Aws::IoT
 
     Resources.member = Shapes::ShapeRef.new(shape: Resource)
 
+    RetryCriteria.add_member(:failure_type, Shapes::ShapeRef.new(shape: RetryableFailureType, required: true, location_name: "failureType"))
+    RetryCriteria.add_member(:number_of_retries, Shapes::ShapeRef.new(shape: NumberOfRetries, required: true, location_name: "numberOfRetries"))
+    RetryCriteria.struct_class = Types::RetryCriteria
+
+    RetryCriteriaList.member = Shapes::ShapeRef.new(shape: RetryCriteria)
+
     RoleAliasDescription.add_member(:role_alias, Shapes::ShapeRef.new(shape: RoleAlias, location_name: "roleAlias"))
     RoleAliasDescription.add_member(:role_alias_arn, Shapes::ShapeRef.new(shape: RoleAliasArn, location_name: "roleAliasArn"))
     RoleAliasDescription.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
@@ -4617,6 +4638,7 @@ module Aws::IoT
     UpdateJobRequest.add_member(:abort_config, Shapes::ShapeRef.new(shape: AbortConfig, location_name: "abortConfig"))
     UpdateJobRequest.add_member(:timeout_config, Shapes::ShapeRef.new(shape: TimeoutConfig, location_name: "timeoutConfig"))
     UpdateJobRequest.add_member(:namespace_id, Shapes::ShapeRef.new(shape: NamespaceId, location: "querystring", location_name: "namespaceId"))
+    UpdateJobRequest.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     UpdateJobRequest.struct_class = Types::UpdateJobRequest
 
     UpdateMitigationActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: MitigationActionName, required: true, location: "uri", location_name: "actionName"))

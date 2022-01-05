@@ -114,6 +114,24 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AuditContext
+    #   data as a hash:
+    #
+    #       {
+    #         additional_audit_context: "AuditContextString",
+    #       }
+    #
+    # @!attribute [rw] additional_audit_context
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuditContext AWS API Documentation
+    #
+    class AuditContext < Struct.new(
+      :additional_audit_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of errors that can occur when registering partition indexes for
     # an existing table.
     #
@@ -176,6 +194,7 @@ module Aws::Glue
     #                 },
     #               ],
     #               location: "LocationString",
+    #               additional_locations: ["LocationString"],
     #               input_format: "FormatString",
     #               output_format: "FormatString",
     #               compressed: false,
@@ -913,6 +932,7 @@ module Aws::Glue
     #                   },
     #                 ],
     #                 location: "LocationString",
+    #                 additional_locations: ["LocationString"],
     #                 input_format: "FormatString",
     #                 output_format: "FormatString",
     #                 compressed: false,
@@ -1015,6 +1035,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,
@@ -1430,6 +1451,7 @@ module Aws::Glue
     #       {
     #         database_name: "NameString", # required
     #         tables: ["NameString"], # required
+    #         connection_name: "ConnectionName",
     #       }
     #
     # @!attribute [rw] database_name
@@ -1440,11 +1462,18 @@ module Aws::Glue
     #   A list of the tables to be synchronized.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] connection_name
+    #   The name of the connection for an Amazon S3-backed Data Catalog
+    #   table to be a target of the crawl when using a `Catalog` connection
+    #   type paired with a `NETWORK` Connection type.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogTarget AWS API Documentation
     #
     class CatalogTarget < Struct.new(
       :database_name,
-      :tables)
+      :tables,
+      :connection_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1750,6 +1779,21 @@ module Aws::Glue
     class ColumnImportance < Struct.new(
       :column_name,
       :importance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] column_name
+    #   @return [String]
+    #
+    # @!attribute [rw] row_filter_expression
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ColumnRowFilter AWS API Documentation
+    #
+    class ColumnRowFilter < Struct.new(
+      :column_name,
+      :row_filter_expression)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2567,6 +2611,9 @@ module Aws::Glue
     #   crawler.
     #   @return [String]
     #
+    # @!attribute [rw] lake_formation_configuration
+    #   @return [Types::LakeFormationConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
     #
     class Crawler < Struct.new(
@@ -2588,7 +2635,8 @@ module Aws::Glue
       :last_crawl,
       :version,
       :configuration,
-      :crawler_security_configuration)
+      :crawler_security_configuration,
+      :lake_formation_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2741,6 +2789,14 @@ module Aws::Glue
     #           {
     #             database_name: "NameString", # required
     #             tables: ["NameString"], # required
+    #             connection_name: "ConnectionName",
+    #           },
+    #         ],
+    #         delta_targets: [
+    #           {
+    #             delta_tables: ["Path"],
+    #             connection_name: "ConnectionName",
+    #             write_manifest: false,
     #           },
     #         ],
     #       }
@@ -2765,6 +2821,10 @@ module Aws::Glue
     #   Specifies Glue Data Catalog targets.
     #   @return [Array<Types::CatalogTarget>]
     #
+    # @!attribute [rw] delta_targets
+    #   Specifies Delta data store targets.
+    #   @return [Array<Types::DeltaTarget>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CrawlerTargets AWS API Documentation
     #
     class CrawlerTargets < Struct.new(
@@ -2772,7 +2832,8 @@ module Aws::Glue
       :jdbc_targets,
       :mongo_db_targets,
       :dynamo_db_targets,
-      :catalog_targets)
+      :catalog_targets,
+      :delta_targets)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2985,6 +3046,14 @@ module Aws::Glue
     #             {
     #               database_name: "NameString", # required
     #               tables: ["NameString"], # required
+    #               connection_name: "ConnectionName",
+    #             },
+    #           ],
+    #           delta_targets: [
+    #             {
+    #               delta_tables: ["Path"],
+    #               connection_name: "ConnectionName",
+    #               write_manifest: false,
     #             },
     #           ],
     #         },
@@ -3000,6 +3069,10 @@ module Aws::Glue
     #         },
     #         lineage_configuration: {
     #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #         },
+    #         lake_formation_configuration: {
+    #           use_lake_formation_credentials: false,
+    #           account_id: "AccountId",
     #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -3064,6 +3137,9 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #   @return [Types::LineageConfiguration]
     #
+    # @!attribute [rw] lake_formation_configuration
+    #   @return [Types::LakeFormationConfiguration]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -3103,6 +3179,7 @@ module Aws::Glue
       :schema_change_policy,
       :recrawl_policy,
       :lineage_configuration,
+      :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration,
       :tags)
@@ -4147,6 +4224,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,
@@ -4636,6 +4714,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,
@@ -6190,6 +6269,41 @@ module Aws::Glue
     #
     class DeleteWorkflowResponse < Struct.new(
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Delta data store to crawl one or more Delta tables.
+    #
+    # @note When making an API call, you may pass DeltaTarget
+    #   data as a hash:
+    #
+    #       {
+    #         delta_tables: ["Path"],
+    #         connection_name: "ConnectionName",
+    #         write_manifest: false,
+    #       }
+    #
+    # @!attribute [rw] delta_tables
+    #   A list of the Amazon S3 paths to the Delta tables.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to use to connect to the Delta table
+    #   target.
+    #   @return [String]
+    #
+    # @!attribute [rw] write_manifest
+    #   Specifies whether to write the manifest files to the Delta table
+    #   path.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeltaTarget AWS API Documentation
+    #
+    class DeltaTarget < Struct.new(
+      :delta_tables,
+      :connection_name,
+      :write_manifest)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9849,6 +9963,216 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetUnfilteredPartitionMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString", # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         partition_values: ["ValueString"], # required
+    #         audit_context: {
+    #           additional_audit_context: "AuditContextString",
+    #         },
+    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_values
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] audit_context
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] supported_permission_types
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadataRequest AWS API Documentation
+    #
+    class GetUnfilteredPartitionMetadataRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :partition_values,
+      :audit_context,
+      :supported_permission_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] partition
+    #   Represents a slice of table data.
+    #   @return [Types::Partition]
+    #
+    # @!attribute [rw] authorized_columns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_registered_with_lake_formation
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadataResponse AWS API Documentation
+    #
+    class GetUnfilteredPartitionMetadataResponse < Struct.new(
+      :partition,
+      :authorized_columns,
+      :is_registered_with_lake_formation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUnfilteredPartitionsMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString", # required
+    #         database_name: "NameString", # required
+    #         table_name: "NameString", # required
+    #         expression: "PredicateString",
+    #         audit_context: {
+    #           additional_audit_context: "AuditContextString",
+    #         },
+    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #         next_token: "Token",
+    #         segment: {
+    #           segment_number: 1, # required
+    #           total_segments: 1, # required
+    #         },
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_context
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] supported_permission_types
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] segment
+    #   Defines a non-overlapping region of a table's partitions, allowing
+    #   multiple requests to be run in parallel.
+    #   @return [Types::Segment]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadataRequest AWS API Documentation
+    #
+    class GetUnfilteredPartitionsMetadataRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :expression,
+      :audit_context,
+      :supported_permission_types,
+      :next_token,
+      :segment,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] unfiltered_partitions
+    #   @return [Array<Types::UnfilteredPartition>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadataResponse AWS API Documentation
+    #
+    class GetUnfilteredPartitionsMetadataResponse < Struct.new(
+      :unfiltered_partitions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetUnfilteredTableMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         catalog_id: "CatalogIdString", # required
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         audit_context: {
+    #           additional_audit_context: "AuditContextString",
+    #         },
+    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #       }
+    #
+    # @!attribute [rw] catalog_id
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] audit_context
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] supported_permission_types
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataRequest AWS API Documentation
+    #
+    class GetUnfilteredTableMetadataRequest < Struct.new(
+      :catalog_id,
+      :database_name,
+      :name,
+      :audit_context,
+      :supported_permission_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table
+    #   Represents a collection of related data organized in columns and
+    #   rows.
+    #   @return [Types::Table]
+    #
+    # @!attribute [rw] authorized_columns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_registered_with_lake_formation
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cell_filters
+    #   @return [Array<Types::ColumnRowFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadataResponse AWS API Documentation
+    #
+    class GetUnfilteredTableMetadataResponse < Struct.new(
+      :table,
+      :authorized_columns,
+      :is_registered_with_lake_formation,
+      :cell_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetUserDefinedFunctionRequest
     #   data as a hash:
     #
@@ -11260,6 +11584,29 @@ module Aws::Glue
     #
     class LabelingSetGenerationTaskRunProperties < Struct.new(
       :output_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass LakeFormationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         use_lake_formation_credentials: false,
+    #         account_id: "AccountId",
+    #       }
+    #
+    # @!attribute [rw] use_lake_formation_credentials
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LakeFormationConfiguration AWS API Documentation
+    #
+    class LakeFormationConfiguration < Struct.new(
+      :use_lake_formation_credentials,
+      :account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12702,6 +13049,7 @@ module Aws::Glue
     #             },
     #           ],
     #           location: "LocationString",
+    #           additional_locations: ["LocationString"],
     #           input_format: "FormatString",
     #           output_format: "FormatString",
     #           compressed: false,
@@ -12804,6 +13152,17 @@ module Aws::Glue
     #
     class PartitionValueList < Struct.new(
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PermissionTypeMismatchException AWS API Documentation
+    #
+    class PermissionTypeMismatchException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14980,6 +15339,7 @@ module Aws::Glue
     #           },
     #         ],
     #         location: "LocationString",
+    #         additional_locations: ["LocationString"],
     #         input_format: "FormatString",
     #         output_format: "FormatString",
     #         compressed: false,
@@ -15029,6 +15389,9 @@ module Aws::Glue
     #   of the warehouse location, followed by the database location in the
     #   warehouse, followed by the table name.
     #   @return [String]
+    #
+    # @!attribute [rw] additional_locations
+    #   @return [Array<String>]
     #
     # @!attribute [rw] input_format
     #   The input format: `SequenceFileInputFormat` (binary), or
@@ -15088,6 +15451,7 @@ module Aws::Glue
     class StorageDescriptor < Struct.new(
       :columns,
       :location,
+      :additional_locations,
       :input_format,
       :output_format,
       :compressed,
@@ -15338,6 +15702,7 @@ module Aws::Glue
     #             },
     #           ],
     #           location: "LocationString",
+    #           additional_locations: ["LocationString"],
     #           input_format: "FormatString",
     #           output_format: "FormatString",
     #           compressed: false,
@@ -16098,6 +16463,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] partition
+    #   Represents a slice of table data.
+    #   @return [Types::Partition]
+    #
+    # @!attribute [rw] authorized_columns
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_registered_with_lake_formation
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UnfilteredPartition AWS API Documentation
+    #
+    class UnfilteredPartition < Struct.new(
+      :partition,
+      :authorized_columns,
+      :is_registered_with_lake_formation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -16544,6 +16929,14 @@ module Aws::Glue
     #             {
     #               database_name: "NameString", # required
     #               tables: ["NameString"], # required
+    #               connection_name: "ConnectionName",
+    #             },
+    #           ],
+    #           delta_targets: [
+    #             {
+    #               delta_tables: ["Path"],
+    #               connection_name: "ConnectionName",
+    #               write_manifest: false,
     #             },
     #           ],
     #         },
@@ -16559,6 +16952,10 @@ module Aws::Glue
     #         },
     #         lineage_configuration: {
     #           crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #         },
+    #         lake_formation_configuration: {
+    #           use_lake_formation_credentials: false,
+    #           account_id: "AccountId",
     #         },
     #         configuration: "CrawlerConfiguration",
     #         crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -16620,6 +17017,9 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #   @return [Types::LineageConfiguration]
     #
+    # @!attribute [rw] lake_formation_configuration
+    #   @return [Types::LakeFormationConfiguration]
+    #
     # @!attribute [rw] configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -16649,6 +17049,7 @@ module Aws::Glue
       :schema_change_policy,
       :recrawl_policy,
       :lineage_configuration,
+      :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration)
       SENSITIVE = []
@@ -17199,6 +17600,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,
@@ -17435,6 +17837,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,

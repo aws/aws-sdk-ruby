@@ -12704,6 +12704,7 @@ module Aws::EC2
     #   resp.service_configuration.private_dns_name_configuration.type #=> String
     #   resp.service_configuration.private_dns_name_configuration.value #=> String
     #   resp.service_configuration.private_dns_name_configuration.name #=> String
+    #   resp.service_configuration.payer_responsibility #=> String, one of "ServiceOwner"
     #   resp.service_configuration.tags #=> Array
     #   resp.service_configuration.tags[0].key #=> String
     #   resp.service_configuration.tags[0].value #=> String
@@ -31189,6 +31190,7 @@ module Aws::EC2
     #   resp.service_configurations[0].private_dns_name_configuration.type #=> String
     #   resp.service_configurations[0].private_dns_name_configuration.value #=> String
     #   resp.service_configurations[0].private_dns_name_configuration.name #=> String
+    #   resp.service_configurations[0].payer_responsibility #=> String, one of "ServiceOwner"
     #   resp.service_configurations[0].tags #=> Array
     #   resp.service_configurations[0].tags[0].key #=> String
     #   resp.service_configurations[0].tags[0].value #=> String
@@ -31360,6 +31362,7 @@ module Aws::EC2
     #   resp.service_details[0].vpc_endpoint_policy_supported #=> Boolean
     #   resp.service_details[0].acceptance_required #=> Boolean
     #   resp.service_details[0].manages_vpc_endpoints #=> Boolean
+    #   resp.service_details[0].payer_responsibility #=> String, one of "ServiceOwner"
     #   resp.service_details[0].tags #=> Array
     #   resp.service_details[0].tags[0].key #=> String
     #   resp.service_details[0].tags[0].value #=> String
@@ -41556,6 +41559,47 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Modifies the payer responsibility for your VPC endpoint service.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @option params [required, String] :service_id
+    #   The ID of the service.
+    #
+    # @option params [required, String] :payer_responsibility
+    #   The entity that is responsible for the endpoint costs. The default is
+    #   the endpoint owner. If you set the payer responsibility to the service
+    #   owner, you cannot set it back to the endpoint owner.
+    #
+    # @return [Types::ModifyVpcEndpointServicePayerResponsibilityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyVpcEndpointServicePayerResponsibilityResult#return_value #return_value} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_vpc_endpoint_service_payer_responsibility({
+    #     dry_run: false,
+    #     service_id: "VpcEndpointServiceId", # required
+    #     payer_responsibility: "ServiceOwner", # required, accepts ServiceOwner
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return_value #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePayerResponsibility AWS API Documentation
+    #
+    # @overload modify_vpc_endpoint_service_payer_responsibility(params = {})
+    # @param [Hash] params ({})
+    def modify_vpc_endpoint_service_payer_responsibility(params = {}, options = {})
+      req = build_request(:modify_vpc_endpoint_service_payer_responsibility, params)
+      req.send_request(options)
+    end
+
     # Modifies the permissions for your [VPC endpoint service][1]. You can
     # add or remove permissions for service consumers (IAM users, IAM roles,
     # and Amazon Web Services accounts) to connect to your endpoint service.
@@ -48743,7 +48787,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.288.0'
+      context[:gem_version] = '1.289.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -28,8 +28,8 @@ module Aws::ECS
     #
     # @!attribute [rw] status
     #   The status of the attachment. Valid values are `PRECREATED`,
-    #   `CREATED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `DETACHED`, and
-    #   `DELETED`.
+    #   `CREATED`, `ATTACHING`, `ATTACHED`, `DETACHING`, `DETACHED`,
+    #   `DELETED`, and `FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] details
@@ -171,7 +171,8 @@ module Aws::ECS
     # @!attribute [rw] managed_termination_protection
     #   The managed termination protection setting to use for the Auto
     #   Scaling group capacity provider. This determines whether the Auto
-    #   Scaling group has managed termination protection.
+    #   Scaling group has managed termination protection. The default is
+    #   disabled.
     #
     #   When using managed termination protection, managed scaling must also
     #   be used otherwise managed termination protection doesn't work.
@@ -11688,7 +11689,7 @@ module Aws::ECS
     #   @return [String]
     #
     # @!attribute [rw] container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 10 container instance IDs or full ARN entries.
     #   @return [Array<String>]
     #
     # @!attribute [rw] status

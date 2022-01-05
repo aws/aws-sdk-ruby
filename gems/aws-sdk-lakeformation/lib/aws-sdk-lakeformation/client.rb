@@ -1104,6 +1104,11 @@ module Aws::LakeFormation
     #   resp.data_lake_settings.create_table_default_permissions[0].permissions[0] #=> String, one of "ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_TAG", "ALTER_TAG", "DELETE_TAG", "DESCRIBE_TAG", "ASSOCIATE_TAG"
     #   resp.data_lake_settings.trusted_resource_owners #=> Array
     #   resp.data_lake_settings.trusted_resource_owners[0] #=> String
+    #   resp.data_lake_settings.allow_external_data_filtering #=> Boolean
+    #   resp.data_lake_settings.external_data_filtering_allow_list #=> Array
+    #   resp.data_lake_settings.external_data_filtering_allow_list[0].data_lake_principal_identifier #=> String
+    #   resp.data_lake_settings.authorized_session_tag_value_list #=> Array
+    #   resp.data_lake_settings.authorized_session_tag_value_list[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetDataLakeSettings AWS API Documentation
     #
@@ -1499,6 +1504,133 @@ module Aws::LakeFormation
     # @param [Hash] params ({})
     def get_table_objects(params = {}, options = {})
       req = build_request(:get_table_objects, params)
+      req.send_request(options)
+    end
+
+    # This API is identical to `GetTemporaryTableCredentials` except that
+    # this is used when the target Data Catalog resource is of type
+    # Partition. Lake Formation restricts the permission of the vended
+    # credentials with the same scope down policy which restricts access to
+    # a single Amazon S3 prefix.
+    #
+    # @option params [required, String] :table_arn
+    #   The ARN of the partitions' table.
+    #
+    # @option params [required, Types::PartitionValueList] :partition
+    #   A list of partition values identifying a single partition.
+    #
+    # @option params [Array<String>] :permissions
+    #   Filters the request based on the user having been granted a list of
+    #   specified permissions on the requested resource(s).
+    #
+    # @option params [Integer] :duration_seconds
+    #   The time period, between 900 and 21,600 seconds, for the timeout of
+    #   the temporary credentials.
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure representing context to access a resource (column names,
+    #   query ID, etc).
+    #
+    # @option params [required, Array<String>] :supported_permission_types
+    #   A list of supported permission types for the partition. Valid values
+    #   are `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
+    #
+    # @return [Types::GetTemporaryGluePartitionCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTemporaryGluePartitionCredentialsResponse#access_key_id #access_key_id} => String
+    #   * {Types::GetTemporaryGluePartitionCredentialsResponse#secret_access_key #secret_access_key} => String
+    #   * {Types::GetTemporaryGluePartitionCredentialsResponse#session_token #session_token} => String
+    #   * {Types::GetTemporaryGluePartitionCredentialsResponse#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_temporary_glue_partition_credentials({
+    #     table_arn: "ResourceArnString", # required
+    #     partition: { # required
+    #       values: ["ValueString"], # required
+    #     },
+    #     permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_key_id #=> String
+    #   resp.secret_access_key #=> String
+    #   resp.session_token #=> String
+    #   resp.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGluePartitionCredentials AWS API Documentation
+    #
+    # @overload get_temporary_glue_partition_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_temporary_glue_partition_credentials(params = {}, options = {})
+      req = build_request(:get_temporary_glue_partition_credentials, params)
+      req.send_request(options)
+    end
+
+    # Allows a caller in a secure environment to assume a role with
+    # permission to access Amazon S3. In order to vend such credentials,
+    # Lake Formation assumes the role associated with a registered location,
+    # for example an Amazon S3 bucket, with a scope down policy which
+    # restricts the access to a single prefix.
+    #
+    # @option params [required, String] :table_arn
+    #   The ARN identifying a table in the Data Catalog for the temporary
+    #   credentials request.
+    #
+    # @option params [Array<String>] :permissions
+    #   Filters the request based on the user having been granted a list of
+    #   specified permissions on the requested resource(s).
+    #
+    # @option params [Integer] :duration_seconds
+    #   The time period, between 900 and 21,600 seconds, for the timeout of
+    #   the temporary credentials.
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #   A structure representing context to access a resource (column names,
+    #   query ID, etc).
+    #
+    # @option params [required, Array<String>] :supported_permission_types
+    #   A list of supported permission types for the table. Valid values are
+    #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
+    #
+    # @return [Types::GetTemporaryGlueTableCredentialsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#access_key_id #access_key_id} => String
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#secret_access_key #secret_access_key} => String
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#session_token #session_token} => String
+    #   * {Types::GetTemporaryGlueTableCredentialsResponse#expiration #expiration} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_temporary_glue_table_credentials({
+    #     table_arn: "ResourceArnString", # required
+    #     permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_key_id #=> String
+    #   resp.secret_access_key #=> String
+    #   resp.session_token #=> String
+    #   resp.expiration #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentials AWS API Documentation
+    #
+    # @overload get_temporary_glue_table_credentials(params = {})
+    # @param [Hash] params ({})
+    def get_temporary_glue_table_credentials(params = {}, options = {})
+      req = build_request(:get_temporary_glue_table_credentials, params)
       req.send_request(options)
     end
 
@@ -2198,6 +2330,13 @@ module Aws::LakeFormation
     #         },
     #       ],
     #       trusted_resource_owners: ["CatalogIdString"],
+    #       allow_external_data_filtering: false,
+    #       external_data_filtering_allow_list: [
+    #         {
+    #           data_lake_principal_identifier: "DataLakePrincipalString",
+    #         },
+    #       ],
+    #       authorized_session_tag_value_list: ["NameString"],
     #     },
     #   })
     #
@@ -2875,7 +3014,7 @@ module Aws::LakeFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lakeformation'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

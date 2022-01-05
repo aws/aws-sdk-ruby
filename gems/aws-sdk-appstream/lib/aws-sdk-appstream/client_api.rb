@@ -21,6 +21,7 @@ module Aws::AppStream
     Action = Shapes::StringShape.new(name: 'Action')
     AppBlock = Shapes::StructureShape.new(name: 'AppBlock')
     AppBlocks = Shapes::ListShape.new(name: 'AppBlocks')
+    AppVisibility = Shapes::StringShape.new(name: 'AppVisibility')
     Application = Shapes::StructureShape.new(name: 'Application')
     ApplicationAttribute = Shapes::StringShape.new(name: 'ApplicationAttribute')
     ApplicationAttributes = Shapes::ListShape.new(name: 'ApplicationAttributes')
@@ -34,6 +35,8 @@ module Aws::AppStream
     ArnList = Shapes::ListShape.new(name: 'ArnList')
     AssociateApplicationFleetRequest = Shapes::StructureShape.new(name: 'AssociateApplicationFleetRequest')
     AssociateApplicationFleetResult = Shapes::StructureShape.new(name: 'AssociateApplicationFleetResult')
+    AssociateApplicationToEntitlementRequest = Shapes::StructureShape.new(name: 'AssociateApplicationToEntitlementRequest')
+    AssociateApplicationToEntitlementResult = Shapes::StructureShape.new(name: 'AssociateApplicationToEntitlementResult')
     AssociateFleetRequest = Shapes::StructureShape.new(name: 'AssociateFleetRequest')
     AssociateFleetResult = Shapes::StructureShape.new(name: 'AssociateFleetResult')
     AuthenticationType = Shapes::StringShape.new(name: 'AuthenticationType')
@@ -56,6 +59,8 @@ module Aws::AppStream
     CreateApplicationResult = Shapes::StructureShape.new(name: 'CreateApplicationResult')
     CreateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'CreateDirectoryConfigRequest')
     CreateDirectoryConfigResult = Shapes::StructureShape.new(name: 'CreateDirectoryConfigResult')
+    CreateEntitlementRequest = Shapes::StructureShape.new(name: 'CreateEntitlementRequest')
+    CreateEntitlementResult = Shapes::StructureShape.new(name: 'CreateEntitlementResult')
     CreateFleetRequest = Shapes::StructureShape.new(name: 'CreateFleetRequest')
     CreateFleetResult = Shapes::StructureShape.new(name: 'CreateFleetResult')
     CreateImageBuilderRequest = Shapes::StructureShape.new(name: 'CreateImageBuilderRequest')
@@ -78,6 +83,8 @@ module Aws::AppStream
     DeleteApplicationResult = Shapes::StructureShape.new(name: 'DeleteApplicationResult')
     DeleteDirectoryConfigRequest = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigRequest')
     DeleteDirectoryConfigResult = Shapes::StructureShape.new(name: 'DeleteDirectoryConfigResult')
+    DeleteEntitlementRequest = Shapes::StructureShape.new(name: 'DeleteEntitlementRequest')
+    DeleteEntitlementResult = Shapes::StructureShape.new(name: 'DeleteEntitlementResult')
     DeleteFleetRequest = Shapes::StructureShape.new(name: 'DeleteFleetRequest')
     DeleteFleetResult = Shapes::StructureShape.new(name: 'DeleteFleetResult')
     DeleteImageBuilderRequest = Shapes::StructureShape.new(name: 'DeleteImageBuilderRequest')
@@ -100,6 +107,8 @@ module Aws::AppStream
     DescribeApplicationsResult = Shapes::StructureShape.new(name: 'DescribeApplicationsResult')
     DescribeDirectoryConfigsRequest = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsRequest')
     DescribeDirectoryConfigsResult = Shapes::StructureShape.new(name: 'DescribeDirectoryConfigsResult')
+    DescribeEntitlementsRequest = Shapes::StructureShape.new(name: 'DescribeEntitlementsRequest')
+    DescribeEntitlementsResult = Shapes::StructureShape.new(name: 'DescribeEntitlementsResult')
     DescribeFleetsRequest = Shapes::StructureShape.new(name: 'DescribeFleetsRequest')
     DescribeFleetsResult = Shapes::StructureShape.new(name: 'DescribeFleetsResult')
     DescribeImageBuildersRequest = Shapes::StructureShape.new(name: 'DescribeImageBuildersRequest')
@@ -128,6 +137,8 @@ module Aws::AppStream
     DisableUserResult = Shapes::StructureShape.new(name: 'DisableUserResult')
     DisassociateApplicationFleetRequest = Shapes::StructureShape.new(name: 'DisassociateApplicationFleetRequest')
     DisassociateApplicationFleetResult = Shapes::StructureShape.new(name: 'DisassociateApplicationFleetResult')
+    DisassociateApplicationFromEntitlementRequest = Shapes::StructureShape.new(name: 'DisassociateApplicationFromEntitlementRequest')
+    DisassociateApplicationFromEntitlementResult = Shapes::StructureShape.new(name: 'DisassociateApplicationFromEntitlementResult')
     DisassociateFleetRequest = Shapes::StructureShape.new(name: 'DisassociateFleetRequest')
     DisassociateFleetResult = Shapes::StructureShape.new(name: 'DisassociateFleetResult')
     DisplayName = Shapes::StringShape.new(name: 'DisplayName')
@@ -138,6 +149,14 @@ module Aws::AppStream
     EmbedHostDomains = Shapes::ListShape.new(name: 'EmbedHostDomains')
     EnableUserRequest = Shapes::StructureShape.new(name: 'EnableUserRequest')
     EnableUserResult = Shapes::StructureShape.new(name: 'EnableUserResult')
+    EntitledApplication = Shapes::StructureShape.new(name: 'EntitledApplication')
+    EntitledApplicationList = Shapes::ListShape.new(name: 'EntitledApplicationList')
+    Entitlement = Shapes::StructureShape.new(name: 'Entitlement')
+    EntitlementAlreadyExistsException = Shapes::StructureShape.new(name: 'EntitlementAlreadyExistsException')
+    EntitlementAttribute = Shapes::StructureShape.new(name: 'EntitlementAttribute')
+    EntitlementAttributeList = Shapes::ListShape.new(name: 'EntitlementAttributeList')
+    EntitlementList = Shapes::ListShape.new(name: 'EntitlementList')
+    EntitlementNotFoundException = Shapes::StructureShape.new(name: 'EntitlementNotFoundException')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpireSessionRequest = Shapes::StructureShape.new(name: 'ExpireSessionRequest')
     ExpireSessionResult = Shapes::StructureShape.new(name: 'ExpireSessionResult')
@@ -174,6 +193,8 @@ module Aws::AppStream
     ListAssociatedFleetsResult = Shapes::StructureShape.new(name: 'ListAssociatedFleetsResult')
     ListAssociatedStacksRequest = Shapes::StructureShape.new(name: 'ListAssociatedStacksRequest')
     ListAssociatedStacksResult = Shapes::StructureShape.new(name: 'ListAssociatedStacksResult')
+    ListEntitledApplicationsRequest = Shapes::StructureShape.new(name: 'ListEntitledApplicationsRequest')
+    ListEntitledApplicationsResult = Shapes::StructureShape.new(name: 'ListEntitledApplicationsResult')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -247,6 +268,8 @@ module Aws::AppStream
     UpdateApplicationResult = Shapes::StructureShape.new(name: 'UpdateApplicationResult')
     UpdateDirectoryConfigRequest = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigRequest')
     UpdateDirectoryConfigResult = Shapes::StructureShape.new(name: 'UpdateDirectoryConfigResult')
+    UpdateEntitlementRequest = Shapes::StructureShape.new(name: 'UpdateEntitlementRequest')
+    UpdateEntitlementResult = Shapes::StructureShape.new(name: 'UpdateEntitlementResult')
     UpdateFleetRequest = Shapes::StructureShape.new(name: 'UpdateFleetRequest')
     UpdateFleetResult = Shapes::StructureShape.new(name: 'UpdateFleetResult')
     UpdateImagePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateImagePermissionsRequest')
@@ -336,6 +359,13 @@ module Aws::AppStream
     AssociateApplicationFleetResult.add_member(:application_fleet_association, Shapes::ShapeRef.new(shape: ApplicationFleetAssociation, location_name: "ApplicationFleetAssociation"))
     AssociateApplicationFleetResult.struct_class = Types::AssociateApplicationFleetResult
 
+    AssociateApplicationToEntitlementRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    AssociateApplicationToEntitlementRequest.add_member(:entitlement_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "EntitlementName"))
+    AssociateApplicationToEntitlementRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplicationIdentifier"))
+    AssociateApplicationToEntitlementRequest.struct_class = Types::AssociateApplicationToEntitlementRequest
+
+    AssociateApplicationToEntitlementResult.struct_class = Types::AssociateApplicationToEntitlementResult
+
     AssociateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     AssociateFleetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     AssociateFleetRequest.struct_class = Types::AssociateFleetRequest
@@ -411,6 +441,16 @@ module Aws::AppStream
 
     CreateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))
     CreateDirectoryConfigResult.struct_class = Types::CreateDirectoryConfigResult
+
+    CreateEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    CreateEntitlementRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    CreateEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateEntitlementRequest.add_member(:app_visibility, Shapes::ShapeRef.new(shape: AppVisibility, required: true, location_name: "AppVisibility"))
+    CreateEntitlementRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: EntitlementAttributeList, required: true, location_name: "Attributes"))
+    CreateEntitlementRequest.struct_class = Types::CreateEntitlementRequest
+
+    CreateEntitlementResult.add_member(:entitlement, Shapes::ShapeRef.new(shape: Entitlement, location_name: "Entitlement"))
+    CreateEntitlementResult.struct_class = Types::CreateEntitlementResult
 
     CreateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
     CreateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
@@ -533,6 +573,12 @@ module Aws::AppStream
 
     DeleteDirectoryConfigResult.struct_class = Types::DeleteDirectoryConfigResult
 
+    DeleteEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    DeleteEntitlementRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DeleteEntitlementRequest.struct_class = Types::DeleteEntitlementRequest
+
+    DeleteEntitlementResult.struct_class = Types::DeleteEntitlementResult
+
     DeleteFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     DeleteFleetRequest.struct_class = Types::DeleteFleetRequest
 
@@ -607,6 +653,16 @@ module Aws::AppStream
     DescribeDirectoryConfigsResult.add_member(:directory_configs, Shapes::ShapeRef.new(shape: DirectoryConfigList, location_name: "DirectoryConfigs"))
     DescribeDirectoryConfigsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     DescribeDirectoryConfigsResult.struct_class = Types::DescribeDirectoryConfigsResult
+
+    DescribeEntitlementsRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
+    DescribeEntitlementsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DescribeEntitlementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeEntitlementsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    DescribeEntitlementsRequest.struct_class = Types::DescribeEntitlementsRequest
+
+    DescribeEntitlementsResult.add_member(:entitlements, Shapes::ShapeRef.new(shape: EntitlementList, location_name: "Entitlements"))
+    DescribeEntitlementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    DescribeEntitlementsResult.struct_class = Types::DescribeEntitlementsResult
 
     DescribeFleetsRequest.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
     DescribeFleetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -717,6 +773,13 @@ module Aws::AppStream
 
     DisassociateApplicationFleetResult.struct_class = Types::DisassociateApplicationFleetResult
 
+    DisassociateApplicationFromEntitlementRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    DisassociateApplicationFromEntitlementRequest.add_member(:entitlement_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "EntitlementName"))
+    DisassociateApplicationFromEntitlementRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplicationIdentifier"))
+    DisassociateApplicationFromEntitlementRequest.struct_class = Types::DisassociateApplicationFromEntitlementRequest
+
+    DisassociateApplicationFromEntitlementResult.struct_class = Types::DisassociateApplicationFromEntitlementResult
+
     DisassociateFleetRequest.add_member(:fleet_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "FleetName"))
     DisassociateFleetRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "StackName"))
     DisassociateFleetRequest.struct_class = Types::DisassociateFleetRequest
@@ -736,6 +799,34 @@ module Aws::AppStream
     EnableUserRequest.struct_class = Types::EnableUserRequest
 
     EnableUserResult.struct_class = Types::EnableUserResult
+
+    EntitledApplication.add_member(:application_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ApplicationIdentifier"))
+    EntitledApplication.struct_class = Types::EntitledApplication
+
+    EntitledApplicationList.member = Shapes::ShapeRef.new(shape: EntitledApplication)
+
+    Entitlement.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    Entitlement.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    Entitlement.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    Entitlement.add_member(:app_visibility, Shapes::ShapeRef.new(shape: AppVisibility, required: true, location_name: "AppVisibility"))
+    Entitlement.add_member(:attributes, Shapes::ShapeRef.new(shape: EntitlementAttributeList, required: true, location_name: "Attributes"))
+    Entitlement.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTime"))
+    Entitlement.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Entitlement.struct_class = Types::Entitlement
+
+    EntitlementAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EntitlementAlreadyExistsException.struct_class = Types::EntitlementAlreadyExistsException
+
+    EntitlementAttribute.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    EntitlementAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    EntitlementAttribute.struct_class = Types::EntitlementAttribute
+
+    EntitlementAttributeList.member = Shapes::ShapeRef.new(shape: EntitlementAttribute)
+
+    EntitlementList.member = Shapes::ShapeRef.new(shape: Entitlement)
+
+    EntitlementNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    EntitlementNotFoundException.struct_class = Types::EntitlementNotFoundException
 
     ExpireSessionRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SessionId"))
     ExpireSessionRequest.struct_class = Types::ExpireSessionRequest
@@ -868,6 +959,16 @@ module Aws::AppStream
     ListAssociatedStacksResult.add_member(:names, Shapes::ShapeRef.new(shape: StringList, location_name: "Names"))
     ListAssociatedStacksResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListAssociatedStacksResult.struct_class = Types::ListAssociatedStacksResult
+
+    ListEntitledApplicationsRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    ListEntitledApplicationsRequest.add_member(:entitlement_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "EntitlementName"))
+    ListEntitledApplicationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntitledApplicationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    ListEntitledApplicationsRequest.struct_class = Types::ListEntitledApplicationsRequest
+
+    ListEntitledApplicationsResult.add_member(:entitled_applications, Shapes::ShapeRef.new(shape: EntitledApplicationList, location_name: "EntitledApplications"))
+    ListEntitledApplicationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListEntitledApplicationsResult.struct_class = Types::ListEntitledApplicationsResult
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -1045,6 +1146,16 @@ module Aws::AppStream
     UpdateDirectoryConfigResult.add_member(:directory_config, Shapes::ShapeRef.new(shape: DirectoryConfig, location_name: "DirectoryConfig"))
     UpdateDirectoryConfigResult.struct_class = Types::UpdateDirectoryConfigResult
 
+    UpdateEntitlementRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "Name"))
+    UpdateEntitlementRequest.add_member(:stack_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "StackName"))
+    UpdateEntitlementRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateEntitlementRequest.add_member(:app_visibility, Shapes::ShapeRef.new(shape: AppVisibility, location_name: "AppVisibility"))
+    UpdateEntitlementRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: EntitlementAttributeList, location_name: "Attributes"))
+    UpdateEntitlementRequest.struct_class = Types::UpdateEntitlementRequest
+
+    UpdateEntitlementResult.add_member(:entitlement, Shapes::ShapeRef.new(shape: Entitlement, location_name: "Entitlement"))
+    UpdateEntitlementResult.struct_class = Types::UpdateEntitlementResult
+
     UpdateFleetRequest.add_member(:image_name, Shapes::ShapeRef.new(shape: String, location_name: "ImageName"))
     UpdateFleetRequest.add_member(:image_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ImageArn"))
     UpdateFleetRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -1173,6 +1284,19 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:associate_application_to_entitlement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateApplicationToEntitlement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateApplicationToEntitlementRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateApplicationToEntitlementResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
       api.add_operation(:associate_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateFleet"
         o.http_method = "POST"
@@ -1258,6 +1382,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccountStatusException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+      end)
+
+      api.add_operation(:create_entitlement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEntitlement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEntitlementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEntitlementResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementAlreadyExistsException)
       end)
 
       api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -1407,6 +1543,19 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:delete_entitlement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEntitlement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEntitlementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEntitlementResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+      end)
+
       api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteFleet"
         o.http_method = "POST"
@@ -1459,6 +1608,7 @@ module Aws::AppStream
         o.output = Shapes::ShapeRef.new(shape: DeleteStackResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
@@ -1518,6 +1668,17 @@ module Aws::AppStream
         o.input = Shapes::ShapeRef.new(shape: DescribeDirectoryConfigsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDirectoryConfigsResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:describe_entitlements, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEntitlements"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEntitlementsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEntitlementsResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
       end)
 
       api.add_operation(:describe_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -1638,6 +1799,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
+      api.add_operation(:disassociate_application_from_entitlement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateApplicationFromEntitlement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateApplicationFromEntitlementRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateApplicationFromEntitlementResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+      end)
+
       api.add_operation(:disassociate_fleet, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateFleet"
         o.http_method = "POST"
@@ -1682,6 +1855,17 @@ module Aws::AppStream
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListAssociatedStacksRequest)
         o.output = Shapes::ShapeRef.new(shape: ListAssociatedStacksResult)
+      end)
+
+      api.add_operation(:list_entitled_applications, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEntitledApplications"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEntitledApplicationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEntitledApplicationsResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1785,6 +1969,18 @@ module Aws::AppStream
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRoleException)
+      end)
+
+      api.add_operation(:update_entitlement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEntitlement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEntitlementRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEntitlementResult)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: EntitlementNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:update_fleet, Seahorse::Model::Operation.new.tap do |o|

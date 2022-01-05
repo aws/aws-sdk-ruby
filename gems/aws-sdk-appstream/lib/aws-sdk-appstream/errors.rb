@@ -28,6 +28,8 @@ module Aws::AppStream
   #
   # ## Error Classes
   # * {ConcurrentModificationException}
+  # * {EntitlementAlreadyExistsException}
+  # * {EntitlementNotFoundException}
   # * {IncompatibleImageException}
   # * {InvalidAccountStatusException}
   # * {InvalidParameterCombinationException}
@@ -51,6 +53,36 @@ module Aws::AppStream
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::AppStream::Types::ConcurrentModificationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntitlementAlreadyExistsException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppStream::Types::EntitlementAlreadyExistsException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class EntitlementNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::AppStream::Types::EntitlementNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

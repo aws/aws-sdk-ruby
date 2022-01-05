@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-01-05)
+------------------
+
+* Feature - Updating validation rules for interfaces used in the Snowball API to tighten security of service.
+
 1.46.0 (2021-12-21)
 ------------------
 

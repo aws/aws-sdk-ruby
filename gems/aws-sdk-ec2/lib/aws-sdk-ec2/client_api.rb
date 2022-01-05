@@ -1790,6 +1790,8 @@ module Aws::EC2
     ModifyVpcEndpointResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointResult')
     ModifyVpcEndpointServiceConfigurationRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServiceConfigurationRequest')
     ModifyVpcEndpointServiceConfigurationResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServiceConfigurationResult')
+    ModifyVpcEndpointServicePayerResponsibilityRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServicePayerResponsibilityRequest')
+    ModifyVpcEndpointServicePayerResponsibilityResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServicePayerResponsibilityResult')
     ModifyVpcEndpointServicePermissionsRequest = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServicePermissionsRequest')
     ModifyVpcEndpointServicePermissionsResult = Shapes::StructureShape.new(name: 'ModifyVpcEndpointServicePermissionsResult')
     ModifyVpcPeeringConnectionOptionsRequest = Shapes::StructureShape.new(name: 'ModifyVpcPeeringConnectionOptionsRequest')
@@ -1904,6 +1906,7 @@ module Aws::EC2
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     PathStatement = Shapes::StructureShape.new(name: 'PathStatement')
     PathStatementRequest = Shapes::StructureShape.new(name: 'PathStatementRequest')
+    PayerResponsibility = Shapes::StringShape.new(name: 'PayerResponsibility')
     PaymentOption = Shapes::StringShape.new(name: 'PaymentOption')
     PciId = Shapes::StructureShape.new(name: 'PciId')
     PeeringAttachmentStatus = Shapes::StructureShape.new(name: 'PeeringAttachmentStatus')
@@ -7795,7 +7798,7 @@ module Aws::EC2
     HostOffering.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
     HostOffering.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
     HostOffering.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
-    HostOffering.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
+    HostOffering.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "offeringId"))
     HostOffering.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
     HostOffering.add_member(:upfront_price, Shapes::ShapeRef.new(shape: String, location_name: "upfrontPrice"))
     HostOffering.struct_class = Types::HostOffering
@@ -7814,10 +7817,10 @@ module Aws::EC2
     HostReservation.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
     HostReservation.add_member(:end, Shapes::ShapeRef.new(shape: DateTime, location_name: "end"))
     HostReservation.add_member(:host_id_set, Shapes::ShapeRef.new(shape: ResponseHostIdSet, location_name: "hostIdSet"))
-    HostReservation.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "hostReservationId"))
+    HostReservation.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: HostReservationId, location_name: "hostReservationId"))
     HostReservation.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
     HostReservation.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
-    HostReservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
+    HostReservation.add_member(:offering_id, Shapes::ShapeRef.new(shape: OfferingId, location_name: "offeringId"))
     HostReservation.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
     HostReservation.add_member(:start, Shapes::ShapeRef.new(shape: DateTime, location_name: "start"))
     HostReservation.add_member(:state, Shapes::ShapeRef.new(shape: ReservationState, location_name: "state"))
@@ -9781,6 +9784,14 @@ module Aws::EC2
     ModifyVpcEndpointServiceConfigurationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
     ModifyVpcEndpointServiceConfigurationResult.struct_class = Types::ModifyVpcEndpointServiceConfigurationResult
 
+    ModifyVpcEndpointServicePayerResponsibilityRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyVpcEndpointServicePayerResponsibilityRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: VpcEndpointServiceId, required: true, location_name: "ServiceId"))
+    ModifyVpcEndpointServicePayerResponsibilityRequest.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibility, required: true, location_name: "PayerResponsibility"))
+    ModifyVpcEndpointServicePayerResponsibilityRequest.struct_class = Types::ModifyVpcEndpointServicePayerResponsibilityRequest
+
+    ModifyVpcEndpointServicePayerResponsibilityResult.add_member(:return_value, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    ModifyVpcEndpointServicePayerResponsibilityResult.struct_class = Types::ModifyVpcEndpointServicePayerResponsibilityResult
+
     ModifyVpcEndpointServicePermissionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyVpcEndpointServicePermissionsRequest.add_member(:service_id, Shapes::ShapeRef.new(shape: VpcEndpointServiceId, required: true, location_name: "ServiceId"))
     ModifyVpcEndpointServicePermissionsRequest.add_member(:add_allowed_principals, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddAllowedPrincipals"))
@@ -10523,7 +10534,7 @@ module Aws::EC2
     Purchase.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
     Purchase.add_member(:duration, Shapes::ShapeRef.new(shape: Integer, location_name: "duration"))
     Purchase.add_member(:host_id_set, Shapes::ShapeRef.new(shape: ResponseHostIdSet, location_name: "hostIdSet"))
-    Purchase.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: String, location_name: "hostReservationId"))
+    Purchase.add_member(:host_reservation_id, Shapes::ShapeRef.new(shape: HostReservationId, location_name: "hostReservationId"))
     Purchase.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
     Purchase.add_member(:instance_family, Shapes::ShapeRef.new(shape: String, location_name: "instanceFamily"))
     Purchase.add_member(:payment_option, Shapes::ShapeRef.new(shape: PaymentOption, location_name: "paymentOption"))
@@ -11564,6 +11575,7 @@ module Aws::EC2
     ServiceConfiguration.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
     ServiceConfiguration.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
     ServiceConfiguration.add_member(:private_dns_name_configuration, Shapes::ShapeRef.new(shape: PrivateDnsNameConfiguration, location_name: "privateDnsNameConfiguration"))
+    ServiceConfiguration.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibility, location_name: "payerResponsibility"))
     ServiceConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ServiceConfiguration.struct_class = Types::ServiceConfiguration
 
@@ -11580,6 +11592,7 @@ module Aws::EC2
     ServiceDetail.add_member(:vpc_endpoint_policy_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "vpcEndpointPolicySupported"))
     ServiceDetail.add_member(:acceptance_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "acceptanceRequired"))
     ServiceDetail.add_member(:manages_vpc_endpoints, Shapes::ShapeRef.new(shape: Boolean, location_name: "managesVpcEndpoints"))
+    ServiceDetail.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibility, location_name: "payerResponsibility"))
     ServiceDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ServiceDetail.add_member(:private_dns_name_verification_state, Shapes::ShapeRef.new(shape: DnsNameState, location_name: "privateDnsNameVerificationState"))
     ServiceDetail.struct_class = Types::ServiceDetail
@@ -17230,6 +17243,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyVpcEndpointServiceConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyVpcEndpointServiceConfigurationResult)
+      end)
+
+      api.add_operation(:modify_vpc_endpoint_service_payer_responsibility, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVpcEndpointServicePayerResponsibility"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVpcEndpointServicePayerResponsibilityRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVpcEndpointServicePayerResponsibilityResult)
       end)
 
       api.add_operation(:modify_vpc_endpoint_service_permissions, Seahorse::Model::Operation.new.tap do |o|

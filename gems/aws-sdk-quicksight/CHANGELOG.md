@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-01-05)
+------------------
+
+* Feature - Multiple Doc-only updates for Amazon QuickSight.
+
 1.60.0 (2021-12-21)
 ------------------
 

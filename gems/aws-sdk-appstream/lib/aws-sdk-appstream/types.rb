@@ -300,6 +300,41 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateApplicationToEntitlementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "Name", # required
+    #         entitlement_name: "Name", # required
+    #         application_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack.
+    #   @return [String]
+    #
+    # @!attribute [rw] entitlement_name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_identifier
+    #   The identifier of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateApplicationToEntitlementRequest AWS API Documentation
+    #
+    class AssociateApplicationToEntitlementRequest < Struct.new(
+      :stack_name,
+      :entitlement_name,
+      :application_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateApplicationToEntitlementResult AWS API Documentation
+    #
+    class AssociateApplicationToEntitlementResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateFleetRequest
     #   data as a hash:
     #
@@ -744,6 +779,66 @@ module Aws::AppStream
     #
     class CreateDirectoryConfigResult < Struct.new(
       :directory_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateEntitlementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         stack_name: "Name", # required
+    #         description: "Description",
+    #         app_visibility: "ALL", # required, accepts ALL, ASSOCIATED
+    #         attributes: [ # required
+    #           {
+    #             name: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_visibility
+    #   Specifies whether all or selected apps are entitled.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes of the entitlement.
+    #   @return [Array<Types::EntitlementAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateEntitlementRequest AWS API Documentation
+    #
+    class CreateEntitlementRequest < Struct.new(
+      :name,
+      :stack_name,
+      :description,
+      :app_visibility,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entitlement
+    #   The entitlement.
+    #   @return [Types::Entitlement]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateEntitlementResult AWS API Documentation
+    #
+    class CreateEntitlementResult < Struct.new(
+      :entitlement)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1808,6 +1903,35 @@ module Aws::AppStream
     #
     class DeleteDirectoryConfigResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteEntitlementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         stack_name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteEntitlementRequest AWS API Documentation
+    #
+    class DeleteEntitlementRequest < Struct.new(
+      :name,
+      :stack_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteEntitlementResult AWS API Documentation
+    #
+    class DeleteEntitlementResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteFleetRequest
     #   data as a hash:
     #
@@ -2192,6 +2316,62 @@ module Aws::AppStream
     #
     class DescribeDirectoryConfigsResult < Struct.new(
       :directory_configs,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEntitlementsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name",
+    #         stack_name: "Name", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeEntitlementsRequest AWS API Documentation
+    #
+    class DescribeEntitlementsRequest < Struct.new(
+      :name,
+      :stack_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entitlements
+    #   The entitlements.
+    #   @return [Array<Types::Entitlement>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeEntitlementsResult AWS API Documentation
+    #
+    class DescribeEntitlementsResult < Struct.new(
+      :entitlements,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2789,6 +2969,41 @@ module Aws::AppStream
     #
     class DisassociateApplicationFleetResult < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DisassociateApplicationFromEntitlementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "Name", # required
+    #         entitlement_name: "Name", # required
+    #         application_identifier: "String", # required
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] entitlement_name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_identifier
+    #   The identifier of the application to remove from the entitlement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateApplicationFromEntitlementRequest AWS API Documentation
+    #
+    class DisassociateApplicationFromEntitlementRequest < Struct.new(
+      :stack_name,
+      :entitlement_name,
+      :application_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateApplicationFromEntitlementResult AWS API Documentation
+    #
+    class DisassociateApplicationFromEntitlementResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DisassociateFleetRequest
     #   data as a hash:
     #
@@ -2883,6 +3098,148 @@ module Aws::AppStream
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EnableUserResult AWS API Documentation
     #
     class EnableUserResult < Aws::EmptyStructure; end
+
+    # The application associated to an entitlement. Access is controlled
+    # based on user attributes.
+    #
+    # @!attribute [rw] application_identifier
+    #   The identifier of the application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EntitledApplication AWS API Documentation
+    #
+    class EntitledApplication < Struct.new(
+      :application_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an entitlement. Entitlements control access to specific
+    # applications within a stack, based on user attributes. Entitlements
+    # apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user
+    # pool and streaming URL users are entitled to all applications in a
+    # stack. Entitlements don't apply to the desktop stream view
+    # application, or to applications managed by a dynamic app provider
+    # using the Dynamic Application Framework.
+    #
+    # @!attribute [rw] name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_visibility
+    #   Specifies whether all or selected apps are entitled.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes of the entitlement.
+    #   @return [Array<Types::EntitlementAttribute>]
+    #
+    # @!attribute [rw] created_time
+    #   The time when the entitlement was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time when the entitlement was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Entitlement AWS API Documentation
+    #
+    class Entitlement < Struct.new(
+      :name,
+      :stack_name,
+      :description,
+      :app_visibility,
+      :attributes,
+      :created_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entitlement already exists.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EntitlementAlreadyExistsException AWS API Documentation
+    #
+    class EntitlementAlreadyExistsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An attribute associated with an entitlement. Application entitlements
+    # work by matching a supported SAML 2.0 attribute name to a value when a
+    # user identity federates to an Amazon AppStream 2.0 SAML application.
+    #
+    # @note When making an API call, you may pass EntitlementAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String", # required
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   A supported AWS IAM SAML `PrincipalTag` attribute that is matched to
+    #   the associated value when a user identity federates into an Amazon
+    #   AppStream 2.0 SAML application.
+    #
+    #   The following are valid values:
+    #
+    #   * roles
+    #
+    #   * department
+    #
+    #   * organization
+    #
+    #   * groups
+    #
+    #   * title
+    #
+    #   * costCenter
+    #
+    #   * userType
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A value that is matched to a supported SAML attribute name when a
+    #   user identity federates into an Amazon AppStream 2.0 SAML
+    #   application.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EntitlementAttribute AWS API Documentation
+    #
+    class EntitlementAttribute < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The entitlement can't be found.
+    #
+    # @!attribute [rw] message
+    #   The error message in the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/EntitlementNotFoundException AWS API Documentation
+    #
+    class EntitlementNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass ExpireSessionRequest
     #   data as a hash:
@@ -3723,6 +4080,62 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEntitledApplicationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         stack_name: "Name", # required
+    #         entitlement_name: "Name", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] entitlement_name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum size of each page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListEntitledApplicationsRequest AWS API Documentation
+    #
+    class ListEntitledApplicationsRequest < Struct.new(
+      :stack_name,
+      :entitlement_name,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entitled_applications
+    #   The entitled applications.
+    #   @return [Array<Types::EntitledApplication>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListEntitledApplicationsResult AWS API Documentation
+    #
+    class ListEntitledApplicationsResult < Struct.new(
+      :entitled_applications,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -4522,6 +4935,66 @@ module Aws::AppStream
     #
     class UpdateDirectoryConfigResult < Struct.new(
       :directory_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateEntitlementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "Name", # required
+    #         stack_name: "Name", # required
+    #         description: "Description",
+    #         app_visibility: "ALL", # accepts ALL, ASSOCIATED
+    #         attributes: [
+    #           {
+    #             name: "String", # required
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_visibility
+    #   Specifies whether all or only selected apps are entitled.
+    #   @return [String]
+    #
+    # @!attribute [rw] attributes
+    #   The attributes of the entitlement.
+    #   @return [Array<Types::EntitlementAttribute>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateEntitlementRequest AWS API Documentation
+    #
+    class UpdateEntitlementRequest < Struct.new(
+      :name,
+      :stack_name,
+      :description,
+      :app_visibility,
+      :attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] entitlement
+    #   The entitlement.
+    #   @return [Types::Entitlement]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateEntitlementResult AWS API Documentation
+    #
+    class UpdateEntitlementResult < Struct.new(
+      :entitlement)
       SENSITIVE = []
       include Aws::Structure
     end

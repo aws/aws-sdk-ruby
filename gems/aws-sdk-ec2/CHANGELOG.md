@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.289.0 (2022-01-05)
+------------------
+
+* Feature - This release adds a new API called ModifyVpcEndpointServicePayerResponsibility which allows VPC endpoint service owners to take payer responsibility of their VPC Endpoint connections.
+
 1.288.0 (2021-12-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-01-05)
+------------------
+
+* Feature - Amazon EKS now supports running applications using IPv6 address space
+
 1.70.0 (2021-12-21)
 ------------------
 

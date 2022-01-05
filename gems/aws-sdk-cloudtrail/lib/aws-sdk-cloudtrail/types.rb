@@ -17,10 +17,10 @@ module Aws::CloudTrail
     #
     #       {
     #         resource_id: "String", # required
-    #         tags_list: [
+    #         tags_list: [ # required
     #           {
-    #             key: "String", # required
-    #             value: "String",
+    #             key: "TagKey", # required
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -306,6 +306,51 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CancelQueryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #         query_id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on
+    #   which the specified query is running.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query that you want to cancel. The `QueryId` comes
+    #   from the response of a `StartQuery` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CancelQueryRequest AWS API Documentation
+    #
+    class CancelQueryRequest < Struct.new(
+      :event_data_store,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The ID of the canceled query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_status
+    #   Shows the status of a query after a `CancelQuery` request.
+    #   Typically, the values shown are either `RUNNING` or `CANCELLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CancelQueryResponse AWS API Documentation
+    #
+    class CancelQueryResponse < Struct.new(
+      :query_id,
+      :query_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when an operation is called with a trail ARN
     # that is not valid. The following is the format of a trail ARN.
     #
@@ -354,6 +399,162 @@ module Aws::CloudTrail
     #
     class ConflictException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass CreateEventDataStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "EventDataStoreName", # required
+    #         advanced_event_selectors: [
+    #           {
+    #             name: "SelectorName",
+    #             field_selectors: [ # required
+    #               {
+    #                 field: "SelectorField", # required
+    #                 equals: ["OperatorValue"],
+    #                 starts_with: ["OperatorValue"],
+    #                 ends_with: ["OperatorValue"],
+    #                 not_equals: ["OperatorValue"],
+    #                 not_starts_with: ["OperatorValue"],
+    #                 not_ends_with: ["OperatorValue"],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         multi_region_enabled: false,
+    #         organization_enabled: false,
+    #         retention_period: 1,
+    #         termination_protection_enabled: false,
+    #         tags_list: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors to use to select the events for the
+    #   data store. For more information about how to use advanced event
+    #   selectors, see [Log events by using advanced event selectors][1] in
+    #   the CloudTrail User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Specifies whether the event data store includes events from all
+    #   regions, or only from the region in which the event data store is
+    #   created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Specifies whether an event data store collects events logged for an
+    #   organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period of the event data store, in days. You can set a
+    #   retention period of up to 2555 days, the equivalent of seven years.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Specifies whether termination protection is enabled for the event
+    #   data store. If termination protection is enabled, you cannot delete
+    #   the event data store until termination protection is disabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags_list
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreRequest AWS API Documentation
+    #
+    class CreateEventDataStoreRequest < Struct.new(
+      :name,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled,
+      :tags_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of event data store creation.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors that were used to select the events for
+    #   the data store.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Indicates whether the event data store collects events from all
+    #   regions, or only from the region in which it was created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Indicates whether an event data store is collecting logged events
+    #   for an organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period of an event data store, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates whether termination protection is enabled for the event
+    #   data store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tags_list
+    #   A list of tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp that shows when the event data store was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp that shows when an event data store was updated, if
+    #   applicable. `UpdatedTimestamp` is always either the same or newer
+    #   than the time shown in `CreatedTimestamp`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStoreResponse AWS API Documentation
+    #
+    class CreateEventDataStoreResponse < Struct.new(
+      :event_data_store_arn,
+      :name,
+      :status,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled,
+      :tags_list,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the settings for each trail.
     #
     # @note When making an API call, you may pass CreateTrailRequest
@@ -373,8 +574,8 @@ module Aws::CloudTrail
     #         is_organization_trail: false,
     #         tags_list: [
     #           {
-    #             key: "String", # required
-    #             value: "String",
+    #             key: "TagKey", # required
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -769,6 +970,30 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteEventDataStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store to
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteEventDataStoreRequest AWS API Documentation
+    #
+    class DeleteEventDataStoreRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteEventDataStoreResponse AWS API Documentation
+    #
+    class DeleteEventDataStoreResponse < Aws::EmptyStructure; end
+
     # The request that specifies the name of a trail to delete.
     #
     # @note When making an API call, you may pass DeleteTrailRequest
@@ -798,6 +1023,67 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteTrailResponse AWS API Documentation
     #
     class DeleteTrailResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeQueryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #         query_id: "UUID", # required
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on
+    #   which the specified query was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The query ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQueryRequest AWS API Documentation
+    #
+    class DescribeQueryRequest < Struct.new(
+      :event_data_store,
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The ID of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The SQL code of a query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_status
+    #   The status of a query. Values for `QueryStatus` include `QUEUED`,
+    #   `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`
+    #   @return [String]
+    #
+    # @!attribute [rw] query_statistics
+    #   Metadata about a query, including the number of events that were
+    #   matched, the total number of events scanned, the query run time in
+    #   milliseconds, and the query's creation time.
+    #   @return [Types::QueryStatisticsForDescribeQuery]
+    #
+    # @!attribute [rw] error_message
+    #   The error message returned if a query failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQueryResponse AWS API Documentation
+    #
+    class DescribeQueryResponse < Struct.new(
+      :query_id,
+      :query_string,
+      :query_status,
+      :query_statistics,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Returns information about the trail.
     #
@@ -931,6 +1217,112 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # A storage lake of event data against which you can run complex
+    # SQL-based queries. An event data store can include events that you
+    # have logged on your account from the last 90 to 2555 days (about three
+    # months to up to seven years). To select events for an event data
+    # store, use [advanced event selectors][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    #
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates whether the event data store is protected from
+    #   termination.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The status of an event data store. Values are `ENABLED` and
+    #   `PENDING_DELETION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors that were used to select events for the
+    #   data store.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Indicates whether the event data store includes events from all
+    #   regions, or only from the region in which it was created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Indicates that an event data store is collecting logged events for
+    #   an organization.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of the event data store's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp showing when an event data store was updated, if
+    #   applicable. `UpdatedTimestamp` is always either the same or newer
+    #   than the time shown in `CreatedTimestamp`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStore AWS API Documentation
+    #
+    class EventDataStore < Struct.new(
+      :event_data_store_arn,
+      :name,
+      :termination_protection_enabled,
+      :status,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified event data store ARN is not valid or does not map to an
+    # event data store in your account.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreARNInvalidException AWS API Documentation
+    #
+    class EventDataStoreARNInvalidException < Aws::EmptyStructure; end
+
+    # An event data store with that name already exists.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreAlreadyExistsException AWS API Documentation
+    #
+    class EventDataStoreAlreadyExistsException < Aws::EmptyStructure; end
+
+    # Your account has used the maximum number of event data stores.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreMaxLimitExceededException AWS API Documentation
+    #
+    class EventDataStoreMaxLimitExceededException < Aws::EmptyStructure; end
+
+    # The specified event data store was not found.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreNotFoundException AWS API Documentation
+    #
+    class EventDataStoreNotFoundException < Aws::EmptyStructure; end
+
+    # The event data store cannot be deleted because termination protection
+    # is enabled for it.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventDataStoreTerminationProtectedException AWS API Documentation
+    #
+    class EventDataStoreTerminationProtectedException < Aws::EmptyStructure; end
+
     # Use event selectors to further specify the management and data event
     # settings for your trail. By default, trails created without specific
     # event selectors will be configured to log all read and write
@@ -1023,6 +1415,89 @@ module Aws::CloudTrail
       :include_management_events,
       :data_resources,
       :exclude_management_event_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventDataStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store about
+    #   which you want information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreRequest AWS API Documentation
+    #
+    class GetEventDataStoreRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The event data store Amazon Resource Number (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an event data store. Values can be `ENABLED` and
+    #   `PENDING_DELETION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors used to select events for the data
+    #   store.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Indicates whether the event data store includes events from all
+    #   regions, or only from the region in which it was created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Indicates whether an event data store is collecting logged events
+    #   for an organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period of the event data store, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates that termination protection is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of the event data store's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   Shows the time that an event data store was updated, if applicable.
+    #   `UpdatedTimestamp` is always either the same or newer than the time
+    #   shown in `CreatedTimestamp`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStoreResponse AWS API Documentation
+    #
+    class GetEventDataStoreResponse < Struct.new(
+      :event_data_store_arn,
+      :name,
+      :status,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled,
+      :created_timestamp,
+      :updated_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1128,8 +1603,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] insight_selectors
     #   A JSON string that contains the insight types you want to log on a
-    #   trail. In this release, only `ApiCallRateInsight` is supported as an
-    #   insight type.
+    #   trail. In this release, `ApiErrorRateInsight` and
+    #   `ApiCallRateInsight` are supported as insight types.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetInsightSelectorsResponse AWS API Documentation
@@ -1137,6 +1612,77 @@ module Aws::CloudTrail
     class GetInsightSelectorsResponse < Struct.new(
       :trail_arn,
       :insight_selectors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetQueryResultsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #         query_id: "UUID", # required
+    #         next_token: "PaginationToken",
+    #         max_query_results: 1,
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store against
+    #   which the query was run.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_id
+    #   The ID of the query for which you want to get results.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of query results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_query_results
+    #   The maximum number of query results to display on a single page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetQueryResultsRequest AWS API Documentation
+    #
+    class GetQueryResultsRequest < Struct.new(
+      :event_data_store,
+      :query_id,
+      :next_token,
+      :max_query_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_status
+    #   The status of the query. Values include `QUEUED`, `RUNNING`,
+    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_statistics
+    #   Shows the count of query results.
+    #   @return [Types::QueryStatistics]
+    #
+    # @!attribute [rw] query_result_rows
+    #   Contains the individual event results of the query.
+    #   @return [Array<Array<Hash<String,String>>>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of query results.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message returned if a query failed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetQueryResultsResponse AWS API Documentation
+    #
+    class GetQueryResultsResponse < Struct.new(
+      :query_status,
+      :query_statistics,
+      :query_result_rows,
+      :next_token,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1339,6 +1885,19 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # The event data store against which you ran your query is inactive.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveEventDataStoreException AWS API Documentation
+    #
+    class InactiveEventDataStoreException < Aws::EmptyStructure; end
+
+    # The specified query cannot be canceled because it is in the
+    # `FINISHED`, `FAILED`, or `CANCELLED` state.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveQueryException AWS API Documentation
+    #
+    class InactiveQueryException < Aws::EmptyStructure; end
+
     # If you run `GetInsightSelectors` on a trail that does not have
     # Insights events enabled, the operation throws the exception
     # `InsightNotEnabledException`.
@@ -1358,8 +1917,8 @@ module Aws::CloudTrail
     #       }
     #
     # @!attribute [rw] insight_type
-    #   The type of Insights events to log on a trail. The valid Insights
-    #   type in this release is `ApiCallRateInsight`.
+    #   The type of insights to log on a trail. `ApiCallRateInsight` and
+    #   `ApiErrorRateInsight` are valid insight types.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InsightSelector AWS API Documentation
@@ -1418,12 +1977,30 @@ module Aws::CloudTrail
     #
     class InvalidCloudWatchLogsRoleArnException < Aws::EmptyStructure; end
 
+    # A date range for the query was specified that is not valid. For more
+    # information about writing a query, see [Create or edit a query][1] in
+    # the *CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidDateRangeException AWS API Documentation
+    #
+    class InvalidDateRangeException < Aws::EmptyStructure; end
+
     # Occurs if an event category that is not valid is specified as a value
     # of `EventCategory`.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventCategoryException AWS API Documentation
     #
     class InvalidEventCategoryException < Aws::EmptyStructure; end
+
+    # The event data store is not in a status that supports the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidEventDataStoreStatusException AWS API Documentation
+    #
+    class InvalidEventDataStoreStatusException < Aws::EmptyStructure; end
 
     # This exception is thrown when the `PutEventSelectors` operation is
     # called with a number of event selectors, advanced event selectors, or
@@ -1503,6 +2080,30 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidParameterCombinationException AWS API Documentation
     #
     class InvalidParameterCombinationException < Aws::EmptyStructure; end
+
+    # The request includes a parameter that is not valid.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidParameterException AWS API Documentation
+    #
+    class InvalidParameterException < Aws::EmptyStructure; end
+
+    # The query that was submitted has validation errors, or uses incorrect
+    # syntax or unsupported keywords. For more information about writing a
+    # query, see [Create or edit a query][1] in the *CloudTrail User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-create-edit-query.html
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidQueryStatementException AWS API Documentation
+    #
+    class InvalidQueryStatementException < Aws::EmptyStructure; end
+
+    # The query status is not valid for the operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InvalidQueryStatusException AWS API Documentation
+    #
+    class InvalidQueryStatusException < Aws::EmptyStructure; end
 
     # This exception is thrown when the provided S3 bucket name is not
     # valid.
@@ -1587,6 +2188,50 @@ module Aws::CloudTrail
     #
     class KmsKeyNotFoundException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass ListEventDataStoresRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of event data store
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of event data stores to display on a single page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListEventDataStoresRequest AWS API Documentation
+    #
+    class ListEventDataStoresRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_stores
+    #   Contains information about event data stores in the account, in the
+    #   current region.
+    #   @return [Array<Types::EventDataStore>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListEventDataStoresResponse AWS API Documentation
+    #
+    class ListEventDataStoresResponse < Struct.new(
+      :event_data_stores,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Requests the public keys for a specified time range.
     #
     # @note When making an API call, you may pass ListPublicKeysRequest
@@ -1643,6 +2288,78 @@ module Aws::CloudTrail
     #
     class ListPublicKeysResponse < Struct.new(
       :public_key_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQueriesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on
+    #   which queries were run.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of queries to show on a page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] start_time
+    #   Use with `EndTime` to bound a `ListQueries` request, and limit its
+    #   results to only those queries run within a specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Use with `StartTime` to bound a `ListQueries` request, and limit its
+    #   results to only those queries run within a specified time period.
+    #   @return [Time]
+    #
+    # @!attribute [rw] query_status
+    #   The status of queries that you want to return in results. Valid
+    #   values for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`,
+    #   `FAILED`, or `CANCELLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListQueriesRequest AWS API Documentation
+    #
+    class ListQueriesRequest < Struct.new(
+      :event_data_store,
+      :next_token,
+      :max_results,
+      :start_time,
+      :end_time,
+      :query_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] queries
+    #   Lists matching query results, and shows query ID, status, and
+    #   creation time of each query.
+    #   @return [Array<Types::Query>]
+    #
+    # @!attribute [rw] next_token
+    #   A token you can use to get the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListQueriesResponse AWS API Documentation
+    #
+    class ListQueriesResponse < Struct.new(
+      :queries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1868,6 +2585,13 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # You are already running the maximum number of concurrent queries. Wait
+    # a minute for some queries to finish, and then run the query again.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/MaxConcurrentQueriesException AWS API Documentation
+    #
+    class MaxConcurrentQueriesException < Aws::EmptyStructure; end
+
     # This exception is thrown when the maximum number of trails is reached.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/MaximumNumberOfTrailsExceededException AWS API Documentation
@@ -2081,9 +2805,9 @@ module Aws::CloudTrail
     #   @return [String]
     #
     # @!attribute [rw] insight_selectors
-    #   A JSON string that contains the Insights types that you want to log
-    #   on a trail. The valid Insights type in this release is
-    #   `ApiCallRateInsight`.
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
+    #   insight types.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsRequest AWS API Documentation
@@ -2102,8 +2826,8 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] insight_selectors
     #   A JSON string that contains the Insights event types that you want
-    #   to log on a trail. The valid Insights type in this release is
-    #   `ApiCallRateInsight`.
+    #   to log on a trail. The valid Insights types in this release are
+    #   `ApiErrorRateInsight` and `ApiCallRateInsight`.
     #   @return [Array<Types::InsightSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/PutInsightSelectorsResponse AWS API Documentation
@@ -2115,6 +2839,88 @@ module Aws::CloudTrail
       include Aws::Structure
     end
 
+    # A SQL string of criteria about events that you want to collect in an
+    # event data store.
+    #
+    # @!attribute [rw] query_id
+    #   The ID of a query.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_status
+    #   The status of the query. This can be `QUEUED`, `RUNNING`,
+    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of a query.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/Query AWS API Documentation
+    #
+    class Query < Struct.new(
+      :query_id,
+      :query_status,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The query ID does not exist or does not map to a query.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/QueryIdNotFoundException AWS API Documentation
+    #
+    class QueryIdNotFoundException < Aws::EmptyStructure; end
+
+    # Metadata about a query, such as the number of results.
+    #
+    # @!attribute [rw] results_count
+    #   The number of results returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_results_count
+    #   The total number of results returned by a query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/QueryStatistics AWS API Documentation
+    #
+    class QueryStatistics < Struct.new(
+      :results_count,
+      :total_results_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Gets metadata about a query, including the number of events that were
+    # matched, the total number of events scanned, the query run time in
+    # milliseconds, and the query's creation time.
+    #
+    # @!attribute [rw] events_matched
+    #   The number of events that matched a query.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] events_scanned
+    #   The number of events that the query scanned in the event data store.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] execution_time_in_millis
+    #   The query's run time, in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] creation_time
+    #   The creation time of the query.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/QueryStatisticsForDescribeQuery AWS API Documentation
+    #
+    class QueryStatisticsForDescribeQuery < Struct.new(
+      :events_matched,
+      :events_scanned,
+      :execution_time_in_millis,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the tags to remove from a trail.
     #
     # @note When making an API call, you may pass RemoveTagsRequest
@@ -2122,10 +2928,10 @@ module Aws::CloudTrail
     #
     #       {
     #         resource_id: "String", # required
-    #         tags_list: [
+    #         tags_list: [ # required
     #           {
-    #             key: "String", # required
-    #             value: "String",
+    #             key: "TagKey", # required
+    #             value: "TagValue",
     #           },
     #         ],
     #       }
@@ -2221,6 +3027,89 @@ module Aws::CloudTrail
     #
     class ResourceTypeNotSupportedException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass RestoreEventDataStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store that
+    #   you want to restore.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStoreRequest AWS API Documentation
+    #
+    class RestoreEventDataStoreRequest < Struct.new(
+      :event_data_store)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The event data store ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors that were used to select events.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Indicates whether the event data store is collecting events from all
+    #   regions, or only from the region in which the event data store was
+    #   created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Indicates whether an event data store is collecting logged events
+    #   for an organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates that termination protection is enabled and the event data
+    #   store cannot be automatically deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp of an event data store's creation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp that shows when an event data store was updated, if
+    #   applicable. `UpdatedTimestamp` is always either the same or newer
+    #   than the time shown in `CreatedTimestamp`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStoreResponse AWS API Documentation
+    #
+    class RestoreEventDataStoreResponse < Struct.new(
+      :event_data_store_arn,
+      :name,
+      :status,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This exception is thrown when the specified S3 bucket does not exist.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/S3BucketDoesNotExistException AWS API Documentation
@@ -2259,6 +3148,37 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartLoggingResponse AWS API Documentation
     #
     class StartLoggingResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StartQueryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         query_statement: "QueryStatement", # required
+    #       }
+    #
+    # @!attribute [rw] query_statement
+    #   The SQL code of your query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartQueryRequest AWS API Documentation
+    #
+    class StartQueryRequest < Struct.new(
+      :query_statement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] query_id
+    #   The ID of the started query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartQueryResponse AWS API Documentation
+    #
+    class StartQueryResponse < Struct.new(
+      :query_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Passes the request to CloudTrail to stop logging Amazon Web Services
     # API calls for the specified account.
@@ -2300,8 +3220,8 @@ module Aws::CloudTrail
     #   data as a hash:
     #
     #       {
-    #         key: "String", # required
-    #         value: "String",
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       }
     #
     # @!attribute [rw] key
@@ -2499,6 +3419,145 @@ module Aws::CloudTrail
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UnsupportedOperationException AWS API Documentation
     #
     class UnsupportedOperationException < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateEventDataStoreRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_data_store: "EventDataStoreArn", # required
+    #         name: "EventDataStoreName",
+    #         advanced_event_selectors: [
+    #           {
+    #             name: "SelectorName",
+    #             field_selectors: [ # required
+    #               {
+    #                 field: "SelectorField", # required
+    #                 equals: ["OperatorValue"],
+    #                 starts_with: ["OperatorValue"],
+    #                 ends_with: ["OperatorValue"],
+    #                 not_equals: ["OperatorValue"],
+    #                 not_starts_with: ["OperatorValue"],
+    #                 not_ends_with: ["OperatorValue"],
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         multi_region_enabled: false,
+    #         organization_enabled: false,
+    #         retention_period: 1,
+    #         termination_protection_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store that
+    #   you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The event data store name.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors used to select events for the event
+    #   data store.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Specifies whether an event data store collects events from all
+    #   regions, or only from the region in which it was created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Specifies whether an event data store collects events logged for an
+    #   organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates that termination protection is enabled and the event data
+    #   store cannot be automatically deleted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreRequest AWS API Documentation
+    #
+    class UpdateEventDataStoreRequest < Struct.new(
+      :event_data_store,
+      :name,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_data_store_arn
+    #   The ARN of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the event data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of an event data store. Values can be `ENABLED` and
+    #   `PENDING_DELETION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] advanced_event_selectors
+    #   The advanced event selectors that are applied to the event data
+    #   store.
+    #   @return [Array<Types::AdvancedEventSelector>]
+    #
+    # @!attribute [rw] multi_region_enabled
+    #   Indicates whether the event data store includes events from all
+    #   regions, or only from the region in which it was created.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] organization_enabled
+    #   Indicates whether an event data store is collecting logged events
+    #   for an organization in Organizations.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] retention_period
+    #   The retention period, in days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] termination_protection_enabled
+    #   Indicates whether termination protection is enabled for the event
+    #   data store.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_timestamp
+    #   The timestamp that shows when an event data store was first created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_timestamp
+    #   The timestamp that shows when the event data store was last updated.
+    #   `UpdatedTimestamp` is always either the same or newer than the time
+    #   shown in `CreatedTimestamp`.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStoreResponse AWS API Documentation
+    #
+    class UpdateEventDataStoreResponse < Struct.new(
+      :event_data_store_arn,
+      :name,
+      :status,
+      :advanced_event_selectors,
+      :multi_region_enabled,
+      :organization_enabled,
+      :retention_period,
+      :termination_protection_enabled,
+      :created_timestamp,
+      :updated_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Specifies settings to update for the trail.
     #

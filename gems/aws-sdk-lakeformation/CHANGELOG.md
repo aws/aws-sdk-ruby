@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-01-05)
+------------------
+
+* Feature - Add new APIs for 3rd Party Support for Lake Formation
+
 1.21.0 (2021-12-21)
 ------------------
 

@@ -36,6 +36,7 @@ module Aws::LakeFormation
   # * {InternalServiceException}
   # * {InvalidInputException}
   # * {OperationTimeoutException}
+  # * {PermissionTypeMismatchException}
   # * {ResourceNotReadyException}
   # * {ResourceNumberLimitExceededException}
   # * {StatisticsNotReadyYetException}
@@ -176,6 +177,21 @@ module Aws::LakeFormation
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::LakeFormation::Types::OperationTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PermissionTypeMismatchException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::LakeFormation::Types::PermissionTypeMismatchException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

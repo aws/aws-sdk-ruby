@@ -6214,8 +6214,8 @@ module Aws::ECS
     # place tasks manually on specific container instances.
     #
     # The Amazon ECS API follows an eventual consistency model. This is
-    # because the distributed nature of the system supporting the API. This
-    # means that the result of an API command you run that affects your
+    # because of the distributed nature of the system supporting the API.
+    # This means that the result of an API command you run that affects your
     # Amazon ECS resources might not be immediately visible to all
     # subsequent commands you run. Keep this in mind when you carry out an
     # API command that immediately follows a previous API command.
@@ -7878,7 +7878,7 @@ module Aws::ECS
     #   cluster, the default cluster is assumed.
     #
     # @option params [required, Array<String>] :container_instances
-    #   A list of container instance IDs or full ARN entries.
+    #   A list of up to 10 container instance IDs or full ARN entries.
     #
     # @option params [required, String] :status
     #   The container instance state to update the container instance with.
@@ -8614,7 +8614,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.94.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

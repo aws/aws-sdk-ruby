@@ -49105,6 +49105,55 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ModifyVpcEndpointServicePayerResponsibilityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         dry_run: false,
+    #         service_id: "VpcEndpointServiceId", # required
+    #         payer_responsibility: "ServiceOwner", # required, accepts ServiceOwner
+    #       }
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] service_id
+    #   The ID of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] payer_responsibility
+    #   The entity that is responsible for the endpoint costs. The default
+    #   is the endpoint owner. If you set the payer responsibility to the
+    #   service owner, you cannot set it back to the endpoint owner.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePayerResponsibilityRequest AWS API Documentation
+    #
+    class ModifyVpcEndpointServicePayerResponsibilityRequest < Struct.new(
+      :dry_run,
+      :service_id,
+      :payer_responsibility)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return_value
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServicePayerResponsibilityResult AWS API Documentation
+    #
+    class ModifyVpcEndpointServicePayerResponsibilityResult < Struct.new(
+      :return_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ModifyVpcEndpointServicePermissionsRequest
     #   data as a hash:
     #
@@ -60177,6 +60226,10 @@ module Aws::EC2
     #   configuration.
     #   @return [Types::PrivateDnsNameConfiguration]
     #
+    # @!attribute [rw] payer_responsibility
+    #   The payer responsibility.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the service.
     #   @return [Array<Types::Tag>]
@@ -60196,6 +60249,7 @@ module Aws::EC2
       :base_endpoint_dns_names,
       :private_dns_name,
       :private_dns_name_configuration,
+      :payer_responsibility,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -60250,6 +60304,10 @@ module Aws::EC2
     #   restricted.
     #   @return [Boolean]
     #
+    # @!attribute [rw] payer_responsibility
+    #   The payer responsibility.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   Any tags assigned to the service.
     #   @return [Array<Types::Tag>]
@@ -60275,6 +60333,7 @@ module Aws::EC2
       :vpc_endpoint_policy_supported,
       :acceptance_required,
       :manages_vpc_endpoints,
+      :payer_responsibility,
       :tags,
       :private_dns_name_verification_state)
       SENSITIVE = []

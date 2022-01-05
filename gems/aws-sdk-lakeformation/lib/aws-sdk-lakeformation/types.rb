@@ -192,6 +192,30 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # A structure used to include auditing information on the privileged
+    # API.
+    #
+    # @note When making an API call, you may pass AuditContext
+    #   data as a hash:
+    #
+    #       {
+    #         additional_audit_context: "AuditContextString",
+    #       }
+    #
+    # @!attribute [rw] additional_audit_context
+    #   The filter engine can populate the 'AdditionalAuditContext'
+    #   information with the request ID for you to track. This information
+    #   will be displayed in CloudTrail log in your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/AuditContext AWS API Documentation
+    #
+    class AuditContext < Struct.new(
+      :additional_audit_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGrantPermissionsRequest
     #   data as a hash:
     #
@@ -747,6 +771,9 @@ module Aws::LakeFormation
     #
     # @!attribute [rw] column_wildcard
     #   A wildcard with exclusions.
+    #
+    #   You must specify either a `ColumnNames` list or the
+    #   `ColumnWildCard`.
     #   @return [Types::ColumnWildcard]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataCellsFilter AWS API Documentation
@@ -802,8 +829,8 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
-    # The AWS Lake Formation principal. Supported principals are IAM users
-    # or IAM roles.
+    # The Lake Formation principal. Supported principals are IAM users or
+    # IAM roles.
     #
     # @note When making an API call, you may pass DataLakePrincipal
     #   data as a hash:
@@ -855,6 +882,13 @@ module Aws::LakeFormation
     #           },
     #         ],
     #         trusted_resource_owners: ["CatalogIdString"],
+    #         allow_external_data_filtering: false,
+    #         external_data_filtering_allow_list: [
+    #           {
+    #             data_lake_principal_identifier: "DataLakePrincipalString",
+    #           },
+    #         ],
+    #         authorized_session_tag_value_list: ["NameString"],
     #       }
     #
     # @!attribute [rw] data_lake_admins
@@ -919,13 +953,49 @@ module Aws::LakeFormation
     #   boundary, such as the same team or company.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] allow_external_data_filtering
+    #   Whether to allow Amazon EMR clusters to access data managed by Lake
+    #   Formation.
+    #
+    #   If true, you allow Amazon EMR clusters to access data in Amazon S3
+    #   locations that are registered with Lake Formation.
+    #
+    #   If false or null, no Amazon EMR clusters will be able to access data
+    #   in Amazon S3 locations that are registered with Lake Formation.
+    #
+    #   For more information, see [(Optional) Allow Data Filtering on Amazon
+    #   EMR][1].
+    #
+    #
+    #
+    #   [1]: https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] external_data_filtering_allow_list
+    #   A list of the account IDs of Amazon Web Services accounts with
+    #   Amazon EMR clusters that are to perform data filtering.&gt;
+    #   @return [Array<Types::DataLakePrincipal>]
+    #
+    # @!attribute [rw] authorized_session_tag_value_list
+    #   Lake Formation relies on a privileged process secured by Amazon EMR
+    #   or the third party integrator to tag the user's role while assuming
+    #   it. Lake Formation will publish the acceptable key-value pair, for
+    #   example key = "LakeFormationTrustedCaller" and value = "TRUE"
+    #   and the third party integrator must properly tag the temporary
+    #   security credentials that will be used to call Lake Formation's
+    #   administrative APIs.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/DataLakeSettings AWS API Documentation
     #
     class DataLakeSettings < Struct.new(
       :data_lake_admins,
       :create_database_default_permissions,
       :create_table_default_permissions,
-      :trusted_resource_owners)
+      :trusted_resource_owners,
+      :allow_external_data_filtering,
+      :external_data_filtering_allow_list,
+      :authorized_session_tag_value_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1820,6 +1890,167 @@ module Aws::LakeFormation
     class GetTableObjectsResponse < Struct.new(
       :objects,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTemporaryGluePartitionCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "ResourceArnString", # required
+    #         partition: { # required
+    #           values: ["ValueString"], # required
+    #         },
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #         duration_seconds: 1,
+    #         audit_context: {
+    #           additional_audit_context: "AuditContextString",
+    #         },
+    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The ARN of the partitions' table.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition
+    #   A list of partition values identifying a single partition.
+    #   @return [Types::PartitionValueList]
+    #
+    # @!attribute [rw] permissions
+    #   Filters the request based on the user having been granted a list of
+    #   specified permissions on the requested resource(s).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The time period, between 900 and 21,600 seconds, for the timeout of
+    #   the temporary credentials.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audit_context
+    #   A structure representing context to access a resource (column names,
+    #   query ID, etc).
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] supported_permission_types
+    #   A list of supported permission types for the partition. Valid values
+    #   are `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGluePartitionCredentialsRequest AWS API Documentation
+    #
+    class GetTemporaryGluePartitionCredentialsRequest < Struct.new(
+      :table_arn,
+      :partition,
+      :permissions,
+      :duration_seconds,
+      :audit_context,
+      :supported_permission_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_key_id
+    #   The access key ID for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret key for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the temporary credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGluePartitionCredentialsResponse AWS API Documentation
+    #
+    class GetTemporaryGluePartitionCredentialsResponse < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTemporaryGlueTableCredentialsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         table_arn: "ResourceArnString", # required
+    #         permissions: ["ALL"], # accepts ALL, SELECT, ALTER, DROP, DELETE, INSERT, DESCRIBE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, CREATE_TAG, ALTER_TAG, DELETE_TAG, DESCRIBE_TAG, ASSOCIATE_TAG
+    #         duration_seconds: 1,
+    #         audit_context: {
+    #           additional_audit_context: "AuditContextString",
+    #         },
+    #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #       }
+    #
+    # @!attribute [rw] table_arn
+    #   The ARN identifying a table in the Data Catalog for the temporary
+    #   credentials request.
+    #   @return [String]
+    #
+    # @!attribute [rw] permissions
+    #   Filters the request based on the user having been granted a list of
+    #   specified permissions on the requested resource(s).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The time period, between 900 and 21,600 seconds, for the timeout of
+    #   the temporary credentials.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] audit_context
+    #   A structure representing context to access a resource (column names,
+    #   query ID, etc).
+    #   @return [Types::AuditContext]
+    #
+    # @!attribute [rw] supported_permission_types
+    #   A list of supported permission types for the table. Valid values are
+    #   `COLUMN_PERMISSION` and `CELL_FILTER_PERMISSION`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentialsRequest AWS API Documentation
+    #
+    class GetTemporaryGlueTableCredentialsRequest < Struct.new(
+      :table_arn,
+      :permissions,
+      :duration_seconds,
+      :audit_context,
+      :supported_permission_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] access_key_id
+    #   The access key ID for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_access_key
+    #   The secret key for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] session_token
+    #   The session token for the temporary credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiration
+    #   The date and time when the temporary credentials expire.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/GetTemporaryGlueTableCredentialsResponse AWS API Documentation
+    #
+    class GetTemporaryGlueTableCredentialsResponse < Struct.new(
+      :access_key_id,
+      :secret_access_key,
+      :session_token,
+      :expiration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2725,6 +2956,45 @@ module Aws::LakeFormation
       include Aws::Structure
     end
 
+    # Contains a list of values defining partitions.
+    #
+    # @note When making an API call, you may pass PartitionValueList
+    #   data as a hash:
+    #
+    #       {
+    #         values: ["ValueString"], # required
+    #       }
+    #
+    # @!attribute [rw] values
+    #   The list of partition values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PartitionValueList AWS API Documentation
+    #
+    class PartitionValueList < Struct.new(
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The engine does not support filtering data based on the enforced
+    # permissions. For example, if you call the
+    # `GetTemporaryGlueTableCredentials` operation with
+    # `SupportedPermissionType` equal to `ColumnPermission`, but cell-level
+    # permissions exist on the table, this exception is thrown.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lakeformation-2017-03-31/PermissionTypeMismatchException AWS API Documentation
+    #
+    class PermissionTypeMismatchException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Statistics related to the processing of a query statement.
     #
     # @!attribute [rw] estimated_data_to_scan_bytes
@@ -2848,6 +3118,13 @@ module Aws::LakeFormation
     #             },
     #           ],
     #           trusted_resource_owners: ["CatalogIdString"],
+    #           allow_external_data_filtering: false,
+    #           external_data_filtering_allow_list: [
+    #             {
+    #               data_lake_principal_identifier: "DataLakePrincipalString",
+    #             },
+    #           ],
+    #           authorized_session_tag_value_list: ["NameString"],
     #         },
     #       }
     #

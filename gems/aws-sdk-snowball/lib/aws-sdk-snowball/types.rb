@@ -367,6 +367,8 @@ module Aws::Snowball
     # than once when other requests are not completed.
     #
     # @!attribute [rw] conflict_resource
+    #   You get this resource when you call `CreateReturnShippingLabel` more
+    #   than once when other requests are not completed. .
     #   @return [String]
     #
     # @!attribute [rw] message

@@ -47,6 +47,7 @@ module Aws::Glue
   # * {MLTransformNotReadyException}
   # * {NoScheduleException}
   # * {OperationTimeoutException}
+  # * {PermissionTypeMismatchException}
   # * {ResourceNotReadyException}
   # * {ResourceNumberLimitExceededException}
   # * {SchedulerNotRunningException}
@@ -351,6 +352,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::OperationTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PermissionTypeMismatchException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::PermissionTypeMismatchException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

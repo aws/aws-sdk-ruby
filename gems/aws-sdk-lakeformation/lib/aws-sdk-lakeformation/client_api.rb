@@ -14,11 +14,15 @@ module Aws::LakeFormation
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccessKeyIdString = Shapes::StringShape.new(name: 'AccessKeyIdString')
     AddLFTagsToResourceRequest = Shapes::StructureShape.new(name: 'AddLFTagsToResourceRequest')
     AddLFTagsToResourceResponse = Shapes::StructureShape.new(name: 'AddLFTagsToResourceResponse')
     AddObjectInput = Shapes::StructureShape.new(name: 'AddObjectInput')
     AllRowsWildcard = Shapes::StructureShape.new(name: 'AllRowsWildcard')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
+    AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
+    AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
+    AuthorizedSessionTagValueList = Shapes::ListShape.new(name: 'AuthorizedSessionTagValueList')
     BatchGrantPermissionsRequest = Shapes::StructureShape.new(name: 'BatchGrantPermissionsRequest')
     BatchGrantPermissionsResponse = Shapes::StructureShape.new(name: 'BatchGrantPermissionsResponse')
     BatchPermissionsFailureEntry = Shapes::StructureShape.new(name: 'BatchPermissionsFailureEntry')
@@ -44,6 +48,7 @@ module Aws::LakeFormation
     CreateDataCellsFilterResponse = Shapes::StructureShape.new(name: 'CreateDataCellsFilterResponse')
     CreateLFTagRequest = Shapes::StructureShape.new(name: 'CreateLFTagRequest')
     CreateLFTagResponse = Shapes::StructureShape.new(name: 'CreateLFTagResponse')
+    CredentialTimeoutDurationSecondInteger = Shapes::IntegerShape.new(name: 'CredentialTimeoutDurationSecondInteger')
     DataCellsFilter = Shapes::StructureShape.new(name: 'DataCellsFilter')
     DataCellsFilterList = Shapes::ListShape.new(name: 'DataCellsFilterList')
     DataCellsFilterResource = Shapes::StructureShape.new(name: 'DataCellsFilterResource')
@@ -76,6 +81,7 @@ module Aws::LakeFormation
     ErrorDetail = Shapes::StructureShape.new(name: 'ErrorDetail')
     ErrorMessageString = Shapes::StringShape.new(name: 'ErrorMessageString')
     ExecutionStatistics = Shapes::StructureShape.new(name: 'ExecutionStatistics')
+    ExpirationTimestamp = Shapes::TimestampShape.new(name: 'ExpirationTimestamp')
     ExpiredException = Shapes::StructureShape.new(name: 'ExpiredException')
     Expression = Shapes::ListShape.new(name: 'Expression')
     ExtendTransactionRequest = Shapes::StructureShape.new(name: 'ExtendTransactionRequest')
@@ -99,6 +105,10 @@ module Aws::LakeFormation
     GetResourceLFTagsResponse = Shapes::StructureShape.new(name: 'GetResourceLFTagsResponse')
     GetTableObjectsRequest = Shapes::StructureShape.new(name: 'GetTableObjectsRequest')
     GetTableObjectsResponse = Shapes::StructureShape.new(name: 'GetTableObjectsResponse')
+    GetTemporaryGluePartitionCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryGluePartitionCredentialsRequest')
+    GetTemporaryGluePartitionCredentialsResponse = Shapes::StructureShape.new(name: 'GetTemporaryGluePartitionCredentialsResponse')
+    GetTemporaryGlueTableCredentialsRequest = Shapes::StructureShape.new(name: 'GetTemporaryGlueTableCredentialsRequest')
+    GetTemporaryGlueTableCredentialsResponse = Shapes::StructureShape.new(name: 'GetTemporaryGlueTableCredentialsResponse')
     GetWorkUnitResultsRequest = Shapes::StructureShape.new(name: 'GetWorkUnitResultsRequest')
     GetWorkUnitResultsRequestQueryIdString = Shapes::StringShape.new(name: 'GetWorkUnitResultsRequestQueryIdString')
     GetWorkUnitResultsRequestWorkUnitIdLong = Shapes::IntegerShape.new(name: 'GetWorkUnitResultsRequestWorkUnitIdLong')
@@ -147,11 +157,15 @@ module Aws::LakeFormation
     OptimizerType = Shapes::StringShape.new(name: 'OptimizerType')
     PageSize = Shapes::IntegerShape.new(name: 'PageSize')
     PartitionObjects = Shapes::StructureShape.new(name: 'PartitionObjects')
+    PartitionValueList = Shapes::StructureShape.new(name: 'PartitionValueList')
     PartitionValueString = Shapes::StringShape.new(name: 'PartitionValueString')
     PartitionValuesList = Shapes::ListShape.new(name: 'PartitionValuesList')
     PartitionedTableObjectsList = Shapes::ListShape.new(name: 'PartitionedTableObjectsList')
     Permission = Shapes::StringShape.new(name: 'Permission')
     PermissionList = Shapes::ListShape.new(name: 'PermissionList')
+    PermissionType = Shapes::StringShape.new(name: 'PermissionType')
+    PermissionTypeList = Shapes::ListShape.new(name: 'PermissionTypeList')
+    PermissionTypeMismatchException = Shapes::StructureShape.new(name: 'PermissionTypeMismatchException')
     PlanningStatistics = Shapes::StructureShape.new(name: 'PlanningStatistics')
     PredicateString = Shapes::StringShape.new(name: 'PredicateString')
     PrincipalPermissions = Shapes::StructureShape.new(name: 'PrincipalPermissions')
@@ -188,6 +202,8 @@ module Aws::LakeFormation
     SearchDatabasesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchDatabasesByLFTagsResponse')
     SearchTablesByLFTagsRequest = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsRequest')
     SearchTablesByLFTagsResponse = Shapes::StructureShape.new(name: 'SearchTablesByLFTagsResponse')
+    SecretAccessKeyString = Shapes::StringShape.new(name: 'SecretAccessKeyString')
+    SessionTokenString = Shapes::StringShape.new(name: 'SessionTokenString')
     StartQueryPlanningRequest = Shapes::StructureShape.new(name: 'StartQueryPlanningRequest')
     StartQueryPlanningResponse = Shapes::StructureShape.new(name: 'StartQueryPlanningResponse')
     StartTransactionRequest = Shapes::StructureShape.new(name: 'StartTransactionRequest')
@@ -237,6 +253,8 @@ module Aws::LakeFormation
     UpdateTableObjectsResponse = Shapes::StructureShape.new(name: 'UpdateTableObjectsResponse')
     UpdateTableStorageOptimizerRequest = Shapes::StructureShape.new(name: 'UpdateTableStorageOptimizerRequest')
     UpdateTableStorageOptimizerResponse = Shapes::StructureShape.new(name: 'UpdateTableStorageOptimizerResponse')
+    ValueString = Shapes::StringShape.new(name: 'ValueString')
+    ValueStringList = Shapes::ListShape.new(name: 'ValueStringList')
     VirtualObject = Shapes::StructureShape.new(name: 'VirtualObject')
     VirtualObjectList = Shapes::ListShape.new(name: 'VirtualObjectList')
     WorkUnitIdLong = Shapes::IntegerShape.new(name: 'WorkUnitIdLong')
@@ -268,6 +286,11 @@ module Aws::LakeFormation
 
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
+
+    AuditContext.add_member(:additional_audit_context, Shapes::ShapeRef.new(shape: AuditContextString, location_name: "AdditionalAuditContext"))
+    AuditContext.struct_class = Types::AuditContext
+
+    AuthorizedSessionTagValueList.member = Shapes::ShapeRef.new(shape: NameString)
 
     BatchGrantPermissionsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     BatchGrantPermissionsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchPermissionsRequestEntryList, required: true, location_name: "Entries"))
@@ -363,6 +386,9 @@ module Aws::LakeFormation
     DataLakeSettings.add_member(:create_database_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateDatabaseDefaultPermissions"))
     DataLakeSettings.add_member(:create_table_default_permissions, Shapes::ShapeRef.new(shape: PrincipalPermissionsList, location_name: "CreateTableDefaultPermissions"))
     DataLakeSettings.add_member(:trusted_resource_owners, Shapes::ShapeRef.new(shape: TrustedResourceOwners, location_name: "TrustedResourceOwners"))
+    DataLakeSettings.add_member(:allow_external_data_filtering, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowExternalDataFiltering"))
+    DataLakeSettings.add_member(:external_data_filtering_allow_list, Shapes::ShapeRef.new(shape: DataLakePrincipalList, location_name: "ExternalDataFilteringAllowList"))
+    DataLakeSettings.add_member(:authorized_session_tag_value_list, Shapes::ShapeRef.new(shape: AuthorizedSessionTagValueList, location_name: "AuthorizedSessionTagValueList"))
     DataLakeSettings.struct_class = Types::DataLakeSettings
 
     DataLocationResource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
@@ -516,6 +542,33 @@ module Aws::LakeFormation
     GetTableObjectsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: TokenString, location_name: "NextToken"))
     GetTableObjectsResponse.struct_class = Types::GetTableObjectsResponse
 
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "TableArn"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:partition, Shapes::ShapeRef.new(shape: PartitionValueList, required: true, location_name: "Partition"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
+    GetTemporaryGluePartitionCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetTemporaryGluePartitionCredentialsRequest.struct_class = Types::GetTemporaryGluePartitionCredentialsRequest
+
+    GetTemporaryGluePartitionCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
+    GetTemporaryGluePartitionCredentialsResponse.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKeyString, location_name: "SecretAccessKey"))
+    GetTemporaryGluePartitionCredentialsResponse.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionTokenString, location_name: "SessionToken"))
+    GetTemporaryGluePartitionCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    GetTemporaryGluePartitionCredentialsResponse.struct_class = Types::GetTemporaryGluePartitionCredentialsResponse
+
+    GetTemporaryGlueTableCredentialsRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: ResourceArnString, required: true, location_name: "TableArn"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:permissions, Shapes::ShapeRef.new(shape: PermissionList, location_name: "Permissions"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: CredentialTimeoutDurationSecondInteger, location_name: "DurationSeconds"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:audit_context, Shapes::ShapeRef.new(shape: AuditContext, location_name: "AuditContext"))
+    GetTemporaryGlueTableCredentialsRequest.add_member(:supported_permission_types, Shapes::ShapeRef.new(shape: PermissionTypeList, required: true, location_name: "SupportedPermissionTypes"))
+    GetTemporaryGlueTableCredentialsRequest.struct_class = Types::GetTemporaryGlueTableCredentialsRequest
+
+    GetTemporaryGlueTableCredentialsResponse.add_member(:access_key_id, Shapes::ShapeRef.new(shape: AccessKeyIdString, location_name: "AccessKeyId"))
+    GetTemporaryGlueTableCredentialsResponse.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SecretAccessKeyString, location_name: "SecretAccessKey"))
+    GetTemporaryGlueTableCredentialsResponse.add_member(:session_token, Shapes::ShapeRef.new(shape: SessionTokenString, location_name: "SessionToken"))
+    GetTemporaryGlueTableCredentialsResponse.add_member(:expiration, Shapes::ShapeRef.new(shape: ExpirationTimestamp, location_name: "Expiration"))
+    GetTemporaryGlueTableCredentialsResponse.struct_class = Types::GetTemporaryGlueTableCredentialsResponse
+
     GetWorkUnitResultsRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: GetWorkUnitResultsRequestQueryIdString, required: true, location_name: "QueryId"))
     GetWorkUnitResultsRequest.add_member(:work_unit_id, Shapes::ShapeRef.new(shape: GetWorkUnitResultsRequestWorkUnitIdLong, required: true, location_name: "WorkUnitId"))
     GetWorkUnitResultsRequest.add_member(:work_unit_token, Shapes::ShapeRef.new(shape: SyntheticGetWorkUnitResultsRequestWorkUnitTokenString, required: true, location_name: "WorkUnitToken"))
@@ -651,11 +704,19 @@ module Aws::LakeFormation
     PartitionObjects.add_member(:objects, Shapes::ShapeRef.new(shape: TableObjectList, location_name: "Objects"))
     PartitionObjects.struct_class = Types::PartitionObjects
 
+    PartitionValueList.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "Values"))
+    PartitionValueList.struct_class = Types::PartitionValueList
+
     PartitionValuesList.member = Shapes::ShapeRef.new(shape: PartitionValueString)
 
     PartitionedTableObjectsList.member = Shapes::ShapeRef.new(shape: PartitionObjects)
 
     PermissionList.member = Shapes::ShapeRef.new(shape: Permission)
+
+    PermissionTypeList.member = Shapes::ShapeRef.new(shape: PermissionType)
+
+    PermissionTypeMismatchException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    PermissionTypeMismatchException.struct_class = Types::PermissionTypeMismatchException
 
     PlanningStatistics.add_member(:estimated_data_to_scan_bytes, Shapes::ShapeRef.new(shape: NumberOfBytes, location_name: "EstimatedDataToScanBytes"))
     PlanningStatistics.add_member(:planning_time_millis, Shapes::ShapeRef.new(shape: NumberOfMilliseconds, location_name: "PlanningTimeMillis"))
@@ -889,6 +950,8 @@ module Aws::LakeFormation
 
     UpdateTableStorageOptimizerResponse.add_member(:result, Shapes::ShapeRef.new(shape: Result, location_name: "Result"))
     UpdateTableStorageOptimizerResponse.struct_class = Types::UpdateTableStorageOptimizerResponse
+
+    ValueStringList.member = Shapes::ShapeRef.new(shape: ValueString)
 
     VirtualObject.add_member(:uri, Shapes::ShapeRef.new(shape: URI, required: true, location_name: "Uri"))
     VirtualObject.add_member(:etag, Shapes::ShapeRef.new(shape: ETagString, location_name: "ETag"))
@@ -1221,6 +1284,34 @@ module Aws::LakeFormation
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_temporary_glue_partition_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemporaryGluePartitionCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetTemporaryGluePartitionCredentials"
+        o.input = Shapes::ShapeRef.new(shape: GetTemporaryGluePartitionCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTemporaryGluePartitionCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PermissionTypeMismatchException)
+      end)
+
+      api.add_operation(:get_temporary_glue_table_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTemporaryGlueTableCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetTemporaryGlueTableCredentials"
+        o.input = Shapes::ShapeRef.new(shape: GetTemporaryGlueTableCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTemporaryGlueTableCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: PermissionTypeMismatchException)
       end)
 
       api.add_operation(:get_work_unit_results, Seahorse::Model::Operation.new.tap do |o|

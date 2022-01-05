@@ -2232,7 +2232,7 @@ module Aws::Snowball
     #   resp = client.update_cluster({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
     #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
-    #     description: "Updated the address to send this to image processing - RJ", 
+    #     description: "updated-cluster-name", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -2367,7 +2367,7 @@ module Aws::Snowball
     #
     #   resp = client.update_job({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
-    #     description: "Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.", 
+    #     description: "updated-job-name", 
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
     #     shipping_option: "NEXT_DAY", 
     #     snowball_capacity_preference: "T100", 
@@ -2520,7 +2520,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
