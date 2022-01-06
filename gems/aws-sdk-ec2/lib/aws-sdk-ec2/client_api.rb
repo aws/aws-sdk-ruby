@@ -1423,6 +1423,7 @@ module Aws::EC2
     InstanceMetadataOptionsResponse = Shapes::StructureShape.new(name: 'InstanceMetadataOptionsResponse')
     InstanceMetadataOptionsState = Shapes::StringShape.new(name: 'InstanceMetadataOptionsState')
     InstanceMetadataProtocolState = Shapes::StringShape.new(name: 'InstanceMetadataProtocolState')
+    InstanceMetadataTagsState = Shapes::StringShape.new(name: 'InstanceMetadataTagsState')
     InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
     InstanceMonitoringList = Shapes::ListShape.new(name: 'InstanceMonitoringList')
     InstanceNetworkInterface = Shapes::StructureShape.new(name: 'InstanceNetworkInterface')
@@ -1605,6 +1606,7 @@ module Aws::EC2
     LaunchTemplateInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMetadataOptionsRequest')
     LaunchTemplateInstanceMetadataOptionsState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataOptionsState')
     LaunchTemplateInstanceMetadataProtocolIpv6 = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataProtocolIpv6')
+    LaunchTemplateInstanceMetadataTagsState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataTagsState')
     LaunchTemplateInstanceNetworkInterfaceSpecification = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecification')
     LaunchTemplateInstanceNetworkInterfaceSpecificationList = Shapes::ListShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationList')
     LaunchTemplateInstanceNetworkInterfaceSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceNetworkInterfaceSpecificationRequest')
@@ -1940,6 +1942,7 @@ module Aws::EC2
     Phase2IntegrityAlgorithmsRequestListValue = Shapes::StructureShape.new(name: 'Phase2IntegrityAlgorithmsRequestListValue')
     Placement = Shapes::StructureShape.new(name: 'Placement')
     PlacementGroup = Shapes::StructureShape.new(name: 'PlacementGroup')
+    PlacementGroupArn = Shapes::StringShape.new(name: 'PlacementGroupArn')
     PlacementGroupId = Shapes::StringShape.new(name: 'PlacementGroupId')
     PlacementGroupIdStringList = Shapes::ListShape.new(name: 'PlacementGroupIdStringList')
     PlacementGroupInfo = Shapes::StructureShape.new(name: 'PlacementGroupInfo')
@@ -3395,6 +3398,7 @@ module Aws::EC2
     CapacityReservation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CapacityReservation.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "outpostArn"))
     CapacityReservation.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: String, location_name: "capacityReservationFleetId"))
+    CapacityReservation.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "placementGroupArn"))
     CapacityReservation.struct_class = Types::CapacityReservation
 
     CapacityReservationFleet.add_member(:capacity_reservation_fleet_id, Shapes::ShapeRef.new(shape: CapacityReservationFleetId, location_name: "capacityReservationFleetId"))
@@ -3767,6 +3771,7 @@ module Aws::EC2
     CreateCapacityReservationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CreateCapacityReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateCapacityReservationRequest.add_member(:outpost_arn, Shapes::ShapeRef.new(shape: OutpostArn, location_name: "OutpostArn"))
+    CreateCapacityReservationRequest.add_member(:placement_group_arn, Shapes::ShapeRef.new(shape: PlacementGroupArn, location_name: "PlacementGroupArn"))
     CreateCapacityReservationRequest.struct_class = Types::CreateCapacityReservationRequest
 
     CreateCapacityReservationResult.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "capacityReservation"))
@@ -8319,6 +8324,7 @@ module Aws::EC2
     InstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     InstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     InstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
+    InstanceMetadataOptionsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
     InstanceMetadataOptionsRequest.struct_class = Types::InstanceMetadataOptionsRequest
 
     InstanceMetadataOptionsResponse.add_member(:state, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsState, location_name: "state"))
@@ -8326,6 +8332,7 @@ module Aws::EC2
     InstanceMetadataOptionsResponse.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
     InstanceMetadataOptionsResponse.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "httpEndpoint"))
     InstanceMetadataOptionsResponse.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "httpProtocolIpv6"))
+    InstanceMetadataOptionsResponse.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "instanceMetadataTags"))
     InstanceMetadataOptionsResponse.struct_class = Types::InstanceMetadataOptionsResponse
 
     InstanceMonitoring.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -8965,12 +8972,14 @@ module Aws::EC2
     LaunchTemplateInstanceMetadataOptions.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "httpPutResponseHopLimit"))
     LaunchTemplateInstanceMetadataOptions.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "httpEndpoint"))
     LaunchTemplateInstanceMetadataOptions.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataProtocolIpv6, location_name: "httpProtocolIpv6"))
+    LaunchTemplateInstanceMetadataOptions.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataTagsState, location_name: "instanceMetadataTags"))
     LaunchTemplateInstanceMetadataOptions.struct_class = Types::LaunchTemplateInstanceMetadataOptions
 
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: LaunchTemplateHttpTokensState, location_name: "HttpTokens"))
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_put_response_hop_limit, Shapes::ShapeRef.new(shape: Integer, location_name: "HttpPutResponseHopLimit"))
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     LaunchTemplateInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataProtocolIpv6, location_name: "HttpProtocolIpv6"))
+    LaunchTemplateInstanceMetadataOptionsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
     LaunchTemplateInstanceMetadataOptionsRequest.struct_class = Types::LaunchTemplateInstanceMetadataOptionsRequest
 
     LaunchTemplateInstanceNetworkInterfaceSpecification.add_member(:associate_carrier_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associateCarrierIpAddress"))
@@ -9477,6 +9486,7 @@ module Aws::EC2
     ModifyInstanceMetadataOptionsRequest.add_member(:http_endpoint, Shapes::ShapeRef.new(shape: InstanceMetadataEndpointState, location_name: "HttpEndpoint"))
     ModifyInstanceMetadataOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_protocol_ipv_6, Shapes::ShapeRef.new(shape: InstanceMetadataProtocolState, location_name: "HttpProtocolIpv6"))
+    ModifyInstanceMetadataOptionsRequest.add_member(:instance_metadata_tags, Shapes::ShapeRef.new(shape: InstanceMetadataTagsState, location_name: "InstanceMetadataTags"))
     ModifyInstanceMetadataOptionsRequest.struct_class = Types::ModifyInstanceMetadataOptionsRequest
 
     ModifyInstanceMetadataOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -9896,9 +9906,9 @@ module Aws::EC2
     MoveAddressToVpcResult.struct_class = Types::MoveAddressToVpcResult
 
     MoveByoipCidrToIpamRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
-    MoveByoipCidrToIpamRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, location_name: "Cidr"))
-    MoveByoipCidrToIpamRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "IpamPoolId"))
-    MoveByoipCidrToIpamRequest.add_member(:ipam_pool_owner, Shapes::ShapeRef.new(shape: String, location_name: "IpamPoolOwner"))
+    MoveByoipCidrToIpamRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
+    MoveByoipCidrToIpamRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
+    MoveByoipCidrToIpamRequest.add_member(:ipam_pool_owner, Shapes::ShapeRef.new(shape: String, required: true, location_name: "IpamPoolOwner"))
     MoveByoipCidrToIpamRequest.struct_class = Types::MoveByoipCidrToIpamRequest
 
     MoveByoipCidrToIpamResult.add_member(:byoip_cidr, Shapes::ShapeRef.new(shape: ByoipCidr, location_name: "byoipCidr"))
@@ -10325,6 +10335,7 @@ module Aws::EC2
     PlacementGroup.add_member(:partition_count, Shapes::ShapeRef.new(shape: Integer, location_name: "partitionCount"))
     PlacementGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     PlacementGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    PlacementGroup.add_member(:group_arn, Shapes::ShapeRef.new(shape: String, location_name: "groupArn"))
     PlacementGroup.struct_class = Types::PlacementGroup
 
     PlacementGroupIdStringList.member = Shapes::ShapeRef.new(shape: PlacementGroupId, location_name: "GroupId")

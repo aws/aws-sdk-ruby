@@ -1238,6 +1238,36 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # The operation to delete queued messages.
+    #
+    # @option params [required, String] :id
+    #   Id of a given wireless device which messages will be deleted
+    #
+    # @option params [required, String] :message_id
+    #   if messageID=="*", the queue for a particular wireless deviceId
+    #   will be purged, otherwise, the specific message with messageId will be
+    #   deleted
+    #
+    # @option params [String] :wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queued_messages({
+    #     id: "WirelessDeviceId", # required
+    #     message_id: "MessageId", # required
+    #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #   })
+    #
+    # @overload delete_queued_messages(params = {})
+    # @param [Hash] params ({})
+    def delete_queued_messages(params = {}, options = {})
+      req = build_request(:delete_queued_messages, params)
+      req.send_request(options)
+    end
+
     # Deletes a service profile.
     #
     # @option params [required, String] :id
@@ -2520,6 +2550,54 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # The operation to list queued messages.
+    #
+    # @option params [required, String] :id
+    #   Id of a given wireless device which the downlink packets are targeted
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #
+    # @return [Types::ListQueuedMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueuedMessagesResponse#next_token #next_token} => String
+    #   * {Types::ListQueuedMessagesResponse#downlink_queue_messages_list #downlink_queue_messages_list} => Array&lt;Types::DownlinkQueueMessage&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queued_messages({
+    #     id: "WirelessDeviceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.downlink_queue_messages_list #=> Array
+    #   resp.downlink_queue_messages_list[0].message_id #=> String
+    #   resp.downlink_queue_messages_list[0].transmit_mode #=> Integer
+    #   resp.downlink_queue_messages_list[0].received_at #=> String
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.f_port #=> Integer
+    #
+    # @overload list_queued_messages(params = {})
+    # @param [Hash] params ({})
+    def list_queued_messages(params = {}, options = {})
+      req = build_request(:list_queued_messages, params)
+      req.send_request(options)
+    end
+
     # Lists the service profiles registered to your AWS account.
     #
     # @option params [String] :next_token
@@ -3508,7 +3586,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

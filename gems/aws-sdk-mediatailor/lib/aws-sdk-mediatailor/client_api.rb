@@ -719,6 +719,7 @@ module Aws::MediaTailor
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UpdateChannelRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "channelName"))
+    UpdateChannelRequest.add_member(:filler_slate, Shapes::ShapeRef.new(shape: SlateSource, location_name: "FillerSlate"))
     UpdateChannelRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: RequestOutputs, required: true, location_name: "Outputs"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 

@@ -674,6 +674,7 @@ module Aws::ElasticsearchService
     #         roles_key: "String",
     #         session_timeout_minutes: 1,
     #       },
+    #       anonymous_auth_enabled: false,
     #     },
     #     auto_tune_options: {
     #       desired_state: "ENABLED", # accepts ENABLED, DISABLED
@@ -766,6 +767,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #
@@ -971,6 +974,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #
@@ -1242,6 +1247,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.saml_options.subject_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.roles_key #=> String
     #   resp.domain_status.advanced_security_options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_status.advanced_security_options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
     #
@@ -1381,6 +1388,8 @@ module Aws::ElasticsearchService
     #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
     #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_config.advanced_security_options.options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_config.advanced_security_options.options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -1495,6 +1504,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].advanced_security_options.saml_options.subject_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.saml_options.roles_key #=> String
     #   resp.domain_status_list[0].advanced_security_options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status_list[0].auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
     #
@@ -2591,6 +2602,7 @@ module Aws::ElasticsearchService
     #         roles_key: "String",
     #         session_timeout_minutes: 1,
     #       },
+    #       anonymous_auth_enabled: false,
     #     },
     #     node_to_node_encryption_options: {
     #       enabled: false,
@@ -2728,6 +2740,8 @@ module Aws::ElasticsearchService
     #   resp.domain_config.advanced_security_options.options.saml_options.subject_key #=> String
     #   resp.domain_config.advanced_security_options.options.saml_options.roles_key #=> String
     #   resp.domain_config.advanced_security_options.options.saml_options.session_timeout_minutes #=> Integer
+    #   resp.domain_config.advanced_security_options.options.anonymous_auth_disable_date #=> Time
+    #   resp.domain_config.advanced_security_options.options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_config.advanced_security_options.status.creation_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_date #=> Time
     #   resp.domain_config.advanced_security_options.status.update_version #=> Integer
@@ -2865,7 +2879,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

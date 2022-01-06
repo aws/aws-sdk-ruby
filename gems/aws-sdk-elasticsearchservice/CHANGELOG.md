@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-01-06)
+------------------
+
+* Feature - Amazon OpenSearch Service adds support for Fine Grained Access Control for existing domains running Elasticsearch version 6.7 and above
+
 1.61.0 (2021-12-21)
 ------------------
 

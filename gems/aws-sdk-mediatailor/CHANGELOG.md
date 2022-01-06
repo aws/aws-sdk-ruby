@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-01-06)
+------------------
+
+* Feature - This release adds support for filler slate when updating MediaTailor channels that use the linear playback mode.
+
 1.50.0 (2021-12-21)
 ------------------
 

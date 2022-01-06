@@ -177,10 +177,22 @@ module Aws::ElasticsearchService
     #   Describes the SAML application configured for a domain.
     #   @return [Types::SAMLOptionsOutput]
     #
+    # @!attribute [rw] anonymous_auth_disable_date
+    #   Specifies the Anonymous Auth Disable Date when Anonymous Auth is
+    #   enabled.
+    #   @return [Time]
+    #
+    # @!attribute [rw] anonymous_auth_enabled
+    #   True if Anonymous auth is enabled. Anonymous auth can be enabled
+    #   only when AdvancedSecurity is enabled on existing domains.
+    #   @return [Boolean]
+    #
     class AdvancedSecurityOptions < Struct.new(
       :enabled,
       :internal_user_database_enabled,
-      :saml_options)
+      :saml_options,
+      :anonymous_auth_disable_date,
+      :anonymous_auth_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -213,6 +225,7 @@ module Aws::ElasticsearchService
     #           roles_key: "String",
     #           session_timeout_minutes: 1,
     #         },
+    #         anonymous_auth_enabled: false,
     #       }
     #
     # @!attribute [rw] enabled
@@ -232,11 +245,17 @@ module Aws::ElasticsearchService
     #   Specifies the SAML application configuration for the domain.
     #   @return [Types::SAMLOptionsInput]
     #
+    # @!attribute [rw] anonymous_auth_enabled
+    #   True if Anonymous auth is enabled. Anonymous auth can be enabled
+    #   only when AdvancedSecurity is enabled on existing domains.
+    #   @return [Boolean]
+    #
     class AdvancedSecurityOptionsInput < Struct.new(
       :enabled,
       :internal_user_database_enabled,
       :master_user_options,
-      :saml_options)
+      :saml_options,
+      :anonymous_auth_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -797,6 +816,7 @@ module Aws::ElasticsearchService
     #             roles_key: "String",
     #             session_timeout_minutes: 1,
     #           },
+    #           anonymous_auth_enabled: false,
     #         },
     #         auto_tune_options: {
     #           desired_state: "ENABLED", # accepts ENABLED, DISABLED
@@ -4259,6 +4279,7 @@ module Aws::ElasticsearchService
     #             roles_key: "String",
     #             session_timeout_minutes: 1,
     #           },
+    #           anonymous_auth_enabled: false,
     #         },
     #         node_to_node_encryption_options: {
     #           enabled: false,

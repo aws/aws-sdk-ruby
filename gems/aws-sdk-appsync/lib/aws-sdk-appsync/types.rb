@@ -874,6 +874,7 @@ module Aws::AppSync
     #             lambda_conflict_handler_arn: "String",
     #           },
     #         },
+    #         max_batch_size: 1,
     #       }
     #
     # @!attribute [rw] api_id
@@ -913,6 +914,10 @@ module Aws::AppSync
     #   to use when the resolver is invoked.
     #   @return [Types::SyncConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -923,7 +928,8 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version,
-      :sync_config)
+      :sync_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1086,6 +1092,7 @@ module Aws::AppSync
     #           ttl: 1,
     #           caching_keys: ["String"],
     #         },
+    #         max_batch_size: 1,
     #       }
     #
     # @!attribute [rw] api_id
@@ -1145,6 +1152,10 @@ module Aws::AppSync
     #   The caching configuration for the resolver.
     #   @return [Types::CachingConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolverRequest AWS API Documentation
     #
     class CreateResolverRequest < Struct.new(
@@ -1157,7 +1168,8 @@ module Aws::AppSync
       :kind,
       :pipeline_config,
       :sync_config,
-      :caching_config)
+      :caching_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1781,6 +1793,10 @@ module Aws::AppSync
     #   to use when the resolver is invoked.
     #   @return [Types::SyncConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -1792,7 +1808,8 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version,
-      :sync_config)
+      :sync_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3165,6 +3182,10 @@ module Aws::AppSync
     #   The caching configuration for the resolver.
     #   @return [Types::CachingConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/Resolver AWS API Documentation
     #
     class Resolver < Struct.new(
@@ -3177,7 +3198,8 @@ module Aws::AppSync
       :kind,
       :pipeline_config,
       :sync_config,
-      :caching_config)
+      :caching_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3719,6 +3741,7 @@ module Aws::AppSync
     #             lambda_conflict_handler_arn: "String",
     #           },
     #         },
+    #         max_batch_size: 1,
     #       }
     #
     # @!attribute [rw] api_id
@@ -3762,6 +3785,10 @@ module Aws::AppSync
     #   to use when the resolver is invoked.
     #   @return [Types::SyncConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunctionRequest AWS API Documentation
     #
     class UpdateFunctionRequest < Struct.new(
@@ -3773,7 +3800,8 @@ module Aws::AppSync
       :request_mapping_template,
       :response_mapping_template,
       :function_version,
-      :sync_config)
+      :sync_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3935,6 +3963,7 @@ module Aws::AppSync
     #           ttl: 1,
     #           caching_keys: ["String"],
     #         },
+    #         max_batch_size: 1,
     #       }
     #
     # @!attribute [rw] api_id
@@ -3994,6 +4023,10 @@ module Aws::AppSync
     #   The caching configuration for the resolver.
     #   @return [Types::CachingConfig]
     #
+    # @!attribute [rw] max_batch_size
+    #   The maximum batching size for a resolver.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolverRequest AWS API Documentation
     #
     class UpdateResolverRequest < Struct.new(
@@ -4006,7 +4039,8 @@ module Aws::AppSync
       :kind,
       :pipeline_config,
       :sync_config,
-      :caching_config)
+      :caching_config,
+      :max_batch_size)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1129,6 +1129,39 @@ module Aws::IoTWireless
 
     class DeleteMulticastGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteQueuedMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "WirelessDeviceId", # required
+    #         message_id: "MessageId", # required
+    #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Id of a given wireless device which messages will be deleted
+    #   @return [String]
+    #
+    # @!attribute [rw] message_id
+    #   if messageID=="*", the queue for a particular wireless deviceId
+    #   will be purged, otherwise, the specific message with messageId will
+    #   be deleted
+    #   @return [String]
+    #
+    # @!attribute [rw] wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   @return [String]
+    #
+    class DeleteQueuedMessagesRequest < Struct.new(
+      :id,
+      :message_id,
+      :wireless_device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteQueuedMessagesResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteServiceProfileRequest
     #   data as a hash:
     #
@@ -1462,6 +1495,35 @@ module Aws::IoTWireless
     end
 
     class DisassociateWirelessGatewayFromThingResponse < Aws::EmptyStructure; end
+
+    # The message in downlink queue.
+    #
+    # @!attribute [rw] message_id
+    #   The messageId allocated by IoT Wireless for tracing purpose
+    #   @return [String]
+    #
+    # @!attribute [rw] transmit_mode
+    #   The transmit mode to use to send data to the wireless device. Can
+    #   be: `0` for UM (unacknowledge mode) or `1` for AM (acknowledge
+    #   mode).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] received_at
+    #   The timestamp that Iot Wireless received the message.
+    #   @return [String]
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   LoRaWAN router info.
+    #   @return [Types::LoRaWANSendDataToDevice]
+    #
+    class DownlinkQueueMessage < Struct.new(
+      :message_id,
+      :transmit_mode,
+      :received_at,
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # List of FPort assigned for different LoRaWAN application packages to
     # use
@@ -2661,6 +2723,61 @@ module Aws::IoTWireless
     class ListPartnerAccountsResponse < Struct.new(
       :next_token,
       :sidewalk)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListQueuedMessagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "WirelessDeviceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Id of a given wireless device which the downlink packets are
+    #   targeted
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   @return [String]
+    #
+    class ListQueuedMessagesRequest < Struct.new(
+      :id,
+      :next_token,
+      :max_results,
+      :wireless_device_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] downlink_queue_messages_list
+    #   The messages in downlink queue.
+    #   @return [Array<Types::DownlinkQueueMessage>]
+    #
+    class ListQueuedMessagesResponse < Struct.new(
+      :next_token,
+      :downlink_queue_messages_list)
       SENSITIVE = []
       include Aws::Structure
     end

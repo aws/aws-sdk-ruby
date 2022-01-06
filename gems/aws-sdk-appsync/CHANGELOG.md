@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-01-06)
+------------------
+
+* Feature - AppSync: AWS AppSync now supports configurable batching sizes for AWS Lambda resolvers, Direct AWS Lambda resolvers and pipeline functions
+
 1.49.0 (2021-12-21)
 ------------------
 

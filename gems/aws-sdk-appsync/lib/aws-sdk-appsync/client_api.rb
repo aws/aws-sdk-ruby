@@ -147,6 +147,7 @@ module Aws::AppSync
     Long = Shapes::IntegerShape.new(name: 'Long')
     MapOfStringToString = Shapes::MapShape.new(name: 'MapOfStringToString')
     MappingTemplate = Shapes::StringShape.new(name: 'MappingTemplate')
+    MaxBatchSize = Shapes::IntegerShape.new(name: 'MaxBatchSize')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenIDConnectConfig = Shapes::StructureShape.new(name: 'OpenIDConnectConfig')
@@ -323,6 +324,7 @@ module Aws::AppSync
     CreateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     CreateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
     CreateFunctionRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    CreateFunctionRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
@@ -352,6 +354,7 @@ module Aws::AppSync
     CreateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     CreateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     CreateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
+    CreateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     CreateResolverRequest.struct_class = Types::CreateResolverRequest
 
     CreateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))
@@ -470,6 +473,7 @@ module Aws::AppSync
     FunctionConfiguration.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     FunctionConfiguration.add_member(:function_version, Shapes::ShapeRef.new(shape: String, location_name: "functionVersion"))
     FunctionConfiguration.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    FunctionConfiguration.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     Functions.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
@@ -712,6 +716,7 @@ module Aws::AppSync
     Resolver.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     Resolver.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     Resolver.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
+    Resolver.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     Resolver.struct_class = Types::Resolver
 
     Resolvers.member = Shapes::ShapeRef.new(shape: Resolver)
@@ -807,6 +812,7 @@ module Aws::AppSync
     UpdateFunctionRequest.add_member(:response_mapping_template, Shapes::ShapeRef.new(shape: MappingTemplate, location_name: "responseMappingTemplate"))
     UpdateFunctionRequest.add_member(:function_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "functionVersion"))
     UpdateFunctionRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
+    UpdateFunctionRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     UpdateFunctionRequest.struct_class = Types::UpdateFunctionRequest
 
     UpdateFunctionResponse.add_member(:function_configuration, Shapes::ShapeRef.new(shape: FunctionConfiguration, location_name: "functionConfiguration"))
@@ -836,6 +842,7 @@ module Aws::AppSync
     UpdateResolverRequest.add_member(:pipeline_config, Shapes::ShapeRef.new(shape: PipelineConfig, location_name: "pipelineConfig"))
     UpdateResolverRequest.add_member(:sync_config, Shapes::ShapeRef.new(shape: SyncConfig, location_name: "syncConfig"))
     UpdateResolverRequest.add_member(:caching_config, Shapes::ShapeRef.new(shape: CachingConfig, location_name: "cachingConfig"))
+    UpdateResolverRequest.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     UpdateResolverRequest.struct_class = Types::UpdateResolverRequest
 
     UpdateResolverResponse.add_member(:resolver, Shapes::ShapeRef.new(shape: Resolver, location_name: "resolver"))

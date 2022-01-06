@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-01-06)
+------------------
+
+* Feature - This release adds a "Source" field that provides the initiator of an update, such as due to an automated patch from AWS or due to modification via Console or API.
+
 1.12.0 (2021-12-21)
 ------------------
 

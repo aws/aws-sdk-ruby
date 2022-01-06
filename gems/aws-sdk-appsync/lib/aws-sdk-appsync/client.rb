@@ -737,6 +737,9 @@ module Aws::AppSync
     #   Specifies which Conflict Detection strategy and Resolution strategy to
     #   use when the resolver is invoked.
     #
+    # @option params [Integer] :max_batch_size
+    #   The maximum batching size for a resolver.
+    #
     # @return [Types::CreateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
@@ -758,6 +761,7 @@ module Aws::AppSync
     #         lambda_conflict_handler_arn: "String",
     #       },
     #     },
+    #     max_batch_size: 1,
     #   })
     #
     # @example Response structure
@@ -773,6 +777,7 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.function_configuration.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateFunction AWS API Documentation
     #
@@ -973,6 +978,9 @@ module Aws::AppSync
     # @option params [Types::CachingConfig] :caching_config
     #   The caching configuration for the resolver.
     #
+    # @option params [Integer] :max_batch_size
+    #   The maximum batching size for a resolver.
+    #
     # @return [Types::CreateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverResponse#resolver #resolver} => Types::Resolver
@@ -1001,6 +1009,7 @@ module Aws::AppSync
     #       ttl: 1,
     #       caching_keys: ["String"],
     #     },
+    #     max_batch_size: 1,
     #   })
     #
     # @example Response structure
@@ -1020,6 +1029,7 @@ module Aws::AppSync
     #   resp.resolver.caching_config.ttl #=> Integer
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
+    #   resp.resolver.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/CreateResolver AWS API Documentation
     #
@@ -1507,6 +1517,7 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.function_configuration.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetFunction AWS API Documentation
     #
@@ -1657,6 +1668,7 @@ module Aws::AppSync
     #   resp.resolver.caching_config.ttl #=> Integer
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
+    #   resp.resolver.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/GetResolver AWS API Documentation
     #
@@ -1934,6 +1946,7 @@ module Aws::AppSync
     #   resp.functions[0].sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
     #   resp.functions[0].sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.functions[0].sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.functions[0].max_batch_size #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListFunctions AWS API Documentation
@@ -2065,6 +2078,7 @@ module Aws::AppSync
     #   resp.resolvers[0].caching_config.ttl #=> Integer
     #   resp.resolvers[0].caching_config.caching_keys #=> Array
     #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
+    #   resp.resolvers[0].max_batch_size #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolvers AWS API Documentation
@@ -2124,6 +2138,7 @@ module Aws::AppSync
     #   resp.resolvers[0].caching_config.ttl #=> Integer
     #   resp.resolvers[0].caching_config.caching_keys #=> Array
     #   resp.resolvers[0].caching_config.caching_keys[0] #=> String
+    #   resp.resolvers[0].max_batch_size #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/ListResolversByFunction AWS API Documentation
@@ -2642,6 +2657,9 @@ module Aws::AppSync
     #   Specifies which Conflict Detection strategy and Resolution strategy to
     #   use when the resolver is invoked.
     #
+    # @option params [Integer] :max_batch_size
+    #   The maximum batching size for a resolver.
+    #
     # @return [Types::UpdateFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFunctionResponse#function_configuration #function_configuration} => Types::FunctionConfiguration
@@ -2664,6 +2682,7 @@ module Aws::AppSync
     #         lambda_conflict_handler_arn: "String",
     #       },
     #     },
+    #     max_batch_size: 1,
     #   })
     #
     # @example Response structure
@@ -2679,6 +2698,7 @@ module Aws::AppSync
     #   resp.function_configuration.sync_config.conflict_handler #=> String, one of "OPTIMISTIC_CONCURRENCY", "LAMBDA", "AUTOMERGE", "NONE"
     #   resp.function_configuration.sync_config.conflict_detection #=> String, one of "VERSION", "NONE"
     #   resp.function_configuration.sync_config.lambda_conflict_handler_config.lambda_conflict_handler_arn #=> String
+    #   resp.function_configuration.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateFunction AWS API Documentation
     #
@@ -2873,6 +2893,9 @@ module Aws::AppSync
     # @option params [Types::CachingConfig] :caching_config
     #   The caching configuration for the resolver.
     #
+    # @option params [Integer] :max_batch_size
+    #   The maximum batching size for a resolver.
+    #
     # @return [Types::UpdateResolverResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverResponse#resolver #resolver} => Types::Resolver
@@ -2901,6 +2924,7 @@ module Aws::AppSync
     #       ttl: 1,
     #       caching_keys: ["String"],
     #     },
+    #     max_batch_size: 1,
     #   })
     #
     # @example Response structure
@@ -2920,6 +2944,7 @@ module Aws::AppSync
     #   resp.resolver.caching_config.ttl #=> Integer
     #   resp.resolver.caching_config.caching_keys #=> Array
     #   resp.resolver.caching_config.caching_keys[0] #=> String
+    #   resp.resolver.max_batch_size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appsync-2017-07-25/UpdateResolver AWS API Documentation
     #
@@ -2987,7 +3012,7 @@ module Aws::AppSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appsync'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

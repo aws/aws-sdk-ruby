@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-01-06)
+------------------
+
+* Feature - Downlink Queue Management feature provides APIs for customers to manage the queued messages destined to device inside AWS IoT Core for LoRaWAN. Customer can view, delete or purge the queued message(s). It allows customer to preempt the queued messages and let more urgent messages go through.
+
 1.19.0 (2021-12-21)
 ------------------
 

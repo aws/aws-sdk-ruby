@@ -400,7 +400,9 @@ module Aws::MediaTailor
     #
     # @option params [Types::SlateSource] :filler_slate
     #   The slate used to fill gaps between programs in the schedule. You must
-    #   configure filler slate if your channel uses a LINEAR PlaybackMode.
+    #   configure filler slate if your channel uses the LINEAR PlaybackMode.
+    #   MediaTailor doesn't support filler slate for channels using the LOOP
+    #   PlaybackMode.
     #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
@@ -2035,6 +2037,12 @@ module Aws::MediaTailor
     #
     # @option params [required, String] :channel_name
     #
+    # @option params [Types::SlateSource] :filler_slate
+    #   The slate used to fill gaps between programs in the schedule. You must
+    #   configure filler slate if your channel uses the LINEAR PlaybackMode.
+    #   MediaTailor doesn't support filler slate for channels using the LOOP
+    #   PlaybackMode.
+    #
     # @option params [required, Array<Types::RequestOutputItem>] :outputs
     #   The channel's output properties.
     #
@@ -2054,6 +2062,10 @@ module Aws::MediaTailor
     #
     #   resp = client.update_channel({
     #     channel_name: "__string", # required
+    #     filler_slate: {
+    #       source_location_name: "__string",
+    #       vod_source_name: "__string",
+    #     },
     #     outputs: [ # required
     #       {
     #         dash_playlist_settings: {
@@ -2241,7 +2253,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

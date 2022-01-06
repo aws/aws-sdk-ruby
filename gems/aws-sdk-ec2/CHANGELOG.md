@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.290.0 (2022-01-06)
+------------------
+
+* Feature - This release introduces On-Demand Capacity Reservation support for Cluster Placement Groups, adds Tags on instance Metadata, and includes documentation updates for Amazon EC2.
+
 1.289.0 (2022-01-05)
 ------------------
 

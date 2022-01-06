@@ -66,6 +66,12 @@ module Aws::EC2
       data[:tags]
     end
 
+    # The Amazon Resource Name (ARN) of the placement group.
+    # @return [String]
+    def group_arn
+      data[:group_arn]
+    end
+
     # @!endgroup
 
     # @return [Client]

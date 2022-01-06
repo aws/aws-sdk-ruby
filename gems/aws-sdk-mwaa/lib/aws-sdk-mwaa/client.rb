@@ -347,10 +347,16 @@ module Aws::MWAA
 
     # @!group API Operations
 
-    # Create a CLI token to use Airflow CLI.
+    # Creates a CLI token for the Airflow CLI. To learn more, see [Creating
+    # an Apache Airflow CLI token][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html
     #
     # @option params [required, String] :name
-    #   Create a CLI token request for a MWAA environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #
     # @return [Types::CreateCliTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -390,9 +396,14 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
     #
     # @option params [String] :airflow_version
-    #   The Apache Airflow version for your environment. For example,
-    #   `v1.10.12`. If no value is specified, defaults to the latest version.
-    #   Valid values: `v1.10.12`.
+    #   The Apache Airflow version for your environment. If no value is
+    #   specified, defaults to the latest version. Valid values: `1.10.12`,
+    #   `2.0.2`. To learn more, see [Apache Airflow versions on Amazon Managed
+    #   Workflows for Apache Airflow (MWAA)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
     #
     # @option params [required, String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
@@ -412,30 +423,28 @@ module Aws::MWAA
     #
     # @option params [required, String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role for your
-    #   environment. An execution role is an AWS Identity and Access
-    #   Management (IAM) role that grants MWAA permission to access AWS
-    #   services and resources used by your environment. For example,
-    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
-    #   [Amazon MWAA Execution role][1].
+    #   environment. An execution role is an Amazon Web Services Identity and
+    #   Access Management (IAM) role that grants MWAA permission to access
+    #   Amazon Web Services services and resources used by your environment.
+    #   For example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
+    #   more, see [Amazon MWAA Execution role][1].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #
     # @option params [String] :kms_key
-    #   The AWS Key Management Service (KMS) key to encrypt the data in your
-    #   environment. You can use an AWS owned CMK, or a Customer managed CMK
-    #   (advanced). To learn more, see [Get started with Amazon Managed
-    #   Workflows for Apache Airflow][1].
+    #   The Amazon Web Services Key Management Service (KMS) key to encrypt
+    #   the data in your environment. You can use an Amazon Web Services owned
+    #   CMK, or a Customer managed CMK (advanced). To learn more, see [Create
+    #   an Amazon MWAA environment][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html
     #
     # @option params [Types::LoggingConfigurationInput] :logging_configuration
-    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
-    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    #   `WorkerLogs`.
+    #   Defines the Apache Airflow logs to send to CloudWatch Logs.
     #
     # @option params [Integer] :max_workers
     #   The maximum number of workers that you want to run in your
@@ -459,8 +468,8 @@ module Aws::MWAA
     #
     # @option params [required, Types::NetworkConfiguration] :network_configuration
     #   The VPC networking components used to secure and enable network
-    #   traffic between the AWS resources for your environment. To learn more,
-    #   see [About networking on Amazon MWAA][1].
+    #   traffic between the Amazon Web Services resources for your
+    #   environment. To learn more, see [About networking on Amazon MWAA][1].
     #
     #
     #
@@ -505,6 +514,11 @@ module Aws::MWAA
     #
     # @option params [Integer] :schedulers
     #   The number of Apache Airflow schedulers to run in your environment.
+    #   Valid values:
+    #
+    #   * v2.0.2 - Accepts between 2 to 5. Defaults to 2.
+    #
+    #   * v1.10.12 - Accepts 1.
     #
     # @option params [required, String] :source_bucket_arn
     #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG
@@ -518,8 +532,8 @@ module Aws::MWAA
     #
     # @option params [Hash<String,String>] :tags
     #   The key-value tag pairs you want to associate to your environment. For
-    #   example, `"Environment": "Staging"`. To learn more, see [Tagging AWS
-    #   resources][1].
+    #   example, `"Environment": "Staging"`. To learn more, see [Tagging
+    #   Amazon Web Services resources][1].
     #
     #
     #
@@ -534,14 +548,11 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #
     # @option params [String] :weekly_maintenance_window_start
-    #   The day and time of the week to start weekly maintenance updates of
-    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time to start weekly maintenance updates of your
+    #   environment in the following format: `DAY:HH:MM`. For example:
     #   `TUE:03:30`. You can specify a start time in 30 minute increments
-    #   only. Supported input includes the following:
-    #
-    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
-    #
-    #   ^
+    #   only.
     #
     # @return [Types::CreateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -613,11 +624,16 @@ module Aws::MWAA
       req.send_request(options)
     end
 
-    # Create a JWT token to be used to login to Airflow Web UI with claims
-    # based Authentication.
+    # Creates a web login token for the Airflow Web UI. To learn more, see
+    # [Creating an Apache Airflow web login token][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html
     #
     # @option params [required, String] :name
-    #   Create an Airflow Web UI login token request for a MWAA environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #
     # @return [Types::CreateWebLoginTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -668,8 +684,8 @@ module Aws::MWAA
       req.send_request(options)
     end
 
-    # Retrieves the details of an Amazon Managed Workflows for Apache
-    # Airflow (MWAA) environment.
+    # Describes an Amazon Managed Workflows for Apache Airflow (MWAA)
+    # environment.
     #
     # @option params [required, String] :name
     #   The name of the Amazon MWAA environment. For example,
@@ -699,6 +715,7 @@ module Aws::MWAA
     #   resp.environment.last_update.created_at #=> Time
     #   resp.environment.last_update.error.error_code #=> String
     #   resp.environment.last_update.error.error_message #=> String
+    #   resp.environment.last_update.source #=> String
     #   resp.environment.last_update.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
     #   resp.environment.logging_configuration.dag_processing_logs.cloud_watch_log_group_arn #=> String
     #   resp.environment.logging_configuration.dag_processing_logs.enabled #=> Boolean
@@ -817,15 +834,20 @@ module Aws::MWAA
       req.send_request(options)
     end
 
-    # An operation for publishing metrics from the customers to the Ops
-    # plane.
+    # **Internal only**. Publishes environment health metrics to Amazon
+    # CloudWatch.
     #
     # @option params [required, String] :environment_name
-    #   Publishes environment metric data to Amazon CloudWatch.
+    #   **Internal only**. The name of the environment.
     #
     # @option params [required, Array<Types::MetricDatum>] :metric_data
-    #   Publishes metric data points to Amazon CloudWatch. CloudWatch
-    #   associates the data points with the specified metrica.
+    #   **Internal only**. Publishes metrics to Amazon CloudWatch. To learn
+    #   more about the metrics published to Amazon CloudWatch, see [Amazon
+    #   MWAA performance metrics in Amazon CloudWatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -874,8 +896,8 @@ module Aws::MWAA
     #
     # @option params [required, Hash<String,String>] :tags
     #   The key-value tag pairs you want to associate to your environment. For
-    #   example, `"Environment": "Staging"`. To learn more, see [Tagging AWS
-    #   resources][1].
+    #   example, `"Environment": "Staging"`. To learn more, see [Tagging
+    #   Amazon Web Services resources][1].
     #
     #
     #
@@ -945,9 +967,9 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
     #
     # @option params [String] :airflow_version
-    #   The Apache Airflow version for your environment. For example,
-    #   `v1.10.12`. If no value is specified, defaults to the latest version.
-    #   Valid values: `v1.10.12`.
+    #   The Apache Airflow version for your environment. If no value is
+    #   specified, defaults to the latest version. Valid values: `1.10.12`,
+    #   `2.0.2`.
     #
     # @option params [String] :dag_s3_path
     #   The relative path to the DAGs folder on your Amazon S3 bucket. For
@@ -967,7 +989,8 @@ module Aws::MWAA
     #
     # @option params [String] :execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
-    #   allows MWAA to access AWS resources in your environment. For example,
+    #   allows MWAA to access Amazon Web Services resources in your
+    #   environment. For example,
     #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
     #   [Amazon MWAA Execution role][1].
     #
@@ -976,9 +999,7 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
     #
     # @option params [Types::LoggingConfigurationInput] :logging_configuration
-    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
-    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    #   `WorkerLogs`.
+    #   The Apache Airflow log types to send to CloudWatch Logs.
     #
     # @option params [Integer] :max_workers
     #   The maximum number of workers that you want to run in your
@@ -1002,8 +1023,8 @@ module Aws::MWAA
     #
     # @option params [Types::UpdateNetworkConfigurationInput] :network_configuration
     #   The VPC networking components used to secure and enable network
-    #   traffic between the AWS resources for your environment. To learn more,
-    #   see [About networking on Amazon MWAA][1].
+    #   traffic between the Amazon Web Services resources for your
+    #   environment. To learn more, see [About networking on Amazon MWAA][1].
     #
     #
     #
@@ -1069,14 +1090,11 @@ module Aws::MWAA
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
     #
     # @option params [String] :weekly_maintenance_window_start
-    #   The day and time of the week to start weekly maintenance updates of
-    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time to start weekly maintenance updates of your
+    #   environment in the following format: `DAY:HH:MM`. For example:
     #   `TUE:03:30`. You can specify a start time in 30 minute increments
-    #   only. Supported input includes the following:
-    #
-    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
-    #
-    #   ^
+    #   only.
     #
     # @return [Types::UpdateEnvironmentOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1156,7 +1174,7 @@ module Aws::MWAA
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
