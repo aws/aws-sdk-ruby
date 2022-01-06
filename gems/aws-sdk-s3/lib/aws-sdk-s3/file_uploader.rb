@@ -37,6 +37,8 @@ module Aws
         if File.size(source) >= multipart_threshold
           MultipartFileUploader.new(@options).upload(source, options)
         else
+          # remove multipart parameters not supported by put_object
+          options.delete(:thread_count)
           put_object(source, options)
         end
       end
@@ -56,15 +58,7 @@ module Aws
           options[:on_chunk_sent] = single_part_progress(callback)
         end
         open_file(source) do |file|
-          unsupported_options = options.keys - put_object_options
-          unless (unsupported_options.empty?)
-            warn("Skipping unsupported options for put_object: #{unsupported_options}")
-          end
-          @client.put_object(
-            options
-              .merge(body: file)
-              .select { |key, _| !unsupported_options.include? key }
-          )
+          @client.put_object(options.merge(body: file))
         end
       end
 
@@ -72,11 +66,6 @@ module Aws
         proc do |_chunk, bytes_read, total_size|
           progress_callback.call([bytes_read], [total_size])
         end
-      end
-
-      def put_object_options
-        S3::Client.api.operation(:put_object)
-                  .input.shape.member_names + [:on_chunk_sent]
       end
     end
   end

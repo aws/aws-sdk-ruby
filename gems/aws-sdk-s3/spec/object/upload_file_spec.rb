@@ -124,7 +124,6 @@ module Aws
               key: 'key',
               body: ten_meg_file
             )
-            expect_any_instance_of(FileUploader).to receive(:warn)
             object.upload_file(ten_meg_file, thread_count: 1)
           end
         end
