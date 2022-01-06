@@ -32,6 +32,9 @@ module Aws
       # @option options [Proc] :progress_callback
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with [bytes_read], [total_sizes]
+      # @option options [Integer] :thread_count
+      #   The thread count to use for multipart uploads. Ignored for
+      #   objects smaller than the multipart threshold.
       # @return [void]
       def upload(source, options = {})
         if File.size(source) >= multipart_threshold
