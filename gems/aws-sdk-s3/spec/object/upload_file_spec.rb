@@ -117,6 +117,15 @@ module Aws
             )
             object.upload_file(ten_meg_file.path)
           end
+
+          it 'does not fail when given :thread_count' do
+            expect(client).to receive(:put_object).with(
+              bucket: 'bucket',
+              key: 'key',
+              body: ten_meg_file
+            )
+            object.upload_file(ten_meg_file, thread_count: 1)
+          end
         end
 
         context 'large objects' do

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't fail small files in `upload_file` when `:thread_count` is set. (#2628)
+
 1.111.0 (2022-01-04)
 ------------------
 
