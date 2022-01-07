@@ -3612,6 +3612,7 @@ module Aws::MediaLive
     #                   mode: "LIVE", # accepts LIVE, VOD
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #                   program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #                   program_date_time_period: 1,
     #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,
@@ -6916,6 +6917,7 @@ module Aws::MediaLive
     #                 mode: "LIVE", # accepts LIVE, VOD
     #                 output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                 program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #                 program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #                 program_date_time_period: 1,
     #                 redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                 segment_length: 1,
@@ -8966,6 +8968,7 @@ module Aws::MediaLive
     #         mode: "LIVE", # accepts LIVE, VOD
     #         output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #         program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #         program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #         program_date_time_period: 1,
     #         redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #         segment_length: 1,
@@ -9188,10 +9191,19 @@ module Aws::MediaLive
     #
     # @!attribute [rw] program_date_time
     #   Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest
-    #   files. The value is calculated as follows: either the program date
-    #   and time are initialized using the input timecode source, or the
-    #   time is initialized using the input timecode source and the date is
-    #   initialized using the timestampOffset.
+    #   files. The value is calculated using the program date time clock.
+    #   @return [String]
+    #
+    # @!attribute [rw] program_date_time_clock
+    #   Specifies the algorithm used to drive the HLS
+    #   EXT-X-PROGRAM-DATE-TIME clock. Options include:
+    #   INITIALIZE\_FROM\_OUTPUT\_TIMECODE: The PDT clock is initialized as
+    #   a function of the first output timecode, then incremented by the
+    #   EXTINF duration of each encoded segment. SYSTEM\_CLOCK: The PDT
+    #   clock is initialized as a function of the UTC wall clock, then
+    #   incremented by the EXTINF duration of each encoded segment. If the
+    #   PDT clock diverges from the wall clock by more than 500ms, it is
+    #   resynchronized to the wall clock.
     #   @return [String]
     #
     # @!attribute [rw] program_date_time_period
@@ -9294,6 +9306,7 @@ module Aws::MediaLive
       :mode,
       :output_selection,
       :program_date_time,
+      :program_date_time_clock,
       :program_date_time_period,
       :redundant_manifest,
       :segment_length,
@@ -14245,6 +14258,7 @@ module Aws::MediaLive
     #             mode: "LIVE", # accepts LIVE, VOD
     #             output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #             program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #             program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #             program_date_time_period: 1,
     #             redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #             segment_length: 1,
@@ -14655,6 +14669,7 @@ module Aws::MediaLive
     #           mode: "LIVE", # accepts LIVE, VOD
     #           output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #           program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #           program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #           program_date_time_period: 1,
     #           redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #           segment_length: 1,
@@ -18158,6 +18173,7 @@ module Aws::MediaLive
     #                   mode: "LIVE", # accepts LIVE, VOD
     #                   output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #                   program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #                   program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #                   program_date_time_period: 1,
     #                   redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #                   segment_length: 1,

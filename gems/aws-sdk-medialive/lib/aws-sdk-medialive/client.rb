@@ -1246,6 +1246,7 @@ module Aws::MediaLive
     #               mode: "LIVE", # accepts LIVE, VOD
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #               program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #               program_date_time_period: 1,
     #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               segment_length: 1,
@@ -2054,6 +2055,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -3110,6 +3112,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -4036,6 +4039,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -5977,6 +5981,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -6685,6 +6690,7 @@ module Aws::MediaLive
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -7577,6 +7583,7 @@ module Aws::MediaLive
     #               mode: "LIVE", # accepts LIVE, VOD
     #               output_selection: "MANIFESTS_AND_SEGMENTS", # accepts MANIFESTS_AND_SEGMENTS, SEGMENTS_ONLY, VARIANT_MANIFESTS_AND_SEGMENTS
     #               program_date_time: "EXCLUDE", # accepts EXCLUDE, INCLUDE
+    #               program_date_time_clock: "INITIALIZE_FROM_OUTPUT_TIMECODE", # accepts INITIALIZE_FROM_OUTPUT_TIMECODE, SYSTEM_CLOCK
     #               program_date_time_period: 1,
     #               redundant_manifest: "DISABLED", # accepts DISABLED, ENABLED
     #               segment_length: 1,
@@ -8375,6 +8382,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -9044,6 +9052,7 @@ module Aws::MediaLive
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.mode #=> String, one of "LIVE", "VOD"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.output_selection #=> String, one of "MANIFESTS_AND_SEGMENTS", "SEGMENTS_ONLY", "VARIANT_MANIFESTS_AND_SEGMENTS"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time #=> String, one of "EXCLUDE", "INCLUDE"
+    #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_clock #=> String, one of "INITIALIZE_FROM_OUTPUT_TIMECODE", "SYSTEM_CLOCK"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.program_date_time_period #=> Integer
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.redundant_manifest #=> String, one of "DISABLED", "ENABLED"
     #   resp.channel.encoder_settings.output_groups[0].output_group_settings.hls_group_settings.segment_length #=> Integer
@@ -9862,7 +9871,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

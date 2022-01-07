@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-01-07)
+------------------
+
+* Feature - This release adds support for selecting the Program Date Time (PDT) Clock source algorithm for HLS outputs.
+
 1.82.0 (2021-12-21)
 ------------------
 
