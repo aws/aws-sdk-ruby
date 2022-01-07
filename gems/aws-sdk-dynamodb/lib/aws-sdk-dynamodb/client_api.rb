@@ -370,6 +370,8 @@ module Aws::DynamoDB
     TableAlreadyExistsException = Shapes::StructureShape.new(name: 'TableAlreadyExistsException')
     TableArn = Shapes::StringShape.new(name: 'TableArn')
     TableAutoScalingDescription = Shapes::StructureShape.new(name: 'TableAutoScalingDescription')
+    TableClass = Shapes::StringShape.new(name: 'TableClass')
+    TableClassSummary = Shapes::StructureShape.new(name: 'TableClassSummary')
     TableCreationDateTime = Shapes::TimestampShape.new(name: 'TableCreationDateTime')
     TableDescription = Shapes::StructureShape.new(name: 'TableDescription')
     TableId = Shapes::StringShape.new(name: 'TableId')
@@ -670,6 +672,7 @@ module Aws::DynamoDB
     CreateReplicationGroupMemberAction.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     CreateReplicationGroupMemberAction.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
     CreateReplicationGroupMemberAction.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
+    CreateReplicationGroupMemberAction.add_member(:table_class_override, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClassOverride"))
     CreateReplicationGroupMemberAction.struct_class = Types::CreateReplicationGroupMemberAction
 
     CreateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, required: true, location_name: "AttributeDefinitions"))
@@ -682,6 +685,7 @@ module Aws::DynamoDB
     CreateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
     CreateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     CreateTableInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     CreateTableInput.struct_class = Types::CreateTableInput
 
     CreateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))
@@ -1301,6 +1305,7 @@ module Aws::DynamoDB
     ReplicaDescription.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
     ReplicaDescription.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexDescriptionList, location_name: "GlobalSecondaryIndexes"))
     ReplicaDescription.add_member(:replica_inaccessible_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "ReplicaInaccessibleDateTime"))
+    ReplicaDescription.add_member(:replica_table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "ReplicaTableClassSummary"))
     ReplicaDescription.struct_class = Types::ReplicaDescription
 
     ReplicaDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaDescription)
@@ -1361,6 +1366,7 @@ module Aws::DynamoDB
     ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_units, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "ReplicaProvisionedWriteCapacityUnits"))
     ReplicaSettingsDescription.add_member(:replica_provisioned_write_capacity_auto_scaling_settings, Shapes::ShapeRef.new(shape: AutoScalingSettingsDescription, location_name: "ReplicaProvisionedWriteCapacityAutoScalingSettings"))
     ReplicaSettingsDescription.add_member(:replica_global_secondary_index_settings, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsDescriptionList, location_name: "ReplicaGlobalSecondaryIndexSettings"))
+    ReplicaSettingsDescription.add_member(:replica_table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "ReplicaTableClassSummary"))
     ReplicaSettingsDescription.struct_class = Types::ReplicaSettingsDescription
 
     ReplicaSettingsDescriptionList.member = Shapes::ShapeRef.new(shape: ReplicaSettingsDescription)
@@ -1369,6 +1375,7 @@ module Aws::DynamoDB
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_units, Shapes::ShapeRef.new(shape: PositiveLongObject, location_name: "ReplicaProvisionedReadCapacityUnits"))
     ReplicaSettingsUpdate.add_member(:replica_provisioned_read_capacity_auto_scaling_settings_update, Shapes::ShapeRef.new(shape: AutoScalingSettingsUpdate, location_name: "ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate"))
     ReplicaSettingsUpdate.add_member(:replica_global_secondary_index_settings_update, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexSettingsUpdateList, location_name: "ReplicaGlobalSecondaryIndexSettingsUpdate"))
+    ReplicaSettingsUpdate.add_member(:replica_table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "ReplicaTableClass"))
     ReplicaSettingsUpdate.struct_class = Types::ReplicaSettingsUpdate
 
     ReplicaSettingsUpdateList.member = Shapes::ShapeRef.new(shape: ReplicaSettingsUpdate)
@@ -1499,6 +1506,10 @@ module Aws::DynamoDB
     TableAutoScalingDescription.add_member(:replicas, Shapes::ShapeRef.new(shape: ReplicaAutoScalingDescriptionList, location_name: "Replicas"))
     TableAutoScalingDescription.struct_class = Types::TableAutoScalingDescription
 
+    TableClassSummary.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
+    TableClassSummary.add_member(:last_update_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateDateTime"))
+    TableClassSummary.struct_class = Types::TableClassSummary
+
     TableDescription.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
     TableDescription.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
     TableDescription.add_member(:key_schema, Shapes::ShapeRef.new(shape: KeySchema, location_name: "KeySchema"))
@@ -1520,6 +1531,7 @@ module Aws::DynamoDB
     TableDescription.add_member(:restore_summary, Shapes::ShapeRef.new(shape: RestoreSummary, location_name: "RestoreSummary"))
     TableDescription.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     TableDescription.add_member(:archival_summary, Shapes::ShapeRef.new(shape: ArchivalSummary, location_name: "ArchivalSummary"))
+    TableDescription.add_member(:table_class_summary, Shapes::ShapeRef.new(shape: TableClassSummary, location_name: "TableClassSummary"))
     TableDescription.struct_class = Types::TableDescription
 
     TableInUseException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
@@ -1667,6 +1679,7 @@ module Aws::DynamoDB
     UpdateReplicationGroupMemberAction.add_member(:kms_master_key_id, Shapes::ShapeRef.new(shape: KMSMasterKeyId, location_name: "KMSMasterKeyId"))
     UpdateReplicationGroupMemberAction.add_member(:provisioned_throughput_override, Shapes::ShapeRef.new(shape: ProvisionedThroughputOverride, location_name: "ProvisionedThroughputOverride"))
     UpdateReplicationGroupMemberAction.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: ReplicaGlobalSecondaryIndexList, location_name: "GlobalSecondaryIndexes"))
+    UpdateReplicationGroupMemberAction.add_member(:table_class_override, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClassOverride"))
     UpdateReplicationGroupMemberAction.struct_class = Types::UpdateReplicationGroupMemberAction
 
     UpdateTableInput.add_member(:attribute_definitions, Shapes::ShapeRef.new(shape: AttributeDefinitions, location_name: "AttributeDefinitions"))
@@ -1677,6 +1690,7 @@ module Aws::DynamoDB
     UpdateTableInput.add_member(:stream_specification, Shapes::ShapeRef.new(shape: StreamSpecification, location_name: "StreamSpecification"))
     UpdateTableInput.add_member(:sse_specification, Shapes::ShapeRef.new(shape: SSESpecification, location_name: "SSESpecification"))
     UpdateTableInput.add_member(:replica_updates, Shapes::ShapeRef.new(shape: ReplicationGroupUpdateList, location_name: "ReplicaUpdates"))
+    UpdateTableInput.add_member(:table_class, Shapes::ShapeRef.new(shape: TableClass, location_name: "TableClass"))
     UpdateTableInput.struct_class = Types::UpdateTableInput
 
     UpdateTableOutput.add_member(:table_description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "TableDescription"))

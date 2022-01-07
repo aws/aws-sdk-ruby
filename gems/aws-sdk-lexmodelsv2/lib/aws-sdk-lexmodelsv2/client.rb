@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::LexModelsV2
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::LexModelsV2
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::LexModelsV2
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::LexModelsV2
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::LexModelsV2
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -383,7 +394,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.last_build_submitted_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BuildBotLocale AWS API Documentation
@@ -723,7 +734,7 @@ module Aws::LexModelsV2
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
     #   resp.voice_settings.engine #=> String, one of "standard", "neural"
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.creation_date_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateBotLocale AWS API Documentation
@@ -2316,7 +2327,7 @@ module Aws::LexModelsV2
     #   values that help train the machine learning model about the values
     #   that it resolves for a slot.
     #
-    # @option params [required, Types::SlotValueSelectionSetting] :value_selection_setting
+    # @option params [Types::SlotValueSelectionSetting] :value_selection_setting
     #   Determines the strategy that Amazon Lex uses to select a value from
     #   the list of possible values. The field can be set to one of the
     #   following values:
@@ -2354,6 +2365,9 @@ module Aws::LexModelsV2
     #
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
+    # @option params [Types::ExternalSourceSetting] :external_source_setting
+    #   Sets the type of external information used to create the slot type.
+    #
     # @return [Types::CreateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -2366,6 +2380,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateSlotTypeResponse#bot_version #bot_version} => String
     #   * {Types::CreateSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::CreateSlotTypeResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::CreateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -2384,7 +2399,7 @@ module Aws::LexModelsV2
     #         ],
     #       },
     #     ],
-    #     value_selection_setting: { # required
+    #     value_selection_setting: {
     #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
@@ -2394,6 +2409,15 @@ module Aws::LexModelsV2
     #     bot_id: "Id", # required
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
+    #     external_source_setting: {
+    #       grammar_slot_type_setting: {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -2412,6 +2436,9 @@ module Aws::LexModelsV2
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotType AWS API Documentation
     #
@@ -2569,7 +2596,7 @@ module Aws::LexModelsV2
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
     #   resp.locale_id #=> String
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteBotLocale AWS API Documentation
     #
@@ -3131,6 +3158,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
     #   * {Types::DescribeBotLocaleResponse#last_build_submitted_date_time #last_build_submitted_date_time} => Time
     #   * {Types::DescribeBotLocaleResponse#bot_locale_history_events #bot_locale_history_events} => Array&lt;Types::BotLocaleHistoryEvent&gt;
+    #   * {Types::DescribeBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3152,7 +3180,7 @@ module Aws::LexModelsV2
     #   resp.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.intents_count #=> Integer
     #   resp.slot_types_count #=> Integer
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
@@ -3161,6 +3189,8 @@ module Aws::LexModelsV2
     #   resp.bot_locale_history_events #=> Array
     #   resp.bot_locale_history_events[0].event #=> String
     #   resp.bot_locale_history_events[0].event_date #=> Time
+    #   resp.recommended_actions #=> Array
+    #   resp.recommended_actions[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3175,6 +3205,89 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def describe_bot_locale(params = {}, options = {})
       req = build_request(:describe_bot_locale, params)
+      req.send_request(options)
+    end
+
+    # Provides metadata information about a bot recommendation. This
+    # information will enable you to get a description on the request
+    # inputs, to download associated transcripts after processing is
+    # complete, and to download intents and slot-types generated by the bot
+    # recommendation.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot associated with the bot
+    #   recommendation.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot associated with the bot recommendation.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the bot recommendation to
+    #   describe. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, String] :bot_recommendation_id
+    #   The identifier of the bot recommendation to describe.
+    #
+    # @return [Types::DescribeBotRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBotRecommendationResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeBotRecommendationResponse#bot_version #bot_version} => String
+    #   * {Types::DescribeBotRecommendationResponse#locale_id #locale_id} => String
+    #   * {Types::DescribeBotRecommendationResponse#bot_recommendation_status #bot_recommendation_status} => String
+    #   * {Types::DescribeBotRecommendationResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #   * {Types::DescribeBotRecommendationResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
+    #   * {Types::DescribeBotRecommendationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeBotRecommendationResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeBotRecommendationResponse#transcript_source_setting #transcript_source_setting} => Types::TranscriptSourceSetting
+    #   * {Types::DescribeBotRecommendationResponse#encryption_setting #encryption_setting} => Types::EncryptionSetting
+    #   * {Types::DescribeBotRecommendationResponse#bot_recommendation_results #bot_recommendation_results} => Types::BotRecommendationResults
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bot_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     bot_recommendation_id: "Id", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_id #=> String
+    #   resp.failure_reasons #=> Array
+    #   resp.failure_reasons[0] #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.s3_bucket_name #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes #=> Array
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes[0] #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_format #=> String, one of "Lex"
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.start_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.end_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.kms_key_arn #=> String
+    #   resp.encryption_setting.kms_key_arn #=> String
+    #   resp.encryption_setting.bot_locale_export_password #=> String
+    #   resp.encryption_setting.associated_transcripts_password #=> String
+    #   resp.bot_recommendation_results.bot_locale_export_url #=> String
+    #   resp.bot_recommendation_results.associated_transcripts_url #=> String
+    #   resp.bot_recommendation_results.statistics.intents.discovered_intent_count #=> Integer
+    #   resp.bot_recommendation_results.statistics.slot_types.discovered_slot_type_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotRecommendation AWS API Documentation
+    #
+    # @overload describe_bot_recommendation(params = {})
+    # @param [Hash] params ({})
+    def describe_bot_recommendation(params = {}, options = {})
+      req = build_request(:describe_bot_recommendation, params)
       req.send_request(options)
     end
 
@@ -3329,7 +3442,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
     #   resp.imported_resource_id #=> String
     #   resp.imported_resource_name #=> String
-    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -3844,6 +3957,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::DescribeSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::DescribeSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::DescribeSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -3871,6 +3985,9 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotType AWS API Documentation
     #
@@ -4141,7 +4258,7 @@ module Aws::LexModelsV2
     #   resp.bot_locale_summaries[0].locale_id #=> String
     #   resp.bot_locale_summaries[0].locale_name #=> String
     #   resp.bot_locale_summaries[0].description #=> String
-    #   resp.bot_locale_summaries[0].bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_summaries[0].bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.bot_locale_summaries[0].last_updated_date_time #=> Time
     #   resp.bot_locale_summaries[0].last_build_submitted_date_time #=> Time
     #
@@ -4151,6 +4268,71 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def list_bot_locales(params = {}, options = {})
       req = build_request(:list_bot_locales, params)
+      req.send_request(options)
+    end
+
+    # Get a list of bot recommendations that meet the specified criteria.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot that contains the bot recommendation
+    #   list.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot that contains the bot recommendation list.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListBotRecommendation operation contains more
+    #   results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter to
+    #   return the next page of results.
+    #
+    # @return [Types::ListBotRecommendationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBotRecommendationsResponse#bot_id #bot_id} => String
+    #   * {Types::ListBotRecommendationsResponse#bot_version #bot_version} => String
+    #   * {Types::ListBotRecommendationsResponse#locale_id #locale_id} => String
+    #   * {Types::ListBotRecommendationsResponse#bot_recommendation_summaries #bot_recommendation_summaries} => Array&lt;Types::BotRecommendationSummary&gt;
+    #   * {Types::ListBotRecommendationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bot_recommendations({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_summaries #=> Array
+    #   resp.bot_recommendation_summaries[0].bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_summaries[0].bot_recommendation_id #=> String
+    #   resp.bot_recommendation_summaries[0].creation_date_time #=> Time
+    #   resp.bot_recommendation_summaries[0].last_updated_date_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotRecommendations AWS API Documentation
+    #
+    # @overload list_bot_recommendations(params = {})
+    # @param [Hash] params ({})
+    def list_bot_recommendations(params = {}, options = {})
+      req = build_request(:list_bot_recommendations, params)
       req.send_request(options)
     end
 
@@ -4581,7 +4763,7 @@ module Aws::LexModelsV2
     #   resp.import_summaries[0].imported_resource_id #=> String
     #   resp.import_summaries[0].imported_resource_name #=> String
     #   resp.import_summaries[0].import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
-    #   resp.import_summaries[0].merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.import_summaries[0].merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_summaries[0].creation_date_time #=> Time
     #   resp.import_summaries[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
@@ -4692,6 +4874,77 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Gets a list of recommended intents provided by the bot recommendation
+    # that you can use in your bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot associated with the recommended
+    #   intents.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot that contains the recommended intents.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the recommended intents.
+    #
+    # @option params [required, String] :bot_recommendation_id
+    #   The identifier of the bot recommendation that contains the recommended
+    #   intents.
+    #
+    # @option params [String] :next_token
+    #   If the response from the ListRecommendedIntents operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter to
+    #   return the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #
+    # @return [Types::ListRecommendedIntentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListRecommendedIntentsResponse#bot_id #bot_id} => String
+    #   * {Types::ListRecommendedIntentsResponse#bot_version #bot_version} => String
+    #   * {Types::ListRecommendedIntentsResponse#locale_id #locale_id} => String
+    #   * {Types::ListRecommendedIntentsResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #   * {Types::ListRecommendedIntentsResponse#summary_list #summary_list} => Array&lt;Types::RecommendedIntentSummary&gt;
+    #   * {Types::ListRecommendedIntentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_recommended_intents({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     bot_recommendation_id: "Id", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_id #=> String
+    #   resp.summary_list #=> Array
+    #   resp.summary_list[0].intent_id #=> String
+    #   resp.summary_list[0].intent_name #=> String
+    #   resp.summary_list[0].sample_utterances_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListRecommendedIntents AWS API Documentation
+    #
+    # @overload list_recommended_intents(params = {})
+    # @param [Hash] params ({})
+    def list_recommended_intents(params = {}, options = {})
+      req = build_request(:list_recommended_intents, params)
+      req.send_request(options)
+    end
+
     # Gets a list of slot types that match the specified criteria.
     #
     # @option params [required, String] :bot_id
@@ -4752,7 +5005,7 @@ module Aws::LexModelsV2
     #     },
     #     filters: [
     #       {
-    #         name: "SlotTypeName", # required, accepts SlotTypeName
+    #         name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #         values: ["FilterValue"], # required
     #         operator: "CO", # required, accepts CO, EQ
     #       },
@@ -4772,6 +5025,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_summaries[0].description #=> String
     #   resp.slot_type_summaries[0].parent_slot_type_signature #=> String
     #   resp.slot_type_summaries[0].last_updated_date_time #=> Time
+    #   resp.slot_type_summaries[0].slot_type_category #=> String, one of "Custom", "Extended", "ExternalGrammar"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListSlotTypes AWS API Documentation
@@ -4934,6 +5188,192 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Search for associated transcripts that meet the specified criteria.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot associated with the transcripts that
+    #   you are searching.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot containing the transcripts that you are
+    #   searching.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the transcripts to
+    #   search. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, String] :bot_recommendation_id
+    #   The unique identifier of the bot recommendation associated with the
+    #   transcripts to search.
+    #
+    # @option params [String] :search_order
+    #   How SearchResults are ordered. Valid values are Ascending or
+    #   Descending. The default is Descending.
+    #
+    # @option params [required, Array<Types::AssociatedTranscriptFilter>] :filters
+    #   A list of filter objects.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #
+    # @option params [Integer] :next_index
+    #   If the response from the SearchAssociatedTranscriptsRequest operation
+    #   contains more results than specified in the maxResults parameter, an
+    #   index is returned in the response. Use that index in the nextIndex
+    #   parameter to return the next page of results.
+    #
+    # @return [Types::SearchAssociatedTranscriptsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchAssociatedTranscriptsResponse#bot_id #bot_id} => String
+    #   * {Types::SearchAssociatedTranscriptsResponse#bot_version #bot_version} => String
+    #   * {Types::SearchAssociatedTranscriptsResponse#locale_id #locale_id} => String
+    #   * {Types::SearchAssociatedTranscriptsResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #   * {Types::SearchAssociatedTranscriptsResponse#next_index #next_index} => Integer
+    #   * {Types::SearchAssociatedTranscriptsResponse#associated_transcripts #associated_transcripts} => Array&lt;Types::AssociatedTranscript&gt;
+    #   * {Types::SearchAssociatedTranscriptsResponse#total_results #total_results} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_associated_transcripts({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     bot_recommendation_id: "Id", # required
+    #     search_order: "Ascending", # accepts Ascending, Descending
+    #     filters: [ # required
+    #       {
+    #         name: "IntentId", # required, accepts IntentId, SlotTypeId
+    #         values: ["FilterValue"], # required
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_index: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_id #=> String
+    #   resp.next_index #=> Integer
+    #   resp.associated_transcripts #=> Array
+    #   resp.associated_transcripts[0].transcript #=> String
+    #   resp.total_results #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SearchAssociatedTranscripts AWS API Documentation
+    #
+    # @overload search_associated_transcripts(params = {})
+    # @param [Hash] params ({})
+    def search_associated_transcripts(params = {}, options = {})
+      req = build_request(:search_associated_transcripts, params)
+      req.send_request(options)
+    end
+
+    # Use this to provide your transcript data, and to start the bot
+    # recommendation process.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot containing the bot recommendation.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot containing the bot recommendation.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the bot recommendation to
+    #   start. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, Types::TranscriptSourceSetting] :transcript_source_setting
+    #   The object representing the Amazon S3 bucket containing the
+    #   transcript, as well as the associated metadata.
+    #
+    # @option params [Types::EncryptionSetting] :encryption_setting
+    #   The object representing the passwords that will be used to encrypt the
+    #   data related to the bot recommendation results, as well as the KMS key
+    #   ARN used to encrypt the associated metadata.
+    #
+    # @return [Types::StartBotRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBotRecommendationResponse#bot_id #bot_id} => String
+    #   * {Types::StartBotRecommendationResponse#bot_version #bot_version} => String
+    #   * {Types::StartBotRecommendationResponse#locale_id #locale_id} => String
+    #   * {Types::StartBotRecommendationResponse#bot_recommendation_status #bot_recommendation_status} => String
+    #   * {Types::StartBotRecommendationResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #   * {Types::StartBotRecommendationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::StartBotRecommendationResponse#transcript_source_setting #transcript_source_setting} => Types::TranscriptSourceSetting
+    #   * {Types::StartBotRecommendationResponse#encryption_setting #encryption_setting} => Types::EncryptionSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bot_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     transcript_source_setting: { # required
+    #       s3_bucket_transcript_source: {
+    #         s3_bucket_name: "S3BucketName", # required
+    #         path_format: {
+    #           object_prefixes: ["ObjectPrefix"],
+    #         },
+    #         transcript_format: "Lex", # required, accepts Lex
+    #         transcript_filter: {
+    #           lex_transcript_filter: {
+    #             date_range_filter: {
+    #               start_date_time: Time.now, # required
+    #               end_date_time: Time.now, # required
+    #             },
+    #           },
+    #         },
+    #         kms_key_arn: "KmsKeyArn",
+    #       },
+    #     },
+    #     encryption_setting: {
+    #       kms_key_arn: "KmsKeyArn",
+    #       bot_locale_export_password: "FilePassword",
+    #       associated_transcripts_password: "FilePassword",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.s3_bucket_name #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes #=> Array
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes[0] #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_format #=> String, one of "Lex"
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.start_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.end_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.kms_key_arn #=> String
+    #   resp.encryption_setting.kms_key_arn #=> String
+    #   resp.encryption_setting.bot_locale_export_password #=> String
+    #   resp.encryption_setting.associated_transcripts_password #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotRecommendation AWS API Documentation
+    #
+    # @overload start_bot_recommendation(params = {})
+    # @param [Hash] params ({})
+    def start_bot_recommendation(params = {}, options = {})
+      req = build_request(:start_bot_recommendation, params)
+      req.send_request(options)
+    end
+
     # Starts importing a bot or bot locale from a zip archive that you
     # uploaded to an S3 bucket.
     #
@@ -4997,7 +5437,7 @@ module Aws::LexModelsV2
     #         },
     #       },
     #     },
-    #     merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict
+    #     merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict, Append
     #     file_password: "ImportExportFilePassword",
     #   })
     #
@@ -5018,7 +5458,7 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
-    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict"
+    #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
     #
@@ -5339,6 +5779,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
     #   * {Types::UpdateBotLocaleResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateBotLocaleResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateBotLocaleResponse#recommended_actions #recommended_actions} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5364,11 +5805,13 @@ module Aws::LexModelsV2
     #   resp.nlu_intent_confidence_threshold #=> Float
     #   resp.voice_settings.voice_id #=> String
     #   resp.voice_settings.engine #=> String, one of "standard", "neural"
-    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing"
+    #   resp.bot_locale_status #=> String, one of "Creating", "Building", "Built", "ReadyExpressTesting", "Failed", "Deleting", "NotBuilt", "Importing", "Processing"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.recommended_actions #=> Array
+    #   resp.recommended_actions[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocale AWS API Documentation
     #
@@ -5376,6 +5819,88 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def update_bot_locale(params = {}, options = {})
       req = build_request(:update_bot_locale, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing bot recommendation request.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot containing the bot recommendation to
+    #   be updated.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot containing the bot recommendation to be
+    #   updated.
+    #
+    # @option params [required, String] :locale_id
+    #   The identifier of the language and locale of the bot recommendation to
+    #   update. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #
+    # @option params [required, String] :bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be updated.
+    #
+    # @option params [required, Types::EncryptionSetting] :encryption_setting
+    #   The object representing the passwords that will be used to encrypt the
+    #   data related to the bot recommendation results, as well as the KMS key
+    #   ARN used to encrypt the associated metadata.
+    #
+    # @return [Types::UpdateBotRecommendationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateBotRecommendationResponse#bot_id #bot_id} => String
+    #   * {Types::UpdateBotRecommendationResponse#bot_version #bot_version} => String
+    #   * {Types::UpdateBotRecommendationResponse#locale_id #locale_id} => String
+    #   * {Types::UpdateBotRecommendationResponse#bot_recommendation_status #bot_recommendation_status} => String
+    #   * {Types::UpdateBotRecommendationResponse#bot_recommendation_id #bot_recommendation_id} => String
+    #   * {Types::UpdateBotRecommendationResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::UpdateBotRecommendationResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateBotRecommendationResponse#transcript_source_setting #transcript_source_setting} => Types::TranscriptSourceSetting
+    #   * {Types::UpdateBotRecommendationResponse#encryption_setting #encryption_setting} => Types::EncryptionSetting
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_bot_recommendation({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #     bot_recommendation_id: "Id", # required
+    #     encryption_setting: { # required
+    #       kms_key_arn: "KmsKeyArn",
+    #       bot_locale_export_password: "FilePassword",
+    #       associated_transcripts_password: "FilePassword",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.bot_recommendation_status #=> String, one of "Processing", "Deleting", "Deleted", "Downloading", "Updating", "Available", "Failed"
+    #   resp.bot_recommendation_id #=> String
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.s3_bucket_name #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes #=> Array
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.path_format.object_prefixes[0] #=> String
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_format #=> String, one of "Lex"
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.start_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.transcript_filter.lex_transcript_filter.date_range_filter.end_date_time #=> Time
+    #   resp.transcript_source_setting.s3_bucket_transcript_source.kms_key_arn #=> String
+    #   resp.encryption_setting.kms_key_arn #=> String
+    #   resp.encryption_setting.bot_locale_export_password #=> String
+    #   resp.encryption_setting.associated_transcripts_password #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotRecommendation AWS API Documentation
+    #
+    # @overload update_bot_recommendation(params = {})
+    # @param [Hash] params ({})
+    def update_bot_recommendation(params = {}, options = {})
+      req = build_request(:update_bot_recommendation, params)
       req.send_request(options)
     end
 
@@ -6722,7 +7247,7 @@ module Aws::LexModelsV2
     #   A new list of values and their optional synonyms that define the
     #   values that the slot type can take.
     #
-    # @option params [required, Types::SlotValueSelectionSetting] :value_selection_setting
+    # @option params [Types::SlotValueSelectionSetting] :value_selection_setting
     #   The strategy that Amazon Lex should use when deciding on a value from
     #   the list of slot type values.
     #
@@ -6745,6 +7270,10 @@ module Aws::LexModelsV2
     #
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #
+    # @option params [Types::ExternalSourceSetting] :external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #
     # @return [Types::UpdateSlotTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateSlotTypeResponse#slot_type_id #slot_type_id} => String
@@ -6758,6 +7287,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateSlotTypeResponse#locale_id #locale_id} => String
     #   * {Types::UpdateSlotTypeResponse#creation_date_time #creation_date_time} => Time
     #   * {Types::UpdateSlotTypeResponse#last_updated_date_time #last_updated_date_time} => Time
+    #   * {Types::UpdateSlotTypeResponse#external_source_setting #external_source_setting} => Types::ExternalSourceSetting
     #
     # @example Request syntax with placeholder values
     #
@@ -6777,7 +7307,7 @@ module Aws::LexModelsV2
     #         ],
     #       },
     #     ],
-    #     value_selection_setting: { # required
+    #     value_selection_setting: {
     #       resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
@@ -6787,6 +7317,15 @@ module Aws::LexModelsV2
     #     bot_id: "Id", # required
     #     bot_version: "DraftBotVersion", # required
     #     locale_id: "LocaleId", # required
+    #     external_source_setting: {
+    #       grammar_slot_type_setting: {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -6806,6 +7345,9 @@ module Aws::LexModelsV2
     #   resp.locale_id #=> String
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_bucket_name #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.s3_object_key #=> String
+    #   resp.external_source_setting.grammar_slot_type_setting.source.kms_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotType AWS API Documentation
     #
@@ -6829,7 +7371,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

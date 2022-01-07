@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2022-01-05)
+------------------
+
+* Feature - This release adds an automatic retry mechanism for AWS IoT Jobs. You can now define a maximum number of retries for each Job rollout, along with the criteria to trigger the retry for FAILED/TIMED_OUT/ALL(both FAILED an TIMED_OUT) job.
+
+1.82.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2021-12-08)
+------------------
+
+* Feature - This release allows customer to enable caching of custom authorizer on HTTP protocol for clients that use persistent or Keep-Alive connection in order to reduce the number of Lambda invocations.
+
+1.80.0 (2021-11-30)
+------------------
+
+* Feature - Added the ability to enable/disable IoT Fleet Indexing for Device Defender and Named Shadow information, and search them through IoT Fleet Indexing APIs.
+
 1.79.0 (2021-11-23)
 ------------------
 

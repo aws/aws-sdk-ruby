@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::LocationService
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::LocationService
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::LocationService
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::LocationService
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::LocationService
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -480,6 +491,11 @@ module Aws::LocationService
     #
     #  </note>
     #
+    # <note markdown="1"> Geofence evaluation uses the given device position. It does not
+    # account for the optional `Accuracy` of a `DevicePositionUpdate`.
+    #
+    #  </note>
+    #
     # @option params [required, String] :collection_name
     #   The geofence collection used in evaluating the position of devices
     #   against its geofences.
@@ -498,8 +514,14 @@ module Aws::LocationService
     #     collection_name: "ResourceName", # required
     #     device_position_updates: [ # required
     #       {
+    #         accuracy: {
+    #           horizontal: 1.0, # required
+    #         },
     #         device_id: "Id", # required
     #         position: [1.0], # required
+    #         position_properties: {
+    #           "PropertyMapKeyString" => "PropertyMapValueString",
+    #         },
     #         sample_time: Time.now, # required
     #       },
     #     ],
@@ -550,9 +572,12 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.device_positions #=> Array
+    #   resp.device_positions[0].accuracy.horizontal #=> Float
     #   resp.device_positions[0].device_id #=> String
     #   resp.device_positions[0].position #=> Array
     #   resp.device_positions[0].position[0] #=> Float
+    #   resp.device_positions[0].position_properties #=> Hash
+    #   resp.device_positions[0].position_properties["PropertyMapKeyString"] #=> String
     #   resp.device_positions[0].received_time #=> Time
     #   resp.device_positions[0].sample_time #=> Time
     #   resp.errors #=> Array
@@ -633,10 +658,21 @@ module Aws::LocationService
     # location data is stored at a maximum of one position per 30 second
     # interval. If your update frequency is more often than every 30
     # seconds, only one update per 30 seconds is stored for each unique
-    # device ID. When `PositionFiltering` is set to `DistanceBased`
-    # filtering, location data is stored and evaluated against linked
-    # geofence collections only if the device has moved more than 30 m (98.4
-    # ft).
+    # device ID.
+    #
+    #  When `PositionFiltering` is set to `DistanceBased` filtering, location
+    # data is stored and evaluated against linked geofence collections only
+    # if the device has moved more than 30 m (98.4 ft).
+    #
+    #  When `PositionFiltering` is set to `AccuracyBased` filtering, location
+    # data is stored and evaluated against linked geofence collections only
+    # if the device has moved more than the measured accuracy. For example,
+    # if two consecutive updates from a device have a horizontal accuracy of
+    # 5 m and 10 m, the second update is neither stored or evaluated if the
+    # device has moved less than 15 m. If `PositionFiltering` is set to
+    # `AccuracyBased` filtering, Amazon Location uses the default value `\{
+    # "Horizontal": 0\}` when accuracy is not provided on a
+    # `DevicePositionUpdate`.
     #
     #  </note>
     #
@@ -656,8 +692,14 @@ module Aws::LocationService
     #     tracker_name: "ResourceName", # required
     #     updates: [ # required
     #       {
+    #         accuracy: {
+    #           horizontal: 1.0, # required
+    #         },
     #         device_id: "Id", # required
     #         position: [1.0], # required
+    #         position_properties: {
+    #           "PropertyMapKeyString" => "PropertyMapValueString",
+    #         },
     #         sample_time: Time.now, # required
     #       },
     #     ],
@@ -955,8 +997,9 @@ module Aws::LocationService
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
     #
-    # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for the geofence collection.
+    # @option params [String] :pricing_plan
+    #   Optionally specifies the pricing plan for the geofence collection.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see the [Amazon Location Service pricing page][1].
@@ -1024,7 +1067,7 @@ module Aws::LocationService
     #     collection_name: "ResourceName", # required
     #     description: "ResourceDescription",
     #     kms_key_id: "KmsKeyId",
-    #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1067,8 +1110,9 @@ module Aws::LocationService
     #
     #   * No spaces allowed. For example, `ExampleMap`.
     #
-    # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your map resource.
+    # @option params [String] :pricing_plan
+    #   Optionally specifies the pricing plan for the map resource. Defaults
+    #   to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1113,7 +1157,7 @@ module Aws::LocationService
     #     },
     #     description: "ResourceDescription",
     #     map_name: "ResourceName", # required
-    #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1137,7 +1181,9 @@ module Aws::LocationService
     # Creates a place index resource in your AWS account. Use a place index
     # resource to geocode addresses and other text queries by using the
     # `SearchPlaceIndexForText` operation, and reverse geocode coordinates
-    # by using the `SearchPlaceIndexForPosition` operation.
+    # by using the `SearchPlaceIndexForPosition` operation, and enable
+    # autosuggestions by using the `SearchPlaceIndexForSuggestions`
+    # operation.
     #
     # @option params [required, String] :data_source
     #   Specifies the geospatial data provider for the new place index.
@@ -1193,8 +1239,9 @@ module Aws::LocationService
     #
     #   * No spaces allowed. For example, `ExamplePlaceIndex`.
     #
-    # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your place index resource.
+    # @option params [String] :pricing_plan
+    #   Optionally specifies the pricing plan for the place index resource.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1241,7 +1288,7 @@ module Aws::LocationService
     #     },
     #     description: "ResourceDescription",
     #     index_name: "ResourceName", # required
-    #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1315,8 +1362,9 @@ module Aws::LocationService
     # @option params [String] :description
     #   The optional description for the route calculator resource.
     #
-    # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for your route calculator resource.
+    # @option params [String] :pricing_plan
+    #   Optionally specifies the pricing plan for the route calculator
+    #   resource. Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1363,7 +1411,7 @@ module Aws::LocationService
     #     calculator_name: "ResourceName", # required
     #     data_source: "String", # required
     #     description: "ResourceDescription",
-    #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1416,11 +1464,22 @@ module Aws::LocationService
     #     Distance-based filtering can also reduce the effects of GPS noise
     #     when displaying device trajectories on a map.
     #
+    #   * `AccuracyBased` - If the device has moved less than the measured
+    #     accuracy, location updates are ignored. For example, if two
+    #     consecutive updates from a device have a horizontal accuracy of 5 m
+    #     and 10 m, the second update is ignored if the device has moved less
+    #     than 15 m. Ignored location updates are neither evaluated against
+    #     linked geofence collections, nor stored. This can reduce the effects
+    #     of GPS noise when displaying device trajectories on a map, and can
+    #     help control your costs by reducing the number of geofence
+    #     evaluations.
+    #
     #   This field is optional. If not specified, the default value is
     #   `TimeBased`.
     #
-    # @option params [required, String] :pricing_plan
-    #   Specifies the pricing plan for the tracker resource.
+    # @option params [String] :pricing_plan
+    #   Optionally specifies the pricing plan for the tracker resource.
+    #   Defaults to `RequestBasedUsage`.
     #
     #   For additional details and restrictions on each pricing plan option,
     #   see [Amazon Location Service pricing][1].
@@ -1500,7 +1559,7 @@ module Aws::LocationService
     #     description: "ResourceDescription",
     #     kms_key_id: "KmsKeyId",
     #     position_filtering: "TimeBased", # accepts TimeBased, DistanceBased, AccuracyBased
-    #     pricing_plan: "RequestBasedUsage", # required, accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
+    #     pricing_plan: "RequestBasedUsage", # accepts RequestBasedUsage, MobileAssetTracking, MobileAssetManagement
     #     pricing_plan_data_source: "String",
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1938,8 +1997,10 @@ module Aws::LocationService
     #
     # @return [Types::GetDevicePositionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetDevicePositionResponse#accuracy #accuracy} => Types::PositionalAccuracy
     #   * {Types::GetDevicePositionResponse#device_id #device_id} => String
     #   * {Types::GetDevicePositionResponse#position #position} => Array&lt;Float&gt;
+    #   * {Types::GetDevicePositionResponse#position_properties #position_properties} => Hash&lt;String,String&gt;
     #   * {Types::GetDevicePositionResponse#received_time #received_time} => Time
     #   * {Types::GetDevicePositionResponse#sample_time #sample_time} => Time
     #
@@ -1952,9 +2013,12 @@ module Aws::LocationService
     #
     # @example Response structure
     #
+    #   resp.accuracy.horizontal #=> Float
     #   resp.device_id #=> String
     #   resp.position #=> Array
     #   resp.position[0] #=> Float
+    #   resp.position_properties #=> Hash
+    #   resp.position_properties["PropertyMapKeyString"] #=> String
     #   resp.received_time #=> Time
     #   resp.sample_time #=> Time
     #
@@ -2039,9 +2103,12 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.device_positions #=> Array
+    #   resp.device_positions[0].accuracy.horizontal #=> Float
     #   resp.device_positions[0].device_id #=> String
     #   resp.device_positions[0].position #=> Array
     #   resp.device_positions[0].position[0] #=> Float
+    #   resp.device_positions[0].position_properties #=> Hash
+    #   resp.device_positions[0].position_properties["PropertyMapKeyString"] #=> String
     #   resp.device_positions[0].received_time #=> Time
     #   resp.device_positions[0].sample_time #=> Time
     #   resp.next_token #=> String
@@ -2335,9 +2402,12 @@ module Aws::LocationService
     # @example Response structure
     #
     #   resp.data.entries #=> Array
+    #   resp.data.entries[0].accuracy.horizontal #=> Float
     #   resp.data.entries[0].device_id #=> String
     #   resp.data.entries[0].position #=> Array
     #   resp.data.entries[0].position[0] #=> Float
+    #   resp.data.entries[0].position_properties #=> Hash
+    #   resp.data.entries[0].position_properties["PropertyMapKeyString"] #=> String
     #   resp.data.entries[0].sample_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2860,6 +2930,140 @@ module Aws::LocationService
       req.send_request(options)
     end
 
+    # Generates suggestions for addresses and points of interest based on
+    # partial or misspelled free-form text. This operation is also known as
+    # autocomplete, autosuggest, or fuzzy matching.
+    #
+    # Optional parameters let you narrow your search results by bounding box
+    # or country, or bias your search toward a specific position on the
+    # globe.
+    #
+    # <note markdown="1"> You can search for suggested place names near a specified position by
+    # using `BiasPosition`, or filter results within a bounding box by using
+    # `FilterBBox`. These parameters are mutually exclusive; using both
+    # `BiasPosition` and `FilterBBox` in the same command returns an error.
+    #
+    #  </note>
+    #
+    # @option params [Array<Float>] :bias_position
+    #   An optional parameter that indicates a preference for place
+    #   suggestions that are closer to a specified position.
+    #
+    #   If provided, this parameter must contain a pair of numbers. The first
+    #   number represents the X coordinate, or longitude; the second number
+    #   represents the Y coordinate, or latitude.
+    #
+    #   For example, `[-123.1174, 49.2847]` represents the position with
+    #   longitude `-123.1174` and latitude `49.2847`.
+    #
+    #   <note markdown="1"> `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
+    #
+    # @option params [Array<Float>] :filter_b_box
+    #   An optional parameter that limits the search results by returning only
+    #   suggestions within a specified bounding box.
+    #
+    #   If provided, this parameter must contain a total of four consecutive
+    #   numbers in two pairs. The first pair of numbers represents the X and Y
+    #   coordinates (longitude and latitude, respectively) of the southwest
+    #   corner of the bounding box; the second pair of numbers represents the
+    #   X and Y coordinates (longitude and latitude, respectively) of the
+    #   northeast corner of the bounding box.
+    #
+    #   For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
+    #   bounding box where the southwest corner has longitude `-12.7935` and
+    #   latitude `-37.4835`, and the northeast corner has longitude `-12.0684`
+    #   and latitude `-36.9542`.
+    #
+    #   <note markdown="1"> `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying
+    #   both options results in an error.
+    #
+    #    </note>
+    #
+    # @option params [Array<String>] :filter_countries
+    #   An optional parameter that limits the search results by returning only
+    #   suggestions within the provided list of countries.
+    #
+    #   * Use the [ISO 3166][1] 3-digit country code. For example, Australia
+    #     uses three upper-case characters: `AUS`.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-3166-country-codes.html
+    #
+    # @option params [required, String] :index_name
+    #   The name of the place index resource you want to use for the search.
+    #
+    # @option params [String] :language
+    #   The preferred language used to return results. The value must be a
+    #   valid [BCP 47][1] language tag, for example, `en` for English.
+    #
+    #   This setting affects the languages used in the results. It does not
+    #   change which results are returned. If the language is not specified,
+    #   or not supported for a particular result, the partner automatically
+    #   chooses a language for the result.
+    #
+    #   Used only when the partner selected is Here.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/search/bcp47
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter. The maximum number of results returned per
+    #   request.
+    #
+    #   The default: `5`
+    #
+    # @option params [required, String] :text
+    #   The free-form partial text to use to generate place suggestions. For
+    #   example, `eiffel tow`.
+    #
+    # @return [Types::SearchPlaceIndexForSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchPlaceIndexForSuggestionsResponse#results #results} => Array&lt;Types::SearchForSuggestionsResult&gt;
+    #   * {Types::SearchPlaceIndexForSuggestionsResponse#summary #summary} => Types::SearchPlaceIndexForSuggestionsSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_place_index_for_suggestions({
+    #     bias_position: [1.0],
+    #     filter_b_box: [1.0],
+    #     filter_countries: ["CountryCode"],
+    #     index_name: "ResourceName", # required
+    #     language: "LanguageTag",
+    #     max_results: 1,
+    #     text: "SyntheticSearchPlaceIndexForSuggestionsRequestString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].text #=> String
+    #   resp.summary.bias_position #=> Array
+    #   resp.summary.bias_position[0] #=> Float
+    #   resp.summary.data_source #=> String
+    #   resp.summary.filter_b_box #=> Array
+    #   resp.summary.filter_b_box[0] #=> Float
+    #   resp.summary.filter_countries #=> Array
+    #   resp.summary.filter_countries[0] #=> String
+    #   resp.summary.language #=> String
+    #   resp.summary.max_results #=> Integer
+    #   resp.summary.text #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/SearchPlaceIndexForSuggestions AWS API Documentation
+    #
+    # @overload search_place_index_for_suggestions(params = {})
+    # @param [Hash] params ({})
+    def search_place_index_for_suggestions(params = {}, options = {})
+      req = build_request(:search_place_index_for_suggestions, params)
+      req.send_request(options)
+    end
+
     # Geocodes free-form text, such as an address, name, city, or region to
     # allow you to search for Places or points of interest.
     #
@@ -3337,9 +3541,19 @@ module Aws::LocationService
     #     location updates are ignored. Location updates within this distance
     #     are neither evaluated against linked geofence collections, nor
     #     stored. This helps control costs by reducing the number of geofence
-    #     evaluations and device positions to retrieve. Distance-based
-    #     filtering can also reduce the jitter effect when displaying device
-    #     trajectory on a map.
+    #     evaluations and historical device positions to paginate through.
+    #     Distance-based filtering can also reduce the effects of GPS noise
+    #     when displaying device trajectories on a map.
+    #
+    #   * `AccuracyBased` - If the device has moved less than the measured
+    #     accuracy, location updates are ignored. For example, if two
+    #     consecutive updates from a device have a horizontal accuracy of 5 m
+    #     and 10 m, the second update is ignored if the device has moved less
+    #     than 15 m. Ignored location updates are neither evaluated against
+    #     linked geofence collections, nor stored. This helps educe the
+    #     effects of GPS noise when displaying device trajectories on a map,
+    #     and can help control costs by reducing the number of geofence
+    #     evaluations.
     #
     # @option params [String] :pricing_plan
     #   Updates the pricing plan for the tracker resource.
@@ -3422,7 +3636,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

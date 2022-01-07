@@ -10,10 +10,6 @@
 module Aws::NimbleStudio
   module Types
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass AcceptEulasRequest
     #   data as a hash:
     #
@@ -51,10 +47,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] eula_acceptances
     #   A collection of EULA acceptances.
     #   @return [Array<Types::EulaAcceptance>]
@@ -215,10 +207,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateLaunchProfileRequest
     #   data as a hash:
     #
@@ -233,6 +221,13 @@ module Aws::NimbleStudio
     #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #           max_session_length_in_minutes: 1,
     #           max_stopped_session_length_in_minutes: 1,
+    #           session_storage: {
+    #             mode: ["UPLOAD"], # required, accepts UPLOAD
+    #             root: {
+    #               linux: "StreamingSessionStorageRootPathLinux",
+    #               windows: "StreamingSessionStorageRootPathWindows",
+    #             },
+    #           },
     #           streaming_image_ids: ["StreamingImageId"], # required
     #         },
     #         studio_component_ids: ["String"], # required
@@ -305,10 +300,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile
     #   The launch profile.
     #   @return [Types::LaunchProfile]
@@ -321,10 +312,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateStreamingImageRequest
     #   data as a hash:
     #
@@ -384,10 +371,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] streaming_image
     #   The streaming image.
     #   @return [Types::StreamingImage]
@@ -400,10 +383,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateStreamingSessionRequest
     #   data as a hash:
     #
@@ -468,10 +447,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] session
     #   The session.
     #   @return [Types::StreamingSession]
@@ -484,10 +459,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateStreamingSessionStreamRequest
     #   data as a hash:
     #
@@ -531,10 +502,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] stream
     #   The stream.
     #   @return [Types::StreamingSessionStream]
@@ -547,10 +514,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateStudioComponentRequest
     #   data as a hash:
     #
@@ -688,10 +651,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass CreateStudioRequest
     #   data as a hash:
     #
@@ -762,10 +721,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio
     #   Information about a studio.
     #   @return [Types::Studio]
@@ -822,10 +777,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/DeleteLaunchProfileMemberResponse AWS API Documentation
     #
     class DeleteLaunchProfileMemberResponse < Aws::EmptyStructure; end
@@ -867,10 +818,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile
     #   The launch profile.
     #   @return [Types::LaunchProfile]
@@ -920,10 +867,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] streaming_image
     #   The streaming image.
     #   @return [Types::StreamingImage]
@@ -973,10 +916,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] session
     #   The session.
     #   @return [Types::StreamingSession]
@@ -1026,10 +965,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio_component
     #   Information about the studio component.
     #   @return [Types::StudioComponent]
@@ -1080,10 +1015,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/DeleteStudioMemberResponse AWS API Documentation
     #
     class DeleteStudioMemberResponse < Aws::EmptyStructure; end
@@ -1119,10 +1050,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio
     #   Information about a studio.
     #   @return [Types::Studio]
@@ -1225,10 +1152,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] eula
     #   The EULA.
     #   @return [Types::Eula]
@@ -1266,10 +1189,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile
     #   The launch profile.
     #   @return [Types::LaunchProfile]
@@ -1336,10 +1255,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile_initialization
     #   The launch profile initialization.
     #   @return [Types::LaunchProfileInitialization]
@@ -1384,10 +1299,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] member
     #   The member.
     #   @return [Types::LaunchProfileMembership]
@@ -1425,10 +1336,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile
     #   The launch profile.
     #   @return [Types::LaunchProfile]
@@ -1466,10 +1373,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] streaming_image
     #   The streaming image.
     #   @return [Types::StreamingImage]
@@ -1507,10 +1410,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] session
     #   The session.
     #   @return [Types::StreamingSession]
@@ -1554,10 +1453,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] stream
     #   The stream.
     #   @return [Types::StreamingSessionStream]
@@ -1595,10 +1490,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio_component
     #   Information about the studio component.
     #   @return [Types::StudioComponent]
@@ -1637,10 +1528,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] member
     #   The member.
     #   @return [Types::StudioMembership]
@@ -1672,10 +1559,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio
     #   Information about a studio.
     #   @return [Types::Studio]
@@ -1812,7 +1695,7 @@ module Aws::NimbleStudio
     end
 
     # A Launch Profile Initialization contains information required for a
-    # workstation or server to connect to a launch profile
+    # workstation or server to connect to a launch profile.
     #
     # This includes scripts, endpoints, security groups, subnets, and other
     # configuration.
@@ -1870,6 +1753,10 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # The Launch Profile Initialization Active Directory contains
+    # information required for the launch profile to connect to the Active
+    # Directory.
+    #
     # @!attribute [rw] computer_attributes
     #   A collection of custom attributes for an Active Directory computer.
     #   @return [Array<Types::ActiveDirectoryComputerAttribute>]
@@ -1913,6 +1800,9 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # The Launch Profile Initialization Script is used when start streaming
+    # session runs.
+    #
     # @!attribute [rw] script
     #   The initialization script.
     #   @return [String]
@@ -1935,6 +1825,27 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # Launch profile membership enables your studio admins to delegate
+    # launch profile access to other studio users in the Nimble Studio
+    # portal without needing to write or maintain complex IAM policies. A
+    # launch profile member is a user association from your studio identity
+    # source who is granted permissions to a launch profile.
+    #
+    # A launch profile member (type USER) provides the following permissions
+    # to that launch profile:
+    #
+    # * GetLaunchProfile
+    #
+    # * GetLaunchProfileInitialization
+    #
+    # * GetLaunchProfileMembers
+    #
+    # * GetLaunchProfileMember
+    #
+    # * CreateStreamingSession
+    #
+    # * GetLaunchProfileDetails
+    #
     # @!attribute [rw] identity_store_id
     #   The ID of the identity store.
     #   @return [String]
@@ -2060,10 +1971,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] eulas
     #   A collection of EULA resources.
     #   @return [Array<Types::Eula>]
@@ -2119,10 +2026,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] members
     #   A list of members.
     #   @return [Array<Types::LaunchProfileMembership>]
@@ -2185,10 +2088,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profiles
     #   A collection of launch profiles.
     #   @return [Array<Types::LaunchProfile>]
@@ -2238,10 +2137,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or null if there are no more
     #   results.
@@ -2303,10 +2198,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or null if there are no more
     #   results.
@@ -2370,10 +2261,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or null if there are no more
     #   results.
@@ -2423,12 +2310,8 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] members
-    #   A list of members.
+    #   A list of admin members.
     #   @return [Array<Types::StudioMembership>]
     #
     # @!attribute [rw] next_token
@@ -2464,10 +2347,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] next_token
     #   The token for the next set of results, or null if there are no more
     #   results.
@@ -2506,10 +2385,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] tags
     #   A collection of labels, in the form of key:value pairs, that apply
     #   to this resource.
@@ -2523,6 +2398,8 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # A new member that is added to a launch profile.
+    #
     # @note When making an API call, you may pass NewLaunchProfileMember
     #   data as a hash:
     #
@@ -2548,6 +2425,8 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # A new studio user's membership.
+    #
     # @note When making an API call, you may pass NewStudioMember
     #   data as a hash:
     #
@@ -2573,10 +2452,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass PutLaunchProfileMembersRequest
     #   data as a hash:
     #
@@ -2635,10 +2510,6 @@ module Aws::NimbleStudio
     #
     class PutLaunchProfileMembersResponse < Aws::EmptyStructure; end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass PutStudioMembersRequest
     #   data as a hash:
     #
@@ -2687,10 +2558,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/PutStudioMembersResponse AWS API Documentation
     #
     class PutStudioMembersResponse < Aws::EmptyStructure; end
@@ -2905,10 +2772,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio
     #   Information about a studio.
     #   @return [Types::Studio]
@@ -3009,6 +2872,10 @@ module Aws::NimbleStudio
     #   automatically be stopped by AWS (instead of terminated).
     #   @return [Integer]
     #
+    # @!attribute [rw] session_storage
+    #   (Optional) The upload storage for a streaming session.
+    #   @return [Types::StreamConfigurationSessionStorage]
+    #
     # @!attribute [rw] streaming_image_ids
     #   The streaming images that users can select from when launching a
     #   streaming session with this launch profile.
@@ -3021,6 +2888,7 @@ module Aws::NimbleStudio
       :ec2_instance_types,
       :max_session_length_in_minutes,
       :max_stopped_session_length_in_minutes,
+      :session_storage,
       :streaming_image_ids)
       SENSITIVE = []
       include Aws::Structure
@@ -3037,6 +2905,13 @@ module Aws::NimbleStudio
     #         ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #         max_session_length_in_minutes: 1,
     #         max_stopped_session_length_in_minutes: 1,
+    #         session_storage: {
+    #           mode: ["UPLOAD"], # required, accepts UPLOAD
+    #           root: {
+    #             linux: "StreamingSessionStorageRootPathLinux",
+    #             windows: "StreamingSessionStorageRootPathWindows",
+    #           },
+    #         },
     #         streaming_image_ids: ["StreamingImageId"], # required
     #       }
     #
@@ -3059,12 +2934,27 @@ module Aws::NimbleStudio
     #   @return [Integer]
     #
     # @!attribute [rw] max_stopped_session_length_in_minutes
-    #   The length of time, in minutes, that a streaming session can be
-    #   active before it is stopped or terminated. After this point, Nimble
-    #   Studio automatically terminates or stops the session. The default
-    #   length of time is 690 minutes, and the maximum length of time is 30
-    #   days.
+    #   Integer that determines if you can start and stop your sessions and
+    #   how long a session can stay in the STOPPED state. The default value
+    #   is 0. The maximum value is 5760.
+    #
+    #   If the value is missing or set to 0, your sessions can’t be stopped.
+    #   If you then call StopStreamingSession, the session fails. If the
+    #   time that a session stays in the READY state exceeds the
+    #   maxSessionLengthInMinutes value, the session will automatically be
+    #   terminated by AWS (instead of stopped).
+    #
+    #   If the value is set to a positive number, the session can be
+    #   stopped. You can call StopStreamingSession to stop sessions in the
+    #   READY state. If the time that a session stays in the READY state
+    #   exceeds the maxSessionLengthInMinutes value, the session will
+    #   automatically be stopped by AWS (instead of terminated).
     #   @return [Integer]
+    #
+    # @!attribute [rw] session_storage
+    #   (Optional) The upload storage for a streaming workstation that is
+    #   created using this launch profile.
+    #   @return [Types::StreamConfigurationSessionStorage]
     #
     # @!attribute [rw] streaming_image_ids
     #   The streaming images that users can select from when launching a
@@ -3078,7 +2968,40 @@ module Aws::NimbleStudio
       :ec2_instance_types,
       :max_session_length_in_minutes,
       :max_stopped_session_length_in_minutes,
+      :session_storage,
       :streaming_image_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a streaming session’s upload storage.
+    #
+    # @note When making an API call, you may pass StreamConfigurationSessionStorage
+    #   data as a hash:
+    #
+    #       {
+    #         mode: ["UPLOAD"], # required, accepts UPLOAD
+    #         root: {
+    #           linux: "StreamingSessionStorageRootPathLinux",
+    #           windows: "StreamingSessionStorageRootPathWindows",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] mode
+    #   Allows artists to upload files to their workstations. The only valid
+    #   option is `UPLOAD`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] root
+    #   The configuration for the upload storage root of the streaming
+    #   session.
+    #   @return [Types::StreamingSessionStorageRoot]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamConfigurationSessionStorage AWS API Documentation
+    #
+    class StreamConfigurationSessionStorage < Struct.new(
+      :mode,
+      :root)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3305,6 +3228,36 @@ module Aws::NimbleStudio
       :updated_at,
       :updated_by)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The upload storage root location (folder) on streaming workstations
+    # where files are uploaded.
+    #
+    # @note When making an API call, you may pass StreamingSessionStorageRoot
+    #   data as a hash:
+    #
+    #       {
+    #         linux: "StreamingSessionStorageRootPathLinux",
+    #         windows: "StreamingSessionStorageRootPathWindows",
+    #       }
+    #
+    # @!attribute [rw] linux
+    #   The folder path in Linux workstations where files are uploaded. The
+    #   default path is `$HOME/Downloads`.
+    #   @return [String]
+    #
+    # @!attribute [rw] windows
+    #   The folder path in Windows workstations where files are uploaded.
+    #   The default path is `%HOMEPATH%\Downloads`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamingSessionStorageRoot AWS API Documentation
+    #
+    class StreamingSessionStorageRoot < Struct.new(
+      :linux,
+      :windows)
+      SENSITIVE = [:linux, :windows]
       include Aws::Structure
     end
 
@@ -3679,6 +3632,8 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
+    # The studio component's summary.
+    #
     # @!attribute [rw] created_at
     #   The Unix epoch timestamp in seconds for when the resource was
     #   created.
@@ -3951,10 +3906,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass UpdateLaunchProfileRequest
     #   data as a hash:
     #
@@ -3969,6 +3920,13 @@ module Aws::NimbleStudio
     #           ec2_instance_types: ["g4dn.xlarge"], # required, accepts g4dn.xlarge, g4dn.2xlarge, g4dn.4xlarge, g4dn.8xlarge, g4dn.12xlarge, g4dn.16xlarge
     #           max_session_length_in_minutes: 1,
     #           max_stopped_session_length_in_minutes: 1,
+    #           session_storage: {
+    #             mode: ["UPLOAD"], # required, accepts UPLOAD
+    #             root: {
+    #               linux: "StreamingSessionStorageRootPathLinux",
+    #               windows: "StreamingSessionStorageRootPathWindows",
+    #             },
+    #           },
     #           streaming_image_ids: ["StreamingImageId"], # required
     #         },
     #         studio_component_ids: ["String"],
@@ -4030,10 +3988,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] launch_profile
     #   The launch profile.
     #   @return [Types::LaunchProfile]
@@ -4046,10 +4000,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass UpdateStreamingImageRequest
     #   data as a hash:
     #
@@ -4100,6 +4050,18 @@ module Aws::NimbleStudio
     end
 
     # @!attribute [rw] streaming_image
+    #   Represents a streaming image resource.
+    #
+    #   Streaming images are used by studio users to select which operating
+    #   system and software they want to use in a Nimble Studio streaming
+    #   session.
+    #
+    #   Amazon provides a number of streaming images that include popular
+    #   3rd-party software.
+    #
+    #   You can create your own streaming images using an Amazon Elastic
+    #   Compute Cloud (Amazon EC2) machine image that you create for this
+    #   purpose. You can also include software that your users require.
     #   @return [Types::StreamingImage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/UpdateStreamingImageResponse AWS API Documentation
@@ -4110,10 +4072,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass UpdateStudioComponentRequest
     #   data as a hash:
     #
@@ -4236,10 +4194,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio_component
     #   Information about the studio component.
     #   @return [Types::StudioComponent]
@@ -4252,10 +4206,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @note When making an API call, you may pass UpdateStudioRequest
     #   data as a hash:
     #
@@ -4307,10 +4257,6 @@ module Aws::NimbleStudio
       include Aws::Structure
     end
 
-    # <zonbook />
-    #
-    # <xhtml />
-    #
     # @!attribute [rw] studio
     #   Information about a studio.
     #   @return [Types::Studio]

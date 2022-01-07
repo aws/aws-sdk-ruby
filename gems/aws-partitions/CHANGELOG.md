@@ -1,6 +1,71 @@
 Unreleased Changes
 ------------------
 
+1.546.0 (2022-01-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.545.0 (2022-01-05)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.544.0 (2022-01-03)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.543.0 (2021-12-21)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.542.0 (2021-12-20)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.541.0 (2021-12-13)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.540.0 (2021-12-08)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.539.0 (2021-12-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AmplifyUIBuilder`.
+
+1.538.0 (2021-12-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.537.0 (2021-11-30)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::WorkSpacesWeb`.
+
+* Feature - Added support for enumerating regions for `Aws::IoTTwinMaker`.
+
+* Feature - Added support for enumerating regions for `Aws::BackupGateway`.
+
+1.536.0 (2021-11-29)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::RecycleBin`.
+
+* Feature - Added support for enumerating regions for `Aws::Inspector2`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchRUM`.
+
+* Feature - Added support for enumerating regions for `Aws::CloudWatchEvidently`.
+
 1.535.0 (2021-11-29)
 ------------------
 

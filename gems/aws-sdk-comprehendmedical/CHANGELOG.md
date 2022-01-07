@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.33.0 (2021-12-08)
+------------------
+
+* Feature - This release adds a new set of APIs (synchronous and batch) to support the SNOMED-CT ontology.
+
+1.32.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.31.0 (2021-11-04)
 ------------------
 

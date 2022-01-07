@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sms/customizations'
 # @!group service
 module Aws::SMS
 
-  GEM_VERSION = '1.34.0'
+  GEM_VERSION = '1.37.0'
 
 end

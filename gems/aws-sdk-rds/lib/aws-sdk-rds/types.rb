@@ -1700,8 +1700,9 @@ module Aws::RDS
     # @!attribute [rw] engine_version
     #   The name of your CEV. The name format is `19.customized_string `.
     #   For example, a valid name is `19.my_cev1`. This setting is required
-    #   for RDS Custom, but optional for Amazon RDS. The combination of
-    #   `Engine` and `EngineVersion` is unique per customer per Region.
+    #   for RDS Custom for Oracle, but optional for Amazon RDS. The
+    #   combination of `Engine` and `EngineVersion` is unique per customer
+    #   per Region.
     #   @return [String]
     #
     # @!attribute [rw] database_installation_files_s3_bucket_name
@@ -2027,7 +2028,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -2048,7 +2050,8 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL
-    #   5.7-compatible Aurora, use the following command:
+    #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
+    #   command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -2522,11 +2525,11 @@ module Aws::RDS
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, also include a value for the `Iops` parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     #   @return [String]
@@ -2761,7 +2764,7 @@ module Aws::RDS
     #
     #   **Aurora MySQL**
     #
-    #   Example: `aurora5.6`, `aurora-mysql5.7`
+    #   Example: `aurora5.6`, `aurora-mysql5.7`, `aurora-mysql8.0`
     #
     #   **Aurora PostgreSQL**
     #
@@ -2796,7 +2799,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -3083,7 +3087,7 @@ module Aws::RDS
     #
     #   ^
     #
-    #   **Amazon RDS Custom**
+    #   **Amazon RDS Custom for Oracle**
     #
     #   The Oracle System ID (SID) of the created RDS Custom DB instance. If
     #   you don't specify a value, the default value is `ORCL`.
@@ -3097,6 +3101,10 @@ module Aws::RDS
     #   * It must contain a letter.
     #
     #   * It can't be a word reserved by the database engine.
+    #
+    #   **Amazon RDS Custom for SQL Server**
+    #
+    #   Not applicable. Must be null.
     #
     #   **SQL Server**
     #
@@ -3165,10 +3173,12 @@ module Aws::RDS
     #   following:
     #
     #   * General Purpose (SSD) storage (gp2): Must be an integer from 40 to
-    #     65536.
+    #     65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #     Server.
     #
     #   * Provisioned IOPS storage (io1): Must be an integer from 40 to
-    #     65536.
+    #     65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL
+    #     Server.
     #
     #   **MySQL**
     #
@@ -3229,21 +3239,21 @@ module Aws::RDS
     #
     #   * General Purpose (SSD) storage (gp2):
     #
-    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #     * Enterprise and Standard editions: Must be an integer from 20 to
     #       16384.
     #
     #     * Web and Express editions: Must be an integer from 20 to 16384.
     #
     #   * Provisioned IOPS storage (io1):
     #
-    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #     * Enterprise and Standard editions: Must be an integer from 100 to
     #       16384.
     #
     #     * Web and Express editions: Must be an integer from 100 to 16384.
     #
     #   * Magnetic storage (standard):
     #
-    #     * Enterprise and Standard editions: Must be an integer from 200 to
+    #     * Enterprise and Standard editions: Must be an integer from 20 to
     #       1024.
     #
     #     * Web and Express editions: Must be an integer from 20 to 1024.
@@ -3271,11 +3281,18 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
-    #   * `custom-oracle-ee (for RDS Custom instances)`
+    #   * `custom-oracle-ee (for RDS Custom for Oracle instances)`
+    #
+    #   * `custom-sqlserver-ee (for RDS Custom for SQL Server instances)`
+    #
+    #   * `custom-sqlserver-se (for RDS Custom for SQL Server instances)`
+    #
+    #   * `custom-sqlserver-web (for RDS Custom for SQL Server instances)`
     #
     #   * `mariadb`
     #
@@ -3375,6 +3392,10 @@ module Aws::RDS
     #   information on Amazon Web Services Regions and Availability Zones,
     #   see [Regions and Availability Zones][1].
     #
+    #   **Amazon Aurora**
+    #
+    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's Amazon Web Services Region.
     #
@@ -3460,7 +3481,7 @@ module Aws::RDS
     #
     #   * Can't be set to 0 if the DB instance is a source to read replicas
     #
-    #   * Can't be set to 0 or 35 for an RDS Custom DB instance
+    #   * Can't be set to 0 or 35 for an RDS Custom for Oracle DB instance
     #   @return [Integer]
     #
     # @!attribute [rw] preferred_backup_window
@@ -3564,47 +3585,53 @@ module Aws::RDS
     #   Not applicable. The version number of the database engine to be used
     #   by the DB instance is managed by the DB cluster.
     #
-    #   **Amazon RDS Custom**
+    #   **Amazon RDS Custom for Oracle**
     #
     #   A custom engine version (CEV) that you have previously created. This
-    #   setting is required for RDS Custom. The CEV name has the following
-    #   format: `19.customized_string `. An example identifier is
-    #   `19.my_cev1`. For more information, see [ Creating an RDS Custom DB
-    #   instance][1] in the *Amazon RDS User Guide.*.
+    #   setting is required for RDS Custom for Oracle. The CEV name has the
+    #   following format: `19.customized_string `. An example identifier is
+    #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
+    #   Oracle DB instance][1] in the *Amazon RDS User Guide.*.
+    #
+    #   **Amazon RDS Custom for SQL Server**
+    #
+    #   See [RDS Custom for SQL Server general requirements][2] in the
+    #   *Amazon RDS User Guide.*
     #
     #   **MariaDB**
     #
-    #   For information, see [MariaDB on Amazon RDS Versions][2] in the
+    #   For information, see [MariaDB on Amazon RDS Versions][3] in the
     #   *Amazon RDS User Guide.*
     #
     #   **Microsoft SQL Server**
     #
     #   For information, see [Microsoft SQL Server Versions on Amazon
-    #   RDS][3] in the *Amazon RDS User Guide.*
+    #   RDS][4] in the *Amazon RDS User Guide.*
     #
     #   **MySQL**
     #
-    #   For information, see [MySQL on Amazon RDS Versions][4] in the
+    #   For information, see [MySQL on Amazon RDS Versions][5] in the
     #   *Amazon RDS User Guide.*
     #
     #   **Oracle**
     #
-    #   For information, see [Oracle Database Engine Release Notes][5] in
+    #   For information, see [Oracle Database Engine Release Notes][6] in
     #   the *Amazon RDS User Guide.*
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][6] in the *Amazon RDS User Guide.*
+    #   extensions][7] in the *Amazon RDS User Guide.*
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
-    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
-    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
-    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
+    #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
+    #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
+    #   [6]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html
+    #   [7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
     #   @return [String]
     #
     # @!attribute [rw] auto_minor_version_upgrade
@@ -3748,9 +3775,9 @@ module Aws::RDS
     #   A value that indicates whether the DB instance is encrypted. By
     #   default, it isn't encrypted.
     #
-    #   For RDS Custom Oracle instances, either set this parameter to `true`
-    #   or leave it unset. If you set this parameter to `false`, RDS reports
-    #   an error.
+    #   For RDS Custom instances, either set this parameter to `true` or
+    #   leave it unset. If you set this parameter to `false`, RDS reports an
+    #   error.
     #
     #   **Amazon Aurora**
     #
@@ -3781,11 +3808,11 @@ module Aws::RDS
     #
     #   **Amazon RDS Custom**
     #
-    #   A KMS key is required for RDS Custom Oracle instances. For most RDS
+    #   A KMS key is required for RDS Custom instances. For most RDS
     #   engines, if you leave this parameter empty while enabling
     #   `StorageEncrypted`, the engine uses the default KMS key. However,
-    #   RDS Custom for Oracle doesn't use the default key when this
-    #   parameter is empty. You must explicitly specify a key.
+    #   RDS Custom doesn't use the default key when this parameter is
+    #   empty. You must explicitly specify a key.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -4851,7 +4878,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -6096,7 +6124,7 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] storage_type
-    #   The storage type associated with DB instance.
+    #   The storage type associated with the DB cluster.
     #
     #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [String]
@@ -6790,7 +6818,14 @@ module Aws::RDS
     #   @return [Integer]
     #
     # @!attribute [rw] status
-    #   Specifies the status of this DB cluster snapshot.
+    #   Specifies the status of this DB cluster snapshot. Valid statuses are
+    #   the following:
+    #
+    #   * `available`
+    #
+    #   * `copying`
+    #
+    #   * `creating`
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -10676,7 +10711,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -12583,7 +12619,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -14633,9 +14670,9 @@ module Aws::RDS
     #
     # @!attribute [rw] engine_version
     #   The custom engine version (CEV) that you want to modify. This option
-    #   is required for RDS Custom, but optional for Amazon RDS. The
-    #   combination of `Engine` and `EngineVersion` is unique per customer
-    #   per Amazon Web Services Region.
+    #   is required for RDS Custom for Oracle, but optional for Amazon RDS.
+    #   The combination of `Engine` and `EngineVersion` is unique per
+    #   customer per Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -14973,7 +15010,8 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL
-    #   5.7-compatible Aurora, use the following command:
+    #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
+    #   command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -15145,12 +15183,11 @@ module Aws::RDS
     # @!attribute [rw] storage_type
     #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     #   @return [String]
@@ -15569,7 +15606,7 @@ module Aws::RDS
     #   change. The change is applied during the next maintenance window,
     #   unless `ApplyImmediately` is enabled for this request.
     #
-    #   This setting doesn't apply to RDS Custom.
+    #   This setting doesn't apply to RDS Custom for Oracle.
     #
     #   Default: Uses existing setting
     #
@@ -15645,9 +15682,9 @@ module Aws::RDS
     #   can cause an outage and are applied on the next call to
     #   RebootDBInstance, or the next failure reboot. Review the table of
     #   parameters in [Modifying a DB Instance][1] in the *Amazon RDS User
-    #   Guide.* to see the impact of enabling or disabling
-    #   `ApplyImmediately` for each modified parameter and to determine when
-    #   the changes are applied.
+    #   Guide* to see the impact of enabling or disabling `ApplyImmediately`
+    #   for each modified parameter and to determine when the changes are
+    #   applied.
     #
     #
     #
@@ -15749,7 +15786,7 @@ module Aws::RDS
     #
     #   * It must be a value from 0 to 35. It can't be set to 0 if the DB
     #     instance is a source to read replicas. It can't be set to 0 or 35
-    #     for an RDS Custom DB instance.
+    #     for an RDS Custom for Oracle DB instance.
     #
     #   * It can be specified for a MySQL read replica only if the source is
     #     running MySQL 5.6 or later.
@@ -15842,8 +15879,8 @@ module Aws::RDS
     #   is lower. For information about valid engine versions, see
     #   `CreateDBInstance`, or call `DescribeDBEngineVersions`.
     #
-    #   In RDS Custom, this parameter is supported for read replicas only if
-    #   they are in the `PATCH_DB_FAILURE` lifecycle.
+    #   In RDS Custom for Oracle, this parameter is supported for read
+    #   replicas only if they are in the `PATCH_DB_FAILURE` lifecycle.
     #   @return [String]
     #
     # @!attribute [rw] allow_major_version_upgrade
@@ -16124,8 +16161,6 @@ module Aws::RDS
     #   Changes to the `PubliclyAccessible` parameter are applied
     #   immediately regardless of the value of the `ApplyImmediately`
     #   parameter.
-    #
-    #   This setting doesn't apply to RDS Custom.
     #   @return [Boolean]
     #
     # @!attribute [rw] monitoring_role_arn
@@ -16484,25 +16519,35 @@ module Aws::RDS
     # @!attribute [rw] parameters
     #   An array of parameter names, values, and the application methods for
     #   the parameter update. At least one parameter name, value, and
-    #   application method method must be supplied; later arguments are
-    #   optional. A maximum of 20 parameters can be modified in a single
-    #   request.
+    #   application method must be supplied; later arguments are optional. A
+    #   maximum of 20 parameters can be modified in a single request.
     #
     #   Valid Values (for the application method): `immediate |
     #   pending-reboot`
     #
-    #   <note markdown="1"> You can use the `immediate` value with dynamic parameters only. You
+    #   You can use the `immediate` value with dynamic parameters only. You
     #   can use the `pending-reboot` value for both dynamic and static
     #   parameters.
     #
-    #    When the application method is `immediate`, changes to dynamic
+    #   When the application method is `immediate`, changes to dynamic
     #   parameters are applied immediately to the DB instances associated
-    #   with the parameter group. When the application method is
-    #   `pending-reboot`, changes to dynamic and static parameters are
-    #   applied after a reboot without failover to the DB instances
-    #   associated with the parameter group.
+    #   with the parameter group.
+    #
+    #   When the application method is `pending-reboot`, changes to dynamic
+    #   and static parameters are applied after a reboot without failover to
+    #   the DB instances associated with the parameter group.
+    #
+    #   <note markdown="1"> You can't use `pending-reboot` with dynamic parameters on RDS for
+    #   SQL Server DB instances. Use `immediate`.
     #
     #    </note>
+    #
+    #   For more information on modifying DB parameters, see [Working with
+    #   DB parameter groups][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
     #   @return [Array<Types::Parameter>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBParameterGroupMessage AWS API Documentation
@@ -17061,7 +17106,8 @@ module Aws::RDS
     #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
     #
     #   To list all of the available engine versions for `aurora-mysql` (for
-    #   MySQL 5.7-compatible Aurora), use the following command:
+    #   MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the
+    #   following command:
     #
     #   `` aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' ``
@@ -19453,8 +19499,8 @@ module Aws::RDS
     #   The name of the database engine to be used for this DB cluster.
     #
     #   Valid Values: `aurora` (for MySQL 5.6-compatible Aurora),
-    #   `aurora-mysql` (for MySQL 5.7-compatible Aurora), and
-    #   `aurora-postgresql`
+    #   `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #   Aurora), and `aurora-postgresql`
     #   @return [String]
     #
     # @!attribute [rw] engine_version
@@ -19467,7 +19513,8 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for `aurora-mysql` (for
-    #   MySQL 5.7-compatible Aurora), use the following command:
+    #   MySQL 5.7-compatible and MySQL 8.0-compatible Aurora), use the
+    #   following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -19481,7 +19528,7 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   Example: `5.6.10a`, `5.6.mysql_aurora.1.19.2`, `5.7.12`,
-    #   `5.7.mysql_aurora.2.04.5`
+    #   `5.7.mysql_aurora.2.04.5`, `8.0.mysql_aurora.3.01.0`
     #
     #   **Aurora PostgreSQL**
     #
@@ -19892,7 +19939,8 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL
-    #   5.7-compatible Aurora, use the following command:
+    #   5.7-compatible and MySQL 8.0-compatible Aurora, use the following
+    #   command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -20164,12 +20212,11 @@ module Aws::RDS
     #   Specifies the storage type to be associated with the each DB
     #   instance in the Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20649,11 +20696,11 @@ module Aws::RDS
     #   Specifies the storage type to be associated with the each DB
     #   instance in the Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, also include a value for the `Iops` parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     #   @return [String]

@@ -54,6 +54,8 @@ module Aws::NetworkFirewall
     DescribeLoggingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeLoggingConfigurationResponse')
     DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
     DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
+    DescribeRuleGroupMetadataRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupMetadataRequest')
+    DescribeRuleGroupMetadataResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupMetadataResponse')
     DescribeRuleGroupRequest = Shapes::StructureShape.new(name: 'DescribeRuleGroupRequest')
     DescribeRuleGroupResponse = Shapes::StructureShape.new(name: 'DescribeRuleGroupResponse')
     Description = Shapes::StringShape.new(name: 'Description')
@@ -106,6 +108,7 @@ module Aws::NetworkFirewall
     LoggingConfiguration = Shapes::StructureShape.new(name: 'LoggingConfiguration')
     MatchAttributes = Shapes::StructureShape.new(name: 'MatchAttributes')
     NumberOfAssociations = Shapes::IntegerShape.new(name: 'NumberOfAssociations')
+    OverrideAction = Shapes::StringShape.new(name: 'OverrideAction')
     PaginationMaxResults = Shapes::IntegerShape.new(name: 'PaginationMaxResults')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PerObjectStatus = Shapes::StructureShape.new(name: 'PerObjectStatus')
@@ -125,6 +128,7 @@ module Aws::NetworkFirewall
     PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
+    ResourceManagedStatus = Shapes::StringShape.new(name: 'ResourceManagedStatus')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceOwnerCheckException = Shapes::StructureShape.new(name: 'ResourceOwnerCheckException')
@@ -153,6 +157,7 @@ module Aws::NetworkFirewall
     StatefulEngineOptions = Shapes::StructureShape.new(name: 'StatefulEngineOptions')
     StatefulRule = Shapes::StructureShape.new(name: 'StatefulRule')
     StatefulRuleDirection = Shapes::StringShape.new(name: 'StatefulRuleDirection')
+    StatefulRuleGroupOverride = Shapes::StructureShape.new(name: 'StatefulRuleGroupOverride')
     StatefulRuleGroupReference = Shapes::StructureShape.new(name: 'StatefulRuleGroupReference')
     StatefulRuleGroupReferences = Shapes::ListShape.new(name: 'StatefulRuleGroupReferences')
     StatefulRuleOptions = Shapes::StructureShape.new(name: 'StatefulRuleOptions')
@@ -351,6 +356,19 @@ module Aws::NetworkFirewall
     DescribeResourcePolicyResponse.add_member(:policy, Shapes::ShapeRef.new(shape: PolicyString, location_name: "Policy"))
     DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
 
+    DescribeRuleGroupMetadataRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RuleGroupName"))
+    DescribeRuleGroupMetadataRequest.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleGroupArn"))
+    DescribeRuleGroupMetadataRequest.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
+    DescribeRuleGroupMetadataRequest.struct_class = Types::DescribeRuleGroupMetadataRequest
+
+    DescribeRuleGroupMetadataResponse.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "RuleGroupArn"))
+    DescribeRuleGroupMetadataResponse.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "RuleGroupName"))
+    DescribeRuleGroupMetadataResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeRuleGroupMetadataResponse.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
+    DescribeRuleGroupMetadataResponse.add_member(:capacity, Shapes::ShapeRef.new(shape: RuleCapacity, location_name: "Capacity"))
+    DescribeRuleGroupMetadataResponse.add_member(:stateful_rule_options, Shapes::ShapeRef.new(shape: StatefulRuleOptions, location_name: "StatefulRuleOptions"))
+    DescribeRuleGroupMetadataResponse.struct_class = Types::DescribeRuleGroupMetadataResponse
+
     DescribeRuleGroupRequest.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "RuleGroupName"))
     DescribeRuleGroupRequest.add_member(:rule_group_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RuleGroupArn"))
     DescribeRuleGroupRequest.add_member(:type, Shapes::ShapeRef.new(shape: RuleGroupType, location_name: "Type"))
@@ -484,6 +502,7 @@ module Aws::NetworkFirewall
 
     ListRuleGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
     ListRuleGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, location_name: "MaxResults"))
+    ListRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: ResourceManagedStatus, location_name: "Scope"))
     ListRuleGroupsRequest.struct_class = Types::ListRuleGroupsRequest
 
     ListRuleGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -618,8 +637,12 @@ module Aws::NetworkFirewall
     StatefulRule.add_member(:rule_options, Shapes::ShapeRef.new(shape: RuleOptions, required: true, location_name: "RuleOptions"))
     StatefulRule.struct_class = Types::StatefulRule
 
+    StatefulRuleGroupOverride.add_member(:action, Shapes::ShapeRef.new(shape: OverrideAction, location_name: "Action"))
+    StatefulRuleGroupOverride.struct_class = Types::StatefulRuleGroupOverride
+
     StatefulRuleGroupReference.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     StatefulRuleGroupReference.add_member(:priority, Shapes::ShapeRef.new(shape: Priority, location_name: "Priority", metadata: {"box"=>true}))
+    StatefulRuleGroupReference.add_member(:override, Shapes::ShapeRef.new(shape: StatefulRuleGroupOverride, location_name: "Override"))
     StatefulRuleGroupReference.struct_class = Types::StatefulRuleGroupReference
 
     StatefulRuleGroupReferences.member = Shapes::ShapeRef.new(shape: StatefulRuleGroupReference)
@@ -988,6 +1011,18 @@ module Aws::NetworkFirewall
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:describe_rule_group_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeRuleGroupMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeRuleGroupMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeRuleGroupMetadataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
       api.add_operation(:disassociate_subnets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisassociateSubnets"
         o.http_method = "POST"
@@ -1059,6 +1094,8 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o[:pager] = Aws::Pager.new(
@@ -1088,6 +1125,8 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)
@@ -1098,6 +1137,8 @@ module Aws::NetworkFirewall
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)

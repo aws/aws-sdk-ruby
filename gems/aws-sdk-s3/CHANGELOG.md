@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.111.1 (2022-01-06)
+------------------
+
+* Issue - Don't fail small files in `upload_file` when `:thread_count` is set. (#2628)
+
+1.111.0 (2022-01-04)
+------------------
+
+* Feature - Minor doc-based updates based on feedback bugs received.
+
+1.110.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2021-11-30)
+------------------
+
+* Feature - Introduce Amazon S3 Glacier Instant Retrieval storage class and a new setting in S3 Object Ownership to disable ACLs for bucket and the objects in it.
+
+1.108.0 (2021-11-29)
+------------------
+
+* Feature - Amazon S3 Event Notifications adds Amazon EventBridge as a destination and supports additional event types. The PutBucketNotificationConfiguration API can now skip validation of Amazon SQS, Amazon SNS and AWS Lambda destinations.
+
 1.107.0 (2021-11-23)
 ------------------
 

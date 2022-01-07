@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-01-05)
+------------------
+
+* Feature - Multiple Doc-only updates for Amazon QuickSight.
+
+1.60.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.58.0 (2021-11-22)
 ------------------
 

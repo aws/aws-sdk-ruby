@@ -102,6 +102,8 @@ module Aws::LookoutMetrics
     HistoricalDataPath = Shapes::StringShape.new(name: 'HistoricalDataPath')
     HistoricalDataPathList = Shapes::ListShape.new(name: 'HistoricalDataPathList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
+    InterMetricImpactDetails = Shapes::StructureShape.new(name: 'InterMetricImpactDetails')
+    InterMetricImpactList = Shapes::ListShape.new(name: 'InterMetricImpactList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ItemizedMetricStats = Shapes::StructureShape.new(name: 'ItemizedMetricStats')
     ItemizedMetricStatsList = Shapes::ListShape.new(name: 'ItemizedMetricStatsList')
@@ -113,6 +115,8 @@ module Aws::LookoutMetrics
     ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListAnomalyDetectorsRequest = Shapes::StructureShape.new(name: 'ListAnomalyDetectorsRequest')
     ListAnomalyDetectorsResponse = Shapes::StructureShape.new(name: 'ListAnomalyDetectorsResponse')
+    ListAnomalyGroupRelatedMetricsRequest = Shapes::StructureShape.new(name: 'ListAnomalyGroupRelatedMetricsRequest')
+    ListAnomalyGroupRelatedMetricsResponse = Shapes::StructureShape.new(name: 'ListAnomalyGroupRelatedMetricsResponse')
     ListAnomalyGroupSummariesRequest = Shapes::StructureShape.new(name: 'ListAnomalyGroupSummariesRequest')
     ListAnomalyGroupSummariesResponse = Shapes::StructureShape.new(name: 'ListAnomalyGroupSummariesResponse')
     ListAnomalyGroupTimeSeriesRequest = Shapes::StructureShape.new(name: 'ListAnomalyGroupTimeSeriesRequest')
@@ -124,6 +128,7 @@ module Aws::LookoutMetrics
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Message = Shapes::StringShape.new(name: 'Message')
     Metric = Shapes::StructureShape.new(name: 'Metric')
+    MetricChangePercentage = Shapes::FloatShape.new(name: 'MetricChangePercentage')
     MetricLevelImpact = Shapes::StructureShape.new(name: 'MetricLevelImpact')
     MetricLevelImpactList = Shapes::ListShape.new(name: 'MetricLevelImpactList')
     MetricList = Shapes::ListShape.new(name: 'MetricList')
@@ -149,6 +154,7 @@ module Aws::LookoutMetrics
     RedshiftClusterIdentifier = Shapes::StringShape.new(name: 'RedshiftClusterIdentifier')
     RedshiftDatabaseName = Shapes::StringShape.new(name: 'RedshiftDatabaseName')
     RedshiftSourceConfig = Shapes::StructureShape.new(name: 'RedshiftSourceConfig')
+    RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
@@ -467,6 +473,14 @@ module Aws::LookoutMetrics
 
     HistoricalDataPathList.member = Shapes::ShapeRef.new(shape: HistoricalDataPath)
 
+    InterMetricImpactDetails.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
+    InterMetricImpactDetails.add_member(:anomaly_group_id, Shapes::ShapeRef.new(shape: UUID, location_name: "AnomalyGroupId"))
+    InterMetricImpactDetails.add_member(:relationship_type, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "RelationshipType"))
+    InterMetricImpactDetails.add_member(:contribution_percentage, Shapes::ShapeRef.new(shape: MetricChangePercentage, location_name: "ContributionPercentage"))
+    InterMetricImpactDetails.struct_class = Types::InterMetricImpactDetails
+
+    InterMetricImpactList.member = Shapes::ShapeRef.new(shape: InterMetricImpactDetails)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
 
@@ -500,6 +514,17 @@ module Aws::LookoutMetrics
     ListAnomalyDetectorsResponse.add_member(:anomaly_detector_summary_list, Shapes::ShapeRef.new(shape: AnomalyDetectorSummaryList, location_name: "AnomalyDetectorSummaryList"))
     ListAnomalyDetectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListAnomalyDetectorsResponse.struct_class = Types::ListAnomalyDetectorsResponse
+
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:anomaly_group_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "AnomalyGroupId"))
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:relationship_type_filter, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "RelationshipTypeFilter"))
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults", metadata: {"box"=>true}))
+    ListAnomalyGroupRelatedMetricsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAnomalyGroupRelatedMetricsRequest.struct_class = Types::ListAnomalyGroupRelatedMetricsRequest
+
+    ListAnomalyGroupRelatedMetricsResponse.add_member(:inter_metric_impact_list, Shapes::ShapeRef.new(shape: InterMetricImpactList, location_name: "InterMetricImpactList"))
+    ListAnomalyGroupRelatedMetricsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAnomalyGroupRelatedMetricsResponse.struct_class = Types::ListAnomalyGroupRelatedMetricsResponse
 
     ListAnomalyGroupSummariesRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     ListAnomalyGroupSummariesRequest.add_member(:sensitivity_threshold, Shapes::ShapeRef.new(shape: SensitivityThreshold, required: true, location_name: "SensitivityThreshold"))
@@ -966,6 +991,25 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_anomaly_group_related_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAnomalyGroupRelatedMetrics"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListAnomalyGroupRelatedMetrics"
+        o.input = Shapes::ShapeRef.new(shape: ListAnomalyGroupRelatedMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAnomalyGroupRelatedMetricsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

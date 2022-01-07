@@ -48,6 +48,6 @@ require_relative 'aws-sdk-honeycode/customizations'
 # @!group service
 module Aws::Honeycode
 
-  GEM_VERSION = '1.11.0'
+  GEM_VERSION = '1.13.0'
 
 end

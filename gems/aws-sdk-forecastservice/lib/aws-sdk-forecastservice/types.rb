@@ -59,7 +59,7 @@ module Aws::ForecastService
     #
     #   **Holidays**
     #
-    #   To enable Holidays, specify a country with one of the following
+    #   To enable Holidays, set `CountryCode` to one of the following
     #   two-letter country codes:
     #
     #   * "AL" - ALBANIA
@@ -491,6 +491,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] explain_predictor
+    #   Create an Explainability resource for the predictor.
     #   @return [Boolean]
     #
     # @!attribute [rw] tags
@@ -1077,15 +1078,13 @@ module Aws::ForecastService
     #   @return [Types::ExplainabilityConfig]
     #
     # @!attribute [rw] data_source
-    #   The source of your training data, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the data
-    #   and, optionally, an AWS Key Management Service (KMS) key. This
-    #   object is submitted in the CreateDatasetImportJob request.
+    #   The source of your data, an AWS Identity and Access Management (IAM)
+    #   role that allows Amazon Forecast to access the data and, optionally,
+    #   an AWS Key Management Service (KMS) key.
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] schema
-    #   Defines the fields of a dataset. You specify this object in the
-    #   CreateDataset request.
+    #   Defines the fields of a dataset.
     #   @return [Types::Schema]
     #
     # @!attribute [rw] enable_visualization
@@ -1096,11 +1095,17 @@ module Aws::ForecastService
     # @!attribute [rw] start_date_time
     #   If `TimePointGranularity` is set to `SPECIFIC`, define the first
     #   point for the Explainability.
+    #
+    #   Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example:
+    #   2015-01-01T20:00:00)
     #   @return [String]
     #
     # @!attribute [rw] end_date_time
     #   If `TimePointGranularity` is set to `SPECIFIC`, define the last time
     #   point for the Explainability.
+    #
+    #   Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example:
+    #   2015-01-01T20:00:00)
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1805,10 +1810,9 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # The source of your training data, an AWS Identity and Access
-    # Management (IAM) role that allows Amazon Forecast to access the data
-    # and, optionally, an AWS Key Management Service (KMS) key. This object
-    # is submitted in the CreateDatasetImportJob request.
+    # The source of your data, an AWS Identity and Access Management (IAM)
+    # role that allows Amazon Forecast to access the data and, optionally,
+    # an AWS Key Management Service (KMS) key.
     #
     # @note When making an API call, you may pass DataSource
     #   data as a hash:
@@ -1822,9 +1826,8 @@ module Aws::ForecastService
     #       }
     #
     # @!attribute [rw] s3_config
-    #   The path to the training data stored in an Amazon Simple Storage
-    #   Service (Amazon S3) bucket along with the credentials to access the
-    #   data.
+    #   The path to the data stored in an Amazon Simple Storage Service
+    #   (Amazon S3) bucket along with the credentials to access the data.
     #   @return [Types::S3Config]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DataSource AWS API Documentation
@@ -2227,6 +2230,11 @@ module Aws::ForecastService
     #   every year and "5min" indicates every five minutes.
     #   @return [String]
     #
+    # @!attribute [rw] forecast_dimensions
+    #   An array of dimension (field) names that specify the attributes used
+    #   to group your time series.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] dataset_import_job_arns
     #   An array of the ARNs of the dataset import jobs used to import
     #   training data for the predictor.
@@ -2295,6 +2303,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] explainability_info
+    #   Provides the status and ARN of the Predictor Explainability.
     #   @return [Types::ExplainabilityInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictorResponse AWS API Documentation
@@ -2305,6 +2314,7 @@ module Aws::ForecastService
       :forecast_horizon,
       :forecast_types,
       :forecast_frequency,
+      :forecast_dimensions,
       :dataset_import_job_arns,
       :data_config,
       :encryption_config,
@@ -2781,15 +2791,13 @@ module Aws::ForecastService
     #   @return [Boolean]
     #
     # @!attribute [rw] data_source
-    #   The source of your training data, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the data
-    #   and, optionally, an AWS Key Management Service (KMS) key. This
-    #   object is submitted in the CreateDatasetImportJob request.
+    #   The source of your data, an AWS Identity and Access Management (IAM)
+    #   role that allows Amazon Forecast to access the data and, optionally,
+    #   an AWS Key Management Service (KMS) key.
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] schema
-    #   Defines the fields of a dataset. You specify this object in the
-    #   CreateDataset request.
+    #   Defines the fields of a dataset.
     #   @return [Types::Schema]
     #
     # @!attribute [rw] start_date_time
@@ -3593,10 +3601,22 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # Provides information about the Explainability resource.
+    #
     # @!attribute [rw] explainability_arn
+    #   The Amazon Resource Name (ARN) of the Explainability.
     #   @return [String]
     #
     # @!attribute [rw] status
+    #   The status of the Explainability. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `CREATE_STOPPING`, `CREATE_STOPPED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ExplainabilityInfo AWS API Documentation
@@ -3682,6 +3702,11 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # <note markdown="1"> This object belongs to the CreatePredictor operation. If you created
+    # your predictor with CreateAutoPredictor, see AttributeConfig.
+    #
+    #  </note>
+    #
     # Provides featurization (transformation) information for a dataset
     # field. This object is part of the FeaturizationConfig object.
     #
@@ -3740,6 +3765,11 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # <note markdown="1"> This object belongs to the CreatePredictor operation. If you created
+    # your predictor with CreateAutoPredictor, see AttributeConfig.
+    #
+    #  </note>
+    #
     # In a CreatePredictor operation, the specified algorithm trains a model
     # using the specified dataset group. You can optionally tell the
     # operation to modify data fields prior to training a model. These
@@ -4027,6 +4057,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] created_using_auto_predictor
+    #   Whether the Forecast was created from an AutoPredictor.
     #   @return [Boolean]
     #
     # @!attribute [rw] dataset_group_arn
@@ -4203,6 +4234,11 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # <note markdown="1"> This object belongs to the CreatePredictor operation. If you created
+    # your predictor with CreateAutoPredictor, see DataConfig.
+    #
+    #  </note>
+    #
     # The data used to train a predictor. The data includes a dataset group
     # and any supplementary features. You specify this object in the
     # CreatePredictor request.
@@ -4558,7 +4594,7 @@ module Aws::ForecastService
     #     `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorArn` and `Status`.
+    #     `ResourceArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #   @return [Array<Types::Filter>]
@@ -4630,7 +4666,7 @@ module Aws::ForecastService
     #     `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorArn` and `Status`.
+    #     `ResourceArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #   @return [Array<Types::Filter>]
@@ -4983,9 +5019,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
-    #   which to list the tags. Currently, the supported resources are
-    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
-    #   forecasts, and forecast export jobs.
+    #   which to list the tags.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListTagsForResourceRequest AWS API Documentation
@@ -5403,8 +5437,7 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Defines the fields of a dataset. You specify this object in the
-    # CreateDataset request.
+    # Defines the fields of a dataset.
     #
     # @note When making an API call, you may pass Schema
     #   data as a hash:
@@ -5550,8 +5583,9 @@ module Aws::ForecastService
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to stop.
     #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
-    #   `PredictorBacktestExportJobArn`, `ForecastArn`, and
-    #   `ForecastExportJobArn`.
+    #   `PredictorBacktestExportJobArn`, `ForecastArn`,
+    #   `ForecastExportJobArn`, `ExplainabilityArn`, and
+    #   `ExplainabilityExportArn`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/StopResourceRequest AWS API Documentation
@@ -5562,6 +5596,11 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # <note markdown="1"> This object belongs to the CreatePredictor operation. If you created
+    # your predictor with CreateAutoPredictor, see AdditionalDataset.
+    #
+    #  </note>
+    #
     # Describes a supplementary feature of a dataset group. This object is
     # part of the InputDataConfig object. Forecast supports the Weather
     # Index and Holidays built-in featurizations.
@@ -5826,9 +5865,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
-    #   which to list the tags. Currently, the supported resources are
-    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
-    #   forecasts, and forecast export jobs.
+    #   which to list the tags.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5922,9 +5959,7 @@ module Aws::ForecastService
     #
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
-    #   which to list the tags. Currently, the supported resources are
-    #   Forecast dataset groups, datasets, dataset import jobs, predictors,
-    #   forecasts, and forecast exports.
+    #   which to list the tags.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys

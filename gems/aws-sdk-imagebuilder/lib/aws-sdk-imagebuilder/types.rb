@@ -182,10 +182,16 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   The idempotency token used to make this request idempotent.
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/CancelImageCreationRequest AWS API Documentation
@@ -202,7 +208,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] client_token
-    #   The idempotency token used to make this request idempotent.
+    #   The idempotency token that was used for this request.
     #   @return [String]
     #
     # @!attribute [rw] image_build_version_arn
@@ -1219,6 +1225,12 @@ module Aws::Imagebuilder
     #                 set_default_version: false,
     #               },
     #             ],
+    #             s3_export_configuration: {
+    #               role_name: "NonEmptyString", # required
+    #               disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #               s3_bucket: "NonEmptyString", # required
+    #               s3_prefix: "NonEmptyString",
+    #             },
     #           },
     #         ],
     #         tags: {
@@ -1748,7 +1760,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic on which to send image build events.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
@@ -2115,6 +2135,12 @@ module Aws::Imagebuilder
     #             set_default_version: false,
     #           },
     #         ],
+    #         s3_export_configuration: {
+    #           role_name: "NonEmptyString", # required
+    #           disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #           s3_bucket: "NonEmptyString", # required
+    #           s3_prefix: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] region
@@ -2141,6 +2167,12 @@ module Aws::Imagebuilder
     #   distribution for specified accounts.
     #   @return [Array<Types::LaunchTemplateConfiguration>]
     #
+    # @!attribute [rw] s3_export_configuration
+    #   Configure export settings to deliver disk images created from your
+    #   image build, using a file format that is compatible with your VMs in
+    #   that Region.
+    #   @return [Types::S3ExportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
@@ -2148,7 +2180,8 @@ module Aws::Imagebuilder
       :ami_distribution_configuration,
       :container_distribution_configuration,
       :license_configuration_arns,
-      :launch_template_configurations)
+      :launch_template_configurations,
+      :s3_export_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2898,6 +2931,19 @@ module Aws::Imagebuilder
     #   The tags of the image.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] build_type
+    #   Indicates the type of build that created this image. The build can
+    #   be initiated in the following ways:
+    #
+    #   * **USER\_INITIATED** – A manual pipeline build request.
+    #
+    #   * **SCHEDULED** – A pipeline build initiated by a cron expression in
+    #     the Image Builder pipeline, or from EventBridge.
+    #
+    #   * **IMPORT** – A VM import created the image to use as the base
+    #     image for the recipe.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -2918,7 +2964,8 @@ module Aws::Imagebuilder
       :image_tests_configuration,
       :date_created,
       :output_resources,
-      :tags)
+      :tags,
+      :build_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3240,6 +3287,19 @@ module Aws::Imagebuilder
     #   The tags of the image.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] build_type
+    #   Indicates the type of build that created this image. The build can
+    #   be initiated in the following ways:
+    #
+    #   * **USER\_INITIATED** – A manual pipeline build request.
+    #
+    #   * **SCHEDULED** – A pipeline build initiated by a cron expression in
+    #     the Image Builder pipeline, or from EventBridge.
+    #
+    #   * **IMPORT** – A VM import created the image to use as the base
+    #     image for the recipe.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageSummary AWS API Documentation
     #
     class ImageSummary < Struct.new(
@@ -3253,12 +3313,15 @@ module Aws::Imagebuilder
       :owner,
       :date_created,
       :output_resources,
-      :tags)
+      :tags,
+      :build_type)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Image tests configuration.
+    # Configure image tests for your pipeline build. Tests run after
+    # building the image, to verify that the AMI or container image is valid
+    # before distributing it.
     #
     # @note When making an API call, you may pass ImageTestsConfiguration
     #   data as a hash:
@@ -3269,7 +3332,9 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] image_tests_enabled
-    #   Defines if tests should be executed when building this image.
+    #   Determines if tests should run after building the image. Image
+    #   Builder defaults to enable tests to run following the image build,
+    #   before image distribution.
     #   @return [Boolean]
     #
     # @!attribute [rw] timeout_minutes
@@ -3363,6 +3428,19 @@ module Aws::Imagebuilder
     #   was created.
     #   @return [String]
     #
+    # @!attribute [rw] build_type
+    #   Indicates the type of build that created this image. The build can
+    #   be initiated in the following ways:
+    #
+    #   * **USER\_INITIATED** – A manual pipeline build request.
+    #
+    #   * **SCHEDULED** – A pipeline build initiated by a cron expression in
+    #     the Image Builder pipeline, or from EventBridge.
+    #
+    #   * **IMPORT** – A VM import created the image to use as the base
+    #     image for the recipe.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageVersion AWS API Documentation
     #
     class ImageVersion < Struct.new(
@@ -3373,7 +3451,8 @@ module Aws::Imagebuilder
       :platform,
       :os_version,
       :owner,
-      :date_created)
+      :date_created,
+      :build_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3513,6 +3592,124 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ImportVmImageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NonEmptyString", # required
+    #         semantic_version: "VersionNumber", # required
+    #         description: "NonEmptyString",
+    #         platform: "Windows", # required, accepts Windows, Linux
+    #         os_version: "OsVersion",
+    #         vm_import_task_id: "NonEmptyString", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_token: "ClientToken", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the base image that is created by the import process.
+    #   @return [String]
+    #
+    # @!attribute [rw] semantic_version
+    #   The semantic version to attach to the base image that was created
+    #   during the import process. This version follows the semantic version
+    #   syntax.
+    #
+    #   <note markdown="1"> The semantic version has four nodes:
+    #   &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can
+    #   assign values for the first three, and can filter on all of them.
+    #
+    #    **Assignment:** For the first three nodes you can assign any
+    #   positive integer value, including zero, with an upper limit of
+    #   2^30-1, or 1073741823 for each node. Image Builder automatically
+    #   assigns the build number to the fourth node.
+    #
+    #    **Patterns:** You can use any numeric pattern that adheres to the
+    #   assignment requirements for the nodes that you can assign. For
+    #   example, you might choose a software version pattern, such as 1.0.0,
+    #   or a date, such as 2021.01.01.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description for the base image that is created by the import
+    #   process.
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   The operating system platform for the imported VM.
+    #   @return [String]
+    #
+    # @!attribute [rw] os_version
+    #   The operating system version for the imported VM.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_import_task_id
+    #   The `importTaskId` (API) or `ImportTaskId` (CLI) from the Amazon EC2
+    #   VM import process. Image Builder retrieves information from the
+    #   import process to pull in the AMI that is created from the VM source
+    #   as the base image for your recipe.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are attached to the import resources.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier you provide to ensure idempotency
+    #   of the request. For more information, see [Ensuring idempotency][1]
+    #   in the *Amazon EC2 API Reference*.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportVmImageRequest AWS API Documentation
+    #
+    class ImportVmImageRequest < Struct.new(
+      :name,
+      :semantic_version,
+      :description,
+      :platform,
+      :os_version,
+      :vm_import_task_id,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The request ID that uniquely identifies this request.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_arn
+    #   The Amazon Resource Name (ARN) of the AMI that was created during
+    #   the VM import process. This AMI is used as the base image for the
+    #   recipe that imported the VM.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token that was used for this request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImportVmImageResponse AWS API Documentation
+    #
+    class ImportVmImageResponse < Struct.new(
+      :request_id,
+      :image_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Details of the infrastructure configuration.
     #
     # @!attribute [rw] arn
@@ -3557,8 +3754,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic Amazon Resource Name (ARN) of the infrastructure
-    #   configuration.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] date_created
@@ -5114,6 +5318,57 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # Properties that configure export from your build instance to a
+    # compatible file format for your VM.
+    #
+    # @note When making an API call, you may pass S3ExportConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         role_name: "NonEmptyString", # required
+    #         disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #         s3_bucket: "NonEmptyString", # required
+    #         s3_prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] role_name
+    #   The name of the role that grants VM Import/Export permission to
+    #   export images to your S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] disk_image_format
+    #   Export the updated image to one of the following supported disk
+    #   image formats:
+    #
+    #   * **Virtual Hard Disk (VHD)** – Compatible with Citrix Xen and
+    #     Microsoft Hyper-V virtualization products.
+    #
+    #   * **Stream-optimized ESX Virtual Machine Disk (VMDK)** – Compatible
+    #     with VMware ESX and VMware vSphere versions 4, 5, and 6.
+    #
+    #   * **Raw** – Raw format.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The S3 bucket in which to store the output disk images for your VM.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_prefix
+    #   The Amazon S3 path for the bucket where the output disk images for
+    #   your VM are stored.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/S3ExportConfiguration AWS API Documentation
+    #
+    class S3ExportConfiguration < Struct.new(
+      :role_name,
+      :disk_image_format,
+      :s3_bucket,
+      :s3_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Amazon S3 logging configuration.
     #
     # @note When making an API call, you may pass S3Logs
@@ -5125,11 +5380,11 @@ module Aws::Imagebuilder
     #       }
     #
     # @!attribute [rw] s3_bucket_name
-    #   The Amazon S3 bucket in which to store the logs.
+    #   The S3 bucket in which to store the logs.
     #   @return [String]
     #
     # @!attribute [rw] s3_key_prefix
-    #   The Amazon S3 path in which to store the logs.
+    #   The Amazon S3 path to the bucket where the logs are stored.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/S3Logs AWS API Documentation
@@ -5456,6 +5711,12 @@ module Aws::Imagebuilder
     #                 set_default_version: false,
     #               },
     #             ],
+    #             s3_export_configuration: {
+    #               role_name: "NonEmptyString", # required
+    #               disk_image_format: "VMDK", # required, accepts VMDK, RAW, VHD
+    #               s3_bucket: "NonEmptyString", # required
+    #               s3_prefix: "NonEmptyString",
+    #             },
     #           },
     #         ],
     #         client_token: "ClientToken", # required
@@ -5711,7 +5972,15 @@ module Aws::Imagebuilder
     #   @return [Boolean]
     #
     # @!attribute [rw] sns_topic_arn
-    #   The SNS topic on which to send image build events.
+    #   The Amazon Resource Name (ARN) for the SNS topic to which we send
+    #   image build event notifications.
+    #
+    #   <note markdown="1"> EC2 Image Builder is unable to send notifications to SNS topics that
+    #   are encrypted using keys from other accounts. The key that is used
+    #   to encrypt the SNS topic must reside in the account that the Image
+    #   Builder service runs under.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] client_token

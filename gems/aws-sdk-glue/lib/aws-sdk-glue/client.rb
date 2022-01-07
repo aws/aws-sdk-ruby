@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::Glue
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Glue
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::Glue
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::Glue
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -390,6 +401,7 @@ module Aws::Glue
     #             },
     #           ],
     #           location: "LocationString",
+    #           additional_locations: ["LocationString"],
     #           input_format: "FormatString",
     #           output_format: "FormatString",
     #           compressed: false,
@@ -570,6 +582,9 @@ module Aws::Glue
     # @option params [required, Array<String>] :tables_to_delete
     #   A list of the table to delete.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #
     # @return [Types::BatchDeleteTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::BatchDeleteTableResponse#errors #errors} => Array&lt;Types::TableError&gt;
@@ -580,6 +595,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     tables_to_delete: ["NameString"], # required
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @example Response structure
@@ -751,6 +767,12 @@ module Aws::Glue
     #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.delta_targets #=> Array
+    #   resp.crawlers[0].targets.delta_targets[0].delta_tables #=> Array
+    #   resp.crawlers[0].targets.delta_targets[0].delta_tables[0] #=> String
+    #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -775,6 +797,8 @@ module Aws::Glue
     #   resp.crawlers[0].version #=> Integer
     #   resp.crawlers[0].configuration #=> String
     #   resp.crawlers[0].crawler_security_configuration #=> String
+    #   resp.crawlers[0].lake_formation_configuration.use_lake_formation_credentials #=> Boolean
+    #   resp.crawlers[0].lake_formation_configuration.account_id #=> String
     #   resp.crawlers_not_found #=> Array
     #   resp.crawlers_not_found[0] #=> String
     #
@@ -962,6 +986,8 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.columns[0].parameters #=> Hash
     #   resp.partitions[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].storage_descriptor.location #=> String
+    #   resp.partitions[0].storage_descriptor.additional_locations #=> Array
+    #   resp.partitions[0].storage_descriptor.additional_locations[0] #=> String
     #   resp.partitions[0].storage_descriptor.input_format #=> String
     #   resp.partitions[0].storage_descriptor.output_format #=> String
     #   resp.partitions[0].storage_descriptor.compressed #=> Boolean
@@ -1348,6 +1374,7 @@ module Aws::Glue
     #               },
     #             ],
     #             location: "LocationString",
+    #             additional_locations: ["LocationString"],
     #             input_format: "FormatString",
     #             output_format: "FormatString",
     #             compressed: false,
@@ -1685,6 +1712,8 @@ module Aws::Glue
     # @option params [Types::LineageConfiguration] :lineage_configuration
     #   Specifies data lineage configuration settings for the crawler.
     #
+    # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -1752,6 +1781,14 @@ module Aws::Glue
     #         {
     #           database_name: "NameString", # required
     #           tables: ["NameString"], # required
+    #           connection_name: "ConnectionName",
+    #         },
+    #       ],
+    #       delta_targets: [
+    #         {
+    #           delta_tables: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           write_manifest: false,
     #         },
     #       ],
     #     },
@@ -1767,6 +1804,10 @@ module Aws::Glue
     #     },
     #     lineage_configuration: {
     #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #     },
+    #     lake_formation_configuration: {
+    #       use_lake_formation_credentials: false,
+    #       account_id: "AccountId",
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -2488,6 +2529,7 @@ module Aws::Glue
     #           },
     #         ],
     #         location: "LocationString",
+    #         additional_locations: ["LocationString"],
     #         input_format: "FormatString",
     #         output_format: "FormatString",
     #         compressed: false,
@@ -2914,6 +2956,9 @@ module Aws::Glue
     #   A list of partition indexes, `PartitionIndex` structures, to create in
     #   the table.
     #
+    # @option params [String] :transaction_id
+    #   The ID of the transaction.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -2940,6 +2985,7 @@ module Aws::Glue
     #           },
     #         ],
     #         location: "LocationString",
+    #         additional_locations: ["LocationString"],
     #         input_format: "FormatString",
     #         output_format: "FormatString",
     #         compressed: false,
@@ -3007,6 +3053,7 @@ module Aws::Glue
     #         index_name: "NameString", # required
     #       },
     #     ],
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateTable AWS API Documentation
@@ -3828,6 +3875,9 @@ module Aws::Glue
     #   The name of the table to be deleted. For Hive compatibility, this name
     #   is entirely lowercase.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to delete the table contents.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -3836,6 +3886,7 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     name: "NameString", # required
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteTable AWS API Documentation
@@ -4604,6 +4655,12 @@ module Aws::Glue
     #   resp.crawler.targets.catalog_targets[0].database_name #=> String
     #   resp.crawler.targets.catalog_targets[0].tables #=> Array
     #   resp.crawler.targets.catalog_targets[0].tables[0] #=> String
+    #   resp.crawler.targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawler.targets.delta_targets #=> Array
+    #   resp.crawler.targets.delta_targets[0].delta_tables #=> Array
+    #   resp.crawler.targets.delta_targets[0].delta_tables[0] #=> String
+    #   resp.crawler.targets.delta_targets[0].connection_name #=> String
+    #   resp.crawler.targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawler.database_name #=> String
     #   resp.crawler.description #=> String
     #   resp.crawler.classifiers #=> Array
@@ -4628,6 +4685,8 @@ module Aws::Glue
     #   resp.crawler.version #=> Integer
     #   resp.crawler.configuration #=> String
     #   resp.crawler.crawler_security_configuration #=> String
+    #   resp.crawler.lake_formation_configuration.use_lake_formation_credentials #=> Boolean
+    #   resp.crawler.lake_formation_configuration.account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawler AWS API Documentation
     #
@@ -4738,6 +4797,12 @@ module Aws::Glue
     #   resp.crawlers[0].targets.catalog_targets[0].database_name #=> String
     #   resp.crawlers[0].targets.catalog_targets[0].tables #=> Array
     #   resp.crawlers[0].targets.catalog_targets[0].tables[0] #=> String
+    #   resp.crawlers[0].targets.catalog_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.delta_targets #=> Array
+    #   resp.crawlers[0].targets.delta_targets[0].delta_tables #=> Array
+    #   resp.crawlers[0].targets.delta_targets[0].delta_tables[0] #=> String
+    #   resp.crawlers[0].targets.delta_targets[0].connection_name #=> String
+    #   resp.crawlers[0].targets.delta_targets[0].write_manifest #=> Boolean
     #   resp.crawlers[0].database_name #=> String
     #   resp.crawlers[0].description #=> String
     #   resp.crawlers[0].classifiers #=> Array
@@ -4762,6 +4827,8 @@ module Aws::Glue
     #   resp.crawlers[0].version #=> Integer
     #   resp.crawlers[0].configuration #=> String
     #   resp.crawlers[0].crawler_security_configuration #=> String
+    #   resp.crawlers[0].lake_formation_configuration.use_lake_formation_credentials #=> Boolean
+    #   resp.crawlers[0].lake_formation_configuration.account_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCrawlers AWS API Documentation
@@ -5827,6 +5894,8 @@ module Aws::Glue
     #   resp.data.partition.storage_descriptor.columns[0].parameters #=> Hash
     #   resp.data.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.data.partition.storage_descriptor.location #=> String
+    #   resp.data.partition.storage_descriptor.additional_locations #=> Array
+    #   resp.data.partition.storage_descriptor.additional_locations[0] #=> String
     #   resp.data.partition.storage_descriptor.input_format #=> String
     #   resp.data.partition.storage_descriptor.output_format #=> String
     #   resp.data.partition.storage_descriptor.compressed #=> Boolean
@@ -6046,6 +6115,14 @@ module Aws::Glue
     #   partition values or location. This approach avoids the problem of a
     #   large response by not returning duplicate data.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the partition contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the partition contents. If not set, the
+    #   most recent transaction commit time will be used. Cannot be specified
+    #   along with `TransactionId`.
+    #
     # @return [Types::GetPartitionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPartitionsResponse#partitions #partitions} => Array&lt;Types::Partition&gt;
@@ -6067,6 +6144,8 @@ module Aws::Glue
     #     },
     #     max_results: 1,
     #     exclude_column_schema: false,
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -6085,6 +6164,8 @@ module Aws::Glue
     #   resp.partitions[0].storage_descriptor.columns[0].parameters #=> Hash
     #   resp.partitions[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.partitions[0].storage_descriptor.location #=> String
+    #   resp.partitions[0].storage_descriptor.additional_locations #=> Array
+    #   resp.partitions[0].storage_descriptor.additional_locations[0] #=> String
     #   resp.partitions[0].storage_descriptor.input_format #=> String
     #   resp.partitions[0].storage_descriptor.output_format #=> String
     #   resp.partitions[0].storage_descriptor.compressed #=> Boolean
@@ -6699,6 +6780,14 @@ module Aws::Glue
     #   The name of the table for which to retrieve the definition. For Hive
     #   compatibility, this name is entirely lowercase.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the table contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified along
+    #   with `TransactionId`.
+    #
     # @return [Types::GetTableResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTableResponse#table #table} => Types::Table
@@ -6709,6 +6798,8 @@ module Aws::Glue
     #     catalog_id: "CatalogIdString",
     #     database_name: "NameString", # required
     #     name: "NameString", # required
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -6729,6 +6820,8 @@ module Aws::Glue
     #   resp.table.storage_descriptor.columns[0].parameters #=> Hash
     #   resp.table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table.storage_descriptor.location #=> String
+    #   resp.table.storage_descriptor.additional_locations #=> Array
+    #   resp.table.storage_descriptor.additional_locations[0] #=> String
     #   resp.table.storage_descriptor.input_format #=> String
     #   resp.table.storage_descriptor.output_format #=> String
     #   resp.table.storage_descriptor.compressed #=> Boolean
@@ -6832,6 +6925,8 @@ module Aws::Glue
     #   resp.table_version.table.storage_descriptor.columns[0].parameters #=> Hash
     #   resp.table_version.table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_version.table.storage_descriptor.location #=> String
+    #   resp.table_version.table.storage_descriptor.additional_locations #=> Array
+    #   resp.table_version.table.storage_descriptor.additional_locations[0] #=> String
     #   resp.table_version.table.storage_descriptor.input_format #=> String
     #   resp.table_version.table.storage_descriptor.output_format #=> String
     #   resp.table_version.table.storage_descriptor.compressed #=> Boolean
@@ -6944,6 +7039,8 @@ module Aws::Glue
     #   resp.table_versions[0].table.storage_descriptor.columns[0].parameters #=> Hash
     #   resp.table_versions[0].table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_versions[0].table.storage_descriptor.location #=> String
+    #   resp.table_versions[0].table.storage_descriptor.additional_locations #=> Array
+    #   resp.table_versions[0].table.storage_descriptor.additional_locations[0] #=> String
     #   resp.table_versions[0].table.storage_descriptor.input_format #=> String
     #   resp.table_versions[0].table.storage_descriptor.output_format #=> String
     #   resp.table_versions[0].table.storage_descriptor.compressed #=> Boolean
@@ -7021,6 +7118,14 @@ module Aws::Glue
     # @option params [Integer] :max_results
     #   The maximum number of tables to return in a single response.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to read the table contents.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_as_of_time
+    #   The time as of when to read the table contents. If not set, the most
+    #   recent transaction commit time will be used. Cannot be specified along
+    #   with `TransactionId`.
+    #
     # @return [Types::GetTablesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetTablesResponse#table_list #table_list} => Array&lt;Types::Table&gt;
@@ -7036,6 +7141,8 @@ module Aws::Glue
     #     expression: "FilterString",
     #     next_token: "Token",
     #     max_results: 1,
+    #     transaction_id: "TransactionIdString",
+    #     query_as_of_time: Time.now,
     #   })
     #
     # @example Response structure
@@ -7057,6 +7164,8 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.columns[0].parameters #=> Hash
     #   resp.table_list[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].storage_descriptor.location #=> String
+    #   resp.table_list[0].storage_descriptor.additional_locations #=> Array
+    #   resp.table_list[0].storage_descriptor.additional_locations[0] #=> String
     #   resp.table_list[0].storage_descriptor.input_format #=> String
     #   resp.table_list[0].storage_descriptor.output_format #=> String
     #   resp.table_list[0].storage_descriptor.compressed #=> Boolean
@@ -7256,6 +7365,316 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_triggers(params = {}, options = {})
       req = build_request(:get_triggers, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :catalog_id
+    #
+    # @option params [required, String] :database_name
+    #
+    # @option params [required, String] :table_name
+    #
+    # @option params [required, Array<String>] :partition_values
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #
+    # @option params [required, Array<String>] :supported_permission_types
+    #
+    # @return [Types::GetUnfilteredPartitionMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUnfilteredPartitionMetadataResponse#partition #data.partition} => Types::Partition (This method conflicts with a method on Response, call it through the data member)
+    #   * {Types::GetUnfilteredPartitionMetadataResponse#authorized_columns #authorized_columns} => Array&lt;String&gt;
+    #   * {Types::GetUnfilteredPartitionMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_unfiltered_partition_metadata({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     partition_values: ["ValueString"], # required
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.data.partition.values #=> Array
+    #   resp.data.partition.values[0] #=> String
+    #   resp.data.partition.database_name #=> String
+    #   resp.data.partition.table_name #=> String
+    #   resp.data.partition.creation_time #=> Time
+    #   resp.data.partition.last_access_time #=> Time
+    #   resp.data.partition.storage_descriptor.columns #=> Array
+    #   resp.data.partition.storage_descriptor.columns[0].name #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].type #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.data.partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.location #=> String
+    #   resp.data.partition.storage_descriptor.additional_locations #=> Array
+    #   resp.data.partition.storage_descriptor.additional_locations[0] #=> String
+    #   resp.data.partition.storage_descriptor.input_format #=> String
+    #   resp.data.partition.storage_descriptor.output_format #=> String
+    #   resp.data.partition.storage_descriptor.compressed #=> Boolean
+    #   resp.data.partition.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.data.partition.storage_descriptor.serde_info.name #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.data.partition.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.bucket_columns #=> Array
+    #   resp.data.partition.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns #=> Array
+    #   resp.data.partition.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.data.partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.data.partition.storage_descriptor.parameters #=> Hash
+    #   resp.data.partition.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.data.partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.data.partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.data.partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.data.partition.parameters #=> Hash
+    #   resp.data.partition.parameters["KeyString"] #=> String
+    #   resp.data.partition.last_analyzed_time #=> Time
+    #   resp.data.partition.catalog_id #=> String
+    #   resp.authorized_columns #=> Array
+    #   resp.authorized_columns[0] #=> String
+    #   resp.is_registered_with_lake_formation #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionMetadata AWS API Documentation
+    #
+    # @overload get_unfiltered_partition_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_unfiltered_partition_metadata(params = {}, options = {})
+      req = build_request(:get_unfiltered_partition_metadata, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :catalog_id
+    #
+    # @option params [required, String] :database_name
+    #
+    # @option params [required, String] :table_name
+    #
+    # @option params [String] :expression
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #
+    # @option params [required, Array<String>] :supported_permission_types
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Types::Segment] :segment
+    #   Defines a non-overlapping region of a table's partitions, allowing
+    #   multiple requests to be run in parallel.
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::GetUnfilteredPartitionsMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUnfilteredPartitionsMetadataResponse#unfiltered_partitions #unfiltered_partitions} => Array&lt;Types::UnfilteredPartition&gt;
+    #   * {Types::GetUnfilteredPartitionsMetadataResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_unfiltered_partitions_metadata({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     table_name: "NameString", # required
+    #     expression: "PredicateString",
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #     next_token: "Token",
+    #     segment: {
+    #       segment_number: 1, # required
+    #       total_segments: 1, # required
+    #     },
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.unfiltered_partitions #=> Array
+    #   resp.unfiltered_partitions[0].partition.values #=> Array
+    #   resp.unfiltered_partitions[0].partition.values[0] #=> String
+    #   resp.unfiltered_partitions[0].partition.database_name #=> String
+    #   resp.unfiltered_partitions[0].partition.table_name #=> String
+    #   resp.unfiltered_partitions[0].partition.creation_time #=> Time
+    #   resp.unfiltered_partitions[0].partition.last_access_time #=> Time
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns[0].name #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns[0].type #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns[0].comment #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.location #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.additional_locations #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.additional_locations[0] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.input_format #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.output_format #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.compressed #=> Boolean
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.serde_info.name #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.bucket_columns #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.sort_columns #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.parameters #=> Hash
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.unfiltered_partitions[0].partition.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.unfiltered_partitions[0].partition.parameters #=> Hash
+    #   resp.unfiltered_partitions[0].partition.parameters["KeyString"] #=> String
+    #   resp.unfiltered_partitions[0].partition.last_analyzed_time #=> Time
+    #   resp.unfiltered_partitions[0].partition.catalog_id #=> String
+    #   resp.unfiltered_partitions[0].authorized_columns #=> Array
+    #   resp.unfiltered_partitions[0].authorized_columns[0] #=> String
+    #   resp.unfiltered_partitions[0].is_registered_with_lake_formation #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredPartitionsMetadata AWS API Documentation
+    #
+    # @overload get_unfiltered_partitions_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_unfiltered_partitions_metadata(params = {}, options = {})
+      req = build_request(:get_unfiltered_partitions_metadata, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :catalog_id
+    #
+    # @option params [required, String] :database_name
+    #
+    # @option params [required, String] :name
+    #
+    # @option params [Types::AuditContext] :audit_context
+    #
+    # @option params [required, Array<String>] :supported_permission_types
+    #
+    # @return [Types::GetUnfilteredTableMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetUnfilteredTableMetadataResponse#table #table} => Types::Table
+    #   * {Types::GetUnfilteredTableMetadataResponse#authorized_columns #authorized_columns} => Array&lt;String&gt;
+    #   * {Types::GetUnfilteredTableMetadataResponse#is_registered_with_lake_formation #is_registered_with_lake_formation} => Boolean
+    #   * {Types::GetUnfilteredTableMetadataResponse#cell_filters #cell_filters} => Array&lt;Types::ColumnRowFilter&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_unfiltered_table_metadata({
+    #     catalog_id: "CatalogIdString", # required
+    #     database_name: "NameString", # required
+    #     name: "NameString", # required
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString",
+    #     },
+    #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table.name #=> String
+    #   resp.table.database_name #=> String
+    #   resp.table.description #=> String
+    #   resp.table.owner #=> String
+    #   resp.table.create_time #=> Time
+    #   resp.table.update_time #=> Time
+    #   resp.table.last_access_time #=> Time
+    #   resp.table.last_analyzed_time #=> Time
+    #   resp.table.retention #=> Integer
+    #   resp.table.storage_descriptor.columns #=> Array
+    #   resp.table.storage_descriptor.columns[0].name #=> String
+    #   resp.table.storage_descriptor.columns[0].type #=> String
+    #   resp.table.storage_descriptor.columns[0].comment #=> String
+    #   resp.table.storage_descriptor.columns[0].parameters #=> Hash
+    #   resp.table.storage_descriptor.columns[0].parameters["KeyString"] #=> String
+    #   resp.table.storage_descriptor.location #=> String
+    #   resp.table.storage_descriptor.additional_locations #=> Array
+    #   resp.table.storage_descriptor.additional_locations[0] #=> String
+    #   resp.table.storage_descriptor.input_format #=> String
+    #   resp.table.storage_descriptor.output_format #=> String
+    #   resp.table.storage_descriptor.compressed #=> Boolean
+    #   resp.table.storage_descriptor.number_of_buckets #=> Integer
+    #   resp.table.storage_descriptor.serde_info.name #=> String
+    #   resp.table.storage_descriptor.serde_info.serialization_library #=> String
+    #   resp.table.storage_descriptor.serde_info.parameters #=> Hash
+    #   resp.table.storage_descriptor.serde_info.parameters["KeyString"] #=> String
+    #   resp.table.storage_descriptor.bucket_columns #=> Array
+    #   resp.table.storage_descriptor.bucket_columns[0] #=> String
+    #   resp.table.storage_descriptor.sort_columns #=> Array
+    #   resp.table.storage_descriptor.sort_columns[0].column #=> String
+    #   resp.table.storage_descriptor.sort_columns[0].sort_order #=> Integer
+    #   resp.table.storage_descriptor.parameters #=> Hash
+    #   resp.table.storage_descriptor.parameters["KeyString"] #=> String
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_names #=> Array
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_names[0] #=> String
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_values #=> Array
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_values[0] #=> String
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps #=> Hash
+    #   resp.table.storage_descriptor.skewed_info.skewed_column_value_location_maps["ColumnValuesString"] #=> String
+    #   resp.table.storage_descriptor.stored_as_sub_directories #=> Boolean
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_arn #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.schema_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_id.registry_name #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_id #=> String
+    #   resp.table.storage_descriptor.schema_reference.schema_version_number #=> Integer
+    #   resp.table.partition_keys #=> Array
+    #   resp.table.partition_keys[0].name #=> String
+    #   resp.table.partition_keys[0].type #=> String
+    #   resp.table.partition_keys[0].comment #=> String
+    #   resp.table.partition_keys[0].parameters #=> Hash
+    #   resp.table.partition_keys[0].parameters["KeyString"] #=> String
+    #   resp.table.view_original_text #=> String
+    #   resp.table.view_expanded_text #=> String
+    #   resp.table.table_type #=> String
+    #   resp.table.parameters #=> Hash
+    #   resp.table.parameters["KeyString"] #=> String
+    #   resp.table.created_by #=> String
+    #   resp.table.is_registered_with_lake_formation #=> Boolean
+    #   resp.table.target_table.catalog_id #=> String
+    #   resp.table.target_table.database_name #=> String
+    #   resp.table.target_table.name #=> String
+    #   resp.table.catalog_id #=> String
+    #   resp.authorized_columns #=> Array
+    #   resp.authorized_columns[0] #=> String
+    #   resp.is_registered_with_lake_formation #=> Boolean
+    #   resp.cell_filters #=> Array
+    #   resp.cell_filters[0].column_name #=> String
+    #   resp.cell_filters[0].row_filter_expression #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUnfilteredTableMetadata AWS API Documentation
+    #
+    # @overload get_unfiltered_table_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_unfiltered_table_metadata(params = {}, options = {})
+      req = build_request(:get_unfiltered_table_metadata, params)
       req.send_request(options)
     end
 
@@ -8970,6 +9389,8 @@ module Aws::Glue
     #   resp.table_list[0].storage_descriptor.columns[0].parameters #=> Hash
     #   resp.table_list[0].storage_descriptor.columns[0].parameters["KeyString"] #=> String
     #   resp.table_list[0].storage_descriptor.location #=> String
+    #   resp.table_list[0].storage_descriptor.additional_locations #=> Array
+    #   resp.table_list[0].storage_descriptor.additional_locations[0] #=> String
     #   resp.table_list[0].storage_descriptor.input_format #=> String
     #   resp.table_list[0].storage_descriptor.output_format #=> String
     #   resp.table_list[0].storage_descriptor.compressed #=> Boolean
@@ -10121,6 +10542,8 @@ module Aws::Glue
     # @option params [Types::LineageConfiguration] :lineage_configuration
     #   Specifies data lineage configuration settings for the crawler.
     #
+    # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
     #   users to specify aspects of a crawler's behavior. For more
@@ -10179,6 +10602,14 @@ module Aws::Glue
     #         {
     #           database_name: "NameString", # required
     #           tables: ["NameString"], # required
+    #           connection_name: "ConnectionName",
+    #         },
+    #       ],
+    #       delta_targets: [
+    #         {
+    #           delta_tables: ["Path"],
+    #           connection_name: "ConnectionName",
+    #           write_manifest: false,
     #         },
     #       ],
     #     },
@@ -10194,6 +10625,10 @@ module Aws::Glue
     #     },
     #     lineage_configuration: {
     #       crawler_lineage_settings: "ENABLE", # accepts ENABLE, DISABLE
+    #     },
+    #     lake_formation_configuration: {
+    #       use_lake_formation_credentials: false,
+    #       account_id: "AccountId",
     #     },
     #     configuration: "CrawlerConfiguration",
     #     crawler_security_configuration: "CrawlerSecurityConfiguration",
@@ -10593,6 +11028,7 @@ module Aws::Glue
     #           },
     #         ],
     #         location: "LocationString",
+    #         additional_locations: ["LocationString"],
     #         input_format: "FormatString",
     #         output_format: "FormatString",
     #         compressed: false,
@@ -10780,6 +11216,9 @@ module Aws::Glue
     #   table before updating it. However, if `skipArchive` is set to true,
     #   `UpdateTable` does not create the archived version.
     #
+    # @option params [String] :transaction_id
+    #   The transaction ID at which to update the table contents.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -10806,6 +11245,7 @@ module Aws::Glue
     #           },
     #         ],
     #         location: "LocationString",
+    #         additional_locations: ["LocationString"],
     #         input_format: "FormatString",
     #         output_format: "FormatString",
     #         compressed: false,
@@ -10868,6 +11308,7 @@ module Aws::Glue
     #       },
     #     },
     #     skip_archive: false,
+    #     transaction_id: "TransactionIdString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -11077,7 +11518,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -10,9 +10,13 @@
 module Aws::MWAA
   module Types
 
-    # Access to the Airflow Web UI or CLI has been Denied. Please follow the
-    # MWAA user guide to setup permissions to access the Web UI and CLI
-    # functionality.
+    # Access to the Apache Airflow Web UI or CLI has been denied due to
+    # insufficient permissions. To learn more, see [Accessing an Amazon MWAA
+    # environment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-policies.html
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -33,7 +37,8 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] name
-    #   Create a CLI token request for a MWAA environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateCliTokenRequest AWS API Documentation
@@ -45,13 +50,11 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] cli_token
-    #   Create an Airflow CLI login token response for the provided JWT
-    #   token.
+    #   An Airflow CLI login token.
     #   @return [String]
     #
     # @!attribute [rw] web_server_hostname
-    #   Create an Airflow CLI login token response for the provided
-    #   webserver hostname.
+    #   The Airflow web server hostname for the environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateCliTokenResponse AWS API Documentation
@@ -137,9 +140,14 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Apache Airflow version for your environment. For example,
-    #   `v1.10.12`. If no value is specified, defaults to the latest
-    #   version. Valid values: `v1.10.12`.
+    #   The Apache Airflow version for your environment. If no value is
+    #   specified, defaults to the latest version. Valid values: `1.10.12`,
+    #   `2.0.2`. To learn more, see [Apache Airflow versions on Amazon
+    #   Managed Workflows for Apache Airflow (MWAA)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html
     #   @return [String]
     #
     # @!attribute [rw] dag_s3_path
@@ -162,9 +170,10 @@ module Aws::MWAA
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role for your
-    #   environment. An execution role is an AWS Identity and Access
-    #   Management (IAM) role that grants MWAA permission to access AWS
-    #   services and resources used by your environment. For example,
+    #   environment. An execution role is an Amazon Web Services Identity
+    #   and Access Management (IAM) role that grants MWAA permission to
+    #   access Amazon Web Services services and resources used by your
+    #   environment. For example,
     #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
     #   [Amazon MWAA Execution role][1].
     #
@@ -174,20 +183,18 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The AWS Key Management Service (KMS) key to encrypt the data in your
-    #   environment. You can use an AWS owned CMK, or a Customer managed CMK
-    #   (advanced). To learn more, see [Get started with Amazon Managed
-    #   Workflows for Apache Airflow][1].
+    #   The Amazon Web Services Key Management Service (KMS) key to encrypt
+    #   the data in your environment. You can use an Amazon Web Services
+    #   owned CMK, or a Customer managed CMK (advanced). To learn more, see
+    #   [Create an Amazon MWAA environment][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/get-started.html
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/create-environment.html
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
-    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    #   `WorkerLogs`.
+    #   Defines the Apache Airflow logs to send to CloudWatch Logs.
     #   @return [Types::LoggingConfigurationInput]
     #
     # @!attribute [rw] max_workers
@@ -216,8 +223,9 @@ module Aws::MWAA
     #
     # @!attribute [rw] network_configuration
     #   The VPC networking components used to secure and enable network
-    #   traffic between the AWS resources for your environment. To learn
-    #   more, see [About networking on Amazon MWAA][1].
+    #   traffic between the Amazon Web Services resources for your
+    #   environment. To learn more, see [About networking on Amazon
+    #   MWAA][1].
     #
     #
     #
@@ -268,6 +276,11 @@ module Aws::MWAA
     #
     # @!attribute [rw] schedulers
     #   The number of Apache Airflow schedulers to run in your environment.
+    #   Valid values:
+    #
+    #   * v2.0.2 - Accepts between 2 to 5. Defaults to 2.
+    #
+    #   * v1.10.12 - Accepts 1.
     #   @return [Integer]
     #
     # @!attribute [rw] source_bucket_arn
@@ -284,7 +297,7 @@ module Aws::MWAA
     # @!attribute [rw] tags
     #   The key-value tag pairs you want to associate to your environment.
     #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   AWS resources][1].
+    #   Amazon Web Services resources][1].
     #
     #
     #
@@ -301,14 +314,11 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The day and time of the week to start weekly maintenance updates of
-    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time to start weekly maintenance updates of your
+    #   environment in the following format: `DAY:HH:MM`. For example:
     #   `TUE:03:30`. You can specify a start time in 30 minute increments
-    #   only. Supported input includes the following:
-    #
-    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
-    #
-    #   ^
+    #   only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateEnvironmentInput AWS API Documentation
@@ -359,7 +369,8 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] name
-    #   Create an Airflow Web UI login token request for a MWAA environment.
+    #   The name of the Amazon MWAA environment. For example,
+    #   `MyMWAAEnvironment`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateWebLoginTokenRequest AWS API Documentation
@@ -371,13 +382,11 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] web_server_hostname
-    #   Create an Airflow Web UI login token response for the provided
-    #   webserver hostname.
+    #   The Airflow web server hostname for the environment.
     #   @return [String]
     #
     # @!attribute [rw] web_token
-    #   Create an Airflow Web UI login token response for the provided JWT
-    #   token.
+    #   An Airflow web server login token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/CreateWebLoginTokenResponse AWS API Documentation
@@ -413,7 +422,13 @@ module Aws::MWAA
     #
     class DeleteEnvironmentOutput < Aws::EmptyStructure; end
 
-    # Internal only API.
+    # **Internal only**. Represents the dimensions of a metric. To learn
+    # more about the metrics published to Amazon CloudWatch, see [Amazon
+    # MWAA performance metrics in Amazon CloudWatch][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #
     # @note When making an API call, you may pass Dimension
     #   data as a hash:
@@ -424,11 +439,11 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] name
-    #   Internal only API.
+    #   **Internal only**. The name of the dimension.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Internal only API.
+    #   **Internal only**. The value of the dimension.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/Dimension AWS API Documentation
@@ -440,7 +455,8 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The Amazon Managed Workflows for Apache Airflow (MWAA) environment.
+    # Describes an Amazon Managed Workflows for Apache Airflow (MWAA)
+    # environment.
     #
     # @!attribute [rw] airflow_configuration_options
     #   A list of key-value pairs containing the Apache Airflow
@@ -453,8 +469,8 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Apache Airflow version on your environment. For example,
-    #   `v1.10.12`.
+    #   The Apache Airflow version on your environment. Valid values:
+    #   `1.10.12`, `2.0.2`.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -485,9 +501,10 @@ module Aws::MWAA
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
-    #   allows MWAA to access AWS resources in your environment. For
-    #   example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
-    #   more, see [Amazon MWAA Execution role][1].
+    #   allows MWAA to access Amazon Web Services resources in your
+    #   environment. For example,
+    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
+    #   [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -495,19 +512,16 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   The Key Management Service (KMS) encryption key used to encrypt the
-    #   data in your environment.
+    #   The Amazon Web Services Key Management Service (KMS) encryption key
+    #   used to encrypt the data in your environment.
     #   @return [String]
     #
     # @!attribute [rw] last_update
-    #   The status of the last update on the environment, and any errors
-    #   that were encountered.
+    #   The status of the last update on the environment.
     #   @return [Types::LastUpdate]
     #
     # @!attribute [rw] logging_configuration
-    #   The Apache Airflow logs being sent to CloudWatch Logs:
-    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    #   `WorkerLogs`.
+    #   The Apache Airflow logs published to CloudWatch Logs.
     #   @return [Types::LoggingConfiguration]
     #
     # @!attribute [rw] max_workers
@@ -526,9 +540,10 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
-    #   The VPC networking components used to secure and enable network
-    #   traffic between the AWS resources for your environment. To learn
-    #   more, see [About networking on Amazon MWAA][1].
+    #   Describes the VPC networking components used to secure and enable
+    #   network traffic between the Amazon Web Services resources for your
+    #   environment. To learn more, see [About networking on Amazon
+    #   MWAA][1].
     #
     #
     #
@@ -638,8 +653,8 @@ module Aws::MWAA
     #
     # @!attribute [rw] tags
     #   The key-value tag pairs associated to your environment. For example,
-    #   `"Environment": "Staging"`. To learn more, see [Tagging AWS
-    #   resources][1].
+    #   `"Environment": "Staging"`. To learn more, see [Tagging Amazon Web
+    #   Services resources][1].
     #
     #
     #
@@ -666,8 +681,9 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The day and time of the week that weekly maintenance updates are
-    #   scheduled. For example: `TUE:03:30`.
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time that weekly maintenance updates are scheduled.
+    #   For example: `TUE:03:30`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/Environment AWS API Documentation
@@ -748,8 +764,8 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The status of the last update on the environment, and any errors that
-    # were encountered.
+    # Describes the status of the last update on the environment, and any
+    # errors that were encountered.
     #
     # @!attribute [rw] created_at
     #   The day and time of the last update on the environment.
@@ -760,9 +776,13 @@ module Aws::MWAA
     #   environment.
     #   @return [Types::UpdateError]
     #
+    # @!attribute [rw] source
+    #   The source of the last update to the environment. Includes internal
+    #   processes by Amazon MWAA, such as an environment maintenance update.
+    #   @return [String]
+    #
     # @!attribute [rw] status
-    #   The status of the last update on the environment. Valid values:
-    #   `SUCCESS`, `PENDING`, `FAILED`.
+    #   The status of the last update on the environment.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LastUpdate AWS API Documentation
@@ -770,6 +790,7 @@ module Aws::MWAA
     class LastUpdate < Struct.new(
       :created_at,
       :error,
+      :source,
       :status)
       SENSITIVE = []
       include Aws::Structure
@@ -802,7 +823,7 @@ module Aws::MWAA
     end
 
     # @!attribute [rw] environments
-    #   Returns the list of Amazon MWAA environments.
+    #   Returns a list of Amazon MWAA environments.
     #   @return [Array<String>]
     #
     # @!attribute [rw] next_token
@@ -841,7 +862,7 @@ module Aws::MWAA
 
     # @!attribute [rw] tags
     #   The key-value tag pairs associated to your environment. To learn
-    #   more, see [Tagging AWS resources][1].
+    #   more, see [Tagging Amazon Web Services resources][1].
     #
     #
     #
@@ -856,38 +877,32 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Defines the Apache Airflow logs to send to CloudWatch Logs:
-    # `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    # `WorkerLogs`.
+    # Describes the Apache Airflow log types that are published to
+    # CloudWatch Logs.
     #
     # @!attribute [rw] dag_processing_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   The Airflow DAG processing logs published to CloudWatch Logs and the
+    #   log level.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] scheduler_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   The Airflow scheduler logs published to CloudWatch Logs and the log
+    #   level.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] task_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   The Airflow task logs published to CloudWatch Logs and the log
+    #   level.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] webserver_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   The Airflow web server logs published to CloudWatch Logs and the log
+    #   level.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @!attribute [rw] worker_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   The Airflow worker logs published to CloudWatch Logs and the log
+    #   level.
     #   @return [Types::ModuleLoggingConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LoggingConfiguration AWS API Documentation
@@ -902,9 +917,7 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Defines the Apache Airflow logs to send to CloudWatch Logs:
-    # `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    # `WorkerLogs`.
+    # Defines the Apache Airflow log types to send to CloudWatch Logs.
     #
     # @note When making an API call, you may pass LoggingConfigurationInput
     #   data as a hash:
@@ -933,33 +946,23 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] dag_processing_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   Publishes Airflow DAG processing logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] scheduler_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   Publishes Airflow scheduler logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] task_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   Publishes Airflow task logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] webserver_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   Publishes Airflow web server logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @!attribute [rw] worker_logs
-    #   Defines the type of logs to send for the Apache Airflow log type
-    #   (e.g. `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    #   `Enabled`, `LogLevel`.
+    #   Publishes Airflow worker logs to CloudWatch Logs.
     #   @return [Types::ModuleLoggingConfigurationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/LoggingConfigurationInput AWS API Documentation
@@ -974,7 +977,13 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Internal only API.
+    # **Internal only**. Collects Apache Airflow metrics. To learn more
+    # about the metrics published to Amazon CloudWatch, see [Amazon MWAA
+    # performance metrics in Amazon CloudWatch][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #
     # @note When making an API call, you may pass MetricDatum
     #   data as a hash:
@@ -999,27 +1008,27 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] dimensions
-    #   Internal only API.
+    #   **Internal only**. The dimensions associated with the metric.
     #   @return [Array<Types::Dimension>]
     #
     # @!attribute [rw] metric_name
-    #   Internal only API.
+    #   **Internal only**. The name of the metric.
     #   @return [String]
     #
     # @!attribute [rw] statistic_values
-    #   Internal only API.
+    #   **Internal only**. The statistical values for the metric.
     #   @return [Types::StatisticSet]
     #
     # @!attribute [rw] timestamp
-    #   Internal only API.
+    #   **Internal only**. The time the metric data was received.
     #   @return [Time]
     #
     # @!attribute [rw] unit
-    #   Unit
+    #   **Internal only**. The unit used to store the metric.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Internal only API.
+    #   **Internal only**. The value for the metric.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/MetricDatum AWS API Documentation
@@ -1035,9 +1044,8 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Defines the type of logs to send for the Apache Airflow log type (e.g.
-    # `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    # `Enabled`, `LogLevel`.
+    # Describes the Apache Airflow log details for the log type (e.g.
+    # `DagProcessingLogs`).
     #
     # @!attribute [rw] cloud_watch_log_group_arn
     #   The Amazon Resource Name (ARN) for the CloudWatch Logs group where
@@ -1047,14 +1055,13 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] enabled
-    #   Indicates whether to enable the Apache Airflow log type (e.g.
-    #   `DagProcessingLogs`) in CloudWatch Logs.
+    #   Indicates whether the Apache Airflow log type (e.g.
+    #   `DagProcessingLogs`) is enabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] log_level
-    #   Defines the Apache Airflow logs to send for the log type (e.g.
-    #   `DagProcessingLogs`) to CloudWatch Logs. Valid values: `CRITICAL`,
-    #   `ERROR`, `WARNING`, `INFO`.
+    #   The Apache Airflow log level for the log type (e.g.
+    #   `DagProcessingLogs`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ModuleLoggingConfiguration AWS API Documentation
@@ -1067,9 +1074,8 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Defines the type of logs to send for the Apache Airflow log type (e.g.
-    # `DagProcessingLogs`). Valid values: `CloudWatchLogGroupArn`,
-    # `Enabled`, `LogLevel`.
+    # Enables the Apache Airflow log type (e.g. `DagProcessingLogs`) and
+    # defines the log level to send to CloudWatch Logs (e.g. `INFO`).
     #
     # @note When making an API call, you may pass ModuleLoggingConfigurationInput
     #   data as a hash:
@@ -1081,13 +1087,12 @@ module Aws::MWAA
     #
     # @!attribute [rw] enabled
     #   Indicates whether to enable the Apache Airflow log type (e.g.
-    #   `DagProcessingLogs`) in CloudWatch Logs.
+    #   `DagProcessingLogs`).
     #   @return [Boolean]
     #
     # @!attribute [rw] log_level
-    #   Defines the Apache Airflow logs to send for the log type (e.g.
-    #   `DagProcessingLogs`) to CloudWatch Logs. Valid values: `CRITICAL`,
-    #   `ERROR`, `WARNING`, `INFO`.
+    #   Defines the Apache Airflow log level (e.g. `INFO`) to send to
+    #   CloudWatch Logs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/ModuleLoggingConfigurationInput AWS API Documentation
@@ -1099,9 +1104,9 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The VPC networking components used to secure and enable network
-    # traffic between the AWS resources for your environment. To learn more,
-    # see [About networking on Amazon MWAA][1].
+    # Describes the VPC networking components used to secure and enable
+    # network traffic between the Amazon Web Services resources for your
+    # environment. To learn more, see [About networking on Amazon MWAA][1].
     #
     #
     #
@@ -1116,10 +1121,8 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] security_group_ids
-    #   A list of 1 or more security group IDs. Accepts up to 5 security
-    #   group IDs. A security group must be attached to the same VPC as the
-    #   subnets. To learn more, see [Security in your VPC on Amazon
-    #   MWAA][1].
+    #   A list of security group IDs. To learn more, see [Security in your
+    #   VPC on Amazon MWAA][1].
     #
     #
     #
@@ -1127,9 +1130,12 @@ module Aws::MWAA
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   A list of 2 subnet IDs. **Required** to create an environment. Must
-    #   be private subnets in two different availability zones. A subnet
-    #   must be attached to the same VPC as the security group.
+    #   A list of subnet IDs. To learn more, see [About networking on Amazon
+    #   MWAA][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/NetworkConfiguration AWS API Documentation
@@ -1169,12 +1175,17 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] environment_name
-    #   Publishes environment metric data to Amazon CloudWatch.
+    #   **Internal only**. The name of the environment.
     #   @return [String]
     #
     # @!attribute [rw] metric_data
-    #   Publishes metric data points to Amazon CloudWatch. CloudWatch
-    #   associates the data points with the specified metrica.
+    #   **Internal only**. Publishes metrics to Amazon CloudWatch. To learn
+    #   more about the metrics published to Amazon CloudWatch, see [Amazon
+    #   MWAA performance metrics in Amazon CloudWatch][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #   @return [Array<Types::MetricDatum>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/PublishMetricsInput AWS API Documentation
@@ -1203,7 +1214,14 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # Internal only API.
+    # **Internal only**. Represents a set of statistics that describe a
+    # specific metric. To learn more about the metrics published to Amazon
+    # CloudWatch, see [Amazon MWAA performance metrics in Amazon
+    # CloudWatch][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
     #
     # @note When making an API call, you may pass StatisticSet
     #   data as a hash:
@@ -1216,19 +1234,19 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] maximum
-    #   Internal only API.
+    #   **Internal only**. The maximum value of the sample set.
     #   @return [Float]
     #
     # @!attribute [rw] minimum
-    #   Internal only API.
+    #   **Internal only**. The minimum value of the sample set.
     #   @return [Float]
     #
     # @!attribute [rw] sample_count
-    #   Internal only API.
+    #   **Internal only**. The number of samples used for the statistic set.
     #   @return [Integer]
     #
     # @!attribute [rw] sum
-    #   Internal only API.
+    #   **Internal only**. The sum of values for the sample set.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/StatisticSet AWS API Documentation
@@ -1261,7 +1279,7 @@ module Aws::MWAA
     # @!attribute [rw] tags
     #   The key-value tag pairs you want to associate to your environment.
     #   For example, `"Environment": "Staging"`. To learn more, see [Tagging
-    #   AWS resources][1].
+    #   Amazon Web Services resources][1].
     #
     #
     #
@@ -1373,9 +1391,9 @@ module Aws::MWAA
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] airflow_version
-    #   The Apache Airflow version for your environment. For example,
-    #   `v1.10.12`. If no value is specified, defaults to the latest
-    #   version. Valid values: `v1.10.12`.
+    #   The Apache Airflow version for your environment. If no value is
+    #   specified, defaults to the latest version. Valid values: `1.10.12`,
+    #   `2.0.2`.
     #   @return [String]
     #
     # @!attribute [rw] dag_s3_path
@@ -1398,9 +1416,10 @@ module Aws::MWAA
     #
     # @!attribute [rw] execution_role_arn
     #   The Amazon Resource Name (ARN) of the execution role in IAM that
-    #   allows MWAA to access AWS resources in your environment. For
-    #   example, `arn:aws:iam::123456789:role/my-execution-role`. To learn
-    #   more, see [Amazon MWAA Execution role][1].
+    #   allows MWAA to access Amazon Web Services resources in your
+    #   environment. For example,
+    #   `arn:aws:iam::123456789:role/my-execution-role`. To learn more, see
+    #   [Amazon MWAA Execution role][1].
     #
     #
     #
@@ -1408,9 +1427,7 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] logging_configuration
-    #   Defines the Apache Airflow logs to send to CloudWatch Logs:
-    #   `DagProcessingLogs`, `SchedulerLogs`, `TaskLogs`, `WebserverLogs`,
-    #   `WorkerLogs`.
+    #   The Apache Airflow log types to send to CloudWatch Logs.
     #   @return [Types::LoggingConfigurationInput]
     #
     # @!attribute [rw] max_workers
@@ -1439,8 +1456,9 @@ module Aws::MWAA
     #
     # @!attribute [rw] network_configuration
     #   The VPC networking components used to secure and enable network
-    #   traffic between the AWS resources for your environment. To learn
-    #   more, see [About networking on Amazon MWAA][1].
+    #   traffic between the Amazon Web Services resources for your
+    #   environment. To learn more, see [About networking on Amazon
+    #   MWAA][1].
     #
     #
     #
@@ -1515,14 +1533,11 @@ module Aws::MWAA
     #   @return [String]
     #
     # @!attribute [rw] weekly_maintenance_window_start
-    #   The day and time of the week to start weekly maintenance updates of
-    #   your environment in the following format: `DAY:HH:MM`. For example:
+    #   The day and time of the week in Coordinated Universal Time (UTC)
+    #   24-hour standard time to start weekly maintenance updates of your
+    #   environment in the following format: `DAY:HH:MM`. For example:
     #   `TUE:03:30`. You can specify a start time in 30 minute increments
-    #   only. Supported input includes the following:
-    #
-    #   * MON\|TUE\|WED\|THU\|FRI\|SAT\|SUN:(\[01\]\\\\d\|2\[0-3\]):(00\|30)
-    #
-    #   ^
+    #   only.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-2020-07-01/UpdateEnvironmentInput AWS API Documentation
@@ -1564,8 +1579,8 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # An object containing the error encountered with the last update:
-    # `ErrorCode`, `ErrorMessage`.
+    # Describes the error(s) encountered with the last update of the
+    # environment.
     #
     # @!attribute [rw] error_code
     #   The error code that corresponds to the error with the last update.
@@ -1584,9 +1599,9 @@ module Aws::MWAA
       include Aws::Structure
     end
 
-    # The VPC networking components used to secure and enable network
-    # traffic between the AWS resources for your environment. To learn more,
-    # see [About networking on Amazon MWAA][1].
+    # Defines the VPC networking components used to secure and enable
+    # network traffic between the Amazon Web Services resources for your
+    # environment. To learn more, see [About networking on Amazon MWAA][1].
     #
     #
     #
@@ -1600,10 +1615,9 @@ module Aws::MWAA
     #       }
     #
     # @!attribute [rw] security_group_ids
-    #   A list of 1 or more security group IDs. Accepts up to 5 security
-    #   group IDs. A security group must be attached to the same VPC as the
-    #   subnets. To learn more, see [Security in your VPC on Amazon
-    #   MWAA][1].
+    #   A list of security group IDs. A security group must be attached to
+    #   the same VPC as the subnets. To learn more, see [Security in your
+    #   VPC on Amazon MWAA][1].
     #
     #
     #

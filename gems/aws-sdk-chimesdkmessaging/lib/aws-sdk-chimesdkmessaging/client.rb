@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::ChimeSDKMessaging
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::ChimeSDKMessaging
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::ChimeSDKMessaging
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::ChimeSDKMessaging
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::ChimeSDKMessaging
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -475,6 +486,16 @@ module Aws::ChimeSDKMessaging
     #       message_id: "MessageId", # required
     #       content: "NonEmptyContent",
     #       metadata: "Metadata",
+    #       push_notification: {
+    #         title: "PushNotificationTitle",
+    #         body: "PushNotificationBody",
+    #         type: "DEFAULT", # accepts DEFAULT, VOIP
+    #       },
+    #       message_attributes: {
+    #         "MessageAttributeName" => {
+    #           string_values: ["MessageAttributeStringValue"],
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1727,10 +1748,9 @@ module Aws::ChimeSDKMessaging
     #
     # @option params [String] :type
     #   The membership type of a user, `DEFAULT` or `HIDDEN`. Default members
-    #   are always returned as part of `ListChannelMemberships`. Hidden
-    #   members are only returned if the type filter in
-    #   `ListChannelMemberships` equals `HIDDEN`. Otherwise hidden members are
-    #   not returned.
+    #   are returned as part of `ListChannelMemberships` if no type is
+    #   specified. Hidden members are only returned if the type filter in
+    #   `ListChannelMemberships` equals `HIDDEN`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of channel memberships that you want returned.
@@ -2351,9 +2371,9 @@ module Aws::ChimeSDKMessaging
     #     client_request_token: "ClientRequestToken", # required
     #     chime_bearer: "ChimeArn", # required
     #     push_notification: {
-    #       title: "PushNotificationTitle", # required
-    #       body: "PushNotificationBody", # required
-    #       type: "DEFAULT", # required, accepts DEFAULT, VOIP
+    #       title: "PushNotificationTitle",
+    #       body: "PushNotificationBody",
+    #       type: "DEFAULT", # accepts DEFAULT, VOIP
     #     },
     #     message_attributes: {
     #       "MessageAttributeName" => {
@@ -2643,7 +2663,7 @@ module Aws::ChimeSDKMessaging
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

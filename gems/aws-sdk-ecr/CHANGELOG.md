@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.51.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2021-11-29)
+------------------
+
+* Feature - This release adds supports for pull through cache rules and enhanced scanning.
+
 1.49.0 (2021-11-04)
 ------------------
 

@@ -1050,6 +1050,7 @@ module Aws::Redshift
     DataShare.add_member(:producer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ProducerArn"))
     DataShare.add_member(:allow_publicly_accessible_consumers, Shapes::ShapeRef.new(shape: Boolean, location_name: "AllowPubliclyAccessibleConsumers"))
     DataShare.add_member(:data_share_associations, Shapes::ShapeRef.new(shape: DataShareAssociationList, location_name: "DataShareAssociations"))
+    DataShare.add_member(:managed_by, Shapes::ShapeRef.new(shape: String, location_name: "ManagedBy"))
     DataShare.struct_class = Types::DataShare
 
     DataShareAssociation.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerIdentifier"))

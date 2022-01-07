@@ -33,6 +33,7 @@ module Aws::FSx
   # * {BackupNotFound}
   # * {BackupRestoring}
   # * {BadRequest}
+  # * {DataRepositoryAssociationNotFound}
   # * {DataRepositoryTaskEnded}
   # * {DataRepositoryTaskExecuting}
   # * {DataRepositoryTaskNotFound}
@@ -40,6 +41,7 @@ module Aws::FSx
   # * {IncompatibleParameterError}
   # * {IncompatibleRegionForMultiAZ}
   # * {InternalServerError}
+  # * {InvalidDataRepositoryType}
   # * {InvalidDestinationKmsKey}
   # * {InvalidExportPath}
   # * {InvalidImportPath}
@@ -53,6 +55,7 @@ module Aws::FSx
   # * {ResourceDoesNotSupportTagging}
   # * {ResourceNotFound}
   # * {ServiceLimitExceeded}
+  # * {SnapshotNotFound}
   # * {SourceBackupUnavailable}
   # * {StorageVirtualMachineNotFound}
   # * {UnsupportedOperation}
@@ -174,6 +177,21 @@ module Aws::FSx
       end
     end
 
+    class DataRepositoryAssociationNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::DataRepositoryAssociationNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class DataRepositoryTaskEnded < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -274,6 +292,21 @@ module Aws::FSx
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::FSx::Types::InternalServerError] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidDataRepositoryType < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::InvalidDataRepositoryType] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -506,6 +539,21 @@ module Aws::FSx
       # @return [String]
       def limit
         @data[:limit]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class SnapshotNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::FSx::Types::SnapshotNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
       end
 
       # @return [String]

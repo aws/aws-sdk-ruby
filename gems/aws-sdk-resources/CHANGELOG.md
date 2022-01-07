@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+3.124.0 (2021-12-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-amplifyuibuilder` gem.
+
+3.123.0 (2021-11-30)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-workspacesweb` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-iottwinmaker` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-backupgateway` gem.
+
+3.122.0 (2021-11-29)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-recyclebin` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-inspector2` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchrum` gem.
+
+* Feature - Added a dependency on the new `aws-sdk-cloudwatchevidently` gem.
+
 3.121.0 (2021-11-29)
 ------------------
 

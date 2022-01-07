@@ -1696,6 +1696,682 @@ module Aws::Kafka
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListClustersV2Request
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name_filter: "__string",
+    #         cluster_type_filter: "__string",
+    #         max_results: 1,
+    #         next_token: "__string",
+    #       }
+    #
+    # @!attribute [rw] cluster_name_filter
+    #   Specify a prefix of the names of the clusters that you want to list.
+    #   The service lists all the clusters whose names start with this
+    #   prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type_filter
+    #   Specify either PROVISIONED or SERVERLESS.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If there
+    #   are more results, the response includes a NextToken parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The paginated results marker. When the result of the operation is
+    #   truncated, the call returns NextToken in the response. To get the
+    #   next batch, provide this token in your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClustersV2Request AWS API Documentation
+    #
+    class ListClustersV2Request < Struct.new(
+      :cluster_name_filter,
+      :cluster_type_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response contains an array containing cluster information and a
+    # next token if the response is truncated.
+    #
+    # @!attribute [rw] cluster_info_list
+    #   Information on each of the MSK clusters in the response.
+    #   @return [Array<Types::Cluster>]
+    #
+    # @!attribute [rw] next_token
+    #   The paginated results marker. When the result of a ListClusters
+    #   operation is truncated, the call returns NextToken in the response.
+    #   To get another batch of clusters, provide this token in your next
+    #   request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ListClustersV2Response AWS API Documentation
+    #
+    class ListClustersV2Response < Struct.new(
+      :cluster_info_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a new Amazon MSK cluster of either the provisioned or the
+    # serverless type.
+    #
+    # @note When making an API call, you may pass CreateClusterV2Request
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_name: "__stringMin1Max64", # required
+    #         tags: {
+    #           "__string" => "__string",
+    #         },
+    #         provisioned: {
+    #           broker_node_group_info: { # required
+    #             broker_az_distribution: "DEFAULT", # accepts DEFAULT
+    #             client_subnets: ["__string"], # required
+    #             instance_type: "__stringMin5Max32", # required
+    #             security_groups: ["__string"],
+    #             storage_info: {
+    #               ebs_storage_info: {
+    #                 volume_size: 1,
+    #               },
+    #             },
+    #             connectivity_info: {
+    #               public_access: {
+    #                 type: "__string",
+    #               },
+    #             },
+    #           },
+    #           client_authentication: {
+    #             sasl: {
+    #               scram: {
+    #                 enabled: false,
+    #               },
+    #               iam: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #             tls: {
+    #               certificate_authority_arn_list: ["__string"],
+    #               enabled: false,
+    #             },
+    #             unauthenticated: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           configuration_info: {
+    #             arn: "__string", # required
+    #             revision: 1, # required
+    #           },
+    #           encryption_info: {
+    #             encryption_at_rest: {
+    #               data_volume_kms_key_id: "__string", # required
+    #             },
+    #             encryption_in_transit: {
+    #               client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
+    #               in_cluster: false,
+    #             },
+    #           },
+    #           enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
+    #           open_monitoring: {
+    #             prometheus: { # required
+    #               jmx_exporter: {
+    #                 enabled_in_broker: false, # required
+    #               },
+    #               node_exporter: {
+    #                 enabled_in_broker: false, # required
+    #               },
+    #             },
+    #           },
+    #           kafka_version: "__stringMin1Max128", # required
+    #           logging_info: {
+    #             broker_logs: { # required
+    #               cloud_watch_logs: {
+    #                 enabled: false, # required
+    #                 log_group: "__string",
+    #               },
+    #               firehose: {
+    #                 delivery_stream: "__string",
+    #                 enabled: false, # required
+    #               },
+    #               s3: {
+    #                 bucket: "__string",
+    #                 enabled: false, # required
+    #                 prefix: "__string",
+    #               },
+    #             },
+    #           },
+    #           number_of_broker_nodes: 1, # required
+    #         },
+    #         serverless: {
+    #           vpc_configs: [ # required
+    #             {
+    #               subnet_ids: ["__string"], # required
+    #               security_group_ids: ["__string"],
+    #             },
+    #           ],
+    #           client_authentication: {
+    #             sasl: {
+    #               iam: {
+    #                 enabled: false,
+    #               },
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags that you want the cluster to have.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] provisioned
+    #   Creates a provisioned cluster.
+    #   @return [Types::ProvisionedRequest]
+    #
+    # @!attribute [rw] serverless
+    #   Creates a serverless cluster.
+    #   @return [Types::ServerlessRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterV2Request AWS API Documentation
+    #
+    class CreateClusterV2Request < Struct.new(
+      :cluster_name,
+      :tags,
+      :provisioned,
+      :serverless)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about the created cluster of either the
+    # provisioned or the serverless type.
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   The type of the cluster. The possible types are PROVISIONED or
+    #   SERVERLESS.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/CreateClusterV2Response AWS API Documentation
+    #
+    class CreateClusterV2Response < Struct.new(
+      :cluster_arn,
+      :cluster_name,
+      :state,
+      :cluster_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClusterV2Request
+    #   data as a hash:
+    #
+    #       {
+    #         cluster_arn: "__string", # required
+    #       }
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterV2Request AWS API Documentation
+    #
+    class DescribeClusterV2Request < Struct.new(
+      :cluster_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about a cluster of either the provisioned or the
+    # serverless type.
+    #
+    # @!attribute [rw] cluster_info
+    #   The cluster information.
+    #   @return [Types::Cluster]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/DescribeClusterV2Response AWS API Documentation
+    #
+    class DescribeClusterV2Response < Struct.new(
+      :cluster_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns information about a cluster of either the provisioned or the
+    # serverless type.
+    #
+    # @!attribute [rw] active_operation_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies a cluster
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_type
+    #   Cluster Type.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] cluster_name
+    #   The name of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the cluster was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] current_version
+    #   The current version of the MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the cluster. The possible states are ACTIVE, CREATING,
+    #   DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING\_BROKER, and
+    #   UPDATING.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_info
+    #   State Info for the Amazon MSK cluster.
+    #   @return [Types::StateInfo]
+    #
+    # @!attribute [rw] tags
+    #   Tags attached to the cluster.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] provisioned
+    #   Information about the provisioned cluster.
+    #   @return [Types::Provisioned]
+    #
+    # @!attribute [rw] serverless
+    #   Information about the serverless cluster.
+    #   @return [Types::Serverless]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Cluster AWS API Documentation
+    #
+    class Cluster < Struct.new(
+      :active_operation_arn,
+      :cluster_type,
+      :cluster_arn,
+      :cluster_name,
+      :creation_time,
+      :current_version,
+      :state,
+      :state_info,
+      :tags,
+      :provisioned,
+      :serverless)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates a provisioned cluster.
+    #
+    # @note When making an API call, you may pass ProvisionedRequest
+    #   data as a hash:
+    #
+    #       {
+    #         broker_node_group_info: { # required
+    #           broker_az_distribution: "DEFAULT", # accepts DEFAULT
+    #           client_subnets: ["__string"], # required
+    #           instance_type: "__stringMin5Max32", # required
+    #           security_groups: ["__string"],
+    #           storage_info: {
+    #             ebs_storage_info: {
+    #               volume_size: 1,
+    #             },
+    #           },
+    #           connectivity_info: {
+    #             public_access: {
+    #               type: "__string",
+    #             },
+    #           },
+    #         },
+    #         client_authentication: {
+    #           sasl: {
+    #             scram: {
+    #               enabled: false,
+    #             },
+    #             iam: {
+    #               enabled: false,
+    #             },
+    #           },
+    #           tls: {
+    #             certificate_authority_arn_list: ["__string"],
+    #             enabled: false,
+    #           },
+    #           unauthenticated: {
+    #             enabled: false,
+    #           },
+    #         },
+    #         configuration_info: {
+    #           arn: "__string", # required
+    #           revision: 1, # required
+    #         },
+    #         encryption_info: {
+    #           encryption_at_rest: {
+    #             data_volume_kms_key_id: "__string", # required
+    #           },
+    #           encryption_in_transit: {
+    #             client_broker: "TLS", # accepts TLS, TLS_PLAINTEXT, PLAINTEXT
+    #             in_cluster: false,
+    #           },
+    #         },
+    #         enhanced_monitoring: "DEFAULT", # accepts DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, PER_TOPIC_PER_PARTITION
+    #         open_monitoring: {
+    #           prometheus: { # required
+    #             jmx_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #             node_exporter: {
+    #               enabled_in_broker: false, # required
+    #             },
+    #           },
+    #         },
+    #         kafka_version: "__stringMin1Max128", # required
+    #         logging_info: {
+    #           broker_logs: { # required
+    #             cloud_watch_logs: {
+    #               enabled: false, # required
+    #               log_group: "__string",
+    #             },
+    #             firehose: {
+    #               delivery_stream: "__string",
+    #               enabled: false, # required
+    #             },
+    #             s3: {
+    #               bucket: "__string",
+    #               enabled: false, # required
+    #               prefix: "__string",
+    #             },
+    #           },
+    #         },
+    #         number_of_broker_nodes: 1, # required
+    #       }
+    #
+    # @!attribute [rw] broker_node_group_info
+    #   Information about the brokers.
+    #   @return [Types::BrokerNodeGroupInfo]
+    #
+    # @!attribute [rw] client_authentication
+    #   Includes all client authentication related information.
+    #   @return [Types::ClientAuthentication]
+    #
+    # @!attribute [rw] configuration_info
+    #   Represents the configuration that you want MSK to use for the
+    #   cluster.
+    #   @return [Types::ConfigurationInfo]
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes all encryption-related information.
+    #   @return [Types::EncryptionInfo]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies the level of monitoring for the MSK cluster. The possible
+    #   values are DEFAULT, PER\_BROKER, PER\_TOPIC\_PER\_BROKER, and
+    #   PER\_TOPIC\_PER\_PARTITION.
+    #   @return [String]
+    #
+    # @!attribute [rw] open_monitoring
+    #   The settings for open monitoring.
+    #   @return [Types::OpenMonitoringInfo]
+    #
+    # @!attribute [rw] kafka_version
+    #   The Apache Kafka version that you want for the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_info
+    #   LoggingInfo details.
+    #   @return [Types::LoggingInfo]
+    #
+    # @!attribute [rw] number_of_broker_nodes
+    #   The number of brokers in the cluster.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ProvisionedRequest AWS API Documentation
+    #
+    class ProvisionedRequest < Struct.new(
+      :broker_node_group_info,
+      :client_authentication,
+      :configuration_info,
+      :encryption_info,
+      :enhanced_monitoring,
+      :open_monitoring,
+      :kafka_version,
+      :logging_info,
+      :number_of_broker_nodes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the provisioned cluster.
+    #
+    # @!attribute [rw] broker_node_group_info
+    #   Information about the brokers.
+    #   @return [Types::BrokerNodeGroupInfo]
+    #
+    # @!attribute [rw] current_broker_software_info
+    #   Information about the version of software currently deployed on the
+    #   Apache Kafka brokers in the cluster.
+    #   @return [Types::BrokerSoftwareInfo]
+    #
+    # @!attribute [rw] client_authentication
+    #   Includes all client authentication information.
+    #   @return [Types::ClientAuthentication]
+    #
+    # @!attribute [rw] encryption_info
+    #   Includes all encryption-related information.
+    #   @return [Types::EncryptionInfo]
+    #
+    # @!attribute [rw] enhanced_monitoring
+    #   Specifies which metrics are gathered for the MSK cluster. This
+    #   property has the following possible values: DEFAULT, PER\_BROKER,
+    #   PER\_TOPIC\_PER\_BROKER, and PER\_TOPIC\_PER\_PARTITION. For a list
+    #   of the metrics associated with each of these levels of monitoring,
+    #   see [Monitoring][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html
+    #   @return [String]
+    #
+    # @!attribute [rw] open_monitoring
+    #   Settings for open monitoring using Prometheus.
+    #   @return [Types::OpenMonitoringInfo]
+    #
+    # @!attribute [rw] logging_info
+    #   You can configure your MSK cluster to send broker logs to different
+    #   destination types. This is a container for the configuration details
+    #   related to broker logs.
+    #   @return [Types::LoggingInfo]
+    #
+    # @!attribute [rw] number_of_broker_nodes
+    #   The number of brokers in the cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] zookeeper_connect_string
+    #   The connection string to use to connect to the Apache ZooKeeper
+    #   cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] zookeeper_connect_string_tls
+    #   The connection string to use to connect to the Apache ZooKeeper
+    #   cluster on a TLS port.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Provisioned AWS API Documentation
+    #
+    class Provisioned < Struct.new(
+      :broker_node_group_info,
+      :current_broker_software_info,
+      :client_authentication,
+      :encryption_info,
+      :enhanced_monitoring,
+      :open_monitoring,
+      :logging_info,
+      :number_of_broker_nodes,
+      :zookeeper_connect_string,
+      :zookeeper_connect_string_tls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of the Amazon VPCs for the cluster.
+    #
+    # @note When making an API call, you may pass VpcConfig
+    #   data as a hash:
+    #
+    #       {
+    #         subnet_ids: ["__string"], # required
+    #         security_group_ids: ["__string"],
+    #       }
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of the subnets associated with the cluster.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups associated with the cluster.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/VpcConfig AWS API Documentation
+    #
+    class VpcConfig < Struct.new(
+      :subnet_ids,
+      :security_group_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Creates serverless cluster.
+    #
+    # @note When making an API call, you may pass ServerlessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_configs: [ # required
+    #           {
+    #             subnet_ids: ["__string"], # required
+    #             security_group_ids: ["__string"],
+    #           },
+    #         ],
+    #         client_authentication: {
+    #           sasl: {
+    #             iam: {
+    #               enabled: false,
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] vpc_configs
+    #   Information on vpc config for the serverless cluster.
+    #   @return [Array<Types::VpcConfig>]
+    #
+    # @!attribute [rw] client_authentication
+    #   Information about the serverless cluster client authentication.
+    #   @return [Types::ServerlessClientAuthentication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ServerlessRequest AWS API Documentation
+    #
+    class ServerlessRequest < Struct.new(
+      :vpc_configs,
+      :client_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the serverless cluster client authentication.
+    #
+    # @note When making an API call, you may pass ServerlessClientAuthentication
+    #   data as a hash:
+    #
+    #       {
+    #         sasl: {
+    #           iam: {
+    #             enabled: false,
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sasl
+    #   Serverless cluster SASL information.
+    #   @return [Types::ServerlessSasl]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ServerlessClientAuthentication AWS API Documentation
+    #
+    class ServerlessClientAuthentication < Struct.new(
+      :sasl)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the serverless cluster SASL information.
+    #
+    # @note When making an API call, you may pass ServerlessSasl
+    #   data as a hash:
+    #
+    #       {
+    #         iam: {
+    #           enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] iam
+    #   Indicates whether IAM access control is enabled.
+    #   @return [Types::Iam]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ServerlessSasl AWS API Documentation
+    #
+    class ServerlessSasl < Struct.new(
+      :iam)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the serverless cluster.
+    #
+    # @!attribute [rw] vpc_configs
+    #   Information on vpc config for the serverless cluster.
+    #   @return [Array<Types::VpcConfig>]
+    #
+    # @!attribute [rw] client_authentication
+    #   Information about the serverless cluster client authentication.
+    #   @return [Types::ServerlessClientAuthentication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/Serverless AWS API Documentation
+    #
+    class Serverless < Struct.new(
+      :vpc_configs,
+      :client_authentication)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListClustersRequest
     #   data as a hash:
     #

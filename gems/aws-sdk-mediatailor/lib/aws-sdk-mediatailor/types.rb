@@ -385,9 +385,10 @@ module Aws::MediaTailor
     #   @return [Time]
     #
     # @!attribute [rw] filler_slate
-    #   Contains information about the slate used to fill gaps between
-    #   programs in the schedule. You must configure FillerSlate if your
-    #   channel uses an LINEAR PlaybackMode.
+    #   The slate used to fill gaps between programs in the schedule. You
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] last_modified_time
@@ -525,8 +526,9 @@ module Aws::MediaTailor
     #
     # @!attribute [rw] filler_slate
     #   The slate used to fill gaps between programs in the schedule. You
-    #   must configure filler slate if your channel uses a LINEAR
-    #   PlaybackMode.
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
     #   @return [Types::SlateSource]
     #
     # @!attribute [rw] outputs
@@ -3611,6 +3613,10 @@ module Aws::MediaTailor
     #
     #       {
     #         channel_name: "__string", # required
+    #         filler_slate: {
+    #           source_location_name: "__string",
+    #           vod_source_name: "__string",
+    #         },
     #         outputs: [ # required
     #           {
     #             dash_playlist_settings: {
@@ -3631,6 +3637,13 @@ module Aws::MediaTailor
     # @!attribute [rw] channel_name
     #   @return [String]
     #
+    # @!attribute [rw] filler_slate
+    #   The slate used to fill gaps between programs in the schedule. You
+    #   must configure filler slate if your channel uses the LINEAR
+    #   PlaybackMode. MediaTailor doesn't support filler slate for channels
+    #   using the LOOP PlaybackMode.
+    #   @return [Types::SlateSource]
+    #
     # @!attribute [rw] outputs
     #   The channel's output properties.
     #   @return [Array<Types::RequestOutputItem>]
@@ -3639,6 +3652,7 @@ module Aws::MediaTailor
     #
     class UpdateChannelRequest < Struct.new(
       :channel_name,
+      :filler_slate,
       :outputs)
       SENSITIVE = []
       include Aws::Structure

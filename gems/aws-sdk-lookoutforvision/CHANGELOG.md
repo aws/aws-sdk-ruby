@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.10.0 (2021-12-08)
+------------------
+
+* Feature - This release adds new APIs for packaging an Amazon Lookout for Vision model as an AWS IoT Greengrass component.
+
+1.9.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2021-11-04)
 ------------------
 

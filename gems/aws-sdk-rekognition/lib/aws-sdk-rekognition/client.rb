@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Rekognition
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::Rekognition
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Rekognition
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::Rekognition
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::Rekognition
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -373,7 +384,7 @@ module Aws::Rekognition
     # In response, the operation returns an array of face matches ordered by
     # similarity score in descending order. For each face match, the
     # response provides a bounding box of the face, facial landmarks, pose
-    # details (pitch, role, and yaw), quality (brightness and sharpness),
+    # details (pitch, roll, and yaw), quality (brightness and sharpness),
     # and confidence value (indicating the level of confidence that the
     # bounding box contains a face). The response also provides a similarity
     # score, which indicates how closely the faces match.
@@ -2222,9 +2233,8 @@ module Aws::Rekognition
     # information about a single word or line of text that was detected in
     # the image.
     #
-    # A word is one or more ISO basic latin script characters that are not
-    # separated by spaces. `DetectText` can detect up to 100 words in an
-    # image.
+    # A word is one or more script characters that are not separated by
+    # spaces. `DetectText` can detect up to 100 words in an image.
     #
     # A line is a string of equally spaced words. A line isn't necessarily
     # a complete sentence. For example, a driver's license number is
@@ -2395,7 +2405,7 @@ module Aws::Rekognition
     #   resp.urls #=> Array
     #   resp.urls[0] #=> String
     #   resp.name #=> String
-    #   resp.known_gender.type #=> String, one of "Male", "Female"
+    #   resp.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #
     # @overload get_celebrity_info(params = {})
     # @param [Hash] params ({})
@@ -2557,7 +2567,7 @@ module Aws::Rekognition
     #   resp.celebrities[0].celebrity.face.quality.brightness #=> Float
     #   resp.celebrities[0].celebrity.face.quality.sharpness #=> Float
     #   resp.celebrities[0].celebrity.face.confidence #=> Float
-    #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female"
+    #   resp.celebrities[0].celebrity.known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #
     # @overload get_celebrity_recognition(params = {})
     # @param [Hash] params ({})
@@ -2935,6 +2945,7 @@ module Aws::Rekognition
     #   resp.persons[0].face_matches[0].face.image_id #=> String
     #   resp.persons[0].face_matches[0].face.external_image_id #=> String
     #   resp.persons[0].face_matches[0].face.confidence #=> Float
+    #   resp.persons[0].face_matches[0].face.index_faces_model_version #=> String
     #
     # @overload get_face_search(params = {})
     # @param [Hash] params ({})
@@ -3502,9 +3513,9 @@ module Aws::Rekognition
     # `detectionAttributes` parameter), Amazon Rekognition returns detailed
     # facial attributes, such as facial landmarks (for example, location of
     # eye and mouth) and other facial attributes. If you provide the same
-    # image, specify the same collection, and use the same external ID in
-    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
-    # face metadata.
+    # image, specify the same collection, use the same external ID, and use
+    # the same model version in the `IndexFaces` operation, Amazon
+    # Rekognition doesn't save duplicate face metadata.
     #
     #
     #
@@ -3757,6 +3768,7 @@ module Aws::Rekognition
     #   resp.face_records[0].face.image_id #=> String
     #   resp.face_records[0].face.external_image_id #=> String
     #   resp.face_records[0].face.confidence #=> Float
+    #   resp.face_records[0].face.index_faces_model_version #=> String
     #   resp.face_records[0].face_detail.bounding_box.width #=> Float
     #   resp.face_records[0].face_detail.bounding_box.height #=> Float
     #   resp.face_records[0].face_detail.bounding_box.left #=> Float
@@ -4235,6 +4247,7 @@ module Aws::Rekognition
     #   resp.faces[0].image_id #=> String
     #   resp.faces[0].external_image_id #=> String
     #   resp.faces[0].confidence #=> Float
+    #   resp.faces[0].index_faces_model_version #=> String
     #   resp.next_token #=> String
     #   resp.face_model_version #=> String
     #
@@ -4409,7 +4422,7 @@ module Aws::Rekognition
     #   resp.celebrity_faces[0].face.smile.value #=> Boolean
     #   resp.celebrity_faces[0].face.smile.confidence #=> Float
     #   resp.celebrity_faces[0].match_confidence #=> Float
-    #   resp.celebrity_faces[0].known_gender.type #=> String, one of "Male", "Female"
+    #   resp.celebrity_faces[0].known_gender.type #=> String, one of "Male", "Female", "Nonbinary", "Unlisted"
     #   resp.unrecognized_faces #=> Array
     #   resp.unrecognized_faces[0].bounding_box.width #=> Float
     #   resp.unrecognized_faces[0].bounding_box.height #=> Float
@@ -4567,6 +4580,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.index_faces_model_version #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces(params = {})
@@ -4749,6 +4763,7 @@ module Aws::Rekognition
     #   resp.face_matches[0].face.image_id #=> String
     #   resp.face_matches[0].face.external_image_id #=> String
     #   resp.face_matches[0].face.confidence #=> Float
+    #   resp.face_matches[0].face.index_faces_model_version #=> String
     #   resp.face_model_version #=> String
     #
     # @overload search_faces_by_image(params = {})
@@ -5703,7 +5718,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

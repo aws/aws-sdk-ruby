@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::FSx
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::FSx
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::FSx
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::FSx
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::FSx
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -471,14 +482,17 @@ module Aws::FSx
     # to five backup copy requests in progress to a single destination
     # Region per account.
     #
-    # You can use cross-Region backup copies for cross-region disaster
-    # recovery. You periodically take backups and copy them to another
+    # You can use cross-Region backup copies for cross-Region disaster
+    # recovery. You can periodically take backups and copy them to another
     # Region so that in the event of a disaster in the primary Region, you
     # can restore from backup and recover availability quickly in the other
     # Region. You can make cross-Region copies only within your Amazon Web
-    # Services partition.
+    # Services partition. A partition is a grouping of Regions. Amazon Web
+    # Services currently has three partitions: `aws` (Standard Regions),
+    # `aws-cn` (China Regions), and `aws-us-gov` (Amazon Web Services
+    # GovCloud \[US\] Regions).
     #
-    # You can also use backup copies to clone your file data set to another
+    # You can also use backup copies to clone your file dataset to another
     # Region or within the same Region.
     #
     # You can use the `SourceRegion` parameter to specify the Amazon Web
@@ -489,14 +503,16 @@ module Aws::FSx
     # specify a Region, the backup copy is created in the same Region where
     # the request is sent from (in-Region copy).
     #
-    # For more information on creating backup copies, see [ Copying
-    # backups][1] in the *Amazon FSx for Windows User Guide* and [Copying
-    # backups][2] in the *Amazon FSx for Lustre User Guide*.
+    # For more information about creating backup copies, see [ Copying
+    # backups][1] in the *Amazon FSx for Windows User Guide*, [Copying
+    # backups][2] in the *Amazon FSx for Lustre User Guide*, and [Copying
+    # backups][3] in the *Amazon FSx for OpenZFS User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups
     # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups
+    # [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -508,40 +524,40 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :source_backup_id
-    #   The ID of the source backup. Specifies the ID of the backup that is
+    #   The ID of the source backup. Specifies the ID of the backup that's
     #   being copied.
     #
     # @option params [String] :source_region
     #   The source Amazon Web Services Region of the backup. Specifies the
     #   Amazon Web Services Region from which the backup is being copied. The
     #   source and destination Regions must be in the same Amazon Web Services
-    #   partition. If you don't specify a Region, it defaults to the Region
-    #   where the request is sent from (in-Region copy).
+    #   partition. If you don't specify a Region, `SourceRegion` defaults to
+    #   the Region where the request is sent from (in-Region copy).
     #
     # @option params [String] :kms_key_id
     #   The ID of the Key Management Service (KMS) key used to encrypt the
     #   file system's data for Amazon FSx for Windows File Server file
     #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
-    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
-    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
-    #   Management Service API Reference*.
+    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
+    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
+    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
+    #   encrypted at rest using Amazon FSx-managed keys. For more information,
+    #   see [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [Boolean] :copy_tags
-    #   A boolean flag indicating whether tags from the source backup should
-    #   be copied to the backup copy. This value defaults to false.
+    #   A Boolean flag indicating whether tags from the source backup should
+    #   be copied to the backup copy. This value defaults to `false`.
     #
-    #   If you set `CopyTags` to true and the source backup has existing tags,
-    #   you can use the `Tags` parameter to create new tags, provided that the
-    #   sum of the source backup tags and the new tags doesn't exceed 50.
-    #   Both sets of tags are merged. If there are tag conflicts (for example,
-    #   two tags with the same key but different values), the tags created
-    #   with the `Tags` parameter take precedence.
+    #   If you set `CopyTags` to `true` and the source backup has existing
+    #   tags, you can use the `Tags` parameter to create new tags, provided
+    #   that the sum of the source backup tags and the new tags doesn't
+    #   exceed 50. Both sets of tags are merged. If there are tag conflicts
+    #   (for example, two tags with the same key but different values), the
+    #   tags created with the `Tags` parameter take precedence.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of `Tag` values, with a maximum of 50 elements.
@@ -624,7 +640,7 @@ module Aws::FSx
     #   resp.backup.file_system.owner_id #=> String
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
-    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
@@ -665,13 +681,13 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
     #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -679,8 +695,10 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backup.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backup.file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -688,7 +706,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -706,8 +724,37 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -726,6 +773,16 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
+    #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -735,7 +792,7 @@ module Aws::FSx
     #   resp.backup.resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
     #   resp.backup.volume.creation_time #=> Time
     #   resp.backup.volume.file_system_id #=> String
-    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backup.volume.name #=> String
     #   resp.backup.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backup.volume.ontap_configuration.junction_path #=> String
@@ -753,8 +810,132 @@ module Aws::FSx
     #   resp.backup.volume.tags[0].key #=> String
     #   resp.backup.volume.tags[0].value #=> String
     #   resp.backup.volume.volume_id #=> String
-    #   resp.backup.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.administrative_actions #=> Array
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backup.volume.administrative_actions[0].request_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
+    #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backup.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backup.volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CopyBackup AWS API Documentation
     #
@@ -765,18 +946,19 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a backup of an existing Amazon FSx for Windows File Server or
-    # Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp
-    # ONTAP volume. Creating regular backups is a best practice, enabling
-    # you to restore a file system or volume from a backup if an issue
-    # arises with the original file system or volume.
+    # Creates a backup of an existing Amazon FSx for Windows File Server
+    # file system, Amazon FSx for Lustre file system, Amazon FSx for NetApp
+    # ONTAP volume, or Amazon FSx for OpenZFS file system. We recommend
+    # creating regular backups so that you can restore a file system or
+    # volume from a backup if an issue arises with the original file system
+    # or volume.
     #
     # For Amazon FSx for Lustre file systems, you can create a backup only
-    # for file systems with the following configuration:
+    # for file systems that have the following configuration:
     #
-    # * a Persistent deployment type
+    # * A Persistent deployment type
     #
-    # * is *not* linked to a data repository.
+    # * Are *not* linked to a data repository
     #
     # For more information about backups, see the following:
     #
@@ -789,10 +971,13 @@ module Aws::FSx
     # * For Amazon FSx for NetApp ONTAP, see [Working with FSx for NetApp
     #   ONTAP backups][3].
     #
-    # If a backup with the specified client request token exists, and the
+    # * For Amazon FSx for OpenZFS, see [Working with FSx for OpenZFS
+    #   backups][4].
+    #
+    # If a backup with the specified client request token exists and the
     # parameters match, this operation returns the description of the
-    # existing backup. If a backup specified client request token exists,
-    # and the parameters don't match, this operation returns
+    # existing backup. If a backup with the specified client request token
+    # exists and the parameters don't match, this operation returns
     # `IncompatibleParameterError`. If a backup with the specified client
     # request token doesn't exist, `CreateBackup` does the following:
     #
@@ -810,14 +995,16 @@ module Aws::FSx
     #
     # The `CreateBackup` operation returns while the backup's lifecycle
     # state is still `CREATING`. You can check the backup creation status by
-    # calling the DescribeBackups operation, which returns the backup state
-    # along with other information.
+    # calling the [DescribeBackups][5] operation, which returns the backup
+    # state along with other information.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html
     # [2]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html
     # [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html
+    # [4]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html
+    # [5]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeBackups.html
     #
     # @option params [String] :file_system_id
     #   The ID of the file system to back up.
@@ -834,12 +1021,12 @@ module Aws::FSx
     # @option params [Array<Types::Tag>] :tags
     #   (Optional) The tags to apply to the backup at backup creation. The key
     #   value of the `Name` tag appears in the console as the backup name. If
-    #   you have set `CopyTagsToBackups` to true, and you specify one or more
-    #   tags using the `CreateBackup` action, no existing file system tags are
-    #   copied from the file system to the backup.
+    #   you have set `CopyTagsToBackups` to `true`, and you specify one or
+    #   more tags using the `CreateBackup` operation, no existing file system
+    #   tags are copied from the file system to the backup.
     #
     # @option params [String] :volume_id
-    #   The ID of he FSx for NetApp ONTAP volume to back up.
+    #   (Optional) The ID of the FSx for ONTAP volume to back up.
     #
     # @return [Types::CreateBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -919,7 +1106,7 @@ module Aws::FSx
     #   resp.backup.file_system.owner_id #=> String
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
-    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
@@ -960,13 +1147,13 @@ module Aws::FSx
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backup.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backup.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backup.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.backup.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backup.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.backup.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backup.file_system.lustre_configuration.mount_name #=> String
     #   resp.backup.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -974,8 +1161,10 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backup.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backup.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backup.file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
-    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backup.file_system.administrative_actions[0].request_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -983,7 +1172,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -1001,8 +1190,37 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backup.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -1021,6 +1239,16 @@ module Aws::FSx
     #   resp.backup.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backup.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backup.file_system.file_system_type_version #=> String
+    #   resp.backup.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backup.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backup.directory_information.domain_name #=> String
     #   resp.backup.directory_information.active_directory_id #=> String
     #   resp.backup.directory_information.resource_arn #=> String
@@ -1030,7 +1258,7 @@ module Aws::FSx
     #   resp.backup.resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
     #   resp.backup.volume.creation_time #=> Time
     #   resp.backup.volume.file_system_id #=> String
-    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backup.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backup.volume.name #=> String
     #   resp.backup.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backup.volume.ontap_configuration.junction_path #=> String
@@ -1048,8 +1276,132 @@ module Aws::FSx
     #   resp.backup.volume.tags[0].key #=> String
     #   resp.backup.volume.tags[0].value #=> String
     #   resp.backup.volume.volume_id #=> String
-    #   resp.backup.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backup.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backup.volume.lifecycle_transition_reason.message #=> String
+    #   resp.backup.volume.administrative_actions #=> Array
+    #   resp.backup.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backup.volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backup.volume.administrative_actions[0].request_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.backup.volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backup.volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
+    #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backup.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backup.volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backup.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateBackup AWS API Documentation
     #
@@ -1060,12 +1412,146 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Creates an Amazon FSx for Lustre data repository association (DRA). A
+    # data repository association is a link between a directory on the file
+    # system and an Amazon S3 bucket or prefix. You can have a maximum of 8
+    # data repository associations on a file system. Data repository
+    # associations are supported only for file systems with the
+    # `Persistent_2` deployment type.
+    #
+    # Each data repository association must have a unique Amazon FSx file
+    # system directory and a unique S3 bucket or prefix associated with it.
+    # You can configure a data repository association for automatic import
+    # only, for automatic export only, or for both. To learn more about
+    # linking a data repository to your file system, see [Linking your file
+    # system to an S3 bucket][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html
+    #
+    # @option params [required, String] :file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #
+    # @option params [required, String] :file_system_path
+    #   A path on the file system that points to a high-level directory (such
+    #   as `/ns1/`) or subdirectory (such as `/ns1/subdir/`) that will be
+    #   mapped 1-1 with `DataRepositoryPath`. The leading forward slash in the
+    #   name is required. Two data repository associations cannot have
+    #   overlapping file system paths. For example, if a data repository is
+    #   associated with file system path `/ns1/`, then you cannot link another
+    #   data repository with file system path `/ns1/ns2`.
+    #
+    #   This path specifies where in your file system files will be exported
+    #   from or imported to. This file system directory can be linked to only
+    #   one Amazon S3 bucket, and no other S3 bucket can be linked to the
+    #   directory.
+    #
+    # @option params [required, String] :data_repository_path
+    #   The path to the Amazon S3 data repository that will be linked to the
+    #   file system. The path can be an S3 bucket or prefix in the format
+    #   `s3://myBucket/myPrefix/`. This path specifies where in the S3 data
+    #   repository files will be imported from or exported to.
+    #
+    # @option params [Boolean] :batch_import_meta_data_on_create
+    #   Set to `true` to run an import data repository task to import metadata
+    #   from the data repository to the file system after the data repository
+    #   association is created. Default is `false`.
+    #
+    # @option params [Integer] :imported_file_chunk_size
+    #   For files imported from a data repository, this value determines the
+    #   stripe count and maximum amount of data per file (in MiB) stored on a
+    #   single physical disk. The maximum number of disks that a single file
+    #   can be striped across is limited by the total number of disks that
+    #   make up the file system.
+    #
+    #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
+    #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
+    #
+    # @option params [Types::S3DataRepositoryConfiguration] :s3
+    #   The configuration for an Amazon S3 data repository linked to an Amazon
+    #   FSx Lustre file system with a data repository association. The
+    #   configuration defines which file events (new, changed, or deleted
+    #   files or directories) are automatically imported from the linked data
+    #   repository to the file system or automatically exported from the file
+    #   system to the data repository.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateDataRepositoryAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDataRepositoryAssociationResponse#association #association} => Types::DataRepositoryAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_data_repository_association({
+    #     file_system_id: "FileSystemId", # required
+    #     file_system_path: "Namespace", # required
+    #     data_repository_path: "ArchivePath", # required
+    #     batch_import_meta_data_on_create: false,
+    #     imported_file_chunk_size: 1,
+    #     s3: {
+    #       auto_import_policy: {
+    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
+    #       },
+    #       auto_export_policy: {
+    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
+    #       },
+    #     },
+    #     client_request_token: "ClientRequestToken",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.association_id #=> String
+    #   resp.association.resource_arn #=> String
+    #   resp.association.file_system_id #=> String
+    #   resp.association.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.association.failure_details.message #=> String
+    #   resp.association.file_system_path #=> String
+    #   resp.association.data_repository_path #=> String
+    #   resp.association.batch_import_meta_data_on_create #=> Boolean
+    #   resp.association.imported_file_chunk_size #=> Integer
+    #   resp.association.s3.auto_import_policy.events #=> Array
+    #   resp.association.s3.auto_import_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.association.s3.auto_export_policy.events #=> Array
+    #   resp.association.s3.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.association.tags #=> Array
+    #   resp.association.tags[0].key #=> String
+    #   resp.association.tags[0].value #=> String
+    #   resp.association.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateDataRepositoryAssociation AWS API Documentation
+    #
+    # @overload create_data_repository_association(params = {})
+    # @param [Hash] params ({})
+    def create_data_repository_association(params = {}, options = {})
+      req = build_request(:create_data_repository_association, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon FSx for Lustre data repository task. You use data
     # repository tasks to perform bulk operations between your Amazon FSx
-    # file system and its linked data repository. An example of a data
+    # file system and its linked data repositories. An example of a data
     # repository task is exporting any data and metadata changes, including
     # POSIX metadata, to files, directories, and symbolic links (symlinks)
-    # from your FSx file system to its linked data repository. A
+    # from your FSx file system to a linked data repository. A
     # `CreateDataRepositoryTask` operation will fail if a data repository is
     # not linked to the FSx file system. To learn more about data repository
     # tasks, see [Data Repository Tasks][1]. To learn more about linking a
@@ -1075,7 +1561,7 @@ module Aws::FSx
     #
     #
     # [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html
-    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html
+    # [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-dra-linked-data-repo.html
     #
     # @option params [required, String] :type
     #   Specifies the type of data repository task to create.
@@ -1122,7 +1608,7 @@ module Aws::FSx
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_repository_task({
-    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY
+    #     type: "EXPORT_TO_REPOSITORY", # required, accepts EXPORT_TO_REPOSITORY, IMPORT_METADATA_FROM_REPOSITORY
     #     paths: ["DataRepositoryTaskPath"],
     #     file_system_id: "FileSystemId", # required
     #     report: { # required
@@ -1144,7 +1630,7 @@ module Aws::FSx
     #
     #   resp.data_repository_task.task_id #=> String
     #   resp.data_repository_task.lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
-    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_task.type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY"
     #   resp.data_repository_task.creation_time #=> Time
     #   resp.data_repository_task.start_time #=> Time
     #   resp.data_repository_task.end_time #=> Time
@@ -1174,20 +1660,15 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a new, empty Amazon FSx file system.
+    # Creates a new, empty Amazon FSx file system. You can create the
+    # following supported Amazon FSx file systems using the
+    # `CreateFileSystem` API operation:
     #
-    # If a file system with the specified client request token exists and
-    # the parameters match, `CreateFileSystem` returns the description of
-    # the existing file system. If a file system specified client request
-    # token exists and the parameters don't match, this call returns
-    # `IncompatibleParameterError`. If a file system with the specified
-    # client request token doesn't exist, `CreateFileSystem` does the
-    # following:
+    # * Amazon FSx for Lustre
     #
-    # * Creates a new, empty Amazon FSx file system with an assigned ID, and
-    #   an initial lifecycle state of `CREATING`.
+    # * Amazon FSx for NetApp ONTAP
     #
-    # * Returns the description of the file system.
+    # * Amazon FSx for Windows File Server
     #
     # This operation requires a client request token in the request that
     # Amazon FSx uses to ensure idempotent creation. This means that calling
@@ -1201,12 +1682,41 @@ module Aws::FSx
     # call created a file system, the client receives success as long as the
     # parameters are the same.
     #
+    # If a file system with the specified client request token exists and
+    # the parameters match, `CreateFileSystem` returns the description of
+    # the existing file system. If a file system with the specified client
+    # request token exists and the parameters don't match, this call
+    # returns `IncompatibleParameterError`. If a file system with the
+    # specified client request token doesn't exist, `CreateFileSystem` does
+    # the following:
+    #
+    # * Creates a new, empty Amazon FSx file system with an assigned ID, and
+    #   an initial lifecycle state of `CREATING`.
+    #
+    # * Returns the description of the file system.
+    #
+    # This operation requires a client request token in the request that
+    # Amazon FSx uses to ensure idempotent creation. This means that calling
+    # the operation multiple times with the same client request token has no
+    # effect. By using the idempotent operation, you can retry a
+    # `CreateFileSystem` operation without the risk of creating an extra
+    # file system. This approach can be useful when an initial call fails in
+    # a way that makes it unclear whether a file system was created.
+    # Examples are if a transport-level timeout occurred, or your connection
+    # was reset. If you use the same client request token and the initial
+    # call created a file system, the client receives a success message as
+    # long as the parameters are the same.
+    #
     # <note markdown="1"> The `CreateFileSystem` call returns while the file system's lifecycle
     # state is still `CREATING`. You can check the file-system creation
-    # status by calling the DescribeFileSystems operation, which returns the
-    # file system state along with other information.
+    # status by calling the [DescribeFileSystems][1] operation, which
+    # returns the file system state along with other information.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
@@ -1219,50 +1729,55 @@ module Aws::FSx
     #
     # @option params [required, String] :file_system_type
     #   The type of Amazon FSx file system to create. Valid values are
-    #   `WINDOWS`, `LUSTRE`, and `ONTAP`.
+    #   `WINDOWS`, `LUSTRE`, `ONTAP`, and `OPENZFS`.
     #
     # @option params [required, Integer] :storage_capacity
-    #   Sets the storage capacity of the file system that you're creating.
+    #   Sets the storage capacity of the file system that you're creating, in
+    #   gibibytes (GiB).
     #
-    #   For Lustre file systems:
+    #   **FSx for Lustre file systems** - The amount of storage capacity that
+    #   you can configure depends on the value that you set for `StorageType`
+    #   and the Lustre `DeploymentType`, as follows:
     #
-    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
-    #     values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.
+    #   * For `SCRATCH_2`, `PERSISTENT_2` and `PERSISTENT_1` deployment types
+    #     using SSD storage type, the valid values are 1200 GiB, 2400 GiB, and
+    #     increments of 2400 GiB.
     #
-    #   * For `PERSISTENT HDD` file systems, valid values are increments of
+    #   * For `PERSISTENT_1` HDD file systems, valid values are increments of
     #     6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for
     #     40 MB/s/TiB file systems.
     #
     #   * For `SCRATCH_1` deployment type, valid values are 1200 GiB, 2400
     #     GiB, and increments of 3600 GiB.
     #
-    #   For Windows file systems:
+    #   **FSx for ONTAP file systems** - The amount of storage capacity that
+    #   you can configure is from 1024 GiB up to 196,608 GiB (192 TiB).
     #
-    #   * If `StorageType=SSD`, valid values are 32 GiB - 65,536 GiB (64 TiB).
+    #   **FSx for OpenZFS file systems** - The amount of storage capacity that
+    #   you can configure is from 64 GiB up to 524,288 GiB (512 TiB).
     #
-    #   * If `StorageType=HDD`, valid values are 2000 GiB - 65,536 GiB (64
-    #     TiB).
+    #   **FSx for Windows File Server file systems** - The amount of storage
+    #   capacity that you can configure depends on the value that you set for
+    #   `StorageType` as follows:
     #
-    #   For ONTAP file systems:
+    #   * For SSD storage, valid values are 32 GiB-65,536 GiB (64 TiB).
     #
-    #   * Valid values are 1024 GiB - 196,608 GiB (192 TiB).
-    #
-    #   ^
+    #   * For HDD storage, valid values are 2000 GiB-65,536 GiB (64 TiB).
     #
     # @option params [String] :storage_type
-    #   Sets the storage type for the file system you're creating. Valid
+    #   Sets the storage type for the file system that you're creating. Valid
     #   values are `SSD` and `HDD`.
     #
     #   * Set to `SSD` to use solid state drive storage. SSD is supported on
-    #     all Windows, Lustre, and ONTAP deployment types.
+    #     all Windows, Lustre, ONTAP, and OpenZFS deployment types.
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types,
     #     and on `PERSISTENT` Lustre file system deployment types.
     #
-    #   Default value is `SSD`. For more information, see [ Storage Type
-    #   Options][1] in the *Amazon FSx for Windows User Guide* and [Multiple
-    #   Storage Options][2] in the *Amazon FSx for Lustre User Guide*.
+    #   Default value is `SSD`. For more information, see [ Storage type
+    #   options][1] in the *FSx for Windows File Server User Guide* and
+    #   [Multiple storage options][2] in the *FSx for Lustre User Guide*.
     #
     #
     #
@@ -1271,19 +1786,20 @@ module Aws::FSx
     #
     # @option params [required, Array<String>] :subnet_ids
     #   Specifies the IDs of the subnets that the file system will be
-    #   accessible from. For Windows and ONTAP `MULTI_AZ_1` file system
-    #   deployment types, provide exactly two subnet IDs, one for the
-    #   preferred file server and one for the standby file server. You specify
-    #   one of these subnets as the preferred subnet using the
-    #   `WindowsConfiguration > PreferredSubnetID` or `OntapConfiguration >
-    #   PreferredSubnetID` properties. For more information, see [
-    #   Availability and durability: Single-AZ and Multi-AZ file systems][1]
-    #   in the *Amazon FSx for Windows User Guide* and [ Availability and
-    #   durability][2] in the *Amazon FSx for ONTAP User Guide*.
+    #   accessible from. For Windows and ONTAP `MULTI_AZ_1` deployment
+    #   types,provide exactly two subnet IDs, one for the preferred file
+    #   server and one for the standby file server. You specify one of these
+    #   subnets as the preferred subnet using the `WindowsConfiguration >
+    #   PreferredSubnetID` or `OntapConfiguration > PreferredSubnetID`
+    #   properties. For more information about Multi-AZ file system
+    #   configuration, see [ Availability and durability: Single-AZ and
+    #   Multi-AZ file systems][1] in the *Amazon FSx for Windows User Guide*
+    #   and [ Availability and durability][2] in the *Amazon FSx for ONTAP
+    #   User Guide*.
     #
-    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment
-    #   types and Lustre file systems, provide exactly one subnet ID. The file
-    #   server is launched in that subnet's Availability Zone.
+    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` and all Lustre deployment
+    #   types, provide exactly one subnet ID. The file server is launched in
+    #   that subnet's Availability Zone.
     #
     #
     #
@@ -1296,42 +1812,71 @@ module Aws::FSx
     #   in later requests to describe the file system.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   The tags to apply to the file system being created. The key value of
-    #   the `Name` tag appears in the console as the file system name.
+    #   The tags to apply to the file system that's being created. The key
+    #   value of the `Name` tag appears in the console as the file system
+    #   name.
     #
     # @option params [String] :kms_key_id
     #   The ID of the Key Management Service (KMS) key used to encrypt the
     #   file system's data for Amazon FSx for Windows File Server file
     #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
-    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
-    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
-    #   Management Service API Reference*.
+    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
+    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
+    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
+    #   encrypted at rest using Amazon FSx-managed keys. For more information,
+    #   see [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [Types::CreateFileSystemWindowsConfiguration] :windows_configuration
-    #   The Microsoft Windows configuration for the file system being created.
+    #   The Microsoft Windows configuration for the file system that's being
+    #   created.
     #
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
     #   The Lustre configuration for the file system being created.
     #
+    #   <note markdown="1"> The following parameters are not supported for file systems with the
+    #   `Persistent_2` deployment type. Instead, use
+    #   `CreateDataRepositoryAssociation` to create a data repository
+    #   association to link your Lustre file system to a data repository.
+    #
+    #    * `AutoImportPolicy`
+    #
+    #   * `ExportPath`
+    #
+    #   * `ImportedChunkSize`
+    #
+    #   * `ImportPath`
+    #
+    #    </note>
+    #
     # @option params [Types::CreateFileSystemOntapConfiguration] :ontap_configuration
-    #   The ONTAP configuration properties of the FSx for NetApp ONTAP file
-    #   system that you are creating.
+    #   The ONTAP configuration properties of the FSx for ONTAP file system
+    #   that you are creating.
     #
     # @option params [String] :file_system_type_version
-    #   Sets the version of the Amazon FSx for Lustre file system you're
-    #   creating. Valid values are `2.10` and `2.12`.
+    #   (Optional) For FSx for Lustre file systems, sets the Lustre version
+    #   for the file system that you're creating. Valid values are `2.10` and
+    #   `2.12`\:
     #
-    #   * Set the value to `2.10` to create a Lustre 2.10 file system.
+    #   * 2\.10 is supported by the Scratch and Persistent\_1 Lustre deployment
+    #     types.
     #
-    #   * Set the value to `2.12` to create a Lustre 2.12 file system.
+    #   * 2\.12 is supported by all Lustre deployment types. `2.12` is required
+    #     when setting FSx for Lustre `DeploymentType` to `PERSISTENT_2`.
     #
-    #   Default value is `2.10`.
+    #   Default value = `2.10`, except when `DeploymentType` is set to
+    #   `PERSISTENT_2`, then the default is `2.12`.
+    #
+    #   <note markdown="1"> If you set `FileSystemTypeVersion` to `2.10` for a `PERSISTENT_2`
+    #   Lustre deployment type, the `CreateFileSystem` operation fails.
+    #
+    #    </note>
+    #
+    # @option params [Types::CreateFileSystemOpenZFSConfiguration] :open_zfs_configuration
+    #   The OpenZFS configuration for the file system that's being created.
     #
     # @return [Types::CreateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1414,7 +1959,7 @@ module Aws::FSx
     #
     #   resp = client.create_file_system({
     #     client_request_token: "ClientRequestToken",
-    #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE, ONTAP
+    #     file_system_type: "WINDOWS", # required, accepts WINDOWS, LUSTRE, ONTAP, OPENZFS
     #     storage_capacity: 1, # required
     #     storage_type: "SSD", # accepts SSD, HDD
     #     subnet_ids: ["SubnetId"], # required
@@ -1455,14 +2000,18 @@ module Aws::FSx
     #       import_path: "ArchivePath",
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
-    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
-    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
     #       data_compression_type: "NONE", # accepts NONE, LZ4
+    #       log_configuration: {
+    #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
+    #         destination: "GeneralARN",
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -1480,6 +2029,41 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #     },
     #     file_system_type_version: "FileSystemTypeVersion",
+    #     open_zfs_configuration: {
+    #       automatic_backup_retention_days: 1,
+    #       copy_tags_to_backups: false,
+    #       copy_tags_to_volumes: false,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #       throughput_capacity: 1, # required
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
+    #       root_volume_configuration: {
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         nfs_exports: [
+    #           {
+    #             client_configurations: [ # required
+    #               {
+    #                 clients: "OpenZFSClients", # required
+    #                 options: ["OpenZFSNfsExportOption"], # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         user_and_group_quotas: [
+    #           {
+    #             type: "USER", # required, accepts USER, GROUP
+    #             id: 1, # required
+    #             storage_capacity_quota_gi_b: 1, # required
+    #           },
+    #         ],
+    #         copy_tags_to_snapshots: false,
+    #         read_only: false,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1487,7 +2071,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -1528,13 +2112,13 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -1542,8 +2126,10 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1551,7 +2137,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -1569,8 +2155,37 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -1589,6 +2204,16 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.file_system_type_version #=> String
+    #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystem AWS API Documentation
     #
@@ -1599,13 +2224,14 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a new Amazon FSx for Lustre or Amazon FSx for Windows File
-    # Server file system from an existing Amazon FSx backup.
+    # Creates a new Amazon FSx for Lustre, Amazon FSx for Windows File
+    # Server, or Amazon FSx for OpenZFS file system from an existing Amazon
+    # FSx backup.
     #
     # If a file system with the specified client request token exists and
     # the parameters match, this operation returns the description of the
-    # file system. If a client request token specified by the file system
-    # exists and the parameters don't match, this call returns
+    # file system. If a client request token with the specified by the file
+    # system exists and the parameters don't match, this call returns
     # `IncompatibleParameterError`. If a file system with the specified
     # client request token doesn't exist, this operation does the
     # following:
@@ -1615,7 +2241,7 @@ module Aws::FSx
     #
     # * Returns the description of the file system.
     #
-    # Parameters like Active Directory, default share name, automatic
+    # Parameters like the Active Directory, default share name, automatic
     # backup, and backup settings default to the parameters of the file
     # system that was backed up, unless overridden. You can explicitly
     # supply other settings.
@@ -1626,18 +2252,23 @@ module Aws::FSx
     # fails in a way that makes it unclear whether a file system was
     # created. Examples are if a transport level timeout occurred, or your
     # connection was reset. If you use the same client request token and the
-    # initial call created a file system, the client receives success as
-    # long as the parameters are the same.
+    # initial call created a file system, the client receives a success
+    # message as long as the parameters are the same.
     #
     # <note markdown="1"> The `CreateFileSystemFromBackup` call returns while the file system's
     # lifecycle state is still `CREATING`. You can check the file-system
-    # creation status by calling the DescribeFileSystems operation, which
-    # returns the file system state along with other information.
+    # creation status by calling the [ DescribeFileSystems][1] operation,
+    # which returns the file system state along with other information.
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
+    #
     # @option params [required, String] :backup_id
-    #   The ID of the source backup. Specifies the backup you are copying.
+    #   The ID of the source backup. Specifies the backup that you are
+    #   copying.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
@@ -1656,15 +2287,16 @@ module Aws::FSx
     #   subnets as the preferred subnet using the `WindowsConfiguration >
     #   PreferredSubnetID` property.
     #
-    #   For Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` deployment types and
-    #   Lustre file systems, provide exactly one subnet ID. The file server is
-    #   launched in that subnet's Availability Zone.
+    #   Windows `SINGLE_AZ_1` and `SINGLE_AZ_2` file system deployment types,
+    #   Lustre file systems, and OpenZFS file systems provide exactly one
+    #   subnet ID. The file server is launched in that subnet's Availability
+    #   Zone.
     #
     # @option params [Array<String>] :security_group_ids
     #   A list of IDs for the security groups that apply to the specified
     #   network interfaces created for file system access. These security
     #   groups apply to all network interfaces. This value isn't returned in
-    #   later DescribeFileSystem requests.
+    #   later `DescribeFileSystem` requests.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to be applied to the file system at file system creation. The
@@ -1677,24 +2309,40 @@ module Aws::FSx
     # @option params [Types::CreateFileSystemLustreConfiguration] :lustre_configuration
     #   The Lustre configuration for the file system being created.
     #
+    #   <note markdown="1"> The following parameters are not supported for file systems with the
+    #   `Persistent_2` deployment type. Instead, use
+    #   `CreateDataRepositoryAssociation` to create a data repository
+    #   association to link your Lustre file system to a data repository.
+    #
+    #    * `AutoImportPolicy`
+    #
+    #   * `ExportPath`
+    #
+    #   * `ImportedChunkSize`
+    #
+    #   * `ImportPath`
+    #
+    #    </note>
+    #
     # @option params [String] :storage_type
-    #   Sets the storage type for the Windows file system you're creating
-    #   from a backup. Valid values are `SSD` and `HDD`.
+    #   Sets the storage type for the Windows or OpenZFS file system that
+    #   you're creating from a backup. Valid values are `SSD` and `HDD`.
     #
-    #   * Set to `SSD` to use solid state drive storage. Supported on all
-    #     Windows deployment types.
+    #   * Set to `SSD` to use solid state drive storage. SSD is supported on
+    #     all Windows and OpenZFS deployment types.
     #
-    #   * Set to `HDD` to use hard disk drive storage. Supported on
-    #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types.
+    #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
+    #     `SINGLE_AZ_2` and `MULTI_AZ_1` FSx for Windows File Server file
+    #     system deployment types.
     #
-    #   Default value is `SSD`.
+    #   The default value is `SSD`.
     #
     #   <note markdown="1"> HDD and SSD storage types have different minimum storage capacity
     #   requirements. A restored file system's storage capacity is tied to
     #   the file system that was backed up. You can create a file system that
     #   uses HDD storage from a backup of a file system that used SSD storage
-    #   only if the original SSD file system had a storage capacity of at
-    #   least 2000 GiB.
+    #   if the original SSD file system had a storage capacity of at least
+    #   2000 GiB.
     #
     #    </note>
     #
@@ -1702,24 +2350,27 @@ module Aws::FSx
     #   The ID of the Key Management Service (KMS) key used to encrypt the
     #   file system's data for Amazon FSx for Windows File Server file
     #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` file systems at rest. If not specified, the
-    #   Amazon FSx managed key is used. The Amazon FSx for Lustre `SCRATCH_1`
-    #   and `SCRATCH_2` file systems are always encrypted at rest using Amazon
-    #   FSx managed keys. For more information, see [Encrypt][1] in the *Key
-    #   Management Service API Reference*.
+    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
+    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
+    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
+    #   encrypted at rest using Amazon FSx-managed keys. For more information,
+    #   see [Encrypt][1] in the *Key Management Service API Reference*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
     #
     # @option params [String] :file_system_type_version
-    #   Sets the version for the Amazon FSx for Lustre file system you're
-    #   creating from a backup. Valid values are `2.10` and `2.12`.
+    #   Sets the version for the Amazon FSx for Lustre file system that
+    #   you're creating from a backup. Valid values are `2.10` and `2.12`.
     #
     #   You don't need to specify `FileSystemTypeVersion` because it will be
     #   applied using the backup's `FileSystemTypeVersion` setting. If you
     #   choose to specify `FileSystemTypeVersion` when creating from backup,
     #   the value must match the backup's `FileSystemTypeVersion` setting.
+    #
+    # @option params [Types::CreateFileSystemOpenZFSConfiguration] :open_zfs_configuration
+    #   The OpenZFS configuration for the file system that's being created.
     #
     # @return [Types::CreateFileSystemFromBackupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1823,18 +2474,57 @@ module Aws::FSx
     #       import_path: "ArchivePath",
     #       export_path: "ArchivePath",
     #       imported_file_chunk_size: 1,
-    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1
-    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #       deployment_type: "SCRATCH_1", # accepts SCRATCH_1, SCRATCH_2, PERSISTENT_1, PERSISTENT_2
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
     #       per_unit_storage_throughput: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
     #       copy_tags_to_backups: false,
     #       drive_cache_type: "NONE", # accepts NONE, READ
     #       data_compression_type: "NONE", # accepts NONE, LZ4
+    #       log_configuration: {
+    #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
+    #         destination: "GeneralARN",
+    #       },
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #     kms_key_id: "KmsKeyId",
     #     file_system_type_version: "FileSystemTypeVersion",
+    #     open_zfs_configuration: {
+    #       automatic_backup_retention_days: 1,
+    #       copy_tags_to_backups: false,
+    #       copy_tags_to_volumes: false,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       deployment_type: "SINGLE_AZ_1", # required, accepts SINGLE_AZ_1
+    #       throughput_capacity: 1, # required
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
+    #       root_volume_configuration: {
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         nfs_exports: [
+    #           {
+    #             client_configurations: [ # required
+    #               {
+    #                 clients: "OpenZFSClients", # required
+    #                 options: ["OpenZFSNfsExportOption"], # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         user_and_group_quotas: [
+    #           {
+    #             type: "USER", # required, accepts USER, GROUP
+    #             id: 1, # required
+    #             storage_capacity_quota_gi_b: 1, # required
+    #           },
+    #         ],
+    #         copy_tags_to_snapshots: false,
+    #         read_only: false,
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1842,7 +2532,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -1883,13 +2573,13 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -1897,8 +2587,10 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -1906,7 +2598,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -1924,8 +2616,37 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -1944,6 +2665,16 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.file_system_type_version #=> String
+    #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateFileSystemFromBackup AWS API Documentation
     #
@@ -1951,6 +2682,232 @@ module Aws::FSx
     # @param [Hash] params ({})
     def create_file_system_from_backup(params = {}, options = {})
       req = build_request(:create_file_system_from_backup, params)
+      req.send_request(options)
+    end
+
+    # Creates a snapshot of an existing Amazon FSx for OpenZFS file system.
+    # With snapshots, you can easily undo file changes and compare file
+    # versions by restoring the volume to a previous version.
+    #
+    # If a snapshot with the specified client request token exists, and the
+    # parameters match, this operation returns the description of the
+    # existing snapshot. If a snapshot with the specified client request
+    # token exists, and the parameters don't match, this operation returns
+    # `IncompatibleParameterError`. If a snapshot with the specified client
+    # request token doesn't exist, `CreateSnapshot` does the following:
+    #
+    # * Creates a new OpenZFS snapshot with an assigned ID, and an initial
+    #   lifecycle state of `CREATING`.
+    #
+    # * Returns the description of the snapshot.
+    #
+    # By using the idempotent operation, you can retry a `CreateSnapshot`
+    # operation without the risk of creating an extra snapshot. This
+    # approach can be useful when an initial call fails in a way that makes
+    # it unclear whether a snapshot was created. If you use the same client
+    # request token and the initial call created a snapshot, the operation
+    # returns a successful result because all the parameters are the same.
+    #
+    # The `CreateSnapshot` operation returns while the snapshot's lifecycle
+    # state is still `CREATING`. You can check the snapshot creation status
+    # by calling the [DescribeSnapshots][1] operation, which returns the
+    # snapshot state along with other information.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the snapshot.
+    #
+    # @option params [required, String] :volume_id
+    #   The ID of the volume that you are taking a snapshot of.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @return [Types::CreateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSnapshotResponse#snapshot #snapshot} => Types::Snapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_snapshot({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "SnapshotName", # required
+    #     volume_id: "VolumeId", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot.resource_arn #=> String
+    #   resp.snapshot.snapshot_id #=> String
+    #   resp.snapshot.name #=> String
+    #   resp.snapshot.volume_id #=> String
+    #   resp.snapshot.creation_time #=> Time
+    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.tags #=> Array
+    #   resp.snapshot.tags[0].key #=> String
+    #   resp.snapshot.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions #=> Array
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
+    #   resp.snapshot.administrative_actions[0].request_time #=> Time
+    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateSnapshot AWS API Documentation
+    #
+    # @overload create_snapshot(params = {})
+    # @param [Hash] params ({})
+    def create_snapshot(params = {}, options = {})
+      req = build_request(:create_snapshot, params)
       req.send_request(options)
     end
 
@@ -2076,7 +3033,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates an Amazon FSx for NetApp ONTAP storage volume.
+    # Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
+    # storage volume.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -2088,17 +3046,20 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :volume_type
-    #   Specifies the type of volume to create; `ONTAP` is the only valid
-    #   volume type.
+    #   Specifies the type of volume to create; `ONTAP` and `OPENZFS` are the
+    #   only valid volume types.
     #
     # @option params [required, String] :name
-    #   Specifies the name of the volume you're creating.
+    #   Specifies the name of the volume that you're creating.
     #
     # @option params [Types::CreateOntapVolumeConfiguration] :ontap_configuration
-    #   Specifies the `ONTAP` configuration to use in creating the volume.
+    #   Specifies the configuration to use when creating the ONTAP volume.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A list of `Tag` values, with a maximum of 50 elements.
+    #
+    # @option params [Types::CreateOpenZFSVolumeConfiguration] :open_zfs_configuration
+    #   Specifies the configuration to use when creating the OpenZFS volume.
     #
     # @return [Types::CreateVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2108,7 +3069,7 @@ module Aws::FSx
     #
     #   resp = client.create_volume({
     #     client_request_token: "ClientRequestToken",
-    #     volume_type: "ONTAP", # required, accepts ONTAP
+    #     volume_type: "ONTAP", # required, accepts ONTAP, OPENZFS
     #     name: "VolumeName", # required
     #     ontap_configuration: {
     #       junction_path: "JunctionPath", # required
@@ -2127,13 +3088,42 @@ module Aws::FSx
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     open_zfs_configuration: {
+    #       parent_volume_id: "VolumeId", # required
+    #       storage_capacity_reservation_gi_b: 1,
+    #       storage_capacity_quota_gi_b: 1,
+    #       data_compression_type: "NONE", # accepts NONE, ZSTD
+    #       copy_tags_to_snapshots: false,
+    #       origin_snapshot: {
+    #         snapshot_arn: "ResourceARN", # required
+    #         copy_strategy: "CLONE", # required, accepts CLONE, FULL_COPY
+    #       },
+    #       read_only: false,
+    #       nfs_exports: [
+    #         {
+    #           client_configurations: [ # required
+    #             {
+    #               clients: "OpenZFSClients", # required
+    #               options: ["OpenZFSNfsExportOption"], # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       user_and_group_quotas: [
+    #         {
+    #           type: "USER", # required, accepts USER, GROUP
+    #           id: 1, # required
+    #           storage_capacity_quota_gi_b: 1, # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.volume.creation_time #=> Time
     #   resp.volume.file_system_id #=> String
-    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.volume.name #=> String
     #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.volume.ontap_configuration.junction_path #=> String
@@ -2151,8 +3141,132 @@ module Aws::FSx
     #   resp.volume.tags[0].key #=> String
     #   resp.volume.tags[0].value #=> String
     #   resp.volume.volume_id #=> String
-    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions #=> Array
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.volume.administrative_actions[0].request_time #=> Time
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.volume.open_zfs_configuration.volume_path #=> String
+    #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolume AWS API Documentation
     #
@@ -2167,7 +3281,8 @@ module Aws::FSx
     # Amazon FSx volume backup.
     #
     # @option params [required, String] :backup_id
-    #   The ID of the source backup. Specifies the backup you are copying.
+    #   The ID of the source backup. Specifies the backup that you are
+    #   copying.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -2220,7 +3335,7 @@ module Aws::FSx
     #
     #   resp.volume.creation_time #=> Time
     #   resp.volume.file_system_id #=> String
-    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.volume.name #=> String
     #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.volume.ontap_configuration.junction_path #=> String
@@ -2238,8 +3353,132 @@ module Aws::FSx
     #   resp.volume.tags[0].key #=> String
     #   resp.volume.tags[0].value #=> String
     #   resp.volume.volume_id #=> String
-    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions #=> Array
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.volume.administrative_actions[0].request_time #=> Time
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.volume.open_zfs_configuration.volume_path #=> String
+    #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateVolumeFromBackup AWS API Documentation
     #
@@ -2250,22 +3489,22 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes an Amazon FSx backup, deleting its contents. After deletion,
-    # the backup no longer exists, and its data is gone.
+    # Deletes an Amazon FSx backup. After deletion, the backup no longer
+    # exists, and its data is gone.
     #
-    # The `DeleteBackup` call returns instantly. The backup will not show up
+    # The `DeleteBackup` call returns instantly. The backup won't show up
     # in later `DescribeBackups` calls.
     #
     # The data in a deleted backup is also deleted and can't be recovered
     # by any means.
     #
     # @option params [required, String] :backup_id
-    #   The ID of the backup you want to delete.
+    #   The ID of the backup that you want to delete.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-    #   idempotent deletion. This is automatically filled on your behalf when
-    #   using the CLI or SDK.
+    #   idempotent deletion. This parameter is automatically filled on your
+    #   behalf when using the CLI or SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2311,42 +3550,100 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes a file system, deleting its contents. After deletion, the file
-    # system no longer exists, and its data is gone. Any existing automatic
-    # backups will also be deleted.
+    # Deletes a data repository association on an Amazon FSx for Lustre file
+    # system. Deleting the data repository association unlinks the file
+    # system from the Amazon S3 bucket. When deleting a data repository
+    # association, you have the option of deleting the data in the file
+    # system that corresponds to the data repository association. Data
+    # repository associations are supported only for file systems with the
+    # `Persistent_2` deployment type.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the data repository association that you want to delete.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Boolean] :delete_data_in_file_system
+    #   Set to `true` to delete the data in the file system that corresponds
+    #   to the data repository association.
+    #
+    # @return [Types::DeleteDataRepositoryAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteDataRepositoryAssociationResponse#association_id #association_id} => String
+    #   * {Types::DeleteDataRepositoryAssociationResponse#lifecycle #lifecycle} => String
+    #   * {Types::DeleteDataRepositoryAssociationResponse#delete_data_in_file_system #delete_data_in_file_system} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_data_repository_association({
+    #     association_id: "DataRepositoryAssociationId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     delete_data_in_file_system: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.delete_data_in_file_system #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteDataRepositoryAssociation AWS API Documentation
+    #
+    # @overload delete_data_repository_association(params = {})
+    # @param [Hash] params ({})
+    def delete_data_repository_association(params = {}, options = {})
+      req = build_request(:delete_data_repository_association, params)
+      req.send_request(options)
+    end
+
+    # Deletes a file system. After deletion, the file system no longer
+    # exists, and its data is gone. Any existing automatic backups and
+    # snapshots are also deleted.
     #
     # To delete an Amazon FSx for NetApp ONTAP file system, first delete all
-    # the volumes and SVMs on the file system. Then provide a `FileSystemId`
-    # value to the `DeleFileSystem` operation.
+    # the volumes and storage virtual machines (SVMs) on the file system.
+    # Then provide a `FileSystemId` value to the `DeleFileSystem` operation.
     #
     # By default, when you delete an Amazon FSx for Windows File Server file
-    # system, a final backup is created upon deletion. This final backup is
-    # not subject to the file system's retention policy, and must be
+    # system, a final backup is created upon deletion. This final backup
+    # isn't subject to the file system's retention policy, and must be
     # manually deleted.
     #
-    # The `DeleteFileSystem` action returns while the file system has the
+    # The `DeleteFileSystem` operation returns while the file system has the
     # `DELETING` status. You can check the file system deletion status by
-    # calling the DescribeFileSystems action, which returns a list of file
-    # systems in your account. If you pass the file system ID for a deleted
-    # file system, the DescribeFileSystems returns a `FileSystemNotFound`
-    # error.
+    # calling the [DescribeFileSystems][1] operation, which returns a list
+    # of file systems in your account. If you pass the file system ID for a
+    # deleted file system, the `DescribeFileSystems` operation returns a
+    # `FileSystemNotFound` error.
     #
-    # <note markdown="1"> Deleting an Amazon FSx for Lustre file system will fail with a 400
-    # BadRequest if a data repository task is in a `PENDING` or `EXECUTING`
-    # state.
+    # <note markdown="1"> If a data repository task is in a `PENDING` or `EXECUTING` state,
+    # deleting an Amazon FSx for Lustre file system will fail with an HTTP
+    # status code 400 (Bad Request).
     #
     #  </note>
     #
     # The data in a deleted file system is also deleted and can't be
     # recovered by any means.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html
+    #
     # @option params [required, String] :file_system_id
-    #   The ID of the file system you want to delete.
+    #   The ID of the file system that you want to delete.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
-    #   idempotent deletion. This is automatically filled on your behalf when
-    #   using the Command Line Interface (CLI) or an Amazon Web Services SDK.
+    #   idempotent deletion. This token is automatically filled on your behalf
+    #   when using the Command Line Interface (CLI) or an Amazon Web Services
+    #   SDK.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -2359,12 +3656,17 @@ module Aws::FSx
     #   The configuration object for the Amazon FSx for Lustre file system
     #   being deleted in the `DeleteFileSystem` operation.
     #
+    # @option params [Types::DeleteFileSystemOpenZFSConfiguration] :open_zfs_configuration
+    #   The configuration object for the OpenZFS file system used in the
+    #   `DeleteFileSystem` operation.
+    #
     # @return [Types::DeleteFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteFileSystemResponse#file_system_id #file_system_id} => String
     #   * {Types::DeleteFileSystemResponse#lifecycle #lifecycle} => String
     #   * {Types::DeleteFileSystemResponse#windows_response #windows_response} => Types::DeleteFileSystemWindowsResponse
     #   * {Types::DeleteFileSystemResponse#lustre_response #lustre_response} => Types::DeleteFileSystemLustreResponse
+    #   * {Types::DeleteFileSystemResponse#open_zfs_response #open_zfs_response} => Types::DeleteFileSystemOpenZFSResponse
     #
     #
     # @example Example: To delete a file system
@@ -2404,6 +3706,15 @@ module Aws::FSx
     #         },
     #       ],
     #     },
+    #     open_zfs_configuration: {
+    #       skip_final_backup: false,
+    #       final_backup_tags: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue", # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -2418,6 +3729,10 @@ module Aws::FSx
     #   resp.lustre_response.final_backup_tags #=> Array
     #   resp.lustre_response.final_backup_tags[0].key #=> String
     #   resp.lustre_response.final_backup_tags[0].value #=> String
+    #   resp.open_zfs_response.final_backup_id #=> String
+    #   resp.open_zfs_response.final_backup_tags #=> Array
+    #   resp.open_zfs_response.final_backup_tags[0].key #=> String
+    #   resp.open_zfs_response.final_backup_tags[0].value #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystem AWS API Documentation
     #
@@ -2425,6 +3740,52 @@ module Aws::FSx
     # @param [Hash] params ({})
     def delete_file_system(params = {}, options = {})
       req = build_request(:delete_file_system, params)
+      req.send_request(options)
+    end
+
+    # Deletes the Amazon FSx snapshot. After deletion, the snapshot no
+    # longer exists, and its data is gone. Deleting a snapshot doesn't
+    # affect snapshots stored in a file system backup.
+    #
+    # The `DeleteSnapshot` operation returns instantly. The snapshot appears
+    # with the lifecycle status of `DELETING` until the deletion is
+    # complete.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :snapshot_id
+    #   The ID of the snapshot that you want to delete.
+    #
+    # @return [Types::DeleteSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSnapshotResponse#snapshot_id #snapshot_id} => String
+    #   * {Types::DeleteSnapshotResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_snapshot({
+    #     client_request_token: "ClientRequestToken",
+    #     snapshot_id: "SnapshotId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot_id #=> String
+    #   resp.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteSnapshot AWS API Documentation
+    #
+    # @overload delete_snapshot(params = {})
+    # @param [Hash] params ({})
+    def delete_snapshot(params = {}, options = {})
+      req = build_request(:delete_snapshot, params)
       req.send_request(options)
     end
 
@@ -2470,11 +3831,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes an Amazon FSx for NetApp ONTAP volume. When deleting a volume,
-    # you have the option of creating a final backup. If you create a final
-    # backup, you have the option to apply Tags to the backup. You need to
-    # have `fsx:TagResource` permission in order to apply tags to the
-    # backup.
+    # Deletes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
+    # volume.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -2486,11 +3844,16 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :volume_id
-    #   The ID of the volume you are deleting.
+    #   The ID of the volume that you are deleting.
     #
     # @option params [Types::DeleteVolumeOntapConfiguration] :ontap_configuration
     #   For Amazon FSx for ONTAP volumes, specify whether to take a final
-    #   backup of the volume, and apply tags to the backup.
+    #   backup of the volume and apply tags to the backup. To apply tags to
+    #   the backup, you must have the `fsx:TagResource` permission.
+    #
+    # @option params [Types::DeleteVolumeOpenZFSConfiguration] :open_zfs_configuration
+    #   For Amazon FSx for OpenZFS volumes, specify whether to delete all
+    #   child volumes and snapshots.
     #
     # @return [Types::DeleteVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2512,12 +3875,15 @@ module Aws::FSx
     #         },
     #       ],
     #     },
+    #     open_zfs_configuration: {
+    #       options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.volume_id #=> String
-    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.ontap_response.final_backup_id #=> String
     #   resp.ontap_response.final_backup_tags #=> Array
     #   resp.ontap_response.final_backup_tags[0].key #=> String
@@ -2532,7 +3898,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx backups, if a
+    # Returns the description of a specific Amazon FSx backup, if a
     # `BackupIds` value is provided for that backup. Otherwise, it returns
     # all backups owned by your Amazon Web Services account in the Amazon
     # Web Services Region of the endpoint that you're calling.
@@ -2541,42 +3907,42 @@ module Aws::FSx
     # `MaxResults` parameter to limit the number of backups in a response.
     # If more backups remain, Amazon FSx returns a `NextToken` value in the
     # response. In this case, send a later request with the `NextToken`
-    # request parameter set to the value of `NextToken` from the last
-    # response.
+    # request parameter set to the value of the `NextToken` value from the
+    # last response.
     #
-    # This action is used in an iterative process to retrieve a list of your
-    # backups. `DescribeBackups` is called first without a `NextToken`value.
-    # Then the action continues to be called with the `NextToken` parameter
-    # set to the value of the last `NextToken` value until a response has no
-    # `NextToken`.
+    # This operation is used in an iterative process to retrieve a list of
+    # your backups. `DescribeBackups` is called first without a `NextToken`
+    # value. Then the operation continues to be called with the `NextToken`
+    # parameter set to the value of the last `NextToken` value until a
+    # response has no `NextToken` value.
     #
-    # When using this action, keep the following in mind:
+    # When using this operation, keep the following in mind:
     #
-    # * The implementation might return fewer than `MaxResults` backup
-    #   descriptions while still including a `NextToken` value.
+    # * The operation might return fewer than the `MaxResults` value of
+    #   backup descriptions while still including a `NextToken` value.
     #
-    # * The order of backups returned in the response of one
-    #   `DescribeBackups` call and the order of backups returned across the
-    #   responses of a multi-call iteration is unspecified.
+    # * The order of the backups returned in the response of one
+    #   `DescribeBackups` call and the order of the backups returned across
+    #   the responses of a multi-call iteration is unspecified.
     #
     # @option params [Array<String>] :backup_ids
-    #   IDs of the backups you want to retrieve (String). This overrides any
-    #   filters. If any IDs are not found, BackupNotFound will be thrown.
+    #   The IDs of the backups that you want to retrieve. This parameter value
+    #   overrides any filters. If any IDs aren't found, a `BackupNotFound`
+    #   error occurs.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   Filters structure. Supported names are `file-system-id`,
+    #   The filters structure. The supported names are `file-system-id`,
     #   `backup-type`, `file-system-type`, and `volume-id`.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of backups to return in the response (integer). This
-    #   parameter value must be greater than 0. The number of items that
-    #   Amazon FSx returns is the minimum of the `MaxResults` parameter
-    #   specified in the request and the service's internal maximum number of
-    #   items per page.
+    #   Maximum number of backups to return in the response. This parameter
+    #   value must be greater than 0. The number of items that Amazon FSx
+    #   returns is the minimum of the `MaxResults` parameter specified in the
+    #   request and the service's internal maximum number of items per page.
     #
     # @option params [String] :next_token
-    #   Opaque pagination token returned from a previous `DescribeBackups`
-    #   operation (String). If a token present, the action continues the list
+    #   An opaque pagination token returned from a previous `DescribeBackups`
+    #   operation. If a token is present, the operation continues the list
     #   from where the returning call left off.
     #
     # @return [Types::DescribeBackupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2630,7 +3996,7 @@ module Aws::FSx
     #     backup_ids: ["BackupId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
     #         values: ["FilterValue"],
     #       },
     #     ],
@@ -2655,7 +4021,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.owner_id #=> String
     #   resp.backups[0].file_system.creation_time #=> Time
     #   resp.backups[0].file_system.file_system_id #=> String
-    #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
@@ -2696,13 +4062,13 @@ module Aws::FSx
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.backups[0].file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.backups[0].file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.backups[0].file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.backups[0].file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.backups[0].file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.backups[0].file_system.lustre_configuration.mount_name #=> String
     #   resp.backups[0].file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -2710,8 +4076,10 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.backups[0].file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.backups[0].file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backups[0].file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backups[0].file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.backups[0].file_system.administrative_actions #=> Array
-    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].request_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -2719,7 +4087,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -2737,8 +4105,37 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.backups[0].file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -2757,6 +4154,16 @@ module Aws::FSx
     #   resp.backups[0].file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.backups[0].file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.backups[0].file_system.file_system_type_version #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backups[0].file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backups[0].file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].file_system.open_zfs_configuration.root_volume_id #=> String
     #   resp.backups[0].directory_information.domain_name #=> String
     #   resp.backups[0].directory_information.active_directory_id #=> String
     #   resp.backups[0].directory_information.resource_arn #=> String
@@ -2766,7 +4173,7 @@ module Aws::FSx
     #   resp.backups[0].resource_type #=> String, one of "FILE_SYSTEM", "VOLUME"
     #   resp.backups[0].volume.creation_time #=> Time
     #   resp.backups[0].volume.file_system_id #=> String
-    #   resp.backups[0].volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.backups[0].volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.backups[0].volume.name #=> String
     #   resp.backups[0].volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.backups[0].volume.ontap_configuration.junction_path #=> String
@@ -2784,8 +4191,132 @@ module Aws::FSx
     #   resp.backups[0].volume.tags[0].key #=> String
     #   resp.backups[0].volume.tags[0].value #=> String
     #   resp.backups[0].volume.volume_id #=> String
-    #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP"
+    #   resp.backups[0].volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.backups[0].volume.lifecycle_transition_reason.message #=> String
+    #   resp.backups[0].volume.administrative_actions #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.backups[0].volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].request_time #=> Time
+    #   resp.backups[0].volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.backups[0].volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.volume_path #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.backups[0].volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.backups[0].volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backups[0].volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.backups[0].volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.backups[0].volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.backups[0].volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.backups[0].volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.backups[0].volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.backups[0].volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.backups[0].volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeBackups AWS API Documentation
@@ -2794,6 +4325,98 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_backups(params = {}, options = {})
       req = build_request(:describe_backups, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx for Lustre data
+    # repository associations, if one or more `AssociationIds` values are
+    # provided in the request, or if filters are used in the request. Data
+    # repository associations are supported only for file systems with the
+    # `Persistent_2` deployment type.
+    #
+    # You can use filters to narrow the response to include just data
+    # repository associations for specific file systems (use the
+    # `file-system-id` filter with the ID of the file system) or data
+    # repository associations for a specific repository type (use the
+    # `data-repository-type` filter with a value of `S3`). If you don't use
+    # filters, the response returns all data repository associations owned
+    # by your Amazon Web Services account in the Amazon Web Services Region
+    # of the endpoint that you're calling.
+    #
+    # When retrieving all data repository associations, you can paginate the
+    # response by using the optional `MaxResults` parameter to limit the
+    # number of data repository associations returned in a response. If more
+    # data repository associations remain, Amazon FSx returns a `NextToken`
+    # value in the response. In this case, send a later request with the
+    # `NextToken` request parameter set to the value of `NextToken` from the
+    # last response.
+    #
+    # @option params [Array<String>] :association_ids
+    #   IDs of the data repository associations whose descriptions you want to
+    #   retrieve (String).
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A list of `Filter` elements.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeDataRepositoryAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDataRepositoryAssociationsResponse#associations #associations} => Array&lt;Types::DataRepositoryAssociation&gt;
+    #   * {Types::DescribeDataRepositoryAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_data_repository_associations({
+    #     association_ids: ["DataRepositoryAssociationId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, backup-type, file-system-type, volume-id, data-repository-type
+    #         values: ["FilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.associations #=> Array
+    #   resp.associations[0].association_id #=> String
+    #   resp.associations[0].resource_arn #=> String
+    #   resp.associations[0].file_system_id #=> String
+    #   resp.associations[0].lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.associations[0].failure_details.message #=> String
+    #   resp.associations[0].file_system_path #=> String
+    #   resp.associations[0].data_repository_path #=> String
+    #   resp.associations[0].batch_import_meta_data_on_create #=> Boolean
+    #   resp.associations[0].imported_file_chunk_size #=> Integer
+    #   resp.associations[0].s3.auto_import_policy.events #=> Array
+    #   resp.associations[0].s3.auto_import_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.associations[0].s3.auto_export_policy.events #=> Array
+    #   resp.associations[0].s3.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.associations[0].tags #=> Array
+    #   resp.associations[0].tags[0].key #=> String
+    #   resp.associations[0].tags[0].value #=> String
+    #   resp.associations[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeDataRepositoryAssociations AWS API Documentation
+    #
+    # @overload describe_data_repository_associations(params = {})
+    # @param [Hash] params ({})
+    def describe_data_repository_associations(params = {}, options = {})
+      req = build_request(:describe_data_repository_associations, params)
       req.send_request(options)
     end
 
@@ -2844,7 +4467,7 @@ module Aws::FSx
     #     task_ids: ["TaskId"],
     #     filters: [
     #       {
-    #         name: "file-system-id", # accepts file-system-id, task-lifecycle
+    #         name: "file-system-id", # accepts file-system-id, task-lifecycle, data-repository-association-id
     #         values: ["DataRepositoryTaskFilterValue"],
     #       },
     #     ],
@@ -2857,7 +4480,7 @@ module Aws::FSx
     #   resp.data_repository_tasks #=> Array
     #   resp.data_repository_tasks[0].task_id #=> String
     #   resp.data_repository_tasks[0].lifecycle #=> String, one of "PENDING", "EXECUTING", "FAILED", "SUCCEEDED", "CANCELED", "CANCELING"
-    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY"
+    #   resp.data_repository_tasks[0].type #=> String, one of "EXPORT_TO_REPOSITORY", "IMPORT_METADATA_FROM_REPOSITORY"
     #   resp.data_repository_tasks[0].creation_time #=> Time
     #   resp.data_repository_tasks[0].start_time #=> Time
     #   resp.data_repository_tasks[0].end_time #=> Time
@@ -2965,13 +4588,13 @@ module Aws::FSx
     # later request with the `NextToken` request parameter set to the value
     # of `NextToken` from the last response.
     #
-    # This action is used in an iterative process to retrieve a list of your
-    # file system descriptions. `DescribeFileSystems` is called first
-    # without a `NextToken`value. Then the action continues to be called
+    # This operation is used in an iterative process to retrieve a list of
+    # your file system descriptions. `DescribeFileSystems` is called first
+    # without a `NextToken`value. Then the operation continues to be called
     # with the `NextToken` parameter set to the value of the last
     # `NextToken` value until a response has no `NextToken`.
     #
-    # When using this action, keep the following in mind:
+    # When using this operation, keep the following in mind:
     #
     # * The implementation might return fewer than `MaxResults` file system
     #   descriptions while still including a `NextToken` value.
@@ -2993,8 +4616,8 @@ module Aws::FSx
     #
     # @option params [String] :next_token
     #   Opaque pagination token returned from a previous `DescribeFileSystems`
-    #   operation (String). If a token present, the action continues the list
-    #   from where the returning call left off.
+    #   operation (String). If a token present, the operation continues the
+    #   list from where the returning call left off.
     #
     # @return [Types::DescribeFileSystemsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3061,7 +4684,7 @@ module Aws::FSx
     #   resp.file_systems[0].owner_id #=> String
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].file_system_id #=> String
-    #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
@@ -3102,13 +4725,13 @@ module Aws::FSx
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_systems[0].windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_systems[0].lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_systems[0].lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.file_systems[0].lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_systems[0].lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.file_systems[0].lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_systems[0].lustre_configuration.mount_name #=> String
     #   resp.file_systems[0].lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -3116,8 +4739,10 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_systems[0].lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_systems[0].lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.file_systems[0].lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_systems[0].lustre_configuration.log_configuration.destination #=> String
     #   resp.file_systems[0].administrative_actions #=> Array
-    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
     #   resp.file_systems[0].administrative_actions[0].request_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3125,7 +4750,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].failure_details.message #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.name #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -3143,8 +4768,37 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_systems[0].ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_systems[0].ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_systems[0].ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -3163,6 +4817,16 @@ module Aws::FSx
     #   resp.file_systems[0].ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_systems[0].ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_systems[0].file_system_type_version #=> String
+    #   resp.file_systems[0].open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_systems[0].open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.file_systems[0].open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_systems[0].open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_systems[0].open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.file_systems[0].open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_systems[0].open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_systems[0].open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_systems[0].open_zfs_configuration.root_volume_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeFileSystems AWS API Documentation
@@ -3171,6 +4835,233 @@ module Aws::FSx
     # @param [Hash] params ({})
     def describe_file_systems(params = {}, options = {})
       req = build_request(:describe_file_systems, params)
+      req.send_request(options)
+    end
+
+    # Returns the description of specific Amazon FSx snapshots, if a
+    # `SnapshotIds` value is provided. Otherwise, this operation returns all
+    # snapshots owned by your Amazon Web Services account in the Amazon Web
+    # Services Region of the endpoint that you're calling.
+    #
+    # When retrieving all snapshots, you can optionally specify the
+    # `MaxResults` parameter to limit the number of snapshots in a response.
+    # If more backups remain, Amazon FSx returns a `NextToken` value in the
+    # response. In this case, send a later request with the `NextToken`
+    # request parameter set to the value of `NextToken` from the last
+    # response.
+    #
+    # Use this operation in an iterative process to retrieve a list of your
+    # snapshots. `DescribeSnapshots` is called first without a `NextToken`
+    # value. Then the operation continues to be called with the `NextToken`
+    # parameter set to the value of the last `NextToken` value until a
+    # response has no `NextToken` value.
+    #
+    # When using this operation, keep the following in mind:
+    #
+    # * The operation might return fewer than the `MaxResults` value of
+    #   snapshot descriptions while still including a `NextToken` value.
+    #
+    # * The order of snapshots returned in the response of one
+    #   `DescribeSnapshots` call and the order of backups returned across
+    #   the responses of a multi-call iteration is unspecified.
+    #
+    # @option params [Array<String>] :snapshot_ids
+    #   The IDs of the snapshots that you want to retrieve. This parameter
+    #   value overrides any filters. If any IDs aren't found, a
+    #   `SnapshotNotFound` error occurs.
+    #
+    # @option params [Array<Types::SnapshotFilter>] :filters
+    #   The filters structure. The supported names are `file-system-id` or
+    #   `volume-id`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of resources to return in the response. This value
+    #   must be an integer greater than zero.
+    #
+    # @option params [String] :next_token
+    #   (Optional) Opaque pagination token returned from a previous operation
+    #   (String). If present, this token indicates from what point you can
+    #   continue processing the request, where the previous `NextToken` value
+    #   left off.
+    #
+    # @return [Types::DescribeSnapshotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeSnapshotsResponse#snapshots #snapshots} => Array&lt;Types::Snapshot&gt;
+    #   * {Types::DescribeSnapshotsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_snapshots({
+    #     snapshot_ids: ["SnapshotId"],
+    #     filters: [
+    #       {
+    #         name: "file-system-id", # accepts file-system-id, volume-id
+    #         values: ["SnapshotFilterValue"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshots #=> Array
+    #   resp.snapshots[0].resource_arn #=> String
+    #   resp.snapshots[0].snapshot_id #=> String
+    #   resp.snapshots[0].name #=> String
+    #   resp.snapshots[0].volume_id #=> String
+    #   resp.snapshots[0].creation_time #=> Time
+    #   resp.snapshots[0].lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshots[0].tags #=> Array
+    #   resp.snapshots[0].tags[0].key #=> String
+    #   resp.snapshots[0].tags[0].value #=> String
+    #   resp.snapshots[0].administrative_actions #=> Array
+    #   resp.snapshots[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshots[0].administrative_actions[0].progress_percent #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].request_time #=> Time
+    #   resp.snapshots[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].failure_details.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.name #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_snapshot_values #=> Types::Snapshot
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeSnapshots AWS API Documentation
+    #
+    # @overload describe_snapshots(params = {})
+    # @param [Hash] params ({})
+    def describe_snapshots(params = {}, options = {})
+      req = build_request(:describe_snapshots, params)
       req.send_request(options)
     end
 
@@ -3260,13 +5151,15 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Describes one or more Amazon FSx for NetApp ONTAP volumes.
+    # Describes one or more Amazon FSx for NetApp ONTAP or Amazon FSx for
+    # OpenZFS volumes.
     #
     # @option params [Array<String>] :volume_ids
-    #   IDs of the volumes whose descriptions you want to retrieve.
+    #   The IDs of the volumes whose descriptions you want to retrieve.
     #
     # @option params [Array<Types::VolumeFilter>] :filters
-    #   Enter a filter name:value pair to view a select set of volumes.
+    #   Enter a filter `Name` and `Values` pair to view a select set of
+    #   volumes.
     #
     # @option params [Integer] :max_results
     #   The maximum number of resources to return in the response. This value
@@ -3304,7 +5197,7 @@ module Aws::FSx
     #   resp.volumes #=> Array
     #   resp.volumes[0].creation_time #=> Time
     #   resp.volumes[0].file_system_id #=> String
-    #   resp.volumes[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volumes[0].lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.volumes[0].name #=> String
     #   resp.volumes[0].ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.volumes[0].ontap_configuration.junction_path #=> String
@@ -3322,8 +5215,132 @@ module Aws::FSx
     #   resp.volumes[0].tags[0].key #=> String
     #   resp.volumes[0].tags[0].value #=> String
     #   resp.volumes[0].volume_id #=> String
-    #   resp.volumes[0].volume_type #=> String, one of "ONTAP"
+    #   resp.volumes[0].volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volumes[0].lifecycle_transition_reason.message #=> String
+    #   resp.volumes[0].administrative_actions #=> Array
+    #   resp.volumes[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volumes[0].administrative_actions[0].progress_percent #=> Integer
+    #   resp.volumes[0].administrative_actions[0].request_time #=> Time
+    #   resp.volumes[0].administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volumes[0].administrative_actions[0].failure_details.message #=> String
+    #   resp.volumes[0].administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volumes[0].open_zfs_configuration.parent_volume_id #=> String
+    #   resp.volumes[0].open_zfs_configuration.volume_path #=> String
+    #   resp.volumes[0].open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.volumes[0].open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.volumes[0].open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volumes[0].open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.volumes[0].open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.volumes[0].open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.volumes[0].open_zfs_configuration.read_only #=> Boolean
+    #   resp.volumes[0].open_zfs_configuration.nfs_exports #=> Array
+    #   resp.volumes[0].open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.volumes[0].open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.volumes[0].open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.volumes[0].open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.volumes[0].open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DescribeVolumes AWS API Documentation
@@ -3482,6 +5499,249 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Releases the file system lock from an Amazon FSx for OpenZFS file
+    # system.
+    #
+    # @option params [required, String] :file_system_id
+    #   The globally unique ID of the file system, assigned by Amazon FSx.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ReleaseFileSystemNfsV3LocksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReleaseFileSystemNfsV3LocksResponse#file_system #file_system} => Types::FileSystem
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.release_file_system_nfs_v3_locks({
+    #     file_system_id: "FileSystemId", # required
+    #     client_request_token: "ClientRequestToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.file_system.owner_id #=> String
+    #   resp.file_system.creation_time #=> Time
+    #   resp.file_system.file_system_id #=> String
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_system.failure_details.message #=> String
+    #   resp.file_system.storage_capacity #=> Integer
+    #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.file_system.vpc_id #=> String
+    #   resp.file_system.subnet_ids #=> Array
+    #   resp.file_system.subnet_ids[0] #=> String
+    #   resp.file_system.network_interface_ids #=> Array
+    #   resp.file_system.network_interface_ids[0] #=> String
+    #   resp.file_system.dns_name #=> String
+    #   resp.file_system.kms_key_id #=> String
+    #   resp.file_system.resource_arn #=> String
+    #   resp.file_system.tags #=> Array
+    #   resp.file_system.tags[0].key #=> String
+    #   resp.file_system.tags[0].value #=> String
+    #   resp.file_system.windows_configuration.active_directory_id #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.file_system.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.file_system.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.file_system.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.file_system.windows_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.file_system.windows_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.file_system.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.file_system.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.windows_configuration.aliases #=> Array
+    #   resp.file_system.windows_configuration.aliases[0].name #=> String
+    #   resp.file_system.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.file_system.lustre_configuration.mount_name #=> String
+    #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_system.administrative_actions #=> Array
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
+    #   resp.file_system.administrative_actions[0].request_time #=> Time
+    #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.file_system.administrative_actions[0].target_file_system_values #=> Types::FileSystem
+    #   resp.file_system.administrative_actions[0].failure_details.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.file_system.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.file_system.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.file_system.ontap_configuration.route_table_ids #=> Array
+    #   resp.file_system.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.file_system_type_version #=> String
+    #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/ReleaseFileSystemNfsV3Locks AWS API Documentation
+    #
+    # @overload release_file_system_nfs_v3_locks(params = {})
+    # @param [Hash] params ({})
+    def release_file_system_nfs_v3_locks(params = {}, options = {})
+      req = build_request(:release_file_system_nfs_v3_locks, params)
+      req.send_request(options)
+    end
+
+    # Returns an Amazon FSx for OpenZFS volume to the state saved by the
+    # specified snapshot.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :volume_id
+    #   The ID of the volume that you are restoring.
+    #
+    # @option params [required, String] :snapshot_id
+    #   The ID of the source snapshot. Specifies the snapshot that you are
+    #   restoring from.
+    #
+    # @option params [Array<String>] :options
+    #   The settings used when restoring the specified volume from snapshot.
+    #
+    #   * `DELETE_INTERMEDIATE_SNAPSHOTS` - Deletes snapshots between the
+    #     current state and the specified snapshot. If there are intermediate
+    #     snapshots and this option isn't used, `RestoreVolumeFromSnapshot`
+    #     fails.
+    #
+    #   * `DELETE_CLONED_VOLUMES` - Deletes any volumes cloned from this
+    #     volume. If there are any cloned volumes and this option isn't used,
+    #     `RestoreVolumeFromSnapshot` fails.
+    #
+    # @return [Types::RestoreVolumeFromSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreVolumeFromSnapshotResponse#volume_id #volume_id} => String
+    #   * {Types::RestoreVolumeFromSnapshotResponse#lifecycle #lifecycle} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_volume_from_snapshot({
+    #     client_request_token: "ClientRequestToken",
+    #     volume_id: "VolumeId", # required
+    #     snapshot_id: "SnapshotId", # required
+    #     options: ["DELETE_INTERMEDIATE_SNAPSHOTS"], # accepts DELETE_INTERMEDIATE_SNAPSHOTS, DELETE_CLONED_VOLUMES
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.volume_id #=> String
+    #   resp.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshot AWS API Documentation
+    #
+    # @overload restore_volume_from_snapshot(params = {})
+    # @param [Hash] params ({})
+    def restore_volume_from_snapshot(params = {}, options = {})
+      req = build_request(:restore_volume_from_snapshot, params)
+      req.send_request(options)
+    end
+
     # Tags an Amazon FSx resource.
     #
     # @option params [required, String] :resource_arn
@@ -3569,6 +5829,90 @@ module Aws::FSx
       req.send_request(options)
     end
 
+    # Updates the configuration of an existing data repository association
+    # on an Amazon FSx for Lustre file system. Data repository associations
+    # are supported only for file systems with the `Persistent_2` deployment
+    # type.
+    #
+    # @option params [required, String] :association_id
+    #   The ID of the data repository association that you are updating.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Integer] :imported_file_chunk_size
+    #   For files imported from a data repository, this value determines the
+    #   stripe count and maximum amount of data per file (in MiB) stored on a
+    #   single physical disk. The maximum number of disks that a single file
+    #   can be striped across is limited by the total number of disks that
+    #   make up the file system.
+    #
+    #   The default chunk size is 1,024 MiB (1 GiB) and can go as high as
+    #   512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
+    #
+    # @option params [Types::S3DataRepositoryConfiguration] :s3
+    #   The configuration for an Amazon S3 data repository linked to an Amazon
+    #   FSx Lustre file system with a data repository association. The
+    #   configuration defines which file events (new, changed, or deleted
+    #   files or directories) are automatically imported from the linked data
+    #   repository to the file system or automatically exported from the file
+    #   system to the data repository.
+    #
+    # @return [Types::UpdateDataRepositoryAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDataRepositoryAssociationResponse#association #association} => Types::DataRepositoryAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_data_repository_association({
+    #     association_id: "DataRepositoryAssociationId", # required
+    #     client_request_token: "ClientRequestToken",
+    #     imported_file_chunk_size: 1,
+    #     s3: {
+    #       auto_import_policy: {
+    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
+    #       },
+    #       auto_export_policy: {
+    #         events: ["NEW"], # accepts NEW, CHANGED, DELETED
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.association.association_id #=> String
+    #   resp.association.resource_arn #=> String
+    #   resp.association.file_system_id #=> String
+    #   resp.association.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.association.failure_details.message #=> String
+    #   resp.association.file_system_path #=> String
+    #   resp.association.data_repository_path #=> String
+    #   resp.association.batch_import_meta_data_on_create #=> Boolean
+    #   resp.association.imported_file_chunk_size #=> Integer
+    #   resp.association.s3.auto_import_policy.events #=> Array
+    #   resp.association.s3.auto_import_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.association.s3.auto_export_policy.events #=> Array
+    #   resp.association.s3.auto_export_policy.events[0] #=> String, one of "NEW", "CHANGED", "DELETED"
+    #   resp.association.tags #=> Array
+    #   resp.association.tags[0].key #=> String
+    #   resp.association.tags[0].value #=> String
+    #   resp.association.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateDataRepositoryAssociation AWS API Documentation
+    #
+    # @overload update_data_repository_association(params = {})
+    # @param [Hash] params ({})
+    def update_data_repository_association(params = {}, options = {})
+      req = build_request(:update_data_repository_association, params)
+      req.send_request(options)
+    end
+
     # Use this operation to update the configuration of an existing Amazon
     # FSx file system. You can update multiple properties in a single
     # request.
@@ -3576,48 +5920,65 @@ module Aws::FSx
     # For Amazon FSx for Windows File Server file systems, you can update
     # the following properties:
     #
-    # * AuditLogConfiguration
+    # * `AuditLogConfiguration`
     #
-    # * AutomaticBackupRetentionDays
+    # * `AutomaticBackupRetentionDays`
     #
-    # * DailyAutomaticBackupStartTime
+    # * `DailyAutomaticBackupStartTime`
     #
-    # * SelfManagedActiveDirectoryConfiguration
+    # * `SelfManagedActiveDirectoryConfiguration`
     #
-    # * StorageCapacity
+    # * `StorageCapacity`
     #
-    # * ThroughputCapacity
+    # * `ThroughputCapacity`
     #
-    # * WeeklyMaintenanceStartTime
+    # * `WeeklyMaintenanceStartTime`
     #
-    # For Amazon FSx for Lustre file systems, you can update the following
+    # For FSx for Lustre file systems, you can update the following
     # properties:
     #
-    # * AutoImportPolicy
+    # * `AutoImportPolicy`
     #
-    # * AutomaticBackupRetentionDays
+    # * `AutomaticBackupRetentionDays`
     #
-    # * DailyAutomaticBackupStartTime
+    # * `DailyAutomaticBackupStartTime`
     #
-    # * DataCompressionType
+    # * `DataCompressionType`
     #
-    # * StorageCapacity
+    # * `StorageCapacity`
     #
-    # * WeeklyMaintenanceStartTime
+    # * `WeeklyMaintenanceStartTime`
     #
-    # For Amazon FSx for NetApp ONTAP file systems, you can update the
+    # For FSx for ONTAP file systems, you can update the following
+    # properties:
+    #
+    # * `AutomaticBackupRetentionDays`
+    #
+    # * `DailyAutomaticBackupStartTime`
+    #
+    # * `FsxAdminPassword`
+    #
+    # * `WeeklyMaintenanceStartTime`
+    #
+    # For the Amazon FSx for OpenZFS file systems, you can update the
     # following properties:
     #
-    # * AutomaticBackupRetentionDays
+    # * `AutomaticBackupRetentionDays`
     #
-    # * DailyAutomaticBackupStartTime
+    # * `CopyTagsToBackups`
     #
-    # * FsxAdminPassword
+    # * `CopyTagsToVolumes`
     #
-    # * WeeklyMaintenanceStartTime
+    # * `DailyAutomaticBackupStartTime`
+    #
+    # * `DiskIopsConfiguration`
+    #
+    # * `ThroughputCapacity`
+    #
+    # * `WeeklyMaintenanceStartTime`
     #
     # @option params [required, String] :file_system_id
-    #   Identifies the file system that you are updating.
+    #   The ID of the file system that you are updating.
     #
     # @option params [String] :client_request_token
     #   A string of up to 64 ASCII characters that Amazon FSx uses to ensure
@@ -3631,15 +5992,18 @@ module Aws::FSx
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
     #   for Windows File Server or Amazon FSx for Lustre file system.
-    #   Specifies the storage capacity target value, GiB, to increase the
-    #   storage capacity for the file system that you're updating. You cannot
-    #   make a storage capacity increase request if there is an existing
-    #   storage capacity increase request in progress.
+    #   Specifies the storage capacity target value, in GiB, to increase the
+    #   storage capacity for the file system that you're updating.
+    #
+    #   <note markdown="1"> You can't make a storage capacity increase request if there is an
+    #   existing storage capacity increase request in progress.
+    #
+    #    </note>
     #
     #   For Windows file systems, the storage capacity target value must be at
-    #   least 10 percent (%) greater than the current storage capacity value.
-    #   In order to increase storage capacity, the file system must have at
-    #   least 16 MB/s of throughput capacity.
+    #   least 10 percent greater than the current storage capacity value. To
+    #   increase storage capacity, the file system must have at least 16 MBps
+    #   of throughput capacity.
     #
     #   For Lustre file systems, the storage capacity target value can be the
     #   following:
@@ -3649,21 +6013,30 @@ module Aws::FSx
     #     the current storage capacity.
     #
     #   * For `PERSISTENT HDD` file systems, valid values are multiples of
-    #     6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for
-    #     40 MB/s/TiB file systems. The values must be greater than the
-    #     current storage capacity.
+    #     6000 GiB for 12-MBps throughput per TiB file systems and multiples
+    #     of 1800 GiB for 40-MBps throughput per TiB file systems. The values
+    #     must be greater than the current storage capacity.
     #
-    #   * For `SCRATCH_1` file systems, you cannot increase the storage
+    #   * For `SCRATCH_1` file systems, you can't increase the storage
     #     capacity.
     #
+    #   For OpenZFS file systems, the input/output operations per second
+    #   (IOPS) automatically scale with increases to the storage capacity if
+    #   IOPS is configured for automatic scaling. If the storage capacity
+    #   increase would result in less than 3 IOPS per GiB of storage, this
+    #   operation returns an error.
+    #
     #   For more information, see [Managing storage capacity][1] in the
-    #   *Amazon FSx for Windows File Server User Guide* and [Managing storage
-    #   and throughput capacity][2] in the *Amazon FSx for Lustre User Guide*.
+    #   *Amazon FSx for Windows File Server User Guide*, [Managing storage and
+    #   throughput capacity][2] in the *Amazon FSx for Lustre User Guide*, and
+    #   [Managing storage capacity][3] in the *Amazon FSx for OpenZFS User
+    #   Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration updates for an Amazon FSx for Windows File Server
@@ -3676,6 +6049,9 @@ module Aws::FSx
     # @option params [Types::UpdateFileSystemOntapConfiguration] :ontap_configuration
     #   The configuration updates for an Amazon FSx for NetApp ONTAP file
     #   system.
+    #
+    # @option params [Types::UpdateFileSystemOpenZFSConfiguration] :open_zfs_configuration
+    #   The configuration updates for an Amazon FSx for OpenZFS file system.
     #
     # @return [Types::UpdateFileSystemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3751,14 +6127,30 @@ module Aws::FSx
     #       weekly_maintenance_start_time: "WeeklyTime",
     #       daily_automatic_backup_start_time: "DailyTime",
     #       automatic_backup_retention_days: 1,
-    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED
+    #       auto_import_policy: "NONE", # accepts NONE, NEW, NEW_CHANGED, NEW_CHANGED_DELETED
     #       data_compression_type: "NONE", # accepts NONE, LZ4
+    #       log_configuration: {
+    #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
+    #         destination: "GeneralARN",
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
     #       daily_automatic_backup_start_time: "DailyTime",
     #       fsx_admin_password: "AdminPassword",
     #       weekly_maintenance_start_time: "WeeklyTime",
+    #     },
+    #     open_zfs_configuration: {
+    #       automatic_backup_retention_days: 1,
+    #       copy_tags_to_backups: false,
+    #       copy_tags_to_volumes: false,
+    #       daily_automatic_backup_start_time: "DailyTime",
+    #       throughput_capacity: 1,
+    #       weekly_maintenance_start_time: "WeeklyTime",
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
     #     },
     #   })
     #
@@ -3767,7 +6159,7 @@ module Aws::FSx
     #   resp.file_system.owner_id #=> String
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
-    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP"
+    #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
     #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
@@ -3808,13 +6200,13 @@ module Aws::FSx
     #   resp.file_system.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
     #   resp.file_system.windows_configuration.audit_log_configuration.audit_log_destination #=> String
     #   resp.file_system.lustre_configuration.weekly_maintenance_start_time #=> String
-    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.import_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.export_path #=> String
     #   resp.file_system.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
-    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED"
+    #   resp.file_system.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
     #   resp.file_system.lustre_configuration.data_repository_configuration.failure_details.message #=> String
-    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1"
+    #   resp.file_system.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
     #   resp.file_system.lustre_configuration.per_unit_storage_throughput #=> Integer
     #   resp.file_system.lustre_configuration.mount_name #=> String
     #   resp.file_system.lustre_configuration.daily_automatic_backup_start_time #=> String
@@ -3822,8 +6214,10 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.copy_tags_to_backups #=> Boolean
     #   resp.file_system.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
     #   resp.file_system.administrative_actions #=> Array
-    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION"
+    #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
     #   resp.file_system.administrative_actions[0].request_time #=> Time
     #   resp.file_system.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
@@ -3831,7 +6225,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].failure_details.message #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_volume_values.file_system_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.file_system.administrative_actions[0].target_volume_values.name #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.file_system.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
@@ -3849,8 +6243,37 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.tags[0].value #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.volume_id #=> String
-    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.file_system.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.file_system.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.file_system.ontap_configuration.daily_automatic_backup_start_time #=> String
     #   resp.file_system.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
@@ -3869,6 +6292,16 @@ module Aws::FSx
     #   resp.file_system.ontap_configuration.throughput_capacity #=> Integer
     #   resp.file_system.ontap_configuration.weekly_maintenance_start_time #=> String
     #   resp.file_system.file_system_type_version #=> String
+    #   resp.file_system.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.file_system.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.file_system.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.file_system.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.file_system.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.file_system.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.file_system.open_zfs_configuration.root_volume_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystem AWS API Documentation
     #
@@ -3876,6 +6309,194 @@ module Aws::FSx
     # @param [Hash] params ({})
     def update_file_system(params = {}, options = {})
       req = build_request(:update_file_system, params)
+      req.send_request(options)
+    end
+
+    # Updates the name of a snapshot.
+    #
+    # @option params [String] :client_request_token
+    #   (Optional) An idempotency token for resource creation, in a string of
+    #   up to 64 ASCII characters. This token is automatically filled on your
+    #   behalf when you use the Command Line Interface (CLI) or an Amazon Web
+    #   Services SDK.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :name
+    #   The name of the snapshot to update.
+    #
+    # @option params [required, String] :snapshot_id
+    #   The ID of the snapshot that you want to update, in the format
+    #   `fsvolsnap-0123456789abcdef0`.
+    #
+    # @return [Types::UpdateSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSnapshotResponse#snapshot #snapshot} => Types::Snapshot
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_snapshot({
+    #     client_request_token: "ClientRequestToken",
+    #     name: "SnapshotName", # required
+    #     snapshot_id: "SnapshotId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.snapshot.resource_arn #=> String
+    #   resp.snapshot.snapshot_id #=> String
+    #   resp.snapshot.name #=> String
+    #   resp.snapshot.volume_id #=> String
+    #   resp.snapshot.creation_time #=> Time
+    #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.tags #=> Array
+    #   resp.snapshot.tags[0].key #=> String
+    #   resp.snapshot.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions #=> Array
+    #   resp.snapshot.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.snapshot.administrative_actions[0].progress_percent #=> Integer
+    #   resp.snapshot.administrative_actions[0].request_time #=> Time
+    #   resp.snapshot.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].failure_details.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.creation_time #=> Time
+    #   resp.snapshot.administrative_actions[0].target_volume_values.file_system_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.name #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.junction_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.security_style #=> String, one of "UNIX", "NTFS", "MIXED"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.size_in_megabytes #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_efficiency_enabled #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.storage_virtual_machine_root #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.cooling_period #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.tiering_policy.name #=> String, one of "SNAPSHOT_ONLY", "AUTO", "ALL", "NONE"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.uuid #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.ontap_configuration.ontap_volume_type #=> String, one of "RW", "DP", "LS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.resource_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].key #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.tags[0].value #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.volume_type #=> String, one of "ONTAP", "OPENZFS"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.lifecycle_transition_reason.message #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.read_only #=> Boolean
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_snapshot_values #=> Types::Snapshot
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateSnapshot AWS API Documentation
+    #
+    # @overload update_snapshot(params = {})
+    # @param [Hash] params ({})
+    def update_snapshot(params = {}, options = {})
+      req = build_request(:update_snapshot, params)
       req.send_request(options)
     end
 
@@ -3964,7 +6585,8 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates an Amazon FSx for NetApp ONTAP volume's configuration.
+    # Updates the configuration of an Amazon FSx for NetApp ONTAP or Amazon
+    # FSx for OpenZFS volume.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -3976,11 +6598,20 @@ module Aws::FSx
     #   not need to pass this option.**
     #
     # @option params [required, String] :volume_id
-    #   Specifies the volume that you want to update, formatted
+    #   The ID of the volume that you want to update, in the format
     #   `fsvol-0123456789abcdef0`.
     #
     # @option params [Types::UpdateOntapVolumeConfiguration] :ontap_configuration
-    #   The `ONTAP` configuration of the volume you are updating.
+    #   The configuration of the ONTAP volume that you are updating.
+    #
+    # @option params [String] :name
+    #   The name of the OpenZFS volume. OpenZFS root volumes are automatically
+    #   named `FSX`. Child volume names must be unique among their parent
+    #   volume's children. The name of the volume is part of the mount string
+    #   for the OpenZFS volume.
+    #
+    # @option params [Types::UpdateOpenZFSVolumeConfiguration] :open_zfs_configuration
+    #   The configuration of the OpenZFS volume that you are updating.
     #
     # @return [Types::UpdateVolumeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4001,13 +6632,37 @@ module Aws::FSx
     #         name: "SNAPSHOT_ONLY", # accepts SNAPSHOT_ONLY, AUTO, ALL, NONE
     #       },
     #     },
+    #     name: "VolumeName",
+    #     open_zfs_configuration: {
+    #       storage_capacity_reservation_gi_b: 1,
+    #       storage_capacity_quota_gi_b: 1,
+    #       data_compression_type: "NONE", # accepts NONE, ZSTD
+    #       nfs_exports: [
+    #         {
+    #           client_configurations: [ # required
+    #             {
+    #               clients: "OpenZFSClients", # required
+    #               options: ["OpenZFSNfsExportOption"], # required
+    #             },
+    #           ],
+    #         },
+    #       ],
+    #       user_and_group_quotas: [
+    #         {
+    #           type: "USER", # required, accepts USER, GROUP
+    #           id: 1, # required
+    #           storage_capacity_quota_gi_b: 1, # required
+    #         },
+    #       ],
+    #       read_only: false,
+    #     },
     #   })
     #
     # @example Response structure
     #
     #   resp.volume.creation_time #=> Time
     #   resp.volume.file_system_id #=> String
-    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING"
+    #   resp.volume.lifecycle #=> String, one of "CREATING", "CREATED", "DELETING", "FAILED", "MISCONFIGURED", "PENDING", "AVAILABLE"
     #   resp.volume.name #=> String
     #   resp.volume.ontap_configuration.flex_cache_endpoint_type #=> String, one of "NONE", "ORIGIN", "CACHE"
     #   resp.volume.ontap_configuration.junction_path #=> String
@@ -4025,8 +6680,132 @@ module Aws::FSx
     #   resp.volume.tags[0].key #=> String
     #   resp.volume.tags[0].value #=> String
     #   resp.volume.volume_id #=> String
-    #   resp.volume.volume_type #=> String, one of "ONTAP"
+    #   resp.volume.volume_type #=> String, one of "ONTAP", "OPENZFS"
     #   resp.volume.lifecycle_transition_reason.message #=> String
+    #   resp.volume.administrative_actions #=> Array
+    #   resp.volume.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
+    #   resp.volume.administrative_actions[0].progress_percent #=> Integer
+    #   resp.volume.administrative_actions[0].request_time #=> Time
+    #   resp.volume.administrative_actions[0].status #=> String, one of "FAILED", "IN_PROGRESS", "PENDING", "COMPLETED", "UPDATED_OPTIMIZING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.owner_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
+    #   resp.volume.administrative_actions[0].target_file_system_values.vpc_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.subnet_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.network_interface_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.kms_key_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.active_directory_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.domain_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.organizational_unit_distinguished_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.file_system_administrators_group #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.user_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.self_managed_active_directory_configuration.dns_ips[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.deployment_type #=> String, one of "MULTI_AZ_1", "SINGLE_AZ_1", "SINGLE_AZ_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.remote_administration_endpoint #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.preferred_file_server_ip #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.maintenance_operations_in_progress[0] #=> String, one of "PATCHING", "BACKING_UP"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.aliases[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "DELETING", "CREATE_FAILED", "DELETE_FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.file_share_access_audit_log_level #=> String, one of "DISABLED", "SUCCESS_ONLY", "FAILURE_ONLY", "SUCCESS_AND_FAILURE"
+    #   resp.volume.administrative_actions[0].target_file_system_values.windows_configuration.audit_log_configuration.audit_log_destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.lifecycle #=> String, one of "CREATING", "AVAILABLE", "MISCONFIGURED", "UPDATING", "DELETING", "FAILED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.import_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.export_path #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.imported_file_chunk_size #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.auto_import_policy #=> String, one of "NONE", "NEW", "NEW_CHANGED", "NEW_CHANGED_DELETED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_repository_configuration.failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.deployment_type #=> String, one of "SCRATCH_1", "SCRATCH_2", "PERSISTENT_1", "PERSISTENT_2"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.per_unit_storage_throughput #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.mount_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.drive_cache_type #=> String, one of "NONE", "READ"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.deployment_type #=> String, one of "MULTI_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoint_ip_address_range #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.intercluster.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.dns_name #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.endpoints.management.ip_addresses[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.preferred_subnet_id #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.route_table_ids[0] #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type_version #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.automatic_backup_retention_days #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_backups #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.copy_tags_to_volumes #=> Boolean
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.daily_automatic_backup_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.deployment_type #=> String, one of "SINGLE_AZ_1"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.throughput_capacity #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.weekly_maintenance_start_time #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.mode #=> String, one of "AUTOMATIC", "USER_PROVISIONED"
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.disk_iops_configuration.iops #=> Integer
+    #   resp.volume.administrative_actions[0].target_file_system_values.open_zfs_configuration.root_volume_id #=> String
+    #   resp.volume.administrative_actions[0].failure_details.message #=> String
+    #   resp.volume.administrative_actions[0].target_volume_values #=> Types::Volume
+    #   resp.volume.administrative_actions[0].target_snapshot_values.resource_arn #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.snapshot_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.name #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
+    #   resp.volume.administrative_actions[0].target_snapshot_values.administrative_actions #=> Types::AdministrativeActions
+    #   resp.volume.open_zfs_configuration.parent_volume_id #=> String
+    #   resp.volume.open_zfs_configuration.volume_path #=> String
+    #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
+    #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
+    #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
+    #   resp.volume.open_zfs_configuration.read_only #=> Boolean
+    #   resp.volume.open_zfs_configuration.nfs_exports #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].clients #=> String
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options #=> Array
+    #   resp.volume.open_zfs_configuration.nfs_exports[0].client_configurations[0].options[0] #=> String
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas #=> Array
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].type #=> String, one of "USER", "GROUP"
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].id #=> Integer
+    #   resp.volume.open_zfs_configuration.user_and_group_quotas[0].storage_capacity_quota_gi_b #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateVolume AWS API Documentation
     #
@@ -4050,7 +6829,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

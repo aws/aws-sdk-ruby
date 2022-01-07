@@ -129,6 +129,55 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The object containing information that associates the recommended
+    # intent/slot type with a conversation.
+    #
+    # @!attribute [rw] transcript
+    #   The content of the transcript that meets the search filter criteria.
+    #   For the JSON format of the transcript, see [Output transcript
+    #   format][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lex/latest/dg/designing-output-format.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AssociatedTranscript AWS API Documentation
+    #
+    class AssociatedTranscript < Struct.new(
+      :transcript)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to search for the associated transcript.
+    #
+    # @note When making an API call, you may pass AssociatedTranscriptFilter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "IntentId", # required, accepts IntentId, SlotTypeId
+    #         values: ["FilterValue"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the field to use for filtering. The allowed names are
+    #   IntentId and SlotTypeId.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values to use to filter the transcript.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AssociatedTranscriptFilter AWS API Documentation
+    #
+    class AssociatedTranscriptFilter < Struct.new(
+      :name,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of audio log files collected when conversation logging is
     # enabled for a bot.
     #
@@ -686,6 +735,87 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :last_updated_date_time,
       :last_build_submitted_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A statistical summary of the bot recommendation results.
+    #
+    # @!attribute [rw] intents
+    #   Statistical information about about the intents associated with the
+    #   bot recommendation results.
+    #   @return [Types::IntentStatistics]
+    #
+    # @!attribute [rw] slot_types
+    #   Statistical information about the slot types associated with the bot
+    #   recommendation results.
+    #   @return [Types::SlotTypeStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotRecommendationResultStatistics AWS API Documentation
+    #
+    class BotRecommendationResultStatistics < Struct.new(
+      :intents,
+      :slot_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object representing the URL of the bot definition, the URL of the
+    # associated transcript and a statistical summary of the bot
+    # recommendation results.
+    #
+    # @!attribute [rw] bot_locale_export_url
+    #   The presigned URL link of the recommended bot definition.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_transcripts_url
+    #   The presigned url link of the associated transcript.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   The statistical summary of the bot recommendation results.
+    #   @return [Types::BotRecommendationResultStatistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotRecommendationResults AWS API Documentation
+    #
+    class BotRecommendationResults < Struct.new(
+      :bot_locale_export_url,
+      :associated_transcripts_url,
+      :statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the bot recommendation.
+    #
+    # @!attribute [rw] bot_recommendation_status
+    #   The status of the bot recommendation.
+    #
+    #   If the status is Failed, then the reasons for the failure are listed
+    #   in the failureReasons field.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   A timestamp of the date and time that the bot recommendation was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   A timestamp of the date and time that the bot recommendation was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotRecommendationSummary AWS API Documentation
+    #
+    class BotRecommendationSummary < Struct.new(
+      :bot_recommendation_status,
+      :bot_recommendation_id,
+      :creation_date_time,
+      :last_updated_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3130,7 +3260,7 @@ module Aws::LexModelsV2
     #             ],
     #           },
     #         ],
-    #         value_selection_setting: { # required
+    #         value_selection_setting: {
     #           resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
@@ -3140,6 +3270,15 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         external_source_setting: {
+    #           grammar_slot_type_setting: {
+    #             source: {
+    #               s3_bucket_name: "S3BucketName", # required
+    #               s3_object_key: "S3ObjectPath", # required
+    #               kms_key_arn: "KmsKeyArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] slot_type_name
@@ -3202,6 +3341,10 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] external_source_setting
+    #   Sets the type of external information used to create the slot type.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotTypeRequest AWS API Documentation
     #
     class CreateSlotTypeRequest < Struct.new(
@@ -3212,7 +3355,8 @@ module Aws::LexModelsV2
       :parent_slot_type_signature,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3260,6 +3404,10 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the slot type was created.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   The type of external information used to create the slot type.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CreateSlotTypeResponse AWS API Documentation
     #
     class CreateSlotTypeResponse < Struct.new(
@@ -3272,7 +3420,8 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :locale_id,
-      :creation_date_time)
+      :creation_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3375,6 +3524,34 @@ module Aws::LexModelsV2
     #
     class DataPrivacy < Struct.new(
       :child_directed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object used for specifying the data range that the customer wants
+    # Amazon Lex to read through in the input transcripts.
+    #
+    # @note When making an API call, you may pass DateRangeFilter
+    #   data as a hash:
+    #
+    #       {
+    #         start_date_time: Time.now, # required
+    #         end_date_time: Time.now, # required
+    #       }
+    #
+    # @!attribute [rw] start_date_time
+    #   A timestamp indicating the start date for the date range filter.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_time
+    #   A timestamp indicating the end date for the date range filter.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DateRangeFilter AWS API Documentation
+    #
+    class DateRangeFilter < Struct.new(
+      :start_date_time,
+      :end_date_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4192,6 +4369,11 @@ module Aws::LexModelsV2
     #   have taken place for the locale.
     #   @return [Array<Types::BotLocaleHistoryEvent>]
     #
+    # @!attribute [rw] recommended_actions
+    #   Recommended actions to take to resolve an error in the
+    #   `failureReasons` field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotLocaleResponse AWS API Documentation
     #
     class DescribeBotLocaleResponse < Struct.new(
@@ -4209,7 +4391,121 @@ module Aws::LexModelsV2
       :creation_date_time,
       :last_updated_date_time,
       :last_build_submitted_date_time,
-      :bot_locale_history_events)
+      :bot_locale_history_events,
+      :recommended_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBotRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         bot_recommendation_id: "Id", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with the bot
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot associated with the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to describe. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The identifier of the bot recommendation to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotRecommendationRequest AWS API Documentation
+    #
+    class DescribeBotRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot associated with the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot associated with the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_status
+    #   The status of the bot recommendation. If the status is Failed, then
+    #   the reasons for the failure are listed in the failureReasons field.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The identifier of the bot recommendation being described.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_reasons
+    #   If botRecommendationStatus is Failed, Amazon Lex explains why.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the bot recommendation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the bot recommendation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transcript_source_setting
+    #   The object representing the Amazon S3 bucket containing the
+    #   transcript, as well as the associated metadata.
+    #   @return [Types::TranscriptSourceSetting]
+    #
+    # @!attribute [rw] encryption_setting
+    #   The object representing the passwords that were used to encrypt the
+    #   data related to the bot recommendation results, as well as the KMS
+    #   key ARN used to encrypt the associated metadata.
+    #   @return [Types::EncryptionSetting]
+    #
+    # @!attribute [rw] bot_recommendation_results
+    #   The object representing the URL of the bot definition, the URL of
+    #   the associated transcript and a statistical summary of the bot
+    #   recommendation results.
+    #   @return [Types::BotRecommendationResults]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeBotRecommendationResponse AWS API Documentation
+    #
+    class DescribeBotRecommendationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_status,
+      :bot_recommendation_id,
+      :failure_reasons,
+      :creation_date_time,
+      :last_updated_date_time,
+      :transcript_source_setting,
+      :encryption_setting,
+      :bot_recommendation_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4941,6 +5237,11 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeSlotTypeResponse AWS API Documentation
     #
     class DescribeSlotTypeResponse < Struct.new(
@@ -4954,7 +5255,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4978,6 +5280,43 @@ module Aws::LexModelsV2
     class DialogCodeHookSettings < Struct.new(
       :enabled)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object representing the passwords that were used to encrypt the
+    # data related to the bot recommendation, as well as the KMS key ARN
+    # used to encrypt the associated metadata.
+    #
+    # @note When making an API call, you may pass EncryptionSetting
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_arn: "KmsKeyArn",
+    #         bot_locale_export_password: "FilePassword",
+    #         associated_transcripts_password: "FilePassword",
+    #       }
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The KMS key ARN used to encrypt the metadata associated with the bot
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_locale_export_password
+    #   The password used to encrypt the recommended bot recommendation
+    #   file.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_transcripts_password
+    #   The password used to encrypt the associated transcript file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/EncryptionSetting AWS API Documentation
+    #
+    class EncryptionSetting < Struct.new(
+      :kms_key_arn,
+      :bot_locale_export_password,
+      :associated_transcripts_password)
+      SENSITIVE = [:bot_locale_export_password, :associated_transcripts_password]
       include Aws::Structure
     end
 
@@ -5120,6 +5459,35 @@ module Aws::LexModelsV2
       :export_status,
       :creation_date_time,
       :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the external source of the slot type's
+    # definition.
+    #
+    # @note When making an API call, you may pass ExternalSourceSetting
+    #   data as a hash:
+    #
+    #       {
+    #         grammar_slot_type_setting: {
+    #           source: {
+    #             s3_bucket_name: "S3BucketName", # required
+    #             s3_object_key: "S3ObjectPath", # required
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] grammar_slot_type_setting
+    #   Settings required for a slot type based on a grammar that you
+    #   provide.
+    #   @return [Types::GrammarSlotTypeSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExternalSourceSetting AWS API Documentation
+    #
+    class ExternalSourceSetting < Struct.new(
+      :grammar_slot_type_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5762,6 +6130,66 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Settings requried for a slot type based on a grammar that you provide.
+    #
+    # @note When making an API call, you may pass GrammarSlotTypeSetting
+    #   data as a hash:
+    #
+    #       {
+    #         source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           s3_object_key: "S3ObjectPath", # required
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] source
+    #   The source of the grammar used to create the slot type.
+    #   @return [Types::GrammarSlotTypeSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GrammarSlotTypeSetting AWS API Documentation
+    #
+    class GrammarSlotTypeSetting < Struct.new(
+      :source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Amazon S3 bucket name and location for the grammar that
+    # is the source for the slot type.
+    #
+    # @note When making an API call, you may pass GrammarSlotTypeSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "S3BucketName", # required
+    #         s3_object_key: "S3ObjectPath", # required
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the S3 bucket that contains the grammar source.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_object_key
+    #   The path to the grammar in the S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon KMS key required to decrypt the contents of the grammar,
+    #   if any.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/GrammarSlotTypeSource AWS API Documentation
+    #
+    class GrammarSlotTypeSource < Struct.new(
+      :s3_bucket_name,
+      :s3_object_key,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A card that is shown to the user by a messaging platform. You define
     # the contents of the card, the card is displayed by the platform.
     #
@@ -6301,6 +6729,22 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The object that contains the statistical summary of recommended
+    # intents associated with the bot recommendation.
+    #
+    # @!attribute [rw] discovered_intent_count
+    #   The number of recommended intents associated with the bot
+    #   recommendation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/IntentStatistics AWS API Documentation
+    #
+    class IntentStatistics < Struct.new(
+      :discovered_intent_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Summary information about an intent returned by the `ListIntents`
     # operation.
     #
@@ -6435,6 +6879,33 @@ module Aws::LexModelsV2
     class LambdaCodeHook < Struct.new(
       :lambda_arn,
       :code_hook_interface_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object that contains transcript filter details that are associated
+    # with a bot recommendation.
+    #
+    # @note When making an API call, you may pass LexTranscriptFilter
+    #   data as a hash:
+    #
+    #       {
+    #         date_range_filter: {
+    #           start_date_time: Time.now, # required
+    #           end_date_time: Time.now, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] date_range_filter
+    #   The object that contains a date range filter that will be applied to
+    #   the transcript. Specify this object if you want Amazon Lex to only
+    #   read the files that are within the date range.
+    #   @return [Types::DateRangeFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/LexTranscriptFilter AWS API Documentation
+    #
+    class LexTranscriptFilter < Struct.new(
+      :date_range_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6778,6 +7249,98 @@ module Aws::LexModelsV2
       :bot_version,
       :next_token,
       :bot_locale_summaries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListBotRecommendationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that contains the bot
+    #   recommendation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the bot recommendation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListBotRecommendation operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter
+    #   to return the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotRecommendationsRequest AWS API Documentation
+    #
+    class ListBotRecommendationsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that contains the bot
+    #   recommendation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the bot recommendation list.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_summaries
+    #   Summary information for the bot recommendations that meet the filter
+    #   specified in this request. The length of the list is specified in
+    #   the maxResults parameter of the request. If there are more bot
+    #   recommendations available, the nextToken field contains a token to
+    #   get the next page of results.
+    #   @return [Array<Types::BotRecommendationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the ListBotRecommendations operation. If the nextToken
+    #   field is present, you send the contents as the nextToken parameter
+    #   of a ListBotRecommendations operation request to get the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotRecommendationsResponse AWS API Documentation
+    #
+    class ListBotRecommendationsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7422,6 +7985,116 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListRecommendedIntentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         bot_recommendation_id: "Id", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with the recommended
+    #   intents.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the recommended intents.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the recommended
+    #   intents.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The identifier of the bot recommendation that contains the
+    #   recommended intents.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the response from the ListRecommendedIntents operation contains
+    #   more results than specified in the maxResults parameter, a token is
+    #   returned in the response. Use that token in the nextToken parameter
+    #   to return the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListRecommendedIntentsRequest AWS API Documentation
+    #
+    class ListRecommendedIntentsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with the recommended
+    #   intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the intents to list.
+    #   The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The identifier of the bot recommendation that contains the
+    #   recommended intent.
+    #   @return [String]
+    #
+    # @!attribute [rw] summary_list
+    #   Summary information for the intents that meet the filter criteria
+    #   specified in the request. The length of the list is specified in the
+    #   maxResults parameter of the request. If there are more intents
+    #   available, the nextToken field contains a token to get the next page
+    #   of results.
+    #   @return [Array<Types::RecommendedIntentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates whether there are more results to return in a
+    #   response to the ListRecommendedIntents operation. If the nextToken
+    #   field is present, you send the contents as the nextToken parameter
+    #   of a ListRecommendedIntents operation request to get the next page
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListRecommendedIntentsResponse AWS API Documentation
+    #
+    class ListRecommendedIntentsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id,
+      :summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSlotTypesRequest
     #   data as a hash:
     #
@@ -7435,7 +8108,7 @@ module Aws::LexModelsV2
     #         },
     #         filters: [
     #           {
-    #             name: "SlotTypeName", # required, accepts SlotTypeName
+    #             name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #             values: ["FilterValue"], # required
     #             operator: "CO", # required, accepts CO, EQ
     #           },
@@ -7921,6 +8594,32 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The object that contains a path format that will be applied when
+    # Amazon Lex reads the transcript file in the bucket you provide.
+    # Specify this object if you only want Lex to read a subset of files in
+    # your Amazon S3 bucket.
+    #
+    # @note When making an API call, you may pass PathFormat
+    #   data as a hash:
+    #
+    #       {
+    #         object_prefixes: ["ObjectPrefix"],
+    #       }
+    #
+    # @!attribute [rw] object_prefixes
+    #   A list of Amazon S3 prefixes that points to sub-folders in the
+    #   Amazon S3 bucket. Specify this list if you only want Lex to read the
+    #   files under this set of sub-folders.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/PathFormat AWS API Documentation
+    #
+    class PathFormat < Struct.new(
+      :object_prefixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an ASCII text message to send to the user.
     #
     # @note When making an API call, you may pass PlainTextMessage
@@ -8275,6 +8974,33 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # An object that contains a summary of a recommended intent.
+    #
+    # @!attribute [rw] intent_id
+    #   The unique identifier of a recommended intent associated with the
+    #   bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent_name
+    #   The name of a recommended intent associated with the bot
+    #   recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_utterances_count
+    #   The count of sample utterances of a recommended intent that is
+    #   associated with a bot recommendation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/RecommendedIntentSummary AWS API Documentation
+    #
+    class RecommendedIntentSummary < Struct.new(
+      :intent_id,
+      :intent_name,
+      :sample_utterances_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the time window that utterance statistics are returned for.
     # The time window is always relative to the last time that the that
     # utterances were aggregated. For example, if the
@@ -8455,6 +9181,71 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The object representing the Amazon S3 bucket containing the
+    # transcript, as well as the associated metadata.
+    #
+    # @note When making an API call, you may pass S3BucketTranscriptSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_name: "S3BucketName", # required
+    #         path_format: {
+    #           object_prefixes: ["ObjectPrefix"],
+    #         },
+    #         transcript_format: "Lex", # required, accepts Lex
+    #         transcript_filter: {
+    #           lex_transcript_filter: {
+    #             date_range_filter: {
+    #               start_date_time: Time.now, # required
+    #               end_date_time: Time.now, # required
+    #             },
+    #           },
+    #         },
+    #         kms_key_arn: "KmsKeyArn",
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_name
+    #   The name of the bucket containing the transcript and the associated
+    #   metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] path_format
+    #   The object that contains a path format that will be applied when
+    #   Amazon Lex reads the transcript file in the bucket you provide.
+    #   Specify this object if you only want Lex to read a subset of files
+    #   in your Amazon S3 bucket.
+    #   @return [Types::PathFormat]
+    #
+    # @!attribute [rw] transcript_format
+    #   The format of the transcript content. Currently, Genie only supports
+    #   the Amazon Lex transcript format.
+    #   @return [String]
+    #
+    # @!attribute [rw] transcript_filter
+    #   The object that contains the filter which will be applied when
+    #   Amazon Lex reads through the Amazon S3 bucket. Specify this object
+    #   if you want Amazon Lex to read only a subset of the Amazon S3 bucket
+    #   based on the filter you provide.
+    #   @return [Types::TranscriptFilter]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the KMS key that customer use to encrypt their Amazon S3
+    #   bucket. Only use this field if your bucket is encrypted using a
+    #   customer managed KMS key.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/S3BucketTranscriptSource AWS API Documentation
+    #
+    class S3BucketTranscriptSource < Struct.new(
+      :s3_bucket_name,
+      :path_format,
+      :transcript_format,
+      :transcript_filter,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a Speech Synthesis Markup Language (SSML) prompt.
     #
     # @note When making an API call, you may pass SSMLMessage
@@ -8516,6 +9307,143 @@ module Aws::LexModelsV2
     #
     class SampleValue < Struct.new(
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchAssociatedTranscriptsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         bot_recommendation_id: "Id", # required
+    #         search_order: "Ascending", # accepts Ascending, Descending
+    #         filters: [ # required
+    #           {
+    #             name: "IntentId", # required, accepts IntentId, SlotTypeId
+    #             values: ["FilterValue"], # required
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_index: 1,
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with the transcripts
+    #   that you are searching.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the transcripts that you are
+    #   searching.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the transcripts to
+    #   search. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation associated with the
+    #   transcripts to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] search_order
+    #   How SearchResults are ordered. Valid values are Ascending or
+    #   Descending. The default is Descending.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   A list of filter objects.
+    #   @return [Array<Types::AssociatedTranscriptFilter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of bot recommendations to return in each page of
+    #   results. If there are fewer results than the max page size, only the
+    #   actual number of results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_index
+    #   If the response from the SearchAssociatedTranscriptsRequest
+    #   operation contains more results than specified in the maxResults
+    #   parameter, an index is returned in the response. Use that index in
+    #   the nextIndex parameter to return the next page of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SearchAssociatedTranscriptsRequest AWS API Documentation
+    #
+    class SearchAssociatedTranscriptsRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id,
+      :search_order,
+      :filters,
+      :max_results,
+      :next_index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot associated with the transcripts
+    #   that you are searching.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the transcripts that you are
+    #   searching.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the transcripts to
+    #   search. The string must match one of the supported locales. For more
+    #   information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation associated with the
+    #   transcripts to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_index
+    #   A index that indicates whether there are more results to return in a
+    #   response to the SearchAssociatedTranscripts operation. If the
+    #   nextIndex field is present, you send the contents as the nextIndex
+    #   parameter of a SearchAssociatedTranscriptsRequest operation to get
+    #   the next page of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_transcripts
+    #   The object that contains the associated transcript that meet the
+    #   criteria you specified.
+    #   @return [Array<Types::AssociatedTranscript>]
+    #
+    # @!attribute [rw] total_results
+    #   The total number of transcripts returned by the search.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SearchAssociatedTranscriptsResponse AWS API Documentation
+    #
+    class SearchAssociatedTranscriptsResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id,
+      :next_index,
+      :associated_transcripts,
+      :total_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8750,7 +9678,7 @@ module Aws::LexModelsV2
     #   data as a hash:
     #
     #       {
-    #         name: "SlotTypeName", # required, accepts SlotTypeName
+    #         name: "SlotTypeName", # required, accepts SlotTypeName, ExternalSourceType
     #         values: ["FilterValue"], # required
     #         operator: "CO", # required, accepts CO, EQ
     #       }
@@ -8807,6 +9735,22 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # The object that contains the statistical summary of the recommended
+    # slot type associated with the bot recommendation.
+    #
+    # @!attribute [rw] discovered_slot_type_count
+    #   The number of recommended slot types associated with the bot
+    #   recommendation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotTypeStatistics AWS API Documentation
+    #
+    class SlotTypeStatistics < Struct.new(
+      :discovered_slot_type_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information about a slot type.
     #
     # @!attribute [rw] slot_type_id
@@ -8831,6 +9775,27 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] slot_type_category
+    #   Indicates the type of the slot type.
+    #
+    #   * `Custom` - A slot type that you created using custom values. For
+    #     more information, see [Creating custom slot types][1].
+    #
+    #   * `Extended` - A slot type created by extending the
+    #     AMAZON.AlphaNumeric built-in slot type. For more information, see
+    #     [AMAZON.AlphaNumeric][2].
+    #
+    #   * `ExternalGrammar` - A slot type using a custom GRXML grammar to
+    #     define values. For more information, see [Using a custom grammar
+    #     slot type][3].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html
+    #   [2]: https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html
+    #   [3]: https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotTypeSummary AWS API Documentation
     #
     class SlotTypeSummary < Struct.new(
@@ -8838,7 +9803,8 @@ module Aws::LexModelsV2
       :slot_type_name,
       :description,
       :parent_slot_type_signature,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :slot_type_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9236,6 +10202,139 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartBotRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         transcript_source_setting: { # required
+    #           s3_bucket_transcript_source: {
+    #             s3_bucket_name: "S3BucketName", # required
+    #             path_format: {
+    #               object_prefixes: ["ObjectPrefix"],
+    #             },
+    #             transcript_format: "Lex", # required, accepts Lex
+    #             transcript_filter: {
+    #               lex_transcript_filter: {
+    #                 date_range_filter: {
+    #                   start_date_time: Time.now, # required
+    #                   end_date_time: Time.now, # required
+    #                 },
+    #               },
+    #             },
+    #             kms_key_arn: "KmsKeyArn",
+    #           },
+    #         },
+    #         encryption_setting: {
+    #           kms_key_arn: "KmsKeyArn",
+    #           bot_locale_export_password: "FilePassword",
+    #           associated_transcripts_password: "FilePassword",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to start. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] transcript_source_setting
+    #   The object representing the Amazon S3 bucket containing the
+    #   transcript, as well as the associated metadata.
+    #   @return [Types::TranscriptSourceSetting]
+    #
+    # @!attribute [rw] encryption_setting
+    #   The object representing the passwords that will be used to encrypt
+    #   the data related to the bot recommendation results, as well as the
+    #   KMS key ARN used to encrypt the associated metadata.
+    #   @return [Types::EncryptionSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotRecommendationRequest AWS API Documentation
+    #
+    class StartBotRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :transcript_source_setting,
+      :encryption_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the bot recommendation.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to start. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_status
+    #   The status of the bot recommendation.
+    #
+    #   If the status is Failed, then the reasons for the failure are listed
+    #   in the failureReasons field.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The identifier of the bot recommendation that you have created.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   A timestamp of the date and time that the bot recommendation was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transcript_source_setting
+    #   The object representing the Amazon S3 bucket containing the
+    #   transcript, as well as the associated metadata.
+    #   @return [Types::TranscriptSourceSetting]
+    #
+    # @!attribute [rw] encryption_setting
+    #   The object representing the passwords that were used to encrypt the
+    #   data related to the bot recommendation results, as well as the KMS
+    #   key ARN used to encrypt the associated metadata.
+    #   @return [Types::EncryptionSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartBotRecommendationResponse AWS API Documentation
+    #
+    class StartBotRecommendationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_status,
+      :bot_recommendation_id,
+      :creation_date_time,
+      :transcript_source_setting,
+      :encryption_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartImportRequest
     #   data as a hash:
     #
@@ -9267,7 +10366,7 @@ module Aws::LexModelsV2
     #             },
     #           },
     #         },
-    #         merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict
+    #         merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict, Append
     #         file_password: "ImportExportFilePassword",
     #       }
     #
@@ -9542,6 +10641,72 @@ module Aws::LexModelsV2
     class ThrottlingException < Struct.new(
       :retry_after_seconds,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The object representing the filter that Amazon Lex will use to select
+    # the appropriate transcript.
+    #
+    # @note When making an API call, you may pass TranscriptFilter
+    #   data as a hash:
+    #
+    #       {
+    #         lex_transcript_filter: {
+    #           date_range_filter: {
+    #             start_date_time: Time.now, # required
+    #             end_date_time: Time.now, # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lex_transcript_filter
+    #   The object representing the filter that Amazon Lex will use to
+    #   select the appropriate transcript when the transcript format is the
+    #   Amazon Lex format.
+    #   @return [Types::LexTranscriptFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TranscriptFilter AWS API Documentation
+    #
+    class TranscriptFilter < Struct.new(
+      :lex_transcript_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates the setting of the location where the transcript is stored.
+    #
+    # @note When making an API call, you may pass TranscriptSourceSetting
+    #   data as a hash:
+    #
+    #       {
+    #         s3_bucket_transcript_source: {
+    #           s3_bucket_name: "S3BucketName", # required
+    #           path_format: {
+    #             object_prefixes: ["ObjectPrefix"],
+    #           },
+    #           transcript_format: "Lex", # required, accepts Lex
+    #           transcript_filter: {
+    #             lex_transcript_filter: {
+    #               date_range_filter: {
+    #                 start_date_time: Time.now, # required
+    #                 end_date_time: Time.now, # required
+    #               },
+    #             },
+    #           },
+    #           kms_key_arn: "KmsKeyArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_bucket_transcript_source
+    #   Indicates the setting of the Amazon S3 bucket where the transcript
+    #   is stored.
+    #   @return [Types::S3BucketTranscriptSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/TranscriptSourceSetting AWS API Documentation
+    #
+    class TranscriptSourceSetting < Struct.new(
+      :s3_bucket_transcript_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9853,6 +11018,11 @@ module Aws::LexModelsV2
     #   A timestamp of the date and time that the locale was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] recommended_actions
+    #   Recommended actions to take to resolve an error in the
+    #   `failureReasons` field.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotLocaleResponse AWS API Documentation
     #
     class UpdateBotLocaleResponse < Struct.new(
@@ -9866,7 +11036,133 @@ module Aws::LexModelsV2
       :bot_locale_status,
       :failure_reasons,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :recommended_actions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateBotRecommendationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #         bot_recommendation_id: "Id", # required
+    #         encryption_setting: { # required
+    #           kms_key_arn: "KmsKeyArn",
+    #           bot_locale_export_password: "FilePassword",
+    #           associated_transcripts_password: "FilePassword",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation
+    #   to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the bot recommendation to be
+    #   updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to update. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_setting
+    #   The object representing the passwords that will be used to encrypt
+    #   the data related to the bot recommendation results, as well as the
+    #   KMS key ARN used to encrypt the associated metadata.
+    #   @return [Types::EncryptionSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotRecommendationRequest AWS API Documentation
+    #
+    class UpdateBotRecommendationRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_id,
+      :encryption_setting)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot containing the bot recommendation
+    #   that has been updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot containing the bot recommendation that has
+    #   been updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the language and locale of the bot recommendation
+    #   to update. The string must match one of the supported locales. For
+    #   more information, see [Supported languages][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_status
+    #   The status of the bot recommendation.
+    #
+    #   If the status is Failed, then the reasons for the failure are listed
+    #   in the failureReasons field.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_recommendation_id
+    #   The unique identifier of the bot recommendation to be updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   A timestamp of the date and time that the bot recommendation was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   A timestamp of the date and time that the bot recommendation was
+    #   last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] transcript_source_setting
+    #   The object representing the Amazon S3 bucket containing the
+    #   transcript, as well as the associated metadata.
+    #   @return [Types::TranscriptSourceSetting]
+    #
+    # @!attribute [rw] encryption_setting
+    #   The object representing the passwords that were used to encrypt the
+    #   data related to the bot recommendation results, as well as the KMS
+    #   key ARN used to encrypt the associated metadata.
+    #   @return [Types::EncryptionSetting]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateBotRecommendationResponse AWS API Documentation
+    #
+    class UpdateBotRecommendationResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :bot_recommendation_status,
+      :bot_recommendation_id,
+      :creation_date_time,
+      :last_updated_date_time,
+      :transcript_source_setting,
+      :encryption_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11245,7 +12541,7 @@ module Aws::LexModelsV2
     #             ],
     #           },
     #         ],
-    #         value_selection_setting: { # required
+    #         value_selection_setting: {
     #           resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
@@ -11255,6 +12551,15 @@ module Aws::LexModelsV2
     #         bot_id: "Id", # required
     #         bot_version: "DraftBotVersion", # required
     #         locale_id: "LocaleId", # required
+    #         external_source_setting: {
+    #           grammar_slot_type_setting: {
+    #             source: {
+    #               s3_bucket_name: "S3BucketName", # required
+    #               s3_object_key: "S3ObjectPath", # required
+    #               kms_key_arn: "KmsKeyArn",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] slot_type_id
@@ -11302,6 +12607,11 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
     #   @return [String]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotTypeRequest AWS API Documentation
     #
     class UpdateSlotTypeRequest < Struct.new(
@@ -11313,7 +12623,8 @@ module Aws::LexModelsV2
       :parent_slot_type_signature,
       :bot_id,
       :bot_version,
-      :locale_id)
+      :locale_id,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11366,6 +12677,11 @@ module Aws::LexModelsV2
     #   updated.
     #   @return [Time]
     #
+    # @!attribute [rw] external_source_setting
+    #   Provides information about the external source of the slot type's
+    #   definition.
+    #   @return [Types::ExternalSourceSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/UpdateSlotTypeResponse AWS API Documentation
     #
     class UpdateSlotTypeResponse < Struct.new(
@@ -11379,7 +12695,8 @@ module Aws::LexModelsV2
       :bot_version,
       :locale_id,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :external_source_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11440,12 +12757,15 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] engine
     #   Indicates the type of Amazon Polly voice that Amazon Lex should use
-    #   for voice interaction with the user. For more information, see
-    #   [Voices in Amazon Polly][1].
+    #   for voice interaction with the user. For more information, see the [
+    #   `engine` parameter of the `SynthesizeSpeech` operation][1] in the
+    #   *Amazon Polly developer guide*.
+    #
+    #   If you do not specify a value, the default is `standard`.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/voicelist.html
+    #   [1]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/VoiceSettings AWS API Documentation

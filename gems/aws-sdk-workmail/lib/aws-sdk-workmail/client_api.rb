@@ -49,6 +49,8 @@ module Aws::WorkMail
     DeleteAccessControlRuleResponse = Shapes::StructureShape.new(name: 'DeleteAccessControlRuleResponse')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
     DeleteAliasResponse = Shapes::StructureShape.new(name: 'DeleteAliasResponse')
+    DeleteEmailMonitoringConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteEmailMonitoringConfigurationRequest')
+    DeleteEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteEmailMonitoringConfigurationResponse')
     DeleteGroupRequest = Shapes::StructureShape.new(name: 'DeleteGroupRequest')
     DeleteGroupResponse = Shapes::StructureShape.new(name: 'DeleteGroupResponse')
     DeleteMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'DeleteMailboxPermissionsRequest')
@@ -69,6 +71,8 @@ module Aws::WorkMail
     DeregisterFromWorkMailResponse = Shapes::StructureShape.new(name: 'DeregisterFromWorkMailResponse')
     DeregisterMailDomainRequest = Shapes::StructureShape.new(name: 'DeregisterMailDomainRequest')
     DeregisterMailDomainResponse = Shapes::StructureShape.new(name: 'DeregisterMailDomainResponse')
+    DescribeEmailMonitoringConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeEmailMonitoringConfigurationRequest')
+    DescribeEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeEmailMonitoringConfigurationResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'DescribeInboundDmarcSettingsRequest')
@@ -170,6 +174,7 @@ module Aws::WorkMail
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
     ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
+    LogGroupArn = Shapes::StringShape.new(name: 'LogGroupArn')
     MailDomainInUseException = Shapes::StructureShape.new(name: 'MailDomainInUseException')
     MailDomainNotFoundException = Shapes::StructureShape.new(name: 'MailDomainNotFoundException')
     MailDomainStateException = Shapes::StructureShape.new(name: 'MailDomainStateException')
@@ -212,6 +217,8 @@ module Aws::WorkMail
     PolicyDescription = Shapes::StringShape.new(name: 'PolicyDescription')
     PutAccessControlRuleRequest = Shapes::StructureShape.new(name: 'PutAccessControlRuleRequest')
     PutAccessControlRuleResponse = Shapes::StructureShape.new(name: 'PutAccessControlRuleResponse')
+    PutEmailMonitoringConfigurationRequest = Shapes::StructureShape.new(name: 'PutEmailMonitoringConfigurationRequest')
+    PutEmailMonitoringConfigurationResponse = Shapes::StructureShape.new(name: 'PutEmailMonitoringConfigurationResponse')
     PutInboundDmarcSettingsRequest = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsRequest')
     PutInboundDmarcSettingsResponse = Shapes::StructureShape.new(name: 'PutInboundDmarcSettingsResponse')
     PutMailboxPermissionsRequest = Shapes::StructureShape.new(name: 'PutMailboxPermissionsRequest')
@@ -397,6 +404,11 @@ module Aws::WorkMail
 
     DeleteAliasResponse.struct_class = Types::DeleteAliasResponse
 
+    DeleteEmailMonitoringConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DeleteEmailMonitoringConfigurationRequest.struct_class = Types::DeleteEmailMonitoringConfigurationRequest
+
+    DeleteEmailMonitoringConfigurationResponse.struct_class = Types::DeleteEmailMonitoringConfigurationResponse
+
     DeleteGroupRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DeleteGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GroupId"))
     DeleteGroupRequest.struct_class = Types::DeleteGroupRequest
@@ -461,6 +473,13 @@ module Aws::WorkMail
     DeregisterMailDomainRequest.struct_class = Types::DeregisterMailDomainRequest
 
     DeregisterMailDomainResponse.struct_class = Types::DeregisterMailDomainResponse
+
+    DescribeEmailMonitoringConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    DescribeEmailMonitoringConfigurationRequest.struct_class = Types::DescribeEmailMonitoringConfigurationRequest
+
+    DescribeEmailMonitoringConfigurationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeEmailMonitoringConfigurationResponse.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, location_name: "LogGroupArn"))
+    DescribeEmailMonitoringConfigurationResponse.struct_class = Types::DescribeEmailMonitoringConfigurationResponse
 
     DescribeGroupRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     DescribeGroupRequest.add_member(:group_id, Shapes::ShapeRef.new(shape: WorkMailIdentifier, required: true, location_name: "GroupId"))
@@ -927,6 +946,13 @@ module Aws::WorkMail
 
     PutAccessControlRuleResponse.struct_class = Types::PutAccessControlRuleResponse
 
+    PutEmailMonitoringConfigurationRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
+    PutEmailMonitoringConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    PutEmailMonitoringConfigurationRequest.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: LogGroupArn, required: true, location_name: "LogGroupArn"))
+    PutEmailMonitoringConfigurationRequest.struct_class = Types::PutEmailMonitoringConfigurationRequest
+
+    PutEmailMonitoringConfigurationResponse.struct_class = Types::PutEmailMonitoringConfigurationResponse
+
     PutInboundDmarcSettingsRequest.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, required: true, location_name: "OrganizationId"))
     PutInboundDmarcSettingsRequest.add_member(:enforced, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "Enforced"))
     PutInboundDmarcSettingsRequest.struct_class = Types::PutInboundDmarcSettingsRequest
@@ -1269,6 +1295,17 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
+      api.add_operation(:delete_email_monitoring_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEmailMonitoringConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEmailMonitoringConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEmailMonitoringConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
       api.add_operation(:delete_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteGroup"
         o.http_method = "POST"
@@ -1393,6 +1430,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidCustomSesConfigurationException)
+      end)
+
+      api.add_operation(:describe_email_monitoring_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEmailMonitoringConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEmailMonitoringConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEmailMonitoringConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)
 
       api.add_operation(:describe_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1796,6 +1845,18 @@ module Aws::WorkMail
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
+      end)
+
+      api.add_operation(:put_email_monitoring_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutEmailMonitoringConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutEmailMonitoringConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutEmailMonitoringConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: OrganizationStateException)
       end)

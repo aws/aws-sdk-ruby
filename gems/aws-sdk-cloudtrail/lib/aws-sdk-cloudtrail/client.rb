@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::CloudTrail
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::CloudTrail
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::CloudTrail
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::CloudTrail
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -361,7 +372,7 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
-    # @option params [Array<Types::Tag>] :tags_list
+    # @option params [required, Array<Types::Tag>] :tags_list
     #   Contains a list of tags, up to a limit of 50
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -370,10 +381,10 @@ module Aws::CloudTrail
     #
     #   resp = client.add_tags({
     #     resource_id: "String", # required
-    #     tags_list: [
+    #     tags_list: [ # required
     #       {
-    #         key: "String", # required
-    #         value: "String",
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -384,6 +395,168 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def add_tags(params = {}, options = {})
       req = build_request(:add_tags, params)
+      req.send_request(options)
+    end
+
+    # Cancels a query if the query is not in a terminated state, such as
+    # `CANCELLED`, `FAILED` or `FINISHED`. You must specify an ARN value for
+    # `EventDataStore`. The ID of the query that you want to cancel is also
+    # required. When you run `CancelQuery`, the query status might show as
+    # `CANCELLED` even if the operation is not yet finished.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on which
+    #   the specified query is running.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query that you want to cancel. The `QueryId` comes from
+    #   the response of a `StartQuery` operation.
+    #
+    # @return [Types::CancelQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelQueryResponse#query_id #query_id} => String
+    #   * {Types::CancelQueryResponse#query_status #query_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_query({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     query_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CancelQuery AWS API Documentation
+    #
+    # @overload cancel_query(params = {})
+    # @param [Hash] params ({})
+    def cancel_query(params = {}, options = {})
+      req = build_request(:cancel_query, params)
+      req.send_request(options)
+    end
+
+    # Creates a new event data store.
+    #
+    # @option params [required, String] :name
+    #   The name of the event data store.
+    #
+    # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
+    #   The advanced event selectors to use to select the events for the data
+    #   store. For more information about how to use advanced event selectors,
+    #   see [Log events by using advanced event selectors][1] in the
+    #   CloudTrail User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html#creating-data-event-selectors-advanced
+    #
+    # @option params [Boolean] :multi_region_enabled
+    #   Specifies whether the event data store includes events from all
+    #   regions, or only from the region in which the event data store is
+    #   created.
+    #
+    # @option params [Boolean] :organization_enabled
+    #   Specifies whether an event data store collects events logged for an
+    #   organization in Organizations.
+    #
+    # @option params [Integer] :retention_period
+    #   The retention period of the event data store, in days. You can set a
+    #   retention period of up to 2555 days, the equivalent of seven years.
+    #
+    # @option params [Boolean] :termination_protection_enabled
+    #   Specifies whether termination protection is enabled for the event data
+    #   store. If termination protection is enabled, you cannot delete the
+    #   event data store until termination protection is disabled.
+    #
+    # @option params [Array<Types::Tag>] :tags_list
+    #   A list of tags.
+    #
+    # @return [Types::CreateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::CreateEventDataStoreResponse#name #name} => String
+    #   * {Types::CreateEventDataStoreResponse#status #status} => String
+    #   * {Types::CreateEventDataStoreResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
+    #   * {Types::CreateEventDataStoreResponse#multi_region_enabled #multi_region_enabled} => Boolean
+    #   * {Types::CreateEventDataStoreResponse#organization_enabled #organization_enabled} => Boolean
+    #   * {Types::CreateEventDataStoreResponse#retention_period #retention_period} => Integer
+    #   * {Types::CreateEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
+    #   * {Types::CreateEventDataStoreResponse#tags_list #tags_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::CreateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::CreateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_event_data_store({
+    #     name: "EventDataStoreName", # required
+    #     advanced_event_selectors: [
+    #       {
+    #         name: "SelectorName",
+    #         field_selectors: [ # required
+    #           {
+    #             field: "SelectorField", # required
+    #             equals: ["OperatorValue"],
+    #             starts_with: ["OperatorValue"],
+    #             ends_with: ["OperatorValue"],
+    #             not_equals: ["OperatorValue"],
+    #             not_starts_with: ["OperatorValue"],
+    #             not_ends_with: ["OperatorValue"],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     multi_region_enabled: false,
+    #     organization_enabled: false,
+    #     retention_period: 1,
+    #     termination_protection_enabled: false,
+    #     tags_list: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.multi_region_enabled #=> Boolean
+    #   resp.organization_enabled #=> Boolean
+    #   resp.retention_period #=> Integer
+    #   resp.termination_protection_enabled #=> Boolean
+    #   resp.tags_list #=> Array
+    #   resp.tags_list[0].key #=> String
+    #   resp.tags_list[0].value #=> String
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CreateEventDataStore AWS API Documentation
+    #
+    # @overload create_event_data_store(params = {})
+    # @param [Hash] params ({})
+    def create_event_data_store(params = {}, options = {})
+      req = build_request(:create_event_data_store, params)
       req.send_request(options)
     end
 
@@ -530,8 +703,8 @@ module Aws::CloudTrail
     #     is_organization_trail: false,
     #     tags_list: [
     #       {
-    #         key: "String", # required
-    #         value: "String",
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -561,6 +734,39 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Disables the event data store specified by `EventDataStore`, which
+    # accepts an event data store ARN. After you run `DeleteEventDataStore`,
+    # the event data store is automatically deleted after a wait period of
+    # seven days. `TerminationProtectionEnabled` must be set to `False` on
+    # the event data store; this operation cannot work if
+    # `TerminationProtectionEnabled` is `True`.
+    #
+    # After you run `DeleteEventDataStore` on an event data store, you
+    # cannot run `ListQueries`, `DescribeQuery`, or `GetQueryResults` on
+    # queries that are using an event data store in a `PENDING_DELETION`
+    # state.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store to
+    #   delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_event_data_store({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DeleteEventDataStore AWS API Documentation
+    #
+    # @overload delete_event_data_store(params = {})
+    # @param [Hash] params ({})
+    def delete_event_data_store(params = {}, options = {})
+      req = build_request(:delete_event_data_store, params)
+      req.send_request(options)
+    end
+
     # Deletes a trail. This operation must be called from the region in
     # which the trail was created. `DeleteTrail` cannot be called on the
     # shadow trails (replicated trails in other regions) of a trail that is
@@ -585,6 +791,53 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def delete_trail(params = {}, options = {})
       req = build_request(:delete_trail, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about a query, including query run time in
+    # milliseconds, number of events scanned and matched, and query status.
+    # You must specify an ARN for `EventDataStore`, and a value for
+    # `QueryID`.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on which
+    #   the specified query was run.
+    #
+    # @option params [required, String] :query_id
+    #   The query ID.
+    #
+    # @return [Types::DescribeQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeQueryResponse#query_id #query_id} => String
+    #   * {Types::DescribeQueryResponse#query_string #query_string} => String
+    #   * {Types::DescribeQueryResponse#query_status #query_status} => String
+    #   * {Types::DescribeQueryResponse#query_statistics #query_statistics} => Types::QueryStatisticsForDescribeQuery
+    #   * {Types::DescribeQueryResponse#error_message #error_message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_query({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     query_id: "UUID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #   resp.query_string #=> String
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_statistics.events_matched #=> Integer
+    #   resp.query_statistics.events_scanned #=> Integer
+    #   resp.query_statistics.execution_time_in_millis #=> Integer
+    #   resp.query_statistics.creation_time #=> Time
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/DescribeQuery AWS API Documentation
+    #
+    # @overload describe_query(params = {})
+    # @param [Hash] params ({})
+    def describe_query(params = {}, options = {})
+      req = build_request(:describe_query, params)
       req.send_request(options)
     end
 
@@ -659,6 +912,69 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def describe_trails(params = {}, options = {})
       req = build_request(:describe_trails, params)
+      req.send_request(options)
+    end
+
+    # Returns information about an event data store specified as either an
+    # ARN or the ID portion of the ARN.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store about which
+    #   you want information.
+    #
+    # @return [Types::GetEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::GetEventDataStoreResponse#name #name} => String
+    #   * {Types::GetEventDataStoreResponse#status #status} => String
+    #   * {Types::GetEventDataStoreResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
+    #   * {Types::GetEventDataStoreResponse#multi_region_enabled #multi_region_enabled} => Boolean
+    #   * {Types::GetEventDataStoreResponse#organization_enabled #organization_enabled} => Boolean
+    #   * {Types::GetEventDataStoreResponse#retention_period #retention_period} => Integer
+    #   * {Types::GetEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
+    #   * {Types::GetEventDataStoreResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::GetEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_data_store({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.multi_region_enabled #=> Boolean
+    #   resp.organization_enabled #=> Boolean
+    #   resp.retention_period #=> Integer
+    #   resp.termination_protection_enabled #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetEventDataStore AWS API Documentation
+    #
+    # @overload get_event_data_store(params = {})
+    # @param [Hash] params ({})
+    def get_event_data_store(params = {}, options = {})
+      req = build_request(:get_event_data_store, params)
       req.send_request(options)
     end
 
@@ -812,6 +1128,63 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Gets event data results of a query. You must specify the `QueryID`
+    # value returned by the `StartQuery` operation, and an ARN for
+    # `EventDataStore`.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or ID suffix of the ARN) of the event data store against
+    #   which the query was run.
+    #
+    # @option params [required, String] :query_id
+    #   The ID of the query for which you want to get results.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of query results.
+    #
+    # @option params [Integer] :max_query_results
+    #   The maximum number of query results to display on a single page.
+    #
+    # @return [Types::GetQueryResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetQueryResultsResponse#query_status #query_status} => String
+    #   * {Types::GetQueryResultsResponse#query_statistics #query_statistics} => Types::QueryStatistics
+    #   * {Types::GetQueryResultsResponse#query_result_rows #query_result_rows} => Array&lt;Array&lt;Hash&lt;String,String&gt;&gt;&gt;
+    #   * {Types::GetQueryResultsResponse#next_token #next_token} => String
+    #   * {Types::GetQueryResultsResponse#error_message #error_message} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_query_results({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     query_id: "UUID", # required
+    #     next_token: "PaginationToken",
+    #     max_query_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_statistics.results_count #=> Integer
+    #   resp.query_statistics.total_results_count #=> Integer
+    #   resp.query_result_rows #=> Array
+    #   resp.query_result_rows[0] #=> Array
+    #   resp.query_result_rows[0][0] #=> Hash
+    #   resp.query_result_rows[0][0]["QueryResultKey"] #=> String
+    #   resp.next_token #=> String
+    #   resp.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/GetQueryResults AWS API Documentation
+    #
+    # @overload get_query_results(params = {})
+    # @param [Hash] params ({})
+    def get_query_results(params = {}, options = {})
+      req = build_request(:get_query_results, params)
+      req.send_request(options)
+    end
+
     # Returns settings information for a specified trail.
     #
     # @option params [required, String] :name
@@ -926,6 +1299,68 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Returns information about all event data stores in the account, in the
+    # current region.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of event data store results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of event data stores to display on a single page.
+    #
+    # @return [Types::ListEventDataStoresResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventDataStoresResponse#event_data_stores #event_data_stores} => Array&lt;Types::EventDataStore&gt;
+    #   * {Types::ListEventDataStoresResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_data_stores({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_stores #=> Array
+    #   resp.event_data_stores[0].event_data_store_arn #=> String
+    #   resp.event_data_stores[0].name #=> String
+    #   resp.event_data_stores[0].termination_protection_enabled #=> Boolean
+    #   resp.event_data_stores[0].status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.event_data_stores[0].advanced_event_selectors #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].name #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.event_data_stores[0].advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.event_data_stores[0].multi_region_enabled #=> Boolean
+    #   resp.event_data_stores[0].organization_enabled #=> Boolean
+    #   resp.event_data_stores[0].retention_period #=> Integer
+    #   resp.event_data_stores[0].created_timestamp #=> Time
+    #   resp.event_data_stores[0].updated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListEventDataStores AWS API Documentation
+    #
+    # @overload list_event_data_stores(params = {})
+    # @param [Hash] params ({})
+    def list_event_data_stores(params = {}, options = {})
+      req = build_request(:list_event_data_stores, params)
+      req.send_request(options)
+    end
+
     # Returns all public keys whose private keys were used to sign the
     # digest files within the specified time range. The public key is needed
     # to validate digest files that were signed with its corresponding
@@ -981,6 +1416,71 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def list_public_keys(params = {}, options = {})
       req = build_request(:list_public_keys, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of queries and query statuses for the past seven days.
+    # You must specify an ARN value for `EventDataStore`. Optionally, to
+    # shorten the list of results, you can specify a time range, formatted
+    # as timestamps, by adding `StartTime` and `EndTime` parameters, and a
+    # `QueryStatus` value. Valid values for `QueryStatus` include `QUEUED`,
+    # `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of an event data store on which
+    #   queries were run.
+    #
+    # @option params [String] :next_token
+    #   A token you can use to get the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of queries to show on a page.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_time
+    #   Use with `EndTime` to bound a `ListQueries` request, and limit its
+    #   results to only those queries run within a specified time period.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_time
+    #   Use with `StartTime` to bound a `ListQueries` request, and limit its
+    #   results to only those queries run within a specified time period.
+    #
+    # @option params [String] :query_status
+    #   The status of queries that you want to return in results. Valid values
+    #   for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`, `FAILED`,
+    #   or `CANCELLED`.
+    #
+    # @return [Types::ListQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueriesResponse#queries #queries} => Array&lt;Types::Query&gt;
+    #   * {Types::ListQueriesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queries({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.queries #=> Array
+    #   resp.queries[0].query_id #=> String
+    #   resp.queries[0].query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.queries[0].creation_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListQueries AWS API Documentation
+    #
+    # @overload list_queries(params = {})
+    # @param [Hash] params ({})
+    def list_queries(params = {}, options = {})
+      req = build_request(:list_queries, params)
       req.send_request(options)
     end
 
@@ -1360,17 +1860,17 @@ module Aws::CloudTrail
     # Lets you enable Insights event logging by specifying the Insights
     # selectors that you want to enable on an existing trail. You also use
     # `PutInsightSelectors` to turn off Insights event logging, by passing
-    # an empty list of insight types. The valid Insights event type in this
-    # release is `ApiCallRateInsight`.
+    # an empty list of insight types. The valid Insights event types in this
+    # release are `ApiErrorRateInsight` and `ApiCallRateInsight`.
     #
     # @option params [required, String] :trail_name
     #   The name of the CloudTrail trail for which you want to change or add
     #   Insights selectors.
     #
     # @option params [required, Array<Types::InsightSelector>] :insight_selectors
-    #   A JSON string that contains the Insights types that you want to log on
-    #   a trail. The valid Insights type in this release is
-    #   `ApiCallRateInsight`.
+    #   A JSON string that contains the insight types you want to log on a
+    #   trail. `ApiCallRateInsight` and `ApiErrorRateInsight` are valid
+    #   insight types.
     #
     # @return [Types::PutInsightSelectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1411,7 +1911,7 @@ module Aws::CloudTrail
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
-    # @option params [Array<Types::Tag>] :tags_list
+    # @option params [required, Array<Types::Tag>] :tags_list
     #   Specifies a list of tags to be removed.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1420,10 +1920,10 @@ module Aws::CloudTrail
     #
     #   resp = client.remove_tags({
     #     resource_id: "String", # required
-    #     tags_list: [
+    #     tags_list: [ # required
     #       {
-    #         key: "String", # required
-    #         value: "String",
+    #         key: "TagKey", # required
+    #         value: "TagValue",
     #       },
     #     ],
     #   })
@@ -1434,6 +1934,72 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def remove_tags(params = {}, options = {})
       req = build_request(:remove_tags, params)
+      req.send_request(options)
+    end
+
+    # Restores a deleted event data store specified by `EventDataStore`,
+    # which accepts an event data store ARN. You can only restore a deleted
+    # event data store within the seven-day wait period after deletion.
+    # Restoring an event data store can take several minutes, depending on
+    # the size of the event data store.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store that you
+    #   want to restore.
+    #
+    # @return [Types::RestoreEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::RestoreEventDataStoreResponse#name #name} => String
+    #   * {Types::RestoreEventDataStoreResponse#status #status} => String
+    #   * {Types::RestoreEventDataStoreResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
+    #   * {Types::RestoreEventDataStoreResponse#multi_region_enabled #multi_region_enabled} => Boolean
+    #   * {Types::RestoreEventDataStoreResponse#organization_enabled #organization_enabled} => Boolean
+    #   * {Types::RestoreEventDataStoreResponse#retention_period #retention_period} => Integer
+    #   * {Types::RestoreEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
+    #   * {Types::RestoreEventDataStoreResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::RestoreEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_event_data_store({
+    #     event_data_store: "EventDataStoreArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.multi_region_enabled #=> Boolean
+    #   resp.organization_enabled #=> Boolean
+    #   resp.retention_period #=> Integer
+    #   resp.termination_protection_enabled #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/RestoreEventDataStore AWS API Documentation
+    #
+    # @overload restore_event_data_store(params = {})
+    # @param [Hash] params ({})
+    def restore_event_data_store(params = {}, options = {})
+      req = build_request(:restore_event_data_store, params)
       req.send_request(options)
     end
 
@@ -1468,6 +2034,35 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
+    # Starts a CloudTrail Lake query. The required `QueryStatement`
+    # parameter provides your SQL query, enclosed in single quotation marks.
+    #
+    # @option params [required, String] :query_statement
+    #   The SQL code of your query.
+    #
+    # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartQueryResponse#query_id #query_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_query({
+    #     query_statement: "QueryStatement", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.query_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/StartQuery AWS API Documentation
+    #
+    # @overload start_query(params = {})
+    # @param [Hash] params ({})
+    def start_query(params = {}, options = {})
+      req = build_request(:start_query, params)
+      req.send_request(options)
+    end
+
     # Suspends the recording of Amazon Web Services API calls and log file
     # delivery for the specified trail. Under most circumstances, there is
     # no need to use this action. You can update a trail without stopping it
@@ -1499,6 +2094,119 @@ module Aws::CloudTrail
     # @param [Hash] params ({})
     def stop_logging(params = {}, options = {})
       req = build_request(:stop_logging, params)
+      req.send_request(options)
+    end
+
+    # Updates an event data store. The required `EventDataStore` value is an
+    # ARN or the ID portion of the ARN. Other parameters are optional, but
+    # at least one optional parameter must be specified, or CloudTrail
+    # throws an error. `RetentionPeriod` is in days, and valid values are
+    # integers between 90 and 2555. By default, `TerminationProtection` is
+    # enabled. `AdvancedEventSelectors` includes or excludes management and
+    # data events in your event data store; for more information about
+    # `AdvancedEventSelectors`, see
+    # PutEventSelectorsRequest$AdvancedEventSelectors.
+    #
+    # @option params [required, String] :event_data_store
+    #   The ARN (or the ID suffix of the ARN) of the event data store that you
+    #   want to update.
+    #
+    # @option params [String] :name
+    #   The event data store name.
+    #
+    # @option params [Array<Types::AdvancedEventSelector>] :advanced_event_selectors
+    #   The advanced event selectors used to select events for the event data
+    #   store.
+    #
+    # @option params [Boolean] :multi_region_enabled
+    #   Specifies whether an event data store collects events from all
+    #   regions, or only from the region in which it was created.
+    #
+    # @option params [Boolean] :organization_enabled
+    #   Specifies whether an event data store collects events logged for an
+    #   organization in Organizations.
+    #
+    # @option params [Integer] :retention_period
+    #   The retention period, in days.
+    #
+    # @option params [Boolean] :termination_protection_enabled
+    #   Indicates that termination protection is enabled and the event data
+    #   store cannot be automatically deleted.
+    #
+    # @return [Types::UpdateEventDataStoreResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEventDataStoreResponse#event_data_store_arn #event_data_store_arn} => String
+    #   * {Types::UpdateEventDataStoreResponse#name #name} => String
+    #   * {Types::UpdateEventDataStoreResponse#status #status} => String
+    #   * {Types::UpdateEventDataStoreResponse#advanced_event_selectors #advanced_event_selectors} => Array&lt;Types::AdvancedEventSelector&gt;
+    #   * {Types::UpdateEventDataStoreResponse#multi_region_enabled #multi_region_enabled} => Boolean
+    #   * {Types::UpdateEventDataStoreResponse#organization_enabled #organization_enabled} => Boolean
+    #   * {Types::UpdateEventDataStoreResponse#retention_period #retention_period} => Integer
+    #   * {Types::UpdateEventDataStoreResponse#termination_protection_enabled #termination_protection_enabled} => Boolean
+    #   * {Types::UpdateEventDataStoreResponse#created_timestamp #created_timestamp} => Time
+    #   * {Types::UpdateEventDataStoreResponse#updated_timestamp #updated_timestamp} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_data_store({
+    #     event_data_store: "EventDataStoreArn", # required
+    #     name: "EventDataStoreName",
+    #     advanced_event_selectors: [
+    #       {
+    #         name: "SelectorName",
+    #         field_selectors: [ # required
+    #           {
+    #             field: "SelectorField", # required
+    #             equals: ["OperatorValue"],
+    #             starts_with: ["OperatorValue"],
+    #             ends_with: ["OperatorValue"],
+    #             not_equals: ["OperatorValue"],
+    #             not_starts_with: ["OperatorValue"],
+    #             not_ends_with: ["OperatorValue"],
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     multi_region_enabled: false,
+    #     organization_enabled: false,
+    #     retention_period: 1,
+    #     termination_protection_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_data_store_arn #=> String
+    #   resp.name #=> String
+    #   resp.status #=> String, one of "CREATED", "ENABLED", "PENDING_DELETION"
+    #   resp.advanced_event_selectors #=> Array
+    #   resp.advanced_event_selectors[0].name #=> String
+    #   resp.advanced_event_selectors[0].field_selectors #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].field #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].ends_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_equals[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_starts_with[0] #=> String
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with #=> Array
+    #   resp.advanced_event_selectors[0].field_selectors[0].not_ends_with[0] #=> String
+    #   resp.multi_region_enabled #=> Boolean
+    #   resp.organization_enabled #=> Boolean
+    #   resp.retention_period #=> Integer
+    #   resp.termination_protection_enabled #=> Boolean
+    #   resp.created_timestamp #=> Time
+    #   resp.updated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/UpdateEventDataStore AWS API Documentation
+    #
+    # @overload update_event_data_store(params = {})
+    # @param [Hash] params ({})
+    def update_event_data_store(params = {}, options = {})
+      req = build_request(:update_event_data_store, params)
       req.send_request(options)
     end
 
@@ -1698,7 +2406,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

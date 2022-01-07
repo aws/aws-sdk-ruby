@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::ForecastService
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::ForecastService
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::ForecastService
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::ForecastService
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::ForecastService
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -442,6 +453,7 @@ module Aws::ForecastService
     #   The accuracy metric used to optimize the predictor.
     #
     # @option params [Boolean] :explain_predictor
+    #   Create an Explainability resource for the predictor.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata to help you categorize and organize your predictors.
@@ -999,7 +1011,7 @@ module Aws::ForecastService
     #
     # **CreateExplainability with a Forecast ARN**
     #
-    # <note markdown="1"> You can specify a maximum of 50 time series and 1500 time points.
+    # <note markdown="1"> You can specify a maximum of 50 time series and 500 time points.
     #
     #  </note>
     #
@@ -1041,14 +1053,12 @@ module Aws::ForecastService
     #   and time points for the Explainability.
     #
     # @option params [Types::DataSource] :data_source
-    #   The source of your training data, an AWS Identity and Access
-    #   Management (IAM) role that allows Amazon Forecast to access the data
-    #   and, optionally, an AWS Key Management Service (KMS) key. This object
-    #   is submitted in the CreateDatasetImportJob request.
+    #   The source of your data, an AWS Identity and Access Management (IAM)
+    #   role that allows Amazon Forecast to access the data and, optionally,
+    #   an AWS Key Management Service (KMS) key.
     #
     # @option params [Types::Schema] :schema
-    #   Defines the fields of a dataset. You specify this object in the
-    #   CreateDataset request.
+    #   Defines the fields of a dataset.
     #
     # @option params [Boolean] :enable_visualization
     #   Create an Expainability visualization that is viewable within the AWS
@@ -1058,9 +1068,15 @@ module Aws::ForecastService
     #   If `TimePointGranularity` is set to `SPECIFIC`, define the first point
     #   for the Explainability.
     #
+    #   Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example:
+    #   2015-01-01T20:00:00)
+    #
     # @option params [String] :end_date_time
     #   If `TimePointGranularity` is set to `SPECIFIC`, define the last time
     #   point for the Explainability.
+    #
+    #   Use the following timestamp format: yyyy-MM-ddTHH:mm:ss (example:
+    #   2015-01-01T20:00:00)
     #
     # @option params [Array<Types::Tag>] :tags
     #   Optional metadata to help you categorize and organize your resources.
@@ -1767,8 +1783,8 @@ module Aws::ForecastService
     end
 
     # Exports backtest forecasts and accuracy metrics generated by the
-    # CreatePredictor operation. Two folders containing CSV files are
-    # exported to your specified S3 bucket.
+    # CreateAutoPredictor or CreatePredictor operations. Two folders
+    # containing CSV files are exported to your specified S3 bucket.
     #
     # The export file names will match the following conventions:
     #
@@ -1976,7 +1992,7 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes an Explainability export job.
+    # Deletes an Explainability export.
     #
     # @option params [required, String] :explainability_export_arn
     #   The Amazon Resource Name (ARN) of the Explainability export to delete.
@@ -2051,10 +2067,10 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes a predictor created using the CreatePredictor operation. You
-    # can delete only predictor that have a status of `ACTIVE` or
-    # `CREATE_FAILED`. To get the status, use the DescribePredictor
-    # operation.
+    # Deletes a predictor created using the DescribePredictor or
+    # CreatePredictor operations. You can delete only predictor that have a
+    # status of `ACTIVE` or `CREATE_FAILED`. To get the status, use the
+    # DescribePredictor operation.
     #
     # @option params [required, String] :predictor_arn
     #   The Amazon Resource Name (ARN) of the predictor to delete.
@@ -2158,6 +2174,7 @@ module Aws::ForecastService
     #   * {Types::DescribeAutoPredictorResponse#forecast_horizon #forecast_horizon} => Integer
     #   * {Types::DescribeAutoPredictorResponse#forecast_types #forecast_types} => Array&lt;String&gt;
     #   * {Types::DescribeAutoPredictorResponse#forecast_frequency #forecast_frequency} => String
+    #   * {Types::DescribeAutoPredictorResponse#forecast_dimensions #forecast_dimensions} => Array&lt;String&gt;
     #   * {Types::DescribeAutoPredictorResponse#dataset_import_job_arns #dataset_import_job_arns} => Array&lt;String&gt;
     #   * {Types::DescribeAutoPredictorResponse#data_config #data_config} => Types::DataConfig
     #   * {Types::DescribeAutoPredictorResponse#encryption_config #encryption_config} => Types::EncryptionConfig
@@ -2184,6 +2201,8 @@ module Aws::ForecastService
     #   resp.forecast_types #=> Array
     #   resp.forecast_types[0] #=> String
     #   resp.forecast_frequency #=> String
+    #   resp.forecast_dimensions #=> Array
+    #   resp.forecast_dimensions[0] #=> String
     #   resp.dataset_import_job_arns #=> Array
     #   resp.dataset_import_job_arns[0] #=> String
     #   resp.data_config.dataset_group_arn #=> String
@@ -2644,9 +2663,6 @@ module Aws::ForecastService
     # <note markdown="1"> This operation is only valid for legacy predictors created with
     # CreatePredictor. If you are not using a legacy predictor, use
     # DescribeAutoPredictor.
-    #
-    #  To upgrade a legacy predictor to AutoPredictor, see Upgrading to
-    # AutoPredictor.
     #
     #  </note>
     #
@@ -3118,7 +3134,7 @@ module Aws::ForecastService
     #     `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorArn` and `Status`.
+    #     `ResourceArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #
@@ -3193,7 +3209,7 @@ module Aws::ForecastService
     #     `IS_NOT`.
     #
     #   * `Key` - The name of the parameter to filter on. Valid values are
-    #     `PredictorArn` and `Status`.
+    #     `ResourceArn` and `Status`.
     #
     #   * `Value` - The value to match.
     #
@@ -3486,12 +3502,13 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Returns a list of predictors created using the CreatePredictor
-    # operation. For each predictor, this operation returns a summary of its
-    # properties, including its Amazon Resource Name (ARN). You can retrieve
-    # the complete set of properties by using the ARN with the
-    # DescribePredictor operation. You can filter the list using an array of
-    # Filter objects.
+    # Returns a list of predictors created using the CreateAutoPredictor or
+    # CreatePredictor operations. For each predictor, this operation returns
+    # a summary of its properties, including its Amazon Resource Name (ARN).
+    #
+    # You can retrieve the complete set of properties by using the ARN with
+    # the DescribeAutoPredictor and DescribePredictor operations. You can
+    # filter the list using an array of Filter objects.
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -3574,9 +3591,7 @@ module Aws::ForecastService
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resources are Forecast
-    #   dataset groups, datasets, dataset import jobs, predictors, forecasts,
-    #   and forecast export jobs.
+    #   to list the tags.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3622,11 +3637,16 @@ module Aws::ForecastService
     #
     # * Predictor Backtest Export Job
     #
+    # * Explainability Job
+    #
+    # * Explainability Export Job
+    #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource to stop.
     #   The supported ARNs are `DatasetImportJobArn`, `PredictorArn`,
-    #   `PredictorBacktestExportJobArn`, `ForecastArn`, and
-    #   `ForecastExportJobArn`.
+    #   `PredictorBacktestExportJobArn`, `ForecastArn`,
+    #   `ForecastExportJobArn`, `ExplainabilityArn`, and
+    #   `ExplainabilityExportArn`.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3652,9 +3672,7 @@ module Aws::ForecastService
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resources are Forecast
-    #   dataset groups, datasets, dataset import jobs, predictors, forecasts,
-    #   and forecast export jobs.
+    #   to list the tags.
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to add to the resource. A tag is an array of key-value pairs.
@@ -3713,9 +3731,7 @@ module Aws::ForecastService
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for which
-    #   to list the tags. Currently, the supported resources are Forecast
-    #   dataset groups, datasets, dataset import jobs, predictors, forecasts,
-    #   and forecast exports.
+    #   to list the tags.
     #
     # @option params [required, Array<String>] :tag_keys
     #   The keys of the tags to be removed.
@@ -3784,7 +3800,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.28.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

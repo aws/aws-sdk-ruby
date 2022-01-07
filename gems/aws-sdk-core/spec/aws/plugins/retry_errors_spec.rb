@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../spec_helper'
+require_relative '../../retry_errors_helper'
 
 module Aws
   module Plugins
@@ -18,6 +19,14 @@ module Aws
           .to receive(:retry_mode).and_return('standard')
         ENV['AWS_RETRY_MODE'] = 'adaptive'
         expect(client.config.retry_mode).to eq('adaptive')
+      end
+
+      it 'can configure retry_mode using defaults mode' do
+        allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+          .to receive(:resolve)
+        allow_any_instance_of(Aws::DefaultsModeConfigResolver)
+          .to receive(:resolve).with(:retry_mode).and_return('standard')
+        expect(client.config.retry_mode).to eq('standard')
       end
 
       it 'raises when retry_mode is not legacy, standard, or adaptive' do

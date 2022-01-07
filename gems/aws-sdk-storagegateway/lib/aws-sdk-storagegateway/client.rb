@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::StorageGateway
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::StorageGateway
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::StorageGateway
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::StorageGateway
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::StorageGateway
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -407,8 +418,8 @@ module Aws::StorageGateway
     #   specified is critical to all later functions of the gateway and cannot
     #   be changed after activation. The default value is `CACHED`.
     #
-    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `FILE_S3` \|
-    #   `FILE_FSX_SMB|`
+    #   Valid Values: `STORED` \| `CACHED` \| `VTL` \| `VTL_SNOW` \| `FILE_S3`
+    #   \| `FILE_FSX_SMB`
     #
     # @option params [String] :tape_drive_type
     #   The value that indicates the type of tape drive to use for tape
@@ -3435,6 +3446,7 @@ module Aws::StorageGateway
     #   * {Types::DescribeGatewayInformationOutput#deprecation_date #deprecation_date} => String
     #   * {Types::DescribeGatewayInformationOutput#gateway_capacity #gateway_capacity} => String
     #   * {Types::DescribeGatewayInformationOutput#supported_gateway_capacities #supported_gateway_capacities} => Array&lt;String&gt;
+    #   * {Types::DescribeGatewayInformationOutput#host_environment_id #host_environment_id} => String
     #
     #
     # @example Example: To describe metadata about the gateway
@@ -3490,13 +3502,14 @@ module Aws::StorageGateway
     #   resp.tags[0].value #=> String
     #   resp.vpc_endpoint #=> String
     #   resp.cloud_watch_log_group_arn #=> String
-    #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER"
+    #   resp.host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER", "SNOWBALL"
     #   resp.endpoint_type #=> String
     #   resp.software_updates_end_date #=> String
     #   resp.deprecation_date #=> String
     #   resp.gateway_capacity #=> String, one of "Small", "Medium", "Large"
     #   resp.supported_gateway_capacities #=> Array
     #   resp.supported_gateway_capacities[0] #=> String, one of "Small", "Medium", "Large"
+    #   resp.host_environment_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/DescribeGatewayInformation AWS API Documentation
     #
@@ -4879,6 +4892,8 @@ module Aws::StorageGateway
     #   resp.gateways[0].gateway_name #=> String
     #   resp.gateways[0].ec2_instance_id #=> String
     #   resp.gateways[0].ec2_instance_region #=> String
+    #   resp.gateways[0].host_environment #=> String, one of "VMWARE", "HYPER-V", "EC2", "KVM", "OTHER", "SNOWBALL"
+    #   resp.gateways[0].host_environment_id #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/storagegateway-2013-06-30/ListGateways AWS API Documentation
@@ -7198,7 +7213,7 @@ module Aws::StorageGateway
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-storagegateway'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

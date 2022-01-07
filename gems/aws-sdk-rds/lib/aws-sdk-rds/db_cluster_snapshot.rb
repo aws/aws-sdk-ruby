@@ -78,7 +78,14 @@ module Aws::RDS
       data[:allocated_storage]
     end
 
-    # Specifies the status of this DB cluster snapshot.
+    # Specifies the status of this DB cluster snapshot. Valid statuses are
+    # the following:
+    #
+    # * `available`
+    #
+    # * `copying`
+    #
+    # * `creating`
     # @return [String]
     def status
       data[:status]
@@ -574,7 +581,7 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   Aurora, use the following command:
+    #   and MySQL 8.0-compatible Aurora, use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -804,12 +811,11 @@ module Aws::RDS
     #   Specifies the storage type to be associated with the each DB instance
     #   in the Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Integer] :iops

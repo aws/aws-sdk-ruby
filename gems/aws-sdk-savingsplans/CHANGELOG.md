@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2021-12-09)
+------------------
+
+* Feature - Adds the ability to specify Savings Plans hourly commitments using five digits after the decimal point.
+
+1.22.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.21.0 (2021-11-04)
 ------------------
 

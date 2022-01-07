@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-01-04)
+------------------
+
+* Feature - This release introduces a new field IndexFacesModelVersion, which is the version of the face detect and storage model that was used when indexing the face vector.
+
+1.63.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.62.0 (2021-12-03)
+------------------
+
+* Feature - This release added new KnownGender types for Celebrity Recognition.
+
+1.61.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.60.0 (2021-11-04)
 ------------------
 

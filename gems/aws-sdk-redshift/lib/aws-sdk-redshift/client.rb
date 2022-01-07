@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -73,6 +74,7 @@ module Aws::Redshift
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -119,7 +121,9 @@ module Aws::Redshift
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Redshift
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::Redshift
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::Redshift
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -456,6 +467,7 @@ module Aws::Redshift
     #   * {Types::DataShare#producer_arn #producer_arn} => String
     #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
     #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #   * {Types::DataShare#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -475,6 +487,7 @@ module Aws::Redshift
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumer AWS API Documentation
     #
@@ -572,9 +585,9 @@ module Aws::Redshift
     end
 
     # From a data producer account, authorizes the sharing of a datashare
-    # with one or more consumer accounts. To authorize a datashare for a
-    # data consumer, the producer account must have the correct access
-    # privileges.
+    # with one or more consumer accounts or managing entities. To authorize
+    # a datashare for a data consumer, the producer account must have the
+    # correct access privileges.
     #
     # @option params [required, String] :data_share_arn
     #   The Amazon Resource Name (ARN) of the datashare that producers are to
@@ -582,7 +595,8 @@ module Aws::Redshift
     #
     # @option params [required, String] :consumer_identifier
     #   The identifier of the data consumer that is authorized to access the
-    #   datashare. This identifier is an Amazon Web Services account ID.
+    #   datashare. This identifier is an Amazon Web Services account ID or a
+    #   keyword, such as ADX.
     #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -590,6 +604,7 @@ module Aws::Redshift
     #   * {Types::DataShare#producer_arn #producer_arn} => String
     #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
     #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #   * {Types::DataShare#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -608,6 +623,7 @@ module Aws::Redshift
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AuthorizeDataShare AWS API Documentation
     #
@@ -2708,7 +2724,7 @@ module Aws::Redshift
     # @option params [required, String] :consumer_identifier
     #   The identifier of the data consumer that is to have authorization
     #   removed from the datashare. This identifier is an Amazon Web Services
-    #   account ID.
+    #   account ID or a keyword, such as ADX.
     #
     # @return [Types::DataShare] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2716,6 +2732,7 @@ module Aws::Redshift
     #   * {Types::DataShare#producer_arn #producer_arn} => String
     #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
     #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #   * {Types::DataShare#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2734,6 +2751,7 @@ module Aws::Redshift
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DeauthorizeDataShare AWS API Documentation
     #
@@ -4601,6 +4619,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataShares AWS API Documentation
@@ -4667,6 +4686,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForConsumer AWS API Documentation
@@ -4733,6 +4753,7 @@ module Aws::Redshift
     #   resp.data_shares[0].data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_shares[0].data_share_associations[0].created_date #=> Time
     #   resp.data_shares[0].data_share_associations[0].status_change_date #=> Time
+    #   resp.data_shares[0].managed_by #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeDataSharesForProducer AWS API Documentation
@@ -6803,6 +6824,7 @@ module Aws::Redshift
     #   * {Types::DataShare#producer_arn #producer_arn} => String
     #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
     #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #   * {Types::DataShare#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -6822,6 +6844,7 @@ module Aws::Redshift
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisassociateDataShareConsumer AWS API Documentation
     #
@@ -9566,6 +9589,7 @@ module Aws::Redshift
     #   * {Types::DataShare#producer_arn #producer_arn} => String
     #   * {Types::DataShare#allow_publicly_accessible_consumers #allow_publicly_accessible_consumers} => Boolean
     #   * {Types::DataShare#data_share_associations #data_share_associations} => Array&lt;Types::DataShareAssociation&gt;
+    #   * {Types::DataShare#managed_by #managed_by} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -9583,6 +9607,7 @@ module Aws::Redshift
     #   resp.data_share_associations[0].status #=> String, one of "ACTIVE", "PENDING_AUTHORIZATION", "AUTHORIZED", "DEAUTHORIZED", "REJECTED", "AVAILABLE"
     #   resp.data_share_associations[0].created_date #=> Time
     #   resp.data_share_associations[0].status_change_date #=> Time
+    #   resp.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RejectDataShare AWS API Documentation
     #
@@ -10969,7 +10994,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

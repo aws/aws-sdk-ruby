@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.46.0 (2021-11-30)
+------------------
+
+* Feature - This release adds support for the FSx for OpenZFS file system type, FSx for Lustre file systems with the Persistent_2 deployment type, and FSx for Lustre file systems with Amazon S3 data repository associations and automatic export policies.
+
 1.45.0 (2021-11-04)
 ------------------
 

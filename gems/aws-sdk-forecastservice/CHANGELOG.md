@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.30.0 (2021-12-20)
+------------------
+
+* Feature - Adds ForecastDimensions field to the DescribeAutoPredictorResponse
+
+1.29.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.28.0 (2021-11-18)
 ------------------
 

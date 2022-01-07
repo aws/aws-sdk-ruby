@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::AppStream
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::AppStream
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::AppStream
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::AppStream
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::AppStream
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -377,6 +388,36 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def associate_application_fleet(params = {}, options = {})
       req = build_request(:associate_application_fleet, params)
+      req.send_request(options)
+    end
+
+    # Associates an application to entitle.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack.
+    #
+    # @option params [required, String] :entitlement_name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :application_identifier
+    #   The identifier of the application.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_application_to_entitlement({
+    #     stack_name: "Name", # required
+    #     entitlement_name: "Name", # required
+    #     application_identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AssociateApplicationToEntitlement AWS API Documentation
+    #
+    # @overload associate_application_to_entitlement(params = {})
+    # @param [Hash] params ({})
+    def associate_application_to_entitlement(params = {}, options = {})
+      req = build_request(:associate_application_to_entitlement, params)
       req.send_request(options)
     end
 
@@ -767,6 +808,69 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def create_directory_config(params = {}, options = {})
       req = build_request(:create_directory_config, params)
+      req.send_request(options)
+    end
+
+    # Creates a new entitlement. Entitlements control access to specific
+    # applications within a stack, based on user attributes. Entitlements
+    # apply to SAML 2.0 federated user identities. Amazon AppStream 2.0 user
+    # pool and streaming URL users are entitled to all applications in a
+    # stack. Entitlements don't apply to the desktop stream view
+    # application, or to applications managed by a dynamic app provider
+    # using the Dynamic Application Framework.
+    #
+    # @option params [required, String] :name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @option params [String] :description
+    #   The description of the entitlement.
+    #
+    # @option params [required, String] :app_visibility
+    #   Specifies whether all or selected apps are entitled.
+    #
+    # @option params [required, Array<Types::EntitlementAttribute>] :attributes
+    #   The attributes of the entitlement.
+    #
+    # @return [Types::CreateEntitlementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEntitlementResult#entitlement #entitlement} => Types::Entitlement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_entitlement({
+    #     name: "Name", # required
+    #     stack_name: "Name", # required
+    #     description: "Description",
+    #     app_visibility: "ALL", # required, accepts ALL, ASSOCIATED
+    #     attributes: [ # required
+    #       {
+    #         name: "String", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entitlement.name #=> String
+    #   resp.entitlement.stack_name #=> String
+    #   resp.entitlement.description #=> String
+    #   resp.entitlement.app_visibility #=> String, one of "ALL", "ASSOCIATED"
+    #   resp.entitlement.attributes #=> Array
+    #   resp.entitlement.attributes[0].name #=> String
+    #   resp.entitlement.attributes[0].value #=> String
+    #   resp.entitlement.created_time #=> Time
+    #   resp.entitlement.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateEntitlement AWS API Documentation
+    #
+    # @overload create_entitlement(params = {})
+    # @param [Hash] params ({})
+    def create_entitlement(params = {}, options = {})
+      req = build_request(:create_entitlement, params)
       req.send_request(options)
     end
 
@@ -1815,6 +1919,32 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes the specified entitlement.
+    #
+    # @option params [required, String] :name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_entitlement({
+    #     name: "Name", # required
+    #     stack_name: "Name", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteEntitlement AWS API Documentation
+    #
+    # @overload delete_entitlement(params = {})
+    # @param [Hash] params ({})
+    def delete_entitlement(params = {}, options = {})
+      req = build_request(:delete_entitlement, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified fleet.
     #
     # @option params [required, String] :name
@@ -2265,6 +2395,58 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def describe_directory_configs(params = {}, options = {})
       req = build_request(:describe_directory_configs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list that describes one of more entitlements.
+    #
+    # @option params [String] :name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @return [Types::DescribeEntitlementsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEntitlementsResult#entitlements #entitlements} => Array&lt;Types::Entitlement&gt;
+    #   * {Types::DescribeEntitlementsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_entitlements({
+    #     name: "Name",
+    #     stack_name: "Name", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entitlements #=> Array
+    #   resp.entitlements[0].name #=> String
+    #   resp.entitlements[0].stack_name #=> String
+    #   resp.entitlements[0].description #=> String
+    #   resp.entitlements[0].app_visibility #=> String, one of "ALL", "ASSOCIATED"
+    #   resp.entitlements[0].attributes #=> Array
+    #   resp.entitlements[0].attributes[0].name #=> String
+    #   resp.entitlements[0].attributes[0].value #=> String
+    #   resp.entitlements[0].created_time #=> Time
+    #   resp.entitlements[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeEntitlements AWS API Documentation
+    #
+    # @overload describe_entitlements(params = {})
+    # @param [Hash] params ({})
+    def describe_entitlements(params = {}, options = {})
+      req = build_request(:describe_entitlements, params)
       req.send_request(options)
     end
 
@@ -2903,6 +3085,36 @@ module Aws::AppStream
       req.send_request(options)
     end
 
+    # Deletes the specified application from the specified entitlement.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @option params [required, String] :entitlement_name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :application_identifier
+    #   The identifier of the application to remove from the entitlement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_application_from_entitlement({
+    #     stack_name: "Name", # required
+    #     entitlement_name: "Name", # required
+    #     application_identifier: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DisassociateApplicationFromEntitlement AWS API Documentation
+    #
+    # @overload disassociate_application_from_entitlement(params = {})
+    # @param [Hash] params ({})
+    def disassociate_application_from_entitlement(params = {}, options = {})
+      req = build_request(:disassociate_application_from_entitlement, params)
+      req.send_request(options)
+    end
+
     # Disassociates the specified fleet from the specified stack.
     #
     # @option params [required, String] :fleet_name
@@ -3057,6 +3269,50 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def list_associated_stacks(params = {}, options = {})
       req = build_request(:list_associated_stacks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of entitled applications.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @option params [required, String] :entitlement_name
+    #   The name of the entitlement.
+    #
+    # @option params [String] :next_token
+    #   The pagination token used to retrieve the next page of results for
+    #   this operation.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum size of each page of results.
+    #
+    # @return [Types::ListEntitledApplicationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEntitledApplicationsResult#entitled_applications #entitled_applications} => Array&lt;Types::EntitledApplication&gt;
+    #   * {Types::ListEntitledApplicationsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_entitled_applications({
+    #     stack_name: "Name", # required
+    #     entitlement_name: "Name", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entitled_applications #=> Array
+    #   resp.entitled_applications[0].application_identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ListEntitledApplications AWS API Documentation
+    #
+    # @overload list_entitled_applications(params = {})
+    # @param [Hash] params ({})
+    def list_entitled_applications(params = {}, options = {})
+      req = build_request(:list_entitled_applications, params)
       req.send_request(options)
     end
 
@@ -3475,6 +3731,63 @@ module Aws::AppStream
     # @param [Hash] params ({})
     def update_directory_config(params = {}, options = {})
       req = build_request(:update_directory_config, params)
+      req.send_request(options)
+    end
+
+    # Updates the specified entitlement.
+    #
+    # @option params [required, String] :name
+    #   The name of the entitlement.
+    #
+    # @option params [required, String] :stack_name
+    #   The name of the stack with which the entitlement is associated.
+    #
+    # @option params [String] :description
+    #   The description of the entitlement.
+    #
+    # @option params [String] :app_visibility
+    #   Specifies whether all or only selected apps are entitled.
+    #
+    # @option params [Array<Types::EntitlementAttribute>] :attributes
+    #   The attributes of the entitlement.
+    #
+    # @return [Types::UpdateEntitlementResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEntitlementResult#entitlement #entitlement} => Types::Entitlement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_entitlement({
+    #     name: "Name", # required
+    #     stack_name: "Name", # required
+    #     description: "Description",
+    #     app_visibility: "ALL", # accepts ALL, ASSOCIATED
+    #     attributes: [
+    #       {
+    #         name: "String", # required
+    #         value: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.entitlement.name #=> String
+    #   resp.entitlement.stack_name #=> String
+    #   resp.entitlement.description #=> String
+    #   resp.entitlement.app_visibility #=> String, one of "ALL", "ASSOCIATED"
+    #   resp.entitlement.attributes #=> Array
+    #   resp.entitlement.attributes[0].name #=> String
+    #   resp.entitlement.attributes[0].value #=> String
+    #   resp.entitlement.created_time #=> Time
+    #   resp.entitlement.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateEntitlement AWS API Documentation
+    #
+    # @overload update_entitlement(params = {})
+    # @param [Hash] params ({})
+    def update_entitlement(params = {}, options = {})
+      req = build_request(:update_entitlement, params)
       req.send_request(options)
     end
 
@@ -3953,7 +4266,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

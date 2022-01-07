@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-01-05)
+------------------
+
+* Feature - Updating validation rules for interfaces used in the Snowball API to tighten security of service.
+
+1.46.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.45.0 (2021-11-30)
+------------------
+
+* Feature - Tapeball is to integrate tape gateway onto snowball, it enables customer to transfer local data on the tape to snowball,and then ingest the data into tape gateway on the cloud.
+
 1.44.0 (2021-11-04)
 ------------------
 

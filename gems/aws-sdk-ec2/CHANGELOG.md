@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.290.0 (2022-01-06)
+------------------
+
+* Feature - This release introduces On-Demand Capacity Reservation support for Cluster Placement Groups, adds Tags on instance Metadata, and includes documentation updates for Amazon EC2.
+
+1.289.0 (2022-01-05)
+------------------
+
+* Feature - This release adds a new API called ModifyVpcEndpointServicePayerResponsibility which allows VPC endpoint service owners to take payer responsibility of their VPC Endpoint connections.
+
+1.288.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.287.0 (2021-12-09)
+------------------
+
+* Feature - Adds waiters support for internet gateways.
+
+1.286.0 (2021-12-01)
+------------------
+
+* Feature - This release adds support for Amazon VPC IP Address Manager (IPAM), which enables you to plan, track, and monitor IP addresses for your workloads. This release also adds support for VPC Network Access Analyzer, which enables you to analyze network access to resources in your Virtual Private Clouds.
+
+1.285.0 (2021-11-30)
+------------------
+
+* Feature - This release adds support for Is4gen and Im4gn instances. This release also adds a new subnet attribute, enableLniAtDeviceIndex, to support local network interfaces, which are logical networking components that connect an EC2 instance to your on-premises network.
+
+1.284.0 (2021-11-29)
+------------------
+
+* Feature - This release adds support for G5g and M6a instances. This release also adds support for Amazon EBS Snapshots Archive, a feature that enables you to archive your EBS snapshots; and Recycle Bin, a feature that enables you to protect your EBS snapshots against accidental deletion.
+
 1.283.0 (2021-11-26)
 ------------------
 

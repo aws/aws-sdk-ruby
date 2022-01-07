@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-01-05)
+------------------
+
+* Feature - Amazon EKS now supports running applications using IPv6 address space
+
+1.70.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.69.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.68.0 (2021-11-22)
 ------------------
 

@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2022-01-05)
+------------------
+
+* Feature - Amazon SageMaker now supports running training jobs on ml.g5 instance types.
+
+1.114.0 (2022-01-03)
+------------------
+
+* Feature - The release allows users to pass pipeline definitions as Amazon S3 locations and control the pipeline execution concurrency using ParallelismConfiguration. It also adds support of EMR jobs as pipeline steps.
+
+1.113.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.112.0 (2021-12-20)
+------------------
+
+* Feature - This release adds a new ContentType field in AutoMLChannel for SageMaker CreateAutoMLJob InputDataConfig.
+
+1.111.0 (2021-12-08)
+------------------
+
+* Feature - This release added a new Ambarella device(amba_cv2) compilation support for Sagemaker Neo.
+
+1.110.0 (2021-12-01)
+------------------
+
+* Feature - This release enables - 1/ Inference endpoint configuration recommendations and ability to run custom load tests to meet performance needs. 2/ Deploy serverless inference endpoints. 3/ Query, filter and retrieve end-to-end ML lineage graph, and incorporate model quality/bias detection in ML workflow.
+
+1.109.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.108.0 (2021-11-08)
 ------------------
 

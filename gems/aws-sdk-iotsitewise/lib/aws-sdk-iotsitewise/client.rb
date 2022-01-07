@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::IoTSiteWise
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::IoTSiteWise
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::IoTSiteWise
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::IoTSiteWise
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::IoTSiteWise
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1172,8 +1183,7 @@ module Aws::IoTSiteWise
     #     China Regions.
     #
     #   * `IAM` – The portal uses Identity and Access Management to
-    #     authenticate users and manage user permissions. This option is only
-    #     available in the China Regions.
+    #     authenticate users and manage user permissions.
     #
     #   You can't change this value after you create a portal.
     #
@@ -2228,6 +2238,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeStorageConfigurationResponse#storage_type #storage_type} => String
     #   * {Types::DescribeStorageConfigurationResponse#multi_layer_storage #multi_layer_storage} => Types::MultiLayerStorage
     #   * {Types::DescribeStorageConfigurationResponse#disassociated_data_storage #disassociated_data_storage} => String
+    #   * {Types::DescribeStorageConfigurationResponse#retention_period #retention_period} => Types::RetentionPeriod
     #   * {Types::DescribeStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #   * {Types::DescribeStorageConfigurationResponse#last_update_date #last_update_date} => Time
     #
@@ -2237,6 +2248,8 @@ module Aws::IoTSiteWise
     #   resp.multi_layer_storage.customer_managed_s3_storage.s3_resource_arn #=> String
     #   resp.multi_layer_storage.customer_managed_s3_storage.role_arn #=> String
     #   resp.disassociated_data_storage #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retention_period.number_of_days #=> Integer
+    #   resp.retention_period.unlimited #=> Boolean
     #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
@@ -3568,15 +3581,15 @@ module Aws::IoTSiteWise
     # Configures storage settings for IoT SiteWise.
     #
     # @option params [required, String] :storage_type
-    #   The type of storage that you specified for your data. The storage type
-    #   can be one of the following values:
+    #   The storage tier that you specified for your data. The `storageType`
+    #   parameter can be one of the following values:
     #
-    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise replicates your data into
-    #     a service managed database.
+    #   * `SITEWISE_DEFAULT_STORAGE` – IoT SiteWise saves your data into the
+    #     hot tier. The hot tier is a service-managed database.
     #
-    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise replicates your data into a
-    #     service managed database and saves a copy of your raw data and
-    #     metadata in an Amazon S3 object that you specified.
+    #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
+    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     Amazon S3 bucket.
     #
     # @option params [Types::MultiLayerStorage] :multi_layer_storage
     #   Identifies a storage destination. If you specified
@@ -3604,11 +3617,16 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
     #
+    # @option params [Types::RetentionPeriod] :retention_period
+    #   How many days your data is kept in the hot tier. By default, your data
+    #   is kept indefinitely in the hot tier.
+    #
     # @return [Types::PutStorageConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutStorageConfigurationResponse#storage_type #storage_type} => String
     #   * {Types::PutStorageConfigurationResponse#multi_layer_storage #multi_layer_storage} => Types::MultiLayerStorage
     #   * {Types::PutStorageConfigurationResponse#disassociated_data_storage #disassociated_data_storage} => String
+    #   * {Types::PutStorageConfigurationResponse#retention_period #retention_period} => Types::RetentionPeriod
     #   * {Types::PutStorageConfigurationResponse#configuration_status #configuration_status} => Types::ConfigurationStatus
     #
     # @example Request syntax with placeholder values
@@ -3622,6 +3640,10 @@ module Aws::IoTSiteWise
     #       },
     #     },
     #     disassociated_data_storage: "ENABLED", # accepts ENABLED, DISABLED
+    #     retention_period: {
+    #       number_of_days: 1,
+    #       unlimited: false,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3630,6 +3652,8 @@ module Aws::IoTSiteWise
     #   resp.multi_layer_storage.customer_managed_s3_storage.s3_resource_arn #=> String
     #   resp.multi_layer_storage.customer_managed_s3_storage.role_arn #=> String
     #   resp.disassociated_data_storage #=> String, one of "ENABLED", "DISABLED"
+    #   resp.retention_period.number_of_days #=> Integer
+    #   resp.retention_period.unlimited #=> Boolean
     #   resp.configuration_status.state #=> String, one of "ACTIVE", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.configuration_status.error.code #=> String, one of "VALIDATION_ERROR", "INTERNAL_FAILURE"
     #   resp.configuration_status.error.message #=> String
@@ -4401,7 +4425,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

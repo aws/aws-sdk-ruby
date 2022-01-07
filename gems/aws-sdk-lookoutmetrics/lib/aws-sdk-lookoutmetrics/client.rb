@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::LookoutMetrics
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::LookoutMetrics
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::LookoutMetrics
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::LookoutMetrics
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::LookoutMetrics
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1177,6 +1188,62 @@ module Aws::LookoutMetrics
       req.send_request(options)
     end
 
+    # Returns a list of measures that are potential causes or effects of an
+    # anomaly group.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #
+    # @option params [required, String] :anomaly_group_id
+    #   The ID of the anomaly group.
+    #
+    # @option params [String] :relationship_type_filter
+    #   Filter for potential causes (`CAUSE_OF_INPUT_ANOMALY_GROUP`) or
+    #   downstream effects (`EFFECT_OF_INPUT_ANOMALY_GROUP`) of the anomaly
+    #   group.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @return [Types::ListAnomalyGroupRelatedMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAnomalyGroupRelatedMetricsResponse#inter_metric_impact_list #inter_metric_impact_list} => Array&lt;Types::InterMetricImpactDetails&gt;
+    #   * {Types::ListAnomalyGroupRelatedMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_anomaly_group_related_metrics({
+    #     anomaly_detector_arn: "Arn", # required
+    #     anomaly_group_id: "UUID", # required
+    #     relationship_type_filter: "CAUSE_OF_INPUT_ANOMALY_GROUP", # accepts CAUSE_OF_INPUT_ANOMALY_GROUP, EFFECT_OF_INPUT_ANOMALY_GROUP
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.inter_metric_impact_list #=> Array
+    #   resp.inter_metric_impact_list[0].metric_name #=> String
+    #   resp.inter_metric_impact_list[0].anomaly_group_id #=> String
+    #   resp.inter_metric_impact_list[0].relationship_type #=> String, one of "CAUSE_OF_INPUT_ANOMALY_GROUP", "EFFECT_OF_INPUT_ANOMALY_GROUP"
+    #   resp.inter_metric_impact_list[0].contribution_percentage #=> Float
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/ListAnomalyGroupRelatedMetrics AWS API Documentation
+    #
+    # @overload list_anomaly_group_related_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_anomaly_group_related_metrics(params = {}, options = {})
+      req = build_request(:list_anomaly_group_related_metrics, params)
+      req.send_request(options)
+    end
+
     # Returns a list of anomaly groups.
     #
     # @option params [required, String] :anomaly_detector_arn
@@ -1653,7 +1720,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

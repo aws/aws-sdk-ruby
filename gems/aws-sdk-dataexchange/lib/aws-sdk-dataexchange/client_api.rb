@@ -15,6 +15,8 @@ module Aws::DataExchange
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Action = Shapes::StructureShape.new(name: 'Action')
+    ApiDescription = Shapes::StringShape.new(name: 'ApiDescription')
+    ApiGatewayApiAsset = Shapes::StructureShape.new(name: 'ApiGatewayApiAsset')
     Arn = Shapes::StringShape.new(name: 'Arn')
     AssetDestinationEntry = Shapes::StructureShape.new(name: 'AssetDestinationEntry')
     AssetDetails = Shapes::StructureShape.new(name: 'AssetDetails')
@@ -63,6 +65,8 @@ module Aws::DataExchange
     GetRevisionRequest = Shapes::StructureShape.new(name: 'GetRevisionRequest')
     GetRevisionResponse = Shapes::StructureShape.new(name: 'GetRevisionResponse')
     Id = Shapes::StringShape.new(name: 'Id')
+    ImportAssetFromApiGatewayApiRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetFromApiGatewayApiRequestDetails')
+    ImportAssetFromApiGatewayApiResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetFromApiGatewayApiResponseDetails')
     ImportAssetFromSignedUrlJobErrorDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlJobErrorDetails')
     ImportAssetFromSignedUrlRequestDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlRequestDetails')
     ImportAssetFromSignedUrlResponseDetails = Shapes::StructureShape.new(name: 'ImportAssetFromSignedUrlResponseDetails')
@@ -105,6 +109,7 @@ module Aws::DataExchange
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginDetails = Shapes::StructureShape.new(name: 'OriginDetails')
+    ProtocolType = Shapes::StringShape.new(name: 'ProtocolType')
     RedshiftDataShareAsset = Shapes::StructureShape.new(name: 'RedshiftDataShareAsset')
     RedshiftDataShareAssetSourceEntry = Shapes::StructureShape.new(name: 'RedshiftDataShareAssetSourceEntry')
     RequestDetails = Shapes::StructureShape.new(name: 'RequestDetails')
@@ -115,6 +120,8 @@ module Aws::DataExchange
     RevisionEntry = Shapes::StructureShape.new(name: 'RevisionEntry')
     RevisionPublished = Shapes::StructureShape.new(name: 'RevisionPublished')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
+    SendApiAssetRequest = Shapes::StructureShape.new(name: 'SendApiAssetRequest')
+    SendApiAssetResponse = Shapes::StructureShape.new(name: 'SendApiAssetResponse')
     ServerSideEncryptionTypes = Shapes::StringShape.new(name: 'ServerSideEncryptionTypes')
     ServiceLimitExceededException = Shapes::StructureShape.new(name: 'ServiceLimitExceededException')
     StartJobRequest = Shapes::StructureShape.new(name: 'StartJobRequest')
@@ -147,6 +154,17 @@ module Aws::DataExchange
     Action.add_member(:export_revision_to_s3, Shapes::ShapeRef.new(shape: AutoExportRevisionToS3RequestDetails, location_name: "ExportRevisionToS3"))
     Action.struct_class = Types::Action
 
+    ApiGatewayApiAsset.add_member(:api_description, Shapes::ShapeRef.new(shape: ApiDescription, location_name: "ApiDescription"))
+    ApiGatewayApiAsset.add_member(:api_endpoint, Shapes::ShapeRef.new(shape: __string, location_name: "ApiEndpoint"))
+    ApiGatewayApiAsset.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, location_name: "ApiId"))
+    ApiGatewayApiAsset.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
+    ApiGatewayApiAsset.add_member(:api_name, Shapes::ShapeRef.new(shape: __string, location_name: "ApiName"))
+    ApiGatewayApiAsset.add_member(:api_specification_download_url, Shapes::ShapeRef.new(shape: __string, location_name: "ApiSpecificationDownloadUrl"))
+    ApiGatewayApiAsset.add_member(:api_specification_download_url_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApiSpecificationDownloadUrlExpiresAt"))
+    ApiGatewayApiAsset.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, location_name: "ProtocolType"))
+    ApiGatewayApiAsset.add_member(:stage, Shapes::ShapeRef.new(shape: __string, location_name: "Stage"))
+    ApiGatewayApiAsset.struct_class = Types::ApiGatewayApiAsset
+
     AssetDestinationEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "AssetId"))
     AssetDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
     AssetDestinationEntry.add_member(:key, Shapes::ShapeRef.new(shape: __string, location_name: "Key"))
@@ -154,6 +172,7 @@ module Aws::DataExchange
 
     AssetDetails.add_member(:s3_snapshot_asset, Shapes::ShapeRef.new(shape: S3SnapshotAsset, location_name: "S3SnapshotAsset"))
     AssetDetails.add_member(:redshift_data_share_asset, Shapes::ShapeRef.new(shape: RedshiftDataShareAsset, location_name: "RedshiftDataShareAsset"))
+    AssetDetails.add_member(:api_gateway_api_asset, Shapes::ShapeRef.new(shape: ApiGatewayApiAsset, location_name: "ApiGatewayApiAsset"))
     AssetDetails.struct_class = Types::AssetDetails
 
     AssetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -402,6 +421,30 @@ module Aws::DataExchange
     GetRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     GetRevisionResponse.struct_class = Types::GetRevisionResponse
 
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_description, Shapes::ShapeRef.new(shape: ApiDescription, location_name: "ApiDescription"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApiId"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApiName"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_specification_md_5_hash, Shapes::ShapeRef.new(shape: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093, required: true, location_name: "ApiSpecificationMd5Hash"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "ProtocolType"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetFromApiGatewayApiRequestDetails.add_member(:stage, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Stage"))
+    ImportAssetFromApiGatewayApiRequestDetails.struct_class = Types::ImportAssetFromApiGatewayApiRequestDetails
+
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_description, Shapes::ShapeRef.new(shape: ApiDescription, location_name: "ApiDescription"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApiId"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_key, Shapes::ShapeRef.new(shape: __string, location_name: "ApiKey"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApiName"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_specification_md_5_hash, Shapes::ShapeRef.new(shape: __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093, required: true, location_name: "ApiSpecificationMd5Hash"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_specification_upload_url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ApiSpecificationUploadUrl"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:api_specification_upload_url_expires_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ApiSpecificationUploadUrlExpiresAt"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:protocol_type, Shapes::ShapeRef.new(shape: ProtocolType, required: true, location_name: "ProtocolType"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:revision_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "RevisionId"))
+    ImportAssetFromApiGatewayApiResponseDetails.add_member(:stage, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Stage"))
+    ImportAssetFromApiGatewayApiResponseDetails.struct_class = Types::ImportAssetFromApiGatewayApiResponseDetails
+
     ImportAssetFromSignedUrlJobErrorDetails.add_member(:asset_name, Shapes::ShapeRef.new(shape: AssetName, required: true, location_name: "AssetName"))
     ImportAssetFromSignedUrlJobErrorDetails.struct_class = Types::ImportAssetFromSignedUrlJobErrorDetails
 
@@ -554,6 +597,7 @@ module Aws::DataExchange
     RequestDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlRequestDetails, location_name: "ImportAssetFromSignedUrl"))
     RequestDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3RequestDetails, location_name: "ImportAssetsFromS3"))
     RequestDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesRequestDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
+    RequestDetails.add_member(:import_asset_from_api_gateway_api, Shapes::ShapeRef.new(shape: ImportAssetFromApiGatewayApiRequestDetails, location_name: "ImportAssetFromApiGatewayApi"))
     RequestDetails.struct_class = Types::RequestDetails
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
@@ -567,6 +611,7 @@ module Aws::DataExchange
     ResponseDetails.add_member(:import_asset_from_signed_url, Shapes::ShapeRef.new(shape: ImportAssetFromSignedUrlResponseDetails, location_name: "ImportAssetFromSignedUrl"))
     ResponseDetails.add_member(:import_assets_from_s3, Shapes::ShapeRef.new(shape: ImportAssetsFromS3ResponseDetails, location_name: "ImportAssetsFromS3"))
     ResponseDetails.add_member(:import_assets_from_redshift_data_shares, Shapes::ShapeRef.new(shape: ImportAssetsFromRedshiftDataSharesResponseDetails, location_name: "ImportAssetsFromRedshiftDataShares"))
+    ResponseDetails.add_member(:import_asset_from_api_gateway_api, Shapes::ShapeRef.new(shape: ImportAssetFromApiGatewayApiResponseDetails, location_name: "ImportAssetFromApiGatewayApi"))
     ResponseDetails.struct_class = Types::ResponseDetails
 
     RevisionDestinationEntry.add_member(:bucket, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Bucket"))
@@ -589,6 +634,24 @@ module Aws::DataExchange
 
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
     S3SnapshotAsset.struct_class = Types::S3SnapshotAsset
+
+    SendApiAssetRequest.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    SendApiAssetRequest.add_member(:query_string_parameters, Shapes::ShapeRef.new(shape: MapOf__string, location: "querystring", location_name: "QueryStringParameters"))
+    SendApiAssetRequest.add_member(:asset_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "header", location_name: "x-amzn-dataexchange-asset-id"))
+    SendApiAssetRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "header", location_name: "x-amzn-dataexchange-data-set-id"))
+    SendApiAssetRequest.add_member(:request_headers, Shapes::ShapeRef.new(shape: MapOf__string, location: "headers", location_name: "x-amzn-dataexchange-header-"))
+    SendApiAssetRequest.add_member(:method, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "x-amzn-dataexchange-http-method"))
+    SendApiAssetRequest.add_member(:path, Shapes::ShapeRef.new(shape: __string, location: "header", location_name: "x-amzn-dataexchange-path"))
+    SendApiAssetRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "header", location_name: "x-amzn-dataexchange-revision-id"))
+    SendApiAssetRequest.struct_class = Types::SendApiAssetRequest
+    SendApiAssetRequest[:payload] = :body
+    SendApiAssetRequest[:payload_member] = SendApiAssetRequest.member(:body)
+
+    SendApiAssetResponse.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    SendApiAssetResponse.add_member(:response_headers, Shapes::ShapeRef.new(shape: MapOf__string, location: "headers", location_name: ""))
+    SendApiAssetResponse.struct_class = Types::SendApiAssetResponse
+    SendApiAssetResponse[:payload] = :body
+    SendApiAssetResponse[:payload_member] = SendApiAssetResponse.member(:body)
 
     ServiceLimitExceededException.add_member(:limit_name, Shapes::ShapeRef.new(shape: LimitName, location_name: "LimitName"))
     ServiceLimitExceededException.add_member(:limit_value, Shapes::ShapeRef.new(shape: __double, location_name: "LimitValue"))
@@ -971,6 +1034,22 @@ module Aws::DataExchange
         o.http_request_uri = "/tags/{resource-arn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
+      api.add_operation(:send_api_asset, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SendApiAsset"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1"
+        o.endpoint_pattern = {
+          "hostPrefix" => "api-fulfill.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: SendApiAssetRequest)
+        o.output = Shapes::ShapeRef.new(shape: SendApiAssetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:start_job, Seahorse::Model::Operation.new.tap do |o|

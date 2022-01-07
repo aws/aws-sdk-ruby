@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.15.0 (2021-12-20)
+------------------
+
+* Feature - Making PricingPlan optional as part of create resource API.
+
+1.14.0 (2021-12-06)
+------------------
+
+* Feature - This release adds support for Accuracy position filtering, position metadata and autocomplete for addresses and points of interest based on partial or misspelled free-form text.
+
+1.13.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2021-11-16)
 ------------------
 

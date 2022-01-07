@@ -6151,8 +6151,8 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] limit
-    #   The maximum number of requests that can be made in a given time
-    #   period.
+    #   The target maximum number of requests that can be made in a given
+    #   time period.
     #   @return [Integer]
     #
     # @!attribute [rw] offset
@@ -7076,13 +7076,12 @@ module Aws::APIGateway
     #       }
     #
     # @!attribute [rw] burst_limit
-    #   The API request burst limit, the maximum rate limit over a time
-    #   ranging from one to a few seconds, depending upon whether the
-    #   underlying token bucket is at its full capacity.
+    #   The API target request burst rate limit. This allows more requests
+    #   through for a period of time than the target rate limit.
     #   @return [Integer]
     #
     # @!attribute [rw] rate_limit
-    #   The API request steady-state rate limit.
+    #   The API target request rate limit.
     #   @return [Float]
     #
     class ThrottleSettings < Struct.new(
@@ -8088,8 +8087,11 @@ module Aws::APIGateway
       include Aws::Structure
     end
 
-    # Represents a usage plan than can specify who can assess associated API
-    # stages with specified request limits and quotas.
+    # Represents a usage plan used to specify who can assess associated API
+    # stages. Optionally, target request rate and quota limits can be set.
+    # In some cases clients can exceed the targets that you set. Don’t rely
+    # on usage plans to control costs. Consider using [AWS Budgets][1] to
+    # monitor costs and [AWS WAF][2] to manage API requests.
     #
     # <div class="remarks" markdown="1">
     # In a usage plan, you associate an API by specifying the API's Id and
@@ -8099,12 +8101,14 @@ module Aws::APIGateway
     # </div>
     #
     # <div class="seeAlso" markdown="1">
-    # [Create and Use Usage Plans][1]
+    # [Create and Use Usage Plans][3]
     # </div>
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
+    # [1]: https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html
+    # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
+    # [3]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html
     #
     # @!attribute [rw] id
     #   The identifier of a UsagePlan resource.
@@ -8123,12 +8127,13 @@ module Aws::APIGateway
     #   @return [Array<Types::ApiStage>]
     #
     # @!attribute [rw] throttle
-    #   The request throttle limits of a usage plan.
+    #   Map containing method level throttling information for API stage in
+    #   a usage plan.
     #   @return [Types::ThrottleSettings]
     #
     # @!attribute [rw] quota
-    #   The maximum number of permitted requests per a given unit time
-    #   interval.
+    #   The target maximum number of permitted requests per a given unit
+    #   time interval.
     #   @return [Types::QuotaSettings]
     #
     # @!attribute [rw] product_code

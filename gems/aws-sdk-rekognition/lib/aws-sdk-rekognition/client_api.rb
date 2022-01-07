@@ -190,6 +190,7 @@ module Aws::Rekognition
     ImageId = Shapes::StringShape.new(name: 'ImageId')
     ImageQuality = Shapes::StructureShape.new(name: 'ImageQuality')
     ImageTooLargeException = Shapes::StructureShape.new(name: 'ImageTooLargeException')
+    IndexFacesModelVersion = Shapes::StringShape.new(name: 'IndexFacesModelVersion')
     IndexFacesRequest = Shapes::StructureShape.new(name: 'IndexFacesRequest')
     IndexFacesResponse = Shapes::StructureShape.new(name: 'IndexFacesResponse')
     InferenceUnits = Shapes::IntegerShape.new(name: 'InferenceUnits')
@@ -794,6 +795,7 @@ module Aws::Rekognition
     Face.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId"))
     Face.add_member(:external_image_id, Shapes::ShapeRef.new(shape: ExternalImageId, location_name: "ExternalImageId"))
     Face.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
+    Face.add_member(:index_faces_model_version, Shapes::ShapeRef.new(shape: IndexFacesModelVersion, location_name: "IndexFacesModelVersion"))
     Face.struct_class = Types::Face
 
     FaceDetail.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))

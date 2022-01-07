@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::IoT
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::IoT
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::IoT
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::IoT
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::IoT
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1061,6 +1072,15 @@ module Aws::IoT
     #   Specifies whether IoT validates the token signature in an
     #   authorization request.
     #
+    # @option params [Boolean] :enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for clients that use persistent HTTP connections. The results
+    #   are cached for the time specified by the Lambda function in
+    #   `refreshAfterInSeconds`. This value does not affect authorization of
+    #   clients that use MQTT connections.
+    #
+    #   The default value is `false`.
+    #
     # @return [Types::CreateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAuthorizerResponse#authorizer_name #authorizer_name} => String
@@ -1083,6 +1103,7 @@ module Aws::IoT
     #       },
     #     ],
     #     signing_disabled: false,
+    #     enable_caching_for_http: false,
     #   })
     #
     # @example Response structure
@@ -1691,7 +1712,7 @@ module Aws::IoT
     #   Allows you to create a staged rollout of the job.
     #
     # @option params [Types::AbortConfig] :abort_config
-    #   Allows you to create criteria to abort a job.
+    #   Allows you to create the criteria to abort a job.
     #
     # @option params [Types::TimeoutConfig] :timeout_config
     #   Specifies the amount of time each device has to finish its execution
@@ -1718,6 +1739,9 @@ module Aws::IoT
     #
     # @option params [String] :job_template_arn
     #   The ARN of the job template used to create the job.
+    #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
     #
     # @option params [Hash<String,String>] :document_parameters
     #   Parameters of a managed template that you can specify to create the
@@ -1774,6 +1798,14 @@ module Aws::IoT
     #     ],
     #     namespace_id: "NamespaceId",
     #     job_template_arn: "JobTemplateArn",
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #     document_parameters: {
     #       "ParameterKey" => "ParameterValue",
     #     },
@@ -1849,6 +1881,9 @@ module Aws::IoT
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the job template.
     #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #
     # @return [Types::CreateJobTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateJobTemplateResponse#job_template_arn #job_template_arn} => String
@@ -1896,6 +1931,14 @@ module Aws::IoT
     #         value: "TagValue",
     #       },
     #     ],
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -4843,6 +4886,7 @@ module Aws::IoT
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
     #   resp.authorizer_description.signing_disabled #=> Boolean
+    #   resp.authorizer_description.enable_caching_for_http #=> Boolean
     #
     # @overload describe_authorizer(params = {})
     # @param [Hash] params ({})
@@ -5057,6 +5101,7 @@ module Aws::IoT
     #   resp.authorizer_description.creation_date #=> Time
     #   resp.authorizer_description.last_modified_date #=> Time
     #   resp.authorizer_description.signing_disabled #=> Boolean
+    #   resp.authorizer_description.enable_caching_for_http #=> Boolean
     #
     # @overload describe_default_authorizer(params = {})
     # @param [Hash] params ({})
@@ -5465,6 +5510,9 @@ module Aws::IoT
     #   resp.job.timeout_config.in_progress_timeout_in_minutes #=> Integer
     #   resp.job.namespace_id #=> String
     #   resp.job.job_template_arn #=> String
+    #   resp.job.job_executions_retry_config.criteria_list #=> Array
+    #   resp.job.job_executions_retry_config.criteria_list[0].failure_type #=> String, one of "FAILED", "TIMED_OUT", "ALL"
+    #   resp.job.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #   resp.job.document_parameters #=> Hash
     #   resp.job.document_parameters["ParameterKey"] #=> String
     #
@@ -5544,6 +5592,7 @@ module Aws::IoT
     #   * {Types::DescribeJobTemplateResponse#job_executions_rollout_config #job_executions_rollout_config} => Types::JobExecutionsRolloutConfig
     #   * {Types::DescribeJobTemplateResponse#abort_config #abort_config} => Types::AbortConfig
     #   * {Types::DescribeJobTemplateResponse#timeout_config #timeout_config} => Types::TimeoutConfig
+    #   * {Types::DescribeJobTemplateResponse#job_executions_retry_config #job_executions_retry_config} => Types::JobExecutionsRetryConfig
     #
     # @example Request syntax with placeholder values
     #
@@ -5572,6 +5621,9 @@ module Aws::IoT
     #   resp.abort_config.criteria_list[0].threshold_percentage #=> Float
     #   resp.abort_config.criteria_list[0].min_number_of_executed_things #=> Integer
     #   resp.timeout_config.in_progress_timeout_in_minutes #=> Integer
+    #   resp.job_executions_retry_config.criteria_list #=> Array
+    #   resp.job_executions_retry_config.criteria_list[0].failure_type #=> String, one of "FAILED", "TIMED_OUT", "ALL"
+    #   resp.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #
     # @overload describe_job_template(params = {})
     # @param [Hash] params ({})
@@ -6604,6 +6656,8 @@ module Aws::IoT
     #
     #   resp.thing_indexing_configuration.thing_indexing_mode #=> String, one of "OFF", "REGISTRY", "REGISTRY_AND_SHADOW"
     #   resp.thing_indexing_configuration.thing_connectivity_indexing_mode #=> String, one of "OFF", "STATUS"
+    #   resp.thing_indexing_configuration.device_defender_indexing_mode #=> String, one of "OFF", "VIOLATIONS"
+    #   resp.thing_indexing_configuration.named_shadow_indexing_mode #=> String, one of "OFF", "ON"
     #   resp.thing_indexing_configuration.managed_fields #=> Array
     #   resp.thing_indexing_configuration.managed_fields[0].name #=> String
     #   resp.thing_indexing_configuration.managed_fields[0].type #=> String, one of "Number", "String", "Boolean"
@@ -8555,6 +8609,7 @@ module Aws::IoT
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.execution_summaries[0].job_execution_summary.retry_attempt #=> Integer
     #   resp.next_token #=> String
     #
     # @overload list_job_executions_for_job(params = {})
@@ -8599,6 +8654,9 @@ module Aws::IoT
     # @option params [String] :next_token
     #   The token to retrieve the next set of results.
     #
+    # @option params [String] :job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #
     # @return [Types::ListJobExecutionsForThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListJobExecutionsForThingResponse#execution_summaries #execution_summaries} => Array&lt;Types::JobExecutionSummaryForThing&gt;
@@ -8614,6 +8672,7 @@ module Aws::IoT
     #     namespace_id: "NamespaceId",
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     job_id: "JobId",
     #   })
     #
     # @example Response structure
@@ -8625,6 +8684,7 @@ module Aws::IoT
     #   resp.execution_summaries[0].job_execution_summary.started_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.last_updated_at #=> Time
     #   resp.execution_summaries[0].job_execution_summary.execution_number #=> Integer
+    #   resp.execution_summaries[0].job_execution_summary.retry_attempt #=> Integer
     #   resp.next_token #=> String
     #
     # @overload list_job_executions_for_thing(params = {})
@@ -11267,6 +11327,7 @@ module Aws::IoT
     #   resp.things[0].attributes #=> Hash
     #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.things[0].shadow #=> String
+    #   resp.things[0].device_defender #=> String
     #   resp.things[0].connectivity.connected #=> Boolean
     #   resp.things[0].connectivity.timestamp #=> Integer
     #   resp.things[0].connectivity.disconnect_reason #=> String
@@ -12110,6 +12171,11 @@ module Aws::IoT
     # @option params [String] :status
     #   The status of the update authorizer request.
     #
+    # @option params [Boolean] :enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #
     # @return [Types::UpdateAuthorizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAuthorizerResponse#authorizer_name #authorizer_name} => String
@@ -12125,6 +12191,7 @@ module Aws::IoT
     #       "KeyName" => "KeyValue",
     #     },
     #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     enable_caching_for_http: false,
     #   })
     #
     # @example Response structure
@@ -12570,7 +12637,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #
     # @option params [Integer] :expected_version
     #   The expected version of the fleet metric record in the registry.
@@ -12625,6 +12692,8 @@ module Aws::IoT
     #     thing_indexing_configuration: {
     #       thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #       thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #       device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #       named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #       managed_fields: [
     #         {
     #           name: "FieldName",
@@ -12705,6 +12774,9 @@ module Aws::IoT
     #
     #    </note>
     #
+    # @option params [Types::JobExecutionsRetryConfig] :job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -12741,6 +12813,14 @@ module Aws::IoT
     #       in_progress_timeout_in_minutes: 1,
     #     },
     #     namespace_id: "NamespaceId",
+    #     job_executions_retry_config: {
+    #       criteria_list: [ # required
+    #         {
+    #           failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #           number_of_retries: 1, # required
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @overload update_job(params = {})
@@ -13501,7 +13581,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

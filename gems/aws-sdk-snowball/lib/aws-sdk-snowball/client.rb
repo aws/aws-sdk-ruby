@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Snowball
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::Snowball
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Snowball
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::Snowball
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::Snowball
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -504,13 +515,14 @@ module Aws::Snowball
     #
     # @option params [required, Types::JobResource] :resources
     #   The resources associated with the cluster job. These resources include
-    #   Amazon S3 buckets and optional AWS Lambda functions written in the
-    #   Python language.
+    #   Amazon S3 buckets and optional Lambda functions written in the Python
+    #   language.
     #
     # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that your
-    #   transferred data will be exported from or imported into. AWS Snow
-    #   Family supports Amazon S3 and NFS (Network File System).
+    #   transferred data will be exported from or imported into. Amazon Web
+    #   Services Snow Family device clusters support Amazon S3 and NFS
+    #   (Network File System).
     #
     # @option params [String] :description
     #   An optional description of this specific cluster, for example
@@ -522,7 +534,7 @@ module Aws::Snowball
     # @option params [String] :kms_key_arn
     #   The `KmsKeyARN` value that you want to associate with this cluster.
     #   `KmsKeyARN` values are created by using the [CreateKey][1] API action
-    #   in AWS Key Management Service (AWS KMS).
+    #   in Key Management Service (KMS).
     #
     #
     #
@@ -530,18 +542,18 @@ module Aws::Snowball
     #
     # @option params [required, String] :role_arn
     #   The `RoleARN` that you want to associate with this cluster. `RoleArn`
-    #   values are created by using the [CreateRole][1] API action in AWS
-    #   Identity and Access Management (IAM).
+    #   values are created by using the [CreateRole][1] API action in Identity
+    #   and Access Management (IAM).
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
     #
     # @option params [required, String] :snowball_type
-    #   The type of AWS Snow Family device to use for this cluster.
+    #   The type of Snow Family Devices to use for this cluster.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
-    #   device type.
+    #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
+    #   only the `EDGE` device type.
     #
     #    </note>
     #
@@ -592,7 +604,7 @@ module Aws::Snowball
     #   in most regions.
     #
     # @option params [Types::TaxDocuments] :tax_documents
-    #   The tax documents required in your AWS Region.
+    #   The tax documents required in your Amazon Web Services Region.
     #
     # @option params [String] :remote_management
     #   Allows you to securely operate and manage Snow devices in a cluster
@@ -682,6 +694,10 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       tgw_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId", # required
@@ -717,25 +733,26 @@ module Aws::Snowball
     end
 
     # Creates a job to import or export data between Amazon S3 and your
-    # on-premises data center. Your AWS account must have the right trust
-    # policies and permissions in place to create a job for a Snow device.
-    # If you're creating a job for a node in a cluster, you only need to
-    # provide the `clusterId` value; the other job attributes are inherited
-    # from the cluster.
+    # on-premises data center. Your Amazon Web Services account must have
+    # the right trust policies and permissions in place to create a job for
+    # a Snow device. If you're creating a job for a node in a cluster, you
+    # only need to provide the `clusterId` value; the other job attributes
+    # are inherited from the cluster.
     #
     # <note markdown="1"> Only the Snowball; Edge device type is supported when ordering
     # clustered jobs.
     #
     #  The device capacity is optional.
     #
-    #  Availability of device types differ by AWS Region. For more
-    # information about Region availability, see [AWS Regional Services][1].
+    #  Availability of device types differ by Amazon Web Services Region. For
+    # more information about Region availability, see [Amazon Web Services
+    # Regional Services][1].
     #
     #  </note>
     #
     #
     #
-    # **AWS Snow Family device types and their capacities.**
+    # **Snow Family Devices and their capacities.**
     #
     # * Snow Family device type: **SNC1\_SSD**
     #
@@ -793,7 +810,7 @@ module Aws::Snowball
     #   * Description: Original Snowball device
     #
     #     <note markdown="1"> This device is only available in the Ningxia, Beijing, and
-    #     Singapore AWS Regions.
+    #     Singapore Amazon Web Services Region
     #
     #      </note>
     #
@@ -806,7 +823,7 @@ module Aws::Snowball
     #   * Description: Original Snowball device
     #
     #     <note markdown="1"> This device is only available in the Ningxia, Beijing, and
-    #     Singapore AWS Regions.
+    #     Singapore Amazon Web Services Region.
     #
     #      </note>
     #
@@ -832,8 +849,9 @@ module Aws::Snowball
     #
     # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that your
-    #   transferred data will be exported from or imported into. AWS Snow
-    #   Family supports Amazon S3 and NFS (Network File System).
+    #   transferred data will be exported from or imported into. Amazon Web
+    #   Services Snow Family supports Amazon S3 and NFS (Network File System)
+    #   and the Amazon Web Services Storage Gateway service Tape Gateway type.
     #
     # @option params [String] :description
     #   Defines an optional description of this specific job, for example
@@ -844,8 +862,8 @@ module Aws::Snowball
     #
     # @option params [String] :kms_key_arn
     #   The `KmsKeyARN` that you want to associate with this job. `KmsKeyARN`s
-    #   are created using the [CreateKey][1] AWS Key Management Service (KMS)
-    #   API action.
+    #   are created using the [CreateKey][1] Key Management Service (KMS) API
+    #   action.
     #
     #
     #
@@ -853,8 +871,8 @@ module Aws::Snowball
     #
     # @option params [String] :role_arn
     #   The `RoleARN` that you want to associate with this job. `RoleArn`s are
-    #   created using the [CreateRole][1] AWS Identity and Access Management
-    #   (IAM) API action.
+    #   created using the [CreateRole][1] Identity and Access Management (IAM)
+    #   API action.
     #
     #
     #
@@ -899,15 +917,15 @@ module Aws::Snowball
     #   job attributes are inherited from the cluster.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snow Family device to use for this job.
+    #   The type of Snow Family Devices to use for this job.
     #
-    #   <note markdown="1"> For cluster jobs, AWS Snow Family currently supports only the `EDGE`
-    #   device type.
+    #   <note markdown="1"> For cluster jobs, Amazon Web Services Snow Family currently supports
+    #   only the `EDGE` device type.
     #
     #    </note>
     #
-    #   The type of AWS Snow device to use for this job. Currently, the only
-    #   supported device type for cluster jobs is `EDGE`.
+    #   The type of Amazon Web Services Snow device to use for this job.
+    #   Currently, the only supported device type for cluster jobs is `EDGE`.
     #
     #   For more information, see [Snowball Edge Device Options][1] in the
     #   Snowball Edge Developer Guide.
@@ -927,10 +945,10 @@ module Aws::Snowball
     #   most Regions.
     #
     # @option params [Types::TaxDocuments] :tax_documents
-    #   The tax documents required in your AWS Region.
+    #   The tax documents required in your Amazon Web Services Region.
     #
     # @option params [Types::DeviceConfiguration] :device_configuration
-    #   Defines the device configuration for an AWS Snowcone job.
+    #   Defines the device configuration for an Snowcone job.
     #
     #   For more information, see
     #   "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
@@ -1031,6 +1049,10 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       tgw_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
     #     },
     #     description: "String",
     #     address_id: "AddressId",
@@ -1077,8 +1099,8 @@ module Aws::Snowball
 
     # Creates a job with the long-term usage option for a device. The
     # long-term usage is a 1-year or 3-year long-term pricing type for the
-    # device. You are billed upfront, and AWS provides discounts for
-    # long-term pricing.
+    # device. You are billed upfront, and Amazon Web Services provides
+    # discounts for long-term pricing.
     #
     # @option params [required, String] :long_term_pricing_type
     #   The type of long-term pricing option you want for the device, either
@@ -1089,8 +1111,7 @@ module Aws::Snowball
     #   should be renewed.
     #
     # @option params [String] :snowball_type
-    #   The type of AWS Snow Family device to use for the long-term pricing
-    #   job.
+    #   The type of Snow Family Devices to use for the long-term pricing job.
     #
     # @return [Types::CreateLongTermPricingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1118,7 +1139,7 @@ module Aws::Snowball
     end
 
     # Creates a shipping label that will be used to return the Snow device
-    # to AWS.
+    # to Amazon Web Services.
     #
     # @option params [required, String] :job_id
     #   The ID for a job that you want to create the return shipping label
@@ -1126,9 +1147,9 @@ module Aws::Snowball
     #
     # @option params [String] :shipping_option
     #   The shipping speed for a particular job. This speed doesn't dictate
-    #   how soon the device is returned to AWS. This speed represents how
-    #   quickly it moves to its destination while in transit. Regional
-    #   shipping speeds are as follows:
+    #   how soon the device is returned to Amazon Web Services. This speed
+    #   represents how quickly it moves to its destination while in transit.
+    #   Regional shipping speeds are as follows:
     #
     # @return [Types::CreateReturnShippingLabelResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1390,6 +1411,8 @@ module Aws::Snowball
     #   resp.cluster_metadata.tax_documents.ind.gstin #=> String
     #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
     #   resp.cluster_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.cluster_metadata.on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
+    #   resp.cluster_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeCluster AWS API Documentation
     #
@@ -1510,6 +1533,8 @@ module Aws::Snowball
     #   resp.job_metadata.long_term_pricing_id #=> String
     #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
     #   resp.job_metadata.on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.job_metadata.on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
+    #   resp.job_metadata.on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #   resp.sub_job_metadata #=> Array
     #   resp.sub_job_metadata[0].job_id #=> String
     #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWSSortingFacility", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -1559,6 +1584,8 @@ module Aws::Snowball
     #   resp.sub_job_metadata[0].long_term_pricing_id #=> String
     #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_limit #=> Integer
     #   resp.sub_job_metadata[0].on_device_service_configuration.nfs_on_device_service.storage_unit #=> String, one of "TB"
+    #   resp.sub_job_metadata[0].on_device_service_configuration.tgw_on_device_service.storage_limit #=> Integer
+    #   resp.sub_job_metadata[0].on_device_service_configuration.tgw_on_device_service.storage_unit #=> String, one of "TB"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeJob AWS API Documentation
     #
@@ -1570,7 +1597,7 @@ module Aws::Snowball
     end
 
     # Information on the shipping label of a Snow device that is being
-    # returned to AWS.
+    # returned to Amazon Web Services.
     #
     # @option params [required, String] :job_id
     #   The automatically generated ID for a job, for example
@@ -1580,6 +1607,7 @@ module Aws::Snowball
     #
     #   * {Types::DescribeReturnShippingLabelResult#status #status} => String
     #   * {Types::DescribeReturnShippingLabelResult#expiration_date #expiration_date} => Time
+    #   * {Types::DescribeReturnShippingLabelResult#return_shipping_label_uri #return_shipping_label_uri} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1591,6 +1619,7 @@ module Aws::Snowball
     #
     #   resp.status #=> String, one of "InProgress", "TimedOut", "Succeeded", "Failed"
     #   resp.expiration_date #=> Time
+    #   resp.return_shipping_label_uri #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/snowball-2016-06-30/DescribeReturnShippingLabel AWS API Documentation
     #
@@ -1739,7 +1768,7 @@ module Aws::Snowball
     #
     # The default service limit for the number of Snow devices that you can
     # have at one time is 1. If you want to increase your service limit,
-    # contact AWS Support.
+    # contact Amazon Web Services Support.
     #
     # @return [Types::GetSnowballUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1982,11 +2011,11 @@ module Aws::Snowball
     end
 
     # This action returns a list of the different Amazon EC2 Amazon Machine
-    # Images (AMIs) that are owned by your AWS account that would be
-    # supported for use on a Snow device. Currently, supported AMIs are
-    # based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
+    # Images (AMIs) that are owned by your Amazon Web Services accountthat
+    # would be supported for use on a Snow device. Currently, supported AMIs
+    # are based on the CentOS 7 (x86\_64) - with Updates HVM, Ubuntu Server
     # 14.04 LTS (HVM), and Ubuntu 16.04 LTS - Xenial (HVM) images, available
-    # on the AWS Marketplace.
+    # on the Amazon Web Services Marketplace.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results for the list of compatible images.
@@ -2159,7 +2188,7 @@ module Aws::Snowball
     # @option params [String] :role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
     #   with this cluster. To create a role ARN, use the [CreateRole][1] API
-    #   action in AWS Identity and Access Management (IAM).
+    #   action in Identity and Access Management (IAM).
     #
     #
     #
@@ -2174,8 +2203,9 @@ module Aws::Snowball
     #
     # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that your
-    #   transferred data will be exported from or imported into. AWS Snow
-    #   Family supports Amazon S3 and NFS (Network File System).
+    #   transferred data will be exported from or imported into. Amazon Web
+    #   Services Snow Family device clusters support Amazon S3 and NFS
+    #   (Network File System).
     #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
@@ -2202,7 +2232,7 @@ module Aws::Snowball
     #   resp = client.update_cluster({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
     #     cluster_id: "CID123e4567-e89b-12d3-a456-426655440000", 
-    #     description: "Updated the address to send this to image processing - RJ", 
+    #     description: "updated-cluster-name", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -2249,6 +2279,10 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       tgw_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -2280,8 +2314,8 @@ module Aws::Snowball
     #
     # @option params [String] :role_arn
     #   The new role Amazon Resource Name (ARN) that you want to associate
-    #   with this job. To create a role ARN, use the [CreateRole][1]AWS
-    #   Identity and Access Management (IAM) API action.
+    #   with this job. To create a role ARN, use the [CreateRole][1]Identity
+    #   and Access Management (IAM) API action.
     #
     #
     #
@@ -2295,8 +2329,9 @@ module Aws::Snowball
     #
     # @option params [Types::OnDeviceServiceConfiguration] :on_device_service_configuration
     #   Specifies the service or services on the Snow Family device that your
-    #   transferred data will be exported from or imported into. AWS Snow
-    #   Family supports Amazon S3 and NFS (Network File System).
+    #   transferred data will be exported from or imported into. Amazon Web
+    #   Services Snow Family supports Amazon S3 and NFS (Network File System)
+    #   and the Amazon Web Services Storage Gateway service Tape Gateway type.
     #
     # @option params [String] :address_id
     #   The ID of the updated Address object.
@@ -2332,7 +2367,7 @@ module Aws::Snowball
     #
     #   resp = client.update_job({
     #     address_id: "ADID1234ab12-3eec-4eb3-9be6-9374c10eb51b", 
-    #     description: "Upgraded to Edge, shipped to Finance Dept, and requested faster shipping speed - TS.", 
+    #     description: "updated-job-name", 
     #     job_id: "JID123e4567-e89b-12d3-a456-426655440000", 
     #     shipping_option: "NEXT_DAY", 
     #     snowball_capacity_preference: "T100", 
@@ -2386,6 +2421,10 @@ module Aws::Snowball
     #         storage_limit: 1,
     #         storage_unit: "TB", # accepts TB
     #       },
+    #       tgw_on_device_service: {
+    #         storage_limit: 1,
+    #         storage_unit: "TB", # accepts TB
+    #       },
     #     },
     #     address_id: "AddressId",
     #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
@@ -2414,7 +2453,8 @@ module Aws::Snowball
     #
     #   Set to `RECEIVED` when the device arrives at your location.
     #
-    #   Set to `RETURNED` when you have returned the device to AWS.
+    #   Set to `RETURNED` when you have returned the device to Amazon Web
+    #   Services.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2480,7 +2520,7 @@ module Aws::Snowball
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-snowball'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

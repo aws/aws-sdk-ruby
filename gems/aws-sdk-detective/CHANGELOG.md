@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-01-03)
+------------------
+
+* Feature - Added and updated API operations to support the Detective integration with AWS Organizations. New actions are used to manage the delegated administrator account and the integration configuration.
+
+1.25.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.23.0 (2021-11-04)
 ------------------
 

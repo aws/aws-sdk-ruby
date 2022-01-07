@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2021-12-21)
+------------------
+
+* Feature - Amazon Nimble Studio adds support for users to upload files during a streaming session using NICE DCV native client or browser.
+
+1.9.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2021-11-04)
 ------------------
 

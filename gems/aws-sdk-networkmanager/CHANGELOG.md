@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2021-12-02)
+------------------
+
+* Feature - This release adds API support for AWS Cloud WAN.
+
+1.18.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.17.0 (2021-11-04)
 ------------------
 

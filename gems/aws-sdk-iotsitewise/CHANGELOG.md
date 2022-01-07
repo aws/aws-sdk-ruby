@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.37.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.36.0 (2021-11-29)
+------------------
+
+* Feature - AWS IoT SiteWise now supports retention configuration for the hot tier storage.
+
 1.35.0 (2021-11-24)
 ------------------
 

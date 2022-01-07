@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::DataExchange
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::DataExchange
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::DataExchange
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::DataExchange
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::DataExchange
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -394,7 +405,7 @@ module Aws::DataExchange
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_data_set({
-    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE
+    #     asset_type: "S3_SNAPSHOT", # required, accepts S3_SNAPSHOT, REDSHIFT_DATA_SHARE, API_GATEWAY_API
     #     description: "Description", # required
     #     name: "Name", # required
     #     tags: {
@@ -405,7 +416,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -568,8 +579,19 @@ module Aws::DataExchange
     #         data_set_id: "Id", # required
     #         revision_id: "Id", # required
     #       },
+    #       import_asset_from_api_gateway_api: {
+    #         api_description: "ApiDescription",
+    #         api_id: "__string", # required
+    #         api_key: "__string",
+    #         api_name: "__string", # required
+    #         api_specification_md_5_hash: "__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093", # required
+    #         data_set_id: "Id", # required
+    #         protocol_type: "REST", # required, accepts REST
+    #         revision_id: "Id", # required
+    #         stage: "__string", # required
+    #       },
     #     },
-    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES
+    #     type: "IMPORT_ASSETS_FROM_S3", # required, accepts IMPORT_ASSETS_FROM_S3, IMPORT_ASSET_FROM_SIGNED_URL, EXPORT_ASSETS_TO_S3, EXPORT_ASSET_TO_SIGNED_URL, EXPORT_REVISIONS_TO_S3, IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES, IMPORT_ASSET_FROM_API_GATEWAY_API
     #   })
     #
     # @example Response structure
@@ -612,6 +634,17 @@ module Aws::DataExchange
     #   resp.details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
     #   resp.details.import_assets_from_redshift_data_shares.data_set_id #=> String
     #   resp.details.import_assets_from_redshift_data_shares.revision_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_description #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_key #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_name #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_md_5_hash #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_upload_url #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_upload_url_expires_at #=> Time
+    #   resp.details.import_asset_from_api_gateway_api.data_set_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
+    #   resp.details.import_asset_from_api_gateway_api.revision_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.stage #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
@@ -625,7 +658,7 @@ module Aws::DataExchange
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateJob AWS API Documentation
@@ -822,7 +855,16 @@ module Aws::DataExchange
     #   resp.arn #=> String
     #   resp.asset_details.s3_snapshot_asset.size #=> Float
     #   resp.asset_details.redshift_data_share_asset.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.asset_details.api_gateway_api_asset.api_description #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_endpoint #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_id #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_key #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_name #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_specification_download_url #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
+    #   resp.asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
+    #   resp.asset_details.api_gateway_api_asset.stage #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -867,7 +909,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -989,6 +1031,17 @@ module Aws::DataExchange
     #   resp.details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
     #   resp.details.import_assets_from_redshift_data_shares.data_set_id #=> String
     #   resp.details.import_assets_from_redshift_data_shares.revision_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_description #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_key #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_name #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_md_5_hash #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_upload_url #=> String
+    #   resp.details.import_asset_from_api_gateway_api.api_specification_upload_url_expires_at #=> Time
+    #   resp.details.import_asset_from_api_gateway_api.data_set_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
+    #   resp.details.import_asset_from_api_gateway_api.revision_id #=> String
+    #   resp.details.import_asset_from_api_gateway_api.stage #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
@@ -1002,7 +1055,7 @@ module Aws::DataExchange
     #   resp.errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.id #=> String
     #   resp.state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
+    #   resp.type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
     #   resp.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetJob AWS API Documentation
@@ -1137,7 +1190,7 @@ module Aws::DataExchange
     #
     #   resp.data_sets #=> Array
     #   resp.data_sets[0].arn #=> String
-    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.data_sets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.data_sets[0].created_at #=> Time
     #   resp.data_sets[0].description #=> String
     #   resp.data_sets[0].id #=> String
@@ -1271,6 +1324,17 @@ module Aws::DataExchange
     #   resp.jobs[0].details.import_assets_from_redshift_data_shares.asset_sources[0].data_share_arn #=> String
     #   resp.jobs[0].details.import_assets_from_redshift_data_shares.data_set_id #=> String
     #   resp.jobs[0].details.import_assets_from_redshift_data_shares.revision_id #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_description #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_id #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_key #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_name #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_specification_md_5_hash #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_specification_upload_url #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.api_specification_upload_url_expires_at #=> Time
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.data_set_id #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.protocol_type #=> String, one of "REST"
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.revision_id #=> String
+    #   resp.jobs[0].details.import_asset_from_api_gateway_api.stage #=> String
     #   resp.jobs[0].errors #=> Array
     #   resp.jobs[0].errors[0].code #=> String, one of "ACCESS_DENIED_EXCEPTION", "INTERNAL_SERVER_EXCEPTION", "MALWARE_DETECTED", "RESOURCE_NOT_FOUND_EXCEPTION", "SERVICE_QUOTA_EXCEEDED_EXCEPTION", "VALIDATION_EXCEPTION", "MALWARE_SCAN_ENCRYPTED_FILE"
     #   resp.jobs[0].errors[0].details.import_asset_from_signed_url_job_error_details.asset_name #=> String
@@ -1284,7 +1348,7 @@ module Aws::DataExchange
     #   resp.jobs[0].errors[0].resource_type #=> String, one of "REVISION", "ASSET", "DATA_SET"
     #   resp.jobs[0].id #=> String
     #   resp.jobs[0].state #=> String, one of "WAITING", "IN_PROGRESS", "ERROR", "COMPLETED", "CANCELLED", "TIMED_OUT"
-    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
+    #   resp.jobs[0].type #=> String, one of "IMPORT_ASSETS_FROM_S3", "IMPORT_ASSET_FROM_SIGNED_URL", "EXPORT_ASSETS_TO_S3", "EXPORT_ASSET_TO_SIGNED_URL", "EXPORT_REVISIONS_TO_S3", "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES", "IMPORT_ASSET_FROM_API_GATEWAY_API"
     #   resp.jobs[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1330,7 +1394,16 @@ module Aws::DataExchange
     #   resp.assets[0].arn #=> String
     #   resp.assets[0].asset_details.s3_snapshot_asset.size #=> Float
     #   resp.assets[0].asset_details.redshift_data_share_asset.arn #=> String
-    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_description #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_endpoint #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_id #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_key #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_name #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_specification_download_url #=> String
+    #   resp.assets[0].asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
+    #   resp.assets[0].asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
+    #   resp.assets[0].asset_details.api_gateway_api_asset.stage #=> String
+    #   resp.assets[0].asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.assets[0].created_at #=> Time
     #   resp.assets[0].data_set_id #=> String
     #   resp.assets[0].id #=> String
@@ -1374,6 +1447,62 @@ module Aws::DataExchange
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # This operation invokes an API Gateway API asset. The request is
+    # proxied to the provider’s API Gateway API.
+    #
+    # @option params [String] :body
+    #
+    # @option params [Hash<String,String>] :query_string_parameters
+    #
+    # @option params [required, String] :asset_id
+    #
+    # @option params [required, String] :data_set_id
+    #
+    # @option params [Hash<String,String>] :request_headers
+    #
+    # @option params [String] :method
+    #
+    # @option params [String] :path
+    #
+    # @option params [required, String] :revision_id
+    #
+    # @return [Types::SendApiAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SendApiAssetResponse#body #body} => String
+    #   * {Types::SendApiAssetResponse#response_headers #response_headers} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.send_api_asset({
+    #     body: "__string",
+    #     query_string_parameters: {
+    #       "__string" => "__string",
+    #     },
+    #     asset_id: "__string", # required
+    #     data_set_id: "__string", # required
+    #     request_headers: {
+    #       "__string" => "__string",
+    #     },
+    #     method: "__string",
+    #     path: "__string",
+    #     revision_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.body #=> String
+    #   resp.response_headers #=> Hash
+    #   resp.response_headers["__string"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/SendApiAsset AWS API Documentation
+    #
+    # @overload send_api_asset(params = {})
+    # @param [Hash] params ({})
+    def send_api_asset(params = {}, options = {})
+      req = build_request(:send_api_asset, params)
       req.send_request(options)
     end
 
@@ -1457,7 +1586,10 @@ module Aws::DataExchange
     # @option params [required, String] :name
     #   The name of the asset. When importing from Amazon S3, the S3 object
     #   key is used as the asset name. When exporting to Amazon S3, the asset
-    #   name is used as default target S3 object key.
+    #   name is used as default target S3 object key. When importing from
+    #   Amazon API Gateway API, the API name is used as the asset name. When
+    #   importing from Amazon Redshift, the datashare name is used as the
+    #   asset name.
     #
     # @option params [required, String] :revision_id
     #
@@ -1488,7 +1620,16 @@ module Aws::DataExchange
     #   resp.arn #=> String
     #   resp.asset_details.s3_snapshot_asset.size #=> Float
     #   resp.asset_details.redshift_data_share_asset.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.asset_details.api_gateway_api_asset.api_description #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_endpoint #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_id #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_key #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_name #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_specification_download_url #=> String
+    #   resp.asset_details.api_gateway_api_asset.api_specification_download_url_expires_at #=> Time
+    #   resp.asset_details.api_gateway_api_asset.protocol_type #=> String, one of "REST"
+    #   resp.asset_details.api_gateway_api_asset.stage #=> String
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.created_at #=> Time
     #   resp.data_set_id #=> String
     #   resp.id #=> String
@@ -1540,7 +1681,7 @@ module Aws::DataExchange
     # @example Response structure
     #
     #   resp.arn #=> String
-    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE"
+    #   resp.asset_type #=> String, one of "S3_SNAPSHOT", "REDSHIFT_DATA_SHARE", "API_GATEWAY_API"
     #   resp.created_at #=> Time
     #   resp.description #=> String
     #   resp.id #=> String
@@ -1681,7 +1822,7 @@ module Aws::DataExchange
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dataexchange'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

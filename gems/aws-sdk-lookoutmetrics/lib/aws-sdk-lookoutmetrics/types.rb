@@ -1468,6 +1468,39 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # Aggregated details about the measures contributing to the anomaly
+    # group, and the measures potentially impacted by the anomaly group.
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the measure.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_group_id
+    #   The ID of the anomaly group.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_type
+    #   Whether a measure is a potential cause of the anomaly group
+    #   (`CAUSE_OF_INPUT_ANOMALY_GROUP`), or whether the measure is impacted
+    #   by the anomaly group (`EFFECT_OF_INPUT_ANOMALY_GROUP`).
+    #   @return [String]
+    #
+    # @!attribute [rw] contribution_percentage
+    #   For potential causes (`CAUSE_OF_INPUT_ANOMALY_GROUP`), the
+    #   percentage contribution the measure has in causing the anomalies.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/InterMetricImpactDetails AWS API Documentation
+    #
+    class InterMetricImpactDetails < Struct.new(
+      :metric_name,
+      :anomaly_group_id,
+      :relationship_type,
+      :contribution_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request processing has failed because of an unknown error,
     # exception, or failure.
     #
@@ -1649,6 +1682,70 @@ module Aws::LookoutMetrics
     #
     class ListAnomalyDetectorsResponse < Struct.new(
       :anomaly_detector_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAnomalyGroupRelatedMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_detector_arn: "Arn", # required
+    #         anomaly_group_id: "UUID", # required
+    #         relationship_type_filter: "CAUSE_OF_INPUT_ANOMALY_GROUP", # accepts CAUSE_OF_INPUT_ANOMALY_GROUP, EFFECT_OF_INPUT_ANOMALY_GROUP
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #   @return [String]
+    #
+    # @!attribute [rw] anomaly_group_id
+    #   The ID of the anomaly group.
+    #   @return [String]
+    #
+    # @!attribute [rw] relationship_type_filter
+    #   Filter for potential causes (`CAUSE_OF_INPUT_ANOMALY_GROUP`) or
+    #   downstream effects (`EFFECT_OF_INPUT_ANOMALY_GROUP`) of the anomaly
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/ListAnomalyGroupRelatedMetricsRequest AWS API Documentation
+    #
+    class ListAnomalyGroupRelatedMetricsRequest < Struct.new(
+      :anomaly_detector_arn,
+      :anomaly_group_id,
+      :relationship_type_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] inter_metric_impact_list
+    #   Aggregated details about the measures contributing to the anomaly
+    #   group, and the measures potentially impacted by the anomaly group.
+    #   @return [Array<Types::InterMetricImpactDetails>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/ListAnomalyGroupRelatedMetricsResponse AWS API Documentation
+    #
+    class ListAnomalyGroupRelatedMetricsResponse < Struct.new(
+      :inter_metric_impact_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

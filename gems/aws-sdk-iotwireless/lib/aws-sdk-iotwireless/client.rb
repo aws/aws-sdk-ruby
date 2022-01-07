@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::IoTWireless
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::IoTWireless
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::IoTWireless
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::IoTWireless
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::IoTWireless
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1224,6 +1235,36 @@ module Aws::IoTWireless
     # @param [Hash] params ({})
     def delete_multicast_group(params = {}, options = {})
       req = build_request(:delete_multicast_group, params)
+      req.send_request(options)
+    end
+
+    # The operation to delete queued messages.
+    #
+    # @option params [required, String] :id
+    #   Id of a given wireless device which messages will be deleted
+    #
+    # @option params [required, String] :message_id
+    #   if messageID=="*", the queue for a particular wireless deviceId
+    #   will be purged, otherwise, the specific message with messageId will be
+    #   deleted
+    #
+    # @option params [String] :wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_queued_messages({
+    #     id: "WirelessDeviceId", # required
+    #     message_id: "MessageId", # required
+    #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #   })
+    #
+    # @overload delete_queued_messages(params = {})
+    # @param [Hash] params ({})
+    def delete_queued_messages(params = {}, options = {})
+      req = build_request(:delete_queued_messages, params)
       req.send_request(options)
     end
 
@@ -2509,6 +2550,54 @@ module Aws::IoTWireless
       req.send_request(options)
     end
 
+    # The operation to list queued messages.
+    #
+    # @option params [required, String] :id
+    #   Id of a given wireless device which the downlink packets are targeted
+    #
+    # @option params [String] :next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in this operation.
+    #
+    # @option params [String] :wireless_device_type
+    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #
+    # @return [Types::ListQueuedMessagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListQueuedMessagesResponse#next_token #next_token} => String
+    #   * {Types::ListQueuedMessagesResponse#downlink_queue_messages_list #downlink_queue_messages_list} => Array&lt;Types::DownlinkQueueMessage&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_queued_messages({
+    #     id: "WirelessDeviceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     wireless_device_type: "Sidewalk", # accepts Sidewalk, LoRaWAN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.downlink_queue_messages_list #=> Array
+    #   resp.downlink_queue_messages_list[0].message_id #=> String
+    #   resp.downlink_queue_messages_list[0].transmit_mode #=> Integer
+    #   resp.downlink_queue_messages_list[0].received_at #=> String
+    #   resp.downlink_queue_messages_list[0].lo_ra_wan.f_port #=> Integer
+    #
+    # @overload list_queued_messages(params = {})
+    # @param [Hash] params ({})
+    def list_queued_messages(params = {}, options = {})
+      req = build_request(:list_queued_messages, params)
+      req.send_request(options)
+    end
+
     # Lists the service profiles registered to your AWS account.
     #
     # @option params [String] :next_token
@@ -3497,7 +3586,7 @@ module Aws::IoTWireless
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotwireless'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

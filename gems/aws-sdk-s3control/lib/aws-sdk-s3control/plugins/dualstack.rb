@@ -34,7 +34,7 @@ module Aws
             # if it's a regional endpoint and not an ARN, then construct the
             # endpoint. regional endpoint plugin uses the dualstack config
             if context.config.regional_endpoint && !context.metadata[:s3_arn]
-              endpoint = Aws::Partitions::EndpointProvider.resolve(
+              new_endpoint = Aws::Partitions::EndpointProvider.resolve(
                 context.config.region,
                 's3-control',
                 'regional',
@@ -43,7 +43,9 @@ module Aws
                   fips: context.config.use_fips_endpoint
                 }
               )
-              context.http_request.endpoint = URI.parse(endpoint)
+              endpoint = URI.parse(context.http_request.endpoint.to_s)
+              endpoint.host = URI.parse(new_endpoint).host
+              context.http_request.endpoint = endpoint
             end
             @handler.call(context)
           end

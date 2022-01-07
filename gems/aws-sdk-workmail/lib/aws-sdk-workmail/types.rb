@@ -662,6 +662,30 @@ module Aws::WorkMail
     #
     class DeleteAliasResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteEmailMonitoringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization from which the email monitoring
+    #   configuration is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteEmailMonitoringConfigurationRequest AWS API Documentation
+    #
+    class DeleteEmailMonitoringConfigurationRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeleteEmailMonitoringConfigurationResponse AWS API Documentation
+    #
+    class DeleteEmailMonitoringConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteGroupRequest
     #   data as a hash:
     #
@@ -1002,6 +1026,45 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DeregisterMailDomainResponse AWS API Documentation
     #
     class DeregisterMailDomainResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DescribeEmailMonitoringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization for which the email monitoring
+    #   configuration is described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeEmailMonitoringConfigurationRequest AWS API Documentation
+    #
+    class DescribeEmailMonitoringConfigurationRequest < Struct.new(
+      :organization_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM Role associated with the
+    #   email monitoring configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Log group
+    #   associated with the email monitoring configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/DescribeEmailMonitoringConfigurationResponse AWS API Documentation
+    #
+    class DescribeEmailMonitoringConfigurationResponse < Struct.new(
+      :role_arn,
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
@@ -3343,6 +3406,44 @@ module Aws::WorkMail
     # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutAccessControlRuleResponse AWS API Documentation
     #
     class PutAccessControlRuleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass PutEmailMonitoringConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         organization_id: "OrganizationId", # required
+    #         role_arn: "RoleArn", # required
+    #         log_group_arn: "LogGroupArn", # required
+    #       }
+    #
+    # @!attribute [rw] organization_id
+    #   The ID of the organization for which the email monitoring
+    #   configuration is set.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM Role associated with the
+    #   email monitoring configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_group_arn
+    #   The Amazon Resource Name (ARN) of the CloudWatch Log group
+    #   associated with the email monitoring configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutEmailMonitoringConfigurationRequest AWS API Documentation
+    #
+    class PutEmailMonitoringConfigurationRequest < Struct.new(
+      :organization_id,
+      :role_arn,
+      :log_group_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workmail-2017-10-01/PutEmailMonitoringConfigurationResponse AWS API Documentation
+    #
+    class PutEmailMonitoringConfigurationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass PutInboundDmarcSettingsRequest
     #   data as a hash:

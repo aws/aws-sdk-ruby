@@ -101,6 +101,7 @@ module Aws::ElasticsearchService
     DescribeReservedElasticsearchInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsResponse')
     DescribeReservedElasticsearchInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesRequest')
     DescribeReservedElasticsearchInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesResponse')
+    DisableTimestamp = Shapes::TimestampShape.new(name: 'DisableTimestamp')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
     DissociatePackageResponse = Shapes::StructureShape.new(name: 'DissociatePackageResponse')
@@ -330,12 +331,15 @@ module Aws::ElasticsearchService
     AdvancedSecurityOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptions.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptions.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsOutput, location_name: "SAMLOptions"))
+    AdvancedSecurityOptions.add_member(:anonymous_auth_disable_date, Shapes::ShapeRef.new(shape: DisableTimestamp, location_name: "AnonymousAuthDisableDate"))
+    AdvancedSecurityOptions.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptions.struct_class = Types::AdvancedSecurityOptions
 
     AdvancedSecurityOptionsInput.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     AdvancedSecurityOptionsInput.add_member(:internal_user_database_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "InternalUserDatabaseEnabled"))
     AdvancedSecurityOptionsInput.add_member(:master_user_options, Shapes::ShapeRef.new(shape: MasterUserOptions, location_name: "MasterUserOptions"))
     AdvancedSecurityOptionsInput.add_member(:saml_options, Shapes::ShapeRef.new(shape: SAMLOptionsInput, location_name: "SAMLOptions"))
+    AdvancedSecurityOptionsInput.add_member(:anonymous_auth_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "AnonymousAuthEnabled"))
     AdvancedSecurityOptionsInput.struct_class = Types::AdvancedSecurityOptionsInput
 
     AdvancedSecurityOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, required: true, location_name: "Options"))

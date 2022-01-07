@@ -110,6 +110,8 @@ module Aws
               <Integer>123</Integer>
               <Long>321</Long>
               <String>Hello</String>
+              <StringWithConsecutiveSpaces>foo  bar</StringWithConsecutiveSpaces>
+              <StringWithLF>foo\nbar</StringWithLF>
               <Timestamp>123456789</Timestamp>
             </xml>
             XML
@@ -145,6 +147,8 @@ module Aws
               long: 321,
               string: "Hello",
               timestamp: Time.at(123456789),
+              string_with_consecutive_spaces: "foo  bar",
+              string_with_lf: "foo\nbar",
             })
           end
 

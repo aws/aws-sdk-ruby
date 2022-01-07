@@ -327,5 +327,16 @@ module Aws
         expect(config.ec2_metadata_service_endpoint_mode).to eq('IPv6')
       end
     end
+
+    context 'defaults_mode' do
+      it 'can resolve defaults_mode from config file' do
+        config = SharedConfig.new(
+          config_path: mock_config_file,
+          config_enabled: true,
+          profile_name: 'defaults_mode_standard'
+        )
+        expect(config.defaults_mode).to eq('standard')
+      end
+    end
   end
 end

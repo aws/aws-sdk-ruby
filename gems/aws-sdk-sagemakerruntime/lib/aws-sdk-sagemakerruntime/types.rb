@@ -10,6 +10,20 @@
 module Aws::SageMakerRuntime
   module Types
 
+    # Your request caused an exception with an internal dependency. Contact
+    # customer support.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/InternalDependencyException AWS API Documentation
+    #
+    class InternalDependencyException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An internal failure occurred.
     #
     # @!attribute [rw] message
@@ -70,8 +84,8 @@ module Aws::SageMakerRuntime
     #   custom attribute represents the trace ID, your model can prepend the
     #   custom attribute with `Trace ID`\: in your post-processing function.
     #
-    #   This feature is currently supported in the AWS SDKs but not in the
-    #   Amazon SageMaker Python SDK.
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
     #
     #
     #
@@ -187,8 +201,8 @@ module Aws::SageMakerRuntime
     #   custom attribute represents the trace ID, your model can prepend the
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
-    #   This feature is currently supported in the AWS SDKs but not in the
-    #   Amazon SageMaker Python SDK.
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
     #
     #
     #
@@ -285,8 +299,8 @@ module Aws::SageMakerRuntime
     #   custom attribute represents the trace ID, your model can prepend the
     #   custom attribute with `Trace ID:` in your post-processing function.
     #
-    #   This feature is currently supported in the AWS SDKs but not in the
-    #   Amazon SageMaker Python SDK.
+    #   This feature is currently supported in the Amazon Web Services SDKs
+    #   but not in the Amazon SageMaker Python SDK.
     #
     #
     #
@@ -329,6 +343,21 @@ module Aws::SageMakerRuntime
       :original_status_code,
       :original_message,
       :log_stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Either a serverless endpoint variant's resources are still being
+    # provisioned, or a multi-model endpoint is still downloading or loading
+    # the target model. Wait and try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.sagemaker-2017-05-13/ModelNotReadyException AWS API Documentation
+    #
+    class ModelNotReadyException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

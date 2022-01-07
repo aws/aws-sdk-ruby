@@ -26,6 +26,9 @@
   "AmplifyBackend": {
     "models": "amplifybackend/2020-08-11"
   },
+  "AmplifyUIBuilder": {
+    "models": "amplifyuibuilder/2021-08-11"
+  },
   "ApiGatewayManagementApi": {
     "models": "apigatewaymanagementapi/2018-11-29"
   },
@@ -89,6 +92,9 @@
   },
   "Backup": {
     "models": "backup/2018-11-15"
+  },
+  "BackupGateway": {
+    "models": "backup-gateway/2021-01-01"
   },
   "Batch": {
     "models": "batch/2016-08-10"
@@ -157,8 +163,14 @@
   "CloudWatchEvents": {
     "models": "events/2015-10-07"
   },
+  "CloudWatchEvidently": {
+    "models": "evidently/2021-02-01"
+  },
   "CloudWatchLogs": {
     "models": "logs/2014-03-28"
+  },
+  "CloudWatchRUM": {
+    "models": "rum/2018-05-10"
   },
   "CodeArtifact": {
     "models": "codeartifact/2018-09-22"
@@ -441,6 +453,9 @@
   "Inspector": {
     "models": "inspector/2016-02-16"
   },
+  "Inspector2": {
+    "models": "inspector2/2020-06-08"
+  },
   "IoT": {
     "models": "iot/2015-05-28"
   },
@@ -480,6 +495,9 @@
   },
   "IoTThingsGraph": {
     "models": "iotthingsgraph/2018-09-06"
+  },
+  "IoTTwinMaker": {
+    "models": "iottwinmaker/2021-11-29"
   },
   "IoTWireless": {
     "models": "iotwireless/2020-11-22"
@@ -729,6 +747,9 @@
   },
   "RDSDataService": {
     "models": "rds-data/2018-08-01"
+  },
+  "RecycleBin": {
+    "models": "rbin/2021-06-15"
   },
   "Redshift": {
     "models": "redshift/2012-12-01"
@@ -984,6 +1005,9 @@
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08"
+  },
+  "WorkSpacesWeb": {
+    "models": "workspaces-web/2020-07-08"
   },
   "XRay": {
     "models": "xray/2016-04-12"

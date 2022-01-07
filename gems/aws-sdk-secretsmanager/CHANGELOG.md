@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2021-12-13)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
+1.53.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.52.0 (2021-11-04)
 ------------------
 

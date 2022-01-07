@@ -49,6 +49,6 @@ require_relative 'aws-sdk-redshift/customizations'
 # @!group service
 module Aws::Redshift
 
-  GEM_VERSION = '1.73.0'
+  GEM_VERSION = '1.76.0'
 
 end

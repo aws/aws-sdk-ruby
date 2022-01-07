@@ -1591,6 +1591,16 @@ module Aws::CustomerProfiles
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] object_type_names
+    #   A map in which each key is an event type from an external
+    #   application such as Segment or Shopify, and each value is an
+    #   `ObjectTypeName` (template) used to ingest the event. It supports
+    #   the following event types: `SegmentIdentify`,
+    #   `ShopifyCreateCustomers`, `ShopifyUpdateCustomers`,
+    #   `ShopifyCreateDraftOrders`, `ShopifyUpdateDraftOrders`,
+    #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegrationResponse AWS API Documentation
     #
     class GetIntegrationResponse < Struct.new(
@@ -1599,7 +1609,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :created_at,
       :last_updated_at,
-      :tags)
+      :tags,
+      :object_type_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2194,6 +2205,16 @@ module Aws::CustomerProfiles
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] object_type_names
+    #   A map in which each key is an event type from an external
+    #   application such as Segment or Shopify, and each value is an
+    #   `ObjectTypeName` (template) used to ingest the event. It supports
+    #   the following event types: `SegmentIdentify`,
+    #   `ShopifyCreateCustomers`, `ShopifyUpdateCustomers`,
+    #   `ShopifyCreateDraftOrders`, `ShopifyUpdateDraftOrders`,
+    #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrationItem AWS API Documentation
     #
     class ListIntegrationItem < Struct.new(
@@ -2202,7 +2223,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :created_at,
       :last_updated_at,
-      :tags)
+      :tags,
+      :object_type_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2469,7 +2491,7 @@ module Aws::CustomerProfiles
     # @!attribute [rw] object_filter
     #   Applies a filter to the response to include profile objects with the
     #   specified index values. This filter is only supported for
-    #   ObjectTypeName \_asset and \_case.
+    #   ObjectTypeName \_asset, \_case and \_order.
     #   @return [Types::ObjectFilter]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListProfileObjectsRequest AWS API Documentation
@@ -2751,7 +2773,7 @@ module Aws::CustomerProfiles
 
     # The filter applied to ListProfileObjects response to include profile
     # objects with the specified index values. This filter is only supported
-    # for ObjectTypeName \_asset and \_case.
+    # for ObjectTypeName \_asset, \_case and \_order.
     #
     # @note When making an API call, you may pass ObjectFilter
     #   data as a hash:
@@ -2765,7 +2787,8 @@ module Aws::CustomerProfiles
     #   A searchable identifier of a standard profile object. The predefined
     #   keys you can use to search for \_asset include: \_assetId,
     #   \_assetName, \_serialNumber. The predefined keys you can use to
-    #   search for \_case include: \_caseId.
+    #   search for \_case include: \_caseId. The predefined keys you can use
+    #   to search for \_order include: \_orderId.
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -2825,22 +2848,22 @@ module Aws::CustomerProfiles
     #   data as a hash:
     #
     #       {
-    #         standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #         standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
     #         field_names: ["name"],
     #       }
     #
     # @!attribute [rw] standard_identifiers
     #   The types of keys that a ProfileObject can have. Each ProfileObject
-    #   can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET
-    #   or CASE means that this key can be used to tie an object to a
-    #   PROFILE, ASSET or CASE respectively. UNIQUE means that it can be
-    #   used to uniquely identify an object. If a key a is marked as
-    #   SECONDARY, it will be used to search for profiles after all other
-    #   PROFILE keys have been searched. A LOOKUP\_ONLY key is only used to
-    #   match a profile but is not persisted to be used for searching of the
-    #   profile. A NEW\_ONLY key is only used if the profile does not
-    #   already exist before the object is ingested, otherwise it is only
-    #   used for matching objects to profiles.
+    #   can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE,
+    #   ASSET, CASE, or ORDER means that this key can be used to tie an
+    #   object to a PROFILE, ASSET, CASE, or ORDER respectively. UNIQUE
+    #   means that it can be used to uniquely identify an object. If a key a
+    #   is marked as SECONDARY, it will be used to search for profiles after
+    #   all other PROFILE keys have been searched. A LOOKUP\_ONLY key is
+    #   only used to match a profile but is not persisted to be used for
+    #   searching of the profile. A NEW\_ONLY key is only used if the
+    #   profile does not already exist before the object is ingested,
+    #   otherwise it is only used for matching objects to profiles.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_names
@@ -2984,7 +3007,7 @@ module Aws::CustomerProfiles
     #       {
     #         domain_name: "name", # required
     #         uri: "string1To255",
-    #         object_type_name: "typeName", # required
+    #         object_type_name: "typeName",
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
@@ -3051,6 +3074,9 @@ module Aws::CustomerProfiles
     #             },
     #           },
     #         },
+    #         object_type_names: {
+    #           "string1To255" => "typeName",
+    #         },
     #       }
     #
     # @!attribute [rw] domain_name
@@ -3075,6 +3101,16 @@ module Aws::CustomerProfiles
     #   from the source.
     #   @return [Types::FlowDefinition]
     #
+    # @!attribute [rw] object_type_names
+    #   A map in which each key is an event type from an external
+    #   application such as Segment or Shopify, and each value is an
+    #   `ObjectTypeName` (template) used to ingest the event. It supports
+    #   the following event types: `SegmentIdentify`,
+    #   `ShopifyCreateCustomers`, `ShopifyUpdateCustomers`,
+    #   `ShopifyCreateDraftOrders`, `ShopifyUpdateDraftOrders`,
+    #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationRequest AWS API Documentation
     #
     class PutIntegrationRequest < Struct.new(
@@ -3082,7 +3118,8 @@ module Aws::CustomerProfiles
       :uri,
       :object_type_name,
       :tags,
-      :flow_definition)
+      :flow_definition,
+      :object_type_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3112,6 +3149,16 @@ module Aws::CustomerProfiles
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] object_type_names
+    #   A map in which each key is an event type from an external
+    #   application such as Segment or Shopify, and each value is an
+    #   `ObjectTypeName` (template) used to ingest the event. It supports
+    #   the following event types: `SegmentIdentify`,
+    #   `ShopifyCreateCustomers`, `ShopifyUpdateCustomers`,
+    #   `ShopifyCreateDraftOrders`, `ShopifyUpdateDraftOrders`,
+    #   `ShopifyCreateOrders`, and `ShopifyUpdatedOrders`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegrationResponse AWS API Documentation
     #
     class PutIntegrationResponse < Struct.new(
@@ -3120,7 +3167,8 @@ module Aws::CustomerProfiles
       :object_type_name,
       :created_at,
       :last_updated_at,
-      :tags)
+      :tags,
+      :object_type_names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3191,7 +3239,7 @@ module Aws::CustomerProfiles
     #         keys: {
     #           "name" => [
     #             {
-    #               standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #               standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
     #               field_names: ["name"],
     #             },
     #           ],
@@ -3570,10 +3618,12 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] key_name
     #   A searchable identifier of a customer profile. The predefined keys
-    #   you can use to search include: \_account, \_profileId, \_fullName,
-    #   \_phone, \_email, \_ctrContactId, \_marketoLeadId,
-    #   \_salesforceAccountId, \_salesforceContactId, \_zendeskUserId,
-    #   \_zendeskExternalId, \_serviceNowSystemId.
+    #   you can use to search include: \_account, \_profileId, \_assetId,
+    #   \_caseId, \_orderId, \_fullName, \_phone, \_email, \_ctrContactId,
+    #   \_marketoLeadId, \_salesforceAccountId, \_salesforceContactId,
+    #   \_salesforceAssetId, \_zendeskUserId, \_zendeskExternalId,
+    #   \_zendeskTicketId, \_serviceNowSystemId, \_serviceNowIncidentId,
+    #   \_segmentUserId, \_shopifyCustomerId, \_shopifyOrderId.
     #   @return [String]
     #
     # @!attribute [rw] values

@@ -24,7 +24,11 @@ regions to resolve to the STS global endpoint.
           env_mode = nil if env_mode == ''
           cfg_mode = Aws.shared_config.sts_regional_endpoints(
             profile: cfg.profile)
-          env_mode || cfg_mode || 'regional'
+          default_mode_value =
+            if cfg.respond_to?(:defaults_mode_config_resolver)
+              cfg.defaults_mode_config_resolver.resolve(:sts_regional_endpoints)
+            end
+          env_mode || cfg_mode || default_mode_value || 'regional'
         end
 
       end

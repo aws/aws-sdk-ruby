@@ -48,6 +48,6 @@ require_relative 'aws-sdk-eventbridge/customizations'
 # @!group service
 module Aws::EventBridge
 
-  GEM_VERSION = '1.32.0'
+  GEM_VERSION = '1.34.0'
 
 end

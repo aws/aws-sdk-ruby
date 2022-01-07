@@ -57,6 +57,8 @@ module Aws::Route53RecoveryControlConfig
     ListRoutingControlsResponse = Shapes::StructureShape.new(name: 'ListRoutingControlsResponse')
     ListSafetyRulesRequest = Shapes::StructureShape.new(name: 'ListSafetyRulesRequest')
     ListSafetyRulesResponse = Shapes::StructureShape.new(name: 'ListSafetyRulesResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NewAssertionRule = Shapes::StructureShape.new(name: 'NewAssertionRule')
     NewGatingRule = Shapes::StructureShape.new(name: 'NewGatingRule')
@@ -67,7 +69,11 @@ module Aws::Route53RecoveryControlConfig
     RuleType = Shapes::StringShape.new(name: 'RuleType')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Status = Shapes::StringShape.new(name: 'Status')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateControlPanelRequest = Shapes::StructureShape.new(name: 'UpdateControlPanelRequest')
     UpdateControlPanelResponse = Shapes::StructureShape.new(name: 'UpdateControlPanelResponse')
     UpdateRoutingControlRequest = Shapes::StructureShape.new(name: 'UpdateRoutingControlRequest')
@@ -84,72 +90,79 @@ module Aws::Route53RecoveryControlConfig
     __listOfRoutingControl = Shapes::ListShape.new(name: '__listOfRoutingControl')
     __listOfRule = Shapes::ListShape.new(name: '__listOfRule')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
+    __listOf__stringMax36PatternS = Shapes::ListShape.new(name: '__listOf__stringMax36PatternS')
+    __listOf__stringMin1Max256PatternAZaZ09 = Shapes::ListShape.new(name: '__listOf__stringMin1Max256PatternAZaZ09')
     __long = Shapes::IntegerShape.new(name: '__long')
+    __mapOf__stringMin0Max256PatternS = Shapes::MapShape.new(name: '__mapOf__stringMin0Max256PatternS')
     __string = Shapes::StringShape.new(name: '__string')
-    __stringMax64 = Shapes::StringShape.new(name: '__stringMax64')
-    __stringMax8096 = Shapes::StringShape.new(name: '__stringMax8096')
-    __stringMin1Max128 = Shapes::StringShape.new(name: '__stringMin1Max128')
-    __stringMin1Max32 = Shapes::StringShape.new(name: '__stringMin1Max32')
+    __stringMax36PatternS = Shapes::StringShape.new(name: '__stringMax36PatternS')
+    __stringMin0Max256PatternS = Shapes::StringShape.new(name: '__stringMin0Max256PatternS')
+    __stringMin1Max128PatternAZaZ09 = Shapes::StringShape.new(name: '__stringMin1Max128PatternAZaZ09')
+    __stringMin1Max256PatternAZaZ09 = Shapes::StringShape.new(name: '__stringMin1Max256PatternAZaZ09')
+    __stringMin1Max32PatternS = Shapes::StringShape.new(name: '__stringMin1Max32PatternS')
     __stringMin1Max64PatternS = Shapes::StringShape.new(name: '__stringMin1Max64PatternS')
+    __stringMin1Max8096PatternS = Shapes::StringShape.new(name: '__stringMin1Max8096PatternS')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
-    AssertionRule.add_member(:asserted_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "AssertedControls"))
-    AssertionRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ControlPanelArn"))
+    AssertionRule.add_member(:asserted_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "AssertedControls"))
+    AssertionRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
     AssertionRule.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
     AssertionRule.add_member(:rule_config, Shapes::ShapeRef.new(shape: RuleConfig, required: true, location_name: "RuleConfig"))
-    AssertionRule.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SafetyRuleArn"))
+    AssertionRule.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "SafetyRuleArn"))
     AssertionRule.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
     AssertionRule.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     AssertionRule.struct_class = Types::AssertionRule
 
     AssertionRuleUpdate.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
-    AssertionRuleUpdate.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SafetyRuleArn"))
+    AssertionRuleUpdate.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "SafetyRuleArn"))
     AssertionRuleUpdate.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     AssertionRuleUpdate.struct_class = Types::AssertionRuleUpdate
 
-    Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ClusterArn"))
+    Cluster.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ClusterArn"))
     Cluster.add_member(:cluster_endpoints, Shapes::ShapeRef.new(shape: __listOfClusterEndpoint, location_name: "ClusterEndpoints"))
     Cluster.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "Name"))
     Cluster.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     Cluster.struct_class = Types::Cluster
 
-    ClusterEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: __stringMin1Max128, location_name: "Endpoint"))
-    ClusterEndpoint.add_member(:region, Shapes::ShapeRef.new(shape: __stringMin1Max32, location_name: "Region"))
+    ClusterEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: __stringMin1Max128PatternAZaZ09, location_name: "Endpoint"))
+    ClusterEndpoint.add_member(:region, Shapes::ShapeRef.new(shape: __stringMin1Max32PatternS, location_name: "Region"))
     ClusterEndpoint.struct_class = Types::ClusterEndpoint
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
 
-    ControlPanel.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ClusterArn"))
-    ControlPanel.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ControlPanelArn"))
+    ControlPanel.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ClusterArn"))
+    ControlPanel.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ControlPanelArn"))
     ControlPanel.add_member(:default_control_panel, Shapes::ShapeRef.new(shape: __boolean, location_name: "DefaultControlPanel"))
     ControlPanel.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "Name"))
     ControlPanel.add_member(:routing_control_count, Shapes::ShapeRef.new(shape: __integer, location_name: "RoutingControlCount"))
     ControlPanel.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     ControlPanel.struct_class = Types::ControlPanel
 
-    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateClusterRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ClusterName"))
+    CreateClusterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
     CreateClusterRequest.struct_class = Types::CreateClusterRequest
 
     CreateClusterResponse.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))
     CreateClusterResponse.struct_class = Types::CreateClusterResponse
 
-    CreateControlPanelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    CreateControlPanelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ClusterArn"))
+    CreateControlPanelRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateControlPanelRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ClusterArn"))
     CreateControlPanelRequest.add_member(:control_panel_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ControlPanelName"))
+    CreateControlPanelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
     CreateControlPanelRequest.struct_class = Types::CreateControlPanelRequest
 
     CreateControlPanelResponse.add_member(:control_panel, Shapes::ShapeRef.new(shape: ControlPanel, location_name: "ControlPanel"))
     CreateControlPanelResponse.struct_class = Types::CreateControlPanelResponse
 
-    CreateRoutingControlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
-    CreateRoutingControlRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ClusterArn"))
-    CreateRoutingControlRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ControlPanelArn"))
+    CreateRoutingControlRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateRoutingControlRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ClusterArn"))
+    CreateRoutingControlRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ControlPanelArn"))
     CreateRoutingControlRequest.add_member(:routing_control_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "RoutingControlName"))
     CreateRoutingControlRequest.struct_class = Types::CreateRoutingControlRequest
 
@@ -157,8 +170,9 @@ module Aws::Route53RecoveryControlConfig
     CreateRoutingControlResponse.struct_class = Types::CreateRoutingControlResponse
 
     CreateSafetyRuleRequest.add_member(:assertion_rule, Shapes::ShapeRef.new(shape: NewAssertionRule, location_name: "AssertionRule"))
-    CreateSafetyRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMax64, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateSafetyRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateSafetyRuleRequest.add_member(:gating_rule, Shapes::ShapeRef.new(shape: NewGatingRule, location_name: "GatingRule"))
+    CreateSafetyRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
     CreateSafetyRuleRequest.struct_class = Types::CreateSafetyRuleRequest
 
     CreateSafetyRuleResponse.add_member(:assertion_rule, Shapes::ShapeRef.new(shape: AssertionRule, location_name: "AssertionRule"))
@@ -210,18 +224,18 @@ module Aws::Route53RecoveryControlConfig
     DescribeSafetyRuleResponse.add_member(:gating_rule, Shapes::ShapeRef.new(shape: GatingRule, location_name: "GatingRule"))
     DescribeSafetyRuleResponse.struct_class = Types::DescribeSafetyRuleResponse
 
-    GatingRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ControlPanelArn"))
-    GatingRule.add_member(:gating_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "GatingControls"))
+    GatingRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
+    GatingRule.add_member(:gating_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "GatingControls"))
     GatingRule.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
     GatingRule.add_member(:rule_config, Shapes::ShapeRef.new(shape: RuleConfig, required: true, location_name: "RuleConfig"))
-    GatingRule.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SafetyRuleArn"))
+    GatingRule.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "SafetyRuleArn"))
     GatingRule.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
-    GatingRule.add_member(:target_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "TargetControls"))
+    GatingRule.add_member(:target_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "TargetControls"))
     GatingRule.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     GatingRule.struct_class = Types::GatingRule
 
     GatingRuleUpdate.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
-    GatingRuleUpdate.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SafetyRuleArn"))
+    GatingRuleUpdate.add_member(:safety_rule_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "SafetyRuleArn"))
     GatingRuleUpdate.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     GatingRuleUpdate.struct_class = Types::GatingRuleUpdate
 
@@ -233,8 +247,8 @@ module Aws::Route53RecoveryControlConfig
     ListAssociatedRoute53HealthChecksRequest.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RoutingControlArn"))
     ListAssociatedRoute53HealthChecksRequest.struct_class = Types::ListAssociatedRoute53HealthChecksRequest
 
-    ListAssociatedRoute53HealthChecksResponse.add_member(:health_check_ids, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "HealthCheckIds"))
-    ListAssociatedRoute53HealthChecksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMax8096, location_name: "NextToken"))
+    ListAssociatedRoute53HealthChecksResponse.add_member(:health_check_ids, Shapes::ShapeRef.new(shape: __listOf__stringMax36PatternS, location_name: "HealthCheckIds"))
+    ListAssociatedRoute53HealthChecksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max8096PatternS, location_name: "NextToken"))
     ListAssociatedRoute53HealthChecksResponse.struct_class = Types::ListAssociatedRoute53HealthChecksResponse
 
     ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -242,7 +256,7 @@ module Aws::Route53RecoveryControlConfig
     ListClustersRequest.struct_class = Types::ListClustersRequest
 
     ListClustersResponse.add_member(:clusters, Shapes::ShapeRef.new(shape: __listOfCluster, location_name: "Clusters"))
-    ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMax8096, location_name: "NextToken"))
+    ListClustersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max8096PatternS, location_name: "NextToken"))
     ListClustersResponse.struct_class = Types::ListClustersResponse
 
     ListControlPanelsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "ClusterArn"))
@@ -251,7 +265,7 @@ module Aws::Route53RecoveryControlConfig
     ListControlPanelsRequest.struct_class = Types::ListControlPanelsRequest
 
     ListControlPanelsResponse.add_member(:control_panels, Shapes::ShapeRef.new(shape: __listOfControlPanel, location_name: "ControlPanels"))
-    ListControlPanelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMax8096, location_name: "NextToken"))
+    ListControlPanelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max8096PatternS, location_name: "NextToken"))
     ListControlPanelsResponse.struct_class = Types::ListControlPanelsResponse
 
     ListRoutingControlsRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ControlPanelArn"))
@@ -259,7 +273,7 @@ module Aws::Route53RecoveryControlConfig
     ListRoutingControlsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     ListRoutingControlsRequest.struct_class = Types::ListRoutingControlsRequest
 
-    ListRoutingControlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMax8096, location_name: "NextToken"))
+    ListRoutingControlsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max8096PatternS, location_name: "NextToken"))
     ListRoutingControlsResponse.add_member(:routing_controls, Shapes::ShapeRef.new(shape: __listOfRoutingControl, location_name: "RoutingControls"))
     ListRoutingControlsResponse.struct_class = Types::ListRoutingControlsResponse
 
@@ -268,31 +282,37 @@ module Aws::Route53RecoveryControlConfig
     ListSafetyRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
     ListSafetyRulesRequest.struct_class = Types::ListSafetyRulesRequest
 
-    ListSafetyRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMax8096, location_name: "NextToken"))
+    ListSafetyRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __stringMin1Max8096PatternS, location_name: "NextToken"))
     ListSafetyRulesResponse.add_member(:safety_rules, Shapes::ShapeRef.new(shape: __listOfRule, location_name: "SafetyRules"))
     ListSafetyRulesResponse.struct_class = Types::ListSafetyRulesResponse
 
-    NewAssertionRule.add_member(:asserted_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "AssertedControls"))
-    NewAssertionRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ControlPanelArn"))
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, location_name: "Tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    NewAssertionRule.add_member(:asserted_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "AssertedControls"))
+    NewAssertionRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
     NewAssertionRule.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
     NewAssertionRule.add_member(:rule_config, Shapes::ShapeRef.new(shape: RuleConfig, required: true, location_name: "RuleConfig"))
     NewAssertionRule.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     NewAssertionRule.struct_class = Types::NewAssertionRule
 
-    NewGatingRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ControlPanelArn"))
-    NewGatingRule.add_member(:gating_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "GatingControls"))
+    NewGatingRule.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
+    NewGatingRule.add_member(:gating_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "GatingControls"))
     NewGatingRule.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "Name"))
     NewGatingRule.add_member(:rule_config, Shapes::ShapeRef.new(shape: RuleConfig, required: true, location_name: "RuleConfig"))
-    NewGatingRule.add_member(:target_controls, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "TargetControls"))
+    NewGatingRule.add_member(:target_controls, Shapes::ShapeRef.new(shape: __listOf__stringMin1Max256PatternAZaZ09, required: true, location_name: "TargetControls"))
     NewGatingRule.add_member(:wait_period_ms, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "WaitPeriodMs"))
     NewGatingRule.struct_class = Types::NewGatingRule
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    RoutingControl.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, location_name: "ControlPanelArn"))
+    RoutingControl.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "ControlPanelArn"))
     RoutingControl.add_member(:name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, location_name: "Name"))
-    RoutingControl.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: __string, location_name: "RoutingControlArn"))
+    RoutingControl.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, location_name: "RoutingControlArn"))
     RoutingControl.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     RoutingControl.struct_class = Types::RoutingControl
 
@@ -308,17 +328,29 @@ module Aws::Route53RecoveryControlConfig
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__stringMin0Max256PatternS, required: true, location_name: "Tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
-    UpdateControlPanelRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "ControlPanelArn"))
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location: "querystring", location_name: "TagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateControlPanelRequest.add_member(:control_panel_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "ControlPanelArn"))
     UpdateControlPanelRequest.add_member(:control_panel_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "ControlPanelName"))
     UpdateControlPanelRequest.struct_class = Types::UpdateControlPanelRequest
 
     UpdateControlPanelResponse.add_member(:control_panel, Shapes::ShapeRef.new(shape: ControlPanel, location_name: "ControlPanel"))
     UpdateControlPanelResponse.struct_class = Types::UpdateControlPanelResponse
 
-    UpdateRoutingControlRequest.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "RoutingControlArn"))
+    UpdateRoutingControlRequest.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09, required: true, location_name: "RoutingControlArn"))
     UpdateRoutingControlRequest.add_member(:routing_control_name, Shapes::ShapeRef.new(shape: __stringMin1Max64PatternS, required: true, location_name: "RoutingControlName"))
     UpdateRoutingControlRequest.struct_class = Types::UpdateRoutingControlRequest
 
@@ -347,6 +379,13 @@ module Aws::Route53RecoveryControlConfig
     __listOfRule.member = Shapes::ShapeRef.new(shape: Rule)
 
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
+
+    __listOf__stringMax36PatternS.member = Shapes::ShapeRef.new(shape: __stringMax36PatternS)
+
+    __listOf__stringMin1Max256PatternAZaZ09.member = Shapes::ShapeRef.new(shape: __stringMin1Max256PatternAZaZ09)
+
+    __mapOf__stringMin0Max256PatternS.key = Shapes::ShapeRef.new(shape: __string)
+    __mapOf__stringMin0Max256PatternS.value = Shapes::ShapeRef.new(shape: __stringMin0Max256PatternS)
 
 
     # @api private
@@ -617,6 +656,39 @@ module Aws::Route53RecoveryControlConfig
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "GET"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/tags/{ResourceArn}"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_control_panel, Seahorse::Model::Operation.new.tap do |o|

@@ -130,6 +130,10 @@ module Aws::FinSpaceData
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
+    # @!attribute [rw] active_from_timestamp
+    #   Milliseconds since UTC epoch
+    #   @return [Integer]
+    #
     # @!attribute [rw] updates_changeset_id
     #   The unique identifier of the Changeset that is updated.
     #   @return [String]
@@ -151,6 +155,7 @@ module Aws::FinSpaceData
       :status,
       :error_info,
       :active_until_timestamp,
+      :active_from_timestamp,
       :updates_changeset_id,
       :updated_by_changeset_id)
       SENSITIVE = []
@@ -341,6 +346,10 @@ module Aws::FinSpaceData
     #         as_of_timestamp: 1,
     #         destination_type_params: { # required
     #           destination_type: "DataViewDestinationType", # required
+    #           s3_destination_export_file_format: "PARQUET", # accepts PARQUET, DELIMITED_TEXT
+    #           s3_destination_export_file_format_options: {
+    #             "StringMapKey" => "StringMapValue",
+    #           },
     #         },
     #       }
     #
@@ -419,7 +428,7 @@ module Aws::FinSpaceData
     #         client_token: "ClientToken",
     #         dataset_title: "DatasetTitle", # required
     #         kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
-    #         dataset_description: "DatasetDescription", # required
+    #         dataset_description: "DatasetDescription",
     #         owner_info: {
     #           name: "OwnerName",
     #           phone_number: "PhoneNumber",
@@ -433,7 +442,7 @@ module Aws::FinSpaceData
     #             },
     #           ],
     #         },
-    #         alias: "AliasString", # required
+    #         alias: "AliasString",
     #         schema_definition: {
     #           tabular_schema_config: {
     #             columns: [
@@ -547,6 +556,10 @@ module Aws::FinSpaceData
     #
     #       {
     #         destination_type: "DataViewDestinationType", # required
+    #         s3_destination_export_file_format: "PARQUET", # accepts PARQUET, DELIMITED_TEXT
+    #         s3_destination_export_file_format_options: {
+    #           "StringMapKey" => "StringMapValue",
+    #         },
     #       }
     #
     # @!attribute [rw] destination_type
@@ -557,10 +570,19 @@ module Aws::FinSpaceData
     #   ^
     #   @return [String]
     #
+    # @!attribute [rw] s3_destination_export_file_format
+    #   Data View Export File Format
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_destination_export_file_format_options
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DataViewDestinationTypeParams AWS API Documentation
     #
     class DataViewDestinationTypeParams < Struct.new(
-      :destination_type)
+      :destination_type,
+      :s3_destination_export_file_format,
+      :s3_destination_export_file_format_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -928,6 +950,10 @@ module Aws::FinSpaceData
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
+    # @!attribute [rw] active_from_timestamp
+    #   Milliseconds since UTC epoch
+    #   @return [Integer]
+    #
     # @!attribute [rw] updates_changeset_id
     #   The unique identifier of the Changeset that is being updated.
     #   @return [String]
@@ -949,6 +975,7 @@ module Aws::FinSpaceData
       :status,
       :error_info,
       :active_until_timestamp,
+      :active_from_timestamp,
       :updates_changeset_id,
       :updated_by_changeset_id)
       SENSITIVE = []
@@ -1665,7 +1692,7 @@ module Aws::FinSpaceData
     #         dataset_title: "DatasetTitle", # required
     #         kind: "TABULAR", # required, accepts TABULAR, NON_TABULAR
     #         dataset_description: "DatasetDescription",
-    #         alias: "AliasString", # required
+    #         alias: "AliasString",
     #         schema_definition: {
     #           tabular_schema_config: {
     #             columns: [

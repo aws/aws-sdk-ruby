@@ -27,6 +27,8 @@ module Aws::DataSync
     CreateAgentResponse = Shapes::StructureShape.new(name: 'CreateAgentResponse')
     CreateLocationEfsRequest = Shapes::StructureShape.new(name: 'CreateLocationEfsRequest')
     CreateLocationEfsResponse = Shapes::StructureShape.new(name: 'CreateLocationEfsResponse')
+    CreateLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxLustreRequest')
+    CreateLocationFsxLustreResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxLustreResponse')
     CreateLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsRequest')
     CreateLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'CreateLocationFsxWindowsResponse')
     CreateLocationHdfsRequest = Shapes::StructureShape.new(name: 'CreateLocationHdfsRequest')
@@ -51,6 +53,8 @@ module Aws::DataSync
     DescribeAgentResponse = Shapes::StructureShape.new(name: 'DescribeAgentResponse')
     DescribeLocationEfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationEfsRequest')
     DescribeLocationEfsResponse = Shapes::StructureShape.new(name: 'DescribeLocationEfsResponse')
+    DescribeLocationFsxLustreRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxLustreRequest')
+    DescribeLocationFsxLustreResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxLustreResponse')
     DescribeLocationFsxWindowsRequest = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsRequest')
     DescribeLocationFsxWindowsResponse = Shapes::StructureShape.new(name: 'DescribeLocationFsxWindowsResponse')
     DescribeLocationHdfsRequest = Shapes::StructureShape.new(name: 'DescribeLocationHdfsRequest')
@@ -84,6 +88,7 @@ module Aws::DataSync
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValues = Shapes::ListShape.new(name: 'FilterValues')
     FsxFilesystemArn = Shapes::StringShape.new(name: 'FsxFilesystemArn')
+    FsxLustreSubdirectory = Shapes::StringShape.new(name: 'FsxLustreSubdirectory')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
     HdfsAuthenticationType = Shapes::StringShape.new(name: 'HdfsAuthenticationType')
@@ -244,6 +249,15 @@ module Aws::DataSync
     CreateLocationEfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     CreateLocationEfsResponse.struct_class = Types::CreateLocationEfsResponse
 
+    CreateLocationFsxLustreRequest.add_member(:fsx_filesystem_arn, Shapes::ShapeRef.new(shape: FsxFilesystemArn, required: true, location_name: "FsxFilesystemArn"))
+    CreateLocationFsxLustreRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
+    CreateLocationFsxLustreRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: FsxLustreSubdirectory, location_name: "Subdirectory"))
+    CreateLocationFsxLustreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationFsxLustreRequest.struct_class = Types::CreateLocationFsxLustreRequest
+
+    CreateLocationFsxLustreResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    CreateLocationFsxLustreResponse.struct_class = Types::CreateLocationFsxLustreResponse
+
     CreateLocationFsxWindowsRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: FsxWindowsSubdirectory, location_name: "Subdirectory"))
     CreateLocationFsxWindowsRequest.add_member(:fsx_filesystem_arn, Shapes::ShapeRef.new(shape: FsxFilesystemArn, required: true, location_name: "FsxFilesystemArn"))
     CreateLocationFsxWindowsRequest.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, required: true, location_name: "SecurityGroupArns"))
@@ -371,6 +385,15 @@ module Aws::DataSync
     DescribeLocationEfsResponse.add_member(:ec2_config, Shapes::ShapeRef.new(shape: Ec2Config, location_name: "Ec2Config"))
     DescribeLocationEfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
     DescribeLocationEfsResponse.struct_class = Types::DescribeLocationEfsResponse
+
+    DescribeLocationFsxLustreRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
+    DescribeLocationFsxLustreRequest.struct_class = Types::DescribeLocationFsxLustreRequest
+
+    DescribeLocationFsxLustreResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
+    DescribeLocationFsxLustreResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
+    DescribeLocationFsxLustreResponse.add_member(:security_group_arns, Shapes::ShapeRef.new(shape: Ec2SecurityGroupArnList, location_name: "SecurityGroupArns"))
+    DescribeLocationFsxLustreResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationFsxLustreResponse.struct_class = Types::DescribeLocationFsxLustreResponse
 
     DescribeLocationFsxWindowsRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))
     DescribeLocationFsxWindowsRequest.struct_class = Types::DescribeLocationFsxWindowsRequest
@@ -799,6 +822,16 @@ module Aws::DataSync
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:create_location_fsx_lustre, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLocationFsxLustre"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateLocationFsxLustreRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLocationFsxLustreResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:create_location_fsx_windows, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateLocationFsxWindows"
         o.http_method = "POST"
@@ -915,6 +948,16 @@ module Aws::DataSync
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeLocationEfsRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLocationEfsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_location_fsx_lustre, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeLocationFsxLustre"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeLocationFsxLustreResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)

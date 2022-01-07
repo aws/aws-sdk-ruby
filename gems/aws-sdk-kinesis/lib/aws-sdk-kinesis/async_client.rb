@@ -23,6 +23,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/jsonvalue_converter.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/invocation_id.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
@@ -52,6 +53,7 @@ module Aws::Kinesis
     add_plugin(Aws::Plugins::IdempotencyToken)
     add_plugin(Aws::Plugins::JsonvalueConverter)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::InvocationId)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
@@ -98,7 +100,9 @@ module Aws::Kinesis
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -127,6 +131,10 @@ module Aws::Kinesis
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [String] :endpoint
     #     The client endpoint is normally constructed from the `:region`
@@ -276,8 +284,9 @@ module Aws::Kinesis
     # If you call `SubscribeToShard` again with the same `ConsumerARN` and
     # `ShardId` within 5 seconds of a successful call, you'll get a
     # `ResourceInUseException`. If you call `SubscribeToShard` 5 seconds or
-    # more after a successful call, the first connection will expire and the
-    # second call will take over the subscription.
+    # more after a successful call, the second call takes over the
+    # subscription and the previous connection expires or fails with a
+    # `ResourceInUseException`.
     #
     # For an example of how to use this operations, see [Enhanced Fan-Out
     # Using the Kinesis Data Streams
@@ -292,6 +301,8 @@ module Aws::Kinesis
     #   shards for a given stream, use ListShards.
     #
     # @option params [required, Types::StartingPosition] :starting_position
+    #   The starting position in the data stream from which to start
+    #   streaming.
     #
     # @return [Types::SubscribeToShardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -563,7 +574,7 @@ module Aws::Kinesis
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-kinesis'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::CustomerProfiles
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::CustomerProfiles
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::CustomerProfiles
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::CustomerProfiles
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::CustomerProfiles
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -1104,6 +1115,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetIntegrationResponse#created_at #created_at} => Time
     #   * {Types::GetIntegrationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1121,6 +1133,8 @@ module Aws::CustomerProfiles
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.object_type_names #=> Hash
+    #   resp.object_type_names["string1To255"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegration AWS API Documentation
     #
@@ -1131,9 +1145,6 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and subject to
-    # change.
-    #
     # Before calling this API, use [CreateDomain][1] or [UpdateDomain][2] to
     # enable identity resolution: set `Matching` to true.
     #
@@ -1277,7 +1288,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -1335,7 +1346,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #
@@ -1384,6 +1395,8 @@ module Aws::CustomerProfiles
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].object_type_names #=> Hash
+    #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrations AWS API Documentation
@@ -1521,6 +1534,8 @@ module Aws::CustomerProfiles
     #   resp.items[0].last_updated_at #=> Time
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.items[0].object_type_names #=> Hash
+    #   resp.items[0].object_type_names["string1To255"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrations AWS API Documentation
@@ -1635,7 +1650,7 @@ module Aws::CustomerProfiles
     # @option params [Types::ObjectFilter] :object_filter
     #   Applies a filter to the response to include profile objects with the
     #   specified index values. This filter is only supported for
-    #   ObjectTypeName \_asset and \_case.
+    #   ObjectTypeName \_asset, \_case and \_order.
     #
     # @return [Types::ListProfileObjectsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1704,9 +1719,6 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
-    # This API is in preview release for Amazon Connect and subject to
-    # change.
-    #
     # Runs an AWS Lambda job that does the following:
     #
     # 1.  All the profileKeys in the `ProfileToBeMerged` will be moved to
@@ -1818,7 +1830,7 @@ module Aws::CustomerProfiles
     # @option params [String] :uri
     #   The URI of the S3 bucket or any other type of data source.
     #
-    # @option params [required, String] :object_type_name
+    # @option params [String] :object_type_name
     #   The name of the profile object type.
     #
     # @option params [Hash<String,String>] :tags
@@ -1828,6 +1840,15 @@ module Aws::CustomerProfiles
     #   The configuration that controls how Customer Profiles retrieves data
     #   from the source.
     #
+    # @option params [Hash<String,String>] :object_type_names
+    #   A map in which each key is an event type from an external application
+    #   such as Segment or Shopify, and each value is an `ObjectTypeName`
+    #   (template) used to ingest the event. It supports the following event
+    #   types: `SegmentIdentify`, `ShopifyCreateCustomers`,
+    #   `ShopifyUpdateCustomers`, `ShopifyCreateDraftOrders`,
+    #   `ShopifyUpdateDraftOrders`, `ShopifyCreateOrders`, and
+    #   `ShopifyUpdatedOrders`.
+    #
     # @return [Types::PutIntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutIntegrationResponse#domain_name #domain_name} => String
@@ -1836,13 +1857,14 @@ module Aws::CustomerProfiles
     #   * {Types::PutIntegrationResponse#created_at #created_at} => Time
     #   * {Types::PutIntegrationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::PutIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::PutIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_integration({
     #     domain_name: "name", # required
     #     uri: "string1To255",
-    #     object_type_name: "typeName", # required
+    #     object_type_name: "typeName",
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1909,6 +1931,9 @@ module Aws::CustomerProfiles
     #         },
     #       },
     #     },
+    #     object_type_names: {
+    #       "string1To255" => "typeName",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1920,6 +1945,8 @@ module Aws::CustomerProfiles
     #   resp.last_updated_at #=> Time
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.object_type_names #=> Hash
+    #   resp.object_type_names["string1To255"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegration AWS API Documentation
     #
@@ -2057,7 +2084,7 @@ module Aws::CustomerProfiles
     #     keys: {
     #       "name" => [
     #         {
-    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY
+    #           standard_identifiers: ["PROFILE"], # accepts PROFILE, ASSET, CASE, UNIQUE, SECONDARY, LOOKUP_ONLY, NEW_ONLY, ORDER
     #           field_names: ["name"],
     #         },
     #       ],
@@ -2083,7 +2110,7 @@ module Aws::CustomerProfiles
     #   resp.keys #=> Hash
     #   resp.keys["name"] #=> Array
     #   resp.keys["name"][0].standard_identifiers #=> Array
-    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY"
+    #   resp.keys["name"][0].standard_identifiers[0] #=> String, one of "PROFILE", "ASSET", "CASE", "UNIQUE", "SECONDARY", "LOOKUP_ONLY", "NEW_ONLY", "ORDER"
     #   resp.keys["name"][0].field_names #=> Array
     #   resp.keys["name"][0].field_names[0] #=> String
     #   resp.created_at #=> Time
@@ -2114,10 +2141,12 @@ module Aws::CustomerProfiles
     #
     # @option params [required, String] :key_name
     #   A searchable identifier of a customer profile. The predefined keys you
-    #   can use to search include: \_account, \_profileId, \_fullName,
-    #   \_phone, \_email, \_ctrContactId, \_marketoLeadId,
-    #   \_salesforceAccountId, \_salesforceContactId, \_zendeskUserId,
-    #   \_zendeskExternalId, \_serviceNowSystemId.
+    #   can use to search include: \_account, \_profileId, \_assetId,
+    #   \_caseId, \_orderId, \_fullName, \_phone, \_email, \_ctrContactId,
+    #   \_marketoLeadId, \_salesforceAccountId, \_salesforceContactId,
+    #   \_salesforceAssetId, \_zendeskUserId, \_zendeskExternalId,
+    #   \_zendeskTicketId, \_serviceNowSystemId, \_serviceNowIncidentId,
+    #   \_segmentUserId, \_shopifyCustomerId, \_shopifyOrderId.
     #
     # @option params [required, Array<String>] :values
     #   A list of key values.
@@ -2601,7 +2630,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

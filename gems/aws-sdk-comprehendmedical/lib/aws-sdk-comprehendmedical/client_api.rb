@@ -18,6 +18,7 @@ module Aws::ComprehendMedical
     AttributeList = Shapes::ListShape.new(name: 'AttributeList')
     AttributeName = Shapes::StringShape.new(name: 'AttributeName')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
+    Characters = Shapes::StructureShape.new(name: 'Characters')
     ClientRequestTokenString = Shapes::StringShape.new(name: 'ClientRequestTokenString')
     ComprehendMedicalAsyncJobFilter = Shapes::StructureShape.new(name: 'ComprehendMedicalAsyncJobFilter')
     ComprehendMedicalAsyncJobProperties = Shapes::StructureShape.new(name: 'ComprehendMedicalAsyncJobProperties')
@@ -30,6 +31,8 @@ module Aws::ComprehendMedical
     DescribePHIDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribePHIDetectionJobResponse')
     DescribeRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeRxNormInferenceJobRequest')
     DescribeRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeRxNormInferenceJobResponse')
+    DescribeSNOMEDCTInferenceJobRequest = Shapes::StructureShape.new(name: 'DescribeSNOMEDCTInferenceJobRequest')
+    DescribeSNOMEDCTInferenceJobResponse = Shapes::StructureShape.new(name: 'DescribeSNOMEDCTInferenceJobResponse')
     DetectEntitiesRequest = Shapes::StructureShape.new(name: 'DetectEntitiesRequest')
     DetectEntitiesResponse = Shapes::StructureShape.new(name: 'DetectEntitiesResponse')
     DetectEntitiesV2Request = Shapes::StructureShape.new(name: 'DetectEntitiesV2Request')
@@ -59,6 +62,8 @@ module Aws::ComprehendMedical
     InferICD10CMResponse = Shapes::StructureShape.new(name: 'InferICD10CMResponse')
     InferRxNormRequest = Shapes::StructureShape.new(name: 'InferRxNormRequest')
     InferRxNormResponse = Shapes::StructureShape.new(name: 'InferRxNormResponse')
+    InferSNOMEDCTRequest = Shapes::StructureShape.new(name: 'InferSNOMEDCTRequest')
+    InferSNOMEDCTResponse = Shapes::StructureShape.new(name: 'InferSNOMEDCTResponse')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
@@ -77,6 +82,8 @@ module Aws::ComprehendMedical
     ListPHIDetectionJobsResponse = Shapes::StructureShape.new(name: 'ListPHIDetectionJobsResponse')
     ListRxNormInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListRxNormInferenceJobsRequest')
     ListRxNormInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListRxNormInferenceJobsResponse')
+    ListSNOMEDCTInferenceJobsRequest = Shapes::StructureShape.new(name: 'ListSNOMEDCTInferenceJobsRequest')
+    ListSNOMEDCTInferenceJobsResponse = Shapes::StructureShape.new(name: 'ListSNOMEDCTInferenceJobsResponse')
     ManifestFilePath = Shapes::StringShape.new(name: 'ManifestFilePath')
     MaxResultsInteger = Shapes::IntegerShape.new(name: 'MaxResultsInteger')
     ModelVersion = Shapes::StringShape.new(name: 'ModelVersion')
@@ -98,6 +105,20 @@ module Aws::ComprehendMedical
     RxNormTraitName = Shapes::StringShape.new(name: 'RxNormTraitName')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
+    SNOMEDCTAttribute = Shapes::StructureShape.new(name: 'SNOMEDCTAttribute')
+    SNOMEDCTAttributeList = Shapes::ListShape.new(name: 'SNOMEDCTAttributeList')
+    SNOMEDCTAttributeType = Shapes::StringShape.new(name: 'SNOMEDCTAttributeType')
+    SNOMEDCTConcept = Shapes::StructureShape.new(name: 'SNOMEDCTConcept')
+    SNOMEDCTConceptList = Shapes::ListShape.new(name: 'SNOMEDCTConceptList')
+    SNOMEDCTDetails = Shapes::StructureShape.new(name: 'SNOMEDCTDetails')
+    SNOMEDCTEntity = Shapes::StructureShape.new(name: 'SNOMEDCTEntity')
+    SNOMEDCTEntityCategory = Shapes::StringShape.new(name: 'SNOMEDCTEntityCategory')
+    SNOMEDCTEntityList = Shapes::ListShape.new(name: 'SNOMEDCTEntityList')
+    SNOMEDCTEntityType = Shapes::StringShape.new(name: 'SNOMEDCTEntityType')
+    SNOMEDCTRelationshipType = Shapes::StringShape.new(name: 'SNOMEDCTRelationshipType')
+    SNOMEDCTTrait = Shapes::StructureShape.new(name: 'SNOMEDCTTrait')
+    SNOMEDCTTraitList = Shapes::ListShape.new(name: 'SNOMEDCTTraitList')
+    SNOMEDCTTraitName = Shapes::StringShape.new(name: 'SNOMEDCTTraitName')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StartEntitiesDetectionV2JobRequest = Shapes::StructureShape.new(name: 'StartEntitiesDetectionV2JobRequest')
     StartEntitiesDetectionV2JobResponse = Shapes::StructureShape.new(name: 'StartEntitiesDetectionV2JobResponse')
@@ -107,6 +128,8 @@ module Aws::ComprehendMedical
     StartPHIDetectionJobResponse = Shapes::StructureShape.new(name: 'StartPHIDetectionJobResponse')
     StartRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'StartRxNormInferenceJobRequest')
     StartRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'StartRxNormInferenceJobResponse')
+    StartSNOMEDCTInferenceJobRequest = Shapes::StructureShape.new(name: 'StartSNOMEDCTInferenceJobRequest')
+    StartSNOMEDCTInferenceJobResponse = Shapes::StructureShape.new(name: 'StartSNOMEDCTInferenceJobResponse')
     StopEntitiesDetectionV2JobRequest = Shapes::StructureShape.new(name: 'StopEntitiesDetectionV2JobRequest')
     StopEntitiesDetectionV2JobResponse = Shapes::StructureShape.new(name: 'StopEntitiesDetectionV2JobResponse')
     StopICD10CMInferenceJobRequest = Shapes::StructureShape.new(name: 'StopICD10CMInferenceJobRequest')
@@ -115,6 +138,8 @@ module Aws::ComprehendMedical
     StopPHIDetectionJobResponse = Shapes::StructureShape.new(name: 'StopPHIDetectionJobResponse')
     StopRxNormInferenceJobRequest = Shapes::StructureShape.new(name: 'StopRxNormInferenceJobRequest')
     StopRxNormInferenceJobResponse = Shapes::StructureShape.new(name: 'StopRxNormInferenceJobResponse')
+    StopSNOMEDCTInferenceJobRequest = Shapes::StructureShape.new(name: 'StopSNOMEDCTInferenceJobRequest')
+    StopSNOMEDCTInferenceJobResponse = Shapes::StructureShape.new(name: 'StopSNOMEDCTInferenceJobResponse')
     String = Shapes::StringShape.new(name: 'String')
     TextSizeLimitExceededException = Shapes::StructureShape.new(name: 'TextSizeLimitExceededException')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -138,6 +163,9 @@ module Aws::ComprehendMedical
     Attribute.struct_class = Types::Attribute
 
     AttributeList.member = Shapes::ShapeRef.new(shape: Attribute)
+
+    Characters.add_member(:original_text_characters, Shapes::ShapeRef.new(shape: Integer, location_name: "OriginalTextCharacters"))
+    Characters.struct_class = Types::Characters
 
     ComprehendMedicalAsyncJobFilter.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
     ComprehendMedicalAsyncJobFilter.add_member(:job_status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "JobStatus"))
@@ -186,6 +214,12 @@ module Aws::ComprehendMedical
 
     DescribeRxNormInferenceJobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
     DescribeRxNormInferenceJobResponse.struct_class = Types::DescribeRxNormInferenceJobResponse
+
+    DescribeSNOMEDCTInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    DescribeSNOMEDCTInferenceJobRequest.struct_class = Types::DescribeSNOMEDCTInferenceJobRequest
+
+    DescribeSNOMEDCTInferenceJobResponse.add_member(:comprehend_medical_async_job_properties, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobProperties, location_name: "ComprehendMedicalAsyncJobProperties"))
+    DescribeSNOMEDCTInferenceJobResponse.struct_class = Types::DescribeSNOMEDCTInferenceJobResponse
 
     DetectEntitiesRequest.add_member(:text, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Text"))
     DetectEntitiesRequest.struct_class = Types::DetectEntitiesRequest
@@ -283,6 +317,16 @@ module Aws::ComprehendMedical
     InferRxNormResponse.add_member(:model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModelVersion"))
     InferRxNormResponse.struct_class = Types::InferRxNormResponse
 
+    InferSNOMEDCTRequest.add_member(:text, Shapes::ShapeRef.new(shape: OntologyLinkingBoundedLengthString, required: true, location_name: "Text"))
+    InferSNOMEDCTRequest.struct_class = Types::InferSNOMEDCTRequest
+
+    InferSNOMEDCTResponse.add_member(:entities, Shapes::ShapeRef.new(shape: SNOMEDCTEntityList, required: true, location_name: "Entities"))
+    InferSNOMEDCTResponse.add_member(:pagination_token, Shapes::ShapeRef.new(shape: String, location_name: "PaginationToken"))
+    InferSNOMEDCTResponse.add_member(:model_version, Shapes::ShapeRef.new(shape: String, location_name: "ModelVersion"))
+    InferSNOMEDCTResponse.add_member(:snomedct_details, Shapes::ShapeRef.new(shape: SNOMEDCTDetails, location_name: "SNOMEDCTDetails"))
+    InferSNOMEDCTResponse.add_member(:characters, Shapes::ShapeRef.new(shape: Characters, location_name: "Characters"))
+    InferSNOMEDCTResponse.struct_class = Types::InferSNOMEDCTResponse
+
     InputDataConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     InputDataConfig.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     InputDataConfig.struct_class = Types::InputDataConfig
@@ -332,6 +376,15 @@ module Aws::ComprehendMedical
     ListRxNormInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     ListRxNormInferenceJobsResponse.struct_class = Types::ListRxNormInferenceJobsResponse
 
+    ListSNOMEDCTInferenceJobsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobFilter, location_name: "Filter"))
+    ListSNOMEDCTInferenceJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSNOMEDCTInferenceJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsInteger, location_name: "MaxResults"))
+    ListSNOMEDCTInferenceJobsRequest.struct_class = Types::ListSNOMEDCTInferenceJobsRequest
+
+    ListSNOMEDCTInferenceJobsResponse.add_member(:comprehend_medical_async_job_properties_list, Shapes::ShapeRef.new(shape: ComprehendMedicalAsyncJobPropertiesList, location_name: "ComprehendMedicalAsyncJobPropertiesList"))
+    ListSNOMEDCTInferenceJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListSNOMEDCTInferenceJobsResponse.struct_class = Types::ListSNOMEDCTInferenceJobsResponse
+
     OutputDataConfig.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
     OutputDataConfig.add_member(:s3_key, Shapes::ShapeRef.new(shape: S3Key, location_name: "S3Key"))
     OutputDataConfig.struct_class = Types::OutputDataConfig
@@ -377,6 +430,53 @@ module Aws::ComprehendMedical
     RxNormTrait.struct_class = Types::RxNormTrait
 
     RxNormTraitList.member = Shapes::ShapeRef.new(shape: RxNormTrait)
+
+    SNOMEDCTAttribute.add_member(:category, Shapes::ShapeRef.new(shape: SNOMEDCTEntityCategory, location_name: "Category"))
+    SNOMEDCTAttribute.add_member(:type, Shapes::ShapeRef.new(shape: SNOMEDCTAttributeType, location_name: "Type"))
+    SNOMEDCTAttribute.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    SNOMEDCTAttribute.add_member(:relationship_score, Shapes::ShapeRef.new(shape: Float, location_name: "RelationshipScore"))
+    SNOMEDCTAttribute.add_member(:relationship_type, Shapes::ShapeRef.new(shape: SNOMEDCTRelationshipType, location_name: "RelationshipType"))
+    SNOMEDCTAttribute.add_member(:id, Shapes::ShapeRef.new(shape: Integer, location_name: "Id"))
+    SNOMEDCTAttribute.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    SNOMEDCTAttribute.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    SNOMEDCTAttribute.add_member(:text, Shapes::ShapeRef.new(shape: String, location_name: "Text"))
+    SNOMEDCTAttribute.add_member(:traits, Shapes::ShapeRef.new(shape: SNOMEDCTTraitList, location_name: "Traits"))
+    SNOMEDCTAttribute.add_member(:snomedct_concepts, Shapes::ShapeRef.new(shape: SNOMEDCTConceptList, location_name: "SNOMEDCTConcepts"))
+    SNOMEDCTAttribute.struct_class = Types::SNOMEDCTAttribute
+
+    SNOMEDCTAttributeList.member = Shapes::ShapeRef.new(shape: SNOMEDCTAttribute)
+
+    SNOMEDCTConcept.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    SNOMEDCTConcept.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
+    SNOMEDCTConcept.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    SNOMEDCTConcept.struct_class = Types::SNOMEDCTConcept
+
+    SNOMEDCTConceptList.member = Shapes::ShapeRef.new(shape: SNOMEDCTConcept)
+
+    SNOMEDCTDetails.add_member(:edition, Shapes::ShapeRef.new(shape: String, location_name: "Edition"))
+    SNOMEDCTDetails.add_member(:language, Shapes::ShapeRef.new(shape: String, location_name: "Language"))
+    SNOMEDCTDetails.add_member(:version_date, Shapes::ShapeRef.new(shape: String, location_name: "VersionDate"))
+    SNOMEDCTDetails.struct_class = Types::SNOMEDCTDetails
+
+    SNOMEDCTEntity.add_member(:id, Shapes::ShapeRef.new(shape: Integer, location_name: "Id"))
+    SNOMEDCTEntity.add_member(:text, Shapes::ShapeRef.new(shape: OntologyLinkingBoundedLengthString, location_name: "Text"))
+    SNOMEDCTEntity.add_member(:category, Shapes::ShapeRef.new(shape: SNOMEDCTEntityCategory, location_name: "Category"))
+    SNOMEDCTEntity.add_member(:type, Shapes::ShapeRef.new(shape: SNOMEDCTEntityType, location_name: "Type"))
+    SNOMEDCTEntity.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    SNOMEDCTEntity.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    SNOMEDCTEntity.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    SNOMEDCTEntity.add_member(:attributes, Shapes::ShapeRef.new(shape: SNOMEDCTAttributeList, location_name: "Attributes"))
+    SNOMEDCTEntity.add_member(:traits, Shapes::ShapeRef.new(shape: SNOMEDCTTraitList, location_name: "Traits"))
+    SNOMEDCTEntity.add_member(:snomedct_concepts, Shapes::ShapeRef.new(shape: SNOMEDCTConceptList, location_name: "SNOMEDCTConcepts"))
+    SNOMEDCTEntity.struct_class = Types::SNOMEDCTEntity
+
+    SNOMEDCTEntityList.member = Shapes::ShapeRef.new(shape: SNOMEDCTEntity)
+
+    SNOMEDCTTrait.add_member(:name, Shapes::ShapeRef.new(shape: SNOMEDCTTraitName, location_name: "Name"))
+    SNOMEDCTTrait.add_member(:score, Shapes::ShapeRef.new(shape: Float, location_name: "Score"))
+    SNOMEDCTTrait.struct_class = Types::SNOMEDCTTrait
+
+    SNOMEDCTTraitList.member = Shapes::ShapeRef.new(shape: SNOMEDCTTrait)
 
     ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
@@ -429,6 +529,18 @@ module Aws::ComprehendMedical
     StartRxNormInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StartRxNormInferenceJobResponse.struct_class = Types::StartRxNormInferenceJobResponse
 
+    StartSNOMEDCTInferenceJobRequest.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, required: true, location_name: "InputDataConfig"))
+    StartSNOMEDCTInferenceJobRequest.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, required: true, location_name: "OutputDataConfig"))
+    StartSNOMEDCTInferenceJobRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, required: true, location_name: "DataAccessRoleArn"))
+    StartSNOMEDCTInferenceJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
+    StartSNOMEDCTInferenceJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenString, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
+    StartSNOMEDCTInferenceJobRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KMSKey, location_name: "KMSKey"))
+    StartSNOMEDCTInferenceJobRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, required: true, location_name: "LanguageCode"))
+    StartSNOMEDCTInferenceJobRequest.struct_class = Types::StartSNOMEDCTInferenceJobRequest
+
+    StartSNOMEDCTInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StartSNOMEDCTInferenceJobResponse.struct_class = Types::StartSNOMEDCTInferenceJobResponse
+
     StopEntitiesDetectionV2JobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     StopEntitiesDetectionV2JobRequest.struct_class = Types::StopEntitiesDetectionV2JobRequest
 
@@ -452,6 +564,12 @@ module Aws::ComprehendMedical
 
     StopRxNormInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
     StopRxNormInferenceJobResponse.struct_class = Types::StopRxNormInferenceJobResponse
+
+    StopSNOMEDCTInferenceJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
+    StopSNOMEDCTInferenceJobRequest.struct_class = Types::StopSNOMEDCTInferenceJobRequest
+
+    StopSNOMEDCTInferenceJobResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
+    StopSNOMEDCTInferenceJobResponse.struct_class = Types::StopSNOMEDCTInferenceJobResponse
 
     TextSizeLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     TextSizeLimitExceededException.struct_class = Types::TextSizeLimitExceededException
@@ -542,6 +660,18 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_snomedct_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeSNOMEDCTInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeSNOMEDCTInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeSNOMEDCTInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:detect_entities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DetectEntities"
         o.http_method = "POST"
@@ -613,6 +743,20 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
       end)
 
+      api.add_operation(:infer_snomedct, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "InferSNOMEDCT"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: InferSNOMEDCTRequest)
+        o.output = Shapes::ShapeRef.new(shape: InferSNOMEDCTResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidEncodingException)
+        o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
+      end)
+
       api.add_operation(:list_entities_detection_v2_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEntitiesDetectionV2Jobs"
         o.http_method = "POST"
@@ -655,6 +799,18 @@ module Aws::ComprehendMedical
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListRxNormInferenceJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRxNormInferenceJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_snomedct_inference_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSNOMEDCTInferenceJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSNOMEDCTInferenceJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSNOMEDCTInferenceJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -709,6 +865,18 @@ module Aws::ComprehendMedical
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_snomedct_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartSNOMEDCTInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartSNOMEDCTInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartSNOMEDCTInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_entities_detection_v2_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopEntitiesDetectionV2Job"
         o.http_method = "POST"
@@ -750,6 +918,18 @@ module Aws::ComprehendMedical
         o.output = Shapes::ShapeRef.new(shape: StopRxNormInferenceJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:stop_snomedct_inference_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSNOMEDCTInferenceJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopSNOMEDCTInferenceJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopSNOMEDCTInferenceJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
     end

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2021-12-21)
+------------------
+
+* Feature - Added a note to infrastructure configuration actions and data types concerning delivery of Image Builder event messages to encrypted SNS topics. The key that's used to encrypt the SNS topic must reside in the account that Image Builder runs under.
+
+1.36.0 (2021-12-20)
+------------------
+
+* Feature - This release adds support for importing and exporting VM Images as part of the Image Creation workflow via EC2 VM Import/Export.
+
+1.35.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.34.0 (2021-11-24)
 ------------------
 

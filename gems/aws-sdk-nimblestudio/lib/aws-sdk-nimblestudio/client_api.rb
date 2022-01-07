@@ -158,6 +158,7 @@ module Aws::NimbleStudio
     StreamConfigurationCreate = Shapes::StructureShape.new(name: 'StreamConfigurationCreate')
     StreamConfigurationMaxSessionLengthInMinutes = Shapes::IntegerShape.new(name: 'StreamConfigurationMaxSessionLengthInMinutes')
     StreamConfigurationMaxStoppedSessionLengthInMinutes = Shapes::IntegerShape.new(name: 'StreamConfigurationMaxStoppedSessionLengthInMinutes')
+    StreamConfigurationSessionStorage = Shapes::StructureShape.new(name: 'StreamConfigurationSessionStorage')
     StreamingClipboardMode = Shapes::StringShape.new(name: 'StreamingClipboardMode')
     StreamingImage = Shapes::StructureShape.new(name: 'StreamingImage')
     StreamingImageEncryptionConfiguration = Shapes::StructureShape.new(name: 'StreamingImageEncryptionConfiguration')
@@ -177,6 +178,11 @@ module Aws::NimbleStudio
     StreamingSessionList = Shapes::ListShape.new(name: 'StreamingSessionList')
     StreamingSessionState = Shapes::StringShape.new(name: 'StreamingSessionState')
     StreamingSessionStatusCode = Shapes::StringShape.new(name: 'StreamingSessionStatusCode')
+    StreamingSessionStorageMode = Shapes::StringShape.new(name: 'StreamingSessionStorageMode')
+    StreamingSessionStorageModeList = Shapes::ListShape.new(name: 'StreamingSessionStorageModeList')
+    StreamingSessionStorageRoot = Shapes::StructureShape.new(name: 'StreamingSessionStorageRoot')
+    StreamingSessionStorageRootPathLinux = Shapes::StringShape.new(name: 'StreamingSessionStorageRootPathLinux')
+    StreamingSessionStorageRootPathWindows = Shapes::StringShape.new(name: 'StreamingSessionStorageRootPathWindows')
     StreamingSessionStream = Shapes::StructureShape.new(name: 'StreamingSessionStream')
     StreamingSessionStreamExpirationInSeconds = Shapes::IntegerShape.new(name: 'StreamingSessionStreamExpirationInSeconds')
     StreamingSessionStreamState = Shapes::StringShape.new(name: 'StreamingSessionStreamState')
@@ -752,6 +758,7 @@ module Aws::NimbleStudio
     StreamConfiguration.add_member(:ec2_instance_types, Shapes::ShapeRef.new(shape: StreamingInstanceTypeList, required: true, location_name: "ec2InstanceTypes"))
     StreamConfiguration.add_member(:max_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxSessionLengthInMinutes, location_name: "maxSessionLengthInMinutes"))
     StreamConfiguration.add_member(:max_stopped_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxStoppedSessionLengthInMinutes, location_name: "maxStoppedSessionLengthInMinutes"))
+    StreamConfiguration.add_member(:session_storage, Shapes::ShapeRef.new(shape: StreamConfigurationSessionStorage, location_name: "sessionStorage"))
     StreamConfiguration.add_member(:streaming_image_ids, Shapes::ShapeRef.new(shape: StreamingImageIdList, required: true, location_name: "streamingImageIds"))
     StreamConfiguration.struct_class = Types::StreamConfiguration
 
@@ -759,8 +766,13 @@ module Aws::NimbleStudio
     StreamConfigurationCreate.add_member(:ec2_instance_types, Shapes::ShapeRef.new(shape: StreamingInstanceTypeList, required: true, location_name: "ec2InstanceTypes"))
     StreamConfigurationCreate.add_member(:max_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxSessionLengthInMinutes, location_name: "maxSessionLengthInMinutes"))
     StreamConfigurationCreate.add_member(:max_stopped_session_length_in_minutes, Shapes::ShapeRef.new(shape: StreamConfigurationMaxStoppedSessionLengthInMinutes, location_name: "maxStoppedSessionLengthInMinutes"))
+    StreamConfigurationCreate.add_member(:session_storage, Shapes::ShapeRef.new(shape: StreamConfigurationSessionStorage, location_name: "sessionStorage"))
     StreamConfigurationCreate.add_member(:streaming_image_ids, Shapes::ShapeRef.new(shape: StreamingImageIdList, required: true, location_name: "streamingImageIds"))
     StreamConfigurationCreate.struct_class = Types::StreamConfigurationCreate
+
+    StreamConfigurationSessionStorage.add_member(:mode, Shapes::ShapeRef.new(shape: StreamingSessionStorageModeList, required: true, location_name: "mode"))
+    StreamConfigurationSessionStorage.add_member(:root, Shapes::ShapeRef.new(shape: StreamingSessionStorageRoot, location_name: "root"))
+    StreamConfigurationSessionStorage.struct_class = Types::StreamConfigurationSessionStorage
 
     StreamingImage.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     StreamingImage.add_member(:description, Shapes::ShapeRef.new(shape: SyntheticStreamingImageStreamingImageDescription, location_name: "description"))
@@ -810,6 +822,12 @@ module Aws::NimbleStudio
     StreamingSession.struct_class = Types::StreamingSession
 
     StreamingSessionList.member = Shapes::ShapeRef.new(shape: StreamingSession)
+
+    StreamingSessionStorageModeList.member = Shapes::ShapeRef.new(shape: StreamingSessionStorageMode)
+
+    StreamingSessionStorageRoot.add_member(:linux, Shapes::ShapeRef.new(shape: StreamingSessionStorageRootPathLinux, location_name: "linux"))
+    StreamingSessionStorageRoot.add_member(:windows, Shapes::ShapeRef.new(shape: StreamingSessionStorageRootPathWindows, location_name: "windows"))
+    StreamingSessionStorageRoot.struct_class = Types::StreamingSessionStorageRoot
 
     StreamingSessionStream.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     StreamingSessionStream.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))

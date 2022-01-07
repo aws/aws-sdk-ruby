@@ -228,7 +228,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -349,25 +350,35 @@ module Aws::RDS
     # @option options [required, Array<Types::Parameter>] :parameters
     #   An array of parameter names, values, and the application methods for
     #   the parameter update. At least one parameter name, value, and
-    #   application method method must be supplied; later arguments are
-    #   optional. A maximum of 20 parameters can be modified in a single
-    #   request.
+    #   application method must be supplied; later arguments are optional. A
+    #   maximum of 20 parameters can be modified in a single request.
     #
     #   Valid Values (for the application method): `immediate |
     #   pending-reboot`
     #
-    #   <note markdown="1"> You can use the `immediate` value with dynamic parameters only. You
+    #   You can use the `immediate` value with dynamic parameters only. You
     #   can use the `pending-reboot` value for both dynamic and static
     #   parameters.
     #
-    #    When the application method is `immediate`, changes to dynamic
+    #   When the application method is `immediate`, changes to dynamic
     #   parameters are applied immediately to the DB instances associated with
-    #   the parameter group. When the application method is `pending-reboot`,
-    #   changes to dynamic and static parameters are applied after a reboot
-    #   without failover to the DB instances associated with the parameter
-    #   group.
+    #   the parameter group.
+    #
+    #   When the application method is `pending-reboot`, changes to dynamic
+    #   and static parameters are applied after a reboot without failover to
+    #   the DB instances associated with the parameter group.
+    #
+    #   <note markdown="1"> You can't use `pending-reboot` with dynamic parameters on RDS for SQL
+    #   Server DB instances. Use `immediate`.
     #
     #    </note>
+    #
+    #   For more information on modifying DB parameters, see [Working with DB
+    #   parameter groups][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
     # @return [DBParameterGroup]
     def modify(options = {})
       options = options.merge(db_parameter_group_name: @name)

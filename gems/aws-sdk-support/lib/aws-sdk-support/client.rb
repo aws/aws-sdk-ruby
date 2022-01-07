@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Support
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::Support
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Support
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::Support
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::Support
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -353,13 +364,14 @@ module Aws::Support
     # after it's created. The `expiryTime` returned in the response is when
     # the set expires.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -414,19 +426,20 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Adds additional customer communication to an AWS Support case. Use the
-    # `caseId` parameter to identify the case to which to add communication.
-    # You can list a set of email addresses to copy on the communication by
-    # using the `ccEmailAddresses` parameter. The `communicationBody` value
-    # contains the text of the communication.
+    # Adds additional customer communication to an Amazon Web Services
+    # Support case. Use the `caseId` parameter to identify the case to which
+    # to add communication. You can list a set of email addresses to copy on
+    # the communication by using the `ccEmailAddresses` parameter. The
+    # `communicationBody` value contains the text of the communication.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -476,34 +489,38 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Creates a case in the AWS Support Center. This operation is similar to
-    # how you create a case in the AWS Support Center [Create Case][1] page.
+    # Creates a case in the Amazon Web Services Support Center. This
+    # operation is similar to how you create a case in the Amazon Web
+    # Services Support Center [Create Case][1] page.
     #
-    # The AWS Support API doesn't support requesting service limit
-    # increases. You can submit a service limit increase in the following
-    # ways:
+    # The Amazon Web Services Support API doesn't support requesting
+    # service limit increases. You can submit a service limit increase in
+    # the following ways:
     #
-    # * Submit a request from the AWS Support Center [Create Case][1] page.
+    # * Submit a request from the Amazon Web Services Support Center [Create
+    #   Case][1] page.
     #
     # * Use the Service Quotas [RequestServiceQuotaIncrease][2] operation.
     #
-    # A successful `CreateCase` request returns an AWS Support case number.
-    # You can use the DescribeCases operation and specify the case number to
-    # get existing AWS Support cases. After you create a case, use the
-    # AddCommunicationToCase operation to add additional communication or
-    # attachments to an existing case.
+    # A successful `CreateCase` request returns an Amazon Web Services
+    # Support case number. You can use the DescribeCases operation and
+    # specify the case number to get existing Amazon Web Services Support
+    # cases. After you create a case, use the AddCommunicationToCase
+    # operation to add additional communication or attachments to an
+    # existing case.
     #
-    # The `caseId` is separate from the `displayId` that appears in the [AWS
-    # Support Center][3]. Use the DescribeCases operation to get the
-    # `displayId`.
+    # The `caseId` is separate from the `displayId` that appears in the
+    # [Amazon Web Services Support Center][3]. Use the DescribeCases
+    # operation to get the `displayId`.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][4].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][4].
     #
     #  </note>
     #
@@ -516,27 +533,27 @@ module Aws::Support
     #
     # @option params [required, String] :subject
     #   The title of the support case. The title appears in the **Subject**
-    #   field on the AWS Support Center [Create Case][1] page.
+    #   field on the Amazon Web Services Support Center [Create Case][1] page.
     #
     #
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [String] :service_code
-    #   The code for the AWS service. You can use the DescribeServices
-    #   operation to get the possible `serviceCode` values.
+    #   The code for the Amazon Web Services service. You can use the
+    #   DescribeServices operation to get the possible `serviceCode` values.
     #
     # @option params [String] :severity_code
     #   A value that indicates the urgency of the case. This value determines
-    #   the response time according to your service level agreement with AWS
-    #   Support. You can use the DescribeSeverityLevels operation to get the
-    #   possible values for `severityCode`.
+    #   the response time according to your service level agreement with
+    #   Amazon Web Services Support. You can use the DescribeSeverityLevels
+    #   operation to get the possible values for `severityCode`.
     #
     #   For more information, see SeverityLevel and [Choosing a Severity][1]
-    #   in the *AWS Support User Guide*.
+    #   in the *Amazon Web Services Support User Guide*.
     #
     #   <note markdown="1"> The availability of severity levels depends on the support plan for
-    #   the AWS account.
+    #   the Amazon Web Services account.
     #
     #    </note>
     #
@@ -547,32 +564,34 @@ module Aws::Support
     # @option params [String] :category_code
     #   The category of problem for the support case. You also use the
     #   DescribeServices operation to get the category code for a service.
-    #   Each AWS service defines its own set of category codes.
+    #   Each Amazon Web Services service defines its own set of category
+    #   codes.
     #
     # @option params [required, String] :communication_body
     #   The communication body text that describes the issue. This text
-    #   appears in the **Description** field on the AWS Support Center [Create
-    #   Case][1] page.
+    #   appears in the **Description** field on the Amazon Web Services
+    #   Support Center [Create Case][1] page.
     #
     #
     #
     #   [1]: https://console.aws.amazon.com/support/home#/case/create
     #
     # @option params [Array<String>] :cc_email_addresses
-    #   A list of email addresses that AWS Support copies on case
-    #   correspondence. AWS Support identifies the account that creates the
-    #   case when you specify your AWS credentials in an HTTP POST method or
-    #   use the [AWS SDKs][1].
+    #   A list of email addresses that Amazon Web Services Support copies on
+    #   case correspondence. Amazon Web Services Support identifies the
+    #   account that creates the case when you specify your Amazon Web
+    #   Services credentials in an HTTP POST method or use the [Amazon Web
+    #   Services SDKs][1].
     #
     #
     #
     #   [1]: http://aws.amazon.com/tools/
     #
     # @option params [String] :language
-    #   The language in which AWS Support handles the case. You must specify
-    #   the ISO 639-1 code for the `language` parameter if you want support in
-    #   that language. Currently, English ("en") and Japanese ("ja") are
-    #   supported.
+    #   The language in which Amazon Web Services Support handles the case.
+    #   You must specify the ISO 639-1 code for the `language` parameter if
+    #   you want support in that language. Currently, English ("en") and
+    #   Japanese ("ja") are supported.
     #
     # @option params [String] :issue_type
     #   The type of issue for the case. You can specify `customer-service` or
@@ -621,13 +640,14 @@ module Aws::Support
     # are returned in the AttachmentDetails objects that are returned by the
     # DescribeCommunications operation.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -679,13 +699,14 @@ module Aws::Support
     # Case data is available for 12 months after creation. If a case was
     # created more than 12 months ago, a request might return an error.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][2].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][2].
     #
     #  </note>
     #
@@ -699,7 +720,8 @@ module Aws::Support
     #   maximum number of cases is 100.
     #
     # @option params [String] :display_id
-    #   The ID displayed for a case in the AWS Support Center user interface.
+    #   The ID displayed for a case in the Amazon Web Services Support Center
+    #   user interface.
     #
     # @option params [String] :after_time
     #   The start date for a filtered date search on support case
@@ -722,10 +744,10 @@ module Aws::Support
     #   The maximum number of results to return before paginating.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The ISO 639-1 code for the language in which Amazon Web Services
+    #   provides support. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). Language parameters must be
+    #   passed explicitly for operations that take them.
     #
     # @option params [Boolean] :include_communications
     #   Specifies whether to include communications in the `DescribeCases`
@@ -801,13 +823,14 @@ module Aws::Support
     # that you want to display on each page, and use `nextToken` to specify
     # the resumption of pagination.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -874,26 +897,27 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the current list of AWS services and a list of service
-    # categories for each service. You then use service names and categories
-    # in your CreateCase requests. Each AWS service has its own set of
-    # categories.
+    # Returns the current list of Amazon Web Services services and a list of
+    # service categories for each service. You then use service names and
+    # categories in your CreateCase requests. Each Amazon Web Services
+    # service has its own set of categories.
     #
     # The service codes and category codes correspond to the values that
-    # appear in the **Service** and **Category** lists on the AWS Support
-    # Center [Create Case][1] page. The values in those fields don't
-    # necessarily match the service codes and categories returned by the
-    # `DescribeServices` operation. Always use the service codes and
-    # categories that the `DescribeServices` operation returns, so that you
-    # have the most recent set of service and category codes.
+    # appear in the **Service** and **Category** lists on the Amazon Web
+    # Services Support Center [Create Case][1] page. The values in those
+    # fields don't necessarily match the service codes and categories
+    # returned by the `DescribeServices` operation. Always use the service
+    # codes and categories that the `DescribeServices` operation returns, so
+    # that you have the most recent set of service and category codes.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][2].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][2].
     #
     #  </note>
     #
@@ -903,13 +927,14 @@ module Aws::Support
     # [2]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [Array<String>] :service_code_list
-    #   A JSON-formatted list of service codes available for AWS services.
+    #   A JSON-formatted list of service codes available for Amazon Web
+    #   Services services.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The ISO 639-1 code for the language in which Amazon Web Services
+    #   provides support. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). Language parameters must be
+    #   passed explicitly for operations that take them.
     #
     # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -944,13 +969,14 @@ module Aws::Support
     # case. The severity level for a case is also a field in the CaseDetails
     # data type that you include for a CreateCase request.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -959,10 +985,10 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The ISO 639-1 code for the language in which Amazon Web Services
+    #   provides support. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). Language parameters must be
+    #   passed explicitly for operations that take them.
     #
     # @return [Types::DescribeSeverityLevelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -989,8 +1015,8 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the refresh status of the AWS Trusted Advisor checks that have
-    # the specified check IDs. You can get the check IDs by calling the
+    # Returns the refresh status of the Trusted Advisor checks that have the
+    # specified check IDs. You can get the check IDs by calling the
     # DescribeTrustedAdvisorChecks operation.
     #
     # Some checks are refreshed automatically, and you can't return their
@@ -999,13 +1025,14 @@ module Aws::Support
     # this operation for these checks, you might see an
     # `InvalidParameterValue` error.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -1047,7 +1074,7 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the results of the AWS Trusted Advisor check that has the
+    # Returns the results of the Trusted Advisor check that has the
     # specified check ID. You can get the check IDs by calling the
     # DescribeTrustedAdvisorChecks operation.
     #
@@ -1069,13 +1096,14 @@ module Aws::Support
     #
     # * **checkId** - The unique identifier for the check.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -1087,10 +1115,10 @@ module Aws::Support
     #   The unique identifier for the Trusted Advisor check.
     #
     # @option params [String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The ISO 639-1 code for the language in which Amazon Web Services
+    #   provides support. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). Language parameters must be
+    #   passed explicitly for operations that take them.
     #
     # @return [Types::DescribeTrustedAdvisorCheckResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1131,19 +1159,20 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns the results for the AWS Trusted Advisor check summaries for
-    # the check IDs that you specified. You can get the check IDs by calling
-    # the DescribeTrustedAdvisorChecks operation.
+    # Returns the results for the Trusted Advisor check summaries for the
+    # check IDs that you specified. You can get the check IDs by calling the
+    # DescribeTrustedAdvisorChecks operation.
     #
     # The response contains an array of TrustedAdvisorCheckSummary objects.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -1187,20 +1216,21 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Returns information about all available AWS Trusted Advisor checks,
+    # Returns information about all available Trusted Advisor checks,
     # including the name, ID, category, description, and metadata. You must
-    # specify a language code. The AWS Support API currently supports
-    # English ("en") and Japanese ("ja"). The response contains a
-    # TrustedAdvisorCheckDescription object for each check. You must set the
-    # AWS Region to us-east-1.
+    # specify a language code. The Amazon Web Services Support API currently
+    # supports English ("en") and Japanese ("ja"). The response contains
+    # a TrustedAdvisorCheckDescription object for each check. You must set
+    # the Amazon Web Services Region to us-east-1.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     # * The names and descriptions for Trusted Advisor checks are subject to
     #   change. We recommend that you specify the check ID in your code to
@@ -1213,10 +1243,10 @@ module Aws::Support
     # [1]: http://aws.amazon.com/premiumsupport/
     #
     # @option params [required, String] :language
-    #   The ISO 639-1 code for the language in which AWS provides support. AWS
-    #   Support currently supports English ("en") and Japanese ("ja").
-    #   Language parameters must be passed explicitly for operations that take
-    #   them.
+    #   The ISO 639-1 code for the language in which Amazon Web Services
+    #   provides support. Amazon Web Services Support currently supports
+    #   English ("en") and Japanese ("ja"). Language parameters must be
+    #   passed explicitly for operations that take them.
     #
     # @return [Types::DescribeTrustedAdvisorChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1247,8 +1277,8 @@ module Aws::Support
       req.send_request(options)
     end
 
-    # Refreshes the AWS Trusted Advisor check that you specify using the
-    # check ID. You can get the check IDs by calling the
+    # Refreshes the Trusted Advisor check that you specify using the check
+    # ID. You can get the check IDs by calling the
     # DescribeTrustedAdvisorChecks operation.
     #
     # <note markdown="1"> Some checks are refreshed automatically. If you call the
@@ -1259,13 +1289,14 @@ module Aws::Support
     #
     # The response contains a TrustedAdvisorCheckRefreshStatus object.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -1309,13 +1340,14 @@ module Aws::Support
     # Resolves a support case. This operation takes a `caseId` and returns
     # the initial and final state of the case.
     #
-    # <note markdown="1"> * You must have a Business or Enterprise Support plan to use the AWS
-    #   Support API.
+    # <note markdown="1"> * You must have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan to use the Amazon Web Services Support API.
     #
-    # * If you call the AWS Support API from an account that does not have a
-    #   Business or Enterprise Support plan, the
-    #   `SubscriptionRequiredException` error message appears. For
-    #   information about changing your support plan, see [AWS Support][1].
+    # * If you call the Amazon Web Services Support API from an account that
+    #   does not have a Business, Enterprise On-Ramp, or Enterprise Support
+    #   plan, the `SubscriptionRequiredException` error message appears. For
+    #   information about changing your support plan, see [Amazon Web
+    #   Services Support][1].
     #
     #  </note>
     #
@@ -1366,7 +1398,7 @@ module Aws::Support
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-support'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

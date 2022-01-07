@@ -59,6 +59,6 @@ require_relative 'aws-sdk-autoscaling/customizations'
 # @!group service
 module Aws::AutoScaling
 
-  GEM_VERSION = '1.74.0'
+  GEM_VERSION = '1.76.0'
 
 end

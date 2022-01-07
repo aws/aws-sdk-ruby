@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-01-06)
+------------------
+
+* Feature - This release adds support for filler slate when updating MediaTailor channels that use the linear playback mode.
+
+1.50.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2021-11-04)
 ------------------
 

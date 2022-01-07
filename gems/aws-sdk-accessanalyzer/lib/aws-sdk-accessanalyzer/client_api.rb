@@ -199,6 +199,7 @@ module Aws::AccessAnalyzer
     ValidatePolicyFindingList = Shapes::ListShape.new(name: 'ValidatePolicyFindingList')
     ValidatePolicyFindingType = Shapes::StringShape.new(name: 'ValidatePolicyFindingType')
     ValidatePolicyRequest = Shapes::StructureShape.new(name: 'ValidatePolicyRequest')
+    ValidatePolicyResourceType = Shapes::StringShape.new(name: 'ValidatePolicyResourceType')
     ValidatePolicyResponse = Shapes::StructureShape.new(name: 'ValidatePolicyResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
@@ -798,6 +799,7 @@ module Aws::AccessAnalyzer
     ValidatePolicyRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ValidatePolicyRequest.add_member(:policy_document, Shapes::ShapeRef.new(shape: PolicyDocument, required: true, location_name: "policyDocument"))
     ValidatePolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    ValidatePolicyRequest.add_member(:validate_policy_resource_type, Shapes::ShapeRef.new(shape: ValidatePolicyResourceType, location_name: "validatePolicyResourceType"))
     ValidatePolicyRequest.struct_class = Types::ValidatePolicyRequest
 
     ValidatePolicyResponse.add_member(:findings, Shapes::ShapeRef.new(shape: ValidatePolicyFindingList, required: true, location_name: "findings"))

@@ -158,6 +158,7 @@ module Aws::S3
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Errors = Shapes::ListShape.new(name: 'Errors', flattened: true)
     Event = Shapes::StringShape.new(name: 'Event')
+    EventBridgeConfiguration = Shapes::StructureShape.new(name: 'EventBridgeConfiguration')
     EventList = Shapes::ListShape.new(name: 'EventList', flattened: true)
     ExistingObjectReplication = Shapes::StructureShape.new(name: 'ExistingObjectReplication')
     ExistingObjectReplicationStatus = Shapes::StringShape.new(name: 'ExistingObjectReplicationStatus')
@@ -521,6 +522,7 @@ module Aws::S3
     ServerSideEncryptionRules = Shapes::ListShape.new(name: 'ServerSideEncryptionRules', flattened: true)
     Setting = Shapes::BooleanShape.new(name: 'Setting')
     Size = Shapes::IntegerShape.new(name: 'Size')
+    SkipValidation = Shapes::BooleanShape.new(name: 'SkipValidation')
     SourceSelectionCriteria = Shapes::StructureShape.new(name: 'SourceSelectionCriteria')
     SseKmsEncryptedObjects = Shapes::StructureShape.new(name: 'SseKmsEncryptedObjects')
     SseKmsEncryptedObjectsStatus = Shapes::StringShape.new(name: 'SseKmsEncryptedObjectsStatus')
@@ -799,6 +801,7 @@ module Aws::S3
     CreateBucketRequest.add_member(:grant_write, Shapes::ShapeRef.new(shape: GrantWrite, location: "header", location_name: "x-amz-grant-write"))
     CreateBucketRequest.add_member(:grant_write_acp, Shapes::ShapeRef.new(shape: GrantWriteACP, location: "header", location_name: "x-amz-grant-write-acp"))
     CreateBucketRequest.add_member(:object_lock_enabled_for_bucket, Shapes::ShapeRef.new(shape: ObjectLockEnabledForBucket, location: "header", location_name: "x-amz-bucket-object-lock-enabled"))
+    CreateBucketRequest.add_member(:object_ownership, Shapes::ShapeRef.new(shape: ObjectOwnership, location: "header", location_name: "x-amz-object-ownership"))
     CreateBucketRequest.struct_class = Types::CreateBucketRequest
     CreateBucketRequest[:payload] = :create_bucket_configuration
     CreateBucketRequest[:payload_member] = CreateBucketRequest.member(:create_bucket_configuration)
@@ -1003,6 +1006,8 @@ module Aws::S3
     ErrorDocument.struct_class = Types::ErrorDocument
 
     Errors.member = Shapes::ShapeRef.new(shape: Error)
+
+    EventBridgeConfiguration.struct_class = Types::EventBridgeConfiguration
 
     EventList.member = Shapes::ShapeRef.new(shape: Event)
 
@@ -1739,6 +1744,7 @@ module Aws::S3
     NotificationConfiguration.add_member(:topic_configurations, Shapes::ShapeRef.new(shape: TopicConfigurationList, location_name: "TopicConfiguration"))
     NotificationConfiguration.add_member(:queue_configurations, Shapes::ShapeRef.new(shape: QueueConfigurationList, location_name: "QueueConfiguration"))
     NotificationConfiguration.add_member(:lambda_function_configurations, Shapes::ShapeRef.new(shape: LambdaFunctionConfigurationList, location_name: "CloudFunctionConfiguration"))
+    NotificationConfiguration.add_member(:event_bridge_configuration, Shapes::ShapeRef.new(shape: EventBridgeConfiguration, location_name: "EventBridgeConfiguration"))
     NotificationConfiguration.struct_class = Types::NotificationConfiguration
 
     NotificationConfigurationDeprecated.add_member(:topic_configuration, Shapes::ShapeRef.new(shape: TopicConfigurationDeprecated, location_name: "TopicConfiguration"))
@@ -1935,6 +1941,7 @@ module Aws::S3
     PutBucketNotificationConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
     PutBucketNotificationConfigurationRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, required: true, location_name: "NotificationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
     PutBucketNotificationConfigurationRequest.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location: "header", location_name: "x-amz-expected-bucket-owner"))
+    PutBucketNotificationConfigurationRequest.add_member(:skip_destination_validation, Shapes::ShapeRef.new(shape: SkipValidation, location: "header", location_name: "x-amz-skip-destination-validation"))
     PutBucketNotificationConfigurationRequest.struct_class = Types::PutBucketNotificationConfigurationRequest
     PutBucketNotificationConfigurationRequest[:payload] = :notification_configuration
     PutBucketNotificationConfigurationRequest[:payload_member] = PutBucketNotificationConfigurationRequest.member(:notification_configuration)

@@ -231,6 +231,7 @@ module Aws::S3
     #     grant_write: "GrantWrite",
     #     grant_write_acp: "GrantWriteACP",
     #     object_lock_enabled_for_bucket: false,
+    #     object_ownership: "BucketOwnerPreferred", # accepts BucketOwnerPreferred, ObjectWriter, BucketOwnerEnforced
     #   })
     # @param [Hash] options ({})
     # @option options [String] :acl
@@ -254,6 +255,23 @@ module Aws::S3
     # @option options [Boolean] :object_lock_enabled_for_bucket
     #   Specifies whether you want S3 Object Lock to be enabled for the new
     #   bucket.
+    # @option options [String] :object_ownership
+    #   The container element for object ownership for a bucket's ownership
+    #   controls.
+    #
+    #   BucketOwnerPreferred - Objects uploaded to the bucket change ownership
+    #   to the bucket owner if the objects are uploaded with the
+    #   `bucket-owner-full-control` canned ACL.
+    #
+    #   ObjectWriter - The uploading account will own the object if the object
+    #   is uploaded with the `bucket-owner-full-control` canned ACL.
+    #
+    #   BucketOwnerEnforced - Access control lists (ACLs) are disabled and no
+    #   longer affect permissions. The bucket owner automatically owns and has
+    #   full control over every object in the bucket. The bucket only accepts
+    #   PUT requests that don't specify an ACL or bucket owner full control
+    #   ACLs, such as the `bucket-owner-full-control` canned ACL or an
+    #   equivalent form of this ACL expressed in the XML format.
     # @return [Types::CreateBucketOutput]
     def create(options = {})
       options = options.merge(bucket: @name)
@@ -350,7 +368,7 @@ module Aws::S3
     #       "MetadataKey" => "MetadataValue",
     #     },
     #     server_side_encryption: "AES256", # accepts AES256, aws:kms
-    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS
+    #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER, DEEP_ARCHIVE, OUTPOSTS, GLACIER_IR
     #     website_redirect_location: "WebsiteRedirectLocation",
     #     sse_customer_algorithm: "SSECustomerAlgorithm",
     #     sse_customer_key: "SSECustomerKey",

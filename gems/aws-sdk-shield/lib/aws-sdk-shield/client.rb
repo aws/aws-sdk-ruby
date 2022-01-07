@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -73,6 +74,7 @@ module Aws::Shield
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -119,7 +121,9 @@ module Aws::Shield
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::Shield
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -305,7 +313,7 @@ module Aws::Shield
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -320,6 +328,9 @@ module Aws::Shield
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -357,8 +368,8 @@ module Aws::Shield
     #
     #
     #
-    # [1]: https://aws.amazon.com/premiumsupport/business-support/
-    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    # [1]: https://docs.aws.amazon.com/premiumsupport/business-support/
+    # [2]: https://docs.aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
     #   The Amazon S3 bucket that contains the logs that you want to share.
@@ -391,13 +402,12 @@ module Aws::Shield
     # `RoleArn`.
     #
     # Prior to making the `AssociateDRTRole` request, you must attach the
-    # [AWSShieldDRTAccessPolicy][1] managed policy to the role you will
-    # specify in the request. For more information see [Attaching and
-    # Detaching IAM Policies](
-    # https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html).
-    # The role must also trust the service principal `
-    # drt.shield.amazonaws.com`. For more information, see [IAM JSON Policy
-    # Elements: Principal][2].
+    # `AWSShieldDRTAccessPolicy` managed policy to the role that you'll
+    # specify in the request. You can access this policy in the IAM console
+    # at [AWSShieldDRTAccessPolicy][1]. For more information see [Adding and
+    # removing IAM identity permissions][2]. The role must also trust the
+    # service principal `drt.shield.amazonaws.com`. For more information,
+    # see [IAM JSON policy elements: Principal][3].
     #
     # The SRT will have access only to your WAF and Shield resources. By
     # submitting this request, you authorize the SRT to inspect your WAF and
@@ -406,20 +416,21 @@ module Aws::Shield
     # by you.
     #
     # You must have the `iam:PassRole` permission to make an
-    # `AssociateDRTRole` request. For more information, see [Granting a User
-    # Permissions to Pass a Role to an Amazon Web Services Service][3].
+    # `AssociateDRTRole` request. For more information, see [Granting a user
+    # permissions to pass a role to an Amazon Web Services service][4].
     #
     # To use the services of the SRT and make an `AssociateDRTRole` request,
-    # you must be subscribed to the [Business Support plan][4] or the
-    # [Enterprise Support plan][5].
+    # you must be subscribed to the [Business Support plan][5] or the
+    # [Enterprise Support plan][6].
     #
     #
     #
     # [1]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy
-    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
-    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
-    # [4]: https://aws.amazon.com/premiumsupport/business-support/
-    # [5]: https://aws.amazon.com/premiumsupport/enterprise-support/
+    # [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
+    # [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+    # [5]: https://docs.aws.amazon.com/premiumsupport/business-support/
+    # [6]: https://docs.aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role the SRT will use to access
@@ -454,9 +465,9 @@ module Aws::Shield
     # Adds health-based detection to the Shield Advanced protection for a
     # resource. Shield Advanced health-based detection uses the health of
     # your Amazon Web Services resource to improve responsiveness and
-    # accuracy in attack detection and mitigation.
+    # accuracy in attack detection and response.
     #
-    # You define the health check in Route 53 and then associate it with
+    # You define the health check in Route 53 and then associate it with
     # your Shield Advanced protection. For more information, see [Shield
     # Advanced Health-Based Detection][1] in the *WAF Developer Guide*.
     #
@@ -550,17 +561,18 @@ module Aws::Shield
     # Enables Shield Advanced for a specific Amazon Web Services resource.
     # The resource can be an Amazon CloudFront distribution, Elastic Load
     # Balancing load balancer, Global Accelerator accelerator, Elastic IP
-    # Address, or an Amazon Route 53 hosted zone.
+    # Address, or an Amazon Route 53 hosted zone.
     #
     # You can add protection to only a single resource with each
-    # CreateProtection request. If you want to add protection to multiple
-    # resources at once, use the [WAF console][1]. For more information see
-    # [Getting Started with Shield Advanced][2] and [Add Shield Advanced
-    # Protection to more Amazon Web Services Resources][3].
+    # `CreateProtection` request. You can add protection to multiple
+    # resources at once through the Shield Advanced console at
+    # [https://console.aws.amazon.com/wafv2/shieldv2#/][1]. For more
+    # information see [Getting Started with Shield Advanced][2] and [Adding
+    # Shield Advanced protection to Amazon Web Services resources][3].
     #
     #
     #
-    # [1]: https://console.aws.amazon.com/waf/
+    # [1]: https://console.aws.amazon.com/wafv2/shieldv2#/
     # [2]: https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html
     # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html
     #
@@ -586,7 +598,7 @@ module Aws::Shield
     #   * For an Global Accelerator accelerator:
     #     `arn:aws:globalaccelerator::account-id:accelerator/accelerator-id `
     #
-    #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
+    #   * For Amazon Route 53: `arn:aws:route53:::hostedzone/hosted-zone-id `
     #
     #   * For an Elastic IP address:
     #     `arn:aws:ec2:region:account-id:eip-allocation/allocation-id `
@@ -781,7 +793,7 @@ module Aws::Shield
     # Describes the details of a DDoS attack.
     #
     # @option params [required, String] :attack_id
-    #   The unique identifier (ID) for the attack that to be described.
+    #   The unique identifier (ID) for the attack.
     #
     # @return [Types::DescribeAttackResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -965,6 +977,7 @@ module Aws::Shield
     #   resp.protection.health_check_ids #=> Array
     #   resp.protection.health_check_ids[0] #=> String
     #   resp.protection.protection_arn #=> String
+    #   resp.protection.application_layer_automatic_response_configuration.status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DescribeProtection AWS API Documentation
     #
@@ -1044,6 +1057,31 @@ module Aws::Shield
       req.send_request(options)
     end
 
+    # Disable the Shield Advanced automatic application layer DDoS
+    # mitigation feature for the resource. This stops Shield Advanced from
+    # creating, verifying, and applying WAF rules for attacks that it
+    # detects for the resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN (Amazon Resource Name) of the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_application_layer_automatic_response({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisableApplicationLayerAutomaticResponse AWS API Documentation
+    #
+    # @overload disable_application_layer_automatic_response(params = {})
+    # @param [Hash] params ({})
+    def disable_application_layer_automatic_response(params = {}, options = {})
+      req = build_request(:disable_application_layer_automatic_response, params)
+      req.send_request(options)
+    end
+
     # Removes authorization from the Shield Response Team (SRT) to notify
     # contacts about escalations to the SRT and to initiate proactive
     # customer support.
@@ -1061,18 +1099,6 @@ module Aws::Shield
 
     # Removes the Shield Response Team's (SRT) access to the specified
     # Amazon S3 bucket containing the logs that you shared previously.
-    #
-    # To make a `DisassociateDRTLogBucket` request, you must be subscribed
-    # to the [Business Support plan][1] or the [Enterprise Support plan][2].
-    # However, if you are not subscribed to one of these support plans, but
-    # had been previously and had granted the SRT access to your account,
-    # you can submit a `DisassociateDRTLogBucket` request to remove this
-    # access.
-    #
-    #
-    #
-    # [1]: https://aws.amazon.com/premiumsupport/business-support/
-    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
     #
     # @option params [required, String] :log_bucket
     #   The Amazon S3 bucket that contains the logs that you want to share.
@@ -1097,17 +1123,6 @@ module Aws::Shield
     # Removes the Shield Response Team's (SRT) access to your Amazon Web
     # Services account.
     #
-    # To make a `DisassociateDRTRole` request, you must be subscribed to the
-    # [Business Support plan][1] or the [Enterprise Support plan][2].
-    # However, if you are not subscribed to one of these support plans, but
-    # had been previously and had granted the SRT access to your account,
-    # you can submit a `DisassociateDRTRole` request to remove this access.
-    #
-    #
-    #
-    # [1]: https://aws.amazon.com/premiumsupport/business-support/
-    # [2]: https://aws.amazon.com/premiumsupport/enterprise-support/
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/DisassociateDRTRole AWS API Documentation
@@ -1122,9 +1137,9 @@ module Aws::Shield
     # Removes health-based detection from the Shield Advanced protection for
     # a resource. Shield Advanced health-based detection uses the health of
     # your Amazon Web Services resource to improve responsiveness and
-    # accuracy in attack detection and mitigation.
+    # accuracy in attack detection and response.
     #
-    # You define the health check in Route 53 and then associate or
+    # You define the health check in Route 53 and then associate or
     # disassociate it with your Shield Advanced protection. For more
     # information, see [Shield Advanced Health-Based Detection][1] in the
     # *WAF Developer Guide*.
@@ -1156,6 +1171,76 @@ module Aws::Shield
     # @param [Hash] params ({})
     def disassociate_health_check(params = {}, options = {})
       req = build_request(:disassociate_health_check, params)
+      req.send_request(options)
+    end
+
+    # Enable the Shield Advanced automatic application layer DDoS mitigation
+    # for the resource.
+    #
+    # <note markdown="1"> This feature is available for Amazon CloudFront distributions only.
+    #
+    #  </note>
+    #
+    # This causes Shield Advanced to create, verify, and apply WAF rules for
+    # DDoS attacks that it detects for the resource. Shield Advanced applies
+    # the rules in a Shield rule group inside the web ACL that you've
+    # associated with the resource. For information about how automatic
+    # mitigation works and the requirements for using it, see [Shield
+    # Advanced automatic application layer DDoS mitigation][1].
+    #
+    # Don't use this action to make changes to automatic mitigation
+    # settings when it's already enabled for a resource. Instead, use
+    # UpdateApplicationLayerAutomaticResponse.
+    #
+    # To use this feature, you must associate a web ACL with the protected
+    # resource. The web ACL must be created using the latest version of WAF
+    # (v2). You can associate the web ACL through the Shield Advanced
+    # console at [https://console.aws.amazon.com/wafv2/shieldv2#/][2]. For
+    # more information, see [Getting Started with Shield Advanced][3].
+    #
+    # You can also do this through the WAF console or the WAF API, but you
+    # must manage Shield Advanced automatic mitigation through Shield
+    # Advanced. For information about WAF, see [WAF Developer Guide][4].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-automatic-app-layer-response.html
+    # [2]: https://console.aws.amazon.com/wafv2/shieldv2#/
+    # [3]: https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html
+    # [4]: https://docs.aws.amazon.com/waf/latest/developerguide/
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN (Amazon Resource Name) of the resource.
+    #
+    # @option params [required, Types::ResponseAction] :action
+    #   Specifies the action setting that Shield Advanced should use in the
+    #   WAF rules that it creates on behalf of the protected resource in
+    #   response to DDoS attacks. You specify this as part of the
+    #   configuration for the automatic application layer DDoS mitigation
+    #   feature, when you enable or update automatic mitigation. Shield
+    #   Advanced creates the WAF rules in a Shield Advanced-managed rule
+    #   group, inside the web ACL that you have associated with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_application_layer_automatic_response({
+    #     resource_arn: "ResourceArn", # required
+    #     action: { # required
+    #       block: {
+    #       },
+    #       count: {
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/EnableApplicationLayerAutomaticResponse AWS API Documentation
+    #
+    # @overload enable_application_layer_automatic_response(params = {})
+    # @param [Hash] params ({})
+    def enable_application_layer_automatic_response(params = {}, options = {})
+      req = build_request(:enable_application_layer_automatic_response, params)
       req.send_request(options)
     end
 
@@ -1197,44 +1282,56 @@ module Aws::Shield
     # specified time period.
     #
     # @option params [Array<String>] :resource_arns
-    #   The ARN (Amazon Resource Name) of the resource that was attacked. If
-    #   this is left blank, all applicable resources for this account will be
-    #   included.
+    #   The ARNs (Amazon Resource Names) of the resources that were attacked.
+    #   If you leave this blank, all applicable resources for this account
+    #   will be included.
     #
     # @option params [Types::TimeRange] :start_time
     #   The start of the time period for the attacks. This is a `timestamp`
-    #   type. The sample request above indicates a `number` type because the
-    #   default used by WAF is Unix time in seconds. However any valid
-    #   [timestamp format][1] is allowed.
+    #   type. The request syntax listing for this call indicates a `number`
+    #   type, but you can provide the time in any valid [timestamp format][1]
+    #   setting.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
     #
     # @option params [Types::TimeRange] :end_time
     #   The end of the time period for the attacks. This is a `timestamp`
-    #   type. The sample request above indicates a `number` type because the
-    #   default used by WAF is Unix time in seconds. However any valid
-    #   [timestamp format][1] is allowed.
+    #   type. The request syntax listing for this call indicates a `number`
+    #   type, but you can provide the time in any valid [timestamp format][1]
+    #   setting.
     #
     #
     #
-    #   [1]: http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
     #
     # @option params [String] :next_token
-    #   The `ListAttacksRequest.NextMarker` value from a previous call to
-    #   `ListAttacksRequest`. Pass null if this is the first call.
+    #   When you request a list of objects from Shield Advanced, if the
+    #   response does not include all of the remaining available objects,
+    #   Shield Advanced includes a `NextToken` value in the response. You can
+    #   retrieve the next batch of objects by requesting the list again and
+    #   providing the token that was returned by the prior call in your
+    #   request.
+    #
+    #   You can indicate the maximum number of objects that you want Shield
+    #   Advanced to return for a single call with the `MaxResults` setting.
+    #   Shield Advanced will not return more than `MaxResults` objects, but
+    #   may return fewer, even if more objects are still available.
+    #
+    #   Whenever more objects remain that Shield Advanced has not yet returned
+    #   to you, the response will include a `NextToken` value.
+    #
+    #   On your first call to a list operation, leave this setting empty.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of AttackSummary objects to return. If you leave
-    #   this blank, Shield Advanced returns the first 20 results.
+    #   The greatest number of objects that you want Shield Advanced to return
+    #   to the list request. Shield Advanced might return fewer objects than
+    #   you indicate in this setting, even if more objects are available. If
+    #   there are more objects remaining, Shield Advanced will always also
+    #   return a `NextToken` value in the response.
     #
-    #   This is a maximum value. Shield Advanced might return the results in
-    #   smaller batches. That is, the number of objects returned could be less
-    #   than `MaxResults`, even if there are still more objects yet to return.
-    #   If there are more objects to return, Shield Advanced returns a value
-    #   in `NextToken` that you can use in your next request, to get the next
-    #   batch of objects.
+    #   The default setting is 20.
     #
     # @return [Types::ListAttacksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1282,19 +1379,31 @@ module Aws::Shield
     # Retrieves the ProtectionGroup objects for the account.
     #
     # @option params [String] :next_token
-    #   The next token value from a previous call to `ListProtectionGroups`.
-    #   Pass null if this is the first call.
+    #   When you request a list of objects from Shield Advanced, if the
+    #   response does not include all of the remaining available objects,
+    #   Shield Advanced includes a `NextToken` value in the response. You can
+    #   retrieve the next batch of objects by requesting the list again and
+    #   providing the token that was returned by the prior call in your
+    #   request.
+    #
+    #   You can indicate the maximum number of objects that you want Shield
+    #   Advanced to return for a single call with the `MaxResults` setting.
+    #   Shield Advanced will not return more than `MaxResults` objects, but
+    #   may return fewer, even if more objects are still available.
+    #
+    #   Whenever more objects remain that Shield Advanced has not yet returned
+    #   to you, the response will include a `NextToken` value.
+    #
+    #   On your first call to a list operation, leave this setting empty.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of ProtectionGroup objects to return. If you leave
-    #   this blank, Shield Advanced returns the first 20 results.
+    #   The greatest number of objects that you want Shield Advanced to return
+    #   to the list request. Shield Advanced might return fewer objects than
+    #   you indicate in this setting, even if more objects are available. If
+    #   there are more objects remaining, Shield Advanced will always also
+    #   return a `NextToken` value in the response.
     #
-    #   This is a maximum value. Shield Advanced might return the results in
-    #   smaller batches. That is, the number of objects returned could be less
-    #   than `MaxResults`, even if there are still more objects yet to return.
-    #   If there are more objects to return, Shield Advanced returns a value
-    #   in `NextToken` that you can use in your next request, to get the next
-    #   batch of objects.
+    #   The default setting is 20.
     #
     # @return [Types::ListProtectionGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1334,19 +1443,31 @@ module Aws::Shield
     # Lists all Protection objects for the account.
     #
     # @option params [String] :next_token
-    #   The `ListProtectionsRequest.NextToken` value from a previous call to
-    #   `ListProtections`. Pass null if this is the first call.
+    #   When you request a list of objects from Shield Advanced, if the
+    #   response does not include all of the remaining available objects,
+    #   Shield Advanced includes a `NextToken` value in the response. You can
+    #   retrieve the next batch of objects by requesting the list again and
+    #   providing the token that was returned by the prior call in your
+    #   request.
+    #
+    #   You can indicate the maximum number of objects that you want Shield
+    #   Advanced to return for a single call with the `MaxResults` setting.
+    #   Shield Advanced will not return more than `MaxResults` objects, but
+    #   may return fewer, even if more objects are still available.
+    #
+    #   Whenever more objects remain that Shield Advanced has not yet returned
+    #   to you, the response will include a `NextToken` value.
+    #
+    #   On your first call to a list operation, leave this setting empty.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of Protection objects to return. If you leave this
-    #   blank, Shield Advanced returns the first 20 results.
+    #   The greatest number of objects that you want Shield Advanced to return
+    #   to the list request. Shield Advanced might return fewer objects than
+    #   you indicate in this setting, even if more objects are available. If
+    #   there are more objects remaining, Shield Advanced will always also
+    #   return a `NextToken` value in the response.
     #
-    #   This is a maximum value. Shield Advanced might return the results in
-    #   smaller batches. That is, the number of objects returned could be less
-    #   than `MaxResults`, even if there are still more objects yet to return.
-    #   If there are more objects to return, Shield Advanced returns a value
-    #   in `NextToken` that you can use in your next request, to get the next
-    #   batch of objects.
+    #   The default setting is 20.
     #
     # @return [Types::ListProtectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1371,6 +1492,7 @@ module Aws::Shield
     #   resp.protections[0].health_check_ids #=> Array
     #   resp.protections[0].health_check_ids[0] #=> String
     #   resp.protections[0].protection_arn #=> String
+    #   resp.protections[0].application_layer_automatic_response_configuration.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/ListProtections AWS API Documentation
@@ -1390,19 +1512,31 @@ module Aws::Shield
     #   example to update, delete, or describe it.
     #
     # @option params [String] :next_token
-    #   The next token value from a previous call to
-    #   `ListResourcesInProtectionGroup`. Pass null if this is the first call.
+    #   When you request a list of objects from Shield Advanced, if the
+    #   response does not include all of the remaining available objects,
+    #   Shield Advanced includes a `NextToken` value in the response. You can
+    #   retrieve the next batch of objects by requesting the list again and
+    #   providing the token that was returned by the prior call in your
+    #   request.
+    #
+    #   You can indicate the maximum number of objects that you want Shield
+    #   Advanced to return for a single call with the `MaxResults` setting.
+    #   Shield Advanced will not return more than `MaxResults` objects, but
+    #   may return fewer, even if more objects are still available.
+    #
+    #   Whenever more objects remain that Shield Advanced has not yet returned
+    #   to you, the response will include a `NextToken` value.
+    #
+    #   On your first call to a list operation, leave this setting empty.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of resource ARN objects to return. If you leave
-    #   this blank, Shield Advanced returns the first 20 results.
+    #   The greatest number of objects that you want Shield Advanced to return
+    #   to the list request. Shield Advanced might return fewer objects than
+    #   you indicate in this setting, even if more objects are available. If
+    #   there are more objects remaining, Shield Advanced will always also
+    #   return a `NextToken` value in the response.
     #
-    #   This is a maximum value. Shield Advanced might return the results in
-    #   smaller batches. That is, the number of objects returned could be less
-    #   than `MaxResults`, even if there are still more objects yet to return.
-    #   If there are more objects to return, Shield Advanced returns a value
-    #   in `NextToken` that you can use in your next request, to get the next
-    #   batch of objects.
+    #   The default setting is 20.
     #
     # @return [Types::ListResourcesInProtectionGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1521,6 +1655,44 @@ module Aws::Shield
     # @param [Hash] params ({})
     def untag_resource(params = {}, options = {})
       req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing Shield Advanced automatic application layer DDoS
+    # mitigation configuration for the specified resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN (Amazon Resource Name) of the resource.
+    #
+    # @option params [required, Types::ResponseAction] :action
+    #   Specifies the action setting that Shield Advanced should use in the
+    #   WAF rules that it creates on behalf of the protected resource in
+    #   response to DDoS attacks. You specify this as part of the
+    #   configuration for the automatic application layer DDoS mitigation
+    #   feature, when you enable or update automatic mitigation. Shield
+    #   Advanced creates the WAF rules in a Shield Advanced-managed rule
+    #   group, inside the web ACL that you have associated with the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_application_layer_automatic_response({
+    #     resource_arn: "ResourceArn", # required
+    #     action: { # required
+    #       block: {
+    #       },
+    #       count: {
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/shield-2016-06-02/UpdateApplicationLayerAutomaticResponse AWS API Documentation
+    #
+    # @overload update_application_layer_automatic_response(params = {})
+    # @param [Hash] params ({})
+    def update_application_layer_automatic_response(params = {}, options = {})
+      req = build_request(:update_application_layer_automatic_response, params)
       req.send_request(options)
     end
 
@@ -1668,7 +1840,7 @@ module Aws::Shield
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-shield'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

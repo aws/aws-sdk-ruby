@@ -43,9 +43,12 @@ module Aws::Glue
   # * {IllegalWorkflowStateException}
   # * {InternalServiceException}
   # * {InvalidInputException}
+  # * {InvalidStateException}
   # * {MLTransformNotReadyException}
   # * {NoScheduleException}
   # * {OperationTimeoutException}
+  # * {PermissionTypeMismatchException}
+  # * {ResourceNotReadyException}
   # * {ResourceNumberLimitExceededException}
   # * {SchedulerNotRunningException}
   # * {SchedulerRunningException}
@@ -299,6 +302,21 @@ module Aws::Glue
       end
     end
 
+    class InvalidStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::InvalidStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class MLTransformNotReadyException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -334,6 +352,36 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::OperationTimeoutException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class PermissionTypeMismatchException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::PermissionTypeMismatchException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ResourceNotReadyException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::ResourceNotReadyException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

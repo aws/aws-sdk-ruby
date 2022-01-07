@@ -48,6 +48,6 @@ require_relative 'aws-sdk-sagemakeredgemanager/customizations'
 # @!group service
 module Aws::SagemakerEdgeManager
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.9.0'
 
 end

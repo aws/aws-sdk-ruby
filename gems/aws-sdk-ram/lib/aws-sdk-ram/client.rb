@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::RAM
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::RAM
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::RAM
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::RAM
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::RAM
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -337,14 +348,32 @@ module Aws::RAM
     # @!group API Operations
 
     # Accepts an invitation to a resource share from another Amazon Web
-    # Services account.
+    # Services account. After you accept the invitation, the resources
+    # included in the resource share are available to interact with in the
+    # relevant Amazon Web Services Management Consoles and tools.
     #
     # @option params [required, String] :resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   The [Amazon Resoure Name (ARN)][1] of the invitation that you want to
+    #   accept.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::AcceptResourceShareInvitationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -389,42 +418,78 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Associates the specified resource share with the specified principals
-    # and resources.
+    # Adds the specified list of principals and list of resources to a
+    # resource share. Principals that already have access to this resource
+    # share immediately receive access to the added resources. Newly added
+    # principals immediately receive access to the resources shared in this
+    # resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to add principals or resources to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] of the resources
+    #   that you want to share. This can be `null` if you want to add only
+    #   principals.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :principals
-    #   The principals to associate with the resource share. The possible
-    #   values are:
+    #   Specifies a list of principals to whom you want to the resource share.
+    #   This can be `null` if you want to add only resources.
     #
-    #   * An Amazon Web Services account ID
+    #   What the principals can do with the resources in the share is
+    #   determined by the RAM permissions that you associate with the resource
+    #   share. See AssociateResourceSharePermission.
     #
-    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #   You can include the following values:
     #
-    #   * An ARN of an organizational unit (OU) in Organizations
+    #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An ARN of an IAM role
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
     #
-    #   * An ARN of an IAM user
+    #   * An ARN of an organizational unit (OU) in Organizations, for example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
     #
-    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users. For
-    #   more information, see [Sharing with IAM roles and IAM users][1] in the
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::AssociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -463,28 +528,64 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Associates a permission with a resource share.
+    # Adds or replaces the RAM permission for a resource type included in a
+    # resource share. You can have exactly one permission associated with
+    # each resource type in the resource share. You can add a new RAM
+    # permission only if there are currently no resources of that resource
+    # type currently in the resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share to
+    #   which you want to add or replace permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the RAM permission to associate with
-    #   the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission to
+    #   associate with the resource share. To find the ARN for a permission,
+    #   use either the ListPermissions operation or go to the [Permissions
+    #   library][2] page in the RAM console and then choose the name of the
+    #   permission. The ARN is displayed on the detail page.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #
     # @option params [Boolean] :replace
-    #   Indicates whether the permission should replace the permissions that
-    #   are currently associated with the resource share. Use `true` to
-    #   replace the current permissions. Use `false` to add the permission to
-    #   the current permission.
+    #   Specifies whether the specified permission should replace or add to
+    #   the existing permission associated with the resource share. Use `true`
+    #   to replace the current permissions. Use `false` to add the permission
+    #   to the current permission. The default value is `false`.
+    #
+    #   <note markdown="1"> A resource share can have only one permission per resource type. If a
+    #   resource share already has a permission for the specified resource
+    #   type and you don't set `replace` to `true` then the operation returns
+    #   an error. This helps prevent accidental overwriting of a permission.
+    #
+    #    </note>
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [Integer] :permission_version
-    #   The version of the RAM permissions to associate with the resource
-    #   share.
+    #   Specifies the version of the RAM permission to associate with the
+    #   resource share. If you don't specify this parameter, the operation
+    #   uses the version designated as the default.
     #
     # @return [Types::AssociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -515,10 +616,10 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Creates a resource share. You must provide a list of the Amazon
-    # Resource Names (ARNs) for the resources you want to share. You must
-    # also specify who you want to share the resources with, and the
-    # permissions that you grant them.
+    # Creates a resource share. You can provide a list of the [Amazon
+    # Resource Names (ARNs)][1] for the resources that you want to share, a
+    # list of principals you want to share the resources with, and the
+    # permissions to grant those principals.
     #
     # <note markdown="1"> Sharing a resource makes it available for use by principals outside of
     # the Amazon Web Services account that created the resource. Sharing
@@ -527,53 +628,86 @@ module Aws::RAM
     #
     #  </note>
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [required, String] :name
-    #   The name of the resource share.
+    #   Specifies the name of the resource share.
     #
     # @option params [Array<String>] :resource_arns
-    #   The ARNs of the resources to associate with the resource share.
+    #   Specifies a list of one or more ARNs of the resources to associate
+    #   with the resource share.
     #
     # @option params [Array<String>] :principals
-    #   The principals to associate with the resource share. The possible
-    #   values are:
+    #   Specifies a list of one or more principals to associate with the
+    #   resource share.
     #
-    #   * An Amazon Web Services account ID
+    #   You can include the following values:
     #
-    #   * An Amazon Resource Name (ARN) of an organization in Organizations
+    #   * An Amazon Web Services account ID, for example: `123456789012`
     #
-    #   * An ARN of an organizational unit (OU) in Organizations
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
     #
-    #   * An ARN of an IAM role
+    #   * An ARN of an organizational unit (OU) in Organizations, for example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
     #
-    #   * An ARN of an IAM user
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
     #
-    #   <note markdown="1"> Not all resource types can be shared with IAM roles and IAM users. For
-    #   more information, see [Sharing with IAM roles and IAM users][1] in the
+    #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
     #   *Resource Access Manager User Guide*.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [Array<Types::Tag>] :tags
-    #   One or more tags.
+    #   Specifies one or more tags to attach to the resource share itself. It
+    #   doesn't attach the tags to the resources associated with the resource
+    #   share.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization in
-    #   Organizations can be associated with a resource share.
+    #   Specifies whether principals outside your organization in
+    #   Organizations can be associated with a resource share. A value of
+    #   `true` lets you share with individual Amazon Web Services accounts
+    #   that are *not* in your organization. A value of `false` only has
+    #   meaning if your account is a member of an Amazon Web Services
+    #   Organization. The default value is `true`.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @option params [Array<String>] :permission_arns
-    #   The Amazon Resource Names (ARNs) of the permissions to associate with
-    #   the resource share. If you do not specify an ARN for the permission,
-    #   RAM automatically attaches the default version of the permission for
-    #   each resource type. Only one permission can be associated with each
-    #   resource type in a resource share.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the RAM permission
+    #   to associate with the resource share. If you do not specify an ARN for
+    #   the permission, RAM automatically attaches the default version of the
+    #   permission for each resource type. You can associate only one
+    #   permission with each resource type included in the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::CreateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -622,14 +756,33 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Deletes the specified resource share.
+    # Deletes the specified resource share. This doesn't delete any of the
+    # resources that were associated with the resource share; it only stops
+    # the sharing of those resources outside of the Amazon Web Services
+    # account that created them.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share to
+    #   delete.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::DeleteResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -661,17 +814,68 @@ module Aws::RAM
     # resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies [Amazon Resoure Name (ARN)][1] of the resource share that
+    #   you want to remove resources from.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] for one or more
+    #   resources that you want to remove from the resource share. After the
+    #   operation runs, these resources are no longer shared with principals
+    #   outside of the Amazon Web Services account that created the resources.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :principals
-    #   The principals.
+    #   Specifies a list of one or more principals that no longer are to have
+    #   access to the resources in this resource share.
+    #
+    #   You can include the following values:
+    #
+    #   * An Amazon Web Services account ID, for example: `123456789012`
+    #
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations, for example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
+    #
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::DisassociateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -710,18 +914,42 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Disassociates an RAM permission from a resource share.
+    # Disassociates an RAM permission from a resource share. Permission
+    # changes take effect immediately. You can remove a RAM permission from
+    # a resource share only if there are currently no resources of the
+    # relevant resource type currently attached to the resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the resource share from which
+    #   you want to disassociate a permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the permission to disassociate from
-    #   the resource share.
+    #   The [Amazon Resoure Name (ARN)][1] of the permission to disassociate
+    #   from the resource share. Changes to permissions take effect
+    #   immediately.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::DisassociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -751,8 +979,16 @@ module Aws::RAM
     end
 
     # Enables resource sharing within your organization in Organizations.
+    # Calling this operation enables RAM to retrieve information about the
+    # organization and its structure. This lets you share resources with all
+    # of the accounts in an organization by specifying the organization's
+    # ID, or all of the accounts in an organizational unit (OU) by
+    # specifying the OU's ID. Until you enable sharing within the
+    # organization, you can specify only individual Amazon Web Services
+    # accounts, or for supported resource types, IAM users and roles.
     #
-    # The caller must be the master account for the organization.
+    # You must call this operation from an IAM user or role in the
+    # organization's management account.
     #
     # @return [Types::EnableSharingWithAwsOrganizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -774,10 +1010,21 @@ module Aws::RAM
     # Gets the contents of an RAM permission in JSON format.
     #
     # @option params [required, String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the permission.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the permission whose
+    #   contents you want to retrieve. To find the ARN for a permission, use
+    #   either the ListPermissions operation or go to the [Permissions
+    #   library][2] page in the RAM console and then choose the name of the
+    #   permission. The ARN is displayed on the detail page.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #
     # @option params [Integer] :permission_version
-    #   The identifier for the version of the permission.
+    #   Specifies identifier for the version of the RAM permission to
+    #   retrieve. If you don't specify this parameter, the operation
+    #   retrieves the default version.
     #
     # @return [Types::GetPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -811,22 +1058,38 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the policies for the specified resources that you own and have
-    # shared.
+    # Retrieves the resource policies for the specified resources that you
+    # own and have shared.
     #
     # @option params [required, Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the resources whose
+    #   policies you want to retrieve.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :principal
-    #   The principal.
+    #   Specifies the principal.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::GetResourcePoliciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -859,35 +1122,73 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the resources or principals for the resource shares that you own.
+    # Retrieves the resource and principal associations for resource shares
+    # that you own.
     #
     # @option params [required, String] :association_type
-    #   The association type. Specify `PRINCIPAL` to list the principals that
-    #   are associated with the specified resource share. Specify `RESOURCE`
-    #   to list the resources that are associated with the specified resource
-    #   share.
+    #   Specifies whether you want to retrieve the associations that involve a
+    #   specified resource or principal.
+    #
+    #   * `PRINCIPAL` – list the principals that are associated with the
+    #     specified resource share.
+    #
+    #   * `RESOURCE` – list the resources that are associated with the
+    #     specified resource share.
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies a list of [Amazon Resource Names (ARNs)][1] of the resource
+    #   share whose associations you want to retrieve.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource. You cannot specify
-    #   this parameter if the association type is `PRINCIPAL`.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource whose
+    #   resource shares you want to retrieve.
+    #
+    #   You cannot specify this parameter if the association type is
+    #   `PRINCIPAL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :principal
-    #   The principal. You cannot specify this parameter if the association
-    #   type is `RESOURCE`.
+    #   Specifies the ID of the principal whose resource shares you want to
+    #   retrieve. This can be an Amazon Web Services account ID, an
+    #   organization ID, an organizational unit ID, or the [Amazon Resoure
+    #   Name (ARN)][1] of an individual IAM user or role.
+    #
+    #   You cannot specify this parameter if the association type is
+    #   `RESOURCE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :association_status
-    #   The association status.
+    #   Specifies that you want to retrieve only associations with this
+    #   status.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::GetResourceShareAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -931,21 +1232,44 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the invitations that you have received for resource shares.
+    # Retrieves details about invitations that you have received for
+    # resource shares.
     #
     # @option params [Array<String>] :resource_share_invitation_arns
-    #   The Amazon Resource Names (ARN) of the invitations.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of the resource share
+    #   invitations you want information about.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want details about invitations only for the
+    #   resource shares described by this list of [Amazon Resource Names
+    #   (ARNs)][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::GetResourceShareInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -995,35 +1319,65 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Gets the resource shares that you own or the resource shares that are
+    # Retrieves details about the resource shares that you own or that are
     # shared with you.
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARNs) of the resource shares.
+    #   Specifies the [Amazon Resource Names (ARNs)][1] of individual resource
+    #   shares that you want information about.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :resource_share_status
-    #   The status of the resource share.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that have this status.
     #
     # @option params [required, String] :resource_owner
-    #   The type of owner.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that match the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
+    #     share with you
     #
     # @option params [String] :name
-    #   The name of the resource share.
+    #   Specifies the name of an individual resource share that you want to
+    #   retrieve details about.
     #
     # @option params [Array<Types::TagFilter>] :tag_filters
-    #   One or more tag filters.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that match the specified tag keys and values.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @option params [String] :permission_arn
-    #   The Amazon Resource Name (ARN) of the RAM permission that is
-    #   associated with the resource share.
+    #   Specifies that you want to retrieve details of only those resource
+    #   shares that use the RAM permission with this [Amazon Resoure Name
+    #   (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::GetResourceSharesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1077,18 +1431,51 @@ module Aws::RAM
     end
 
     # Lists the resources in a resource share that is shared with you but
-    # that the invitation is still pending for.
+    # for which the invitation is still `PENDING`. That means that you
+    # haven't accepted or rejected the invitation and the invitation
+    # hasn't expired.
     #
     # @option params [required, String] :resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation. You
+    #   can use GetResourceShareInvitations to find the ARN of the invitation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
+    #
+    # @option params [String] :resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or resource
+    #     types.
+    #
+    #   The default value is `ALL`.
     #
     # @return [Types::ListPendingInvitationResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1103,6 +1490,7 @@ module Aws::RAM
     #     resource_share_invitation_arn: "String", # required
     #     next_token: "String",
     #     max_results: 1,
+    #     resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #   })
     #
     # @example Response structure
@@ -1116,6 +1504,7 @@ module Aws::RAM
     #   resp.resources[0].status_message #=> String
     #   resp.resources[0].creation_time #=> Time
     #   resp.resources[0].last_updated_time #=> Time
+    #   resp.resources[0].resource_region_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPendingInvitationResources AWS API Documentation
@@ -1127,20 +1516,33 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the RAM permissions.
+    # Retrieves a list of available RAM permissions that you can use for the
+    # supported resource types.
     #
     # @option params [String] :resource_type
-    #   Specifies the resource type for which to list permissions. For
-    #   example, to list only permissions that apply to EC2 subnets, specify
-    #   `ec2:Subnet`.
+    #   Specifies that you want to list permissions for only the specified
+    #   resource type. For example, to list only permissions that apply to EC2
+    #   subnets, specify `ec2:Subnet`. You can use the ListResourceTypes
+    #   operation to get the specific string required.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1180,49 +1582,91 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the principals that you have shared resources with or that have
-    # shared resources with you.
+    # Lists the principals that you are sharing resources with or that are
+    # sharing resources with you.
     #
     # @option params [required, String] :resource_owner
-    #   The type of owner.
+    #   Specifies that you want to list information for only resource shares
+    #   that match the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
+    #     share with you
     #
     # @option params [String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource.
+    #   Specifies that you want to list principal information for the resource
+    #   share with the specified [Amazon Resoure Name (ARN)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :principals
-    #   The principals.
+    #   Specifies that you want to list information for only the listed
+    #   principals.
+    #
+    #   You can include the following values:
+    #
+    #   * An Amazon Web Services account ID, for example: `123456789012`
+    #
+    #   * An [Amazon Resoure Name (ARN)][1] of an organization in
+    #     Organizations, for example:
+    #     `organizations::123456789012:organization/o-exampleorgid`
+    #
+    #   * An ARN of an organizational unit (OU) in Organizations, for example:
+    #     `organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123`
+    #
+    #   * An ARN of an IAM role, for example:
+    #     `iam::123456789012:role/rolename`
+    #
+    #   * An ARN of an IAM user, for example: `iam::123456789012user/username`
+    #
+    #   <note markdown="1"> Not all resource types can be shared with IAM roles and users. For
+    #   more information, see [Sharing with IAM roles and users][2] in the
+    #   *Resource Access Manager User Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
     #
     # @option params [String] :resource_type
-    #   The resource type.
+    #   Specifies that you want to list information for only principals
+    #   associated with resource shares that include the specified resource
+    #   type.
     #
-    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
-    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
-    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
-    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
-    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
-    #   `license-manager:LicenseConfiguration` I
-    #   `network-firewall:FirewallPolicy` \|
-    #   `network-firewall:StatefulRuleGroup` \|
-    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
-    #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:FirewallRuleGroup`
-    #   \|`route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
-    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
+    #   For a list of valid values, query the ListResourceTypes operation.
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want to list information for only principals
+    #   associated with the resource shares specified by a list the [Amazon
+    #   Resource Names (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::ListPrincipalsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1265,15 +1709,31 @@ module Aws::RAM
     # Lists the RAM permissions that are associated with a resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share for
+    #   which you want to retrieve the associated permissions.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
     #
     # @return [Types::ListResourceSharePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1313,15 +1773,41 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the shareable resource types supported by RAM.
+    # Lists the resource types that can be shared by RAM.
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
+    #
+    # @option params [String] :resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or resource
+    #     types.
+    #
+    #   The default value is `ALL`.
     #
     # @return [Types::ListResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1335,6 +1821,7 @@ module Aws::RAM
     #   resp = client.list_resource_types({
     #     next_token: "String",
     #     max_results: 1,
+    #     resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #   })
     #
     # @example Response structure
@@ -1342,6 +1829,7 @@ module Aws::RAM
     #   resp.resource_types #=> Array
     #   resp.resource_types[0].resource_type #=> String
     #   resp.resource_types[0].service_name #=> String
+    #   resp.resource_types[0].resource_region_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceTypes AWS API Documentation
@@ -1357,45 +1845,73 @@ module Aws::RAM
     # resources that are shared with you.
     #
     # @option params [required, String] :resource_owner
-    #   The type of owner.
+    #   Specifies that you want to list only the resource shares that match
+    #   the following:
+    #
+    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
+    #     share with you
     #
     # @option params [String] :principal
-    #   The principal.
+    #   Specifies that you want to list only the resource shares that are
+    #   associated with the specified principal.
     #
     # @option params [String] :resource_type
-    #   The resource type.
+    #   Specifies that you want to list only the resource shares that include
+    #   resources of the specified resource type.
     #
-    #   Valid values: `acm-pca:CertificateAuthority` \| `appmesh:Mesh` \|
-    #   `codebuild:Project` \| `codebuild:ReportGroup` \|
-    #   `ec2:CapacityReservation` \| `ec2:DedicatedHost` \|
-    #   `ec2:LocalGatewayRouteTable` \| `ec2:PrefixList` \| `ec2:Subnet` \|
-    #   `ec2:TrafficMirrorTarget` \| `ec2:TransitGateway` \|
-    #   `imagebuilder:Component` \| `imagebuilder:Image` \|
-    #   `imagebuilder:ImageRecipe` \| `imagebuilder:ContainerRecipe` \|
-    #   `glue:Catalog` \| `glue:Database` \| `glue:Table` \|
-    #   `license-manager:LicenseConfiguration` I
-    #   `network-firewall:FirewallPolicy` \|
-    #   `network-firewall:StatefulRuleGroup` \|
-    #   `network-firewall:StatelessRuleGroup` \| `outposts:Outpost` \|
-    #   `resource-groups:Group` \| `rds:Cluster` \|
-    #   `route53resolver:FirewallRuleGroup`
-    #   \|`route53resolver:ResolverQueryLogConfig` \|
-    #   `route53resolver:ResolverRule` \| `s3-outposts:Outpost` \|
-    #   `ssm-contacts:Contact` \| `ssm-incidents:ResponsePlan`
+    #   For valid values, query the ListResourceTypes operation.
     #
     # @option params [Array<String>] :resource_arns
-    #   The Amazon Resource Names (ARNs) of the resources.
+    #   Specifies that you want to list only the resource shares that include
+    #   resources with the specified [Amazon Resource Names (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [Array<String>] :resource_share_arns
-    #   The Amazon Resource Names (ARN) of the resource shares.
+    #   Specifies that you want to list only resources in the resource shares
+    #   identified by the specified [Amazon Resource Names (ARNs)][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :next_token
-    #   The token for the next page of results.
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return with a single call. To
-    #   retrieve the remaining results, make another call with the returned
-    #   `nextToken` value.
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
+    #
+    # @option params [String] :resource_region_scope
+    #   Specifies that you want the results to include only resources that
+    #   have the specified scope.
+    #
+    #   * `ALL` – the results include both global and regional resources or
+    #     resource types.
+    #
+    #   * `GLOBAL` – the results include only global resources or resource
+    #     types.
+    #
+    #   * `REGIONAL` – the results include only regional resources or resource
+    #     types.
+    #
+    #   The default value is `ALL`.
     #
     # @return [Types::ListResourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1414,6 +1930,7 @@ module Aws::RAM
     #     resource_share_arns: ["String"],
     #     next_token: "String",
     #     max_results: 1,
+    #     resource_region_scope: "ALL", # accepts ALL, REGIONAL, GLOBAL
     #   })
     #
     # @example Response structure
@@ -1427,6 +1944,7 @@ module Aws::RAM
     #   resp.resources[0].status_message #=> String
     #   resp.resources[0].creation_time #=> Time
     #   resp.resources[0].last_updated_time #=> Time
+    #   resp.resources[0].resource_region_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResources AWS API Documentation
@@ -1438,19 +1956,23 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Resource shares that were created by attaching a policy to a resource
-    # are visible only to the resource share owner, and the resource share
-    # cannot be modified in RAM.
+    # When you attach a resource-based permission policy to a resource, it
+    # automatically creates a resource share. However, resource shares
+    # created this way are visible only to the resource share owner, and the
+    # resource share can't be modified in RAM.
     #
-    # Use this API action to promote the resource share. When you promote
-    # the resource share, it becomes:
-    #
-    # * Visible to all principals that it is shared with.
-    #
-    # * Modifiable in RAM.
+    # You can use this operation to promote the resource share to a full RAM
+    # resource share. When you promote a resource share, you can then manage
+    # the resource share in RAM and it becomes visible to all of the
+    # principals you shared it with.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share to promote.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share to
+    #   promote.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @return [Types::PromoteResourceShareCreatedFromPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1479,11 +2001,27 @@ module Aws::RAM
     # Services account.
     #
     # @option params [required, String] :resource_share_invitation_arn
-    #   The Amazon Resource Name (ARN) of the invitation.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the invitation that
+    #   you want to reject.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::RejectResourceShareInvitationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1528,13 +2066,22 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Adds the specified tags to the specified resource share that you own.
+    # Adds the specified tag keys and values to the specified resource
+    # share. The tags are attached only to the resource share, not to the
+    # resources that are in the resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to add tags to.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   One or more tags.
+    #   A list of one or more tag key and value pairs. The tag key must be
+    #   present and not be an empty string. The tag value must be present but
+    #   can be an empty string.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1559,14 +2106,20 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Removes the specified tags from the specified resource share that you
-    # own.
+    # Removes the specified tag key and value pairs from the specified
+    # resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to remove tags from. The tags are removed from the
+    #   resource share, not the resources in the resource share.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, Array<String>] :tag_keys
-    #   The tag keys of the tags to remove.
+    #   Specifies a list of one or more tag keys that you want to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1586,21 +2139,38 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Updates the specified resource share that you own.
+    # Modifies some of the properties of the specified resource share.
     #
     # @option params [required, String] :resource_share_arn
-    #   The Amazon Resource Name (ARN) of the resource share.
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the resource share
+    #   that you want to modify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [String] :name
-    #   The name of the resource share.
+    #   If specified, the new name that you want to attach to the resource
+    #   share.
     #
     # @option params [Boolean] :allow_external_principals
-    #   Indicates whether principals outside your organization in
+    #   Specifies whether principals outside your organization in
     #   Organizations can be associated with a resource share.
     #
     # @option params [String] :client_token
-    #   A unique, case-sensitive identifier that you provide to ensure the
-    #   idempotency of the request.
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
     #
     # @return [Types::UpdateResourceShareResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1654,7 +2224,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.32.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

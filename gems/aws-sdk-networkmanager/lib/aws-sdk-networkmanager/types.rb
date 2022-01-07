@@ -16,8 +16,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         zone: "String",
-    #         subnet_arn: "String",
+    #         zone: "ConstrainedString",
+    #         subnet_arn: "SubnetArn",
     #       }
     #
     # @!attribute [rw] zone
@@ -39,6 +39,37 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AcceptAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AcceptAttachmentRequest AWS API Documentation
+    #
+    class AcceptAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   The response to the attachment request.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AcceptAttachmentResponse AWS API Documentation
+    #
+    class AcceptAttachmentResponse < Struct.new(
+      :attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
@@ -52,14 +83,63 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connect_peer_id: "ConnectPeerId", # required
+    #         device_id: "DeviceId", # required
+    #         link_id: "LinkId",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of your global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateConnectPeerRequest AWS API Documentation
+    #
+    class AssociateConnectPeerRequest < Struct.new(
+      :global_network_id,
+      :connect_peer_id,
+      :device_id,
+      :link_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer_association
+    #   The response to the Connect peer request.
+    #   @return [Types::ConnectPeerAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateConnectPeerResponse AWS API Documentation
+    #
+    class AssociateConnectPeerResponse < Struct.new(
+      :connect_peer_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateCustomerGatewayRequest
     #   data as a hash:
     #
     #       {
-    #         customer_gateway_arn: "String", # required
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
-    #         link_id: "String",
+    #         customer_gateway_arn: "CustomerGatewayArn", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
+    #         link_id: "LinkId",
     #       }
     #
     # @!attribute [rw] customer_gateway_arn
@@ -105,9 +185,9 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
-    #         link_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
+    #         link_id: "LinkId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -148,10 +228,10 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_connect_peer_arn: "String", # required
-    #         device_id: "String", # required
-    #         link_id: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
+    #         device_id: "DeviceId", # required
+    #         link_id: "LinkId",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -193,6 +273,85 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a core network attachment.
+    #
+    # @!attribute [rw] core_network_id
+    #   A core network ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The ARN of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the attachment account owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_type
+    #   The type of attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where the edge is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The attachment resource ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_policy_rule_number
+    #   The policy rule number associated with the attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the attachment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] proposed_segment_change
+    #   The attachment to move from one segment to another.
+    #   @return [Types::ProposedSegmentChange]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the attachment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the attachment was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Attachment AWS API Documentation
+    #
+    class Attachment < Struct.new(
+      :core_network_id,
+      :core_network_arn,
+      :attachment_id,
+      :owner_account_id,
+      :attachment_type,
+      :state,
+      :edge_location,
+      :resource_arn,
+      :attachment_policy_rule_number,
+      :segment_name,
+      :tags,
+      :proposed_segment_change,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes bandwidth information.
     #
     # @note When making an API call, you may pass Bandwidth
@@ -220,6 +379,27 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes the BGP options.
+    #
+    # @note When making an API call, you may pass BgpOptions
+    #   data as a hash:
+    #
+    #       {
+    #         peer_asn: 1,
+    #       }
+    #
+    # @!attribute [rw] peer_asn
+    #   The Peer ASN of the BGP.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/BgpOptions AWS API Documentation
+    #
+    class BgpOptions < Struct.new(
+      :peer_asn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was a conflict processing the request. Updating or deleting the
     # resource can cause an inconsistent state.
     #
@@ -240,6 +420,241 @@ module Aws::NetworkManager
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network Connect attachment.
+    #
+    # @!attribute [rw] attachment
+    #   The attachment details.
+    #   @return [Types::Attachment]
+    #
+    # @!attribute [rw] transport_attachment_id
+    #   The ID of the transport attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Options for connecting an attachment.
+    #   @return [Types::ConnectAttachmentOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectAttachment AWS API Documentation
+    #
+    class ConnectAttachment < Struct.new(
+      :attachment,
+      :transport_attachment_id,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network Connect attachment options.
+    #
+    # @note When making an API call, you may pass ConnectAttachmentOptions
+    #   data as a hash:
+    #
+    #       {
+    #         protocol: "GRE", # accepts GRE
+    #       }
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for the attachment connection.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectAttachmentOptions AWS API Documentation
+    #
+    class ConnectAttachmentOptions < Struct.new(
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network Connect peer.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_attachment_id
+    #   The ID of the attachment to connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Connect peer Regions where edges are located.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the Connect peer was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration of the Connect peer.
+    #   @return [Types::ConnectPeerConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the Connect peer.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeer AWS API Documentation
+    #
+    class ConnectPeer < Struct.new(
+      :core_network_id,
+      :connect_attachment_id,
+      :connect_peer_id,
+      :edge_location,
+      :state,
+      :created_at,
+      :configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network Connect peer association.
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_id
+    #   The ID of the device to connect to.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The ID of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the Connect peer association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerAssociation AWS API Documentation
+    #
+    class ConnectPeerAssociation < Struct.new(
+      :connect_peer_id,
+      :global_network_id,
+      :device_id,
+      :link_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network BGP configuration.
+    #
+    # @!attribute [rw] core_network_asn
+    #   The ASN of the Coret Network.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] peer_asn
+    #   The ASN of the Connect peer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] core_network_address
+    #   The address of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_address
+    #   The address of a core network Connect peer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerBgpConfiguration AWS API Documentation
+    #
+    class ConnectPeerBgpConfiguration < Struct.new(
+      :core_network_asn,
+      :peer_asn,
+      :core_network_address,
+      :peer_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network Connect peer configuration.
+    #
+    # @!attribute [rw] core_network_address
+    #   The IP address of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_address
+    #   The IP address of the Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] inside_cidr_blocks
+    #   The inside IP addresses used for a Connect peer configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used for a Connect peer configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] bgp_configurations
+    #   The Connect peer BGP configurations.
+    #   @return [Array<Types::ConnectPeerBgpConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerConfiguration AWS API Documentation
+    #
+    class ConnectPeerConfiguration < Struct.new(
+      :core_network_address,
+      :peer_address,
+      :inside_cidr_blocks,
+      :protocol,
+      :bgp_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary description of a Connect peer.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_attachment_id
+    #   The ID of a Connect peer attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of a Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where the edge is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_state
+    #   The state of a Connect peer.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when a Connect peer was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a Connect peer summary.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ConnectPeerSummary AWS API Documentation
+    #
+    class ConnectPeerSummary < Struct.new(
+      :core_network_id,
+      :connect_attachment_id,
+      :connect_peer_id,
+      :edge_location,
+      :connect_peer_state,
+      :created_at,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -332,16 +747,555 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a core network.
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network that your core network is a part of.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   The ARN of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when a core network was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The current state of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] segments
+    #   The segments within a core network.
+    #   @return [Array<Types::CoreNetworkSegment>]
+    #
+    # @!attribute [rw] edges
+    #   The edges within a core network.
+    #   @return [Array<Types::CoreNetworkEdge>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with a core network.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetwork AWS API Documentation
+    #
+    class CoreNetwork < Struct.new(
+      :global_network_id,
+      :core_network_id,
+      :core_network_arn,
+      :description,
+      :created_at,
+      :state,
+      :segments,
+      :edges,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details describing a core network change.
+    #
+    # @!attribute [rw] type
+    #   The type of change.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take for a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The resource identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_values
+    #   The previous values for a core network.
+    #   @return [Types::CoreNetworkChangeValues]
+    #
+    # @!attribute [rw] new_values
+    #   The new value for a core network
+    #   @return [Types::CoreNetworkChangeValues]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChange AWS API Documentation
+    #
+    class CoreNetworkChange < Struct.new(
+      :type,
+      :action,
+      :identifier,
+      :previous_values,
+      :new_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network change.
+    #
+    # @!attribute [rw] segment_name
+    #   The names of the segments in a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_locations
+    #   The Regions where edges are located in a core network.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] asn
+    #   The ASN of a core network.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] cidr
+    #   The IP addresses used for a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_identifier
+    #   The ID of the destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] inside_cidr_blocks
+    #   The inside IP addresses used for core network change values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] shared_segments
+    #   The shared segments for a core network change value.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeValues AWS API Documentation
+    #
+    class CoreNetworkChangeValues < Struct.new(
+      :segment_name,
+      :edge_locations,
+      :asn,
+      :cidr,
+      :destination_identifier,
+      :inside_cidr_blocks,
+      :shared_segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network edge.
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where a core network edge is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] asn
+    #   The ASN of a core network edge.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] inside_cidr_blocks
+    #   The inside IP addresses used for core network edges.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkEdge AWS API Documentation
+    #
+    class CoreNetworkEdge < Struct.new(
+      :edge_location,
+      :asn,
+      :inside_cidr_blocks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network policy. You can have only one LIVE Core
+    # Policy.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias
+    #   Whether a core network policy is the current LIVE policy or the most
+    #   recently submitted policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a core network policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when a core network policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] change_set_state
+    #   The state of a core network policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_errors
+    #   Describes any errors in a core network policy.
+    #   @return [Array<Types::CoreNetworkPolicyError>]
+    #
+    # @!attribute [rw] policy_document
+    #   Describes a core network policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkPolicy AWS API Documentation
+    #
+    class CoreNetworkPolicy < Struct.new(
+      :core_network_id,
+      :policy_version_id,
+      :alias,
+      :description,
+      :created_at,
+      :change_set_state,
+      :policy_errors,
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an error in a core network policy.
+    #
+    # @!attribute [rw] error_code
+    #   The error code associated with a core network policy error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message associated with a core network policy error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] path
+    #   The JSON path where the error was discovered in the policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkPolicyError AWS API Documentation
+    #
+    class CoreNetworkPolicyError < Struct.new(
+      :error_code,
+      :message,
+      :path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network policy exception.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] errors
+    #   Describes a core network policy exception.
+    #   @return [Array<Types::CoreNetworkPolicyError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkPolicyException AWS API Documentation
+    #
+    class CoreNetworkPolicyException < Struct.new(
+      :message,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network policy version.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias
+    #   Whether a core network policy is the current policy or the most
+    #   recently submitted policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a core network policy version.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when a core network policy version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] change_set_state
+    #   The status of the policy version change set.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkPolicyVersion AWS API Documentation
+    #
+    class CoreNetworkPolicyVersion < Struct.new(
+      :core_network_id,
+      :policy_version_id,
+      :alias,
+      :description,
+      :created_at,
+      :change_set_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a core network segment, which are dedicated routes. Only
+    # attachments within this segment can communicate with each other.
+    #
+    # @!attribute [rw] name
+    #   The name of a core network segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_locations
+    #   The Regions where the edges are located.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] shared_segments
+    #   The shared segments of a core network.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkSegment AWS API Documentation
+    #
+    class CoreNetworkSegment < Struct.new(
+      :name,
+      :edge_locations,
+      :shared_segments)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns details about a core network edge.
+    #
+    # @note When making an API call, you may pass CoreNetworkSegmentEdgeIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId",
+    #         segment_name: "ConstrainedString",
+    #         edge_location: "ExternalRegionCode",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment edge.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where the segment edge is located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkSegmentEdgeIdentifier AWS API Documentation
+    #
+    class CoreNetworkSegmentEdgeIdentifier < Struct.new(
+      :core_network_id,
+      :segment_name,
+      :edge_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns summary information about a core network.
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_arn
+    #   a core network ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] global_network_id
+    #   The global network ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the account owner.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags associated with a core network summary.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkSummary AWS API Documentation
+    #
+    class CoreNetworkSummary < Struct.new(
+      :core_network_id,
+      :core_network_arn,
+      :global_network_id,
+      :owner_account_id,
+      :state,
+      :description,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConnectAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         edge_location: "ExternalRegionCode", # required
+    #         transport_attachment_id: "AttachmentId", # required
+    #         options: { # required
+    #           protocol: "GRE", # accepts GRE
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network where you want to create the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where the edge is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] transport_attachment_id
+    #   The ID of the attachment between the two connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   Options for creating an attachment.
+    #   @return [Types::ConnectAttachmentOptions]
+    #
+    # @!attribute [rw] tags
+    #   The list of key-value tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectAttachmentRequest AWS API Documentation
+    #
+    class CreateConnectAttachmentRequest < Struct.new(
+      :core_network_id,
+      :edge_location,
+      :transport_attachment_id,
+      :options,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_attachment
+    #   The response to a Connect attachment request.
+    #   @return [Types::ConnectAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectAttachmentResponse AWS API Documentation
+    #
+    class CreateConnectAttachmentResponse < Struct.new(
+      :connect_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connect_attachment_id: "AttachmentId", # required
+    #         core_network_address: "IPAddress",
+    #         peer_address: "IPAddress", # required
+    #         bgp_options: {
+    #           peer_asn: 1,
+    #         },
+    #         inside_cidr_blocks: ["ConstrainedString"], # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] connect_attachment_id
+    #   The ID of the connection attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_address
+    #   A Connect peer core network address.
+    #   @return [String]
+    #
+    # @!attribute [rw] peer_address
+    #   The Connect peer address.
+    #   @return [String]
+    #
+    # @!attribute [rw] bgp_options
+    #   The Connect peer BGP options.
+    #   @return [Types::BgpOptions]
+    #
+    # @!attribute [rw] inside_cidr_blocks
+    #   The inside IP addresses used for BGP peering.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the peer request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeerRequest AWS API Documentation
+    #
+    class CreateConnectPeerRequest < Struct.new(
+      :connect_attachment_id,
+      :core_network_address,
+      :peer_address,
+      :bgp_options,
+      :inside_cidr_blocks,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer
+    #   The response to the request.
+    #   @return [Types::ConnectPeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeerResponse AWS API Documentation
+    #
+    class CreateConnectPeerResponse < Struct.new(
+      :connect_peer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateConnectionRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
-    #         connected_device_id: "String", # required
-    #         link_id: "String",
-    #         connected_link_id: "String",
-    #         description: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
+    #         connected_device_id: "DeviceId", # required
+    #         link_id: "LinkId",
+    #         connected_link_id: "LinkId",
+    #         description: "ConstrainedString",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -406,26 +1360,89 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCoreNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "GlobalNetworkId", # required
+    #         description: "ConstrainedString",
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         policy_document: "CoreNetworkPolicyDocument",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network that a core network will be a part of.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Key-value tags associated with a core network request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] policy_document
+    #   The policy document for creating a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with a core network request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateCoreNetworkRequest AWS API Documentation
+    #
+    class CreateCoreNetworkRequest < Struct.new(
+      :global_network_id,
+      :description,
+      :tags,
+      :policy_document,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network
+    #   Returns details about a core network.
+    #   @return [Types::CoreNetwork]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateCoreNetworkResponse AWS API Documentation
+    #
+    class CreateCoreNetworkResponse < Struct.new(
+      :core_network)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDeviceRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
     #         aws_location: {
-    #           zone: "String",
-    #           subnet_arn: "String",
+    #           zone: "ConstrainedString",
+    #           subnet_arn: "SubnetArn",
     #         },
-    #         description: "String",
-    #         type: "String",
-    #         vendor: "String",
-    #         model: "String",
-    #         serial_number: "String",
+    #         description: "ConstrainedString",
+    #         type: "ConstrainedString",
+    #         vendor: "ConstrainedString",
+    #         model: "ConstrainedString",
+    #         serial_number: "ConstrainedString",
     #         location: {
-    #           address: "String",
-    #           latitude: "String",
-    #           longitude: "String",
+    #           address: "ConstrainedString",
+    #           latitude: "ConstrainedString",
+    #           longitude: "ConstrainedString",
     #         },
-    #         site_id: "String",
+    #         site_id: "SiteId",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -516,7 +1533,7 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         description: "String",
+    #         description: "ConstrainedString",
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -560,15 +1577,15 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         description: "String",
-    #         type: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         description: "ConstrainedString",
+    #         type: "ConstrainedString",
     #         bandwidth: { # required
     #           upload_speed: 1,
     #           download_speed: 1,
     #         },
-    #         provider: "String",
-    #         site_id: "String", # required
+    #         provider: "ConstrainedString",
+    #         site_id: "SiteId", # required
     #         tags: [
     #           {
     #             key: "TagKey",
@@ -643,12 +1660,12 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         description: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         description: "ConstrainedString",
     #         location: {
-    #           address: "String",
-    #           latitude: "String",
-    #           longitude: "String",
+    #           address: "ConstrainedString",
+    #           latitude: "ConstrainedString",
+    #           longitude: "ConstrainedString",
     #         },
     #         tags: [
     #           {
@@ -707,6 +1724,135 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateSiteToSiteVpnAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         vpn_connection_arn: "VpnConnectionArn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network where you're creating a site-to-site VPN
+    #   attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpn_connection_arn
+    #   The ARN identifying the VPN attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateSiteToSiteVpnAttachmentRequest AWS API Documentation
+    #
+    class CreateSiteToSiteVpnAttachmentRequest < Struct.new(
+      :core_network_id,
+      :vpn_connection_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] site_to_site_vpn_attachment
+    #   Details about a site-to-site VPN attachment.
+    #   @return [Types::SiteToSiteVpnAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateSiteToSiteVpnAttachmentResponse AWS API Documentation
+    #
+    class CreateSiteToSiteVpnAttachmentResponse < Struct.new(
+      :site_to_site_vpn_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         vpc_arn: "VpcArn", # required
+    #         subnet_arns: ["SubnetArn"], # required
+    #         options: {
+    #           ipv_6_support: false,
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network for the VPC attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_arn
+    #   The ARN of the VPC.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_arns
+    #   The subnet ARN of the VPC attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] options
+    #   Options for the VPC attachment.
+    #   @return [Types::VpcOptions]
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags associated with the request.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateVpcAttachmentRequest AWS API Documentation
+    #
+    class CreateVpcAttachmentRequest < Struct.new(
+      :core_network_id,
+      :vpc_arn,
+      :subnet_arns,
+      :options,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_attachment
+    #   Provides details about the VPC attachment.
+    #   @return [Types::VpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateVpcAttachmentResponse AWS API Documentation
+    #
+    class CreateVpcAttachmentResponse < Struct.new(
+      :vpc_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the association between a customer gateway, a device, and a
     # link.
     #
@@ -742,12 +1888,74 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteAttachmentRequest AWS API Documentation
+    #
+    class DeleteAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   Information about the deleted attachment.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteAttachmentResponse AWS API Documentation
+    #
+    class DeleteAttachmentResponse < Struct.new(
+      :attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connect_peer_id: "ConnectPeerId", # required
+    #       }
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the deleted Connect peer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectPeerRequest AWS API Documentation
+    #
+    class DeleteConnectPeerRequest < Struct.new(
+      :connect_peer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer
+    #   Information about the deleted Connect peer.
+    #   @return [Types::ConnectPeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectPeerResponse AWS API Documentation
+    #
+    class DeleteConnectPeerResponse < Struct.new(
+      :connect_peer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteConnectionRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         connection_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connection_id: "ConnectionId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -779,12 +1987,80 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteCoreNetworkPolicyVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network for the deleted policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The version ID of the deleted policy.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkPolicyVersionRequest AWS API Documentation
+    #
+    class DeleteCoreNetworkPolicyVersionRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_policy
+    #   Returns information about the deleted policy version.
+    #   @return [Types::CoreNetworkPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkPolicyVersionResponse AWS API Documentation
+    #
+    class DeleteCoreNetworkPolicyVersionResponse < Struct.new(
+      :core_network_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCoreNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The network ID of the deleted core network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkRequest AWS API Documentation
+    #
+    class DeleteCoreNetworkRequest < Struct.new(
+      :core_network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network
+    #   Information about the deleted core network.
+    #   @return [Types::CoreNetwork]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkResponse AWS API Documentation
+    #
+    class DeleteCoreNetworkResponse < Struct.new(
+      :core_network)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteDeviceRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -820,7 +2096,7 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -851,8 +2127,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         link_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         link_id: "LinkId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -884,12 +2160,35 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteSiteRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         site_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         site_id: "SiteId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -925,8 +2224,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_arn: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_arn: "TransitGatewayArn", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -962,9 +2261,9 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_ids: ["String"],
+    #         global_network_ids: ["GlobalNetworkId"],
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_ids
@@ -1085,12 +2384,49 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisassociateConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connect_peer_id: "ConnectPeerId", # required
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the Connect peer to disassociate from a device.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateConnectPeerRequest AWS API Documentation
+    #
+    class DisassociateConnectPeerRequest < Struct.new(
+      :global_network_id,
+      :connect_peer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer_association
+    #   Describes the Connect peer association.
+    #   @return [Types::ConnectPeerAssociation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateConnectPeerResponse AWS API Documentation
+    #
+    class DisassociateConnectPeerResponse < Struct.new(
+      :connect_peer_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateCustomerGatewayRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         customer_gateway_arn: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         customer_gateway_arn: "CustomerGatewayArn", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1126,9 +2462,9 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
-    #         link_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
+    #         link_id: "LinkId", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1169,8 +2505,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_connect_peer_arn: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1202,15 +2538,160 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ExecuteCoreNetworkChangeSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ExecuteCoreNetworkChangeSetRequest AWS API Documentation
+    #
+    class ExecuteCoreNetworkChangeSetRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ExecuteCoreNetworkChangeSetResponse AWS API Documentation
+    #
+    class ExecuteCoreNetworkChangeSetResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass GetConnectAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectAttachmentRequest AWS API Documentation
+    #
+    class GetConnectAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_attachment
+    #   Details about the Connect attachment.
+    #   @return [Types::ConnectAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectAttachmentResponse AWS API Documentation
+    #
+    class GetConnectAttachmentResponse < Struct.new(
+      :connect_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectPeerAssociationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connect_peer_ids: ["ConnectPeerId"],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] global_network_id
+    #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_peer_ids
+    #   The IDs of the Connect peers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeerAssociationsRequest AWS API Documentation
+    #
+    class GetConnectPeerAssociationsRequest < Struct.new(
+      :global_network_id,
+      :connect_peer_ids,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer_associations
+    #   Displays a list of Connect peer associations.
+    #   @return [Array<Types::ConnectPeerAssociation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeerAssociationsResponse AWS API Documentation
+    #
+    class GetConnectPeerAssociationsResponse < Struct.new(
+      :connect_peer_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetConnectPeerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connect_peer_id: "ConnectPeerId", # required
+    #       }
+    #
+    # @!attribute [rw] connect_peer_id
+    #   The ID of the Connect peer.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeerRequest AWS API Documentation
+    #
+    class GetConnectPeerRequest < Struct.new(
+      :connect_peer_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peer
+    #   Returns information about a core network Connect peer.
+    #   @return [Types::ConnectPeer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeerResponse AWS API Documentation
+    #
+    class GetConnectPeerResponse < Struct.new(
+      :connect_peer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetConnectionsRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         connection_ids: ["String"],
-    #         device_id: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connection_ids: ["ConnectionId"],
+    #         device_id: "DeviceId",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1262,14 +2743,142 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCoreNetworkChangeSetRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1, # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkChangeSetRequest AWS API Documentation
+    #
+    class GetCoreNetworkChangeSetRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_changes
+    #   Describes a core network changes.
+    #   @return [Array<Types::CoreNetworkChange>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkChangeSetResponse AWS API Documentation
+    #
+    class GetCoreNetworkChangeSetResponse < Struct.new(
+      :core_network_changes,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCoreNetworkPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1,
+    #         alias: "LIVE", # accepts LIVE, LATEST
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of a core network policy version.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] alias
+    #   The alias of a core network policy
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkPolicyRequest AWS API Documentation
+    #
+    class GetCoreNetworkPolicyRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id,
+      :alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_policy
+    #   The details about a core network policy.
+    #   @return [Types::CoreNetworkPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkPolicyResponse AWS API Documentation
+    #
+    class GetCoreNetworkPolicyResponse < Struct.new(
+      :core_network_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCoreNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkRequest AWS API Documentation
+    #
+    class GetCoreNetworkRequest < Struct.new(
+      :core_network_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network
+    #   Details about a core network.
+    #   @return [Types::CoreNetwork]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkResponse AWS API Documentation
+    #
+    class GetCoreNetworkResponse < Struct.new(
+      :core_network)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetCustomerGatewayAssociationsRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         customer_gateway_arns: ["String"],
+    #         global_network_id: "GlobalNetworkId", # required
+    #         customer_gateway_arns: ["CustomerGatewayArn"],
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1321,11 +2930,11 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_ids: ["String"],
-    #         site_id: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_ids: ["DeviceId"],
+    #         site_id: "SiteId",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1381,11 +2990,11 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String",
-    #         link_id: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId",
+    #         link_id: "LinkId",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1441,13 +3050,13 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         link_ids: ["String"],
-    #         site_id: "String",
-    #         type: "String",
-    #         provider: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         link_ids: ["LinkId"],
+    #         site_id: "SiteId",
+    #         type: "ConstrainedString",
+    #         provider: "ConstrainedString",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1513,10 +3122,10 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         resource_type: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         resource_type: "ConstrainedString",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -1599,18 +3208,23 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         registered_gateway_arn: "String",
-    #         aws_region: "String",
-    #         account_id: "String",
-    #         resource_type: "String",
-    #         resource_arn: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         core_network_id: "CoreNetworkId",
+    #         registered_gateway_arn: "ResourceArn",
+    #         aws_region: "ExternalRegionCode",
+    #         account_id: "AWSAccountId",
+    #         resource_type: "ConstrainedString",
+    #         resource_arn: "ResourceArn",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] registered_gateway_arn
@@ -1677,6 +3291,7 @@ module Aws::NetworkManager
     #
     class GetNetworkResourceRelationshipsRequest < Struct.new(
       :global_network_id,
+      :core_network_id,
       :registered_gateway_arn,
       :aws_region,
       :account_id,
@@ -1709,18 +3324,23 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         registered_gateway_arn: "String",
-    #         aws_region: "String",
-    #         account_id: "String",
-    #         resource_type: "String",
-    #         resource_arn: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         core_network_id: "CoreNetworkId",
+    #         registered_gateway_arn: "ResourceArn",
+    #         aws_region: "ExternalRegionCode",
+    #         account_id: "AWSAccountId",
+    #         resource_type: "ConstrainedString",
+    #         resource_arn: "ResourceArn",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] registered_gateway_arn
@@ -1806,6 +3426,7 @@ module Aws::NetworkManager
     #
     class GetNetworkResourcesRequest < Struct.new(
       :global_network_id,
+      :core_network_id,
       :registered_gateway_arn,
       :aws_region,
       :account_id,
@@ -1838,15 +3459,20 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
     #         route_table_identifier: { # required
-    #           transit_gateway_route_table_arn: "String",
+    #           transit_gateway_route_table_arn: "TransitGatewayRouteTableArn",
+    #           core_network_segment_edge: {
+    #             core_network_id: "CoreNetworkId",
+    #             segment_name: "ConstrainedString",
+    #             edge_location: "ExternalRegionCode",
+    #           },
     #         },
-    #         exact_cidr_matches: ["String"],
-    #         longest_prefix_matches: ["String"],
-    #         subnet_of_matches: ["String"],
-    #         supernet_of_matches: ["String"],
-    #         prefix_list_ids: ["String"],
+    #         exact_cidr_matches: ["ConstrainedString"],
+    #         longest_prefix_matches: ["ConstrainedString"],
+    #         subnet_of_matches: ["ConstrainedString"],
+    #         supernet_of_matches: ["ConstrainedString"],
+    #         prefix_list_ids: ["ConstrainedString"],
     #         states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
     #         types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
     #         destination_filters: {
@@ -1918,6 +3544,10 @@ module Aws::NetworkManager
     #   The ARN of the route table.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_segment_edge
+    #   Describes a core network segment edge.
+    #   @return [Types::CoreNetworkSegmentEdgeIdentifier]
+    #
     # @!attribute [rw] route_table_type
     #   The route table type.
     #   @return [String]
@@ -1934,6 +3564,7 @@ module Aws::NetworkManager
     #
     class GetNetworkRoutesResponse < Struct.new(
       :route_table_arn,
+      :core_network_segment_edge,
       :route_table_type,
       :route_table_timestamp,
       :network_routes)
@@ -1945,18 +3576,23 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         registered_gateway_arn: "String",
-    #         aws_region: "String",
-    #         account_id: "String",
-    #         resource_type: "String",
-    #         resource_arn: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         core_network_id: "CoreNetworkId",
+    #         registered_gateway_arn: "ResourceArn",
+    #         aws_region: "ExternalRegionCode",
+    #         account_id: "AWSAccountId",
+    #         resource_type: "ConstrainedString",
+    #         resource_arn: "ResourceArn",
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] registered_gateway_arn
@@ -2023,6 +3659,7 @@ module Aws::NetworkManager
     #
     class GetNetworkTelemetryRequest < Struct.new(
       :global_network_id,
+      :core_network_id,
       :registered_gateway_arn,
       :aws_region,
       :account_id,
@@ -2051,12 +3688,43 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetResourcePolicyRequest AWS API Documentation
+    #
+    class GetResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_document
+    #   The resource policy document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetResourcePolicyResponse AWS API Documentation
+    #
+    class GetResourcePolicyResponse < Struct.new(
+      :policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetRouteAnalysisRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         route_analysis_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         route_analysis_id: "ConstrainedString", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -2088,14 +3756,45 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSiteToSiteVpnAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSiteToSiteVpnAttachmentRequest AWS API Documentation
+    #
+    class GetSiteToSiteVpnAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] site_to_site_vpn_attachment
+    #   Describes the site-to-site attachment.
+    #   @return [Types::SiteToSiteVpnAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSiteToSiteVpnAttachmentResponse AWS API Documentation
+    #
+    class GetSiteToSiteVpnAttachmentResponse < Struct.new(
+      :site_to_site_vpn_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetSitesRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         site_ids: ["String"],
+    #         global_network_id: "GlobalNetworkId", # required
+    #         site_ids: ["SiteId"],
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -2146,10 +3845,10 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_connect_peer_arns: ["String"],
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_connect_peer_arns: ["TransitGatewayConnectPeerArn"],
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -2201,10 +3900,10 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_arns: ["String"],
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_arns: ["TransitGatewayArn"],
     #         max_results: 1,
-    #         next_token: "String",
+    #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -2252,7 +3951,40 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
-    # Describes a global network.
+    # @note When making an API call, you may pass GetVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetVpcAttachmentRequest AWS API Documentation
+    #
+    class GetVpcAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_attachment
+    #   Returns details about a VPC attachment.
+    #   @return [Types::VpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetVpcAttachmentResponse AWS API Documentation
+    #
+    class GetVpcAttachmentResponse < Struct.new(
+      :vpc_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a global network. This is a single private network acting as
+    # a high-level container for your network objects, including an Amazon
+    # Web Services-manged Core Network.
     #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
@@ -2402,11 +4134,221 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAttachmentsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId",
+    #         attachment_type: "CONNECT", # accepts CONNECT, SITE_TO_SITE_VPN, VPC
+    #         edge_location: "ExternalRegionCode",
+    #         state: "REJECTED", # accepts REJECTED, PENDING_ATTACHMENT_ACCEPTANCE, CREATING, FAILED, AVAILABLE, UPDATING, PENDING_NETWORK_UPDATE, PENDING_TAG_ACCEPTANCE, DELETING
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_type
+    #   The type of attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The Region where the edge is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentsRequest AWS API Documentation
+    #
+    class ListAttachmentsRequest < Struct.new(
+      :core_network_id,
+      :attachment_type,
+      :edge_location,
+      :state,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachments
+    #   Describes the list of attachments.
+    #   @return [Array<Types::Attachment>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentsResponse AWS API Documentation
+    #
+    class ListAttachmentsResponse < Struct.new(
+      :attachments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConnectPeersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId",
+    #         connect_attachment_id: "AttachmentId",
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] connect_attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListConnectPeersRequest AWS API Documentation
+    #
+    class ListConnectPeersRequest < Struct.new(
+      :core_network_id,
+      :connect_attachment_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connect_peers
+    #   Describes the Connect peers.
+    #   @return [Array<Types::ConnectPeerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListConnectPeersResponse AWS API Documentation
+    #
+    class ListConnectPeersResponse < Struct.new(
+      :connect_peers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCoreNetworkPolicyVersionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkPolicyVersionsRequest AWS API Documentation
+    #
+    class ListCoreNetworkPolicyVersionsRequest < Struct.new(
+      :core_network_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_policy_versions
+    #   Describes core network policy versions.
+    #   @return [Array<Types::CoreNetworkPolicyVersion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkPolicyVersionsResponse AWS API Documentation
+    #
+    class ListCoreNetworkPolicyVersionsResponse < Struct.new(
+      :core_network_policy_versions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCoreNetworksRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworksRequest AWS API Documentation
+    #
+    class ListCoreNetworksRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_networks
+    #   Describes the list of core networks.
+    #   @return [Array<Types::CoreNetworkSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworksResponse AWS API Documentation
+    #
+    class ListCoreNetworksResponse < Struct.new(
+      :core_networks,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "ResourceARN", # required
+    #         resource_arn: "ResourceArn", # required
     #       }
     #
     # @!attribute [rw] resource_arn
@@ -2439,9 +4381,9 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         address: "String",
-    #         latitude: "String",
-    #         longitude: "String",
+    #         address: "ConstrainedString",
+    #         latitude: "ConstrainedString",
+    #         longitude: "ConstrainedString",
     #       }
     #
     # @!attribute [rw] address
@@ -2470,6 +4412,10 @@ module Aws::NetworkManager
     #
     # @!attribute [rw] registered_gateway_arn
     #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   a core network ID.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
@@ -2546,6 +4492,7 @@ module Aws::NetworkManager
     #
     class NetworkResource < Struct.new(
       :registered_gateway_arn,
+      :core_network_id,
       :aws_region,
       :account_id,
       :resource_type,
@@ -2655,8 +4602,20 @@ module Aws::NetworkManager
 
     # Describes the destination of a network route.
     #
+    # @!attribute [rw] core_network_attachment_id
+    #   The ID of a core network attachment.
+    #   @return [String]
+    #
     # @!attribute [rw] transit_gateway_attachment_id
     #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment.
+    #   @return [String]
+    #
+    # @!attribute [rw] edge_location
+    #   The edge location for the network destination.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -2670,7 +4629,10 @@ module Aws::NetworkManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkRouteDestination AWS API Documentation
     #
     class NetworkRouteDestination < Struct.new(
+      :core_network_attachment_id,
       :transit_gateway_attachment_id,
+      :segment_name,
+      :edge_location,
       :resource_type,
       :resource_id)
       SENSITIVE = []
@@ -2681,6 +4643,10 @@ module Aws::NetworkManager
     #
     # @!attribute [rw] registered_gateway_arn
     #   The ARN of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
     #   @return [String]
     #
     # @!attribute [rw] aws_region
@@ -2715,6 +4681,7 @@ module Aws::NetworkManager
     #
     class NetworkTelemetry < Struct.new(
       :registered_gateway_arn,
+      :core_network_id,
       :aws_region,
       :account_id,
       :resource_type,
@@ -2750,12 +4717,124 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Describes a proposed segment change. In some cases, the segment change
+    # must first be evaluated and accepted.
+    #
+    # @!attribute [rw] tags
+    #   The key-value tags that changed for the segment.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] attachment_policy_rule_number
+    #   The rule number in the policy document that applies to this change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] segment_name
+    #   The name of the segment to change.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ProposedSegmentChange AWS API Documentation
+    #
+    class ProposedSegmentChange < Struct.new(
+      :tags,
+      :attachment_policy_rule_number,
+      :segment_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutCoreNetworkPolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_document: "CoreNetworkPolicyDocument", # required
+    #         description: "ConstrainedString",
+    #         latest_version_id: 1,
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_document
+    #   The policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   a core network policy description.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version_id
+    #   The ID of a core network policy.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutCoreNetworkPolicyRequest AWS API Documentation
+    #
+    class PutCoreNetworkPolicyRequest < Struct.new(
+      :core_network_id,
+      :policy_document,
+      :description,
+      :latest_version_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_policy
+    #   Describes the changed core network policy.
+    #   @return [Types::CoreNetworkPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutCoreNetworkPolicyResponse AWS API Documentation
+    #
+    class PutCoreNetworkPolicyResponse < Struct.new(
+      :core_network_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         policy_document: "ResourcePolicyDocument", # required
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] policy_document
+    #   The JSON resource policy document.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :policy_document,
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass RegisterTransitGatewayRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         transit_gateway_arn: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         transit_gateway_arn: "TransitGatewayArn", # required
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -2783,6 +4862,37 @@ module Aws::NetworkManager
     #
     class RegisterTransitGatewayResponse < Struct.new(
       :transit_gateway_registration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RejectAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RejectAttachmentRequest AWS API Documentation
+    #
+    class RejectAttachmentRequest < Struct.new(
+      :attachment_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment
+    #   Describes the rejected attachment request.
+    #   @return [Types::Attachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RejectAttachmentResponse AWS API Documentation
+    #
+    class RejectAttachmentResponse < Struct.new(
+      :attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2820,6 +4930,7 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] context
+    #   The specified resource could not be found.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ResourceNotFoundException AWS API Documentation
@@ -2829,6 +4940,43 @@ module Aws::NetworkManager
       :resource_id,
       :resource_type,
       :context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreCoreNetworkPolicyVersionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         policy_version_id: 1, # required
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_version_id
+    #   The ID of the policy version to restore.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RestoreCoreNetworkPolicyVersionRequest AWS API Documentation
+    #
+    class RestoreCoreNetworkPolicyVersionRequest < Struct.new(
+      :core_network_id,
+      :policy_version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_policy
+    #   Describes the restored core network policy.
+    #   @return [Types::CoreNetworkPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RestoreCoreNetworkPolicyVersionResponse AWS API Documentation
+    #
+    class RestoreCoreNetworkPolicyVersionResponse < Struct.new(
+      :core_network_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2981,8 +5129,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         transit_gateway_attachment_arn: "String",
-    #         ip_address: "String",
+    #         transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
+    #         ip_address: "IPAddress",
     #       }
     #
     # @!attribute [rw] transit_gateway_attachment_arn
@@ -3027,17 +5175,27 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         transit_gateway_route_table_arn: "String",
+    #         transit_gateway_route_table_arn: "TransitGatewayRouteTableArn",
+    #         core_network_segment_edge: {
+    #           core_network_id: "CoreNetworkId",
+    #           segment_name: "ConstrainedString",
+    #           edge_location: "ExternalRegionCode",
+    #         },
     #       }
     #
     # @!attribute [rw] transit_gateway_route_table_arn
     #   The ARN of the transit gateway route table.
     #   @return [String]
     #
+    # @!attribute [rw] core_network_segment_edge
+    #   The segment edge in a core network.
+    #   @return [Types::CoreNetworkSegmentEdgeIdentifier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RouteTableIdentifier AWS API Documentation
     #
     class RouteTableIdentifier < Struct.new(
-      :transit_gateway_route_table_arn)
+      :transit_gateway_route_table_arn,
+      :core_network_segment_edge)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3125,18 +5283,37 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # Creates a site-to-site VPN attachment.
+    #
+    # @!attribute [rw] attachment
+    #   Provides details about a site-to-site VPN attachment.
+    #   @return [Types::Attachment]
+    #
+    # @!attribute [rw] vpn_connection_arn
+    #   The ARN of the site-to-site VPN attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/SiteToSiteVpnAttachment AWS API Documentation
+    #
+    class SiteToSiteVpnAttachment < Struct.new(
+      :attachment,
+      :vpn_connection_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartRouteAnalysisRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
     #         source: { # required
-    #           transit_gateway_attachment_arn: "String",
-    #           ip_address: "String",
+    #           transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
+    #           ip_address: "IPAddress",
     #         },
     #         destination: { # required
-    #           transit_gateway_attachment_arn: "String",
-    #           ip_address: "String",
+    #           transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
+    #           ip_address: "IPAddress",
     #         },
     #         include_return_path: false,
     #         use_middleboxes: false,
@@ -3223,7 +5400,7 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "ResourceARN", # required
+    #         resource_arn: "ResourceArn", # required
     #         tags: [ # required
     #           {
     #             key: "TagKey",
@@ -3352,7 +5529,7 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         resource_arn: "ResourceARN", # required
+    #         resource_arn: "ResourceArn", # required
     #         tag_keys: ["TagKey"], # required
     #       }
     #
@@ -3381,11 +5558,11 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         connection_id: "String", # required
-    #         link_id: "String",
-    #         connected_link_id: "String",
-    #         description: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         connection_id: "ConnectionId", # required
+    #         link_id: "LinkId",
+    #         connected_link_id: "LinkId",
+    #         description: "ConstrainedString",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -3434,27 +5611,64 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateCoreNetworkRequest
+    #   data as a hash:
+    #
+    #       {
+    #         core_network_id: "CoreNetworkId", # required
+    #         description: "ConstrainedString",
+    #       }
+    #
+    # @!attribute [rw] core_network_id
+    #   The ID of a core network.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the update.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateCoreNetworkRequest AWS API Documentation
+    #
+    class UpdateCoreNetworkRequest < Struct.new(
+      :core_network_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network
+    #   Returns information about a core network update.
+    #   @return [Types::CoreNetwork]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateCoreNetworkResponse AWS API Documentation
+    #
+    class UpdateCoreNetworkResponse < Struct.new(
+      :core_network)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UpdateDeviceRequest
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         device_id: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         device_id: "DeviceId", # required
     #         aws_location: {
-    #           zone: "String",
-    #           subnet_arn: "String",
+    #           zone: "ConstrainedString",
+    #           subnet_arn: "SubnetArn",
     #         },
-    #         description: "String",
-    #         type: "String",
-    #         vendor: "String",
-    #         model: "String",
-    #         serial_number: "String",
+    #         description: "ConstrainedString",
+    #         type: "ConstrainedString",
+    #         vendor: "ConstrainedString",
+    #         model: "ConstrainedString",
+    #         serial_number: "ConstrainedString",
     #         location: {
-    #           address: "String",
-    #           latitude: "String",
-    #           longitude: "String",
+    #           address: "ConstrainedString",
+    #           latitude: "ConstrainedString",
+    #           longitude: "ConstrainedString",
     #         },
-    #         site_id: "String",
+    #         site_id: "SiteId",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -3539,8 +5753,8 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         description: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         description: "ConstrainedString",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -3578,15 +5792,15 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         link_id: "String", # required
-    #         description: "String",
-    #         type: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         link_id: "LinkId", # required
+    #         description: "ConstrainedString",
+    #         type: "ConstrainedString",
     #         bandwidth: {
     #           upload_speed: 1,
     #           download_speed: 1,
     #         },
-    #         provider: "String",
+    #         provider: "ConstrainedString",
     #       }
     #
     # @!attribute [rw] global_network_id
@@ -3648,10 +5862,10 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         resource_arn: "String", # required
+    #         global_network_id: "GlobalNetworkId", # required
+    #         resource_arn: "ResourceArn", # required
     #         metadata: { # required
-    #           "NetworkResourceMetadataKey" => "NetworkResourceMetadataValue",
+    #           "ConstrainedString" => "ConstrainedString",
     #         },
     #       }
     #
@@ -3698,13 +5912,13 @@ module Aws::NetworkManager
     #   data as a hash:
     #
     #       {
-    #         global_network_id: "String", # required
-    #         site_id: "String", # required
-    #         description: "String",
+    #         global_network_id: "GlobalNetworkId", # required
+    #         site_id: "SiteId", # required
+    #         description: "ConstrainedString",
     #         location: {
-    #           address: "String",
-    #           latitude: "String",
-    #           longitude: "String",
+    #           address: "ConstrainedString",
+    #           latitude: "ConstrainedString",
+    #           longitude: "ConstrainedString",
     #         },
     #       }
     #
@@ -3755,6 +5969,57 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdateVpcAttachmentRequest
+    #   data as a hash:
+    #
+    #       {
+    #         attachment_id: "AttachmentId", # required
+    #         add_subnet_arns: ["SubnetArn"],
+    #         remove_subnet_arns: ["SubnetArn"],
+    #         options: {
+    #           ipv_6_support: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] add_subnet_arns
+    #   Adds a subnet ARN to the VPC attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_subnet_arns
+    #   Removes a subnet ARN from the attachment.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] options
+    #   Additional options for updating the VPC attachment.
+    #   @return [Types::VpcOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateVpcAttachmentRequest AWS API Documentation
+    #
+    class UpdateVpcAttachmentRequest < Struct.new(
+      :attachment_id,
+      :add_subnet_arns,
+      :remove_subnet_arns,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_attachment
+    #   Describes the updated VPC attachment.
+    #   @return [Types::VpcAttachment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateVpcAttachmentResponse AWS API Documentation
+    #
+    class UpdateVpcAttachmentResponse < Struct.new(
+      :vpc_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints.
     #
     # @!attribute [rw] message
@@ -3793,6 +6058,51 @@ module Aws::NetworkManager
     class ValidationExceptionField < Struct.new(
       :name,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a VPC attachment.
+    #
+    # @!attribute [rw] attachment
+    #   Provides details about the VPC attachment.
+    #   @return [Types::Attachment]
+    #
+    # @!attribute [rw] subnet_arns
+    #   The subnet ARNs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] options
+    #   Provides details about the VPC attachment.
+    #   @return [Types::VpcOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/VpcAttachment AWS API Documentation
+    #
+    class VpcAttachment < Struct.new(
+      :attachment,
+      :subnet_arns,
+      :options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the VPC options.
+    #
+    # @note When making an API call, you may pass VpcOptions
+    #   data as a hash:
+    #
+    #       {
+    #         ipv_6_support: false,
+    #       }
+    #
+    # @!attribute [rw] ipv_6_support
+    #   Indicates whether IPv6 is supported.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/VpcOptions AWS API Documentation
+    #
+    class VpcOptions < Struct.new(
+      :ipv_6_support)
       SENSITIVE = []
       include Aws::Structure
     end

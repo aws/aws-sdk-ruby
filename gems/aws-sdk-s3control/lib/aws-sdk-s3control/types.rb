@@ -5523,10 +5523,11 @@ module Aws::S3Control
     #       }
     #
     # @!attribute [rw] expiration_in_days
-    #   This argument specifies how long the S3 Glacier or S3 Glacier Deep
-    #   Archive object remains available in Amazon S3. S3 Initiate Restore
-    #   Object jobs that target S3 Glacier and S3 Glacier Deep Archive
-    #   objects require `ExpirationInDays` set to 1 or greater.
+    #   This argument specifies how long the S3 Glacier Flexible Retrieval
+    #   or S3 Glacier Deep Archive object remains available in Amazon S3. S3
+    #   Initiate Restore Object jobs that target S3 Glacier Flexible
+    #   Retrieval and S3 Glacier Deep Archive objects require
+    #   `ExpirationInDays` set to 1 or greater.
     #
     #   Conversely, do *not* set `ExpirationInDays` when creating S3
     #   Initiate Restore Object jobs that target S3 Intelligent-Tiering
@@ -5535,8 +5536,8 @@ module Aws::S3Control
     #   expiry, so specifying `ExpirationInDays` results in restore request
     #   failure.
     #
-    #   S3 Batch Operations jobs can operate either on S3 Glacier and S3
-    #   Glacier Deep Archive storage class objects or on S3
+    #   S3 Batch Operations jobs can operate either on S3 Glacier Flexible
+    #   Retrieval and S3 Glacier Deep Archive storage class objects or on S3
     #   Intelligent-Tiering Archive Access and Deep Archive Access storage
     #   tier objects, but not both types in the same job. If you need to
     #   restore objects of both types you *must* create separate Batch

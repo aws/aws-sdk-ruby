@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2022-01-03)
+------------------
+
+* Feature - Multiple doc-only updates for Relational Database Service (RDS)
+
+1.134.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.133.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.132.0 (2021-11-23)
 ------------------
 

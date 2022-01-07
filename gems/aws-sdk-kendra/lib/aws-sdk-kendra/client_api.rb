@@ -21,6 +21,12 @@ module Aws::Kendra
     AdditionalResultAttributeValue = Shapes::StructureShape.new(name: 'AdditionalResultAttributeValue')
     AdditionalResultAttributeValueType = Shapes::StringShape.new(name: 'AdditionalResultAttributeValueType')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AssociateEntitiesToExperienceFailedEntityList = Shapes::ListShape.new(name: 'AssociateEntitiesToExperienceFailedEntityList')
+    AssociateEntitiesToExperienceRequest = Shapes::StructureShape.new(name: 'AssociateEntitiesToExperienceRequest')
+    AssociateEntitiesToExperienceResponse = Shapes::StructureShape.new(name: 'AssociateEntitiesToExperienceResponse')
+    AssociateEntityList = Shapes::ListShape.new(name: 'AssociateEntityList')
+    AssociatePersonasToEntitiesRequest = Shapes::StructureShape.new(name: 'AssociatePersonasToEntitiesRequest')
+    AssociatePersonasToEntitiesResponse = Shapes::StructureShape.new(name: 'AssociatePersonasToEntitiesResponse')
     AttributeFilter = Shapes::StructureShape.new(name: 'AttributeFilter')
     AttributeFilterList = Shapes::ListShape.new(name: 'AttributeFilterList')
     AuthenticationConfiguration = Shapes::StructureShape.new(name: 'AuthenticationConfiguration')
@@ -49,6 +55,7 @@ module Aws::Kendra
     ClientTokenName = Shapes::StringShape.new(name: 'ClientTokenName')
     ColumnConfiguration = Shapes::StructureShape.new(name: 'ColumnConfiguration')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ConditionOperator = Shapes::StringShape.new(name: 'ConditionOperator')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConfluenceAttachmentConfiguration = Shapes::StructureShape.new(name: 'ConfluenceAttachmentConfiguration')
     ConfluenceAttachmentFieldMappingsList = Shapes::ListShape.new(name: 'ConfluenceAttachmentFieldMappingsList')
@@ -71,10 +78,13 @@ module Aws::Kendra
     ConfluenceSpaceToIndexFieldMapping = Shapes::StructureShape.new(name: 'ConfluenceSpaceToIndexFieldMapping')
     ConfluenceVersion = Shapes::StringShape.new(name: 'ConfluenceVersion')
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
+    ContentSourceConfiguration = Shapes::StructureShape.new(name: 'ContentSourceConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CrawlDepth = Shapes::IntegerShape.new(name: 'CrawlDepth')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
+    CreateExperienceRequest = Shapes::StructureShape.new(name: 'CreateExperienceRequest')
+    CreateExperienceResponse = Shapes::StructureShape.new(name: 'CreateExperienceResponse')
     CreateFaqRequest = Shapes::StructureShape.new(name: 'CreateFaqRequest')
     CreateFaqResponse = Shapes::StructureShape.new(name: 'CreateFaqResponse')
     CreateIndexRequest = Shapes::StructureShape.new(name: 'CreateIndexRequest')
@@ -83,12 +93,14 @@ module Aws::Kendra
     CreateQuerySuggestionsBlockListResponse = Shapes::StructureShape.new(name: 'CreateQuerySuggestionsBlockListResponse')
     CreateThesaurusRequest = Shapes::StructureShape.new(name: 'CreateThesaurusRequest')
     CreateThesaurusResponse = Shapes::StructureShape.new(name: 'CreateThesaurusResponse')
+    CustomDocumentEnrichmentConfiguration = Shapes::StructureShape.new(name: 'CustomDocumentEnrichmentConfiguration')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceDateFieldFormat = Shapes::StringShape.new(name: 'DataSourceDateFieldFormat')
     DataSourceFieldName = Shapes::StringShape.new(name: 'DataSourceFieldName')
     DataSourceGroup = Shapes::StructureShape.new(name: 'DataSourceGroup')
     DataSourceGroups = Shapes::ListShape.new(name: 'DataSourceGroups')
     DataSourceId = Shapes::StringShape.new(name: 'DataSourceId')
+    DataSourceIdList = Shapes::ListShape.new(name: 'DataSourceIdList')
     DataSourceInclusionsExclusionsStrings = Shapes::ListShape.new(name: 'DataSourceInclusionsExclusionsStrings')
     DataSourceInclusionsExclusionsStringsMember = Shapes::StringShape.new(name: 'DataSourceInclusionsExclusionsStringsMember')
     DataSourceName = Shapes::StringShape.new(name: 'DataSourceName')
@@ -111,6 +123,8 @@ module Aws::Kendra
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
     DeleteDataSourceRequest = Shapes::StructureShape.new(name: 'DeleteDataSourceRequest')
+    DeleteExperienceRequest = Shapes::StructureShape.new(name: 'DeleteExperienceRequest')
+    DeleteExperienceResponse = Shapes::StructureShape.new(name: 'DeleteExperienceResponse')
     DeleteFaqRequest = Shapes::StructureShape.new(name: 'DeleteFaqRequest')
     DeleteIndexRequest = Shapes::StructureShape.new(name: 'DeleteIndexRequest')
     DeletePrincipalMappingRequest = Shapes::StructureShape.new(name: 'DeletePrincipalMappingRequest')
@@ -118,6 +132,8 @@ module Aws::Kendra
     DeleteThesaurusRequest = Shapes::StructureShape.new(name: 'DeleteThesaurusRequest')
     DescribeDataSourceRequest = Shapes::StructureShape.new(name: 'DescribeDataSourceRequest')
     DescribeDataSourceResponse = Shapes::StructureShape.new(name: 'DescribeDataSourceResponse')
+    DescribeExperienceRequest = Shapes::StructureShape.new(name: 'DescribeExperienceRequest')
+    DescribeExperienceResponse = Shapes::StructureShape.new(name: 'DescribeExperienceResponse')
     DescribeFaqRequest = Shapes::StructureShape.new(name: 'DescribeFaqRequest')
     DescribeFaqResponse = Shapes::StructureShape.new(name: 'DescribeFaqResponse')
     DescribeIndexRequest = Shapes::StructureShape.new(name: 'DescribeIndexRequest')
@@ -131,13 +147,20 @@ module Aws::Kendra
     DescribeThesaurusRequest = Shapes::StructureShape.new(name: 'DescribeThesaurusRequest')
     DescribeThesaurusResponse = Shapes::StructureShape.new(name: 'DescribeThesaurusResponse')
     Description = Shapes::StringShape.new(name: 'Description')
+    DisassociateEntitiesFromExperienceRequest = Shapes::StructureShape.new(name: 'DisassociateEntitiesFromExperienceRequest')
+    DisassociateEntitiesFromExperienceResponse = Shapes::StructureShape.new(name: 'DisassociateEntitiesFromExperienceResponse')
+    DisassociateEntityList = Shapes::ListShape.new(name: 'DisassociateEntityList')
+    DisassociatePersonasFromEntitiesRequest = Shapes::StructureShape.new(name: 'DisassociatePersonasFromEntitiesRequest')
+    DisassociatePersonasFromEntitiesResponse = Shapes::StructureShape.new(name: 'DisassociatePersonasFromEntitiesResponse')
     Document = Shapes::StructureShape.new(name: 'Document')
     DocumentAttribute = Shapes::StructureShape.new(name: 'DocumentAttribute')
+    DocumentAttributeCondition = Shapes::StructureShape.new(name: 'DocumentAttributeCondition')
     DocumentAttributeKey = Shapes::StringShape.new(name: 'DocumentAttributeKey')
     DocumentAttributeKeyList = Shapes::ListShape.new(name: 'DocumentAttributeKeyList')
     DocumentAttributeList = Shapes::ListShape.new(name: 'DocumentAttributeList')
     DocumentAttributeStringListValue = Shapes::ListShape.new(name: 'DocumentAttributeStringListValue')
     DocumentAttributeStringValue = Shapes::StringShape.new(name: 'DocumentAttributeStringValue')
+    DocumentAttributeTarget = Shapes::StructureShape.new(name: 'DocumentAttributeTarget')
     DocumentAttributeValue = Shapes::StructureShape.new(name: 'DocumentAttributeValue')
     DocumentAttributeValueCountPair = Shapes::StructureShape.new(name: 'DocumentAttributeValueCountPair')
     DocumentAttributeValueCountPairList = Shapes::ListShape.new(name: 'DocumentAttributeValueCountPairList')
@@ -157,18 +180,40 @@ module Aws::Kendra
     DocumentStatusList = Shapes::ListShape.new(name: 'DocumentStatusList')
     DocumentsMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentsMetadataConfiguration')
     Duration = Shapes::StringShape.new(name: 'Duration')
+    Endpoint = Shapes::StringShape.new(name: 'Endpoint')
+    EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    EntityConfiguration = Shapes::StructureShape.new(name: 'EntityConfiguration')
+    EntityDisplayData = Shapes::StructureShape.new(name: 'EntityDisplayData')
+    EntityId = Shapes::StringShape.new(name: 'EntityId')
+    EntityIdsList = Shapes::ListShape.new(name: 'EntityIdsList')
+    EntityPersonaConfiguration = Shapes::StructureShape.new(name: 'EntityPersonaConfiguration')
+    EntityPersonaConfigurationList = Shapes::ListShape.new(name: 'EntityPersonaConfigurationList')
+    EntityType = Shapes::StringShape.new(name: 'EntityType')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExcludeMimeTypesList = Shapes::ListShape.new(name: 'ExcludeMimeTypesList')
     ExcludeSharedDrivesList = Shapes::ListShape.new(name: 'ExcludeSharedDrivesList')
     ExcludeUserAccountsList = Shapes::ListShape.new(name: 'ExcludeUserAccountsList')
+    ExperienceConfiguration = Shapes::StructureShape.new(name: 'ExperienceConfiguration')
+    ExperienceEndpoint = Shapes::StructureShape.new(name: 'ExperienceEndpoint')
+    ExperienceEndpoints = Shapes::ListShape.new(name: 'ExperienceEndpoints')
+    ExperienceEntitiesSummary = Shapes::StructureShape.new(name: 'ExperienceEntitiesSummary')
+    ExperienceEntitiesSummaryList = Shapes::ListShape.new(name: 'ExperienceEntitiesSummaryList')
+    ExperienceId = Shapes::StringShape.new(name: 'ExperienceId')
+    ExperienceName = Shapes::StringShape.new(name: 'ExperienceName')
+    ExperienceStatus = Shapes::StringShape.new(name: 'ExperienceStatus')
+    ExperiencesSummary = Shapes::StructureShape.new(name: 'ExperiencesSummary')
+    ExperiencesSummaryList = Shapes::ListShape.new(name: 'ExperiencesSummaryList')
     Facet = Shapes::StructureShape.new(name: 'Facet')
     FacetList = Shapes::ListShape.new(name: 'FacetList')
     FacetResult = Shapes::StructureShape.new(name: 'FacetResult')
     FacetResultList = Shapes::ListShape.new(name: 'FacetResultList')
+    FailedEntity = Shapes::StructureShape.new(name: 'FailedEntity')
+    FailedEntityList = Shapes::ListShape.new(name: 'FailedEntityList')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FaqFileFormat = Shapes::StringShape.new(name: 'FaqFileFormat')
     FaqId = Shapes::StringShape.new(name: 'FaqId')
+    FaqIdsList = Shapes::ListShape.new(name: 'FaqIdsList')
     FaqName = Shapes::StringShape.new(name: 'FaqName')
     FaqStatistics = Shapes::StructureShape.new(name: 'FaqStatistics')
     FaqStatus = Shapes::StringShape.new(name: 'FaqStatus')
@@ -177,6 +222,8 @@ module Aws::Kendra
     FeedbackToken = Shapes::StringShape.new(name: 'FeedbackToken')
     GetQuerySuggestionsRequest = Shapes::StructureShape.new(name: 'GetQuerySuggestionsRequest')
     GetQuerySuggestionsResponse = Shapes::StructureShape.new(name: 'GetQuerySuggestionsResponse')
+    GetSnapshotsRequest = Shapes::StructureShape.new(name: 'GetSnapshotsRequest')
+    GetSnapshotsResponse = Shapes::StructureShape.new(name: 'GetSnapshotsResponse')
     GoogleDriveConfiguration = Shapes::StructureShape.new(name: 'GoogleDriveConfiguration')
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     GroupId = Shapes::StringShape.new(name: 'GroupId')
@@ -190,7 +237,9 @@ module Aws::Kendra
     Highlight = Shapes::StructureShape.new(name: 'Highlight')
     HighlightList = Shapes::ListShape.new(name: 'HighlightList')
     HighlightType = Shapes::StringShape.new(name: 'HighlightType')
+    HookConfiguration = Shapes::StructureShape.new(name: 'HookConfiguration')
     Host = Shapes::StringShape.new(name: 'Host')
+    IdentityAttributeName = Shapes::StringShape.new(name: 'IdentityAttributeName')
     Importance = Shapes::IntegerShape.new(name: 'Importance')
     IndexConfigurationSummary = Shapes::StructureShape.new(name: 'IndexConfigurationSummary')
     IndexConfigurationSummaryList = Shapes::ListShape.new(name: 'IndexConfigurationSummaryList')
@@ -203,18 +252,29 @@ module Aws::Kendra
     IndexedQuestionAnswersCount = Shapes::IntegerShape.new(name: 'IndexedQuestionAnswersCount')
     IndexedTextBytes = Shapes::IntegerShape.new(name: 'IndexedTextBytes')
     IndexedTextDocumentsCount = Shapes::IntegerShape.new(name: 'IndexedTextDocumentsCount')
+    InlineCustomDocumentEnrichmentConfiguration = Shapes::StructureShape.new(name: 'InlineCustomDocumentEnrichmentConfiguration')
+    InlineCustomDocumentEnrichmentConfigurationList = Shapes::ListShape.new(name: 'InlineCustomDocumentEnrichmentConfigurationList')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Interval = Shapes::StringShape.new(name: 'Interval')
+    InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     Issuer = Shapes::StringShape.new(name: 'Issuer')
     JsonTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JsonTokenTypeConfiguration')
     JwtTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JwtTokenTypeConfiguration')
     KeyLocation = Shapes::StringShape.new(name: 'KeyLocation')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
+    LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LanguageCode = Shapes::StringShape.new(name: 'LanguageCode')
     ListDataSourceSyncJobsRequest = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsRequest')
     ListDataSourceSyncJobsResponse = Shapes::StructureShape.new(name: 'ListDataSourceSyncJobsResponse')
     ListDataSourcesRequest = Shapes::StructureShape.new(name: 'ListDataSourcesRequest')
     ListDataSourcesResponse = Shapes::StructureShape.new(name: 'ListDataSourcesResponse')
+    ListEntityPersonasRequest = Shapes::StructureShape.new(name: 'ListEntityPersonasRequest')
+    ListEntityPersonasResponse = Shapes::StructureShape.new(name: 'ListEntityPersonasResponse')
+    ListExperienceEntitiesRequest = Shapes::StructureShape.new(name: 'ListExperienceEntitiesRequest')
+    ListExperienceEntitiesResponse = Shapes::StructureShape.new(name: 'ListExperienceEntitiesResponse')
+    ListExperiencesRequest = Shapes::StructureShape.new(name: 'ListExperiencesRequest')
+    ListExperiencesResponse = Shapes::StructureShape.new(name: 'ListExperiencesResponse')
     ListFaqsRequest = Shapes::StructureShape.new(name: 'ListFaqsRequest')
     ListFaqsResponse = Shapes::StructureShape.new(name: 'ListFaqsResponse')
     ListGroupsOlderThanOrderingIdRequest = Shapes::StructureShape.new(name: 'ListGroupsOlderThanOrderingIdRequest')
@@ -233,6 +293,8 @@ module Aws::Kendra
     MaxLinksPerPage = Shapes::IntegerShape.new(name: 'MaxLinksPerPage')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
     MaxResultsIntegerForListDataSourcesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourcesRequest')
+    MaxResultsIntegerForListEntityPersonasRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListEntityPersonasRequest')
+    MaxResultsIntegerForListExperiencesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListExperiencesRequest')
     MaxResultsIntegerForListFaqsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListFaqsRequest')
     MaxResultsIntegerForListIndicesRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListIndicesRequest')
     MaxResultsIntegerForListPrincipalsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListPrincipalsRequest')
@@ -243,11 +305,13 @@ module Aws::Kendra
     MemberGroups = Shapes::ListShape.new(name: 'MemberGroups')
     MemberUser = Shapes::StructureShape.new(name: 'MemberUser')
     MemberUsers = Shapes::ListShape.new(name: 'MemberUsers')
+    MetricType = Shapes::StringShape.new(name: 'MetricType')
     MetricValue = Shapes::StringShape.new(name: 'MetricValue')
     MimeType = Shapes::StringShape.new(name: 'MimeType')
     MinimumNumberOfQueryingUsers = Shapes::IntegerShape.new(name: 'MinimumNumberOfQueryingUsers')
     MinimumQueryCount = Shapes::IntegerShape.new(name: 'MinimumQueryCount')
     Mode = Shapes::StringShape.new(name: 'Mode')
+    NameType = Shapes::StringShape.new(name: 'NameType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ObjectBoolean = Shapes::BooleanShape.new(name: 'ObjectBoolean')
     OneDriveConfiguration = Shapes::StructureShape.new(name: 'OneDriveConfiguration')
@@ -256,6 +320,9 @@ module Aws::Kendra
     OneDriveUsers = Shapes::StructureShape.new(name: 'OneDriveUsers')
     Order = Shapes::StringShape.new(name: 'Order')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    Persona = Shapes::StringShape.new(name: 'Persona')
+    PersonasSummary = Shapes::StructureShape.new(name: 'PersonasSummary')
+    PersonasSummaryList = Shapes::ListShape.new(name: 'PersonasSummaryList')
     Port = Shapes::IntegerShape.new(name: 'Port')
     Principal = Shapes::StructureShape.new(name: 'Principal')
     PrincipalList = Shapes::ListShape.new(name: 'PrincipalList')
@@ -336,6 +403,9 @@ module Aws::Kendra
     SiteMap = Shapes::StringShape.new(name: 'SiteMap')
     SiteMapsConfiguration = Shapes::StructureShape.new(name: 'SiteMapsConfiguration')
     SiteMapsList = Shapes::ListShape.new(name: 'SiteMapsList')
+    SnapshotsDataHeaderFields = Shapes::ListShape.new(name: 'SnapshotsDataHeaderFields')
+    SnapshotsDataRecord = Shapes::ListShape.new(name: 'SnapshotsDataRecord')
+    SnapshotsDataRecords = Shapes::ListShape.new(name: 'SnapshotsDataRecords')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
     SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
@@ -379,6 +449,7 @@ module Aws::Kendra
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
+    UpdateExperienceRequest = Shapes::StructureShape.new(name: 'UpdateExperienceRequest')
     UpdateIndexRequest = Shapes::StructureShape.new(name: 'UpdateIndexRequest')
     UpdateQuerySuggestionsBlockListRequest = Shapes::StructureShape.new(name: 'UpdateQuerySuggestionsBlockListRequest')
     UpdateQuerySuggestionsConfigRequest = Shapes::StructureShape.new(name: 'UpdateQuerySuggestionsConfigRequest')
@@ -391,6 +462,7 @@ module Aws::Kendra
     UserGroupResolutionConfiguration = Shapes::StructureShape.new(name: 'UserGroupResolutionConfiguration')
     UserGroupResolutionMode = Shapes::StringShape.new(name: 'UserGroupResolutionMode')
     UserId = Shapes::StringShape.new(name: 'UserId')
+    UserIdentityConfiguration = Shapes::StructureShape.new(name: 'UserIdentityConfiguration')
     UserNameAttributeField = Shapes::StringShape.new(name: 'UserNameAttributeField')
     UserTokenConfiguration = Shapes::StructureShape.new(name: 'UserTokenConfiguration')
     UserTokenConfigurationList = Shapes::ListShape.new(name: 'UserTokenConfigurationList')
@@ -421,6 +493,26 @@ module Aws::Kendra
 
     AdditionalResultAttributeValue.add_member(:text_with_highlights_value, Shapes::ShapeRef.new(shape: TextWithHighlights, location_name: "TextWithHighlightsValue"))
     AdditionalResultAttributeValue.struct_class = Types::AdditionalResultAttributeValue
+
+    AssociateEntitiesToExperienceFailedEntityList.member = Shapes::ShapeRef.new(shape: FailedEntity)
+
+    AssociateEntitiesToExperienceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    AssociateEntitiesToExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    AssociateEntitiesToExperienceRequest.add_member(:entity_list, Shapes::ShapeRef.new(shape: AssociateEntityList, required: true, location_name: "EntityList"))
+    AssociateEntitiesToExperienceRequest.struct_class = Types::AssociateEntitiesToExperienceRequest
+
+    AssociateEntitiesToExperienceResponse.add_member(:failed_entity_list, Shapes::ShapeRef.new(shape: AssociateEntitiesToExperienceFailedEntityList, location_name: "FailedEntityList"))
+    AssociateEntitiesToExperienceResponse.struct_class = Types::AssociateEntitiesToExperienceResponse
+
+    AssociateEntityList.member = Shapes::ShapeRef.new(shape: EntityConfiguration)
+
+    AssociatePersonasToEntitiesRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    AssociatePersonasToEntitiesRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    AssociatePersonasToEntitiesRequest.add_member(:personas, Shapes::ShapeRef.new(shape: EntityPersonaConfigurationList, required: true, location_name: "Personas"))
+    AssociatePersonasToEntitiesRequest.struct_class = Types::AssociatePersonasToEntitiesRequest
+
+    AssociatePersonasToEntitiesResponse.add_member(:failed_entity_list, Shapes::ShapeRef.new(shape: FailedEntityList, location_name: "FailedEntityList"))
+    AssociatePersonasToEntitiesResponse.struct_class = Types::AssociatePersonasToEntitiesResponse
 
     AttributeFilter.add_member(:and_all_filters, Shapes::ShapeRef.new(shape: AttributeFilterList, location_name: "AndAllFilters"))
     AttributeFilter.add_member(:or_all_filters, Shapes::ShapeRef.new(shape: AttributeFilterList, location_name: "OrAllFilters"))
@@ -479,6 +571,7 @@ module Aws::Kendra
     BatchPutDocumentRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     BatchPutDocumentRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     BatchPutDocumentRequest.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, required: true, location_name: "Documents"))
+    BatchPutDocumentRequest.add_member(:custom_document_enrichment_configuration, Shapes::ShapeRef.new(shape: CustomDocumentEnrichmentConfiguration, location_name: "CustomDocumentEnrichmentConfiguration"))
     BatchPutDocumentRequest.struct_class = Types::BatchPutDocumentRequest
 
     BatchPutDocumentResponse.add_member(:failed_documents, Shapes::ShapeRef.new(shape: BatchPutDocumentResponseFailedDocuments, location_name: "FailedDocuments"))
@@ -582,6 +675,11 @@ module Aws::Kendra
     ConnectionConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     ConnectionConfiguration.struct_class = Types::ConnectionConfiguration
 
+    ContentSourceConfiguration.add_member(:data_source_ids, Shapes::ShapeRef.new(shape: DataSourceIdList, location_name: "DataSourceIds"))
+    ContentSourceConfiguration.add_member(:faq_ids, Shapes::ShapeRef.new(shape: FaqIdsList, location_name: "FaqIds"))
+    ContentSourceConfiguration.add_member(:direct_put_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "DirectPutContent"))
+    ContentSourceConfiguration.struct_class = Types::ContentSourceConfiguration
+
     CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "Name"))
     CreateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateDataSourceRequest.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceType, required: true, location_name: "Type"))
@@ -592,10 +690,22 @@ module Aws::Kendra
     CreateDataSourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDataSourceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateDataSourceRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    CreateDataSourceRequest.add_member(:custom_document_enrichment_configuration, Shapes::ShapeRef.new(shape: CustomDocumentEnrichmentConfiguration, location_name: "CustomDocumentEnrichmentConfiguration"))
     CreateDataSourceRequest.struct_class = Types::CreateDataSourceRequest
 
     CreateDataSourceResponse.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     CreateDataSourceResponse.struct_class = Types::CreateDataSourceResponse
+
+    CreateExperienceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ExperienceName, required: true, location_name: "Name"))
+    CreateExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    CreateExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    CreateExperienceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ExperienceConfiguration, location_name: "Configuration"))
+    CreateExperienceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    CreateExperienceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientTokenName, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateExperienceRequest.struct_class = Types::CreateExperienceRequest
+
+    CreateExperienceResponse.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    CreateExperienceResponse.struct_class = Types::CreateExperienceResponse
 
     CreateFaqRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     CreateFaqRequest.add_member(:name, Shapes::ShapeRef.new(shape: FaqName, required: true, location_name: "Name"))
@@ -650,6 +760,12 @@ module Aws::Kendra
     CreateThesaurusResponse.add_member(:id, Shapes::ShapeRef.new(shape: ThesaurusId, location_name: "Id"))
     CreateThesaurusResponse.struct_class = Types::CreateThesaurusResponse
 
+    CustomDocumentEnrichmentConfiguration.add_member(:inline_configurations, Shapes::ShapeRef.new(shape: InlineCustomDocumentEnrichmentConfigurationList, location_name: "InlineConfigurations"))
+    CustomDocumentEnrichmentConfiguration.add_member(:pre_extraction_hook_configuration, Shapes::ShapeRef.new(shape: HookConfiguration, location_name: "PreExtractionHookConfiguration"))
+    CustomDocumentEnrichmentConfiguration.add_member(:post_extraction_hook_configuration, Shapes::ShapeRef.new(shape: HookConfiguration, location_name: "PostExtractionHookConfiguration"))
+    CustomDocumentEnrichmentConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    CustomDocumentEnrichmentConfiguration.struct_class = Types::CustomDocumentEnrichmentConfiguration
+
     DataSourceConfiguration.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3DataSourceConfiguration, location_name: "S3Configuration"))
     DataSourceConfiguration.add_member(:share_point_configuration, Shapes::ShapeRef.new(shape: SharePointConfiguration, location_name: "SharePointConfiguration"))
     DataSourceConfiguration.add_member(:database_configuration, Shapes::ShapeRef.new(shape: DatabaseConfiguration, location_name: "DatabaseConfiguration"))
@@ -667,6 +783,8 @@ module Aws::Kendra
     DataSourceGroup.struct_class = Types::DataSourceGroup
 
     DataSourceGroups.member = Shapes::ShapeRef.new(shape: DataSourceGroup)
+
+    DataSourceIdList.member = Shapes::ShapeRef.new(shape: DataSourceId)
 
     DataSourceInclusionsExclusionsStrings.member = Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStringsMember)
 
@@ -727,6 +845,12 @@ module Aws::Kendra
     DeleteDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DeleteDataSourceRequest.struct_class = Types::DeleteDataSourceRequest
 
+    DeleteExperienceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    DeleteExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DeleteExperienceRequest.struct_class = Types::DeleteExperienceRequest
+
+    DeleteExperienceResponse.struct_class = Types::DeleteExperienceResponse
+
     DeleteFaqRequest.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, required: true, location_name: "Id"))
     DeleteFaqRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     DeleteFaqRequest.struct_class = Types::DeleteFaqRequest
@@ -765,7 +889,25 @@ module Aws::Kendra
     DescribeDataSourceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeDataSourceResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     DescribeDataSourceResponse.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    DescribeDataSourceResponse.add_member(:custom_document_enrichment_configuration, Shapes::ShapeRef.new(shape: CustomDocumentEnrichmentConfiguration, location_name: "CustomDocumentEnrichmentConfiguration"))
     DescribeDataSourceResponse.struct_class = Types::DescribeDataSourceResponse
+
+    DescribeExperienceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    DescribeExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DescribeExperienceRequest.struct_class = Types::DescribeExperienceRequest
+
+    DescribeExperienceResponse.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, location_name: "Id"))
+    DescribeExperienceResponse.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, location_name: "IndexId"))
+    DescribeExperienceResponse.add_member(:name, Shapes::ShapeRef.new(shape: ExperienceName, location_name: "Name"))
+    DescribeExperienceResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: ExperienceEndpoints, location_name: "Endpoints"))
+    DescribeExperienceResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: ExperienceConfiguration, location_name: "Configuration"))
+    DescribeExperienceResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    DescribeExperienceResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    DescribeExperienceResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    DescribeExperienceResponse.add_member(:status, Shapes::ShapeRef.new(shape: ExperienceStatus, location_name: "Status"))
+    DescribeExperienceResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    DescribeExperienceResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    DescribeExperienceResponse.struct_class = Types::DescribeExperienceResponse
 
     DescribeFaqRequest.add_member(:id, Shapes::ShapeRef.new(shape: FaqId, required: true, location_name: "Id"))
     DescribeFaqRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -868,6 +1010,24 @@ module Aws::Kendra
     DescribeThesaurusResponse.add_member(:synonym_rule_count, Shapes::ShapeRef.new(shape: Long, location_name: "SynonymRuleCount"))
     DescribeThesaurusResponse.struct_class = Types::DescribeThesaurusResponse
 
+    DisassociateEntitiesFromExperienceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    DisassociateEntitiesFromExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DisassociateEntitiesFromExperienceRequest.add_member(:entity_list, Shapes::ShapeRef.new(shape: DisassociateEntityList, required: true, location_name: "EntityList"))
+    DisassociateEntitiesFromExperienceRequest.struct_class = Types::DisassociateEntitiesFromExperienceRequest
+
+    DisassociateEntitiesFromExperienceResponse.add_member(:failed_entity_list, Shapes::ShapeRef.new(shape: FailedEntityList, location_name: "FailedEntityList"))
+    DisassociateEntitiesFromExperienceResponse.struct_class = Types::DisassociateEntitiesFromExperienceResponse
+
+    DisassociateEntityList.member = Shapes::ShapeRef.new(shape: EntityConfiguration)
+
+    DisassociatePersonasFromEntitiesRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    DisassociatePersonasFromEntitiesRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    DisassociatePersonasFromEntitiesRequest.add_member(:entity_ids, Shapes::ShapeRef.new(shape: EntityIdsList, required: true, location_name: "EntityIds"))
+    DisassociatePersonasFromEntitiesRequest.struct_class = Types::DisassociatePersonasFromEntitiesRequest
+
+    DisassociatePersonasFromEntitiesResponse.add_member(:failed_entity_list, Shapes::ShapeRef.new(shape: FailedEntityList, location_name: "FailedEntityList"))
+    DisassociatePersonasFromEntitiesResponse.struct_class = Types::DisassociatePersonasFromEntitiesResponse
+
     Document.add_member(:id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location_name: "Id"))
     Document.add_member(:title, Shapes::ShapeRef.new(shape: Title, location_name: "Title"))
     Document.add_member(:blob, Shapes::ShapeRef.new(shape: Blob, location_name: "Blob"))
@@ -882,11 +1042,21 @@ module Aws::Kendra
     DocumentAttribute.add_member(:value, Shapes::ShapeRef.new(shape: DocumentAttributeValue, required: true, location_name: "Value"))
     DocumentAttribute.struct_class = Types::DocumentAttribute
 
+    DocumentAttributeCondition.add_member(:condition_document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "ConditionDocumentAttributeKey"))
+    DocumentAttributeCondition.add_member(:operator, Shapes::ShapeRef.new(shape: ConditionOperator, required: true, location_name: "Operator"))
+    DocumentAttributeCondition.add_member(:condition_on_value, Shapes::ShapeRef.new(shape: DocumentAttributeValue, location_name: "ConditionOnValue"))
+    DocumentAttributeCondition.struct_class = Types::DocumentAttributeCondition
+
     DocumentAttributeKeyList.member = Shapes::ShapeRef.new(shape: DocumentAttributeKey)
 
     DocumentAttributeList.member = Shapes::ShapeRef.new(shape: DocumentAttribute)
 
     DocumentAttributeStringListValue.member = Shapes::ShapeRef.new(shape: String)
+
+    DocumentAttributeTarget.add_member(:target_document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "TargetDocumentAttributeKey"))
+    DocumentAttributeTarget.add_member(:target_document_attribute_value_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "TargetDocumentAttributeValueDeletion"))
+    DocumentAttributeTarget.add_member(:target_document_attribute_value, Shapes::ShapeRef.new(shape: DocumentAttributeValue, location_name: "TargetDocumentAttributeValue"))
+    DocumentAttributeTarget.struct_class = Types::DocumentAttributeTarget
 
     DocumentAttributeValue.add_member(:string_value, Shapes::ShapeRef.new(shape: DocumentAttributeStringValue, location_name: "StringValue"))
     DocumentAttributeValue.add_member(:string_list_value, Shapes::ShapeRef.new(shape: DocumentAttributeStringListValue, location_name: "StringListValue"))
@@ -929,11 +1099,56 @@ module Aws::Kendra
     DocumentsMetadataConfiguration.add_member(:s3_prefix, Shapes::ShapeRef.new(shape: S3ObjectKey, location_name: "S3Prefix"))
     DocumentsMetadataConfiguration.struct_class = Types::DocumentsMetadataConfiguration
 
+    EntityConfiguration.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EntityId"))
+    EntityConfiguration.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, required: true, location_name: "EntityType"))
+    EntityConfiguration.struct_class = Types::EntityConfiguration
+
+    EntityDisplayData.add_member(:user_name, Shapes::ShapeRef.new(shape: NameType, location_name: "UserName"))
+    EntityDisplayData.add_member(:group_name, Shapes::ShapeRef.new(shape: NameType, location_name: "GroupName"))
+    EntityDisplayData.add_member(:identified_user_name, Shapes::ShapeRef.new(shape: NameType, location_name: "IdentifiedUserName"))
+    EntityDisplayData.add_member(:first_name, Shapes::ShapeRef.new(shape: NameType, location_name: "FirstName"))
+    EntityDisplayData.add_member(:last_name, Shapes::ShapeRef.new(shape: NameType, location_name: "LastName"))
+    EntityDisplayData.struct_class = Types::EntityDisplayData
+
+    EntityIdsList.member = Shapes::ShapeRef.new(shape: EntityId)
+
+    EntityPersonaConfiguration.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, required: true, location_name: "EntityId"))
+    EntityPersonaConfiguration.add_member(:persona, Shapes::ShapeRef.new(shape: Persona, required: true, location_name: "Persona"))
+    EntityPersonaConfiguration.struct_class = Types::EntityPersonaConfiguration
+
+    EntityPersonaConfigurationList.member = Shapes::ShapeRef.new(shape: EntityPersonaConfiguration)
+
     ExcludeMimeTypesList.member = Shapes::ShapeRef.new(shape: MimeType)
 
     ExcludeSharedDrivesList.member = Shapes::ShapeRef.new(shape: SharedDriveId)
 
     ExcludeUserAccountsList.member = Shapes::ShapeRef.new(shape: UserAccount)
+
+    ExperienceConfiguration.add_member(:content_source_configuration, Shapes::ShapeRef.new(shape: ContentSourceConfiguration, location_name: "ContentSourceConfiguration"))
+    ExperienceConfiguration.add_member(:user_identity_configuration, Shapes::ShapeRef.new(shape: UserIdentityConfiguration, location_name: "UserIdentityConfiguration"))
+    ExperienceConfiguration.struct_class = Types::ExperienceConfiguration
+
+    ExperienceEndpoint.add_member(:endpoint_type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "EndpointType"))
+    ExperienceEndpoint.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "Endpoint"))
+    ExperienceEndpoint.struct_class = Types::ExperienceEndpoint
+
+    ExperienceEndpoints.member = Shapes::ShapeRef.new(shape: ExperienceEndpoint)
+
+    ExperienceEntitiesSummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EntityId"))
+    ExperienceEntitiesSummary.add_member(:entity_type, Shapes::ShapeRef.new(shape: EntityType, location_name: "EntityType"))
+    ExperienceEntitiesSummary.add_member(:display_data, Shapes::ShapeRef.new(shape: EntityDisplayData, location_name: "DisplayData"))
+    ExperienceEntitiesSummary.struct_class = Types::ExperienceEntitiesSummary
+
+    ExperienceEntitiesSummaryList.member = Shapes::ShapeRef.new(shape: ExperienceEntitiesSummary)
+
+    ExperiencesSummary.add_member(:name, Shapes::ShapeRef.new(shape: ExperienceName, location_name: "Name"))
+    ExperiencesSummary.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, location_name: "Id"))
+    ExperiencesSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    ExperiencesSummary.add_member(:status, Shapes::ShapeRef.new(shape: ExperienceStatus, location_name: "Status"))
+    ExperiencesSummary.add_member(:endpoints, Shapes::ShapeRef.new(shape: ExperienceEndpoints, location_name: "Endpoints"))
+    ExperiencesSummary.struct_class = Types::ExperiencesSummary
+
+    ExperiencesSummaryList.member = Shapes::ShapeRef.new(shape: ExperiencesSummary)
 
     Facet.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "DocumentAttributeKey"))
     Facet.struct_class = Types::Facet
@@ -946,6 +1161,14 @@ module Aws::Kendra
     FacetResult.struct_class = Types::FacetResult
 
     FacetResultList.member = Shapes::ShapeRef.new(shape: FacetResult)
+
+    FailedEntity.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EntityId"))
+    FailedEntity.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
+    FailedEntity.struct_class = Types::FailedEntity
+
+    FailedEntityList.member = Shapes::ShapeRef.new(shape: FailedEntity)
+
+    FaqIdsList.member = Shapes::ShapeRef.new(shape: FaqId)
 
     FaqStatistics.add_member(:indexed_question_answers_count, Shapes::ShapeRef.new(shape: IndexedQuestionAnswersCount, required: true, location_name: "IndexedQuestionAnswersCount"))
     FaqStatistics.struct_class = Types::FaqStatistics
@@ -969,6 +1192,19 @@ module Aws::Kendra
     GetQuerySuggestionsResponse.add_member(:query_suggestions_id, Shapes::ShapeRef.new(shape: QuerySuggestionsId, location_name: "QuerySuggestionsId"))
     GetQuerySuggestionsResponse.add_member(:suggestions, Shapes::ShapeRef.new(shape: SuggestionList, location_name: "Suggestions"))
     GetQuerySuggestionsResponse.struct_class = Types::GetQuerySuggestionsResponse
+
+    GetSnapshotsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    GetSnapshotsRequest.add_member(:interval, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "Interval"))
+    GetSnapshotsRequest.add_member(:metric_type, Shapes::ShapeRef.new(shape: MetricType, required: true, location_name: "MetricType"))
+    GetSnapshotsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSnapshotsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+    GetSnapshotsRequest.struct_class = Types::GetSnapshotsRequest
+
+    GetSnapshotsResponse.add_member(:snap_shot_time_filter, Shapes::ShapeRef.new(shape: TimeRange, location_name: "SnapShotTimeFilter"))
+    GetSnapshotsResponse.add_member(:snapshots_data_header, Shapes::ShapeRef.new(shape: SnapshotsDataHeaderFields, location_name: "SnapshotsDataHeader"))
+    GetSnapshotsResponse.add_member(:snapshots_data, Shapes::ShapeRef.new(shape: SnapshotsDataRecords, location_name: "SnapshotsData"))
+    GetSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSnapshotsResponse.struct_class = Types::GetSnapshotsResponse
 
     GoogleDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     GoogleDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
@@ -1012,6 +1248,11 @@ module Aws::Kendra
 
     HighlightList.member = Shapes::ShapeRef.new(shape: Highlight)
 
+    HookConfiguration.add_member(:invocation_condition, Shapes::ShapeRef.new(shape: DocumentAttributeCondition, location_name: "InvocationCondition"))
+    HookConfiguration.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: LambdaArn, required: true, location_name: "LambdaArn"))
+    HookConfiguration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "S3Bucket"))
+    HookConfiguration.struct_class = Types::HookConfiguration
+
     IndexConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: IndexName, location_name: "Name"))
     IndexConfigurationSummary.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, location_name: "Id"))
     IndexConfigurationSummary.add_member(:edition, Shapes::ShapeRef.new(shape: IndexEdition, location_name: "Edition"))
@@ -1026,8 +1267,18 @@ module Aws::Kendra
     IndexStatistics.add_member(:text_document_statistics, Shapes::ShapeRef.new(shape: TextDocumentStatistics, required: true, location_name: "TextDocumentStatistics"))
     IndexStatistics.struct_class = Types::IndexStatistics
 
+    InlineCustomDocumentEnrichmentConfiguration.add_member(:condition, Shapes::ShapeRef.new(shape: DocumentAttributeCondition, location_name: "Condition"))
+    InlineCustomDocumentEnrichmentConfiguration.add_member(:target, Shapes::ShapeRef.new(shape: DocumentAttributeTarget, location_name: "Target"))
+    InlineCustomDocumentEnrichmentConfiguration.add_member(:document_content_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "DocumentContentDeletion"))
+    InlineCustomDocumentEnrichmentConfiguration.struct_class = Types::InlineCustomDocumentEnrichmentConfiguration
+
+    InlineCustomDocumentEnrichmentConfigurationList.member = Shapes::ShapeRef.new(shape: InlineCustomDocumentEnrichmentConfiguration)
+
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    InvalidRequestException.struct_class = Types::InvalidRequestException
 
     JsonTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserNameAttributeField"))
     JsonTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupAttributeField"))
@@ -1062,6 +1313,34 @@ module Aws::Kendra
     ListDataSourcesResponse.add_member(:summary_items, Shapes::ShapeRef.new(shape: DataSourceSummaryList, location_name: "SummaryItems"))
     ListDataSourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDataSourcesResponse.struct_class = Types::ListDataSourcesResponse
+
+    ListEntityPersonasRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    ListEntityPersonasRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListEntityPersonasRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEntityPersonasRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListEntityPersonasRequest, location_name: "MaxResults"))
+    ListEntityPersonasRequest.struct_class = Types::ListEntityPersonasRequest
+
+    ListEntityPersonasResponse.add_member(:summary_items, Shapes::ShapeRef.new(shape: PersonasSummaryList, location_name: "SummaryItems"))
+    ListEntityPersonasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEntityPersonasResponse.struct_class = Types::ListEntityPersonasResponse
+
+    ListExperienceEntitiesRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    ListExperienceEntitiesRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListExperienceEntitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExperienceEntitiesRequest.struct_class = Types::ListExperienceEntitiesRequest
+
+    ListExperienceEntitiesResponse.add_member(:summary_items, Shapes::ShapeRef.new(shape: ExperienceEntitiesSummaryList, location_name: "SummaryItems"))
+    ListExperienceEntitiesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExperienceEntitiesResponse.struct_class = Types::ListExperienceEntitiesResponse
+
+    ListExperiencesRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    ListExperiencesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExperiencesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsIntegerForListExperiencesRequest, location_name: "MaxResults"))
+    ListExperiencesRequest.struct_class = Types::ListExperiencesRequest
+
+    ListExperiencesResponse.add_member(:summary_items, Shapes::ShapeRef.new(shape: ExperiencesSummaryList, location_name: "SummaryItems"))
+    ListExperiencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExperiencesResponse.struct_class = Types::ListExperiencesResponse
 
     ListFaqsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     ListFaqsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -1142,6 +1421,14 @@ module Aws::Kendra
     OneDriveUsers.add_member(:one_drive_user_list, Shapes::ShapeRef.new(shape: OneDriveUserList, location_name: "OneDriveUserList"))
     OneDriveUsers.add_member(:one_drive_user_s3_path, Shapes::ShapeRef.new(shape: S3Path, location_name: "OneDriveUserS3Path"))
     OneDriveUsers.struct_class = Types::OneDriveUsers
+
+    PersonasSummary.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "EntityId"))
+    PersonasSummary.add_member(:persona, Shapes::ShapeRef.new(shape: Persona, location_name: "Persona"))
+    PersonasSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    PersonasSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    PersonasSummary.struct_class = Types::PersonasSummary
+
+    PersonasSummaryList.member = Shapes::ShapeRef.new(shape: PersonasSummary)
 
     Principal.add_member(:name, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "Name"))
     Principal.add_member(:type, Shapes::ShapeRef.new(shape: PrincipalType, required: true, location_name: "Type"))
@@ -1365,6 +1652,12 @@ module Aws::Kendra
 
     SiteMapsList.member = Shapes::ShapeRef.new(shape: SiteMap)
 
+    SnapshotsDataHeaderFields.member = Shapes::ShapeRef.new(shape: String)
+
+    SnapshotsDataRecord.member = Shapes::ShapeRef.new(shape: String)
+
+    SnapshotsDataRecords.member = Shapes::ShapeRef.new(shape: SnapshotsDataRecord)
+
     SortingConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
     SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     SortingConfiguration.struct_class = Types::SortingConfiguration
@@ -1468,7 +1761,16 @@ module Aws::Kendra
     UpdateDataSourceRequest.add_member(:schedule, Shapes::ShapeRef.new(shape: ScanSchedule, location_name: "Schedule"))
     UpdateDataSourceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     UpdateDataSourceRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: LanguageCode, location_name: "LanguageCode"))
+    UpdateDataSourceRequest.add_member(:custom_document_enrichment_configuration, Shapes::ShapeRef.new(shape: CustomDocumentEnrichmentConfiguration, location_name: "CustomDocumentEnrichmentConfiguration"))
     UpdateDataSourceRequest.struct_class = Types::UpdateDataSourceRequest
+
+    UpdateExperienceRequest.add_member(:id, Shapes::ShapeRef.new(shape: ExperienceId, required: true, location_name: "Id"))
+    UpdateExperienceRequest.add_member(:name, Shapes::ShapeRef.new(shape: ExperienceName, location_name: "Name"))
+    UpdateExperienceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
+    UpdateExperienceRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
+    UpdateExperienceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: ExperienceConfiguration, location_name: "Configuration"))
+    UpdateExperienceRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    UpdateExperienceRequest.struct_class = Types::UpdateExperienceRequest
 
     UpdateIndexRequest.add_member(:id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "Id"))
     UpdateIndexRequest.add_member(:name, Shapes::ShapeRef.new(shape: IndexName, location_name: "Name"))
@@ -1517,6 +1819,9 @@ module Aws::Kendra
 
     UserGroupResolutionConfiguration.add_member(:user_group_resolution_mode, Shapes::ShapeRef.new(shape: UserGroupResolutionMode, required: true, location_name: "UserGroupResolutionMode"))
     UserGroupResolutionConfiguration.struct_class = Types::UserGroupResolutionConfiguration
+
+    UserIdentityConfiguration.add_member(:identity_attribute_name, Shapes::ShapeRef.new(shape: IdentityAttributeName, location_name: "IdentityAttributeName"))
+    UserIdentityConfiguration.struct_class = Types::UserIdentityConfiguration
 
     UserTokenConfiguration.add_member(:jwt_token_type_configuration, Shapes::ShapeRef.new(shape: JwtTokenTypeConfiguration, location_name: "JwtTokenTypeConfiguration"))
     UserTokenConfiguration.add_member(:json_token_type_configuration, Shapes::ShapeRef.new(shape: JsonTokenTypeConfiguration, location_name: "JsonTokenTypeConfiguration"))
@@ -1568,6 +1873,34 @@ module Aws::Kendra
         "targetPrefix" => "AWSKendraFrontendService",
         "uid" => "kendra-2019-02-03",
       }
+
+      api.add_operation(:associate_entities_to_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateEntitiesToExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateEntitiesToExperienceRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateEntitiesToExperienceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:associate_personas_to_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociatePersonasToEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociatePersonasToEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociatePersonasToEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
 
       api.add_operation(:batch_delete_document, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeleteDocument"
@@ -1642,6 +1975,21 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateExperienceRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExperienceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_faq, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateFaq"
         o.http_method = "POST"
@@ -1708,6 +2056,20 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteDataSourceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteExperienceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteExperienceResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1799,6 +2161,19 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeExperienceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeExperienceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_faq, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFaq"
         o.http_method = "POST"
@@ -1877,6 +2252,32 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:disassociate_entities_from_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateEntitiesFromExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateEntitiesFromExperienceRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateEntitiesFromExperienceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:disassociate_personas_from_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociatePersonasFromEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociatePersonasFromEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociatePersonasFromEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_query_suggestions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetQuerySuggestions"
         o.http_method = "POST"
@@ -1889,6 +2290,18 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_snapshots, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSnapshots"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSnapshotsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSnapshotsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -1918,6 +2331,62 @@ module Aws::Kendra
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListDataSourcesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataSourcesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_entity_personas, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEntityPersonas"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEntityPersonasRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEntityPersonasResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_experience_entities, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExperienceEntities"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExperienceEntitiesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExperienceEntitiesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_experiences, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExperiences"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListExperiencesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExperiencesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -2118,6 +2587,20 @@ module Aws::Kendra
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataSourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_experience, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateExperience"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateExperienceRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

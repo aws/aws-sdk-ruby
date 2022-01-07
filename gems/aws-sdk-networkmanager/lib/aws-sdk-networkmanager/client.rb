@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -73,6 +74,7 @@ module Aws::NetworkManager
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -119,7 +121,9 @@ module Aws::NetworkManager
     #     * EC2/ECS IMDS instance profile - When used by default, the timeouts
     #       are very aggressive. Construct and pass an instance of
     #       `Aws::InstanceProfileCredentails` or `Aws::ECSCredentials` to
-    #       enable retries and extended timeouts.
+    #       enable retries and extended timeouts. Instance profile credential
+    #       fetching can be disabled by setting ENV['AWS_EC2_METADATA_DISABLED']
+    #       to true.
     #
     #   @option options [required, String] :region
     #     The AWS region to connect to.  The configured `:region` is
@@ -172,6 +176,10 @@ module Aws::NetworkManager
     #   @option options [Boolean] :correct_clock_skew (true)
     #     Used only in `standard` and adaptive retry modes. Specifies whether to apply
     #     a clock skew correction and retry requests with skewed client clocks.
+    #
+    #   @option options [String] :defaults_mode ("legacy")
+    #     See {Aws::DefaultsModeConfiguration} for a list of the
+    #     accepted modes and the configuration defaults that are included.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     Set to true to disable SDK automatically adding host prefix
@@ -295,7 +303,7 @@ module Aws::NetworkManager
     #     seconds to wait when opening a HTTP session before raising a
     #     `Timeout::Error`.
     #
-    #   @option options [Integer] :http_read_timeout (60) The default
+    #   @option options [Float] :http_read_timeout (60) The default
     #     number of seconds to wait for response data.  This value can
     #     safely be set per-request on the session.
     #
@@ -310,6 +318,9 @@ module Aws::NetworkManager
     #     "Expect" header set to "100-continue".  Defaults to `nil` which
     #     disables this behaviour.  This value can safely be set per
     #     request on the session.
+    #
+    #   @option options [Float] :ssl_timeout (nil) Sets the SSL timeout
+    #     in seconds.
     #
     #   @option options [Boolean] :http_wire_trace (false) When `true`,
     #     HTTP debug output will be sent to the `:logger`.
@@ -335,6 +346,105 @@ module Aws::NetworkManager
     end
 
     # @!group API Operations
+
+    # Accepts a core network attachment request.
+    #
+    # Once the attachment request is accepted by a core network owner, the
+    # attachment is created and connected to a core network.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @return [Types::AcceptAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AcceptAttachmentResponse#attachment #attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.accept_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment.core_network_id #=> String
+    #   resp.attachment.core_network_arn #=> String
+    #   resp.attachment.attachment_id #=> String
+    #   resp.attachment.owner_account_id #=> String
+    #   resp.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.attachment.edge_location #=> String
+    #   resp.attachment.resource_arn #=> String
+    #   resp.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.segment_name #=> String
+    #   resp.attachment.tags #=> Array
+    #   resp.attachment.tags[0].key #=> String
+    #   resp.attachment.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.tags #=> Array
+    #   resp.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.created_at #=> Time
+    #   resp.attachment.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AcceptAttachment AWS API Documentation
+    #
+    # @overload accept_attachment(params = {})
+    # @param [Hash] params ({})
+    def accept_attachment(params = {}, options = {})
+      req = build_request(:accept_attachment, params)
+      req.send_request(options)
+    end
+
+    # Associates a core network Connect peer with a device and optionally,
+    # with a link.
+    #
+    # If you specify a link, it must be associated with the specified
+    # device. You can only associate core network Connect peers that have
+    # been created on a core network Connect attachment on a core network.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of your global network.
+    #
+    # @option params [required, String] :connect_peer_id
+    #   The ID of the Connect peer.
+    #
+    # @option params [required, String] :device_id
+    #   The ID of the device.
+    #
+    # @option params [String] :link_id
+    #   The ID of the link.
+    #
+    # @return [Types::AssociateConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateConnectPeerResponse#connect_peer_association #connect_peer_association} => Types::ConnectPeerAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_connect_peer({
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connect_peer_id: "ConnectPeerId", # required
+    #     device_id: "DeviceId", # required
+    #     link_id: "LinkId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer_association.connect_peer_id #=> String
+    #   resp.connect_peer_association.global_network_id #=> String
+    #   resp.connect_peer_association.device_id #=> String
+    #   resp.connect_peer_association.link_id #=> String
+    #   resp.connect_peer_association.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AssociateConnectPeer AWS API Documentation
+    #
+    # @overload associate_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def associate_connect_peer(params = {}, options = {})
+      req = build_request(:associate_connect_peer, params)
+      req.send_request(options)
+    end
 
     # Associates a customer gateway with a device and optionally, with a
     # link. If you specify a link, it must be associated with the specified
@@ -375,10 +485,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_customer_gateway({
-    #     customer_gateway_arn: "String", # required
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
-    #     link_id: "String",
+    #     customer_gateway_arn: "CustomerGatewayArn", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
+    #     link_id: "LinkId",
     #   })
     #
     # @example Response structure
@@ -418,9 +528,9 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_link({
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
-    #     link_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
+    #     link_id: "LinkId", # required
     #   })
     #
     # @example Response structure
@@ -469,10 +579,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.associate_transit_gateway_connect_peer({
-    #     global_network_id: "String", # required
-    #     transit_gateway_connect_peer_arn: "String", # required
-    #     device_id: "String", # required
-    #     link_id: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
+    #     device_id: "DeviceId", # required
+    #     link_id: "LinkId",
     #   })
     #
     # @example Response structure
@@ -489,6 +599,174 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def associate_transit_gateway_connect_peer(params = {}, options = {})
       req = build_request(:associate_transit_gateway_connect_peer, params)
+      req.send_request(options)
+    end
+
+    # Creates a core network Connect attachment from a specified core
+    # network attachment.
+    #
+    # A core network Connect attachment is a GRE-based tunnel attachment
+    # that you can use to establish a connection between a core network and
+    # an appliance. A core network Connect attachment uses an existing VPC
+    # attachment as the underlying transport mechanism.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network where you want to create the attachment.
+    #
+    # @option params [required, String] :edge_location
+    #   The Region where the edge is located.
+    #
+    # @option params [required, String] :transport_attachment_id
+    #   The ID of the attachment between the two connections.
+    #
+    # @option params [required, Types::ConnectAttachmentOptions] :options
+    #   Options for creating an attachment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The list of key-value tags associated with the request.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateConnectAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectAttachmentResponse#connect_attachment #connect_attachment} => Types::ConnectAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connect_attachment({
+    #     core_network_id: "CoreNetworkId", # required
+    #     edge_location: "ExternalRegionCode", # required
+    #     transport_attachment_id: "AttachmentId", # required
+    #     options: { # required
+    #       protocol: "GRE", # accepts GRE
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_attachment.attachment.core_network_id #=> String
+    #   resp.connect_attachment.attachment.core_network_arn #=> String
+    #   resp.connect_attachment.attachment.attachment_id #=> String
+    #   resp.connect_attachment.attachment.owner_account_id #=> String
+    #   resp.connect_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.connect_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.connect_attachment.attachment.edge_location #=> String
+    #   resp.connect_attachment.attachment.resource_arn #=> String
+    #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.segment_name #=> String
+    #   resp.connect_attachment.attachment.tags #=> Array
+    #   resp.connect_attachment.attachment.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.connect_attachment.attachment.created_at #=> Time
+    #   resp.connect_attachment.attachment.updated_at #=> Time
+    #   resp.connect_attachment.transport_attachment_id #=> String
+    #   resp.connect_attachment.options.protocol #=> String, one of "GRE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectAttachment AWS API Documentation
+    #
+    # @overload create_connect_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_connect_attachment(params = {}, options = {})
+      req = build_request(:create_connect_attachment, params)
+      req.send_request(options)
+    end
+
+    # Creates a core network connect peer for a specified core network
+    # connect attachment between a core network and an appliance. The peer
+    # address and transit gateway address must be the same IP address family
+    # (IPv4 or IPv6).
+    #
+    # @option params [required, String] :connect_attachment_id
+    #   The ID of the connection attachment.
+    #
+    # @option params [String] :core_network_address
+    #   A Connect peer core network address.
+    #
+    # @option params [required, String] :peer_address
+    #   The Connect peer address.
+    #
+    # @option params [Types::BgpOptions] :bgp_options
+    #   The Connect peer BGP options.
+    #
+    # @option params [required, Array<String>] :inside_cidr_blocks
+    #   The inside IP addresses used for BGP peering.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the peer request.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectPeerResponse#connect_peer #connect_peer} => Types::ConnectPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connect_peer({
+    #     connect_attachment_id: "AttachmentId", # required
+    #     core_network_address: "IPAddress",
+    #     peer_address: "IPAddress", # required
+    #     bgp_options: {
+    #       peer_asn: 1,
+    #     },
+    #     inside_cidr_blocks: ["ConstrainedString"], # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer.core_network_id #=> String
+    #   resp.connect_peer.connect_attachment_id #=> String
+    #   resp.connect_peer.connect_peer_id #=> String
+    #   resp.connect_peer.edge_location #=> String
+    #   resp.connect_peer.state #=> String, one of "CREATING", "FAILED", "AVAILABLE", "DELETING"
+    #   resp.connect_peer.created_at #=> Time
+    #   resp.connect_peer.configuration.core_network_address #=> String
+    #   resp.connect_peer.configuration.peer_address #=> String
+    #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
+    #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.bgp_configurations #=> Array
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_address #=> String
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.connect_peer.tags #=> Array
+    #   resp.connect_peer.tags[0].key #=> String
+    #   resp.connect_peer.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateConnectPeer AWS API Documentation
+    #
+    # @overload create_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def create_connect_peer(params = {}, options = {})
+      req = build_request(:create_connect_peer, params)
       req.send_request(options)
     end
 
@@ -527,12 +805,12 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_connection({
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
-    #     connected_device_id: "String", # required
-    #     link_id: "String",
-    #     connected_link_id: "String",
-    #     description: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
+    #     connected_device_id: "DeviceId", # required
+    #     link_id: "LinkId",
+    #     connected_link_id: "LinkId",
+    #     description: "ConstrainedString",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -563,6 +841,78 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def create_connection(params = {}, options = {})
       req = build_request(:create_connection, params)
+      req.send_request(options)
+    end
+
+    # Creates a core network as part of your global network, and optionally,
+    # with a core network policy.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network that a core network will be a part of.
+    #
+    # @option params [String] :description
+    #   The description of a core network.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Key-value tags associated with a core network request.
+    #
+    # @option params [String] :policy_document
+    #   The policy document for creating a core network.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with a core network request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateCoreNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCoreNetworkResponse#core_network #core_network} => Types::CoreNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_core_network({
+    #     global_network_id: "GlobalNetworkId", # required
+    #     description: "ConstrainedString",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     policy_document: "CoreNetworkPolicyDocument",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network.global_network_id #=> String
+    #   resp.core_network.core_network_id #=> String
+    #   resp.core_network.core_network_arn #=> String
+    #   resp.core_network.description #=> String
+    #   resp.core_network.created_at #=> Time
+    #   resp.core_network.state #=> String, one of "CREATING", "UPDATING", "AVAILABLE", "DELETING"
+    #   resp.core_network.segments #=> Array
+    #   resp.core_network.segments[0].name #=> String
+    #   resp.core_network.segments[0].edge_locations #=> Array
+    #   resp.core_network.segments[0].edge_locations[0] #=> String
+    #   resp.core_network.segments[0].shared_segments #=> Array
+    #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.edges #=> Array
+    #   resp.core_network.edges[0].edge_location #=> String
+    #   resp.core_network.edges[0].asn #=> Integer
+    #   resp.core_network.edges[0].inside_cidr_blocks #=> Array
+    #   resp.core_network.edges[0].inside_cidr_blocks[0] #=> String
+    #   resp.core_network.tags #=> Array
+    #   resp.core_network.tags[0].key #=> String
+    #   resp.core_network.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateCoreNetwork AWS API Documentation
+    #
+    # @overload create_core_network(params = {})
+    # @param [Hash] params ({})
+    def create_core_network(params = {}, options = {})
+      req = build_request(:create_core_network, params)
       req.send_request(options)
     end
 
@@ -616,22 +966,22 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_device({
-    #     global_network_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
     #     aws_location: {
-    #       zone: "String",
-    #       subnet_arn: "String",
+    #       zone: "ConstrainedString",
+    #       subnet_arn: "SubnetArn",
     #     },
-    #     description: "String",
-    #     type: "String",
-    #     vendor: "String",
-    #     model: "String",
-    #     serial_number: "String",
+    #     description: "ConstrainedString",
+    #     type: "ConstrainedString",
+    #     vendor: "ConstrainedString",
+    #     model: "ConstrainedString",
+    #     serial_number: "ConstrainedString",
     #     location: {
-    #       address: "String",
-    #       latitude: "String",
-    #       longitude: "String",
+    #       address: "ConstrainedString",
+    #       latitude: "ConstrainedString",
+    #       longitude: "ConstrainedString",
     #     },
-    #     site_id: "String",
+    #     site_id: "SiteId",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -688,7 +1038,7 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_global_network({
-    #     description: "String",
+    #     description: "ConstrainedString",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -755,15 +1105,15 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_link({
-    #     global_network_id: "String", # required
-    #     description: "String",
-    #     type: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     description: "ConstrainedString",
+    #     type: "ConstrainedString",
     #     bandwidth: { # required
     #       upload_speed: 1,
     #       download_speed: 1,
     #     },
-    #     provider: "String",
-    #     site_id: "String", # required
+    #     provider: "ConstrainedString",
+    #     site_id: "SiteId", # required
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -829,12 +1179,12 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_site({
-    #     global_network_id: "String", # required
-    #     description: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     description: "ConstrainedString",
     #     location: {
-    #       address: "String",
-    #       latitude: "String",
-    #       longitude: "String",
+    #       address: "ConstrainedString",
+    #       latitude: "ConstrainedString",
+    #       longitude: "ConstrainedString",
     #     },
     #     tags: [
     #       {
@@ -868,6 +1218,249 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Creates a site-to-site VPN attachment on an edge location of a core
+    # network.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network where you're creating a site-to-site VPN
+    #   attachment.
+    #
+    # @option params [required, String] :vpn_connection_arn
+    #   The ARN identifying the VPN attachment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags associated with the request.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateSiteToSiteVpnAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSiteToSiteVpnAttachmentResponse#site_to_site_vpn_attachment #site_to_site_vpn_attachment} => Types::SiteToSiteVpnAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_site_to_site_vpn_attachment({
+    #     core_network_id: "CoreNetworkId", # required
+    #     vpn_connection_arn: "VpnConnectionArn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site_to_site_vpn_attachment.attachment.core_network_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.core_network_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.owner_account_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.site_to_site_vpn_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.site_to_site_vpn_attachment.attachment.edge_location #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.resource_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
+    #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
+    #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateSiteToSiteVpnAttachment AWS API Documentation
+    #
+    # @overload create_site_to_site_vpn_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_site_to_site_vpn_attachment(params = {}, options = {})
+      req = build_request(:create_site_to_site_vpn_attachment, params)
+      req.send_request(options)
+    end
+
+    # Creates a VPC attachment on an edge location of a core network.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network for the VPC attachment.
+    #
+    # @option params [required, String] :vpc_arn
+    #   The ARN of the VPC.
+    #
+    # @option params [required, Array<String>] :subnet_arns
+    #   The subnet ARN of the VPC attachment.
+    #
+    # @option params [Types::VpcOptions] :options
+    #   Options for the VPC attachment.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The key-value tags associated with the request.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateVpcAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVpcAttachmentResponse#vpc_attachment #vpc_attachment} => Types::VpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vpc_attachment({
+    #     core_network_id: "CoreNetworkId", # required
+    #     vpc_arn: "VpcArn", # required
+    #     subnet_arns: ["SubnetArn"], # required
+    #     options: {
+    #       ipv_6_support: false,
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_attachment.attachment.core_network_id #=> String
+    #   resp.vpc_attachment.attachment.core_network_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_id #=> String
+    #   resp.vpc_attachment.attachment.owner_account_id #=> String
+    #   resp.vpc_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.vpc_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.vpc_attachment.attachment.edge_location #=> String
+    #   resp.vpc_attachment.attachment.resource_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.tags #=> Array
+    #   resp.vpc_attachment.attachment.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.created_at #=> Time
+    #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.subnet_arns #=> Array
+    #   resp.vpc_attachment.subnet_arns[0] #=> String
+    #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CreateVpcAttachment AWS API Documentation
+    #
+    # @overload create_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def create_vpc_attachment(params = {}, options = {})
+      req = build_request(:create_vpc_attachment, params)
+      req.send_request(options)
+    end
+
+    # Deletes an attachment. Supports all attachment types.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment to delete.
+    #
+    # @return [Types::DeleteAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAttachmentResponse#attachment #attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment.core_network_id #=> String
+    #   resp.attachment.core_network_arn #=> String
+    #   resp.attachment.attachment_id #=> String
+    #   resp.attachment.owner_account_id #=> String
+    #   resp.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.attachment.edge_location #=> String
+    #   resp.attachment.resource_arn #=> String
+    #   resp.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.segment_name #=> String
+    #   resp.attachment.tags #=> Array
+    #   resp.attachment.tags[0].key #=> String
+    #   resp.attachment.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.tags #=> Array
+    #   resp.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.created_at #=> Time
+    #   resp.attachment.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteAttachment AWS API Documentation
+    #
+    # @overload delete_attachment(params = {})
+    # @param [Hash] params ({})
+    def delete_attachment(params = {}, options = {})
+      req = build_request(:delete_attachment, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Connect peer.
+    #
+    # @option params [required, String] :connect_peer_id
+    #   The ID of the deleted Connect peer.
+    #
+    # @return [Types::DeleteConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteConnectPeerResponse#connect_peer #connect_peer} => Types::ConnectPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connect_peer({
+    #     connect_peer_id: "ConnectPeerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer.core_network_id #=> String
+    #   resp.connect_peer.connect_attachment_id #=> String
+    #   resp.connect_peer.connect_peer_id #=> String
+    #   resp.connect_peer.edge_location #=> String
+    #   resp.connect_peer.state #=> String, one of "CREATING", "FAILED", "AVAILABLE", "DELETING"
+    #   resp.connect_peer.created_at #=> Time
+    #   resp.connect_peer.configuration.core_network_address #=> String
+    #   resp.connect_peer.configuration.peer_address #=> String
+    #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
+    #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.bgp_configurations #=> Array
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_address #=> String
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.connect_peer.tags #=> Array
+    #   resp.connect_peer.tags[0].key #=> String
+    #   resp.connect_peer.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteConnectPeer AWS API Documentation
+    #
+    # @overload delete_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def delete_connect_peer(params = {}, options = {})
+      req = build_request(:delete_connect_peer, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified connection in your global network.
     #
     # @option params [required, String] :global_network_id
@@ -883,8 +1476,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_connection({
-    #     global_network_id: "String", # required
-    #     connection_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connection_id: "ConnectionId", # required
     #   })
     #
     # @example Response structure
@@ -912,6 +1505,97 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Deletes a core network along with all core network policies. This can
+    # only be done if there are no attachments on a core network.
+    #
+    # @option params [required, String] :core_network_id
+    #   The network ID of the deleted core network.
+    #
+    # @return [Types::DeleteCoreNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCoreNetworkResponse#core_network #core_network} => Types::CoreNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_core_network({
+    #     core_network_id: "CoreNetworkId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network.global_network_id #=> String
+    #   resp.core_network.core_network_id #=> String
+    #   resp.core_network.core_network_arn #=> String
+    #   resp.core_network.description #=> String
+    #   resp.core_network.created_at #=> Time
+    #   resp.core_network.state #=> String, one of "CREATING", "UPDATING", "AVAILABLE", "DELETING"
+    #   resp.core_network.segments #=> Array
+    #   resp.core_network.segments[0].name #=> String
+    #   resp.core_network.segments[0].edge_locations #=> Array
+    #   resp.core_network.segments[0].edge_locations[0] #=> String
+    #   resp.core_network.segments[0].shared_segments #=> Array
+    #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.edges #=> Array
+    #   resp.core_network.edges[0].edge_location #=> String
+    #   resp.core_network.edges[0].asn #=> Integer
+    #   resp.core_network.edges[0].inside_cidr_blocks #=> Array
+    #   resp.core_network.edges[0].inside_cidr_blocks[0] #=> String
+    #   resp.core_network.tags #=> Array
+    #   resp.core_network.tags[0].key #=> String
+    #   resp.core_network.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetwork AWS API Documentation
+    #
+    # @overload delete_core_network(params = {})
+    # @param [Hash] params ({})
+    def delete_core_network(params = {}, options = {})
+      req = build_request(:delete_core_network, params)
+      req.send_request(options)
+    end
+
+    # Deletes a policy version from a core network. You can't delete the
+    # current LIVE policy.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network for the deleted policy.
+    #
+    # @option params [required, Integer] :policy_version_id
+    #   The version ID of the deleted policy.
+    #
+    # @return [Types::DeleteCoreNetworkPolicyVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCoreNetworkPolicyVersionResponse#core_network_policy #core_network_policy} => Types::CoreNetworkPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_core_network_policy_version({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_version_id: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_policy.core_network_id #=> String
+    #   resp.core_network_policy.policy_version_id #=> Integer
+    #   resp.core_network_policy.alias #=> String, one of "LIVE", "LATEST"
+    #   resp.core_network_policy.description #=> String
+    #   resp.core_network_policy.created_at #=> Time
+    #   resp.core_network_policy.change_set_state #=> String, one of "PENDING_GENERATION", "FAILED_GENERATION", "READY_TO_EXECUTE", "EXECUTING", "EXECUTION_SUCCEEDED", "OUT_OF_DATE"
+    #   resp.core_network_policy.policy_errors #=> Array
+    #   resp.core_network_policy.policy_errors[0].error_code #=> String
+    #   resp.core_network_policy.policy_errors[0].message #=> String
+    #   resp.core_network_policy.policy_errors[0].path #=> String
+    #   resp.core_network_policy.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteCoreNetworkPolicyVersion AWS API Documentation
+    #
+    # @overload delete_core_network_policy_version(params = {})
+    # @param [Hash] params ({})
+    def delete_core_network_policy_version(params = {}, options = {})
+      req = build_request(:delete_core_network_policy_version, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing device. You must first disassociate the device
     # from any links and customer gateways.
     #
@@ -928,8 +1612,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_device({
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
     #   })
     #
     # @example Response structure
@@ -977,7 +1661,7 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_global_network({
-    #     global_network_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
     #   })
     #
     # @example Response structure
@@ -1016,8 +1700,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_link({
-    #     global_network_id: "String", # required
-    #     link_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     link_id: "LinkId", # required
     #   })
     #
     # @example Response structure
@@ -1046,6 +1730,29 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Deletes a resource policy for the specified resource. This revokes the
+    # access of the principals specified in the resource policy.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the policy to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Deletes an existing site. The site cannot be associated with any
     # device or link.
     #
@@ -1062,8 +1769,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_site({
-    #     global_network_id: "String", # required
-    #     site_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     site_id: "SiteId", # required
     #   })
     #
     # @example Response structure
@@ -1107,8 +1814,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.deregister_transit_gateway({
-    #     global_network_id: "String", # required
-    #     transit_gateway_arn: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_arn: "TransitGatewayArn", # required
     #   })
     #
     # @example Response structure
@@ -1152,9 +1859,9 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_global_networks({
-    #     global_network_ids: ["String"],
+    #     global_network_ids: ["GlobalNetworkId"],
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1179,6 +1886,42 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Disassociates a core network Connect peer from a device and a link.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [required, String] :connect_peer_id
+    #   The ID of the Connect peer to disassociate from a device.
+    #
+    # @return [Types::DisassociateConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateConnectPeerResponse#connect_peer_association #connect_peer_association} => Types::ConnectPeerAssociation
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_connect_peer({
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connect_peer_id: "ConnectPeerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer_association.connect_peer_id #=> String
+    #   resp.connect_peer_association.global_network_id #=> String
+    #   resp.connect_peer_association.device_id #=> String
+    #   resp.connect_peer_association.link_id #=> String
+    #   resp.connect_peer_association.state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/DisassociateConnectPeer AWS API Documentation
+    #
+    # @overload disassociate_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def disassociate_connect_peer(params = {}, options = {})
+      req = build_request(:disassociate_connect_peer, params)
+      req.send_request(options)
+    end
+
     # Disassociates a customer gateway from a device and a link.
     #
     # @option params [required, String] :global_network_id
@@ -1194,8 +1937,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_customer_gateway({
-    #     global_network_id: "String", # required
-    #     customer_gateway_arn: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     customer_gateway_arn: "CustomerGatewayArn", # required
     #   })
     #
     # @example Response structure
@@ -1234,9 +1977,9 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_link({
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
-    #     link_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
+    #     link_id: "LinkId", # required
     #   })
     #
     # @example Response structure
@@ -1270,8 +2013,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.disassociate_transit_gateway_connect_peer({
-    #     global_network_id: "String", # required
-    #     transit_gateway_connect_peer_arn: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_connect_peer_arn: "TransitGatewayConnectPeerArn", # required
     #   })
     #
     # @example Response structure
@@ -1288,6 +2031,177 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def disassociate_transit_gateway_connect_peer(params = {}, options = {})
       req = build_request(:disassociate_transit_gateway_connect_peer, params)
+      req.send_request(options)
+    end
+
+    # Executes a change set on your core network. Deploys changes globally
+    # based on the policy submitted..
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [required, Integer] :policy_version_id
+    #   The ID of the policy version.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.execute_core_network_change_set({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_version_id: 1, # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ExecuteCoreNetworkChangeSet AWS API Documentation
+    #
+    # @overload execute_core_network_change_set(params = {})
+    # @param [Hash] params ({})
+    def execute_core_network_change_set(params = {}, options = {})
+      req = build_request(:execute_core_network_change_set, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a core network Connect attachment.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @return [Types::GetConnectAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectAttachmentResponse#connect_attachment #connect_attachment} => Types::ConnectAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connect_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_attachment.attachment.core_network_id #=> String
+    #   resp.connect_attachment.attachment.core_network_arn #=> String
+    #   resp.connect_attachment.attachment.attachment_id #=> String
+    #   resp.connect_attachment.attachment.owner_account_id #=> String
+    #   resp.connect_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.connect_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.connect_attachment.attachment.edge_location #=> String
+    #   resp.connect_attachment.attachment.resource_arn #=> String
+    #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.segment_name #=> String
+    #   resp.connect_attachment.attachment.tags #=> Array
+    #   resp.connect_attachment.attachment.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.connect_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.connect_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.connect_attachment.attachment.created_at #=> Time
+    #   resp.connect_attachment.attachment.updated_at #=> Time
+    #   resp.connect_attachment.transport_attachment_id #=> String
+    #   resp.connect_attachment.options.protocol #=> String, one of "GRE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectAttachment AWS API Documentation
+    #
+    # @overload get_connect_attachment(params = {})
+    # @param [Hash] params ({})
+    def get_connect_attachment(params = {}, options = {})
+      req = build_request(:get_connect_attachment, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a core network Connect peer.
+    #
+    # @option params [required, String] :connect_peer_id
+    #   The ID of the Connect peer.
+    #
+    # @return [Types::GetConnectPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectPeerResponse#connect_peer #connect_peer} => Types::ConnectPeer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connect_peer({
+    #     connect_peer_id: "ConnectPeerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer.core_network_id #=> String
+    #   resp.connect_peer.connect_attachment_id #=> String
+    #   resp.connect_peer.connect_peer_id #=> String
+    #   resp.connect_peer.edge_location #=> String
+    #   resp.connect_peer.state #=> String, one of "CREATING", "FAILED", "AVAILABLE", "DELETING"
+    #   resp.connect_peer.created_at #=> Time
+    #   resp.connect_peer.configuration.core_network_address #=> String
+    #   resp.connect_peer.configuration.peer_address #=> String
+    #   resp.connect_peer.configuration.inside_cidr_blocks #=> Array
+    #   resp.connect_peer.configuration.inside_cidr_blocks[0] #=> String
+    #   resp.connect_peer.configuration.protocol #=> String, one of "GRE"
+    #   resp.connect_peer.configuration.bgp_configurations #=> Array
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_asn #=> Integer
+    #   resp.connect_peer.configuration.bgp_configurations[0].core_network_address #=> String
+    #   resp.connect_peer.configuration.bgp_configurations[0].peer_address #=> String
+    #   resp.connect_peer.tags #=> Array
+    #   resp.connect_peer.tags[0].key #=> String
+    #   resp.connect_peer.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeer AWS API Documentation
+    #
+    # @overload get_connect_peer(params = {})
+    # @param [Hash] params ({})
+    def get_connect_peer(params = {}, options = {})
+      req = build_request(:get_connect_peer, params)
+      req.send_request(options)
+    end
+
+    # Returns information about a core network Connect peer associations.
+    #
+    # @option params [required, String] :global_network_id
+    #   The ID of the global network.
+    #
+    # @option params [Array<String>] :connect_peer_ids
+    #   The IDs of the Connect peers.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetConnectPeerAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetConnectPeerAssociationsResponse#connect_peer_associations #connect_peer_associations} => Array&lt;Types::ConnectPeerAssociation&gt;
+    #   * {Types::GetConnectPeerAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_connect_peer_associations({
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connect_peer_ids: ["ConnectPeerId"],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peer_associations #=> Array
+    #   resp.connect_peer_associations[0].connect_peer_id #=> String
+    #   resp.connect_peer_associations[0].global_network_id #=> String
+    #   resp.connect_peer_associations[0].device_id #=> String
+    #   resp.connect_peer_associations[0].link_id #=> String
+    #   resp.connect_peer_associations[0].state #=> String, one of "PENDING", "AVAILABLE", "DELETING", "DELETED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetConnectPeerAssociations AWS API Documentation
+    #
+    # @overload get_connect_peer_associations(params = {})
+    # @param [Hash] params ({})
+    def get_connect_peer_associations(params = {}, options = {})
+      req = build_request(:get_connect_peer_associations, params)
       req.send_request(options)
     end
 
@@ -1319,11 +2233,11 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_connections({
-    #     global_network_id: "String", # required
-    #     connection_ids: ["String"],
-    #     device_id: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connection_ids: ["ConnectionId"],
+    #     device_id: "DeviceId",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1353,6 +2267,169 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Returns information about a core network. By default it returns the
+    # LIVE policy.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @return [Types::GetCoreNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCoreNetworkResponse#core_network #core_network} => Types::CoreNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_core_network({
+    #     core_network_id: "CoreNetworkId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network.global_network_id #=> String
+    #   resp.core_network.core_network_id #=> String
+    #   resp.core_network.core_network_arn #=> String
+    #   resp.core_network.description #=> String
+    #   resp.core_network.created_at #=> Time
+    #   resp.core_network.state #=> String, one of "CREATING", "UPDATING", "AVAILABLE", "DELETING"
+    #   resp.core_network.segments #=> Array
+    #   resp.core_network.segments[0].name #=> String
+    #   resp.core_network.segments[0].edge_locations #=> Array
+    #   resp.core_network.segments[0].edge_locations[0] #=> String
+    #   resp.core_network.segments[0].shared_segments #=> Array
+    #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.edges #=> Array
+    #   resp.core_network.edges[0].edge_location #=> String
+    #   resp.core_network.edges[0].asn #=> Integer
+    #   resp.core_network.edges[0].inside_cidr_blocks #=> Array
+    #   resp.core_network.edges[0].inside_cidr_blocks[0] #=> String
+    #   resp.core_network.tags #=> Array
+    #   resp.core_network.tags[0].key #=> String
+    #   resp.core_network.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetwork AWS API Documentation
+    #
+    # @overload get_core_network(params = {})
+    # @param [Hash] params ({})
+    def get_core_network(params = {}, options = {})
+      req = build_request(:get_core_network, params)
+      req.send_request(options)
+    end
+
+    # Returns a change set between the LIVE core network policy and a
+    # submitted policy.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [required, Integer] :policy_version_id
+    #   The ID of the policy version.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::GetCoreNetworkChangeSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCoreNetworkChangeSetResponse#core_network_changes #core_network_changes} => Array&lt;Types::CoreNetworkChange&gt;
+    #   * {Types::GetCoreNetworkChangeSetResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_core_network_change_set({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_version_id: 1, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_changes #=> Array
+    #   resp.core_network_changes[0].type #=> String, one of "CORE_NETWORK_SEGMENT", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC"
+    #   resp.core_network_changes[0].action #=> String, one of "ADD", "MODIFY", "REMOVE"
+    #   resp.core_network_changes[0].identifier #=> String
+    #   resp.core_network_changes[0].previous_values.segment_name #=> String
+    #   resp.core_network_changes[0].previous_values.edge_locations #=> Array
+    #   resp.core_network_changes[0].previous_values.edge_locations[0] #=> String
+    #   resp.core_network_changes[0].previous_values.asn #=> Integer
+    #   resp.core_network_changes[0].previous_values.cidr #=> String
+    #   resp.core_network_changes[0].previous_values.destination_identifier #=> String
+    #   resp.core_network_changes[0].previous_values.inside_cidr_blocks #=> Array
+    #   resp.core_network_changes[0].previous_values.inside_cidr_blocks[0] #=> String
+    #   resp.core_network_changes[0].previous_values.shared_segments #=> Array
+    #   resp.core_network_changes[0].previous_values.shared_segments[0] #=> String
+    #   resp.core_network_changes[0].new_values.segment_name #=> String
+    #   resp.core_network_changes[0].new_values.edge_locations #=> Array
+    #   resp.core_network_changes[0].new_values.edge_locations[0] #=> String
+    #   resp.core_network_changes[0].new_values.asn #=> Integer
+    #   resp.core_network_changes[0].new_values.cidr #=> String
+    #   resp.core_network_changes[0].new_values.destination_identifier #=> String
+    #   resp.core_network_changes[0].new_values.inside_cidr_blocks #=> Array
+    #   resp.core_network_changes[0].new_values.inside_cidr_blocks[0] #=> String
+    #   resp.core_network_changes[0].new_values.shared_segments #=> Array
+    #   resp.core_network_changes[0].new_values.shared_segments[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkChangeSet AWS API Documentation
+    #
+    # @overload get_core_network_change_set(params = {})
+    # @param [Hash] params ({})
+    def get_core_network_change_set(params = {}, options = {})
+      req = build_request(:get_core_network_change_set, params)
+      req.send_request(options)
+    end
+
+    # Gets details about a core network policy. You can get details about
+    # your current live policy or any previous policy version.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [Integer] :policy_version_id
+    #   The ID of a core network policy version.
+    #
+    # @option params [String] :alias
+    #   The alias of a core network policy
+    #
+    # @return [Types::GetCoreNetworkPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCoreNetworkPolicyResponse#core_network_policy #core_network_policy} => Types::CoreNetworkPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_core_network_policy({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_version_id: 1,
+    #     alias: "LIVE", # accepts LIVE, LATEST
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_policy.core_network_id #=> String
+    #   resp.core_network_policy.policy_version_id #=> Integer
+    #   resp.core_network_policy.alias #=> String, one of "LIVE", "LATEST"
+    #   resp.core_network_policy.description #=> String
+    #   resp.core_network_policy.created_at #=> Time
+    #   resp.core_network_policy.change_set_state #=> String, one of "PENDING_GENERATION", "FAILED_GENERATION", "READY_TO_EXECUTE", "EXECUTING", "EXECUTION_SUCCEEDED", "OUT_OF_DATE"
+    #   resp.core_network_policy.policy_errors #=> Array
+    #   resp.core_network_policy.policy_errors[0].error_code #=> String
+    #   resp.core_network_policy.policy_errors[0].message #=> String
+    #   resp.core_network_policy.policy_errors[0].path #=> String
+    #   resp.core_network_policy.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetCoreNetworkPolicy AWS API Documentation
+    #
+    # @overload get_core_network_policy(params = {})
+    # @param [Hash] params ({})
+    def get_core_network_policy(params = {}, options = {})
+      req = build_request(:get_core_network_policy, params)
+      req.send_request(options)
+    end
+
     # Gets the association information for customer gateways that are
     # associated with devices and links in your global network.
     #
@@ -1379,10 +2456,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_customer_gateway_associations({
-    #     global_network_id: "String", # required
-    #     customer_gateway_arns: ["String"],
+    #     global_network_id: "GlobalNetworkId", # required
+    #     customer_gateway_arns: ["CustomerGatewayArn"],
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1432,11 +2509,11 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_devices({
-    #     global_network_id: "String", # required
-    #     device_ids: ["String"],
-    #     site_id: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_ids: ["DeviceId"],
+    #     site_id: "SiteId",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1500,11 +2577,11 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_link_associations({
-    #     global_network_id: "String", # required
-    #     device_id: "String",
-    #     link_id: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId",
+    #     link_id: "LinkId",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1563,13 +2640,13 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_links({
-    #     global_network_id: "String", # required
-    #     link_ids: ["String"],
-    #     site_id: "String",
-    #     type: "String",
-    #     provider: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     link_ids: ["LinkId"],
+    #     site_id: "SiteId",
+    #     type: "ConstrainedString",
+    #     provider: "ConstrainedString",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1657,10 +2734,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_resource_counts({
-    #     global_network_id: "String", # required
-    #     resource_type: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     resource_type: "ConstrainedString",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1684,6 +2761,9 @@ module Aws::NetworkManager
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network.
     #
     # @option params [String] :registered_gateway_arn
     #   The ARN of the registered gateway.
@@ -1748,14 +2828,15 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_resource_relationships({
-    #     global_network_id: "String", # required
-    #     registered_gateway_arn: "String",
-    #     aws_region: "String",
-    #     account_id: "String",
-    #     resource_type: "String",
-    #     resource_arn: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     core_network_id: "CoreNetworkId",
+    #     registered_gateway_arn: "ResourceArn",
+    #     aws_region: "ExternalRegionCode",
+    #     account_id: "AWSAccountId",
+    #     resource_type: "ConstrainedString",
+    #     resource_arn: "ResourceArn",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -1782,6 +2863,9 @@ module Aws::NetworkManager
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network.
     #
     # @option params [String] :registered_gateway_arn
     #   The ARN of the gateway.
@@ -1865,20 +2949,22 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_resources({
-    #     global_network_id: "String", # required
-    #     registered_gateway_arn: "String",
-    #     aws_region: "String",
-    #     account_id: "String",
-    #     resource_type: "String",
-    #     resource_arn: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     core_network_id: "CoreNetworkId",
+    #     registered_gateway_arn: "ResourceArn",
+    #     aws_region: "ExternalRegionCode",
+    #     account_id: "AWSAccountId",
+    #     resource_type: "ConstrainedString",
+    #     resource_arn: "ResourceArn",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.network_resources #=> Array
     #   resp.network_resources[0].registered_gateway_arn #=> String
+    #   resp.network_resources[0].core_network_id #=> String
     #   resp.network_resources[0].aws_region #=> String
     #   resp.network_resources[0].account_id #=> String
     #   resp.network_resources[0].resource_type #=> String
@@ -1890,7 +2976,7 @@ module Aws::NetworkManager
     #   resp.network_resources[0].tags[0].key #=> String
     #   resp.network_resources[0].tags[0].value #=> String
     #   resp.network_resources[0].metadata #=> Hash
-    #   resp.network_resources[0].metadata["NetworkResourceMetadataKey"] #=> String
+    #   resp.network_resources[0].metadata["ConstrainedString"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkResources AWS API Documentation
@@ -1940,6 +3026,7 @@ module Aws::NetworkManager
     # @return [Types::GetNetworkRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetNetworkRoutesResponse#route_table_arn #route_table_arn} => String
+    #   * {Types::GetNetworkRoutesResponse#core_network_segment_edge #core_network_segment_edge} => Types::CoreNetworkSegmentEdgeIdentifier
     #   * {Types::GetNetworkRoutesResponse#route_table_type #route_table_type} => String
     #   * {Types::GetNetworkRoutesResponse#route_table_timestamp #route_table_timestamp} => Time
     #   * {Types::GetNetworkRoutesResponse#network_routes #network_routes} => Array&lt;Types::NetworkRoute&gt;
@@ -1947,15 +3034,20 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_routes({
-    #     global_network_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
     #     route_table_identifier: { # required
-    #       transit_gateway_route_table_arn: "String",
+    #       transit_gateway_route_table_arn: "TransitGatewayRouteTableArn",
+    #       core_network_segment_edge: {
+    #         core_network_id: "CoreNetworkId",
+    #         segment_name: "ConstrainedString",
+    #         edge_location: "ExternalRegionCode",
+    #       },
     #     },
-    #     exact_cidr_matches: ["String"],
-    #     longest_prefix_matches: ["String"],
-    #     subnet_of_matches: ["String"],
-    #     supernet_of_matches: ["String"],
-    #     prefix_list_ids: ["String"],
+    #     exact_cidr_matches: ["ConstrainedString"],
+    #     longest_prefix_matches: ["ConstrainedString"],
+    #     subnet_of_matches: ["ConstrainedString"],
+    #     supernet_of_matches: ["ConstrainedString"],
+    #     prefix_list_ids: ["ConstrainedString"],
     #     states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
     #     types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
     #     destination_filters: {
@@ -1966,12 +3058,18 @@ module Aws::NetworkManager
     # @example Response structure
     #
     #   resp.route_table_arn #=> String
-    #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE"
+    #   resp.core_network_segment_edge.core_network_id #=> String
+    #   resp.core_network_segment_edge.segment_name #=> String
+    #   resp.core_network_segment_edge.edge_location #=> String
+    #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE", "CORE_NETWORK_SEGMENT"
     #   resp.route_table_timestamp #=> Time
     #   resp.network_routes #=> Array
     #   resp.network_routes[0].destination_cidr_block #=> String
     #   resp.network_routes[0].destinations #=> Array
+    #   resp.network_routes[0].destinations[0].core_network_attachment_id #=> String
     #   resp.network_routes[0].destinations[0].transit_gateway_attachment_id #=> String
+    #   resp.network_routes[0].destinations[0].segment_name #=> String
+    #   resp.network_routes[0].destinations[0].edge_location #=> String
     #   resp.network_routes[0].destinations[0].resource_type #=> String
     #   resp.network_routes[0].destinations[0].resource_id #=> String
     #   resp.network_routes[0].prefix_list_id #=> String
@@ -1991,6 +3089,9 @@ module Aws::NetworkManager
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network.
     #
     # @option params [String] :registered_gateway_arn
     #   The ARN of the gateway.
@@ -2055,20 +3156,22 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_network_telemetry({
-    #     global_network_id: "String", # required
-    #     registered_gateway_arn: "String",
-    #     aws_region: "String",
-    #     account_id: "String",
-    #     resource_type: "String",
-    #     resource_arn: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     core_network_id: "CoreNetworkId",
+    #     registered_gateway_arn: "ResourceArn",
+    #     aws_region: "ExternalRegionCode",
+    #     account_id: "AWSAccountId",
+    #     resource_type: "ConstrainedString",
+    #     resource_arn: "ResourceArn",
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.network_telemetry #=> Array
     #   resp.network_telemetry[0].registered_gateway_arn #=> String
+    #   resp.network_telemetry[0].core_network_id #=> String
     #   resp.network_telemetry[0].aws_region #=> String
     #   resp.network_telemetry[0].account_id #=> String
     #   resp.network_telemetry[0].resource_type #=> String
@@ -2089,6 +3192,34 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Returns information about a resource policy.
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource.
+    #
+    # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePolicyResponse#policy_document #policy_document} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_policy({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetResourcePolicy AWS API Documentation
+    #
+    # @overload get_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def get_resource_policy(params = {}, options = {})
+      req = build_request(:get_resource_policy, params)
+      req.send_request(options)
+    end
+
     # Gets information about the specified route analysis.
     #
     # @option params [required, String] :global_network_id
@@ -2104,8 +3235,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_route_analysis({
-    #     global_network_id: "String", # required
-    #     route_analysis_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     route_analysis_id: "ConstrainedString", # required
     #   })
     #
     # @example Response structure
@@ -2159,6 +3290,54 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Returns information about a site-to-site VPN attachment.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @return [Types::GetSiteToSiteVpnAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSiteToSiteVpnAttachmentResponse#site_to_site_vpn_attachment #site_to_site_vpn_attachment} => Types::SiteToSiteVpnAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_site_to_site_vpn_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.site_to_site_vpn_attachment.attachment.core_network_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.core_network_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.owner_account_id #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.site_to_site_vpn_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.site_to_site_vpn_attachment.attachment.edge_location #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.resource_arn #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.site_to_site_vpn_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
+    #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
+    #   resp.site_to_site_vpn_attachment.vpn_connection_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetSiteToSiteVpnAttachment AWS API Documentation
+    #
+    # @overload get_site_to_site_vpn_attachment(params = {})
+    # @param [Hash] params ({})
+    def get_site_to_site_vpn_attachment(params = {}, options = {})
+      req = build_request(:get_site_to_site_vpn_attachment, params)
+      req.send_request(options)
+    end
+
     # Gets information about one or more of your sites in a global network.
     #
     # @option params [required, String] :global_network_id
@@ -2183,10 +3362,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_sites({
-    #     global_network_id: "String", # required
-    #     site_ids: ["String"],
+    #     global_network_id: "GlobalNetworkId", # required
+    #     site_ids: ["SiteId"],
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -2240,10 +3419,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_connect_peer_associations({
-    #     global_network_id: "String", # required
-    #     transit_gateway_connect_peer_arns: ["String"],
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_connect_peer_arns: ["TransitGatewayConnectPeerArn"],
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -2291,10 +3470,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_transit_gateway_registrations({
-    #     global_network_id: "String", # required
-    #     transit_gateway_arns: ["String"],
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_arns: ["TransitGatewayArn"],
     #     max_results: 1,
-    #     next_token: "String",
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -2315,6 +3494,272 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Returns information about a VPC attachment.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @return [Types::GetVpcAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetVpcAttachmentResponse#vpc_attachment #vpc_attachment} => Types::VpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_vpc_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_attachment.attachment.core_network_id #=> String
+    #   resp.vpc_attachment.attachment.core_network_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_id #=> String
+    #   resp.vpc_attachment.attachment.owner_account_id #=> String
+    #   resp.vpc_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.vpc_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.vpc_attachment.attachment.edge_location #=> String
+    #   resp.vpc_attachment.attachment.resource_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.tags #=> Array
+    #   resp.vpc_attachment.attachment.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.created_at #=> Time
+    #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.subnet_arns #=> Array
+    #   resp.vpc_attachment.subnet_arns[0] #=> String
+    #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetVpcAttachment AWS API Documentation
+    #
+    # @overload get_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def get_vpc_attachment(params = {}, options = {})
+      req = build_request(:get_vpc_attachment, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of core network attachments.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [String] :attachment_type
+    #   The type of attachment.
+    #
+    # @option params [String] :edge_location
+    #   The Region where the edge is located.
+    #
+    # @option params [String] :state
+    #   The state of the attachment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListAttachmentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttachmentsResponse#attachments #attachments} => Array&lt;Types::Attachment&gt;
+    #   * {Types::ListAttachmentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attachments({
+    #     core_network_id: "CoreNetworkId",
+    #     attachment_type: "CONNECT", # accepts CONNECT, SITE_TO_SITE_VPN, VPC
+    #     edge_location: "ExternalRegionCode",
+    #     state: "REJECTED", # accepts REJECTED, PENDING_ATTACHMENT_ACCEPTANCE, CREATING, FAILED, AVAILABLE, UPDATING, PENDING_NETWORK_UPDATE, PENDING_TAG_ACCEPTANCE, DELETING
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachments #=> Array
+    #   resp.attachments[0].core_network_id #=> String
+    #   resp.attachments[0].core_network_arn #=> String
+    #   resp.attachments[0].attachment_id #=> String
+    #   resp.attachments[0].owner_account_id #=> String
+    #   resp.attachments[0].attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.attachments[0].state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.attachments[0].edge_location #=> String
+    #   resp.attachments[0].resource_arn #=> String
+    #   resp.attachments[0].attachment_policy_rule_number #=> Integer
+    #   resp.attachments[0].segment_name #=> String
+    #   resp.attachments[0].tags #=> Array
+    #   resp.attachments[0].tags[0].key #=> String
+    #   resp.attachments[0].tags[0].value #=> String
+    #   resp.attachments[0].proposed_segment_change.tags #=> Array
+    #   resp.attachments[0].proposed_segment_change.tags[0].key #=> String
+    #   resp.attachments[0].proposed_segment_change.tags[0].value #=> String
+    #   resp.attachments[0].proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachments[0].proposed_segment_change.segment_name #=> String
+    #   resp.attachments[0].created_at #=> Time
+    #   resp.attachments[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachments AWS API Documentation
+    #
+    # @overload list_attachments(params = {})
+    # @param [Hash] params ({})
+    def list_attachments(params = {}, options = {})
+      req = build_request(:list_attachments, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of core network Connect peers.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [String] :connect_attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListConnectPeersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListConnectPeersResponse#connect_peers #connect_peers} => Array&lt;Types::ConnectPeerSummary&gt;
+    #   * {Types::ListConnectPeersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_connect_peers({
+    #     core_network_id: "CoreNetworkId",
+    #     connect_attachment_id: "AttachmentId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.connect_peers #=> Array
+    #   resp.connect_peers[0].core_network_id #=> String
+    #   resp.connect_peers[0].connect_attachment_id #=> String
+    #   resp.connect_peers[0].connect_peer_id #=> String
+    #   resp.connect_peers[0].edge_location #=> String
+    #   resp.connect_peers[0].connect_peer_state #=> String, one of "CREATING", "FAILED", "AVAILABLE", "DELETING"
+    #   resp.connect_peers[0].created_at #=> Time
+    #   resp.connect_peers[0].tags #=> Array
+    #   resp.connect_peers[0].tags[0].key #=> String
+    #   resp.connect_peers[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListConnectPeers AWS API Documentation
+    #
+    # @overload list_connect_peers(params = {})
+    # @param [Hash] params ({})
+    def list_connect_peers(params = {}, options = {})
+      req = build_request(:list_connect_peers, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of core network policy versions.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListCoreNetworkPolicyVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCoreNetworkPolicyVersionsResponse#core_network_policy_versions #core_network_policy_versions} => Array&lt;Types::CoreNetworkPolicyVersion&gt;
+    #   * {Types::ListCoreNetworkPolicyVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_core_network_policy_versions({
+    #     core_network_id: "CoreNetworkId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_policy_versions #=> Array
+    #   resp.core_network_policy_versions[0].core_network_id #=> String
+    #   resp.core_network_policy_versions[0].policy_version_id #=> Integer
+    #   resp.core_network_policy_versions[0].alias #=> String, one of "LIVE", "LATEST"
+    #   resp.core_network_policy_versions[0].description #=> String
+    #   resp.core_network_policy_versions[0].created_at #=> Time
+    #   resp.core_network_policy_versions[0].change_set_state #=> String, one of "PENDING_GENERATION", "FAILED_GENERATION", "READY_TO_EXECUTE", "EXECUTING", "EXECUTION_SUCCEEDED", "OUT_OF_DATE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworkPolicyVersions AWS API Documentation
+    #
+    # @overload list_core_network_policy_versions(params = {})
+    # @param [Hash] params ({})
+    def list_core_network_policy_versions(params = {}, options = {})
+      req = build_request(:list_core_network_policy_versions, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of owned and shared core networks.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListCoreNetworksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCoreNetworksResponse#core_networks #core_networks} => Array&lt;Types::CoreNetworkSummary&gt;
+    #   * {Types::ListCoreNetworksResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_core_networks({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_networks #=> Array
+    #   resp.core_networks[0].core_network_id #=> String
+    #   resp.core_networks[0].core_network_arn #=> String
+    #   resp.core_networks[0].global_network_id #=> String
+    #   resp.core_networks[0].owner_account_id #=> String
+    #   resp.core_networks[0].state #=> String, one of "CREATING", "UPDATING", "AVAILABLE", "DELETING"
+    #   resp.core_networks[0].description #=> String
+    #   resp.core_networks[0].tags #=> Array
+    #   resp.core_networks[0].tags[0].key #=> String
+    #   resp.core_networks[0].tags[0].value #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListCoreNetworks AWS API Documentation
+    #
+    # @overload list_core_networks(params = {})
+    # @param [Hash] params ({})
+    def list_core_networks(params = {}, options = {})
+      req = build_request(:list_core_networks, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for a specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -2327,7 +3772,7 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_arn: "ResourceARN", # required
+    #     resource_arn: "ResourceArn", # required
     #   })
     #
     # @example Response structure
@@ -2342,6 +3787,99 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def list_tags_for_resource(params = {}, options = {})
       req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a new, immutable version of a core network policy. A
+    # subsequent change set is created showing the differences between the
+    # LIVE policy and the submitted policy.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [required, String] :policy_document
+    #   The policy document.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [String] :description
+    #   a core network policy description.
+    #
+    # @option params [Integer] :latest_version_id
+    #   The ID of a core network policy.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::PutCoreNetworkPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutCoreNetworkPolicyResponse#core_network_policy #core_network_policy} => Types::CoreNetworkPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_core_network_policy({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_document: "CoreNetworkPolicyDocument", # required
+    #     description: "ConstrainedString",
+    #     latest_version_id: 1,
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_policy.core_network_id #=> String
+    #   resp.core_network_policy.policy_version_id #=> Integer
+    #   resp.core_network_policy.alias #=> String, one of "LIVE", "LATEST"
+    #   resp.core_network_policy.description #=> String
+    #   resp.core_network_policy.created_at #=> Time
+    #   resp.core_network_policy.change_set_state #=> String, one of "PENDING_GENERATION", "FAILED_GENERATION", "READY_TO_EXECUTE", "EXECUTING", "EXECUTION_SUCCEEDED", "OUT_OF_DATE"
+    #   resp.core_network_policy.policy_errors #=> Array
+    #   resp.core_network_policy.policy_errors[0].error_code #=> String
+    #   resp.core_network_policy.policy_errors[0].message #=> String
+    #   resp.core_network_policy.policy_errors[0].path #=> String
+    #   resp.core_network_policy.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutCoreNetworkPolicy AWS API Documentation
+    #
+    # @overload put_core_network_policy(params = {})
+    # @param [Hash] params ({})
+    def put_core_network_policy(params = {}, options = {})
+      req = build_request(:put_core_network_policy, params)
+      req.send_request(options)
+    end
+
+    # Creates or updates a resource policy.
+    #
+    # @option params [required, String] :policy_document
+    #   The JSON resource policy document.
+    #
+    #   **SDK automatically handles json encoding and base64 encoding for you
+    #   when the required value (Hash, Array, etc.) is provided according to
+    #   the description.**
+    #
+    # @option params [required, String] :resource_arn
+    #   The ARN of the resource policy.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     policy_document: "ResourcePolicyDocument", # required
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -2363,8 +3901,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_transit_gateway({
-    #     global_network_id: "String", # required
-    #     transit_gateway_arn: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     transit_gateway_arn: "TransitGatewayArn", # required
     #   })
     #
     # @example Response structure
@@ -2380,6 +3918,97 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def register_transit_gateway(params = {}, options = {})
       req = build_request(:register_transit_gateway, params)
+      req.send_request(options)
+    end
+
+    # Rejects a core network attachment request.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @return [Types::RejectAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RejectAttachmentResponse#attachment #attachment} => Types::Attachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reject_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment.core_network_id #=> String
+    #   resp.attachment.core_network_arn #=> String
+    #   resp.attachment.attachment_id #=> String
+    #   resp.attachment.owner_account_id #=> String
+    #   resp.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.attachment.edge_location #=> String
+    #   resp.attachment.resource_arn #=> String
+    #   resp.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.segment_name #=> String
+    #   resp.attachment.tags #=> Array
+    #   resp.attachment.tags[0].key #=> String
+    #   resp.attachment.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.tags #=> Array
+    #   resp.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.attachment.created_at #=> Time
+    #   resp.attachment.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RejectAttachment AWS API Documentation
+    #
+    # @overload reject_attachment(params = {})
+    # @param [Hash] params ({})
+    def reject_attachment(params = {}, options = {})
+      req = build_request(:reject_attachment, params)
+      req.send_request(options)
+    end
+
+    # Restores a previous policy version as a new, immutable version of a
+    # core network policy. A subsequent change set is created showing the
+    # differences between the LIVE policy and restored policy.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [required, Integer] :policy_version_id
+    #   The ID of the policy version to restore.
+    #
+    # @return [Types::RestoreCoreNetworkPolicyVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreCoreNetworkPolicyVersionResponse#core_network_policy #core_network_policy} => Types::CoreNetworkPolicy
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_core_network_policy_version({
+    #     core_network_id: "CoreNetworkId", # required
+    #     policy_version_id: 1, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network_policy.core_network_id #=> String
+    #   resp.core_network_policy.policy_version_id #=> Integer
+    #   resp.core_network_policy.alias #=> String, one of "LIVE", "LATEST"
+    #   resp.core_network_policy.description #=> String
+    #   resp.core_network_policy.created_at #=> Time
+    #   resp.core_network_policy.change_set_state #=> String, one of "PENDING_GENERATION", "FAILED_GENERATION", "READY_TO_EXECUTE", "EXECUTING", "EXECUTION_SUCCEEDED", "OUT_OF_DATE"
+    #   resp.core_network_policy.policy_errors #=> Array
+    #   resp.core_network_policy.policy_errors[0].error_code #=> String
+    #   resp.core_network_policy.policy_errors[0].message #=> String
+    #   resp.core_network_policy.policy_errors[0].path #=> String
+    #   resp.core_network_policy.policy_document #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/RestoreCoreNetworkPolicyVersion AWS API Documentation
+    #
+    # @overload restore_core_network_policy_version(params = {})
+    # @param [Hash] params ({})
+    def restore_core_network_policy_version(params = {}, options = {})
+      req = build_request(:restore_core_network_policy_version, params)
       req.send_request(options)
     end
 
@@ -2413,14 +4042,14 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_route_analysis({
-    #     global_network_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
     #     source: { # required
-    #       transit_gateway_attachment_arn: "String",
-    #       ip_address: "String",
+    #       transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
+    #       ip_address: "IPAddress",
     #     },
     #     destination: { # required
-    #       transit_gateway_attachment_arn: "String",
-    #       ip_address: "String",
+    #       transit_gateway_attachment_arn: "TransitGatewayAttachmentArn",
+    #       ip_address: "IPAddress",
     #     },
     #     include_return_path: false,
     #     use_middleboxes: false,
@@ -2490,7 +4119,7 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.tag_resource({
-    #     resource_arn: "ResourceARN", # required
+    #     resource_arn: "ResourceArn", # required
     #     tags: [ # required
     #       {
     #         key: "TagKey",
@@ -2521,7 +4150,7 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.untag_resource({
-    #     resource_arn: "ResourceARN", # required
+    #     resource_arn: "ResourceArn", # required
     #     tag_keys: ["TagKey"], # required
     #   })
     #
@@ -2561,11 +4190,11 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_connection({
-    #     global_network_id: "String", # required
-    #     connection_id: "String", # required
-    #     link_id: "String",
-    #     connected_link_id: "String",
-    #     description: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     connection_id: "ConnectionId", # required
+    #     link_id: "LinkId",
+    #     connected_link_id: "LinkId",
+    #     description: "ConstrainedString",
     #   })
     #
     # @example Response structure
@@ -2590,6 +4219,57 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def update_connection(params = {}, options = {})
       req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
+    # Updates the description of a core network.
+    #
+    # @option params [required, String] :core_network_id
+    #   The ID of a core network.
+    #
+    # @option params [String] :description
+    #   The description of the update.
+    #
+    # @return [Types::UpdateCoreNetworkResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCoreNetworkResponse#core_network #core_network} => Types::CoreNetwork
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_core_network({
+    #     core_network_id: "CoreNetworkId", # required
+    #     description: "ConstrainedString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.core_network.global_network_id #=> String
+    #   resp.core_network.core_network_id #=> String
+    #   resp.core_network.core_network_arn #=> String
+    #   resp.core_network.description #=> String
+    #   resp.core_network.created_at #=> Time
+    #   resp.core_network.state #=> String, one of "CREATING", "UPDATING", "AVAILABLE", "DELETING"
+    #   resp.core_network.segments #=> Array
+    #   resp.core_network.segments[0].name #=> String
+    #   resp.core_network.segments[0].edge_locations #=> Array
+    #   resp.core_network.segments[0].edge_locations[0] #=> String
+    #   resp.core_network.segments[0].shared_segments #=> Array
+    #   resp.core_network.segments[0].shared_segments[0] #=> String
+    #   resp.core_network.edges #=> Array
+    #   resp.core_network.edges[0].edge_location #=> String
+    #   resp.core_network.edges[0].asn #=> Integer
+    #   resp.core_network.edges[0].inside_cidr_blocks #=> Array
+    #   resp.core_network.edges[0].inside_cidr_blocks[0] #=> String
+    #   resp.core_network.tags #=> Array
+    #   resp.core_network.tags[0].key #=> String
+    #   resp.core_network.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateCoreNetwork AWS API Documentation
+    #
+    # @overload update_core_network(params = {})
+    # @param [Hash] params ({})
+    def update_core_network(params = {}, options = {})
+      req = build_request(:update_core_network, params)
       req.send_request(options)
     end
 
@@ -2642,23 +4322,23 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_device({
-    #     global_network_id: "String", # required
-    #     device_id: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     device_id: "DeviceId", # required
     #     aws_location: {
-    #       zone: "String",
-    #       subnet_arn: "String",
+    #       zone: "ConstrainedString",
+    #       subnet_arn: "SubnetArn",
     #     },
-    #     description: "String",
-    #     type: "String",
-    #     vendor: "String",
-    #     model: "String",
-    #     serial_number: "String",
+    #     description: "ConstrainedString",
+    #     type: "ConstrainedString",
+    #     vendor: "ConstrainedString",
+    #     model: "ConstrainedString",
+    #     serial_number: "ConstrainedString",
     #     location: {
-    #       address: "String",
-    #       latitude: "String",
-    #       longitude: "String",
+    #       address: "ConstrainedString",
+    #       latitude: "ConstrainedString",
+    #       longitude: "ConstrainedString",
     #     },
-    #     site_id: "String",
+    #     site_id: "SiteId",
     #   })
     #
     # @example Response structure
@@ -2710,8 +4390,8 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_global_network({
-    #     global_network_id: "String", # required
-    #     description: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     description: "ConstrainedString",
     #   })
     #
     # @example Response structure
@@ -2768,15 +4448,15 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_link({
-    #     global_network_id: "String", # required
-    #     link_id: "String", # required
-    #     description: "String",
-    #     type: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     link_id: "LinkId", # required
+    #     description: "ConstrainedString",
+    #     type: "ConstrainedString",
     #     bandwidth: {
     #       upload_speed: 1,
     #       download_speed: 1,
     #     },
-    #     provider: "String",
+    #     provider: "ConstrainedString",
     #   })
     #
     # @example Response structure
@@ -2824,10 +4504,10 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_network_resource_metadata({
-    #     global_network_id: "String", # required
-    #     resource_arn: "String", # required
+    #     global_network_id: "GlobalNetworkId", # required
+    #     resource_arn: "ResourceArn", # required
     #     metadata: { # required
-    #       "NetworkResourceMetadataKey" => "NetworkResourceMetadataValue",
+    #       "ConstrainedString" => "ConstrainedString",
     #     },
     #   })
     #
@@ -2835,7 +4515,7 @@ module Aws::NetworkManager
     #
     #   resp.resource_arn #=> String
     #   resp.metadata #=> Hash
-    #   resp.metadata["NetworkResourceMetadataKey"] #=> String
+    #   resp.metadata["ConstrainedString"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateNetworkResourceMetadata AWS API Documentation
     #
@@ -2876,13 +4556,13 @@ module Aws::NetworkManager
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_site({
-    #     global_network_id: "String", # required
-    #     site_id: "String", # required
-    #     description: "String",
+    #     global_network_id: "GlobalNetworkId", # required
+    #     site_id: "SiteId", # required
+    #     description: "ConstrainedString",
     #     location: {
-    #       address: "String",
-    #       latitude: "String",
-    #       longitude: "String",
+    #       address: "ConstrainedString",
+    #       latitude: "ConstrainedString",
+    #       longitude: "ConstrainedString",
     #     },
     #   })
     #
@@ -2910,6 +4590,70 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Updates a VPC attachment.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment.
+    #
+    # @option params [Array<String>] :add_subnet_arns
+    #   Adds a subnet ARN to the VPC attachment.
+    #
+    # @option params [Array<String>] :remove_subnet_arns
+    #   Removes a subnet ARN from the attachment.
+    #
+    # @option params [Types::VpcOptions] :options
+    #   Additional options for updating the VPC attachment.
+    #
+    # @return [Types::UpdateVpcAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateVpcAttachmentResponse#vpc_attachment #vpc_attachment} => Types::VpcAttachment
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_vpc_attachment({
+    #     attachment_id: "AttachmentId", # required
+    #     add_subnet_arns: ["SubnetArn"],
+    #     remove_subnet_arns: ["SubnetArn"],
+    #     options: {
+    #       ipv_6_support: false,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vpc_attachment.attachment.core_network_id #=> String
+    #   resp.vpc_attachment.attachment.core_network_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_id #=> String
+    #   resp.vpc_attachment.attachment.owner_account_id #=> String
+    #   resp.vpc_attachment.attachment.attachment_type #=> String, one of "CONNECT", "SITE_TO_SITE_VPN", "VPC"
+    #   resp.vpc_attachment.attachment.state #=> String, one of "REJECTED", "PENDING_ATTACHMENT_ACCEPTANCE", "CREATING", "FAILED", "AVAILABLE", "UPDATING", "PENDING_NETWORK_UPDATE", "PENDING_TAG_ACCEPTANCE", "DELETING"
+    #   resp.vpc_attachment.attachment.edge_location #=> String
+    #   resp.vpc_attachment.attachment.resource_arn #=> String
+    #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.segment_name #=> String
+    #   resp.vpc_attachment.attachment.tags #=> Array
+    #   resp.vpc_attachment.attachment.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags #=> Array
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].key #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.tags[0].value #=> String
+    #   resp.vpc_attachment.attachment.proposed_segment_change.attachment_policy_rule_number #=> Integer
+    #   resp.vpc_attachment.attachment.proposed_segment_change.segment_name #=> String
+    #   resp.vpc_attachment.attachment.created_at #=> Time
+    #   resp.vpc_attachment.attachment.updated_at #=> Time
+    #   resp.vpc_attachment.subnet_arns #=> Array
+    #   resp.vpc_attachment.subnet_arns[0] #=> String
+    #   resp.vpc_attachment.options.ipv_6_support #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateVpcAttachment AWS API Documentation
+    #
+    # @overload update_vpc_attachment(params = {})
+    # @param [Hash] params ({})
+    def update_vpc_attachment(params = {}, options = {})
+      req = build_request(:update_vpc_attachment, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2923,7 +4667,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1463,6 +1463,12 @@ module Aws::IoT
     #   authorization request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #   @return [Boolean]
+    #
     class AuthorizerDescription < Struct.new(
       :authorizer_name,
       :authorizer_arn,
@@ -1472,7 +1478,8 @@ module Aws::IoT
       :status,
       :creation_date,
       :last_modified_date,
-      :signing_disabled)
+      :signing_disabled,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2828,6 +2835,7 @@ module Aws::IoT
     #           },
     #         ],
     #         signing_disabled: false,
+    #         enable_caching_for_http: false,
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -2872,6 +2880,16 @@ module Aws::IoT
     #   authorization request.
     #   @return [Boolean]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for clients that use persistent HTTP connections. The results
+    #   are cached for the time specified by the Lambda function in
+    #   `refreshAfterInSeconds`. This value does not affect authorization of
+    #   clients that use MQTT connections.
+    #
+    #   The default value is `false`.
+    #   @return [Boolean]
+    #
     class CreateAuthorizerRequest < Struct.new(
       :authorizer_name,
       :authorizer_function_arn,
@@ -2879,7 +2897,8 @@ module Aws::IoT
       :token_signing_public_keys,
       :status,
       :tags,
-      :signing_disabled)
+      :signing_disabled,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3506,6 +3525,14 @@ module Aws::IoT
     #         ],
     #         namespace_id: "NamespaceId",
     #         job_template_arn: "JobTemplateArn",
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #         document_parameters: {
     #           "ParameterKey" => "ParameterValue",
     #         },
@@ -3565,7 +3592,7 @@ module Aws::IoT
     #   @return [Types::JobExecutionsRolloutConfig]
     #
     # @!attribute [rw] abort_config
-    #   Allows you to create criteria to abort a job.
+    #   Allows you to create the criteria to abort a job.
     #   @return [Types::AbortConfig]
     #
     # @!attribute [rw] timeout_config
@@ -3598,6 +3625,10 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     # @!attribute [rw] document_parameters
     #   Parameters of a managed template that you can specify to create the
     #   job document.
@@ -3617,6 +3648,7 @@ module Aws::IoT
       :tags,
       :namespace_id,
       :job_template_arn,
+      :job_executions_retry_config,
       :document_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -3685,6 +3717,14 @@ module Aws::IoT
     #             value: "TagValue",
     #           },
     #         ],
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] job_template_id
@@ -3746,6 +3786,10 @@ module Aws::IoT
     #   Metadata that can be used to manage the job template.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class CreateJobTemplateRequest < Struct.new(
       :job_template_id,
       :job_arn,
@@ -3756,7 +3800,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :tags)
+      :tags,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7155,6 +7200,13 @@ module Aws::IoT
     #   * REGISTRY\_AND\_SHADOW\_AND\_CONNECTIVITY\_STATUS - Your thing
     #     index contains registry data, shadow data, and thing connectivity
     #     status data.
+    #
+    #   * MULTI\_INDEXING\_MODE - Your thing index contains multiple data
+    #     sources. For more information, see [GetIndexingConfiguration][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html
     #   @return [String]
     #
     class DescribeIndexResponse < Struct.new(
@@ -7299,6 +7351,11 @@ module Aws::IoT
     #   set to `TIMED_OUT`.
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   The configuration that determines how many retries are allowed for
+    #   each failure type for a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class DescribeJobTemplateResponse < Struct.new(
       :job_template_arn,
       :job_template_id,
@@ -7309,7 +7366,8 @@ module Aws::IoT
       :presigned_url_config,
       :job_executions_rollout_config,
       :abort_config,
-      :timeout_config)
+      :timeout_config,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10111,6 +10169,10 @@ module Aws::IoT
     #   The ARN of the job template used to create the job.
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   The configuration for the criteria to retry the job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     # @!attribute [rw] document_parameters
     #   A key-value map that pairs the patterns that need to be replaced in
     #   a managed template job document schema. You can use the description
@@ -10138,6 +10200,7 @@ module Aws::IoT
       :timeout_config,
       :namespace_id,
       :job_template_arn,
+      :job_executions_retry_config,
       :document_parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -10261,12 +10324,18 @@ module Aws::IoT
     #   execution information.
     #   @return [Integer]
     #
+    # @!attribute [rw] retry_attempt
+    #   The number that indicates how many retry attempts have been
+    #   completed for this job on this device.
+    #   @return [Integer]
+    #
     class JobExecutionSummary < Struct.new(
       :status,
       :queued_at,
       :started_at,
       :last_updated_at,
-      :execution_number)
+      :execution_number,
+      :retry_attempt)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10302,6 +10371,32 @@ module Aws::IoT
     class JobExecutionSummaryForThing < Struct.new(
       :job_id,
       :job_execution_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that determines how many retries are allowed for
+    # each failure type for a job.
+    #
+    # @note When making an API call, you may pass JobExecutionsRetryConfig
+    #   data as a hash:
+    #
+    #       {
+    #         criteria_list: [ # required
+    #           {
+    #             failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #             number_of_retries: 1, # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] criteria_list
+    #   The list of criteria that determines how many retries are allowed
+    #   for each failure type for a job.
+    #   @return [Array<Types::RetryCriteria>]
+    #
+    class JobExecutionsRetryConfig < Struct.new(
+      :criteria_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11757,6 +11852,7 @@ module Aws::IoT
     #         namespace_id: "NamespaceId",
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         job_id: "JobId",
     #       }
     #
     # @!attribute [rw] thing_name
@@ -11790,12 +11886,17 @@ module Aws::IoT
     #   The token to retrieve the next set of results.
     #   @return [String]
     #
+    # @!attribute [rw] job_id
+    #   The unique identifier you assigned to this job when it was created.
+    #   @return [String]
+    #
     class ListJobExecutionsForThingRequest < Struct.new(
       :thing_name,
       :status,
       :namespace_id,
       :max_results,
-      :next_token)
+      :next_token,
+      :job_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15565,6 +15666,32 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # The criteria that determines how many retries are allowed for each
+    # failure type for a job.
+    #
+    # @note When making an API call, you may pass RetryCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #         number_of_retries: 1, # required
+    #       }
+    #
+    # @!attribute [rw] failure_type
+    #   The type of job execution failures that can initiate a job retry.
+    #   @return [String]
+    #
+    # @!attribute [rw] number_of_retries
+    #   The number of retries allowed for a failure type for the job.
+    #   @return [Integer]
+    #
+    class RetryCriteria < Struct.new(
+      :failure_type,
+      :number_of_retries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Role alias description.
     #
     # @!attribute [rw] role_alias
@@ -17148,7 +17275,25 @@ module Aws::IoT
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] shadow
-    #   The shadow.
+    #   The unnamed shadow and named shadow.
+    #
+    #   For more information about shadows, see [IoT Device Shadow
+    #   service.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html
+    #   @return [String]
+    #
+    # @!attribute [rw] device_defender
+    #   Contains Device Defender data.
+    #
+    #   For more information about Device Defender, see [Device
+    #   Defender][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/device-defender.html
     #   @return [String]
     #
     # @!attribute [rw] connectivity
@@ -17163,6 +17308,7 @@ module Aws::IoT
       :thing_group_names,
       :attributes,
       :shadow,
+      :device_defender,
       :connectivity)
       SENSITIVE = []
       include Aws::Structure
@@ -17311,6 +17457,8 @@ module Aws::IoT
     #       {
     #         thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #         thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #         device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #         named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #         managed_fields: [
     #           {
     #             name: "FieldName",
@@ -17346,6 +17494,39 @@ module Aws::IoT
     #   * OFF - Thing connectivity status indexing is disabled.
     #   @return [String]
     #
+    # @!attribute [rw] device_defender_indexing_mode
+    #   Device Defender indexing mode. Valid values are:
+    #
+    #   * VIOLATIONS – Your thing index contains Device Defender violations.
+    #     To enable Device Defender indexing, *deviceDefenderIndexingMode*
+    #     must not be set to OFF.
+    #
+    #   * OFF - Device Defender indexing is disabled.
+    #
+    #   For more information about Device Defender violations, see [Device
+    #   Defender Detect.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-detect.html
+    #   @return [String]
+    #
+    # @!attribute [rw] named_shadow_indexing_mode
+    #   Named shadow indexing mode. Valid values are:
+    #
+    #   * ON – Your thing index contains named shadow. To enable thing named
+    #     shadow indexing, *namedShadowIndexingMode* must not be set to OFF.
+    #
+    #   * OFF - Named shadow indexing is disabled.
+    #
+    #   For more information about Shadows, see [IoT Device Shadow
+    #   service.][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-device-shadows.html
+    #   @return [String]
+    #
     # @!attribute [rw] managed_fields
     #   Contains fields that are indexed and whose types are already known
     #   by the Fleet Indexing service.
@@ -17358,6 +17539,8 @@ module Aws::IoT
     class ThingIndexingConfiguration < Struct.new(
       :thing_indexing_mode,
       :thing_connectivity_indexing_mode,
+      :device_defender_indexing_mode,
+      :named_shadow_indexing_mode,
       :managed_fields,
       :custom_fields)
       SENSITIVE = []
@@ -18563,6 +18746,7 @@ module Aws::IoT
     #           "KeyName" => "KeyValue",
     #         },
     #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         enable_caching_for_http: false,
     #       }
     #
     # @!attribute [rw] authorizer_name
@@ -18585,12 +18769,19 @@ module Aws::IoT
     #   The status of the update authorizer request.
     #   @return [String]
     #
+    # @!attribute [rw] enable_caching_for_http
+    #   When `true`, the result from the authorizer’s Lambda function is
+    #   cached for the time specified in `refreshAfterInSeconds`. The cached
+    #   result is used while the device reuses the same HTTP connection.
+    #   @return [Boolean]
+    #
     class UpdateAuthorizerRequest < Struct.new(
       :authorizer_name,
       :authorizer_function_arn,
       :token_key_name,
       :token_signing_public_keys,
-      :status)
+      :status,
+      :enable_caching_for_http)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19116,7 +19307,7 @@ module Aws::IoT
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
     #   @return [String]
     #
     # @!attribute [rw] expected_version
@@ -19145,6 +19336,8 @@ module Aws::IoT
     #         thing_indexing_configuration: {
     #           thing_indexing_mode: "OFF", # required, accepts OFF, REGISTRY, REGISTRY_AND_SHADOW
     #           thing_connectivity_indexing_mode: "OFF", # accepts OFF, STATUS
+    #           device_defender_indexing_mode: "OFF", # accepts OFF, VIOLATIONS
+    #           named_shadow_indexing_mode: "OFF", # accepts OFF, ON
     #           managed_fields: [
     #             {
     #               name: "FieldName",
@@ -19227,6 +19420,14 @@ module Aws::IoT
     #           in_progress_timeout_in_minutes: 1,
     #         },
     #         namespace_id: "NamespaceId",
+    #         job_executions_retry_config: {
+    #           criteria_list: [ # required
+    #             {
+    #               failure_type: "FAILED", # required, accepts FAILED, TIMED_OUT, ALL
+    #               number_of_retries: 1, # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] job_id
@@ -19271,6 +19472,10 @@ module Aws::IoT
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] job_executions_retry_config
+    #   Allows you to create the criteria to retry a job.
+    #   @return [Types::JobExecutionsRetryConfig]
+    #
     class UpdateJobRequest < Struct.new(
       :job_id,
       :description,
@@ -19278,7 +19483,8 @@ module Aws::IoT
       :job_executions_rollout_config,
       :abort_config,
       :timeout_config,
-      :namespace_id)
+      :namespace_id,
+      :job_executions_retry_config)
       SENSITIVE = []
       include Aws::Structure
     end

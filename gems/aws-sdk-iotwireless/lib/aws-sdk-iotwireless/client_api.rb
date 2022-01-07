@@ -79,6 +79,8 @@ module Aws::IoTWireless
     DeleteFuotaTaskResponse = Shapes::StructureShape.new(name: 'DeleteFuotaTaskResponse')
     DeleteMulticastGroupRequest = Shapes::StructureShape.new(name: 'DeleteMulticastGroupRequest')
     DeleteMulticastGroupResponse = Shapes::StructureShape.new(name: 'DeleteMulticastGroupResponse')
+    DeleteQueuedMessagesRequest = Shapes::StructureShape.new(name: 'DeleteQueuedMessagesRequest')
+    DeleteQueuedMessagesResponse = Shapes::StructureShape.new(name: 'DeleteQueuedMessagesResponse')
     DeleteServiceProfileRequest = Shapes::StructureShape.new(name: 'DeleteServiceProfileRequest')
     DeleteServiceProfileResponse = Shapes::StructureShape.new(name: 'DeleteServiceProfileResponse')
     DeleteWirelessDeviceRequest = Shapes::StructureShape.new(name: 'DeleteWirelessDeviceRequest')
@@ -126,6 +128,8 @@ module Aws::IoTWireless
     DlRate = Shapes::IntegerShape.new(name: 'DlRate')
     DlRatePolicy = Shapes::StringShape.new(name: 'DlRatePolicy')
     Double = Shapes::FloatShape.new(name: 'Double')
+    DownlinkQueueMessage = Shapes::StructureShape.new(name: 'DownlinkQueueMessage')
+    DownlinkQueueMessagesList = Shapes::ListShape.new(name: 'DownlinkQueueMessagesList')
     DrMax = Shapes::IntegerShape.new(name: 'DrMax')
     DrMin = Shapes::IntegerShape.new(name: 'DrMin')
     EndPoint = Shapes::StringShape.new(name: 'EndPoint')
@@ -212,6 +216,8 @@ module Aws::IoTWireless
     ListMulticastGroupsResponse = Shapes::StructureShape.new(name: 'ListMulticastGroupsResponse')
     ListPartnerAccountsRequest = Shapes::StructureShape.new(name: 'ListPartnerAccountsRequest')
     ListPartnerAccountsResponse = Shapes::StructureShape.new(name: 'ListPartnerAccountsResponse')
+    ListQueuedMessagesRequest = Shapes::StructureShape.new(name: 'ListQueuedMessagesRequest')
+    ListQueuedMessagesResponse = Shapes::StructureShape.new(name: 'ListQueuedMessagesResponse')
     ListServiceProfilesRequest = Shapes::StructureShape.new(name: 'ListServiceProfilesRequest')
     ListServiceProfilesResponse = Shapes::StructureShape.new(name: 'ListServiceProfilesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
@@ -626,6 +632,13 @@ module Aws::IoTWireless
 
     DeleteMulticastGroupResponse.struct_class = Types::DeleteMulticastGroupResponse
 
+    DeleteQueuedMessagesRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
+    DeleteQueuedMessagesRequest.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location: "querystring", location_name: "messageId"))
+    DeleteQueuedMessagesRequest.add_member(:wireless_device_type, Shapes::ShapeRef.new(shape: WirelessDeviceType, location: "querystring", location_name: "WirelessDeviceType"))
+    DeleteQueuedMessagesRequest.struct_class = Types::DeleteQueuedMessagesRequest
+
+    DeleteQueuedMessagesResponse.struct_class = Types::DeleteQueuedMessagesResponse
+
     DeleteServiceProfileRequest.add_member(:id, Shapes::ShapeRef.new(shape: ServiceProfileId, required: true, location: "uri", location_name: "Id"))
     DeleteServiceProfileRequest.struct_class = Types::DeleteServiceProfileRequest
 
@@ -711,6 +724,14 @@ module Aws::IoTWireless
     DisassociateWirelessGatewayFromThingRequest.struct_class = Types::DisassociateWirelessGatewayFromThingRequest
 
     DisassociateWirelessGatewayFromThingResponse.struct_class = Types::DisassociateWirelessGatewayFromThingResponse
+
+    DownlinkQueueMessage.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, location_name: "MessageId"))
+    DownlinkQueueMessage.add_member(:transmit_mode, Shapes::ShapeRef.new(shape: TransmitMode, location_name: "TransmitMode"))
+    DownlinkQueueMessage.add_member(:received_at, Shapes::ShapeRef.new(shape: ISODateTimeString, location_name: "ReceivedAt"))
+    DownlinkQueueMessage.add_member(:lo_ra_wan, Shapes::ShapeRef.new(shape: LoRaWANSendDataToDevice, location_name: "LoRaWAN"))
+    DownlinkQueueMessage.struct_class = Types::DownlinkQueueMessage
+
+    DownlinkQueueMessagesList.member = Shapes::ShapeRef.new(shape: DownlinkQueueMessage)
 
     FPorts.add_member(:fuota, Shapes::ShapeRef.new(shape: FPort, location_name: "Fuota"))
     FPorts.add_member(:multicast, Shapes::ShapeRef.new(shape: FPort, location_name: "Multicast"))
@@ -967,6 +988,16 @@ module Aws::IoTWireless
     ListPartnerAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPartnerAccountsResponse.add_member(:sidewalk, Shapes::ShapeRef.new(shape: SidewalkAccountList, location_name: "Sidewalk"))
     ListPartnerAccountsResponse.struct_class = Types::ListPartnerAccountsResponse
+
+    ListQueuedMessagesRequest.add_member(:id, Shapes::ShapeRef.new(shape: WirelessDeviceId, required: true, location: "uri", location_name: "Id"))
+    ListQueuedMessagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListQueuedMessagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListQueuedMessagesRequest.add_member(:wireless_device_type, Shapes::ShapeRef.new(shape: WirelessDeviceType, location: "querystring", location_name: "WirelessDeviceType"))
+    ListQueuedMessagesRequest.struct_class = Types::ListQueuedMessagesRequest
+
+    ListQueuedMessagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListQueuedMessagesResponse.add_member(:downlink_queue_messages_list, Shapes::ShapeRef.new(shape: DownlinkQueueMessagesList, location_name: "DownlinkQueueMessagesList"))
+    ListQueuedMessagesResponse.struct_class = Types::ListQueuedMessagesResponse
 
     ListServiceProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListServiceProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1796,6 +1827,19 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:delete_queued_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteQueuedMessages"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/wireless-devices/{Id}/data"
+        o.input = Shapes::ShapeRef.new(shape: DeleteQueuedMessagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteQueuedMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_service_profile, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteServiceProfile"
         o.http_method = "DELETE"
@@ -2314,6 +2358,25 @@ module Aws::IoTWireless
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_queued_messages, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListQueuedMessages"
+        o.http_method = "GET"
+        o.http_request_uri = "/wireless-devices/{Id}/data"
+        o.input = Shapes::ShapeRef.new(shape: ListQueuedMessagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListQueuedMessagesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_service_profiles, Seahorse::Model::Operation.new.tap do |o|

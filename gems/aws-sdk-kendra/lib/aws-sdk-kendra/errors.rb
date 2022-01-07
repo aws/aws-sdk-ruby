@@ -30,6 +30,7 @@ module Aws::Kendra
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {InvalidRequestException}
   # * {ResourceAlreadyExistException}
   # * {ResourceInUseException}
   # * {ResourceNotFoundException}
@@ -79,6 +80,21 @@ module Aws::Kendra
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Kendra::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidRequestException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Kendra::Types::InvalidRequestException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

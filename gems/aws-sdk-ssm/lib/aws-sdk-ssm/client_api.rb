@@ -1063,6 +1063,8 @@ module Aws::SSM
     SignalType = Shapes::StringShape.new(name: 'SignalType')
     SnapshotDownloadUrl = Shapes::StringShape.new(name: 'SnapshotDownloadUrl')
     SnapshotId = Shapes::StringShape.new(name: 'SnapshotId')
+    SourceId = Shapes::StringShape.new(name: 'SourceId')
+    SourceType = Shapes::StringShape.new(name: 'SourceType')
     StandardErrorContent = Shapes::StringShape.new(name: 'StandardErrorContent')
     StandardOutputContent = Shapes::StringShape.new(name: 'StandardOutputContent')
     StartAssociationsOnceRequest = Shapes::StructureShape.new(name: 'StartAssociationsOnceRequest')
@@ -2727,6 +2729,8 @@ module Aws::SSM
     InstanceInformation.add_member(:last_association_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastAssociationExecutionDate"))
     InstanceInformation.add_member(:last_successful_association_execution_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "LastSuccessfulAssociationExecutionDate"))
     InstanceInformation.add_member(:association_overview, Shapes::ShapeRef.new(shape: InstanceAggregatedAssociationOverview, location_name: "AssociationOverview"))
+    InstanceInformation.add_member(:source_id, Shapes::ShapeRef.new(shape: SourceId, location_name: "SourceId"))
+    InstanceInformation.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, location_name: "SourceType"))
     InstanceInformation.struct_class = Types::InstanceInformation
 
     InstanceInformationFilter.add_member(:key, Shapes::ShapeRef.new(shape: InstanceInformationFilterKey, required: true, location_name: "key"))

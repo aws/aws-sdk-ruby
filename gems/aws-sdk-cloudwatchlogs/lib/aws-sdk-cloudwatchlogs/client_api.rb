@@ -86,6 +86,7 @@ module Aws::CloudWatchLogs
     FilterPattern = Shapes::StringShape.new(name: 'FilterPattern')
     FilteredLogEvent = Shapes::StructureShape.new(name: 'FilteredLogEvent')
     FilteredLogEvents = Shapes::ListShape.new(name: 'FilteredLogEvents')
+    ForceUpdate = Shapes::BooleanShape.new(name: 'ForceUpdate')
     GetLogEventsRequest = Shapes::StructureShape.new(name: 'GetLogEventsRequest')
     GetLogEventsResponse = Shapes::StructureShape.new(name: 'GetLogEventsResponse')
     GetLogGroupFieldsRequest = Shapes::StructureShape.new(name: 'GetLogGroupFieldsRequest')
@@ -549,6 +550,7 @@ module Aws::CloudWatchLogs
 
     PutDestinationPolicyRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
     PutDestinationPolicyRequest.add_member(:access_policy, Shapes::ShapeRef.new(shape: AccessPolicy, required: true, location_name: "accessPolicy"))
+    PutDestinationPolicyRequest.add_member(:force_update, Shapes::ShapeRef.new(shape: ForceUpdate, location_name: "forceUpdate"))
     PutDestinationPolicyRequest.struct_class = Types::PutDestinationPolicyRequest
 
     PutDestinationRequest.add_member(:destination_name, Shapes::ShapeRef.new(shape: DestinationName, required: true, location_name: "destinationName"))
@@ -1164,6 +1166,7 @@ module Aws::CloudWatchLogs
         o.input = Shapes::ShapeRef.new(shape: PutQueryDefinitionRequest)
         o.output = Shapes::ShapeRef.new(shape: PutQueryDefinitionResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)

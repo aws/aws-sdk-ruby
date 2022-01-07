@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2021-12-20)
+------------------
+
+* Feature - Adds Tags support to DescribeOrganizationResourceCollectionHealth
+
+1.17.0 (2021-12-01)
+------------------
+
+* Feature - DevOps Guru now provides detailed, database-specific analyses of performance issues and recommends corrective actions for Amazon Aurora database instances with Performance Insights turned on. You can also use AWS tags to choose which resources to analyze and define your applications.
+
+1.16.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.15.0 (2021-11-17)
 ------------------
 

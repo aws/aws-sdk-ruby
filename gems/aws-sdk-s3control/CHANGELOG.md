@@ -1,6 +1,23 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-01-04)
+------------------
+
+* Feature - Documentation updates for the renaming of Glacier to Glacier Flexible Retrieval.
+
+1.45.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2021-11-30)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix a bug where the dualstack plugin was dropping URI paths.
+
 1.43.0 (2021-11-22)
 ------------------
 

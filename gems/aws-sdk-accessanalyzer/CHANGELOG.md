@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.26.0 (2021-11-30)
+------------------
+
+* Feature - AWS IAM Access Analyzer now supports policy validation for resource policies attached to S3 buckets and access points. You can run additional policy checks by specifying the S3 resource type you want to attach to your resource policy.
+
 1.25.0 (2021-11-04)
 ------------------
 

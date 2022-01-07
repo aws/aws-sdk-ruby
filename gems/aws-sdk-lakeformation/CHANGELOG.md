@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-01-05)
+------------------
+
+* Feature - Add new APIs for 3rd Party Support for Lake Formation
+
+1.21.0 (2021-12-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.20.0 (2021-11-30)
+------------------
+
+* Feature - This release adds support for row and cell-based access control in Lake Formation. It also adds support for Lake Formation Governed Tables, which support ACID transactions and automatic storage optimizations.
+
 1.19.0 (2021-11-04)
 ------------------
 

@@ -494,7 +494,7 @@ module Aws::RDS
       data[:db_cluster_instance_class]
     end
 
-    # The storage type associated with DB instance.
+    # The storage type associated with the DB cluster.
     #
     # This setting is only for non-Aurora Multi-AZ DB clusters.
     # @return [String]
@@ -854,7 +854,8 @@ module Aws::RDS
     #
     #   * `aurora` (for MySQL 5.6-compatible Aurora)
     #
-    #   * `aurora-mysql` (for MySQL 5.7-compatible Aurora)
+    #   * `aurora-mysql` (for MySQL 5.7-compatible and MySQL 8.0-compatible
+    #     Aurora)
     #
     #   * `aurora-postgresql`
     #
@@ -873,7 +874,7 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   Aurora, use the following command:
+    #   and MySQL 8.0-compatible Aurora, use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -1294,11 +1295,11 @@ module Aws::RDS
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, also include a value for the `Iops` parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :iops
@@ -1758,7 +1759,7 @@ module Aws::RDS
     #   "DBEngineVersions[].EngineVersion"`
     #
     #   To list all of the available engine versions for MySQL 5.7-compatible
-    #   Aurora, use the following command:
+    #   and MySQL 8.0-compatible Aurora, use the following command:
     #
     #   `aws rds describe-db-engine-versions --engine aurora-mysql --query
     #   "DBEngineVersions[].EngineVersion"`
@@ -1904,12 +1905,11 @@ module Aws::RDS
     # @option options [String] :storage_type
     #   Specifies the storage type to be associated with the DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, you must also include a value for the `Iops`
-    #   parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Integer] :iops
@@ -2284,11 +2284,11 @@ module Aws::RDS
     #   Specifies the storage type to be associated with the each DB instance
     #   in the Multi-AZ DB cluster.
     #
-    #   Valid values: `standard | gp2 | io1`
+    #   Valid values: `io1`
     #
-    #   If you specify `io1`, also include a value for the `Iops` parameter.
+    #   When specified, a value for the `Iops` parameter is required.
     #
-    #   Default: `io1` if the `Iops` parameter is specified, otherwise `gp2`
+    #   Default: `io1`
     #
     #   Valid for: Multi-AZ DB clusters only
     # @option options [Boolean] :publicly_accessible

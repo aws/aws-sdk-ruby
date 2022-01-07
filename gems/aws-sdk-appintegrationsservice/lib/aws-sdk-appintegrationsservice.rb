@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appintegrationsservice/customizations'
 # @!group service
 module Aws::AppIntegrationsService
 
-  GEM_VERSION = '1.9.0'
+  GEM_VERSION = '1.11.0'
 
 end

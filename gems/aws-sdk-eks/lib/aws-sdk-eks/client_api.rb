@@ -100,6 +100,7 @@ module Aws::EKS
     IncludeClustersList = Shapes::ListShape.new(name: 'IncludeClustersList')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IpFamily = Shapes::StringShape.new(name: 'IpFamily')
     Issue = Shapes::StructureShape.new(name: 'Issue')
     IssueList = Shapes::ListShape.new(name: 'IssueList')
     KubernetesNetworkConfigRequest = Shapes::StructureShape.new(name: 'KubernetesNetworkConfigRequest')
@@ -536,9 +537,12 @@ module Aws::EKS
     IssueList.member = Shapes::ShapeRef.new(shape: Issue)
 
     KubernetesNetworkConfigRequest.add_member(:service_ipv_4_cidr, Shapes::ShapeRef.new(shape: String, location_name: "serviceIpv4Cidr"))
+    KubernetesNetworkConfigRequest.add_member(:ip_family, Shapes::ShapeRef.new(shape: IpFamily, location_name: "ipFamily"))
     KubernetesNetworkConfigRequest.struct_class = Types::KubernetesNetworkConfigRequest
 
     KubernetesNetworkConfigResponse.add_member(:service_ipv_4_cidr, Shapes::ShapeRef.new(shape: String, location_name: "serviceIpv4Cidr"))
+    KubernetesNetworkConfigResponse.add_member(:service_ipv_6_cidr, Shapes::ShapeRef.new(shape: String, location_name: "serviceIpv6Cidr"))
+    KubernetesNetworkConfigResponse.add_member(:ip_family, Shapes::ShapeRef.new(shape: IpFamily, location_name: "ipFamily"))
     KubernetesNetworkConfigResponse.struct_class = Types::KubernetesNetworkConfigResponse
 
     LaunchTemplateSpecification.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))

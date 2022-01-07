@@ -96,6 +96,7 @@ module Aws::MWAA
     UpdateEnvironmentOutput = Shapes::StructureShape.new(name: 'UpdateEnvironmentOutput')
     UpdateError = Shapes::StructureShape.new(name: 'UpdateError')
     UpdateNetworkConfigurationInput = Shapes::StructureShape.new(name: 'UpdateNetworkConfigurationInput')
+    UpdateSource = Shapes::StringShape.new(name: 'UpdateSource')
     UpdateStatus = Shapes::StringShape.new(name: 'UpdateStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     WebserverAccessMode = Shapes::StringShape.new(name: 'WebserverAccessMode')
@@ -199,6 +200,7 @@ module Aws::MWAA
 
     LastUpdate.add_member(:created_at, Shapes::ShapeRef.new(shape: UpdateCreatedAt, location_name: "CreatedAt"))
     LastUpdate.add_member(:error, Shapes::ShapeRef.new(shape: UpdateError, location_name: "Error"))
+    LastUpdate.add_member(:source, Shapes::ShapeRef.new(shape: UpdateSource, location_name: "Source"))
     LastUpdate.add_member(:status, Shapes::ShapeRef.new(shape: UpdateStatus, location_name: "Status"))
     LastUpdate.struct_class = Types::LastUpdate
 
