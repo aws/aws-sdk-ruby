@@ -465,6 +465,7 @@ module Aws::GlueDataBrew
     #       s3_input_definition: {
     #         bucket: "Bucket", # required
     #         key: "Key",
+    #         bucket_owner: "BucketOwner",
     #       },
     #       data_catalog_input_definition: {
     #         catalog_id: "CatalogId",
@@ -473,6 +474,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #       },
     #       database_input_definition: {
@@ -481,6 +483,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         query_string: "QueryString",
     #       },
@@ -570,8 +573,9 @@ module Aws::GlueDataBrew
     #   The maximum number of times to retry the job after a job run fails.
     #
     # @option params [required, Types::S3Location] :output_location
-    #   Represents an Amazon S3 location (bucket name and object key) where
-    #   DataBrew can read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name, bucket owner, and
+    #   object key) where DataBrew can read input data, or write output from a
+    #   job.
     #
     # @option params [Types::ProfileConfiguration] :configuration
     #   Configuration for profile jobs. Used to select columns, do
@@ -615,6 +619,7 @@ module Aws::GlueDataBrew
     #     output_location: { # required
     #       bucket: "Bucket", # required
     #       key: "Key",
+    #       bucket_owner: "BucketOwner",
     #     },
     #     configuration: {
     #       dataset_statistics_configuration: {
@@ -894,6 +899,7 @@ module Aws::GlueDataBrew
     #         location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         overwrite: false,
     #         format_options: {
@@ -912,12 +918,14 @@ module Aws::GlueDataBrew
     #           location: { # required
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #         },
     #         database_options: {
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -931,6 +939,7 @@ module Aws::GlueDataBrew
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -1300,15 +1309,18 @@ module Aws::GlueDataBrew
     #   resp.format_options.csv.header_row #=> Boolean
     #   resp.input.s3_input_definition.bucket #=> String
     #   resp.input.s3_input_definition.key #=> String
+    #   resp.input.s3_input_definition.bucket_owner #=> String
     #   resp.input.data_catalog_input_definition.catalog_id #=> String
     #   resp.input.data_catalog_input_definition.database_name #=> String
     #   resp.input.data_catalog_input_definition.table_name #=> String
     #   resp.input.data_catalog_input_definition.temp_directory.bucket #=> String
     #   resp.input.data_catalog_input_definition.temp_directory.key #=> String
+    #   resp.input.data_catalog_input_definition.temp_directory.bucket_owner #=> String
     #   resp.input.database_input_definition.glue_connection_name #=> String
     #   resp.input.database_input_definition.database_table_name #=> String
     #   resp.input.database_input_definition.temp_directory.bucket #=> String
     #   resp.input.database_input_definition.temp_directory.key #=> String
+    #   resp.input.database_input_definition.temp_directory.bucket_owner #=> String
     #   resp.input.database_input_definition.query_string #=> String
     #   resp.input.metadata.source_arn #=> String
     #   resp.last_modified_date #=> Time
@@ -1402,6 +1414,7 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].partition_columns[0] #=> String
     #   resp.outputs[0].location.bucket #=> String
     #   resp.outputs[0].location.key #=> String
+    #   resp.outputs[0].location.bucket_owner #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
     #   resp.data_catalog_outputs #=> Array
@@ -1410,14 +1423,17 @@ module Aws::GlueDataBrew
     #   resp.data_catalog_outputs[0].table_name #=> String
     #   resp.data_catalog_outputs[0].s3_options.location.bucket #=> String
     #   resp.data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.bucket_owner #=> String
     #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.data_catalog_outputs[0].database_options.table_name #=> String
     #   resp.data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.database_outputs #=> Array
     #   resp.database_outputs[0].glue_connection_name #=> String
     #   resp.database_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.database_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.database_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.database_outputs[0].database_options.table_name #=> String
     #   resp.database_outputs[0].database_output_mode #=> String, one of "NEW_TABLE"
     #   resp.project_name #=> String
@@ -1550,6 +1566,7 @@ module Aws::GlueDataBrew
     #   resp.outputs[0].partition_columns[0] #=> String
     #   resp.outputs[0].location.bucket #=> String
     #   resp.outputs[0].location.key #=> String
+    #   resp.outputs[0].location.bucket_owner #=> String
     #   resp.outputs[0].overwrite #=> Boolean
     #   resp.outputs[0].format_options.csv.delimiter #=> String
     #   resp.data_catalog_outputs #=> Array
@@ -1558,14 +1575,17 @@ module Aws::GlueDataBrew
     #   resp.data_catalog_outputs[0].table_name #=> String
     #   resp.data_catalog_outputs[0].s3_options.location.bucket #=> String
     #   resp.data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.data_catalog_outputs[0].s3_options.location.bucket_owner #=> String
     #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.data_catalog_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.data_catalog_outputs[0].database_options.table_name #=> String
     #   resp.data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.database_outputs #=> Array
     #   resp.database_outputs[0].glue_connection_name #=> String
     #   resp.database_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.database_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.database_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.database_outputs[0].database_options.table_name #=> String
     #   resp.database_outputs[0].database_output_mode #=> String, one of "NEW_TABLE"
     #   resp.recipe_reference.name #=> String
@@ -1851,15 +1871,18 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].format_options.csv.header_row #=> Boolean
     #   resp.datasets[0].input.s3_input_definition.bucket #=> String
     #   resp.datasets[0].input.s3_input_definition.key #=> String
+    #   resp.datasets[0].input.s3_input_definition.bucket_owner #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.catalog_id #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.database_name #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.table_name #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.temp_directory.bucket #=> String
     #   resp.datasets[0].input.data_catalog_input_definition.temp_directory.key #=> String
+    #   resp.datasets[0].input.data_catalog_input_definition.temp_directory.bucket_owner #=> String
     #   resp.datasets[0].input.database_input_definition.glue_connection_name #=> String
     #   resp.datasets[0].input.database_input_definition.database_table_name #=> String
     #   resp.datasets[0].input.database_input_definition.temp_directory.bucket #=> String
     #   resp.datasets[0].input.database_input_definition.temp_directory.key #=> String
+    #   resp.datasets[0].input.database_input_definition.temp_directory.bucket_owner #=> String
     #   resp.datasets[0].input.database_input_definition.query_string #=> String
     #   resp.datasets[0].input.metadata.source_arn #=> String
     #   resp.datasets[0].last_modified_date #=> Time
@@ -1942,6 +1965,7 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].outputs[0].partition_columns[0] #=> String
     #   resp.job_runs[0].outputs[0].location.bucket #=> String
     #   resp.job_runs[0].outputs[0].location.key #=> String
+    #   resp.job_runs[0].outputs[0].location.bucket_owner #=> String
     #   resp.job_runs[0].outputs[0].overwrite #=> Boolean
     #   resp.job_runs[0].outputs[0].format_options.csv.delimiter #=> String
     #   resp.job_runs[0].data_catalog_outputs #=> Array
@@ -1950,14 +1974,17 @@ module Aws::GlueDataBrew
     #   resp.job_runs[0].data_catalog_outputs[0].table_name #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].s3_options.location.bucket #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].s3_options.location.bucket_owner #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.job_runs[0].data_catalog_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].database_options.table_name #=> String
     #   resp.job_runs[0].data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.job_runs[0].database_outputs #=> Array
     #   resp.job_runs[0].database_outputs[0].glue_connection_name #=> String
     #   resp.job_runs[0].database_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.job_runs[0].database_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.job_runs[0].database_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.job_runs[0].database_outputs[0].database_options.table_name #=> String
     #   resp.job_runs[0].database_outputs[0].database_output_mode #=> String, one of "NEW_TABLE"
     #   resp.job_runs[0].recipe_reference.name #=> String
@@ -2038,6 +2065,7 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].outputs[0].partition_columns[0] #=> String
     #   resp.jobs[0].outputs[0].location.bucket #=> String
     #   resp.jobs[0].outputs[0].location.key #=> String
+    #   resp.jobs[0].outputs[0].location.bucket_owner #=> String
     #   resp.jobs[0].outputs[0].overwrite #=> Boolean
     #   resp.jobs[0].outputs[0].format_options.csv.delimiter #=> String
     #   resp.jobs[0].data_catalog_outputs #=> Array
@@ -2046,14 +2074,17 @@ module Aws::GlueDataBrew
     #   resp.jobs[0].data_catalog_outputs[0].table_name #=> String
     #   resp.jobs[0].data_catalog_outputs[0].s3_options.location.bucket #=> String
     #   resp.jobs[0].data_catalog_outputs[0].s3_options.location.key #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].s3_options.location.bucket_owner #=> String
     #   resp.jobs[0].data_catalog_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.jobs[0].data_catalog_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.jobs[0].data_catalog_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.jobs[0].data_catalog_outputs[0].database_options.table_name #=> String
     #   resp.jobs[0].data_catalog_outputs[0].overwrite #=> Boolean
     #   resp.jobs[0].database_outputs #=> Array
     #   resp.jobs[0].database_outputs[0].glue_connection_name #=> String
     #   resp.jobs[0].database_outputs[0].database_options.temp_directory.bucket #=> String
     #   resp.jobs[0].database_outputs[0].database_options.temp_directory.key #=> String
+    #   resp.jobs[0].database_outputs[0].database_options.temp_directory.bucket_owner #=> String
     #   resp.jobs[0].database_outputs[0].database_options.table_name #=> String
     #   resp.jobs[0].database_outputs[0].database_output_mode #=> String, one of "NEW_TABLE"
     #   resp.jobs[0].project_name #=> String
@@ -2716,6 +2747,7 @@ module Aws::GlueDataBrew
     #       s3_input_definition: {
     #         bucket: "Bucket", # required
     #         key: "Key",
+    #         bucket_owner: "BucketOwner",
     #       },
     #       data_catalog_input_definition: {
     #         catalog_id: "CatalogId",
@@ -2724,6 +2756,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #       },
     #       database_input_definition: {
@@ -2732,6 +2765,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         query_string: "QueryString",
     #       },
@@ -2818,8 +2852,9 @@ module Aws::GlueDataBrew
     #   The maximum number of times to retry the job after a job run fails.
     #
     # @option params [required, Types::S3Location] :output_location
-    #   Represents an Amazon S3 location (bucket name and object key) where
-    #   DataBrew can read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name, bucket owner, and
+    #   object key) where DataBrew can read input data, or write output from a
+    #   job.
     #
     # @option params [Array<Types::ValidationConfiguration>] :validation_configurations
     #   List of validation configurations that are applied to the profile job.
@@ -2903,6 +2938,7 @@ module Aws::GlueDataBrew
     #     output_location: { # required
     #       bucket: "Bucket", # required
     #       key: "Key",
+    #       bucket_owner: "BucketOwner",
     #     },
     #     validation_configurations: [
     #       {
@@ -3095,6 +3131,7 @@ module Aws::GlueDataBrew
     #         location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         overwrite: false,
     #         format_options: {
@@ -3113,12 +3150,14 @@ module Aws::GlueDataBrew
     #           location: { # required
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #         },
     #         database_options: {
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -3132,6 +3171,7 @@ module Aws::GlueDataBrew
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -3267,7 +3307,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -50,13 +50,13 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] first
     #   A time range from the beginning of the call to the value that
-    #   you've specified. For example, if you specify 100000, the time
+    #   you've specified. For example, if you specify `100000`, the time
     #   range is set to the first 100,000 milliseconds of the call.
     #   @return [Integer]
     #
     # @!attribute [rw] last
     #   A time range from the value that you've specified to the end of the
-    #   call. For example, if you specify 100000, the time range is set to
+    #   call. For example, if you specify `100000`, the time range is set to
     #   the last 100,000 milliseconds of the call.
     #   @return [Integer]
     #
@@ -107,12 +107,11 @@ module Aws::TranscribeService
     #   identify the language. To improve the accuracy of language
     #   identification, you can provide an array containing the possible
     #   language codes for the language spoken in your audio. Refer to
-    #   [Supported languages and language-specific features][1] for
-    #   additional information.
+    #   [Supported languages][1] for additional information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
@@ -198,7 +197,7 @@ module Aws::TranscribeService
     #   language that it identified in the source audio. This value appears
     #   only when you don't provide a single language code. Larger values
     #   indicate that Amazon Transcribe has higher confidence in the
-    #   language that it identified
+    #   language that it identified.
     #   @return [Float]
     #
     # @!attribute [rw] settings
@@ -296,12 +295,12 @@ module Aws::TranscribeService
     #   Amazon Transcribe will use machine learning to identify the language
     #   for you. To improve the ability of Amazon Transcribe to correctly
     #   identify the language, you can provide an array of the languages
-    #   that can be present in the audio. Refer to [Supported languages and
-    #   language-specific features][1] for additional information.
+    #   that can be present in the audio. Refer to [Supported languages][1]
+    #   for additional information.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_id_settings
@@ -724,9 +723,7 @@ module Aws::TranscribeService
     #   Region as the resource that you're calling. Enter information about
     #   your `VocabularyFileUri` in the following format:
     #
-    #   `
-    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
+    #   `https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>`
     #
     #   The following is an example URI for a vocabulary file that is stored
     #   in Amazon S3:
@@ -742,7 +739,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -838,7 +835,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] vocabulary_filter_file_uri
@@ -855,7 +852,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -923,7 +920,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see transcribe-whatis.
+    #   and their corresponding language codes, see table-language-matrix.
     #   @return [String]
     #
     # @!attribute [rw] phrases
@@ -935,6 +932,14 @@ module Aws::TranscribeService
     #   custom vocabulary. The URI must be in the same region as the API
     #   endpoint that you are calling. The general form is:
     #
+    #   `https://s3.<Amazon Web
+    #   Services-region>.amazonaws.com/<AWSDOC-EXAMPLE-BUCKET>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
+    #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
     #
@@ -944,7 +949,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1676,22 +1681,22 @@ module Aws::TranscribeService
     # @!attribute [rw] vocabulary_name
     #   The name of the vocabulary you want to use when processing your
     #   transcription job. The vocabulary you specify must have the same
-    #   language code as the transcription job; if the languages don't
-    #   match, the vocabulary won't be applied.
+    #   language codes as the transcription job; if the languages don't
+    #   match, the vocabulary isn't applied.
     #   @return [String]
     #
     # @!attribute [rw] vocabulary_filter_name
     #   The name of the vocabulary filter you want to use when transcribing
-    #   your audio. The filter you specify must have the same language code
+    #   your audio. The filter you specify must have the same language codes
     #   as the transcription job; if the languages don't match, the
-    #   vocabulary filter won't be applied.
+    #   vocabulary filter isn't be applied.
     #   @return [String]
     #
     # @!attribute [rw] language_model_name
     #   The name of the language model you want to use when transcribing
-    #   your audio. The model you specify must have the same language code
+    #   your audio. The model you specify must have the same language codes
     #   as the transcription job; if the languages don't match, the
-    #   language model won't be applied.
+    #   language model isn't be applied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/LanguageIdSettings AWS API Documentation
@@ -2388,7 +2393,13 @@ module Aws::TranscribeService
     #   the same region as the API endpoint that you are calling. The
     #   general form is:
     #
+    #   ` s3://<AWSDOC-EXAMPLE-BUCKET>/<keyprefix>/<objectkey>`
+    #
     #   For example:
+    #
+    #   `s3://AWSDOC-EXAMPLE-BUCKET/example.mp4`
+    #
+    #   `s3://AWSDOC-EXAMPLE-BUCKET/mediadocs/example.mp4`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -2453,9 +2464,7 @@ module Aws::TranscribeService
     #
     #   If you don't specify the sample rate, Amazon Transcribe Medical
     #   determines it for you. If you choose to specify the sample rate, it
-    #   must match the rate detected by Amazon Transcribe Medical. In most
-    #   cases, you should leave the `MedicalMediaSampleHertz` blank and let
-    #   Amazon Transcribe Medical determine the sample rate.
+    #   must match the rate detected by Amazon Transcribe Medical.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -2512,13 +2521,13 @@ module Aws::TranscribeService
     #   * `Invalid file size: file size too large`- The size of your audio
     #     file is larger than what Amazon Transcribe Medical can process.
     #     For more information, see [Guidelines and Quotas][1] in the
-    #     *Amazon Transcribe Medical Guide*
+    #     *Amazon Transcribe Medical Guide*.
     #
     #   * `Invalid number of channels: number of channels too large`- Your
     #     audio contains more channels than Amazon Transcribe Medical is
     #     configured to process. To request additional channels, see [Amazon
     #     Transcribe Medical Endpoints and Quotas][2] in the *Amazon Web
-    #     Services General Reference*
+    #     Services General Reference*.
     #
     #
     #
@@ -2709,7 +2718,7 @@ module Aws::TranscribeService
     #
     #   You can't set both `ShowSpeakerLabels` and `ChannelIdentification`
     #   in the same request. If you set both, your request returns a
-    #   `BadRequestException`
+    #   `BadRequestException`.
     #   @return [Boolean]
     #
     # @!attribute [rw] show_alternatives
@@ -3187,15 +3196,15 @@ module Aws::TranscribeService
     #
     #     f you specify a path, Amazon Transcribe saves the output of the
     #     analytics job as
-    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json
+    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json.
     #
     #     If you specify a folder, you must provide a trailing slash.
     #
-    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json.
     #
     #     If you provide a path that has the filename specified, Amazon
     #     Transcribe saves the output of the analytics job as
-    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
+    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json.
     #
     #   You can specify an Amazon Web Services Key Management Service (KMS)
     #   key to encrypt the output of our analytics job using the
@@ -3225,8 +3234,8 @@ module Aws::TranscribeService
     #     another account: "arn:aws:kms:region:account
     #     ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
     #
-    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
-    #     ID:alias/ExampleAlias"
+    #   * ARN of a KMS Key Alias:
+    #     "arn:aws:kms:region:accountID:alias/ExampleAlias"
     #
     #   If you don't specify an encryption key, the output of the call
     #   analytics job is encrypted with the default Amazon S3 key (SSE-S3).
@@ -3799,7 +3808,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] formats
     #   Specify the output format for your subtitle file; if you select both
-    #   SRT and VTT formats, two output files are genereated.
+    #   SRT and VTT formats, two output files are generated.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subtitle_file_uris
@@ -4011,8 +4020,8 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio track in the input media
-    #   file.
+    #   The sample rate, in Hertz (Hz), of the audio track in the input
+    #   media file.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -4130,7 +4139,7 @@ module Aws::TranscribeService
     #   Language-specific settings that can be specified when language
     #   identification is enabled for your transcription job. These settings
     #   include `VocabularyName`, `VocabularyFilterName`, and
-    #   `LanguageModelName`LanguageModelName.
+    #   `LanguageModelName`.
     #   @return [Hash<String,Types::LanguageIdSettings>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/TranscriptionJob AWS API Documentation
@@ -4415,7 +4424,7 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code of the language used for the entries in the
-    #   updated vocabulary. US English (en-US) is the only valid language
+    #   updated vocabulary. U.S. English (en-US) is the only valid language
     #   code in Amazon Transcribe Medical.
     #   @return [String]
     #
@@ -4442,7 +4451,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateMedicalVocabularyRequest AWS API Documentation
@@ -4511,7 +4520,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] vocabulary_filter_file_uri
@@ -4528,7 +4537,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyFilterRequest AWS API Documentation
@@ -4581,7 +4590,12 @@ module Aws::TranscribeService
     #
     # @!attribute [rw] language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see transcribe-whatis.
+    #   and their corresponding language codes, see [Supported
+    #   languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #   @return [String]
     #
     # @!attribute [rw] phrases
@@ -4591,9 +4605,13 @@ module Aws::TranscribeService
     # @!attribute [rw] vocabulary_file_uri
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is
+    #   endpoint that you are calling. The general form is:
+    #
+    #   `https://s3.<aws-region>.amazonaws.com/<AWSDOC-EXAMPLE-BUCKET>/<keyprefix>/<objectkey>`
     #
     #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -4604,7 +4622,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/UpdateVocabularyRequest AWS API Documentation

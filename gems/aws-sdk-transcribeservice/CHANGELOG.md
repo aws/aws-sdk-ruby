@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-01-10)
+------------------
+
+* Feature - Documentation updates for Amazon Transcribe.
+
 1.68.0 (2021-12-21)
 ------------------
 

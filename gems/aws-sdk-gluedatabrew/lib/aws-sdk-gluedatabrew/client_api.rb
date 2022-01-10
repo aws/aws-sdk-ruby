@@ -25,6 +25,7 @@ module Aws::GlueDataBrew
     BatchDeleteRecipeVersionRequest = Shapes::StructureShape.new(name: 'BatchDeleteRecipeVersionRequest')
     BatchDeleteRecipeVersionResponse = Shapes::StructureShape.new(name: 'BatchDeleteRecipeVersionResponse')
     Bucket = Shapes::StringShape.new(name: 'Bucket')
+    BucketOwner = Shapes::StringShape.new(name: 'BucketOwner')
     CatalogId = Shapes::StringShape.new(name: 'CatalogId')
     ClientSessionId = Shapes::StringShape.new(name: 'ClientSessionId')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
@@ -960,6 +961,7 @@ module Aws::GlueDataBrew
 
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, required: true, location_name: "Bucket"))
     S3Location.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
+    S3Location.add_member(:bucket_owner, Shapes::ShapeRef.new(shape: BucketOwner, location_name: "BucketOwner"))
     S3Location.struct_class = Types::S3Location
 
     S3TableOutputOptions.add_member(:location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "Location"))

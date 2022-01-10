@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-01-10)
+------------------
+
+* Feature - This release adds FailureType in the response of DescribeAnomalyDetector.
+
 1.11.0 (2021-12-21)
 ------------------
 

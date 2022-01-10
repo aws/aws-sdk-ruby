@@ -614,9 +614,7 @@ module Aws::TranscribeService
     #   Region as the resource that you're calling. Enter information about
     #   your `VocabularyFileUri` in the following format:
     #
-    #   `
-    #   https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>
-    #   `
+    #   `https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>`
     #
     #   The following is an example URI for a vocabulary file that is stored
     #   in Amazon S3:
@@ -632,7 +630,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more tags, each in the form of a key:value pair, to a new
@@ -688,7 +686,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see transcribe-whatis.
+    #   and their corresponding language codes, see table-language-matrix.
     #
     # @option params [Array<String>] :phrases
     #   An array of strings that contains the vocabulary entries.
@@ -697,6 +695,14 @@ module Aws::TranscribeService
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
     #   endpoint that you are calling. The general form is:
+    #
+    #   `https://s3.<Amazon Web
+    #   Services-region>.amazonaws.com/<AWSDOC-EXAMPLE-BUCKET>/<keyprefix>/<objectkey>
+    #   `
+    #
+    #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -707,7 +713,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more tags, each in the form of a key:value pair, to a new
@@ -778,7 +784,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [String] :vocabulary_filter_file_uri
     #   The Amazon S3 location of a text file used as input to create the
@@ -794,7 +800,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   Adds one or more tags, each in the form of a key:value pair, to a new
@@ -2040,15 +2046,15 @@ module Aws::TranscribeService
     #
     #     f you specify a path, Amazon Transcribe saves the output of the
     #     analytics job as
-    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json
+    #     s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json.
     #
     #     If you specify a folder, you must provide a trailing slash.
     #
-    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json
+    #   * s3://DOC-EXAMPLE-BUCKET1/folder/filename.json.
     #
     #     If you provide a path that has the filename specified, Amazon
     #     Transcribe saves the output of the analytics job as
-    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json
+    #     s3://DOC-EXAMPLEBUCKET1/folder/filename.json.
     #
     #   You can specify an Amazon Web Services Key Management Service (KMS)
     #   key to encrypt the output of our analytics job using the
@@ -2077,8 +2083,8 @@ module Aws::TranscribeService
     #     another account: "arn:aws:kms:region:account
     #     ID:key/1234abcd-12ab-34cd-56ef1234567890ab"
     #
-    #   * ARN of a KMS Key Alias: "arn:aws:kms:region:account
-    #     ID:alias/ExampleAlias"
+    #   * ARN of a KMS Key Alias:
+    #     "arn:aws:kms:region:accountID:alias/ExampleAlias"
     #
     #   If you don't specify an encryption key, the output of the call
     #   analytics job is encrypted with the default Amazon S3 key (SSE-S3).
@@ -2906,7 +2912,7 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the language used for the entries in the updated
-    #   vocabulary. US English (en-US) is the only valid language code in
+    #   vocabulary. U.S. English (en-US) is the only valid language code in
     #   Amazon Transcribe Medical.
     #
     # @option params [String] :vocabulary_file_uri
@@ -2932,7 +2938,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-med.html
     #
     # @return [Types::UpdateMedicalVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2976,7 +2982,11 @@ module Aws::TranscribeService
     #
     # @option params [required, String] :language_code
     #   The language code of the vocabulary entries. For a list of languages
-    #   and their corresponding language codes, see transcribe-whatis.
+    #   and their corresponding language codes, see [Supported languages][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html
     #
     # @option params [Array<String>] :phrases
     #   An array of strings containing the vocabulary entries.
@@ -2984,9 +2994,13 @@ module Aws::TranscribeService
     # @option params [String] :vocabulary_file_uri
     #   The S3 location of the text file that contains the definition of the
     #   custom vocabulary. The URI must be in the same region as the API
-    #   endpoint that you are calling. The general form is
+    #   endpoint that you are calling. The general form is:
+    #
+    #   `https://s3.<aws-region>.amazonaws.com/<AWSDOC-EXAMPLE-BUCKET>/<keyprefix>/<objectkey>`
     #
     #   For example:
+    #
+    #   `https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt`
     #
     #   For more information about S3 object names, see [Object Keys][1] in
     #   the *Amazon S3 Developer Guide*.
@@ -2997,7 +3011,7 @@ module Aws::TranscribeService
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys
-    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary
+    #   [2]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html
     #
     # @return [Types::UpdateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3048,7 +3062,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @option params [String] :vocabulary_filter_file_uri
     #   The Amazon S3 location of a text file used as input to create the
@@ -3064,7 +3078,7 @@ module Aws::TranscribeService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary.html#charsets
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html
     #
     # @return [Types::UpdateVocabularyFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3108,7 +3122,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

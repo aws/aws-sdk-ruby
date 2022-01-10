@@ -30,6 +30,7 @@ module Aws::LookoutMetrics
     AnomalyDetectorConfig = Shapes::StructureShape.new(name: 'AnomalyDetectorConfig')
     AnomalyDetectorConfigSummary = Shapes::StructureShape.new(name: 'AnomalyDetectorConfigSummary')
     AnomalyDetectorDescription = Shapes::StringShape.new(name: 'AnomalyDetectorDescription')
+    AnomalyDetectorFailureType = Shapes::StringShape.new(name: 'AnomalyDetectorFailureType')
     AnomalyDetectorName = Shapes::StringShape.new(name: 'AnomalyDetectorName')
     AnomalyDetectorStatus = Shapes::StringShape.new(name: 'AnomalyDetectorStatus')
     AnomalyDetectorSummary = Shapes::StructureShape.new(name: 'AnomalyDetectorSummary')
@@ -289,8 +290,8 @@ module Aws::LookoutMetrics
     AnomalyGroupTimeSeriesFeedback.add_member(:is_anomaly, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "IsAnomaly"))
     AnomalyGroupTimeSeriesFeedback.struct_class = Types::AnomalyGroupTimeSeriesFeedback
 
-    AppFlowConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
-    AppFlowConfig.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "FlowName"))
+    AppFlowConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
+    AppFlowConfig.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, location_name: "FlowName"))
     AppFlowConfig.struct_class = Types::AppFlowConfig
 
     BackTestAnomalyDetectorRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
@@ -298,7 +299,7 @@ module Aws::LookoutMetrics
 
     BackTestAnomalyDetectorResponse.struct_class = Types::BackTestAnomalyDetectorResponse
 
-    CloudWatchConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    CloudWatchConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
     CloudWatchConfig.struct_class = Types::CloudWatchConfig
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
@@ -392,6 +393,7 @@ module Aws::LookoutMetrics
     DescribeAnomalyDetectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: AnomalyDetectorStatus, location_name: "Status"))
     DescribeAnomalyDetectorResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "FailureReason"))
     DescribeAnomalyDetectorResponse.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    DescribeAnomalyDetectorResponse.add_member(:failure_type, Shapes::ShapeRef.new(shape: AnomalyDetectorFailureType, location_name: "FailureType"))
     DescribeAnomalyDetectorResponse.struct_class = Types::DescribeAnomalyDetectorResponse
 
     DescribeMetricSetRequest.add_member(:metric_set_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MetricSetArn"))
@@ -606,24 +608,24 @@ module Aws::LookoutMetrics
 
     PutFeedbackResponse.struct_class = Types::PutFeedbackResponse
 
-    RDSSourceConfig.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: RDSDatabaseIdentifier, required: true, location_name: "DBInstanceIdentifier"))
-    RDSSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, required: true, location_name: "DatabaseHost"))
-    RDSSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, required: true, location_name: "DatabasePort", metadata: {"box"=>true}))
-    RDSSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, required: true, location_name: "SecretManagerArn"))
-    RDSSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RDSDatabaseName, required: true, location_name: "DatabaseName"))
-    RDSSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
-    RDSSourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
-    RDSSourceConfig.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "VpcConfiguration"))
+    RDSSourceConfig.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: RDSDatabaseIdentifier, location_name: "DBInstanceIdentifier"))
+    RDSSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, location_name: "DatabaseHost"))
+    RDSSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box"=>true}))
+    RDSSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, location_name: "SecretManagerArn"))
+    RDSSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RDSDatabaseName, location_name: "DatabaseName"))
+    RDSSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    RDSSourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
+    RDSSourceConfig.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     RDSSourceConfig.struct_class = Types::RDSSourceConfig
 
-    RedshiftSourceConfig.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: RedshiftClusterIdentifier, required: true, location_name: "ClusterIdentifier"))
-    RedshiftSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, required: true, location_name: "DatabaseHost"))
-    RedshiftSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, required: true, location_name: "DatabasePort", metadata: {"box"=>true}))
-    RedshiftSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, required: true, location_name: "SecretManagerArn"))
-    RedshiftSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RedshiftDatabaseName, required: true, location_name: "DatabaseName"))
-    RedshiftSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "TableName"))
-    RedshiftSourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
-    RedshiftSourceConfig.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, required: true, location_name: "VpcConfiguration"))
+    RedshiftSourceConfig.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: RedshiftClusterIdentifier, location_name: "ClusterIdentifier"))
+    RedshiftSourceConfig.add_member(:database_host, Shapes::ShapeRef.new(shape: DatabaseHost, location_name: "DatabaseHost"))
+    RedshiftSourceConfig.add_member(:database_port, Shapes::ShapeRef.new(shape: DatabasePort, location_name: "DatabasePort", metadata: {"box"=>true}))
+    RedshiftSourceConfig.add_member(:secret_manager_arn, Shapes::ShapeRef.new(shape: PoirotSecretManagerArn, location_name: "SecretManagerArn"))
+    RedshiftSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: RedshiftDatabaseName, location_name: "DatabaseName"))
+    RedshiftSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, location_name: "TableName"))
+    RedshiftSourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
+    RedshiftSourceConfig.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "VpcConfiguration"))
     RedshiftSourceConfig.struct_class = Types::RedshiftSourceConfig
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))
@@ -631,7 +633,7 @@ module Aws::LookoutMetrics
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    S3SourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
+    S3SourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
     S3SourceConfig.add_member(:templated_path_list, Shapes::ShapeRef.new(shape: TemplatedPathList, location_name: "TemplatedPathList"))
     S3SourceConfig.add_member(:historical_data_path_list, Shapes::ShapeRef.new(shape: HistoricalDataPathList, location_name: "HistoricalDataPathList"))
     S3SourceConfig.add_member(:file_format_descriptor, Shapes::ShapeRef.new(shape: FileFormatDescriptor, location_name: "FileFormatDescriptor"))
@@ -1145,6 +1147,7 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
     end
 

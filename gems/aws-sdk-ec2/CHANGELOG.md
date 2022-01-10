@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.291.0 (2022-01-10)
+------------------
+
+* Feature - New feature: Updated EC2 API to support faster launching for Windows images. Optimized images are pre-provisioned, using snapshots to launch instances up to 65% faster.
+
 1.290.0 (2022-01-06)
 ------------------
 

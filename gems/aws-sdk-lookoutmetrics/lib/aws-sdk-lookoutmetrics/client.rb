@@ -575,7 +575,7 @@ module Aws::LookoutMetrics
     #     metric_set_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
     #     metric_source: { # required
     #       s3_source_config: {
-    #         role_arn: "Arn", # required
+    #         role_arn: "Arn",
     #         templated_path_list: ["TemplatedPath"],
     #         historical_data_path_list: ["HistoricalDataPath"],
     #         file_format_descriptor: {
@@ -594,34 +594,34 @@ module Aws::LookoutMetrics
     #         },
     #       },
     #       app_flow_config: {
-    #         role_arn: "Arn", # required
-    #         flow_name: "FlowName", # required
+    #         role_arn: "Arn",
+    #         flow_name: "FlowName",
     #       },
     #       cloud_watch_config: {
-    #         role_arn: "Arn", # required
+    #         role_arn: "Arn",
     #       },
     #       rds_source_config: {
-    #         db_instance_identifier: "RDSDatabaseIdentifier", # required
-    #         database_host: "DatabaseHost", # required
-    #         database_port: 1, # required
-    #         secret_manager_arn: "PoirotSecretManagerArn", # required
-    #         database_name: "RDSDatabaseName", # required
-    #         table_name: "TableName", # required
-    #         role_arn: "Arn", # required
-    #         vpc_configuration: { # required
+    #         db_instance_identifier: "RDSDatabaseIdentifier",
+    #         database_host: "DatabaseHost",
+    #         database_port: 1,
+    #         secret_manager_arn: "PoirotSecretManagerArn",
+    #         database_name: "RDSDatabaseName",
+    #         table_name: "TableName",
+    #         role_arn: "Arn",
+    #         vpc_configuration: {
     #           subnet_id_list: ["SubnetId"], # required
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
     #       },
     #       redshift_source_config: {
-    #         cluster_identifier: "RedshiftClusterIdentifier", # required
-    #         database_host: "DatabaseHost", # required
-    #         database_port: 1, # required
-    #         secret_manager_arn: "PoirotSecretManagerArn", # required
-    #         database_name: "RedshiftDatabaseName", # required
-    #         table_name: "TableName", # required
-    #         role_arn: "Arn", # required
-    #         vpc_configuration: { # required
+    #         cluster_identifier: "RedshiftClusterIdentifier",
+    #         database_host: "DatabaseHost",
+    #         database_port: 1,
+    #         secret_manager_arn: "PoirotSecretManagerArn",
+    #         database_name: "RedshiftDatabaseName",
+    #         table_name: "TableName",
+    #         role_arn: "Arn",
+    #         vpc_configuration: {
     #           subnet_id_list: ["SubnetId"], # required
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
@@ -807,6 +807,7 @@ module Aws::LookoutMetrics
     #   * {Types::DescribeAnomalyDetectorResponse#status #status} => String
     #   * {Types::DescribeAnomalyDetectorResponse#failure_reason #failure_reason} => String
     #   * {Types::DescribeAnomalyDetectorResponse#kms_key_arn #kms_key_arn} => String
+    #   * {Types::DescribeAnomalyDetectorResponse#failure_type #failure_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -825,6 +826,7 @@ module Aws::LookoutMetrics
     #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
     #   resp.failure_reason #=> String
     #   resp.kms_key_arn #=> String
+    #   resp.failure_type #=> String, one of "ACTIVATION_FAILURE", "BACK_TEST_ACTIVATION_FAILURE", "DELETION_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeAnomalyDetector AWS API Documentation
     #
@@ -1640,7 +1642,7 @@ module Aws::LookoutMetrics
     #     metric_set_frequency: "P1D", # accepts P1D, PT1H, PT10M, PT5M
     #     metric_source: {
     #       s3_source_config: {
-    #         role_arn: "Arn", # required
+    #         role_arn: "Arn",
     #         templated_path_list: ["TemplatedPath"],
     #         historical_data_path_list: ["HistoricalDataPath"],
     #         file_format_descriptor: {
@@ -1659,34 +1661,34 @@ module Aws::LookoutMetrics
     #         },
     #       },
     #       app_flow_config: {
-    #         role_arn: "Arn", # required
-    #         flow_name: "FlowName", # required
+    #         role_arn: "Arn",
+    #         flow_name: "FlowName",
     #       },
     #       cloud_watch_config: {
-    #         role_arn: "Arn", # required
+    #         role_arn: "Arn",
     #       },
     #       rds_source_config: {
-    #         db_instance_identifier: "RDSDatabaseIdentifier", # required
-    #         database_host: "DatabaseHost", # required
-    #         database_port: 1, # required
-    #         secret_manager_arn: "PoirotSecretManagerArn", # required
-    #         database_name: "RDSDatabaseName", # required
-    #         table_name: "TableName", # required
-    #         role_arn: "Arn", # required
-    #         vpc_configuration: { # required
+    #         db_instance_identifier: "RDSDatabaseIdentifier",
+    #         database_host: "DatabaseHost",
+    #         database_port: 1,
+    #         secret_manager_arn: "PoirotSecretManagerArn",
+    #         database_name: "RDSDatabaseName",
+    #         table_name: "TableName",
+    #         role_arn: "Arn",
+    #         vpc_configuration: {
     #           subnet_id_list: ["SubnetId"], # required
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
     #       },
     #       redshift_source_config: {
-    #         cluster_identifier: "RedshiftClusterIdentifier", # required
-    #         database_host: "DatabaseHost", # required
-    #         database_port: 1, # required
-    #         secret_manager_arn: "PoirotSecretManagerArn", # required
-    #         database_name: "RedshiftDatabaseName", # required
-    #         table_name: "TableName", # required
-    #         role_arn: "Arn", # required
-    #         vpc_configuration: { # required
+    #         cluster_identifier: "RedshiftClusterIdentifier",
+    #         database_host: "DatabaseHost",
+    #         database_port: 1,
+    #         secret_manager_arn: "PoirotSecretManagerArn",
+    #         database_name: "RedshiftDatabaseName",
+    #         table_name: "TableName",
+    #         role_arn: "Arn",
+    #         vpc_configuration: {
     #           subnet_id_list: ["SubnetId"], # required
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
@@ -1720,7 +1722,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

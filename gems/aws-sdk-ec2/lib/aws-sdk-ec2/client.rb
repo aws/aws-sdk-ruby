@@ -8751,8 +8751,8 @@ module Aws::EC2
     #   resp = client.create_network_insights_path({
     #     source_ip: "IpAddress",
     #     destination_ip: "IpAddress",
-    #     source: "String", # required
-    #     destination: "String", # required
+    #     source: "NetworkInsightsResourceId", # required
+    #     destination: "NetworkInsightsResourceId", # required
     #     protocol: "tcp", # required, accepts tcp, udp
     #     destination_port: 1,
     #     tag_specifications: [
@@ -18667,6 +18667,86 @@ module Aws::EC2
     # @param [Hash] params ({})
     def describe_export_tasks(params = {}, options = {})
       req = build_request(:describe_export_tasks, params)
+      req.send_request(options)
+    end
+
+    # Describe details for Windows AMIs that are configured for faster
+    # launching.
+    #
+    # @option params [Array<String>] :image_ids
+    #   Details for one or more Windows AMI image IDs.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   Use the following filters to streamline results.
+    #
+    #   * `resource-type` - The resource type for pre-provisioning.
+    #
+    #   * `launch-template` - The launch template that is associated with the
+    #     pre-provisioned Windows AMI.
+    #
+    #   * `owner-id` - The owner ID for the pre-provisioning resource.
+    #
+    #   * `state` - The current state of fast launching for the Windows AMI.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call. To retrieve
+    #   the remaining results, make another request with the returned
+    #   NextToken value. If this parameter is not specified, then all results
+    #   are returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DescribeFastLaunchImagesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeFastLaunchImagesResult#fast_launch_images #fast_launch_images} => Array&lt;Types::DescribeFastLaunchImagesSuccessItem&gt;
+    #   * {Types::DescribeFastLaunchImagesResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_fast_launch_images({
+    #     image_ids: ["ImageId"],
+    #     filters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.fast_launch_images #=> Array
+    #   resp.fast_launch_images[0].image_id #=> String
+    #   resp.fast_launch_images[0].resource_type #=> String, one of "snapshot"
+    #   resp.fast_launch_images[0].snapshot_configuration.target_resource_count #=> Integer
+    #   resp.fast_launch_images[0].launch_template.launch_template_id #=> String
+    #   resp.fast_launch_images[0].launch_template.launch_template_name #=> String
+    #   resp.fast_launch_images[0].launch_template.version #=> String
+    #   resp.fast_launch_images[0].max_parallel_launches #=> Integer
+    #   resp.fast_launch_images[0].owner_id #=> String
+    #   resp.fast_launch_images[0].state #=> String, one of "enabling", "enabling-failed", "enabled", "enabled-failed", "disabling", "disabling-failed"
+    #   resp.fast_launch_images[0].state_transition_reason #=> String
+    #   resp.fast_launch_images[0].state_transition_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImages AWS API Documentation
+    #
+    # @overload describe_fast_launch_images(params = {})
+    # @param [Hash] params ({})
+    def describe_fast_launch_images(params = {}, options = {})
+      req = build_request(:describe_fast_launch_images, params)
       req.send_request(options)
     end
 
@@ -32413,6 +32493,70 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Discontinue faster launching for a Windows AMI, and clean up existing
+    # pre-provisioned snapshots. When you disable faster launching, the AMI
+    # uses the standard launch process for each instance. All
+    # pre-provisioned snapshots must be removed before you can enable faster
+    # launching again.
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the image for which you’re turning off faster launching, and
+    #   removing pre-provisioned snapshots.
+    #
+    # @option params [Boolean] :force
+    #   Forces the image settings to turn off faster launching for your
+    #   Windows AMI. This parameter overrides any errors that are encountered
+    #   while cleaning up resources in your account.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::DisableFastLaunchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisableFastLaunchResult#image_id #image_id} => String
+    #   * {Types::DisableFastLaunchResult#resource_type #resource_type} => String
+    #   * {Types::DisableFastLaunchResult#snapshot_configuration #snapshot_configuration} => Types::FastLaunchSnapshotConfigurationResponse
+    #   * {Types::DisableFastLaunchResult#launch_template #launch_template} => Types::FastLaunchLaunchTemplateSpecificationResponse
+    #   * {Types::DisableFastLaunchResult#max_parallel_launches #max_parallel_launches} => Integer
+    #   * {Types::DisableFastLaunchResult#owner_id #owner_id} => String
+    #   * {Types::DisableFastLaunchResult#state #state} => String
+    #   * {Types::DisableFastLaunchResult#state_transition_reason #state_transition_reason} => String
+    #   * {Types::DisableFastLaunchResult#state_transition_time #state_transition_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disable_fast_launch({
+    #     image_id: "ImageId", # required
+    #     force: false,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.resource_type #=> String, one of "snapshot"
+    #   resp.snapshot_configuration.target_resource_count #=> Integer
+    #   resp.launch_template.launch_template_id #=> String
+    #   resp.launch_template.launch_template_name #=> String
+    #   resp.launch_template.version #=> String
+    #   resp.max_parallel_launches #=> Integer
+    #   resp.owner_id #=> String
+    #   resp.state #=> String, one of "enabling", "enabling-failed", "enabled", "enabled-failed", "disabling", "disabling-failed"
+    #   resp.state_transition_reason #=> String
+    #   resp.state_transition_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastLaunch AWS API Documentation
+    #
+    # @overload disable_fast_launch(params = {})
+    # @param [Hash] params ({})
+    def disable_fast_launch(params = {}, options = {})
+      req = build_request(:disable_fast_launch, params)
+      req.send_request(options)
+    end
+
     # Disables fast snapshot restores for the specified snapshots in the
     # specified Availability Zones.
     #
@@ -33377,6 +33521,94 @@ module Aws::EC2
     # @param [Hash] params ({})
     def enable_ebs_encryption_by_default(params = {}, options = {})
       req = build_request(:enable_ebs_encryption_by_default, params)
+      req.send_request(options)
+    end
+
+    # When you enable faster launching for a Windows AMI, images are
+    # pre-provisioned, using snapshots to launch instances up to 65% faster.
+    # To create the optimized Windows image, Amazon EC2 launches an instance
+    # and runs through Sysprep steps, rebooting as required. Then it creates
+    # a set of reserved snapshots that are used for subsequent launches. The
+    # reserved snapshots are automatically replenished as they are used,
+    # depending on your settings for launch frequency.
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the image for which you’re enabling faster launching.
+    #
+    # @option params [String] :resource_type
+    #   The type of resource to use for pre-provisioning the Windows AMI for
+    #   faster launching. Supported values include: `snapshot`, which is the
+    #   default value.
+    #
+    # @option params [Types::FastLaunchSnapshotConfigurationRequest] :snapshot_configuration
+    #   Configuration settings for creating and managing the snapshots that
+    #   are used for pre-provisioning the Windows AMI for faster launching.
+    #   The associated `ResourceType` must be `snapshot`.
+    #
+    # @option params [Types::FastLaunchLaunchTemplateSpecificationRequest] :launch_template
+    #   The launch template to use when launching Windows instances from
+    #   pre-provisioned snapshots. Launch template parameters can include
+    #   either the name or ID of the launch template, but not both.
+    #
+    # @option params [Integer] :max_parallel_launches
+    #   The maximum number of parallel instances to launch for creating
+    #   resources.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::EnableFastLaunchResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EnableFastLaunchResult#image_id #image_id} => String
+    #   * {Types::EnableFastLaunchResult#resource_type #resource_type} => String
+    #   * {Types::EnableFastLaunchResult#snapshot_configuration #snapshot_configuration} => Types::FastLaunchSnapshotConfigurationResponse
+    #   * {Types::EnableFastLaunchResult#launch_template #launch_template} => Types::FastLaunchLaunchTemplateSpecificationResponse
+    #   * {Types::EnableFastLaunchResult#max_parallel_launches #max_parallel_launches} => Integer
+    #   * {Types::EnableFastLaunchResult#owner_id #owner_id} => String
+    #   * {Types::EnableFastLaunchResult#state #state} => String
+    #   * {Types::EnableFastLaunchResult#state_transition_reason #state_transition_reason} => String
+    #   * {Types::EnableFastLaunchResult#state_transition_time #state_transition_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.enable_fast_launch({
+    #     image_id: "ImageId", # required
+    #     resource_type: "String",
+    #     snapshot_configuration: {
+    #       target_resource_count: 1,
+    #     },
+    #     launch_template: {
+    #       launch_template_id: "LaunchTemplateId",
+    #       launch_template_name: "String",
+    #       version: "String", # required
+    #     },
+    #     max_parallel_launches: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_id #=> String
+    #   resp.resource_type #=> String, one of "snapshot"
+    #   resp.snapshot_configuration.target_resource_count #=> Integer
+    #   resp.launch_template.launch_template_id #=> String
+    #   resp.launch_template.launch_template_name #=> String
+    #   resp.launch_template.version #=> String
+    #   resp.max_parallel_launches #=> Integer
+    #   resp.owner_id #=> String
+    #   resp.state #=> String, one of "enabling", "enabling-failed", "enabled", "enabled-failed", "disabling", "disabling-failed"
+    #   resp.state_transition_reason #=> String
+    #   resp.state_transition_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastLaunch AWS API Documentation
+    #
+    # @overload enable_fast_launch(params = {})
+    # @param [Hash] params ({})
+    def enable_fast_launch(params = {}, options = {})
+      req = build_request(:enable_fast_launch, params)
       req.send_request(options)
     end
 
@@ -48840,7 +49072,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.290.0'
+      context[:gem_version] = '1.291.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

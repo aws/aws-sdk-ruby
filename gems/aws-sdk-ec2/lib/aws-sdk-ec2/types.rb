@@ -10135,8 +10135,8 @@ module Aws::EC2
     #       {
     #         source_ip: "IpAddress",
     #         destination_ip: "IpAddress",
-    #         source: "String", # required
-    #         destination: "String", # required
+    #         source: "NetworkInsightsResourceId", # required
+    #         destination: "NetworkInsightsResourceId", # required
     #         protocol: "tcp", # required, accepts tcp, udp
     #         destination_port: 1,
     #         tag_specifications: [
@@ -18811,6 +18811,150 @@ module Aws::EC2
     #
     class DescribeExportTasksResult < Struct.new(
       :export_tasks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeFastLaunchImagesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["ImageId"],
+    #         filters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   Details for one or more Windows AMI image IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] filters
+    #   Use the following filters to streamline results.
+    #
+    #   * `resource-type` - The resource type for pre-provisioning.
+    #
+    #   * `launch-template` - The launch template that is associated with
+    #     the pre-provisioned Windows AMI.
+    #
+    #   * `owner-id` - The owner ID for the pre-provisioning resource.
+    #
+    #   * `state` - The current state of fast launching for the Windows AMI.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. To
+    #   retrieve the remaining results, make another request with the
+    #   returned NextToken value. If this parameter is not specified, then
+    #   all results are returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesRequest AWS API Documentation
+    #
+    class DescribeFastLaunchImagesRequest < Struct.new(
+      :image_ids,
+      :filters,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] fast_launch_images
+    #   A collection of details about the fast-launch enabled Windows images
+    #   that meet the requested criteria.
+    #   @return [Array<Types::DescribeFastLaunchImagesSuccessItem>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use for the next set of results. This value is null
+    #   when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesResult AWS API Documentation
+    #
+    class DescribeFastLaunchImagesResult < Struct.new(
+      :fast_launch_images,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describe details about a fast-launch enabled Windows image that meets
+    # the requested criteria. Criteria are defined by the
+    # `DescribeFastLaunchImages` action filters.
+    #
+    # @!attribute [rw] image_id
+    #   The image ID that identifies the fast-launch enabled Windows image.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type that is used for pre-provisioning the Windows AMI.
+    #   Supported values include: `snapshot`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   A group of parameters that are used for pre-provisioning the
+    #   associated Windows AMI using snapshots.
+    #   @return [Types::FastLaunchSnapshotConfigurationResponse]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template that the fast-launch enabled Windows AMI uses
+    #   when it launches Windows instances from pre-provisioned snapshots.
+    #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
+    #
+    # @!attribute [rw] max_parallel_launches
+    #   The maximum number of parallel instances that are launched for
+    #   creating resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner ID for the fast-launch enabled Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of faster launching for the specified Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason that faster launching for the Windows AMI changed to the
+    #   current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_time
+    #   The time that faster launching for the Windows AMI changed to the
+    #   current state.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeFastLaunchImagesSuccessItem AWS API Documentation
+    #
+    class DescribeFastLaunchImagesSuccessItem < Struct.new(
+      :image_id,
+      :resource_type,
+      :snapshot_configuration,
+      :launch_template,
+      :max_parallel_launches,
+      :owner_id,
+      :state,
+      :state_transition_reason,
+      :state_transition_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29436,6 +29580,104 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DisableFastLaunchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         force: false,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the image for which you’re turning off faster launching,
+    #   and removing pre-provisioned snapshots.
+    #   @return [String]
+    #
+    # @!attribute [rw] force
+    #   Forces the image settings to turn off faster launching for your
+    #   Windows AMI. This parameter overrides any errors that are
+    #   encountered while cleaning up resources in your account.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastLaunchRequest AWS API Documentation
+    #
+    class DisableFastLaunchRequest < Struct.new(
+      :image_id,
+      :force,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the image for which faster-launching has been turned off.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The pre-provisioning resource type that must be cleaned after
+    #   turning off faster launching for the Windows AMI. Supported values
+    #   include: `snapshot`.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   Parameters that were used for faster launching for the Windows AMI
+    #   before faster launching was turned off. This informs the clean-up
+    #   process.
+    #   @return [Types::FastLaunchSnapshotConfigurationResponse]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template that was used to launch Windows instances from
+    #   pre-provisioned snapshots.
+    #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
+    #
+    # @!attribute [rw] max_parallel_launches
+    #   The maximum number of parallel instances to launch for creating
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner of the Windows AMI for which faster launching was turned
+    #   off.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of faster launching for the specified Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason that the state changed for faster launching for the
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_time
+    #   The time that the state changed for faster launching for the Windows
+    #   AMI.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DisableFastLaunchResult AWS API Documentation
+    #
+    class DisableFastLaunchResult < Struct.new(
+      :image_id,
+      :resource_type,
+      :snapshot_configuration,
+      :launch_template,
+      :max_parallel_launches,
+      :owner_id,
+      :state,
+      :state_transition_reason,
+      :state_transition_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the errors that occurred when disabling
     # fast snapshot restores.
     #
@@ -31171,6 +31413,133 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass EnableFastLaunchRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         resource_type: "String",
+    #         snapshot_configuration: {
+    #           target_resource_count: 1,
+    #         },
+    #         launch_template: {
+    #           launch_template_id: "LaunchTemplateId",
+    #           launch_template_name: "String",
+    #           version: "String", # required
+    #         },
+    #         max_parallel_launches: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the image for which you’re enabling faster launching.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource to use for pre-provisioning the Windows AMI for
+    #   faster launching. Supported values include: `snapshot`, which is the
+    #   default value.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   Configuration settings for creating and managing the snapshots that
+    #   are used for pre-provisioning the Windows AMI for faster launching.
+    #   The associated `ResourceType` must be `snapshot`.
+    #   @return [Types::FastLaunchSnapshotConfigurationRequest]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template to use when launching Windows instances from
+    #   pre-provisioned snapshots. Launch template parameters can include
+    #   either the name or ID of the launch template, but not both.
+    #   @return [Types::FastLaunchLaunchTemplateSpecificationRequest]
+    #
+    # @!attribute [rw] max_parallel_launches
+    #   The maximum number of parallel instances to launch for creating
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastLaunchRequest AWS API Documentation
+    #
+    class EnableFastLaunchRequest < Struct.new(
+      :image_id,
+      :resource_type,
+      :snapshot_configuration,
+      :launch_template,
+      :max_parallel_launches,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The image ID that identifies the Windows AMI for which faster
+    #   launching was enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource that was defined for pre-provisioning the
+    #   Windows AMI for faster launching.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   The configuration settings that were defined for creating and
+    #   managing the pre-provisioned snapshots for faster launching of the
+    #   Windows AMI. This property is returned when the associated
+    #   `resourceType` is `snapshot`.
+    #   @return [Types::FastLaunchSnapshotConfigurationResponse]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template that is used when launching Windows instances
+    #   from pre-provisioned snapshots.
+    #   @return [Types::FastLaunchLaunchTemplateSpecificationResponse]
+    #
+    # @!attribute [rw] max_parallel_launches
+    #   The maximum number of parallel instances to launch for creating
+    #   resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] owner_id
+    #   The owner ID for the Windows AMI for which faster launching was
+    #   enabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of faster launching for the specified Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_reason
+    #   The reason that the state changed for faster launching for the
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] state_transition_time
+    #   The time that the state changed for faster launching for the Windows
+    #   AMI.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EnableFastLaunchResult AWS API Documentation
+    #
+    class EnableFastLaunchResult < Struct.new(
+      :image_id,
+      :resource_type,
+      :snapshot_configuration,
+      :launch_template,
+      :max_parallel_launches,
+      :owner_id,
+      :state,
+      :state_transition_reason,
+      :state_transition_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the errors that occurred when enabling fast
     # snapshot restores.
     #
@@ -32643,6 +33012,115 @@ module Aws::EC2
     class FailedQueuedPurchaseDeletion < Struct.new(
       :error,
       :reserved_instances_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request to create a launch template for a fast-launch enabled Windows
+    # AMI.
+    #
+    # <note markdown="1"> Note - You can specify either the `LaunchTemplateName` or the
+    # `LaunchTemplateId`, but not both.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass FastLaunchLaunchTemplateSpecificationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "LaunchTemplateId",
+    #         launch_template_name: "String",
+    #         version: "String", # required
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationRequest AWS API Documentation
+    #
+    class FastLaunchLaunchTemplateSpecificationRequest < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the launch template to use for faster launching of the
+    # Windows AMI.
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template for faster launching of the associated
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template for faster launching of the
+    #   associated Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the launch template for faster launching of the
+    #   associated Windows AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchLaunchTemplateSpecificationResponse AWS API Documentation
+    #
+    class FastLaunchLaunchTemplateSpecificationResponse < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for creating and managing pre-provisioned
+    # snapshots for a fast-launch enabled Windows AMI.
+    #
+    # @note When making an API call, you may pass FastLaunchSnapshotConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_resource_count: 1,
+    #       }
+    #
+    # @!attribute [rw] target_resource_count
+    #   The number of pre-provisioned snapshots to keep on hand for a
+    #   fast-launch enabled Windows AMI.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationRequest AWS API Documentation
+    #
+    class FastLaunchSnapshotConfigurationRequest < Struct.new(
+      :target_resource_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for creating and managing pre-provisioned
+    # snapshots for a fast-launch enabled Windows AMI.
+    #
+    # @!attribute [rw] target_resource_count
+    #   The number of pre-provisioned snapshots requested to keep on hand
+    #   for a fast-launch enabled Windows AMI.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/FastLaunchSnapshotConfigurationResponse AWS API Documentation
+    #
+    class FastLaunchSnapshotConfigurationResponse < Struct.new(
+      :target_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end

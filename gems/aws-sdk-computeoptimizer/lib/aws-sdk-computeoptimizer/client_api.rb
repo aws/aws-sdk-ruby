@@ -110,6 +110,9 @@ module Aws::ComputeOptimizer
     High = Shapes::IntegerShape.new(name: 'High')
     Identifier = Shapes::StringShape.new(name: 'Identifier')
     IncludeMemberAccounts = Shapes::BooleanShape.new(name: 'IncludeMemberAccounts')
+    InferredWorkloadType = Shapes::StringShape.new(name: 'InferredWorkloadType')
+    InferredWorkloadTypes = Shapes::ListShape.new(name: 'InferredWorkloadTypes')
+    InferredWorkloadTypesPreference = Shapes::StringShape.new(name: 'InferredWorkloadTypesPreference')
     InstanceArn = Shapes::StringShape.new(name: 'InstanceArn')
     InstanceArns = Shapes::ListShape.new(name: 'InstanceArns')
     InstanceName = Shapes::StringShape.new(name: 'InstanceName')
@@ -161,6 +164,7 @@ module Aws::ComputeOptimizer
     MetricStatistic = Shapes::StringShape.new(name: 'MetricStatistic')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricValues = Shapes::ListShape.new(name: 'MetricValues')
+    MigrationEffort = Shapes::StringShape.new(name: 'MigrationEffort')
     MinSize = Shapes::IntegerShape.new(name: 'MinSize')
     MissingAuthenticationToken = Shapes::StructureShape.new(name: 'MissingAuthenticationToken')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -267,6 +271,7 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     AutoScalingGroupRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     AutoScalingGroupRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    AutoScalingGroupRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
     AutoScalingGroupRecommendation.struct_class = Types::AutoScalingGroupRecommendation
 
     AutoScalingGroupRecommendationOption.add_member(:configuration, Shapes::ShapeRef.new(shape: AutoScalingGroupConfiguration, location_name: "configuration"))
@@ -274,6 +279,7 @@ module Aws::ComputeOptimizer
     AutoScalingGroupRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     AutoScalingGroupRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     AutoScalingGroupRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    AutoScalingGroupRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     AutoScalingGroupRecommendationOption.struct_class = Types::AutoScalingGroupRecommendationOption
 
     AutoScalingGroupRecommendationOptions.member = Shapes::ShapeRef.new(shape: AutoScalingGroupRecommendationOption)
@@ -320,6 +326,7 @@ module Aws::ComputeOptimizer
 
     EffectiveRecommendationPreferences.add_member(:cpu_vendor_architectures, Shapes::ShapeRef.new(shape: CpuVendorArchitectures, location_name: "cpuVendorArchitectures"))
     EffectiveRecommendationPreferences.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
+    EffectiveRecommendationPreferences.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     EffectiveRecommendationPreferences.struct_class = Types::EffectiveRecommendationPreferences
 
     EnrollmentFilter.add_member(:name, Shapes::ShapeRef.new(shape: EnrollmentFilterName, location_name: "name"))
@@ -513,6 +520,8 @@ module Aws::ComputeOptimizer
     GetRecommendationSummariesResponse.add_member(:recommendation_summaries, Shapes::ShapeRef.new(shape: RecommendationSummaries, location_name: "recommendationSummaries"))
     GetRecommendationSummariesResponse.struct_class = Types::GetRecommendationSummariesResponse
 
+    InferredWorkloadTypes.member = Shapes::ShapeRef.new(shape: InferredWorkloadType)
+
     InstanceArns.member = Shapes::ShapeRef.new(shape: InstanceArn)
 
     InstanceRecommendation.add_member(:instance_arn, Shapes::ShapeRef.new(shape: InstanceArn, location_name: "instanceArn"))
@@ -528,6 +537,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendation.add_member(:last_refresh_timestamp, Shapes::ShapeRef.new(shape: LastRefreshTimestamp, location_name: "lastRefreshTimestamp"))
     InstanceRecommendation.add_member(:current_performance_risk, Shapes::ShapeRef.new(shape: CurrentPerformanceRisk, location_name: "currentPerformanceRisk"))
     InstanceRecommendation.add_member(:effective_recommendation_preferences, Shapes::ShapeRef.new(shape: EffectiveRecommendationPreferences, location_name: "effectiveRecommendationPreferences"))
+    InstanceRecommendation.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypes, location_name: "inferredWorkloadTypes"))
     InstanceRecommendation.struct_class = Types::InstanceRecommendation
 
     InstanceRecommendationFindingReasonCodes.member = Shapes::ShapeRef.new(shape: InstanceRecommendationFindingReasonCode)
@@ -538,6 +548,7 @@ module Aws::ComputeOptimizer
     InstanceRecommendationOption.add_member(:performance_risk, Shapes::ShapeRef.new(shape: PerformanceRisk, location_name: "performanceRisk"))
     InstanceRecommendationOption.add_member(:rank, Shapes::ShapeRef.new(shape: Rank, location_name: "rank"))
     InstanceRecommendationOption.add_member(:savings_opportunity, Shapes::ShapeRef.new(shape: SavingsOpportunity, location_name: "savingsOpportunity"))
+    InstanceRecommendationOption.add_member(:migration_effort, Shapes::ShapeRef.new(shape: MigrationEffort, location_name: "migrationEffort"))
     InstanceRecommendationOption.struct_class = Types::InstanceRecommendationOption
 
     InstanceRecommendations.member = Shapes::ShapeRef.new(shape: InstanceRecommendation)
@@ -627,6 +638,7 @@ module Aws::ComputeOptimizer
     PutRecommendationPreferencesRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     PutRecommendationPreferencesRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     PutRecommendationPreferencesRequest.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
+    PutRecommendationPreferencesRequest.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     PutRecommendationPreferencesRequest.struct_class = Types::PutRecommendationPreferencesRequest
 
     PutRecommendationPreferencesResponse.struct_class = Types::PutRecommendationPreferencesResponse
@@ -658,6 +670,7 @@ module Aws::ComputeOptimizer
     RecommendationPreferencesDetail.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     RecommendationPreferencesDetail.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
     RecommendationPreferencesDetail.add_member(:enhanced_infrastructure_metrics, Shapes::ShapeRef.new(shape: EnhancedInfrastructureMetrics, location_name: "enhancedInfrastructureMetrics"))
+    RecommendationPreferencesDetail.add_member(:inferred_workload_types, Shapes::ShapeRef.new(shape: InferredWorkloadTypesPreference, location_name: "inferredWorkloadTypes"))
     RecommendationPreferencesDetail.struct_class = Types::RecommendationPreferencesDetail
 
     RecommendationPreferencesDetails.member = Shapes::ShapeRef.new(shape: RecommendationPreferencesDetail)

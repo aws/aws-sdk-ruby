@@ -158,6 +158,33 @@ module Aws::ComputeOptimizer
     #   for the Auto Scaling group.
     #   @return [Types::EffectiveRecommendationPreferences]
     #
+    # @!attribute [rw] inferred_workload_types
+    #   The applications that might be running on the instances in the Auto
+    #   Scaling group as inferred by Compute Optimizer.
+    #
+    #   Compute Optimizer can infer if one of the following applications
+    #   might be running on the instances:
+    #
+    #   * `AmazonEmr` - Infers that Amazon EMR might be running on the
+    #     instances.
+    #
+    #   * `ApacheCassandra` - Infers that Apache Cassandra might be running
+    #     on the instances.
+    #
+    #   * `ApacheHadoop` - Infers that Apache Hadoop might be running on the
+    #     instances.
+    #
+    #   * `Memcached` - Infers that Memcached might be running on the
+    #     instances.
+    #
+    #   * `NGINX` - Infers that NGINX might be running on the instances.
+    #
+    #   * `PostgreSql` - Infers that PostgreSQL might be running on the
+    #     instances.
+    #
+    #   * `Redis` - Infers that Redis might be running on the instances.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendation AWS API Documentation
     #
     class AutoScalingGroupRecommendation < Struct.new(
@@ -171,7 +198,8 @@ module Aws::ComputeOptimizer
       :recommendation_options,
       :last_refresh_timestamp,
       :current_performance_risk,
-      :effective_recommendation_preferences)
+      :effective_recommendation_preferences,
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -232,6 +260,19 @@ module Aws::ComputeOptimizer
     #   the estimated monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] migration_effort
+    #   The level of effort required to migrate from the current instance
+    #   type to the recommended instance type.
+    #
+    #   For example, the migration effort is `Low` if Amazon EMR is the
+    #   inferred workload type and an Amazon Web Services Graviton instance
+    #   type is recommended. The migration effort is `Medium` if a workload
+    #   type couldn't be inferred but an Amazon Web Services Graviton
+    #   instance type is recommended. The migration effort is `VeryLow` if
+    #   both the current and recommended instance types are of the same CPU
+    #   architecture.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/AutoScalingGroupRecommendationOption AWS API Documentation
     #
     class AutoScalingGroupRecommendationOption < Struct.new(
@@ -239,7 +280,8 @@ module Aws::ComputeOptimizer
       :projected_utilization_metrics,
       :performance_risk,
       :rank,
-      :savings_opportunity)
+      :savings_opportunity,
+      :migration_effort)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -285,12 +327,12 @@ module Aws::ComputeOptimizer
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
     #         scope: {
     #           name: "Organization", # accepts Organization, AccountId, ResourceArn
     #           value: "ScopeValue",
     #         },
-    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics
+    #         recommendation_preference_names: ["EnhancedInfrastructureMetrics"], # required, accepts EnhancedInfrastructureMetrics, InferredWorkloadTypes
     #       }
     #
     # @!attribute [rw] resource_type
@@ -550,14 +592,31 @@ module Aws::ComputeOptimizer
     #
     #   A status of `Active` confirms that the preference is applied in the
     #   latest recommendation refresh, and a status of `Inactive` confirms
-    #   that it's not yet applied.
+    #   that it's not yet applied to recommendations.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inferred_workload_types
+    #   Describes the activation status of the inferred workload types
+    #   preference.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh. A status of `Inactive` confirms that
+    #   it's not yet applied to recommendations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/EffectiveRecommendationPreferences AWS API Documentation
     #
     class EffectiveRecommendationPreferences < Struct.new(
       :cpu_vendor_architectures,
-      :enhanced_infrastructure_metrics)
+      :enhanced_infrastructure_metrics,
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -596,8 +655,9 @@ module Aws::ComputeOptimizer
       include Aws::Structure
     end
 
-    # Describes the estimated monthly savings amount possible for a given
-    # resource based on On-Demand instance pricing
+    # Describes the estimated monthly savings amount possible, based on
+    # On-Demand instance pricing, by adopting Compute Optimizer
+    # recommendations for a given resource.
     #
     # For more information, see [Estimated monthly savings and savings
     # opportunities][1] in the *Compute Optimizer User Guide*.
@@ -634,7 +694,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
+    #         fields_to_export: ["AccountId"], # accepts AccountId, AutoScalingGroupArn, AutoScalingGroupName, Finding, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, LookbackPeriodInDays, CurrentConfigurationInstanceType, CurrentConfigurationDesiredCapacity, CurrentConfigurationMinSize, CurrentConfigurationMaxSize, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsConfigurationInstanceType, RecommendationOptionsConfigurationDesiredCapacity, RecommendationOptionsConfigurationMinSize, RecommendationOptionsConfigurationMaxSize, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPerformanceRisk, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -935,7 +995,7 @@ module Aws::ComputeOptimizer
     #             values: ["FilterValue"],
     #           },
     #         ],
-    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics
+    #         fields_to_export: ["AccountId"], # accepts AccountId, InstanceArn, InstanceName, Finding, FindingReasonCodes, LookbackPeriodInDays, CurrentInstanceType, UtilizationMetricsCpuMaximum, UtilizationMetricsMemoryMaximum, UtilizationMetricsEbsReadOpsPerSecondMaximum, UtilizationMetricsEbsWriteOpsPerSecondMaximum, UtilizationMetricsEbsReadBytesPerSecondMaximum, UtilizationMetricsEbsWriteBytesPerSecondMaximum, UtilizationMetricsDiskReadOpsPerSecondMaximum, UtilizationMetricsDiskWriteOpsPerSecondMaximum, UtilizationMetricsDiskReadBytesPerSecondMaximum, UtilizationMetricsDiskWriteBytesPerSecondMaximum, UtilizationMetricsNetworkInBytesPerSecondMaximum, UtilizationMetricsNetworkOutBytesPerSecondMaximum, UtilizationMetricsNetworkPacketsInPerSecondMaximum, UtilizationMetricsNetworkPacketsOutPerSecondMaximum, CurrentOnDemandPrice, CurrentStandardOneYearNoUpfrontReservedPrice, CurrentStandardThreeYearNoUpfrontReservedPrice, CurrentVCpus, CurrentMemory, CurrentStorage, CurrentNetwork, RecommendationOptionsInstanceType, RecommendationOptionsProjectedUtilizationMetricsCpuMaximum, RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum, RecommendationOptionsPlatformDifferences, RecommendationOptionsPerformanceRisk, RecommendationOptionsVcpus, RecommendationOptionsMemory, RecommendationOptionsStorage, RecommendationOptionsNetwork, RecommendationOptionsOnDemandPrice, RecommendationOptionsStandardOneYearNoUpfrontReservedPrice, RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice, RecommendationsSourcesRecommendationSourceArn, RecommendationsSourcesRecommendationSourceType, LastRefreshTimestamp, CurrentPerformanceRisk, RecommendationOptionsSavingsOpportunityPercentage, RecommendationOptionsEstimatedMonthlySavingsCurrency, RecommendationOptionsEstimatedMonthlySavingsValue, EffectiveRecommendationPreferencesCpuVendorArchitectures, EffectiveRecommendationPreferencesEnhancedInfrastructureMetrics, EffectiveRecommendationPreferencesInferredWorkloadTypes, InferredWorkloadTypes, RecommendationOptionsMigrationEffort
     #         s3_destination_config: { # required
     #           bucket: "DestinationBucket",
     #           key_prefix: "DestinationKeyPrefix",
@@ -1729,13 +1789,20 @@ module Aws::ComputeOptimizer
     #
     #   A status of `Active` confirms that the preference is applied in the
     #   latest recommendation refresh, and a status of `Inactive` confirms
-    #   that it's not yet applied.
+    #   that it's not yet applied to recommendations.
     #
     #   To validate whether the preference is applied to your last generated
     #   set of recommendations, review the
     #   `effectiveRecommendationPreferences` value in the response of the
     #   GetAutoScalingGroupRecommendations and GetEC2InstanceRecommendations
     #   actions.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/GetEffectiveRecommendationPreferencesResponse AWS API Documentation
@@ -1983,7 +2050,7 @@ module Aws::ComputeOptimizer
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
     #         scope: {
     #           name: "Organization", # accepts Organization, AccountId, ResourceArn
     #           value: "ScopeValue",
@@ -2341,13 +2408,40 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] current_performance_risk
     #   The risk of the current instance not meeting the performance needs
     #   of its workloads. The higher the risk, the more likely the current
-    #   Lambda function requires more memory.
+    #   instance cannot meet the performance requirements of its workload.
     #   @return [String]
     #
     # @!attribute [rw] effective_recommendation_preferences
     #   An object that describes the effective recommendation preferences
     #   for the instance.
     #   @return [Types::EffectiveRecommendationPreferences]
+    #
+    # @!attribute [rw] inferred_workload_types
+    #   The applications that might be running on the instance as inferred
+    #   by Compute Optimizer.
+    #
+    #   Compute Optimizer can infer if one of the following applications
+    #   might be running on the instance:
+    #
+    #   * `AmazonEmr` - Infers that Amazon EMR might be running on the
+    #     instance.
+    #
+    #   * `ApacheCassandra` - Infers that Apache Cassandra might be running
+    #     on the instance.
+    #
+    #   * `ApacheHadoop` - Infers that Apache Hadoop might be running on the
+    #     instance.
+    #
+    #   * `Memcached` - Infers that Memcached might be running on the
+    #     instance.
+    #
+    #   * `NGINX` - Infers that NGINX might be running on the instance.
+    #
+    #   * `PostgreSql` - Infers that PostgreSQL might be running on the
+    #     instance.
+    #
+    #   * `Redis` - Infers that Redis might be running on the instance.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendation AWS API Documentation
     #
@@ -2364,7 +2458,8 @@ module Aws::ComputeOptimizer
       :recommendation_sources,
       :last_refresh_timestamp,
       :current_performance_risk,
-      :effective_recommendation_preferences)
+      :effective_recommendation_preferences,
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2522,6 +2617,19 @@ module Aws::ComputeOptimizer
     #   monthly savings amount and percentage.
     #   @return [Types::SavingsOpportunity]
     #
+    # @!attribute [rw] migration_effort
+    #   The level of effort required to migrate from the current instance
+    #   type to the recommended instance type.
+    #
+    #   For example, the migration effort is `Low` if Amazon EMR is the
+    #   inferred workload type and an Amazon Web Services Graviton instance
+    #   type is recommended. The migration effort is `Medium` if a workload
+    #   type couldn't be inferred but an Amazon Web Services Graviton
+    #   instance type is recommended. The migration effort is `VeryLow` if
+    #   both the current and recommended instance types are of the same CPU
+    #   architecture.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/InstanceRecommendationOption AWS API Documentation
     #
     class InstanceRecommendationOption < Struct.new(
@@ -2530,7 +2638,8 @@ module Aws::ComputeOptimizer
       :platform_differences,
       :performance_risk,
       :rank,
-      :savings_opportunity)
+      :savings_opportunity,
+      :migration_effort)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2794,8 +2903,7 @@ module Aws::ComputeOptimizer
     # @!attribute [rw] current_performance_risk
     #   The risk of the current Lambda function not meeting the performance
     #   needs of its workloads. The higher the risk, the more likely the
-    #   current Lambda function configuration is underperforming in its
-    #   workload.
+    #   current Lambda function requires more memory.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/LambdaFunctionRecommendation AWS API Documentation
@@ -3035,12 +3143,13 @@ module Aws::ComputeOptimizer
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction
+    #         resource_type: "Ec2Instance", # required, accepts Ec2Instance, AutoScalingGroup, EbsVolume, LambdaFunction, NotApplicable
     #         scope: {
     #           name: "Organization", # accepts Organization, AccountId, ResourceArn
     #           value: "ScopeValue",
     #         },
     #         enhanced_infrastructure_metrics: "Active", # accepts Active, Inactive
+    #         inferred_workload_types: "Active", # accepts Active, Inactive
     #       }
     #
     # @!attribute [rw] resource_type
@@ -3067,7 +3176,10 @@ module Aws::ComputeOptimizer
     #   resource level by specifying a scope name of `ResourceArn` and a
     #   scope value of the Auto Scaling group Amazon Resource Name (ARN).
     #   This will configure the preference for all instances that are part
-    #   of the specified the Auto Scaling group.
+    #   of the specified Auto Scaling group. You also cannot create
+    #   recommendation preferences at the resource level for instances that
+    #   are part of an Auto Scaling group. You can create recommendation
+    #   preferences at the resource level only for standalone instances.
     #
     #    </note>
     #
@@ -3080,9 +3192,35 @@ module Aws::ComputeOptimizer
     #   The status of the enhanced infrastructure metrics recommendation
     #   preference to create or update.
     #
-    #   A status of `Active` confirms that the preference is applied in the
-    #   latest recommendation refresh, and a status of `Inactive` confirms
-    #   that it's not yet applied.
+    #   Specify the `Active` status to activate the preference, or specify
+    #   `Inactive` to deactivate the preference.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inferred_workload_types
+    #   The status of the inferred workload types recommendation preference
+    #   to create or update.
+    #
+    #   <note markdown="1"> The inferred workload type feature is active by default. To
+    #   deactivate it, create a recommendation preference.
+    #
+    #    </note>
+    #
+    #   Specify the `Inactive` status to deactivate the feature, or specify
+    #   `Active` to activate it.
+    #
+    #   For more information, see [Inferred workload types][1] in the
+    #   *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/PutRecommendationPreferencesRequest AWS API Documentation
@@ -3090,7 +3228,8 @@ module Aws::ComputeOptimizer
     class PutRecommendationPreferencesRequest < Struct.new(
       :resource_type,
       :scope,
-      :enhanced_infrastructure_metrics)
+      :enhanced_infrastructure_metrics,
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3239,7 +3378,22 @@ module Aws::ComputeOptimizer
     #
     #   A status of `Active` confirms that the preference is applied in the
     #   latest recommendation refresh, and a status of `Inactive` confirms
-    #   that it's not yet applied.
+    #   that it's not yet applied to recommendations.
+    #
+    #   For more information, see [Enhanced infrastructure metrics][1] in
+    #   the *Compute Optimizer User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
+    #   @return [String]
+    #
+    # @!attribute [rw] inferred_workload_types
+    #   The status of the inferred workload types recommendation preference.
+    #
+    #   A status of `Active` confirms that the preference is applied in the
+    #   latest recommendation refresh. A status of `Inactive` confirms that
+    #   it's not yet applied to recommendations.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/RecommendationPreferencesDetail AWS API Documentation
@@ -3247,7 +3401,8 @@ module Aws::ComputeOptimizer
     class RecommendationPreferencesDetail < Struct.new(
       :scope,
       :resource_type,
-      :enhanced_infrastructure_metrics)
+      :enhanced_infrastructure_metrics,
+      :inferred_workload_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3468,12 +3623,14 @@ module Aws::ComputeOptimizer
     #
     # @!attribute [rw] savings_opportunity_percentage
     #   The estimated monthly savings possible as a percentage of monthly
-    #   cost.
+    #   cost by adopting Compute Optimizer recommendations for a given
+    #   resource.
     #   @return [Float]
     #
     # @!attribute [rw] estimated_monthly_savings
     #   An object that describes the estimated monthly savings amount
-    #   possible based on On-Demand instance pricing.
+    #   possible, based on On-Demand instance pricing, by adopting Compute
+    #   Optimizer recommendations for a given resource.
     #   @return [Types::EstimatedMonthlySavings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/compute-optimizer-2019-11-01/SavingsOpportunity AWS API Documentation
@@ -3497,8 +3654,11 @@ module Aws::ComputeOptimizer
     # preferences for Auto Scaling groups only at the resource level by
     # specifying a scope name of `ResourceArn` and a scope value of the Auto
     # Scaling group Amazon Resource Name (ARN). This will configure the
-    # preference for all instances that are part of the specified the Auto
-    # Scaling group.
+    # preference for all instances that are part of the specified Auto
+    # Scaling group. You also cannot create recommendation preferences at
+    # the resource level for instances that are part of an Auto Scaling
+    # group. You can create recommendation preferences at the resource level
+    # only for standalone instances.
     #
     #  </note>
     #

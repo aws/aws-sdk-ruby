@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-01-10)
+------------------
+
+* Feature - This SDK release adds support for specifying a Bucket Owner for an S3 location.
+
 1.18.0 (2021-12-21)
 ------------------
 

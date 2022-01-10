@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2022-01-10)
+------------------
+
+* Feature - Adds support for new Compute Optimizer capability that makes it easier for customers to optimize their EC2 instances by leveraging multiple CPU architectures.
+
 1.29.0 (2021-12-21)
 ------------------
 

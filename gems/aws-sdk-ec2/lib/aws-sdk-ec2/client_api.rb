@@ -694,6 +694,11 @@ module Aws::EC2
     DescribeExportImageTasksResult = Shapes::StructureShape.new(name: 'DescribeExportImageTasksResult')
     DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
     DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
+    DescribeFastLaunchImagesRequest = Shapes::StructureShape.new(name: 'DescribeFastLaunchImagesRequest')
+    DescribeFastLaunchImagesRequestMaxResults = Shapes::IntegerShape.new(name: 'DescribeFastLaunchImagesRequestMaxResults')
+    DescribeFastLaunchImagesResult = Shapes::StructureShape.new(name: 'DescribeFastLaunchImagesResult')
+    DescribeFastLaunchImagesSuccessItem = Shapes::StructureShape.new(name: 'DescribeFastLaunchImagesSuccessItem')
+    DescribeFastLaunchImagesSuccessSet = Shapes::ListShape.new(name: 'DescribeFastLaunchImagesSuccessSet')
     DescribeFastSnapshotRestoreSuccessItem = Shapes::StructureShape.new(name: 'DescribeFastSnapshotRestoreSuccessItem')
     DescribeFastSnapshotRestoreSuccessSet = Shapes::ListShape.new(name: 'DescribeFastSnapshotRestoreSuccessSet')
     DescribeFastSnapshotRestoresMaxResults = Shapes::IntegerShape.new(name: 'DescribeFastSnapshotRestoresMaxResults')
@@ -965,6 +970,8 @@ module Aws::EC2
     DirectoryServiceAuthenticationRequest = Shapes::StructureShape.new(name: 'DirectoryServiceAuthenticationRequest')
     DisableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultRequest')
     DisableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'DisableEbsEncryptionByDefaultResult')
+    DisableFastLaunchRequest = Shapes::StructureShape.new(name: 'DisableFastLaunchRequest')
+    DisableFastLaunchResult = Shapes::StructureShape.new(name: 'DisableFastLaunchResult')
     DisableFastSnapshotRestoreErrorItem = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreErrorItem')
     DisableFastSnapshotRestoreErrorSet = Shapes::ListShape.new(name: 'DisableFastSnapshotRestoreErrorSet')
     DisableFastSnapshotRestoreStateError = Shapes::StructureShape.new(name: 'DisableFastSnapshotRestoreStateError')
@@ -1063,6 +1070,8 @@ module Aws::EC2
     EnaSupport = Shapes::StringShape.new(name: 'EnaSupport')
     EnableEbsEncryptionByDefaultRequest = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultRequest')
     EnableEbsEncryptionByDefaultResult = Shapes::StructureShape.new(name: 'EnableEbsEncryptionByDefaultResult')
+    EnableFastLaunchRequest = Shapes::StructureShape.new(name: 'EnableFastLaunchRequest')
+    EnableFastLaunchResult = Shapes::StructureShape.new(name: 'EnableFastLaunchResult')
     EnableFastSnapshotRestoreErrorItem = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreErrorItem')
     EnableFastSnapshotRestoreErrorSet = Shapes::ListShape.new(name: 'EnableFastSnapshotRestoreErrorSet')
     EnableFastSnapshotRestoreStateError = Shapes::StructureShape.new(name: 'EnableFastSnapshotRestoreStateError')
@@ -1129,6 +1138,13 @@ module Aws::EC2
     FailedCapacityReservationFleetCancellationResultSet = Shapes::ListShape.new(name: 'FailedCapacityReservationFleetCancellationResultSet')
     FailedQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'FailedQueuedPurchaseDeletion')
     FailedQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'FailedQueuedPurchaseDeletionSet')
+    FastLaunchImageIdList = Shapes::ListShape.new(name: 'FastLaunchImageIdList')
+    FastLaunchLaunchTemplateSpecificationRequest = Shapes::StructureShape.new(name: 'FastLaunchLaunchTemplateSpecificationRequest')
+    FastLaunchLaunchTemplateSpecificationResponse = Shapes::StructureShape.new(name: 'FastLaunchLaunchTemplateSpecificationResponse')
+    FastLaunchResourceType = Shapes::StringShape.new(name: 'FastLaunchResourceType')
+    FastLaunchSnapshotConfigurationRequest = Shapes::StructureShape.new(name: 'FastLaunchSnapshotConfigurationRequest')
+    FastLaunchSnapshotConfigurationResponse = Shapes::StructureShape.new(name: 'FastLaunchSnapshotConfigurationResponse')
+    FastLaunchStateCode = Shapes::StringShape.new(name: 'FastLaunchStateCode')
     FastSnapshotRestoreStateCode = Shapes::StringShape.new(name: 'FastSnapshotRestoreStateCode')
     FederatedAuthentication = Shapes::StructureShape.new(name: 'FederatedAuthentication')
     FederatedAuthenticationRequest = Shapes::StructureShape.new(name: 'FederatedAuthenticationRequest')
@@ -1860,6 +1876,7 @@ module Aws::EC2
     NetworkInsightsPathId = Shapes::StringShape.new(name: 'NetworkInsightsPathId')
     NetworkInsightsPathIdList = Shapes::ListShape.new(name: 'NetworkInsightsPathIdList')
     NetworkInsightsPathList = Shapes::ListShape.new(name: 'NetworkInsightsPathList')
+    NetworkInsightsResourceId = Shapes::StringShape.new(name: 'NetworkInsightsResourceId')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceAssociation = Shapes::StructureShape.new(name: 'NetworkInterfaceAssociation')
     NetworkInterfaceAttachment = Shapes::StructureShape.new(name: 'NetworkInterfaceAttachment')
@@ -4120,8 +4137,8 @@ module Aws::EC2
 
     CreateNetworkInsightsPathRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "SourceIp"))
     CreateNetworkInsightsPathRequest.add_member(:destination_ip, Shapes::ShapeRef.new(shape: IpAddress, location_name: "DestinationIp"))
-    CreateNetworkInsightsPathRequest.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Source"))
-    CreateNetworkInsightsPathRequest.add_member(:destination, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Destination"))
+    CreateNetworkInsightsPathRequest.add_member(:source, Shapes::ShapeRef.new(shape: NetworkInsightsResourceId, required: true, location_name: "Source"))
+    CreateNetworkInsightsPathRequest.add_member(:destination, Shapes::ShapeRef.new(shape: NetworkInsightsResourceId, required: true, location_name: "Destination"))
     CreateNetworkInsightsPathRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: Protocol, required: true, location_name: "Protocol"))
     CreateNetworkInsightsPathRequest.add_member(:destination_port, Shapes::ShapeRef.new(shape: Port, location_name: "DestinationPort"))
     CreateNetworkInsightsPathRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -5348,6 +5365,30 @@ module Aws::EC2
 
     DescribeExportTasksResult.add_member(:export_tasks, Shapes::ShapeRef.new(shape: ExportTaskList, location_name: "exportTaskSet"))
     DescribeExportTasksResult.struct_class = Types::DescribeExportTasksResult
+
+    DescribeFastLaunchImagesRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: FastLaunchImageIdList, location_name: "ImageId"))
+    DescribeFastLaunchImagesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeFastLaunchImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeFastLaunchImagesRequestMaxResults, location_name: "MaxResults"))
+    DescribeFastLaunchImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeFastLaunchImagesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeFastLaunchImagesRequest.struct_class = Types::DescribeFastLaunchImagesRequest
+
+    DescribeFastLaunchImagesResult.add_member(:fast_launch_images, Shapes::ShapeRef.new(shape: DescribeFastLaunchImagesSuccessSet, location_name: "fastLaunchImageSet"))
+    DescribeFastLaunchImagesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeFastLaunchImagesResult.struct_class = Types::DescribeFastLaunchImagesResult
+
+    DescribeFastLaunchImagesSuccessItem.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:resource_type, Shapes::ShapeRef.new(shape: FastLaunchResourceType, location_name: "resourceType"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: FastLaunchSnapshotConfigurationResponse, location_name: "snapshotConfiguration"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:launch_template, Shapes::ShapeRef.new(shape: FastLaunchLaunchTemplateSpecificationResponse, location_name: "launchTemplate"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:max_parallel_launches, Shapes::ShapeRef.new(shape: Integer, location_name: "maxParallelLaunches"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:state, Shapes::ShapeRef.new(shape: FastLaunchStateCode, location_name: "state"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    DescribeFastLaunchImagesSuccessItem.add_member(:state_transition_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "stateTransitionTime"))
+    DescribeFastLaunchImagesSuccessItem.struct_class = Types::DescribeFastLaunchImagesSuccessItem
+
+    DescribeFastLaunchImagesSuccessSet.member = Shapes::ShapeRef.new(shape: DescribeFastLaunchImagesSuccessItem, location_name: "item")
 
     DescribeFastSnapshotRestoreSuccessItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     DescribeFastSnapshotRestoreSuccessItem.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -6609,6 +6650,22 @@ module Aws::EC2
     DisableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     DisableEbsEncryptionByDefaultResult.struct_class = Types::DisableEbsEncryptionByDefaultResult
 
+    DisableFastLaunchRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    DisableFastLaunchRequest.add_member(:force, Shapes::ShapeRef.new(shape: Boolean, location_name: "Force"))
+    DisableFastLaunchRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DisableFastLaunchRequest.struct_class = Types::DisableFastLaunchRequest
+
+    DisableFastLaunchResult.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
+    DisableFastLaunchResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: FastLaunchResourceType, location_name: "resourceType"))
+    DisableFastLaunchResult.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: FastLaunchSnapshotConfigurationResponse, location_name: "snapshotConfiguration"))
+    DisableFastLaunchResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: FastLaunchLaunchTemplateSpecificationResponse, location_name: "launchTemplate"))
+    DisableFastLaunchResult.add_member(:max_parallel_launches, Shapes::ShapeRef.new(shape: Integer, location_name: "maxParallelLaunches"))
+    DisableFastLaunchResult.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    DisableFastLaunchResult.add_member(:state, Shapes::ShapeRef.new(shape: FastLaunchStateCode, location_name: "state"))
+    DisableFastLaunchResult.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    DisableFastLaunchResult.add_member(:state_transition_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "stateTransitionTime"))
+    DisableFastLaunchResult.struct_class = Types::DisableFastLaunchResult
+
     DisableFastSnapshotRestoreErrorItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     DisableFastSnapshotRestoreErrorItem.add_member(:fast_snapshot_restore_state_errors, Shapes::ShapeRef.new(shape: DisableFastSnapshotRestoreStateErrorSet, location_name: "fastSnapshotRestoreStateErrorSet"))
     DisableFastSnapshotRestoreErrorItem.struct_class = Types::DisableFastSnapshotRestoreErrorItem
@@ -6918,6 +6975,25 @@ module Aws::EC2
     EnableEbsEncryptionByDefaultResult.add_member(:ebs_encryption_by_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "ebsEncryptionByDefault"))
     EnableEbsEncryptionByDefaultResult.struct_class = Types::EnableEbsEncryptionByDefaultResult
 
+    EnableFastLaunchRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    EnableFastLaunchRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "ResourceType"))
+    EnableFastLaunchRequest.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: FastLaunchSnapshotConfigurationRequest, location_name: "SnapshotConfiguration"))
+    EnableFastLaunchRequest.add_member(:launch_template, Shapes::ShapeRef.new(shape: FastLaunchLaunchTemplateSpecificationRequest, location_name: "LaunchTemplate"))
+    EnableFastLaunchRequest.add_member(:max_parallel_launches, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxParallelLaunches"))
+    EnableFastLaunchRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    EnableFastLaunchRequest.struct_class = Types::EnableFastLaunchRequest
+
+    EnableFastLaunchResult.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "imageId"))
+    EnableFastLaunchResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: FastLaunchResourceType, location_name: "resourceType"))
+    EnableFastLaunchResult.add_member(:snapshot_configuration, Shapes::ShapeRef.new(shape: FastLaunchSnapshotConfigurationResponse, location_name: "snapshotConfiguration"))
+    EnableFastLaunchResult.add_member(:launch_template, Shapes::ShapeRef.new(shape: FastLaunchLaunchTemplateSpecificationResponse, location_name: "launchTemplate"))
+    EnableFastLaunchResult.add_member(:max_parallel_launches, Shapes::ShapeRef.new(shape: Integer, location_name: "maxParallelLaunches"))
+    EnableFastLaunchResult.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
+    EnableFastLaunchResult.add_member(:state, Shapes::ShapeRef.new(shape: FastLaunchStateCode, location_name: "state"))
+    EnableFastLaunchResult.add_member(:state_transition_reason, Shapes::ShapeRef.new(shape: String, location_name: "stateTransitionReason"))
+    EnableFastLaunchResult.add_member(:state_transition_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "stateTransitionTime"))
+    EnableFastLaunchResult.struct_class = Types::EnableFastLaunchResult
+
     EnableFastSnapshotRestoreErrorItem.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: String, location_name: "snapshotId"))
     EnableFastSnapshotRestoreErrorItem.add_member(:fast_snapshot_restore_state_errors, Shapes::ShapeRef.new(shape: EnableFastSnapshotRestoreStateErrorSet, location_name: "fastSnapshotRestoreStateErrorSet"))
     EnableFastSnapshotRestoreErrorItem.struct_class = Types::EnableFastSnapshotRestoreErrorItem
@@ -7181,6 +7257,24 @@ module Aws::EC2
     FailedQueuedPurchaseDeletion.struct_class = Types::FailedQueuedPurchaseDeletion
 
     FailedQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: FailedQueuedPurchaseDeletion, location_name: "item")
+
+    FastLaunchImageIdList.member = Shapes::ShapeRef.new(shape: ImageId, location_name: "ImageId")
+
+    FastLaunchLaunchTemplateSpecificationRequest.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "LaunchTemplateId"))
+    FastLaunchLaunchTemplateSpecificationRequest.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "LaunchTemplateName"))
+    FastLaunchLaunchTemplateSpecificationRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
+    FastLaunchLaunchTemplateSpecificationRequest.struct_class = Types::FastLaunchLaunchTemplateSpecificationRequest
+
+    FastLaunchLaunchTemplateSpecificationResponse.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "launchTemplateId"))
+    FastLaunchLaunchTemplateSpecificationResponse.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: String, location_name: "launchTemplateName"))
+    FastLaunchLaunchTemplateSpecificationResponse.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+    FastLaunchLaunchTemplateSpecificationResponse.struct_class = Types::FastLaunchLaunchTemplateSpecificationResponse
+
+    FastLaunchSnapshotConfigurationRequest.add_member(:target_resource_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TargetResourceCount"))
+    FastLaunchSnapshotConfigurationRequest.struct_class = Types::FastLaunchSnapshotConfigurationRequest
+
+    FastLaunchSnapshotConfigurationResponse.add_member(:target_resource_count, Shapes::ShapeRef.new(shape: Integer, location_name: "targetResourceCount"))
+    FastLaunchSnapshotConfigurationResponse.struct_class = Types::FastLaunchSnapshotConfigurationResponse
 
     FederatedAuthentication.add_member(:saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "samlProviderArn"))
     FederatedAuthentication.add_member(:self_service_saml_provider_arn, Shapes::ShapeRef.new(shape: String, location_name: "selfServiceSamlProviderArn"))
@@ -14791,6 +14885,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeExportTasksResult)
       end)
 
+      api.add_operation(:describe_fast_launch_images, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeFastLaunchImages"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeFastLaunchImagesRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeFastLaunchImagesResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeFastSnapshotRestores"
         o.http_method = "POST"
@@ -16194,6 +16302,14 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DisableEbsEncryptionByDefaultResult)
       end)
 
+      api.add_operation(:disable_fast_launch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableFastLaunch"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisableFastLaunchRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableFastLaunchResult)
+      end)
+
       api.add_operation(:disable_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DisableFastSnapshotRestores"
         o.http_method = "POST"
@@ -16352,6 +16468,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultRequest)
         o.output = Shapes::ShapeRef.new(shape: EnableEbsEncryptionByDefaultResult)
+      end)
+
+      api.add_operation(:enable_fast_launch, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableFastLaunch"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EnableFastLaunchRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableFastLaunchResult)
       end)
 
       api.add_operation(:enable_fast_snapshot_restores, Seahorse::Model::Operation.new.tap do |o|

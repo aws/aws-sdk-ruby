@@ -252,6 +252,7 @@ module Aws::GlueDataBrew
     #           s3_input_definition: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           data_catalog_input_definition: {
     #             catalog_id: "CatalogId",
@@ -260,6 +261,7 @@ module Aws::GlueDataBrew
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #           },
     #           database_input_definition: {
@@ -268,6 +270,7 @@ module Aws::GlueDataBrew
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #             query_string: "QueryString",
     #           },
@@ -379,6 +382,7 @@ module Aws::GlueDataBrew
     #         output_location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         configuration: {
     #           dataset_statistics_configuration: {
@@ -484,8 +488,9 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] output_location
-    #   Represents an Amazon S3 location (bucket name and object key) where
-    #   DataBrew can read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name, bucket owner, and
+    #   object key) where DataBrew can read input data, or write output from
+    #   a job.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] configuration
@@ -643,6 +648,7 @@ module Aws::GlueDataBrew
     #             location: { # required
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #             overwrite: false,
     #             format_options: {
@@ -661,12 +667,14 @@ module Aws::GlueDataBrew
     #               location: { # required
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #             },
     #             database_options: {
     #               temp_directory: {
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #               table_name: "DatabaseTableName", # required
     #             },
@@ -680,6 +688,7 @@ module Aws::GlueDataBrew
     #               temp_directory: {
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #               table_name: "DatabaseTableName", # required
     #             },
@@ -1083,6 +1092,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #       }
     #
@@ -1130,12 +1140,14 @@ module Aws::GlueDataBrew
     #           location: { # required
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #         },
     #         database_options: {
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -1195,6 +1207,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         query_string: "QueryString",
     #       }
@@ -1209,8 +1222,9 @@ module Aws::GlueDataBrew
     #   @return [String]
     #
     # @!attribute [rw] temp_directory
-    #   Represents an Amazon S3 location (bucket name and object key) where
-    #   DataBrew can read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name, bucket owner, and
+    #   object key) where DataBrew can read input data, or write output from
+    #   a job.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] query_string
@@ -1241,6 +1255,7 @@ module Aws::GlueDataBrew
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           table_name: "DatabaseTableName", # required
     #         },
@@ -1282,6 +1297,7 @@ module Aws::GlueDataBrew
     #         temp_directory: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         table_name: "DatabaseTableName", # required
     #       }
@@ -2697,6 +2713,7 @@ module Aws::GlueDataBrew
     #         s3_input_definition: {
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         data_catalog_input_definition: {
     #           catalog_id: "CatalogId",
@@ -2705,6 +2722,7 @@ module Aws::GlueDataBrew
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #         },
     #         database_input_definition: {
@@ -2713,6 +2731,7 @@ module Aws::GlueDataBrew
     #           temp_directory: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           query_string: "QueryString",
     #         },
@@ -3566,6 +3585,7 @@ module Aws::GlueDataBrew
     #         location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         overwrite: false,
     #         format_options: {
@@ -4202,6 +4222,12 @@ module Aws::GlueDataBrew
     #   ColumnSelectors has been defined, then there should be no columnn
     #   reference in the left side of a condition, for example, `is_between
     #   :val1 and :val2`.
+    #
+    #   For more information, see [Available checks][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/databrew/latest/dg/profile.data-quality-available-checks.html
     #   @return [String]
     #
     # @!attribute [rw] substitution_map
@@ -4304,8 +4330,9 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents an Amazon S3 location (bucket name and object key) where
-    # DataBrew can read input data, or write output from a job.
+    # Represents an Amazon S3 location (bucket name, bucket owner, and
+    # object key) where DataBrew can read input data, or write output from a
+    # job.
     #
     # @note When making an API call, you may pass S3Location
     #   data as a hash:
@@ -4313,6 +4340,7 @@ module Aws::GlueDataBrew
     #       {
     #         bucket: "Bucket", # required
     #         key: "Key",
+    #         bucket_owner: "BucketOwner",
     #       }
     #
     # @!attribute [rw] bucket
@@ -4323,11 +4351,16 @@ module Aws::GlueDataBrew
     #   The unique name of the object in the bucket.
     #   @return [String]
     #
+    # @!attribute [rw] bucket_owner
+    #   The Amazon Web Services account ID of the bucket owner.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/S3Location AWS API Documentation
     #
     class S3Location < Struct.new(
       :bucket,
-      :key)
+      :key,
+      :bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4342,6 +4375,7 @@ module Aws::GlueDataBrew
     #         location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #       }
     #
@@ -4863,6 +4897,7 @@ module Aws::GlueDataBrew
     #           s3_input_definition: {
     #             bucket: "Bucket", # required
     #             key: "Key",
+    #             bucket_owner: "BucketOwner",
     #           },
     #           data_catalog_input_definition: {
     #             catalog_id: "CatalogId",
@@ -4871,6 +4906,7 @@ module Aws::GlueDataBrew
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #           },
     #           database_input_definition: {
@@ -4879,6 +4915,7 @@ module Aws::GlueDataBrew
     #             temp_directory: {
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #             query_string: "QueryString",
     #           },
@@ -5028,6 +5065,7 @@ module Aws::GlueDataBrew
     #         output_location: { # required
     #           bucket: "Bucket", # required
     #           key: "Key",
+    #           bucket_owner: "BucketOwner",
     #         },
     #         validation_configurations: [
     #           {
@@ -5083,8 +5121,9 @@ module Aws::GlueDataBrew
     #   @return [Integer]
     #
     # @!attribute [rw] output_location
-    #   Represents an Amazon S3 location (bucket name and object key) where
-    #   DataBrew can read input data, or write output from a job.
+    #   Represents an Amazon S3 location (bucket name, bucket owner, and
+    #   object key) where DataBrew can read input data, or write output from
+    #   a job.
     #   @return [Types::S3Location]
     #
     # @!attribute [rw] validation_configurations
@@ -5212,6 +5251,7 @@ module Aws::GlueDataBrew
     #             location: { # required
     #               bucket: "Bucket", # required
     #               key: "Key",
+    #               bucket_owner: "BucketOwner",
     #             },
     #             overwrite: false,
     #             format_options: {
@@ -5230,12 +5270,14 @@ module Aws::GlueDataBrew
     #               location: { # required
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #             },
     #             database_options: {
     #               temp_directory: {
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #               table_name: "DatabaseTableName", # required
     #             },
@@ -5249,6 +5291,7 @@ module Aws::GlueDataBrew
     #               temp_directory: {
     #                 bucket: "Bucket", # required
     #                 key: "Key",
+    #                 bucket_owner: "BucketOwner",
     #               },
     #               table_name: "DatabaseTableName", # required
     #             },
