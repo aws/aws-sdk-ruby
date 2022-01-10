@@ -41,11 +41,9 @@
             "us-west-2" : {
               "variants" : [
                 {
-                  "hostname" : "default-pattern-service-fips.us-west-2.amazonaws.com",
                   "tags" : [ "fips" ]
                 },
                 {
-                  "hostname" : "default-pattern-service.us-west-2.api.aws",
                   "tags" : [ "dualstack" ]
                 }
               ]
