@@ -461,12 +461,12 @@ module Aws::IoTEventsData
       req.send_request(options)
     end
 
-    # Sends a set of messages to the AWS IoT Events system. Each message
-    # payload is transformed into the input you specify (`"inputName"`) and
-    # ingested into any detectors that monitor that input. If multiple
-    # messages are sent, the order in which the messages are processed
-    # isn't guaranteed. To guarantee ordering, you must send messages one
-    # at a time and wait for a successful response.
+    # Sends a set of messages to the IoT Events system. Each message payload
+    # is transformed into the input you specify (`"inputName"`) and ingested
+    # into any detectors that monitor that input. If multiple messages are
+    # sent, the order in which the messages are processed isn't guaranteed.
+    # To guarantee ordering, you must send messages one at a time and wait
+    # for a successful response.
     #
     # @option params [required, Array<Types::Message>] :messages
     #   The list of messages to send. Each message has the following format:
@@ -834,7 +834,7 @@ module Aws::IoTEventsData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ioteventsdata'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

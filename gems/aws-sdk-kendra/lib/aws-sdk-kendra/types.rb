@@ -5038,6 +5038,13 @@ module Aws::Kendra
 
     # A custom attribute value assigned to a document.
     #
+    # For more information on how to create custom document attributes, see
+    # [Custom Attributes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/custom-attributes.html
+    #
     # @note When making an API call, you may pass DocumentAttribute
     #   data as a hash:
     #
@@ -5235,9 +5242,9 @@ module Aws::Kendra
     #   A date expressed as an ISO 8601 string.
     #
     #   It is important for the time zone to be included in the ISO 8601
-    #   date-time format. For example, 20120325T123010+01:00 is the ISO 8601
-    #   date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in
-    #   Central European Time.
+    #   date-time format. For example, 2012-03-25T12:30:10+01:00 is the ISO
+    #   8601 date-time format for March 25th 2012 at 12:30PM (plus 10
+    #   seconds) in Central European Time.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValue AWS API Documentation
@@ -6289,18 +6296,17 @@ module Aws::Kendra
     # advanced alterations on the original or raw documents. If you want to
     # apply advanced alterations on the Amazon Kendra structured documents,
     # you must configure your Lambda function using
-    # [PostExtractionHookConfiguration][2]. You can only invoke one Lambda
+    # [PostExtractionHookConfiguration][1]. You can only invoke one Lambda
     # function. However, this function can invoke other functions it
     # requires.
     #
     # For more information, see [Customizing document metadata during the
-    # ingestion process][3].
+    # ingestion process][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_PreExtractionHookConfiguration.html
-    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/API_PostExtractionHookConfiguration.html
-    # [3]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_CustomDocumentEnrichmentConfiguration.html
+    # [2]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
     #
     # @note When making an API call, you may pass HookConfiguration
     #   data as a hash:
@@ -7649,7 +7655,7 @@ module Aws::Kendra
     #
     #       {
     #         index_id: "IndexId", # required
-    #         query_text: "QueryText", # required
+    #         query_text: "QueryText",
     #         attribute_filter: {
     #           and_all_filters: [
     #             {
@@ -7900,13 +7906,27 @@ module Aws::Kendra
     #   items, you can only retrieve the first 100 of the items.
     #   @return [Integer]
     #
+    # @!attribute [rw] warnings
+    #   A list of warning codes and their messages on problems with your
+    #   query.
+    #
+    #   Amazon Kendra currently only supports one type of warning, which is
+    #   a warning on invalid syntax used in the query. For examples of
+    #   invalid query syntax, see [Searching with advanced query syntax][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
+    #   @return [Array<Types::Warning>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResult AWS API Documentation
     #
     class QueryResult < Struct.new(
       :query_id,
       :result_items,
       :facet_results,
-      :total_number_of_results)
+      :total_number_of_results,
+      :warnings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10887,6 +10907,12 @@ module Aws::Kendra
     # permissions to use Amazon Web Services SSO with Amazon Kendra. For
     # more information, see [IAM roles for Amazon Web Services SSO][3].
     #
+    # Amazon Kendra currently does not support using
+    # `UserGroupResolutionConfiguration` with an Amazon Web Services
+    # organization member account for your Amazon Web Services SSO identify
+    # source. You must create your index in the parent account for the
+    # organization in order to use `UserGroupResolutionConfiguration`.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/kendra/latest/dg/API_PutPrincipalMapping.html
@@ -10994,6 +11020,25 @@ module Aws::Kendra
     #
     class ValidationException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The warning code and message that explains a problem with a query.
+    #
+    # @!attribute [rw] message
+    #   The message that explains the problem with the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The code used to show the type of warning for the query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Warning AWS API Documentation
+    #
+    class Warning < Struct.new(
+      :message,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end

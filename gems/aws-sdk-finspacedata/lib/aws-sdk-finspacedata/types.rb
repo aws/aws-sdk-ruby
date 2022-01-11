@@ -131,7 +131,10 @@ module Aws::FinSpaceData
     #   @return [Integer]
     #
     # @!attribute [rw] active_from_timestamp
-    #   Milliseconds since UTC epoch
+    #   Beginning time from which the Changeset is active. The value is
+    #   determined as Epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] updates_changeset_id
@@ -250,7 +253,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -275,7 +278,25 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] source_params
-    #   Options that define the location of the data being ingested.
+    #   Options that define the location of the data being ingested
+    #   (`s3SourcePath`) and the source of the changeset (`sourceType`).
+    #
+    #   Both `s3SourcePath` and `sourceType` are required attributes.
+    #
+    #   Here is an example of how you could specify the `sourceParams`\:
+    #
+    #   ` "sourceParams": \{ "s3SourcePath":
+    #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
+    #   "sourceType": "S3" \} `
+    #
+    #   The S3 path that you specify must allow the FinSpace role access. To
+    #   do that, you first need to configure the IAM policy on S3 bucket.
+    #   For more information, see [Loading data from an Amazon S3 Bucket
+    #   using the FinSpace API][1]section.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] format_params
@@ -295,9 +316,22 @@ module Aws::FinSpaceData
     #
     #   * `XML` - XML source file format.
     #
-    #   For example, you could specify the following for `formatParams`\: `
-    #   "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   Here is an example of how you could specify the `formatParams`\:
+    #
+    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
     #   "separator": ",", "compression":"None" \} `
+    #
+    #   Note that if you only provide `formatType` as `CSV`, the rest of the
+    #   attributes will automatically default to CSV values as following:
+    #
+    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #
+    #   For more information about supported file formats, see [Supported
+    #   Data Types and File Formats][1] in the FinSpace User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateChangesetRequest AWS API Documentation
@@ -354,7 +388,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -458,7 +492,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -567,14 +601,24 @@ module Aws::FinSpaceData
     #
     #   * `GLUE_TABLE` - Glue table destination type.
     #
-    #   ^
+    #   * `S3` - S3 destination type.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_export_file_format
-    #   Data View Export File Format
+    #   Data view export file format.
+    #
+    #   * `PARQUET` - Parquet export file format.
+    #
+    #   * `DELIMITED_TEXT` - Delimited text export file format.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_export_file_format_options
+    #   Format Options for S3 Destination type.
+    #
+    #   Here is an example of how you could specify the
+    #   `s3DestinationExportFileFormatOptions`
+    #
+    #   ` \{ "header": "true", "delimiter": ",", "compression": "gzip" \}`
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DataViewDestinationTypeParams AWS API Documentation
@@ -832,7 +876,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -951,7 +995,10 @@ module Aws::FinSpaceData
     #   @return [Integer]
     #
     # @!attribute [rw] active_from_timestamp
-    #   Milliseconds since UTC epoch
+    #   Beginning time from which the Changeset is active. The value is
+    #   determined as Epoch time in milliseconds. For example, the value for
+    #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
+    #   1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] updates_changeset_id
@@ -1476,6 +1523,14 @@ module Aws::FinSpaceData
 
     # Permission group parameters for Dataset permissions.
     #
+    # Here is an example of how you could specify the
+    # `PermissionGroupParams`\:
+    #
+    # ` \{ "permissionGroupId": "0r6fCRtSTUk4XPfXQe3M0g",
+    # "datasetPermissions": [ \{"permission": "ViewDatasetDetails"\},
+    # \{"permission": "AddDatasetData"\}, \{"permission":
+    # "EditDatasetMetadata"\}, \{"permission": "DeleteDataset"\} ] \} `
+    #
     # @note When making an API call, you may pass PermissionGroupParams
     #   data as a hash:
     #
@@ -1518,7 +1573,32 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
-    # Resource permission for a Dataset.
+    # Resource permission for a dataset. When you create a dataset, all the
+    # other members of the same user group inherit access to the dataset.
+    # You can only create a dataset if your user group has application
+    # permission for Create Datasets.
+    #
+    # The following is a list of valid dataset permissions that you can
+    # apply:
+    #
+    # * `ViewDatasetDetails`
+    #
+    # * `ReadDatasetDetails`
+    #
+    # * `AddDatasetData`
+    #
+    # * `CreateSnapshot`
+    #
+    # * `EditDatasetMetadata`
+    #
+    # * `DeleteDataset`
+    #
+    # For more information on the ataset permissions, see [Supported Dataset
+    # Permissions][1] in the FinSpace User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/finspace/latest/userguide/managing-user-permissions.html#supported-dataset-permissions
     #
     # @note When making an API call, you may pass ResourcePermission
     #   data as a hash:
@@ -1626,7 +1706,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1642,11 +1722,60 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] source_params
-    #   Options that define the location of the data being ingested.
+    #   Options that define the location of the data being ingested
+    #   (`s3SourcePath`) and the source of the changeset (`sourceType`).
+    #
+    #   Both `s3SourcePath` and `sourceType` are required attributes.
+    #
+    #   Here is an example of how you could specify the `sourceParams`\:
+    #
+    #   ` "sourceParams": \{ "s3SourcePath":
+    #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
+    #   "sourceType": "S3" \} `
+    #
+    #   The S3 path that you specify must allow the FinSpace role access. To
+    #   do that, you first need to configure the IAM policy on S3 bucket.
+    #   For more information, see [Loading data from an Amazon S3 Bucket
+    #   using the FinSpace API][1]section.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] format_params
-    #   Options that define the structure of the source file(s).
+    #   Options that define the structure of the source file(s) including
+    #   the format type (`formatType`), header row (`withHeader`), data
+    #   separation character (`separator`) and the type of compression
+    #   (`compression`).
+    #
+    #   `formatType` is a required attribute and can have the following
+    #   values:
+    #
+    #   * `PARQUET` - Parquet source file format.
+    #
+    #   * `CSV` - CSV source file format.
+    #
+    #   * `JSON` - JSON source file format.
+    #
+    #   * `XML` - XML source file format.
+    #
+    #   Here is an example of how you could specify the `formatParams`\:
+    #
+    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" \} `
+    #
+    #   Note that if you only provide `formatType` as `CSV`, the rest of the
+    #   attributes will automatically default to CSV values as following:
+    #
+    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #
+    #   For more information about supported file formats, see [Supported
+    #   Data Types and File Formats][1] in the FinSpace User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateChangesetRequest AWS API Documentation
@@ -1708,7 +1837,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.

@@ -1386,7 +1386,7 @@ module Aws::IoTEventsData
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   The number of seconds which have elapsed on the timer.
+    #   The expiration time for the timer.
     #   @return [Time]
     #
     class Timer < Struct.new(

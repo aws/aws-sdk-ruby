@@ -18,7 +18,10 @@ module Aws::WorkSpaces
     AccessPropertyValue = Shapes::StringShape.new(name: 'AccessPropertyValue')
     AccountModification = Shapes::StructureShape.new(name: 'AccountModification')
     AccountModificationList = Shapes::ListShape.new(name: 'AccountModificationList')
+    AddInName = Shapes::StringShape.new(name: 'AddInName')
+    AddInUrl = Shapes::StringShape.new(name: 'AddInUrl')
     Alias = Shapes::StringShape.new(name: 'Alias')
+    AmazonUuid = Shapes::StringShape.new(name: 'AmazonUuid')
     Application = Shapes::StringShape.new(name: 'Application')
     ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
     AssociateConnectionAliasRequest = Shapes::StructureShape.new(name: 'AssociateConnectionAliasRequest')
@@ -40,6 +43,8 @@ module Aws::WorkSpaces
     Compute = Shapes::StringShape.new(name: 'Compute')
     ComputeType = Shapes::StructureShape.new(name: 'ComputeType')
     ComputerName = Shapes::StringShape.new(name: 'ComputerName')
+    ConnectClientAddIn = Shapes::StructureShape.new(name: 'ConnectClientAddIn')
+    ConnectClientAddInList = Shapes::ListShape.new(name: 'ConnectClientAddInList')
     ConnectionAlias = Shapes::StructureShape.new(name: 'ConnectionAlias')
     ConnectionAliasAssociation = Shapes::StructureShape.new(name: 'ConnectionAliasAssociation')
     ConnectionAliasAssociationList = Shapes::ListShape.new(name: 'ConnectionAliasAssociationList')
@@ -54,6 +59,8 @@ module Aws::WorkSpaces
     ConnectionString = Shapes::StringShape.new(name: 'ConnectionString')
     CopyWorkspaceImageRequest = Shapes::StructureShape.new(name: 'CopyWorkspaceImageRequest')
     CopyWorkspaceImageResult = Shapes::StructureShape.new(name: 'CopyWorkspaceImageResult')
+    CreateConnectClientAddInRequest = Shapes::StructureShape.new(name: 'CreateConnectClientAddInRequest')
+    CreateConnectClientAddInResult = Shapes::StructureShape.new(name: 'CreateConnectClientAddInResult')
     CreateConnectionAliasRequest = Shapes::StructureShape.new(name: 'CreateConnectionAliasRequest')
     CreateConnectionAliasResult = Shapes::StructureShape.new(name: 'CreateConnectionAliasResult')
     CreateIpGroupRequest = Shapes::StructureShape.new(name: 'CreateIpGroupRequest')
@@ -73,6 +80,8 @@ module Aws::WorkSpaces
     DedicatedTenancySupportResultEnum = Shapes::StringShape.new(name: 'DedicatedTenancySupportResultEnum')
     DefaultOu = Shapes::StringShape.new(name: 'DefaultOu')
     DefaultWorkspaceCreationProperties = Shapes::StructureShape.new(name: 'DefaultWorkspaceCreationProperties')
+    DeleteConnectClientAddInRequest = Shapes::StructureShape.new(name: 'DeleteConnectClientAddInRequest')
+    DeleteConnectClientAddInResult = Shapes::StructureShape.new(name: 'DeleteConnectClientAddInResult')
     DeleteConnectionAliasRequest = Shapes::StructureShape.new(name: 'DeleteConnectionAliasRequest')
     DeleteConnectionAliasResult = Shapes::StructureShape.new(name: 'DeleteConnectionAliasResult')
     DeleteIpGroupRequest = Shapes::StructureShape.new(name: 'DeleteIpGroupRequest')
@@ -91,6 +100,8 @@ module Aws::WorkSpaces
     DescribeAccountResult = Shapes::StructureShape.new(name: 'DescribeAccountResult')
     DescribeClientPropertiesRequest = Shapes::StructureShape.new(name: 'DescribeClientPropertiesRequest')
     DescribeClientPropertiesResult = Shapes::StructureShape.new(name: 'DescribeClientPropertiesResult')
+    DescribeConnectClientAddInsRequest = Shapes::StructureShape.new(name: 'DescribeConnectClientAddInsRequest')
+    DescribeConnectClientAddInsResult = Shapes::StructureShape.new(name: 'DescribeConnectClientAddInsResult')
     DescribeConnectionAliasPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeConnectionAliasPermissionsRequest')
     DescribeConnectionAliasPermissionsResult = Shapes::StructureShape.new(name: 'DescribeConnectionAliasPermissionsResult')
     DescribeConnectionAliasesRequest = Shapes::StructureShape.new(name: 'DescribeConnectionAliasesRequest')
@@ -238,6 +249,8 @@ module Aws::WorkSpaces
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UnsupportedNetworkConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedNetworkConfigurationException')
     UnsupportedWorkspaceConfigurationException = Shapes::StructureShape.new(name: 'UnsupportedWorkspaceConfigurationException')
+    UpdateConnectClientAddInRequest = Shapes::StructureShape.new(name: 'UpdateConnectClientAddInRequest')
+    UpdateConnectClientAddInResult = Shapes::StructureShape.new(name: 'UpdateConnectClientAddInResult')
     UpdateConnectionAliasPermissionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionRequest')
     UpdateConnectionAliasPermissionResult = Shapes::StructureShape.new(name: 'UpdateConnectionAliasPermissionResult')
     UpdateDescription = Shapes::StringShape.new(name: 'UpdateDescription')
@@ -335,6 +348,14 @@ module Aws::WorkSpaces
     ComputeType.add_member(:name, Shapes::ShapeRef.new(shape: Compute, location_name: "Name"))
     ComputeType.struct_class = Types::ComputeType
 
+    ConnectClientAddIn.add_member(:add_in_id, Shapes::ShapeRef.new(shape: AmazonUuid, location_name: "AddInId"))
+    ConnectClientAddIn.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "ResourceId"))
+    ConnectClientAddIn.add_member(:name, Shapes::ShapeRef.new(shape: AddInName, location_name: "Name"))
+    ConnectClientAddIn.add_member(:url, Shapes::ShapeRef.new(shape: AddInUrl, location_name: "URL"))
+    ConnectClientAddIn.struct_class = Types::ConnectClientAddIn
+
+    ConnectClientAddInList.member = Shapes::ShapeRef.new(shape: ConnectClientAddIn)
+
     ConnectionAlias.add_member(:connection_string, Shapes::ShapeRef.new(shape: ConnectionString, location_name: "ConnectionString"))
     ConnectionAlias.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, location_name: "AliasId"))
     ConnectionAlias.add_member(:state, Shapes::ShapeRef.new(shape: ConnectionAliasState, location_name: "State"))
@@ -369,6 +390,14 @@ module Aws::WorkSpaces
 
     CopyWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))
     CopyWorkspaceImageResult.struct_class = Types::CopyWorkspaceImageResult
+
+    CreateConnectClientAddInRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    CreateConnectClientAddInRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddInName, required: true, location_name: "Name"))
+    CreateConnectClientAddInRequest.add_member(:url, Shapes::ShapeRef.new(shape: AddInUrl, required: true, location_name: "URL"))
+    CreateConnectClientAddInRequest.struct_class = Types::CreateConnectClientAddInRequest
+
+    CreateConnectClientAddInResult.add_member(:add_in_id, Shapes::ShapeRef.new(shape: AmazonUuid, location_name: "AddInId"))
+    CreateConnectClientAddInResult.struct_class = Types::CreateConnectClientAddInResult
 
     CreateConnectionAliasRequest.add_member(:connection_string, Shapes::ShapeRef.new(shape: ConnectionString, required: true, location_name: "ConnectionString"))
     CreateConnectionAliasRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -430,6 +459,12 @@ module Aws::WorkSpaces
     DefaultWorkspaceCreationProperties.add_member(:enable_maintenance_mode, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EnableMaintenanceMode"))
     DefaultWorkspaceCreationProperties.struct_class = Types::DefaultWorkspaceCreationProperties
 
+    DeleteConnectClientAddInRequest.add_member(:add_in_id, Shapes::ShapeRef.new(shape: AmazonUuid, required: true, location_name: "AddInId"))
+    DeleteConnectClientAddInRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    DeleteConnectClientAddInRequest.struct_class = Types::DeleteConnectClientAddInRequest
+
+    DeleteConnectClientAddInResult.struct_class = Types::DeleteConnectClientAddInResult
+
     DeleteConnectionAliasRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
     DeleteConnectionAliasRequest.struct_class = Types::DeleteConnectionAliasRequest
 
@@ -479,6 +514,15 @@ module Aws::WorkSpaces
 
     DescribeClientPropertiesResult.add_member(:client_properties_list, Shapes::ShapeRef.new(shape: ClientPropertiesList, location_name: "ClientPropertiesList"))
     DescribeClientPropertiesResult.struct_class = Types::DescribeClientPropertiesResult
+
+    DescribeConnectClientAddInsRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    DescribeConnectClientAddInsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectClientAddInsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Limit, location_name: "MaxResults"))
+    DescribeConnectClientAddInsRequest.struct_class = Types::DescribeConnectClientAddInsRequest
+
+    DescribeConnectClientAddInsResult.add_member(:add_ins, Shapes::ShapeRef.new(shape: ConnectClientAddInList, location_name: "AddIns"))
+    DescribeConnectClientAddInsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    DescribeConnectClientAddInsResult.struct_class = Types::DescribeConnectClientAddInsResult
 
     DescribeConnectionAliasPermissionsRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
     DescribeConnectionAliasPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
@@ -854,6 +898,14 @@ module Aws::WorkSpaces
     UnsupportedWorkspaceConfigurationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
     UnsupportedWorkspaceConfigurationException.struct_class = Types::UnsupportedWorkspaceConfigurationException
 
+    UpdateConnectClientAddInRequest.add_member(:add_in_id, Shapes::ShapeRef.new(shape: AmazonUuid, required: true, location_name: "AddInId"))
+    UpdateConnectClientAddInRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "ResourceId"))
+    UpdateConnectClientAddInRequest.add_member(:name, Shapes::ShapeRef.new(shape: AddInName, location_name: "Name"))
+    UpdateConnectClientAddInRequest.add_member(:url, Shapes::ShapeRef.new(shape: AddInUrl, location_name: "URL"))
+    UpdateConnectClientAddInRequest.struct_class = Types::UpdateConnectClientAddInRequest
+
+    UpdateConnectClientAddInResult.struct_class = Types::UpdateConnectClientAddInResult
+
     UpdateConnectionAliasPermissionRequest.add_member(:alias_id, Shapes::ShapeRef.new(shape: ConnectionAliasId, required: true, location_name: "AliasId"))
     UpdateConnectionAliasPermissionRequest.add_member(:connection_alias_permission, Shapes::ShapeRef.new(shape: ConnectionAliasPermission, required: true, location_name: "ConnectionAliasPermission"))
     UpdateConnectionAliasPermissionRequest.struct_class = Types::UpdateConnectionAliasPermissionRequest
@@ -1084,6 +1136,19 @@ module Aws::WorkSpaces
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
       end)
 
+      api.add_operation(:create_connect_client_add_in, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateConnectClientAddIn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateConnectClientAddInRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateConnectClientAddInResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceCreationFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:create_connection_alias, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateConnectionAlias"
         o.http_method = "POST"
@@ -1159,6 +1224,17 @@ module Aws::WorkSpaces
         o.output = Shapes::ShapeRef.new(shape: CreateWorkspacesResult)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+      end)
+
+      api.add_operation(:delete_connect_client_add_in, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteConnectClientAddIn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteConnectClientAddInRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteConnectClientAddInResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:delete_connection_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1257,6 +1333,17 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClientPropertiesRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClientPropertiesResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:describe_connect_client_add_ins, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeConnectClientAddIns"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeConnectClientAddInsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeConnectClientAddInsResult)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1611,6 +1698,17 @@ module Aws::WorkSpaces
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TerminateWorkspacesRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateWorkspacesResult)
+      end)
+
+      api.add_operation(:update_connect_client_add_in, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateConnectClientAddIn"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateConnectClientAddInRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateConnectClientAddInResult)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:update_connection_alias_permission, Seahorse::Model::Operation.new.tap do |o|

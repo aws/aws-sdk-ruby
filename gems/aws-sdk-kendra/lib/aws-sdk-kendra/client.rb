@@ -1406,6 +1406,8 @@ module Aws::Kendra
     # Creates an new set of frequently asked question (FAQ) questions and
     # answers.
     #
+    # Adding FAQs to an index is an asynchronous operation.
+    #
     # @option params [required, String] :index_id
     #   The identifier of the index that contains the FAQ.
     #
@@ -3020,6 +3022,8 @@ module Aws::Kendra
     #   * {Types::GetSnapshotsResponse#snapshots_data #snapshots_data} => Array&lt;Array&lt;String&gt;&gt;
     #   * {Types::GetSnapshotsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_snapshots({
@@ -3786,7 +3790,7 @@ module Aws::Kendra
     #   The unique identifier of the index to search. The identifier is
     #   returned in the response from the `CreateIndex` operation.
     #
-    # @option params [required, String] :query_text
+    # @option params [String] :query_text
     #   The text to search for.
     #
     # @option params [Types::AttributeFilter] :attribute_filter
@@ -3865,12 +3869,13 @@ module Aws::Kendra
     #   * {Types::QueryResult#result_items #result_items} => Array&lt;Types::QueryResultItem&gt;
     #   * {Types::QueryResult#facet_results #facet_results} => Array&lt;Types::FacetResult&gt;
     #   * {Types::QueryResult#total_number_of_results #total_number_of_results} => Integer
+    #   * {Types::QueryResult#warnings #warnings} => Array&lt;Types::Warning&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.query({
     #     index_id: "IndexId", # required
-    #     query_text: "QueryText", # required
+    #     query_text: "QueryText",
     #     attribute_filter: {
     #       and_all_filters: [
     #         {
@@ -4039,6 +4044,9 @@ module Aws::Kendra
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.date_value #=> Time
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].count #=> Integer
     #   resp.total_number_of_results #=> Integer
+    #   resp.warnings #=> Array
+    #   resp.warnings[0].message #=> String
+    #   resp.warnings[0].code #=> String, one of "QUERY_LANGUAGE_INVALID_SYNTAX"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Query AWS API Documentation
     #
@@ -5066,7 +5074,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

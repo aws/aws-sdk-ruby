@@ -1662,8 +1662,8 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
-    # Details about the Amazon ES instances that Amazon Web Services
-    # recommends that you purchase.
+    # Details about the Amazon OpenSearch Service instances that Amazon Web
+    # Services recommends that you purchase.
     #
     # @!attribute [rw] instance_class
     #   The class of instance that Amazon Web Services recommends.
@@ -2230,6 +2230,13 @@ module Aws::CostExplorer
     #   service. You can nest `Expression` objects to define any combination
     #   of dimension filters. For more information, see [Expression][1].
     #
+    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values
+    #   for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
@@ -2402,6 +2409,13 @@ module Aws::CostExplorer
     #   either group by or filter by a `ResourceId`. It requires the
     #   [Expression][1] `"SERVICE = Amazon Elastic Compute Cloud - Compute"`
     #   in the filter.
+    #
+    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values
+    #   for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
     #
     #
     #
@@ -2945,7 +2959,11 @@ module Aws::CostExplorer
     #
     # @!attribute [rw] dimension
     #   The name of the dimension. Each `Dimension` is available for a
-    #   different `Context`. For more information, see `Context`.
+    #   different `Context`. For more information, see [Context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html#awscostmanagement-GetDimensionValues-request-Context
     #   @return [String]
     #
     # @!attribute [rw] context
@@ -3435,8 +3453,7 @@ module Aws::CostExplorer
     #
     #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
-    #   You can nest only one level deep. If there are multiple values for a
-    #   dimension, they are OR'd together.
+    #   You can nest only one level deep.
     #
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
@@ -3827,8 +3844,7 @@ module Aws::CostExplorer
     #
     #   `GetReservationUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
-    #   dimension, and nesting is supported up to only one level deep. If
-    #   there are multiple values for a dimension, they are OR'd together.
+    #   dimension, and nesting is supported up to only one level deep.
     #
     #
     #
@@ -4187,10 +4203,9 @@ module Aws::CostExplorer
     #
     #   `GetSavingsPlansCoverage` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
-    #   dimension. If there are multiple values for a dimension, they are
-    #   OR'd together.
+    #   dimension.
     #
-    #   Cost category is also supported.
+    #   Cost category is supported. Tags are not supported.
     #
     #
     #
@@ -4475,6 +4490,8 @@ module Aws::CostExplorer
     #   object as the other operations, but only `AND` is supported among
     #   each dimension.
     #
+    #   Filtering by tags isn't supported.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
@@ -4639,6 +4656,8 @@ module Aws::CostExplorer
     #   `GetSavingsPlansUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
     #   dimension.
+    #
+    #   Filtering by tags isn't supported.
     #
     #
     #
@@ -5152,8 +5171,8 @@ module Aws::CostExplorer
     #   @return [Types::ElastiCacheInstanceDetails]
     #
     # @!attribute [rw] es_instance_details
-    #   The Amazon ES instances that Amazon Web Services recommends that you
-    #   purchase.
+    #   The Amazon OpenSearch Service instances that Amazon Web Services
+    #   recommends that you purchase.
     #   @return [Types::ESInstanceDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/InstanceDetails AWS API Documentation

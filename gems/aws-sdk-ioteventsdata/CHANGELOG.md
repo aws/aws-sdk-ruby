@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-01-11)
+------------------
+
+* Feature - This release provides documentation updates for Timer.timestamp in the IoT Events API Reference Guide.
+
 1.23.0 (2021-12-21)
 ------------------
 

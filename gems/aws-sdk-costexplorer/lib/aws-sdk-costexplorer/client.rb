@@ -974,6 +974,12 @@ module Aws::CostExplorer
     #   You can nest `Expression` objects to define any combination of
     #   dimension filters. For more information, see [Expression][1].
     #
+    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values for
+    #   `MatchOptions` for `Dimensions` are `EQUALS` and `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
@@ -1155,6 +1161,12 @@ module Aws::CostExplorer
     #   The `GetCostAndUsageWithResources` operation requires that you either
     #   group by or filter by a `ResourceId`. It requires the [Expression][1]
     #   `"SERVICE = Amazon Elastic Compute Cloud - Compute"` in the filter.
+    #
+    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values for
+    #   `MatchOptions` for `Dimensions` are `EQUALS` and `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
     #
     #
     #
@@ -1651,7 +1663,11 @@ module Aws::CostExplorer
     #
     # @option params [required, String] :dimension
     #   The name of the dimension. Each `Dimension` is available for a
-    #   different `Context`. For more information, see `Context`.
+    #   different `Context`. For more information, see [Context][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html#awscostmanagement-GetDimensionValues-request-Context
     #
     # @option params [String] :context
     #   The context for the call to `GetDimensionValues`. This can be
@@ -2040,8 +2056,7 @@ module Aws::CostExplorer
     #
     #   `GetReservationCoverage` uses the same [Expression][1] object as the
     #   other operations, but only `AND` is supported among each dimension.
-    #   You can nest only one level deep. If there are multiple values for a
-    #   dimension, they are OR'd together.
+    #   You can nest only one level deep.
     #
     #   If you don't provide a `SERVICE` filter, Cost Explorer defaults to
     #   EC2.
@@ -2496,8 +2511,7 @@ module Aws::CostExplorer
     #
     #   `GetReservationUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
-    #   dimension, and nesting is supported up to only one level deep. If
-    #   there are multiple values for a dimension, they are OR'd together.
+    #   dimension, and nesting is supported up to only one level deep.
     #
     #
     #
@@ -2935,8 +2949,19 @@ module Aws::CostExplorer
     #
     # * `INSTANCE_FAMILY`
     #
+    # <note markdown="1"> `GetSavingsPlansCoverage` doesn't support filtering by tags.
+    # `GetSavingsPlansCoverage` also doesn't support the `OR` operator
+    # between filter dimensions. For the full request syntax with supported
+    # parameters, see [Examples][1].
+    #
+    #  </note>
+    #
     # To determine valid values for a dimension, use the
     # `GetDimensionValues` operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansCoverage.html#API_GetSavingsPlansCoverage_Examples
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The time period that you want the usage and costs for. The `Start`
@@ -2968,10 +2993,9 @@ module Aws::CostExplorer
     #   * `INSTANCE_FAMILY`
     #
     #   `GetSavingsPlansCoverage` uses the same [Expression][1] object as the
-    #   other operations, but only `AND` is supported among each dimension. If
-    #   there are multiple values for a dimension, they are OR'd together.
+    #   other operations, but only `AND` is supported among each dimension.
     #
-    #   Cost category is also supported.
+    #   Cost category is supported. Tags are not supported.
     #
     #
     #
@@ -3247,7 +3271,16 @@ module Aws::CostExplorer
     # <note markdown="1"> You cannot group by any dimension values for
     # `GetSavingsPlansUtilization`.
     #
+    #  `GetSavingsPlansUtilization` doesn't support filtering by tags.
+    # `GetSavingsPlansUtilization` also doesn't support the `OR` operator
+    # between filter dimensions. For the full request syntax with supported
+    # parameters, see [Examples][1].
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansUtilization.html#API_GetSavingsPlansUtilization_Examples
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The time period that you want the usage and costs for. The `Start`
@@ -3281,6 +3314,8 @@ module Aws::CostExplorer
     #   `GetSavingsPlansUtilization` uses the same [Expression][1] object as
     #   the other operations, but only `AND` is supported among each
     #   dimension.
+    #
+    #   Filtering by tags isn't supported.
     #
     #
     #
@@ -3397,7 +3432,16 @@ module Aws::CostExplorer
     # <note markdown="1"> `GetSavingsPlanUtilizationDetails` internally groups data by
     # `SavingsPlansArn`.
     #
+    #  `GetSavingsPlansUtilizationDetails` doesn't support filtering by
+    # tags. `GetSavingsPlansUtilizationDetails` also doesn't support the
+    # `OR` operator between filter dimensions. For the full request syntax
+    # with supported parameters, see [Examples][1].
+    #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetSavingsPlansUtilizationDetails.html#API_GetSavingsPlansUtilizationDetails_Examples
     #
     # @option params [required, Types::DateInterval] :time_period
     #   The time period that you want the usage and costs for. The `Start`
@@ -3422,6 +3466,8 @@ module Aws::CostExplorer
     #   `GetSavingsPlansUtilizationDetails` uses the same [Expression][1]
     #   object as the other operations, but only `AND` is supported among each
     #   dimension.
+    #
+    #   Filtering by tags isn't supported.
     #
     #
     #
@@ -4186,7 +4232,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

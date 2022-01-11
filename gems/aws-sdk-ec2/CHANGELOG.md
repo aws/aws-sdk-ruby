@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.292.0 (2022-01-11)
+------------------
+
+* Feature - EC2 Capacity Reservations now supports RHEL instance platforms (RHEL with SQL Server Standard, RHEL with SQL Server Enterprise, RHEL with SQL Server Web, RHEL with HA, RHEL with HA and SQL Server Standard, RHEL with HA and SQL Server Enterprise)
+
 1.291.0 (2022-01-10)
 ------------------
 

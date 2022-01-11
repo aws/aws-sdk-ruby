@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-01-11)
+------------------
+
+* Feature - Documentation updates for FinSpace.
+
 1.10.0 (2021-12-21)
 ------------------
 

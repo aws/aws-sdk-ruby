@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-01-11)
+------------------
+
+* Feature - Doc only update for Cost Explorer API that fixes missing clarifications for MatchOptions definitions
+
 1.70.0 (2021-12-21)
 ------------------
 

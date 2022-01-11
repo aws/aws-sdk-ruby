@@ -233,6 +233,35 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Describes an Amazon Connect client add-in.
+    #
+    # @!attribute [rw] add_in_id
+    #   The client add-in identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the client add in.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The endpoint URL of the client add-in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ConnectClientAddIn AWS API Documentation
+    #
+    class ConnectClientAddIn < Struct.new(
+      :add_in_id,
+      :resource_id,
+      :name,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a connection alias. Connection aliases are used for
     # cross-Region redirection. For more information, see [ Cross-Region
     # Redirection for Amazon WorkSpaces][1].
@@ -405,6 +434,49 @@ module Aws::WorkSpaces
     #
     class CopyWorkspaceImageResult < Struct.new(
       :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateConnectClientAddInRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         name: "AddInName", # required
+    #         url: "AddInUrl", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which to configure the client add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the client add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The endpoint URL of the Amazon Connect client add-in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectClientAddInRequest AWS API Documentation
+    #
+    class CreateConnectClientAddInRequest < Struct.new(
+      :resource_id,
+      :name,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] add_in_id
+    #   The client add-in identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectClientAddInResult AWS API Documentation
+    #
+    class CreateConnectClientAddInResult < Struct.new(
+      :add_in_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -833,6 +905,35 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteConnectClientAddInRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_in_id: "AmazonUuid", # required
+    #         resource_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] add_in_id
+    #   The identifier of the client add-in to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectClientAddInRequest AWS API Documentation
+    #
+    class DeleteConnectClientAddInRequest < Struct.new(
+      :add_in_id,
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectClientAddInResult AWS API Documentation
+    #
+    class DeleteConnectClientAddInResult < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteConnectionAliasRequest
     #   data as a hash:
     #
@@ -1076,6 +1177,56 @@ module Aws::WorkSpaces
     #
     class DescribeClientPropertiesResult < Struct.new(
       :client_properties_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeConnectClientAddInsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If you received a `NextToken` from a previous call that was
+    #   paginated, provide this token to receive the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectClientAddInsRequest AWS API Documentation
+    #
+    class DescribeConnectClientAddInsRequest < Struct.new(
+      :resource_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] add_ins
+    #   Information about client add-ins.
+    #   @return [Array<Types::ConnectClientAddIn>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   null when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectClientAddInsResult AWS API Documentation
+    #
+    class DescribeConnectClientAddInsResult < Struct.new(
+      :add_ins,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2984,6 +3135,47 @@ module Aws::WorkSpaces
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateConnectClientAddInRequest
+    #   data as a hash:
+    #
+    #       {
+    #         add_in_id: "AmazonUuid", # required
+    #         resource_id: "DirectoryId", # required
+    #         name: "AddInName",
+    #         url: "AddInUrl",
+    #       }
+    #
+    # @!attribute [rw] add_in_id
+    #   The identifier of the client add-in to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the client add-in.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The endpoint URL of the Amazon Connect client add-in.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectClientAddInRequest AWS API Documentation
+    #
+    class UpdateConnectClientAddInRequest < Struct.new(
+      :add_in_id,
+      :resource_id,
+      :name,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectClientAddInResult AWS API Documentation
+    #
+    class UpdateConnectClientAddInResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateConnectionAliasPermissionRequest
     #   data as a hash:

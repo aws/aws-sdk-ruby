@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-01-11)
+------------------
+
+* Feature - Amazon Kendra now supports advanced query language and query-less search.
+
 1.41.0 (2021-12-21)
 ------------------
 

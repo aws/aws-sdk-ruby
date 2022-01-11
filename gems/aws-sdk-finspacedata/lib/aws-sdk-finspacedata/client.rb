@@ -352,7 +352,7 @@ module Aws::FinSpaceData
     # Creates a new Changeset in a FinSpace Dataset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -374,7 +374,25 @@ module Aws::FinSpaceData
     #     prior ingested Changeset.
     #
     # @option params [required, Hash<String,String>] :source_params
-    #   Options that define the location of the data being ingested.
+    #   Options that define the location of the data being ingested
+    #   (`s3SourcePath`) and the source of the changeset (`sourceType`).
+    #
+    #   Both `s3SourcePath` and `sourceType` are required attributes.
+    #
+    #   Here is an example of how you could specify the `sourceParams`\:
+    #
+    #   ` "sourceParams": \{ "s3SourcePath":
+    #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
+    #   "sourceType": "S3" \} `
+    #
+    #   The S3 path that you specify must allow the FinSpace role access. To
+    #   do that, you first need to configure the IAM policy on S3 bucket. For
+    #   more information, see [Loading data from an Amazon S3 Bucket using the
+    #   FinSpace API][1]section.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
     #
     # @option params [required, Hash<String,String>] :format_params
     #   Options that define the structure of the source file(s) including the
@@ -392,9 +410,22 @@ module Aws::FinSpaceData
     #
     #   * `XML` - XML source file format.
     #
-    #   For example, you could specify the following for `formatParams`\: `
-    #   "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   Here is an example of how you could specify the `formatParams`\:
+    #
+    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
     #   "separator": ",", "compression":"None" \} `
+    #
+    #   Note that if you only provide `formatType` as `CSV`, the rest of the
+    #   attributes will automatically default to CSV values as following:
+    #
+    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #
+    #   For more information about supported file formats, see [Supported Data
+    #   Types and File Formats][1] in the FinSpace User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
     #
     # @return [Types::CreateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -432,7 +463,7 @@ module Aws::FinSpaceData
     # Creates a Dataview for a Dataset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -497,7 +528,7 @@ module Aws::FinSpaceData
     # Creates a new FinSpace Dataset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -582,7 +613,7 @@ module Aws::FinSpaceData
     # Deletes a FinSpace Dataset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1034,7 +1065,7 @@ module Aws::FinSpaceData
     # Updates a FinSpace Changeset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1047,10 +1078,58 @@ module Aws::FinSpaceData
     #   The unique identifier for the Changeset to update.
     #
     # @option params [required, Hash<String,String>] :source_params
-    #   Options that define the location of the data being ingested.
+    #   Options that define the location of the data being ingested
+    #   (`s3SourcePath`) and the source of the changeset (`sourceType`).
+    #
+    #   Both `s3SourcePath` and `sourceType` are required attributes.
+    #
+    #   Here is an example of how you could specify the `sourceParams`\:
+    #
+    #   ` "sourceParams": \{ "s3SourcePath":
+    #   "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
+    #   "sourceType": "S3" \} `
+    #
+    #   The S3 path that you specify must allow the FinSpace role access. To
+    #   do that, you first need to configure the IAM policy on S3 bucket. For
+    #   more information, see [Loading data from an Amazon S3 Bucket using the
+    #   FinSpace API][1]section.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
     #
     # @option params [required, Hash<String,String>] :format_params
-    #   Options that define the structure of the source file(s).
+    #   Options that define the structure of the source file(s) including the
+    #   format type (`formatType`), header row (`withHeader`), data separation
+    #   character (`separator`) and the type of compression (`compression`).
+    #
+    #   `formatType` is a required attribute and can have the following
+    #   values:
+    #
+    #   * `PARQUET` - Parquet source file format.
+    #
+    #   * `CSV` - CSV source file format.
+    #
+    #   * `JSON` - JSON source file format.
+    #
+    #   * `XML` - XML source file format.
+    #
+    #   Here is an example of how you could specify the `formatParams`\:
+    #
+    #   ` "formatParams": \{ "formatType": "CSV", "withHeader": "true",
+    #   "separator": ",", "compression":"None" \} `
+    #
+    #   Note that if you only provide `formatType` as `CSV`, the rest of the
+    #   attributes will automatically default to CSV values as following:
+    #
+    #   ` \{ "withHeader": "true", "separator": "," \} `
+    #
+    #   For more information about supported file formats, see [Supported Data
+    #   Types and File Formats][1] in the FinSpace User Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
     #
     # @return [Types::UpdateChangesetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1088,7 +1167,7 @@ module Aws::FinSpaceData
     # Updates a FinSpace Dataset.
     #
     # @option params [String] :client_token
-    #   A token used to ensure idempotency.
+    #   A token that ensures idempotency. This token expires in 10 minutes.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1168,7 +1247,7 @@ module Aws::FinSpaceData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-finspacedata'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

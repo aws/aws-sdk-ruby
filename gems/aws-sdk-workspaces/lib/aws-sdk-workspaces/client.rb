@@ -533,6 +533,46 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Creates a client-add-in for Amazon Connect within a directory. You can
+    # create only one Amazon Connect client add-in within a directory.
+    #
+    # This client add-in allows WorkSpaces users to seamlessly connect to
+    # Amazon Connect.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which to configure the client add-in.
+    #
+    # @option params [required, String] :name
+    #   The name of the client add-in.
+    #
+    # @option params [required, String] :url
+    #   The endpoint URL of the Amazon Connect client add-in.
+    #
+    # @return [Types::CreateConnectClientAddInResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateConnectClientAddInResult#add_in_id #add_in_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_connect_client_add_in({
+    #     resource_id: "DirectoryId", # required
+    #     name: "AddInName", # required
+    #     url: "AddInUrl", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.add_in_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/CreateConnectClientAddIn AWS API Documentation
+    #
+    # @overload create_connect_client_add_in(params = {})
+    # @param [Hash] params ({})
+    def create_connect_client_add_in(params = {}, options = {})
+      req = build_request(:create_connect_client_add_in, params)
+      req.send_request(options)
+    end
+
     # Creates the specified connection alias for use with cross-Region
     # redirection. For more information, see [ Cross-Region Redirection for
     # Amazon WorkSpaces][1].
@@ -929,6 +969,33 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes a client-add-in for Amazon Connect that is configured within a
+    # directory.
+    #
+    # @option params [required, String] :add_in_id
+    #   The identifier of the client add-in to delete.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_connect_client_add_in({
+    #     add_in_id: "AmazonUuid", # required
+    #     resource_id: "DirectoryId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteConnectClientAddIn AWS API Documentation
+    #
+    # @overload delete_connect_client_add_in(params = {})
+    # @param [Hash] params ({})
+    def delete_connect_client_add_in(params = {}, options = {})
+      req = build_request(:delete_connect_client_add_in, params)
+      req.send_request(options)
+    end
+
     # Deletes the specified connection alias. For more information, see [
     # Cross-Region Redirection for Amazon WorkSpaces][1].
     #
@@ -1212,6 +1279,50 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_client_properties(params = {}, options = {})
       req = build_request(:describe_client_properties, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of Amazon Connect client add-ins that have been
+    # created.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #
+    # @option params [String] :next_token
+    #   If you received a `NextToken` from a previous call that was paginated,
+    #   provide this token to receive the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return.
+    #
+    # @return [Types::DescribeConnectClientAddInsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeConnectClientAddInsResult#add_ins #add_ins} => Array&lt;Types::ConnectClientAddIn&gt;
+    #   * {Types::DescribeConnectClientAddInsResult#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_connect_client_add_ins({
+    #     resource_id: "DirectoryId", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.add_ins #=> Array
+    #   resp.add_ins[0].add_in_id #=> String
+    #   resp.add_ins[0].resource_id #=> String
+    #   resp.add_ins[0].name #=> String
+    #   resp.add_ins[0].url #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeConnectClientAddIns AWS API Documentation
+    #
+    # @overload describe_connect_client_add_ins(params = {})
+    # @param [Hash] params ({})
+    def describe_connect_client_add_ins(params = {}, options = {})
+      req = build_request(:describe_connect_client_add_ins, params)
       req.send_request(options)
     end
 
@@ -2662,6 +2773,41 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Updates a Amazon Connect client add-in. Use this action to update the
+    # name and endpoint URL of a Amazon Connect client add-in.
+    #
+    # @option params [required, String] :add_in_id
+    #   The identifier of the client add-in to update.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier for which the client add-in is configured.
+    #
+    # @option params [String] :name
+    #   The name of the client add-in.
+    #
+    # @option params [String] :url
+    #   The endpoint URL of the Amazon Connect client add-in.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_connect_client_add_in({
+    #     add_in_id: "AmazonUuid", # required
+    #     resource_id: "DirectoryId", # required
+    #     name: "AddInName",
+    #     url: "AddInUrl",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/UpdateConnectClientAddIn AWS API Documentation
+    #
+    # @overload update_connect_client_add_in(params = {})
+    # @param [Hash] params ({})
+    def update_connect_client_add_in(params = {}, options = {})
+      req = build_request(:update_connect_client_add_in, params)
+      req.send_request(options)
+    end
+
     # Shares or unshares a connection alias with one account by specifying
     # whether that account has permission to associate the connection alias
     # with a directory. If the association permission is granted, the
@@ -2865,7 +3011,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

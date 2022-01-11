@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2022-01-11)
+------------------
+
+* Feature - This release adds the db-proxy event type to support subscribing to RDS Proxy events.
+
 1.135.0 (2022-01-03)
 ------------------
 

@@ -471,6 +471,10 @@ module Aws::Kendra
     ValueImportanceMapKey = Shapes::StringShape.new(name: 'ValueImportanceMapKey')
     VisitorId = Shapes::StringShape.new(name: 'VisitorId')
     VpcSecurityGroupId = Shapes::StringShape.new(name: 'VpcSecurityGroupId')
+    Warning = Shapes::StructureShape.new(name: 'Warning')
+    WarningCode = Shapes::StringShape.new(name: 'WarningCode')
+    WarningList = Shapes::ListShape.new(name: 'WarningList')
+    WarningMessage = Shapes::StringShape.new(name: 'WarningMessage')
     WebCrawlerConfiguration = Shapes::StructureShape.new(name: 'WebCrawlerConfiguration')
     WebCrawlerMode = Shapes::StringShape.new(name: 'WebCrawlerMode')
     WorkDocsConfiguration = Shapes::StructureShape.new(name: 'WorkDocsConfiguration')
@@ -1452,7 +1456,7 @@ module Aws::Kendra
     PutPrincipalMappingRequest.struct_class = Types::PutPrincipalMappingRequest
 
     QueryRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
-    QueryRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, required: true, location_name: "QueryText"))
+    QueryRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: QueryText, location_name: "QueryText"))
     QueryRequest.add_member(:attribute_filter, Shapes::ShapeRef.new(shape: AttributeFilter, location_name: "AttributeFilter"))
     QueryRequest.add_member(:facets, Shapes::ShapeRef.new(shape: FacetList, location_name: "Facets"))
     QueryRequest.add_member(:requested_document_attributes, Shapes::ShapeRef.new(shape: DocumentAttributeKeyList, location_name: "RequestedDocumentAttributes"))
@@ -1469,6 +1473,7 @@ module Aws::Kendra
     QueryResult.add_member(:result_items, Shapes::ShapeRef.new(shape: QueryResultItemList, location_name: "ResultItems"))
     QueryResult.add_member(:facet_results, Shapes::ShapeRef.new(shape: FacetResultList, location_name: "FacetResults"))
     QueryResult.add_member(:total_number_of_results, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalNumberOfResults"))
+    QueryResult.add_member(:warnings, Shapes::ShapeRef.new(shape: WarningList, location_name: "Warnings"))
     QueryResult.struct_class = Types::QueryResult
 
     QueryResultItem.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
@@ -1834,6 +1839,12 @@ module Aws::Kendra
 
     ValueImportanceMap.key = Shapes::ShapeRef.new(shape: ValueImportanceMapKey)
     ValueImportanceMap.value = Shapes::ShapeRef.new(shape: Importance)
+
+    Warning.add_member(:message, Shapes::ShapeRef.new(shape: WarningMessage, location_name: "Message"))
+    Warning.add_member(:code, Shapes::ShapeRef.new(shape: WarningCode, location_name: "Code"))
+    Warning.struct_class = Types::Warning
+
+    WarningList.member = Shapes::ShapeRef.new(shape: Warning)
 
     WebCrawlerConfiguration.add_member(:urls, Shapes::ShapeRef.new(shape: Urls, required: true, location_name: "Urls"))
     WebCrawlerConfiguration.add_member(:crawl_depth, Shapes::ShapeRef.new(shape: CrawlDepth, location_name: "CrawlDepth"))
@@ -2303,6 +2314,12 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_data_source_sync_jobs, Seahorse::Model::Operation.new.tap do |o|
