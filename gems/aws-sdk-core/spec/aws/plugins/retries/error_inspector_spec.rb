@@ -18,7 +18,8 @@ module Aws
           RetryErrorsSvc::Errors::InvalidAccessKeyId,
           RetryErrorsSvc::Errors::AuthFailure,
           RetryErrorsSvc::Errors::InvalidIdentityToken,
-          RetryErrorsSvc::Errors::ExpiredToken
+          RetryErrorsSvc::Errors::ExpiredToken,
+          RetryErrorsSvc::Errors::ExpiredTokenException
         ]
 
         expired_credentials_errors.each do |e|
