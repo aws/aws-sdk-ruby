@@ -13,7 +13,8 @@ module Aws
             'InvalidAccessKeyId',          # s3
             'AuthFailure',                 # ec2
             'InvalidIdentityToken',        # sts
-            'ExpiredToken'                 # route53
+            'ExpiredToken',                # route53
+            'ExpiredTokenException'        # kinesis
           ]
         )
 
