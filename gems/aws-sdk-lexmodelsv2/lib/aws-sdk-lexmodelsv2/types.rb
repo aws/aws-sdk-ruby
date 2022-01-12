@@ -10,6 +10,29 @@
 module Aws::LexModelsV2
   module Types
 
+    # Provides settings that enable advanced recognition settings for slot
+    # values.
+    #
+    # @note When making an API call, you may pass AdvancedRecognitionSetting
+    #   data as a hash:
+    #
+    #       {
+    #         audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
+    #       }
+    #
+    # @!attribute [rw] audio_recognition_strategy
+    #   Enables using the slot values as a custom vocabulary for recognizing
+    #   user utterances.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AdvancedRecognitionSetting AWS API Documentation
+    #
+    class AdvancedRecognitionSetting < Struct.new(
+      :audio_recognition_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters responses returned by the `ListAggregatedUtterances`
     # operation.
     #
@@ -1884,8 +1907,13 @@ module Aws::LexModelsV2
     #             bot_version: "BotVersion", # required
     #             locale_id: "LocaleId", # required
     #           },
+    #           custom_vocabulary_export_specification: {
+    #             bot_id: "Id", # required
+    #             bot_version: "BotVersion", # required
+    #             locale_id: "LocaleId", # required
+    #           },
     #         },
-    #         file_format: "LexJson", # required, accepts LexJson
+    #         file_format: "LexJson", # required, accepts LexJson, TSV
     #         file_password: "ImportExportFilePassword",
     #       }
     #
@@ -3265,6 +3293,9 @@ module Aws::LexModelsV2
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
     #           },
+    #           advanced_recognition_setting: {
+    #             audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
+    #           },
     #         },
     #         parent_slot_type_signature: "SlotTypeSignature",
     #         bot_id: "Id", # required
@@ -3473,6 +3504,75 @@ module Aws::LexModelsV2
     #
     class CustomPayload < Struct.new(
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the parameters required for exporting a custom vocabulary.
+    #
+    # @note When making an API call, you may pass CustomVocabularyExportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot that contains the custom vocabulary to
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the custom vocabulary to
+    #   export.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale of the bot that contains the custom vocabulary to export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CustomVocabularyExportSpecification AWS API Documentation
+    #
+    class CustomVocabularyExportSpecification < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the parameters required for importing a custom vocabulary.
+    #
+    # @note When making an API call, you may pass CustomVocabularyImportSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot to import the custom vocabulary to.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to import the custom vocabulary to.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The identifier of the local to import the custom vocabulary to. The
+    #   value must be `en_GB`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/CustomVocabularyImportSpecification AWS API Documentation
+    #
+    class CustomVocabularyImportSpecification < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3777,6 +3877,68 @@ module Aws::LexModelsV2
       :bot_id,
       :bot_version,
       :bot_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteCustomVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot to remove the custom vocabulary
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot to remove the custom vocabulary from.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier for the locale that contains the custom
+    #   vocabulary to remove.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteCustomVocabularyRequest AWS API Documentation
+    #
+    class DeleteCustomVocabularyRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot that the custom vocabulary was removed
+    #   from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that the custom vocabulary was removed from.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale identifier for the locale that the custom vocabulary was
+    #   removed from.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_status
+    #   The status of removing the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteCustomVocabularyResponse AWS API Documentation
+    #
+    class DeleteCustomVocabularyResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4672,6 +4834,78 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeCustomVocabularyMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       }
+    #
+    # @!attribute [rw] bot_id
+    #   The unique identifier of the bot that contains the custom
+    #   vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The bot version of the bot to return metadata for.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale to return the custom vocabulary information for. The
+    #   locale must be `en_GB`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeCustomVocabularyMetadataRequest AWS API Documentation
+    #
+    class DescribeCustomVocabularyMetadataRequest < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bot_id
+    #   The identifier of the bot that contains the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] bot_version
+    #   The version of the bot that contains the custom vocabulary to
+    #   describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   The locale that contains the custom vocabulary to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_vocabulary_status
+    #   The status of the custom vocabulary. If the status is `Ready` the
+    #   custom vocabulary is ready to use.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date_time
+    #   The date and time that the custom vocabulary was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_date_time
+    #   The date and time that the custom vocabulary was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeCustomVocabularyMetadataResponse AWS API Documentation
+    #
+    class DescribeCustomVocabularyMetadataResponse < Struct.new(
+      :bot_id,
+      :bot_version,
+      :locale_id,
+      :custom_vocabulary_status,
+      :creation_date_time,
+      :last_updated_date_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeExportRequest
     #   data as a hash:
     #
@@ -4701,8 +4935,7 @@ module Aws::LexModelsV2
     #   @return [Types::ExportResourceSpecification]
     #
     # @!attribute [rw] file_format
-    #   The file format used in the files that describe the bot or bot
-    #   locale.
+    #   The file format used in the files that describe the resource.
     #   @return [String]
     #
     # @!attribute [rw] export_status
@@ -4768,7 +5001,8 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] resource_specification
-    #   The specifications of the imported bot or bot locale.
+    #   The specifications of the imported bot, bot locale, or custom
+    #   vocabulary.
     #   @return [Types::ImportResourceSpecification]
     #
     # @!attribute [rw] imported_resource_id
@@ -5340,7 +5574,8 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to use to filter the response.
+    #   The values to use to filter the response. The values must be `Bot`,
+    #   `BotLocale`, or `CustomVocabulary`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
@@ -5377,6 +5612,11 @@ module Aws::LexModelsV2
     #           bot_version: "BotVersion", # required
     #           locale_id: "LocaleId", # required
     #         },
+    #         custom_vocabulary_export_specification: {
+    #           bot_id: "Id", # required
+    #           bot_version: "BotVersion", # required
+    #           locale_id: "LocaleId", # required
+    #         },
     #       }
     #
     # @!attribute [rw] bot_export_specification
@@ -5387,11 +5627,16 @@ module Aws::LexModelsV2
     #   Parameters for exporting a bot locale.
     #   @return [Types::BotLocaleExportSpecification]
     #
+    # @!attribute [rw] custom_vocabulary_export_specification
+    #   The parameters required to export a custom vocabulary.
+    #   @return [Types::CustomVocabularyExportSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ExportResourceSpecification AWS API Documentation
     #
     class ExportResourceSpecification < Struct.new(
       :bot_export_specification,
-      :bot_locale_export_specification)
+      :bot_locale_export_specification,
+      :custom_vocabulary_export_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6264,7 +6509,8 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] values
-    #   The values to use to filter the response.
+    #   The values to use to filter the response. The values must be `Bot`,
+    #   `BotLocale`, or `CustomVocabulary`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] operator
@@ -6316,6 +6562,11 @@ module Aws::LexModelsV2
     #             engine: "standard", # accepts standard, neural
     #           },
     #         },
+    #         custom_vocabulary_import_specification: {
+    #           bot_id: "Id", # required
+    #           bot_version: "DraftBotVersion", # required
+    #           locale_id: "LocaleId", # required
+    #         },
     #       }
     #
     # @!attribute [rw] bot_import_specification
@@ -6326,11 +6577,16 @@ module Aws::LexModelsV2
     #   Parameters for importing a bot locale.
     #   @return [Types::BotLocaleImportSpecification]
     #
+    # @!attribute [rw] custom_vocabulary_import_specification
+    #   Provides the parameters required for importing a custom vocabulary.
+    #   @return [Types::CustomVocabularyImportSpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportResourceSpecification AWS API Documentation
     #
     class ImportResourceSpecification < Struct.new(
       :bot_import_specification,
-      :bot_locale_import_specification)
+      :bot_locale_import_specification,
+      :custom_vocabulary_import_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6395,6 +6651,10 @@ module Aws::LexModelsV2
     #   The date and time that the import was last updated.
     #   @return [Time]
     #
+    # @!attribute [rw] imported_resource_type
+    #   The type of resource that was imported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ImportSummary AWS API Documentation
     #
     class ImportSummary < Struct.new(
@@ -6404,7 +6664,8 @@ module Aws::LexModelsV2
       :import_status,
       :merge_strategy,
       :creation_date_time,
-      :last_updated_date_time)
+      :last_updated_date_time,
+      :imported_resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7462,8 +7723,12 @@ module Aws::LexModelsV2
     # @!attribute [rw] next_token
     #   If the response from the `ListBots` operation contains more results
     #   than specified in the `maxResults` parameter, a token is returned in
-    #   the response. Use that token in the `nextToken` parameter to return
-    #   the next page of results.
+    #   the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a `ListBots`
+    #   request to return the next page of results. For a complete set of
+    #   results, call the `ListBots` operation until the `nextToken`
+    #   returned in the response is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListBotsRequest AWS API Documentation
@@ -7686,6 +7951,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         locale_id: "LocaleId",
     #       }
     #
     # @!attribute [rw] bot_id
@@ -7717,8 +7983,18 @@ module Aws::LexModelsV2
     # @!attribute [rw] next_token
     #   If the response from the `ListExports` operation contains more
     #   results that specified in the `maxResults` parameter, a token is
-    #   returned in the response. Use that token in the `nextToken`
-    #   parameter to return the next page of results.
+    #   returned in the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a
+    #   `ListExports` request to return the next page of results. For a
+    #   complete set of results, call the `ListExports` operation until the
+    #   `nextToken` returned in the response is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   Specifies the resources that should be exported. If you don't
+    #   specify a resource type in the `filters` parameter, both bot locales
+    #   and custom vocabularies are exported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExportsRequest AWS API Documentation
@@ -7729,7 +8005,8 @@ module Aws::LexModelsV2
       :sort_by,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7756,13 +8033,18 @@ module Aws::LexModelsV2
     #   `ListExports` operation request to get the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] locale_id
+    #   The locale specified in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExportsResponse AWS API Documentation
     #
     class ListExportsResponse < Struct.new(
       :bot_id,
       :bot_version,
       :export_summaries,
-      :next_token)
+      :next_token,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7786,6 +8068,7 @@ module Aws::LexModelsV2
     #         ],
     #         max_results: 1,
     #         next_token: "NextToken",
+    #         locale_id: "LocaleId",
     #       }
     #
     # @!attribute [rw] bot_id
@@ -7817,8 +8100,18 @@ module Aws::LexModelsV2
     # @!attribute [rw] next_token
     #   If the response from the `ListImports` operation contains more
     #   results than specified in the `maxResults` parameter, a token is
-    #   returned in the response. Use that token in the `nextToken`
-    #   parameter to return the next page of results.
+    #   returned in the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a
+    #   `ListImports` request to return the next page of results. For a
+    #   complete set of results, call the `ListImports` operation until the
+    #   `nextToken` returned in the response is null.
+    #   @return [String]
+    #
+    # @!attribute [rw] locale_id
+    #   Specifies the locale that should be present in the list. If you
+    #   don't specify a resource type in the `filters` parameter, the list
+    #   contains both bot locales and custom vocabularies.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImportsRequest AWS API Documentation
@@ -7829,7 +8122,8 @@ module Aws::LexModelsV2
       :sort_by,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7856,13 +8150,18 @@ module Aws::LexModelsV2
     #   `ListImports` operation request to get the next page of results.
     #   @return [String]
     #
+    # @!attribute [rw] locale_id
+    #   The locale specified in the request.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImportsResponse AWS API Documentation
     #
     class ListImportsResponse < Struct.new(
       :bot_id,
       :bot_version,
       :import_summaries,
-      :next_token)
+      :next_token,
+      :locale_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7928,8 +8227,12 @@ module Aws::LexModelsV2
     # @!attribute [rw] next_token
     #   If the response from the `ListIntents` operation contains more
     #   results than specified in the `maxResults` parameter, a token is
-    #   returned in the response. Use that token in the `nextToken`
-    #   parameter to return the next page of results.
+    #   returned in the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a
+    #   `ListIntents` request to return the next page of results. For a
+    #   complete set of results, call the `ListIntents` operation until the
+    #   `nextToken` returned in the response is null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListIntentsRequest AWS API Documentation
@@ -10171,6 +10474,9 @@ module Aws::LexModelsV2
     #         regex_filter: {
     #           pattern: "RegexPattern", # required
     #         },
+    #         advanced_recognition_setting: {
+    #           audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
+    #         },
     #       }
     #
     # @!attribute [rw] resolution_strategy
@@ -10193,11 +10499,17 @@ module Aws::LexModelsV2
     #   A regular expression used to validate the value of a slot.
     #   @return [Types::SlotValueRegexFilter]
     #
+    # @!attribute [rw] advanced_recognition_setting
+    #   Provides settings that enable advanced recognition settings for slot
+    #   values.
+    #   @return [Types::AdvancedRecognitionSetting]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/SlotValueSelectionSetting AWS API Documentation
     #
     class SlotValueSelectionSetting < Struct.new(
       :resolution_strategy,
-      :regex_filter)
+      :regex_filter,
+      :advanced_recognition_setting)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10365,6 +10677,11 @@ module Aws::LexModelsV2
     #               engine: "standard", # accepts standard, neural
     #             },
     #           },
+    #           custom_vocabulary_import_specification: {
+    #             bot_id: "Id", # required
+    #             bot_version: "DraftBotVersion", # required
+    #             locale_id: "LocaleId", # required
+    #           },
     #         },
     #         merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict, Append
     #         file_password: "ImportExportFilePassword",
@@ -10380,7 +10697,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] resource_specification
-    #   Parameters for creating the bot or bot locale.
+    #   Parameters for creating the bot, bot locale or custom vocabulary.
     #   @return [Types::ImportResourceSpecification]
     #
     # @!attribute [rw] merge_strategy
@@ -10391,9 +10708,9 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] file_password
-    #   The password used to encrypt the zip archive that contains the bot
-    #   or bot locale definition. You should always encrypt the zip archive
-    #   to protect it during transit between your site and Amazon Lex.
+    #   The password used to encrypt the zip archive that contains the
+    #   resource definition. You should always encrypt the zip archive to
+    #   protect it during transit between your site and Amazon Lex.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/StartImportRequest AWS API Documentation
@@ -10412,7 +10729,7 @@ module Aws::LexModelsV2
     #   @return [String]
     #
     # @!attribute [rw] resource_specification
-    #   The parameters used when importing the bot or bot locale.
+    #   The parameters used when importing the resource.
     #   @return [Types::ImportResourceSpecification]
     #
     # @!attribute [rw] merge_strategy
@@ -10424,7 +10741,7 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] import_status
     #   The current status of the import. When the status is `Complete` the
-    #   bot or bot alias is ready to use.
+    #   bot, bot alias, or custom vocabulary is ready to use.
     #   @return [String]
     #
     # @!attribute [rw] creation_date_time
@@ -11324,7 +11641,9 @@ module Aws::LexModelsV2
     #   @return [Types::ExportResourceSpecification]
     #
     # @!attribute [rw] file_format
-    #   The file format used for the files that define the resource.
+    #   The file format used for the files that define the resource. The
+    #   `TSV` format is required to export a custom vocabulary only;
+    #   otherwise use `LexJson` format.
     #   @return [String]
     #
     # @!attribute [rw] export_status
@@ -12545,6 +12864,9 @@ module Aws::LexModelsV2
     #           resolution_strategy: "OriginalValue", # required, accepts OriginalValue, TopResolution
     #           regex_filter: {
     #             pattern: "RegexPattern", # required
+    #           },
+    #           advanced_recognition_setting: {
+    #             audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
     #           },
     #         },
     #         parent_slot_type_signature: "SlotTypeSignature",

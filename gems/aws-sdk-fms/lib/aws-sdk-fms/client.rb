@@ -1603,7 +1603,7 @@ module Aws::FMS
     # * An Network Firewall policy, which provides firewall rules to filter
     #   network traffic in specified Amazon VPCs.
     #
-    # * A DNS Firewall policy, which provides Route 53 Resolver DNS Firewall
+    # * A DNS Firewall policy, which provides Route 53 Resolver DNS Firewall
     #   rules to filter DNS queries for specified VPCs.
     #
     # Each policy is specific to one of the types. If you want to enforce
@@ -1831,7 +1831,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

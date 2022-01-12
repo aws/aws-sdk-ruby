@@ -820,7 +820,7 @@ module Aws::Honeycode
     #   @return [String]
     #
     # @!attribute [rw] app_id
-    #   The ID of the app that contains the screem.
+    #   The ID of the app that contains the screen.
     #   @return [String]
     #
     # @!attribute [rw] screen_id
@@ -1331,6 +1331,37 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The resource's tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTagsForResourceResult AWS API Documentation
+    #
+    class ListTagsForResourceResult < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass QueryTableRowsRequest
     #   data as a hash:
     #
@@ -1752,6 +1783,37 @@ module Aws::Honeycode
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of tags to apply to the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/TagResourceResult AWS API Documentation
+    #
+    class TagResourceResult < Aws::EmptyStructure; end
+
     # Tps(transactions per second) rate reached.
     #
     # @!attribute [rw] message
@@ -1764,6 +1826,35 @@ module Aws::Honeycode
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ResourceArn", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A list of tag keys to remove from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/UntagResourceResult AWS API Documentation
+    #
+    class UntagResourceResult < Aws::EmptyStructure; end
 
     # Data needed to create a single row in a table as part of the
     # BatchCreateTableRows request.

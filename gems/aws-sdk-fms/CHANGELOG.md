@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-01-12)
+------------------
+
+* Feature - Shield Advanced policies for Amazon CloudFront resources now support automatic application layer DDoS mitigation. The max length for SecurityServicePolicyData ManagedServiceData is now 8192 characters, instead of 4096.
+
 1.45.0 (2021-12-21)
 ------------------
 

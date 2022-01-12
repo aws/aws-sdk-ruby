@@ -2152,8 +2152,9 @@ module Aws::FMS
     #   specify a resource type of `ResourceTypeList` and then specify the
     #   resource types in a `ResourceTypeList`.
     #
-    #   For WAF and Shield Advanced, example resource types include
-    #   `AWS::ElasticLoadBalancingV2::LoadBalancer` and
+    #   For WAF and Shield Advanced, resource types include
+    #   `AWS::ElasticLoadBalancingV2::LoadBalancer`,
+    #   `AWS::ElasticLoadBalancing::LoadBalancer`, `AWS::EC2::EIP`, and
     #   `AWS::CloudFront::Distribution`. For a security group common policy,
     #   valid values are `AWS::EC2::NetworkInterface` and
     #   `AWS::EC2::Instance`. For a security group content audit policy,
@@ -2191,10 +2192,16 @@ module Aws::FMS
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_unused_fm_managed_resources
-    #   Indicates whether Firewall Manager should delete Firewall Manager
-    #   managed resources, such as web ACLs and security groups, when they
-    #   are not in use by the Firewall Manager policy. By default, Firewall
-    #   Manager doesn't delete unused Firewall Manager managed resources.
+    #   Indicates whether Firewall Manager should automatically remove
+    #   protections from resources that leave the policy scope and clean up
+    #   resources that Firewall Manager is managing for accounts when those
+    #   accounts leave policy scope. For example, Firewall Manager will
+    #   disassociate a Firewall Manager managed web ACL from a protected
+    #   customer resource when the customer resource leaves policy scope.
+    #
+    #   By default, Firewall Manager doesn't remove protections or delete
+    #   Firewall Manager managed resources.
+    #
     #   This option is not available for Shield Advanced or WAF Classic
     #   policies.
     #   @return [Boolean]
@@ -2427,10 +2434,16 @@ module Aws::FMS
     #   @return [Boolean]
     #
     # @!attribute [rw] delete_unused_fm_managed_resources
-    #   Indicates whether Firewall Manager should delete Firewall Manager
-    #   managed resources, such as web ACLs and security groups, when they
-    #   are not in use by the Firewall Manager policy. By default, Firewall
-    #   Manager doesn't delete unused Firewall Manager managed resources.
+    #   Indicates whether Firewall Manager should automatically remove
+    #   protections from resources that leave the policy scope and clean up
+    #   resources that Firewall Manager is managing for accounts when those
+    #   accounts leave policy scope. For example, Firewall Manager will
+    #   disassociate a Firewall Manager managed web ACL from a protected
+    #   customer resource when the customer resource leaves policy scope.
+    #
+    #   By default, Firewall Manager doesn't remove protections or delete
+    #   Firewall Manager managed resources.
+    #
     #   This option is not available for Shield Advanced or WAF Classic
     #   policies.
     #   @return [Boolean]
@@ -3172,8 +3185,7 @@ module Aws::FMS
     #
     # @!attribute [rw] managed_service_data
     #   Details about the service that are specific to the service type, in
-    #   JSON format. For service type `SHIELD_ADVANCED`, this is an empty
-    #   string.
+    #   JSON format.
     #
     #   * Example: `DNS_FIREWALL`
     #
@@ -3189,6 +3201,28 @@ module Aws::FMS
     #
     #     `"\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2","priority":10\}],"networkFirewallStatelessDefaultActions":["aws:pass","custom1"],"networkFirewallStatelessFragmentDefaultActions":["custom2","aws:pass"],"networkFirewallStatelessCustomActions":[\{"actionName":"custom1","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension1"\}]\}\}\},\{"actionName":"custom2","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension2"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1"\}],"networkFirewallOrchestrationConfig":\{"singleFirewallEndpointPerVPC":true,"allowedIPV4CidrList":["10.24.34.0/28"]\}
     #     \}"`
+    #
+    #   * Specification for `SHIELD_ADVANCED` for Amazon CloudFront
+    #     distributions
+    #
+    #     `"\{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
+    #     \{"automaticResponseStatus":"ENABLED|IGNORED|DISABLED",
+    #     "automaticResponseAction":"BLOCK|COUNT"\},
+    #     "overrideCustomerWebaclClassic":true|false\}"`
+    #
+    #     For example:
+    #     `"\{"type":"SHIELD_ADVANCED","automaticResponseConfiguration":
+    #     \{"automaticResponseStatus":"ENABLED",
+    #     "automaticResponseAction":"COUNT"\}\}"`
+    #
+    #     The default value for `automaticResponseStatus` is `IGNORED`. The
+    #     value for `automaticResponseAction` is only required when
+    #     `automaticResponseStatus` is set to `ENABLED`. The default value
+    #     for `overrideCustomerWebaclClassic` is `false`.
+    #
+    #     For other resource types that you can protect with a Shield
+    #     Advanced policy, this `ManagedServiceData` configuration is an
+    #     empty string.
     #
     #   * Example: `WAFV2`
     #

@@ -745,7 +745,7 @@ module Aws::Honeycode
     #   The ID of the workbook that contains the screen.
     #
     # @option params [required, String] :app_id
-    #   The ID of the app that contains the screem.
+    #   The ID of the app that contains the screen.
     #
     # @option params [required, String] :screen_id
     #   The ID of the screen.
@@ -1080,6 +1080,35 @@ module Aws::Honeycode
       req.send_request(options)
     end
 
+    # The ListTagsForResource API allows you to return a resource's tags.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #
+    # @return [Types::ListTagsForResourceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResult#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "ResourceArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # The QueryTableRows API allows you to use a filter formula to query for
     # specific rows in a table.
     #
@@ -1243,6 +1272,63 @@ module Aws::Honeycode
       req.send_request(options)
     end
 
+    # The TagResource API allows you to add tags to an ARN-able resource.
+    # Resource includes workbook, table, screen and screen-automation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   A list of tags to apply to the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # The UntagResource API allows you to removes tags from an ARN-able
+    # resource. Resource includes workbook, table, screen and
+    # screen-automation.
+    #
+    # @option params [required, String] :resource_arn
+    #   The resource's Amazon Resource Name (ARN).
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   A list of tag keys to remove from the resource.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "ResourceArn", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1256,7 +1342,7 @@ module Aws::Honeycode
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-honeycode'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

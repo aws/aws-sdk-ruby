@@ -1066,7 +1066,7 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 5.0.6
+    #       **T4g node types** (available only for Redis engine version 6.0
     #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -2077,7 +2077,7 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 5.0.6
+    #       **T4g node types** (available only for Redis engine version 6.0
     #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -6375,7 +6375,7 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 5.0.6
+    #       **T4g node types** (available only for Redis engine version 6.0
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -6591,7 +6591,7 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version 5.0.6
+    #       **T4g node types** (available only for Redis engine version 6.0
     #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -9581,7 +9581,7 @@ module Aws::ElastiCache
     #
     #
     #
-    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html
+    # [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html
     #
     # @option params [required, String] :cache_cluster_id
     #   The cluster identifier. This parameter is stored as a lowercase
@@ -10221,7 +10221,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

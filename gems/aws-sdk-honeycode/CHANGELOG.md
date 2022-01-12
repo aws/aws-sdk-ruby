@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-01-12)
+------------------
+
+* Feature - Honeycode is releasing new APIs to allow user to create, delete and list tags on resources.
+
 1.13.0 (2021-12-21)
 ------------------
 

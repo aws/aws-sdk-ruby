@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.125.3 (2022-01-12)
+------------------
+
 * Issue - Add `ExpiredTokenException` to `ErrorInspector` (legacy retry) for Kinesis errors.
 
 3.125.2 (2022-01-10)

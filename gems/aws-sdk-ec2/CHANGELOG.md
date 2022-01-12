@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.293.0 (2022-01-12)
+------------------
+
+* Feature - Hpc6a instances are powered by a third-generation AMD EPYC processors (Milan) delivering all-core turbo frequency of 3.4 GHz
+
 1.292.0 (2022-01-11)
 ------------------
 

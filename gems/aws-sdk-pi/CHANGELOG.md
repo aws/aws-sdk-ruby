@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-01-12)
+------------------
+
+* Feature - This release adds three Performance Insights APIs. Use ListAvailableResourceMetrics to get available metrics, GetResourceMetadata to get feature metadata, and ListAvailableResourceDimensions to list available dimensions. The AdditionalMetrics field in DescribeDimensionKeys retrieves per-SQL metrics.
+
 1.35.0 (2021-12-21)
 ------------------
 

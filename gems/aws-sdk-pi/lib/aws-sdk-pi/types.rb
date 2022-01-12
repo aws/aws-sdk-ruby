@@ -34,7 +34,7 @@ module Aws::PI
     #   data as a hash:
     #
     #       {
-    #         service_type: "RDS", # required, accepts RDS
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
     #         identifier: "RequestString", # required
     #         start_time: Time.now, # required
     #         end_time: Time.now, # required
@@ -45,6 +45,7 @@ module Aws::PI
     #           dimensions: ["RequestString"],
     #           limit: 1,
     #         },
+    #         additional_metrics: ["RequestString"],
     #         partition_by: {
     #           group: "RequestString", # required
     #           dimensions: ["RequestString"],
@@ -58,17 +59,18 @@ module Aws::PI
     #       }
     #
     # @!attribute [rw] service_type
-    #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. The only valid value for *ServiceType* is `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   An immutable, AWS Region-unique identifier for a data source.
-    #   Performance Insights gathers metrics from this data source.
+    #   An immutable, Amazon Web Services Region-unique identifier for a
+    #   data source. Performance Insights gathers metrics from this data
+    #   source.
     #
     #   To use an Amazon RDS instance as a data source, you specify its
     #   `DbiResourceId` value. For example, specify
-    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -140,6 +142,14 @@ module Aws::PI
     #   values for a dimension.
     #   @return [Types::DimensionGroup]
     #
+    # @!attribute [rw] additional_metrics
+    #   Additional metrics for the top `N` dimension keys. If the specified
+    #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`,
+    #   you can specify per-SQL metrics to get the values for the top `N`
+    #   SQL digests. The response syntax is `"AdditionalMetrics" : \{
+    #   "string" : "string" \}`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary
     #   dimension to further subdivide the partition keys in the response.
@@ -177,6 +187,7 @@ module Aws::PI
       :metric,
       :period_in_seconds,
       :group_by,
+      :additional_metrics,
       :partition_by,
       :filter,
       :max_results,
@@ -210,9 +221,10 @@ module Aws::PI
     #   @return [Array<Types::DimensionKeyDescription>]
     #
     # @!attribute [rw] next_token
-    #   An optional pagination token provided by a previous request. If this
-    #   parameter is specified, the response includes only records beyond
-    #   the token, up to the value specified by `MaxRecords`.
+    #   A pagination token that indicates the response didn’t return all
+    #   available records because `MaxRecords` was specified in the previous
+    #   request. To get the remaining records, specify `NextToken` in a
+    #   separate request with this value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DescribeDimensionKeysResponse AWS API Documentation
@@ -223,6 +235,20 @@ module Aws::PI
       :partition_keys,
       :keys,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The information about a dimension.
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of a dimension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionDetail AWS API Documentation
+    #
+    class DimensionDetail < Struct.new(
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -251,8 +277,8 @@ module Aws::PI
     #   The name of the dimension group. Valid values are:
     #
     #   * `db` - The name of the database to which the client is connected
-    #     (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL, RDS MySQL,
-    #     and MariaDB)
+    #     (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora MySQL,
+    #     Amazon RDS MySQL, and MariaDB)
     #
     #   * `db.application` - The name of the application that is connected
     #     to the database (only Aurora PostgreSQL and RDS PostgreSQL)
@@ -293,8 +319,8 @@ module Aws::PI
     #     engines)
     #
     #   * `db.name` - The name of the database to which the client is
-    #     connected (only Aurora PostgreSQL, RDS PostgreSQL, Aurora MySQL,
-    #     RDS MySQL, and MariaDB)
+    #     connected (only Aurora PostgreSQL, Amazon RDS PostgreSQL, Aurora
+    #     MySQL, Amazon RDS MySQL, and MariaDB)
     #
     #   * `db.session_type.name` - The type of the current session (only
     #     Aurora PostgreSQL and RDS PostgreSQL)
@@ -348,17 +374,40 @@ module Aws::PI
       include Aws::Structure
     end
 
-    # An array of descriptions and aggregated values for each dimension
-    # within a dimension group.
+    # Information about dimensions within a dimension group.
+    #
+    # @!attribute [rw] group
+    #   The name of the dimension group.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   The dimensions within a dimension group.
+    #   @return [Array<Types::DimensionDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/DimensionGroupDetail AWS API Documentation
+    #
+    class DimensionGroupDetail < Struct.new(
+      :group,
+      :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that includes the requested dimension key values and
+    # aggregated metric values within a dimension group.
     #
     # @!attribute [rw] dimensions
     #   A map of name-value pairs for the dimensions in the group.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] total
-    #   The aggregated metric value for the dimension(s), over the requested
+    #   The aggregated metric value for the dimensions, over the requested
     #   time range.
     #   @return [Float]
+    #
+    # @!attribute [rw] additional_metrics
+    #   A map that contains the value for each additional metric.
+    #   @return [Hash<String,Float>]
     #
     # @!attribute [rw] partitions
     #   If `PartitionBy` was specified, `PartitionKeys` contains the
@@ -370,6 +419,7 @@ module Aws::PI
     class DimensionKeyDescription < Struct.new(
       :dimensions,
       :total,
+      :additional_metrics,
       :partitions)
       SENSITIVE = []
       include Aws::Structure
@@ -413,11 +463,41 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # The metadata for a feature. For example, the metadata might indicate
+    # that a feature is turned on or off on a specific DB instance.
+    #
+    # @!attribute [rw] status
+    #   The status of the feature on the DB instance. Possible values
+    #   include the following:
+    #
+    #   * `ENABLED`\: the feature is enabled on the instance.
+    #
+    #   * `DISABLED`\: the feature is disabled on the instance.
+    #
+    #   * `UNSUPPORTED`\: the feature isn't supported on the instance.
+    #
+    #   * `ENABLED_PENDING_REBOOT`\: the feature is enabled on the instance
+    #     but requires a reboot to take effect.
+    #
+    #   * `DISABLED_PENDING_REBOOT`\: the feature is disabled on the
+    #     instance but requires a reboot to take effect.
+    #
+    #   * `UNKNOWN`\: the feature status couldn't be determined.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/FeatureMetadata AWS API Documentation
+    #
+    class FeatureMetadata < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetDimensionKeyDetailsRequest
     #   data as a hash:
     #
     #       {
-    #         service_type: "RDS", # required, accepts RDS
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
     #         identifier: "IdentifierString", # required
     #         group: "RequestString", # required
     #         group_identifier: "RequestString", # required
@@ -425,15 +505,16 @@ module Aws::PI
     #       }
     #
     # @!attribute [rw] service_type
-    #   The AWS service for which Performance Insights returns data. The
-    #   only valid value is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns data. The only valid value is `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
     #   The ID for a data source from which to gather dimension data. This
-    #   ID must be immutable and unique within an AWS Region. When a DB
-    #   instance is the data source, specify its `DbiResourceId` value. For
-    #   example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   ID must be immutable and unique within an Amazon Web Services
+    #   Region. When a DB instance is the data source, specify its
+    #   `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
     #   @return [String]
     #
     # @!attribute [rw] group
@@ -480,11 +561,64 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetResourceMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
+    #         identifier: "RequestString", # required
+    #       }
+    #
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique for an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. To use a DB instance as a data source,
+    #   specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetadataRequest AWS API Documentation
+    #
+    class GetResourceMetadataRequest < Struct.new(
+      :service_type,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique for an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. To use a DB instance as a data source,
+    #   specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   @return [String]
+    #
+    # @!attribute [rw] features
+    #   The metadata for different features. For example, the metadata might
+    #   indicate that a feature is turned on or off on a specific DB
+    #   instance.
+    #   @return [Hash<String,Types::FeatureMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetadataResponse AWS API Documentation
+    #
+    class GetResourceMetadataResponse < Struct.new(
+      :identifier,
+      :features)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetResourceMetricsRequest
     #   data as a hash:
     #
     #       {
-    #         service_type: "RDS", # required, accepts RDS
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
     #         identifier: "RequestString", # required
     #         metric_queries: [ # required
     #           {
@@ -507,13 +641,14 @@ module Aws::PI
     #       }
     #
     # @!attribute [rw] service_type
-    #   The AWS service for which Performance Insights returns metrics. The
-    #   only valid value for *ServiceType* is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics. The only valid value for *ServiceType* is `RDS`.
     #   @return [String]
     #
     # @!attribute [rw] identifier
-    #   An immutable, AWS Region-unique identifier for a data source.
-    #   Performance Insights gathers metrics from this data source.
+    #   An immutable, Amazon Web Services Region-unique identifier for a
+    #   data source. Performance Insights gathers metrics from this data
+    #   source.
     #
     #   To use a DB instance as a data source, specify its `DbiResourceId`
     #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
@@ -607,8 +742,9 @@ module Aws::PI
     #   @return [Time]
     #
     # @!attribute [rw] identifier
-    #   An immutable, AWS Region-unique identifier for a data source.
-    #   Performance Insights gathers metrics from this data source.
+    #   An immutable, Amazon Web Services Region-unique identifier for a
+    #   data source. Performance Insights gathers metrics from this data
+    #   source.
     #
     #   To use a DB instance as a data source, you specify its
     #   `DbiResourceId` value - for example: `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
@@ -663,11 +799,185 @@ module Aws::PI
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListAvailableResourceDimensionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
+    #         identifier: "RequestString", # required
+    #         metrics: ["RequestString"], # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique within an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. To use an Amazon RDS DB instance as a data
+    #   source, specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metrics
+    #   The types of metrics for which to retrieve dimensions. Valid values
+    #   include `db.load`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in the response. If more items
+    #   exist than the specified `MaxRecords` value, a pagination token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the token, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceDimensionsRequest AWS API Documentation
+    #
+    class ListAvailableResourceDimensionsRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :metrics,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_dimensions
+    #   The dimension information returned for requested metric types.
+    #   @return [Array<Types::MetricDimensionGroups>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the token, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceDimensionsResponse AWS API Documentation
+    #
+    class ListAvailableResourceDimensionsResponse < Struct.new(
+      :metric_dimensions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAvailableResourceMetricsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         service_type: "RDS", # required, accepts RDS, DOCDB
+    #         identifier: "RequestString", # required
+    #         metric_types: ["RequestString"], # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] service_type
+    #   The Amazon Web Services service for which Performance Insights
+    #   returns metrics.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   An immutable identifier for a data source that is unique within an
+    #   Amazon Web Services Region. Performance Insights gathers metrics
+    #   from this data source. To use an Amazon RDS DB instance as a data
+    #   source, specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_types
+    #   The types of metrics to return in the response. Valid values in the
+    #   array include the following:
+    #
+    #   * `os` (OS counter metrics)
+    #
+    #   * `db` (DB load metrics)
+    #
+    #   * `db.sql.stats` (per-SQL metrics)
+    #
+    #   * `db.sql_tokenized.stats` (per-SQL digest metrics)
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the token, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return. If the `MaxRecords` value is
+    #   less than the number of existing items, the response includes a
+    #   pagination token.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceMetricsRequest AWS API Documentation
+    #
+    class ListAvailableResourceMetricsRequest < Struct.new(
+      :service_type,
+      :identifier,
+      :metric_types,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metrics
+    #   An array of metrics available to query. Each array element contains
+    #   the full name, description, and unit of the metric.
+    #   @return [Array<Types::ResponseResourceMetric>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that indicates the response didn’t return all
+    #   available records because `MaxRecords` was specified in the previous
+    #   request. To get the remaining records, specify `NextToken` in a
+    #   separate request with this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceMetricsResponse AWS API Documentation
+    #
+    class ListAvailableResourceMetricsResponse < Struct.new(
+      :metrics,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The available dimension information for a metric type.
+    #
+    # @!attribute [rw] metric
+    #   The metric type to which the dimension information belongs.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The available dimension groups for a metric type.
+    #   @return [Array<Types::DimensionGroupDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/MetricDimensionGroups AWS API Documentation
+    #
+    class MetricDimensionGroups < Struct.new(
+      :metric,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A time-ordered series of data points, corresponding to a dimension of
     # a Performance Insights metric.
     #
     # @!attribute [rw] key
-    #   The dimension(s) to which the data points apply.
+    #   The dimensions to which the data points apply.
     #   @return [Types::ResponseResourceMetricKey]
     #
     # @!attribute [rw] data_points
@@ -686,8 +996,8 @@ module Aws::PI
 
     # A single query to be processed. You must provide the metric to query.
     # If no other parameters are specified, Performance Insights returns all
-    # of the data points for that metric. You can optionally request that
-    # the data points be aggregated by dimension group ( `GroupBy`), and
+    # data points for the specified metric. Optionally, you can request that
+    # the data points be aggregated by dimension group (`GroupBy`), and
     # return only those data points that match your criteria (`Filter`).
     #
     # @note When making an API call, you may pass MetricQuery
@@ -772,13 +1082,38 @@ module Aws::PI
     # specifies one dimension.
     #
     # @!attribute [rw] dimensions
-    #   A dimension map that contains the dimension(s) for this partition.
+    #   A dimension map that contains the dimensions for this partition.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ResponsePartitionKey AWS API Documentation
     #
     class ResponsePartitionKey < Struct.new(
       :dimensions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains the full name, description, and unit of a
+    # metric.
+    #
+    # @!attribute [rw] metric
+    #   The full name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] unit
+    #   The unit of the metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ResponseResourceMetric AWS API Documentation
+    #
+    class ResponseResourceMetric < Struct.new(
+      :metric,
+      :description,
+      :unit)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-01-12)
+------------------
+
+* Feature - This release adds support for Custom vocabulary in Amazon Lex V2 APIs for model building. Customers can give Amazon Lex V2 more information about how to process audio conversations with a bot by creating a custom vocabulary in a specific language.
+
 1.19.0 (2021-12-21)
 ------------------
 

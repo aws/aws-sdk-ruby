@@ -304,8 +304,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -724,7 +724,7 @@ module Aws::ElastiCache
     #     **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #     `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #     **T4g node types** (available only for Redis engine version 5.0.6
+    #     **T4g node types** (available only for Redis engine version 6.0
     #     onward and for Memcached engine version 1.5.16 onward):
     #     `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
@@ -1736,8 +1736,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -2532,8 +2532,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -4207,8 +4207,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -4401,8 +4401,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and for Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and for Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -8047,8 +8047,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -8271,8 +8271,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and Memcached engine version 1.5.16 onward):
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #
     #       **T3 node types:** `cache.t3.micro`, `cache.t3.small`,
@@ -8773,8 +8773,8 @@ module Aws::ElastiCache
     #       **M4 node types:** `cache.m4.large`, `cache.m4.xlarge`,
     #       `cache.m4.2xlarge`, `cache.m4.4xlarge`, `cache.m4.10xlarge`
     #
-    #       **T4g node types** (available only for Redis engine version
-    #       5.0.6 onward and Memcached engine version 1.5.16 onward):
+    #       **T4g node types** (available only for Redis engine version 6.0
+    #       onward and Memcached engine version 1.5.16 onward):
     #
     #       `cache.t4g.micro`, `cache.t4g.small`, `cache.t4g.medium`
     #

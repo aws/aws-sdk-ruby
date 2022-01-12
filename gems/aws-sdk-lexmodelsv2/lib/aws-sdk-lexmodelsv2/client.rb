@@ -855,8 +855,13 @@ module Aws::LexModelsV2
     #         bot_version: "BotVersion", # required
     #         locale_id: "LocaleId", # required
     #       },
+    #       custom_vocabulary_export_specification: {
+    #         bot_id: "Id", # required
+    #         bot_version: "BotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       },
     #     },
-    #     file_format: "LexJson", # required, accepts LexJson
+    #     file_format: "LexJson", # required, accepts LexJson, TSV
     #     file_password: "ImportExportFilePassword",
     #   })
     #
@@ -868,7 +873,10 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
     #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
     #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
     #
@@ -2404,6 +2412,9 @@ module Aws::LexModelsV2
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
     #       },
+    #       advanced_recognition_setting: {
+    #         audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
+    #       },
     #     },
     #     parent_slot_type_signature: "SlotTypeSignature",
     #     bot_id: "Id", # required
@@ -2431,6 +2442,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].synonyms[0].value #=> String
     #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
+    #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -2653,6 +2665,50 @@ module Aws::LexModelsV2
     # @param [Hash] params ({})
     def delete_bot_version(params = {}, options = {})
       req = build_request(:delete_bot_version, params)
+      req.send_request(options)
+    end
+
+    # Removes a custom vocabulary from the specified locale in the specified
+    # bot.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot to remove the custom vocabulary from.
+    #
+    # @option params [required, String] :bot_version
+    #   The version of the bot to remove the custom vocabulary from.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale identifier for the locale that contains the custom
+    #   vocabulary to remove.
+    #
+    # @return [Types::DeleteCustomVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomVocabularyResponse#bot_id #bot_id} => String
+    #   * {Types::DeleteCustomVocabularyResponse#bot_version #bot_version} => String
+    #   * {Types::DeleteCustomVocabularyResponse#locale_id #locale_id} => String
+    #   * {Types::DeleteCustomVocabularyResponse#custom_vocabulary_status #custom_vocabulary_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_vocabulary({
+    #     bot_id: "Id", # required
+    #     bot_version: "DraftBotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.custom_vocabulary_status #=> String, one of "Ready", "Deleting", "Exporting", "Importing", "Creating"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DeleteCustomVocabulary AWS API Documentation
+    #
+    # @overload delete_custom_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_vocabulary(params = {}, options = {})
+      req = build_request(:delete_custom_vocabulary, params)
       req.send_request(options)
     end
 
@@ -3348,6 +3404,53 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
+    # Provides metadata information about a custom vocabulary.
+    #
+    # @option params [required, String] :bot_id
+    #   The unique identifier of the bot that contains the custom vocabulary.
+    #
+    # @option params [required, String] :bot_version
+    #   The bot version of the bot to return metadata for.
+    #
+    # @option params [required, String] :locale_id
+    #   The locale to return the custom vocabulary information for. The locale
+    #   must be `en_GB`.
+    #
+    # @return [Types::DescribeCustomVocabularyMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#bot_id #bot_id} => String
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#bot_version #bot_version} => String
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#locale_id #locale_id} => String
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#custom_vocabulary_status #custom_vocabulary_status} => String
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#creation_date_time #creation_date_time} => Time
+    #   * {Types::DescribeCustomVocabularyMetadataResponse#last_updated_date_time #last_updated_date_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_custom_vocabulary_metadata({
+    #     bot_id: "Id", # required
+    #     bot_version: "BotVersion", # required
+    #     locale_id: "LocaleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bot_id #=> String
+    #   resp.bot_version #=> String
+    #   resp.locale_id #=> String
+    #   resp.custom_vocabulary_status #=> String, one of "Ready", "Deleting", "Exporting", "Importing", "Creating"
+    #   resp.creation_date_time #=> Time
+    #   resp.last_updated_date_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/DescribeCustomVocabularyMetadata AWS API Documentation
+    #
+    # @overload describe_custom_vocabulary_metadata(params = {})
+    # @param [Hash] params ({})
+    def describe_custom_vocabulary_metadata(params = {}, options = {})
+      req = build_request(:describe_custom_vocabulary_metadata, params)
+      req.send_request(options)
+    end
+
     # Gets information about a specific export.
     #
     # @option params [required, String] :export_id
@@ -3378,7 +3481,10 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
     #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
     #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.failure_reasons #=> Array
     #   resp.failure_reasons[0] #=> String
@@ -3440,6 +3546,9 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
+    #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
+    #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
     #   resp.imported_resource_id #=> String
     #   resp.imported_resource_name #=> String
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
@@ -3979,6 +4088,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].synonyms[0].value #=> String
     #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
+    #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -4424,8 +4534,12 @@ module Aws::LexModelsV2
     # @option params [String] :next_token
     #   If the response from the `ListBots` operation contains more results
     #   than specified in the `maxResults` parameter, a token is returned in
-    #   the response. Use that token in the `nextToken` parameter to return
-    #   the next page of results.
+    #   the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a `ListBots`
+    #   request to return the next page of results. For a complete set of
+    #   results, call the `ListBots` operation until the `nextToken` returned
+    #   in the response is null.
     #
     # @return [Types::ListBotsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4610,8 +4724,8 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Lists the exports for a bot or bot locale. Exports are kept in the
-    # list for 7 days.
+    # Lists the exports for a bot, bot locale, or custom vocabulary. Exports
+    # are kept in the list for 7 days.
     #
     # @option params [String] :bot_id
     #   The unique identifier that Amazon Lex assigned to the bot.
@@ -4637,8 +4751,17 @@ module Aws::LexModelsV2
     # @option params [String] :next_token
     #   If the response from the `ListExports` operation contains more results
     #   that specified in the `maxResults` parameter, a token is returned in
-    #   the response. Use that token in the `nextToken` parameter to return
-    #   the next page of results.
+    #   the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a `ListExports`
+    #   request to return the next page of results. For a complete set of
+    #   results, call the `ListExports` operation until the `nextToken`
+    #   returned in the response is null.
+    #
+    # @option params [String] :locale_id
+    #   Specifies the resources that should be exported. If you don't specify
+    #   a resource type in the `filters` parameter, both bot locales and
+    #   custom vocabularies are exported.
     #
     # @return [Types::ListExportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4646,6 +4769,7 @@ module Aws::LexModelsV2
     #   * {Types::ListExportsResponse#bot_version #bot_version} => String
     #   * {Types::ListExportsResponse#export_summaries #export_summaries} => Array&lt;Types::ExportSummary&gt;
     #   * {Types::ListExportsResponse#next_token #next_token} => String
+    #   * {Types::ListExportsResponse#locale_id #locale_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -4667,6 +4791,7 @@ module Aws::LexModelsV2
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     locale_id: "LocaleId",
     #   })
     #
     # @example Response structure
@@ -4680,11 +4805,15 @@ module Aws::LexModelsV2
     #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.bot_id #=> String
     #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.bot_version #=> String
     #   resp.export_summaries[0].resource_specification.bot_locale_export_specification.locale_id #=> String
-    #   resp.export_summaries[0].file_format #=> String, one of "LexJson"
+    #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.bot_id #=> String
+    #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.bot_version #=> String
+    #   resp.export_summaries[0].resource_specification.custom_vocabulary_export_specification.locale_id #=> String
+    #   resp.export_summaries[0].file_format #=> String, one of "LexJson", "TSV"
     #   resp.export_summaries[0].export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.export_summaries[0].creation_date_time #=> Time
     #   resp.export_summaries[0].last_updated_date_time #=> Time
     #   resp.next_token #=> String
+    #   resp.locale_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListExports AWS API Documentation
     #
@@ -4695,8 +4824,8 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Lists the imports for a bot or bot locale. Imports are kept in the
-    # list for 7 days.
+    # Lists the imports for a bot, bot locale, or custom vocabulary. Imports
+    # are kept in the list for 7 days.
     #
     # @option params [String] :bot_id
     #   The unique identifier that Amazon Lex assigned to the bot.
@@ -4722,8 +4851,17 @@ module Aws::LexModelsV2
     # @option params [String] :next_token
     #   If the response from the `ListImports` operation contains more results
     #   than specified in the `maxResults` parameter, a token is returned in
-    #   the response. Use that token in the `nextToken` parameter to return
-    #   the next page of results.
+    #   the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a `ListImports`
+    #   request to return the next page of results. For a complete set of
+    #   results, call the `ListImports` operation until the `nextToken`
+    #   returned in the response is null.
+    #
+    # @option params [String] :locale_id
+    #   Specifies the locale that should be present in the list. If you don't
+    #   specify a resource type in the `filters` parameter, the list contains
+    #   both bot locales and custom vocabularies.
     #
     # @return [Types::ListImportsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4731,6 +4869,7 @@ module Aws::LexModelsV2
     #   * {Types::ListImportsResponse#bot_version #bot_version} => String
     #   * {Types::ListImportsResponse#import_summaries #import_summaries} => Array&lt;Types::ImportSummary&gt;
     #   * {Types::ListImportsResponse#next_token #next_token} => String
+    #   * {Types::ListImportsResponse#locale_id #locale_id} => String
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -4752,6 +4891,7 @@ module Aws::LexModelsV2
     #     ],
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     locale_id: "LocaleId",
     #   })
     #
     # @example Response structure
@@ -4766,7 +4906,9 @@ module Aws::LexModelsV2
     #   resp.import_summaries[0].merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_summaries[0].creation_date_time #=> Time
     #   resp.import_summaries[0].last_updated_date_time #=> Time
+    #   resp.import_summaries[0].imported_resource_type #=> String, one of "Bot", "BotLocale", "CustomVocabulary"
     #   resp.next_token #=> String
+    #   resp.locale_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/ListImports AWS API Documentation
     #
@@ -4812,8 +4954,12 @@ module Aws::LexModelsV2
     # @option params [String] :next_token
     #   If the response from the `ListIntents` operation contains more results
     #   than specified in the `maxResults` parameter, a token is returned in
-    #   the response. Use that token in the `nextToken` parameter to return
-    #   the next page of results.
+    #   the response.
+    #
+    #   Use the returned token in the `nextToken` parameter of a `ListIntents`
+    #   request to return the next page of results. For a complete set of
+    #   results, call the `ListIntents` operation until the `nextToken`
+    #   returned in the response is null.
     #
     # @return [Types::ListIntentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5374,8 +5520,8 @@ module Aws::LexModelsV2
       req.send_request(options)
     end
 
-    # Starts importing a bot or bot locale from a zip archive that you
-    # uploaded to an S3 bucket.
+    # Starts importing a bot, bot locale, or custom vocabulary from a zip
+    # archive that you uploaded to an S3 bucket.
     #
     # @option params [required, String] :import_id
     #   The unique identifier for the import. It is included in the response
@@ -5386,7 +5532,7 @@ module Aws::LexModelsV2
     #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/API_CreateUploadUrl.html
     #
     # @option params [required, Types::ImportResourceSpecification] :resource_specification
-    #   Parameters for creating the bot or bot locale.
+    #   Parameters for creating the bot, bot locale or custom vocabulary.
     #
     # @option params [required, String] :merge_strategy
     #   The strategy to use when there is a name conflict between the imported
@@ -5395,8 +5541,8 @@ module Aws::LexModelsV2
     #   fails.
     #
     # @option params [String] :file_password
-    #   The password used to encrypt the zip archive that contains the bot or
-    #   bot locale definition. You should always encrypt the zip archive to
+    #   The password used to encrypt the zip archive that contains the
+    #   resource definition. You should always encrypt the zip archive to
     #   protect it during transit between your site and Amazon Lex.
     #
     # @return [Types::StartImportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -5436,6 +5582,11 @@ module Aws::LexModelsV2
     #           engine: "standard", # accepts standard, neural
     #         },
     #       },
+    #       custom_vocabulary_import_specification: {
+    #         bot_id: "Id", # required
+    #         bot_version: "DraftBotVersion", # required
+    #         locale_id: "LocaleId", # required
+    #       },
     #     },
     #     merge_strategy: "Overwrite", # required, accepts Overwrite, FailOnConflict, Append
     #     file_password: "ImportExportFilePassword",
@@ -5458,6 +5609,9 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.nlu_intent_confidence_threshold #=> Float
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.voice_id #=> String
     #   resp.resource_specification.bot_locale_import_specification.voice_settings.engine #=> String, one of "standard", "neural"
+    #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
+    #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
+    #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
     #   resp.merge_strategy #=> String, one of "Overwrite", "FailOnConflict", "Append"
     #   resp.import_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
@@ -5945,7 +6099,10 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_export_specification.bot_id #=> String
     #   resp.resource_specification.bot_locale_export_specification.bot_version #=> String
     #   resp.resource_specification.bot_locale_export_specification.locale_id #=> String
-    #   resp.file_format #=> String, one of "LexJson"
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_id #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.bot_version #=> String
+    #   resp.resource_specification.custom_vocabulary_export_specification.locale_id #=> String
+    #   resp.file_format #=> String, one of "LexJson", "TSV"
     #   resp.export_status #=> String, one of "InProgress", "Completed", "Failed", "Deleting"
     #   resp.creation_date_time #=> Time
     #   resp.last_updated_date_time #=> Time
@@ -7312,6 +7469,9 @@ module Aws::LexModelsV2
     #       regex_filter: {
     #         pattern: "RegexPattern", # required
     #       },
+    #       advanced_recognition_setting: {
+    #         audio_recognition_strategy: "UseSlotValuesAsCustomVocabulary", # accepts UseSlotValuesAsCustomVocabulary
+    #       },
     #     },
     #     parent_slot_type_signature: "SlotTypeSignature",
     #     bot_id: "Id", # required
@@ -7339,6 +7499,7 @@ module Aws::LexModelsV2
     #   resp.slot_type_values[0].synonyms[0].value #=> String
     #   resp.value_selection_setting.resolution_strategy #=> String, one of "OriginalValue", "TopResolution"
     #   resp.value_selection_setting.regex_filter.pattern #=> String
+    #   resp.value_selection_setting.advanced_recognition_setting.audio_recognition_strategy #=> String, one of "UseSlotValuesAsCustomVocabulary"
     #   resp.parent_slot_type_signature #=> String
     #   resp.bot_id #=> String
     #   resp.bot_version #=> String
@@ -7371,7 +7532,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

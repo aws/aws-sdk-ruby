@@ -367,16 +367,16 @@ module Aws::PI
     #  </note>
     #
     # @option params [required, String] :service_type
-    #   The AWS service for which Performance Insights will return metrics.
-    #   The only valid value for *ServiceType* is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights will
+    #   return metrics. The only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
-    #   An immutable, AWS Region-unique identifier for a data source.
-    #   Performance Insights gathers metrics from this data source.
+    #   An immutable, Amazon Web Services Region-unique identifier for a data
+    #   source. Performance Insights gathers metrics from this data source.
     #
     #   To use an Amazon RDS instance as a data source, you specify its
     #   `DbiResourceId` value. For example, specify
-    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`
+    #   `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The date and time specifying the beginning of the requested time
@@ -440,6 +440,13 @@ module Aws::PI
     #   Performance Insights return a limited number of values for a
     #   dimension.
     #
+    # @option params [Array<String>] :additional_metrics
+    #   Additional metrics for the top `N` dimension keys. If the specified
+    #   dimension group in the `GroupBy` parameter is `db.sql_tokenized`, you
+    #   can specify per-SQL metrics to get the values for the top `N` SQL
+    #   digests. The response syntax is `"AdditionalMetrics" : \{ "string" :
+    #   "string" \}`.
+    #
     # @option params [Types::DimensionGroup] :partition_by
     #   For each dimension specified in `GroupBy`, specify a secondary
     #   dimension to further subdivide the partition keys in the response.
@@ -471,10 +478,12 @@ module Aws::PI
     #   * {Types::DescribeDimensionKeysResponse#keys #keys} => Array&lt;Types::DimensionKeyDescription&gt;
     #   * {Types::DescribeDimensionKeysResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_dimension_keys({
-    #     service_type: "RDS", # required, accepts RDS
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
     #     identifier: "RequestString", # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
@@ -485,6 +494,7 @@ module Aws::PI
     #       dimensions: ["RequestString"],
     #       limit: 1,
     #     },
+    #     additional_metrics: ["RequestString"],
     #     partition_by: {
     #       group: "RequestString", # required
     #       dimensions: ["RequestString"],
@@ -508,6 +518,8 @@ module Aws::PI
     #   resp.keys[0].dimensions #=> Hash
     #   resp.keys[0].dimensions["RequestString"] #=> String
     #   resp.keys[0].total #=> Float
+    #   resp.keys[0].additional_metrics #=> Hash
+    #   resp.keys[0].additional_metrics["RequestString"] #=> Float
     #   resp.keys[0].partitions #=> Array
     #   resp.keys[0].partitions[0] #=> Float
     #   resp.next_token #=> String
@@ -524,19 +536,19 @@ module Aws::PI
     # Get the attributes of the specified dimension group for a DB instance
     # or data source. For example, if you specify a SQL ID,
     # `GetDimensionKeyDetails` retrieves the full text of the dimension
-    # `db.sql.statement` associated with this ID. This operation is useful
+    # `db.sql.statement`cassociated with this ID. This operation is useful
     # because `GetResourceMetrics` and `DescribeDimensionKeys` don't
     # support retrieval of large SQL statement text.
     #
     # @option params [required, String] :service_type
-    #   The AWS service for which Performance Insights returns data. The only
-    #   valid value is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   data. The only valid value is `RDS`.
     #
     # @option params [required, String] :identifier
     #   The ID for a data source from which to gather dimension data. This ID
-    #   must be immutable and unique within an AWS Region. When a DB instance
-    #   is the data source, specify its `DbiResourceId` value. For example,
-    #   specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #   must be immutable and unique within an Amazon Web Services Region.
+    #   When a DB instance is the data source, specify its `DbiResourceId`
+    #   value. For example, specify `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
     #
     # @option params [required, String] :group
     #   The name of the dimension group. The only valid value is `db.sql`.
@@ -562,7 +574,7 @@ module Aws::PI
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_dimension_key_details({
-    #     service_type: "RDS", # required, accepts RDS
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
     #     identifier: "IdentifierString", # required
     #     group: "RequestString", # required
     #     group_identifier: "RequestString", # required
@@ -585,6 +597,48 @@ module Aws::PI
       req.send_request(options)
     end
 
+    # Retrieve the metadata for different features. For example, the
+    # metadata might indicate that a feature is turned on or off on a
+    # specific DB instance.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique for an Amazon
+    #   Web Services Region. Performance Insights gathers metrics from this
+    #   data source. To use a DB instance as a data source, specify its
+    #   `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VW2X`.
+    #
+    # @return [Types::GetResourceMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourceMetadataResponse#identifier #identifier} => String
+    #   * {Types::GetResourceMetadataResponse#features #features} => Hash&lt;String,Types::FeatureMetadata&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_metadata({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "RequestString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.identifier #=> String
+    #   resp.features #=> Hash
+    #   resp.features["String"].status #=> String, one of "ENABLED", "DISABLED", "UNSUPPORTED", "ENABLED_PENDING_REBOOT", "DISABLED_PENDING_REBOOT", "UNKNOWN"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/GetResourceMetadata AWS API Documentation
+    #
+    # @overload get_resource_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_resource_metadata(params = {}, options = {})
+      req = build_request(:get_resource_metadata, params)
+      req.send_request(options)
+    end
+
     # Retrieve Performance Insights metrics for a set of data sources, over
     # a time period. You can provide specific dimension groups and
     # dimensions, and provide aggregation and filtering criteria for each
@@ -597,12 +651,12 @@ module Aws::PI
     #  </note>
     #
     # @option params [required, String] :service_type
-    #   The AWS service for which Performance Insights returns metrics. The
-    #   only valid value for *ServiceType* is `RDS`.
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics. The only valid value for *ServiceType* is `RDS`.
     #
     # @option params [required, String] :identifier
-    #   An immutable, AWS Region-unique identifier for a data source.
-    #   Performance Insights gathers metrics from this data source.
+    #   An immutable, Amazon Web Services Region-unique identifier for a data
+    #   source. Performance Insights gathers metrics from this data source.
     #
     #   To use a DB instance as a data source, specify its `DbiResourceId`
     #   value. For example, specify `db-FAIHNTYBKTGAUSUZQYPDS2GW4A`.
@@ -666,10 +720,12 @@ module Aws::PI
     #   * {Types::GetResourceMetricsResponse#metric_list #metric_list} => Array&lt;Types::MetricKeyDataPoints&gt;
     #   * {Types::GetResourceMetricsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_resource_metrics({
-    #     service_type: "RDS", # required, accepts RDS
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
     #     identifier: "RequestString", # required
     #     metric_queries: [ # required
     #       {
@@ -714,6 +770,141 @@ module Aws::PI
       req.send_request(options)
     end
 
+    # Retrieve the dimensions that can be queried for each specified metric
+    # type on a specified DB instance.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique within an
+    #   Amazon Web Services Region. Performance Insights gathers metrics from
+    #   this data source. To use an Amazon RDS DB instance as a data source,
+    #   specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
+    #
+    # @option params [required, Array<String>] :metrics
+    #   The types of metrics for which to retrieve dimensions. Valid values
+    #   include `db.load`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return in the response. If more items
+    #   exist than the specified `MaxRecords` value, a pagination token is
+    #   included in the response so that the remaining results can be
+    #   retrieved.
+    #
+    # @option params [String] :next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   token, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::ListAvailableResourceDimensionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableResourceDimensionsResponse#metric_dimensions #metric_dimensions} => Array&lt;Types::MetricDimensionGroups&gt;
+    #   * {Types::ListAvailableResourceDimensionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_resource_dimensions({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "RequestString", # required
+    #     metrics: ["RequestString"], # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_dimensions #=> Array
+    #   resp.metric_dimensions[0].metric #=> String
+    #   resp.metric_dimensions[0].groups #=> Array
+    #   resp.metric_dimensions[0].groups[0].group #=> String
+    #   resp.metric_dimensions[0].groups[0].dimensions #=> Array
+    #   resp.metric_dimensions[0].groups[0].dimensions[0].identifier #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceDimensions AWS API Documentation
+    #
+    # @overload list_available_resource_dimensions(params = {})
+    # @param [Hash] params ({})
+    def list_available_resource_dimensions(params = {}, options = {})
+      req = build_request(:list_available_resource_dimensions, params)
+      req.send_request(options)
+    end
+
+    # Retrieve metrics of the specified types that can be queried for a
+    # specified DB instance.
+    #
+    # @option params [required, String] :service_type
+    #   The Amazon Web Services service for which Performance Insights returns
+    #   metrics.
+    #
+    # @option params [required, String] :identifier
+    #   An immutable identifier for a data source that is unique within an
+    #   Amazon Web Services Region. Performance Insights gathers metrics from
+    #   this data source. To use an Amazon RDS DB instance as a data source,
+    #   specify its `DbiResourceId` value. For example, specify
+    #   `db-ABCDEFGHIJKLMNOPQRSTU1VWZ`.
+    #
+    # @option params [required, Array<String>] :metric_types
+    #   The types of metrics to return in the response. Valid values in the
+    #   array include the following:
+    #
+    #   * `os` (OS counter metrics)
+    #
+    #   * `db` (DB load metrics)
+    #
+    #   * `db.sql.stats` (per-SQL metrics)
+    #
+    #   * `db.sql_tokenized.stats` (per-SQL digest metrics)
+    #
+    # @option params [String] :next_token
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   token, up to the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return. If the `MaxRecords` value is
+    #   less than the number of existing items, the response includes a
+    #   pagination token.
+    #
+    # @return [Types::ListAvailableResourceMetricsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAvailableResourceMetricsResponse#metrics #metrics} => Array&lt;Types::ResponseResourceMetric&gt;
+    #   * {Types::ListAvailableResourceMetricsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_available_resource_metrics({
+    #     service_type: "RDS", # required, accepts RDS, DOCDB
+    #     identifier: "RequestString", # required
+    #     metric_types: ["RequestString"], # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metrics #=> Array
+    #   resp.metrics[0].metric #=> String
+    #   resp.metrics[0].description #=> String
+    #   resp.metrics[0].unit #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pi-2018-02-27/ListAvailableResourceMetrics AWS API Documentation
+    #
+    # @overload list_available_resource_metrics(params = {})
+    # @param [Hash] params ({})
+    def list_available_resource_metrics(params = {}, options = {})
+      req = build_request(:list_available_resource_metrics, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -727,7 +918,7 @@ module Aws::PI
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pi'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
