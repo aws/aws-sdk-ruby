@@ -275,6 +275,14 @@ module Aws::SSM
     #
     # @!attribute [rw] document_version
     #   The version of the document used in the association.
+    #
+    #   State Manager doesn't support running associations that use a new
+    #   version of a document if that document is shared from another
+    #   account. State Manager always runs the `default` version of a
+    #   document if shared from another account, even though the Systems
+    #   Manager console shows that a new version was processed. If you want
+    #   to run an association using a new version of a document shared form
+    #   another account, you must set the document version to `default`.
     #   @return [String]
     #
     # @!attribute [rw] targets
@@ -1853,8 +1861,8 @@ module Aws::SSM
     #     enough invocations failed for the status to be Failed. This is a
     #     terminal state.
     #
-    #   * Canceled: The command was terminated before it was completed. This
-    #     is a terminal state.
+    #   * Cancelled: The command was terminated before it was completed.
+    #     This is a terminal state.
     #
     #   * Rate Exceeded: The number of managed nodes targeted by the command
     #     exceeded the account limit for pending invocations. The system has
@@ -1916,7 +1924,7 @@ module Aws::SSM
     # @!attribute [rw] completed_count
     #   The number of targets for which the command invocation reached a
     #   terminal state. Terminal states include the following: Success,
-    #   Failed, Execution Timed Out, Delivery Timed Out, Canceled,
+    #   Failed, Execution Timed Out, Delivery Timed Out, Cancelled,
     #   Terminated, or Undeliverable.
     #   @return [Integer]
     #
@@ -2175,8 +2183,8 @@ module Aws::SSM
     #     more plugins wasn't zero. Invocation failures count against the
     #     `MaxErrors` limit of the parent command. This is a terminal state.
     #
-    #   * Canceled: The command was terminated before it was completed. This
-    #     is a terminal state.
+    #   * Cancelled: The command was terminated before it was completed.
+    #     This is a terminal state.
     #
     #   * Undeliverable: The command can't be delivered to the managed
     #     node. The managed node might not exist or might not be responding.
@@ -2306,8 +2314,8 @@ module Aws::SSM
     #     more plugins wasn't zero. Invocation failures count against the
     #     MaxErrors limit of the parent command. This is a terminal state.
     #
-    #   * Canceled: The command was terminated before it was completed. This
-    #     is a terminal state.
+    #   * Cancelled: The command was terminated before it was completed.
+    #     This is a terminal state.
     #
     #   * Undeliverable: The command can't be delivered to the managed
     #     node. The managed node might not exist, or it might not be
@@ -3158,6 +3166,14 @@ module Aws::SSM
     # @!attribute [rw] document_version
     #   The document version you want to associate with the target(s). Can
     #   be a specific version or the default version.
+    #
+    #   State Manager doesn't support running associations that use a new
+    #   version of a document if that document is shared from another
+    #   account. State Manager always runs the `default` version of a
+    #   document if shared from another account, even though the Systems
+    #   Manager console shows that a new version was processed. If you want
+    #   to run an association using a new version of a document shared form
+    #   another account, you must set the document version to `default`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -7100,7 +7116,7 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    # Describes a Amazon Web Services Systems Manager document (SSM
+    # Describes an Amazon Web Services Systems Manager document (SSM
     # document).
     #
     # @!attribute [rw] sha_1
@@ -7172,7 +7188,8 @@ module Aws::SSM
     #   @return [Array<Types::DocumentParameter>]
     #
     # @!attribute [rw] platform_types
-    #   The list of OS platforms compatible with this SSM document.
+    #   The list of operating system (OS) platforms compatible with this SSM
+    #   document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_type
@@ -7242,6 +7259,15 @@ module Aws::SSM
     #   The current status of the review.
     #   @return [String]
     #
+    # @!attribute [rw] category
+    #   The classification of a document to help you identify and categorize
+    #   its use.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] category_enum
+    #   The value that identifies a document's category.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DocumentDescription AWS API Documentation
     #
     class DocumentDescription < Struct.new(
@@ -7272,7 +7298,9 @@ module Aws::SSM
       :review_information,
       :approved_version,
       :pending_review_version,
-      :review_status)
+      :review_status,
+      :category,
+      :category_enum)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8213,8 +8241,8 @@ module Aws::SSM
     #     against the `MaxErrors` limit of the parent command. This is a
     #     terminal state.
     #
-    #   * Canceled: The command was terminated before it was completed. This
-    #     is a terminal state.
+    #   * Cancelled: The command was terminated before it was completed.
+    #     This is a terminal state.
     #
     #   * Undeliverable: The command can't be delivered to the managed
     #     node. The node might not exist or might not be responding.
@@ -19746,6 +19774,14 @@ module Aws::SSM
     #
     # @!attribute [rw] document_version
     #   The document version you want update for the association.
+    #
+    #   State Manager doesn't support running associations that use a new
+    #   version of a document if that document is shared from another
+    #   account. State Manager always runs the `default` version of a
+    #   document if shared from another account, even though the Systems
+    #   Manager console shows that a new version was processed. If you want
+    #   to run an association using a new version of a document shared form
+    #   another account, you must set the document version to `default`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_expression

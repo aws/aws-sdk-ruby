@@ -499,6 +499,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.tags["String"] #=> String
     #   resp.launch_profile.updated_at #=> Time
     #   resp.launch_profile.updated_by #=> String
+    #   resp.launch_profile.validation_results #=> Array
+    #   resp.launch_profile.validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_message #=> String
+    #   resp.launch_profile.validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/CreateLaunchProfile AWS API Documentation
     #
@@ -603,7 +608,9 @@ module Aws::NimbleStudio
     #   The launch profile ID.
     #
     # @option params [String] :owned_by
-    #   The user ID of the user that owns the streaming session.
+    #   The user ID of the user that owns the streaming session. The user that
+    #   owns the session will be logging into the session and interacting with
+    #   the virtual workstation.
     #
     # @option params [String] :streaming_image_id
     #   The ID of the streaming image.
@@ -645,7 +652,7 @@ module Aws::NimbleStudio
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
     #   resp.session.stop_at #=> Time
     #   resp.session.stopped_at #=> Time
@@ -1047,6 +1054,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.tags["String"] #=> String
     #   resp.launch_profile.updated_at #=> Time
     #   resp.launch_profile.updated_by #=> String
+    #   resp.launch_profile.validation_results #=> Array
+    #   resp.launch_profile.validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_message #=> String
+    #   resp.launch_profile.validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/DeleteLaunchProfile AWS API Documentation
     #
@@ -1202,7 +1214,7 @@ module Aws::NimbleStudio
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
     #   resp.session.stop_at #=> Time
     #   resp.session.stopped_at #=> Time
@@ -1477,6 +1489,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.tags["String"] #=> String
     #   resp.launch_profile.updated_at #=> Time
     #   resp.launch_profile.updated_by #=> String
+    #   resp.launch_profile.validation_results #=> Array
+    #   resp.launch_profile.validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_message #=> String
+    #   resp.launch_profile.validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1550,6 +1567,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.tags["String"] #=> String
     #   resp.launch_profile.updated_at #=> Time
     #   resp.launch_profile.updated_by #=> String
+    #   resp.launch_profile.validation_results #=> Array
+    #   resp.launch_profile.validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_message #=> String
+    #   resp.launch_profile.validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #   resp.streaming_images #=> Array
     #   resp.streaming_images[0].arn #=> String
     #   resp.streaming_images[0].description #=> String
@@ -1751,7 +1773,7 @@ module Aws::NimbleStudio
 
     # Gets StreamingSession resource.
     #
-    # anvoke this operation to poll for a streaming session state while
+    # Invoke this operation to poll for a streaming session state while
     # creating or deleting a session.
     #
     # @option params [required, String] :session_id
@@ -1783,7 +1805,7 @@ module Aws::NimbleStudio
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
     #   resp.session.stop_at #=> Time
     #   resp.session.stopped_at #=> Time
@@ -2193,7 +2215,7 @@ module Aws::NimbleStudio
     #     max_results: 1,
     #     next_token: "String",
     #     principal_id: "String",
-    #     states: ["String"],
+    #     states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
     #     studio_id: "String", # required
     #   })
     #
@@ -2230,6 +2252,11 @@ module Aws::NimbleStudio
     #   resp.launch_profiles[0].tags["String"] #=> String
     #   resp.launch_profiles[0].updated_at #=> Time
     #   resp.launch_profiles[0].updated_by #=> String
+    #   resp.launch_profiles[0].validation_results #=> Array
+    #   resp.launch_profiles[0].validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profiles[0].validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profiles[0].validation_results[0].status_message #=> String
+    #   resp.launch_profiles[0].validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ListLaunchProfiles AWS API Documentation
@@ -2348,7 +2375,7 @@ module Aws::NimbleStudio
     #   resp.sessions[0].started_at #=> Time
     #   resp.sessions[0].started_by #=> String
     #   resp.sessions[0].state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.sessions[0].status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.sessions[0].status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.sessions[0].status_message #=> String
     #   resp.sessions[0].stop_at #=> Time
     #   resp.sessions[0].stopped_at #=> Time
@@ -2400,9 +2427,9 @@ module Aws::NimbleStudio
     #   resp = client.list_studio_components({
     #     max_results: 1,
     #     next_token: "String",
-    #     states: ["String"],
+    #     states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
     #     studio_id: "String", # required
-    #     types: ["String"],
+    #     types: ["ACTIVE_DIRECTORY"], # accepts ACTIVE_DIRECTORY, SHARED_FILE_SYSTEM, COMPUTE_FARM, LICENSE_SERVICE, CUSTOM
     #   })
     #
     # @example Response structure
@@ -2729,7 +2756,7 @@ module Aws::NimbleStudio
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
     #   resp.session.stop_at #=> Time
     #   resp.session.stopped_at #=> Time
@@ -2861,7 +2888,7 @@ module Aws::NimbleStudio
     #   resp.session.started_at #=> Time
     #   resp.session.started_by #=> String
     #   resp.session.state #=> String, one of "CREATE_IN_PROGRESS", "DELETE_IN_PROGRESS", "READY", "DELETED", "CREATE_FAILED", "DELETE_FAILED", "STOP_IN_PROGRESS", "START_IN_PROGRESS", "STOPPED", "STOP_FAILED", "START_FAILED"
-    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS"
+    #   resp.session.status_code #=> String, one of "STREAMING_SESSION_READY", "STREAMING_SESSION_DELETED", "STREAMING_SESSION_CREATE_IN_PROGRESS", "STREAMING_SESSION_DELETE_IN_PROGRESS", "INTERNAL_ERROR", "INSUFFICIENT_CAPACITY", "ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR", "NETWORK_CONNECTION_ERROR", "INITIALIZATION_SCRIPT_ERROR", "DECRYPT_STREAMING_IMAGE_ERROR", "NETWORK_INTERFACE_ERROR", "STREAMING_SESSION_STOPPED", "STREAMING_SESSION_STARTED", "STREAMING_SESSION_STOP_IN_PROGRESS", "STREAMING_SESSION_START_IN_PROGRESS", "AMI_VALIDATION_ERROR"
     #   resp.session.status_message #=> String
     #   resp.session.stop_at #=> Time
     #   resp.session.stopped_at #=> Time
@@ -3035,6 +3062,11 @@ module Aws::NimbleStudio
     #   resp.launch_profile.tags["String"] #=> String
     #   resp.launch_profile.updated_at #=> Time
     #   resp.launch_profile.updated_by #=> String
+    #   resp.launch_profile.validation_results #=> Array
+    #   resp.launch_profile.validation_results[0].state #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_code #=> String, one of "VALIDATION_NOT_STARTED", "VALIDATION_IN_PROGRESS", "VALIDATION_SUCCESS", "VALIDATION_FAILED_INVALID_SUBNET_ROUTE_TABLE_ASSOCIATION", "VALIDATION_FAILED_SUBNET_NOT_FOUND", "VALIDATION_FAILED_INVALID_SECURITY_GROUP_ASSOCIATION", "VALIDATION_FAILED_INVALID_ACTIVE_DIRECTORY", "VALIDATION_FAILED_UNAUTHORIZED", "VALIDATION_FAILED_INTERNAL_SERVER_ERROR"
+    #   resp.launch_profile.validation_results[0].status_message #=> String
+    #   resp.launch_profile.validation_results[0].type #=> String, one of "VALIDATE_ACTIVE_DIRECTORY_STUDIO_COMPONENT", "VALIDATE_SUBNET_ASSOCIATION", "VALIDATE_NETWORK_ACL_ASSOCIATION", "VALIDATE_SECURITY_GROUP_ASSOCIATION"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/UpdateLaunchProfile AWS API Documentation
     #
@@ -3397,7 +3429,7 @@ module Aws::NimbleStudio
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-nimblestudio'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

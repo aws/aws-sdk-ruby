@@ -417,7 +417,9 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] owned_by
-    #   The user ID of the user that owns the streaming session.
+    #   The user ID of the user that owns the streaming session. The user
+    #   that owns the session will be logging into the session and
+    #   interacting with the virtual workstation.
     #   @return [String]
     #
     # @!attribute [rw] streaming_image_id
@@ -1671,6 +1673,10 @@ module Aws::NimbleStudio
     #   The user ID of the user that most recently updated the resource.
     #   @return [String]
     #
+    # @!attribute [rw] validation_results
+    #   The list of the latest validation results.
+    #   @return [Array<Types::ValidationResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/LaunchProfile AWS API Documentation
     #
     class LaunchProfile < Struct.new(
@@ -1689,7 +1695,8 @@ module Aws::NimbleStudio
       :studio_component_ids,
       :tags,
       :updated_at,
-      :updated_by)
+      :updated_by,
+      :validation_results)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end
@@ -2051,7 +2058,7 @@ module Aws::NimbleStudio
     #         max_results: 1,
     #         next_token: "String",
     #         principal_id: "String",
-    #         states: ["String"],
+    #         states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
     #         studio_id: "String", # required
     #       }
     #
@@ -2222,9 +2229,9 @@ module Aws::NimbleStudio
     #       {
     #         max_results: 1,
     #         next_token: "String",
-    #         states: ["String"],
+    #         states: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, READY, UPDATE_IN_PROGRESS, DELETE_IN_PROGRESS, DELETED, DELETE_FAILED, CREATE_FAILED, UPDATE_FAILED
     #         studio_id: "String", # required
-    #         types: ["String"],
+    #         types: ["ACTIVE_DIRECTORY"], # accepts ACTIVE_DIRECTORY, SHARED_FILE_SYSTEM, COMPUTE_FARM, LICENSE_SERVICE, CUSTOM
     #       }
     #
     # @!attribute [rw] max_results
@@ -2860,15 +2867,15 @@ module Aws::NimbleStudio
     #   is 0. The maximum value is 5760.
     #
     #   If the value is missing or set to 0, your sessions can’t be stopped.
-    #   If you then call StopStreamingSession, the session fails. If the
+    #   If you then call `StopStreamingSession`, the session fails. If the
     #   time that a session stays in the READY state exceeds the
-    #   maxSessionLengthInMinutes value, the session will automatically be
+    #   `maxSessionLengthInMinutes` value, the session will automatically be
     #   terminated by AWS (instead of stopped).
     #
     #   If the value is set to a positive number, the session can be
-    #   stopped. You can call StopStreamingSession to stop sessions in the
+    #   stopped. You can call `StopStreamingSession` to stop sessions in the
     #   READY state. If the time that a session stays in the READY state
-    #   exceeds the maxSessionLengthInMinutes value, the session will
+    #   exceeds the `maxSessionLengthInMinutes` value, the session will
     #   automatically be stopped by AWS (instead of terminated).
     #   @return [Integer]
     #
@@ -2939,15 +2946,15 @@ module Aws::NimbleStudio
     #   is 0. The maximum value is 5760.
     #
     #   If the value is missing or set to 0, your sessions can’t be stopped.
-    #   If you then call StopStreamingSession, the session fails. If the
+    #   If you then call `StopStreamingSession`, the session fails. If the
     #   time that a session stays in the READY state exceeds the
-    #   maxSessionLengthInMinutes value, the session will automatically be
+    #   `maxSessionLengthInMinutes` value, the session will automatically be
     #   terminated by AWS (instead of stopped).
     #
     #   If the value is set to a positive number, the session can be
-    #   stopped. You can call StopStreamingSession to stop sessions in the
+    #   stopped. You can call `StopStreamingSession` to stop sessions in the
     #   READY state. If the time that a session stays in the READY state
-    #   exceeds the maxSessionLengthInMinutes value, the session will
+    #   exceeds the `maxSessionLengthInMinutes` value, the session will
     #   automatically be stopped by AWS (instead of terminated).
     #   @return [Integer]
     #
@@ -3141,7 +3148,9 @@ module Aws::NimbleStudio
     #   @return [String]
     #
     # @!attribute [rw] owned_by
-    #   The user ID of the user that owns the streaming session.
+    #   The user ID of the user that owns the streaming session. The user
+    #   that owns the session will be logging into the session and
+    #   interacting with the virtual workstation.
     #   @return [String]
     #
     # @!attribute [rw] session_id
@@ -3243,13 +3252,11 @@ module Aws::NimbleStudio
     #       }
     #
     # @!attribute [rw] linux
-    #   The folder path in Linux workstations where files are uploaded. The
-    #   default path is `$HOME/Downloads`.
+    #   The folder path in Linux workstations where files are uploaded.
     #   @return [String]
     #
     # @!attribute [rw] windows
     #   The folder path in Windows workstations where files are uploaded.
-    #   The default path is `%HOMEPATH%\Downloads`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/StreamingSessionStorageRoot AWS API Documentation
@@ -3281,7 +3288,9 @@ module Aws::NimbleStudio
     #   @return [Time]
     #
     # @!attribute [rw] owned_by
-    #   The user ID of the user that owns the streaming session.
+    #   The user ID of the user that owns the streaming session. The user
+    #   that owns the session will be logging into the session and
+    #   interacting with the virtual workstation.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -4289,6 +4298,36 @@ module Aws::NimbleStudio
       :code,
       :context,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The launch profile validation result.
+    #
+    # @!attribute [rw] state
+    #   The current state.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_code
+    #   The status code. This will contain the failure reason if the state
+    #   is `VALIDATION_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The status message for the validation result.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the validation result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/nimble-2020-08-01/ValidationResult AWS API Documentation
+    #
+    class ValidationResult < Struct.new(
+      :state,
+      :status_code,
+      :status_message,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end

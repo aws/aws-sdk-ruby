@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-01-13)
+------------------
+
+* Feature - Adds JourneyChannelSettings to WriteJourneyRequest
+
 1.63.0 (2021-12-21)
 ------------------
 

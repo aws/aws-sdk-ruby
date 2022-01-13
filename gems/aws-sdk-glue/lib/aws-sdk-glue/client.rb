@@ -9896,6 +9896,9 @@ module Aws::Glue
     # @option params [required, String] :name
     #   The name of the workflow to start.
     #
+    # @option params [Hash<String,String>] :run_properties
+    #   The workflow run properties for the new workflow run.
+    #
     # @return [Types::StartWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartWorkflowRunResponse#run_id #run_id} => String
@@ -9904,6 +9907,9 @@ module Aws::Glue
     #
     #   resp = client.start_workflow_run({
     #     name: "NameString", # required
+    #     run_properties: {
+    #       "IdString" => "GenericString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -11518,7 +11524,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

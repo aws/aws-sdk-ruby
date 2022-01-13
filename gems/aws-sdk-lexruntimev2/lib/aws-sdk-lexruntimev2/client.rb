@@ -511,6 +511,10 @@ module Aws::LexRuntimeV2
     #   resp.session_state.session_attributes #=> Hash
     #   resp.session_state.session_attributes["NonEmptyString"] #=> String
     #   resp.session_state.originating_request_id #=> String
+    #   resp.session_state.runtime_hints.slot_hints #=> Hash
+    #   resp.session_state.runtime_hints.slot_hints["Name"] #=> Hash
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/GetSession AWS API Documentation
     #
@@ -638,6 +642,19 @@ module Aws::LexRuntimeV2
     #         "NonEmptyString" => "String",
     #       },
     #       originating_request_id: "NonEmptyString",
+    #       runtime_hints: {
+    #         slot_hints: {
+    #           "Name" => {
+    #             "Name" => {
+    #               runtime_hint_values: [ # required
+    #                 {
+    #                   phrase: "RuntimeHintPhrase", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     request_attributes: {
     #       "NonEmptyString" => "String",
@@ -778,6 +795,19 @@ module Aws::LexRuntimeV2
     #         "NonEmptyString" => "String",
     #       },
     #       originating_request_id: "NonEmptyString",
+    #       runtime_hints: {
+    #         slot_hints: {
+    #           "Name" => {
+    #             "Name" => {
+    #               runtime_hint_values: [ # required
+    #                 {
+    #                   phrase: "RuntimeHintPhrase", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       },
     #     },
     #     request_attributes: {
     #       "NonEmptyString" => "String",
@@ -818,6 +848,10 @@ module Aws::LexRuntimeV2
     #   resp.session_state.session_attributes #=> Hash
     #   resp.session_state.session_attributes["NonEmptyString"] #=> String
     #   resp.session_state.originating_request_id #=> String
+    #   resp.session_state.runtime_hints.slot_hints #=> Hash
+    #   resp.session_state.runtime_hints.slot_hints["Name"] #=> Hash
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
+    #   resp.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
     #   resp.interpretations #=> Array
     #   resp.interpretations[0].nlu_confidence.score #=> Float
     #   resp.interpretations[0].sentiment_response.sentiment #=> String, one of "MIXED", "NEGATIVE", "NEUTRAL", "POSITIVE"
@@ -1053,7 +1087,7 @@ module Aws::LexRuntimeV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

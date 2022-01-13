@@ -106,8 +106,13 @@ module Aws::NimbleStudio
     LaunchProfileProtocolVersionList = Shapes::ListShape.new(name: 'LaunchProfileProtocolVersionList')
     LaunchProfileSecurityGroupIdList = Shapes::ListShape.new(name: 'LaunchProfileSecurityGroupIdList')
     LaunchProfileState = Shapes::StringShape.new(name: 'LaunchProfileState')
+    LaunchProfileStateList = Shapes::ListShape.new(name: 'LaunchProfileStateList')
     LaunchProfileStatusCode = Shapes::StringShape.new(name: 'LaunchProfileStatusCode')
     LaunchProfileStudioComponentIdList = Shapes::ListShape.new(name: 'LaunchProfileStudioComponentIdList')
+    LaunchProfileValidationState = Shapes::StringShape.new(name: 'LaunchProfileValidationState')
+    LaunchProfileValidationStatusCode = Shapes::StringShape.new(name: 'LaunchProfileValidationStatusCode')
+    LaunchProfileValidationStatusMessage = Shapes::StringShape.new(name: 'LaunchProfileValidationStatusMessage')
+    LaunchProfileValidationType = Shapes::StringShape.new(name: 'LaunchProfileValidationType')
     LaunchPurpose = Shapes::StringShape.new(name: 'LaunchPurpose')
     LicenseServiceConfiguration = Shapes::StructureShape.new(name: 'LicenseServiceConfiguration')
     LinuxMountPoint = Shapes::StringShape.new(name: 'LinuxMountPoint')
@@ -203,11 +208,13 @@ module Aws::NimbleStudio
     StudioComponentScriptParameterKeyValueList = Shapes::ListShape.new(name: 'StudioComponentScriptParameterKeyValueList')
     StudioComponentSecurityGroupIdList = Shapes::ListShape.new(name: 'StudioComponentSecurityGroupIdList')
     StudioComponentState = Shapes::StringShape.new(name: 'StudioComponentState')
+    StudioComponentStateList = Shapes::ListShape.new(name: 'StudioComponentStateList')
     StudioComponentStatusCode = Shapes::StringShape.new(name: 'StudioComponentStatusCode')
     StudioComponentSubtype = Shapes::StringShape.new(name: 'StudioComponentSubtype')
     StudioComponentSummary = Shapes::StructureShape.new(name: 'StudioComponentSummary')
     StudioComponentSummaryList = Shapes::ListShape.new(name: 'StudioComponentSummaryList')
     StudioComponentType = Shapes::StringShape.new(name: 'StudioComponentType')
+    StudioComponentTypeList = Shapes::ListShape.new(name: 'StudioComponentTypeList')
     StudioEncryptionConfiguration = Shapes::StructureShape.new(name: 'StudioEncryptionConfiguration')
     StudioEncryptionConfigurationKeyArn = Shapes::StringShape.new(name: 'StudioEncryptionConfigurationKeyArn')
     StudioEncryptionConfigurationKeyType = Shapes::StringShape.new(name: 'StudioEncryptionConfigurationKeyType')
@@ -249,6 +256,8 @@ module Aws::NimbleStudio
     UpdateStudioRequest = Shapes::StructureShape.new(name: 'UpdateStudioRequest')
     UpdateStudioResponse = Shapes::StructureShape.new(name: 'UpdateStudioResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    ValidationResult = Shapes::StructureShape.new(name: 'ValidationResult')
+    ValidationResults = Shapes::ListShape.new(name: 'ValidationResults')
     WindowsMountDrive = Shapes::StringShape.new(name: 'WindowsMountDrive')
 
     AcceptEulasRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "header", location_name: "X-Amz-Client-Token", metadata: {"idempotencyToken"=>true}))
@@ -542,6 +551,7 @@ module Aws::NimbleStudio
     LaunchProfile.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     LaunchProfile.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     LaunchProfile.add_member(:updated_by, Shapes::ShapeRef.new(shape: String, location_name: "updatedBy"))
+    LaunchProfile.add_member(:validation_results, Shapes::ShapeRef.new(shape: ValidationResults, location_name: "validationResults"))
     LaunchProfile.struct_class = Types::LaunchProfile
 
     LaunchProfileInitialization.add_member(:active_directory, Shapes::ShapeRef.new(shape: LaunchProfileInitializationActiveDirectory, location_name: "activeDirectory"))
@@ -585,6 +595,8 @@ module Aws::NimbleStudio
 
     LaunchProfileSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    LaunchProfileStateList.member = Shapes::ShapeRef.new(shape: LaunchProfileState)
+
     LaunchProfileStudioComponentIdList.member = Shapes::ShapeRef.new(shape: String)
 
     LicenseServiceConfiguration.add_member(:endpoint, Shapes::ShapeRef.new(shape: SyntheticLicenseServiceConfigurationString, location_name: "endpoint"))
@@ -620,7 +632,7 @@ module Aws::NimbleStudio
     ListLaunchProfilesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListLaunchProfilesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListLaunchProfilesRequest.add_member(:principal_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "principalId"))
-    ListLaunchProfilesRequest.add_member(:states, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "states"))
+    ListLaunchProfilesRequest.add_member(:states, Shapes::ShapeRef.new(shape: LaunchProfileStateList, location: "querystring", location_name: "states"))
     ListLaunchProfilesRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
     ListLaunchProfilesRequest.struct_class = Types::ListLaunchProfilesRequest
 
@@ -650,9 +662,9 @@ module Aws::NimbleStudio
 
     ListStudioComponentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListStudioComponentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
-    ListStudioComponentsRequest.add_member(:states, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "states"))
+    ListStudioComponentsRequest.add_member(:states, Shapes::ShapeRef.new(shape: StudioComponentStateList, location: "querystring", location_name: "states"))
     ListStudioComponentsRequest.add_member(:studio_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "studioId"))
-    ListStudioComponentsRequest.add_member(:types, Shapes::ShapeRef.new(shape: StringList, location: "querystring", location_name: "types"))
+    ListStudioComponentsRequest.add_member(:types, Shapes::ShapeRef.new(shape: StudioComponentTypeList, location: "querystring", location_name: "types"))
     ListStudioComponentsRequest.struct_class = Types::ListStudioComponentsRequest
 
     ListStudioComponentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -905,6 +917,8 @@ module Aws::NimbleStudio
 
     StudioComponentSecurityGroupIdList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    StudioComponentStateList.member = Shapes::ShapeRef.new(shape: StudioComponentState)
+
     StudioComponentSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     StudioComponentSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: String, location_name: "createdBy"))
     StudioComponentSummary.add_member(:description, Shapes::ShapeRef.new(shape: StudioComponentDescription, location_name: "description"))
@@ -917,6 +931,8 @@ module Aws::NimbleStudio
     StudioComponentSummary.struct_class = Types::StudioComponentSummary
 
     StudioComponentSummaryList.member = Shapes::ShapeRef.new(shape: StudioComponentSummary)
+
+    StudioComponentTypeList.member = Shapes::ShapeRef.new(shape: StudioComponentType)
 
     StudioEncryptionConfiguration.add_member(:key_arn, Shapes::ShapeRef.new(shape: StudioEncryptionConfigurationKeyArn, location_name: "keyArn"))
     StudioEncryptionConfiguration.add_member(:key_type, Shapes::ShapeRef.new(shape: StudioEncryptionConfigurationKeyType, required: true, location_name: "keyType"))
@@ -1015,6 +1031,14 @@ module Aws::NimbleStudio
     ValidationException.add_member(:context, Shapes::ShapeRef.new(shape: ExceptionContext, location_name: "context"))
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
+
+    ValidationResult.add_member(:state, Shapes::ShapeRef.new(shape: LaunchProfileValidationState, required: true, location_name: "state"))
+    ValidationResult.add_member(:status_code, Shapes::ShapeRef.new(shape: LaunchProfileValidationStatusCode, required: true, location_name: "statusCode"))
+    ValidationResult.add_member(:status_message, Shapes::ShapeRef.new(shape: LaunchProfileValidationStatusMessage, required: true, location_name: "statusMessage"))
+    ValidationResult.add_member(:type, Shapes::ShapeRef.new(shape: LaunchProfileValidationType, required: true, location_name: "type"))
+    ValidationResult.struct_class = Types::ValidationResult
+
+    ValidationResults.member = Shapes::ShapeRef.new(shape: ValidationResult)
 
 
     # @api private

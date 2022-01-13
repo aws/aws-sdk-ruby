@@ -129,6 +129,9 @@ module Aws::SSM
     CancelCommandResult = Shapes::StructureShape.new(name: 'CancelCommandResult')
     CancelMaintenanceWindowExecutionRequest = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionRequest')
     CancelMaintenanceWindowExecutionResult = Shapes::StructureShape.new(name: 'CancelMaintenanceWindowExecutionResult')
+    Category = Shapes::StringShape.new(name: 'Category')
+    CategoryEnumList = Shapes::ListShape.new(name: 'CategoryEnumList')
+    CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     ChangeDetailsValue = Shapes::StringShape.new(name: 'ChangeDetailsValue')
     ChangeRequestName = Shapes::StringShape.new(name: 'ChangeRequestName')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
@@ -1492,6 +1495,10 @@ module Aws::SSM
     CancelMaintenanceWindowExecutionResult.add_member(:window_execution_id, Shapes::ShapeRef.new(shape: MaintenanceWindowExecutionId, location_name: "WindowExecutionId"))
     CancelMaintenanceWindowExecutionResult.struct_class = Types::CancelMaintenanceWindowExecutionResult
 
+    CategoryEnumList.member = Shapes::ShapeRef.new(shape: Category)
+
+    CategoryList.member = Shapes::ShapeRef.new(shape: Category)
+
     CloudWatchOutputConfig.add_member(:cloud_watch_log_group_name, Shapes::ShapeRef.new(shape: CloudWatchLogGroupName, location_name: "CloudWatchLogGroupName"))
     CloudWatchOutputConfig.add_member(:cloud_watch_output_enabled, Shapes::ShapeRef.new(shape: CloudWatchOutputEnabled, location_name: "CloudWatchOutputEnabled"))
     CloudWatchOutputConfig.struct_class = Types::CloudWatchOutputConfig
@@ -2236,6 +2243,8 @@ module Aws::SSM
     DocumentDescription.add_member(:approved_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "ApprovedVersion"))
     DocumentDescription.add_member(:pending_review_version, Shapes::ShapeRef.new(shape: DocumentVersion, location_name: "PendingReviewVersion"))
     DocumentDescription.add_member(:review_status, Shapes::ShapeRef.new(shape: ReviewStatus, location_name: "ReviewStatus"))
+    DocumentDescription.add_member(:category, Shapes::ShapeRef.new(shape: CategoryList, location_name: "Category"))
+    DocumentDescription.add_member(:category_enum, Shapes::ShapeRef.new(shape: CategoryEnumList, location_name: "CategoryEnum"))
     DocumentDescription.struct_class = Types::DocumentDescription
 
     DocumentFilter.add_member(:key, Shapes::ShapeRef.new(shape: DocumentFilterKey, required: true, location_name: "key"))

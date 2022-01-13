@@ -5096,6 +5096,21 @@ module Aws::Pinpoint
         o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
+
+      api.add_operation(:verify_otp_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "VerifyOTPMessage"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/apps/{application-id}/verify-otp"
+        o.input = Shapes::ShapeRef.new(shape: VerifyOTPMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: VerifyOTPMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: PayloadTooLargeException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
     end
 
   end

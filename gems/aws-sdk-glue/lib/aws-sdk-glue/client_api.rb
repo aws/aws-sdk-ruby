@@ -3281,6 +3281,7 @@ module Aws::Glue
     StartTriggerResponse.struct_class = Types::StartTriggerResponse
 
     StartWorkflowRunRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    StartWorkflowRunRequest.add_member(:run_properties, Shapes::ShapeRef.new(shape: WorkflowRunProperties, location_name: "RunProperties"))
     StartWorkflowRunRequest.struct_class = Types::StartWorkflowRunRequest
 
     StartWorkflowRunResponse.add_member(:run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "RunId"))

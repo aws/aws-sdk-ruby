@@ -1600,7 +1600,7 @@ module Aws::ElastiCache
     #         preferred_outpost_arns: ["String"],
     #         log_delivery_configurations: [
     #           {
-    #             log_type: "slow-log", # accepts slow-log
+    #             log_type: "slow-log", # accepts slow-log, engine-log
     #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #             destination_details: {
     #               cloud_watch_logs_details: {
@@ -2368,7 +2368,7 @@ module Aws::ElastiCache
     #         user_group_ids: ["UserGroupId"],
     #         log_delivery_configurations: [
     #           {
-    #             log_type: "slow-log", # accepts slow-log
+    #             log_type: "slow-log", # accepts slow-log, engine-log
     #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #             destination_details: {
     #               cloud_watch_logs_details: {
@@ -5740,7 +5740,7 @@ module Aws::ElastiCache
     # Returns the destination, format and type of the logs.
     #
     # @!attribute [rw] log_type
-    #   Refers to [slow-log][1].
+    #   Refers to [slow-log][1] or engine-log.
     #
     #
     #
@@ -5789,7 +5789,7 @@ module Aws::ElastiCache
     #   data as a hash:
     #
     #       {
-    #         log_type: "slow-log", # accepts slow-log
+    #         log_type: "slow-log", # accepts slow-log, engine-log
     #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #         destination_details: {
     #           cloud_watch_logs_details: {
@@ -5804,7 +5804,7 @@ module Aws::ElastiCache
     #       }
     #
     # @!attribute [rw] log_type
-    #   Refers to [slow-log][1].
+    #   Refers to [slow-log][1] or engine-log..
     #
     #
     #
@@ -5868,7 +5868,7 @@ module Aws::ElastiCache
     #         auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
     #         log_delivery_configurations: [
     #           {
-    #             log_type: "slow-log", # accepts slow-log
+    #             log_type: "slow-log", # accepts slow-log, engine-log
     #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #             destination_details: {
     #               cloud_watch_logs_details: {
@@ -6462,7 +6462,7 @@ module Aws::ElastiCache
     #         remove_user_groups: false,
     #         log_delivery_configurations: [
     #           {
-    #             log_type: "slow-log", # accepts slow-log
+    #             log_type: "slow-log", # accepts slow-log, engine-log
     #             destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #             destination_details: {
     #               cloud_watch_logs_details: {
@@ -7348,7 +7348,7 @@ module Aws::ElastiCache
     # The log delivery configurations being modified
     #
     # @!attribute [rw] log_type
-    #   Refers to [slow-log][1].
+    #   Refers to [slow-log][1] or engine-log..
     #
     #
     #

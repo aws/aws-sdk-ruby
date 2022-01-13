@@ -296,6 +296,19 @@ module Aws::LexRuntimeV2
     #             "NonEmptyString" => "String",
     #           },
     #           originating_request_id: "NonEmptyString",
+    #           runtime_hints: {
+    #             slot_hints: {
+    #               "Name" => {
+    #                 "Name" => {
+    #                   runtime_hint_values: [ # required
+    #                     {
+    #                       phrase: "RuntimeHintPhrase", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #         welcome_messages: [
     #           {
@@ -1105,6 +1118,19 @@ module Aws::LexRuntimeV2
     #             "NonEmptyString" => "String",
     #           },
     #           originating_request_id: "NonEmptyString",
+    #           runtime_hints: {
+    #             slot_hints: {
+    #               "Name" => {
+    #                 "Name" => {
+    #                   runtime_hint_values: [ # required
+    #                     {
+    #                       phrase: "RuntimeHintPhrase", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #         request_attributes: {
     #           "NonEmptyString" => "String",
@@ -1271,6 +1297,19 @@ module Aws::LexRuntimeV2
     #             "NonEmptyString" => "String",
     #           },
     #           originating_request_id: "NonEmptyString",
+    #           runtime_hints: {
+    #             slot_hints: {
+    #               "Name" => {
+    #                 "Name" => {
+    #                   runtime_hint_values: [ # required
+    #                     {
+    #                       phrase: "RuntimeHintPhrase", # required
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             },
+    #           },
     #         },
     #         request_attributes: {
     #           "NonEmptyString" => "String",
@@ -1613,6 +1652,112 @@ module Aws::LexRuntimeV2
       include Aws::Structure
     end
 
+    # Provides an array of phrases that should be given preference when
+    # resolving values for a slot.
+    #
+    # @note When making an API call, you may pass RuntimeHintDetails
+    #   data as a hash:
+    #
+    #       {
+    #         runtime_hint_values: [ # required
+    #           {
+    #             phrase: "RuntimeHintPhrase", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] runtime_hint_values
+    #   One or more strings that Amazon Lex V2 should look for in the input
+    #   to the bot. Each phrase is given preference when deciding on slot
+    #   values.
+    #   @return [Array<Types::RuntimeHintValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RuntimeHintDetails AWS API Documentation
+    #
+    class RuntimeHintDetails < Struct.new(
+      :runtime_hint_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the phrase that Amazon Lex V2 should look for in the user's
+    # input to the bot.
+    #
+    # @note When making an API call, you may pass RuntimeHintValue
+    #   data as a hash:
+    #
+    #       {
+    #         phrase: "RuntimeHintPhrase", # required
+    #       }
+    #
+    # @!attribute [rw] phrase
+    #   The phrase that Amazon Lex V2 should look for in the user's input
+    #   to the bot.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RuntimeHintValue AWS API Documentation
+    #
+    class RuntimeHintValue < Struct.new(
+      :phrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # You can provide Amazon Lex V2 with hints to the phrases that a
+    # customer is likely to use for a slot. When a slot with hints is
+    # resolved, the phrases in the runtime hints are preferred in the
+    # resolution. You can provide hints for a maximum of 100 intents. You
+    # can provide a maximum of 100 slots.
+    #
+    # Before you can use runtime hints with an existing bot, you must first
+    # rebuild the bot.
+    #
+    # For more information, see [Using hints to improve accuracy][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml
+    #
+    # @note When making an API call, you may pass RuntimeHints
+    #   data as a hash:
+    #
+    #       {
+    #         slot_hints: {
+    #           "Name" => {
+    #             "Name" => {
+    #               runtime_hint_values: [ # required
+    #                 {
+    #                   phrase: "RuntimeHintPhrase", # required
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] slot_hints
+    #   A list of the slots in the intent that should have runtime hints
+    #   added, and the phrases that should be added for each slot.
+    #
+    #   The first level of the `slotHints` map is the name of the intent.
+    #   The second level is the name of the slot within the intent. For more
+    #   information, see [Using hints to improve accuracy][1].
+    #
+    #   The intent name and slot name must exist.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.xml
+    #   @return [Hash<String,Hash<String,Types::RuntimeHintDetails>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/RuntimeHints AWS API Documentation
+    #
+    class RuntimeHints < Struct.new(
+      :slot_hints)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about the sentiment expressed in a user's
     # response in a conversation. Sentiments are determined using Amazon
     # Comprehend. Sentiments are only returned if they are enabled for the
@@ -1724,6 +1869,19 @@ module Aws::LexRuntimeV2
     #           "NonEmptyString" => "String",
     #         },
     #         originating_request_id: "NonEmptyString",
+    #         runtime_hints: {
+    #           slot_hints: {
+    #             "Name" => {
+    #               "Name" => {
+    #                 runtime_hint_values: [ # required
+    #                   {
+    #                     phrase: "RuntimeHintPhrase", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] dialog_action
@@ -1749,7 +1907,14 @@ module Aws::LexRuntimeV2
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] originating_request_id
+    #   A unique identifier for a specific request.
     #   @return [String]
+    #
+    # @!attribute [rw] runtime_hints
+    #   Hints for phrases that a customer is likely to use for a slot.
+    #   Amazon Lex V2 uses the hints to help determine the correct value of
+    #   a slot.
+    #   @return [Types::RuntimeHints]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/runtime.lex.v2-2020-08-07/SessionState AWS API Documentation
     #
@@ -1758,7 +1923,8 @@ module Aws::LexRuntimeV2
       :intent,
       :active_contexts,
       :session_attributes,
-      :originating_request_id)
+      :originating_request_id,
+      :runtime_hints)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2085,6 +2251,19 @@ module Aws::LexRuntimeV2
     #               "NonEmptyString" => "String",
     #             },
     #             originating_request_id: "NonEmptyString",
+    #             runtime_hints: {
+    #               slot_hints: {
+    #                 "Name" => {
+    #                   "Name" => {
+    #                     runtime_hint_values: [ # required
+    #                       {
+    #                         phrase: "RuntimeHintPhrase", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               },
+    #             },
     #           },
     #           welcome_messages: [
     #             {

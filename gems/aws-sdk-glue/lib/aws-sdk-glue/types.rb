@@ -15168,16 +15168,24 @@ module Aws::Glue
     #
     #       {
     #         name: "NameString", # required
+    #         run_properties: {
+    #           "IdString" => "GenericString",
+    #         },
     #       }
     #
     # @!attribute [rw] name
     #   The name of the workflow to start.
     #   @return [String]
     #
+    # @!attribute [rw] run_properties
+    #   The workflow run properties for the new workflow run.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartWorkflowRunRequest AWS API Documentation
     #
     class StartWorkflowRunRequest < Struct.new(
-      :name)
+      :name,
+      :run_properties)
       SENSITIVE = []
       include Aws::Structure
     end

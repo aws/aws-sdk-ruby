@@ -20010,6 +20010,18 @@ module Aws::Pinpoint
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass VerifyOTPMessageRequest
+    #   data as a hash:
+    #
+    #       {
+    #         application_id: "__string", # required
+    #         verify_otp_message_request_parameters: { # required
+    #           destination_identity: "__string", # required
+    #           otp: "__string", # required
+    #           reference_id: "__string", # required
+    #         },
+    #       }
+    #
     # @!attribute [rw] application_id
     #   @return [String]
     #
@@ -20027,6 +20039,15 @@ module Aws::Pinpoint
     end
 
     # Verify OTP message request.
+    #
+    # @note When making an API call, you may pass VerifyOTPMessageRequestParameters
+    #   data as a hash:
+    #
+    #       {
+    #         destination_identity: "__string", # required
+    #         otp: "__string", # required
+    #         reference_id: "__string", # required
+    #       }
     #
     # @!attribute [rw] destination_identity
     #   The destination identity to send OTP to.

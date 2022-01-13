@@ -12000,6 +12000,41 @@ module Aws::Pinpoint
       req.send_request(options)
     end
 
+    # Verify an OTP
+    #
+    # @option params [required, String] :application_id
+    #
+    # @option params [required, Types::VerifyOTPMessageRequestParameters] :verify_otp_message_request_parameters
+    #   Verify OTP message request.
+    #
+    # @return [Types::VerifyOTPMessageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::VerifyOTPMessageResponse#verification_response #verification_response} => Types::VerificationResponse
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.verify_otp_message({
+    #     application_id: "__string", # required
+    #     verify_otp_message_request_parameters: { # required
+    #       destination_identity: "__string", # required
+    #       otp: "__string", # required
+    #       reference_id: "__string", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.verification_response.valid #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/VerifyOTPMessage AWS API Documentation
+    #
+    # @overload verify_otp_message(params = {})
+    # @param [Hash] params ({})
+    def verify_otp_message(params = {}, options = {})
+      req = build_request(:verify_otp_message, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -12013,7 +12048,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

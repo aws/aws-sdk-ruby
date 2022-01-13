@@ -66,6 +66,7 @@ module Aws::LexRuntimeV2
     Message = Shapes::StructureShape.new(name: 'Message')
     MessageContentType = Shapes::StringShape.new(name: 'MessageContentType')
     Messages = Shapes::ListShape.new(name: 'Messages')
+    Name = Shapes::StringShape.new(name: 'Name')
     NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
     ParameterName = Shapes::StringShape.new(name: 'ParameterName')
     PlaybackCompletionEvent = Shapes::StructureShape.new(name: 'PlaybackCompletionEvent')
@@ -78,6 +79,11 @@ module Aws::LexRuntimeV2
     RecognizeUtteranceRequest = Shapes::StructureShape.new(name: 'RecognizeUtteranceRequest')
     RecognizeUtteranceResponse = Shapes::StructureShape.new(name: 'RecognizeUtteranceResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RuntimeHintDetails = Shapes::StructureShape.new(name: 'RuntimeHintDetails')
+    RuntimeHintPhrase = Shapes::StringShape.new(name: 'RuntimeHintPhrase')
+    RuntimeHintValue = Shapes::StructureShape.new(name: 'RuntimeHintValue')
+    RuntimeHintValuesList = Shapes::ListShape.new(name: 'RuntimeHintValuesList')
+    RuntimeHints = Shapes::StructureShape.new(name: 'RuntimeHints')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SentimentResponse = Shapes::StructureShape.new(name: 'SentimentResponse')
     SentimentScore = Shapes::StructureShape.new(name: 'SentimentScore')
@@ -86,6 +92,8 @@ module Aws::LexRuntimeV2
     SessionState = Shapes::StructureShape.new(name: 'SessionState')
     Shape = Shapes::StringShape.new(name: 'Shape')
     Slot = Shapes::StructureShape.new(name: 'Slot')
+    SlotHintsIntentMap = Shapes::MapShape.new(name: 'SlotHintsIntentMap')
+    SlotHintsSlotMap = Shapes::MapShape.new(name: 'SlotHintsSlotMap')
     Slots = Shapes::MapShape.new(name: 'Slots')
     StartConversationRequest = Shapes::StructureShape.new(name: 'StartConversationRequest')
     StartConversationRequestEventStream = Shapes::StructureShape.new(name: 'StartConversationRequestEventStream')
@@ -311,6 +319,17 @@ module Aws::LexRuntimeV2
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RuntimeHintDetails.add_member(:runtime_hint_values, Shapes::ShapeRef.new(shape: RuntimeHintValuesList, required: true, location_name: "runtimeHintValues"))
+    RuntimeHintDetails.struct_class = Types::RuntimeHintDetails
+
+    RuntimeHintValue.add_member(:phrase, Shapes::ShapeRef.new(shape: RuntimeHintPhrase, required: true, location_name: "phrase"))
+    RuntimeHintValue.struct_class = Types::RuntimeHintValue
+
+    RuntimeHintValuesList.member = Shapes::ShapeRef.new(shape: RuntimeHintValue)
+
+    RuntimeHints.add_member(:slot_hints, Shapes::ShapeRef.new(shape: SlotHintsIntentMap, location_name: "slotHints"))
+    RuntimeHints.struct_class = Types::RuntimeHints
+
     SentimentResponse.add_member(:sentiment, Shapes::ShapeRef.new(shape: SentimentType, location_name: "sentiment"))
     SentimentResponse.add_member(:sentiment_score, Shapes::ShapeRef.new(shape: SentimentScore, location_name: "sentimentScore"))
     SentimentResponse.struct_class = Types::SentimentResponse
@@ -326,12 +345,19 @@ module Aws::LexRuntimeV2
     SessionState.add_member(:active_contexts, Shapes::ShapeRef.new(shape: ActiveContextsList, location_name: "activeContexts"))
     SessionState.add_member(:session_attributes, Shapes::ShapeRef.new(shape: StringMap, location_name: "sessionAttributes"))
     SessionState.add_member(:originating_request_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "originatingRequestId"))
+    SessionState.add_member(:runtime_hints, Shapes::ShapeRef.new(shape: RuntimeHints, location_name: "runtimeHints"))
     SessionState.struct_class = Types::SessionState
 
     Slot.add_member(:value, Shapes::ShapeRef.new(shape: Value, location_name: "value"))
     Slot.add_member(:shape, Shapes::ShapeRef.new(shape: Shape, location_name: "shape"))
     Slot.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "values"))
     Slot.struct_class = Types::Slot
+
+    SlotHintsIntentMap.key = Shapes::ShapeRef.new(shape: Name)
+    SlotHintsIntentMap.value = Shapes::ShapeRef.new(shape: SlotHintsSlotMap)
+
+    SlotHintsSlotMap.key = Shapes::ShapeRef.new(shape: Name)
+    SlotHintsSlotMap.value = Shapes::ShapeRef.new(shape: RuntimeHintDetails)
 
     Slots.key = Shapes::ShapeRef.new(shape: NonEmptyString)
     Slots.value = Shapes::ShapeRef.new(shape: Slot)

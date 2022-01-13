@@ -543,6 +543,10 @@ module Aws::LexRuntimeV2
     #   event.session_state.session_attributes #=> Hash
     #   event.session_state.session_attributes["NonEmptyString"] #=> String
     #   event.session_state.originating_request_id #=> String
+    #   event.session_state.runtime_hints.slot_hints #=> Hash
+    #   event.session_state.runtime_hints.slot_hints["Name"] #=> Hash
+    #   event.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values #=> Array
+    #   event.session_state.runtime_hints.slot_hints["Name"]["Name"].runtime_hint_values[0].phrase #=> String
     #   event.request_attributes #=> Hash
     #   event.request_attributes["NonEmptyString"] #=> String
     #   event.session_id #=> String
@@ -635,7 +639,7 @@ module Aws::LexRuntimeV2
         http_response: Seahorse::Client::Http::AsyncResponse.new,
         config: config)
       context[:gem_name] = 'aws-sdk-lexruntimev2'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

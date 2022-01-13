@@ -659,7 +659,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -702,7 +702,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -1439,7 +1439,7 @@ module Aws::ElastiCache
     #     preferred_outpost_arns: ["String"],
     #     log_delivery_configurations: [
     #       {
-    #         log_type: "slow-log", # accepts slow-log
+    #         log_type: "slow-log", # accepts slow-log, engine-log
     #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #         destination_details: {
     #           cloud_watch_logs_details: {
@@ -1477,7 +1477,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -1516,7 +1516,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.arn #=> String
     #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
     #   resp.cache_cluster.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -2536,7 +2536,7 @@ module Aws::ElastiCache
     #     user_group_ids: ["UserGroupId"],
     #     log_delivery_configurations: [
     #       {
-    #         log_type: "slow-log", # accepts slow-log
+    #         log_type: "slow-log", # accepts slow-log, engine-log
     #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #         destination_details: {
     #           cloud_watch_logs_details: {
@@ -2569,7 +2569,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -2612,7 +2612,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3162,7 +3162,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3205,7 +3205,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3329,7 +3329,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3368,7 +3368,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.arn #=> String
     #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
     #   resp.cache_cluster.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3651,7 +3651,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -3694,7 +3694,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -4143,7 +4143,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].pending_modified_values.cache_node_type #=> String
     #   resp.cache_clusters[0].pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_clusters[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -4182,7 +4182,7 @@ module Aws::ElastiCache
     #   resp.cache_clusters[0].arn #=> String
     #   resp.cache_clusters[0].replication_group_log_delivery_enabled #=> Boolean
     #   resp.cache_clusters[0].log_delivery_configurations #=> Array
-    #   resp.cache_clusters[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_clusters[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_clusters[0].log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_clusters[0].log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_clusters[0].log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -6266,7 +6266,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_groups[0].pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_groups[0].pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -6309,7 +6309,7 @@ module Aws::ElastiCache
     #   resp.replication_groups[0].user_group_ids #=> Array
     #   resp.replication_groups[0].user_group_ids[0] #=> String
     #   resp.replication_groups[0].log_delivery_configurations #=> Array
-    #   resp.replication_groups[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_groups[0].log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_groups[0].log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_groups[0].log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_groups[0].log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -7793,7 +7793,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -7836,7 +7836,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -8403,7 +8403,7 @@ module Aws::ElastiCache
     #     auth_token_update_strategy: "SET", # accepts SET, ROTATE, DELETE
     #     log_delivery_configurations: [
     #       {
-    #         log_type: "slow-log", # accepts slow-log
+    #         log_type: "slow-log", # accepts slow-log, engine-log
     #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #         destination_details: {
     #           cloud_watch_logs_details: {
@@ -8441,7 +8441,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -8480,7 +8480,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.arn #=> String
     #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
     #   resp.cache_cluster.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9063,7 +9063,7 @@ module Aws::ElastiCache
     #     remove_user_groups: false,
     #     log_delivery_configurations: [
     #       {
-    #         log_type: "slow-log", # accepts slow-log
+    #         log_type: "slow-log", # accepts slow-log, engine-log
     #         destination_type: "cloudwatch-logs", # accepts cloudwatch-logs, kinesis-firehose
     #         destination_details: {
     #           cloud_watch_logs_details: {
@@ -9095,7 +9095,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9138,7 +9138,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9239,7 +9239,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9282,7 +9282,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9670,7 +9670,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.pending_modified_values.cache_node_type #=> String
     #   resp.cache_cluster.pending_modified_values.auth_token_status #=> String, one of "SETTING", "ROTATING"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9709,7 +9709,7 @@ module Aws::ElastiCache
     #   resp.cache_cluster.arn #=> String
     #   resp.cache_cluster.replication_group_log_delivery_enabled #=> Boolean
     #   resp.cache_cluster.log_delivery_configurations #=> Array
-    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.cache_cluster.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.cache_cluster.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -9988,7 +9988,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -10031,7 +10031,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -10146,7 +10146,7 @@ module Aws::ElastiCache
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove #=> Array
     #   resp.replication_group.pending_modified_values.user_groups.user_group_ids_to_remove[0] #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations #=> Array
-    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.pending_modified_values.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -10189,7 +10189,7 @@ module Aws::ElastiCache
     #   resp.replication_group.user_group_ids #=> Array
     #   resp.replication_group.user_group_ids[0] #=> String
     #   resp.replication_group.log_delivery_configurations #=> Array
-    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log"
+    #   resp.replication_group.log_delivery_configurations[0].log_type #=> String, one of "slow-log", "engine-log"
     #   resp.replication_group.log_delivery_configurations[0].destination_type #=> String, one of "cloudwatch-logs", "kinesis-firehose"
     #   resp.replication_group.log_delivery_configurations[0].destination_details.cloud_watch_logs_details.log_group #=> String
     #   resp.replication_group.log_delivery_configurations[0].destination_details.kinesis_firehose_details.delivery_stream #=> String
@@ -10221,7 +10221,7 @@ module Aws::ElastiCache
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticache'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

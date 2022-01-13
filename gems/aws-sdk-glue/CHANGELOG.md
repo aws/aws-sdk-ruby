@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2022-01-13)
+------------------
+
+* Feature - This SDK release adds support to pass run properties when starting a workflow run
+
 1.102.0 (2022-01-05)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.128.0 (2022-01-13)
+------------------
+
+* Feature - AWS Systems Manager adds category support for DescribeDocument API
+
 1.127.0 (2021-12-21)
 ------------------
 
