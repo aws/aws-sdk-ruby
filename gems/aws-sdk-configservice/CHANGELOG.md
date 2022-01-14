@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.72.0 (2022-01-14)
+------------------
+
+* Feature - Update ResourceType enum with values for CodeDeploy, EC2 and Kinesis resources
+
 1.71.0 (2021-12-21)
 ------------------
 

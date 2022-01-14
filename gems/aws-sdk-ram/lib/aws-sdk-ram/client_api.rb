@@ -51,6 +51,8 @@ module Aws::RAM
     InvalidStateTransitionException = Shapes::StructureShape.new(name: 'InvalidStateTransitionException')
     ListPendingInvitationResourcesRequest = Shapes::StructureShape.new(name: 'ListPendingInvitationResourcesRequest')
     ListPendingInvitationResourcesResponse = Shapes::StructureShape.new(name: 'ListPendingInvitationResourcesResponse')
+    ListPermissionVersionsRequest = Shapes::StructureShape.new(name: 'ListPermissionVersionsRequest')
+    ListPermissionVersionsResponse = Shapes::StructureShape.new(name: 'ListPermissionVersionsResponse')
     ListPermissionsRequest = Shapes::StructureShape.new(name: 'ListPermissionsRequest')
     ListPermissionsResponse = Shapes::StructureShape.new(name: 'ListPermissionsResponse')
     ListPrincipalsRequest = Shapes::StructureShape.new(name: 'ListPrincipalsRequest')
@@ -286,6 +288,15 @@ module Aws::RAM
     ListPendingInvitationResourcesResponse.add_member(:resources, Shapes::ShapeRef.new(shape: ResourceList, location_name: "resources"))
     ListPendingInvitationResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListPendingInvitationResourcesResponse.struct_class = Types::ListPendingInvitationResourcesResponse
+
+    ListPermissionVersionsRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
+    ListPermissionVersionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPermissionVersionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListPermissionVersionsRequest.struct_class = Types::ListPermissionVersionsRequest
+
+    ListPermissionVersionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourceSharePermissionList, location_name: "permissions"))
+    ListPermissionVersionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPermissionVersionsResponse.struct_class = Types::ListPermissionVersionsResponse
 
     ListPermissionsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ListPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -808,6 +819,27 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationAlreadyRejectedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceShareInvitationExpiredException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_permission_versions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPermissionVersions"
+        o.http_method = "POST"
+        o.http_request_uri = "/listpermissionversions"
+        o.input = Shapes::ShapeRef.new(shape: ListPermissionVersionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPermissionVersionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

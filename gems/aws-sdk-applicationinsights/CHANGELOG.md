@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-01-14)
+------------------
+
+* Feature - Application Insights support for Active Directory and SharePoint
+
 1.27.0 (2021-12-21)
 ------------------
 

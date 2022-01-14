@@ -903,6 +903,29 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeactivateAnomalyDetectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_detector_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DeactivateAnomalyDetectorRequest AWS API Documentation
+    #
+    class DeactivateAnomalyDetectorRequest < Struct.new(
+      :anomaly_detector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DeactivateAnomalyDetectorResponse AWS API Documentation
+    #
+    class DeactivateAnomalyDetectorResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteAlertRequest
     #   data as a hash:
     #

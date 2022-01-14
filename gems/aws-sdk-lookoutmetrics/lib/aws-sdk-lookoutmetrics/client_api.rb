@@ -63,6 +63,8 @@ module Aws::LookoutMetrics
     DatabaseHost = Shapes::StringShape.new(name: 'DatabaseHost')
     DatabasePort = Shapes::IntegerShape.new(name: 'DatabasePort')
     DateTimeFormat = Shapes::StringShape.new(name: 'DateTimeFormat')
+    DeactivateAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'DeactivateAnomalyDetectorRequest')
+    DeactivateAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'DeactivateAnomalyDetectorResponse')
     DeleteAlertRequest = Shapes::StructureShape.new(name: 'DeleteAlertRequest')
     DeleteAlertResponse = Shapes::StructureShape.new(name: 'DeleteAlertResponse')
     DeleteAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'DeleteAnomalyDetectorRequest')
@@ -354,6 +356,11 @@ module Aws::LookoutMetrics
     CsvFormatDescriptor.add_member(:header_list, Shapes::ShapeRef.new(shape: HeaderList, location_name: "HeaderList"))
     CsvFormatDescriptor.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: QuoteSymbol, location_name: "QuoteSymbol"))
     CsvFormatDescriptor.struct_class = Types::CsvFormatDescriptor
+
+    DeactivateAnomalyDetectorRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
+    DeactivateAnomalyDetectorRequest.struct_class = Types::DeactivateAnomalyDetectorRequest
+
+    DeactivateAnomalyDetectorResponse.struct_class = Types::DeactivateAnomalyDetectorResponse
 
     DeleteAlertRequest.add_member(:alert_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AlertArn"))
     DeleteAlertRequest.struct_class = Types::DeleteAlertRequest
@@ -828,6 +835,20 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:deactivate_anomaly_detector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeactivateAnomalyDetector"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeactivateAnomalyDetector"
+        o.input = Shapes::ShapeRef.new(shape: DeactivateAnomalyDetectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeactivateAnomalyDetectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

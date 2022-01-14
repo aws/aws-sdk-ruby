@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-01-14)
+------------------
+
+* Feature - Added read and write api support for multi-select picklist. And added errorcode field to DescribeTableDataImportJob API output, when import job fails.
+
 1.14.0 (2022-01-12)
 ------------------
 

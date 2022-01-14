@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-01-14)
+------------------
+
+* Feature - This release adds the ListPermissionVersions API which lists the versions for a given permission.
+
 1.35.0 (2021-12-21)
 ------------------
 

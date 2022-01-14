@@ -63,6 +63,7 @@ module Aws::Honeycode
     #             cells_to_create: { # required
     #               "ResourceId" => {
     #                 fact: "Fact",
+    #                 facts: ["Fact"],
     #               },
     #             },
     #           },
@@ -233,6 +234,7 @@ module Aws::Honeycode
     #             cells_to_update: { # required
     #               "ResourceId" => {
     #                 fact: "Fact",
+    #                 facts: ["Fact"],
     #               },
     #             },
     #           },
@@ -326,6 +328,7 @@ module Aws::Honeycode
     #             cells_to_update: { # required
     #               "ResourceId" => {
     #                 fact: "Fact",
+    #                 facts: ["Fact"],
     #               },
     #             },
     #           },
@@ -468,6 +471,23 @@ module Aws::Honeycode
     #   "row:dfcefaee-5b37-4355-8f28-40c3e4ff5dd4/ca432b2f-b8eb-431d-9fb5-cbe0342f9f03"
     #   as the raw value.
     #
+    #   Cells with format ROWSET (aka multi-select or multi-record picklist)
+    #   will by default have the first column of each of the linked rows as
+    #   the formatted value in the list, and the rowset id of the linked
+    #   rows as the raw value. For example, a cell containing a multi-select
+    #   picklist to a table that contains items might have "Item A",
+    #   "Item B" in the formatted value list and
+    #   "rows:b742c1f4-6cb0-4650-a845-35eb86fcc2bb/
+    #   \[fdea123b-8f68-474a-aa8a-5ff87aa333af,6daf41f0-a138-4eee-89da-123086d36ecf\]"
+    #   as the raw value.
+    #
+    #   Cells with format ATTACHMENT will have the name of the attachment as
+    #   the formatted value and the attachment id as the raw value. For
+    #   example, a cell containing an attachment named "image.jpeg" will
+    #   have "image.jpeg" as the formatted value and
+    #   "attachment:ca432b2f-b8eb-431d-9fb5-cbe0342f9f03" as the raw
+    #   value.
+    #
     #   Cells with format AUTO or cells without any format that are
     #   auto-detected as one of the formats above will contain the raw and
     #   formatted values as mentioned above, based on the auto-detected
@@ -488,13 +508,21 @@ module Aws::Honeycode
     #   values.
     #   @return [String]
     #
+    # @!attribute [rw] formatted_values
+    #   A list of formatted values of the cell. This field is only returned
+    #   when the cell is ROWSET format (aka multi-select or multi-record
+    #   picklist). Values in the list are always represented as strings. The
+    #   formattedValue field will be empty if this field is returned.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/Cell AWS API Documentation
     #
     class Cell < Struct.new(
       :formula,
       :format,
       :raw_value,
-      :formatted_value)
+      :formatted_value,
+      :formatted_values)
       SENSITIVE = [:formula]
       include Aws::Structure
     end
@@ -502,11 +530,18 @@ module Aws::Honeycode
     # CellInput object contains the data needed to create or update cells in
     # a table.
     #
+    # <note markdown="1"> CellInput object has only a facts field or a fact field, but not both.
+    # A 400 bad request will be thrown if both fact and facts field are
+    # present.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass CellInput
     #   data as a hash:
     #
     #       {
     #         fact: "Fact",
+    #         facts: ["Fact"],
     #       }
     #
     # @!attribute [rw] fact
@@ -515,10 +550,17 @@ module Aws::Honeycode
     #   (=) sign.
     #   @return [String]
     #
+    # @!attribute [rw] facts
+    #   A list representing the values that are entered into a ROWSET cell.
+    #   Facts list can have either only values or rowIDs, and rowIDs should
+    #   from the same table.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/CellInput AWS API Documentation
     #
     class CellInput < Struct.new(
-      :fact)
+      :fact,
+      :facts)
       SENSITIVE = [:fact]
       include Aws::Structure
     end
@@ -553,6 +595,7 @@ module Aws::Honeycode
     #         cells_to_create: { # required
     #           "ResourceId" => {
     #             fact: "Fact",
+    #             facts: ["Fact"],
     #           },
     #         },
     #       }
@@ -703,12 +746,18 @@ module Aws::Honeycode
     #   The metadata about the job that was submitted for import.
     #   @return [Types::TableDataImportJobMetadata]
     #
+    # @!attribute [rw] error_code
+    #   If job status is failed, error code to understand reason for the
+    #   failure.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/honeycode-2020-03-01/DescribeTableDataImportJobResult AWS API Documentation
     #
     class DescribeTableDataImportJobResult < Struct.new(
       :job_status,
       :message,
-      :job_metadata)
+      :job_metadata,
+      :error_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -935,7 +984,7 @@ module Aws::Honeycode
     #
     class ImportDataSourceConfig < Struct.new(
       :data_source_url)
-      SENSITIVE = []
+      SENSITIVE = [:data_source_url]
       include Aws::Structure
     end
 
@@ -1867,6 +1916,7 @@ module Aws::Honeycode
     #         cells_to_update: { # required
     #           "ResourceId" => {
     #             fact: "Fact",
+    #             facts: ["Fact"],
     #           },
     #         },
     #       }
@@ -1905,6 +1955,7 @@ module Aws::Honeycode
     #         cells_to_update: { # required
     #           "ResourceId" => {
     #             fact: "Fact",
+    #             facts: ["Fact"],
     #           },
     #         },
     #       }

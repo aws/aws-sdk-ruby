@@ -646,6 +646,28 @@ module Aws::LookoutMetrics
       req.send_request(options)
     end
 
+    # Deactivates an anomaly detector.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   The Amazon Resource Name (ARN) of the anomaly detector.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deactivate_anomaly_detector({
+    #     anomaly_detector_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DeactivateAnomalyDetector AWS API Documentation
+    #
+    # @overload deactivate_anomaly_detector(params = {})
+    # @param [Hash] params ({})
+    def deactivate_anomaly_detector(params = {}, options = {})
+      req = build_request(:deactivate_anomaly_detector, params)
+      req.send_request(options)
+    end
+
     # Deletes an alert.
     #
     # @option params [required, String] :alert_arn
@@ -823,10 +845,10 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_config.anomaly_detector_frequency #=> String, one of "P1D", "PT1H", "PT10M", "PT5M"
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
-    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE", "DEACTIVATED", "DEACTIVATING"
     #   resp.failure_reason #=> String
     #   resp.kms_key_arn #=> String
-    #   resp.failure_type #=> String, one of "ACTIVATION_FAILURE", "BACK_TEST_ACTIVATION_FAILURE", "DELETION_FAILURE"
+    #   resp.failure_type #=> String, one of "ACTIVATION_FAILURE", "BACK_TEST_ACTIVATION_FAILURE", "DELETION_FAILURE", "DEACTIVATION_FAILURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeAnomalyDetector AWS API Documentation
     #
@@ -1176,7 +1198,7 @@ module Aws::LookoutMetrics
     #   resp.anomaly_detector_summary_list[0].anomaly_detector_description #=> String
     #   resp.anomaly_detector_summary_list[0].creation_time #=> Time
     #   resp.anomaly_detector_summary_list[0].last_modification_time #=> Time
-    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE"
+    #   resp.anomaly_detector_summary_list[0].status #=> String, one of "ACTIVE", "ACTIVATING", "DELETING", "FAILED", "INACTIVE", "LEARNING", "BACK_TEST_ACTIVATING", "BACK_TEST_ACTIVE", "BACK_TEST_COMPLETE", "DEACTIVATED", "DEACTIVATING"
     #   resp.anomaly_detector_summary_list[0].tags #=> Hash
     #   resp.anomaly_detector_summary_list[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1722,7 +1744,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-01-14)
+------------------
+
+* Feature - This release adds a new DeactivateAnomalyDetector API operation.
+
 1.12.0 (2022-01-10)
 ------------------
 

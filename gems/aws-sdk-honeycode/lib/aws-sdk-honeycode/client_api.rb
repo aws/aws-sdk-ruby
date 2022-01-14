@@ -43,13 +43,16 @@ module Aws::Honeycode
     DescribeTableDataImportJobResult = Shapes::StructureShape.new(name: 'DescribeTableDataImportJobResult')
     DestinationOptions = Shapes::StructureShape.new(name: 'DestinationOptions')
     Email = Shapes::StringShape.new(name: 'Email')
+    ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     Fact = Shapes::StringShape.new(name: 'Fact')
+    FactList = Shapes::ListShape.new(name: 'FactList')
     FailedBatchItem = Shapes::StructureShape.new(name: 'FailedBatchItem')
     FailedBatchItems = Shapes::ListShape.new(name: 'FailedBatchItems')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     Format = Shapes::StringShape.new(name: 'Format')
     FormattedValue = Shapes::StringShape.new(name: 'FormattedValue')
+    FormattedValuesList = Shapes::ListShape.new(name: 'FormattedValuesList')
     Formula = Shapes::StringShape.new(name: 'Formula')
     GetScreenDataRequest = Shapes::StructureShape.new(name: 'GetScreenDataRequest')
     GetScreenDataResult = Shapes::StructureShape.new(name: 'GetScreenDataResult')
@@ -189,9 +192,11 @@ module Aws::Honeycode
     Cell.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "format"))
     Cell.add_member(:raw_value, Shapes::ShapeRef.new(shape: RawValue, location_name: "rawValue"))
     Cell.add_member(:formatted_value, Shapes::ShapeRef.new(shape: FormattedValue, location_name: "formattedValue"))
+    Cell.add_member(:formatted_values, Shapes::ShapeRef.new(shape: FormattedValuesList, location_name: "formattedValues"))
     Cell.struct_class = Types::Cell
 
     CellInput.add_member(:fact, Shapes::ShapeRef.new(shape: Fact, location_name: "fact"))
+    CellInput.add_member(:facts, Shapes::ShapeRef.new(shape: FactList, location_name: "facts"))
     CellInput.struct_class = Types::CellInput
 
     Cells.member = Shapes::ShapeRef.new(shape: Cell)
@@ -230,10 +235,13 @@ module Aws::Honeycode
     DescribeTableDataImportJobResult.add_member(:job_status, Shapes::ShapeRef.new(shape: TableDataImportJobStatus, required: true, location_name: "jobStatus"))
     DescribeTableDataImportJobResult.add_member(:message, Shapes::ShapeRef.new(shape: TableDataImportJobMessage, required: true, location_name: "message"))
     DescribeTableDataImportJobResult.add_member(:job_metadata, Shapes::ShapeRef.new(shape: TableDataImportJobMetadata, required: true, location_name: "jobMetadata"))
+    DescribeTableDataImportJobResult.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "errorCode"))
     DescribeTableDataImportJobResult.struct_class = Types::DescribeTableDataImportJobResult
 
     DestinationOptions.add_member(:column_map, Shapes::ShapeRef.new(shape: ImportColumnMap, location_name: "columnMap"))
     DestinationOptions.struct_class = Types::DestinationOptions
+
+    FactList.member = Shapes::ShapeRef.new(shape: Fact)
 
     FailedBatchItem.add_member(:id, Shapes::ShapeRef.new(shape: BatchItemId, required: true, location_name: "id"))
     FailedBatchItem.add_member(:error_message, Shapes::ShapeRef.new(shape: BatchErrorMessage, required: true, location_name: "errorMessage"))
@@ -244,6 +252,8 @@ module Aws::Honeycode
     Filter.add_member(:formula, Shapes::ShapeRef.new(shape: Formula, required: true, location_name: "formula"))
     Filter.add_member(:context_row_id, Shapes::ShapeRef.new(shape: RowId, location_name: "contextRowId"))
     Filter.struct_class = Types::Filter
+
+    FormattedValuesList.member = Shapes::ShapeRef.new(shape: FormattedValue)
 
     GetScreenDataRequest.add_member(:workbook_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "workbookId"))
     GetScreenDataRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "appId"))
@@ -559,6 +569,7 @@ module Aws::Honeycode
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
       end)
 
       api.add_operation(:get_screen_data, Seahorse::Model::Operation.new.tap do |o|
@@ -591,6 +602,7 @@ module Aws::Honeycode
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionException)
         o.errors << Shapes::ShapeRef.new(shape: AutomationExecutionTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:list_table_columns, Seahorse::Model::Operation.new.tap do |o|
@@ -703,6 +715,8 @@ module Aws::Honeycode
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

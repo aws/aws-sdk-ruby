@@ -585,7 +585,9 @@ module Aws::RAM
     # @option params [Integer] :permission_version
     #   Specifies the version of the RAM permission to associate with the
     #   resource share. If you don't specify this parameter, the operation
-    #   uses the version designated as the default.
+    #   uses the version designated as the default. You can use the
+    #   ListPermissionVersions operation to discover the available versions of
+    #   a permission.
     #
     # @return [Types::AssociateResourceSharePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1516,6 +1518,75 @@ module Aws::RAM
       req.send_request(options)
     end
 
+    # Lists the available versions of the specified RAM permission.
+    #
+    # @option params [required, String] :permission_arn
+    #   Specifies the [Amazon Resoure Name (ARN)][1] of the RAM permission
+    #   whose versions you want to list. You can use the `permissionVersion`
+    #   parameter on the AssociateResourceSharePermission operation to specify
+    #   a non-default version to attach.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [String] :next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `NextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `NextToken`
+    #   response to request the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the total number of results that you want included on each
+    #   page of the response. If you do not include this parameter, it
+    #   defaults to a value that is specific to the operation. If additional
+    #   items exist beyond the number you specify, the `NextToken` response
+    #   element is returned with a value (not null). Include the specified
+    #   value as the `NextToken` request parameter in the next call to the
+    #   operation to get the next part of the results. Note that the service
+    #   might return fewer results than the maximum even when there are more
+    #   results available. You should check `NextToken` after every operation
+    #   to ensure that you receive all of the results.
+    #
+    # @return [Types::ListPermissionVersionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPermissionVersionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
+    #   * {Types::ListPermissionVersionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_permission_versions({
+    #     permission_arn: "String", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.permissions #=> Array
+    #   resp.permissions[0].arn #=> String
+    #   resp.permissions[0].version #=> String
+    #   resp.permissions[0].default_version #=> Boolean
+    #   resp.permissions[0].name #=> String
+    #   resp.permissions[0].resource_type #=> String
+    #   resp.permissions[0].status #=> String
+    #   resp.permissions[0].creation_time #=> Time
+    #   resp.permissions[0].last_updated_time #=> Time
+    #   resp.permissions[0].is_resource_type_default #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionVersions AWS API Documentation
+    #
+    # @overload list_permission_versions(params = {})
+    # @param [Hash] params ({})
+    def list_permission_versions(params = {}, options = {})
+      req = build_request(:list_permission_versions, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of available RAM permissions that you can use for the
     # supported resource types.
     #
@@ -2224,7 +2295,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
