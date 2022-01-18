@@ -5189,6 +5189,44 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ClientLoginBannerOptions
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         banner_text: "String",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] banner_text
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientLoginBannerOptions AWS API Documentation
+    #
+    class ClientLoginBannerOptions < Struct.new(
+      :enabled,
+      :banner_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] enabled
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] banner_text
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientLoginBannerResponseOptions AWS API Documentation
+    #
+    class ClientLoginBannerResponseOptions < Struct.new(
+      :enabled,
+      :banner_text)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the authentication methods used by a Client VPN endpoint.
     # For more information, see [Authentication][1] in the *Client VPN
     # Administrator Guide*.
@@ -5504,6 +5542,12 @@ module Aws::EC2
     #   connections.
     #   @return [Types::ClientConnectResponseOptions]
     #
+    # @!attribute [rw] session_timeout_hours
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   @return [Types::ClientLoginBannerResponseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
     #
     class ClientVpnEndpoint < Struct.new(
@@ -5527,7 +5571,9 @@ module Aws::EC2
       :security_group_ids,
       :vpc_id,
       :self_service_portal_url,
-      :client_connect_options)
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6897,6 +6943,11 @@ module Aws::EC2
     #           enabled: false,
     #           lambda_function_arn: "String",
     #         },
+    #         session_timeout_hours: 1,
+    #         client_login_banner_options: {
+    #           enabled: false,
+    #           banner_text: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_cidr_block
@@ -7026,6 +7077,12 @@ module Aws::EC2
     #   connections.
     #   @return [Types::ClientConnectOptions]
     #
+    # @!attribute [rw] session_timeout_hours
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   @return [Types::ClientLoginBannerOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
     #
     class CreateClientVpnEndpointRequest < Struct.new(
@@ -7044,7 +7101,9 @@ module Aws::EC2
       :security_group_ids,
       :vpc_id,
       :self_service_portal,
-      :client_connect_options)
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -46175,6 +46234,11 @@ module Aws::EC2
     #           enabled: false,
     #           lambda_function_arn: "String",
     #         },
+    #         session_timeout_hours: 1,
+    #         client_login_banner_options: {
+    #           enabled: false,
+    #           banner_text: "String",
+    #         },
     #       }
     #
     # @!attribute [rw] client_vpn_endpoint_id
@@ -46257,6 +46321,12 @@ module Aws::EC2
     #   connections.
     #   @return [Types::ClientConnectOptions]
     #
+    # @!attribute [rw] session_timeout_hours
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_login_banner_options
+    #   @return [Types::ClientLoginBannerOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
     #
     class ModifyClientVpnEndpointRequest < Struct.new(
@@ -46271,7 +46341,9 @@ module Aws::EC2
       :security_group_ids,
       :vpc_id,
       :self_service_portal,
-      :client_connect_options)
+      :client_connect_options,
+      :session_timeout_hours,
+      :client_login_banner_options)
       SENSITIVE = []
       include Aws::Structure
     end

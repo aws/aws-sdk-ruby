@@ -621,6 +621,266 @@ module Aws::LocationService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CalculateRouteMatrixRequest
+    #   data as a hash:
+    #
+    #       {
+    #         calculator_name: "ResourceName", # required
+    #         car_mode_options: {
+    #           avoid_ferries: false,
+    #           avoid_tolls: false,
+    #         },
+    #         depart_now: false,
+    #         departure_positions: [ # required
+    #           [1.0],
+    #         ],
+    #         departure_time: Time.now,
+    #         destination_positions: [ # required
+    #           [1.0],
+    #         ],
+    #         distance_unit: "Kilometers", # accepts Kilometers, Miles
+    #         travel_mode: "Car", # accepts Car, Truck, Walking
+    #         truck_mode_options: {
+    #           avoid_ferries: false,
+    #           avoid_tolls: false,
+    #           dimensions: {
+    #             height: 1.0,
+    #             length: 1.0,
+    #             unit: "Meters", # accepts Meters, Feet
+    #             width: 1.0,
+    #           },
+    #           weight: {
+    #             total: 1.0,
+    #             unit: "Kilograms", # accepts Kilograms, Pounds
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] calculator_name
+    #   The name of the route calculator resource that you want to use to
+    #   calculate the route matrix.
+    #   @return [String]
+    #
+    # @!attribute [rw] car_mode_options
+    #   Specifies route preferences when traveling by `Car`, such as
+    #   avoiding routes that use ferries or tolls.
+    #
+    #   Requirements: `TravelMode` must be specified as `Car`.
+    #   @return [Types::CalculateRouteCarModeOptions]
+    #
+    # @!attribute [rw] depart_now
+    #   Sets the time of departure as the current time. Uses the current
+    #   time to calculate the route matrix. You can't set both
+    #   `DepartureTime` and `DepartNow`. If neither is set, the best time of
+    #   day to travel with the best traffic conditions is used to calculate
+    #   the route matrix.
+    #
+    #   Default Value: `false`
+    #
+    #   Valid Values: `false` \| `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] departure_positions
+    #   The list of departure (origin) positions for the route matrix. An
+    #   array of points, each of which is itself a 2-value array defined in
+    #   [WGS 84][1] format: `[longitude, latitude]`. For example,
+    #   `[-123.115, 49.285]`.
+    #
+    #   Depending on the data provider selected in the route calculator
+    #   resource there may be additional restrictions on the inputs you can
+    #   choose. See [ Position restrictions][2] in the *Amazon Location
+    #   Service Developer Guide*.
+    #
+    #   <note markdown="1"> For route calculators that use Esri as the data provider, if you
+    #   specify a departure that's not located on a road, Amazon Location [
+    #   moves the position to the nearest road][3]. The snapped value is
+    #   available in the result in `SnappedDeparturePositions`.
+    #
+    #    </note>
+    #
+    #   Valid Values: `[-180 to 180,-90 to 90]`
+    #
+    #
+    #
+    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   @return [Array<Array<Float>>]
+    #
+    # @!attribute [rw] departure_time
+    #   Specifies the desired time of departure. Uses the given time to
+    #   calculate the route matrix. You can't set both `DepartureTime` and
+    #   `DepartNow`. If neither is set, the best time of day to travel with
+    #   the best traffic conditions is used to calculate the route matrix.
+    #
+    #   <note markdown="1"> Setting a departure time in the past returns a `400
+    #   ValidationException` error.
+    #
+    #    </note>
+    #
+    #   * In [ISO 8601][1] format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
+    #     `2020–07-2T12:15:20.000Z+01:00`
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
+    # @!attribute [rw] destination_positions
+    #   The list of destination positions for the route matrix. An array of
+    #   points, each of which is itself a 2-value array defined in [WGS
+    #   84][1] format: `[longitude, latitude]`. For example, `[-122.339,
+    #   47.615]`
+    #
+    #   Depending on the data provider selected in the route calculator
+    #   resource there may be additional restrictions on the inputs you can
+    #   choose. See [ Position restrictions][2] in the *Amazon Location
+    #   Service Developer Guide*.
+    #
+    #   <note markdown="1"> For route calculators that use Esri as the data provider, if you
+    #   specify a destination that's not located on a road, Amazon Location
+    #   [ moves the position to the nearest road][3]. The snapped value is
+    #   available in the result in `SnappedDestinationPositions`.
+    #
+    #    </note>
+    #
+    #   Valid Values: `[-180 to 180,-90 to 90]`
+    #
+    #
+    #
+    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits
+    #   [3]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
+    #   @return [Array<Array<Float>>]
+    #
+    # @!attribute [rw] distance_unit
+    #   Set the unit system to specify the distance.
+    #
+    #   Default Value: `Kilometers`
+    #   @return [String]
+    #
+    # @!attribute [rw] travel_mode
+    #   Specifies the mode of transport when calculating a route. Used in
+    #   estimating the speed of travel and road compatibility.
+    #
+    #   The `TravelMode` you specify also determines how you specify route
+    #   preferences:
+    #
+    #   * If traveling by `Car` use the `CarModeOptions` parameter.
+    #
+    #   * If traveling by `Truck` use the `TruckModeOptions` parameter.
+    #
+    #   Default Value: `Car`
+    #   @return [String]
+    #
+    # @!attribute [rw] truck_mode_options
+    #   Specifies route preferences when traveling by `Truck`, such as
+    #   avoiding routes that use ferries or tolls, and truck specifications
+    #   to consider when choosing an optimal road.
+    #
+    #   Requirements: `TravelMode` must be specified as `Truck`.
+    #   @return [Types::CalculateRouteTruckModeOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixRequest AWS API Documentation
+    #
+    class CalculateRouteMatrixRequest < Struct.new(
+      :calculator_name,
+      :car_mode_options,
+      :depart_now,
+      :departure_positions,
+      :departure_time,
+      :destination_positions,
+      :distance_unit,
+      :travel_mode,
+      :truck_mode_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the result of the route matrix calculation.
+    #
+    # @!attribute [rw] route_matrix
+    #   The calculated route matrix containing the results for all pairs of
+    #   `DeparturePositions` to `DestinationPositions`. Each row corresponds
+    #   to one entry in `DeparturePositions`. Each entry in the row
+    #   corresponds to the route from that entry in `DeparturePositions` to
+    #   an entry in `DestinationPositions`.
+    #   @return [Array<Array<Types::RouteMatrixEntry>>]
+    #
+    # @!attribute [rw] snapped_departure_positions
+    #   For routes calculated using an Esri route calculator resource,
+    #   departure positions are snapped to the closest road. For Esri route
+    #   calculator resources, this returns the list of departure/origin
+    #   positions used for calculation of the `RouteMatrix`.
+    #   @return [Array<Array<Float>>]
+    #
+    # @!attribute [rw] snapped_destination_positions
+    #   The list of destination positions for the route matrix used for
+    #   calculation of the `RouteMatrix`.
+    #   @return [Array<Array<Float>>]
+    #
+    # @!attribute [rw] summary
+    #   Contains information about the route matrix, `DataSource`,
+    #   `DistanceUnit`, `RouteCount` and `ErrorCount`.
+    #   @return [Types::CalculateRouteMatrixSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixResponse AWS API Documentation
+    #
+    class CalculateRouteMatrixResponse < Struct.new(
+      :route_matrix,
+      :snapped_departure_positions,
+      :snapped_destination_positions,
+      :summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the calculated route matrix.
+    #
+    # @!attribute [rw] data_source
+    #   The data provider of traffic and road network data used to calculate
+    #   the routes. Indicates one of the available providers:
+    #
+    #   * `Esri`
+    #
+    #   * `Here`
+    #
+    #   For more information about data providers, see [Amazon Location
+    #   Service data providers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
+    #   @return [String]
+    #
+    # @!attribute [rw] distance_unit
+    #   The unit of measurement for route distances.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_count
+    #   The count of error results in the route matrix. If this number is 0,
+    #   all routes were calculated successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] route_count
+    #   The count of cells in the route matrix. Equal to the number of
+    #   `DeparturePositions` multiplied by the number of
+    #   `DestinationPositions`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteMatrixSummary AWS API Documentation
+    #
+    class CalculateRouteMatrixSummary < Struct.new(
+      :data_source,
+      :distance_unit,
+      :error_count,
+      :route_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CalculateRouteRequest
     #   data as a hash:
     #
@@ -698,7 +958,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] departure_time
@@ -739,7 +999,7 @@ module Aws::LocationService
     #
     #
     #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
-    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] distance_unit
@@ -761,7 +1021,7 @@ module Aws::LocationService
     #   Specifies the mode of transport when calculating a route. Used in
     #   estimating the speed of travel and road compatibility.
     #
-    #   The `TravelMode` you specify determines how you specify route
+    #   The `TravelMode` you specify also determines how you specify route
     #   preferences:
     #
     #   * If traveling by `Car` use the `CarModeOptions` parameter.
@@ -806,7 +1066,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Array<Float>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/CalculateRouteRequest AWS API Documentation
@@ -857,7 +1117,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Types::Leg>]
     #
     # @!attribute [rw] summary
@@ -1060,41 +1320,12 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Optionally specifies the pricing plan for the geofence collection.
-    #   Defaults to `RequestBasedUsage`.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Specifies the data provider for the geofence collection.
-    #
-    #   * Required value for the following pricing plans:
-    #     `MobileAssetTracking `\| `MobileAssetManagement`
-    #
-    #   ^
-    #
-    #   For more information about [Data Providers][1], and [Pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> Amazon Location Service only uses `PricingPlanDataSource` to
-    #   calculate billing for your geofence collection. Your data won't be
-    #   shared with the data provider, and will remain in your AWS account
-    #   or Region unless you move it.
-    #
-    #    </note>
-    #
-    #   Valid Values: `Esri `\| `Here`
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   This parameter is no longer used.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1203,15 +1434,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Optionally specifies the pricing plan for the map resource. Defaults
-    #   to `RequestBasedUsage`.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1356,15 +1580,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Optionally specifies the pricing plan for the place index resource.
-    #   Defaults to `RequestBasedUsage`.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1501,15 +1718,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Optionally specifies the pricing plan for the route calculator
-    #   resource. Defaults to `RequestBasedUsage`.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1653,41 +1863,12 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Optionally specifies the pricing plan for the tracker resource.
-    #   Defaults to `RequestBasedUsage`.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Specifies the data provider for the tracker resource.
-    #
-    #   * Required value for the following pricing plans:
-    #     `MobileAssetTracking `\| `MobileAssetManagement`
-    #
-    #   ^
-    #
-    #   For more information about [Data Providers][1], and [Pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> Amazon Location Service only uses `PricingPlanDataSource` to
-    #   calculate billing for your tracker resource. Your data will not be
-    #   shared with the data provider, and will remain in your AWS account
-    #   or Region unless you move it.
-    #
-    #    </note>
-    #
-    #   Valid values: `Esri` \| `Here`
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   This parameter is no longer used.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1993,18 +2174,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified geofence collection.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the geofence collection.
+    #   No longer used. Always returns an empty string.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2090,9 +2264,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified map resource.
-    #
-    #        <p>For additional details and restrictions on each pricing plan option, see <a href="https://aws.amazon.com/location/pricing/">Amazon Location Service pricing</a>.</p>
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2191,14 +2363,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified place index resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2297,15 +2462,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified route calculator
-    #   resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2386,18 +2543,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan selected for the specified tracker resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the tracker resource.
+    #   No longer used. Always returns an empty string.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -3144,7 +3294,7 @@ module Aws::LocationService
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    # [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #
     # @!attribute [rw] distance
     #   The distance between the leg's `StartPosition` and `EndPosition`
@@ -3173,7 +3323,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/nap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] geometry
@@ -3191,7 +3341,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road
+    #   [1]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #   @return [Array<Float>]
     #
     # @!attribute [rw] steps
@@ -3408,18 +3558,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified geofence collection.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see the [Amazon Location Service pricing page][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the geofence collection.
+    #   No longer used. Always returns an empty string.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -3622,14 +3765,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified map resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -3741,14 +3877,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified place index resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -3863,14 +3992,7 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified route calculator resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] update_time
@@ -4069,18 +4191,11 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   The pricing plan for the specified tracker resource.
-    #
-    #   For additional details and restrictions on each pricing plan option,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   Always returns `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   The specified data provider for the tracker resource.
+    #   No longer used. Always returns an empty string.
     #   @return [String]
     #
     # @!attribute [rw] tracker_name
@@ -4400,6 +4515,89 @@ module Aws::LocationService
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result for one `SnappedDeparturePosition`
+    # `SnappedDestinationPosition` pair.
+    #
+    # @!attribute [rw] distance
+    #   The total distance of travel for the route.
+    #   @return [Float]
+    #
+    # @!attribute [rw] duration_seconds
+    #   The expected duration of travel for the route.
+    #   @return [Float]
+    #
+    # @!attribute [rw] error
+    #   An error corresponding to the calculation of a route between the
+    #   `DeparturePosition` and `DestinationPosition`.
+    #   @return [Types::RouteMatrixEntryError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/RouteMatrixEntry AWS API Documentation
+    #
+    class RouteMatrixEntry < Struct.new(
+      :distance,
+      :duration_seconds,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error corresponding to the calculation of a route between the
+    # `DeparturePosition` and `DestinationPosition`.
+    #
+    # The error code can be one of the following:
+    #
+    # * `RouteNotFound` - Unable to find a valid route with the given
+    #   parameters.
+    #
+    # ^
+    # ^
+    #
+    # * `RouteTooLong` - Route calculation went beyond the maximum size of a
+    #   route and was terminated before completion.
+    #
+    # ^
+    # ^
+    #
+    # * `PositionsNotFound` - One or more of the input positions were not
+    #   found on the route network.
+    #
+    # ^
+    # ^
+    #
+    # * `DestinationPositionNotFound` - The destination position was not
+    #   found on the route network.
+    #
+    # ^
+    # ^
+    #
+    # * `DeparturePositionNotFound` - The departure position was not found
+    #   on the route network.
+    #
+    # ^
+    # ^
+    #
+    # * `OtherValidationError` - The given inputs were not valid or a route
+    #   was not found. More information is given in the error `Message`
+    #
+    # ^
+    #
+    # @!attribute [rw] code
+    #   The type of error which occurred for the route calculation.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message about the error that occurred for the route calculation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/RouteMatrixEntryError AWS API Documentation
+    #
+    class RouteMatrixEntryError < Struct.new(
+      :code,
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -5335,39 +5533,12 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the geofence collection.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Updates the data provider for the geofence collection.
-    #
-    #   A required value for the following pricing plans:
-    #   `MobileAssetTracking`\| `MobileAssetManagement`
-    #
-    #   For more information about [data providers][1] and [pricing
-    #   plans][2], see the Amazon Location Service product page.
-    #
-    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
-    #   request.
-    #
-    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
-    #   billing for your geofence collection. Your data won't be shared
-    #   with the data provider, and will remain in your AWS account and
-    #   Region unless you move it.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   This parameter is no longer used.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateGeofenceCollectionRequest AWS API Documentation
@@ -5432,14 +5603,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the map resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateMapRequest AWS API Documentation
@@ -5509,14 +5674,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the place index resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdatePlaceIndexRequest AWS API Documentation
@@ -5581,14 +5740,8 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the route calculator resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/location-2020-11-19/UpdateRouteCalculatorRequest AWS API Documentation
@@ -5679,39 +5832,12 @@ module Aws::LocationService
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan
-    #   Updates the pricing plan for the tracker resource.
-    #
-    #   For more information about each pricing plan option restrictions,
-    #   see [Amazon Location Service pricing][1].
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/pricing/
+    #   No longer used. If included, the only allowed value is
+    #   `RequestBasedUsage`.
     #   @return [String]
     #
     # @!attribute [rw] pricing_plan_data_source
-    #   Updates the data provider for the tracker resource.
-    #
-    #   A required value for the following pricing plans:
-    #   `MobileAssetTracking`\| `MobileAssetManagement`
-    #
-    #   For more information about [data providers][1] and [pricing
-    #   plans][2], see the Amazon Location Service product page
-    #
-    #   <note markdown="1"> This can only be updated when updating the `PricingPlan` in the same
-    #   request.
-    #
-    #    Amazon Location Service uses `PricingPlanDataSource` to calculate
-    #   billing for your tracker resource. Your data won't be shared with
-    #   the data provider, and will remain in your AWS account and Region
-    #   unless you move it.
-    #
-    #    </note>
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/location/data-providers/
-    #   [2]: https://aws.amazon.com/location/pricing/
+    #   This parameter is no longer used.
     #   @return [String]
     #
     # @!attribute [rw] tracker_name

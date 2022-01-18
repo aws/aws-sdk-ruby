@@ -537,6 +537,11 @@ module Aws::IVS
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #
+    # @option params [Types::ThumbnailConfiguration] :thumbnail_configuration
+    #   A complex type that allows you to enable/disable the recording of
+    #   thumbnails for a live session and modify the interval at which
+    #   thumbnails are generated for the live session.
+    #
     # @return [Types::CreateRecordingConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRecordingConfigurationResponse#recording_configuration #recording_configuration} => Types::RecordingConfiguration
@@ -553,6 +558,10 @@ module Aws::IVS
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     thumbnail_configuration: {
+    #       recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
+    #       target_interval_seconds: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -563,6 +572,8 @@ module Aws::IVS
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
+    #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfiguration AWS API Documentation
     #
@@ -831,6 +842,8 @@ module Aws::IVS
     #   resp.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.recording_configuration.tags #=> Hash
     #   resp.recording_configuration.tags["TagKey"] #=> String
+    #   resp.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetRecordingConfiguration AWS API Documentation
     #
@@ -960,6 +973,8 @@ module Aws::IVS
     #   resp.stream_session.recording_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE"
     #   resp.stream_session.recording_configuration.tags #=> Hash
     #   resp.stream_session.recording_configuration.tags["TagKey"] #=> String
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.recording_mode #=> String, one of "DISABLED", "INTERVAL"
+    #   resp.stream_session.recording_configuration.thumbnail_configuration.target_interval_seconds #=> Integer
     #   resp.stream_session.start_time #=> Time
     #   resp.stream_session.stream_id #=> String
     #   resp.stream_session.truncated_events #=> Array
@@ -1557,7 +1572,7 @@ module Aws::IVS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

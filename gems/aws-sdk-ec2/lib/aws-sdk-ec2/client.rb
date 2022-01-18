@@ -4790,6 +4790,10 @@ module Aws::EC2
     #   The options for managing connection authorization for new client
     #   connections.
     #
+    # @option params [Integer] :session_timeout_hours
+    #
+    # @option params [Types::ClientLoginBannerOptions] :client_login_banner_options
+    #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateClientVpnEndpointResult#client_vpn_endpoint_id #client_vpn_endpoint_id} => String
@@ -4845,6 +4849,11 @@ module Aws::EC2
     #     client_connect_options: {
     #       enabled: false,
     #       lambda_function_arn: "String",
+    #     },
+    #     session_timeout_hours: 1,
+    #     client_login_banner_options: {
+    #       enabled: false,
+    #       banner_text: "String",
     #     },
     #   })
     #
@@ -17816,6 +17825,9 @@ module Aws::EC2
     #   resp.client_vpn_endpoints[0].client_connect_options.lambda_function_arn #=> String
     #   resp.client_vpn_endpoints[0].client_connect_options.status.code #=> String, one of "applying", "applied"
     #   resp.client_vpn_endpoints[0].client_connect_options.status.message #=> String
+    #   resp.client_vpn_endpoints[0].session_timeout_hours #=> Integer
+    #   resp.client_vpn_endpoints[0].client_login_banner_options.enabled #=> Boolean
+    #   resp.client_vpn_endpoints[0].client_login_banner_options.banner_text #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeClientVpnEndpoints AWS API Documentation
@@ -38075,6 +38087,10 @@ module Aws::EC2
     #   The options for managing connection authorization for new client
     #   connections.
     #
+    # @option params [Integer] :session_timeout_hours
+    #
+    # @option params [Types::ClientLoginBannerOptions] :client_login_banner_options
+    #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyClientVpnEndpointResult#return #return} => Boolean
@@ -38103,6 +38119,11 @@ module Aws::EC2
     #     client_connect_options: {
     #       enabled: false,
     #       lambda_function_arn: "String",
+    #     },
+    #     session_timeout_hours: 1,
+    #     client_login_banner_options: {
+    #       enabled: false,
+    #       banner_text: "String",
     #     },
     #   })
     #
@@ -49072,7 +49093,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.293.0'
+      context[:gem_version] = '1.294.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

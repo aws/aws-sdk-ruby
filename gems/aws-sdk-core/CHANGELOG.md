@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.125.4 (2022-01-18)
+------------------
+
 * Issue - Add `InternalError` to `ErrorInspector` for S3 errors.
 
 

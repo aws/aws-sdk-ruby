@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-01-18)
+------------------
+
+* Feature - This release adds the CalculateRouteMatrix API which calculates routes for the provided departure and destination positions. The release also deprecates the use of pricing plan across all verticals.
+
 1.16.0 (2021-12-21)
 ------------------
 

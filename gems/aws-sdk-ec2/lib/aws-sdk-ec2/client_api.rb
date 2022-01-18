@@ -275,6 +275,8 @@ module Aws::EC2
     ClientConnectOptions = Shapes::StructureShape.new(name: 'ClientConnectOptions')
     ClientConnectResponseOptions = Shapes::StructureShape.new(name: 'ClientConnectResponseOptions')
     ClientData = Shapes::StructureShape.new(name: 'ClientData')
+    ClientLoginBannerOptions = Shapes::StructureShape.new(name: 'ClientLoginBannerOptions')
+    ClientLoginBannerResponseOptions = Shapes::StructureShape.new(name: 'ClientLoginBannerResponseOptions')
     ClientVpnAssociationId = Shapes::StringShape.new(name: 'ClientVpnAssociationId')
     ClientVpnAuthentication = Shapes::StructureShape.new(name: 'ClientVpnAuthentication')
     ClientVpnAuthenticationList = Shapes::ListShape.new(name: 'ClientVpnAuthenticationList')
@@ -3542,6 +3544,14 @@ module Aws::EC2
     ClientData.add_member(:upload_start, Shapes::ShapeRef.new(shape: DateTime, location_name: "UploadStart"))
     ClientData.struct_class = Types::ClientData
 
+    ClientLoginBannerOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
+    ClientLoginBannerOptions.add_member(:banner_text, Shapes::ShapeRef.new(shape: String, location_name: "BannerText"))
+    ClientLoginBannerOptions.struct_class = Types::ClientLoginBannerOptions
+
+    ClientLoginBannerResponseOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    ClientLoginBannerResponseOptions.add_member(:banner_text, Shapes::ShapeRef.new(shape: String, location_name: "bannerText"))
+    ClientLoginBannerResponseOptions.struct_class = Types::ClientLoginBannerResponseOptions
+
     ClientVpnAuthentication.add_member(:type, Shapes::ShapeRef.new(shape: ClientVpnAuthenticationType, location_name: "type"))
     ClientVpnAuthentication.add_member(:active_directory, Shapes::ShapeRef.new(shape: DirectoryServiceAuthentication, location_name: "activeDirectory"))
     ClientVpnAuthentication.add_member(:mutual_authentication, Shapes::ShapeRef.new(shape: CertificateAuthentication, location_name: "mutualAuthentication"))
@@ -3605,6 +3615,8 @@ module Aws::EC2
     ClientVpnEndpoint.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     ClientVpnEndpoint.add_member(:self_service_portal_url, Shapes::ShapeRef.new(shape: String, location_name: "selfServicePortalUrl"))
     ClientVpnEndpoint.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectResponseOptions, location_name: "clientConnectOptions"))
+    ClientVpnEndpoint.add_member(:session_timeout_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "sessionTimeoutHours"))
+    ClientVpnEndpoint.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: ClientLoginBannerResponseOptions, location_name: "clientLoginBannerOptions"))
     ClientVpnEndpoint.struct_class = Types::ClientVpnEndpoint
 
     ClientVpnEndpointAttributeStatus.add_member(:code, Shapes::ShapeRef.new(shape: ClientVpnEndpointAttributeStatusCode, location_name: "code"))
@@ -3819,6 +3831,8 @@ module Aws::EC2
     CreateClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     CreateClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
     CreateClientVpnEndpointRequest.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectOptions, location_name: "ClientConnectOptions"))
+    CreateClientVpnEndpointRequest.add_member(:session_timeout_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "SessionTimeoutHours"))
+    CreateClientVpnEndpointRequest.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: ClientLoginBannerOptions, location_name: "ClientLoginBannerOptions"))
     CreateClientVpnEndpointRequest.struct_class = Types::CreateClientVpnEndpointRequest
 
     CreateClientVpnEndpointResult.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "clientVpnEndpointId"))
@@ -9440,6 +9454,8 @@ module Aws::EC2
     ModifyClientVpnEndpointRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "VpcId"))
     ModifyClientVpnEndpointRequest.add_member(:self_service_portal, Shapes::ShapeRef.new(shape: SelfServicePortal, location_name: "SelfServicePortal"))
     ModifyClientVpnEndpointRequest.add_member(:client_connect_options, Shapes::ShapeRef.new(shape: ClientConnectOptions, location_name: "ClientConnectOptions"))
+    ModifyClientVpnEndpointRequest.add_member(:session_timeout_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "SessionTimeoutHours"))
+    ModifyClientVpnEndpointRequest.add_member(:client_login_banner_options, Shapes::ShapeRef.new(shape: ClientLoginBannerOptions, location_name: "ClientLoginBannerOptions"))
     ModifyClientVpnEndpointRequest.struct_class = Types::ModifyClientVpnEndpointRequest
 
     ModifyClientVpnEndpointResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))

@@ -101,6 +101,7 @@ module Aws::IVS
     RecordingConfigurationName = Shapes::StringShape.new(name: 'RecordingConfigurationName')
     RecordingConfigurationState = Shapes::StringShape.new(name: 'RecordingConfigurationState')
     RecordingConfigurationSummary = Shapes::StructureShape.new(name: 'RecordingConfigurationSummary')
+    RecordingMode = Shapes::StringShape.new(name: 'RecordingMode')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3DestinationBucketName = Shapes::StringShape.new(name: 'S3DestinationBucketName')
@@ -138,7 +139,9 @@ module Aws::IVS
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
+    TargetIntervalSeconds = Shapes::IntegerShape.new(name: 'TargetIntervalSeconds')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    ThumbnailConfiguration = Shapes::StructureShape.new(name: 'ThumbnailConfiguration')
     Time = Shapes::TimestampShape.new(name: 'Time', timestampFormat: "iso8601")
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -225,6 +228,7 @@ module Aws::IVS
     CreateRecordingConfigurationRequest.add_member(:destination_configuration, Shapes::ShapeRef.new(shape: DestinationConfiguration, required: true, location_name: "destinationConfiguration"))
     CreateRecordingConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     CreateRecordingConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateRecordingConfigurationRequest.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     CreateRecordingConfigurationRequest.struct_class = Types::CreateRecordingConfigurationRequest
 
     CreateRecordingConfigurationResponse.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
@@ -390,6 +394,7 @@ module Aws::IVS
     RecordingConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: RecordingConfigurationName, location_name: "name"))
     RecordingConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: RecordingConfigurationState, required: true, location_name: "state"))
     RecordingConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    RecordingConfiguration.add_member(:thumbnail_configuration, Shapes::ShapeRef.new(shape: ThumbnailConfiguration, location_name: "thumbnailConfiguration"))
     RecordingConfiguration.struct_class = Types::RecordingConfiguration
 
     RecordingConfigurationList.member = Shapes::ShapeRef.new(shape: RecordingConfigurationSummary)
@@ -494,6 +499,10 @@ module Aws::IVS
 
     ThrottlingException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    ThumbnailConfiguration.add_member(:recording_mode, Shapes::ShapeRef.new(shape: RecordingMode, location_name: "recordingMode"))
+    ThumbnailConfiguration.add_member(:target_interval_seconds, Shapes::ShapeRef.new(shape: TargetIntervalSeconds, location_name: "targetIntervalSeconds"))
+    ThumbnailConfiguration.struct_class = Types::ThumbnailConfiguration
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
@@ -822,6 +831,7 @@ module Aws::IVS
         o.input = Shapes::ShapeRef.new(shape: ListStreamsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListStreamsResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

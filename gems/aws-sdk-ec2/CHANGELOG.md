@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.294.0 (2022-01-18)
+------------------
+
+* Feature - Add support for AWS Client VPN client login banner and session timeout.
+
 1.293.0 (2022-01-12)
 ------------------
 

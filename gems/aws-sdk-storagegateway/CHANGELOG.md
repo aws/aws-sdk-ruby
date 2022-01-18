@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-01-18)
+------------------
+
+* Feature - Documentation update for adding bandwidth throttling support for S3 File Gateways.
+
 1.64.0 (2021-12-21)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-01-18)
+------------------
+
+* Feature - This release fixes a documentation bug in the description for the readOnly field selector in advanced event selectors. The description now clarifies that users omit the readOnly field selector to select both Read and Write management events.
+
 1.44.0 (2022-01-05)
 ------------------
 

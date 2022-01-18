@@ -736,15 +736,17 @@ module Aws::CloudTrail
 
     # Disables the event data store specified by `EventDataStore`, which
     # accepts an event data store ARN. After you run `DeleteEventDataStore`,
-    # the event data store is automatically deleted after a wait period of
-    # seven days. `TerminationProtectionEnabled` must be set to `False` on
-    # the event data store; this operation cannot work if
+    # the event data store enters a `PENDING_DELETION` state, and is
+    # automatically deleted after a wait period of seven days.
+    # `TerminationProtectionEnabled` must be set to `False` on the event
+    # data store; this operation cannot work if
     # `TerminationProtectionEnabled` is `True`.
     #
     # After you run `DeleteEventDataStore` on an event data store, you
     # cannot run `ListQueries`, `DescribeQuery`, or `GetQueryResults` on
     # queries that are using an event data store in a `PENDING_DELETION`
-    # state.
+    # state. An event data store in the `PENDING_DELETION` state does not
+    # incur costs.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of the event data store to
@@ -2406,7 +2408,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

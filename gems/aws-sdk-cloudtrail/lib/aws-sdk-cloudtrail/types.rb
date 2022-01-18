@@ -135,8 +135,10 @@ module Aws::CloudTrail
     #   `resources.ARN`.
     #
     #   * <b> <code>readOnly</code> </b> - Optional. Can be set to `Equals`
-    #     a value of `true` or `false`. A value of `false` logs both `read`
-    #     and `write` events.
+    #     a value of `true` or `false`. If you do not add this field,
+    #     CloudTrail logs both both `read` and `write` events. A value of
+    #     `true` logs only `read` events. A value of `false` logs only
+    #     `write` events.
     #
     #   * <b> <code>eventSource</code> </b> - For filtering management
     #     events only. This can be set only to `NotEquals`
@@ -171,6 +173,8 @@ module Aws::CloudTrail
     #     * `AWS::S3::AccessPoint`
     #
     #     * `AWS::DynamoDB::Stream`
+    #
+    #     * `AWS::Glue::Table`
     #
     #     You can have only one `resources.type` ﬁeld per selector. To log
     #     data events on more than one resource type, add another selector.
@@ -256,6 +260,14 @@ module Aws::CloudTrail
     #     following format:
     #
     #     * `arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time>`
+    #
+    #     ^
+    #
+    #     When `resources.type` equals `AWS::Glue::Table`, and the operator
+    #     is set to `Equals` or `NotEquals`, the ARN must be in the
+    #     following format:
+    #
+    #     * `arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name>`
     #
     #     ^
     #   @return [String]
@@ -907,6 +919,8 @@ module Aws::CloudTrail
     #   * `AWS::S3::AccessPoint`
     #
     #   * `AWS::DynamoDB::Stream`
+    #
+    #   * `AWS::Glue::Table`
     #   @return [String]
     #
     # @!attribute [rw] values
@@ -1405,7 +1419,8 @@ module Aws::CloudTrail
     #   Management Service or Amazon RDS Data API events by containing
     #   `kms.amazonaws.com` or `rdsdata.amazonaws.com`. By default,
     #   `ExcludeManagementEventSources` is empty, and KMS and Amazon RDS
-    #   Data API events are logged to your trail.
+    #   Data API events are logged to your trail. You can exclude management
+    #   event sources only in regions that support the event source.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/EventSelector AWS API Documentation

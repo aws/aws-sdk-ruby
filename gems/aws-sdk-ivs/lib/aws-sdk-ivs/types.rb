@@ -385,6 +385,10 @@ module Aws::IVS
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         thumbnail_configuration: {
+    #           recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
+    #           target_interval_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] destination_configuration
@@ -400,12 +404,19 @@ module Aws::IVS
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] thumbnail_configuration
+    #   A complex type that allows you to enable/disable the recording of
+    #   thumbnails for a live session and modify the interval at which
+    #   thumbnails are generated for the live session.
+    #   @return [Types::ThumbnailConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateRecordingConfigurationRequest AWS API Documentation
     #
     class CreateRecordingConfigurationRequest < Struct.new(
       :destination_configuration,
       :name,
-      :tags)
+      :tags,
+      :thumbnail_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1078,6 +1089,7 @@ module Aws::IVS
     #   @return [String]
     #
     # @!attribute [rw] stream_sessions
+    #   List of stream sessions.
     #   @return [Array<Types::StreamSessionSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListStreamSessionsResponse AWS API Documentation
@@ -1287,6 +1299,12 @@ module Aws::IVS
     #   Array of 1-50 maps, each of the form `string:string (key:value)`.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] thumbnail_configuration
+    #   A complex type that allows you to enable/disable the recording of
+    #   thumbnails for a live session and modify the interval at which
+    #   thumbnails are generated for the live session.
+    #   @return [Types::ThumbnailConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/RecordingConfiguration AWS API Documentation
     #
     class RecordingConfiguration < Struct.new(
@@ -1294,7 +1312,8 @@ module Aws::IVS
       :destination_configuration,
       :name,
       :state,
-      :tags)
+      :tags,
+      :thumbnail_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1741,6 +1760,48 @@ module Aws::IVS
     #
     class ThrottlingException < Struct.new(
       :exception_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a configuration of thumbnails for recorded
+    # video.
+    #
+    # @note When making an API call, you may pass ThumbnailConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         recording_mode: "DISABLED", # accepts DISABLED, INTERVAL
+    #         target_interval_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] recording_mode
+    #   Thumbnail recording mode. Default: `INTERVAL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_interval_seconds
+    #   The targeted thumbnail-generation interval in seconds. This is
+    #   configurable (and required) only if `recordingMode` is `INTERVAL`.
+    #   Default: 60.
+    #
+    #   **Important:** Setting a value for `targetIntervalSeconds` does not
+    #   guarantee that thumbnails are generated at the specified interval.
+    #   For thumbnails to be generated at the `targetIntervalSeconds`
+    #   interval, the `IDR/Keyframe` value for the input video must be less
+    #   than the `targetIntervalSeconds` value. See [ Amazon IVS Streaming
+    #   Configuration][1] for information on setting `IDR/Keyframe` to the
+    #   recommended value in video-encoder settings.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ThumbnailConfiguration AWS API Documentation
+    #
+    class ThumbnailConfiguration < Struct.new(
+      :recording_mode,
+      :target_interval_seconds)
       SENSITIVE = []
       include Aws::Structure
     end
