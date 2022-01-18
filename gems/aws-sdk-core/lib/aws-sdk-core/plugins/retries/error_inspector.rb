@@ -46,7 +46,7 @@ module Aws
         NETWORKING_ERRORS = Set.new(
           [
             'RequestTimeout',          # s3
-            'InternalError',          # s3
+            'InternalError',           # s3
             'RequestTimeoutException', # glacier
             'IDPCommunicationError'    # sts
           ]
