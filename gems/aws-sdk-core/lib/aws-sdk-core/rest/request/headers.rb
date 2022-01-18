@@ -32,12 +32,11 @@ module Aws
 
         def apply_header_value(headers, ref, value)
           value = apply_json_trait(value) if ref['jsonvalue']
-          headers[ref.location_name] =
-            case ref.shape
-            when TimestampShape then timestamp(ref, value)
-            when ListShape then list(ref, value)
-            else value.to_s
-            end
+          case ref.shape
+          when TimestampShape then headers[ref.location_name] = timestamp(ref, value)
+          when ListShape then list(headers, ref, value)
+          else headers[ref.location_name] = value.to_s
+          end
         end
 
         def timestamp(ref, value)
@@ -50,8 +49,9 @@ module Aws
           end
         end
 
-        def list(_ref, value)
-          value
+        def list(headers, ref, value)
+          return if !value || value.empty?
+          headers[ref.location_name] = value
             .compact
             .map { |s| escape_header_list_string(s.to_s) }
             .join(",")
