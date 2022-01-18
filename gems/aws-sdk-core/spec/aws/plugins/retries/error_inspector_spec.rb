@@ -135,6 +135,12 @@ module Aws
           ).to be(true)
         end
 
+        it 'returns true for InternalError' do
+          expect(
+            inspector(RetryErrorsSvc::Errors::InternalError).networking?
+          ).to be(true)
+        end
+
         it 'returns true for RequestTimeoutException' do
           expect(
             inspector(

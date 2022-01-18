@@ -1,10 +1,13 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add `InternalError` to `ErrorInspector` for S3 errors.
+
+
 3.125.3 (2022-01-12)
 ------------------
 
-* Issue - Add `ExpiredTokenException` to `ErrorInspector` (legacy retry) for Kinesis errors.
+* Issue - Add `ExpiredTokenException` to `ErrorInspector` for Kinesis errors.
 
 3.125.2 (2022-01-10)
 ------------------
