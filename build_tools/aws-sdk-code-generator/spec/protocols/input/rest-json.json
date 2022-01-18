@@ -179,6 +179,30 @@
           "name": "OperationName"
         },
         "params": {
+          "ListOfStrings": []
+        },
+        "serialized": {
+          "body": "",
+          "uri": "/path",
+          "headers": {
+          },
+          "forbidHeaders": [
+            "x-amz-string-list"
+          ]
+        }
+      },
+      {
+        "given": {
+          "http": {
+            "method": "GET",
+            "requestUri": "/path"
+          },
+          "input": {
+            "shape": "InputShape"
+          },
+          "name": "OperationName"
+        },
+        "params": {
           "ListOfStrings": ["\"value1\"", "value2,value3", "'value4'"],
           "String": "singleValue"
         },
