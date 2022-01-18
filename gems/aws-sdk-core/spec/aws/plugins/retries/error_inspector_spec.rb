@@ -129,7 +129,6 @@ module Aws
       end
 
       describe '#networking?' do
-
         it 'returns true for RequestTimeout' do
           expect(
             inspector(RetryErrorsSvc::Errors::RequestTimeout).networking?
