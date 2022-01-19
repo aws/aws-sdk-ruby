@@ -554,8 +554,8 @@ module Aws::Macie2
     CreateCustomDataIdentifierRequest.add_member(:ignore_words, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "ignoreWords"))
     CreateCustomDataIdentifierRequest.add_member(:keywords, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "keywords"))
     CreateCustomDataIdentifierRequest.add_member(:maximum_match_distance, Shapes::ShapeRef.new(shape: __integer, location_name: "maximumMatchDistance"))
-    CreateCustomDataIdentifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
-    CreateCustomDataIdentifierRequest.add_member(:regex, Shapes::ShapeRef.new(shape: __string, location_name: "regex"))
+    CreateCustomDataIdentifierRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
+    CreateCustomDataIdentifierRequest.add_member(:regex, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "regex"))
     CreateCustomDataIdentifierRequest.add_member(:severity_levels, Shapes::ShapeRef.new(shape: SeverityLevelList, location_name: "severityLevels"))
     CreateCustomDataIdentifierRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateCustomDataIdentifierRequest.struct_class = Types::CreateCustomDataIdentifierRequest

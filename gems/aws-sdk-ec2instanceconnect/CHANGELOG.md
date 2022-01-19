@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-01-19)
+------------------
+
+* Feature - Adds support for ED25519 keys. PushSSHPublicKey Availability Zone parameter is now optional. Adds EC2InstanceStateInvalidException for instances that are not running. This was previously a service exception, so this may require updating your code to handle this new exception.
+
 1.21.0 (2021-12-21)
 ------------------
 

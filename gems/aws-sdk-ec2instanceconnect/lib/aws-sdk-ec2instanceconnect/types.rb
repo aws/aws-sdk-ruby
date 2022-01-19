@@ -37,6 +37,22 @@ module Aws::EC2InstanceConnect
       include Aws::Structure
     end
 
+    # Unable to connect because the instance is not in a valid state.
+    # Connecting to a stopped or terminated instance is not supported. If
+    # the instance is stopped, start your instance, and try to connect
+    # again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-instance-connect-2018-04-02/EC2InstanceStateInvalidException AWS API Documentation
+    #
+    class EC2InstanceStateInvalidException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The instance type is not supported for connecting via the serial
     # console. Only Nitro instance types are currently supported.
     #
@@ -71,7 +87,7 @@ module Aws::EC2InstanceConnect
     #         instance_id: "InstanceId", # required
     #         instance_os_user: "InstanceOSUser", # required
     #         ssh_public_key: "SSHPublicKey", # required
-    #         availability_zone: "AvailabilityZone", # required
+    #         availability_zone: "AvailabilityZone",
     #       }
     #
     # @!attribute [rw] instance_id

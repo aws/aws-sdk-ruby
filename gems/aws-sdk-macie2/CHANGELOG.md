@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-01-19)
+------------------
+
+* Feature - This release of the Amazon Macie API introduces stricter validation of requests to create custom data identifiers.
+
 1.41.0 (2021-12-21)
 ------------------
 

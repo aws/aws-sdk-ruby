@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.125.5 (2022-01-19)
+------------------
+
 * Issue - Correctly serialize empty header lists.
 
 3.125.4 (2022-01-18)

@@ -1195,8 +1195,8 @@ module Aws::Macie2
     #         ignore_words: ["__string"],
     #         keywords: ["__string"],
     #         maximum_match_distance: 1,
-    #         name: "__string",
-    #         regex: "__string",
+    #         name: "__string", # required
+    #         regex: "__string", # required
     #         severity_levels: [
     #           {
     #             occurrences_threshold: 1, # required

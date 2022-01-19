@@ -610,9 +610,9 @@ module Aws::Macie2
     #
     # @option params [Integer] :maximum_match_distance
     #
-    # @option params [String] :name
+    # @option params [required, String] :name
     #
-    # @option params [String] :regex
+    # @option params [required, String] :regex
     #
     # @option params [Array<Types::SeverityLevel>] :severity_levels
     #   The severity to assign to findings that the custom data identifier
@@ -647,8 +647,8 @@ module Aws::Macie2
     #     ignore_words: ["__string"],
     #     keywords: ["__string"],
     #     maximum_match_distance: 1,
-    #     name: "__string",
-    #     regex: "__string",
+    #     name: "__string", # required
+    #     regex: "__string", # required
     #     severity_levels: [
     #       {
     #         occurrences_threshold: 1, # required
@@ -2987,7 +2987,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

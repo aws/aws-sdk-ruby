@@ -377,7 +377,7 @@ module Aws::EC2InstanceConnect
     #   The public key material. To use the public key, you must have the
     #   matching private key.
     #
-    # @option params [required, String] :availability_zone
+    # @option params [String] :availability_zone
     #   The Availability Zone in which the EC2 instance was launched.
     #
     # @return [Types::SendSSHPublicKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -410,7 +410,7 @@ module Aws::EC2InstanceConnect
     #     instance_id: "InstanceId", # required
     #     instance_os_user: "InstanceOSUser", # required
     #     ssh_public_key: "SSHPublicKey", # required
-    #     availability_zone: "AvailabilityZone", # required
+    #     availability_zone: "AvailabilityZone",
     #   })
     #
     # @example Response structure
@@ -496,7 +496,7 @@ module Aws::EC2InstanceConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2instanceconnect'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
