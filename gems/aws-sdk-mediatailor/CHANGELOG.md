@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-01-20)
+------------------
+
+* Feature - This release adds support for multiple Segment Delivery Configurations. Users can provide a list of names and URLs when creating or editing a source location. When retrieving content, users can send a header to choose which URL should be used to serve content.
+
 1.51.0 (2022-01-06)
 ------------------
 

@@ -181,7 +181,7 @@ module Aws::GuardDuty
     # delegated administrator.
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS account ID for the account.
+    #   The Amazon Web Services account ID for the account.
     #   @return [String]
     #
     # @!attribute [rw] admin_status
@@ -231,29 +231,35 @@ module Aws::GuardDuty
     # Contains information about the API action.
     #
     # @!attribute [rw] api
-    #   The AWS API name.
+    #   The Amazon Web Services API name.
     #   @return [String]
     #
     # @!attribute [rw] caller_type
-    #   The AWS API caller type.
+    #   The Amazon Web Services API caller type.
     #   @return [String]
     #
     # @!attribute [rw] domain_details
-    #   The domain information for the AWS API call.
+    #   The domain information for the Amazon Web Services API call.
     #   @return [Types::DomainDetails]
     #
     # @!attribute [rw] error_code
-    #   The error code of the failed AWS API action.
+    #   The error code of the failed Amazon Web Services API action.
     #   @return [String]
     #
     # @!attribute [rw] remote_ip_details
-    #   The remote IP information of the connection that initiated the AWS
-    #   API call.
+    #   The remote IP information of the connection that initiated the
+    #   Amazon Web Services API call.
     #   @return [Types::RemoteIpDetails]
     #
     # @!attribute [rw] service_name
-    #   The AWS service name whose API was invoked.
+    #   The Amazon Web Services service name whose API was invoked.
     #   @return [String]
+    #
+    # @!attribute [rw] remote_account_details
+    #   The details of the Amazon Web Services account that made the API
+    #   call. This field appears if the call was made from outside your
+    #   account.
+    #   @return [Types::RemoteAccountDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/AwsApiCallAction AWS API Documentation
     #
@@ -263,7 +269,8 @@ module Aws::GuardDuty
       :domain_details,
       :error_code,
       :remote_ip_details,
-      :service_name)
+      :service_name,
+      :remote_account_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -742,6 +749,16 @@ module Aws::GuardDuty
     #
     #   * service.additionalInfo.threatListName
     #
+    #   * resource.s3BucketDetails.publicAccess.effectivePermissions
+    #
+    #   * resource.s3BucketDetails.name
+    #
+    #   * resource.s3BucketDetails.tags.key
+    #
+    #   * resource.s3BucketDetails.tags.value
+    #
+    #   * resource.s3BucketDetails.type
+    #
     #   * service.archived
     #
     #     When this attribute is set to TRUE, only archived findings are
@@ -832,8 +849,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1041,8 +1057,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -1165,9 +1180,9 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs of the AWS accounts that sent invitations to
-    #   the current member account that you want to decline invitations
-    #   from.
+    #   A list of account IDs of the Amazon Web Services accounts that sent
+    #   invitations to the current member account that you want to decline
+    #   invitations from.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeclineInvitationsRequest AWS API Documentation
@@ -1305,8 +1320,9 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] account_ids
-    #   A list of account IDs of the AWS accounts that sent invitations to
-    #   the current member account that you want to delete invitations from.
+    #   A list of account IDs of the Amazon Web Services accounts that sent
+    #   invitations to the current member account that you want to delete
+    #   invitations from.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DeleteInvitationsRequest AWS API Documentation
@@ -1576,6 +1592,9 @@ module Aws::GuardDuty
     #
     # @!attribute [rw] destination_arn
     #   The ARN of the resource to publish to.
+    #
+    #   To specify an S3 bucket folder use the following format:
+    #   `arn:aws:s3:::DOC-EXAMPLE-BUCKET/myFolder/`
     #   @return [String]
     #
     # @!attribute [rw] kms_key_arn
@@ -1599,8 +1618,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS Account ID for the organizations account to be disabled as a
-    #   GuardDuty delegated administrator.
+    #   The Amazon Web Services Account ID for the organizations account to
+    #   be disabled as a GuardDuty delegated administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DisableOrganizationAdminAccountRequest AWS API Documentation
@@ -1696,7 +1715,7 @@ module Aws::GuardDuty
     # Contains information about the domain.
     #
     # @!attribute [rw] domain
-    #   The domain information for the AWS API call.
+    #   The domain information for the Amazon Web Services API call.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DomainDetails AWS API Documentation
@@ -1715,8 +1734,8 @@ module Aws::GuardDuty
     #       }
     #
     # @!attribute [rw] admin_account_id
-    #   The AWS Account ID for the organization account to be enabled as a
-    #   GuardDuty delegated administrator.
+    #   The Amazon Web Services Account ID for the organization account to
+    #   be enabled as a GuardDuty delegated administrator.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EnableOrganizationAdminAccountRequest AWS API Documentation
@@ -1781,8 +1800,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   Contains information about the AWS resource associated with the
-    #   activity that prompted GuardDuty to generate a finding.
+    #   Contains information about the Amazon Web Services resource
+    #   associated with the activity that prompted GuardDuty to generate a
+    #   finding.
     #   @return [Types::Resource]
     #
     # @!attribute [rw] schema_version
@@ -2185,8 +2205,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2384,8 +2403,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2536,8 +2554,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
-    #   The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable
-    #   to AWS Outposts instances.
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost.
+    #   Only applicable to Amazon Web Services Outposts instances.
     #   @return [String]
     #
     # @!attribute [rw] launch_time
@@ -2902,8 +2920,6 @@ module Aws::GuardDuty
     #   * service.action.networkConnectionAction.localPortDetails.port
     #
     #   * service.action.networkConnectionAction.protocol
-    #
-    #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
     #
@@ -3833,6 +3849,29 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Contains details about the remote Amazon Web Services account that
+    # made the API call.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID of the remote API caller.
+    #   @return [String]
+    #
+    # @!attribute [rw] affiliated
+    #   Details on whether the Amazon Web Services account of the remote API
+    #   caller is related to your GuardDuty environment. If this value is
+    #   `True` the API caller is affiliated to your account in some way. If
+    #   it is `False` the API caller is from outside your environment.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/RemoteAccountDetails AWS API Documentation
+    #
+    class RemoteAccountDetails < Struct.new(
+      :account_id,
+      :affiliated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the remote IP address of the connection.
     #
     # @!attribute [rw] city
@@ -3886,8 +3925,8 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the AWS resource associated with the
-    # activity that prompted GuardDuty to generate a finding.
+    # Contains information about the Amazon Web Services resource associated
+    # with the activity that prompted GuardDuty to generate a finding.
     #
     # @!attribute [rw] access_key_details
     #   The IAM access key details (IAM user information) of a user that
@@ -3905,7 +3944,7 @@ module Aws::GuardDuty
     #   @return [Types::InstanceDetails]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource.
+    #   The type of Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Resource AWS API Documentation
@@ -4061,7 +4100,8 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] service_name
-    #   The name of the AWS service (GuardDuty) that generated a finding.
+    #   The name of the Amazon Web Services service (GuardDuty) that
+    #   generated a finding.
     #   @return [String]
     #
     # @!attribute [rw] user_feedback
@@ -4317,7 +4357,7 @@ module Aws::GuardDuty
     # Contains information about the accounts that weren't processed.
     #
     # @!attribute [rw] account_id
-    #   The AWS account ID.
+    #   The Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] result
@@ -4559,8 +4599,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet.
     #   @return [String]
     #
     # @!attribute [rw] activate
@@ -4836,10 +4875,11 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information on the sum of usage based on an AWS resource.
+    # Contains information on the sum of usage based on an Amazon Web
+    # Services resource.
     #
     # @!attribute [rw] resource
-    #   The AWS resource that generated usage.
+    #   The Amazon Web Services resource that generated usage.
     #   @return [String]
     #
     # @!attribute [rw] total

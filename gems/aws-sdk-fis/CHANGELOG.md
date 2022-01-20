@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-01-20)
+------------------
+
+* Feature - Added action startTime and action endTime timestamp fields to the ExperimentAction object
+
 1.8.0 (2021-12-21)
 ------------------
 

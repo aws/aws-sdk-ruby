@@ -591,6 +591,16 @@ module Aws::GuardDuty
     #
     #   * service.additionalInfo.threatListName
     #
+    #   * resource.s3BucketDetails.publicAccess.effectivePermissions
+    #
+    #   * resource.s3BucketDetails.name
+    #
+    #   * resource.s3BucketDetails.tags.key
+    #
+    #   * resource.s3BucketDetails.tags.value
+    #
+    #   * resource.s3BucketDetails.type
+    #
     #   * service.archived
     #
     #     When this attribute is set to TRUE, only archived findings are
@@ -670,10 +680,10 @@ module Aws::GuardDuty
 
     # Creates a new IPSet, which is called a trusted IP list in the console
     # user interface. An IPSet is a list of IP addresses that are trusted
-    # for secure communication with AWS infrastructure and applications.
-    # GuardDuty doesn't generate findings for IP addresses that are
-    # included in IPSets. Only users from the administrator account can use
-    # this operation.
+    # for secure communication with Amazon Web Services infrastructure and
+    # applications. GuardDuty doesn't generate findings for IP addresses
+    # that are included in IPSets. Only users from the administrator account
+    # can use this operation.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -689,8 +699,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the IPSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the IPSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -736,10 +745,10 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Creates member accounts of the current AWS account by specifying a
-    # list of AWS account IDs. This step is a prerequisite for managing the
-    # associated member accounts either by invitation or through an
-    # organization.
+    # Creates member accounts of the current Amazon Web Services account by
+    # specifying a list of Amazon Web Services account IDs. This step is a
+    # prerequisite for managing the associated member accounts either by
+    # invitation or through an organization.
     #
     # When using `Create Members` as an organizations delegated
     # administrator this action will enable GuardDuty in the added member
@@ -890,8 +899,7 @@ module Aws::GuardDuty
     #   The format of the file that contains the ThreatIntelSet.
     #
     # @option params [required, String] :location
-    #   The URI of the file that contains the ThreatIntelSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The URI of the file that contains the ThreatIntelSet.
     #
     # @option params [required, Boolean] :activate
     #   A Boolean value that indicates whether GuardDuty is to start using the
@@ -937,12 +945,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Declines invitations sent to the current member account by AWS
-    # accounts specified by their account IDs.
+    # Declines invitations sent to the current member account by Amazon Web
+    # Services accounts specified by their account IDs.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs of the AWS accounts that sent invitations to the
-    #   current member account that you want to decline invitations from.
+    #   A list of account IDs of the Amazon Web Services accounts that sent
+    #   invitations to the current member account that you want to decline
+    #   invitations from.
     #
     # @return [Types::DeclineInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1045,12 +1054,13 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Deletes invitations sent to the current member account by AWS accounts
-    # specified by their account IDs.
+    # Deletes invitations sent to the current member account by Amazon Web
+    # Services accounts specified by their account IDs.
     #
     # @option params [required, Array<String>] :account_ids
-    #   A list of account IDs of the AWS accounts that sent invitations to the
-    #   current member account that you want to delete invitations from.
+    #   A list of account IDs of the Amazon Web Services accounts that sent
+    #   invitations to the current member account that you want to delete
+    #   invitations from.
     #
     # @return [Types::DeleteInvitationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1245,12 +1255,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Disables an AWS account within the Organization as the GuardDuty
-    # delegated administrator.
+    # Disables an Amazon Web Services account within the Organization as the
+    # GuardDuty delegated administrator.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS Account ID for the organizations account to be disabled as a
-    #   GuardDuty delegated administrator.
+    #   The Amazon Web Services Account ID for the organizations account to be
+    #   disabled as a GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1329,12 +1339,12 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Enables an AWS account within the organization as the GuardDuty
-    # delegated administrator.
+    # Enables an Amazon Web Services account within the organization as the
+    # GuardDuty delegated administrator.
     #
     # @option params [required, String] :admin_account_id
-    #   The AWS Account ID for the organization account to be enabled as a
-    #   GuardDuty delegated administrator.
+    #   The Amazon Web Services Account ID for the organization account to be
+    #   enabled as a GuardDuty delegated administrator.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1573,6 +1583,8 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.isp #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.organization.org #=> String
     #   resp.findings[0].service.action.aws_api_call_action.service_name #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.account_id #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.remote_account_details.affiliated #=> Boolean
     #   resp.findings[0].service.action.dns_request_action.domain #=> String
     #   resp.findings[0].service.action.network_connection_action.blocked #=> Boolean
     #   resp.findings[0].service.action.network_connection_action.connection_direction #=> String
@@ -2000,10 +2012,11 @@ module Aws::GuardDuty
       req.send_request(options)
     end
 
-    # Invites other AWS accounts (created as members of the current AWS
-    # account by CreateMembers) to enable GuardDuty, and allow the current
-    # AWS account to view and manage these accounts' findings on their
-    # behalf as the GuardDuty administrator account.
+    # Invites other Amazon Web Services accounts (created as members of the
+    # current Amazon Web Services account by CreateMembers) to enable
+    # GuardDuty, and allow the current Amazon Web Services account to view
+    # and manage these accounts' findings on their behalf as the GuardDuty
+    # administrator account.
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account that you want
@@ -2225,8 +2238,6 @@ module Aws::GuardDuty
     #
     #   * service.action.networkConnectionAction.protocol
     #
-    #   * service.action.networkConnectionAction.remoteIpDetails.city.cityName
-    #
     #   * service.action.networkConnectionAction.remoteIpDetails.country.countryName
     #
     #   * service.action.networkConnectionAction.remoteIpDetails.ipAddressV4
@@ -2373,7 +2384,7 @@ module Aws::GuardDuty
     end
 
     # Lists all GuardDuty membership invitations that were sent to the
-    # current AWS account.
+    # current Amazon Web Services account.
     #
     # @option params [Integer] :max_results
     #   You can use this parameter to indicate the maximum number of items
@@ -2522,7 +2533,7 @@ module Aws::GuardDuty
     end
 
     # Returns a list of publishing destinations associated with the
-    # specified `dectectorId`.
+    # specified `detectorId`.
     #
     # @option params [required, String] :detector_id
     #   The ID of the detector to retrieve publishing destinations for.
@@ -2965,8 +2976,7 @@ module Aws::GuardDuty
     #   The unique ID that specifies the IPSet that you want to update.
     #
     # @option params [String] :location
-    #   The updated URI of the file that contains the IPSet. For example:
-    #   https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+    #   The updated URI of the file that contains the IPSet.
     #
     # @option params [Boolean] :activate
     #   The updated Boolean value that specifies whether the IPSet is active
@@ -3161,7 +3171,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

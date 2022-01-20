@@ -680,6 +680,9 @@ module Aws::MediaTailor
     # @option params [required, Types::HttpConfiguration] :http_configuration
     #   The source's HTTP package configurations.
     #
+    # @option params [Array<Types::SegmentDeliveryConfiguration>] :segment_delivery_configurations
+    #   An array of segment delivery configurations for this source location.
+    #
     # @option params [required, String] :source_location_name
     #
     # @option params [Hash<String,String>] :tags
@@ -693,6 +696,7 @@ module Aws::MediaTailor
     #   * {Types::CreateSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
     #   * {Types::CreateSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
     #   * {Types::CreateSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::CreateSourceLocationResponse#segment_delivery_configurations #segment_delivery_configurations} => Array&lt;Types::SegmentDeliveryConfiguration&gt;
     #   * {Types::CreateSourceLocationResponse#source_location_name #source_location_name} => String
     #   * {Types::CreateSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -713,6 +717,12 @@ module Aws::MediaTailor
     #     http_configuration: { # required
     #       base_url: "__string", # required
     #     },
+    #     segment_delivery_configurations: [
+    #       {
+    #         base_url: "__string",
+    #         name: "__string",
+    #       },
+    #     ],
     #     source_location_name: "__string", # required
     #     tags: {
     #       "__string" => "__string",
@@ -730,6 +740,9 @@ module Aws::MediaTailor
     #   resp.default_segment_delivery_configuration.base_url #=> String
     #   resp.http_configuration.base_url #=> String
     #   resp.last_modified_time #=> Time
+    #   resp.segment_delivery_configurations #=> Array
+    #   resp.segment_delivery_configurations[0].base_url #=> String
+    #   resp.segment_delivery_configurations[0].name #=> String
     #   resp.source_location_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1080,6 +1093,7 @@ module Aws::MediaTailor
     #   * {Types::DescribeSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
     #   * {Types::DescribeSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
     #   * {Types::DescribeSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeSourceLocationResponse#segment_delivery_configurations #segment_delivery_configurations} => Array&lt;Types::SegmentDeliveryConfiguration&gt;
     #   * {Types::DescribeSourceLocationResponse#source_location_name #source_location_name} => String
     #   * {Types::DescribeSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -1100,6 +1114,9 @@ module Aws::MediaTailor
     #   resp.default_segment_delivery_configuration.base_url #=> String
     #   resp.http_configuration.base_url #=> String
     #   resp.last_modified_time #=> Time
+    #   resp.segment_delivery_configurations #=> Array
+    #   resp.segment_delivery_configurations[0].base_url #=> String
+    #   resp.segment_delivery_configurations[0].name #=> String
     #   resp.source_location_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -1627,6 +1644,9 @@ module Aws::MediaTailor
     #   resp.items[0].default_segment_delivery_configuration.base_url #=> String
     #   resp.items[0].http_configuration.base_url #=> String
     #   resp.items[0].last_modified_time #=> Time
+    #   resp.items[0].segment_delivery_configurations #=> Array
+    #   resp.items[0].segment_delivery_configurations[0].base_url #=> String
+    #   resp.items[0].segment_delivery_configurations[0].name #=> String
     #   resp.items[0].source_location_name #=> String
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["__string"] #=> String
@@ -2126,6 +2146,9 @@ module Aws::MediaTailor
     # @option params [required, Types::HttpConfiguration] :http_configuration
     #   The HTTP configuration for the source location.
     #
+    # @option params [Array<Types::SegmentDeliveryConfiguration>] :segment_delivery_configurations
+    #   An array of segment delivery configurations for this source location.
+    #
     # @option params [required, String] :source_location_name
     #
     # @return [Types::UpdateSourceLocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2136,6 +2159,7 @@ module Aws::MediaTailor
     #   * {Types::UpdateSourceLocationResponse#default_segment_delivery_configuration #default_segment_delivery_configuration} => Types::DefaultSegmentDeliveryConfiguration
     #   * {Types::UpdateSourceLocationResponse#http_configuration #http_configuration} => Types::HttpConfiguration
     #   * {Types::UpdateSourceLocationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateSourceLocationResponse#segment_delivery_configurations #segment_delivery_configurations} => Array&lt;Types::SegmentDeliveryConfiguration&gt;
     #   * {Types::UpdateSourceLocationResponse#source_location_name #source_location_name} => String
     #   * {Types::UpdateSourceLocationResponse#tags #tags} => Hash&lt;String,String&gt;
     #
@@ -2156,6 +2180,12 @@ module Aws::MediaTailor
     #     http_configuration: { # required
     #       base_url: "__string", # required
     #     },
+    #     segment_delivery_configurations: [
+    #       {
+    #         base_url: "__string",
+    #         name: "__string",
+    #       },
+    #     ],
     #     source_location_name: "__string", # required
     #   })
     #
@@ -2170,6 +2200,9 @@ module Aws::MediaTailor
     #   resp.default_segment_delivery_configuration.base_url #=> String
     #   resp.http_configuration.base_url #=> String
     #   resp.last_modified_time #=> Time
+    #   resp.segment_delivery_configurations #=> Array
+    #   resp.segment_delivery_configurations[0].base_url #=> String
+    #   resp.segment_delivery_configurations[0].name #=> String
     #   resp.source_location_name #=> String
     #   resp.tags #=> Hash
     #   resp.tags["__string"] #=> String
@@ -2253,7 +2286,7 @@ module Aws::MediaTailor
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

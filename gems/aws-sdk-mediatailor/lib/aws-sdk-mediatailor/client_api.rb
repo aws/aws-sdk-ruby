@@ -119,6 +119,7 @@ module Aws::MediaTailor
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
     ScheduleEntryType = Shapes::StringShape.new(name: 'ScheduleEntryType')
     SecretsManagerAccessTokenConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerAccessTokenConfiguration')
+    SegmentDeliveryConfiguration = Shapes::StructureShape.new(name: 'SegmentDeliveryConfiguration')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
     SpliceInsertMessage = Shapes::StructureShape.new(name: 'SpliceInsertMessage')
@@ -149,6 +150,7 @@ module Aws::MediaTailor
     __listOfPrefetchSchedule = Shapes::ListShape.new(name: '__listOfPrefetchSchedule')
     __listOfScheduleAdBreak = Shapes::ListShape.new(name: '__listOfScheduleAdBreak')
     __listOfScheduleEntry = Shapes::ListShape.new(name: '__listOfScheduleEntry')
+    __listOfSegmentDeliveryConfiguration = Shapes::ListShape.new(name: '__listOfSegmentDeliveryConfiguration')
     __listOfSourceLocation = Shapes::ListShape.new(name: '__listOfSourceLocation')
     __listOfVodSource = Shapes::ListShape.new(name: '__listOfVodSource')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
@@ -275,6 +277,7 @@ module Aws::MediaTailor
     CreateSourceLocationRequest.add_member(:access_configuration, Shapes::ShapeRef.new(shape: AccessConfiguration, location_name: "AccessConfiguration"))
     CreateSourceLocationRequest.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     CreateSourceLocationRequest.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, required: true, location_name: "HttpConfiguration"))
+    CreateSourceLocationRequest.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     CreateSourceLocationRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
     CreateSourceLocationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateSourceLocationRequest.struct_class = Types::CreateSourceLocationRequest
@@ -285,6 +288,7 @@ module Aws::MediaTailor
     CreateSourceLocationResponse.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     CreateSourceLocationResponse.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, location_name: "HttpConfiguration"))
     CreateSourceLocationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    CreateSourceLocationResponse.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     CreateSourceLocationResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     CreateSourceLocationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     CreateSourceLocationResponse.struct_class = Types::CreateSourceLocationResponse
@@ -397,6 +401,7 @@ module Aws::MediaTailor
     DescribeSourceLocationResponse.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     DescribeSourceLocationResponse.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, location_name: "HttpConfiguration"))
     DescribeSourceLocationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    DescribeSourceLocationResponse.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     DescribeSourceLocationResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     DescribeSourceLocationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     DescribeSourceLocationResponse.struct_class = Types::DescribeSourceLocationResponse
@@ -674,6 +679,10 @@ module Aws::MediaTailor
     SecretsManagerAccessTokenConfiguration.add_member(:secret_string_key, Shapes::ShapeRef.new(shape: __string, location_name: "SecretStringKey"))
     SecretsManagerAccessTokenConfiguration.struct_class = Types::SecretsManagerAccessTokenConfiguration
 
+    SegmentDeliveryConfiguration.add_member(:base_url, Shapes::ShapeRef.new(shape: __string, location_name: "BaseUrl"))
+    SegmentDeliveryConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "Name"))
+    SegmentDeliveryConfiguration.struct_class = Types::SegmentDeliveryConfiguration
+
     SlateSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     SlateSource.struct_class = Types::SlateSource
@@ -684,6 +693,7 @@ module Aws::MediaTailor
     SourceLocation.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     SourceLocation.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, required: true, location_name: "HttpConfiguration"))
     SourceLocation.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    SourceLocation.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     SourceLocation.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "SourceLocationName"))
     SourceLocation.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     SourceLocation.struct_class = Types::SourceLocation
@@ -737,6 +747,7 @@ module Aws::MediaTailor
     UpdateSourceLocationRequest.add_member(:access_configuration, Shapes::ShapeRef.new(shape: AccessConfiguration, location_name: "AccessConfiguration"))
     UpdateSourceLocationRequest.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     UpdateSourceLocationRequest.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, required: true, location_name: "HttpConfiguration"))
+    UpdateSourceLocationRequest.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     UpdateSourceLocationRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "sourceLocationName"))
     UpdateSourceLocationRequest.struct_class = Types::UpdateSourceLocationRequest
 
@@ -746,6 +757,7 @@ module Aws::MediaTailor
     UpdateSourceLocationResponse.add_member(:default_segment_delivery_configuration, Shapes::ShapeRef.new(shape: DefaultSegmentDeliveryConfiguration, location_name: "DefaultSegmentDeliveryConfiguration"))
     UpdateSourceLocationResponse.add_member(:http_configuration, Shapes::ShapeRef.new(shape: HttpConfiguration, location_name: "HttpConfiguration"))
     UpdateSourceLocationResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: __timestampUnix, location_name: "LastModifiedTime"))
+    UpdateSourceLocationResponse.add_member(:segment_delivery_configurations, Shapes::ShapeRef.new(shape: __listOfSegmentDeliveryConfiguration, location_name: "SegmentDeliveryConfigurations"))
     UpdateSourceLocationResponse.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     UpdateSourceLocationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
     UpdateSourceLocationResponse.struct_class = Types::UpdateSourceLocationResponse
@@ -788,6 +800,8 @@ module Aws::MediaTailor
     __listOfScheduleAdBreak.member = Shapes::ShapeRef.new(shape: ScheduleAdBreak)
 
     __listOfScheduleEntry.member = Shapes::ShapeRef.new(shape: ScheduleEntry)
+
+    __listOfSegmentDeliveryConfiguration.member = Shapes::ShapeRef.new(shape: SegmentDeliveryConfiguration)
 
     __listOfSourceLocation.member = Shapes::ShapeRef.new(shape: SourceLocation)
 

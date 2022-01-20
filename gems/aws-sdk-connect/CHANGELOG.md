@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.61.0 (2022-01-20)
+------------------
+
+* Feature - This release adds tagging support for UserHierarchyGroups resource.
+
 1.60.0 (2021-12-21)
 ------------------
 

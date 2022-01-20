@@ -1671,6 +1671,9 @@ module Aws::Connect
     #         name: "HierarchyGroupName", # required
     #         parent_group_id: "HierarchyGroupId",
     #         instance_id: "InstanceId", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1688,12 +1691,18 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateUserHierarchyGroupRequest AWS API Documentation
     #
     class CreateUserHierarchyGroupRequest < Struct.new(
       :name,
       :parent_group_id,
-      :instance_id)
+      :instance_id,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3104,8 +3113,10 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] queues
-    #   The queues to use to filter the metrics. You can specify up to 100
-    #   queues per request.
+    #   The queues to use to filter the metrics. You should specify at least
+    #   one queue, and can specify up to 100 queues per request. The
+    #   `GetCurrentMetricsData` API in particular requires a queue when you
+    #   include a `Filter` in your request.
     #   @return [Array<String>]
     #
     # @!attribute [rw] channels
@@ -3721,6 +3732,11 @@ module Aws::Connect
     #   Information about the levels in the hierarchy group.
     #   @return [Types::HierarchyPath]
     #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroup AWS API Documentation
     #
     class HierarchyGroup < Struct.new(
@@ -3728,7 +3744,8 @@ module Aws::Connect
       :arn,
       :name,
       :level_id,
-      :hierarchy_path)
+      :hierarchy_path,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8234,7 +8251,8 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact AWS Support for allowlisting.
+    #   access this feature, contact Amazon Web Services Support for
+    #   allowlisting.
     #
     #    </note>
     #   @return [String]

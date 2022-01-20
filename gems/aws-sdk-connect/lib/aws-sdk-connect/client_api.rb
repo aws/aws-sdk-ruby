@@ -815,6 +815,7 @@ module Aws::Connect
     CreateUserHierarchyGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, required: true, location_name: "Name"))
     CreateUserHierarchyGroupRequest.add_member(:parent_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "ParentGroupId"))
     CreateUserHierarchyGroupRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateUserHierarchyGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateUserHierarchyGroupRequest.struct_class = Types::CreateUserHierarchyGroupRequest
 
     CreateUserHierarchyGroupResponse.add_member(:hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "HierarchyGroupId"))
@@ -1111,6 +1112,7 @@ module Aws::Connect
     HierarchyGroup.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyGroupName, location_name: "Name"))
     HierarchyGroup.add_member(:level_id, Shapes::ShapeRef.new(shape: HierarchyLevelId, location_name: "LevelId"))
     HierarchyGroup.add_member(:hierarchy_path, Shapes::ShapeRef.new(shape: HierarchyPath, location_name: "HierarchyPath"))
+    HierarchyGroup.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     HierarchyGroup.struct_class = Types::HierarchyGroup
 
     HierarchyGroupSummary.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "Id"))

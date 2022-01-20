@@ -10,8 +10,8 @@
 module Aws::FIS
   module Types
 
-    # Describes an action. For more information, see [AWS FIS actions][1] in
-    # the *AWS Fault Injection Simulator User Guide*.
+    # Describes an action. For more information, see [FIS actions][1] in the
+    # *Fault Injection Simulator User Guide*.
     #
     #
     #
@@ -126,6 +126,13 @@ module Aws::FIS
 
     # Specifies an action for an experiment template.
     #
+    # For more information, see [Actions][1] in the *Fault Injection
+    # Simulator User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/actions.html
+    #
     # @note When making an API call, you may pass CreateExperimentTemplateActionInput
     #   data as a hash:
     #
@@ -142,7 +149,8 @@ module Aws::FIS
     #       }
     #
     # @!attribute [rw] action_id
-    #   The ID of the action.
+    #   The ID of the action. The format of the action ID is:
+    #   aws:*service-name*\:*action-type*.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -231,8 +239,7 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   A description for the experiment template. Can contain up to 64
-    #   letters (A-Z and a-z).
+    #   A description for the experiment template.
     #   @return [String]
     #
     # @!attribute [rw] stop_conditions
@@ -248,8 +255,8 @@ module Aws::FIS
     #   @return [Hash<String,Types::CreateExperimentTemplateActionInput>]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that grants the AWS
-    #   FIS service permission to perform service actions on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
+    #   service permission to perform service actions on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -316,6 +323,13 @@ module Aws::FIS
     # Amazon Resource Name (ARN) or at least one resource tag. You cannot
     # specify both ARNs and tags.
     #
+    # For more information, see [Targets][1] in the *Fault Injection
+    # Simulator User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html
+    #
     # @note When making an API call, you may pass CreateExperimentTemplateTargetInput
     #   data as a hash:
     #
@@ -335,8 +349,8 @@ module Aws::FIS
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The AWS resource type. The resource type must be supported for the
-    #   specified action.
+    #   The Amazon Web Services resource type. The resource type must be
+    #   supported for the specified action.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -423,8 +437,8 @@ module Aws::FIS
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that grants the AWS
-    #   FIS service permission to perform service actions on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
+    #   service permission to perform service actions on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] state
@@ -444,11 +458,11 @@ module Aws::FIS
     #   @return [Array<Types::ExperimentStopCondition>]
     #
     # @!attribute [rw] creation_time
-    #   The time the experiment was created.
+    #   The time that the experiment was created.
     #   @return [Time]
     #
     # @!attribute [rw] start_time
-    #   The time that the experiment was started.
+    #   The time that the experiment started.
     #   @return [Time]
     #
     # @!attribute [rw] end_time
@@ -504,6 +518,14 @@ module Aws::FIS
     #   The state of the action.
     #   @return [Types::ExperimentActionState]
     #
+    # @!attribute [rw] start_time
+    #   The time that the action started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the action ended.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentAction AWS API Documentation
     #
     class ExperimentAction < Struct.new(
@@ -512,7 +534,9 @@ module Aws::FIS
       :parameters,
       :targets,
       :start_after,
-      :state)
+      :state,
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -861,8 +885,15 @@ module Aws::FIS
       include Aws::Structure
     end
 
-    # Describes a filter used for the target resource input in an experiment
+    # Specifies a filter used for the target resource input in an experiment
     # template.
+    #
+    # For more information, see [Resource filters][1] in the *Fault
+    # Injection Simulator User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/targets.html#target-filters
     #
     # @note When making an API call, you may pass ExperimentTemplateTargetInputFilter
     #   data as a hash:
@@ -1430,8 +1461,8 @@ module Aws::FIS
     #   @return [Hash<String,Types::UpdateExperimentTemplateActionInputItem>]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that grants the AWS
-    #   FIS service permission to perform service actions on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
+    #   service permission to perform service actions on your behalf.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateRequest AWS API Documentation
@@ -1512,8 +1543,8 @@ module Aws::FIS
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The AWS resource type. The resource type must be supported for the
-    #   specified action.
+    #   The Amazon Web Services resource type. The resource type must be
+    #   supported for the specified action.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns

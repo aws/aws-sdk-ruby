@@ -43,6 +43,7 @@ module Aws::FIS
     Experiment = Shapes::StructureShape.new(name: 'Experiment')
     ExperimentAction = Shapes::StructureShape.new(name: 'ExperimentAction')
     ExperimentActionDescription = Shapes::StringShape.new(name: 'ExperimentActionDescription')
+    ExperimentActionEndTime = Shapes::TimestampShape.new(name: 'ExperimentActionEndTime')
     ExperimentActionMap = Shapes::MapShape.new(name: 'ExperimentActionMap')
     ExperimentActionName = Shapes::StringShape.new(name: 'ExperimentActionName')
     ExperimentActionParameter = Shapes::StringShape.new(name: 'ExperimentActionParameter')
@@ -50,6 +51,7 @@ module Aws::FIS
     ExperimentActionParameterName = Shapes::StringShape.new(name: 'ExperimentActionParameterName')
     ExperimentActionStartAfter = Shapes::StringShape.new(name: 'ExperimentActionStartAfter')
     ExperimentActionStartAfterList = Shapes::ListShape.new(name: 'ExperimentActionStartAfterList')
+    ExperimentActionStartTime = Shapes::TimestampShape.new(name: 'ExperimentActionStartTime')
     ExperimentActionState = Shapes::StructureShape.new(name: 'ExperimentActionState')
     ExperimentActionStatus = Shapes::StringShape.new(name: 'ExperimentActionStatus')
     ExperimentActionStatusReason = Shapes::StringShape.new(name: 'ExperimentActionStatusReason')
@@ -247,6 +249,8 @@ module Aws::FIS
     ExperimentAction.add_member(:targets, Shapes::ShapeRef.new(shape: ExperimentActionTargetMap, location_name: "targets"))
     ExperimentAction.add_member(:start_after, Shapes::ShapeRef.new(shape: ExperimentActionStartAfterList, location_name: "startAfter"))
     ExperimentAction.add_member(:state, Shapes::ShapeRef.new(shape: ExperimentActionState, location_name: "state"))
+    ExperimentAction.add_member(:start_time, Shapes::ShapeRef.new(shape: ExperimentActionStartTime, location_name: "startTime"))
+    ExperimentAction.add_member(:end_time, Shapes::ShapeRef.new(shape: ExperimentActionEndTime, location_name: "endTime"))
     ExperimentAction.struct_class = Types::ExperimentAction
 
     ExperimentActionMap.key = Shapes::ShapeRef.new(shape: ExperimentActionName)

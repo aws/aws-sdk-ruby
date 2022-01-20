@@ -349,11 +349,11 @@ module Aws::FIS
 
     # Creates an experiment template.
     #
-    # To create a template, specify the following information:
+    # An experiment template includes the following components:
     #
-    # * **Targets**\: A target can be a specific resource in your AWS
-    #   environment, or one or more resources that match criteria that you
-    #   specify, for example, resources that have specific tags.
+    # * **Targets**\: A target can be a specific resource in your Amazon Web
+    #   Services environment, or one or more resources that match criteria
+    #   that you specify, for example, resources that have specific tags.
     #
     # * **Actions**\: The actions to carry out on the target. You can
     #   specify multiple actions, the duration of each action, and when to
@@ -363,12 +363,12 @@ module Aws::FIS
     #   experiment is running, the experiment is automatically stopped. You
     #   can define a stop condition as a CloudWatch alarm.
     #
-    # For more information, see the [AWS Fault Injection Simulator User
-    # Guide][1].
+    # For more information, see [Experiment templates][1] in the *Fault
+    # Injection Simulator User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/
+    # [1]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-templates.html
     #
     # @option params [required, String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
@@ -378,8 +378,7 @@ module Aws::FIS
     #   not need to pass this option.**
     #
     # @option params [required, String] :description
-    #   A description for the experiment template. Can contain up to 64
-    #   letters (A-Z and a-z).
+    #   A description for the experiment template.
     #
     # @option params [required, Array<Types::CreateExperimentTemplateStopConditionInput>] :stop_conditions
     #   The stop conditions.
@@ -391,7 +390,7 @@ module Aws::FIS
     #   The actions for the experiment.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS
+    #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
     #   service permission to perform service actions on your behalf.
     #
     # @option params [Hash<String,String>] :tags
@@ -546,7 +545,7 @@ module Aws::FIS
       req.send_request(options)
     end
 
-    # Gets information about the specified AWS FIS action.
+    # Gets information about the specified FIS action.
     #
     # @option params [required, String] :id
     #   The ID of the action.
@@ -626,6 +625,8 @@ module Aws::FIS
     #   resp.experiment.actions["ExperimentActionName"].start_after[0] #=> String
     #   resp.experiment.actions["ExperimentActionName"].state.status #=> String, one of "pending", "initiating", "running", "completed", "cancelled", "stopping", "stopped", "failed"
     #   resp.experiment.actions["ExperimentActionName"].state.reason #=> String
+    #   resp.experiment.actions["ExperimentActionName"].start_time #=> Time
+    #   resp.experiment.actions["ExperimentActionName"].end_time #=> Time
     #   resp.experiment.stop_conditions #=> Array
     #   resp.experiment.stop_conditions[0].source #=> String
     #   resp.experiment.stop_conditions[0].value #=> String
@@ -701,7 +702,7 @@ module Aws::FIS
       req.send_request(options)
     end
 
-    # Lists the available AWS FIS actions.
+    # Lists the available FIS actions.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -921,6 +922,8 @@ module Aws::FIS
     #   resp.experiment.actions["ExperimentActionName"].start_after[0] #=> String
     #   resp.experiment.actions["ExperimentActionName"].state.status #=> String, one of "pending", "initiating", "running", "completed", "cancelled", "stopping", "stopped", "failed"
     #   resp.experiment.actions["ExperimentActionName"].state.reason #=> String
+    #   resp.experiment.actions["ExperimentActionName"].start_time #=> Time
+    #   resp.experiment.actions["ExperimentActionName"].end_time #=> Time
     #   resp.experiment.stop_conditions #=> Array
     #   resp.experiment.stop_conditions[0].source #=> String
     #   resp.experiment.stop_conditions[0].value #=> String
@@ -983,6 +986,8 @@ module Aws::FIS
     #   resp.experiment.actions["ExperimentActionName"].start_after[0] #=> String
     #   resp.experiment.actions["ExperimentActionName"].state.status #=> String, one of "pending", "initiating", "running", "completed", "cancelled", "stopping", "stopped", "failed"
     #   resp.experiment.actions["ExperimentActionName"].state.reason #=> String
+    #   resp.experiment.actions["ExperimentActionName"].start_time #=> Time
+    #   resp.experiment.actions["ExperimentActionName"].end_time #=> Time
     #   resp.experiment.stop_conditions #=> Array
     #   resp.experiment.stop_conditions[0].source #=> String
     #   resp.experiment.stop_conditions[0].value #=> String
@@ -1073,7 +1078,7 @@ module Aws::FIS
     #   The actions for the experiment.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that grants the AWS FIS
+    #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
     #   service permission to perform service actions on your behalf.
     #
     # @return [Types::UpdateExperimentTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1178,7 +1183,7 @@ module Aws::FIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-01-20)
+------------------
+
+* Feature - Amazon GuardDuty findings now include remoteAccountDetails under AwsApiCallAction section if instance credential is exfiltrated.
+
 1.52.0 (2021-12-21)
 ------------------
 

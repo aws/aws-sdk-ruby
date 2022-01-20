@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.295.0 (2022-01-20)
+------------------
+
+* Feature - C6i, M6i and R6i instances are powered by a third-generation Intel Xeon Scalable processor (Ice Lake) delivering all-core turbo frequency of 3.5 GHz
+
 1.294.0 (2022-01-18)
 ------------------
 

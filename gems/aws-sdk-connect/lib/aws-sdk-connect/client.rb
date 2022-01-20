@@ -977,7 +977,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Creates an AWS resource association with an Amazon Connect instance.
+    # Creates an Amazon Web Services resource association with an Amazon
+    # Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -1455,6 +1456,9 @@ module Aws::Connect
     #   The identifier of the Amazon Connect instance. You can find the
     #   instanceId in the ARN of the instance.
     #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
     # @return [Types::CreateUserHierarchyGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserHierarchyGroupResponse#hierarchy_group_id #hierarchy_group_id} => String
@@ -1466,6 +1470,9 @@ module Aws::Connect
     #     name: "HierarchyGroupName", # required
     #     parent_group_id: "HierarchyGroupId",
     #     instance_id: "InstanceId", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -1599,8 +1606,9 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Deletes an AWS resource association from an Amazon Connect instance.
-    # The association must not have any use cases associated with it.
+    # Deletes an Amazon Web Services resource association from an Amazon
+    # Connect instance. The association must not have any use cases
+    # associated with it.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -2419,6 +2427,8 @@ module Aws::Connect
     #   resp.hierarchy_group.hierarchy_path.level_five.id #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.arn #=> String
     #   resp.hierarchy_group.hierarchy_path.level_five.name #=> String
+    #   resp.hierarchy_group.tags #=> Hash
+    #   resp.hierarchy_group.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeUserHierarchyGroup AWS API Documentation
     #
@@ -3864,8 +3874,8 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Provides summary information about the AWS resource associations for
-    # the specified Amazon Connect instance.
+    # Provides summary information about the Amazon Web Services resource
+    # associations for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5896,7 +5906,8 @@ module Aws::Connect
     #   The type of attribute.
     #
     #   <note markdown="1"> Only allowlisted customers can consume USE\_CUSTOM\_TTS\_VOICES. To
-    #   access this feature, contact AWS Support for allowlisting.
+    #   access this feature, contact Amazon Web Services Support for
+    #   allowlisting.
     #
     #    </note>
     #
@@ -6702,7 +6713,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

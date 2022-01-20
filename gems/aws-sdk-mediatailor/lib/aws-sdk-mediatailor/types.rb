@@ -842,6 +842,12 @@ module Aws::MediaTailor
     #         http_configuration: { # required
     #           base_url: "__string", # required
     #         },
+    #         segment_delivery_configurations: [
+    #           {
+    #             base_url: "__string",
+    #             name: "__string",
+    #           },
+    #         ],
     #         source_location_name: "__string", # required
     #         tags: {
     #           "__string" => "__string",
@@ -861,6 +867,11 @@ module Aws::MediaTailor
     #   The source's HTTP package configurations.
     #   @return [Types::HttpConfiguration]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   An array of segment delivery configurations for this source
+    #   location.
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   @return [String]
     #
@@ -874,6 +885,7 @@ module Aws::MediaTailor
       :access_configuration,
       :default_segment_delivery_configuration,
       :http_configuration,
+      :segment_delivery_configurations,
       :source_location_name,
       :tags)
       SENSITIVE = []
@@ -907,6 +919,9 @@ module Aws::MediaTailor
     # @!attribute [rw] last_modified_time
     #   @return [Time]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   @return [String]
     #
@@ -922,6 +937,7 @@ module Aws::MediaTailor
       :default_segment_delivery_configuration,
       :http_configuration,
       :last_modified_time,
+      :segment_delivery_configurations,
       :source_location_name,
       :tags)
       SENSITIVE = []
@@ -1540,6 +1556,11 @@ module Aws::MediaTailor
     #   modified.
     #   @return [Time]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   An array of segment delivery configurations for this source
+    #   location.
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -1557,6 +1578,7 @@ module Aws::MediaTailor
       :default_segment_delivery_configuration,
       :http_configuration,
       :last_modified_time,
+      :segment_delivery_configurations,
       :source_location_name,
       :tags)
       SENSITIVE = []
@@ -3330,6 +3352,37 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SegmentDeliveryConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         base_url: "__string",
+    #         name: "__string",
+    #       }
+    #
+    # @!attribute [rw] base_url
+    #   The base URL of the host or path of the segment delivery server that
+    #   you're using to serve segments. This is typically a content
+    #   delivery network (CDN). The URL can be absolute or relative. To use
+    #   an absolute URL include the protocol, such as
+    #   https://example.com/some/path. To use a relative URL specify the
+    #   relative path, such as /some/path.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A unique identifier used to distinguish between multiple segment
+    #   delivery configurations in a source location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SegmentDeliveryConfiguration AWS API Documentation
+    #
+    class SegmentDeliveryConfiguration < Struct.new(
+      :base_url,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Slate VOD source configuration.
     #
     # @note When making an API call, you may pass SlateSource
@@ -3386,6 +3439,11 @@ module Aws::MediaTailor
     #   modified.
     #   @return [Time]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   An array of segment delivery configurations for this source
+    #   location.
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   The name of the source location.
     #   @return [String]
@@ -3403,6 +3461,7 @@ module Aws::MediaTailor
       :default_segment_delivery_configuration,
       :http_configuration,
       :last_modified_time,
+      :segment_delivery_configurations,
       :source_location_name,
       :tags)
       SENSITIVE = []
@@ -3722,6 +3781,12 @@ module Aws::MediaTailor
     #         http_configuration: { # required
     #           base_url: "__string", # required
     #         },
+    #         segment_delivery_configurations: [
+    #           {
+    #             base_url: "__string",
+    #             name: "__string",
+    #           },
+    #         ],
     #         source_location_name: "__string", # required
     #       }
     #
@@ -3738,6 +3803,11 @@ module Aws::MediaTailor
     #   The HTTP configuration for the source location.
     #   @return [Types::HttpConfiguration]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   An array of segment delivery configurations for this source
+    #   location.
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   @return [String]
     #
@@ -3747,6 +3817,7 @@ module Aws::MediaTailor
       :access_configuration,
       :default_segment_delivery_configuration,
       :http_configuration,
+      :segment_delivery_configurations,
       :source_location_name)
       SENSITIVE = []
       include Aws::Structure
@@ -3779,6 +3850,9 @@ module Aws::MediaTailor
     # @!attribute [rw] last_modified_time
     #   @return [Time]
     #
+    # @!attribute [rw] segment_delivery_configurations
+    #   @return [Array<Types::SegmentDeliveryConfiguration>]
+    #
     # @!attribute [rw] source_location_name
     #   @return [String]
     #
@@ -3794,6 +3868,7 @@ module Aws::MediaTailor
       :default_segment_delivery_configuration,
       :http_configuration,
       :last_modified_time,
+      :segment_delivery_configurations,
       :source_location_name,
       :tags)
       SENSITIVE = []

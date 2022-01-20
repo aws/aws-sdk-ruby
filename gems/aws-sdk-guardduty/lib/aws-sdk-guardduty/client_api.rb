@@ -211,6 +211,7 @@ module Aws::GuardDuty
     ProductCodes = Shapes::ListShape.new(name: 'ProductCodes')
     PublicAccess = Shapes::StructureShape.new(name: 'PublicAccess')
     PublishingStatus = Shapes::StringShape.new(name: 'PublishingStatus')
+    RemoteAccountDetails = Shapes::StructureShape.new(name: 'RemoteAccountDetails')
     RemoteIpDetails = Shapes::StructureShape.new(name: 'RemoteIpDetails')
     RemotePortDetails = Shapes::StructureShape.new(name: 'RemotePortDetails')
     Resource = Shapes::StructureShape.new(name: 'Resource')
@@ -329,6 +330,7 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
     AwsApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
+    AwsApiCallAction.add_member(:remote_account_details, Shapes::ShapeRef.new(shape: RemoteAccountDetails, location_name: "remoteAccountDetails"))
     AwsApiCallAction.struct_class = Types::AwsApiCallAction
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -962,6 +964,10 @@ module Aws::GuardDuty
     PublicAccess.add_member(:permission_configuration, Shapes::ShapeRef.new(shape: PermissionConfiguration, location_name: "permissionConfiguration"))
     PublicAccess.add_member(:effective_permission, Shapes::ShapeRef.new(shape: String, location_name: "effectivePermission"))
     PublicAccess.struct_class = Types::PublicAccess
+
+    RemoteAccountDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: String, location_name: "accountId"))
+    RemoteAccountDetails.add_member(:affiliated, Shapes::ShapeRef.new(shape: Boolean, location_name: "affiliated"))
+    RemoteAccountDetails.struct_class = Types::RemoteAccountDetails
 
     RemoteIpDetails.add_member(:city, Shapes::ShapeRef.new(shape: City, location_name: "city"))
     RemoteIpDetails.add_member(:country, Shapes::ShapeRef.new(shape: Country, location_name: "country"))
