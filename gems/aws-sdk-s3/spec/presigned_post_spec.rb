@@ -28,7 +28,7 @@ module Aws
         it 'rejects unknown options' do
           expect do
             PresignedPost.new(creds, region, bucket, foo: 'bar')
-          end.to raise_error(/undefined method `foo'/)
+          end.to raise_error(/Unsupported option: foo/)
         end
       end
 

@@ -176,6 +176,7 @@ module Aws
     # ```
     #
     class PresignedPost
+      @@allowed_fields = []
 
       # @param [Credentials] credentials Security credentials for signing
       #   the post policy.
@@ -247,7 +248,12 @@ module Aws
           case option_name
           when :allow_any then allow_any(option_value)
           when :signature_expiration then @signature_expiration = option_value
-          else send("#{option_name}", option_value)
+          else
+            if @@allowed_fields.include?(option_name)
+              send("#{option_name}", option_value)
+            else
+              raise ArgumentError, "Unsupported option: #{option_name}"
+            end
           end
         end
       end
@@ -279,17 +285,22 @@ module Aws
       end
 
       # @api private
-      def self.define_field(field, *args)
+      def self.define_field(field, *args, &block)
+        @@allowed_fields << field
         options = args.last.is_a?(Hash) ? args.pop : {}
         field_name = args.last || field.to_s
 
-        define_method("#{field}") do |value|
-          with(field_name, value)
-        end
+        if block_given?
+          define_method("#{field}", block)
+        else
+          define_method("#{field}") do |value|
+            with(field_name, value)
+          end
 
-        if options[:starts_with]
-          define_method("#{field}_starts_with") do |value|
-            starts_with(field_name, value)
+          if options[:starts_with]
+            define_method("#{field}_starts_with") do |value|
+              starts_with(field_name, value)
+            end
           end
         end
       end
@@ -307,7 +318,7 @@ module Aws
       # @param [String] key
       # @see http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html)
       # @return [self]
-      def key(key)
+      define_field(:key) do |key|
         @key_set = true
         with('key', key)
       end
@@ -316,7 +327,7 @@ module Aws
       # @param [String] prefix
       # @see #key
       # @return [self]
-      def key_starts_with(prefix)
+      define_field(:key_starts_with) do |prefix|
         @key_set = true
         starts_with('key', prefix)
       end
@@ -399,21 +410,21 @@ module Aws
       # @param [Time] time
       # @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
       # @return [self]
-      def expires(time)
+      define_field(:expires) do |time|
         with('Expires', time.httpdate)
       end
 
       # @param [String] prefix
       # @see #expires
       # @return [self]
-      def expires_starts_with(prefix)
+      define_field(:expires_starts_with) do |prefix|
         starts_with('Expires', prefix)
       end
 
       # The minimum and maximum allowable size for the uploaded content.
       # @param [Range<Integer>] byte_range
       # @return [self]
-      def content_length_range(byte_range)
+      define_field(:content_length_range) do |byte_range|
         min = byte_range.begin
         max = byte_range.end
         max -= 1 if byte_range.exclude_end?
@@ -492,7 +503,7 @@ module Aws
       # prefixed with "x-amz-meta-".
       # @param [Hash<String,String>] hash
       # @return [self]
-      def metadata(hash)
+      define_field(:metadata) do |hash|
         hash.each do |key, value|
           with("x-amz-meta-#{key}", value)
         end
@@ -503,7 +514,7 @@ module Aws
       # @param [Hash<String,String>] hash
       # @see #metadata
       # @return [self]
-      def metadata_starts_with(hash)
+      define_field(:metadata_starts_with) do |hash|
         hash.each do |key, value|
           starts_with("x-amz-meta-#{key}", value)
         end
@@ -561,7 +572,7 @@ module Aws
       # @param [String] value
       # @see #server_side_encryption_customer_algorithm
       # @return [self]
-      def server_side_encryption_customer_key(value)
+      define_field(:server_side_encryption_customer_key) do |value|
         field_name = 'x-amz-server-side-encryption-customer-key'
         with(field_name, base64(value))
         with(field_name + '-MD5', base64(OpenSSL::Digest::MD5.digest(value)))
@@ -570,7 +581,7 @@ module Aws
       # @param [String] prefix
       # @see #server_side_encryption_customer_key
       # @return [self]
-      def server_side_encryption_customer_key_starts_with(prefix)
+      define_field(:server_side_encryption_customer_key_starts_with) do |prefix|
         field_name = 'x-amz-server-side-encryption-customer-key'
         starts_with(field_name, prefix)
       end
