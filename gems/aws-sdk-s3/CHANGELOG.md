@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Minor cleanups.
+
 1.111.1 (2022-01-06)
 ------------------
 

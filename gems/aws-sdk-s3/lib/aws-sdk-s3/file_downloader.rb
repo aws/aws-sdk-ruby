@@ -134,7 +134,7 @@ module Aws
       def write(resp)
         range, _ = resp.content_range.split(' ').last.split('/')
         head, _ = range.split('-').map {|s| s.to_i}
-        IO.write(@path, resp.body.read, head)
+        File.write(@path, resp.body.read, head)
       end
 
       def single_request
