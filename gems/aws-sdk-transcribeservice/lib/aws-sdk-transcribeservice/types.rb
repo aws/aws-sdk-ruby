@@ -245,6 +245,7 @@ module Aws::TranscribeService
     #         content_redaction: {
     #           redaction_type: "PII", # required, accepts PII
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #         },
     #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         language_id_settings: {
@@ -450,6 +451,7 @@ module Aws::TranscribeService
     #       {
     #         redaction_type: "PII", # required, accepts PII
     #         redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #       }
     #
     # @!attribute [rw] redaction_type
@@ -468,11 +470,17 @@ module Aws::TranscribeService
     #   both the redacted and unredacted transcripts.
     #   @return [String]
     #
+    # @!attribute [rw] pii_entity_types
+    #   The types of personally identifiable information (PII) you want to
+    #   redact in your transcript.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/ContentRedaction AWS API Documentation
     #
     class ContentRedaction < Struct.new(
       :redaction_type,
-      :redaction_output)
+      :redaction_output,
+      :pii_entity_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3152,6 +3160,7 @@ module Aws::TranscribeService
     #           content_redaction: {
     #             redaction_type: "PII", # required, accepts PII
     #             redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #             pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #           },
     #           language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #           language_id_settings: {
@@ -3544,6 +3553,7 @@ module Aws::TranscribeService
     #         content_redaction: {
     #           redaction_type: "PII", # required, accepts PII
     #           redaction_output: "redacted", # required, accepts redacted, redacted_and_unredacted
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, ALL
     #         },
     #         identify_language: false,
     #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ

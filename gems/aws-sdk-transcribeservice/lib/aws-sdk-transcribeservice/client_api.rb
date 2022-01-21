@@ -129,6 +129,8 @@ module Aws::TranscribeService
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
     Phrase = Shapes::StringShape.new(name: 'Phrase')
     Phrases = Shapes::ListShape.new(name: 'Phrases')
+    PiiEntityType = Shapes::StringShape.new(name: 'PiiEntityType')
+    PiiEntityTypes = Shapes::ListShape.new(name: 'PiiEntityTypes')
     RedactionOutput = Shapes::StringShape.new(name: 'RedactionOutput')
     RedactionType = Shapes::StringShape.new(name: 'RedactionType')
     RelativeTimeRange = Shapes::StructureShape.new(name: 'RelativeTimeRange')
@@ -257,6 +259,7 @@ module Aws::TranscribeService
 
     ContentRedaction.add_member(:redaction_type, Shapes::ShapeRef.new(shape: RedactionType, required: true, location_name: "RedactionType"))
     ContentRedaction.add_member(:redaction_output, Shapes::ShapeRef.new(shape: RedactionOutput, required: true, location_name: "RedactionOutput"))
+    ContentRedaction.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: PiiEntityTypes, location_name: "PiiEntityTypes"))
     ContentRedaction.struct_class = Types::ContentRedaction
 
     CreateCallAnalyticsCategoryRequest.add_member(:category_name, Shapes::ShapeRef.new(shape: CategoryName, required: true, location_name: "CategoryName"))
@@ -606,6 +609,8 @@ module Aws::TranscribeService
     NotFoundException.struct_class = Types::NotFoundException
 
     Phrases.member = Shapes::ShapeRef.new(shape: Phrase)
+
+    PiiEntityTypes.member = Shapes::ShapeRef.new(shape: PiiEntityType)
 
     RelativeTimeRange.add_member(:start_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "StartPercentage"))
     RelativeTimeRange.add_member(:end_percentage, Shapes::ShapeRef.new(shape: Percentage, location_name: "EndPercentage"))

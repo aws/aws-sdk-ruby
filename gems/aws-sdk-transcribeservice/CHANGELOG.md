@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-01-21)
+------------------
+
+* Feature - Add support for granular PIIEntityTypes when using Batch ContentRedaction.
+
 1.69.0 (2022-01-10)
 ------------------
 
