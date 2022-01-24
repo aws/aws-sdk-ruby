@@ -10,9 +10,7 @@ module Aws
         def call(context)
           context[:original_params] = context.params
           resp = @handler.call(context)
-          puts RubyVM.stat[:global_constant_state]
           resp.extend(PageableResponse)
-          puts RubyVM.stat[:global_constant_state]
           resp.pager = context.operation[:pager] || Aws::Pager::NullPager.new
           resp
         end
