@@ -298,6 +298,7 @@ module Aws
           end
 
           if options[:starts_with]
+            @@allowed_fields << "#{field}_starts_with".to_sym
             define_method("#{field}_starts_with") do |value|
               starts_with(field_name, value)
             end

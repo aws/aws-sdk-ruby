@@ -30,6 +30,14 @@ module Aws
             PresignedPost.new(creds, region, bucket, foo: 'bar')
           end.to raise_error(/Unsupported option: foo/)
         end
+
+        it 'provides options for setting fields or fields starts with' do
+          post = PresignedPost.new(creds, region, bucket, key: 'key',
+                                   acl: 'public-read',
+                                   content_type_starts_with: 'image/')
+          expect(post.fields['acl']).to eq('public-read')
+          expect(policy(post)).to include(['starts-with', '$Content-Type', 'image/'])
+        end
       end
 
       describe '#url' do
