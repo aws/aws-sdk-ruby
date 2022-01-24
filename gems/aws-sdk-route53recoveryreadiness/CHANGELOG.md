@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-01-24)
+------------------
+
+* Feature - Updated documentation for Route53 Recovery Readiness APIs.
+
 1.7.0 (2021-12-21)
 ------------------
 

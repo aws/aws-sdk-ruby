@@ -347,14 +347,14 @@ module Aws::Route53RecoveryReadiness
 
     # @!group API Operations
 
-    # Creates a new Cell.
+    # Creates a cell in an account.
     #
     # @option params [required, String] :cell_name
     #
     # @option params [Array<String>] :cells
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #
     # @return [Types::CreateCellResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -394,10 +394,13 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Create a new cross account readiness authorization.
+    # Creates a cross-account readiness authorization. This lets you
+    # authorize another account to work with Route 53 Application Recovery
+    # Controller, for example, to check the readiness status of resources in
+    # a separate account.
     #
     # @option params [required, String] :cross_account_authorization
-    #   A cross-account authorization, e.g. arn:aws:iam::123456789012:root
+    #   CrossAccountAuthorization
     #
     # @return [Types::CreateCrossAccountAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -422,14 +425,18 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Creates a new Readiness Check.
+    # Creates a readiness check in an account. A readiness check monitors a
+    # resource set in your application, such as a set of Amazon Aurora
+    # instances, that Application Recovery Controller is auditing recovery
+    # readiness for. The audits run once every minute on every resource
+    # that's associated with a readiness check.
     #
     # @option params [required, String] :readiness_check_name
     #
     # @option params [required, String] :resource_set_name
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #
     # @return [Types::CreateReadinessCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -465,14 +472,16 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Creates a new Recovery Group.
+    # Creates a recovery group in an account. A recovery group corresponds
+    # to an application and includes a list of the cells that make up the
+    # application.
     #
     # @option params [Array<String>] :cells
     #
     # @option params [required, String] :recovery_group_name
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #
     # @return [Types::CreateRecoveryGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -509,7 +518,9 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Creates a new Resource Set.
+    # Creates a resource set. A resource set is a set of resources of one
+    # type that span multiple cells. You can associate a resource set with a
+    # readiness check to monitor the resources for failover readiness.
     #
     # @option params [required, String] :resource_set_name
     #
@@ -518,7 +529,7 @@ module Aws::Route53RecoveryReadiness
     # @option params [required, Array<Types::Resource>] :resources
     #
     # @option params [Hash<String,String>] :tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #
     # @return [Types::CreateResourceSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -589,7 +600,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Deletes an existing Cell.
+    # Delete a cell. When successful, the response code is 204, with no
+    # response body.
     #
     # @option params [required, String] :cell_name
     #
@@ -610,7 +622,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Delete cross account readiness authorization
+    # Deletes cross account readiness authorization.
     #
     # @option params [required, String] :cross_account_authorization
     #
@@ -631,7 +643,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Deletes an existing Readiness Check.
+    # Deletes a readiness check.
     #
     # @option params [required, String] :readiness_check_name
     #
@@ -652,7 +664,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Deletes an existing Recovery Group.
+    # Deletes a recovery group.
     #
     # @option params [required, String] :recovery_group_name
     #
@@ -673,7 +685,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Deletes an existing Resource Set.
+    # Deletes a resource set.
     #
     # @option params [required, String] :resource_set_name
     #
@@ -694,8 +706,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of recommendations to improve resilliance and
-    # readiness check quality for a Recovery Group.
+    # Gets recommendations about architecture designs for improving
+    # resiliency for an application, based on a recovery group.
     #
     # @option params [Integer] :max_results
     #
@@ -733,7 +745,9 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about a Cell.
+    # Gets information about a cell including cell name, cell Amazon
+    # Resource Name (ARN), ARNs of nested cells for this cell, and a list of
+    # those cell ARNs with their associated recovery group ARNs.
     #
     # @option params [required, String] :cell_name
     #
@@ -771,7 +785,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about readiness of a Cell.
+    # Gets readiness for a cell. Aggregates the readiness of all the
+    # resources that are associated with the cell into a single value.
     #
     # @option params [required, String] :cell_name
     #
@@ -812,7 +827,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about a ReadinessCheck.
+    # Gets details about a readiness check.
     #
     # @option params [required, String] :readiness_check_name
     #
@@ -846,8 +861,10 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns detailed information about the status of an individual
-    # resource within a Readiness Check's Resource Set.
+    # Gets individual readiness status for a readiness check. To see the
+    # overall readiness status for a recovery group, that considers the
+    # readiness status for all the readiness checks in the recovery group,
+    # use GetRecoveryGroupReadinessSummary.
     #
     # @option params [Integer] :max_results
     #
@@ -894,7 +911,10 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about the status of a Readiness Check.
+    # Gets the readiness status for an individual readiness check. To see
+    # the overall readiness status for a recovery group, that considers the
+    # readiness status for all the readiness checks in a recovery group, use
+    # GetRecoveryGroupReadinessSummary.
     #
     # @option params [Integer] :max_results
     #
@@ -940,7 +960,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about a Recovery Group.
+    # Gets details about a recovery group, including a list of the cells
+    # that are included in it.
     #
     # @option params [required, String] :recovery_group_name
     #
@@ -975,7 +996,9 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about a Recovery Group.
+    # Displays a summary of information about a recovery group's readiness
+    # status. Includes the readiness checks for resources in the recovery
+    # group and the readiness status of each one.
     #
     # @option params [Integer] :max_results
     #
@@ -1016,7 +1039,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns information about a Resource Set.
+    # Displays the details about a resource set, including a list of the
+    # resources in the set.
     #
     # @option params [required, String] :resource_set_name
     #
@@ -1063,7 +1087,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of Cells.
+    # Lists the cells for an account.
     #
     # @option params [Integer] :max_results
     #
@@ -1105,7 +1129,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of cross account readiness authorizations.
+    # Lists the cross-account readiness authorizations that are in place for
+    # an account.
     #
     # @option params [Integer] :max_results
     #
@@ -1140,7 +1165,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of Readiness Checks.
+    # Lists the readiness checks for an account.
     #
     # @option params [Integer] :max_results
     #
@@ -1179,7 +1204,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of Recovery Groups.
+    # Lists the recovery groups in an account.
     #
     # @option params [Integer] :max_results
     #
@@ -1219,7 +1244,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of Resource Sets.
+    # Lists the resource sets in an account.
     #
     # @option params [Integer] :max_results
     #
@@ -1270,8 +1295,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a collection of rules that are applied as part of Readiness
-    # Checks.
+    # Lists all readiness rules, or lists the readiness rules for a specific
+    # resource type.
     #
     # @option params [Integer] :max_results
     #
@@ -1311,7 +1336,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Returns a list of the tags assigned to the specified resource.
+    # Lists the tags for a resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -1339,13 +1364,12 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Adds tags to the specified resource. You can specify one or more tags
-    # to add.
+    # Adds a tag to a resource.
     #
     # @option params [required, String] :resource_arn
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1367,8 +1391,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Removes tags from the specified resource. You can specify one or more
-    # tags to remove.
+    # Removes a tag from a resource.
     #
     # @option params [required, String] :resource_arn
     #
@@ -1392,7 +1415,8 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Updates an existing Cell.
+    # Updates a cell to replace the list of nested cells with a new list of
+    # nested cells.
     #
     # @option params [required, String] :cell_name
     #
@@ -1433,7 +1457,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Updates an exisiting Readiness Check.
+    # Updates a readiness check.
     #
     # @option params [required, String] :readiness_check_name
     #
@@ -1470,7 +1494,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Updates an existing Recovery Group.
+    # Updates a recovery group.
     #
     # @option params [required, Array<String>] :cells
     #
@@ -1508,7 +1532,7 @@ module Aws::Route53RecoveryReadiness
       req.send_request(options)
     end
 
-    # Updates an existing Resource Set.
+    # Updates a resource set.
     #
     # @option params [required, String] :resource_set_name
     #
@@ -1595,7 +1619,7 @@ module Aws::Route53RecoveryReadiness
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoveryreadiness'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

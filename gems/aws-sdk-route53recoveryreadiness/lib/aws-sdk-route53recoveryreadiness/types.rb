@@ -21,26 +21,28 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A Cell and its properties
+    # Information about a cell.
     #
     # @!attribute [rw] cell_arn
-    #   The arn for the Cell
+    #   The Amazon Resource Name (ARN) for the cell.
     #   @return [String]
     #
     # @!attribute [rw] cell_name
-    #   The name of the Cell
+    #   The name of the cell.
     #   @return [String]
     #
     # @!attribute [rw] cells
-    #   A list of Cell arns
+    #   A list of cell ARNs.
     #   @return [Array<String>]
     #
     # @!attribute [rw] parent_readiness_scopes
-    #   A list of Cell ARNs and/or RecoveryGroup ARNs
+    #   The readiness scope for the cell, which can be a cell Amazon
+    #   Resource Name (ARN) or a recovery group ARN. This is a list but
+    #   currently can have only one element.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   Tags on the resources.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CellOutput AWS API Documentation
@@ -84,7 +86,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateCellRequest AWS API Documentation
@@ -110,7 +112,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateCellResponse AWS API Documentation
@@ -133,7 +135,7 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] cross_account_authorization
-    #   A cross-account authorization, e.g. arn:aws:iam::123456789012:root
+    #   CrossAccountAuthorization
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateCrossAccountAuthorizationRequest AWS API Documentation
@@ -145,7 +147,7 @@ module Aws::Route53RecoveryReadiness
     end
 
     # @!attribute [rw] cross_account_authorization
-    #   A cross-account authorization, e.g. arn:aws:iam::123456789012:root
+    #   CrossAccountAuthorization
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateCrossAccountAuthorizationResponse AWS API Documentation
@@ -174,7 +176,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateReadinessCheckRequest AWS API Documentation
@@ -197,7 +199,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateReadinessCheckResponse AWS API Documentation
@@ -229,7 +231,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateRecoveryGroupRequest AWS API Documentation
@@ -252,7 +254,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateRecoveryGroupResponse AWS API Documentation
@@ -309,7 +311,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateResourceSetRequest AWS API Documentation
@@ -336,7 +338,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/CreateResourceSetResponse AWS API Documentation
@@ -351,7 +353,8 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A component for DNS/Routing Control Readiness Checks
+    # A component for DNS/routing control readiness checks and architecture
+    # checks.
     #
     # @note When making an API call, you may pass DNSTargetResource
     #   data as a hash:
@@ -373,24 +376,26 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The DNS Name that acts as ingress point to a portion of application
+    #   The domain name that acts as an ingress point to a portion of the
+    #   customer application.
     #   @return [String]
     #
     # @!attribute [rw] hosted_zone_arn
-    #   The Hosted Zone ARN that contains the DNS record with the provided
-    #   name of target resource.
+    #   The hosted zone Amazon Resource Name (ARN) that contains the DNS
+    #   record with the provided name of the target resource.
     #   @return [String]
     #
     # @!attribute [rw] record_set_id
-    #   The R53 Set Id to uniquely identify a record given a Name and a Type
+    #   The Route 53 record set ID that uniquely identifies a DNS record,
+    #   given a name and a type.
     #   @return [String]
     #
     # @!attribute [rw] record_type
-    #   The Type of DNS Record of target resource
+    #   The type of DNS record of the target resource.
     #   @return [String]
     #
     # @!attribute [rw] target_resource
-    #   The target resource the R53 record points to
+    #   The target resource of the DNS target resource.
     #   @return [Types::TargetResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/DNSTargetResource AWS API Documentation
@@ -528,8 +533,8 @@ module Aws::Route53RecoveryReadiness
     end
 
     # @!attribute [rw] last_audit_timestamp
-    #   The time a Recovery Group was last assessed for recommendations in
-    #   UTC ISO-8601 format
+    #   The time that a recovery group was last assessed for
+    #   recommendations, in UTC ISO-8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] next_token
@@ -580,8 +585,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] readiness
-    #   The readiness of an entire ReadinessCheck or an individual resource
-    #   ARN.
+    #   The readiness status.
     #   @return [String]
     #
     # @!attribute [rw] readiness_checks
@@ -628,7 +632,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/GetCellResponse AWS API Documentation
@@ -698,8 +702,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] readiness
-    #   The readiness of an entire ReadinessCheck or an individual resource
-    #   ARN.
+    #   The readiness status.
     #   @return [String]
     #
     # @!attribute [rw] rules
@@ -725,7 +728,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/GetReadinessCheckResponse AWS API Documentation
@@ -774,8 +777,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] readiness
-    #   The readiness of an entire ReadinessCheck or an individual resource
-    #   ARN.
+    #   The readiness status.
     #   @return [String]
     #
     # @!attribute [rw] resources
@@ -824,8 +826,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] readiness
-    #   The readiness of an entire ReadinessCheck or an individual resource
-    #   ARN.
+    #   The readiness status.
     #   @return [String]
     #
     # @!attribute [rw] readiness_checks
@@ -869,7 +870,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/GetRecoveryGroupResponse AWS API Documentation
@@ -914,7 +915,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/GetResourceSetResponse AWS API Documentation
@@ -1130,18 +1131,19 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A collection of rules used in a readiness check
+    # Readiness rule information, including the resource type, rule ID, and
+    # rule description.
     #
     # @!attribute [rw] resource_type
-    #   The resource type the rule applies to.
+    #   The resource type that the readiness rule applies to.
     #   @return [String]
     #
     # @!attribute [rw] rule_description
-    #   A description of the rule
+    #   The description of a readiness rule.
     #   @return [String]
     #
     # @!attribute [rw] rule_id
-    #   The Rule's ID.
+    #   The ID for the readiness rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ListRulesOutput AWS API Documentation
@@ -1216,7 +1218,7 @@ module Aws::Route53RecoveryReadiness
     end
 
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ListTagsForResourcesResponse AWS API Documentation
@@ -1227,10 +1229,10 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # Information relating to readiness check status
+    # Information relating to readiness check status.
     #
     # @!attribute [rw] message_text
-    #   The text of a readiness check message
+    #   The text of a readiness check message.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/Message AWS API Documentation
@@ -1241,7 +1243,8 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # The NLB resource a DNS Target Resource points to
+    # The Network Load Balancer resource that a DNS target resource points
+    # to.
     #
     # @note When making an API call, you may pass NLBResource
     #   data as a hash:
@@ -1251,7 +1254,7 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] arn
-    #   An NLB resource arn
+    #   The Network Load Balancer resource Amazon Resource Name (ARN).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/NLBResource AWS API Documentation
@@ -1262,7 +1265,7 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # The Route 53 resource a DNS Target Resource record points to
+    # The Route 53 resource that a DNS target resource record points to.
     #
     # @note When making an API call, you may pass R53ResourceRecord
     #   data as a hash:
@@ -1273,11 +1276,11 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] domain_name
-    #   The DNS target name
+    #   The DNS target domain name.
     #   @return [String]
     #
     # @!attribute [rw] record_set_id
-    #   The Resource Record set id
+    #   The Route 53 Resource Record Set ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/R53ResourceRecord AWS API Documentation
@@ -1289,22 +1292,22 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A resource used for checking the readiness of a Resource Set
+    # A readiness check.
     #
     # @!attribute [rw] readiness_check_arn
-    #   Arn associated with ReadinessCheck
+    #   The Amazon Resource Name (ARN) associated with a readiness check.
     #   @return [String]
     #
     # @!attribute [rw] readiness_check_name
-    #   Name for a ReadinessCheck
+    #   Name of a readiness check.
     #   @return [String]
     #
     # @!attribute [rw] resource_set
-    #   Name of the ResourceSet to be checked
+    #   Name of the resource set to be checked.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ReadinessCheckOutput AWS API Documentation
@@ -1318,16 +1321,15 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # Summary of ReadinessCheck status, paginated in
-    # GetRecoveryGroupReadinessSummary and GetCellReadinessSummary
+    # Summary of all readiness check statuses in a recovery group, paginated
+    # in GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.
     #
     # @!attribute [rw] readiness
-    #   The readiness of this ReadinessCheck
+    #   The readiness status of this readiness check.
     #   @return [String]
     #
     # @!attribute [rw] readiness_check_name
-    #   The name of a ReadinessCheck which is part of the given
-    #   RecoveryGroup or Cell
+    #   The name of a readiness check.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ReadinessCheckSummary AWS API Documentation
@@ -1339,10 +1341,12 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # Guidance for improving Recovery Group resilliancy
+    # Recommendations that are provided to make an application more recovery
+    # resilient.
     #
     # @!attribute [rw] recommendation_text
-    #   Guidance text for recommendation
+    #   Text of the recommendations that are provided to make an application
+    #   more recovery resilient.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/Recommendation AWS API Documentation
@@ -1353,22 +1357,23 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A Recovery Group generally containing multiple Cells
+    # A representation of the application, typically containing multiple
+    # cells.
     #
     # @!attribute [rw] cells
-    #   A list of Cell arns
+    #   A list of a cell's Amazon Resource Names (ARNs).
     #   @return [Array<String>]
     #
     # @!attribute [rw] recovery_group_arn
-    #   The arn for the RecoveryGroup
+    #   The Amazon Resource Name (ARN) for the recovery group.
     #   @return [String]
     #
     # @!attribute [rw] recovery_group_name
-    #   The name of the RecoveryGroup
+    #   The name of the recovery group.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   The tags associated with the recovery group.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/RecoveryGroupOutput AWS API Documentation
@@ -1382,7 +1387,7 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # The resource element of a ResourceSet
+    # The resource element of a resource set.
     #
     # @note When making an API call, you may pass Resource
     #   data as a hash:
@@ -1409,22 +1414,21 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] component_id
-    #   The component id of the resource, generated by the service when
-    #   dnsTargetResource is used
+    #   The component identifier of the resource, generated when DNS target
+    #   resource is used.
     #   @return [String]
     #
     # @!attribute [rw] dns_target_resource
-    #   A component for DNS/Routing Control Readiness Checks
+    #   The DNS target resource.
     #   @return [Types::DNSTargetResource]
     #
     # @!attribute [rw] readiness_scopes
-    #   A list of RecoveryGroup ARNs and/or Cell ARNs that this resource is
-    #   contained within.
+    #   A list of recovery group Amazon Resource Names (ARNs) and cell ARNs
+    #   that this resource is contained within.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the AWS resource, can be skipped if dnsTargetResource is
-    #   used
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/Resource AWS API Documentation
@@ -1449,23 +1453,24 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # Result with status for an individual resource.
+    # The result of a successful Resource request, with status for an
+    # individual resource.
     #
     # @!attribute [rw] component_id
-    #   The component id of the resource
+    #   The component id of the resource.
     #   @return [String]
     #
     # @!attribute [rw] last_checked_timestamp
-    #   The time the resource was last checked for readiness, in ISO-8601
-    #   format, UTC.
+    #   The time (UTC) that the resource was last checked for readiness, in
+    #   ISO-8601 format.
     #   @return [Time]
     #
     # @!attribute [rw] readiness
-    #   The readiness of the resource.
+    #   The readiness of a resource.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The ARN of the resource
+    #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ResourceResult AWS API Documentation
@@ -1479,26 +1484,37 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # A collection of resources of the same type
+    # A collection of resources of the same type.
     #
     # @!attribute [rw] resource_set_arn
-    #   The arn for the ResourceSet
+    #   The Amazon Resource Name (ARN) for the resource set.
     #   @return [String]
     #
     # @!attribute [rw] resource_set_name
-    #   The name of the ResourceSet
+    #   The name of the resource set.
     #   @return [String]
     #
     # @!attribute [rw] resource_set_type
-    #   AWS Resource Type of the resources in the ResourceSet
+    #   The resource type of the resources in the resource set. Enter one of
+    #   the following values for resource type:
+    #
+    #   AWS::ApiGateway::Stage, AWS::ApiGatewayV2::Stage,
+    #   AWS::AutoScaling::AutoScalingGroup, AWS::CloudWatch::Alarm,
+    #   AWS::EC2::CustomerGateway, AWS::DynamoDB::Table, AWS::EC2::Volume,
+    #   AWS::ElasticLoadBalancing::LoadBalancer,
+    #   AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::Lambda::Function,
+    #   AWS::MSK::Cluster, AWS::RDS::DBCluster, AWS::Route53::HealthCheck,
+    #   AWS::SQS::Queue, AWS::SNS::Topic, AWS::SNS::Subscription,
+    #   AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway,
+    #   AWS::Route53RecoveryReadiness::DNSTargetResource
     #   @return [String]
     #
     # @!attribute [rw] resources
-    #   A list of Resource objects
+    #   A list of resource objects.
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/ResourceSetOutput AWS API Documentation
@@ -1513,7 +1529,8 @@ module Aws::Route53RecoveryReadiness
       include Aws::Structure
     end
 
-    # Result with status for an individual rule..
+    # The result of a successful Rule request, with status for an individual
+    # rule.
     #
     # @!attribute [rw] last_checked_timestamp
     #   The time the resource was last checked for readiness, in ISO-8601
@@ -1521,7 +1538,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Time]
     #
     # @!attribute [rw] messages
-    #   Details about the resource's readiness
+    #   Details about the resource's readiness.
     #   @return [Array<Types::Message>]
     #
     # @!attribute [rw] readiness
@@ -1557,7 +1574,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/TagResourceRequest AWS API Documentation
@@ -1573,7 +1590,7 @@ module Aws::Route53RecoveryReadiness
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The target resource the R53 record points to
+    # The target resource that the Route 53 record points to.
     #
     # @note When making an API call, you may pass TargetResource
     #   data as a hash:
@@ -1589,11 +1606,11 @@ module Aws::Route53RecoveryReadiness
     #       }
     #
     # @!attribute [rw] nlb_resource
-    #   The NLB resource a DNS Target Resource points to
+    #   The Network Load Balancer Resource.
     #   @return [Types::NLBResource]
     #
     # @!attribute [rw] r53_resource
-    #   The Route 53 resource a DNS Target Resource record points to
+    #   The Route 53 resource.
     #   @return [Types::R53ResourceRecord]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/TargetResource AWS API Documentation
@@ -1675,7 +1692,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/UpdateCellResponse AWS API Documentation
@@ -1723,7 +1740,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/UpdateReadinessCheckResponse AWS API Documentation
@@ -1770,7 +1787,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/UpdateRecoveryGroupResponse AWS API Documentation
@@ -1846,7 +1863,7 @@ module Aws::Route53RecoveryReadiness
     #   @return [Array<Types::Resource>]
     #
     # @!attribute [rw] tags
-    #   A collection of tags associated with a resource
+    #   A collection of tags associated with a resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-readiness-2019-12-02/UpdateResourceSetResponse AWS API Documentation
