@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-01-25)
+------------------
+
+* Feature - This release adds support for custom vocabularies to be used with Contact Lens. Custom vocabularies improve transcription accuracy for one or more specific words.
+
 1.61.0 (2022-01-20)
 ------------------
 

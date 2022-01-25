@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-01-25)
+------------------
+
+* Feature - Amazon GuardDuty expands threat detection coverage to protect Amazon Elastic Kubernetes Service (EKS) workloads.
+
 1.53.0 (2022-01-20)
 ------------------
 

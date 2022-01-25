@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-01-25)
+------------------
+
+* Feature - This release adds support for growing SSD storage capacity and growing/shrinking SSD IOPS for FSx for ONTAP file systems.
+
 1.47.0 (2021-12-21)
 ------------------
 

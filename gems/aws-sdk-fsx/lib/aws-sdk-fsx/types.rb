@@ -83,14 +83,11 @@ module Aws::FSx
     #     increase a file system's storage capacity has been completed
     #     successfully, a `STORAGE_OPTIMIZATION` task starts.
     #
-    #     * For Windows, storage optimization is the process of migrating
-    #       the file system data to the new, larger disks.
+    #     * For Windows and ONTAP, storage optimization is the process of
+    #       migrating the file system data to newer larger disks.
     #
     #     * For Lustre, storage optimization consists of rebalancing the
     #       data across the existing and newly added file servers.
-    #
-    #     * For OpenZFS, storage optimization consists of migrating data
-    #       from the older smaller disks to the newer larger disks.
     #
     #     You can track the storage-optimization progress using the
     #     `ProgressPercent` property. When `STORAGE_OPTIMIZATION` has been
@@ -98,8 +95,9 @@ module Aws::FSx
     #     status changes to `COMPLETED`. For more information, see [Managing
     #     storage capacity][1] in the *Amazon FSx for Windows File Server
     #     User Guide*, [Managing storage and throughput capacity][2] in the
-    #     *Amazon FSx for Lustre User Guide*, and [Managing storage
-    #     capacity][3] in the *Amazon FSx for OpenZFS User Guide*.
+    #     *Amazon FSx for Lustre User Guide*, and [Managing storage capacity
+    #     and provisioned IOPS][3] in the *Amazon FSx for NetApp ONTAP User
+    #     Guide*.
     #
     #   * `FILE_SYSTEM_ALIAS_ASSOCIATION` - A file system update to
     #     associate a new Domain Name System (DNS) alias with the file
@@ -125,7 +123,7 @@ module Aws::FSx
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
     #   [4]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_AssociateFileSystemAliases.html
     #   [5]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DisassociateFileSystemAliases.html
     #   @return [String]
@@ -1503,7 +1501,7 @@ module Aws::FSx
     #   and higher burst throughput capacity than `SCRATCH_1`.
     #
     #   Choose `PERSISTENT_1` for longer-term storage and for
-    #   throughput-focused workloads that aren’t latency-sensitive. a.
+    #   throughput-focused workloads that aren’t latency-sensitive.
     #   `PERSISTENT_1` supports encryption of data in transit, and is
     #   available in all Amazon Web Services Regions in which FSx for Lustre
     #   is available.
@@ -1761,7 +1759,7 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   Sets the throughput capacity for the file system that you're
-    #   creating. Valid values are 512, 1024, and 2048 MBps.
+    #   creating. Valid values are 128, 256, 512, 1024, and 2048 MBps.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -2106,7 +2104,7 @@ module Aws::FSx
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment
-    #     types, and on `PERSISTENT` Lustre file system deployment types.
+    #     types, and on `PERSISTENT_1` Lustre file system deployment types.
     #
     #   Default value is `SSD`. For more information, see [ Storage type
     #   options][1] in the *FSx for Windows File Server User Guide* and
@@ -2500,6 +2498,31 @@ module Aws::FSx
     #   Amazon FSx for ONTAP's intelligent tiering automatically
     #   transitions a volume's data between the file system's primary
     #   storage and capacity pool storage based on your access patterns.
+    #
+    #   Valid tiering policies are the following:
+    #
+    #   * `SNAPSHOT_ONLY` - (Default value) moves cold snapshots to the
+    #     capacity pool storage tier.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `AUTO` - moves cold user data and snapshots to the capacity pool
+    #     storage tier based on your access patterns.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `ALL` - moves all user data blocks in both the active file system
+    #     and Snapshot copies to the storage pool tier.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `NONE` - keeps a volume's data in the primary storage tier,
+    #     preventing it from being moved to the capacity pool tier.
+    #
+    #   ^
     #   @return [Types::TieringPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/CreateOntapVolumeConfiguration AWS API Documentation
@@ -4193,8 +4216,8 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] options
-    #   To delete the volume's children and snapshots, use the string
-    #   `DELETE_CHILD_VOLUMES_AND_SNAPSHOTS`.
+    #   To delete the volume's child volumes, snapshots, and clones, use
+    #   the string `DELETE_CHILD_VOLUMES_AND_SNAPSHOTS`.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteVolumeOpenZFSConfiguration AWS API Documentation
@@ -5078,7 +5101,7 @@ module Aws::FSx
     #   @return [Types::OntapFileSystemConfiguration]
     #
     # @!attribute [rw] file_system_type_version
-    #   The Lustre version of the Amazon FSx for Lustrefile system, either
+    #   The Lustre version of the Amazon FSx for Lustre file system, either
     #   `2.10` or `2.12`.
     #   @return [String]
     #
@@ -7181,6 +7204,31 @@ module Aws::FSx
     # a volume's data between the file system's primary storage and
     # capacity pool storage based on your access patterns.
     #
+    # Valid tiering policies are the following:
+    #
+    # * `SNAPSHOT_ONLY` - (Default value) moves cold snapshots to the
+    #   capacity pool storage tier.
+    #
+    # ^
+    # ^
+    #
+    # * `AUTO` - moves cold user data and snapshots to the capacity pool
+    #   storage tier based on your access patterns.
+    #
+    # ^
+    # ^
+    #
+    # * `ALL` - moves all user data blocks in both the active file system
+    #   and Snapshot copies to the storage pool tier.
+    #
+    # ^
+    # ^
+    #
+    # * `NONE` - keeps a volume's data in the primary storage tier,
+    #   preventing it from being moved to the capacity pool tier.
+    #
+    # ^
+    #
     # @note When making an API call, you may pass TieringPolicy
     #   data as a hash:
     #
@@ -7464,6 +7512,10 @@ module Aws::FSx
     #         daily_automatic_backup_start_time: "DailyTime",
     #         fsx_admin_password: "AdminPassword",
     #         weekly_maintenance_start_time: "WeeklyTime",
+    #         disk_iops_configuration: {
+    #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #           iops: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -7499,13 +7551,23 @@ module Aws::FSx
     #   [1]: https://en.wikipedia.org/wiki/ISO_week_date
     #   @return [String]
     #
+    # @!attribute [rw] disk_iops_configuration
+    #   The SSD IOPS (input/output operations per second) configuration for
+    #   an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS
+    #   per GB of storage capacity, but you can provision additional IOPS
+    #   per GB of storage. The configuration consists of an IOPS mode
+    #   (`AUTOMATIC` or `USER_PROVISIONED`), and in the case of
+    #   `USER_PROVISIONED` IOPS, the total number of SSD IOPS provisioned.
+    #   @return [Types::DiskIopsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
       :automatic_backup_retention_days,
       :daily_automatic_backup_start_time,
       :fsx_admin_password,
-      :weekly_maintenance_start_time)
+      :weekly_maintenance_start_time,
+      :disk_iops_configuration)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -7564,7 +7626,7 @@ module Aws::FSx
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
     #   per second (MBps), in 2 to the nth increments, between 2^3 (8) and
-    #   2^11 (2048).
+    #   2^12 (4096).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7648,6 +7710,10 @@ module Aws::FSx
     #           daily_automatic_backup_start_time: "DailyTime",
     #           fsx_admin_password: "AdminPassword",
     #           weekly_maintenance_start_time: "WeeklyTime",
+    #           disk_iops_configuration: {
+    #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #             iops: 1,
+    #           },
     #         },
     #         open_zfs_configuration: {
     #           automatic_backup_retention_days: 1,
@@ -7679,9 +7745,10 @@ module Aws::FSx
     #
     # @!attribute [rw] storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server or Amazon FSx for Lustre file system.
-    #   Specifies the storage capacity target value, in GiB, to increase the
-    #   storage capacity for the file system that you're updating.
+    #   for Windows File Server, Amazon FSx for Lustre, or Amazon FSx for
+    #   NetApp ONTAP file system. Specifies the storage capacity target
+    #   value, in GiB, to increase the storage capacity for the file system
+    #   that you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -7691,14 +7758,16 @@ module Aws::FSx
     #   For Windows file systems, the storage capacity target value must be
     #   at least 10 percent greater than the current storage capacity value.
     #   To increase storage capacity, the file system must have at least 16
-    #   MBps of throughput capacity.
+    #   MBps of throughput capacity. For more information, see [Managing
+    #   storage capacity][1] in the *Amazon FSx for Windows File Server User
+    #   Guide*.
     #
     #   For Lustre file systems, the storage capacity target value can be
     #   the following:
     #
-    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
-    #     values are in multiples of 2400 GiB. The value must be greater
-    #     than the current storage capacity.
+    #   * For `SCRATCH_2`, `PERSISTENT_1`, and `PERSISTENT_2 SSD` deployment
+    #     types, valid values are in multiples of 2400 GiB. The value must
+    #     be greater than the current storage capacity.
     #
     #   * For `PERSISTENT HDD` file systems, valid values are multiples of
     #     6000 GiB for 12-MBps throughput per TiB file systems and multiples
@@ -7708,23 +7777,19 @@ module Aws::FSx
     #   * For `SCRATCH_1` file systems, you can't increase the storage
     #     capacity.
     #
-    #   For OpenZFS file systems, the input/output operations per second
-    #   (IOPS) automatically scale with increases to the storage capacity if
-    #   IOPS is configured for automatic scaling. If the storage capacity
-    #   increase would result in less than 3 IOPS per GiB of storage, this
-    #   operation returns an error.
+    #   For more information, see [Managing storage and throughput
+    #   capacity][2] in the *Amazon FSx for Lustre User Guide*.
     #
-    #   For more information, see [Managing storage capacity][1] in the
-    #   *Amazon FSx for Windows File Server User Guide*, [Managing storage
-    #   and throughput capacity][2] in the *Amazon FSx for Lustre User
-    #   Guide*, and [Managing storage capacity][3] in the *Amazon FSx for
-    #   OpenZFS User Guide*.
+    #   For ONTAP file systems, the storage capacity target value must be at
+    #   least 10 percent greater than the current storage capacity value.
+    #   For more information, see [Managing storage capacity and provisioned
+    #   IOPS][3] in the *Amazon FSx for NetApp ONTAP User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
     #   @return [Integer]
     #
     # @!attribute [rw] windows_configuration

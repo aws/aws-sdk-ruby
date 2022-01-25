@@ -1668,6 +1668,8 @@ module Aws::FSx
     #
     # * Amazon FSx for NetApp ONTAP
     #
+    # * Amazon FSx for OpenZFS
+    #
     # * Amazon FSx for Windows File Server
     #
     # This operation requires a client request token in the request that
@@ -1773,7 +1775,7 @@ module Aws::FSx
     #
     #   * Set to `HDD` to use hard disk drive storage. HDD is supported on
     #     `SINGLE_AZ_2` and `MULTI_AZ_1` Windows file system deployment types,
-    #     and on `PERSISTENT` Lustre file system deployment types.
+    #     and on `PERSISTENT_1` Lustre file system deployment types.
     #
     #   Default value is `SSD`. For more information, see [ Storage type
     #   options][1] in the *FSx for Windows File Server User Guide* and
@@ -5934,7 +5936,7 @@ module Aws::FSx
     #
     # * `WeeklyMaintenanceStartTime`
     #
-    # For FSx for Lustre file systems, you can update the following
+    # For Amazon FSx for Lustre file systems, you can update the following
     # properties:
     #
     # * `AutoImportPolicy`
@@ -5949,14 +5951,18 @@ module Aws::FSx
     #
     # * `WeeklyMaintenanceStartTime`
     #
-    # For FSx for ONTAP file systems, you can update the following
-    # properties:
+    # For Amazon FSx for NetApp ONTAP file systems, you can update the
+    # following properties:
     #
     # * `AutomaticBackupRetentionDays`
     #
     # * `DailyAutomaticBackupStartTime`
     #
+    # * `DiskIopsConfiguration`
+    #
     # * `FsxAdminPassword`
+    #
+    # * `StorageCapacity`
     #
     # * `WeeklyMaintenanceStartTime`
     #
@@ -5970,8 +5976,6 @@ module Aws::FSx
     # * `CopyTagsToVolumes`
     #
     # * `DailyAutomaticBackupStartTime`
-    #
-    # * `DiskIopsConfiguration`
     #
     # * `ThroughputCapacity`
     #
@@ -5991,9 +5995,10 @@ module Aws::FSx
     #
     # @option params [Integer] :storage_capacity
     #   Use this parameter to increase the storage capacity of an Amazon FSx
-    #   for Windows File Server or Amazon FSx for Lustre file system.
-    #   Specifies the storage capacity target value, in GiB, to increase the
-    #   storage capacity for the file system that you're updating.
+    #   for Windows File Server, Amazon FSx for Lustre, or Amazon FSx for
+    #   NetApp ONTAP file system. Specifies the storage capacity target value,
+    #   in GiB, to increase the storage capacity for the file system that
+    #   you're updating.
     #
     #   <note markdown="1"> You can't make a storage capacity increase request if there is an
     #   existing storage capacity increase request in progress.
@@ -6003,14 +6008,15 @@ module Aws::FSx
     #   For Windows file systems, the storage capacity target value must be at
     #   least 10 percent greater than the current storage capacity value. To
     #   increase storage capacity, the file system must have at least 16 MBps
-    #   of throughput capacity.
+    #   of throughput capacity. For more information, see [Managing storage
+    #   capacity][1] in the *Amazon FSx for Windows File Server User Guide*.
     #
     #   For Lustre file systems, the storage capacity target value can be the
     #   following:
     #
-    #   * For `SCRATCH_2` and `PERSISTENT_1 SSD` deployment types, valid
-    #     values are in multiples of 2400 GiB. The value must be greater than
-    #     the current storage capacity.
+    #   * For `SCRATCH_2`, `PERSISTENT_1`, and `PERSISTENT_2 SSD` deployment
+    #     types, valid values are in multiples of 2400 GiB. The value must be
+    #     greater than the current storage capacity.
     #
     #   * For `PERSISTENT HDD` file systems, valid values are multiples of
     #     6000 GiB for 12-MBps throughput per TiB file systems and multiples
@@ -6020,23 +6026,19 @@ module Aws::FSx
     #   * For `SCRATCH_1` file systems, you can't increase the storage
     #     capacity.
     #
-    #   For OpenZFS file systems, the input/output operations per second
-    #   (IOPS) automatically scale with increases to the storage capacity if
-    #   IOPS is configured for automatic scaling. If the storage capacity
-    #   increase would result in less than 3 IOPS per GiB of storage, this
-    #   operation returns an error.
+    #   For more information, see [Managing storage and throughput
+    #   capacity][2] in the *Amazon FSx for Lustre User Guide*.
     #
-    #   For more information, see [Managing storage capacity][1] in the
-    #   *Amazon FSx for Windows File Server User Guide*, [Managing storage and
-    #   throughput capacity][2] in the *Amazon FSx for Lustre User Guide*, and
-    #   [Managing storage capacity][3] in the *Amazon FSx for OpenZFS User
-    #   Guide*.
+    #   For ONTAP file systems, the storage capacity target value must be at
+    #   least 10 percent greater than the current storage capacity value. For
+    #   more information, see [Managing storage capacity and provisioned
+    #   IOPS][3] in the *Amazon FSx for NetApp ONTAP User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html
     #   [2]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html
-    #   [3]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-storage-capacity.html
+    #   [3]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html
     #
     # @option params [Types::UpdateFileSystemWindowsConfiguration] :windows_configuration
     #   The configuration updates for an Amazon FSx for Windows File Server
@@ -6139,6 +6141,10 @@ module Aws::FSx
     #       daily_automatic_backup_start_time: "DailyTime",
     #       fsx_admin_password: "AdminPassword",
     #       weekly_maintenance_start_time: "WeeklyTime",
+    #       disk_iops_configuration: {
+    #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
+    #         iops: 1,
+    #       },
     #     },
     #     open_zfs_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -6829,7 +6835,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

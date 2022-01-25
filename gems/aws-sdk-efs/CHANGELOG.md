@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-01-25)
+------------------
+
+* Feature - Use Amazon EFS Replication to replicate your Amazon EFS file system in the AWS Region of your preference.
+
 1.50.0 (2021-12-21)
 ------------------
 
