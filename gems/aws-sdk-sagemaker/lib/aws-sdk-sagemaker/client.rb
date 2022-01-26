@@ -2308,11 +2308,11 @@ module Aws::SageMaker
     # @option params [Types::AsyncInferenceConfig] :async_inference_config
     #   Specifies configuration for how an endpoint performs asynchronous
     #   inference. This is a required field in order for your Endpoint to be
-    #   invoked using [ `InvokeEndpointAsync` ][1].
+    #   invoked using [InvokeEndpointAsync][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html
     #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14248,12 +14248,13 @@ module Aws::SageMaker
     #   model group.
     #
     # @option params [String] :model_package_type
-    #   A filter that returns onlyl the model packages of the specified type.
+    #   A filter that returns only the model packages of the specified type.
     #   This can be one of the following values.
     #
-    #   * `VERSIONED` - List only versioned models.
+    #   * `UNVERSIONED` - List only unversioined models. This is the default
+    #     value if no `ModelPackageType` is specified.
     #
-    #   * `UNVERSIONED` - List only unversioined models.
+    #   * `VERSIONED` - List only versioned models.
     #
     #   * `BOTH` - List both versioned and unversioned models.
     #
@@ -14929,6 +14930,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.emr.step_id #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
+    #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -14994,6 +14996,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_summaries[0].pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
     #   resp.pipeline_execution_summaries[0].pipeline_execution_description #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_display_name #=> String
+    #   resp.pipeline_execution_summaries[0].pipeline_execution_failure_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutions AWS API Documentation
@@ -17639,17 +17642,17 @@ module Aws::SageMaker
     #
     # A pipeline execution won't stop while a callback step is running.
     # When you call `StopPipelineExecution` on a pipeline execution with a
-    # running callback step, Amazon SageMaker Pipelines sends an additional
-    # Amazon SQS message to the specified SQS queue. The body of the SQS
-    # message contains a "Status" field which is set to "Stopping".
+    # running callback step, SageMaker Pipelines sends an additional Amazon
+    # SQS message to the specified SQS queue. The body of the SQS message
+    # contains a "Status" field which is set to "Stopping".
     #
     # You should add logic to your Amazon SQS message consumer to take any
     # needed action (for example, resource cleanup) upon receipt of the
     # message followed by a call to `SendPipelineExecutionStepSuccess` or
     # `SendPipelineExecutionStepFailure`.
     #
-    # Only when Amazon SageMaker Pipelines receives one of these calls will
-    # it stop the pipeline execution.
+    # Only when SageMaker Pipelines receives one of these calls will it stop
+    # the pipeline execution.
     #
     # **Lambda Step**
     #
@@ -19443,7 +19446,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -27,6 +27,7 @@ module Aws::FraudDetector
     BatchImportList = Shapes::ListShape.new(name: 'BatchImportList')
     BatchPrediction = Shapes::StructureShape.new(name: 'BatchPrediction')
     BatchPredictionList = Shapes::ListShape.new(name: 'BatchPredictionList')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelBatchImportJobRequest = Shapes::StructureShape.new(name: 'CancelBatchImportJobRequest')
     CancelBatchImportJobResult = Shapes::StructureShape.new(name: 'CancelBatchImportJobResult')
     CancelBatchPredictionJobRequest = Shapes::StructureShape.new(name: 'CancelBatchPredictionJobRequest')
@@ -94,11 +95,18 @@ module Aws::FraudDetector
     DetectorsMaxResults = Shapes::IntegerShape.new(name: 'DetectorsMaxResults')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     EntityType = Shapes::StructureShape.new(name: 'EntityType')
+    EvaluatedExternalModel = Shapes::StructureShape.new(name: 'EvaluatedExternalModel')
+    EvaluatedModelVersion = Shapes::StructureShape.new(name: 'EvaluatedModelVersion')
+    EvaluatedRule = Shapes::StructureShape.new(name: 'EvaluatedRule')
+    EvaluatedRuleList = Shapes::ListShape.new(name: 'EvaluatedRuleList')
     Event = Shapes::StructureShape.new(name: 'Event')
     EventAttributeMap = Shapes::MapShape.new(name: 'EventAttributeMap')
     EventIngestion = Shapes::StringShape.new(name: 'EventIngestion')
+    EventPredictionSummary = Shapes::StructureShape.new(name: 'EventPredictionSummary')
+    EventPredictionsMaxResults = Shapes::IntegerShape.new(name: 'EventPredictionsMaxResults')
     EventType = Shapes::StructureShape.new(name: 'EventType')
     EventVariableMap = Shapes::MapShape.new(name: 'EventVariableMap')
+    EventVariableSummary = Shapes::StructureShape.new(name: 'EventVariableSummary')
     ExternalEventsDetail = Shapes::StructureShape.new(name: 'ExternalEventsDetail')
     ExternalModel = Shapes::StructureShape.new(name: 'ExternalModel')
     ExternalModelEndpointDataBlobMap = Shapes::MapShape.new(name: 'ExternalModelEndpointDataBlobMap')
@@ -109,6 +117,7 @@ module Aws::FraudDetector
     ExternalModelsMaxResults = Shapes::IntegerShape.new(name: 'ExternalModelsMaxResults')
     FieldValidationMessage = Shapes::StructureShape.new(name: 'FieldValidationMessage')
     FileValidationMessage = Shapes::StructureShape.new(name: 'FileValidationMessage')
+    FilterCondition = Shapes::StructureShape.new(name: 'FilterCondition')
     GetBatchImportJobsRequest = Shapes::StructureShape.new(name: 'GetBatchImportJobsRequest')
     GetBatchImportJobsResult = Shapes::StructureShape.new(name: 'GetBatchImportJobsResult')
     GetBatchPredictionJobsRequest = Shapes::StructureShape.new(name: 'GetBatchPredictionJobsRequest')
@@ -121,6 +130,8 @@ module Aws::FraudDetector
     GetDetectorsResult = Shapes::StructureShape.new(name: 'GetDetectorsResult')
     GetEntityTypesRequest = Shapes::StructureShape.new(name: 'GetEntityTypesRequest')
     GetEntityTypesResult = Shapes::StructureShape.new(name: 'GetEntityTypesResult')
+    GetEventPredictionMetadataRequest = Shapes::StructureShape.new(name: 'GetEventPredictionMetadataRequest')
+    GetEventPredictionMetadataResult = Shapes::StructureShape.new(name: 'GetEventPredictionMetadataResult')
     GetEventPredictionRequest = Shapes::StructureShape.new(name: 'GetEventPredictionRequest')
     GetEventPredictionResult = Shapes::StructureShape.new(name: 'GetEventPredictionResult')
     GetEventRequest = Shapes::StructureShape.new(name: 'GetEventRequest')
@@ -153,9 +164,16 @@ module Aws::FraudDetector
     Label = Shapes::StructureShape.new(name: 'Label')
     LabelSchema = Shapes::StructureShape.new(name: 'LabelSchema')
     Language = Shapes::StringShape.new(name: 'Language')
+    ListEventPredictionsRequest = Shapes::StructureShape.new(name: 'ListEventPredictionsRequest')
+    ListEventPredictionsResult = Shapes::StructureShape.new(name: 'ListEventPredictionsResult')
+    ListOfEvaluatedExternalModels = Shapes::ListShape.new(name: 'ListOfEvaluatedExternalModels')
+    ListOfEvaluatedModelVersions = Shapes::ListShape.new(name: 'ListOfEvaluatedModelVersions')
+    ListOfEventPredictionSummaries = Shapes::ListShape.new(name: 'ListOfEventPredictionSummaries')
+    ListOfEventVariableSummaries = Shapes::ListShape.new(name: 'ListOfEventVariableSummaries')
     ListOfExternalModelOutputs = Shapes::ListShape.new(name: 'ListOfExternalModelOutputs')
     ListOfLogOddsMetrics = Shapes::ListShape.new(name: 'ListOfLogOddsMetrics')
     ListOfModelScores = Shapes::ListShape.new(name: 'ListOfModelScores')
+    ListOfModelVersionEvaluations = Shapes::ListShape.new(name: 'ListOfModelVersionEvaluations')
     ListOfModelVersions = Shapes::ListShape.new(name: 'ListOfModelVersions')
     ListOfRuleResults = Shapes::ListShape.new(name: 'ListOfRuleResults')
     ListOfStrings = Shapes::ListShape.new(name: 'ListOfStrings')
@@ -163,6 +181,7 @@ module Aws::FraudDetector
     ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
     LogOddsMetric = Shapes::StructureShape.new(name: 'LogOddsMetric')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MapOfStrings = Shapes::MapShape.new(name: 'MapOfStrings')
     MetricDataPoint = Shapes::StructureShape.new(name: 'MetricDataPoint')
     Model = Shapes::StructureShape.new(name: 'Model')
     ModelEndpointDataBlob = Shapes::StructureShape.new(name: 'ModelEndpointDataBlob')
@@ -177,12 +196,15 @@ module Aws::FraudDetector
     ModelTypeEnum = Shapes::StringShape.new(name: 'ModelTypeEnum')
     ModelVersion = Shapes::StructureShape.new(name: 'ModelVersion')
     ModelVersionDetail = Shapes::StructureShape.new(name: 'ModelVersionDetail')
+    ModelVersionEvaluation = Shapes::StructureShape.new(name: 'ModelVersionEvaluation')
     ModelVersionStatus = Shapes::StringShape.new(name: 'ModelVersionStatus')
     NameList = Shapes::ListShape.new(name: 'NameList')
     NonEmptyListOfStrings = Shapes::ListShape.new(name: 'NonEmptyListOfStrings')
     Outcome = Shapes::StructureShape.new(name: 'Outcome')
     OutcomeList = Shapes::ListShape.new(name: 'OutcomeList')
     OutcomesMaxResults = Shapes::IntegerShape.new(name: 'OutcomesMaxResults')
+    PredictionExplanations = Shapes::StructureShape.new(name: 'PredictionExplanations')
+    PredictionTimeRange = Shapes::StructureShape.new(name: 'PredictionTimeRange')
     PutDetectorRequest = Shapes::StructureShape.new(name: 'PutDetectorRequest')
     PutDetectorResult = Shapes::StructureShape.new(name: 'PutDetectorResult')
     PutEntityTypeRequest = Shapes::StructureShape.new(name: 'PutEntityTypeRequest')
@@ -245,6 +267,7 @@ module Aws::FraudDetector
     Variable = Shapes::StructureShape.new(name: 'Variable')
     VariableEntry = Shapes::StructureShape.new(name: 'VariableEntry')
     VariableEntryList = Shapes::ListShape.new(name: 'VariableEntryList')
+    VariableImpactExplanation = Shapes::StructureShape.new(name: 'VariableImpactExplanation')
     VariableImportanceMetrics = Shapes::StructureShape.new(name: 'VariableImportanceMetrics')
     VariableList = Shapes::ListShape.new(name: 'VariableList')
     VariablesMaxResults = Shapes::IntegerShape.new(name: 'VariablesMaxResults')
@@ -262,6 +285,7 @@ module Aws::FraudDetector
     eventTypesMaxResults = Shapes::IntegerShape.new(name: 'eventTypesMaxResults')
     fieldValidationMessageList = Shapes::ListShape.new(name: 'fieldValidationMessageList')
     fileValidationMessageList = Shapes::ListShape.new(name: 'fileValidationMessageList')
+    filterString = Shapes::StringShape.new(name: 'filterString')
     float = Shapes::FloatShape.new(name: 'float')
     floatVersionString = Shapes::StringShape.new(name: 'floatVersionString')
     fraudDetectorArn = Shapes::StringShape.new(name: 'fraudDetectorArn')
@@ -272,6 +296,7 @@ module Aws::FraudDetector
     labelMapper = Shapes::MapShape.new(name: 'labelMapper')
     labelsMaxResults = Shapes::IntegerShape.new(name: 'labelsMaxResults')
     listOfEntities = Shapes::ListShape.new(name: 'listOfEntities')
+    listOfVariableImpactExplanations = Shapes::ListShape.new(name: 'listOfVariableImpactExplanations')
     metricDataPointsList = Shapes::ListShape.new(name: 'metricDataPointsList')
     modelIdentifier = Shapes::StringShape.new(name: 'modelIdentifier')
     modelInputTemplate = Shapes::StringShape.new(name: 'modelInputTemplate')
@@ -281,6 +306,7 @@ module Aws::FraudDetector
     ruleExpression = Shapes::StringShape.new(name: 'ruleExpression')
     s3BucketLocation = Shapes::StringShape.new(name: 's3BucketLocation')
     sageMakerEndpointIdentifier = Shapes::StringShape.new(name: 'sageMakerEndpointIdentifier')
+    sensitiveString = Shapes::StringShape.new(name: 'sensitiveString')
     string = Shapes::StringShape.new(name: 'string')
     tagKey = Shapes::StringShape.new(name: 'tagKey')
     tagKeyList = Shapes::ListShape.new(name: 'tagKeyList')
@@ -596,6 +622,29 @@ module Aws::FraudDetector
     EntityType.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     EntityType.struct_class = Types::EntityType
 
+    EvaluatedExternalModel.add_member(:model_endpoint, Shapes::ShapeRef.new(shape: string, location_name: "modelEndpoint"))
+    EvaluatedExternalModel.add_member(:use_event_variables, Shapes::ShapeRef.new(shape: Boolean, location_name: "useEventVariables"))
+    EvaluatedExternalModel.add_member(:input_variables, Shapes::ShapeRef.new(shape: MapOfStrings, location_name: "inputVariables"))
+    EvaluatedExternalModel.add_member(:output_variables, Shapes::ShapeRef.new(shape: MapOfStrings, location_name: "outputVariables"))
+    EvaluatedExternalModel.struct_class = Types::EvaluatedExternalModel
+
+    EvaluatedModelVersion.add_member(:model_id, Shapes::ShapeRef.new(shape: string, location_name: "modelId"))
+    EvaluatedModelVersion.add_member(:model_version, Shapes::ShapeRef.new(shape: string, location_name: "modelVersion"))
+    EvaluatedModelVersion.add_member(:model_type, Shapes::ShapeRef.new(shape: string, location_name: "modelType"))
+    EvaluatedModelVersion.add_member(:evaluations, Shapes::ShapeRef.new(shape: ListOfModelVersionEvaluations, location_name: "evaluations"))
+    EvaluatedModelVersion.struct_class = Types::EvaluatedModelVersion
+
+    EvaluatedRule.add_member(:rule_id, Shapes::ShapeRef.new(shape: identifier, location_name: "ruleId"))
+    EvaluatedRule.add_member(:rule_version, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "ruleVersion"))
+    EvaluatedRule.add_member(:expression, Shapes::ShapeRef.new(shape: sensitiveString, location_name: "expression"))
+    EvaluatedRule.add_member(:expression_with_values, Shapes::ShapeRef.new(shape: sensitiveString, location_name: "expressionWithValues"))
+    EvaluatedRule.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
+    EvaluatedRule.add_member(:evaluated, Shapes::ShapeRef.new(shape: Boolean, location_name: "evaluated"))
+    EvaluatedRule.add_member(:matched, Shapes::ShapeRef.new(shape: Boolean, location_name: "matched"))
+    EvaluatedRule.struct_class = Types::EvaluatedRule
+
+    EvaluatedRuleList.member = Shapes::ShapeRef.new(shape: EvaluatedRule)
+
     Event.add_member(:event_id, Shapes::ShapeRef.new(shape: string, location_name: "eventId"))
     Event.add_member(:event_type_name, Shapes::ShapeRef.new(shape: string, location_name: "eventTypeName"))
     Event.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: string, location_name: "eventTimestamp"))
@@ -607,6 +656,14 @@ module Aws::FraudDetector
 
     EventAttributeMap.key = Shapes::ShapeRef.new(shape: attributeKey)
     EventAttributeMap.value = Shapes::ShapeRef.new(shape: attributeValue)
+
+    EventPredictionSummary.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, location_name: "eventId"))
+    EventPredictionSummary.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    EventPredictionSummary.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: time, location_name: "eventTimestamp"))
+    EventPredictionSummary.add_member(:prediction_timestamp, Shapes::ShapeRef.new(shape: time, location_name: "predictionTimestamp"))
+    EventPredictionSummary.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorId"))
+    EventPredictionSummary.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
+    EventPredictionSummary.struct_class = Types::EventPredictionSummary
 
     EventType.add_member(:name, Shapes::ShapeRef.new(shape: string, location_name: "name"))
     EventType.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -622,6 +679,11 @@ module Aws::FraudDetector
 
     EventVariableMap.key = Shapes::ShapeRef.new(shape: variableName)
     EventVariableMap.value = Shapes::ShapeRef.new(shape: variableValue)
+
+    EventVariableSummary.add_member(:name, Shapes::ShapeRef.new(shape: sensitiveString, location_name: "name"))
+    EventVariableSummary.add_member(:value, Shapes::ShapeRef.new(shape: sensitiveString, location_name: "value"))
+    EventVariableSummary.add_member(:source, Shapes::ShapeRef.new(shape: sensitiveString, location_name: "source"))
+    EventVariableSummary.struct_class = Types::EventVariableSummary
 
     ExternalEventsDetail.add_member(:data_location, Shapes::ShapeRef.new(shape: s3BucketLocation, required: true, location_name: "dataLocation"))
     ExternalEventsDetail.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: iamRoleArn, required: true, location_name: "dataAccessRoleArn"))
@@ -665,6 +727,9 @@ module Aws::FraudDetector
     FileValidationMessage.add_member(:content, Shapes::ShapeRef.new(shape: string, location_name: "content"))
     FileValidationMessage.add_member(:type, Shapes::ShapeRef.new(shape: string, location_name: "type"))
     FileValidationMessage.struct_class = Types::FileValidationMessage
+
+    FilterCondition.add_member(:value, Shapes::ShapeRef.new(shape: filterString, location_name: "value"))
+    FilterCondition.struct_class = Types::FilterCondition
 
     GetBatchImportJobsRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: identifier, location_name: "jobId"))
     GetBatchImportJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: batchImportsMaxPageSize, location_name: "maxResults"))
@@ -725,6 +790,30 @@ module Aws::FraudDetector
     GetEntityTypesResult.add_member(:entity_types, Shapes::ShapeRef.new(shape: entityTypeList, location_name: "entityTypes"))
     GetEntityTypesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
     GetEntityTypesResult.struct_class = Types::GetEntityTypesResult
+
+    GetEventPredictionMetadataRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventId"))
+    GetEventPredictionMetadataRequest.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "eventTypeName"))
+    GetEventPredictionMetadataRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
+    GetEventPredictionMetadataRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, required: true, location_name: "detectorVersionId"))
+    GetEventPredictionMetadataRequest.add_member(:prediction_timestamp, Shapes::ShapeRef.new(shape: time, required: true, location_name: "predictionTimestamp"))
+    GetEventPredictionMetadataRequest.struct_class = Types::GetEventPredictionMetadataRequest
+
+    GetEventPredictionMetadataResult.add_member(:event_id, Shapes::ShapeRef.new(shape: identifier, location_name: "eventId"))
+    GetEventPredictionMetadataResult.add_member(:event_type_name, Shapes::ShapeRef.new(shape: identifier, location_name: "eventTypeName"))
+    GetEventPredictionMetadataResult.add_member(:entity_id, Shapes::ShapeRef.new(shape: string, location_name: "entityId"))
+    GetEventPredictionMetadataResult.add_member(:entity_type, Shapes::ShapeRef.new(shape: string, location_name: "entityType"))
+    GetEventPredictionMetadataResult.add_member(:event_timestamp, Shapes::ShapeRef.new(shape: time, location_name: "eventTimestamp"))
+    GetEventPredictionMetadataResult.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, location_name: "detectorId"))
+    GetEventPredictionMetadataResult.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
+    GetEventPredictionMetadataResult.add_member(:detector_version_status, Shapes::ShapeRef.new(shape: string, location_name: "detectorVersionStatus"))
+    GetEventPredictionMetadataResult.add_member(:event_variables, Shapes::ShapeRef.new(shape: ListOfEventVariableSummaries, location_name: "eventVariables"))
+    GetEventPredictionMetadataResult.add_member(:rules, Shapes::ShapeRef.new(shape: EvaluatedRuleList, location_name: "rules"))
+    GetEventPredictionMetadataResult.add_member(:rule_execution_mode, Shapes::ShapeRef.new(shape: RuleExecutionMode, location_name: "ruleExecutionMode"))
+    GetEventPredictionMetadataResult.add_member(:outcomes, Shapes::ShapeRef.new(shape: ListOfStrings, location_name: "outcomes"))
+    GetEventPredictionMetadataResult.add_member(:evaluated_model_versions, Shapes::ShapeRef.new(shape: ListOfEvaluatedModelVersions, location_name: "evaluatedModelVersions"))
+    GetEventPredictionMetadataResult.add_member(:evaluated_external_models, Shapes::ShapeRef.new(shape: ListOfEvaluatedExternalModels, location_name: "evaluatedExternalModels"))
+    GetEventPredictionMetadataResult.add_member(:prediction_timestamp, Shapes::ShapeRef.new(shape: time, location_name: "predictionTimestamp"))
+    GetEventPredictionMetadataResult.struct_class = Types::GetEventPredictionMetadataResult
 
     GetEventPredictionRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "detectorId"))
     GetEventPredictionRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: wholeNumberVersionString, location_name: "detectorVersionId"))
@@ -867,11 +956,34 @@ module Aws::FraudDetector
     LabelSchema.add_member(:unlabeled_events_treatment, Shapes::ShapeRef.new(shape: UnlabeledEventsTreatment, location_name: "unlabeledEventsTreatment"))
     LabelSchema.struct_class = Types::LabelSchema
 
+    ListEventPredictionsRequest.add_member(:event_id, Shapes::ShapeRef.new(shape: FilterCondition, location_name: "eventId"))
+    ListEventPredictionsRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: FilterCondition, location_name: "eventType"))
+    ListEventPredictionsRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: FilterCondition, location_name: "detectorId"))
+    ListEventPredictionsRequest.add_member(:detector_version_id, Shapes::ShapeRef.new(shape: FilterCondition, location_name: "detectorVersionId"))
+    ListEventPredictionsRequest.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "predictionTimeRange"))
+    ListEventPredictionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    ListEventPredictionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: EventPredictionsMaxResults, location_name: "maxResults"))
+    ListEventPredictionsRequest.struct_class = Types::ListEventPredictionsRequest
+
+    ListEventPredictionsResult.add_member(:event_prediction_summaries, Shapes::ShapeRef.new(shape: ListOfEventPredictionSummaries, location_name: "eventPredictionSummaries"))
+    ListEventPredictionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: string, location_name: "nextToken"))
+    ListEventPredictionsResult.struct_class = Types::ListEventPredictionsResult
+
+    ListOfEvaluatedExternalModels.member = Shapes::ShapeRef.new(shape: EvaluatedExternalModel)
+
+    ListOfEvaluatedModelVersions.member = Shapes::ShapeRef.new(shape: EvaluatedModelVersion)
+
+    ListOfEventPredictionSummaries.member = Shapes::ShapeRef.new(shape: EventPredictionSummary)
+
+    ListOfEventVariableSummaries.member = Shapes::ShapeRef.new(shape: EventVariableSummary)
+
     ListOfExternalModelOutputs.member = Shapes::ShapeRef.new(shape: ExternalModelOutputs)
 
     ListOfLogOddsMetrics.member = Shapes::ShapeRef.new(shape: LogOddsMetric)
 
     ListOfModelScores.member = Shapes::ShapeRef.new(shape: ModelScores)
+
+    ListOfModelVersionEvaluations.member = Shapes::ShapeRef.new(shape: ModelVersionEvaluation)
 
     ListOfModelVersions.member = Shapes::ShapeRef.new(shape: ModelVersion)
 
@@ -892,6 +1004,9 @@ module Aws::FraudDetector
     LogOddsMetric.add_member(:variable_type, Shapes::ShapeRef.new(shape: string, required: true, location_name: "variableType"))
     LogOddsMetric.add_member(:variable_importance, Shapes::ShapeRef.new(shape: float, required: true, location_name: "variableImportance"))
     LogOddsMetric.struct_class = Types::LogOddsMetric
+
+    MapOfStrings.key = Shapes::ShapeRef.new(shape: string)
+    MapOfStrings.value = Shapes::ShapeRef.new(shape: string)
 
     MetricDataPoint.add_member(:fpr, Shapes::ShapeRef.new(shape: float, location_name: "fpr"))
     MetricDataPoint.add_member(:precision, Shapes::ShapeRef.new(shape: float, location_name: "precision"))
@@ -951,6 +1066,11 @@ module Aws::FraudDetector
     ModelVersionDetail.add_member(:arn, Shapes::ShapeRef.new(shape: fraudDetectorArn, location_name: "arn"))
     ModelVersionDetail.struct_class = Types::ModelVersionDetail
 
+    ModelVersionEvaluation.add_member(:output_variable_name, Shapes::ShapeRef.new(shape: string, location_name: "outputVariableName"))
+    ModelVersionEvaluation.add_member(:evaluation_score, Shapes::ShapeRef.new(shape: string, location_name: "evaluationScore"))
+    ModelVersionEvaluation.add_member(:prediction_explanations, Shapes::ShapeRef.new(shape: PredictionExplanations, location_name: "predictionExplanations"))
+    ModelVersionEvaluation.struct_class = Types::ModelVersionEvaluation
+
     NameList.member = Shapes::ShapeRef.new(shape: string)
 
     NonEmptyListOfStrings.member = Shapes::ShapeRef.new(shape: string)
@@ -963,6 +1083,13 @@ module Aws::FraudDetector
     Outcome.struct_class = Types::Outcome
 
     OutcomeList.member = Shapes::ShapeRef.new(shape: Outcome)
+
+    PredictionExplanations.add_member(:variable_impact_explanations, Shapes::ShapeRef.new(shape: listOfVariableImpactExplanations, location_name: "variableImpactExplanations"))
+    PredictionExplanations.struct_class = Types::PredictionExplanations
+
+    PredictionTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: time, required: true, location_name: "startTime"))
+    PredictionTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: time, required: true, location_name: "endTime"))
+    PredictionTimeRange.struct_class = Types::PredictionTimeRange
 
     PutDetectorRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: identifier, required: true, location_name: "detectorId"))
     PutDetectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: description, location_name: "description"))
@@ -1205,6 +1332,11 @@ module Aws::FraudDetector
 
     VariableEntryList.member = Shapes::ShapeRef.new(shape: VariableEntry)
 
+    VariableImpactExplanation.add_member(:event_variable_name, Shapes::ShapeRef.new(shape: string, location_name: "eventVariableName"))
+    VariableImpactExplanation.add_member(:relative_impact, Shapes::ShapeRef.new(shape: string, location_name: "relativeImpact"))
+    VariableImpactExplanation.add_member(:log_odds_impact, Shapes::ShapeRef.new(shape: float, location_name: "logOddsImpact"))
+    VariableImpactExplanation.struct_class = Types::VariableImpactExplanation
+
     VariableImportanceMetrics.add_member(:log_odds_metrics, Shapes::ShapeRef.new(shape: ListOfLogOddsMetrics, location_name: "logOddsMetrics"))
     VariableImportanceMetrics.struct_class = Types::VariableImportanceMetrics
 
@@ -1224,6 +1356,8 @@ module Aws::FraudDetector
     labelMapper.value = Shapes::ShapeRef.new(shape: NonEmptyListOfStrings)
 
     listOfEntities.member = Shapes::ShapeRef.new(shape: Entity)
+
+    listOfVariableImpactExplanations.member = Shapes::ShapeRef.new(shape: VariableImpactExplanation)
 
     metricDataPointsList.member = Shapes::ShapeRef.new(shape: MetricDataPoint)
 
@@ -1746,6 +1880,19 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:get_event_prediction_metadata, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetEventPredictionMetadata"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetEventPredictionMetadataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetEventPredictionMetadataResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_event_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetEventTypes"
         o.http_method = "POST"
@@ -1896,6 +2043,24 @@ module Aws::FraudDetector
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_event_predictions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEventPredictions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEventPredictionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEventPredictionsResult)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

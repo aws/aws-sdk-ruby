@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-01-26)
+------------------
+
+* Feature - Adding top level Sample boolean field
+
 1.59.0 (2021-12-21)
 ------------------
 

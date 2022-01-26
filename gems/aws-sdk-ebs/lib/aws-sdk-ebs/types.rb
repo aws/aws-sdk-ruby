@@ -278,10 +278,21 @@ module Aws::EBS
     #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is
+    #   ignored.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The number of results to return.
+    #   The maximum number of blocks to be returned by the request.
+    #
+    #   Even if additional blocks can be retrieved from the snapshot, the
+    #   request can return less blocks than **MaxResults** or an empty array
+    #   of blocks.
+    #
+    #   To retrieve the next set of blocks from the snapshot, make another
+    #   request with the returned **NextToken** value. The value of
+    #   **NextToken** is `null` when there are no more blocks to return.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_block_index
@@ -289,6 +300,9 @@ module Aws::EBS
     #
     #   The list in the response will start from this block index or the
     #   next valid block index in the snapshots.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is
+    #   ignored.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListChangedBlocksRequest AWS API Documentation
@@ -353,16 +367,30 @@ module Aws::EBS
     #
     # @!attribute [rw] next_token
     #   The token to request the next page of results.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is
+    #   ignored.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The number of results to return.
+    #   The maximum number of blocks to be returned by the request.
+    #
+    #   Even if additional blocks can be retrieved from the snapshot, the
+    #   request can return less blocks than **MaxResults** or an empty array
+    #   of blocks.
+    #
+    #   To retrieve the next set of blocks from the snapshot, make another
+    #   request with the returned **NextToken** value. The value of
+    #   **NextToken** is `null` when there are no more blocks to return.
     #   @return [Integer]
     #
     # @!attribute [rw] starting_block_index
     #   The block index from which the list should start. The list in the
     #   response will start from this block index or the next valid block
     #   index in the snapshot.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is
+    #   ignored.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ebs-2019-11-02/ListSnapshotBlocksRequest AWS API Documentation

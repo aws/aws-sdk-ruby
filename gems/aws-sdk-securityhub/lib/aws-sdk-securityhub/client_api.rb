@@ -472,6 +472,8 @@ module Aws::SecurityHub
     BatchUpdateFindingsUnprocessedFinding = Shapes::StructureShape.new(name: 'BatchUpdateFindingsUnprocessedFinding')
     BatchUpdateFindingsUnprocessedFindingsList = Shapes::ListShape.new(name: 'BatchUpdateFindingsUnprocessedFindingsList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BooleanFilter = Shapes::StructureShape.new(name: 'BooleanFilter')
+    BooleanFilterList = Shapes::ListShape.new(name: 'BooleanFilterList')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Cell = Shapes::StructureShape.new(name: 'Cell')
     Cells = Shapes::ListShape.new(name: 'Cells')
@@ -3132,6 +3134,7 @@ module Aws::SecurityHub
     AwsSecurityFinding.add_member(:patch_summary, Shapes::ShapeRef.new(shape: PatchSummary, location_name: "PatchSummary"))
     AwsSecurityFinding.add_member(:action, Shapes::ShapeRef.new(shape: Action, location_name: "Action"))
     AwsSecurityFinding.add_member(:finding_provider_fields, Shapes::ShapeRef.new(shape: FindingProviderFields, location_name: "FindingProviderFields"))
+    AwsSecurityFinding.add_member(:sample, Shapes::ShapeRef.new(shape: Boolean, location_name: "Sample"))
     AwsSecurityFinding.struct_class = Types::AwsSecurityFinding
 
     AwsSecurityFindingFilters.add_member(:product_arn, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "ProductArn"))
@@ -3228,6 +3231,7 @@ module Aws::SecurityHub
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_severity_label, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsSeverityLabel"))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_severity_original, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsSeverityOriginal"))
     AwsSecurityFindingFilters.add_member(:finding_provider_fields_types, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "FindingProviderFieldsTypes"))
+    AwsSecurityFindingFilters.add_member(:sample, Shapes::ShapeRef.new(shape: BooleanFilterList, location_name: "Sample"))
     AwsSecurityFindingFilters.struct_class = Types::AwsSecurityFindingFilters
 
     AwsSecurityFindingIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
@@ -3377,6 +3381,11 @@ module Aws::SecurityHub
     BatchUpdateFindingsUnprocessedFinding.struct_class = Types::BatchUpdateFindingsUnprocessedFinding
 
     BatchUpdateFindingsUnprocessedFindingsList.member = Shapes::ShapeRef.new(shape: BatchUpdateFindingsUnprocessedFinding)
+
+    BooleanFilter.add_member(:value, Shapes::ShapeRef.new(shape: Boolean, location_name: "Value"))
+    BooleanFilter.struct_class = Types::BooleanFilter
+
+    BooleanFilterList.member = Shapes::ShapeRef.new(shape: BooleanFilter)
 
     CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 

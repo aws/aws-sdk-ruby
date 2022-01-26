@@ -1597,6 +1597,112 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The details of the external (Amazon Sagemaker) model evaluated for
+    # generating predictions.
+    #
+    # @!attribute [rw] model_endpoint
+    #   The endpoint of the external (Amazon Sagemaker) model.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_event_variables
+    #   Indicates whether event variables were used to generate predictions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] input_variables
+    #   Input variables use for generating predictions.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_variables
+    #   Output variables.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EvaluatedExternalModel AWS API Documentation
+    #
+    class EvaluatedExternalModel < Struct.new(
+      :model_endpoint,
+      :use_event_variables,
+      :input_variables,
+      :output_variables)
+      SENSITIVE = [:input_variables, :output_variables]
+      include Aws::Structure
+    end
+
+    # The model version evaluated for generating prediction.
+    #
+    # @!attribute [rw] model_id
+    #   The model ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_version
+    #   The model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_type
+    #   The model type.
+    #
+    #   Valid values: `ONLINE_FRAUD_INSIGHTS` \|
+    #   `TRANSACTION_FRAUD_INSIGHTS`
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluations
+    #   Evaluations generated for the model version.
+    #   @return [Array<Types::ModelVersionEvaluation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EvaluatedModelVersion AWS API Documentation
+    #
+    class EvaluatedModelVersion < Struct.new(
+      :model_id,
+      :model_version,
+      :model_type,
+      :evaluations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the rule used for evaluating variable values.
+    #
+    # @!attribute [rw] rule_id
+    #   The rule ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_version
+    #   The rule version.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression
+    #   The rule expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] expression_with_values
+    #   The rule expression value.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcomes
+    #   The rule outcome.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] evaluated
+    #   Indicates whether the rule was evaluated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] matched
+    #   Indicates whether the rule matched.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EvaluatedRule AWS API Documentation
+    #
+    class EvaluatedRule < Struct.new(
+      :rule_id,
+      :rule_version,
+      :expression,
+      :expression_with_values,
+      :outcomes,
+      :evaluated,
+      :matched)
+      SENSITIVE = [:expression, :expression_with_values]
+      include Aws::Structure
+    end
+
     # The event details.
     #
     # @!attribute [rw] event_id
@@ -1641,6 +1747,45 @@ module Aws::FraudDetector
       :current_label,
       :label_timestamp,
       :entities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the summary of an event prediction.
+    #
+    # @!attribute [rw] event_id
+    #   The event ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The timestamp of the event.
+    #   @return [String]
+    #
+    # @!attribute [rw] prediction_timestamp
+    #   The timestamp when the prediction was generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version_id
+    #   The detector version ID.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EventPredictionSummary AWS API Documentation
+    #
+    class EventPredictionSummary < Struct.new(
+      :event_id,
+      :event_type_name,
+      :event_timestamp,
+      :prediction_timestamp,
+      :detector_id,
+      :detector_version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1705,6 +1850,31 @@ module Aws::FraudDetector
       :created_time,
       :arn)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the summary of an event variable that was evaluated
+    # for generating prediction.
+    #
+    # @!attribute [rw] name
+    #   The event variable name.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the event variable.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The event variable source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/EventVariableSummary AWS API Documentation
+    #
+    class EventVariableSummary < Struct.new(
+      :name,
+      :value,
+      :source)
+      SENSITIVE = [:name, :value, :source]
       include Aws::Structure
     end
 
@@ -1882,6 +2052,28 @@ module Aws::FraudDetector
       :title,
       :content,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A conditional statement for filtering a list of past predictions.
+    #
+    # @note When making an API call, you may pass FilterCondition
+    #   data as a hash:
+    #
+    #       {
+    #         value: "filterString",
+    #       }
+    #
+    # @!attribute [rw] value
+    #   A statement containing a resource property and a value to specify
+    #   filter condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/FilterCondition AWS API Documentation
+    #
+    class FilterCondition < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2208,6 +2400,136 @@ module Aws::FraudDetector
     class GetEntityTypesResult < Struct.new(
       :entity_types,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetEventPredictionMetadataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_id: "identifier", # required
+    #         event_type_name: "identifier", # required
+    #         detector_id: "identifier", # required
+    #         detector_version_id: "wholeNumberVersionString", # required
+    #         prediction_timestamp: "time", # required
+    #       }
+    #
+    # @!attribute [rw] event_id
+    #   The event ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type associated with the detector specified for the
+    #   prediction.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version_id
+    #   The detector version ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] prediction_timestamp
+    #   The timestamp that defines when the prediction was generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionMetadataRequest AWS API Documentation
+    #
+    class GetEventPredictionMetadataRequest < Struct.new(
+      :event_id,
+      :event_type_name,
+      :detector_id,
+      :detector_version_id,
+      :prediction_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_id
+    #   The event ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type_name
+    #   The event type associated with the detector specified for this
+    #   prediction.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_id
+    #   The entity ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_type
+    #   The entity type.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_timestamp
+    #   The timestamp for when the prediction was generated for the
+    #   associated event ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version_id
+    #   The detector version ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] detector_version_status
+    #   The status of the detector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_variables
+    #   A list of event variables that influenced the prediction scores.
+    #   @return [Array<Types::EventVariableSummary>]
+    #
+    # @!attribute [rw] rules
+    #   List of rules associated with the detector version that were used
+    #   for evaluating variable values.
+    #   @return [Array<Types::EvaluatedRule>]
+    #
+    # @!attribute [rw] rule_execution_mode
+    #   The execution mode of the rule used for evaluating variable values.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcomes
+    #   The outcomes of the matched rule, based on the rule execution mode.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] evaluated_model_versions
+    #   Model versions that were evaluated for generating predictions.
+    #   @return [Array<Types::EvaluatedModelVersion>]
+    #
+    # @!attribute [rw] evaluated_external_models
+    #   External (Amazon SageMaker) models that were evaluated for
+    #   generating predictions.
+    #   @return [Array<Types::EvaluatedExternalModel>]
+    #
+    # @!attribute [rw] prediction_timestamp
+    #   The timestamp that defines when the prediction was generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionMetadataResult AWS API Documentation
+    #
+    class GetEventPredictionMetadataResult < Struct.new(
+      :event_id,
+      :event_type_name,
+      :entity_id,
+      :entity_type,
+      :event_timestamp,
+      :detector_id,
+      :detector_version_id,
+      :detector_version_status,
+      :event_variables,
+      :rules,
+      :rule_execution_mode,
+      :outcomes,
+      :evaluated_model_versions,
+      :evaluated_external_models,
+      :prediction_timestamp)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3032,6 +3354,93 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListEventPredictionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_id: {
+    #           value: "filterString",
+    #         },
+    #         event_type: {
+    #           value: "filterString",
+    #         },
+    #         detector_id: {
+    #           value: "filterString",
+    #         },
+    #         detector_version_id: {
+    #           value: "filterString",
+    #         },
+    #         prediction_time_range: {
+    #           start_time: "time", # required
+    #           end_time: "time", # required
+    #         },
+    #         next_token: "string",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] event_id
+    #   The event ID.
+    #   @return [Types::FilterCondition]
+    #
+    # @!attribute [rw] event_type
+    #   The event type associated with the detector.
+    #   @return [Types::FilterCondition]
+    #
+    # @!attribute [rw] detector_id
+    #   The detector ID.
+    #   @return [Types::FilterCondition]
+    #
+    # @!attribute [rw] detector_version_id
+    #   The detector version ID.
+    #   @return [Types::FilterCondition]
+    #
+    # @!attribute [rw] prediction_time_range
+    #   The time period for when the predictions were generated.
+    #   @return [Types::PredictionTimeRange]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return. Use the token to make
+    #   the call again to retrieve the next page. Keep all other arguments
+    #   unchanged. Each pagination token expires after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of predictions to return for the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ListEventPredictionsRequest AWS API Documentation
+    #
+    class ListEventPredictionsRequest < Struct.new(
+      :event_id,
+      :event_type,
+      :detector_id,
+      :detector_version_id,
+      :prediction_time_range,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] event_prediction_summaries
+    #   The summary of the past predictions.
+    #   @return [Array<Types::EventPredictionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return. Use the token to make
+    #   the call again to retrieve the next page. Keep all other arguments
+    #   unchanged. Each pagination token expires after 24 hours.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ListEventPredictionsResult AWS API Documentation
+    #
+    class ListEventPredictionsResult < Struct.new(
+      :event_prediction_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -3441,6 +3850,30 @@ module Aws::FraudDetector
       include Aws::Structure
     end
 
+    # The model version evalutions.
+    #
+    # @!attribute [rw] output_variable_name
+    #   The output variable name.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_score
+    #   The evaluation score generated for the model version.
+    #   @return [String]
+    #
+    # @!attribute [rw] prediction_explanations
+    #   The prediction explanations generated for the model version.
+    #   @return [Types::PredictionExplanations]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ModelVersionEvaluation AWS API Documentation
+    #
+    class ModelVersionEvaluation < Struct.new(
+      :output_variable_name,
+      :evaluation_score,
+      :prediction_explanations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The outcome.
     #
     # @!attribute [rw] name
@@ -3471,6 +3904,50 @@ module Aws::FraudDetector
       :last_updated_time,
       :created_time,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The prediction explanations that provide insight into how each event
+    # variable impacted the model version's fraud prediction score.
+    #
+    # @!attribute [rw] variable_impact_explanations
+    #   The details of the event variable's impact on the prediction score.
+    #   @return [Array<Types::VariableImpactExplanation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PredictionExplanations AWS API Documentation
+    #
+    class PredictionExplanations < Struct.new(
+      :variable_impact_explanations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time period for when the predictions were generated.
+    #
+    # @note When making an API call, you may pass PredictionTimeRange
+    #   data as a hash:
+    #
+    #       {
+    #         start_time: "time", # required
+    #         end_time: "time", # required
+    #       }
+    #
+    # @!attribute [rw] start_time
+    #   The start time of the time period for when the predictions were
+    #   generated.
+    #   @return [String]
+    #
+    # @!attribute [rw] end_time
+    #   The end time of the time period for when the predictions were
+    #   generated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/PredictionTimeRange AWS API Documentation
+    #
+    class PredictionTimeRange < Struct.new(
+      :start_time,
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4853,6 +5330,41 @@ module Aws::FraudDetector
       :default_value,
       :description,
       :variable_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the event variable's impact on the prediction score.
+    #
+    # @!attribute [rw] event_variable_name
+    #   The event variable name.
+    #   @return [String]
+    #
+    # @!attribute [rw] relative_impact
+    #   The event variable's relative impact in terms of magnitude on the
+    #   prediction scores. The relative impact values consist of a numerical
+    #   rating (0-5, 5 being the highest) and direction
+    #   (increased/decreased) impact of the fraud risk.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_odds_impact
+    #   The raw, uninterpreted value represented as log-odds of the fraud.
+    #   These values are usually between -10 to +10, but range from -
+    #   infinity to + infinity.
+    #
+    #   * A positive value indicates that the variable drove the risk score
+    #     up.
+    #
+    #   * A negative value indicates that the variable drove the risk score
+    #     down.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/VariableImpactExplanation AWS API Documentation
+    #
+    class VariableImpactExplanation < Struct.new(
+      :event_variable_name,
+      :relative_impact,
+      :log_odds_impact)
       SENSITIVE = []
       include Aws::Structure
     end
