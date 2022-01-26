@@ -12,7 +12,6 @@ module Aws
           unless context.http_request.headers.key?('x-amz-trace-id')
             if ENV['AWS_LAMBDA_FUNCTION_NAME'] &&
               (trace_id = ENV['_X_AMZ_TRACE_ID'])
-              # TODO: percent encode (NOT uri/cgi escape)
               context.http_request.headers['x-amz-trace-id'] = trace_id
             end
           end
