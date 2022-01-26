@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add support for recursion detection.
+
 3.125.5 (2022-01-19)
 ------------------
 
