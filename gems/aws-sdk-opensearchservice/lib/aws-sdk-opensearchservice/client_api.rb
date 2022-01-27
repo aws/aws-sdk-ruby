@@ -48,6 +48,12 @@ module Aws::OpenSearchService
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelServiceSoftwareUpdateRequest')
     CancelServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'CancelServiceSoftwareUpdateResponse')
+    ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
+    ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
+    ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
+    ChangeProgressStageName = Shapes::StringShape.new(name: 'ChangeProgressStageName')
+    ChangeProgressStageStatus = Shapes::StringShape.new(name: 'ChangeProgressStageStatus')
+    ChangeProgressStatusDetails = Shapes::StructureShape.new(name: 'ChangeProgressStatusDetails')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     ClusterConfig = Shapes::StructureShape.new(name: 'ClusterConfig')
     ClusterConfigStatus = Shapes::StructureShape.new(name: 'ClusterConfigStatus')
@@ -81,6 +87,8 @@ module Aws::OpenSearchService
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
     DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
+    DescribeDomainChangeProgressRequest = Shapes::StructureShape.new(name: 'DescribeDomainChangeProgressRequest')
+    DescribeDomainChangeProgressResponse = Shapes::StructureShape.new(name: 'DescribeDomainChangeProgressResponse')
     DescribeDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeDomainConfigRequest')
     DescribeDomainConfigResponse = Shapes::StructureShape.new(name: 'DescribeDomainConfigResponse')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
@@ -104,6 +112,7 @@ module Aws::OpenSearchService
     DescribeReservedInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedInstanceOfferingsResponse')
     DescribeReservedInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedInstancesRequest')
     DescribeReservedInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedInstancesResponse')
+    Description = Shapes::StringShape.new(name: 'Description')
     DisableTimestamp = Shapes::TimestampShape.new(name: 'DisableTimestamp')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
@@ -209,6 +218,7 @@ module Aws::OpenSearchService
     OutboundConnectionStatus = Shapes::StructureShape.new(name: 'OutboundConnectionStatus')
     OutboundConnectionStatusCode = Shapes::StringShape.new(name: 'OutboundConnectionStatusCode')
     OutboundConnections = Shapes::ListShape.new(name: 'OutboundConnections')
+    OverallChangeStatus = Shapes::StringShape.new(name: 'OverallChangeStatus')
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
     PackageDescription = Shapes::StringShape.new(name: 'PackageDescription')
     PackageDetails = Shapes::StructureShape.new(name: 'PackageDetails')
@@ -275,6 +285,7 @@ module Aws::OpenSearchService
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
+    TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UpdateDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateDomainConfigRequest')
     UpdateDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateDomainConfigResponse')
@@ -412,6 +423,27 @@ module Aws::OpenSearchService
     CancelServiceSoftwareUpdateResponse.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     CancelServiceSoftwareUpdateResponse.struct_class = Types::CancelServiceSoftwareUpdateResponse
 
+    ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
+    ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ChangeProgressDetails.struct_class = Types::ChangeProgressDetails
+
+    ChangeProgressStage.add_member(:name, Shapes::ShapeRef.new(shape: ChangeProgressStageName, location_name: "Name"))
+    ChangeProgressStage.add_member(:status, Shapes::ShapeRef.new(shape: ChangeProgressStageStatus, location_name: "Status"))
+    ChangeProgressStage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ChangeProgressStage.add_member(:last_updated, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdated"))
+    ChangeProgressStage.struct_class = Types::ChangeProgressStage
+
+    ChangeProgressStageList.member = Shapes::ShapeRef.new(shape: ChangeProgressStage)
+
+    ChangeProgressStatusDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
+    ChangeProgressStatusDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "StartTime"))
+    ChangeProgressStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: OverallChangeStatus, location_name: "Status"))
+    ChangeProgressStatusDetails.add_member(:pending_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "PendingProperties"))
+    ChangeProgressStatusDetails.add_member(:completed_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "CompletedProperties"))
+    ChangeProgressStatusDetails.add_member(:total_number_of_stages, Shapes::ShapeRef.new(shape: TotalNumberOfStages, location_name: "TotalNumberOfStages"))
+    ChangeProgressStatusDetails.add_member(:change_progress_stages, Shapes::ShapeRef.new(shape: ChangeProgressStageList, location_name: "ChangeProgressStages"))
+    ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
+
     ClusterConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: OpenSearchPartitionInstanceType, location_name: "InstanceType"))
     ClusterConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "InstanceCount"))
     ClusterConfig.add_member(:dedicated_master_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "DedicatedMasterEnabled"))
@@ -525,6 +557,13 @@ module Aws::OpenSearchService
     DescribeDomainAutoTunesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDomainAutoTunesResponse.struct_class = Types::DescribeDomainAutoTunesResponse
 
+    DescribeDomainChangeProgressRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDomainChangeProgressRequest.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "changeid"))
+    DescribeDomainChangeProgressRequest.struct_class = Types::DescribeDomainChangeProgressRequest
+
+    DescribeDomainChangeProgressResponse.add_member(:change_progress_status, Shapes::ShapeRef.new(shape: ChangeProgressStatusDetails, location_name: "ChangeProgressStatus"))
+    DescribeDomainChangeProgressResponse.struct_class = Types::DescribeDomainChangeProgressResponse
+
     DescribeDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainConfigRequest.struct_class = Types::DescribeDomainConfigRequest
 
@@ -627,6 +666,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     DomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     DomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
+    DomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -688,6 +728,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     DomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
     DomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
+    DomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -1101,6 +1142,7 @@ module Aws::OpenSearchService
     UpgradeDomainResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: VersionString, location_name: "TargetVersion"))
     UpgradeDomainResponse.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
     UpgradeDomainResponse.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
+    UpgradeDomainResponse.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     UpgradeDomainResponse.struct_class = Types::UpgradeDomainResponse
 
     UpgradeHistory.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
@@ -1327,6 +1369,18 @@ module Aws::OpenSearchService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_domain_change_progress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainChangeProgress"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/progress"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainChangeProgressRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainChangeProgressResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_domain_config, Seahorse::Model::Operation.new.tap do |o|

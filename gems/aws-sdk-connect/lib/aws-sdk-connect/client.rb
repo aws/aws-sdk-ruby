@@ -5134,13 +5134,18 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
-    # A 429 error occurs in two situations:
+    # A 429 error occurs in the following situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
     #   `TooManyRequests` exception.
     #
     # * The [quota for concurrent active chats][2] is exceeded. Active chat
     #   throttling returns a `LimitExceededException`.
+    #
+    # If you use the `ChatDurationInMinutes` parameter and receive a 400
+    # error, your account may not support the ability to configure custom
+    # chat durations. For more information, contact Amazon Web Services
+    # Support.
     #
     # For more information about chat, see [Chat][3] in the *Amazon Connect
     # Administrator Guide*.
@@ -5187,6 +5192,12 @@ module Aws::Connect
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The minumum
+    #   configurable time is 60 minutes. The maximum configurable time is
+    #   10,080 minutes (7 days).
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -5209,6 +5220,7 @@ module Aws::Connect
     #       content: "ChatContent", # required
     #     },
     #     client_token: "ClientToken",
+    #     chat_duration_in_minutes: 1,
     #   })
     #
     # @example Response structure
@@ -5985,7 +5997,7 @@ module Aws::Connect
     #   The identifier of the contact flow.
     #
     # @option params [String] :name
-    #   The name of the contact flow.
+    #   TThe name of the contact flow.
     #
     # @option params [String] :description
     #   The description of the contact flow.
@@ -7038,7 +7050,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

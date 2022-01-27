@@ -61,6 +61,7 @@ module Aws::Connect
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
+    ChatDurationInMinutes = Shapes::IntegerShape.new(name: 'ChatDurationInMinutes')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
     ChatStreamingConfiguration = Shapes::StructureShape.new(name: 'ChatStreamingConfiguration')
     ChatStreamingEndpointARN = Shapes::StringShape.new(name: 'ChatStreamingEndpointARN')
@@ -1862,6 +1863,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, required: true, location_name: "ParticipantDetails"))
     StartChatContactRequest.add_member(:initial_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialMessage"))
     StartChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))

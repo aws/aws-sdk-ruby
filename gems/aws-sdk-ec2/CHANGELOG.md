@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.296.0 (2022-01-27)
+------------------
+
+* Feature - X2ezn instances are powered by Intel Cascade Lake CPUs that deliver turbo all core frequency of up to 4.5 GHz and up to 100 Gbps of networking bandwidth
+
 1.295.0 (2022-01-20)
 ------------------
 

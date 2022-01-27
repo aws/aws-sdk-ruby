@@ -7526,6 +7526,7 @@ module Aws::Connect
     #           content: "ChatContent", # required
     #         },
     #         client_token: "ClientToken",
+    #         chat_duration_in_minutes: 1,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -7570,6 +7571,13 @@ module Aws::Connect
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The
+    #   minumum configurable time is 60 minutes. The maximum configurable
+    #   time is 10,080 minutes (7 days).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -7578,7 +7586,8 @@ module Aws::Connect
       :attributes,
       :participant_details,
       :initial_message,
-      :client_token)
+      :client_token,
+      :chat_duration_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8338,7 +8347,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of the contact flow.
+    #   TThe name of the contact flow.
     #   @return [String]
     #
     # @!attribute [rw] description

@@ -390,7 +390,9 @@ module Aws::Amplify
     #   branches that are part of this app.
     #
     # @option params [String] :basic_auth_credentials
-    #   The credentials for basic authorization for an Amplify app.
+    #   The credentials for basic authorization for an Amplify app. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #
     # @option params [Array<Types::CustomRule>] :custom_rules
     #   The custom rewrite and redirect rules for an Amplify app.
@@ -592,7 +594,9 @@ module Aws::Amplify
     #   The environment variables for the branch.
     #
     # @option params [String] :basic_auth_credentials
-    #   The basic authorization credentials for the branch.
+    #   The basic authorization credentials for the branch. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #
     # @option params [Boolean] :enable_basic_auth
     #   Enables basic authorization for the branch.
@@ -2213,7 +2217,9 @@ module Aws::Amplify
     #   Enables basic authorization for an Amplify app.
     #
     # @option params [String] :basic_auth_credentials
-    #   The basic authorization credentials for an Amplify app.
+    #   The basic authorization credentials for an Amplify app. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #
     # @option params [Array<Types::CustomRule>] :custom_rules
     #   The custom redirect and rewrite rules for an Amplify app.
@@ -2379,7 +2385,9 @@ module Aws::Amplify
     #   The environment variables for the branch.
     #
     # @option params [String] :basic_auth_credentials
-    #   The basic authorization credentials for the branch.
+    #   The basic authorization credentials for the branch. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #
     # @option params [Boolean] :enable_basic_auth
     #   Enables basic authorization for the branch.
@@ -2605,7 +2613,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

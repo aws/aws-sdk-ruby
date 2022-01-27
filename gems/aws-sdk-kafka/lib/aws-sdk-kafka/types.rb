@@ -81,12 +81,20 @@ module Aws::Kafka
     #
     #       {
     #         kafka_broker_node_id: "__string", # required
-    #         volume_size_gb: 1, # required
+    #         provisioned_throughput: {
+    #           enabled: false,
+    #           volume_throughput: 1,
+    #         },
+    #         volume_size_gb: 1,
     #       }
     #
     # @!attribute [rw] kafka_broker_node_id
     #   The ID of the broker to update.
     #   @return [String]
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   EBS volume provisioned throughput information.
+    #   @return [Types::ProvisionedThroughput]
     #
     # @!attribute [rw] volume_size_gb
     #   Size of the EBS volume to update.
@@ -96,6 +104,7 @@ module Aws::Kafka
     #
     class BrokerEBSVolumeInfo < Struct.new(
       :kafka_broker_node_id,
+      :provisioned_throughput,
       :volume_size_gb)
       SENSITIVE = []
       include Aws::Structure
@@ -158,6 +167,10 @@ module Aws::Kafka
     #         security_groups: ["__string"],
     #         storage_info: {
     #           ebs_storage_info: {
+    #             provisioned_throughput: {
+    #               enabled: false,
+    #               volume_throughput: 1,
+    #             },
     #             volume_size: 1,
     #           },
     #         },
@@ -736,6 +749,10 @@ module Aws::Kafka
     #           security_groups: ["__string"],
     #           storage_info: {
     #             ebs_storage_info: {
+    #               provisioned_throughput: {
+    #                 enabled: false,
+    #                 volume_throughput: 1,
+    #               },
     #               volume_size: 1,
     #             },
     #           },
@@ -1300,8 +1317,16 @@ module Aws::Kafka
     #   data as a hash:
     #
     #       {
+    #         provisioned_throughput: {
+    #           enabled: false,
+    #           volume_throughput: 1,
+    #         },
     #         volume_size: 1,
     #       }
+    #
+    # @!attribute [rw] provisioned_throughput
+    #   EBS volume provisioned throughput information.
+    #   @return [Types::ProvisionedThroughput]
     #
     # @!attribute [rw] volume_size
     #   The size in GiB of the EBS volume for the data drive on each broker
@@ -1311,6 +1336,7 @@ module Aws::Kafka
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/EBSStorageInfo AWS API Documentation
     #
     class EBSStorageInfo < Struct.new(
+      :provisioned_throughput,
       :volume_size)
       SENSITIVE = []
       include Aws::Structure
@@ -1780,6 +1806,10 @@ module Aws::Kafka
     #             security_groups: ["__string"],
     #             storage_info: {
     #               ebs_storage_info: {
+    #                 provisioned_throughput: {
+    #                   enabled: false,
+    #                   volume_throughput: 1,
+    #                 },
     #                 volume_size: 1,
     #               },
     #             },
@@ -2042,6 +2072,10 @@ module Aws::Kafka
     #           security_groups: ["__string"],
     #           storage_info: {
     #             ebs_storage_info: {
+    #               provisioned_throughput: {
+    #                 enabled: false,
+    #                 volume_throughput: 1,
+    #               },
     #               volume_size: 1,
     #             },
     #           },
@@ -2959,6 +2993,10 @@ module Aws::Kafka
     #
     #       {
     #         ebs_storage_info: {
+    #           provisioned_throughput: {
+    #             enabled: false,
+    #             volume_throughput: 1,
+    #           },
     #           volume_size: 1,
     #         },
     #       }
@@ -3243,7 +3281,11 @@ module Aws::Kafka
     #         target_broker_ebs_volume_info: [ # required
     #           {
     #             kafka_broker_node_id: "__string", # required
-    #             volume_size_gb: 1, # required
+    #             provisioned_throughput: {
+    #               enabled: false,
+    #               volume_throughput: 1,
+    #             },
+    #             volume_size_gb: 1,
     #           },
     #         ],
     #       }
@@ -3812,6 +3854,35 @@ module Aws::Kafka
     class PrometheusInfo < Struct.new(
       :jmx_exporter,
       :node_exporter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about provisioned throughput for EBS storage
+    # volumes attached to kafka broker nodes.
+    #
+    # @note When making an API call, you may pass ProvisionedThroughput
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false,
+    #         volume_throughput: 1,
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Provisioned throughput is enabled or not.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] volume_throughput
+    #   Throughput value of the EBS volumes for the data drive on each kafka
+    #   broker node in MiB per second.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafka-2018-11-14/ProvisionedThroughput AWS API Documentation
+    #
+    class ProvisionedThroughput < Struct.new(
+      :enabled,
+      :volume_throughput)
       SENSITIVE = []
       include Aws::Structure
     end

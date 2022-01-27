@@ -77,7 +77,8 @@ module Aws::Amplify
     #
     # @!attribute [rw] basic_auth_credentials
     #   The basic authorization credentials for branches for the Amplify
-    #   app.
+    #   app. You must base64-encode the authorization credentials and
+    #   provide them in the format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
@@ -198,7 +199,9 @@ module Aws::Amplify
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   The basic authorization credentials for the autocreated branch.
+    #   The basic authorization credentials for the autocreated branch. You
+    #   must base64-encode the authorization credentials and provide them in
+    #   the format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
@@ -384,6 +387,8 @@ module Aws::Amplify
     #
     # @!attribute [rw] basic_auth_credentials
     #   The basic authorization credentials for a branch of an Amplify app.
+    #   You must base64-encode the authorization credentials and provide
+    #   them in the format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] build_spec
@@ -557,7 +562,9 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   The credentials for basic authorization for an Amplify app.
+    #   The credentials for basic authorization for an Amplify app. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
@@ -743,7 +750,9 @@ module Aws::Amplify
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   The basic authorization credentials for the branch.
+    #   The basic authorization credentials for the branch. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
@@ -2798,7 +2807,9 @@ module Aws::Amplify
     #   @return [Boolean]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   The basic authorization credentials for an Amplify app.
+    #   The basic authorization credentials for an Amplify app. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] custom_rules
@@ -2942,7 +2953,9 @@ module Aws::Amplify
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] basic_auth_credentials
-    #   The basic authorization credentials for the branch.
+    #   The basic authorization credentials for the branch. You must
+    #   base64-encode the authorization credentials and provide them in the
+    #   format `user:password`.
     #   @return [String]
     #
     # @!attribute [rw] enable_basic_auth
