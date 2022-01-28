@@ -4580,7 +4580,7 @@ module Aws::SageMaker
     #           target_platform: {
     #             os: "ANDROID", # required, accepts ANDROID, LINUX
     #             arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #             accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #             accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
     #           },
     #           compiler_options: "CompilerOptions",
     #           kms_key_id: "KmsKeyId",
@@ -30416,7 +30416,7 @@ module Aws::SageMaker
     #         target_platform: {
     #           os: "ANDROID", # required, accepts ANDROID, LINUX
     #           arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #           accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #           accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
     #         },
     #         compiler_options: "CompilerOptions",
     #         kms_key_id: "KmsKeyId",
@@ -35995,7 +35995,7 @@ module Aws::SageMaker
     #       {
     #         os: "ANDROID", # required, accepts ANDROID, LINUX
     #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
     #       }
     #
     # @!attribute [rw] os

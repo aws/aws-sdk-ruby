@@ -348,34 +348,41 @@ module Aws::AppConfigData
     # @!group API Operations
 
     # Retrieves the latest deployed configuration. This API may return empty
-    # Configuration data if the client already has the latest version. See
-    # StartConfigurationSession to obtain an InitialConfigurationToken to
-    # call this API.
+    # configuration data if the client already has the latest version. For
+    # more information about this API action and to view example CLI
+    # commands that show how to use it with the StartConfigurationSession
+    # API action, see [Receiving the configuration][1] in the *AppConfig
+    # User Guide*.
     #
-    # Each call to GetLatestConfiguration returns a new ConfigurationToken
-    # (NextPollConfigurationToken in the response). This new token MUST be
-    # provided to the next call to GetLatestConfiguration when polling for
-    # configuration updates.
+    # Note the following important information.
     #
-    #  To avoid excess charges, we recommend that you include the
-    # `ClientConfigurationVersion` value with every call to
-    # `GetConfiguration`. This value must be saved on your client.
-    # Subsequent calls to `GetConfiguration` must pass this value by using
-    # the `ClientConfigurationVersion` parameter.
+    #  * Each configuration token is only valid for one call to
+    #   `GetLatestConfiguration`. The `GetLatestConfiguration` response
+    #   includes a `NextPollConfigurationToken` that should always replace
+    #   the token used for the just-completed call in preparation for the
+    #   next one.
+    #
+    # * `GetLatestConfiguration` is a priced call. For more information, see
+    #   [Pricing][2].
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration
+    # [2]: https://aws.amazon.com/systems-manager/pricing/
     #
     # @option params [required, String] :configuration_token
     #   Token describing the current state of the configuration session. To
     #   obtain a token, first call the StartConfigurationSession API. Note
-    #   that every call to GetLatestConfiguration will return a new
-    #   ConfigurationToken (NextPollConfigurationToken in the response) and
-    #   MUST be provided to subsequent GetLatestConfiguration API calls.
+    #   that every call to `GetLatestConfiguration` will return a new
+    #   `ConfigurationToken` (`NextPollConfigurationToken` in the response)
+    #   and MUST be provided to subsequent `GetLatestConfiguration` API calls.
     #
     # @return [Types::GetLatestConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::GetLatestConfigurationResponse#configuration #configuration} => String
-    #   * {Types::GetLatestConfigurationResponse#content_type #content_type} => String
     #   * {Types::GetLatestConfigurationResponse#next_poll_configuration_token #next_poll_configuration_token} => String
     #   * {Types::GetLatestConfigurationResponse#next_poll_interval_in_seconds #next_poll_interval_in_seconds} => Integer
+    #   * {Types::GetLatestConfigurationResponse#content_type #content_type} => String
+    #   * {Types::GetLatestConfigurationResponse#configuration #configuration} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -385,10 +392,10 @@ module Aws::AppConfigData
     #
     # @example Response structure
     #
-    #   resp.configuration #=> String
-    #   resp.content_type #=> String
     #   resp.next_poll_configuration_token #=> String
     #   resp.next_poll_interval_in_seconds #=> Integer
+    #   resp.content_type #=> String
+    #   resp.configuration #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfigdata-2021-11-11/GetLatestConfiguration AWS API Documentation
     #
@@ -400,22 +407,29 @@ module Aws::AppConfigData
     end
 
     # Starts a configuration session used to retrieve a deployed
-    # configuration. See the GetLatestConfiguration API for more details.
+    # configuration. For more information about this API action and to view
+    # example CLI commands that show how to use it with the
+    # GetLatestConfiguration API action, see [Receiving the
+    # configuration][1] in the *AppConfig User Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration
     #
     # @option params [required, String] :application_identifier
     #   The application ID or the application name.
     #
-    # @option params [required, String] :configuration_profile_identifier
-    #   The configuration profile ID or the configuration profile name.
-    #
     # @option params [required, String] :environment_identifier
     #   The environment ID or the environment name.
     #
+    # @option params [required, String] :configuration_profile_identifier
+    #   The configuration profile ID or the configuration profile name.
+    #
     # @option params [Integer] :required_minimum_poll_interval_in_seconds
-    #   The interval at which your client will poll for configuration. If
-    #   provided, the service will throw a BadRequestException if the client
-    #   polls before the specified poll interval. By default, client poll
-    #   intervals are not enforced.
+    #   Sets a constraint on a session. If you specify a value of, for
+    #   example, 60 seconds, then the client that established the session
+    #   can't call GetLatestConfiguration more frequently then every 60
+    #   seconds.
     #
     # @return [Types::StartConfigurationSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -425,8 +439,8 @@ module Aws::AppConfigData
     #
     #   resp = client.start_configuration_session({
     #     application_identifier: "Identifier", # required
-    #     configuration_profile_identifier: "Identifier", # required
     #     environment_identifier: "Identifier", # required
+    #     configuration_profile_identifier: "Identifier", # required
     #     required_minimum_poll_interval_in_seconds: 1,
     #   })
     #
@@ -456,7 +470,7 @@ module Aws::AppConfigData
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appconfigdata'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.3.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

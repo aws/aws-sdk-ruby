@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.3.0 (2022-01-28)
+------------------
+
+* Feature - Documentation updates for AWS AppConfig Data.
+
 1.2.0 (2021-12-21)
 ------------------
 

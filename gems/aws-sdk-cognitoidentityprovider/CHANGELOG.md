@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-01-28)
+------------------
+
+* Feature - Doc updates for Cognito user pools API Reference.
+
 1.61.0 (2021-12-21)
 ------------------
 

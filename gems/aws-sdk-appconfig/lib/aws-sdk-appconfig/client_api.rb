@@ -652,6 +652,7 @@ module Aws::AppConfig
         o.name = "GetConfiguration"
         o.http_method = "GET"
         o.http_request_uri = "/applications/{Application}/environments/{Environment}/configurations/{Configuration}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: Configuration)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

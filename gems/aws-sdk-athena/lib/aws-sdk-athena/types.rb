@@ -10,6 +10,32 @@
 module Aws::Athena
   module Types
 
+    # Provides information about an Athena query error. The `AthenaError`
+    # feature provides standardized error information to help you understand
+    # failed queries and take steps after a query failure occurs.
+    # `AthenaError` includes an `ErrorCategory` field that specifies whether
+    # the cause of the failed query is due to system error, user error, or
+    # unknown error.
+    #
+    # @!attribute [rw] error_category
+    #   An integer value that specifies the category of a query failure
+    #   error. The following list shows the category for each integer value.
+    #
+    #   **1** - System
+    #
+    #   **2** - User
+    #
+    #   **3** - Unknown
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AthenaError AWS API Documentation
+    #
+    class AthenaError < Struct.new(
+      :error_category)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetNamedQueryInput
     #   data as a hash:
     #
@@ -188,7 +214,9 @@ module Aws::Athena
     # @!attribute [rw] name
     #   The name of the data catalog to create. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
-    #   128 alphanumeric, underscore, at sign, or hyphen characters.
+    #   127 alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -458,8 +486,10 @@ module Aws::Athena
     #
     # @!attribute [rw] name
     #   The name of the data catalog. The catalog name must be unique for
-    #   the Amazon Web Services account and can use a maximum of 128
-    #   alphanumeric, underscore, at sign, or hyphen characters.
+    #   the Amazon Web Services account and can use a maximum of 127
+    #   alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -527,7 +557,11 @@ module Aws::Athena
     # and type.
     #
     # @!attribute [rw] catalog_name
-    #   The name of the data catalog.
+    #   The name of the data catalog. The catalog name is unique for the
+    #   Amazon Web Services account and can use a maximum of 127
+    #   alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1879,13 +1913,18 @@ module Aws::Athena
     #   The date and time that the query completed.
     #   @return [Time]
     #
+    # @!attribute [rw] athena_error
+    #   Provides information about an Athena query error.
+    #   @return [Types::AthenaError]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/QueryExecutionStatus AWS API Documentation
     #
     class QueryExecutionStatus < Struct.new(
       :state,
       :state_change_reason,
       :submission_date_time,
-      :completion_date_time)
+      :completion_date_time,
+      :athena_error)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2447,7 +2486,9 @@ module Aws::Athena
     # @!attribute [rw] name
     #   The name of the data catalog to update. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
-    #   128 alphanumeric, underscore, at sign, or hyphen characters.
+    #   127 alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #   @return [String]
     #
     # @!attribute [rw] type

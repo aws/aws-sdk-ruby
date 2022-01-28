@@ -41,18 +41,18 @@ module Aws::AppConfigData
     BadRequestDetails.add_member_subclass(:unknown, Types::BadRequestDetails::Unknown)
     BadRequestDetails.struct_class = Types::BadRequestDetails
 
-    BadRequestException.add_member(:details, Shapes::ShapeRef.new(shape: BadRequestDetails, location_name: "Details"))
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     BadRequestException.add_member(:reason, Shapes::ShapeRef.new(shape: BadRequestReason, location_name: "Reason"))
+    BadRequestException.add_member(:details, Shapes::ShapeRef.new(shape: BadRequestDetails, location_name: "Details"))
     BadRequestException.struct_class = Types::BadRequestException
 
     GetLatestConfigurationRequest.add_member(:configuration_token, Shapes::ShapeRef.new(shape: Token, required: true, location: "querystring", location_name: "configuration_token"))
     GetLatestConfigurationRequest.struct_class = Types::GetLatestConfigurationRequest
 
-    GetLatestConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: SyntheticGetLatestConfigurationResponseBlob, location_name: "Configuration"))
-    GetLatestConfigurationResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
     GetLatestConfigurationResponse.add_member(:next_poll_configuration_token, Shapes::ShapeRef.new(shape: Token, location: "header", location_name: "Next-Poll-Configuration-Token"))
     GetLatestConfigurationResponse.add_member(:next_poll_interval_in_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Next-Poll-Interval-In-Seconds"))
+    GetLatestConfigurationResponse.add_member(:content_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Content-Type"))
+    GetLatestConfigurationResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: SyntheticGetLatestConfigurationResponseBlob, location_name: "Configuration"))
     GetLatestConfigurationResponse.struct_class = Types::GetLatestConfigurationResponse
     GetLatestConfigurationResponse[:payload] = :configuration
     GetLatestConfigurationResponse[:payload_member] = GetLatestConfigurationResponse.member(:configuration)
@@ -67,13 +67,13 @@ module Aws::AppConfigData
     InvalidParameterMap.value = Shapes::ShapeRef.new(shape: InvalidParameterDetail)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    ResourceNotFoundException.add_member(:referenced_by, Shapes::ShapeRef.new(shape: StringMap, location_name: "ReferencedBy"))
     ResourceNotFoundException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ResourceNotFoundException.add_member(:referenced_by, Shapes::ShapeRef.new(shape: StringMap, location_name: "ReferencedBy"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     StartConfigurationSessionRequest.add_member(:application_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ApplicationIdentifier"))
-    StartConfigurationSessionRequest.add_member(:configuration_profile_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ConfigurationProfileIdentifier"))
     StartConfigurationSessionRequest.add_member(:environment_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "EnvironmentIdentifier"))
+    StartConfigurationSessionRequest.add_member(:configuration_profile_identifier, Shapes::ShapeRef.new(shape: Identifier, required: true, location_name: "ConfigurationProfileIdentifier"))
     StartConfigurationSessionRequest.add_member(:required_minimum_poll_interval_in_seconds, Shapes::ShapeRef.new(shape: OptionalPollSeconds, location_name: "RequiredMinimumPollIntervalInSeconds"))
     StartConfigurationSessionRequest.struct_class = Types::StartConfigurationSessionRequest
 

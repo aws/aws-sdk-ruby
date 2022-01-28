@@ -51,7 +51,7 @@ module Aws::AppConfig
     end
 
     # Detailed information about the input that failed to satisfy the
-    # constraints specified by an AWS service.
+    # constraints specified by a call.
     #
     # @!attribute [rw] invalid_configuration
     #   Detailed information about the bad request exception error when
@@ -82,7 +82,7 @@ module Aws::AppConfig
     #
     # @!attribute [rw] details
     #   Detailed information about the input that failed to satisfy the
-    #   constraints specified by an AWS service.
+    #   constraints specified by a call.
     #   @return [Types::BadRequestDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/BadRequestException AWS API Documentation
@@ -98,13 +98,11 @@ module Aws::AppConfig
     # @!attribute [rw] content
     #   The content of the configuration or the configuration data.
     #
-    #   Compare the configuration version numbers of the configuration
-    #   cached locally on your machine and the configuration number in the
-    #   the header. If the configuration numbers are the same, the content
-    #   can be ignored. The `Content` section only appears if the system
-    #   finds new or updated configuration data. If the system doesn't find
-    #   new or updated configuration data, then the `Content` section is not
-    #   returned.
+    #   The `Content` attribute only contains data if the system finds new
+    #   or updated configuration data. If there is no new or updated data
+    #   and `ClientConfigurationVersion` matches the version of the current
+    #   configuration, AppConfig returns a `204 No Content` HTTP response
+    #   code and the `Content` value will be empty.
     #   @return [String]
     #
     # @!attribute [rw] configuration_version
@@ -160,10 +158,16 @@ module Aws::AppConfig
     #   @return [Array<Types::Validator>]
     #
     # @!attribute [rw] type
-    #   The type of configurations that the configuration profile contains.
-    #   A configuration can be a feature flag used for enabling or disabling
-    #   new features or a free-form configuration used for distributing
-    #   configurations to your application.
+    #   The type of configurations contained in the profile. AppConfig
+    #   supports `feature flags` and `freeform` configurations. We recommend
+    #   you create feature flag configurations to enable or disable new
+    #   features and freeform configurations to distribute configurations to
+    #   an application. When calling this API, enter one of the following
+    #   values for `Type`\:
+    #
+    #   `AWS.AppConfig.FeatureFlags`
+    #
+    #   `AWS.Freeform`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ConfigurationProfile AWS API Documentation
@@ -204,10 +208,16 @@ module Aws::AppConfig
     #   @return [Array<String>]
     #
     # @!attribute [rw] type
-    #   The type of configurations that the configuration profile contains.
-    #   A configuration can be a feature flag used for enabling or disabling
-    #   new features or a free-form configuration used to introduce changes
-    #   to your application.
+    #   The type of configurations contained in the profile. AppConfig
+    #   supports `feature flags` and `freeform` configurations. We recommend
+    #   you create feature flag configurations to enable or disable new
+    #   features and freeform configurations to distribute configurations to
+    #   an application. When calling this API, enter one of the following
+    #   values for `Type`\:
+    #
+    #   `AWS.AppConfig.FeatureFlags`
+    #
+    #   `AWS.Freeform`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ConfigurationProfileSummary AWS API Documentation
@@ -357,10 +367,16 @@ module Aws::AppConfig
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
-    #   The type of configurations that the configuration profile contains.
-    #   A configuration can be a feature flag used for enabling or disabling
-    #   new features or a free-form configuration used for distributing
-    #   configurations to your application.
+    #   The type of configurations contained in the profile. AppConfig
+    #   supports `feature flags` and `freeform` configurations. We recommend
+    #   you create feature flag configurations to enable or disable new
+    #   features and freeform configurations to distribute configurations to
+    #   an application. When calling this API, enter one of the following
+    #   values for `Type`\:
+    #
+    #   `AWS.AppConfig.FeatureFlags`
+    #
+    #   `AWS.Freeform`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/CreateConfigurationProfileRequest AWS API Documentation
@@ -1479,7 +1495,7 @@ module Aws::AppConfig
     # @!attribute [rw] type
     #   A filter based on the type of configurations that the configuration
     #   profile contains. A configuration can be a feature flag or a
-    #   free-form configuration.
+    #   freeform configuration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListConfigurationProfilesRequest AWS API Documentation
@@ -1540,14 +1556,16 @@ module Aws::AppConfig
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of items to return for this call. The call also
-    #   returns a token that you can specify in a subsequent call to get the
-    #   next set of results.
+    #   The maximum number of items that may be returned for this call. If
+    #   there are items that have not yet been returned, the response will
+    #   include a non-null `NextToken` that you can provide in a subsequent
+    #   call to get the next set of results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to start the list. Use this token to get the next set of
-    #   results.
+    #   The token returned by a prior call to this operation indicating the
+    #   next set of results to be returned. If not specified, the operation
+    #   will return the first set of results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appconfig-2019-10-09/ListDeploymentsRequest AWS API Documentation
@@ -2144,9 +2162,9 @@ module Aws::AppConfig
     # A validator provides a syntactic or semantic check to ensure the
     # configuration that you want to deploy functions as intended. To
     # validate your application configuration data, you provide a schema or
-    # a Lambda function that runs against the configuration. The
-    # configuration deployment or update can only proceed when the
-    # configuration data is valid.
+    # an Amazon Web Services Lambda function that runs against the
+    # configuration. The configuration deployment or update can only proceed
+    # when the configuration data is valid.
     #
     # @note When making an API call, you may pass Validator
     #   data as a hash:

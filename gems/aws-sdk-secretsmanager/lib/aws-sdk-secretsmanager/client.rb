@@ -372,6 +372,15 @@ module Aws::SecretsManager
     #
     #  </note>
     #
+    # <b>Required permissions: </b> `secretsmanager:CancelRotateSecret`. For
+    # more information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
     #
@@ -451,9 +460,15 @@ module Aws::SecretsManager
     # to encrypt the secret, and you must create and use a customer managed
     # KMS key.
     #
+    # <b>Required permissions: </b> `secretsmanager:CreateSecret`. For more
+    # information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :name
     #   The name of the new secret.
@@ -687,6 +702,15 @@ module Aws::SecretsManager
     # Deletes the resource-based permission policy attached to the secret.
     # To attach a policy to a secret, use PutResourcePolicy.
     #
+    # <b>Required permissions: </b> `secretsmanager:DeleteResourcePolicy`.
+    # For more information, see [ IAM policy actions for Secrets Manager][1]
+    # and [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to delete the attached resource-based
     #   policy for.
@@ -756,9 +780,15 @@ module Aws::SecretsManager
     # secret value. To access that information, first cancel the deletion
     # with RestoreSecret and then retrieve the information.
     #
+    # <b>Required permissions: </b> `secretsmanager:DeleteSecret`. For more
+    # information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to delete.
@@ -842,6 +872,15 @@ module Aws::SecretsManager
     # Retrieves the details of a secret. It does not include the encrypted
     # secret value. Secrets Manager only returns fields that have a value in
     # the response.
+    #
+    # <b>Required permissions: </b> `secretsmanager:DescribeSecret`. For
+    # more information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -927,6 +966,8 @@ module Aws::SecretsManager
     #   resp.rotation_enabled #=> Boolean
     #   resp.rotation_lambda_arn #=> String
     #   resp.rotation_rules.automatically_after_days #=> Integer
+    #   resp.rotation_rules.duration #=> String
+    #   resp.rotation_rules.schedule_expression #=> String
     #   resp.last_rotated_date #=> Time
     #   resp.last_changed_date #=> Time
     #   resp.last_accessed_date #=> Time
@@ -959,6 +1000,15 @@ module Aws::SecretsManager
     # Generates a random password. We recommend that you specify the maximum
     # length and include every character type that the system you are
     # generating a password for can support.
+    #
+    # <b>Required permissions: </b> `secretsmanager:GetRandomPassword`. For
+    # more information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Integer] :password_length
     #   The length of the password. If you don't include this parameter, the
@@ -1048,9 +1098,15 @@ module Aws::SecretsManager
     # attached to a secret, see [Permissions policies attached to a
     # secret][1].
     #
+    # <b>Required permissions: </b> `secretsmanager:GetResourcePolicy`. For
+    # more information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-policies.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to retrieve the attached resource-based
@@ -1106,17 +1162,22 @@ module Aws::SecretsManager
     # `SecretBinary` from the specified version of a secret, whichever
     # contains content.
     #
-    # For information about retrieving the secret value in the console, see
-    # [Retrieve secrets][1].
+    # We recommend that you cache your secret values by using client-side
+    # caching. Caching secrets improves speed and reduces your costs. For
+    # more information, see [Cache secrets for your applications][1].
     #
-    # To run this command, you must have `secretsmanager:GetSecretValue`
-    # permissions. If the secret is encrypted using a customer-managed key
-    # instead of the Amazon Web Services managed key `aws/secretsmanager`,
-    # then you also need `kms:Decrypt` permissions for that key.
+    # <b>Required permissions: </b> `secretsmanager:GetSecretValue`. If the
+    # secret is encrypted using a customer-managed key instead of the Amazon
+    # Web Services managed key `aws/secretsmanager`, then you also need
+    # `kms:Decrypt` permissions for that key. For more information, see [
+    # IAM policy actions for Secrets Manager][2] and [Authentication and
+    # access control in Secrets Manager][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to retrieve.
@@ -1216,10 +1277,14 @@ module Aws::SecretsManager
     # To get the secret value from `SecretString` or `SecretBinary`, call
     # GetSecretValue.
     #
-    # **Minimum permissions**
+    # <b>Required permissions: </b> `secretsmanager:ListSecretVersionIds`.
+    # For more information, see [ IAM policy actions for Secrets Manager][1]
+    # and [Authentication and access control in Secrets Manager][2].
     #
-    # To run this command, you must have
-    # `secretsmanager:ListSecretVersionIds` permissions.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret whose versions you want to list.
@@ -1333,14 +1398,15 @@ module Aws::SecretsManager
     # For information about finding secrets in the console, see [Enhanced
     # search capabilities for secrets in Secrets Manager][1].
     #
-    # **Minimum permissions**
-    #
-    # To run this command, you must have `secretsmanager:ListSecrets`
-    # permissions.
+    # <b>Required permissions: </b> `secretsmanager:ListSecrets`. For more
+    # information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Integer] :max_results
     #   The number of results to include in the response.
@@ -1427,6 +1493,8 @@ module Aws::SecretsManager
     #   resp.secret_list[0].rotation_enabled #=> Boolean
     #   resp.secret_list[0].rotation_lambda_arn #=> String
     #   resp.secret_list[0].rotation_rules.automatically_after_days #=> Integer
+    #   resp.secret_list[0].rotation_rules.duration #=> String
+    #   resp.secret_list[0].rotation_rules.schedule_expression #=> String
     #   resp.secret_list[0].last_rotated_date #=> Time
     #   resp.secret_list[0].last_changed_date #=> Time
     #   resp.secret_list[0].last_accessed_date #=> Time
@@ -1458,10 +1526,15 @@ module Aws::SecretsManager
     # For information about attaching a policy in the console, see [Attach a
     # permissions policy to a secret][2].
     #
+    # <b>Required permissions: </b> `secretsmanager:PutResourcePolicy`. For
+    # more information, see [ IAM policy actions for Secrets Manager][3] and
+    # [Authentication and access control in Secrets Manager][1].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html
+    # [3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to attach the resource-based policy.
@@ -1557,6 +1630,15 @@ module Aws::SecretsManager
     # nothing. However, if the secret data is different, then the operation
     # fails because you can't modify an existing version; you can only
     # create new ones.
+    #
+    # <b>Required permissions: </b> `secretsmanager:PutSecretValue`. For
+    # more information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to add a new version to.
@@ -1699,6 +1781,16 @@ module Aws::SecretsManager
     # For a secret that is replicated to other Regions, deletes the secret
     # replicas from the Regions you specify.
     #
+    # <b>Required permissions: </b>
+    # `secretsmanager:RemoveRegionsFromReplication`. For more information,
+    # see [ IAM policy actions for Secrets Manager][1] and [Authentication
+    # and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
     #
@@ -1738,9 +1830,16 @@ module Aws::SecretsManager
 
     # Replicates the secret to a new Regions. See [Multi-Region secrets][1].
     #
+    # <b>Required permissions: </b>
+    # `secretsmanager:ReplicateSecretToRegions`. For more information, see [
+    # IAM policy actions for Secrets Manager][2] and [Authentication and
+    # access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to replicate.
@@ -1792,6 +1891,15 @@ module Aws::SecretsManager
     # Cancels the scheduled deletion of a secret by removing the
     # `DeletedDate` time stamp. You can access a secret again after it has
     # been restored.
+    #
+    # <b>Required permissions: </b> `secretsmanager:RestoreSecret`. For more
+    # information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to restore.
@@ -1864,14 +1972,19 @@ module Aws::SecretsManager
     # `RotateSecret` assumes that a previous rotation request is still in
     # progress and returns an error.
     #
-    # To run this command, you must have `secretsmanager:RotateSecret`
-    # permissions and `lambda:InvokeFunction` permissions on the function
-    # specified in the secret's metadata.
+    # <b>Required permissions: </b> `secretsmanager:RotateSecret`. For more
+    # information, see [ IAM policy actions for Secrets Manager][3] and
+    # [Authentication and access control in Secrets Manager][4]. You also
+    # need `lambda:InvokeFunction` permissions on the rotation function. For
+    # more information, see [ Permissions for rotation][5].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    # [3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to rotate.
@@ -1912,6 +2025,23 @@ module Aws::SecretsManager
     # @option params [Types::RotationRulesType] :rotation_rules
     #   A structure that defines the rotation configuration for this secret.
     #
+    # @option params [Boolean] :rotate_immediately
+    #   Specifies whether to rotate the secret immediately or wait until the
+    #   next scheduled rotation window. The rotation schedule is defined in
+    #   RotateSecretRequest$RotationRules.
+    #
+    #   If you don't immediately rotate the secret, Secrets Manager tests the
+    #   rotation configuration by running the [ `testSecret` step][1] of the
+    #   Lambda rotation function. The test creates an `AWSPENDING` version of
+    #   the secret and then removes it.
+    #
+    #   If you don't specify this value, then by default, Secrets Manager
+    #   rotates the secret immediately.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    #
     # @return [Types::RotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RotateSecretResponse#arn #arn} => String
@@ -1926,7 +2056,10 @@ module Aws::SecretsManager
     #     rotation_lambda_arn: "RotationLambdaARNType",
     #     rotation_rules: {
     #       automatically_after_days: 1,
+    #       duration: "DurationType",
+    #       schedule_expression: "ScheduleExpressionType",
     #     },
+    #     rotate_immediately: false,
     #   })
     #
     # @example Response structure
@@ -1949,6 +2082,16 @@ module Aws::SecretsManager
     #
     # You must call this operation from the Region in which you want to
     # promote the replica to a primary secret.
+    #
+    # <b>Required permissions: </b>
+    # `secretsmanager:StopReplicationToReplica`. For more information, see [
+    # IAM policy actions for Secrets Manager][1] and [Authentication and
+    # access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN of the primary secret.
@@ -2006,6 +2149,15 @@ module Aws::SecretsManager
     # removing a tag can change permissions. If successfully completing this
     # operation would result in you losing your permissions for this secret,
     # then the operation is blocked and returns an Access Denied error.
+    #
+    # <b>Required permissions: </b> `secretsmanager:TagResource`. For more
+    # information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The identifier for the secret to attach tags to. You can specify
@@ -2080,6 +2232,15 @@ module Aws::SecretsManager
     # can change permissions. If successfully completing this operation
     # would result in you losing your permissions for this secret, then the
     # operation is blocked and returns an Access Denied error.
+    #
+    # <b>Required permissions: </b> `secretsmanager:UntagResource`. For more
+    # information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -2172,9 +2333,18 @@ module Aws::SecretsManager
     # to encrypt the secret, and you must create and use a customer managed
     # key.
     #
-    # To run this command, you must have `secretsmanager:UpdateSecret`
-    # permissions. If you use a customer managed key, you must also have
-    # `kms:GenerateDataKey` and `kms:Decrypt` permissions .
+    # <b>Required permissions: </b> `secretsmanager:UpdateSecret`. For more
+    # information, see [ IAM policy actions for Secrets Manager][1] and
+    # [Authentication and access control in Secrets Manager][2]. If you use
+    # a customer managed key, you must also have `kms:GenerateDataKey` and
+    # `kms:Decrypt` permissions on the key. For more information, see [
+    # Secret encryption and decryption][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -2350,9 +2520,16 @@ module Aws::SecretsManager
     # then the version is considered to be 'deprecated' and can be deleted
     # by Secrets Manager.
     #
+    # <b>Required permissions: </b>
+    # `secretsmanager:UpdateSecretVersionStage`. For more information, see [
+    # IAM policy actions for Secrets Manager][2] and [Authentication and
+    # access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or the name of the secret with the version and staging
@@ -2477,9 +2654,15 @@ module Aws::SecretsManager
     #
     # * Verifies the policy does not lock out a caller.
     #
+    # <b>Required permissions: </b> `secretsmanager:ValidateResourcePolicy`.
+    # For more information, see [ IAM policy actions for Secrets Manager][2]
+    # and [Authentication and access control in Secrets Manager][3].
+    #
     #
     #
     # [1]: https://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/
+    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [String] :secret_id
     #   This field is reserved for internal use.
@@ -2552,7 +2735,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

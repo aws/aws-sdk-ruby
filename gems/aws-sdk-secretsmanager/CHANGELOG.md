@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-01-28)
+------------------
+
+* Feature - Feature are ready to release on Jan 28th
+
 1.55.0 (2021-12-21)
 ------------------
 

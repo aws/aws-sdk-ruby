@@ -1446,7 +1446,7 @@ module Aws::SageMaker
     #       target_platform: {
     #         os: "ANDROID", # required, accepts ANDROID, LINUX
     #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
     #       },
     #       compiler_options: "CompilerOptions",
     #       kms_key_id: "KmsKeyId",
@@ -8391,7 +8391,7 @@ module Aws::SageMaker
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
     #   resp.output_config.target_platform.arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
-    #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
+    #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
     #   resp.output_config.compiler_options #=> String
     #   resp.output_config.kms_key_id #=> String
     #   resp.vpc_config.security_group_ids #=> Array
@@ -12556,7 +12556,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.compilation_job_summaries[0].compilation_target_platform_os #=> String, one of "ANDROID", "LINUX"
     #   resp.compilation_job_summaries[0].compilation_target_platform_arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
-    #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
+    #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -19446,7 +19446,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.116.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

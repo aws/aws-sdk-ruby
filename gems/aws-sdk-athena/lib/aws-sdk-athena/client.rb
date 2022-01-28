@@ -442,6 +442,7 @@ module Aws::Athena
     #   resp.query_executions[0].status.state_change_reason #=> String
     #   resp.query_executions[0].status.submission_date_time #=> Time
     #   resp.query_executions[0].status.completion_date_time #=> Time
+    #   resp.query_executions[0].status.athena_error.error_category #=> Integer
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
@@ -473,7 +474,9 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the data catalog to create. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
-    #   128 alphanumeric, underscore, at sign, or hyphen characters.
+    #   127 alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #
     # @option params [required, String] :type
     #   The type of data catalog to create: `LAMBDA` for a federated catalog,
@@ -1006,6 +1009,7 @@ module Aws::Athena
     #   resp.query_execution.status.state_change_reason #=> String
     #   resp.query_execution.status.submission_date_time #=> Time
     #   resp.query_execution.status.completion_date_time #=> Time
+    #   resp.query_execution.status.athena_error.error_category #=> Integer
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_execution.statistics.data_manifest_location #=> String
@@ -1831,7 +1835,9 @@ module Aws::Athena
     # @option params [required, String] :name
     #   The name of the data catalog to update. The catalog name must be
     #   unique for the Amazon Web Services account and can use a maximum of
-    #   128 alphanumeric, underscore, at sign, or hyphen characters.
+    #   127 alphanumeric, underscore, at sign, or hyphen characters. The
+    #   remainder of the length constraint of 256 is reserved for use by
+    #   Athena.
     #
     # @option params [required, String] :type
     #   Specifies the type of data catalog to update. Specify `LAMBDA` for a
@@ -1992,7 +1998,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
