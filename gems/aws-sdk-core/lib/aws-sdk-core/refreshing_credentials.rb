@@ -48,6 +48,7 @@ module Aws
       Thread.new do
         # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
         # call, we check before doing so, and then we check within the mutex to avoid a race condition.
+        # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
         if near_expiration?
           @mutex.synchronize do
             refresh if near_expiration?
