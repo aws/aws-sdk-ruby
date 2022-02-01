@@ -45,9 +45,13 @@ module Aws
     # Refreshes instance metadata credentials if they are within
     # 5 minutes of expiration.
     def refresh_if_near_expiration
-      if near_expiration?
-        @mutex.synchronize do
-          refresh if near_expiration?
+      Thread.new do
+        # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
+        # call, we check before doing so, and then we check within the mutex to avoid a race condition.
+        if near_expiration?
+          @mutex.synchronize do
+            refresh if near_expiration?
+          end
         end
       end
     end
