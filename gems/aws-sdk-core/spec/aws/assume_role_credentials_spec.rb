@@ -100,6 +100,7 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
+      sleep(0.1)
     end
 
   end

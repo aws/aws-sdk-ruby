@@ -62,7 +62,7 @@ module Aws
     it 'auto populates :session_name when not provided' do
       expect(client).to receive(:assume_role_with_web_identity).with(
         role_arn: 'arn',
-        web_identity_token: '', 
+        web_identity_token: '',
         role_session_name: generate_name
       )
       AssumeRoleWebIdentityCredentials.new(
@@ -80,7 +80,7 @@ module Aws
         AssumeRoleWebIdentityCredentials.new(
           role_arn: 'arn',
           web_identity_token_file: '/not/exist/file/foo',
-        ) 
+        )
       }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
 
       token_file.write('token')
@@ -143,7 +143,7 @@ module Aws
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-      ) 
+      )
       expect(c).to be_set
       expect(c.credentials.access_key_id).to eq('akid')
       expect(c.credentials.secret_access_key).to eq('secret')
@@ -163,6 +163,7 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
+      sleep(0.1)
     end
 
   end
