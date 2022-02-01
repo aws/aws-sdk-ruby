@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.125.6 (2022-01-31)
+------------------
+
+* Issue - Asynchronously refresh AWS credentials.
+
 3.125.5 (2022-01-19)
 ------------------
 
