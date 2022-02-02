@@ -17,8 +17,8 @@ module Aws
   # @api private
   module RefreshingCredentials
 
-    SYNC_EXPIRATION_LENGTH = 300
-    ASYNC_EXPIRATION_LENGTH = 600
+    SYNC_EXPIRATION_LENGTH = 300 # 5 minutes
+    ASYNC_EXPIRATION_LENGTH = 600 # 10 minutes
 
     def initialize(options = {})
       @mutex = Mutex.new
