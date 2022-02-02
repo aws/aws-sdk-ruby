@@ -17,19 +17,33 @@ module Aws
   # @api private
   module RefreshingCredentials
 
+    SYNC_EXPIRATION_LENGTH = 300
+    ASYNC_EXPIRATION_LENGTH = 600
+
     def initialize(options = {})
       @mutex = Mutex.new
       refresh
     end
 
+    # Refreshes credentials asynchronously and synchronously. The sync
+    # refresh is a stop-gap measure, in the case that the asynchronous
+    # refresh fails. In this case, we want the synchronous refresh to happen
+    # and fail / raise to clients.
     # @return [Credentials]
     def credentials
+      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) }
       refresh_if_near_expiration
+
       @credentials
     end
 
+    # Refreshes credentials asynchronously and synchronously. The sync
+    # refresh is a stop-gap measure, in the case that the asynchronous
+    # refresh fails. In this case, we want the synchronous refresh to happen
+    # and fail / raise to clients.
     # @return [Time,nil]
     def expiration
+      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) }
       refresh_if_near_expiration
       @expiration
     end
@@ -43,24 +57,22 @@ module Aws
     private
 
     # Refreshes instance metadata credentials if they are within
-    # 5 minutes of expiration asynchronously.
-    def refresh_if_near_expiration
-      Thread.new do
-        # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
-        # call, we check before doing so, and then we check within the mutex to avoid a race condition.
-        # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
-        if near_expiration?
-          @mutex.synchronize do
-            refresh if near_expiration?
-          end
+    # 5 or 10 minutes of expiration.
+    def refresh_if_near_expiration!(expiration_length = SYNC_EXPIRATION_LENGTH)
+      # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
+      # call, we check before doing so, and then we check within the mutex to avoid a race condition.
+      # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
+      if near_expiration?(expiration_length)
+        @mutex.synchronize do
+          refresh if near_expiration?(expiration_length)
         end
       end
     end
 
-    def near_expiration?
+    def near_expiration?(expiration_length)
       if @expiration
-        # are we within 5 minutes of expiration?
-        (Time.now.to_i + 300) > @expiration.to_i
+        # Are we within expiration?
+        (Time.now.to_i + expiration_length) > @expiration.to_i
       else
         true
       end
