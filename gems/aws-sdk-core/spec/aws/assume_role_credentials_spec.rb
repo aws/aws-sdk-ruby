@@ -93,7 +93,7 @@ module Aws
 
     it 'refreshes credentials automatically when they are near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
-      expect(client).to receive(:assume_role).exactly(7).times
+      expect(client).to receive(:assume_role).at_least(4).times
       c = AssumeRoleCredentials.new(
         role_arn: 'arn',
         role_session_name: 'session')
