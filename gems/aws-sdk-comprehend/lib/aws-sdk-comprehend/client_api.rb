@@ -63,6 +63,8 @@ module Aws::Comprehend
     DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEntityRecognizerRequest = Shapes::StructureShape.new(name: 'DeleteEntityRecognizerRequest')
     DeleteEntityRecognizerResponse = Shapes::StructureShape.new(name: 'DeleteEntityRecognizerResponse')
+    DeleteResourcePolicyRequest = Shapes::StructureShape.new(name: 'DeleteResourcePolicyRequest')
+    DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DescribeDocumentClassificationJobRequest = Shapes::StructureShape.new(name: 'DescribeDocumentClassificationJobRequest')
     DescribeDocumentClassificationJobResponse = Shapes::StructureShape.new(name: 'DescribeDocumentClassificationJobResponse')
     DescribeDocumentClassifierRequest = Shapes::StructureShape.new(name: 'DescribeDocumentClassifierRequest')
@@ -81,6 +83,8 @@ module Aws::Comprehend
     DescribeKeyPhrasesDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeKeyPhrasesDetectionJobResponse')
     DescribePiiEntitiesDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribePiiEntitiesDetectionJobRequest')
     DescribePiiEntitiesDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribePiiEntitiesDetectionJobResponse')
+    DescribeResourcePolicyRequest = Shapes::StructureShape.new(name: 'DescribeResourcePolicyRequest')
+    DescribeResourcePolicyResponse = Shapes::StructureShape.new(name: 'DescribeResourcePolicyResponse')
     DescribeSentimentDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeSentimentDetectionJobRequest')
     DescribeSentimentDetectionJobResponse = Shapes::StructureShape.new(name: 'DescribeSentimentDetectionJobResponse')
     DescribeTopicsDetectionJobRequest = Shapes::StructureShape.new(name: 'DescribeTopicsDetectionJobRequest')
@@ -160,6 +164,8 @@ module Aws::Comprehend
     EventsDetectionJobPropertiesList = Shapes::ListShape.new(name: 'EventsDetectionJobPropertiesList')
     Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
+    ImportModelRequest = Shapes::StructureShape.new(name: 'ImportModelRequest')
+    ImportModelResponse = Shapes::StructureShape.new(name: 'ImportModelResponse')
     InferenceUnitsInteger = Shapes::IntegerShape.new(name: 'InferenceUnitsInteger')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     InputFormat = Shapes::StringShape.new(name: 'InputFormat')
@@ -237,6 +243,10 @@ module Aws::Comprehend
     PiiEntity = Shapes::StructureShape.new(name: 'PiiEntity')
     PiiEntityType = Shapes::StringShape.new(name: 'PiiEntityType')
     PiiOutputDataConfig = Shapes::StructureShape.new(name: 'PiiOutputDataConfig')
+    Policy = Shapes::StringShape.new(name: 'Policy')
+    PolicyRevisionId = Shapes::StringShape.new(name: 'PolicyRevisionId')
+    PutResourcePolicyRequest = Shapes::StructureShape.new(name: 'PutResourcePolicyRequest')
+    PutResourcePolicyResponse = Shapes::StructureShape.new(name: 'PutResourcePolicyResponse')
     RedactionConfig = Shapes::StructureShape.new(name: 'RedactionConfig')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
@@ -438,6 +448,7 @@ module Aws::Comprehend
     CreateDocumentClassifierRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateDocumentClassifierRequest.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
     CreateDocumentClassifierRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
+    CreateDocumentClassifierRequest.add_member(:model_policy, Shapes::ShapeRef.new(shape: Policy, location_name: "ModelPolicy"))
     CreateDocumentClassifierRequest.struct_class = Types::CreateDocumentClassifierRequest
 
     CreateDocumentClassifierResponse.add_member(:document_classifier_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "DocumentClassifierArn"))
@@ -464,6 +475,7 @@ module Aws::Comprehend
     CreateEntityRecognizerRequest.add_member(:volume_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "VolumeKmsKeyId"))
     CreateEntityRecognizerRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     CreateEntityRecognizerRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
+    CreateEntityRecognizerRequest.add_member(:model_policy, Shapes::ShapeRef.new(shape: Policy, location_name: "ModelPolicy"))
     CreateEntityRecognizerRequest.struct_class = Types::CreateEntityRecognizerRequest
 
     CreateEntityRecognizerResponse.add_member(:entity_recognizer_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "EntityRecognizerArn"))
@@ -485,6 +497,12 @@ module Aws::Comprehend
     DeleteEntityRecognizerRequest.struct_class = Types::DeleteEntityRecognizerRequest
 
     DeleteEntityRecognizerResponse.struct_class = Types::DeleteEntityRecognizerResponse
+
+    DeleteResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "ResourceArn"))
+    DeleteResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
+
+    DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
 
     DescribeDocumentClassificationJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeDocumentClassificationJobRequest.struct_class = Types::DescribeDocumentClassificationJobRequest
@@ -539,6 +557,15 @@ module Aws::Comprehend
 
     DescribePiiEntitiesDetectionJobResponse.add_member(:pii_entities_detection_job_properties, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionJobProperties, location_name: "PiiEntitiesDetectionJobProperties"))
     DescribePiiEntitiesDetectionJobResponse.struct_class = Types::DescribePiiEntitiesDetectionJobResponse
+
+    DescribeResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "ResourceArn"))
+    DescribeResourcePolicyRequest.struct_class = Types::DescribeResourcePolicyRequest
+
+    DescribeResourcePolicyResponse.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, location_name: "ResourcePolicy"))
+    DescribeResourcePolicyResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeResourcePolicyResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    DescribeResourcePolicyResponse.struct_class = Types::DescribeResourcePolicyResponse
 
     DescribeSentimentDetectionJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
     DescribeSentimentDetectionJobRequest.struct_class = Types::DescribeSentimentDetectionJobRequest
@@ -658,6 +685,7 @@ module Aws::Comprehend
     DocumentClassifierProperties.add_member(:mode, Shapes::ShapeRef.new(shape: DocumentClassifierMode, location_name: "Mode"))
     DocumentClassifierProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     DocumentClassifierProperties.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
+    DocumentClassifierProperties.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: DocumentClassifierArn, location_name: "SourceModelArn"))
     DocumentClassifierProperties.struct_class = Types::DocumentClassifierProperties
 
     DocumentClassifierPropertiesList.member = Shapes::ShapeRef.new(shape: DocumentClassifierProperties)
@@ -823,6 +851,7 @@ module Aws::Comprehend
     EntityRecognizerProperties.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     EntityRecognizerProperties.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
     EntityRecognizerProperties.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
+    EntityRecognizerProperties.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: EntityRecognizerArn, location_name: "SourceModelArn"))
     EntityRecognizerProperties.struct_class = Types::EntityRecognizerProperties
 
     EntityRecognizerPropertiesList.member = Shapes::ShapeRef.new(shape: EntityRecognizerProperties)
@@ -867,6 +896,17 @@ module Aws::Comprehend
     EventsDetectionJobProperties.struct_class = Types::EventsDetectionJobProperties
 
     EventsDetectionJobPropertiesList.member = Shapes::ShapeRef.new(shape: EventsDetectionJobProperties)
+
+    ImportModelRequest.add_member(:source_model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "SourceModelArn"))
+    ImportModelRequest.add_member(:model_name, Shapes::ShapeRef.new(shape: ComprehendArnName, location_name: "ModelName"))
+    ImportModelRequest.add_member(:version_name, Shapes::ShapeRef.new(shape: VersionName, location_name: "VersionName"))
+    ImportModelRequest.add_member(:model_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "ModelKmsKeyId"))
+    ImportModelRequest.add_member(:data_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "DataAccessRoleArn"))
+    ImportModelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportModelRequest.struct_class = Types::ImportModelRequest
+
+    ImportModelResponse.add_member(:model_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, location_name: "ModelArn"))
+    ImportModelResponse.struct_class = Types::ImportModelResponse
 
     InputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     InputDataConfig.add_member(:input_format, Shapes::ShapeRef.new(shape: InputFormat, location_name: "InputFormat"))
@@ -1109,6 +1149,14 @@ module Aws::Comprehend
     PiiOutputDataConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "S3Uri"))
     PiiOutputDataConfig.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
     PiiOutputDataConfig.struct_class = Types::PiiOutputDataConfig
+
+    PutResourcePolicyRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ComprehendModelArn, required: true, location_name: "ResourceArn"))
+    PutResourcePolicyRequest.add_member(:resource_policy, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "ResourcePolicy"))
+    PutResourcePolicyRequest.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyRequest.struct_class = Types::PutResourcePolicyRequest
+
+    PutResourcePolicyResponse.add_member(:policy_revision_id, Shapes::ShapeRef.new(shape: PolicyRevisionId, location_name: "PolicyRevisionId"))
+    PutResourcePolicyResponse.struct_class = Types::PutResourcePolicyResponse
 
     RedactionConfig.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: ListOfPiiEntityTypes, location_name: "PiiEntityTypes"))
     RedactionConfig.add_member(:mask_mode, Shapes::ShapeRef.new(shape: PiiEntitiesDetectionMaskMode, location_name: "MaskMode"))
@@ -1614,6 +1662,17 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_document_classification_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDocumentClassificationJob"
         o.http_method = "POST"
@@ -1722,6 +1781,17 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:describe_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:describe_sentiment_detection_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeSentimentDetectionJob"
         o.http_method = "POST"
@@ -1815,6 +1885,23 @@ module Aws::Comprehend
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: TextSizeLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedLanguageException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:import_model, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ImportModel"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ImportModelRequest)
+        o.output = Shapes::ShapeRef.new(shape: ImportModelResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: KmsKeyValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
@@ -2046,6 +2133,17 @@ module Aws::Comprehend
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_resource_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutResourcePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_document_classification_job, Seahorse::Model::Operation.new.tap do |o|

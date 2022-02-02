@@ -740,9 +740,13 @@ module Aws::DynamoDB
     end
 
     # The `BatchWriteItem` operation puts or deletes multiple items in one
-    # or more tables. A single call to `BatchWriteItem` can write up to 16
-    # MB of data, which can comprise as many as 25 put or delete requests.
-    # Individual items to be written can be as large as 400 KB.
+    # or more tables. A single call to `BatchWriteItem` can transmit up to
+    # 16MB of data over the network, consisting of up to 25 item put or
+    # delete operations. While individual items can be up to 400 KB once
+    # stored, it's important to note that an item's representation might
+    # be greater than 400KB while being sent in DynamoDB's JSON format for
+    # the API call. For more details on this distinction, see [Naming Rules
+    # and Data Types][1].
     #
     # <note markdown="1"> `BatchWriteItem` cannot update items. To update items, use the
     # `UpdateItem` action.
@@ -772,7 +776,7 @@ module Aws::DynamoDB
     # operation using exponential backoff, the individual requests in the
     # batch are much more likely to succeed.
     #
-    #  For more information, see [Batch Operations and Error Handling][1] in
+    #  For more information, see [Batch Operations and Error Handling][2] in
     # the *Amazon DynamoDB Developer Guide*.
     #
     # With `BatchWriteItem`, you can efficiently write or delete large
@@ -821,7 +825,8 @@ module Aws::DynamoDB
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.NamingRulesDataTypes.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations
     #
     # @option params [required, Hash<String,Array>] :request_items
     #   A map of one or more table names and, for each table, a list of
@@ -5995,10 +6000,10 @@ module Aws::DynamoDB
     # index. CloudWatch Contributor Insights for DynamoDB graphs display the
     # partition key and (if applicable) sort key of frequently accessed
     # items and frequently throttled items in plaintext. If you require the
-    # use of AWS Key Management Service (KMS) to encrypt this table’s
-    # partition key and sort key data with an AWS managed key or customer
-    # managed key, you should not enable CloudWatch Contributor Insights for
-    # DynamoDB for this table.
+    # use of Amazon Web Services Key Management Service (KMS) to encrypt
+    # this table’s partition key and sort key data with an Amazon Web
+    # Services managed key or customer managed key, you should not enable
+    # CloudWatch Contributor Insights for DynamoDB for this table.
     #
     # @option params [required, String] :table_name
     #   The name of the table.
@@ -7313,7 +7318,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

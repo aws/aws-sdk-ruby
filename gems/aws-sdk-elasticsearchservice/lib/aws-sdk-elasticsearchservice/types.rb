@@ -625,6 +625,100 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # Specifies change details of the domain configuration change.
+    #
+    # @!attribute [rw] change_id
+    #   The unique change identifier associated with a specific domain
+    #   configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Contains an optional message associated with the domain
+    #   configuration change.
+    #   @return [String]
+    #
+    class ChangeProgressDetails < Struct.new(
+      :change_id,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A progress stage details of a specific domain configuration change.
+    #
+    # @!attribute [rw] name
+    #   The name of the specific progress stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The overall status of a specific progress stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the progress stage.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated
+    #   The last updated timestamp of the progress stage.
+    #   @return [Time]
+    #
+    class ChangeProgressStage < Struct.new(
+      :name,
+      :status,
+      :description,
+      :last_updated)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The progress details of a specific domain configuration change.
+    #
+    # @!attribute [rw] change_id
+    #   The unique change identifier associated with a specific domain
+    #   configuration change.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time at which the configuration change is made on the domain.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The overall status of the domain configuration change. This field
+    #   can take the following values: `PENDING`, `PROCESSING`, `COMPLETED`
+    #   and `FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] pending_properties
+    #   The list of properties involved in the domain configuration change
+    #   that are still in pending.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] completed_properties
+    #   The list of properties involved in the domain configuration change
+    #   that are completed.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] total_number_of_stages
+    #   The total number of stages required for the configuration change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] change_progress_stages
+    #   The specific stages that the domain is going through to perform the
+    #   configuration change.
+    #   @return [Array<Types::ChangeProgressStage>]
+    #
+    class ChangeProgressStatusDetails < Struct.new(
+      :change_id,
+      :start_time,
+      :status,
+      :pending_properties,
+      :completed_properties,
+      :total_number_of_stages,
+      :change_progress_stages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Options to specify the Cognito user and identity pools for Kibana
     # authentication. For more information, see [Amazon Cognito
     # Authentication for Kibana][1].
@@ -1302,6 +1396,49 @@ module Aws::ElasticsearchService
     class DescribeDomainAutoTunesResponse < Struct.new(
       :auto_tunes,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the parameters to the `DescribeDomainChangeProgress`
+    # operation. Specifies the domain name and optional change specific
+    # identity for which you want progress information.
+    #
+    # @note When making an API call, you may pass DescribeDomainChangeProgressRequest
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "DomainName", # required
+    #         change_id: "GUID",
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The domain you want to get the progress information about.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_id
+    #   The specific change ID for which you want to get progress
+    #   information. This is an optional parameter. If omitted, the service
+    #   returns information about the most recent configuration change.
+    #   @return [String]
+    #
+    class DescribeDomainChangeProgressRequest < Struct.new(
+      :domain_name,
+      :change_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The result of a `DescribeDomainChangeProgress` request. Contains the
+    # progress information of the requested domain change.
+    #
+    # @!attribute [rw] change_progress_status
+    #   Progress information for the configuration change that is requested
+    #   in the `DescribeDomainChangeProgress` request.
+    #   @return [Types::ChangeProgressStatusDetails]
+    #
+    class DescribeDomainChangeProgressResponse < Struct.new(
+      :change_progress_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2310,6 +2447,10 @@ module Aws::ElasticsearchService
     #   Specifies `AutoTuneOptions` for the domain.
     #   @return [Types::AutoTuneOptionsStatus]
     #
+    # @!attribute [rw] change_progress_details
+    #   Specifies change details of the domain configuration change.
+    #   @return [Types::ChangeProgressDetails]
+    #
     class ElasticsearchDomainConfig < Struct.new(
       :elasticsearch_version,
       :elasticsearch_cluster_config,
@@ -2324,7 +2465,8 @@ module Aws::ElasticsearchService
       :log_publishing_options,
       :domain_endpoint_options,
       :advanced_security_options,
-      :auto_tune_options)
+      :auto_tune_options,
+      :change_progress_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2463,6 +2605,10 @@ module Aws::ElasticsearchService
     #   The current status of the Elasticsearch domain's Auto-Tune options.
     #   @return [Types::AutoTuneOptionsOutput]
     #
+    # @!attribute [rw] change_progress_details
+    #   Specifies change details of the domain configuration change.
+    #   @return [Types::ChangeProgressDetails]
+    #
     class ElasticsearchDomainStatus < Struct.new(
       :domain_id,
       :domain_name,
@@ -2487,7 +2633,8 @@ module Aws::ElasticsearchService
       :service_software_options,
       :domain_endpoint_options,
       :advanced_security_options,
-      :auto_tune_options)
+      :auto_tune_options,
+      :change_progress_details)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4544,10 +4691,15 @@ module Aws::ElasticsearchService
     #   Upgrade.
     #   @return [Boolean]
     #
+    # @!attribute [rw] change_progress_details
+    #   Specifies change details of the domain configuration change.
+    #   @return [Types::ChangeProgressDetails]
+    #
     class UpgradeElasticsearchDomainResponse < Struct.new(
       :domain_name,
       :target_version,
-      :perform_check_only)
+      :perform_check_only,
+      :change_progress_details)
       SENSITIVE = []
       include Aws::Structure
     end
