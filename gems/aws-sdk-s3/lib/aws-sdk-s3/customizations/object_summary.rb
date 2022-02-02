@@ -14,7 +14,7 @@ module Aws
       # @return (see Object#copy_from)
       # @see Object#copy_from
       def copy_from(source, options = {})
-        object.copy_from(source, options)
+        object.copy_from(source, **options)
       end
 
       # @param (see Object#copy_to)
@@ -22,7 +22,7 @@ module Aws
       # @return (see Object#copy_to)
       # @see Object#copy_to
       def copy_to(target, options = {})
-        object.copy_to(target, options)
+        object.copy_to(target, **options)
       end
 
       # @param (see Object#move_to)
@@ -30,7 +30,7 @@ module Aws
       # @return (see Object#move_to)
       # @see Object#move_to
       def move_to(target, options = {})
-        object.move_to(target, options)
+        object.move_to(target, **options)
       end
 
       # @param (see Object#presigned_post)
@@ -38,7 +38,7 @@ module Aws
       # @return (see Object#presigned_post)
       # @see Object#presigned_post
       def presigned_post(options = {})
-        object.presigned_post(options)
+        object.presigned_post(**options)
       end
 
       # @param (see Object#presigned_url)
@@ -46,7 +46,7 @@ module Aws
       # @return (see Object#presigned_url)
       # @see Object#presigned_url
       def presigned_url(http_method, params = {})
-        object.presigned_url(http_method, params)
+        object.presigned_url(http_method, **params)
       end
 
       # @param (see Object#public_url)
@@ -54,7 +54,7 @@ module Aws
       # @return (see Object#public_url)
       # @see Object#public_url
       def public_url(options = {})
-        object.public_url(options)
+        object.public_url(**options)
       end
 
       # @param (see Object#upload_file)
@@ -62,14 +62,14 @@ module Aws
       # @return (see Object#upload_file)
       # @see Object#upload_file
       def upload_file(source, options = {})
-        object.upload_file(source, options)
+        object.upload_file(source, **options)
       end
 
       # @options (see Object#upload_stream)
       # @return (see Object#upload_stream)
       # @see Object#upload_stream
       def upload_stream(options = {}, &block)
-        object.upload_stream(options, &block)
+        object.upload_stream(**options, &block)
       end
 
       # @param (see Object#download_file)
@@ -77,7 +77,7 @@ module Aws
       # @return (see Object#download_file)
       # @see Object#download_file
       def download_file(destination, options = {})
-        object.download_file(destination, options)
+        object.download_file(destination, **options)
       end
 
     end
