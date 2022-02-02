@@ -45,6 +45,7 @@ module Aws
     def expiration
       Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) }
       refresh_if_near_expiration
+
       @expiration
     end
 
