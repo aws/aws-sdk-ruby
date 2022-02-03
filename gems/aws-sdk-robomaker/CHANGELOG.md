@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-02-03)
+------------------
+
+* Feature - The release deprecates the use various APIs of RoboMaker Deployment Service in favor of AWS IoT GreenGrass v2.0.
+
 1.48.0 (2022-02-03)
 ------------------
 
