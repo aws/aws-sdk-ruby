@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.104.0 (2022-02-02)
+------------------
+
+* Feature - Launch Protobuf support for AWS Glue Schema Registry
+
 1.103.0 (2022-01-13)
 ------------------
 

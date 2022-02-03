@@ -586,6 +586,11 @@ module Aws::EMR
     # You can only add steps to a cluster that is in one of the following
     # states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
     #
+    # <note markdown="1"> The string values passed into `HadoopJarStep` object cannot exceed a
+    # total of 10240 characters.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html
@@ -2606,15 +2611,22 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # <note markdown="1"> Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0
+    # and later. For more information, see [Using an auto-termination
+    # policy][1].
+    #
+    #  </note>
+    #
     # Creates or updates an auto-termination policy for an Amazon EMR
     # cluster. An auto-termination policy defines the amount of idle time in
     # seconds after which a cluster automatically terminates. For
     # alternative cluster termination options, see [Control cluster
-    # termination][1].
+    # termination][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html
+    # [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #
     # @option params [required, String] :cluster_id
     #   Specifies the ID of the Amazon EMR cluster to which the
@@ -2990,7 +3002,7 @@ module Aws::EMR
     #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive list
     #   of applications for Amazon EMR to install and configure when launching
     #   the cluster. For a list of applications available for each Amazon EMR
-    #   release version, see the [Amazon EMR Release Guide][1].
+    #   release version, see the [Amazon EMRRelease Guide][1].
     #
     #
     #
@@ -3001,6 +3013,9 @@ module Aws::EMR
     #   supplied for the EMR cluster you are creating.
     #
     # @option params [Boolean] :visible_to_all_users
+    #   The VisibleToAllUsers parameter is no longer supported. By default,
+    #   the value is set to `true`. Setting it to `false` now has no effect.
+    #
     #   Set this value to `true` so that IAM principals in the Amazon Web
     #   Services account associated with the cluster can perform EMR actions
     #   on the cluster that their IAM policies allow. This value defaults to
@@ -3448,6 +3463,11 @@ module Aws::EMR
       req.send_request(options)
     end
 
+    # The SetVisibleToAllUsers parameter is no longer supported. Your
+    # cluster may be visible to all users in your account. To restrict
+    # cluster access using an IAM policy, see [Identity and Access
+    # Management for EMR][1].
+    #
     # Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When
     # `true`, IAM principals in the Amazon Web Services account can perform
     # EMR cluster actions that their IAM policies allow. When `false`, only
@@ -3459,11 +3479,12 @@ module Aws::EMR
     # the RunJobFlowInput$VisibleToAllUsers parameter.
     #
     # For more information, see [Understanding the EMR Cluster
-    # VisibleToAllUsers Setting][1] in the *Amazon EMRManagement Guide*.
+    # VisibleToAllUsers Setting][2] in the *Amazon EMRManagement Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
+    # [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-iam.html
+    # [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #
     # @option params [required, Array<String>] :job_flow_ids
     #   The unique identifier of the job flow (cluster).
@@ -3741,7 +3762,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

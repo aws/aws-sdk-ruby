@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-02-02)
+------------------
+
+* Feature - This release adds support for configuring AWS IoT logging level per client ID, source IP, or principal ID.
+
 1.83.0 (2022-01-05)
 ------------------
 

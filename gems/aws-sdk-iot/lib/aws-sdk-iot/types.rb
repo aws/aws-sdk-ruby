@@ -6302,7 +6302,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP
+    #         target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #         target_name: "LogTargetName", # required
     #       }
     #
@@ -13512,7 +13512,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP
+    #         target_type: "DEFAULT", # accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #         next_token: "NextToken",
     #         max_results: 1,
     #       }
@@ -13647,7 +13647,7 @@ module Aws::IoT
     #   data as a hash:
     #
     #       {
-    #         target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP
+    #         target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #         target_name: "LogTargetName",
     #       }
     #
@@ -16134,7 +16134,7 @@ module Aws::IoT
     #
     #       {
     #         log_target: { # required
-    #           target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP
+    #           target_type: "DEFAULT", # required, accepts DEFAULT, THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID
     #           target_name: "LogTargetName",
     #         },
     #         log_level: "DEBUG", # required, accepts DEBUG, INFO, ERROR, WARN, DISABLED

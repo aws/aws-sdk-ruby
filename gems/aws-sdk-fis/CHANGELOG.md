@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-02-02)
+------------------
+
+* Feature - Added GetTargetResourceType and ListTargetResourceTypesAPI actions. These actions return additional details about resource types and parameters that can be targeted by FIS actions. Added a parameters field for the targets that can be specified in experiment templates.
+
 1.9.0 (2022-01-20)
 ------------------
 

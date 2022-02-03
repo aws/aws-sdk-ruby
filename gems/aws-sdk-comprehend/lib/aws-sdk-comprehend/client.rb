@@ -765,6 +765,24 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [String] :model_policy
+    #   The resource-based policy to attach to your custom document classifier
+    #   model. You can use this policy to allow another AWS account to import
+    #   your custom model.
+    #
+    #   Provide your policy as a JSON body that you enter as a UTF-8 encoded
+    #   string without line breaks. To provide valid JSON, enclose the
+    #   attribute names and values in double quotes. If the JSON body is also
+    #   enclosed in double quotes, then you must escape the double quotes that
+    #   are inside the policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #
     # @return [Types::CreateDocumentClassifierResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDocumentClassifierResponse#document_classifier_arn #document_classifier_arn} => String
@@ -810,6 +828,7 @@ module Aws::Comprehend
     #     },
     #     mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
     #     model_kms_key_id: "KmsKeyId",
+    #     model_policy: "Policy",
     #   })
     #
     # @example Response structure
@@ -970,6 +989,24 @@ module Aws::Comprehend
     #   * Amazon Resource Name (ARN) of a KMS Key:
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #
+    # @option params [String] :model_policy
+    #   The JSON resource-based policy to attach to your custom entity
+    #   recognizer model. You can use this policy to allow another AWS account
+    #   to import your custom model.
+    #
+    #   Provide your JSON as a UTF-8 encoded string without line breaks. To
+    #   provide valid JSON for your policy, enclose the attribute names and
+    #   values in double quotes. If the JSON body is also enclosed in double
+    #   quotes, then you must escape the double quotes that are inside the
+    #   policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #
     # @return [Types::CreateEntityRecognizerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateEntityRecognizerResponse#entity_recognizer_arn #entity_recognizer_arn} => String
@@ -1024,6 +1061,7 @@ module Aws::Comprehend
     #       subnets: ["SubnetId"], # required
     #     },
     #     model_kms_key_id: "KmsKeyId",
+    #     model_policy: "Policy",
     #   })
     #
     # @example Response structure
@@ -1123,6 +1161,33 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def delete_entity_recognizer(params = {}, options = {})
       req = build_request(:delete_entity_recognizer, params)
+      req.send_request(options)
+    end
+
+    # Deletes a resource-based policy that is attached to a custom model.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the custom model version that has
+    #   the policy to delete.
+    #
+    # @option params [String] :policy_revision_id
+    #   The revision ID of the policy to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_resource_policy({
+    #     resource_arn: "ComprehendModelArn", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteResourcePolicy AWS API Documentation
+    #
+    # @overload delete_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def delete_resource_policy(params = {}, options = {})
+      req = build_request(:delete_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1237,6 +1302,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties.mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties.model_kms_key_id #=> String
     #   resp.document_classifier_properties.version_name #=> String
+    #   resp.document_classifier_properties.source_model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeDocumentClassifier AWS API Documentation
     #
@@ -1451,6 +1517,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties.vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties.model_kms_key_id #=> String
     #   resp.entity_recognizer_properties.version_name #=> String
+    #   resp.entity_recognizer_properties.source_model_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeEntityRecognizer AWS API Documentation
     #
@@ -1606,6 +1673,41 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def describe_pii_entities_detection_job(params = {}, options = {})
       req = build_request(:describe_pii_entities_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a resource-based policy that is attached to a
+    # custom model, including the JSON body of the policy.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the policy to describe.
+    #
+    # @return [Types::DescribeResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePolicyResponse#resource_policy #resource_policy} => String
+    #   * {Types::DescribeResourcePolicyResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeResourcePolicyResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::DescribeResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_policy({
+    #     resource_arn: "ComprehendModelArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_policy #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeResourcePolicy AWS API Documentation
+    #
+    # @overload describe_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_policy(params = {}, options = {})
+      req = build_request(:describe_resource_policy, params)
       req.send_request(options)
     end
 
@@ -1964,6 +2066,86 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Creates a new custom model that replicates a source custom model that
+    # you import. The source model can be in your AWS account or another
+    # one.
+    #
+    # If the source model is in another AWS account, then it must have a
+    # resource-based policy that authorizes you to import it.
+    #
+    # The source model must be in the same AWS region that you're using
+    # when you import. You can't import a model that's in a different
+    # region.
+    #
+    # @option params [required, String] :source_model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to import.
+    #
+    # @option params [String] :model_name
+    #   The name to assign to the custom model that is created in Amazon
+    #   Comprehend by this import.
+    #
+    # @option params [String] :version_name
+    #   The version name given to the custom model that is created by this
+    #   import. Version names can have a maximum of 256 characters.
+    #   Alphanumeric characters, hyphens (-) and underscores (\_) are allowed.
+    #   The version name must be unique among all models with the same
+    #   classifier name in the account/AWS Region.
+    #
+    # @option params [String] :model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
+    #   uses to encrypt trained custom models. The ModelKmsKeyId can be either
+    #   of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that allows Amazon Comprehend to use Amazon Key Management
+    #   Service (KMS) to encrypt or decrypt the custom model.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the custom model that is created by this
+    #   import. A tag is a key-value pair that adds as a metadata to a
+    #   resource used by Amazon Comprehend. For example, a tag with "Sales"
+    #   as the key might be added to a resource to indicate its use by the
+    #   sales department.
+    #
+    # @return [Types::ImportModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportModelResponse#model_arn #model_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_model({
+    #     source_model_arn: "ComprehendModelArn", # required
+    #     model_name: "ComprehendArnName",
+    #     version_name: "VersionName",
+    #     model_kms_key_id: "KmsKeyId",
+    #     data_access_role_arn: "IamRoleArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ImportModel AWS API Documentation
+    #
+    # @overload import_model(params = {})
+    # @param [Hash] params ({})
+    def import_model(params = {}, options = {})
+      req = build_request(:import_model, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the documentation classification jobs that you have
     # submitted.
     #
@@ -2157,6 +2339,7 @@ module Aws::Comprehend
     #   resp.document_classifier_properties_list[0].mode #=> String, one of "MULTI_CLASS", "MULTI_LABEL"
     #   resp.document_classifier_properties_list[0].model_kms_key_id #=> String
     #   resp.document_classifier_properties_list[0].version_name #=> String
+    #   resp.document_classifier_properties_list[0].source_model_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListDocumentClassifiers AWS API Documentation
@@ -2497,6 +2680,7 @@ module Aws::Comprehend
     #   resp.entity_recognizer_properties_list[0].vpc_config.subnets[0] #=> String
     #   resp.entity_recognizer_properties_list[0].model_kms_key_id #=> String
     #   resp.entity_recognizer_properties_list[0].version_name #=> String
+    #   resp.entity_recognizer_properties_list[0].source_model_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListEntityRecognizers AWS API Documentation
@@ -2881,6 +3065,60 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def list_topics_detection_jobs(params = {}, options = {})
       req = build_request(:list_topics_detection_jobs, params)
+      req.send_request(options)
+    end
+
+    # Attaches a resource-based policy to a custom model. You can use this
+    # policy to authorize an entity in another AWS account to import the
+    # custom model, which replicates it in Amazon Comprehend in their
+    # account.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the custom model to attach the
+    #   policy to.
+    #
+    # @option params [required, String] :resource_policy
+    #   The JSON resource-based policy to attach to your custom model. Provide
+    #   your JSON as a UTF-8 encoded string without line breaks. To provide
+    #   valid JSON for your policy, enclose the attribute names and values in
+    #   double quotes. If the JSON body is also enclosed in double quotes,
+    #   then you must escape the double quotes that are inside the policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #
+    # @option params [String] :policy_revision_id
+    #   The revision ID that Amazon Comprehend assigned to the policy that you
+    #   are updating. If you are creating a new policy that has no prior
+    #   version, don't use this parameter. Amazon Comprehend creates the
+    #   revision ID for you.
+    #
+    # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutResourcePolicyResponse#policy_revision_id #policy_revision_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_resource_policy({
+    #     resource_arn: "ComprehendModelArn", # required
+    #     resource_policy: "Policy", # required
+    #     policy_revision_id: "PolicyRevisionId",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_revision_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PutResourcePolicy AWS API Documentation
+    #
+    # @overload put_resource_policy(params = {})
+    # @param [Hash] params ({})
+    def put_resource_policy(params = {}, options = {})
+      req = build_request(:put_resource_policy, params)
       req.send_request(options)
     end
 
@@ -4162,7 +4400,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

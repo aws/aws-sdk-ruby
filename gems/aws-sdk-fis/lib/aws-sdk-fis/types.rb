@@ -197,7 +197,7 @@ module Aws::FIS
     #         ],
     #         targets: {
     #           "ExperimentTemplateTargetName" => {
-    #             resource_type: "ResourceType", # required
+    #             resource_type: "TargetResourceTypeId", # required
     #             resource_arns: ["ResourceArn"],
     #             resource_tags: {
     #               "TagKey" => "TagValue",
@@ -209,6 +209,9 @@ module Aws::FIS
     #               },
     #             ],
     #             selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #             parameters: {
+    #               "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #             },
     #           },
     #         },
     #         actions: { # required
@@ -334,7 +337,7 @@ module Aws::FIS
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ResourceType", # required
+    #         resource_type: "TargetResourceTypeId", # required
     #         resource_arns: ["ResourceArn"],
     #         resource_tags: {
     #           "TagKey" => "TagValue",
@@ -346,11 +349,14 @@ module Aws::FIS
     #           },
     #         ],
     #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #         parameters: {
+    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #         },
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The Amazon Web Services resource type. The resource type must be
-    #   supported for the specified action.
+    #   The resource type. The resource type must be supported for the
+    #   specified action.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -383,6 +389,10 @@ module Aws::FIS
     #     example, PERCENT(25) selects 25% of the targets.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The resource type parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplateTargetInput AWS API Documentation
     #
     class CreateExperimentTemplateTargetInput < Struct.new(
@@ -390,7 +400,8 @@ module Aws::FIS
       :resource_arns,
       :resource_tags,
       :filters,
-      :selection_mode)
+      :selection_mode,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -656,6 +667,10 @@ module Aws::FIS
     #   Scopes the identified resources to a specific count or percentage.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The resource type parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTarget AWS API Documentation
     #
     class ExperimentTarget < Struct.new(
@@ -663,7 +678,8 @@ module Aws::FIS
       :resource_arns,
       :resource_tags,
       :filters,
-      :selection_mode)
+      :selection_mode,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -853,6 +869,10 @@ module Aws::FIS
     #   Scopes the identified resources to a specific count or percentage.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The resource type parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ExperimentTemplateTarget AWS API Documentation
     #
     class ExperimentTemplateTarget < Struct.new(
@@ -860,7 +880,8 @@ module Aws::FIS
       :resource_arns,
       :resource_tags,
       :filters,
-      :selection_mode)
+      :selection_mode,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1009,6 +1030,37 @@ module Aws::FIS
     #
     class GetExperimentTemplateResponse < Struct.new(
       :experiment_template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTargetResourceTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "TargetResourceTypeId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetResourceTypeRequest AWS API Documentation
+    #
+    class GetTargetResourceTypeRequest < Struct.new(
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_resource_type
+    #   Information about the resource type.
+    #   @return [Types::TargetResourceType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetResourceTypeResponse AWS API Documentation
+    #
+    class GetTargetResourceTypeResponse < Struct.new(
+      :target_resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1179,6 +1231,51 @@ module Aws::FIS
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTargetResourceTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTargetResourceTypesRequest AWS API Documentation
+    #
+    class ListTargetResourceTypesRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_resource_types
+    #   The target resource types.
+    #   @return [Array<Types::TargetResourceTypeSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTargetResourceTypesResponse AWS API Documentation
+    #
+    class ListTargetResourceTypesResponse < Struct.new(
+      :target_resource_types,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The specified resource cannot be found.
     #
     # @!attribute [rw] message
@@ -1316,6 +1413,69 @@ module Aws::FIS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Describes a resource type.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters for the resource type.
+    #   @return [Hash<String,Types::TargetResourceTypeParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TargetResourceType AWS API Documentation
+    #
+    class TargetResourceType < Struct.new(
+      :resource_type,
+      :description,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the parameters for a resource type. Use parameters to
+    # determine which tasks are identified during target resolution.
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Indicates whether the parameter is required.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TargetResourceTypeParameter AWS API Documentation
+    #
+    class TargetResourceTypeParameter < Struct.new(
+      :description,
+      :required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a resource type.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/TargetResourceTypeSummary AWS API Documentation
+    #
+    class TargetResourceTypeSummary < Struct.new(
+      :resource_type,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -1410,7 +1570,7 @@ module Aws::FIS
     #         ],
     #         targets: {
     #           "ExperimentTemplateTargetName" => {
-    #             resource_type: "ResourceType", # required
+    #             resource_type: "TargetResourceTypeId", # required
     #             resource_arns: ["ResourceArn"],
     #             resource_tags: {
     #               "TagKey" => "TagValue",
@@ -1422,6 +1582,9 @@ module Aws::FIS
     #               },
     #             ],
     #             selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #             parameters: {
+    #               "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #             },
     #           },
     #         },
     #         actions: {
@@ -1528,7 +1691,7 @@ module Aws::FIS
     #   data as a hash:
     #
     #       {
-    #         resource_type: "ResourceType", # required
+    #         resource_type: "TargetResourceTypeId", # required
     #         resource_arns: ["ResourceArn"],
     #         resource_tags: {
     #           "TagKey" => "TagValue",
@@ -1540,11 +1703,14 @@ module Aws::FIS
     #           },
     #         ],
     #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #         parameters: {
+    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #         },
     #       }
     #
     # @!attribute [rw] resource_type
-    #   The Amazon Web Services resource type. The resource type must be
-    #   supported for the specified action.
+    #   The resource type. The resource type must be supported for the
+    #   specified action.
     #   @return [String]
     #
     # @!attribute [rw] resource_arns
@@ -1564,6 +1730,10 @@ module Aws::FIS
     #   Scopes the identified resources to a specific count or percentage.
     #   @return [String]
     #
+    # @!attribute [rw] parameters
+    #   The resource type parameters.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplateTargetInput AWS API Documentation
     #
     class UpdateExperimentTemplateTargetInput < Struct.new(
@@ -1571,7 +1741,8 @@ module Aws::FIS
       :resource_arns,
       :resource_tags,
       :filters,
-      :selection_mode)
+      :selection_mode,
+      :parameters)
       SENSITIVE = []
       include Aws::Structure
     end
