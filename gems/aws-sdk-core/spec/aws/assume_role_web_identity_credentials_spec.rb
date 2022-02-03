@@ -152,10 +152,11 @@ module Aws
     end
 
     it 'refreshes asynchronously' do
-      allow(credentials).to receive(:expiration).and_return(Time.now)
-      expect(client).to receive(:assume_role_with_web_identity).at_least(2).times
-      expect(File).to receive(:read).with(token_file_path).at_least(2).times
-      expect(Thread).to receive(:new).and_call_original
+      # expiration 6 minutes out, within the async exp time window
+      allow(credentials).to receive(:expiration).and_return(Time.now + (6*60))
+      expect(client).to receive(:assume_role_with_web_identity).exactly(2).times
+      expect(File).to receive(:read).with(token_file_path).exactly(2).times
+      expect(Thread).to receive(:new).and_yield
 
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
@@ -166,9 +167,8 @@ module Aws
 
     it 'auto refreshes credentials when near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
-      expect(client).to receive(:assume_role_with_web_identity).at_least(4).times
-      expect(File).to receive(:read).with(token_file_path).at_least(4).times
-      expect(Thread).to receive(:new).exactly(3).times.and_call_original
+      expect(client).to receive(:assume_role_with_web_identity).exactly(4).times
+      expect(File).to receive(:read).with(token_file_path).exactly(4).times
 
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
@@ -178,6 +178,5 @@ module Aws
       c.credentials
       c.credentials
     end
-
   end
 end

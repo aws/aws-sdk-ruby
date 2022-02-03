@@ -25,23 +25,15 @@ module Aws
       refresh
     end
 
-    # Refreshes credentials asynchronously and synchronously. The sync
-    # refresh is a stop-gap measure, in the case that the asynchronous
-    # refresh fails. In this case, we want the synchronous refresh to happen
-    # and fail / raise to clients.
     # @return [Credentials]
     def credentials
-      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) } if @async_refresh
       refresh_if_near_expiration!
-
       @credentials
     end
 
     # @return [Time,nil]
     def expiration
-      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) } if @async_refresh
       refresh_if_near_expiration!
-
       @expiration
     end
 
@@ -53,15 +45,25 @@ module Aws
 
     private
 
-    # Refreshes instance metadata credentials if they are within
-    # 5 or 10 minutes of expiration.
-    def refresh_if_near_expiration!(expiration_length = SYNC_EXPIRATION_LENGTH)
+    # Refreshes credentials asynchronously and synchronously.
+    # If we are near to expiration, block while getting new credentials.
+    # Otherwise, if we're approaching expiration, use the existing credentials
+    # but attempt a refresh in the background.
+    def refresh_if_near_expiration!
       # Note: This check is an optimization. Rather than acquire the mutex on every #refresh_if_near_expiration
       # call, we check before doing so, and then we check within the mutex to avoid a race condition.
       # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
-      if near_expiration?(expiration_length)
+      if near_expiration?(SYNC_EXPIRATION_LENGTH)
         @mutex.synchronize do
-          refresh if near_expiration?(expiration_length)
+          refresh if near_expiration?(SYNC_EXPIRATION_LENGTH)
+        end
+      elsif @async_refresh && near_expiration?(ASYNC_EXPIRATION_LENGTH)
+        unless @mutex.locked?
+          Thread.new do
+            @mutex.synchronize do
+              refresh if near_expiration?(ASYNC_EXPIRATION_LENGTH)
+            end
+          end
         end
       end
     end
