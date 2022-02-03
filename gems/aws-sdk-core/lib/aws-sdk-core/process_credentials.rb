@@ -74,9 +74,9 @@ module Aws
       @credentials = credentials_from_process(@process)
     end
 
-    def near_expiration?
+    def near_expiration?(expiration_length)
       # are we within 5 minutes of expiration?
-      @expiration && (Time.now.to_i + 5 * 60) > @expiration.to_i
+      @expiration && (Time.now.to_i + expiration_length) > @expiration.to_i
     end
   end
 end

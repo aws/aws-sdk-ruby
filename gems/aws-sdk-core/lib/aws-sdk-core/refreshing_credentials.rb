@@ -37,10 +37,6 @@ module Aws
       @credentials
     end
 
-    # Refreshes credentials asynchronously and synchronously. The sync
-    # refresh is a stop-gap measure, in the case that the asynchronous
-    # refresh fails. In this case, we want the synchronous refresh to happen
-    # and fail / raise to clients.
     # @return [Time,nil]
     def expiration
       Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) } if @async_refresh
