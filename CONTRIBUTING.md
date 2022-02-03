@@ -51,7 +51,10 @@ Specifically, here are a few things that we would appreciate help on:
 The AWS SDK for Ruby is unit tested using RSpec. You can run the unit tests of the SDK after cloning the repo:
 
     bundle install
-    bundle exec rake test
+    bundle exec rake test:spec
+
+If you want to run `PURE_RUBY` tests, then `export PURE_RUBY=1` into your environment. This will skip installing
+packages like `oj` for instance.
 
 To run integration tests, create a `integration-test-config.json` file at the root of this repository. It should
 contain a `"region"` and credentials. Running rake test when this file is present will enable integration tests.

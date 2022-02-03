@@ -186,7 +186,7 @@ module Aws
           backoff: lambda{|n| Kernel.sleep(2 ** n ) },
           retries:3
         )
-        expect(expected_request).to have_been_made.at_least_times(4)
+        assert_requested(expected_request, times:4)
       end
 
     end
