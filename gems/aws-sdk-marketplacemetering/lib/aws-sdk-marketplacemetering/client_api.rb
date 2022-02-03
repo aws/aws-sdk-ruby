@@ -17,6 +17,7 @@ module Aws::MarketplaceMetering
     BatchMeterUsageRequest = Shapes::StructureShape.new(name: 'BatchMeterUsageRequest')
     BatchMeterUsageResult = Shapes::StructureShape.new(name: 'BatchMeterUsageResult')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CustomerAWSAccountId = Shapes::StringShape.new(name: 'CustomerAWSAccountId')
     CustomerIdentifier = Shapes::StringShape.new(name: 'CustomerIdentifier')
     CustomerNotEntitledException = Shapes::StructureShape.new(name: 'CustomerNotEntitledException')
     DisabledApiException = Shapes::StructureShape.new(name: 'DisabledApiException')
@@ -140,6 +141,7 @@ module Aws::MarketplaceMetering
 
     ResolveCustomerResult.add_member(:customer_identifier, Shapes::ShapeRef.new(shape: CustomerIdentifier, location_name: "CustomerIdentifier"))
     ResolveCustomerResult.add_member(:product_code, Shapes::ShapeRef.new(shape: ProductCode, location_name: "ProductCode"))
+    ResolveCustomerResult.add_member(:customer_aws_account_id, Shapes::ShapeRef.new(shape: CustomerAWSAccountId, location_name: "CustomerAWSAccountId"))
     ResolveCustomerResult.struct_class = Types::ResolveCustomerResult
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))

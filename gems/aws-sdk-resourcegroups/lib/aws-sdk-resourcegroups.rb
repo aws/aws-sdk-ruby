@@ -48,6 +48,6 @@ require_relative 'aws-sdk-resourcegroups/customizations'
 # @!group service
 module Aws::ResourceGroups
 
-  GEM_VERSION = '1.43.0'
+  GEM_VERSION = '1.44.0'
 
 end

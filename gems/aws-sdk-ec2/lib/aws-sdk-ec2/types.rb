@@ -5189,6 +5189,10 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Options for enabling a customizable text banner that will be displayed
+    # on Amazon Web Services provided clients when a VPN session is
+    # established.
+    #
     # @note When making an API call, you may pass ClientLoginBannerOptions
     #   data as a hash:
     #
@@ -5198,9 +5202,19 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] enabled
+    #   Enable or disable a customizable text banner that will be displayed
+    #   on Amazon Web Services provided clients when a VPN session is
+    #   established.
+    #
+    #   Valid values: `true | false`
+    #
+    #   Default value: `false`
     #   @return [Boolean]
     #
     # @!attribute [rw] banner_text
+    #   Customizable text that will be displayed in a banner on Amazon Web
+    #   Services provided clients when a VPN session is established. UTF-8
+    #   encoded characters only. Maximum of 1400 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientLoginBannerOptions AWS API Documentation
@@ -5212,10 +5226,20 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Current state of options for customizable text banner that will be
+    # displayed on Amazon Web Services provided clients when a VPN session
+    # is established.
+    #
     # @!attribute [rw] enabled
+    #   Current state of text banner feature.
+    #
+    #   Valid values: `true | false`
     #   @return [Boolean]
     #
     # @!attribute [rw] banner_text
+    #   Customizable text that will be displayed in a banner on Amazon Web
+    #   Services provided clients when a VPN session is established. UTF-8
+    #   encoded characters only. Maximum of 1400 characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientLoginBannerResponseOptions AWS API Documentation
@@ -5543,9 +5567,17 @@ module Aws::EC2
     #   @return [Types::ClientConnectResponseOptions]
     #
     # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #
+    #   Valid values: `8 | 10 | 12 | 24`
+    #
+    #   Default value: `24`
     #   @return [Integer]
     #
     # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
     #   @return [Types::ClientLoginBannerResponseOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ClientVpnEndpoint AWS API Documentation
@@ -7078,9 +7110,17 @@ module Aws::EC2
     #   @return [Types::ClientConnectOptions]
     #
     # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #
+    #   Valid values: `8 | 10 | 12 | 24`
+    #
+    #   Default value: `24`
     #   @return [Integer]
     #
     # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
     #   @return [Types::ClientLoginBannerOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateClientVpnEndpointRequest AWS API Documentation
@@ -31514,7 +31554,7 @@ module Aws::EC2
     #
     # @!attribute [rw] max_parallel_launches
     #   The maximum number of parallel instances to launch for creating
-    #   resources.
+    #   resources. Value must be `6` or greater.
     #   @return [Integer]
     #
     # @!attribute [rw] dry_run
@@ -37841,6 +37881,41 @@ module Aws::EC2
       :snapshot_id,
       :url,
       :user_bucket)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about an AMI that is currently in the Recycle Bin.
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] recycle_bin_enter_time
+    #   The date and time when the AMI entered the Recycle Bin.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recycle_bin_exit_time
+    #   The date and time when the AMI is to be permanently deleted from the
+    #   Recycle Bin.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageRecycleBinInfo AWS API Documentation
+    #
+    class ImageRecycleBinInfo < Struct.new(
+      :image_id,
+      :name,
+      :description,
+      :recycle_bin_enter_time,
+      :recycle_bin_exit_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -45233,6 +45308,76 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListImagesInRecycleBinRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_ids: ["ImageId"],
+    #         next_token: "String",
+    #         max_results: 1,
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_ids
+    #   The IDs of the AMIs to list. Omit this parameter to list all of the
+    #   AMIs that are in the Recycle Bin. You can specify up to 20 IDs in a
+    #   single request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If you do not specify a value for *MaxResults*, the request returns
+    #   1,000 items per page by default. For more information, see [
+    #   Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ListImagesInRecycleBinRequest AWS API Documentation
+    #
+    class ListImagesInRecycleBinRequest < Struct.new(
+      :image_ids,
+      :next_token,
+      :max_results,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] images
+    #   Information about the AMIs.
+    #   @return [Array<Types::ImageRecycleBinInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ListImagesInRecycleBinResult AWS API Documentation
+    #
+    class ListImagesInRecycleBinResult < Struct.new(
+      :images,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListSnapshotsInRecycleBinRequest
     #   data as a hash:
     #
@@ -46322,9 +46467,17 @@ module Aws::EC2
     #   @return [Types::ClientConnectOptions]
     #
     # @!attribute [rw] session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #
+    #   Valid values: `8 | 10 | 12 | 24`
+    #
+    #   Default value: `24`
     #   @return [Integer]
     #
     # @!attribute [rw] client_login_banner_options
+    #   Options for enabling a customizable text banner that will be
+    #   displayed on Amazon Web Services provided clients when a VPN session
+    #   is established.
     #   @return [Types::ClientLoginBannerOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
@@ -57796,6 +57949,47 @@ module Aws::EC2
     class RestoreAddressToClassicResult < Struct.new(
       :public_ip,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreImageFromRecycleBinRequest
+    #   data as a hash:
+    #
+    #       {
+    #         image_id: "ImageId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI to restore.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreImageFromRecycleBinRequest AWS API Documentation
+    #
+    class RestoreImageFromRecycleBinRequest < Struct.new(
+      :image_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] return
+    #   Returns `true` if the request succeeds; otherwise, it returns an
+    #   error.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreImageFromRecycleBinResult AWS API Documentation
+    #
+    class RestoreImageFromRecycleBinResult < Struct.new(
+      :return)
       SENSITIVE = []
       include Aws::Structure
     end

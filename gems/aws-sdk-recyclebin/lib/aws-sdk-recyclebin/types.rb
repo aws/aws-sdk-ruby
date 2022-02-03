@@ -25,7 +25,7 @@ module Aws::RecycleBin
     #             value: "TagValue", # required
     #           },
     #         ],
-    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT
+    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
     #         resource_tags: [
     #           {
     #             resource_tag_key: "ResourceTagKey", # required
@@ -40,7 +40,7 @@ module Aws::RecycleBin
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] description
-    #   A brief description for the retention rule.
+    #   The retention rule description.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -49,19 +49,28 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots are supported.
+    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To
+    #   retain snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs,
+    #   specify `EC2_IMAGE`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
-    #   Information about the resource tags to use to identify resources
-    #   that are to be retained by the retention rule. The retention rule
-    #   retains only deleted snapshots that have one or more of the
-    #   specified tag key and value pairs. If a snapshot is deleted, but it
-    #   does not have any of the specified tag key and value pairs, it is
-    #   immediately deleted without being retained by the retention rule.
+    #   Specifies the resource tags to use to identify resources that are to
+    #   be retained by a tag-level retention rule. For tag-level retention
+    #   rules, only deleted resources, of the specified resource type, that
+    #   have one or more of the specified tag key and value pairs are
+    #   retained. If a resource is deleted, but it does not have any of the
+    #   specified tag key and value pairs, it is immediately deleted without
+    #   being retained by the retention rule.
     #
     #   You can add the same tag key and value pair to a maximum or five
     #   retention rules.
+    #
+    #   To create a Region-level retention rule, omit this parameter. A
+    #   Region-level retention rule does not have any resource tags
+    #   specified. It retains all deleted resources of the specified
+    #   resource type in the Region in which the rule is created, even if
+    #   the resources are not tagged.
     #   @return [Array<Types::ResourceTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/CreateRuleRequest AWS API Documentation
@@ -77,12 +86,12 @@ module Aws::RecycleBin
     end
 
     # @!attribute [rw] identifier
-    #   The unique identifier of the retention rule.
+    #   The unique ID of the retention rule.
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   Information about the retention period for which a retention rule is
-    #   to retain resources.
+    #   Information about the retention period for which the retention rule
+    #   is to retain resources.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] description
@@ -90,7 +99,7 @@ module Aws::RecycleBin
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags assigned to the retention rule.
+    #   Information about the tags assigned to the retention rule.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] resource_type
@@ -104,7 +113,7 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] status
     #   The state of the retention rule. Only retention rules that are in
-    #   the `available` state retain snapshots.
+    #   the `available` state retain resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/CreateRuleResponse AWS API Documentation
@@ -129,7 +138,7 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] identifier
-    #   The unique ID of the retention rule to delete.
+    #   The unique ID of the retention rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/DeleteRuleRequest AWS API Documentation
@@ -168,27 +177,26 @@ module Aws::RecycleBin
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description assigned to the retention rule.
+    #   The retention rule description.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The resource type retained by the retention rule. Currently, only
-    #   Amazon EBS snapshots are supported.
+    #   The resource type retained by the retention rule.
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   Information about the period for which the retention rule retains
-    #   resources.
+    #   Information about the retention period for which the retention rule
+    #   is to retain resources.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] resource_tags
-    #   The resource tags used to identify resources that are to be retained
-    #   by the retention rule.
+    #   Information about the resource tags used to identify resources that
+    #   are retained by the retention rule.
     #   @return [Array<Types::ResourceTag>]
     #
     # @!attribute [rw] status
     #   The state of the retention rule. Only retention rules that are in
-    #   the `available` state retain snapshots.
+    #   the `available` state retain resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/GetRuleResponse AWS API Documentation
@@ -224,7 +232,7 @@ module Aws::RecycleBin
     #       {
     #         max_results: 1,
     #         next_token: "NextToken",
-    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT
+    #         resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
     #         resource_tags: [
     #           {
     #             resource_tag_key: "ResourceTagKey", # required
@@ -234,25 +242,27 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive
-    #   an error.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token for the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
     #   The resource type retained by the retention rule. Only retention
-    #   rules that retain the specified resource type are listed.
+    #   rules that retain the specified resource type are listed. Currently,
+    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To list
+    #   retention rules that retain snapshots, specify `EBS_SNAPSHOT`. To
+    #   list retention rules that retain EBS-backed AMIs, specify
+    #   `EC2_IMAGE`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
-    #   The tags used to identify resources that are to be retained by the
-    #   retention rule.
+    #   Information about the resource tags used to identify resources that
+    #   are retained by the retention rule.
     #   @return [Array<Types::ResourceTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/ListRulesRequest AWS API Documentation
@@ -292,8 +302,7 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource for which to list the
-    #   tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/ListTagsForResourceRequest AWS API Documentation
@@ -305,7 +314,7 @@ module Aws::RecycleBin
     end
 
     # @!attribute [rw] tags
-    #   Information about the tags assigned to the resource.
+    #   Information about the tags assigned to the retention rule.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/ListTagsForResourceResponse AWS API Documentation
@@ -334,8 +343,8 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # Information about a resource tag used to identify resources that are
-    # to be retained by a Recycle Bin retention rule.
+    # Information about the resource tags used to identify resources that
+    # are retained by the retention rule.
     #
     # @note When making an API call, you may pass ResourceTag
     #   data as a hash:
@@ -362,7 +371,7 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # Information about the retention period for which a retention rule is
+    # Information about the retention period for which the retention rule is
     # to retain resources.
     #
     # @note When making an API call, you may pass RetentionPeriod
@@ -400,12 +409,12 @@ module Aws::RecycleBin
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   The description for the retention rule.
+    #   The retention rule description.
     #   @return [String]
     #
     # @!attribute [rw] retention_period
     #   Information about the retention period for which the retention rule
-    #   retains resources
+    #   is to retain resources.
     #   @return [Types::RetentionPeriod]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/RuleSummary AWS API Documentation
@@ -437,7 +446,7 @@ module Aws::RecycleBin
       include Aws::Structure
     end
 
-    # Information about the tags assigned to a Recycle Bin retention rule.
+    # Information about the tags to assign to the retention rule.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -478,12 +487,11 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to assign
-    #   the tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Information about the tags to assign to the resource.
+    #   Information about the tags to assign to the retention rule.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/TagResourceRequest AWS API Documentation
@@ -508,12 +516,12 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to
-    #   unassign the tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   Information about the tags to unassign from the resource.
+    #   The tag keys of the tags to unassign. All tags that have the
+    #   specified tag key are unassigned.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UntagResourceRequest AWS API Documentation
@@ -539,7 +547,7 @@ module Aws::RecycleBin
     #           retention_period_unit: "DAYS", # required, accepts DAYS
     #         },
     #         description: "Description",
-    #         resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT
+    #         resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT, EC2_IMAGE
     #         resource_tags: [
     #           {
     #             resource_tag_key: "ResourceTagKey", # required
@@ -549,7 +557,7 @@ module Aws::RecycleBin
     #       }
     #
     # @!attribute [rw] identifier
-    #   The unique ID of the retention rule to update.
+    #   The unique ID of the retention rule.
     #   @return [String]
     #
     # @!attribute [rw] retention_period
@@ -563,19 +571,28 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots are supported.
+    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To
+    #   retain snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs,
+    #   specify `EC2_IMAGE`.
     #   @return [String]
     #
     # @!attribute [rw] resource_tags
-    #   Information about the resource tags to use to identify resources
-    #   that are to be retained by the retention rule. The retention rule
-    #   retains only deleted snapshots that have one or more of the
-    #   specified tag key and value pairs. If a snapshot is deleted, but it
-    #   does not have any of the specified tag key and value pairs, it is
-    #   immediately deleted without being retained by the retention rule.
+    #   Specifies the resource tags to use to identify resources that are to
+    #   be retained by a tag-level retention rule. For tag-level retention
+    #   rules, only deleted resources, of the specified resource type, that
+    #   have one or more of the specified tag key and value pairs are
+    #   retained. If a resource is deleted, but it does not have any of the
+    #   specified tag key and value pairs, it is immediately deleted without
+    #   being retained by the retention rule.
     #
     #   You can add the same tag key and value pair to a maximum or five
     #   retention rules.
+    #
+    #   To create a Region-level retention rule, omit this parameter. A
+    #   Region-level retention rule does not have any resource tags
+    #   specified. It retains all deleted resources of the specified
+    #   resource type in the Region in which the rule is created, even if
+    #   the resources are not tagged.
     #   @return [Array<Types::ResourceTag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UpdateRuleRequest AWS API Documentation
@@ -595,8 +612,8 @@ module Aws::RecycleBin
     #   @return [String]
     #
     # @!attribute [rw] retention_period
-    #   Information about the retention period for which a retention rule is
-    #   to retain resources.
+    #   Information about the retention period for which the retention rule
+    #   is to retain resources.
     #   @return [Types::RetentionPeriod]
     #
     # @!attribute [rw] description
@@ -614,7 +631,7 @@ module Aws::RecycleBin
     #
     # @!attribute [rw] status
     #   The state of the retention rule. Only retention rules that are in
-    #   the `available` state retain snapshots.
+    #   the `available` state retain resources.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rbin-2021-06-15/UpdateRuleResponse AWS API Documentation

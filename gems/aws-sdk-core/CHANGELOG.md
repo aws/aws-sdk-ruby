@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.126.0 (2022-02-03)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Add support for recursion detection.
 
 3.125.6 (2022-02-02)
