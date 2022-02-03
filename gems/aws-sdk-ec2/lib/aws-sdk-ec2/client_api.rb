@@ -1344,6 +1344,8 @@ module Aws::EC2
     ImageIdList = Shapes::ListShape.new(name: 'ImageIdList')
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
     ImageList = Shapes::ListShape.new(name: 'ImageList')
+    ImageRecycleBinInfo = Shapes::StructureShape.new(name: 'ImageRecycleBinInfo')
+    ImageRecycleBinInfoList = Shapes::ListShape.new(name: 'ImageRecycleBinInfoList')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageTypeValues = Shapes::StringShape.new(name: 'ImageTypeValues')
     ImportClientVpnClientCertificateRevocationListRequest = Shapes::StructureShape.new(name: 'ImportClientVpnClientCertificateRevocationListRequest')
@@ -1657,6 +1659,9 @@ module Aws::EC2
     LicenseConfigurationRequest = Shapes::StructureShape.new(name: 'LicenseConfigurationRequest')
     LicenseList = Shapes::ListShape.new(name: 'LicenseList')
     LicenseSpecificationListRequest = Shapes::ListShape.new(name: 'LicenseSpecificationListRequest')
+    ListImagesInRecycleBinMaxResults = Shapes::IntegerShape.new(name: 'ListImagesInRecycleBinMaxResults')
+    ListImagesInRecycleBinRequest = Shapes::StructureShape.new(name: 'ListImagesInRecycleBinRequest')
+    ListImagesInRecycleBinResult = Shapes::StructureShape.new(name: 'ListImagesInRecycleBinResult')
     ListSnapshotsInRecycleBinMaxResults = Shapes::IntegerShape.new(name: 'ListSnapshotsInRecycleBinMaxResults')
     ListSnapshotsInRecycleBinRequest = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinRequest')
     ListSnapshotsInRecycleBinResult = Shapes::StructureShape.new(name: 'ListSnapshotsInRecycleBinResult')
@@ -2179,6 +2184,8 @@ module Aws::EC2
     RestorableByStringList = Shapes::ListShape.new(name: 'RestorableByStringList')
     RestoreAddressToClassicRequest = Shapes::StructureShape.new(name: 'RestoreAddressToClassicRequest')
     RestoreAddressToClassicResult = Shapes::StructureShape.new(name: 'RestoreAddressToClassicResult')
+    RestoreImageFromRecycleBinRequest = Shapes::StructureShape.new(name: 'RestoreImageFromRecycleBinRequest')
+    RestoreImageFromRecycleBinResult = Shapes::StructureShape.new(name: 'RestoreImageFromRecycleBinResult')
     RestoreManagedPrefixListVersionRequest = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionRequest')
     RestoreManagedPrefixListVersionResult = Shapes::StructureShape.new(name: 'RestoreManagedPrefixListVersionResult')
     RestoreSnapshotFromRecycleBinRequest = Shapes::StructureShape.new(name: 'RestoreSnapshotFromRecycleBinRequest')
@@ -8040,6 +8047,15 @@ module Aws::EC2
 
     ImageList.member = Shapes::ShapeRef.new(shape: Image, location_name: "item")
 
+    ImageRecycleBinInfo.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
+    ImageRecycleBinInfo.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    ImageRecycleBinInfo.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    ImageRecycleBinInfo.add_member(:recycle_bin_enter_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinEnterTime"))
+    ImageRecycleBinInfo.add_member(:recycle_bin_exit_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "recycleBinExitTime"))
+    ImageRecycleBinInfo.struct_class = Types::ImageRecycleBinInfo
+
+    ImageRecycleBinInfoList.member = Shapes::ShapeRef.new(shape: ImageRecycleBinInfo, location_name: "item")
+
     ImportClientVpnClientCertificateRevocationListRequest.add_member(:client_vpn_endpoint_id, Shapes::ShapeRef.new(shape: ClientVpnEndpointId, required: true, location_name: "ClientVpnEndpointId"))
     ImportClientVpnClientCertificateRevocationListRequest.add_member(:certificate_revocation_list, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CertificateRevocationList"))
     ImportClientVpnClientCertificateRevocationListRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
@@ -9249,6 +9265,16 @@ module Aws::EC2
     LicenseList.member = Shapes::ShapeRef.new(shape: LicenseConfiguration, location_name: "item")
 
     LicenseSpecificationListRequest.member = Shapes::ShapeRef.new(shape: LicenseConfigurationRequest, location_name: "item")
+
+    ListImagesInRecycleBinRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdStringList, location_name: "ImageId"))
+    ListImagesInRecycleBinRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    ListImagesInRecycleBinRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListImagesInRecycleBinMaxResults, location_name: "MaxResults"))
+    ListImagesInRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ListImagesInRecycleBinRequest.struct_class = Types::ListImagesInRecycleBinRequest
+
+    ListImagesInRecycleBinResult.add_member(:images, Shapes::ShapeRef.new(shape: ImageRecycleBinInfoList, location_name: "imageSet"))
+    ListImagesInRecycleBinResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListImagesInRecycleBinResult.struct_class = Types::ListImagesInRecycleBinResult
 
     ListSnapshotsInRecycleBinRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListSnapshotsInRecycleBinMaxResults, location_name: "MaxResults"))
     ListSnapshotsInRecycleBinRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -11262,6 +11288,13 @@ module Aws::EC2
     RestoreAddressToClassicResult.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
     RestoreAddressToClassicResult.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     RestoreAddressToClassicResult.struct_class = Types::RestoreAddressToClassicResult
+
+    RestoreImageFromRecycleBinRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    RestoreImageFromRecycleBinRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    RestoreImageFromRecycleBinRequest.struct_class = Types::RestoreImageFromRecycleBinRequest
+
+    RestoreImageFromRecycleBinResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
+    RestoreImageFromRecycleBinResult.struct_class = Types::RestoreImageFromRecycleBinResult
 
     RestoreManagedPrefixListVersionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     RestoreManagedPrefixListVersionRequest.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: PrefixListResourceId, required: true, location_name: "PrefixListId"))
@@ -17014,6 +17047,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: ImportVolumeResult)
       end)
 
+      api.add_operation(:list_images_in_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListImagesInRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListImagesInRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListImagesInRecycleBinResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_snapshots_in_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListSnapshotsInRecycleBin"
         o.http_method = "POST"
@@ -17770,6 +17817,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: RestoreAddressToClassicRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreAddressToClassicResult)
+      end)
+
+      api.add_operation(:restore_image_from_recycle_bin, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreImageFromRecycleBin"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreImageFromRecycleBinRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreImageFromRecycleBinResult)
       end)
 
       api.add_operation(:restore_managed_prefix_list_version, Seahorse::Model::Operation.new.tap do |o|

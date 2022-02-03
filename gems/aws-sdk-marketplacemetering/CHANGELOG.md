@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-02-03)
+------------------
+
+* Feature - Add CustomerAWSAccountId to ResolveCustomer API response and increase UsageAllocation limit to 2500.
+
+1.42.0 (2022-02-03)
+------------------
+
+* Feature - Add CustomerAWSAccountId to ResolveCustomer API response and increase UsageAllocation limit to 2500.
+
 1.41.0 (2021-12-21)
 ------------------
 

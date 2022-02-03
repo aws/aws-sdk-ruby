@@ -48,6 +48,6 @@ require_relative 'aws-sdk-cloudwatchrum/customizations'
 # @!group service
 module Aws::CloudWatchRUM
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
