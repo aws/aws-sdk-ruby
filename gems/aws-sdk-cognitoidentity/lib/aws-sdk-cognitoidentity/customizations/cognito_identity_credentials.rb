@@ -86,6 +86,7 @@ module Aws
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
         @before_refresh = options.delete(:before_refresh)
+        @async_refresh = false
 
         if !@identity_pool_id && !@identity_id
           raise ArgumentError,

@@ -31,7 +31,7 @@ module Aws
     # and fail / raise to clients.
     # @return [Credentials]
     def credentials
-      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) }
+      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) } if @async_refresh
       refresh_if_near_expiration!
 
       @credentials
@@ -43,7 +43,7 @@ module Aws
     # and fail / raise to clients.
     # @return [Time,nil]
     def expiration
-      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) }
+      Thread.new { refresh_if_near_expiration!(ASYNC_EXPIRATION_LENGTH) } if @async_refresh
       refresh_if_near_expiration!
 
       @expiration

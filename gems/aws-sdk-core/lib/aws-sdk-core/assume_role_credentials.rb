@@ -39,6 +39,7 @@ module Aws
         end
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
+      @async_refresh = true
       super
     end
 

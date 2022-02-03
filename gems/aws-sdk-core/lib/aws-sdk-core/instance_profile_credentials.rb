@@ -74,6 +74,8 @@ module Aws
       @backoff = backoff(options[:backoff])
       @token_ttl = options[:token_ttl] || 21_600
       @token = nil
+      @async_refresh = false
+
       super
     end
 
