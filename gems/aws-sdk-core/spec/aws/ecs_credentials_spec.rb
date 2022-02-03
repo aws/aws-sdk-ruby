@@ -132,8 +132,6 @@ module Aws
 
         it 'auto-refreshes within 5 minutes from expiration' do
           c = ECSCredentials.new
-          c.credentials
-          sleep(0.1)
           expect(c.credentials.access_key_id).to eq('akid-2')
           expect(c.credentials.secret_access_key).to eq('secret-2')
           expect(c.credentials.session_token).to eq('session-token-2')
