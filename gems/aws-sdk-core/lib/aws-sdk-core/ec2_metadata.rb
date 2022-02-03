@@ -136,8 +136,9 @@ module Aws
 
     def fetch_token
       open_connection do |conn|
+        created_time = Time.now
         token_value, token_ttl = http_put(conn, @token_ttl)
-        @token = Token.new(value: token_value, ttl: token_ttl)
+        @token = Token.new(value: token_value, ttl: token_ttl, created_time: created_time)
       end
     end
 
@@ -222,7 +223,7 @@ module Aws
       def initialize(options = {})
         @ttl   = options[:ttl]
         @value = options[:value]
-        @created_time = Time.now
+        @created_time = options[:created_time] || Time.now
       end
 
       # [String] Returns the token value.
