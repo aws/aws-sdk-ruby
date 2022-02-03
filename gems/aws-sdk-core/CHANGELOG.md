@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens.
+
 * Feature - Add support for recursion detection.
 
 3.125.6 (2022-02-02)
