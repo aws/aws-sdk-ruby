@@ -10,6 +10,19 @@
 module Aws::Appflow
   module Types
 
+    # AppFlow/Requester has invalid or missing permissions.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AccessDeniedException AWS API Documentation
+    #
+    class AccessDeniedException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The aggregation settings that you can use to customize the output
     # format of your flow data.
     #
@@ -57,7 +70,7 @@ module Aws::Appflow
     class AmplitudeConnectorProfileCredentials < Struct.new(
       :api_key,
       :secret_key)
-      SENSITIVE = [:secret_key]
+      SENSITIVE = [:api_key, :secret_key]
       include Aws::Structure
     end
 
@@ -94,6 +107,118 @@ module Aws::Appflow
     #
     class AmplitudeSourceProperties < Struct.new(
       :object)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The API key credentials required for API key authentication.
+    #
+    # @note When making an API call, you may pass ApiKeyCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         api_key: "ApiKey", # required
+    #         api_secret_key: "ApiSecretKey",
+    #       }
+    #
+    # @!attribute [rw] api_key
+    #   The API key required for API key authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_secret_key
+    #   The API secret key required for API key authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ApiKeyCredentials AWS API Documentation
+    #
+    class ApiKeyCredentials < Struct.new(
+      :api_key,
+      :api_secret_key)
+      SENSITIVE = [:api_key, :api_secret_key]
+      include Aws::Structure
+    end
+
+    # Information about required authentication parameters.
+    #
+    # @!attribute [rw] key
+    #   The authentication key required to authenticate with the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether this authentication parameter is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] label
+    #   Label used for authentication parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the authentication parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sensitive_field
+    #   Indicates whether this authentication parameter is a sensitive
+    #   field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connector_supplied_values
+    #   Contains default values for this authentication parameter that are
+    #   supplied by the connector.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AuthParameter AWS API Documentation
+    #
+    class AuthParameter < Struct.new(
+      :key,
+      :is_required,
+      :label,
+      :description,
+      :is_sensitive_field,
+      :connector_supplied_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the authentication config that the
+    # connector supports.
+    #
+    # @!attribute [rw] is_basic_auth_supported
+    #   Indicates whether basic authentication is supported by the
+    #   connector.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_api_key_auth_supported
+    #   Indicates whether API key authentication is supported by the
+    #   connector
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_o_auth_2_supported
+    #   Indicates whether OAuth 2.0 authentication is supported by the
+    #   connector.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_custom_auth_supported
+    #   Indicates whether custom authentication is supported by the
+    #   connector
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] o_auth_2_defaults
+    #   Contains the default values required for OAuth 2.0 authentication.
+    #   @return [Types::OAuth2Defaults]
+    #
+    # @!attribute [rw] custom_auth_configs
+    #   Contains information required for custom authentication.
+    #   @return [Array<Types::CustomAuthConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/AuthenticationConfig AWS API Documentation
+    #
+    class AuthenticationConfig < Struct.new(
+      :is_basic_auth_supported,
+      :is_api_key_auth_supported,
+      :is_o_auth_2_supported,
+      :is_custom_auth_supported,
+      :o_auth_2_defaults,
+      :custom_auth_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -188,6 +313,78 @@ module Aws::Appflow
     #   `supportedRegions`, `privateLinkServiceUrl`, and so on.
     #   @return [Types::ConnectorMetadata]
     #
+    # @!attribute [rw] connector_type
+    #   The connector type.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_label
+    #   The label used for registering the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_description
+    #   A description about the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_owner
+    #   The owner who developed the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The connector name.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_version
+    #   The connector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) for the registered connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_modes
+    #   The connection modes that the connector supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] authentication_config
+    #   The authentication config required for the connector.
+    #   @return [Types::AuthenticationConfig]
+    #
+    # @!attribute [rw] connector_runtime_settings
+    #   The required connector runtime settings.
+    #   @return [Array<Types::ConnectorRuntimeSetting>]
+    #
+    # @!attribute [rw] supported_api_versions
+    #   A list of API versions that are supported by the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_operators
+    #   A list of operators supported by the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supported_write_operations
+    #   A list of write operations supported by the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connector_provisioning_type
+    #   The provisioning type used to register the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_provisioning_config
+    #   The configuration required for registering the connector.
+    #   @return [Types::ConnectorProvisioningConfig]
+    #
+    # @!attribute [rw] logo_url
+    #   Logo URL of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_at
+    #   The date on which the connector was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] registered_by
+    #   Information about who registered the connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorConfiguration AWS API Documentation
     #
     class ConnectorConfiguration < Struct.new(
@@ -198,7 +395,89 @@ module Aws::Appflow
       :is_private_link_enabled,
       :is_private_link_endpoint_url_required,
       :supported_trigger_types,
-      :connector_metadata)
+      :connector_metadata,
+      :connector_type,
+      :connector_label,
+      :connector_description,
+      :connector_owner,
+      :connector_name,
+      :connector_version,
+      :connector_arn,
+      :connector_modes,
+      :authentication_config,
+      :connector_runtime_settings,
+      :supported_api_versions,
+      :supported_operators,
+      :supported_write_operations,
+      :connector_provisioning_type,
+      :connector_provisioning_config,
+      :logo_url,
+      :registered_at,
+      :registered_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the registered connector.
+    #
+    # @!attribute [rw] connector_description
+    #   A description about the registered connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_owner
+    #   The owner of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_version
+    #   The connector version.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_type
+    #   The application type of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_type
+    #   The connector type.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_label
+    #   A label used for the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] registered_at
+    #   The time at which the connector was registered.
+    #   @return [Time]
+    #
+    # @!attribute [rw] registered_by
+    #   The user who registered the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_provisioning_type
+    #   The provisioning type that the connector uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_modes
+    #   The connection mode that the connector supports.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorDetail AWS API Documentation
+    #
+    class ConnectorDetail < Struct.new(
+      :connector_description,
+      :connector_name,
+      :connector_owner,
+      :connector_version,
+      :application_type,
+      :connector_type,
+      :connector_label,
+      :registered_at,
+      :registered_by,
+      :connector_provisioning_type,
+      :connector_modes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -242,9 +521,27 @@ module Aws::Appflow
     #   The unique identifier of the connector field.
     #   @return [String]
     #
+    # @!attribute [rw] parent_identifier
+    #   The parent identifier of the connector field.
+    #   @return [String]
+    #
     # @!attribute [rw] label
     #   The label applied to a connector entity field.
     #   @return [String]
+    #
+    # @!attribute [rw] is_primary_key
+    #   Booelan value that indicates whether this field can be used as a
+    #   primary key.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_value
+    #   Default value that can be assigned to this field.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_deprecated
+    #   Booelan value that indicates whether this field is deprecated or
+    #   not.
+    #   @return [Boolean]
     #
     # @!attribute [rw] supported_field_type_details
     #   Contains details regarding the supported `FieldType`, including the
@@ -265,15 +562,25 @@ module Aws::Appflow
     #   as a destination.
     #   @return [Types::DestinationFieldProperties]
     #
+    # @!attribute [rw] custom_properties
+    #   A map that has specific properties related to the
+    #   ConnectorEntityField.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorEntityField AWS API Documentation
     #
     class ConnectorEntityField < Struct.new(
       :identifier,
+      :parent_identifier,
       :label,
+      :is_primary_key,
+      :default_value,
+      :is_deprecated,
       :supported_field_type_details,
       :description,
       :source_properties,
-      :destination_properties)
+      :destination_properties,
+      :custom_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -444,6 +751,7 @@ module Aws::Appflow
     #         veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #         custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #       }
     #
     # @!attribute [rw] amplitude
@@ -516,6 +824,10 @@ module Aws::Appflow
     #   fields.
     #   @return [String]
     #
+    # @!attribute [rw] custom_connector
+    #   Operators supported by the custom connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorOperator AWS API Documentation
     #
     class ConnectorOperator < Struct.new(
@@ -533,7 +845,8 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :sapo_data)
+      :sapo_data,
+      :custom_connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -556,6 +869,10 @@ module Aws::Appflow
     #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_label
+    #   The label for the connector profile being created.
     #   @return [String]
     #
     # @!attribute [rw] connection_mode
@@ -588,6 +905,7 @@ module Aws::Appflow
       :connector_profile_arn,
       :connector_profile_name,
       :connector_type,
+      :connector_label,
       :connection_mode,
       :credentials_arn,
       :connector_profile_properties,
@@ -670,6 +988,15 @@ module Aws::Appflow
     #               token_url: "TokenUrl", # required
     #               auth_code_url: "AuthCodeUrl", # required
     #               o_auth_scopes: ["OAuthScope"], # required
+    #             },
+    #           },
+    #           custom_connector: {
+    #             profile_properties: {
+    #               "ProfilePropertyKey" => "ProfilePropertyValue",
+    #             },
+    #             o_auth_2_properties: {
+    #               token_url: "TokenUrl", # required
+    #               o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #             },
     #           },
     #         },
@@ -780,6 +1107,33 @@ module Aws::Appflow
     #               o_auth_request: {
     #                 auth_code: "AuthCode",
     #                 redirect_uri: "RedirectUri",
+    #               },
+    #             },
+    #           },
+    #           custom_connector: {
+    #             authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
+    #             basic: {
+    #               username: "Username", # required
+    #               password: "Password", # required
+    #             },
+    #             oauth2: {
+    #               client_id: "ClientId",
+    #               client_secret: "ClientSecret",
+    #               access_token: "AccessToken",
+    #               refresh_token: "RefreshToken",
+    #               o_auth_request: {
+    #                 auth_code: "AuthCode",
+    #                 redirect_uri: "RedirectUri",
+    #               },
+    #             },
+    #             api_key: {
+    #               api_key: "ApiKey", # required
+    #               api_secret_key: "ApiSecretKey",
+    #             },
+    #             custom: {
+    #               custom_authentication_type: "CustomAuthenticationType", # required
+    #               credentials_map: {
+    #                 "CredentialsMapKey" => "CredentialsMapValue",
     #               },
     #             },
     #           },
@@ -918,6 +1272,33 @@ module Aws::Appflow
     #             },
     #           },
     #         },
+    #         custom_connector: {
+    #           authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
+    #           basic: {
+    #             username: "Username", # required
+    #             password: "Password", # required
+    #           },
+    #           oauth2: {
+    #             client_id: "ClientId",
+    #             client_secret: "ClientSecret",
+    #             access_token: "AccessToken",
+    #             refresh_token: "RefreshToken",
+    #             o_auth_request: {
+    #               auth_code: "AuthCode",
+    #               redirect_uri: "RedirectUri",
+    #             },
+    #           },
+    #           api_key: {
+    #             api_key: "ApiKey", # required
+    #             api_secret_key: "ApiSecretKey",
+    #           },
+    #           custom: {
+    #             custom_authentication_type: "CustomAuthenticationType", # required
+    #             credentials_map: {
+    #               "CredentialsMapKey" => "CredentialsMapValue",
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] amplitude
@@ -992,6 +1373,11 @@ module Aws::Appflow
     #   SAPOData.
     #   @return [Types::SAPODataConnectorProfileCredentials]
     #
+    # @!attribute [rw] custom_connector
+    #   The connector-specific profile credentials that are required when
+    #   using the custom connector.
+    #   @return [Types::CustomConnectorProfileCredentials]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorProfileCredentials AWS API Documentation
     #
     class ConnectorProfileCredentials < Struct.new(
@@ -1011,7 +1397,8 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :sapo_data)
+      :sapo_data,
+      :custom_connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1088,6 +1475,15 @@ module Aws::Appflow
     #             o_auth_scopes: ["OAuthScope"], # required
     #           },
     #         },
+    #         custom_connector: {
+    #           profile_properties: {
+    #             "ProfilePropertyKey" => "ProfilePropertyValue",
+    #           },
+    #           o_auth_2_properties: {
+    #             token_url: "TokenUrl", # required
+    #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] amplitude
@@ -1159,6 +1555,10 @@ module Aws::Appflow
     #   SAPOData.
     #   @return [Types::SAPODataConnectorProfileProperties]
     #
+    # @!attribute [rw] custom_connector
+    #   The properties required by the custom connector.
+    #   @return [Types::CustomConnectorProfileProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorProfileProperties AWS API Documentation
     #
     class ConnectorProfileProperties < Struct.new(
@@ -1178,7 +1578,79 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :sapo_data)
+      :sapo_data,
+      :custom_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the configuration of the connector being
+    # registered.
+    #
+    # @note When making an API call, you may pass ConnectorProvisioningConfig
+    #   data as a hash:
+    #
+    #       {
+    #         lambda: {
+    #           lambda_arn: "ARN", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lambda
+    #   Contains information about the configuration of the lambda which is
+    #   being registered as the connector.
+    #   @return [Types::LambdaConnectorProvisioningConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorProvisioningConfig AWS API Documentation
+    #
+    class ConnectorProvisioningConfig < Struct.new(
+      :lambda)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the connector runtime settings that are
+    # required for flow execution.
+    #
+    # @!attribute [rw] key
+    #   Contains value information about the connector runtime setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   Data type of the connector runtime setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether this connector runtime setting is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] label
+    #   A label used for connector runtime setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the connector runtime setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   Indicates the scope of the connector runtime setting.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_supplied_value_options
+    #   Contains default values for the connector runtime setting that are
+    #   supplied by the connector.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ConnectorRuntimeSetting AWS API Documentation
+    #
+    class ConnectorRuntimeSetting < Struct.new(
+      :key,
+      :data_type,
+      :is_required,
+      :label,
+      :description,
+      :scope,
+      :connector_supplied_value_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1202,7 +1674,8 @@ module Aws::Appflow
     #       {
     #         connector_profile_name: "ConnectorProfileName", # required
     #         kms_arn: "KMSArn",
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         connector_label: "ConnectorLabel",
     #         connection_mode: "Public", # required, accepts Public, Private
     #         connector_profile_config: { # required
     #           connector_profile_properties: { # required
@@ -1270,6 +1743,15 @@ module Aws::Appflow
     #                 token_url: "TokenUrl", # required
     #                 auth_code_url: "AuthCodeUrl", # required
     #                 o_auth_scopes: ["OAuthScope"], # required
+    #               },
+    #             },
+    #             custom_connector: {
+    #               profile_properties: {
+    #                 "ProfilePropertyKey" => "ProfilePropertyValue",
+    #               },
+    #               o_auth_2_properties: {
+    #                 token_url: "TokenUrl", # required
+    #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
     #               },
     #             },
     #           },
@@ -1383,6 +1865,33 @@ module Aws::Appflow
     #                 },
     #               },
     #             },
+    #             custom_connector: {
+    #               authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
+    #               basic: {
+    #                 username: "Username", # required
+    #                 password: "Password", # required
+    #               },
+    #               oauth2: {
+    #                 client_id: "ClientId",
+    #                 client_secret: "ClientSecret",
+    #                 access_token: "AccessToken",
+    #                 refresh_token: "RefreshToken",
+    #                 o_auth_request: {
+    #                   auth_code: "AuthCode",
+    #                   redirect_uri: "RedirectUri",
+    #                 },
+    #               },
+    #               api_key: {
+    #                 api_key: "ApiKey", # required
+    #                 api_secret_key: "ApiSecretKey",
+    #               },
+    #               custom: {
+    #                 custom_authentication_type: "CustomAuthenticationType", # required
+    #                 credentials_map: {
+    #                   "CredentialsMapKey" => "CredentialsMapValue",
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       }
@@ -1404,6 +1913,12 @@ module Aws::Appflow
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #   @return [String]
     #
+    # @!attribute [rw] connector_label
+    #   The label of the connector. The label is unique for each
+    #   `ConnectorRegistration` in your Amazon Web Services account. Only
+    #   needed if calling for CUSTOMCONNECTOR connector type/.
+    #   @return [String]
+    #
     # @!attribute [rw] connection_mode
     #   Indicates the connection mode and specifies whether it is public or
     #   private. Private flows use Amazon Web Services PrivateLink to route
@@ -1421,6 +1936,7 @@ module Aws::Appflow
       :connector_profile_name,
       :kms_arn,
       :connector_type,
+      :connector_label,
       :connection_mode,
       :connector_profile_config)
       SENSITIVE = []
@@ -1461,7 +1977,8 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #           api_version: "ApiVersion",
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -1519,6 +2036,12 @@ module Aws::Appflow
     #             sapo_data: {
     #               object_path: "Object",
     #             },
+    #             custom_connector: {
+    #               entity_name: "EntityName", # required
+    #               custom_properties: {
+    #                 "CustomPropertyKey" => "CustomPropertyValue",
+    #               },
+    #             },
     #           },
     #           incremental_pull_config: {
     #             datetime_type_field_name: "DatetimeTypeFieldName",
@@ -1526,7 +2049,8 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #             api_version: "ApiVersion",
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -1561,7 +2085,7 @@ module Aws::Appflow
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -1617,7 +2141,20 @@ module Aws::Appflow
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #               },
+    #               custom_connector: {
+    #                 entity_name: "EntityName", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #                 id_field_names: ["Name"],
+    #                 custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },
@@ -1641,6 +2178,7 @@ module Aws::Appflow
     #               veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #               sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
     #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
@@ -1726,6 +2264,247 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Configuration information required for custom authentication.
+    #
+    # @!attribute [rw] custom_authentication_type
+    #   The authentication type that the custom connector uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_parameters
+    #   Information about authentication parameters required for
+    #   authentication.
+    #   @return [Array<Types::AuthParameter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomAuthConfig AWS API Documentation
+    #
+    class CustomAuthConfig < Struct.new(
+      :custom_authentication_type,
+      :auth_parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The custom credentials required for custom authentication.
+    #
+    # @note When making an API call, you may pass CustomAuthCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         custom_authentication_type: "CustomAuthenticationType", # required
+    #         credentials_map: {
+    #           "CredentialsMapKey" => "CredentialsMapValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] custom_authentication_type
+    #   The custom authentication type that the connector uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] credentials_map
+    #   A map that holds custom authentication credentials.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomAuthCredentials AWS API Documentation
+    #
+    class CustomAuthCredentials < Struct.new(
+      :custom_authentication_type,
+      :credentials_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when the custom connector is being
+    # used as a destination.
+    #
+    # @note When making an API call, you may pass CustomConnectorDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         entity_name: "EntityName", # required
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #         id_field_names: ["Name"],
+    #         custom_properties: {
+    #           "CustomPropertyKey" => "CustomPropertyValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] entity_name
+    #   The entity specified in the custom connector as a destination in the
+    #   flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the custom connector as destination.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @!attribute [rw] write_operation_type
+    #   Specifies the type of write operation to be performed in the custom
+    #   connector when it's used as destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] id_field_names
+    #   The name of the field that Amazon AppFlow uses as an ID when
+    #   performing a write operation such as update, delete, or upsert.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] custom_properties
+    #   The custom properties that are specific to the connector when it's
+    #   used as a destination in the flow.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorDestinationProperties AWS API Documentation
+    #
+    class CustomConnectorDestinationProperties < Struct.new(
+      :entity_name,
+      :error_handling_config,
+      :write_operation_type,
+      :id_field_names,
+      :custom_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connector-specific profile credentials that are required when
+    # using the custom connector.
+    #
+    # @note When making an API call, you may pass CustomConnectorProfileCredentials
+    #   data as a hash:
+    #
+    #       {
+    #         authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
+    #         basic: {
+    #           username: "Username", # required
+    #           password: "Password", # required
+    #         },
+    #         oauth2: {
+    #           client_id: "ClientId",
+    #           client_secret: "ClientSecret",
+    #           access_token: "AccessToken",
+    #           refresh_token: "RefreshToken",
+    #           o_auth_request: {
+    #             auth_code: "AuthCode",
+    #             redirect_uri: "RedirectUri",
+    #           },
+    #         },
+    #         api_key: {
+    #           api_key: "ApiKey", # required
+    #           api_secret_key: "ApiSecretKey",
+    #         },
+    #         custom: {
+    #           custom_authentication_type: "CustomAuthenticationType", # required
+    #           credentials_map: {
+    #             "CredentialsMapKey" => "CredentialsMapValue",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] authentication_type
+    #   The authentication type that the custom connector uses for
+    #   authenticating while creating a connector profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] basic
+    #   The basic credentials that are required for the authentication of
+    #   the user.
+    #   @return [Types::BasicAuthCredentials]
+    #
+    # @!attribute [rw] oauth2
+    #   The OAuth 2.0 credentials required for the authentication of the
+    #   user.
+    #   @return [Types::OAuth2Credentials]
+    #
+    # @!attribute [rw] api_key
+    #   The API keys required for the authentication of the user.
+    #   @return [Types::ApiKeyCredentials]
+    #
+    # @!attribute [rw] custom
+    #   If the connector uses the custom authentication mechanism, this
+    #   holds the required credentials.
+    #   @return [Types::CustomAuthCredentials]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorProfileCredentials AWS API Documentation
+    #
+    class CustomConnectorProfileCredentials < Struct.new(
+      :authentication_type,
+      :basic,
+      :oauth2,
+      :api_key,
+      :custom)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The profile properties required by the custom connector.
+    #
+    # @note When making an API call, you may pass CustomConnectorProfileProperties
+    #   data as a hash:
+    #
+    #       {
+    #         profile_properties: {
+    #           "ProfilePropertyKey" => "ProfilePropertyValue",
+    #         },
+    #         o_auth_2_properties: {
+    #           token_url: "TokenUrl", # required
+    #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] profile_properties
+    #   A map of properties that are required to create a profile for the
+    #   custom connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] o_auth_2_properties
+    #   The OAuth 2.0 properties required for OAuth 2.0 authentication.
+    #   @return [Types::OAuth2Properties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorProfileProperties AWS API Documentation
+    #
+    class CustomConnectorProfileProperties < Struct.new(
+      :profile_properties,
+      :o_auth_2_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that are applied when the custom connector is being
+    # used as a source.
+    #
+    # @note When making an API call, you may pass CustomConnectorSourceProperties
+    #   data as a hash:
+    #
+    #       {
+    #         entity_name: "EntityName", # required
+    #         custom_properties: {
+    #           "CustomPropertyKey" => "CustomPropertyValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] entity_name
+    #   The entity specified in the custom connector as a source in the
+    #   flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_properties
+    #   Custom properties that are required to use the custom connector as a
+    #   source.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/CustomConnectorSourceProperties AWS API Documentation
+    #
+    class CustomConnectorSourceProperties < Struct.new(
+      :entity_name,
+      :custom_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The properties that are applied when Amazon Connect Customer Profiles
     # is used as a destination.
     #
@@ -1788,7 +2567,7 @@ module Aws::Appflow
     class DatadogConnectorProfileCredentials < Struct.new(
       :api_key,
       :application_key)
-      SENSITIVE = []
+      SENSITIVE = [:api_key]
       include Aws::Structure
     end
 
@@ -1907,9 +2686,10 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_entity_name: "Name", # required
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_entity_name: "EntityName", # required
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
     #         connector_profile_name: "ConnectorProfileName",
+    #         api_version: "ApiVersion",
     #       }
     #
     # @!attribute [rw] connector_entity_name
@@ -1926,12 +2706,17 @@ module Aws::Appflow
     #   `ConnectorProfile` in the Amazon Web Services account.
     #   @return [String]
     #
+    # @!attribute [rw] api_version
+    #   The version of the API that's used by the connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectorEntityRequest AWS API Documentation
     #
     class DescribeConnectorEntityRequest < Struct.new(
       :connector_entity_name,
       :connector_type,
-      :connector_profile_name)
+      :connector_profile_name,
+      :api_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1955,7 +2740,8 @@ module Aws::Appflow
     #
     #       {
     #         connector_profile_names: ["ConnectorProfileName"],
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         connector_label: "ConnectorLabel",
     #         max_results: 1,
     #         next_token: "NextToken",
     #       }
@@ -1967,6 +2753,12 @@ module Aws::Appflow
     #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_label
+    #   The name of the connector. The name is unique for each
+    #   `ConnectorRegistration` in your Amazon Web Services account. Only
+    #   needed if calling for CUSTOMCONNECTOR connector type/.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1984,6 +2776,7 @@ module Aws::Appflow
     class DescribeConnectorProfilesRequest < Struct.new(
       :connector_profile_names,
       :connector_type,
+      :connector_label,
       :max_results,
       :next_token)
       SENSITIVE = []
@@ -2009,17 +2802,63 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         connector_label: "ConnectorLabel",
+    #       }
+    #
+    # @!attribute [rw] connector_type
+    #   The connector type, such as CUSTOMCONNECTOR, Saleforce, Marketo.
+    #   Please choose CUSTOMCONNECTOR for Lambda based custom connectors.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_label
+    #   The label of the connector. The label is unique for each
+    #   `ConnectorRegistration` in your Amazon Web Services account. Only
+    #   needed if calling for CUSTOMCONNECTOR connector type/.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectorRequest AWS API Documentation
+    #
+    class DescribeConnectorRequest < Struct.new(
+      :connector_type,
+      :connector_label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_configuration
+    #   Configuration info of all the connectors that the user requested.
+    #   @return [Types::ConnectorConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DescribeConnectorResponse AWS API Documentation
+    #
+    class DescribeConnectorResponse < Struct.new(
+      :connector_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeConnectorsRequest
     #   data as a hash:
     #
     #       {
-    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_types: ["Salesforce"], # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         max_results: 1,
     #         next_token: "NextToken",
     #       }
     #
     # @!attribute [rw] connector_types
     #   The type of connector, such as Salesforce, Amplitude, and so on.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items that should be returned in the result
+    #   set. The default is 20.
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token for the next page of data.
@@ -2029,6 +2868,7 @@ module Aws::Appflow
     #
     class DescribeConnectorsRequest < Struct.new(
       :connector_types,
+      :max_results,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2039,6 +2879,10 @@ module Aws::Appflow
     #   flow.
     #   @return [Hash<String,Types::ConnectorConfiguration>]
     #
+    # @!attribute [rw] connectors
+    #   Information about the connectors supported in Amazon AppFlow.
+    #   @return [Array<Types::ConnectorDetail>]
+    #
     # @!attribute [rw] next_token
     #   The pagination token for the next page of data.
     #   @return [String]
@@ -2047,6 +2891,7 @@ module Aws::Appflow
     #
     class DescribeConnectorsResponse < Struct.new(
       :connector_configurations,
+      :connectors,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -2260,7 +3105,7 @@ module Aws::Appflow
     #             bucket_prefix: "BucketPrefix",
     #             bucket_name: "BucketName",
     #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #         },
     #         snowflake: {
     #           object: "Object", # required
@@ -2316,7 +3161,20 @@ module Aws::Appflow
     #             bucket_prefix: "BucketPrefix",
     #             bucket_name: "BucketName",
     #           },
-    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #         },
+    #         custom_connector: {
+    #           entity_name: "EntityName", # required
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #           id_field_names: ["Name"],
+    #           custom_properties: {
+    #             "CustomPropertyKey" => "CustomPropertyValue",
+    #           },
     #         },
     #       }
     #
@@ -2360,6 +3218,10 @@ module Aws::Appflow
     #   The properties required to query Zendesk.
     #   @return [Types::ZendeskDestinationProperties]
     #
+    # @!attribute [rw] custom_connector
+    #   The properties that are required to query the custom Connector.
+    #   @return [Types::CustomConnectorDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -2372,7 +3234,8 @@ module Aws::Appflow
       :upsolver,
       :honeycode,
       :customer_profiles,
-      :zendesk)
+      :zendesk,
+      :custom_connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2400,6 +3263,11 @@ module Aws::Appflow
     #   `UPSERT` write operation.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_defaulted_on_create
+    #   Specifies whether the field can use the default value during a
+    #   Create operation.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] supported_write_operations
     #   A list of supported write operations. For each write operation
     #   listed, this field can be used in `idFieldNames` when that write
@@ -2413,6 +3281,7 @@ module Aws::Appflow
       :is_nullable,
       :is_upsertable,
       :is_updatable,
+      :is_defaulted_on_create,
       :supported_write_operations)
       SENSITIVE = []
       include Aws::Structure
@@ -2425,7 +3294,8 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         api_version: "ApiVersion",
     #         connector_profile_name: "ConnectorProfileName",
     #         destination_connector_properties: { # required
     #           redshift: {
@@ -2460,7 +3330,7 @@ module Aws::Appflow
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
     #           snowflake: {
     #             object: "Object", # required
@@ -2516,13 +3386,30 @@ module Aws::Appflow
     #               bucket_prefix: "BucketPrefix",
     #               bucket_name: "BucketName",
     #             },
-    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #           },
+    #           custom_connector: {
+    #             entity_name: "EntityName", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #             id_field_names: ["Name"],
+    #             custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       }
     #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_version
+    #   The API version that the destination connector uses.
     #   @return [String]
     #
     # @!attribute [rw] connector_profile_name
@@ -2539,6 +3426,7 @@ module Aws::Appflow
     #
     class DestinationFlowConfig < Struct.new(
       :connector_type,
+      :api_version,
       :connector_profile_name,
       :destination_connector_properties)
       SENSITIVE = []
@@ -2836,12 +3724,32 @@ module Aws::Appflow
     #   `fieldType` can have two values: "true" and "false".
     #   @return [Array<String>]
     #
+    # @!attribute [rw] value_regex_pattern
+    #   The regular expression pattern for the field name.
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_date_format
+    #   The date format that the field supports.
+    #   @return [String]
+    #
+    # @!attribute [rw] field_value_range
+    #   The range of values this field can hold.
+    #   @return [Types::Range]
+    #
+    # @!attribute [rw] field_length_range
+    #   This is the allowable length range for this field's value.
+    #   @return [Types::Range]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/FieldTypeDetails AWS API Documentation
     #
     class FieldTypeDetails < Struct.new(
       :field_type,
       :filter_operators,
-      :supported_values)
+      :supported_values,
+      :value_regex_pattern,
+      :supported_date_format,
+      :field_value_range,
+      :field_length_range)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2871,9 +3779,17 @@ module Aws::Appflow
     #   Amplitude, and so on.
     #   @return [String]
     #
+    # @!attribute [rw] source_connector_label
+    #   The label of the source connector in the flow.
+    #   @return [String]
+    #
     # @!attribute [rw] destination_connector_type
     #   Specifies the destination connector type, such as Salesforce, Amazon
     #   S3, Amplitude, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_connector_label
+    #   The label of the destination connector in the flow.
     #   @return [String]
     #
     # @!attribute [rw] trigger_type
@@ -2913,7 +3829,9 @@ module Aws::Appflow
       :flow_name,
       :flow_status,
       :source_connector_type,
+      :source_connector_label,
       :destination_connector_type,
+      :destination_connector_label,
       :trigger_type,
       :created_at,
       :last_updated_at,
@@ -3246,13 +4164,36 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Contains information about the configuration of the lambda which is
+    # being registered as the connector.
+    #
+    # @note When making an API call, you may pass LambdaConnectorProvisioningConfig
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_arn: "ARN", # required
+    #       }
+    #
+    # @!attribute [rw] lambda_arn
+    #   Lambda ARN of the connector being registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/LambdaConnectorProvisioningConfig AWS API Documentation
+    #
+    class LambdaConnectorProvisioningConfig < Struct.new(
+      :lambda_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListConnectorEntitiesRequest
     #   data as a hash:
     #
     #       {
     #         connector_profile_name: "ConnectorProfileName",
-    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_type: "Salesforce", # accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
     #         entities_path: "EntitiesPath",
+    #         api_version: "ApiVersion",
     #       }
     #
     # @!attribute [rw] connector_profile_name
@@ -3275,12 +4216,17 @@ module Aws::Appflow
     #   supported by the provider.
     #   @return [String]
     #
+    # @!attribute [rw] api_version
+    #   The version of the API that's used by the connector.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorEntitiesRequest AWS API Documentation
     #
     class ListConnectorEntitiesRequest < Struct.new(
       :connector_profile_name,
       :connector_type,
-      :entities_path)
+      :entities_path,
+      :api_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3295,6 +4241,52 @@ module Aws::Appflow
     #
     class ListConnectorEntitiesResponse < Struct.new(
       :connector_entity_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListConnectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of items that should be returned in the
+    #   result set. The default for `maxResults` is 20 (for all paginated
+    #   API operations).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorsRequest AWS API Documentation
+    #
+    class ListConnectorsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connectors
+    #   Contains information about the connectors supported by Amazon
+    #   AppFlow.
+    #   @return [Array<Types::ConnectorDetail>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token for the next page of data. If nextToken=null,
+    #   this means that all records have been fetched.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ListConnectorsResponse AWS API Documentation
+    #
+    class ListConnectorsResponse < Struct.new(
+      :connectors,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3475,6 +4467,113 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The OAuth 2.0 credentials required for OAuth 2.0 authentication.
+    #
+    # @note When making an API call, you may pass OAuth2Credentials
+    #   data as a hash:
+    #
+    #       {
+    #         client_id: "ClientId",
+    #         client_secret: "ClientSecret",
+    #         access_token: "AccessToken",
+    #         refresh_token: "RefreshToken",
+    #         o_auth_request: {
+    #           auth_code: "AuthCode",
+    #           redirect_uri: "RedirectUri",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_id
+    #   The identifier for the desired client.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_secret
+    #   The client secret used by the OAuth client to authenticate to the
+    #   authorization server.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_token
+    #   The access token used to access the connector on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] refresh_token
+    #   The refresh token used to refresh an expired access token.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_request
+    #   Used by select connectors for which the OAuth workflow is supported,
+    #   such as Salesforce, Google Analytics, Marketo, Zendesk, and Slack.
+    #   @return [Types::ConnectorOAuthRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Credentials AWS API Documentation
+    #
+    class OAuth2Credentials < Struct.new(
+      :client_id,
+      :client_secret,
+      :access_token,
+      :refresh_token,
+      :o_auth_request)
+      SENSITIVE = [:client_secret, :access_token]
+      include Aws::Structure
+    end
+
+    # Contains the default values required for OAuth 2.0 authentication.
+    #
+    # @!attribute [rw] oauth_scopes
+    #   OAuth 2.0 scopes that the connector supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] token_urls
+    #   Token URLs that can be used for OAuth 2.0 authentication.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] auth_code_urls
+    #   Auth code URLs that can be used for OAuth 2.0 authentication.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] oauth2_grant_types_supported
+    #   OAuth 2.0 grant types supported by the connector.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Defaults AWS API Documentation
+    #
+    class OAuth2Defaults < Struct.new(
+      :oauth_scopes,
+      :token_urls,
+      :auth_code_urls,
+      :oauth2_grant_types_supported)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The OAuth 2.0 properties required for OAuth 2.0 authentication.
+    #
+    # @note When making an API call, you may pass OAuth2Properties
+    #   data as a hash:
+    #
+    #       {
+    #         token_url: "TokenUrl", # required
+    #         o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #       }
+    #
+    # @!attribute [rw] token_url
+    #   The token URL required for OAuth 2.0 authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth 2.0 grant type used by connector for OAuth 2.0
+    #   authentication.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Properties AWS API Documentation
+    #
+    class OAuth2Properties < Struct.new(
+      :token_url,
+      :o_auth_2_grant_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The OAuth credentials required for OAuth type authentication.
     #
     # @note When making an API call, you may pass OAuthCredentials
@@ -3615,6 +4714,25 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The range of values that the property supports.
+    #
+    # @!attribute [rw] maximum
+    #   Maximum value supported by the field.
+    #   @return [Float]
+    #
+    # @!attribute [rw] minimum
+    #   Minimum value supported by the field.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/Range AWS API Documentation
+    #
+    class Range < Struct.new(
+      :maximum,
+      :minimum)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The connector-specific profile credentials required when using Amazon
     # Redshift.
     #
@@ -3739,6 +4857,62 @@ module Aws::Appflow
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/RedshiftMetadata AWS API Documentation
     #
     class RedshiftMetadata < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass RegisterConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connector_label: "ConnectorLabel",
+    #         description: "Description",
+    #         connector_provisioning_type: "LAMBDA", # accepts LAMBDA
+    #         connector_provisioning_config: {
+    #           lambda: {
+    #             lambda_arn: "ARN", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connector_label
+    #   The name of the connector. The name is unique for each
+    #   `ConnectorRegistration` in your Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the connector that's being registered.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_provisioning_type
+    #   The provisioning type of the connector. Currently the only supported
+    #   value is LAMBDA.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_provisioning_config
+    #   The provisioning type of the connector. Currently the only supported
+    #   value is LAMBDA.
+    #   @return [Types::ConnectorProvisioningConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/RegisterConnectorRequest AWS API Documentation
+    #
+    class RegisterConnectorRequest < Struct.new(
+      :connector_label,
+      :description,
+      :connector_provisioning_type,
+      :connector_provisioning_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The ARN of the connector being registered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/RegisterConnectorResponse AWS API Documentation
+    #
+    class RegisterConnectorResponse < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The resource specified in the request (such as the source or
     # destination connector profile) is not found.
@@ -4128,7 +5302,7 @@ module Aws::Appflow
     #           bucket_prefix: "BucketPrefix",
     #           bucket_name: "BucketName",
     #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #       }
     #
     # @!attribute [rw] object
@@ -4391,7 +5565,7 @@ module Aws::Appflow
     #
     class SingularConnectorProfileCredentials < Struct.new(
       :api_key)
-      SENSITIVE = []
+      SENSITIVE = [:api_key]
       include Aws::Structure
     end
 
@@ -4751,6 +5925,12 @@ module Aws::Appflow
     #         sapo_data: {
     #           object_path: "Object",
     #         },
+    #         custom_connector: {
+    #           entity_name: "EntityName", # required
+    #           custom_properties: {
+    #             "CustomPropertyKey" => "CustomPropertyValue",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] amplitude
@@ -4815,6 +5995,11 @@ module Aws::Appflow
     #   source.
     #   @return [Types::SAPODataSourceProperties]
     #
+    # @!attribute [rw] custom_connector
+    #   The properties that are applied when the custom connector is being
+    #   used as a source.
+    #   @return [Types::CustomConnectorSourceProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SourceConnectorProperties AWS API Documentation
     #
     class SourceConnectorProperties < Struct.new(
@@ -4832,7 +6017,8 @@ module Aws::Appflow
       :trendmicro,
       :veeva,
       :zendesk,
-      :sapo_data)
+      :sapo_data,
+      :custom_connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4848,11 +6034,17 @@ module Aws::Appflow
     #   Indicates if the field can be queried.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_timestamp_field_for_incremental_queries
+    #   Indicates if this timestamp field can be used for incremental
+    #   queries.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SourceFieldProperties AWS API Documentation
     #
     class SourceFieldProperties < Struct.new(
       :is_retrievable,
-      :is_queryable)
+      :is_queryable,
+      :is_timestamp_field_for_incremental_queries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4864,7 +6056,8 @@ module Aws::Appflow
     #   data as a hash:
     #
     #       {
-    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #         connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #         api_version: "ApiVersion",
     #         connector_profile_name: "ConnectorProfileName",
     #         source_connector_properties: { # required
     #           amplitude: {
@@ -4922,6 +6115,12 @@ module Aws::Appflow
     #           sapo_data: {
     #             object_path: "Object",
     #           },
+    #           custom_connector: {
+    #             entity_name: "EntityName", # required
+    #             custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
+    #           },
     #         },
     #         incremental_pull_config: {
     #           datetime_type_field_name: "DatetimeTypeFieldName",
@@ -4930,6 +6129,11 @@ module Aws::Appflow
     #
     # @!attribute [rw] connector_type
     #   The type of connector, such as Salesforce, Amplitude, and so on.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_version
+    #   The API version of the connector when it's used as a source in the
+    #   flow.
     #   @return [String]
     #
     # @!attribute [rw] connector_profile_name
@@ -4952,6 +6156,7 @@ module Aws::Appflow
     #
     class SourceFlowConfig < Struct.new(
       :connector_type,
+      :api_version,
       :connector_profile_name,
       :source_connector_properties,
       :incremental_pull_config)
@@ -5111,6 +6316,7 @@ module Aws::Appflow
     #           veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #           sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
     #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
@@ -5150,6 +6356,20 @@ module Aws::Appflow
       :destination_field,
       :task_type,
       :task_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # API calls have exceeded the maximum allowed API request rate per
+    # account and per Region.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5286,6 +6506,38 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UnregisterConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         connector_label: "ConnectorLabel", # required
+    #         force_delete: false,
+    #       }
+    #
+    # @!attribute [rw] connector_label
+    #   The label of the connector. The label is unique for each
+    #   `ConnectorRegistration` in your Amazon Web Services account.
+    #   @return [String]
+    #
+    # @!attribute [rw] force_delete
+    #   Indicates whether Amazon AppFlow should unregister the connector,
+    #   even if it is currently in use in one or more connector profiles.
+    #   The default value is false.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UnregisterConnectorRequest AWS API Documentation
+    #
+    class UnregisterConnectorRequest < Struct.new(
+      :connector_label,
+      :force_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/UnregisterConnectorResponse AWS API Documentation
+    #
+    class UnregisterConnectorResponse < Aws::EmptyStructure; end
+
     # The requested operation is not supported for the current flow.
     #
     # @!attribute [rw] message
@@ -5403,6 +6655,15 @@ module Aws::Appflow
     #                 o_auth_scopes: ["OAuthScope"], # required
     #               },
     #             },
+    #             custom_connector: {
+    #               profile_properties: {
+    #                 "ProfilePropertyKey" => "ProfilePropertyValue",
+    #               },
+    #               o_auth_2_properties: {
+    #                 token_url: "TokenUrl", # required
+    #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #               },
+    #             },
     #           },
     #           connector_profile_credentials: { # required
     #             amplitude: {
@@ -5514,6 +6775,33 @@ module Aws::Appflow
     #                 },
     #               },
     #             },
+    #             custom_connector: {
+    #               authentication_type: "OAUTH2", # required, accepts OAUTH2, APIKEY, BASIC, CUSTOM
+    #               basic: {
+    #                 username: "Username", # required
+    #                 password: "Password", # required
+    #               },
+    #               oauth2: {
+    #                 client_id: "ClientId",
+    #                 client_secret: "ClientSecret",
+    #                 access_token: "AccessToken",
+    #                 refresh_token: "RefreshToken",
+    #                 o_auth_request: {
+    #                   auth_code: "AuthCode",
+    #                   redirect_uri: "RedirectUri",
+    #                 },
+    #               },
+    #               api_key: {
+    #                 api_key: "ApiKey", # required
+    #                 api_secret_key: "ApiSecretKey",
+    #               },
+    #               custom: {
+    #                 custom_authentication_type: "CustomAuthenticationType", # required
+    #                 credentials_map: {
+    #                   "CredentialsMapKey" => "CredentialsMapValue",
+    #                 },
+    #               },
+    #             },
     #           },
     #         },
     #       }
@@ -5575,7 +6863,8 @@ module Aws::Appflow
     #           },
     #         },
     #         source_flow_config: { # required
-    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #           connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #           api_version: "ApiVersion",
     #           connector_profile_name: "ConnectorProfileName",
     #           source_connector_properties: { # required
     #             amplitude: {
@@ -5633,6 +6922,12 @@ module Aws::Appflow
     #             sapo_data: {
     #               object_path: "Object",
     #             },
+    #             custom_connector: {
+    #               entity_name: "EntityName", # required
+    #               custom_properties: {
+    #                 "CustomPropertyKey" => "CustomPropertyValue",
+    #               },
+    #             },
     #           },
     #           incremental_pull_config: {
     #             datetime_type_field_name: "DatetimeTypeFieldName",
@@ -5640,7 +6935,8 @@ module Aws::Appflow
     #         },
     #         destination_flow_config_list: [ # required
     #           {
-    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Singular, Slack, Redshift, S3, Marketo, Googleanalytics, Zendesk, Servicenow, Datadog, Trendmicro, Snowflake, Dynatrace, Infornexus, Amplitude, Veeva, EventBridge, LookoutMetrics, Upsolver, Honeycode, CustomerProfiles, SAPOData, CustomConnector
+    #             api_version: "ApiVersion",
     #             connector_profile_name: "ConnectorProfileName",
     #             destination_connector_properties: { # required
     #               redshift: {
@@ -5675,7 +6971,7 @@ module Aws::Appflow
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
     #               snowflake: {
     #                 object: "Object", # required
@@ -5731,7 +7027,20 @@ module Aws::Appflow
     #                   bucket_prefix: "BucketPrefix",
     #                   bucket_name: "BucketName",
     #                 },
-    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #               },
+    #               custom_connector: {
+    #                 entity_name: "EntityName", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #                 id_field_names: ["Name"],
+    #                 custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },
@@ -5755,6 +7064,7 @@ module Aws::Appflow
     #               veeva: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #               zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #               sapo_data: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
     #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
@@ -6107,7 +7417,7 @@ module Aws::Appflow
     #           bucket_prefix: "BucketPrefix",
     #           bucket_name: "BucketName",
     #         },
-    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #       }
     #
     # @!attribute [rw] object

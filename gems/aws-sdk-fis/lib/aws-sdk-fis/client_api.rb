@@ -75,6 +75,9 @@ module Aws::FIS
     ExperimentTargetFilterValues = Shapes::ListShape.new(name: 'ExperimentTargetFilterValues')
     ExperimentTargetMap = Shapes::MapShape.new(name: 'ExperimentTargetMap')
     ExperimentTargetName = Shapes::StringShape.new(name: 'ExperimentTargetName')
+    ExperimentTargetParameterMap = Shapes::MapShape.new(name: 'ExperimentTargetParameterMap')
+    ExperimentTargetParameterName = Shapes::StringShape.new(name: 'ExperimentTargetParameterName')
+    ExperimentTargetParameterValue = Shapes::StringShape.new(name: 'ExperimentTargetParameterValue')
     ExperimentTargetSelectionMode = Shapes::StringShape.new(name: 'ExperimentTargetSelectionMode')
     ExperimentTemplate = Shapes::StructureShape.new(name: 'ExperimentTemplate')
     ExperimentTemplateAction = Shapes::StructureShape.new(name: 'ExperimentTemplateAction')
@@ -104,6 +107,9 @@ module Aws::FIS
     ExperimentTemplateTargetInputFilter = Shapes::StructureShape.new(name: 'ExperimentTemplateTargetInputFilter')
     ExperimentTemplateTargetMap = Shapes::MapShape.new(name: 'ExperimentTemplateTargetMap')
     ExperimentTemplateTargetName = Shapes::StringShape.new(name: 'ExperimentTemplateTargetName')
+    ExperimentTemplateTargetParameterMap = Shapes::MapShape.new(name: 'ExperimentTemplateTargetParameterMap')
+    ExperimentTemplateTargetParameterName = Shapes::StringShape.new(name: 'ExperimentTemplateTargetParameterName')
+    ExperimentTemplateTargetParameterValue = Shapes::StringShape.new(name: 'ExperimentTemplateTargetParameterValue')
     ExperimentTemplateTargetSelectionMode = Shapes::StringShape.new(name: 'ExperimentTemplateTargetSelectionMode')
     GetActionRequest = Shapes::StructureShape.new(name: 'GetActionRequest')
     GetActionResponse = Shapes::StructureShape.new(name: 'GetActionResponse')
@@ -111,6 +117,8 @@ module Aws::FIS
     GetExperimentResponse = Shapes::StructureShape.new(name: 'GetExperimentResponse')
     GetExperimentTemplateRequest = Shapes::StructureShape.new(name: 'GetExperimentTemplateRequest')
     GetExperimentTemplateResponse = Shapes::StructureShape.new(name: 'GetExperimentTemplateResponse')
+    GetTargetResourceTypeRequest = Shapes::StructureShape.new(name: 'GetTargetResourceTypeRequest')
+    GetTargetResourceTypeResponse = Shapes::StructureShape.new(name: 'GetTargetResourceTypeResponse')
     LastUpdateTime = Shapes::TimestampShape.new(name: 'LastUpdateTime')
     ListActionsMaxResults = Shapes::IntegerShape.new(name: 'ListActionsMaxResults')
     ListActionsRequest = Shapes::StructureShape.new(name: 'ListActionsRequest')
@@ -123,11 +131,13 @@ module Aws::FIS
     ListExperimentsResponse = Shapes::StructureShape.new(name: 'ListExperimentsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListTargetResourceTypesMaxResults = Shapes::IntegerShape.new(name: 'ListTargetResourceTypesMaxResults')
+    ListTargetResourceTypesRequest = Shapes::StructureShape.new(name: 'ListTargetResourceTypesRequest')
+    ListTargetResourceTypesResponse = Shapes::StructureShape.new(name: 'ListTargetResourceTypesResponse')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
-    ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartExperimentRequest = Shapes::StructureShape.new(name: 'StartExperimentRequest')
@@ -142,7 +152,16 @@ module Aws::FIS
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
-    TargetResourceType = Shapes::StringShape.new(name: 'TargetResourceType')
+    TargetResourceType = Shapes::StructureShape.new(name: 'TargetResourceType')
+    TargetResourceTypeDescription = Shapes::StringShape.new(name: 'TargetResourceTypeDescription')
+    TargetResourceTypeId = Shapes::StringShape.new(name: 'TargetResourceTypeId')
+    TargetResourceTypeParameter = Shapes::StructureShape.new(name: 'TargetResourceTypeParameter')
+    TargetResourceTypeParameterDescription = Shapes::StringShape.new(name: 'TargetResourceTypeParameterDescription')
+    TargetResourceTypeParameterMap = Shapes::MapShape.new(name: 'TargetResourceTypeParameterMap')
+    TargetResourceTypeParameterName = Shapes::StringShape.new(name: 'TargetResourceTypeParameterName')
+    TargetResourceTypeParameterRequired = Shapes::BooleanShape.new(name: 'TargetResourceTypeParameterRequired')
+    TargetResourceTypeSummary = Shapes::StructureShape.new(name: 'TargetResourceTypeSummary')
+    TargetResourceTypeSummaryList = Shapes::ListShape.new(name: 'TargetResourceTypeSummaryList')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateExperimentTemplateActionInputItem = Shapes::StructureShape.new(name: 'UpdateExperimentTemplateActionInputItem')
@@ -177,7 +196,7 @@ module Aws::FIS
 
     ActionSummaryList.member = Shapes::ShapeRef.new(shape: ActionSummary)
 
-    ActionTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceType, location_name: "resourceType"))
+    ActionTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
     ActionTarget.struct_class = Types::ActionTarget
 
     ActionTargetMap.key = Shapes::ShapeRef.new(shape: ActionTargetName)
@@ -214,11 +233,12 @@ module Aws::FIS
 
     CreateExperimentTemplateStopConditionInputList.member = Shapes::ShapeRef.new(shape: CreateExperimentTemplateStopConditionInput)
 
-    CreateExperimentTemplateTargetInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    CreateExperimentTemplateTargetInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, required: true, location_name: "resourceType"))
     CreateExperimentTemplateTargetInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     CreateExperimentTemplateTargetInput.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
     CreateExperimentTemplateTargetInput.add_member(:filters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
     CreateExperimentTemplateTargetInput.add_member(:selection_mode, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, required: true, location_name: "selectionMode"))
+    CreateExperimentTemplateTargetInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     CreateExperimentTemplateTargetInput.struct_class = Types::CreateExperimentTemplateTargetInput
 
     CreateExperimentTemplateTargetInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
@@ -287,11 +307,12 @@ module Aws::FIS
 
     ExperimentSummaryList.member = Shapes::ShapeRef.new(shape: ExperimentSummary)
 
-    ExperimentTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ExperimentTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
     ExperimentTarget.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     ExperimentTarget.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
     ExperimentTarget.add_member(:filters, Shapes::ShapeRef.new(shape: ExperimentTargetFilterList, location_name: "filters"))
     ExperimentTarget.add_member(:selection_mode, Shapes::ShapeRef.new(shape: ExperimentTargetSelectionMode, location_name: "selectionMode"))
+    ExperimentTarget.add_member(:parameters, Shapes::ShapeRef.new(shape: ExperimentTargetParameterMap, location_name: "parameters"))
     ExperimentTarget.struct_class = Types::ExperimentTarget
 
     ExperimentTargetFilter.add_member(:path, Shapes::ShapeRef.new(shape: ExperimentTargetFilterPath, location_name: "path"))
@@ -304,6 +325,9 @@ module Aws::FIS
 
     ExperimentTargetMap.key = Shapes::ShapeRef.new(shape: ExperimentTargetName)
     ExperimentTargetMap.value = Shapes::ShapeRef.new(shape: ExperimentTarget)
+
+    ExperimentTargetParameterMap.key = Shapes::ShapeRef.new(shape: ExperimentTargetParameterName)
+    ExperimentTargetParameterMap.value = Shapes::ShapeRef.new(shape: ExperimentTargetParameterValue)
 
     ExperimentTemplate.add_member(:id, Shapes::ShapeRef.new(shape: ExperimentTemplateId, location_name: "id"))
     ExperimentTemplate.add_member(:description, Shapes::ShapeRef.new(shape: ExperimentTemplateDescription, location_name: "description"))
@@ -349,11 +373,12 @@ module Aws::FIS
 
     ExperimentTemplateSummaryList.member = Shapes::ShapeRef.new(shape: ExperimentTemplateSummary)
 
-    ExperimentTemplateTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "resourceType"))
+    ExperimentTemplateTarget.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
     ExperimentTemplateTarget.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     ExperimentTemplateTarget.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
     ExperimentTemplateTarget.add_member(:filters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterList, location_name: "filters"))
     ExperimentTemplateTarget.add_member(:selection_mode, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, location_name: "selectionMode"))
+    ExperimentTemplateTarget.add_member(:parameters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     ExperimentTemplateTarget.struct_class = Types::ExperimentTemplateTarget
 
     ExperimentTemplateTargetFilter.add_member(:path, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterPath, location_name: "path"))
@@ -373,6 +398,9 @@ module Aws::FIS
     ExperimentTemplateTargetMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
     ExperimentTemplateTargetMap.value = Shapes::ShapeRef.new(shape: ExperimentTemplateTarget)
 
+    ExperimentTemplateTargetParameterMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterName)
+    ExperimentTemplateTargetParameterMap.value = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterValue)
+
     GetActionRequest.add_member(:id, Shapes::ShapeRef.new(shape: ActionId, required: true, location: "uri", location_name: "id"))
     GetActionRequest.struct_class = Types::GetActionRequest
 
@@ -390,6 +418,12 @@ module Aws::FIS
 
     GetExperimentTemplateResponse.add_member(:experiment_template, Shapes::ShapeRef.new(shape: ExperimentTemplate, location_name: "experimentTemplate"))
     GetExperimentTemplateResponse.struct_class = Types::GetExperimentTemplateResponse
+
+    GetTargetResourceTypeRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, required: true, location: "uri", location_name: "resourceType"))
+    GetTargetResourceTypeRequest.struct_class = Types::GetTargetResourceTypeRequest
+
+    GetTargetResourceTypeResponse.add_member(:target_resource_type, Shapes::ShapeRef.new(shape: TargetResourceType, location_name: "targetResourceType"))
+    GetTargetResourceTypeResponse.struct_class = Types::GetTargetResourceTypeResponse
 
     ListActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListActionsMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
     ListActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -420,6 +454,14 @@ module Aws::FIS
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListTargetResourceTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTargetResourceTypesMaxResults, location: "querystring", location_name: "maxResults", metadata: {"box"=>true}))
+    ListTargetResourceTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTargetResourceTypesRequest.struct_class = Types::ListTargetResourceTypesRequest
+
+    ListTargetResourceTypesResponse.add_member(:target_resource_types, Shapes::ShapeRef.new(shape: TargetResourceTypeSummaryList, location_name: "targetResourceTypes"))
+    ListTargetResourceTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTargetResourceTypesResponse.struct_class = Types::ListTargetResourceTypesResponse
 
     ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
 
@@ -454,6 +496,24 @@ module Aws::FIS
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TargetResourceType.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
+    TargetResourceType.add_member(:description, Shapes::ShapeRef.new(shape: TargetResourceTypeDescription, location_name: "description"))
+    TargetResourceType.add_member(:parameters, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterMap, location_name: "parameters"))
+    TargetResourceType.struct_class = Types::TargetResourceType
+
+    TargetResourceTypeParameter.add_member(:description, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterDescription, location_name: "description"))
+    TargetResourceTypeParameter.add_member(:required, Shapes::ShapeRef.new(shape: TargetResourceTypeParameterRequired, location_name: "required", metadata: {"box"=>true}))
+    TargetResourceTypeParameter.struct_class = Types::TargetResourceTypeParameter
+
+    TargetResourceTypeParameterMap.key = Shapes::ShapeRef.new(shape: TargetResourceTypeParameterName)
+    TargetResourceTypeParameterMap.value = Shapes::ShapeRef.new(shape: TargetResourceTypeParameter)
+
+    TargetResourceTypeSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, location_name: "resourceType"))
+    TargetResourceTypeSummary.add_member(:description, Shapes::ShapeRef.new(shape: TargetResourceTypeDescription, location_name: "description"))
+    TargetResourceTypeSummary.struct_class = Types::TargetResourceTypeSummary
+
+    TargetResourceTypeSummaryList.member = Shapes::ShapeRef.new(shape: TargetResourceTypeSummary)
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -487,11 +547,12 @@ module Aws::FIS
 
     UpdateExperimentTemplateStopConditionInputList.member = Shapes::ShapeRef.new(shape: UpdateExperimentTemplateStopConditionInput)
 
-    UpdateExperimentTemplateTargetInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
+    UpdateExperimentTemplateTargetInput.add_member(:resource_type, Shapes::ShapeRef.new(shape: TargetResourceTypeId, required: true, location_name: "resourceType"))
     UpdateExperimentTemplateTargetInput.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, location_name: "resourceArns"))
     UpdateExperimentTemplateTargetInput.add_member(:resource_tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "resourceTags"))
     UpdateExperimentTemplateTargetInput.add_member(:filters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetFilterInputList, location_name: "filters"))
     UpdateExperimentTemplateTargetInput.add_member(:selection_mode, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetSelectionMode, required: true, location_name: "selectionMode"))
+    UpdateExperimentTemplateTargetInput.add_member(:parameters, Shapes::ShapeRef.new(shape: ExperimentTemplateTargetParameterMap, location_name: "parameters"))
     UpdateExperimentTemplateTargetInput.struct_class = Types::UpdateExperimentTemplateTargetInput
 
     UpdateExperimentTemplateTargetInputMap.key = Shapes::ShapeRef.new(shape: ExperimentTemplateTargetName)
@@ -571,6 +632,16 @@ module Aws::FIS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_target_resource_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTargetResourceType"
+        o.http_method = "GET"
+        o.http_request_uri = "/targetResourceTypes/{resourceType}"
+        o.input = Shapes::ShapeRef.new(shape: GetTargetResourceTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTargetResourceTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:list_actions, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListActions"
         o.http_method = "GET"
@@ -622,6 +693,21 @@ module Aws::FIS
         o.http_request_uri = "/tags/{resourceArn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
+      api.add_operation(:list_target_resource_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTargetResourceTypes"
+        o.http_method = "GET"
+        o.http_request_uri = "/targetResourceTypes"
+        o.input = Shapes::ShapeRef.new(shape: ListTargetResourceTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTargetResourceTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_experiment, Seahorse::Model::Operation.new.tap do |o|

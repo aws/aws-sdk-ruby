@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-02-02)
+------------------
+
+* Feature - Documentation update for AWS ElastiCache
+
 1.70.0 (2022-01-13)
 ------------------
 

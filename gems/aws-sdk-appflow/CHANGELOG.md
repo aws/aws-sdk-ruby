@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-02-02)
+------------------
+
+* Feature - Launching Amazon AppFlow Custom Connector SDK.
+
 1.20.0 (2021-12-21)
 ------------------
 

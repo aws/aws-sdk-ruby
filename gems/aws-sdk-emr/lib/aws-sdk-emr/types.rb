@@ -936,16 +936,11 @@ module Aws::EMR
     #   The default value is `true` if a value is not provided when creating
     #   a cluster using the EMR API RunJobFlow command, the CLI
     #   [create-cluster][1] command, or the Amazon Web Services Management
-    #   Console. IAM principals that are allowed to perform actions on the
-    #   cluster can use the SetVisibleToAllUsers action to change the value
-    #   on a running cluster. For more information, see [Understanding the
-    #   EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
-    #   EMRManagement Guide*.
+    #   Console.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
-    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #   @return [Boolean]
     #
     # @!attribute [rw] applications
@@ -3390,8 +3385,8 @@ module Aws::EMR
     #   @return [Integer]
     #
     # @!attribute [rw] state
-    #   State of instance group. The following values are deprecated:
-    #   STARTING, TERMINATED, and FAILED.
+    #   State of instance group. The following values are no longer
+    #   supported: STARTING, TERMINATED, and FAILED.
     #   @return [String]
     #
     # @!attribute [rw] last_state_change_reason
@@ -3952,16 +3947,11 @@ module Aws::EMR
     #   The default value is `true` if a value is not provided when creating
     #   a cluster using the EMR API RunJobFlow command, the CLI
     #   [create-cluster][1] command, or the Amazon Web Services Management
-    #   Console. IAM principals that are authorized to perform actions on
-    #   the cluster can use the SetVisibleToAllUsers action to change the
-    #   value on a running cluster. For more information, see [Understanding
-    #   the EMR Cluster VisibleToAllUsers Setting][2] in the *Amazon
-    #   EMRManagement Guide*.
+    #   Console.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html
-    #   [2]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users
     #   @return [Boolean]
     #
     # @!attribute [rw] job_flow_role
@@ -6483,7 +6473,7 @@ module Aws::EMR
     #   Applies to Amazon EMR releases 4.0 and later. A case-insensitive
     #   list of applications for Amazon EMR to install and configure when
     #   launching the cluster. For a list of applications available for each
-    #   Amazon EMR release version, see the [Amazon EMR Release Guide][1].
+    #   Amazon EMR release version, see the [Amazon EMRRelease Guide][1].
     #
     #
     #
@@ -6496,6 +6486,9 @@ module Aws::EMR
     #   @return [Array<Types::Configuration>]
     #
     # @!attribute [rw] visible_to_all_users
+    #   The VisibleToAllUsers parameter is no longer supported. By default,
+    #   the value is set to `true`. Setting it to `false` now has no effect.
+    #
     #   Set this value to `true` so that IAM principals in the Amazon Web
     #   Services account associated with the cluster can perform EMR actions
     #   on the cluster that their IAM policies allow. This value defaults to
@@ -7199,6 +7192,13 @@ module Aws::EMR
     #
     #  </note>
     #
+    # <note markdown="1"> Spot Instances with a defined duration (also known as Spot blocks) are
+    # no longer available to new customers from July 1, 2021. For customers
+    # who have previously used the feature, we will continue to support Spot
+    # Instances with a defined duration until December 31, 2022.
+    #
+    #  </note>
+    #
     # @note When making an API call, you may pass SpotProvisioningSpecification
     #   data as a hash:
     #
@@ -7237,6 +7237,14 @@ module Aws::EMR
     #   marks the Spot Instance for termination and provides a Spot Instance
     #   termination notice, which gives the instance a two-minute warning
     #   before it terminates.
+    #
+    #   <note markdown="1"> Spot Instances with a defined duration (also known as Spot blocks)
+    #   are no longer available to new customers from July 1, 2021. For
+    #   customers who have previously used the feature, we will continue to
+    #   support Spot Instances with a defined duration until December 31,
+    #   2022.
+    #
+    #    </note>
     #   @return [Integer]
     #
     # @!attribute [rw] allocation_strategy
@@ -7860,7 +7868,7 @@ module Aws::EMR
     #
     # @!attribute [rw] key
     #   A user-defined key, which is the minimum required information for a
-    #   valid tag. For more information, see [Tag ][1].
+    #   valid tag. For more information, see [Tag][1].
     #
     #
     #
@@ -8028,7 +8036,7 @@ module Aws::EMR
     #       }
     #
     # @!attribute [rw] volume_type
-    #   The volume type. Volume types supported are gp2, io1, standard.
+    #   The volume type. Volume types supported are gp2, io1, and standard.
     #   @return [String]
     #
     # @!attribute [rw] iops

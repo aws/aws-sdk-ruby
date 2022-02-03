@@ -18,7 +18,7 @@ module Aws
         @code = self.class.code
         @context = context
         @data = data
-        @message = message && !message.empty? ? message : self.class
+        @message = message && !message.empty? ? message : self.class.to_s
         super(@message)
       end
 
