@@ -74,7 +74,7 @@ module Aws
     it 'populates :web_identity_token from file when valid' do
       expect {
         AssumeRoleWebIdentityCredentials.new(
-          role_arn: 'arn') 
+          role_arn: 'arn')
       }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
       expect {
         AssumeRoleWebIdentityCredentials.new(
@@ -125,7 +125,7 @@ module Aws
     it 'assumes role with web identity using the client' do
       expect(client).to receive(:assume_role_with_web_identity).with(
         role_arn: 'arn',
-        web_identity_token: '', 
+        web_identity_token: '',
         role_session_name: "session-name",
         provider_id: "urlType",
         policy: "sessionPolicyDocumentType"
@@ -151,10 +151,24 @@ module Aws
       expect(c.expiration).to eq(in_one_hour)
     end
 
+    it 'refreshes asynchronously' do
+      allow(credentials).to receive(:expiration).and_return(Time.now)
+      expect(client).to receive(:assume_role_with_web_identity).at_least(2).times
+      expect(File).to receive(:read).with(token_file_path).at_least(2).times
+      expect(Thread).to receive(:new).and_call_original
+
+      c = AssumeRoleWebIdentityCredentials.new(
+        role_arn: 'arn',
+        web_identity_token_file: token_file_path,
+        role_session_name: 'session')
+      c.credentials
+    end
+
     it 'auto refreshes credentials when near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
-      expect(client).to receive(:assume_role_with_web_identity).exactly(4).times
-      expect(File).to receive(:read).with(token_file_path).exactly(4).times
+      expect(client).to receive(:assume_role_with_web_identity).at_least(4).times
+      expect(File).to receive(:read).with(token_file_path).at_least(4).times
+      expect(Thread).to receive(:new).exactly(3).times.and_call_original
 
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
@@ -163,7 +177,6 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
-      sleep(0.1)
     end
 
   end

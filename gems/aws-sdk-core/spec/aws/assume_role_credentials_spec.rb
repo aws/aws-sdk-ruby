@@ -91,6 +91,16 @@ module Aws
       expect(c.expiration).to eq(in_one_hour)
     end
 
+    it 'refreshes asynchronously' do
+      allow(credentials).to receive(:expiration).and_return(Time.now)
+      expect(client).to receive(:assume_role).at_least(2).times
+      expect(Thread).to receive(:new).and_call_original
+      c = AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session')
+      c.credentials
+    end
+
     it 'refreshes credentials automatically when they are near expiration' do
       allow(credentials).to receive(:expiration).and_return(Time.now)
       expect(client).to receive(:assume_role).at_least(4).times
