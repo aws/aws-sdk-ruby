@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2022-01-27)
+------------------
+
+* Feature - Doc only update to the description of basicauthcredentials to describe the required encoding and format.
+
 1.36.0 (2021-12-21)
 ------------------
 

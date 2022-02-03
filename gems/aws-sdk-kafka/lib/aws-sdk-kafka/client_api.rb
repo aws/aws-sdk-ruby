@@ -112,6 +112,7 @@ module Aws::Kafka
     PrometheusInfo = Shapes::StructureShape.new(name: 'PrometheusInfo')
     Provisioned = Shapes::StructureShape.new(name: 'Provisioned')
     ProvisionedRequest = Shapes::StructureShape.new(name: 'ProvisionedRequest')
+    ProvisionedThroughput = Shapes::StructureShape.new(name: 'ProvisionedThroughput')
     PublicAccess = Shapes::StructureShape.new(name: 'PublicAccess')
     RebootBrokerRequest = Shapes::StructureShape.new(name: 'RebootBrokerRequest')
     RebootBrokerResponse = Shapes::StructureShape.new(name: 'RebootBrokerResponse')
@@ -200,7 +201,8 @@ module Aws::Kafka
     BatchDisassociateScramSecretResponse.struct_class = Types::BatchDisassociateScramSecretResponse
 
     BrokerEBSVolumeInfo.add_member(:kafka_broker_node_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "kafkaBrokerNodeId"))
-    BrokerEBSVolumeInfo.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "volumeSizeGB"))
+    BrokerEBSVolumeInfo.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "provisionedThroughput"))
+    BrokerEBSVolumeInfo.add_member(:volume_size_gb, Shapes::ShapeRef.new(shape: __integer, location_name: "volumeSizeGB"))
     BrokerEBSVolumeInfo.struct_class = Types::BrokerEBSVolumeInfo
 
     BrokerLogs.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogs, location_name: "cloudWatchLogs"))
@@ -419,6 +421,7 @@ module Aws::Kafka
     DescribeConfigurationRevisionResponse.add_member(:server_properties, Shapes::ShapeRef.new(shape: __blob, location_name: "serverProperties"))
     DescribeConfigurationRevisionResponse.struct_class = Types::DescribeConfigurationRevisionResponse
 
+    EBSStorageInfo.add_member(:provisioned_throughput, Shapes::ShapeRef.new(shape: ProvisionedThroughput, location_name: "provisionedThroughput"))
     EBSStorageInfo.add_member(:volume_size, Shapes::ShapeRef.new(shape: __integerMin1Max16384, location_name: "volumeSize"))
     EBSStorageInfo.struct_class = Types::EBSStorageInfo
 
@@ -631,6 +634,10 @@ module Aws::Kafka
     ProvisionedRequest.add_member(:logging_info, Shapes::ShapeRef.new(shape: LoggingInfo, location_name: "loggingInfo"))
     ProvisionedRequest.add_member(:number_of_broker_nodes, Shapes::ShapeRef.new(shape: __integerMin1Max15, required: true, location_name: "numberOfBrokerNodes"))
     ProvisionedRequest.struct_class = Types::ProvisionedRequest
+
+    ProvisionedThroughput.add_member(:enabled, Shapes::ShapeRef.new(shape: __boolean, location_name: "enabled"))
+    ProvisionedThroughput.add_member(:volume_throughput, Shapes::ShapeRef.new(shape: __integer, location_name: "volumeThroughput"))
+    ProvisionedThroughput.struct_class = Types::ProvisionedThroughput
 
     PublicAccess.add_member(:type, Shapes::ShapeRef.new(shape: __string, location_name: "type"))
     PublicAccess.struct_class = Types::PublicAccess

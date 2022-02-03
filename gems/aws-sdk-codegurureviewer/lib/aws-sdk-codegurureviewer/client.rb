@@ -1386,7 +1386,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.27.0'
+      context[:gem_version] = '1.28.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1454,8 +1454,8 @@ module Aws::CodeGuruReviewer
     #
     # | waiter_name                      | params                                   | :delay   | :max_attempts |
     # | -------------------------------- | ---------------------------------------- | -------- | ------------- |
-    # | code_review_completed            | {Client#describe_code_review}            | 10       | 60            |
-    # | repository_association_succeeded | {Client#describe_repository_association} | 10       | 20            |
+    # | code_review_completed            | {Client#describe_code_review}            | 10       | 180           |
+    # | repository_association_succeeded | {Client#describe_repository_association} | 10       | 30            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition

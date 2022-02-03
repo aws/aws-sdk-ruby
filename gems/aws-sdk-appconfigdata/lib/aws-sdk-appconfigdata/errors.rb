@@ -48,11 +48,6 @@ module Aws::AppConfigData
       end
 
       # @return [String]
-      def details
-        @data[:details]
-      end
-
-      # @return [String]
       def message
         @message || @data[:message]
       end
@@ -60,6 +55,11 @@ module Aws::AppConfigData
       # @return [String]
       def reason
         @data[:reason]
+      end
+
+      # @return [String]
+      def details
+        @data[:details]
       end
     end
 
@@ -93,13 +93,13 @@ module Aws::AppConfigData
       end
 
       # @return [String]
-      def referenced_by
-        @data[:referenced_by]
+      def resource_type
+        @data[:resource_type]
       end
 
       # @return [String]
-      def resource_type
-        @data[:resource_type]
+      def referenced_by
+        @data[:referenced_by]
       end
     end
 

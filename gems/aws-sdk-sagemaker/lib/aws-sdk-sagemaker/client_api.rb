@@ -618,6 +618,7 @@ module Aws::SageMaker
     ExpiresInSeconds = Shapes::IntegerShape.new(name: 'ExpiresInSeconds')
     Explainability = Shapes::StructureShape.new(name: 'Explainability')
     ExplainabilityLocation = Shapes::StringShape.new(name: 'ExplainabilityLocation')
+    FailStepMetadata = Shapes::StructureShape.new(name: 'FailStepMetadata')
     FailureReason = Shapes::StringShape.new(name: 'FailureReason')
     FeatureDefinition = Shapes::StructureShape.new(name: 'FeatureDefinition')
     FeatureDefinitions = Shapes::ListShape.new(name: 'FeatureDefinitions')
@@ -1407,6 +1408,7 @@ module Aws::SageMaker
     String200 = Shapes::StringShape.new(name: 'String200')
     String2048 = Shapes::StringShape.new(name: 'String2048')
     String256 = Shapes::StringShape.new(name: 'String256')
+    String3072 = Shapes::StringShape.new(name: 'String3072')
     String40 = Shapes::StringShape.new(name: 'String40')
     String64 = Shapes::StringShape.new(name: 'String64')
     String8192 = Shapes::StringShape.new(name: 'String8192')
@@ -4030,6 +4032,9 @@ module Aws::SageMaker
     Explainability.add_member(:report, Shapes::ShapeRef.new(shape: MetricsSource, location_name: "Report"))
     Explainability.struct_class = Types::Explainability
 
+    FailStepMetadata.add_member(:error_message, Shapes::ShapeRef.new(shape: String3072, location_name: "ErrorMessage"))
+    FailStepMetadata.struct_class = Types::FailStepMetadata
+
     FeatureDefinition.add_member(:feature_name, Shapes::ShapeRef.new(shape: FeatureName, location_name: "FeatureName"))
     FeatureDefinition.add_member(:feature_type, Shapes::ShapeRef.new(shape: FeatureType, location_name: "FeatureType"))
     FeatureDefinition.struct_class = Types::FeatureDefinition
@@ -5889,6 +5894,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:quality_check, Shapes::ShapeRef.new(shape: QualityCheckStepMetadata, location_name: "QualityCheck"))
     PipelineExecutionStepMetadata.add_member(:clarify_check, Shapes::ShapeRef.new(shape: ClarifyCheckStepMetadata, location_name: "ClarifyCheck"))
     PipelineExecutionStepMetadata.add_member(:emr, Shapes::ShapeRef.new(shape: EMRStepMetadata, location_name: "EMR"))
+    PipelineExecutionStepMetadata.add_member(:fail, Shapes::ShapeRef.new(shape: FailStepMetadata, location_name: "Fail"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -5896,6 +5902,7 @@ module Aws::SageMaker
     PipelineExecutionSummary.add_member(:pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "PipelineExecutionStatus"))
     PipelineExecutionSummary.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
     PipelineExecutionSummary.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
+    PipelineExecutionSummary.add_member(:pipeline_execution_failure_reason, Shapes::ShapeRef.new(shape: String3072, location_name: "PipelineExecutionFailureReason"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)

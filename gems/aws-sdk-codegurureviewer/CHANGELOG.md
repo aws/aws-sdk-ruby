@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.28.0 (2022-01-26)
+------------------
+
+* Feature - Added failure state and adjusted timeout in waiter
+
 1.27.0 (2021-12-21)
 ------------------
 

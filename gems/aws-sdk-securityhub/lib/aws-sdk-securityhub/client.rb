@@ -3439,6 +3439,7 @@ module Aws::SecurityHub
     #           },
     #           types: ["NonEmptyString"],
     #         },
+    #         sample: false,
     #       },
     #     ],
     #   })
@@ -4390,6 +4391,11 @@ module Aws::SecurityHub
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       sample: [
+    #         {
+    #           value: false,
     #         },
     #       ],
     #     },
@@ -6001,6 +6007,11 @@ module Aws::SecurityHub
     #         {
     #           value: "NonEmptyString",
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #         },
+    #       ],
+    #       sample: [
+    #         {
+    #           value: false,
     #         },
     #       ],
     #     },
@@ -7882,6 +7893,7 @@ module Aws::SecurityHub
     #   resp.findings[0].finding_provider_fields.severity.original #=> String
     #   resp.findings[0].finding_provider_fields.types #=> Array
     #   resp.findings[0].finding_provider_fields.types[0] #=> String
+    #   resp.findings[0].sample #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetFindings AWS API Documentation
@@ -8275,6 +8287,8 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.finding_provider_fields_types #=> Array
     #   resp.insights[0].filters.finding_provider_fields_types[0].value #=> String
     #   resp.insights[0].filters.finding_provider_fields_types[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS"
+    #   resp.insights[0].filters.sample #=> Array
+    #   resp.insights[0].filters.sample[0].value #=> Boolean
     #   resp.insights[0].group_by_attribute #=> String
     #   resp.next_token #=> String
     #
@@ -9512,6 +9526,11 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       sample: [
+    #         {
+    #           value: false,
+    #         },
+    #       ],
     #     },
     #     note: {
     #       text: "NonEmptyString", # required
@@ -10167,6 +10186,11 @@ module Aws::SecurityHub
     #           comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #         },
     #       ],
+    #       sample: [
+    #         {
+    #           value: false,
+    #         },
+    #       ],
     #     },
     #     group_by_attribute: "NonEmptyString",
     #   })
@@ -10282,7 +10306,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -38,6 +38,8 @@ module Aws::GuardDuty
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     CloudTrailConfigurationResult = Shapes::StructureShape.new(name: 'CloudTrailConfigurationResult')
     Condition = Shapes::StructureShape.new(name: 'Condition')
+    Container = Shapes::StructureShape.new(name: 'Container')
+    Containers = Shapes::ListShape.new(name: 'Containers')
     CountBySeverity = Shapes::MapShape.new(name: 'CountBySeverity')
     Country = Shapes::StructureShape.new(name: 'Country')
     CreateDetectorRequest = Shapes::StructureShape.new(name: 'CreateDetectorRequest')
@@ -98,6 +100,7 @@ module Aws::GuardDuty
     DnsRequestAction = Shapes::StructureShape.new(name: 'DnsRequestAction')
     DomainDetails = Shapes::StructureShape.new(name: 'DomainDetails')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EksClusterDetails = Shapes::StructureShape.new(name: 'EksClusterDetails')
     Email = Shapes::StringShape.new(name: 'Email')
     EnableOrganizationAdminAccountRequest = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountRequest')
     EnableOrganizationAdminAccountResponse = Shapes::StructureShape.new(name: 'EnableOrganizationAdminAccountResponse')
@@ -145,7 +148,9 @@ module Aws::GuardDuty
     GetThreatIntelSetResponse = Shapes::StructureShape.new(name: 'GetThreatIntelSetResponse')
     GetUsageStatisticsRequest = Shapes::StructureShape.new(name: 'GetUsageStatisticsRequest')
     GetUsageStatisticsResponse = Shapes::StructureShape.new(name: 'GetUsageStatisticsResponse')
+    Groups = Shapes::ListShape.new(name: 'Groups')
     GuardDutyArn = Shapes::StringShape.new(name: 'GuardDutyArn')
+    HostPath = Shapes::StructureShape.new(name: 'HostPath')
     IamInstanceProfile = Shapes::StructureShape.new(name: 'IamInstanceProfile')
     InstanceDetails = Shapes::StructureShape.new(name: 'InstanceDetails')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -158,6 +163,14 @@ module Aws::GuardDuty
     IpSetIds = Shapes::ListShape.new(name: 'IpSetIds')
     IpSetStatus = Shapes::StringShape.new(name: 'IpSetStatus')
     Ipv6Addresses = Shapes::ListShape.new(name: 'Ipv6Addresses')
+    KubernetesApiCallAction = Shapes::StructureShape.new(name: 'KubernetesApiCallAction')
+    KubernetesAuditLogsConfiguration = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfiguration')
+    KubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesAuditLogsConfigurationResult')
+    KubernetesConfiguration = Shapes::StructureShape.new(name: 'KubernetesConfiguration')
+    KubernetesConfigurationResult = Shapes::StructureShape.new(name: 'KubernetesConfigurationResult')
+    KubernetesDetails = Shapes::StructureShape.new(name: 'KubernetesDetails')
+    KubernetesUserDetails = Shapes::StructureShape.new(name: 'KubernetesUserDetails')
+    KubernetesWorkloadDetails = Shapes::StructureShape.new(name: 'KubernetesWorkloadDetails')
     ListDetectorsRequest = Shapes::StructureShape.new(name: 'ListDetectorsRequest')
     ListDetectorsResponse = Shapes::StructureShape.new(name: 'ListDetectorsResponse')
     ListFiltersRequest = Shapes::StructureShape.new(name: 'ListFiltersRequest')
@@ -198,6 +211,10 @@ module Aws::GuardDuty
     Organization = Shapes::StructureShape.new(name: 'Organization')
     OrganizationDataSourceConfigurations = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurations')
     OrganizationDataSourceConfigurationsResult = Shapes::StructureShape.new(name: 'OrganizationDataSourceConfigurationsResult')
+    OrganizationKubernetesAuditLogsConfiguration = Shapes::StructureShape.new(name: 'OrganizationKubernetesAuditLogsConfiguration')
+    OrganizationKubernetesAuditLogsConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationKubernetesAuditLogsConfigurationResult')
+    OrganizationKubernetesConfiguration = Shapes::StructureShape.new(name: 'OrganizationKubernetesConfiguration')
+    OrganizationKubernetesConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationKubernetesConfigurationResult')
     OrganizationS3LogsConfiguration = Shapes::StructureShape.new(name: 'OrganizationS3LogsConfiguration')
     OrganizationS3LogsConfigurationResult = Shapes::StructureShape.new(name: 'OrganizationS3LogsConfigurationResult')
     Owner = Shapes::StructureShape.new(name: 'Owner')
@@ -220,10 +237,12 @@ module Aws::GuardDuty
     S3BucketDetails = Shapes::ListShape.new(name: 'S3BucketDetails')
     S3LogsConfiguration = Shapes::StructureShape.new(name: 'S3LogsConfiguration')
     S3LogsConfigurationResult = Shapes::StructureShape.new(name: 'S3LogsConfigurationResult')
+    SecurityContext = Shapes::StructureShape.new(name: 'SecurityContext')
     SecurityGroup = Shapes::StructureShape.new(name: 'SecurityGroup')
     SecurityGroups = Shapes::ListShape.new(name: 'SecurityGroups')
     Service = Shapes::StructureShape.new(name: 'Service')
     SortCriteria = Shapes::StructureShape.new(name: 'SortCriteria')
+    SourceIps = Shapes::ListShape.new(name: 'SourceIps')
     StartMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StartMonitoringMembersRequest')
     StartMonitoringMembersResponse = Shapes::StructureShape.new(name: 'StartMonitoringMembersResponse')
     StopMonitoringMembersRequest = Shapes::StructureShape.new(name: 'StopMonitoringMembersRequest')
@@ -276,6 +295,10 @@ module Aws::GuardDuty
     UsageResourceResultList = Shapes::ListShape.new(name: 'UsageResourceResultList')
     UsageStatisticType = Shapes::StringShape.new(name: 'UsageStatisticType')
     UsageStatistics = Shapes::StructureShape.new(name: 'UsageStatistics')
+    Volume = Shapes::StructureShape.new(name: 'Volume')
+    VolumeMount = Shapes::StructureShape.new(name: 'VolumeMount')
+    VolumeMounts = Shapes::ListShape.new(name: 'VolumeMounts')
+    Volumes = Shapes::ListShape.new(name: 'Volumes')
 
     AcceptInvitationRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     AcceptInvitationRequest.add_member(:master_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "masterId"))
@@ -310,6 +333,7 @@ module Aws::GuardDuty
     Action.add_member(:dns_request_action, Shapes::ShapeRef.new(shape: DnsRequestAction, location_name: "dnsRequestAction"))
     Action.add_member(:network_connection_action, Shapes::ShapeRef.new(shape: NetworkConnectionAction, location_name: "networkConnectionAction"))
     Action.add_member(:port_probe_action, Shapes::ShapeRef.new(shape: PortProbeAction, location_name: "portProbeAction"))
+    Action.add_member(:kubernetes_api_call_action, Shapes::ShapeRef.new(shape: KubernetesApiCallAction, location_name: "kubernetesApiCallAction"))
     Action.struct_class = Types::Action
 
     AdminAccount.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: String, location_name: "adminAccountId"))
@@ -328,6 +352,7 @@ module Aws::GuardDuty
     AwsApiCallAction.add_member(:caller_type, Shapes::ShapeRef.new(shape: String, location_name: "callerType"))
     AwsApiCallAction.add_member(:domain_details, Shapes::ShapeRef.new(shape: DomainDetails, location_name: "domainDetails"))
     AwsApiCallAction.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "errorCode"))
+    AwsApiCallAction.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "userAgent"))
     AwsApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
     AwsApiCallAction.add_member(:service_name, Shapes::ShapeRef.new(shape: String, location_name: "serviceName"))
     AwsApiCallAction.add_member(:remote_account_details, Shapes::ShapeRef.new(shape: RemoteAccountDetails, location_name: "remoteAccountDetails"))
@@ -371,6 +396,17 @@ module Aws::GuardDuty
     Condition.add_member(:less_than, Shapes::ShapeRef.new(shape: Long, location_name: "lessThan"))
     Condition.add_member(:less_than_or_equal, Shapes::ShapeRef.new(shape: Long, location_name: "lessThanOrEqual"))
     Condition.struct_class = Types::Condition
+
+    Container.add_member(:container_runtime, Shapes::ShapeRef.new(shape: String, location_name: "containerRuntime"))
+    Container.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+    Container.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Container.add_member(:image, Shapes::ShapeRef.new(shape: String, location_name: "image"))
+    Container.add_member(:image_prefix, Shapes::ShapeRef.new(shape: String, location_name: "imagePrefix"))
+    Container.add_member(:volume_mounts, Shapes::ShapeRef.new(shape: VolumeMounts, location_name: "volumeMounts"))
+    Container.add_member(:security_context, Shapes::ShapeRef.new(shape: SecurityContext, location_name: "securityContext"))
+    Container.struct_class = Types::Container
+
+    Containers.member = Shapes::ShapeRef.new(shape: Container)
 
     CountBySeverity.key = Shapes::ShapeRef.new(shape: String)
     CountBySeverity.value = Shapes::ShapeRef.new(shape: Integer)
@@ -455,12 +491,14 @@ module Aws::GuardDuty
     DNSLogsConfigurationResult.struct_class = Types::DNSLogsConfigurationResult
 
     DataSourceConfigurations.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfiguration, location_name: "s3Logs"))
+    DataSourceConfigurations.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesConfiguration, location_name: "kubernetes"))
     DataSourceConfigurations.struct_class = Types::DataSourceConfigurations
 
     DataSourceConfigurationsResult.add_member(:cloud_trail, Shapes::ShapeRef.new(shape: CloudTrailConfigurationResult, required: true, location_name: "cloudTrail"))
     DataSourceConfigurationsResult.add_member(:dns_logs, Shapes::ShapeRef.new(shape: DNSLogsConfigurationResult, required: true, location_name: "dnsLogs"))
     DataSourceConfigurationsResult.add_member(:flow_logs, Shapes::ShapeRef.new(shape: FlowLogsConfigurationResult, required: true, location_name: "flowLogs"))
     DataSourceConfigurationsResult.add_member(:s3_logs, Shapes::ShapeRef.new(shape: S3LogsConfigurationResult, required: true, location_name: "s3Logs"))
+    DataSourceConfigurationsResult.add_member(:kubernetes, Shapes::ShapeRef.new(shape: KubernetesConfigurationResult, location_name: "kubernetes"))
     DataSourceConfigurationsResult.struct_class = Types::DataSourceConfigurationsResult
 
     DataSourceList.member = Shapes::ShapeRef.new(shape: DataSource)
@@ -571,6 +609,14 @@ module Aws::GuardDuty
 
     DomainDetails.add_member(:domain, Shapes::ShapeRef.new(shape: String, location_name: "domain"))
     DomainDetails.struct_class = Types::DomainDetails
+
+    EksClusterDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    EksClusterDetails.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
+    EksClusterDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+    EksClusterDetails.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
+    EksClusterDetails.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    EksClusterDetails.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
+    EksClusterDetails.struct_class = Types::EksClusterDetails
 
     EnableOrganizationAdminAccountRequest.add_member(:admin_account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "adminAccountId"))
     EnableOrganizationAdminAccountRequest.struct_class = Types::EnableOrganizationAdminAccountRequest
@@ -725,6 +771,11 @@ module Aws::GuardDuty
     GetUsageStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetUsageStatisticsResponse.struct_class = Types::GetUsageStatisticsResponse
 
+    Groups.member = Shapes::ShapeRef.new(shape: String)
+
+    HostPath.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
+    HostPath.struct_class = Types::HostPath
+
     IamInstanceProfile.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "arn"))
     IamInstanceProfile.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
     IamInstanceProfile.struct_class = Types::IamInstanceProfile
@@ -768,6 +819,45 @@ module Aws::GuardDuty
     IpSetIds.member = Shapes::ShapeRef.new(shape: String)
 
     Ipv6Addresses.member = Shapes::ShapeRef.new(shape: String)
+
+    KubernetesApiCallAction.add_member(:request_uri, Shapes::ShapeRef.new(shape: String, location_name: "requestUri"))
+    KubernetesApiCallAction.add_member(:verb, Shapes::ShapeRef.new(shape: String, location_name: "verb"))
+    KubernetesApiCallAction.add_member(:source_ips, Shapes::ShapeRef.new(shape: SourceIps, location_name: "sourceIps"))
+    KubernetesApiCallAction.add_member(:user_agent, Shapes::ShapeRef.new(shape: String, location_name: "userAgent"))
+    KubernetesApiCallAction.add_member(:remote_ip_details, Shapes::ShapeRef.new(shape: RemoteIpDetails, location_name: "remoteIpDetails"))
+    KubernetesApiCallAction.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "statusCode"))
+    KubernetesApiCallAction.add_member(:parameters, Shapes::ShapeRef.new(shape: String, location_name: "parameters"))
+    KubernetesApiCallAction.struct_class = Types::KubernetesApiCallAction
+
+    KubernetesAuditLogsConfiguration.add_member(:enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "enable"))
+    KubernetesAuditLogsConfiguration.struct_class = Types::KubernetesAuditLogsConfiguration
+
+    KubernetesAuditLogsConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
+    KubernetesAuditLogsConfigurationResult.struct_class = Types::KubernetesAuditLogsConfigurationResult
+
+    KubernetesConfiguration.add_member(:audit_logs, Shapes::ShapeRef.new(shape: KubernetesAuditLogsConfiguration, required: true, location_name: "auditLogs"))
+    KubernetesConfiguration.struct_class = Types::KubernetesConfiguration
+
+    KubernetesConfigurationResult.add_member(:audit_logs, Shapes::ShapeRef.new(shape: KubernetesAuditLogsConfigurationResult, required: true, location_name: "auditLogs"))
+    KubernetesConfigurationResult.struct_class = Types::KubernetesConfigurationResult
+
+    KubernetesDetails.add_member(:kubernetes_user_details, Shapes::ShapeRef.new(shape: KubernetesUserDetails, location_name: "kubernetesUserDetails"))
+    KubernetesDetails.add_member(:kubernetes_workload_details, Shapes::ShapeRef.new(shape: KubernetesWorkloadDetails, location_name: "kubernetesWorkloadDetails"))
+    KubernetesDetails.struct_class = Types::KubernetesDetails
+
+    KubernetesUserDetails.add_member(:username, Shapes::ShapeRef.new(shape: String, location_name: "username"))
+    KubernetesUserDetails.add_member(:uid, Shapes::ShapeRef.new(shape: String, location_name: "uid"))
+    KubernetesUserDetails.add_member(:groups, Shapes::ShapeRef.new(shape: Groups, location_name: "groups"))
+    KubernetesUserDetails.struct_class = Types::KubernetesUserDetails
+
+    KubernetesWorkloadDetails.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    KubernetesWorkloadDetails.add_member(:type, Shapes::ShapeRef.new(shape: String, location_name: "type"))
+    KubernetesWorkloadDetails.add_member(:uid, Shapes::ShapeRef.new(shape: String, location_name: "uid"))
+    KubernetesWorkloadDetails.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "namespace"))
+    KubernetesWorkloadDetails.add_member(:host_network, Shapes::ShapeRef.new(shape: Boolean, location_name: "hostNetwork"))
+    KubernetesWorkloadDetails.add_member(:containers, Shapes::ShapeRef.new(shape: Containers, location_name: "containers"))
+    KubernetesWorkloadDetails.add_member(:volumes, Shapes::ShapeRef.new(shape: Volumes, location_name: "volumes"))
+    KubernetesWorkloadDetails.struct_class = Types::KubernetesWorkloadDetails
 
     ListDetectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListDetectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
@@ -920,10 +1010,24 @@ module Aws::GuardDuty
     Organization.struct_class = Types::Organization
 
     OrganizationDataSourceConfigurations.add_member(:s3_logs, Shapes::ShapeRef.new(shape: OrganizationS3LogsConfiguration, location_name: "s3Logs"))
+    OrganizationDataSourceConfigurations.add_member(:kubernetes, Shapes::ShapeRef.new(shape: OrganizationKubernetesConfiguration, location_name: "kubernetes"))
     OrganizationDataSourceConfigurations.struct_class = Types::OrganizationDataSourceConfigurations
 
     OrganizationDataSourceConfigurationsResult.add_member(:s3_logs, Shapes::ShapeRef.new(shape: OrganizationS3LogsConfigurationResult, required: true, location_name: "s3Logs"))
+    OrganizationDataSourceConfigurationsResult.add_member(:kubernetes, Shapes::ShapeRef.new(shape: OrganizationKubernetesConfigurationResult, location_name: "kubernetes"))
     OrganizationDataSourceConfigurationsResult.struct_class = Types::OrganizationDataSourceConfigurationsResult
+
+    OrganizationKubernetesAuditLogsConfiguration.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
+    OrganizationKubernetesAuditLogsConfiguration.struct_class = Types::OrganizationKubernetesAuditLogsConfiguration
+
+    OrganizationKubernetesAuditLogsConfigurationResult.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
+    OrganizationKubernetesAuditLogsConfigurationResult.struct_class = Types::OrganizationKubernetesAuditLogsConfigurationResult
+
+    OrganizationKubernetesConfiguration.add_member(:audit_logs, Shapes::ShapeRef.new(shape: OrganizationKubernetesAuditLogsConfiguration, required: true, location_name: "auditLogs"))
+    OrganizationKubernetesConfiguration.struct_class = Types::OrganizationKubernetesConfiguration
+
+    OrganizationKubernetesConfigurationResult.add_member(:audit_logs, Shapes::ShapeRef.new(shape: OrganizationKubernetesAuditLogsConfigurationResult, required: true, location_name: "auditLogs"))
+    OrganizationKubernetesConfigurationResult.struct_class = Types::OrganizationKubernetesConfigurationResult
 
     OrganizationS3LogsConfiguration.add_member(:auto_enable, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "autoEnable"))
     OrganizationS3LogsConfiguration.struct_class = Types::OrganizationS3LogsConfiguration
@@ -983,6 +1087,8 @@ module Aws::GuardDuty
     Resource.add_member(:access_key_details, Shapes::ShapeRef.new(shape: AccessKeyDetails, location_name: "accessKeyDetails"))
     Resource.add_member(:s3_bucket_details, Shapes::ShapeRef.new(shape: S3BucketDetails, location_name: "s3BucketDetails"))
     Resource.add_member(:instance_details, Shapes::ShapeRef.new(shape: InstanceDetails, location_name: "instanceDetails"))
+    Resource.add_member(:eks_cluster_details, Shapes::ShapeRef.new(shape: EksClusterDetails, location_name: "eksClusterDetails"))
+    Resource.add_member(:kubernetes_details, Shapes::ShapeRef.new(shape: KubernetesDetails, location_name: "kubernetesDetails"))
     Resource.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     Resource.struct_class = Types::Resource
 
@@ -1006,6 +1112,9 @@ module Aws::GuardDuty
     S3LogsConfigurationResult.add_member(:status, Shapes::ShapeRef.new(shape: DataSourceStatus, required: true, location_name: "status"))
     S3LogsConfigurationResult.struct_class = Types::S3LogsConfigurationResult
 
+    SecurityContext.add_member(:privileged, Shapes::ShapeRef.new(shape: Boolean, location_name: "privileged"))
+    SecurityContext.struct_class = Types::SecurityContext
+
     SecurityGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: String, location_name: "groupId"))
     SecurityGroup.add_member(:group_name, Shapes::ShapeRef.new(shape: String, location_name: "groupName"))
     SecurityGroup.struct_class = Types::SecurityGroup
@@ -1027,6 +1136,8 @@ module Aws::GuardDuty
     SortCriteria.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "attributeName"))
     SortCriteria.add_member(:order_by, Shapes::ShapeRef.new(shape: OrderBy, location_name: "orderBy"))
     SortCriteria.struct_class = Types::SortCriteria
+
+    SourceIps.member = Shapes::ShapeRef.new(shape: String)
 
     StartMonitoringMembersRequest.add_member(:detector_id, Shapes::ShapeRef.new(shape: DetectorId, required: true, location: "uri", location_name: "detectorId"))
     StartMonitoringMembersRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIds, required: true, location_name: "accountIds"))
@@ -1186,6 +1297,18 @@ module Aws::GuardDuty
     UsageStatistics.add_member(:sum_by_resource, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "sumByResource"))
     UsageStatistics.add_member(:top_resources, Shapes::ShapeRef.new(shape: UsageResourceResultList, location_name: "topResources"))
     UsageStatistics.struct_class = Types::UsageStatistics
+
+    Volume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    Volume.add_member(:host_path, Shapes::ShapeRef.new(shape: HostPath, location_name: "hostPath"))
+    Volume.struct_class = Types::Volume
+
+    VolumeMount.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    VolumeMount.add_member(:mount_path, Shapes::ShapeRef.new(shape: String, location_name: "mountPath"))
+    VolumeMount.struct_class = Types::VolumeMount
+
+    VolumeMounts.member = Shapes::ShapeRef.new(shape: VolumeMount)
+
+    Volumes.member = Shapes::ShapeRef.new(shape: Volume)
 
 
     # @api private

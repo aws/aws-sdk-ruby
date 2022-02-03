@@ -451,6 +451,11 @@ module Aws::GuardDuty
     #       s3_logs: {
     #         enable: false, # required
     #       },
+    #       kubernetes: {
+    #         audit_logs: { # required
+    #           enable: false, # required
+    #         },
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -1202,6 +1207,7 @@ module Aws::GuardDuty
     #   resp.auto_enable #=> Boolean
     #   resp.member_account_limit_reached #=> Boolean
     #   resp.data_sources.s3_logs.auto_enable #=> Boolean
+    #   resp.data_sources.kubernetes.audit_logs.auto_enable #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -1395,6 +1401,7 @@ module Aws::GuardDuty
     #   resp.data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_sources.kubernetes.audit_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1565,6 +1572,36 @@ module Aws::GuardDuty
     #   resp.findings[0].resource.instance_details.tags #=> Array
     #   resp.findings[0].resource.instance_details.tags[0].key #=> String
     #   resp.findings[0].resource.instance_details.tags[0].value #=> String
+    #   resp.findings[0].resource.eks_cluster_details.name #=> String
+    #   resp.findings[0].resource.eks_cluster_details.arn #=> String
+    #   resp.findings[0].resource.eks_cluster_details.vpc_id #=> String
+    #   resp.findings[0].resource.eks_cluster_details.status #=> String
+    #   resp.findings[0].resource.eks_cluster_details.tags #=> Array
+    #   resp.findings[0].resource.eks_cluster_details.tags[0].key #=> String
+    #   resp.findings[0].resource.eks_cluster_details.tags[0].value #=> String
+    #   resp.findings[0].resource.eks_cluster_details.created_at #=> Time
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.username #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.uid #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_user_details.groups[0] #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.name #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.type #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.uid #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.namespace #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.host_network #=> Boolean
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].container_runtime #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].id #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].name #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].image #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].image_prefix #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].volume_mounts #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].volume_mounts[0].name #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].volume_mounts[0].mount_path #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.containers[0].security_context.privileged #=> Boolean
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes #=> Array
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes[0].name #=> String
+    #   resp.findings[0].resource.kubernetes_details.kubernetes_workload_details.volumes[0].host_path.path #=> String
     #   resp.findings[0].resource.resource_type #=> String
     #   resp.findings[0].schema_version #=> String
     #   resp.findings[0].service.action.action_type #=> String
@@ -1572,6 +1609,7 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.aws_api_call_action.caller_type #=> String
     #   resp.findings[0].service.action.aws_api_call_action.domain_details.domain #=> String
     #   resp.findings[0].service.action.aws_api_call_action.error_code #=> String
+    #   resp.findings[0].service.action.aws_api_call_action.user_agent #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.city.city_name #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_code #=> String
     #   resp.findings[0].service.action.aws_api_call_action.remote_ip_details.country.country_name #=> String
@@ -1619,6 +1657,23 @@ module Aws::GuardDuty
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.asn_org #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.isp #=> String
     #   resp.findings[0].service.action.port_probe_action.port_probe_details[0].remote_ip_details.organization.org #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.request_uri #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.verb #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.source_ips #=> Array
+    #   resp.findings[0].service.action.kubernetes_api_call_action.source_ips[0] #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.user_agent #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.city.city_name #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.country.country_code #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.country.country_name #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lat #=> Float
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.geo_location.lon #=> Float
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.ip_address_v4 #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.asn_org #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.isp #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.remote_ip_details.organization.org #=> String
+    #   resp.findings[0].service.action.kubernetes_api_call_action.status_code #=> Integer
+    #   resp.findings[0].service.action.kubernetes_api_call_action.parameters #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details #=> Array
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_list_name #=> String
     #   resp.findings[0].service.evidence.threat_intelligence_details[0].threat_names #=> Array
@@ -1824,6 +1879,7 @@ module Aws::GuardDuty
     #   resp.member_data_source_configurations[0].data_sources.dns_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].data_sources.flow_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.member_data_source_configurations[0].data_sources.s3_logs.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.member_data_source_configurations[0].data_sources.kubernetes.audit_logs.status #=> String, one of "ENABLED", "DISABLED"
     #   resp.unprocessed_accounts #=> Array
     #   resp.unprocessed_accounts[0].account_id #=> String
     #   resp.unprocessed_accounts[0].result #=> String
@@ -1975,7 +2031,7 @@ module Aws::GuardDuty
     #     usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
     #     usage_criteria: { # required
     #       account_ids: ["AccountId"],
-    #       data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #       data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS
     #       resources: ["String"],
     #     },
     #     unit: "String",
@@ -1990,7 +2046,7 @@ module Aws::GuardDuty
     #   resp.usage_statistics.sum_by_account[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_account[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_data_source #=> Array
-    #   resp.usage_statistics.sum_by_data_source[0].data_source #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_LOGS"
+    #   resp.usage_statistics.sum_by_data_source[0].data_source #=> String, one of "FLOW_LOGS", "CLOUD_TRAIL", "DNS_LOGS", "S3_LOGS", "KUBERNETES_AUDIT_LOGS"
     #   resp.usage_statistics.sum_by_data_source[0].total.amount #=> String
     #   resp.usage_statistics.sum_by_data_source[0].total.unit #=> String
     #   resp.usage_statistics.sum_by_resource #=> Array
@@ -2846,6 +2902,11 @@ module Aws::GuardDuty
     #       s3_logs: {
     #         enable: false, # required
     #       },
+    #       kubernetes: {
+    #         audit_logs: { # required
+    #           enable: false, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -3027,6 +3088,11 @@ module Aws::GuardDuty
     #       s3_logs: {
     #         enable: false, # required
     #       },
+    #       kubernetes: {
+    #         audit_logs: { # required
+    #           enable: false, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -3067,6 +3133,11 @@ module Aws::GuardDuty
     #     data_sources: {
     #       s3_logs: {
     #         auto_enable: false, # required
+    #       },
+    #       kubernetes: {
+    #         audit_logs: { # required
+    #           auto_enable: false, # required
+    #         },
     #       },
     #     },
     #   })
@@ -3171,7 +3242,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

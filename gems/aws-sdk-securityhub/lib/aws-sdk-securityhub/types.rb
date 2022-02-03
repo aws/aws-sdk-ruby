@@ -20349,6 +20349,7 @@ module Aws::SecurityHub
     #           },
     #           types: ["NonEmptyString"],
     #         },
+    #         sample: false,
     #       }
     #
     # @!attribute [rw] schema_version
@@ -20623,6 +20624,10 @@ module Aws::SecurityHub
     #   confidence, criticality, related findings, severity, and types.
     #   @return [Types::FindingProviderFields]
     #
+    # @!attribute [rw] sample
+    #   Indicates whether the finding is a sample finding.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFinding AWS API Documentation
     #
     class AwsSecurityFinding < Struct.new(
@@ -20664,7 +20669,8 @@ module Aws::SecurityHub
       :vulnerabilities,
       :patch_summary,
       :action,
-      :finding_provider_fields)
+      :finding_provider_fields,
+      :sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21295,6 +21301,11 @@ module Aws::SecurityHub
     #             comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #           },
     #         ],
+    #         sample: [
+    #           {
+    #             value: false,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] product_arn
@@ -21795,6 +21806,11 @@ module Aws::SecurityHub
     #   Identifications
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] sample
+    #   Indicates whether or not sample findings are included in the filter
+    #   results.
+    #   @return [Array<Types::BooleanFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsSecurityFindingFilters AWS API Documentation
     #
     class AwsSecurityFindingFilters < Struct.new(
@@ -21891,7 +21907,8 @@ module Aws::SecurityHub
       :finding_provider_fields_related_findings_product_arn,
       :finding_provider_fields_severity_label,
       :finding_provider_fields_severity_original,
-      :finding_provider_fields_types)
+      :finding_provider_fields_types,
+      :sample)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25587,6 +25604,7 @@ module Aws::SecurityHub
     #               },
     #               types: ["NonEmptyString"],
     #             },
+    #             sample: false,
     #           },
     #         ],
     #       }
@@ -25806,6 +25824,27 @@ module Aws::SecurityHub
       :finding_identifier,
       :error_code,
       :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Boolean filter for querying findings.
+    #
+    # @note When making an API call, you may pass BooleanFilter
+    #   data as a hash:
+    #
+    #       {
+    #         value: false,
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of the boolean.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/BooleanFilter AWS API Documentation
+    #
+    class BooleanFilter < Struct.new(
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -26993,6 +27032,11 @@ module Aws::SecurityHub
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           sample: [
+    #             {
+    #               value: false,
     #             },
     #           ],
     #         },
@@ -29247,6 +29291,11 @@ module Aws::SecurityHub
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           sample: [
+    #             {
+    #               value: false,
     #             },
     #           ],
     #         },
@@ -39492,6 +39541,11 @@ module Aws::SecurityHub
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
     #             },
     #           ],
+    #           sample: [
+    #             {
+    #               value: false,
+    #             },
+    #           ],
     #         },
     #         note: {
     #           text: "NonEmptyString", # required
@@ -40147,6 +40201,11 @@ module Aws::SecurityHub
     #             {
     #               value: "NonEmptyString",
     #               comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS
+    #             },
+    #           ],
+    #           sample: [
+    #             {
+    #               value: false,
     #             },
     #           ],
     #         },

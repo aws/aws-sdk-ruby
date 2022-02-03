@@ -1037,6 +1037,7 @@ module Aws::Personalize
     Recommender.struct_class = Types::Recommender
 
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
+    RecommenderConfig.add_member(:min_recommendation_requests_per_second, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minRecommendationRequestsPerSecond"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))

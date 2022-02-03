@@ -64,6 +64,7 @@ module Aws::CodeGuruReviewer
     ListCodeReviewsResponse = Shapes::StructureShape.new(name: 'ListCodeReviewsResponse')
     ListRecommendationFeedbackRequest = Shapes::StructureShape.new(name: 'ListRecommendationFeedbackRequest')
     ListRecommendationFeedbackResponse = Shapes::StructureShape.new(name: 'ListRecommendationFeedbackResponse')
+    ListRecommendationsMaxResults = Shapes::IntegerShape.new(name: 'ListRecommendationsMaxResults')
     ListRecommendationsRequest = Shapes::StructureShape.new(name: 'ListRecommendationsRequest')
     ListRecommendationsResponse = Shapes::StructureShape.new(name: 'ListRecommendationsResponse')
     ListRepositoryAssociationsRequest = Shapes::StructureShape.new(name: 'ListRepositoryAssociationsRequest')
@@ -286,7 +287,7 @@ module Aws::CodeGuruReviewer
     ListRecommendationFeedbackResponse.struct_class = Types::ListRecommendationFeedbackResponse
 
     ListRecommendationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListRecommendationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListRecommendationsMaxResults, location: "querystring", location_name: "MaxResults"))
     ListRecommendationsRequest.add_member(:code_review_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "CodeReviewArn"))
     ListRecommendationsRequest.struct_class = Types::ListRecommendationsRequest
 

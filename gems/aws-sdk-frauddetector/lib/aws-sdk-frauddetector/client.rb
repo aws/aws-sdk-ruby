@@ -1982,6 +1982,109 @@ module Aws::FraudDetector
       req.send_request(options)
     end
 
+    # Gets details of the past fraud predictions for the specified event ID,
+    # event type, detector ID, and detector version ID that was generated in
+    # the specified time period.
+    #
+    # @option params [required, String] :event_id
+    #   The event ID.
+    #
+    # @option params [required, String] :event_type_name
+    #   The event type associated with the detector specified for the
+    #   prediction.
+    #
+    # @option params [required, String] :detector_id
+    #   The detector ID.
+    #
+    # @option params [required, String] :detector_version_id
+    #   The detector version ID.
+    #
+    # @option params [required, String] :prediction_timestamp
+    #   The timestamp that defines when the prediction was generated.
+    #
+    # @return [Types::GetEventPredictionMetadataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetEventPredictionMetadataResult#event_id #event_id} => String
+    #   * {Types::GetEventPredictionMetadataResult#event_type_name #event_type_name} => String
+    #   * {Types::GetEventPredictionMetadataResult#entity_id #entity_id} => String
+    #   * {Types::GetEventPredictionMetadataResult#entity_type #entity_type} => String
+    #   * {Types::GetEventPredictionMetadataResult#event_timestamp #event_timestamp} => String
+    #   * {Types::GetEventPredictionMetadataResult#detector_id #detector_id} => String
+    #   * {Types::GetEventPredictionMetadataResult#detector_version_id #detector_version_id} => String
+    #   * {Types::GetEventPredictionMetadataResult#detector_version_status #detector_version_status} => String
+    #   * {Types::GetEventPredictionMetadataResult#event_variables #event_variables} => Array&lt;Types::EventVariableSummary&gt;
+    #   * {Types::GetEventPredictionMetadataResult#rules #rules} => Array&lt;Types::EvaluatedRule&gt;
+    #   * {Types::GetEventPredictionMetadataResult#rule_execution_mode #rule_execution_mode} => String
+    #   * {Types::GetEventPredictionMetadataResult#outcomes #outcomes} => Array&lt;String&gt;
+    #   * {Types::GetEventPredictionMetadataResult#evaluated_model_versions #evaluated_model_versions} => Array&lt;Types::EvaluatedModelVersion&gt;
+    #   * {Types::GetEventPredictionMetadataResult#evaluated_external_models #evaluated_external_models} => Array&lt;Types::EvaluatedExternalModel&gt;
+    #   * {Types::GetEventPredictionMetadataResult#prediction_timestamp #prediction_timestamp} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_event_prediction_metadata({
+    #     event_id: "identifier", # required
+    #     event_type_name: "identifier", # required
+    #     detector_id: "identifier", # required
+    #     detector_version_id: "wholeNumberVersionString", # required
+    #     prediction_timestamp: "time", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_id #=> String
+    #   resp.event_type_name #=> String
+    #   resp.entity_id #=> String
+    #   resp.entity_type #=> String
+    #   resp.event_timestamp #=> String
+    #   resp.detector_id #=> String
+    #   resp.detector_version_id #=> String
+    #   resp.detector_version_status #=> String
+    #   resp.event_variables #=> Array
+    #   resp.event_variables[0].name #=> String
+    #   resp.event_variables[0].value #=> String
+    #   resp.event_variables[0].source #=> String
+    #   resp.rules #=> Array
+    #   resp.rules[0].rule_id #=> String
+    #   resp.rules[0].rule_version #=> String
+    #   resp.rules[0].expression #=> String
+    #   resp.rules[0].expression_with_values #=> String
+    #   resp.rules[0].outcomes #=> Array
+    #   resp.rules[0].outcomes[0] #=> String
+    #   resp.rules[0].evaluated #=> Boolean
+    #   resp.rules[0].matched #=> Boolean
+    #   resp.rule_execution_mode #=> String, one of "ALL_MATCHED", "FIRST_MATCHED"
+    #   resp.outcomes #=> Array
+    #   resp.outcomes[0] #=> String
+    #   resp.evaluated_model_versions #=> Array
+    #   resp.evaluated_model_versions[0].model_id #=> String
+    #   resp.evaluated_model_versions[0].model_version #=> String
+    #   resp.evaluated_model_versions[0].model_type #=> String
+    #   resp.evaluated_model_versions[0].evaluations #=> Array
+    #   resp.evaluated_model_versions[0].evaluations[0].output_variable_name #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].evaluation_score #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations #=> Array
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].event_variable_name #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].relative_impact #=> String
+    #   resp.evaluated_model_versions[0].evaluations[0].prediction_explanations.variable_impact_explanations[0].log_odds_impact #=> Float
+    #   resp.evaluated_external_models #=> Array
+    #   resp.evaluated_external_models[0].model_endpoint #=> String
+    #   resp.evaluated_external_models[0].use_event_variables #=> Boolean
+    #   resp.evaluated_external_models[0].input_variables #=> Hash
+    #   resp.evaluated_external_models[0].input_variables["string"] #=> String
+    #   resp.evaluated_external_models[0].output_variables #=> Hash
+    #   resp.evaluated_external_models[0].output_variables["string"] #=> String
+    #   resp.prediction_timestamp #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/GetEventPredictionMetadata AWS API Documentation
+    #
+    # @overload get_event_prediction_metadata(params = {})
+    # @param [Hash] params ({})
+    def get_event_prediction_metadata(params = {}, options = {})
+      req = build_request(:get_event_prediction_metadata, params)
+      req.send_request(options)
+    end
+
     # Gets all event types or a specific event type if name is provided.
     # This is a paginated API. If you provide a null `maxResults`, this
     # action retrieves a maximum of 10 records per page. If you provide a
@@ -2469,6 +2572,94 @@ module Aws::FraudDetector
     # @param [Hash] params ({})
     def get_variables(params = {}, options = {})
       req = build_request(:get_variables, params)
+      req.send_request(options)
+    end
+
+    # Gets a list of past predictions. The list can be filtered by detector
+    # ID, detector version ID, event ID, event type, or by specifying a time
+    # period. If filter is not specified, the most recent prediction is
+    # returned.
+    #
+    # For example, the following filter lists all past predictions for `xyz`
+    # event type - `\{ "eventType":\{ "value": "xyz" \}” \} `
+    #
+    # This is a paginated API. If you provide a null `maxResults`, this
+    # action will retrieve a maximum of 10 records per page. If you provide
+    # a `maxResults`, the value must be between 50 and 100. To get the next
+    # page results, provide the `nextToken` from the response as part of
+    # your request. A null `nextToken` fetches the records from the
+    # beginning.
+    #
+    # @option params [Types::FilterCondition] :event_id
+    #   The event ID.
+    #
+    # @option params [Types::FilterCondition] :event_type
+    #   The event type associated with the detector.
+    #
+    # @option params [Types::FilterCondition] :detector_id
+    #   The detector ID.
+    #
+    # @option params [Types::FilterCondition] :detector_version_id
+    #   The detector version ID.
+    #
+    # @option params [Types::PredictionTimeRange] :prediction_time_range
+    #   The time period for when the predictions were generated.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return. Use the token to make
+    #   the call again to retrieve the next page. Keep all other arguments
+    #   unchanged. Each pagination token expires after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of predictions to return for the request.
+    #
+    # @return [Types::ListEventPredictionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEventPredictionsResult#event_prediction_summaries #event_prediction_summaries} => Array&lt;Types::EventPredictionSummary&gt;
+    #   * {Types::ListEventPredictionsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_event_predictions({
+    #     event_id: {
+    #       value: "filterString",
+    #     },
+    #     event_type: {
+    #       value: "filterString",
+    #     },
+    #     detector_id: {
+    #       value: "filterString",
+    #     },
+    #     detector_version_id: {
+    #       value: "filterString",
+    #     },
+    #     prediction_time_range: {
+    #       start_time: "time", # required
+    #       end_time: "time", # required
+    #     },
+    #     next_token: "string",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.event_prediction_summaries #=> Array
+    #   resp.event_prediction_summaries[0].event_id #=> String
+    #   resp.event_prediction_summaries[0].event_type_name #=> String
+    #   resp.event_prediction_summaries[0].event_timestamp #=> String
+    #   resp.event_prediction_summaries[0].prediction_timestamp #=> String
+    #   resp.event_prediction_summaries[0].detector_id #=> String
+    #   resp.event_prediction_summaries[0].detector_version_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/frauddetector-2019-11-15/ListEventPredictions AWS API Documentation
+    #
+    # @overload list_event_predictions(params = {})
+    # @param [Hash] params ({})
+    def list_event_predictions(params = {}, options = {})
+      req = build_request(:list_event_predictions, params)
       req.send_request(options)
     end
 
@@ -3391,7 +3582,7 @@ module Aws::FraudDetector
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-frauddetector'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

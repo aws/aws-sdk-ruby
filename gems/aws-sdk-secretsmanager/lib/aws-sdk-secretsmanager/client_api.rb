@@ -32,6 +32,7 @@ module Aws::SecretsManager
     DescribeSecretRequest = Shapes::StructureShape.new(name: 'DescribeSecretRequest')
     DescribeSecretResponse = Shapes::StructureShape.new(name: 'DescribeSecretResponse')
     DescriptionType = Shapes::StringShape.new(name: 'DescriptionType')
+    DurationType = Shapes::StringShape.new(name: 'DurationType')
     EncryptionFailure = Shapes::StructureShape.new(name: 'EncryptionFailure')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExcludeCharactersType = Shapes::StringShape.new(name: 'ExcludeCharactersType')
@@ -99,6 +100,7 @@ module Aws::SecretsManager
     RotationEnabledType = Shapes::BooleanShape.new(name: 'RotationEnabledType')
     RotationLambdaARNType = Shapes::StringShape.new(name: 'RotationLambdaARNType')
     RotationRulesType = Shapes::StructureShape.new(name: 'RotationRulesType')
+    ScheduleExpressionType = Shapes::StringShape.new(name: 'ScheduleExpressionType')
     SecretARNType = Shapes::StringShape.new(name: 'SecretARNType')
     SecretBinaryType = Shapes::BlobShape.new(name: 'SecretBinaryType')
     SecretIdType = Shapes::StringShape.new(name: 'SecretIdType')
@@ -368,6 +370,7 @@ module Aws::SecretsManager
     RotateSecretRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestTokenType, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     RotateSecretRequest.add_member(:rotation_lambda_arn, Shapes::ShapeRef.new(shape: RotationLambdaARNType, location_name: "RotationLambdaARN"))
     RotateSecretRequest.add_member(:rotation_rules, Shapes::ShapeRef.new(shape: RotationRulesType, location_name: "RotationRules"))
+    RotateSecretRequest.add_member(:rotate_immediately, Shapes::ShapeRef.new(shape: BooleanType, location_name: "RotateImmediately", metadata: {"box"=>true}))
     RotateSecretRequest.struct_class = Types::RotateSecretRequest
 
     RotateSecretResponse.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -376,6 +379,8 @@ module Aws::SecretsManager
     RotateSecretResponse.struct_class = Types::RotateSecretResponse
 
     RotationRulesType.add_member(:automatically_after_days, Shapes::ShapeRef.new(shape: AutomaticallyRotateAfterDaysType, location_name: "AutomaticallyAfterDays", metadata: {"box"=>true}))
+    RotationRulesType.add_member(:duration, Shapes::ShapeRef.new(shape: DurationType, location_name: "Duration"))
+    RotationRulesType.add_member(:schedule_expression, Shapes::ShapeRef.new(shape: ScheduleExpressionType, location_name: "ScheduleExpression"))
     RotationRulesType.struct_class = Types::RotationRulesType
 
     SecretListEntry.add_member(:arn, Shapes::ShapeRef.new(shape: SecretARNType, location_name: "ARN"))
@@ -517,6 +522,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
       end)
 
       api.add_operation(:delete_resource_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -652,6 +658,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
       end)
 
       api.add_operation(:remove_regions_from_replication, Seahorse::Model::Operation.new.tap do |o|
@@ -753,6 +760,7 @@ module Aws::SecretsManager
         o.errors << Shapes::ShapeRef.new(shape: MalformedPolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceError)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
       end)
 
       api.add_operation(:update_secret_version_stage, Seahorse::Model::Operation.new.tap do |o|

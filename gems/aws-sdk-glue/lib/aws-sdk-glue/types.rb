@@ -1482,13 +1482,13 @@ module Aws::Glue
     #   data as a hash:
     #
     #       {
-    #         data_format: "AVRO", # required, accepts AVRO, JSON
+    #         data_format: "AVRO", # required, accepts AVRO, JSON, PROTOBUF
     #         schema_definition: "SchemaDefinitionString", # required
     #       }
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] schema_definition
@@ -4378,7 +4378,7 @@ module Aws::Glue
     #           registry_arn: "GlueResourceArn",
     #         },
     #         schema_name: "SchemaRegistryNameString", # required
-    #         data_format: "AVRO", # required, accepts AVRO, JSON
+    #         data_format: "AVRO", # required, accepts AVRO, JSON, PROTOBUF
     #         compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
     #         description: "DescriptionString",
     #         tags: {
@@ -4401,8 +4401,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -4505,8 +4505,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -9230,8 +9230,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently only `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -9306,8 +9306,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] compatibility
@@ -9418,8 +9418,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] data_format
-    #   The data format of the schema definition. Currently `AVRO` and
-    #   `JSON` are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON`
+    #   and `PROTOBUF` are supported.
     #   @return [String]
     #
     # @!attribute [rw] schema_arn

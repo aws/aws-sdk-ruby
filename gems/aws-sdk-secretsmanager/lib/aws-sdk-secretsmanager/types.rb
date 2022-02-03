@@ -956,7 +956,7 @@ module Aws::SecretsManager
       include Aws::Structure
     end
 
-    # The parameter name is invalid value.
+    # The parameter name or value is invalid.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1634,7 +1634,10 @@ module Aws::SecretsManager
     #         rotation_lambda_arn: "RotationLambdaARNType",
     #         rotation_rules: {
     #           automatically_after_days: 1,
+    #           duration: "DurationType",
+    #           schedule_expression: "ScheduleExpressionType",
     #         },
+    #         rotate_immediately: false,
     #       }
     #
     # @!attribute [rw] secret_id
@@ -1682,13 +1685,32 @@ module Aws::SecretsManager
     #   A structure that defines the rotation configuration for this secret.
     #   @return [Types::RotationRulesType]
     #
+    # @!attribute [rw] rotate_immediately
+    #   Specifies whether to rotate the secret immediately or wait until the
+    #   next scheduled rotation window. The rotation schedule is defined in
+    #   RotateSecretRequest$RotationRules.
+    #
+    #   If you don't immediately rotate the secret, Secrets Manager tests
+    #   the rotation configuration by running the [ `testSecret` step][1] of
+    #   the Lambda rotation function. The test creates an `AWSPENDING`
+    #   version of the secret and then removes it.
+    #
+    #   If you don't specify this value, then by default, Secrets Manager
+    #   rotates the secret immediately.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotateSecretRequest AWS API Documentation
     #
     class RotateSecretRequest < Struct.new(
       :secret_id,
       :client_request_token,
       :rotation_lambda_arn,
-      :rotation_rules)
+      :rotation_rules,
+      :rotate_immediately)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1722,32 +1744,79 @@ module Aws::SecretsManager
     #
     #       {
     #         automatically_after_days: 1,
+    #         duration: "DurationType",
+    #         schedule_expression: "ScheduleExpressionType",
     #       }
     #
     # @!attribute [rw] automatically_after_days
-    #   Specifies the number of days between automatic scheduled rotations
-    #   of the secret.
+    #   The number of days between automatic scheduled rotations of the
+    #   secret. You can use this value to check that your secret meets your
+    #   compliance guidelines for how often secrets must be rotated.
     #
-    #   Secrets Manager schedules the next rotation when the previous one is
-    #   complete. Secrets Manager schedules the date by adding the rotation
-    #   interval (number of days) to the actual date of the last rotation.
-    #   The service chooses the hour within that 24-hour date window
-    #   randomly. The minute is also chosen somewhat randomly, but weighted
-    #   towards the top of the hour and influenced by a variety of factors
-    #   that help distribute load.
+    #   In `DescribeSecret` and `ListSecrets`, this value is calculated from
+    #   the rotation schedule after every successful rotation. In
+    #   `RotateSecret`, you can set the rotation schedule in `RotationRules`
+    #   with `AutomaticallyAfterDays` or `ScheduleExpression`, but not both.
     #   @return [Integer]
+    #
+    # @!attribute [rw] duration
+    #   The length of the rotation window in hours, for example `3h` for a
+    #   three hour window. Secrets Manager rotates your secret at any time
+    #   during this window. The window must not go into the next UTC day. If
+    #   you don't specify this value, the window automatically ends at the
+    #   end of the UTC day. The window begins according to the
+    #   `ScheduleExpression`. For more information, including examples, see
+    #   [Schedule expressions in Secrets Manager rotation][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_schedule.html
+    #   @return [String]
+    #
+    # @!attribute [rw] schedule_expression
+    #   A `cron()` or `rate()` expression that defines the schedule for
+    #   rotating your secret. Secrets Manager rotation schedules use UTC
+    #   time zone.
+    #
+    #   Secrets Manager `rate()` expressions represent the interval in days
+    #   that you want to rotate your secret, for example `rate(10 days)`. If
+    #   you use a `rate()` expression, the rotation window opens at
+    #   midnight, and Secrets Manager rotates your secret any time that day
+    #   after midnight. You can set a `Duration` to shorten the rotation
+    #   window.
+    #
+    #   You can use a `cron()` expression to create rotation schedules that
+    #   are more detailed than a rotation interval. For more information,
+    #   including examples, see [Schedule expressions in Secrets Manager
+    #   rotation][1]. If you use a `cron()` expression, Secrets Manager
+    #   rotates your secret any time during that day after the window opens.
+    #   For example, `cron(0 8 1 * ? *)` represents a rotation window that
+    #   occurs on the first day of every month beginning at 8:00 AM UTC.
+    #   Secrets Manager rotates the secret any time that day after 8:00 AM.
+    #   You can set a `Duration` to shorten the rotation window.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_schedule.html
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RotationRulesType AWS API Documentation
     #
     class RotationRulesType < Struct.new(
-      :automatically_after_days)
+      :automatically_after_days,
+      :duration,
+      :schedule_expression)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # A structure that contains the details about a secret. It does not
     # include the encrypted `SecretString` and `SecretBinary` values. To get
-    # those values, use the GetSecretValue operation.
+    # those values, use [GetSecretValue][1] .
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
     #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the secret.
@@ -1778,7 +1847,11 @@ module Aws::SecretsManager
     # @!attribute [rw] rotation_lambda_arn
     #   The ARN of an Amazon Web Services Lambda function invoked by Secrets
     #   Manager to rotate and expire the secret either automatically per the
-    #   schedule or manually by a call to RotateSecret.
+    #   schedule or manually by a call to [ `RotateSecret` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_RotateSecret.html
     #   @return [String]
     #
     # @!attribute [rw] rotation_rules
@@ -1805,13 +1878,23 @@ module Aws::SecretsManager
     #   The date and time the deletion of the secret occurred. Not present
     #   on active secrets. The secret can be recovered until the number of
     #   days in the recovery window has passed, as specified in the
-    #   `RecoveryWindowInDays` parameter of the DeleteSecret operation.
+    #   `RecoveryWindowInDays` parameter of the [ `DeleteSecret` ][1]
+    #   operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_DeleteSecret.html
     #   @return [Time]
     #
     # @!attribute [rw] tags
     #   The list of user-defined tags associated with the secret. To add
-    #   tags to a secret, use TagResource. To remove tags, use
-    #   UntagResource.
+    #   tags to a secret, use [ `TagResource` ][1]. To remove tags, use [
+    #   `UntagResource` ][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_UntagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] secret_versions_to_stages

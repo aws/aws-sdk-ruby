@@ -470,14 +470,26 @@ module Aws::EBS
     # @option params [String] :next_token
     #   The token to request the next page of results.
     #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is ignored.
+    #
     # @option params [Integer] :max_results
-    #   The number of results to return.
+    #   The maximum number of blocks to be returned by the request.
+    #
+    #   Even if additional blocks can be retrieved from the snapshot, the
+    #   request can return less blocks than **MaxResults** or an empty array
+    #   of blocks.
+    #
+    #   To retrieve the next set of blocks from the snapshot, make another
+    #   request with the returned **NextToken** value. The value of
+    #   **NextToken** is `null` when there are no more blocks to return.
     #
     # @option params [Integer] :starting_block_index
     #   The block index from which the comparison should start.
     #
     #   The list in the response will start from this block index or the next
     #   valid block index in the snapshots.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is ignored.
     #
     # @return [Types::ListChangedBlocksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -529,13 +541,25 @@ module Aws::EBS
     # @option params [String] :next_token
     #   The token to request the next page of results.
     #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is ignored.
+    #
     # @option params [Integer] :max_results
-    #   The number of results to return.
+    #   The maximum number of blocks to be returned by the request.
+    #
+    #   Even if additional blocks can be retrieved from the snapshot, the
+    #   request can return less blocks than **MaxResults** or an empty array
+    #   of blocks.
+    #
+    #   To retrieve the next set of blocks from the snapshot, make another
+    #   request with the returned **NextToken** value. The value of
+    #   **NextToken** is `null` when there are no more blocks to return.
     #
     # @option params [Integer] :starting_block_index
     #   The block index from which the list should start. The list in the
     #   response will start from this block index or the next valid block
     #   index in the snapshot.
+    #
+    #   If you specify **NextToken**, then **StartingBlockIndex** is ignored.
     #
     # @return [Types::ListSnapshotBlocksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -826,7 +850,7 @@ module Aws::EBS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ebs'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

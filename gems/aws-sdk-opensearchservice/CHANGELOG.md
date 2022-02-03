@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-01-27)
+------------------
+
+* Feature - Allows customers to get progress updates for blue/green deployments
+
 1.7.0 (2022-01-06)
 ------------------
 

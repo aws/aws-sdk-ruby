@@ -35,6 +35,8 @@ module Aws::Connect
     AnswerMachineDetectionConfig = Shapes::StructureShape.new(name: 'AnswerMachineDetectionConfig')
     AssociateApprovedOriginRequest = Shapes::StructureShape.new(name: 'AssociateApprovedOriginRequest')
     AssociateBotRequest = Shapes::StructureShape.new(name: 'AssociateBotRequest')
+    AssociateDefaultVocabularyRequest = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyRequest')
+    AssociateDefaultVocabularyResponse = Shapes::StructureShape.new(name: 'AssociateDefaultVocabularyResponse')
     AssociateInstanceStorageConfigRequest = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigRequest')
     AssociateInstanceStorageConfigResponse = Shapes::StructureShape.new(name: 'AssociateInstanceStorageConfigResponse')
     AssociateLambdaFunctionRequest = Shapes::StructureShape.new(name: 'AssociateLambdaFunctionRequest')
@@ -59,6 +61,7 @@ module Aws::Connect
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
+    ChatDurationInMinutes = Shapes::IntegerShape.new(name: 'ChatDurationInMinutes')
     ChatMessage = Shapes::StructureShape.new(name: 'ChatMessage')
     ChatStreamingConfiguration = Shapes::StructureShape.new(name: 'ChatStreamingConfiguration')
     ChatStreamingEndpointARN = Shapes::StringShape.new(name: 'ChatStreamingEndpointARN')
@@ -117,6 +120,8 @@ module Aws::Connect
     CreateUserHierarchyGroupResponse = Shapes::StructureShape.new(name: 'CreateUserHierarchyGroupResponse')
     CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
     CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
+    CreateVocabularyRequest = Shapes::StructureShape.new(name: 'CreateVocabularyRequest')
+    CreateVocabularyResponse = Shapes::StructureShape.new(name: 'CreateVocabularyResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CurrentMetric = Shapes::StructureShape.new(name: 'CurrentMetric')
     CurrentMetricData = Shapes::StructureShape.new(name: 'CurrentMetricData')
@@ -125,6 +130,8 @@ module Aws::Connect
     CurrentMetricResult = Shapes::StructureShape.new(name: 'CurrentMetricResult')
     CurrentMetricResults = Shapes::ListShape.new(name: 'CurrentMetricResults')
     CurrentMetrics = Shapes::ListShape.new(name: 'CurrentMetrics')
+    DefaultVocabulary = Shapes::StructureShape.new(name: 'DefaultVocabulary')
+    DefaultVocabularyList = Shapes::ListShape.new(name: 'DefaultVocabularyList')
     Delay = Shapes::IntegerShape.new(name: 'Delay')
     DeleteContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleRequest')
     DeleteContactFlowModuleResponse = Shapes::StructureShape.new(name: 'DeleteContactFlowModuleResponse')
@@ -137,6 +144,8 @@ module Aws::Connect
     DeleteUseCaseRequest = Shapes::StructureShape.new(name: 'DeleteUseCaseRequest')
     DeleteUserHierarchyGroupRequest = Shapes::StructureShape.new(name: 'DeleteUserHierarchyGroupRequest')
     DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
+    DeleteVocabularyRequest = Shapes::StructureShape.new(name: 'DeleteVocabularyRequest')
+    DeleteVocabularyResponse = Shapes::StructureShape.new(name: 'DeleteVocabularyResponse')
     DescribeAgentStatusRequest = Shapes::StructureShape.new(name: 'DescribeAgentStatusRequest')
     DescribeAgentStatusResponse = Shapes::StructureShape.new(name: 'DescribeAgentStatusResponse')
     DescribeContactFlowModuleRequest = Shapes::StructureShape.new(name: 'DescribeContactFlowModuleRequest')
@@ -167,6 +176,8 @@ module Aws::Connect
     DescribeUserHierarchyStructureResponse = Shapes::StructureShape.new(name: 'DescribeUserHierarchyStructureResponse')
     DescribeUserRequest = Shapes::StructureShape.new(name: 'DescribeUserRequest')
     DescribeUserResponse = Shapes::StructureShape.new(name: 'DescribeUserResponse')
+    DescribeVocabularyRequest = Shapes::StructureShape.new(name: 'DescribeVocabularyRequest')
+    DescribeVocabularyResponse = Shapes::StructureShape.new(name: 'DescribeVocabularyResponse')
     Description = Shapes::StringShape.new(name: 'Description')
     DestinationNotAllowedException = Shapes::StructureShape.new(name: 'DestinationNotAllowedException')
     Dimensions = Shapes::StructureShape.new(name: 'Dimensions')
@@ -277,6 +288,8 @@ module Aws::Connect
     ListContactFlowsResponse = Shapes::StructureShape.new(name: 'ListContactFlowsResponse')
     ListContactReferencesRequest = Shapes::StructureShape.new(name: 'ListContactReferencesRequest')
     ListContactReferencesResponse = Shapes::StructureShape.new(name: 'ListContactReferencesResponse')
+    ListDefaultVocabulariesRequest = Shapes::StructureShape.new(name: 'ListDefaultVocabulariesRequest')
+    ListDefaultVocabulariesResponse = Shapes::StructureShape.new(name: 'ListDefaultVocabulariesResponse')
     ListHoursOfOperationsRequest = Shapes::StructureShape.new(name: 'ListHoursOfOperationsRequest')
     ListHoursOfOperationsResponse = Shapes::StructureShape.new(name: 'ListHoursOfOperationsResponse')
     ListInstanceAttributesRequest = Shapes::StructureShape.new(name: 'ListInstanceAttributesRequest')
@@ -413,6 +426,8 @@ module Aws::Connect
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
+    SearchVocabulariesRequest = Shapes::StructureShape.new(name: 'SearchVocabulariesRequest')
+    SearchVocabulariesResponse = Shapes::StructureShape.new(name: 'SearchVocabulariesResponse')
     SecurityKey = Shapes::StructureShape.new(name: 'SecurityKey')
     SecurityKeysList = Shapes::ListShape.new(name: 'SecurityKeysList')
     SecurityProfile = Shapes::StructureShape.new(name: 'SecurityProfile')
@@ -516,6 +531,17 @@ module Aws::Connect
     UserSummary = Shapes::StructureShape.new(name: 'UserSummary')
     UserSummaryList = Shapes::ListShape.new(name: 'UserSummaryList')
     Value = Shapes::FloatShape.new(name: 'Value')
+    Vocabulary = Shapes::StructureShape.new(name: 'Vocabulary')
+    VocabularyContent = Shapes::StringShape.new(name: 'VocabularyContent')
+    VocabularyFailureReason = Shapes::StringShape.new(name: 'VocabularyFailureReason')
+    VocabularyId = Shapes::StringShape.new(name: 'VocabularyId')
+    VocabularyLanguageCode = Shapes::StringShape.new(name: 'VocabularyLanguageCode')
+    VocabularyLastModifiedTime = Shapes::TimestampShape.new(name: 'VocabularyLastModifiedTime')
+    VocabularyName = Shapes::StringShape.new(name: 'VocabularyName')
+    VocabularyNextToken = Shapes::StringShape.new(name: 'VocabularyNextToken')
+    VocabularyState = Shapes::StringShape.new(name: 'VocabularyState')
+    VocabularySummary = Shapes::StructureShape.new(name: 'VocabularySummary')
+    VocabularySummaryList = Shapes::ListShape.new(name: 'VocabularySummaryList')
     VoiceRecordingConfiguration = Shapes::StructureShape.new(name: 'VoiceRecordingConfiguration')
     VoiceRecordingTrack = Shapes::StringShape.new(name: 'VoiceRecordingTrack')
     timestamp = Shapes::TimestampShape.new(name: 'timestamp')
@@ -559,6 +585,13 @@ module Aws::Connect
     AssociateBotRequest.add_member(:lex_bot, Shapes::ShapeRef.new(shape: LexBot, location_name: "LexBot"))
     AssociateBotRequest.add_member(:lex_v2_bot, Shapes::ShapeRef.new(shape: LexV2Bot, location_name: "LexV2Bot"))
     AssociateBotRequest.struct_class = Types::AssociateBotRequest
+
+    AssociateDefaultVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    AssociateDefaultVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location: "uri", location_name: "LanguageCode"))
+    AssociateDefaultVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, location_name: "VocabularyId"))
+    AssociateDefaultVocabularyRequest.struct_class = Types::AssociateDefaultVocabularyRequest
+
+    AssociateDefaultVocabularyResponse.struct_class = Types::AssociateDefaultVocabularyResponse
 
     AssociateInstanceStorageConfigRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     AssociateInstanceStorageConfigRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: InstanceStorageResourceType, required: true, location_name: "ResourceType"))
@@ -838,6 +871,19 @@ module Aws::Connect
     CreateUserResponse.add_member(:user_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "UserArn"))
     CreateUserResponse.struct_class = Types::CreateUserResponse
 
+    CreateVocabularyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    CreateVocabularyRequest.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    CreateVocabularyRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location_name: "LanguageCode"))
+    CreateVocabularyRequest.add_member(:content, Shapes::ShapeRef.new(shape: VocabularyContent, required: true, location_name: "Content"))
+    CreateVocabularyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateVocabularyRequest.struct_class = Types::CreateVocabularyRequest
+
+    CreateVocabularyResponse.add_member(:vocabulary_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "VocabularyArn"))
+    CreateVocabularyResponse.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "VocabularyId"))
+    CreateVocabularyResponse.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
+    CreateVocabularyResponse.struct_class = Types::CreateVocabularyResponse
+
     Credentials.add_member(:access_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "AccessToken"))
     Credentials.add_member(:access_token_expiration, Shapes::ShapeRef.new(shape: timestamp, location_name: "AccessTokenExpiration"))
     Credentials.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SecurityToken, location_name: "RefreshToken"))
@@ -861,6 +907,14 @@ module Aws::Connect
     CurrentMetricResults.member = Shapes::ShapeRef.new(shape: CurrentMetricResult)
 
     CurrentMetrics.member = Shapes::ShapeRef.new(shape: CurrentMetric)
+
+    DefaultVocabulary.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    DefaultVocabulary.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location_name: "LanguageCode"))
+    DefaultVocabulary.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "VocabularyId"))
+    DefaultVocabulary.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "VocabularyName"))
+    DefaultVocabulary.struct_class = Types::DefaultVocabulary
+
+    DefaultVocabularyList.member = Shapes::ShapeRef.new(shape: DefaultVocabulary)
 
     DeleteContactFlowModuleRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteContactFlowModuleRequest.add_member(:contact_flow_module_id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, required: true, location: "uri", location_name: "ContactFlowModuleId"))
@@ -903,6 +957,15 @@ module Aws::Connect
     DeleteUserRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DeleteUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
     DeleteUserRequest.struct_class = Types::DeleteUserRequest
+
+    DeleteVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DeleteVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location: "uri", location_name: "VocabularyId"))
+    DeleteVocabularyRequest.struct_class = Types::DeleteVocabularyRequest
+
+    DeleteVocabularyResponse.add_member(:vocabulary_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "VocabularyArn"))
+    DeleteVocabularyResponse.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "VocabularyId"))
+    DeleteVocabularyResponse.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
+    DeleteVocabularyResponse.struct_class = Types::DeleteVocabularyResponse
 
     DescribeAgentStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     DescribeAgentStatusRequest.add_member(:agent_status_id, Shapes::ShapeRef.new(shape: AgentStatusId, required: true, location: "uri", location_name: "AgentStatusId"))
@@ -1007,6 +1070,13 @@ module Aws::Connect
 
     DescribeUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: User, location_name: "User"))
     DescribeUserResponse.struct_class = Types::DescribeUserResponse
+
+    DescribeVocabularyRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    DescribeVocabularyRequest.add_member(:vocabulary_id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location: "uri", location_name: "VocabularyId"))
+    DescribeVocabularyRequest.struct_class = Types::DescribeVocabularyRequest
+
+    DescribeVocabularyResponse.add_member(:vocabulary, Shapes::ShapeRef.new(shape: Vocabulary, required: true, location_name: "Vocabulary"))
+    DescribeVocabularyResponse.struct_class = Types::DescribeVocabularyResponse
 
     DestinationNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DestinationNotAllowedException.struct_class = Types::DestinationNotAllowedException
@@ -1353,6 +1423,16 @@ module Aws::Connect
     ListContactReferencesResponse.add_member(:reference_summary_list, Shapes::ShapeRef.new(shape: ReferenceSummaryList, location_name: "ReferenceSummaryList"))
     ListContactReferencesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListContactReferencesResponse.struct_class = Types::ListContactReferencesResponse
+
+    ListDefaultVocabulariesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    ListDefaultVocabulariesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, location_name: "LanguageCode"))
+    ListDefaultVocabulariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults"))
+    ListDefaultVocabulariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
+    ListDefaultVocabulariesRequest.struct_class = Types::ListDefaultVocabulariesRequest
+
+    ListDefaultVocabulariesResponse.add_member(:default_vocabulary_list, Shapes::ShapeRef.new(shape: DefaultVocabularyList, required: true, location_name: "DefaultVocabularyList"))
+    ListDefaultVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
+    ListDefaultVocabulariesResponse.struct_class = Types::ListDefaultVocabulariesResponse
 
     ListHoursOfOperationsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListHoursOfOperationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
@@ -1738,6 +1818,18 @@ module Aws::Connect
     S3Config.add_member(:encryption_config, Shapes::ShapeRef.new(shape: EncryptionConfig, location_name: "EncryptionConfig"))
     S3Config.struct_class = Types::S3Config
 
+    SearchVocabulariesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    SearchVocabulariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults"))
+    SearchVocabulariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
+    SearchVocabulariesRequest.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, location_name: "State"))
+    SearchVocabulariesRequest.add_member(:name_starts_with, Shapes::ShapeRef.new(shape: VocabularyName, location_name: "NameStartsWith"))
+    SearchVocabulariesRequest.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, location_name: "LanguageCode"))
+    SearchVocabulariesRequest.struct_class = Types::SearchVocabulariesRequest
+
+    SearchVocabulariesResponse.add_member(:vocabulary_summary_list, Shapes::ShapeRef.new(shape: VocabularySummaryList, location_name: "VocabularySummaryList"))
+    SearchVocabulariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: VocabularyNextToken, location_name: "NextToken"))
+    SearchVocabulariesResponse.struct_class = Types::SearchVocabulariesResponse
+
     SecurityKey.add_member(:association_id, Shapes::ShapeRef.new(shape: AssociationId, location_name: "AssociationId"))
     SecurityKey.add_member(:key, Shapes::ShapeRef.new(shape: PEM, location_name: "Key"))
     SecurityKey.add_member(:creation_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "CreationTime"))
@@ -1771,6 +1863,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:participant_details, Shapes::ShapeRef.new(shape: ParticipantDetails, required: true, location_name: "ParticipantDetails"))
     StartChatContactRequest.add_member(:initial_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialMessage"))
     StartChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    StartChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
@@ -2102,6 +2195,28 @@ module Aws::Connect
 
     UserSummaryList.member = Shapes::ShapeRef.new(shape: UserSummary)
 
+    Vocabulary.add_member(:name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "Name"))
+    Vocabulary.add_member(:id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "Id"))
+    Vocabulary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "Arn"))
+    Vocabulary.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location_name: "LanguageCode"))
+    Vocabulary.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
+    Vocabulary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: VocabularyLastModifiedTime, required: true, location_name: "LastModifiedTime"))
+    Vocabulary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: VocabularyFailureReason, location_name: "FailureReason"))
+    Vocabulary.add_member(:content, Shapes::ShapeRef.new(shape: VocabularyContent, location_name: "Content"))
+    Vocabulary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    Vocabulary.struct_class = Types::Vocabulary
+
+    VocabularySummary.add_member(:name, Shapes::ShapeRef.new(shape: VocabularyName, required: true, location_name: "Name"))
+    VocabularySummary.add_member(:id, Shapes::ShapeRef.new(shape: VocabularyId, required: true, location_name: "Id"))
+    VocabularySummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "Arn"))
+    VocabularySummary.add_member(:language_code, Shapes::ShapeRef.new(shape: VocabularyLanguageCode, required: true, location_name: "LanguageCode"))
+    VocabularySummary.add_member(:state, Shapes::ShapeRef.new(shape: VocabularyState, required: true, location_name: "State"))
+    VocabularySummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: VocabularyLastModifiedTime, required: true, location_name: "LastModifiedTime"))
+    VocabularySummary.add_member(:failure_reason, Shapes::ShapeRef.new(shape: VocabularyFailureReason, location_name: "FailureReason"))
+    VocabularySummary.struct_class = Types::VocabularySummary
+
+    VocabularySummaryList.member = Shapes::ShapeRef.new(shape: VocabularySummary)
+
     VoiceRecordingConfiguration.add_member(:voice_recording_track, Shapes::ShapeRef.new(shape: VoiceRecordingTrack, location_name: "VoiceRecordingTrack"))
     VoiceRecordingConfiguration.struct_class = Types::VoiceRecordingConfiguration
 
@@ -2152,6 +2267,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:associate_default_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateDefaultVocabulary"
+        o.http_method = "PUT"
+        o.http_request_uri = "/default-vocabulary/{InstanceId}/{LanguageCode}"
+        o.input = Shapes::ShapeRef.new(shape: AssociateDefaultVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateDefaultVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:associate_instance_storage_config, Seahorse::Model::Operation.new.tap do |o|
@@ -2433,6 +2561,21 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:create_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/vocabulary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: CreateVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_contact_flow, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteContactFlow"
         o.http_method = "DELETE"
@@ -2562,6 +2705,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:delete_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVocabulary"
+        o.http_method = "POST"
+        o.http_request_uri = "/vocabulary-remove/{InstanceId}/{VocabularyId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 
       api.add_operation(:describe_agent_status, Seahorse::Model::Operation.new.tap do |o|
@@ -2757,6 +2914,19 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:describe_vocabulary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVocabulary"
+        o.http_method = "GET"
+        o.http_request_uri = "/vocabulary/{InstanceId}/{VocabularyId}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVocabularyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVocabularyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
       api.add_operation(:disassociate_approved_origin, Seahorse::Model::Operation.new.tap do |o|
@@ -3032,6 +3202,24 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_default_vocabularies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListDefaultVocabularies"
+        o.http_method = "POST"
+        o.http_request_uri = "/default-vocabulary-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListDefaultVocabulariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListDefaultVocabulariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }
@@ -3435,6 +3623,24 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
+      api.add_operation(:search_vocabularies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchVocabularies"
+        o.http_method = "POST"
+        o.http_request_uri = "/vocabulary-summary/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: SearchVocabulariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchVocabulariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:start_chat_contact, Seahorse::Model::Operation.new.tap do |o|

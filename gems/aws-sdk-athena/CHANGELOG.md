@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-01-28)
+------------------
+
+* Feature - This release adds a field, AthenaError, to the GetQueryExecution response object when a query fails.
+
 1.45.0 (2021-12-21)
 ------------------
 

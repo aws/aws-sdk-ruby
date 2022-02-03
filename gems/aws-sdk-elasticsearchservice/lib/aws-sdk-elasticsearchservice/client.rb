@@ -771,6 +771,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.change_progress_details.change_id #=> String
+    #   resp.domain_status.change_progress_details.message #=> String
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -978,6 +980,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.change_progress_details.change_id #=> String
+    #   resp.domain_status.change_progress_details.message #=> String
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1160,6 +1164,51 @@ module Aws::ElasticsearchService
       req.send_request(options)
     end
 
+    # Returns information about the current blue/green deployment happening
+    # on a domain, including a change ID, status, and progress stages.
+    #
+    # @option params [required, String] :domain_name
+    #   The domain you want to get the progress information about.
+    #
+    # @option params [String] :change_id
+    #   The specific change ID for which you want to get progress information.
+    #   This is an optional parameter. If omitted, the service returns
+    #   information about the most recent configuration change.
+    #
+    # @return [Types::DescribeDomainChangeProgressResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainChangeProgressResponse#change_progress_status #change_progress_status} => Types::ChangeProgressStatusDetails
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_change_progress({
+    #     domain_name: "DomainName", # required
+    #     change_id: "GUID",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.change_progress_status.change_id #=> String
+    #   resp.change_progress_status.start_time #=> Time
+    #   resp.change_progress_status.status #=> String, one of "PENDING", "PROCESSING", "COMPLETED", "FAILED"
+    #   resp.change_progress_status.pending_properties #=> Array
+    #   resp.change_progress_status.pending_properties[0] #=> String
+    #   resp.change_progress_status.completed_properties #=> Array
+    #   resp.change_progress_status.completed_properties[0] #=> String
+    #   resp.change_progress_status.total_number_of_stages #=> Integer
+    #   resp.change_progress_status.change_progress_stages #=> Array
+    #   resp.change_progress_status.change_progress_stages[0].name #=> String
+    #   resp.change_progress_status.change_progress_stages[0].status #=> String
+    #   resp.change_progress_status.change_progress_stages[0].description #=> String
+    #   resp.change_progress_status.change_progress_stages[0].last_updated #=> Time
+    #
+    # @overload describe_domain_change_progress(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_change_progress(params = {}, options = {})
+      req = build_request(:describe_domain_change_progress, params)
+      req.send_request(options)
+    end
+
     # Returns domain configuration information about the specified
     # Elasticsearch domain, including the domain ID, domain endpoint, and
     # domain ARN.
@@ -1251,6 +1300,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status.advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status.auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status.auto_tune_options.error_message #=> String
+    #   resp.domain_status.change_progress_details.change_id #=> String
+    #   resp.domain_status.change_progress_details.message #=> String
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1408,6 +1459,8 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_config.auto_tune_options.status.error_message #=> String
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.change_progress_details.change_id #=> String
+    #   resp.domain_config.change_progress_details.message #=> String
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1508,6 +1561,8 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].advanced_security_options.anonymous_auth_enabled #=> Boolean
     #   resp.domain_status_list[0].auto_tune_options.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_status_list[0].auto_tune_options.error_message #=> String
+    #   resp.domain_status_list[0].change_progress_details.change_id #=> String
+    #   resp.domain_status_list[0].change_progress_details.message #=> String
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -2760,6 +2815,8 @@ module Aws::ElasticsearchService
     #   resp.domain_config.auto_tune_options.status.state #=> String, one of "ENABLED", "DISABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "DISABLED_AND_ROLLBACK_SCHEDULED", "DISABLED_AND_ROLLBACK_IN_PROGRESS", "DISABLED_AND_ROLLBACK_COMPLETE", "DISABLED_AND_ROLLBACK_ERROR", "ERROR"
     #   resp.domain_config.auto_tune_options.status.error_message #=> String
     #   resp.domain_config.auto_tune_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.change_progress_details.change_id #=> String
+    #   resp.domain_config.change_progress_details.message #=> String
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -2844,6 +2901,7 @@ module Aws::ElasticsearchService
     #   * {Types::UpgradeElasticsearchDomainResponse#domain_name #domain_name} => String
     #   * {Types::UpgradeElasticsearchDomainResponse#target_version #target_version} => String
     #   * {Types::UpgradeElasticsearchDomainResponse#perform_check_only #perform_check_only} => Boolean
+    #   * {Types::UpgradeElasticsearchDomainResponse#change_progress_details #change_progress_details} => Types::ChangeProgressDetails
     #
     # @example Request syntax with placeholder values
     #
@@ -2858,6 +2916,8 @@ module Aws::ElasticsearchService
     #   resp.domain_name #=> String
     #   resp.target_version #=> String
     #   resp.perform_check_only #=> Boolean
+    #   resp.change_progress_details.change_id #=> String
+    #   resp.change_progress_details.message #=> String
     #
     # @overload upgrade_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -2879,7 +2939,7 @@ module Aws::ElasticsearchService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -165,6 +165,11 @@ module Aws::GuardDuty
     #   Information about the PORT\_PROBE action described in this finding.
     #   @return [Types::PortProbeAction]
     #
+    # @!attribute [rw] kubernetes_api_call_action
+    #   Information about the Kubernetes API call action described in this
+    #   finding.
+    #   @return [Types::KubernetesApiCallAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Action AWS API Documentation
     #
     class Action < Struct.new(
@@ -172,7 +177,8 @@ module Aws::GuardDuty
       :aws_api_call_action,
       :dns_request_action,
       :network_connection_action,
-      :port_probe_action)
+      :port_probe_action,
+      :kubernetes_api_call_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -246,6 +252,9 @@ module Aws::GuardDuty
     #   The error code of the failed Amazon Web Services API action.
     #   @return [String]
     #
+    # @!attribute [rw] user_agent
+    #   @return [String]
+    #
     # @!attribute [rw] remote_ip_details
     #   The remote IP information of the connection that initiated the
     #   Amazon Web Services API call.
@@ -268,6 +277,7 @@ module Aws::GuardDuty
       :caller_type,
       :domain_details,
       :error_code,
+      :user_agent,
       :remote_ip_details,
       :service_name,
       :remote_account_details)
@@ -507,6 +517,54 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
+    # Details of a container.
+    #
+    # @!attribute [rw] container_runtime
+    #   The container runtime (such as, Docker or containerd) used to run
+    #   the container.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   Container ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Container name.
+    #   @return [String]
+    #
+    # @!attribute [rw] image
+    #   Container image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_prefix
+    #   Part of the image name before the last slash. For example,
+    #   imagePrefix for public.ecr.aws/amazonlinux/amazonlinux:latest would
+    #   be public.ecr.aws/amazonlinux. If the image name is relative and
+    #   does not have a slash, this field is empty.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_mounts
+    #   Container volume mounts.
+    #   @return [Array<Types::VolumeMount>]
+    #
+    # @!attribute [rw] security_context
+    #   Container security context.
+    #   @return [Types::SecurityContext]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Container AWS API Documentation
+    #
+    class Container < Struct.new(
+      :container_runtime,
+      :id,
+      :name,
+      :image,
+      :image_prefix,
+      :volume_mounts,
+      :security_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the country where the remote IP address is
     # located.
     #
@@ -537,6 +595,11 @@ module Aws::GuardDuty
     #         data_sources: {
     #           s3_logs: {
     #             enable: false, # required
+    #           },
+    #           kubernetes: {
+    #             audit_logs: { # required
+    #               enable: false, # required
+    #             },
     #           },
     #         },
     #         tags: {
@@ -1125,16 +1188,26 @@ module Aws::GuardDuty
     #         s3_logs: {
     #           enable: false, # required
     #         },
+    #         kubernetes: {
+    #           audit_logs: { # required
+    #             enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_logs
     #   Describes whether S3 data event logs are enabled as a data source.
     #   @return [Types::S3LogsConfiguration]
     #
+    # @!attribute [rw] kubernetes
+    #   Describes whether any Kubernetes logs are enabled as data sources.
+    #   @return [Types::KubernetesConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurations AWS API Documentation
     #
     class DataSourceConfigurations < Struct.new(
-      :s3_logs)
+      :s3_logs,
+      :kubernetes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1161,13 +1234,19 @@ module Aws::GuardDuty
     #   logs as a data source.
     #   @return [Types::S3LogsConfigurationResult]
     #
+    # @!attribute [rw] kubernetes
+    #   An object that contains information on the status of all Kubernetes
+    #   data sources.
+    #   @return [Types::KubernetesConfigurationResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/DataSourceConfigurationsResult AWS API Documentation
     #
     class DataSourceConfigurationsResult < Struct.new(
       :cloud_trail,
       :dns_logs,
       :flow_logs,
-      :s3_logs)
+      :s3_logs,
+      :kubernetes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1722,6 +1801,45 @@ module Aws::GuardDuty
     #
     class DomainDetails < Struct.new(
       :domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the EKS cluster involved in a Kubernetes finding.
+    #
+    # @!attribute [rw] name
+    #   EKS cluster name.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   EKS cluster ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID to which the EKS cluster is attached.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The EKS cluster status.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The EKS cluster tags.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the EKS cluster was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/EksClusterDetails AWS API Documentation
+    #
+    class EksClusterDetails < Struct.new(
+      :name,
+      :arn,
+      :vpc_id,
+      :status,
+      :tags,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2434,7 +2552,7 @@ module Aws::GuardDuty
     #         usage_statistic_type: "SUM_BY_ACCOUNT", # required, accepts SUM_BY_ACCOUNT, SUM_BY_DATA_SOURCE, SUM_BY_RESOURCE, TOP_RESOURCES
     #         usage_criteria: { # required
     #           account_ids: ["AccountId"],
-    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #           data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS
     #           resources: ["String"],
     #         },
     #         unit: "String",
@@ -2500,6 +2618,21 @@ module Aws::GuardDuty
     class GetUsageStatisticsResponse < Struct.new(
       :usage_statistics,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a pre-existing file or directory on the host machine that
+    # the volume maps to.
+    #
+    # @!attribute [rw] path
+    #   Path of the file or directory on the host that the volume maps to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/HostPath AWS API Documentation
+    #
+    class HostPath < Struct.new(
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2699,6 +2832,218 @@ module Aws::GuardDuty
     #
     class InviteMembersResponse < Struct.new(
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the Kubernetes API call action described in this
+    # finding.
+    #
+    # @!attribute [rw] request_uri
+    #   The Kubernetes API request URI.
+    #   @return [String]
+    #
+    # @!attribute [rw] verb
+    #   The Kubernetes API request HTTP verb.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_ips
+    #   The IP of the Kubernetes API caller and the IPs of any proxies or
+    #   load balancers between the caller and the API endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] user_agent
+    #   The user agent of the caller of the Kubernetes API.
+    #   @return [String]
+    #
+    # @!attribute [rw] remote_ip_details
+    #   Contains information about the remote IP address of the connection.
+    #   @return [Types::RemoteIpDetails]
+    #
+    # @!attribute [rw] status_code
+    #   The resulting HTTP response code of the Kubernetes API call action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] parameters
+    #   Parameters related to the Kubernetes API call action.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesApiCallAction AWS API Documentation
+    #
+    class KubernetesApiCallAction < Struct.new(
+      :request_uri,
+      :verb,
+      :source_ips,
+      :user_agent,
+      :remote_ip_details,
+      :status_code,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether Kubernetes audit logs are enabled as a data source.
+    #
+    # @note When making an API call, you may pass KubernetesAuditLogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] enable
+    #   The status of Kubernetes audit logs as a data source.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesAuditLogsConfiguration AWS API Documentation
+    #
+    class KubernetesAuditLogsConfiguration < Struct.new(
+      :enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether Kubernetes audit logs are enabled as a data source.
+    #
+    # @!attribute [rw] status
+    #   A value that describes whether Kubernetes audit logs are enabled as
+    #   a data source.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesAuditLogsConfigurationResult AWS API Documentation
+    #
+    class KubernetesAuditLogsConfigurationResult < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether any Kubernetes data sources are enabled.
+    #
+    # @note When making an API call, you may pass KubernetesConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         audit_logs: { # required
+    #           enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] audit_logs
+    #   The status of Kubernetes audit logs as a data source.
+    #   @return [Types::KubernetesAuditLogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesConfiguration AWS API Documentation
+    #
+    class KubernetesConfiguration < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes whether any Kubernetes logs will be enabled as a data
+    # source.
+    #
+    # @!attribute [rw] audit_logs
+    #   Describes whether Kubernetes audit logs are enabled as a data
+    #   source.
+    #   @return [Types::KubernetesAuditLogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesConfigurationResult AWS API Documentation
+    #
+    class KubernetesConfigurationResult < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about Kubernetes resources such as a Kubernetes user or
+    # workload resource involved in a Kubernetes finding.
+    #
+    # @!attribute [rw] kubernetes_user_details
+    #   Details about the Kubernetes user involved in a Kubernetes finding.
+    #   @return [Types::KubernetesUserDetails]
+    #
+    # @!attribute [rw] kubernetes_workload_details
+    #   Details about the Kubernetes workload involved in a Kubernetes
+    #   finding.
+    #   @return [Types::KubernetesWorkloadDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesDetails AWS API Documentation
+    #
+    class KubernetesDetails < Struct.new(
+      :kubernetes_user_details,
+      :kubernetes_workload_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the Kubernetes user involved in a Kubernetes finding.
+    #
+    # @!attribute [rw] username
+    #   The username of the user who called the Kubernetes API.
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   The user ID of the user who called the Kubernetes API.
+    #   @return [String]
+    #
+    # @!attribute [rw] groups
+    #   The groups that include the user who called the Kubernetes API.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesUserDetails AWS API Documentation
+    #
+    class KubernetesUserDetails < Struct.new(
+      :username,
+      :uid,
+      :groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the Kubernetes workload involved in a Kubernetes
+    # finding.
+    #
+    # @!attribute [rw] name
+    #   Kubernetes workload name.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Kubernetes workload type (e.g. Pod, Deployment, etc.).
+    #   @return [String]
+    #
+    # @!attribute [rw] uid
+    #   Kubernetes workload ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   Kubernetes namespace that the workload is part of.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_network
+    #   Whether the hostNetwork flag is enabled for the pods included in the
+    #   workload.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] containers
+    #   Containers running as part of the Kubernetes workload.
+    #   @return [Array<Types::Container>]
+    #
+    # @!attribute [rw] volumes
+    #   Volumes used by the Kubernetes workload.
+    #   @return [Array<Types::Volume>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/KubernetesWorkloadDetails AWS API Documentation
+    #
+    class KubernetesWorkloadDetails < Struct.new(
+      :name,
+      :type,
+      :uid,
+      :namespace,
+      :host_network,
+      :containers,
+      :volumes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3634,6 +3979,11 @@ module Aws::GuardDuty
     #         s3_logs: {
     #           auto_enable: false, # required
     #         },
+    #         kubernetes: {
+    #           audit_logs: { # required
+    #             auto_enable: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_logs
@@ -3641,10 +3991,16 @@ module Aws::GuardDuty
     #   the organization.
     #   @return [Types::OrganizationS3LogsConfiguration]
     #
+    # @!attribute [rw] kubernetes
+    #   Describes the configuration of Kubernetes data sources for new
+    #   members of the organization.
+    #   @return [Types::OrganizationKubernetesConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurations AWS API Documentation
     #
     class OrganizationDataSourceConfigurations < Struct.new(
-      :s3_logs)
+      :s3_logs,
+      :kubernetes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3656,10 +4012,94 @@ module Aws::GuardDuty
     #   Describes whether S3 data event logs are enabled as a data source.
     #   @return [Types::OrganizationS3LogsConfigurationResult]
     #
+    # @!attribute [rw] kubernetes
+    #   Describes the configuration of Kubernetes data sources.
+    #   @return [Types::OrganizationKubernetesConfigurationResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationDataSourceConfigurationsResult AWS API Documentation
     #
     class OrganizationDataSourceConfigurationsResult < Struct.new(
-      :s3_logs)
+      :s3_logs,
+      :kubernetes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Organization-wide Kubernetes audit logs configuration.
+    #
+    # @note When making an API call, you may pass OrganizationKubernetesAuditLogsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         auto_enable: false, # required
+    #       }
+    #
+    # @!attribute [rw] auto_enable
+    #   A value that contains information on whether Kubernetes audit logs
+    #   should be enabled automatically as a data source for the
+    #   organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationKubernetesAuditLogsConfiguration AWS API Documentation
+    #
+    class OrganizationKubernetesAuditLogsConfiguration < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current configuration of Kubernetes audit logs as a data source
+    # for the organization.
+    #
+    # @!attribute [rw] auto_enable
+    #   Whether Kubernetes audit logs data source should be auto-enabled for
+    #   new members joining the organization.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationKubernetesAuditLogsConfigurationResult AWS API Documentation
+    #
+    class OrganizationKubernetesAuditLogsConfigurationResult < Struct.new(
+      :auto_enable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Organization-wide Kubernetes data sources configurations.
+    #
+    # @note When making an API call, you may pass OrganizationKubernetesConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         audit_logs: { # required
+    #           auto_enable: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] audit_logs
+    #   Whether Kubernetes audit logs data source should be auto-enabled for
+    #   new members joining the organization.
+    #   @return [Types::OrganizationKubernetesAuditLogsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationKubernetesConfiguration AWS API Documentation
+    #
+    class OrganizationKubernetesConfiguration < Struct.new(
+      :audit_logs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current configuration of all Kubernetes data sources for the
+    # organization.
+    #
+    # @!attribute [rw] audit_logs
+    #   The current configuration of Kubernetes audit logs as a data source
+    #   for the organization.
+    #   @return [Types::OrganizationKubernetesAuditLogsConfigurationResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/OrganizationKubernetesConfigurationResult AWS API Documentation
+    #
+    class OrganizationKubernetesConfigurationResult < Struct.new(
+      :audit_logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3943,6 +4383,15 @@ module Aws::GuardDuty
     #   that prompted GuardDuty to generate a finding.
     #   @return [Types::InstanceDetails]
     #
+    # @!attribute [rw] eks_cluster_details
+    #   Details about the EKS cluster involved in a Kubernetes finding.
+    #   @return [Types::EksClusterDetails]
+    #
+    # @!attribute [rw] kubernetes_details
+    #   Details about the Kubernetes user and workload involved in a
+    #   Kubernetes finding.
+    #   @return [Types::KubernetesDetails]
+    #
     # @!attribute [rw] resource_type
     #   The type of Amazon Web Services resource.
     #   @return [String]
@@ -3953,6 +4402,8 @@ module Aws::GuardDuty
       :access_key_details,
       :s3_bucket_details,
       :instance_details,
+      :eks_cluster_details,
+      :kubernetes_details,
       :resource_type)
       SENSITIVE = []
       include Aws::Structure
@@ -4039,6 +4490,20 @@ module Aws::GuardDuty
     #
     class S3LogsConfigurationResult < Struct.new(
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container security context.
+    #
+    # @!attribute [rw] privileged
+    #   Whether the container is privileged.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/SecurityContext AWS API Documentation
+    #
+    class SecurityContext < Struct.new(
+      :privileged)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4413,6 +4878,11 @@ module Aws::GuardDuty
     #           s3_logs: {
     #             enable: false, # required
     #           },
+    #           kubernetes: {
+    #             audit_logs: { # required
+    #               enable: false, # required
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -4633,6 +5103,11 @@ module Aws::GuardDuty
     #           s3_logs: {
     #             enable: false, # required
     #           },
+    #           kubernetes: {
+    #             audit_logs: { # required
+    #               enable: false, # required
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -4680,6 +5155,11 @@ module Aws::GuardDuty
     #         data_sources: {
     #           s3_logs: {
     #             auto_enable: false, # required
+    #           },
+    #           kubernetes: {
+    #             audit_logs: { # required
+    #               auto_enable: false, # required
+    #             },
     #           },
     #         },
     #       }
@@ -4829,7 +5309,7 @@ module Aws::GuardDuty
     #
     #       {
     #         account_ids: ["AccountId"],
-    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS
+    #         data_sources: ["FLOW_LOGS"], # required, accepts FLOW_LOGS, CLOUD_TRAIL, DNS_LOGS, S3_LOGS, KUBERNETES_AUDIT_LOGS
     #         resources: ["String"],
     #       }
     #
@@ -4922,6 +5402,45 @@ module Aws::GuardDuty
       :sum_by_data_source,
       :sum_by_resource,
       :top_resources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Volume used by the Kubernetes workload.
+    #
+    # @!attribute [rw] name
+    #   Volume name.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_path
+    #   Represents a pre-existing file or directory on the host machine that
+    #   the volume maps to.
+    #   @return [Types::HostPath]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/Volume AWS API Documentation
+    #
+    class Volume < Struct.new(
+      :name,
+      :host_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container volume mount.
+    #
+    # @!attribute [rw] name
+    #   Volume mount name.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   Volume mount path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/VolumeMount AWS API Documentation
+    #
+    class VolumeMount < Struct.new(
+      :name,
+      :mount_path)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.117.0 (2022-01-28)
+------------------
+
+* Feature - This release added a new NNA accelerator compilation support for Sagemaker Neo.
+
+1.116.0 (2022-01-26)
+------------------
+
+* Feature - API changes relating to Fail steps in model building pipeline and add PipelineExecutionFailureReason in PipelineExecutionSummary.
+
 1.115.0 (2022-01-05)
 ------------------
 

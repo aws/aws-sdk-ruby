@@ -417,6 +417,46 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates an existing vocabulary as the default. Contact Lens for
+    # Amazon Connect uses the vocabulary in post-call and real-time analysis
+    # sessions for the given language.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #
+    # @option params [String] :vocabulary_id
+    #   The identifier of the custom vocabulary. If this is empty, the default
+    #   is set to none.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_default_vocabulary({
+    #     instance_id: "InstanceId", # required
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     vocabulary_id: "VocabularyId",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateDefaultVocabulary AWS API Documentation
+    #
+    # @overload associate_default_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def associate_default_vocabulary(params = {}, options = {})
+      req = build_request(:associate_default_vocabulary, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -1489,6 +1529,85 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a custom vocabulary associated with your Amazon Connect
+    # instance. You can set a custom vocabulary to be your default
+    # vocabulary for a given language. Contact Lens for Amazon Connect uses
+    # the default vocabulary in post-call and real-time contact analysis
+    # sessions for that language.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If a create request is received more than
+    #   once with same client token, subsequent requests return the previous
+    #   response without creating a vocabulary again.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :vocabulary_name
+    #   A unique name of the custom vocabulary.
+    #
+    # @option params [required, String] :language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #
+    # @option params [required, String] :content
+    #   The content of the custom vocabulary in plain-text format with a table
+    #   of values. Each row in the table represents a word or a phrase,
+    #   described with `Phrase`, `IPA`, `SoundsLike`, and `DisplayAs` fields.
+    #   Separate the fields with TAB characters. The size limit is 50KB. For
+    #   more information, see [Create a custom vocabulary using a table][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateVocabularyResponse#vocabulary_arn #vocabulary_arn} => String
+    #   * {Types::CreateVocabularyResponse#vocabulary_id #vocabulary_id} => String
+    #   * {Types::CreateVocabularyResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_vocabulary({
+    #     client_token: "ClientToken",
+    #     instance_id: "InstanceId", # required
+    #     vocabulary_name: "VocabularyName", # required
+    #     language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     content: "VocabularyContent", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_arn #=> String
+    #   resp.vocabulary_id #=> String
+    #   resp.state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateVocabulary AWS API Documentation
+    #
+    # @overload create_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def create_vocabulary(params = {}, options = {})
+      req = build_request(:create_vocabulary, params)
+      req.send_request(options)
+    end
+
     # Deletes a contact flow for the specified Amazon Connect instance.
     #
     # @option params [required, String] :instance_id
@@ -1783,6 +1902,43 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_user_hierarchy_group(params = {}, options = {})
       req = build_request(:delete_user_hierarchy_group, params)
+      req.send_request(options)
+    end
+
+    # Deletes the vocabulary that has the given identifier.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #
+    # @return [Types::DeleteVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteVocabularyResponse#vocabulary_arn #vocabulary_arn} => String
+    #   * {Types::DeleteVocabularyResponse#vocabulary_id #vocabulary_id} => String
+    #   * {Types::DeleteVocabularyResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_vocabulary({
+    #     instance_id: "InstanceId", # required
+    #     vocabulary_id: "VocabularyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_arn #=> String
+    #   resp.vocabulary_id #=> String
+    #   resp.state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteVocabulary AWS API Documentation
+    #
+    # @overload delete_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def delete_vocabulary(params = {}, options = {})
+      req = build_request(:delete_vocabulary, params)
       req.send_request(options)
     end
 
@@ -2480,6 +2636,48 @@ module Aws::Connect
     # @param [Hash] params ({})
     def describe_user_hierarchy_structure(params = {}, options = {})
       req = build_request(:describe_user_hierarchy_structure, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified vocabulary.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #
+    # @return [Types::DescribeVocabularyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeVocabularyResponse#vocabulary #vocabulary} => Types::Vocabulary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_vocabulary({
+    #     instance_id: "InstanceId", # required
+    #     vocabulary_id: "VocabularyId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary.name #=> String
+    #   resp.vocabulary.id #=> String
+    #   resp.vocabulary.arn #=> String
+    #   resp.vocabulary.language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.vocabulary.state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.vocabulary.last_modified_time #=> Time
+    #   resp.vocabulary.failure_reason #=> String
+    #   resp.vocabulary.content #=> String
+    #   resp.vocabulary.tags #=> Hash
+    #   resp.vocabulary.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeVocabulary AWS API Documentation
+    #
+    # @overload describe_vocabulary(params = {})
+    # @param [Hash] params ({})
+    def describe_vocabulary(params = {}, options = {})
+      req = build_request(:describe_vocabulary, params)
       req.send_request(options)
     end
 
@@ -3655,6 +3853,64 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists the default vocabularies for the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::ListDefaultVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDefaultVocabulariesResponse#default_vocabulary_list #default_vocabulary_list} => Array&lt;Types::DefaultVocabulary&gt;
+    #   * {Types::ListDefaultVocabulariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_default_vocabularies({
+    #     instance_id: "InstanceId", # required
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #     max_results: 1,
+    #     next_token: "VocabularyNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.default_vocabulary_list #=> Array
+    #   resp.default_vocabulary_list[0].instance_id #=> String
+    #   resp.default_vocabulary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.default_vocabulary_list[0].vocabulary_id #=> String
+    #   resp.default_vocabulary_list[0].vocabulary_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDefaultVocabularies AWS API Documentation
+    #
+    # @overload list_default_vocabularies(params = {})
+    # @param [Hash] params ({})
+    def list_default_vocabularies(params = {}, options = {})
+      req = build_request(:list_default_vocabularies, params)
+      req.send_request(options)
+    end
+
     # Provides information about the hours of operation for the specified
     # Amazon Connect instance.
     #
@@ -4798,6 +5054,75 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Searches for vocabularies within a specific Amazon Connect instance
+    # using `State`, `NameStartsWith`, and `LanguageCode`.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [String] :state
+    #   The current state of the custom vocabulary.
+    #
+    # @option params [String] :name_starts_with
+    #   The starting pattern of the name of the vocabulary.
+    #
+    # @option params [String] :language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #
+    # @return [Types::SearchVocabulariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchVocabulariesResponse#vocabulary_summary_list #vocabulary_summary_list} => Array&lt;Types::VocabularySummary&gt;
+    #   * {Types::SearchVocabulariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_vocabularies({
+    #     instance_id: "InstanceId", # required
+    #     max_results: 1,
+    #     next_token: "VocabularyNextToken",
+    #     state: "CREATION_IN_PROGRESS", # accepts CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS
+    #     name_starts_with: "VocabularyName",
+    #     language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.vocabulary_summary_list #=> Array
+    #   resp.vocabulary_summary_list[0].name #=> String
+    #   resp.vocabulary_summary_list[0].id #=> String
+    #   resp.vocabulary_summary_list[0].arn #=> String
+    #   resp.vocabulary_summary_list[0].language_code #=> String, one of "ar-AE", "de-CH", "de-DE", "en-AB", "en-AU", "en-GB", "en-IE", "en-IN", "en-US", "en-WL", "es-ES", "es-US", "fr-CA", "fr-FR", "hi-IN", "it-IT", "ja-JP", "ko-KR", "pt-BR", "pt-PT", "zh-CN"
+    #   resp.vocabulary_summary_list[0].state #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "CREATION_FAILED", "DELETE_IN_PROGRESS"
+    #   resp.vocabulary_summary_list[0].last_modified_time #=> Time
+    #   resp.vocabulary_summary_list[0].failure_reason #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchVocabularies AWS API Documentation
+    #
+    # @overload search_vocabularies(params = {})
+    # @param [Hash] params ({})
+    def search_vocabularies(params = {}, options = {})
+      req = build_request(:search_vocabularies, params)
+      req.send_request(options)
+    end
+
     # Initiates a contact flow to start a new chat for the customer.
     # Response of this API provides a token required to obtain credentials
     # from the [CreateParticipantConnection][1] API in the Amazon Connect
@@ -4809,13 +5134,18 @@ module Aws::Connect
     # [CreateParticipantConnection][1] with WEBSOCKET and
     # CONNECTION\_CREDENTIALS.
     #
-    # A 429 error occurs in two situations:
+    # A 429 error occurs in the following situations:
     #
     # * API rate limit is exceeded. API TPS throttling returns a
     #   `TooManyRequests` exception.
     #
     # * The [quota for concurrent active chats][2] is exceeded. Active chat
     #   throttling returns a `LimitExceededException`.
+    #
+    # If you use the `ChatDurationInMinutes` parameter and receive a 400
+    # error, your account may not support the ability to configure custom
+    # chat durations. For more information, contact Amazon Web Services
+    # Support.
     #
     # For more information about chat, see [Chat][3] in the *Amazon Connect
     # Administrator Guide*.
@@ -4862,6 +5192,12 @@ module Aws::Connect
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Integer] :chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The minumum
+    #   configurable time is 60 minutes. The maximum configurable time is
+    #   10,080 minutes (7 days).
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -4884,6 +5220,7 @@ module Aws::Connect
     #       content: "ChatContent", # required
     #     },
     #     client_token: "ClientToken",
+    #     chat_duration_in_minutes: 1,
     #   })
     #
     # @example Response structure
@@ -6713,7 +7050,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

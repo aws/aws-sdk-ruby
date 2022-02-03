@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - Add support for recursion detection.
 
+3.125.6 (2022-02-02)
+------------------
+
+* Issue - Ensure default message for ServiceError is a string (#2643).
+
 3.125.5 (2022-01-19)
 ------------------
 

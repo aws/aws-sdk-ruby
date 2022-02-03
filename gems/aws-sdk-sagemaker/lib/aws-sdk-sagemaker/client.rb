@@ -1446,7 +1446,7 @@ module Aws::SageMaker
     #       target_platform: {
     #         os: "ANDROID", # required, accepts ANDROID, LINUX
     #         arch: "X86_64", # required, accepts X86_64, X86, ARM64, ARM_EABI, ARM_EABIHF
-    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA
+    #         accelerator: "INTEL_GRAPHICS", # accepts INTEL_GRAPHICS, MALI, NVIDIA, NNA
     #       },
     #       compiler_options: "CompilerOptions",
     #       kms_key_id: "KmsKeyId",
@@ -2308,11 +2308,11 @@ module Aws::SageMaker
     # @option params [Types::AsyncInferenceConfig] :async_inference_config
     #   Specifies configuration for how an endpoint performs asynchronous
     #   inference. This is a required field in order for your Endpoint to be
-    #   invoked using [ `InvokeEndpointAsync` ][1].
+    #   invoked using [InvokeEndpointAsync][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpointAsync.html
     #
     # @return [Types::CreateEndpointConfigOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8391,7 +8391,7 @@ module Aws::SageMaker
     #   resp.output_config.target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.output_config.target_platform.os #=> String, one of "ANDROID", "LINUX"
     #   resp.output_config.target_platform.arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
-    #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
+    #   resp.output_config.target_platform.accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
     #   resp.output_config.compiler_options #=> String
     #   resp.output_config.kms_key_id #=> String
     #   resp.vpc_config.security_group_ids #=> Array
@@ -12556,7 +12556,7 @@ module Aws::SageMaker
     #   resp.compilation_job_summaries[0].compilation_target_device #=> String, one of "lambda", "ml_m4", "ml_m5", "ml_c4", "ml_c5", "ml_p2", "ml_p3", "ml_g4dn", "ml_inf1", "ml_eia2", "jetson_tx1", "jetson_tx2", "jetson_nano", "jetson_xavier", "rasp3b", "imx8qm", "deeplens", "rk3399", "rk3288", "aisage", "sbe_c", "qcs605", "qcs603", "sitara_am57x", "amba_cv2", "amba_cv22", "amba_cv25", "x86_win32", "x86_win64", "coreml", "jacinto_tda4vm", "imx8mplus"
     #   resp.compilation_job_summaries[0].compilation_target_platform_os #=> String, one of "ANDROID", "LINUX"
     #   resp.compilation_job_summaries[0].compilation_target_platform_arch #=> String, one of "X86_64", "X86", "ARM64", "ARM_EABI", "ARM_EABIHF"
-    #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA"
+    #   resp.compilation_job_summaries[0].compilation_target_platform_accelerator #=> String, one of "INTEL_GRAPHICS", "MALI", "NVIDIA", "NNA"
     #   resp.compilation_job_summaries[0].last_modified_time #=> Time
     #   resp.compilation_job_summaries[0].compilation_job_status #=> String, one of "INPROGRESS", "COMPLETED", "FAILED", "STARTING", "STOPPING", "STOPPED"
     #   resp.next_token #=> String
@@ -14248,12 +14248,13 @@ module Aws::SageMaker
     #   model group.
     #
     # @option params [String] :model_package_type
-    #   A filter that returns onlyl the model packages of the specified type.
+    #   A filter that returns only the model packages of the specified type.
     #   This can be one of the following values.
     #
-    #   * `VERSIONED` - List only versioned models.
+    #   * `UNVERSIONED` - List only unversioined models. This is the default
+    #     value if no `ModelPackageType` is specified.
     #
-    #   * `UNVERSIONED` - List only unversioined models.
+    #   * `VERSIONED` - List only versioned models.
     #
     #   * `BOTH` - List both versioned and unversioned models.
     #
@@ -14929,6 +14930,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_steps[0].metadata.emr.step_id #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.step_name #=> String
     #   resp.pipeline_execution_steps[0].metadata.emr.log_file_path #=> String
+    #   resp.pipeline_execution_steps[0].metadata.fail.error_message #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutionSteps AWS API Documentation
@@ -14994,6 +14996,7 @@ module Aws::SageMaker
     #   resp.pipeline_execution_summaries[0].pipeline_execution_status #=> String, one of "Executing", "Stopping", "Stopped", "Failed", "Succeeded"
     #   resp.pipeline_execution_summaries[0].pipeline_execution_description #=> String
     #   resp.pipeline_execution_summaries[0].pipeline_execution_display_name #=> String
+    #   resp.pipeline_execution_summaries[0].pipeline_execution_failure_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListPipelineExecutions AWS API Documentation
@@ -17639,17 +17642,17 @@ module Aws::SageMaker
     #
     # A pipeline execution won't stop while a callback step is running.
     # When you call `StopPipelineExecution` on a pipeline execution with a
-    # running callback step, Amazon SageMaker Pipelines sends an additional
-    # Amazon SQS message to the specified SQS queue. The body of the SQS
-    # message contains a "Status" field which is set to "Stopping".
+    # running callback step, SageMaker Pipelines sends an additional Amazon
+    # SQS message to the specified SQS queue. The body of the SQS message
+    # contains a "Status" field which is set to "Stopping".
     #
     # You should add logic to your Amazon SQS message consumer to take any
     # needed action (for example, resource cleanup) upon receipt of the
     # message followed by a call to `SendPipelineExecutionStepSuccess` or
     # `SendPipelineExecutionStepFailure`.
     #
-    # Only when Amazon SageMaker Pipelines receives one of these calls will
-    # it stop the pipeline execution.
+    # Only when SageMaker Pipelines receives one of these calls will it stop
+    # the pipeline execution.
     #
     # **Lambda Step**
     #
@@ -19443,7 +19446,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

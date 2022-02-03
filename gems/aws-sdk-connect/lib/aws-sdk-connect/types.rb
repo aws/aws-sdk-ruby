@@ -213,6 +213,49 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociateDefaultVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #         vocabulary_id: "VocabularyId",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary. If this is empty, the
+    #   default is set to none.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateDefaultVocabularyRequest AWS API Documentation
+    #
+    class AssociateDefaultVocabularyRequest < Struct.new(
+      :instance_id,
+      :language_code,
+      :vocabulary_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateDefaultVocabularyResponse AWS API Documentation
+    #
+    class AssociateDefaultVocabularyResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass AssociateInstanceStorageConfigRequest
     #   data as a hash:
     #
@@ -1842,6 +1885,102 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         client_token: "ClientToken",
+    #         instance_id: "InstanceId", # required
+    #         vocabulary_name: "VocabularyName", # required
+    #         language_code: "ar-AE", # required, accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #         content: "VocabularyContent", # required
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If a create request is received more
+    #   than once with same client token, subsequent requests return the
+    #   previous response without creating a vocabulary again.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   A unique name of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the custom vocabulary in plain-text format with a
+    #   table of values. Each row in the table represents a word or a
+    #   phrase, described with `Phrase`, `IPA`, `SoundsLike`, and
+    #   `DisplayAs` fields. Separate the fields with TAB characters. The
+    #   size limit is 50KB. For more information, see [Create a custom
+    #   vocabulary using a table][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateVocabularyRequest AWS API Documentation
+    #
+    class CreateVocabularyRequest < Struct.new(
+      :client_token,
+      :instance_id,
+      :vocabulary_name,
+      :language_code,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_arn
+    #   The Amazon Resource Name (ARN) of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateVocabularyResponse AWS API Documentation
+    #
+    class CreateVocabularyResponse < Struct.new(
+      :vocabulary_arn,
+      :vocabulary_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains credentials to use for federation.
     #
     # @!attribute [rw] access_token
@@ -1941,6 +2080,42 @@ module Aws::Connect
     class CurrentMetricResult < Struct.new(
       :dimensions,
       :collections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a default vocabulary.
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_name
+    #   A unique name of the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DefaultVocabulary AWS API Documentation
+    #
+    class DefaultVocabulary < Struct.new(
+      :instance_id,
+      :language_code,
+      :vocabulary_id,
+      :vocabulary_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2205,6 +2380,54 @@ module Aws::Connect
     class DeleteUserRequest < Struct.new(
       :instance_id,
       :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         vocabulary_id: "VocabularyId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteVocabularyRequest AWS API Documentation
+    #
+    class DeleteVocabularyRequest < Struct.new(
+      :instance_id,
+      :vocabulary_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_arn
+    #   The Amazon Resource Name (ARN) of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteVocabularyResponse AWS API Documentation
+    #
+    class DeleteVocabularyResponse < Struct.new(
+      :vocabulary_arn,
+      :vocabulary_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2769,6 +2992,47 @@ module Aws::Connect
     #
     class DescribeUserResponse < Struct.new(
       :user)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeVocabularyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         vocabulary_id: "VocabularyId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] vocabulary_id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeVocabularyRequest AWS API Documentation
+    #
+    class DescribeVocabularyRequest < Struct.new(
+      :instance_id,
+      :vocabulary_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary
+    #   A list of specific words that you want Contact Lens for Amazon
+    #   Connect to recognize in your audio input. They are generally
+    #   domain-specific words and phrases, words that Contact Lens is not
+    #   recognizing, or proper nouns.
+    #   @return [Types::Vocabulary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribeVocabularyResponse AWS API Documentation
+    #
+    class DescribeVocabularyResponse < Struct.new(
+      :vocabulary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5008,6 +5272,70 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListDefaultVocabulariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #         max_results: 1,
+    #         next_token: "VocabularyNextToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDefaultVocabulariesRequest AWS API Documentation
+    #
+    class ListDefaultVocabulariesRequest < Struct.new(
+      :instance_id,
+      :language_code,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] default_vocabulary_list
+    #   A list of default vocabularies.
+    #   @return [Array<Types::DefaultVocabulary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListDefaultVocabulariesResponse AWS API Documentation
+    #
+    class ListDefaultVocabulariesResponse < Struct.new(
+      :default_vocabulary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListHoursOfOperationsRequest
     #   data as a hash:
     #
@@ -7003,6 +7331,82 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass SearchVocabulariesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         max_results: 1,
+    #         next_token: "VocabularyNextToken",
+    #         state: "CREATION_IN_PROGRESS", # accepts CREATION_IN_PROGRESS, ACTIVE, CREATION_FAILED, DELETE_IN_PROGRESS
+    #         name_starts_with: "VocabularyName",
+    #         language_code: "ar-AE", # accepts ar-AE, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fr-CA, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, pt-PT, zh-CN
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] name_starts_with
+    #   The starting pattern of the name of the vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchVocabulariesRequest AWS API Documentation
+    #
+    class SearchVocabulariesRequest < Struct.new(
+      :instance_id,
+      :max_results,
+      :next_token,
+      :state,
+      :name_starts_with,
+      :language_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vocabulary_summary_list
+    #   The list of the available custom vocabularies.
+    #   @return [Array<Types::VocabularySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchVocabulariesResponse AWS API Documentation
+    #
+    class SearchVocabulariesResponse < Struct.new(
+      :vocabulary_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information of the security key.
     #
     # @!attribute [rw] association_id
@@ -7122,6 +7526,7 @@ module Aws::Connect
     #           content: "ChatContent", # required
     #         },
     #         client_token: "ClientToken",
+    #         chat_duration_in_minutes: 1,
     #       }
     #
     # @!attribute [rw] instance_id
@@ -7166,6 +7571,13 @@ module Aws::Connect
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] chat_duration_in_minutes
+    #   The total duration of the newly started chat session. If not
+    #   specified, the chat session duration defaults to 25 hour. The
+    #   minumum configurable time is 60 minutes. The maximum configurable
+    #   time is 10,080 minutes (7 days).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -7174,7 +7586,8 @@ module Aws::Connect
       :attributes,
       :participant_details,
       :initial_message,
-      :client_token)
+      :client_token,
+      :chat_duration_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9268,6 +9681,125 @@ module Aws::Connect
       :id,
       :arn,
       :username)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a custom vocabulary.
+    #
+    # @!attribute [rw] name
+    #   A unique name of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the custom vocabulary was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the custom vocabulary was not created.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the custom vocabulary in plain-text format with a
+    #   table of values. Each row in the table represents a word or a
+    #   phrase, described with `Phrase`, `IPA`, `SoundsLike`, and
+    #   `DisplayAs` fields. Separate the fields with TAB characters. For
+    #   more information, see [Create a custom vocabulary using a table][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html#create-vocabulary-table
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Vocabulary AWS API Documentation
+    #
+    class Vocabulary < Struct.new(
+      :name,
+      :id,
+      :arn,
+      :language_code,
+      :state,
+      :last_modified_time,
+      :failure_reason,
+      :content,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about the custom vocabulary.
+    #
+    # @!attribute [rw] name
+    #   A unique name of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the vocabulary entries. For a list of languages
+    #   and their corresponding language codes, see [What is Amazon
+    #   Transcribe?][1]
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-whatis.html
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current state of the custom vocabulary.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the custom vocabulary was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason why the custom vocabulary was not created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/VocabularySummary AWS API Documentation
+    #
+    class VocabularySummary < Struct.new(
+      :name,
+      :id,
+      :arn,
+      :language_code,
+      :state,
+      :last_modified_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end

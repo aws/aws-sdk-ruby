@@ -564,17 +564,17 @@ module Aws::EFS
     # @option params [Boolean] :encrypted
     #   A Boolean value that, if true, creates an encrypted file system. When
     #   creating an encrypted file system, you have the option of specifying
-    #   CreateFileSystemRequest$KmsKeyId for an existing Key Management
-    #   Service (KMS customer master key (CMK). If you don't specify a CMK,
-    #   then the default CMK for Amazon EFS, `/aws/elasticfilesystem`, is used
-    #   to protect the encrypted file system.
+    #   an existing Key Management Service key (KMS key). If you don't
+    #   specify a KMS key, then the default KMS key for Amazon EFS,
+    #   `/aws/elasticfilesystem`, is used to protect the encrypted file
+    #   system.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the KMS CMK that you want to use to protect the encrypted
+    #   The ID of the KMS key that you want to use to protect the encrypted
     #   file system. This parameter is only required if you want to use a
     #   non-default KMS key. If this parameter is not specified, the default
-    #   CMK for Amazon EFS is used. This ID can be in one of the following
-    #   formats:
+    #   KMS key for Amazon EFS is used. You can specify a KMS key ID using the
+    #   following formats:
     #
     #   * Key ID - A unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
@@ -588,11 +588,11 @@ module Aws::EFS
     #   * Key alias ARN - An ARN for a key alias, for example
     #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #
-    #   If `KmsKeyId` is specified, the CreateFileSystemRequest$Encrypted
-    #   parameter must be set to true.
+    #   If you use `KmsKeyId`, you must set the
+    #   CreateFileSystemRequest$Encrypted parameter to true.
     #
     #   EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS
-    #   keys with EFS file systems.
+    #   keys with Amazon EFS file systems.
     #
     # @option params [String] :throughput_mode
     #   Specifies the throughput mode for the file system, either `bursting`
@@ -651,8 +651,8 @@ module Aws::EFS
     #   Default is `false`. However, if you specify an `AvailabilityZoneName`,
     #   the default is `true`.
     #
-    #   <note markdown="1"> Backup is not available in all Amazon Web Services Regionswhere Amazon
-    #   EFS is available.
+    #   <note markdown="1"> Backup is not available in all Amazon Web Services Regions where
+    #   Amazon EFS is available.
     #
     #    </note>
     #
@@ -993,6 +993,122 @@ module Aws::EFS
       req.send_request(options)
     end
 
+    # Creates a replication configuration that replicates an existing EFS
+    # file system to a new, read-only file system. For more information, see
+    # [Amazon EFS replication][1]. The replication configuration specifies
+    # the following:
+    #
+    # * **Source file system** - an existing EFS file system that you want
+    #   replicated. The source file system cannot be a destination file
+    #   system in an existing replication configuration.
+    #
+    # * **Destination file system configuration** - the configuration of the
+    #   destination file system to which the source file system will be
+    #   replicated. There can only be one destination file system in a
+    #   replication configuration.
+    #
+    #   * **Amazon Web Services Region** - The Amazon Web Services Region in
+    #     which the destination file system is created. EFS Replication is
+    #     available in all Amazon Web Services Region that Amazon EFS is
+    #     available in, except the following regions: Asia Pacific (Hong
+    #     Kong) Europe (Milan), Middle East (Bahrain), Africa (Cape Town),
+    #     and Asia Pacific (Jakarta).
+    #
+    #   * **Availability zone** - If you want the destination file system to
+    #     use One Zone availability and durability, you must specify the
+    #     Availability Zone to create the file system in. For more
+    #     information about EFS storage classes, see [ Amazon EFS storage
+    #     classes][2] in the *Amazon EFS User Guide*.
+    #
+    #   * **Encryption** - All destination file systems are created with
+    #     encryption at rest enabled. You can specify the KMS key that is
+    #     used to encrypt the destination file system. Your service-managed
+    #     KMS key for Amazon EFS is used if you don't specify a KMS key.
+    #     You cannot change this after the file system is created.
+    #
+    # The following properties are set by default:
+    #
+    # * **Performance mode** - The destination file system's performance
+    #   mode will match that of the source file system, unless the
+    #   destination file system uses One Zone storage. In that case, the
+    #   *General Purpose* performance mode is used. The Performance mode
+    #   cannot be changed.
+    #
+    # * **Throughput mode** - The destination file system use the Bursting
+    #   throughput mode by default. You can modify the throughput mode once
+    #   the file system is created.
+    #
+    # The following properties are turned off by default:
+    #
+    # * **Lifecycle management** - EFS lifecycle management and intelligent
+    #   tiering are not enabled on the destination file system. You can
+    #   enable EFS lifecycle management and intelligent tiering after the
+    #   destination file system is created.
+    #
+    # * **Automatic backups** - Automatic daily backups not enabled on the
+    #   destination file system. You can change this setting after the file
+    #   system is created.
+    #
+    # For more information, see [Amazon EFS replication][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html
+    # [2]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
+    #
+    # @option params [required, String] :source_file_system_id
+    #   Specifies the Amazon EFS file system that you want to replicate. This
+    #   file system cannot already be a source or destination file system in
+    #   another replication configuration.
+    #
+    # @option params [required, Array<Types::DestinationToCreate>] :destinations
+    #   An array of destination configuration objects. Only one destination
+    #   configuration object is supported.
+    #
+    # @return [Types::ReplicationConfigurationDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ReplicationConfigurationDescription#source_file_system_id #source_file_system_id} => String
+    #   * {Types::ReplicationConfigurationDescription#source_file_system_region #source_file_system_region} => String
+    #   * {Types::ReplicationConfigurationDescription#source_file_system_arn #source_file_system_arn} => String
+    #   * {Types::ReplicationConfigurationDescription#original_source_file_system_arn #original_source_file_system_arn} => String
+    #   * {Types::ReplicationConfigurationDescription#creation_time #creation_time} => Time
+    #   * {Types::ReplicationConfigurationDescription#destinations #destinations} => Array&lt;Types::Destination&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_replication_configuration({
+    #     source_file_system_id: "FileSystemId", # required
+    #     destinations: [ # required
+    #       {
+    #         region: "RegionName",
+    #         availability_zone_name: "AvailabilityZoneName",
+    #         kms_key_id: "KmsKeyId",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_file_system_id #=> String
+    #   resp.source_file_system_region #=> String
+    #   resp.source_file_system_arn #=> String
+    #   resp.original_source_file_system_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.destinations #=> Array
+    #   resp.destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR"
+    #   resp.destinations[0].file_system_id #=> String
+    #   resp.destinations[0].region #=> String
+    #   resp.destinations[0].last_replicated_timestamp #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/CreateReplicationConfiguration AWS API Documentation
+    #
+    # @overload create_replication_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_replication_configuration(params = {}, options = {})
+      req = build_request(:create_replication_configuration, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> DEPRECATED - CreateTags is deprecated and not maintained. Please use
     # the API action to create tags for EFS resources.
     #
@@ -1223,6 +1339,32 @@ module Aws::EFS
     # @param [Hash] params ({})
     def delete_mount_target(params = {}, options = {})
       req = build_request(:delete_mount_target, params)
+      req.send_request(options)
+    end
+
+    # Deletes an existing replication configuration. To delete a replication
+    # configuration, you must make the request from the Amazon Web Services
+    # Region in which the destination file system is located. Deleting a
+    # replication configuration ends the replication process. You can write
+    # to the destination file system once it's status becomes `Writeable`.
+    #
+    # @option params [required, String] :source_file_system_id
+    #   The ID of the source file system in the replication configuration.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_replication_configuration({
+    #     source_file_system_id: "FileSystemId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DeleteReplicationConfiguration AWS API Documentation
+    #
+    # @overload delete_replication_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_replication_configuration(params = {}, options = {})
+      req = build_request(:delete_replication_configuration, params)
       req.send_request(options)
     end
 
@@ -1811,6 +1953,60 @@ module Aws::EFS
     # @param [Hash] params ({})
     def describe_mount_targets(params = {}, options = {})
       req = build_request(:describe_mount_targets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the replication configurations for either a specific file
+    # system, or all configurations for the Amazon Web Services account in
+    # an Amazon Web Services Region if a file system is not specified.
+    #
+    # @option params [String] :file_system_id
+    #   You can retrieve replication configurations for a specific file system
+    #   by providing a file system ID.
+    #
+    # @option params [String] :next_token
+    #   `NextToken` is present if the response is paginated. You can use
+    #   `NextMarker` in a subsequent request to fetch the next page of output.
+    #
+    # @option params [Integer] :max_results
+    #   (Optional) You can optionally specify the `MaxItems` parameter to
+    #   limit the number of objects returned in a response. The default value
+    #   is 100.
+    #
+    # @return [Types::DescribeReplicationConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeReplicationConfigurationsResponse#replications #replications} => Array&lt;Types::ReplicationConfigurationDescription&gt;
+    #   * {Types::DescribeReplicationConfigurationsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_replication_configurations({
+    #     file_system_id: "FileSystemId",
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.replications #=> Array
+    #   resp.replications[0].source_file_system_id #=> String
+    #   resp.replications[0].source_file_system_region #=> String
+    #   resp.replications[0].source_file_system_arn #=> String
+    #   resp.replications[0].original_source_file_system_arn #=> String
+    #   resp.replications[0].creation_time #=> Time
+    #   resp.replications[0].destinations #=> Array
+    #   resp.replications[0].destinations[0].status #=> String, one of "ENABLED", "ENABLING", "DELETING", "ERROR"
+    #   resp.replications[0].destinations[0].file_system_id #=> String
+    #   resp.replications[0].destinations[0].region #=> String
+    #   resp.replications[0].destinations[0].last_replicated_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeReplicationConfigurations AWS API Documentation
+    #
+    # @overload describe_replication_configurations(params = {})
+    # @param [Hash] params ({})
+    def describe_replication_configurations(params = {}, options = {})
+      req = build_request(:describe_replication_configurations, params)
       req.send_request(options)
     end
 
@@ -2444,7 +2640,7 @@ module Aws::EFS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-efs'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

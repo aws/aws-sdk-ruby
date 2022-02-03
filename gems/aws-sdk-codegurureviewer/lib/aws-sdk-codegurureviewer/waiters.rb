@@ -69,8 +69,8 @@ module Aws::CodeGuruReviewer
   #
   # | waiter_name                      | params                                   | :delay   | :max_attempts |
   # | -------------------------------- | ---------------------------------------- | -------- | ------------- |
-  # | code_review_completed            | {Client#describe_code_review}            | 10       | 60            |
-  # | repository_association_succeeded | {Client#describe_repository_association} | 10       | 20            |
+  # | code_review_completed            | {Client#describe_code_review}            | 10       | 180           |
+  # | repository_association_succeeded | {Client#describe_repository_association} | 10       | 30            |
   #
   module Waiters
 
@@ -79,14 +79,14 @@ module Aws::CodeGuruReviewer
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :max_attempts (180)
       # @option options [Integer] :delay (10)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 60,
+          max_attempts: 180,
           delay: 10,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_code_review,
@@ -96,6 +96,12 @@ module Aws::CodeGuruReviewer
                 "matcher" => "path",
                 "argument" => "code_review.state",
                 "expected" => "Completed"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "code_review.state",
+                "expected" => "Failed"
               },
               {
                 "state" => "retry",
@@ -124,14 +130,14 @@ module Aws::CodeGuruReviewer
 
       # @param [Hash] options
       # @option options [required, Client] :client
-      # @option options [Integer] :max_attempts (20)
+      # @option options [Integer] :max_attempts (30)
       # @option options [Integer] :delay (10)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       def initialize(options)
         @client = options.fetch(:client)
         @waiter = Aws::Waiters::Waiter.new({
-          max_attempts: 20,
+          max_attempts: 30,
           delay: 10,
           poller: Aws::Waiters::Poller.new(
             operation_name: :describe_repository_association,
@@ -141,6 +147,12 @@ module Aws::CodeGuruReviewer
                 "matcher" => "path",
                 "argument" => "repository_association.state",
                 "expected" => "Associated"
+              },
+              {
+                "state" => "failure",
+                "matcher" => "path",
+                "argument" => "repository_association.state",
+                "expected" => "Failed"
               },
               {
                 "state" => "retry",

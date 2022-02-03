@@ -14,6 +14,7 @@ module Aws::Athena
     include Seahorse::Model
 
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
+    AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
     BatchGetNamedQueryOutput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryOutput')
     BatchGetQueryExecutionInput = Shapes::StructureShape.new(name: 'BatchGetQueryExecutionInput')
@@ -58,6 +59,7 @@ module Aws::Athena
     EncryptionOption = Shapes::StringShape.new(name: 'EncryptionOption')
     EngineVersion = Shapes::StructureShape.new(name: 'EngineVersion')
     EngineVersionsList = Shapes::ListShape.new(name: 'EngineVersionsList')
+    ErrorCategory = Shapes::IntegerShape.new(name: 'ErrorCategory')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
@@ -182,6 +184,9 @@ module Aws::Athena
     WorkGroupsList = Shapes::ListShape.new(name: 'WorkGroupsList')
     datumList = Shapes::ListShape.new(name: 'datumList')
     datumString = Shapes::StringShape.new(name: 'datumString')
+
+    AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
+    AthenaError.struct_class = Types::AthenaError
 
     BatchGetNamedQueryInput.add_member(:named_query_ids, Shapes::ShapeRef.new(shape: NamedQueryIdList, required: true, location_name: "NamedQueryIds"))
     BatchGetNamedQueryInput.struct_class = Types::BatchGetNamedQueryInput
@@ -514,6 +519,7 @@ module Aws::Athena
     QueryExecutionStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: String, location_name: "StateChangeReason"))
     QueryExecutionStatus.add_member(:submission_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "SubmissionDateTime"))
     QueryExecutionStatus.add_member(:completion_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CompletionDateTime"))
+    QueryExecutionStatus.add_member(:athena_error, Shapes::ShapeRef.new(shape: AthenaError, location_name: "AthenaError"))
     QueryExecutionStatus.struct_class = Types::QueryExecutionStatus
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))

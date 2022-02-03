@@ -48,6 +48,7 @@ module Aws::EFS
   # * {NetworkInterfaceLimitExceeded}
   # * {NoFreeAddressesInSubnet}
   # * {PolicyNotFound}
+  # * {ReplicationNotFound}
   # * {SecurityGroupLimitExceeded}
   # * {SecurityGroupNotFound}
   # * {SubnetNotFound}
@@ -477,6 +478,26 @@ module Aws::EFS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::EFS::Types::PolicyNotFound] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error_code
+        @data[:error_code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplicationNotFound < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::EFS::Types::ReplicationNotFound] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
