@@ -1396,6 +1396,7 @@ module Aws::Personalize
     #           item_exploration_config: {
     #             "ParameterName" => "ParameterValue",
     #           },
+    #           min_recommendation_requests_per_second: 1,
     #         },
     #       }
     #
@@ -4568,6 +4569,7 @@ module Aws::Personalize
     #         item_exploration_config: {
     #           "ParameterName" => "ParameterValue",
     #         },
+    #         min_recommendation_requests_per_second: 1,
     #       }
     #
     # @!attribute [rw] item_exploration_config
@@ -4579,10 +4581,16 @@ module Aws::Personalize
     #   user (not popular items or similar items).
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] min_recommendation_requests_per_second
+    #   Specifies the requested minimum provisioned recommendation requests
+    #   per second that Amazon Personalize will support.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/RecommenderConfig AWS API Documentation
     #
     class RecommenderConfig < Struct.new(
-      :item_exploration_config)
+      :item_exploration_config,
+      :min_recommendation_requests_per_second)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4646,7 +4654,7 @@ module Aws::Personalize
     end
 
     # Provides a summary of the properties of a recommender update. For a
-    # complete listing, call the DescribeRecommender API.
+    # complete listing, call the DescribeRecommender API operation.
     #
     # @!attribute [rw] recommender_config
     #   The configuration details of the recommender update.
@@ -4745,7 +4753,7 @@ module Aws::Personalize
     # @!attribute [rw] kms_key_arn
     #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
     #   key that Amazon Personalize uses to encrypt or decrypt the input and
-    #   output files of a batch inference job.
+    #   output files.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/S3DataConfig AWS API Documentation
@@ -5257,6 +5265,7 @@ module Aws::Personalize
     #           item_exploration_config: {
     #             "ParameterName" => "ParameterValue",
     #           },
+    #           min_recommendation_requests_per_second: 1,
     #         },
     #       }
     #

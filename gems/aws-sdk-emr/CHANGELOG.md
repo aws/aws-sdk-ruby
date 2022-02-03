@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-02-02)
+------------------
+
+* Feature - Documentation updates for Amazon EMR.
+
 1.56.0 (2021-12-21)
 ------------------
 

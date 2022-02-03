@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.37.0 (2022-02-02)
+------------------
+
+* Feature - Adding minRecommendationRequestsPerSecond attribute to recommender APIs.
+
 1.36.0 (2021-12-21)
 ------------------
 

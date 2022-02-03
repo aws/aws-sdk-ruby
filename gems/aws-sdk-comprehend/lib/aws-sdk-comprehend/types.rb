@@ -760,6 +760,7 @@ module Aws::Comprehend
     #         },
     #         mode: "MULTI_CLASS", # accepts MULTI_CLASS, MULTI_LABEL
     #         model_kms_key_id: "KmsKeyId",
+    #         model_policy: "Policy",
     #       }
     #
     # @!attribute [rw] document_classifier_name
@@ -855,6 +856,25 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] model_policy
+    #   The resource-based policy to attach to your custom document
+    #   classifier model. You can use this policy to allow another AWS
+    #   account to import your custom model.
+    #
+    #   Provide your policy as a JSON body that you enter as a UTF-8 encoded
+    #   string without line breaks. To provide valid JSON, enclose the
+    #   attribute names and values in double quotes. If the JSON body is
+    #   also enclosed in double quotes, then you must escape the double
+    #   quotes that are inside the policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateDocumentClassifierRequest AWS API Documentation
     #
     class CreateDocumentClassifierRequest < Struct.new(
@@ -869,7 +889,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :mode,
-      :model_kms_key_id)
+      :model_kms_key_id,
+      :model_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1019,6 +1040,7 @@ module Aws::Comprehend
     #           subnets: ["SubnetId"], # required
     #         },
     #         model_kms_key_id: "KmsKeyId",
+    #         model_policy: "Policy",
     #       }
     #
     # @!attribute [rw] recognizer_name
@@ -1104,6 +1126,25 @@ module Aws::Comprehend
     #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
     #   @return [String]
     #
+    # @!attribute [rw] model_policy
+    #   The JSON resource-based policy to attach to your custom entity
+    #   recognizer model. You can use this policy to allow another AWS
+    #   account to import your custom model.
+    #
+    #   Provide your JSON as a UTF-8 encoded string without line breaks. To
+    #   provide valid JSON for your policy, enclose the attribute names and
+    #   values in double quotes. If the JSON body is also enclosed in double
+    #   quotes, then you must escape the double quotes that are inside the
+    #   policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/CreateEntityRecognizerRequest AWS API Documentation
     #
     class CreateEntityRecognizerRequest < Struct.new(
@@ -1116,7 +1157,8 @@ module Aws::Comprehend
       :language_code,
       :volume_kms_key_id,
       :vpc_config,
-      :model_kms_key_id)
+      :model_kms_key_id,
+      :model_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1204,6 +1246,36 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteEntityRecognizerResponse AWS API Documentation
     #
     class DeleteEntityRecognizerResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendModelArn", # required
+    #         policy_revision_id: "PolicyRevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the custom model version that has
+    #   the policy to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID of the policy to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteResourcePolicyRequest AWS API Documentation
+    #
+    class DeleteResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DeleteResourcePolicyResponse AWS API Documentation
+    #
+    class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DescribeDocumentClassificationJobRequest
     #   data as a hash:
@@ -1493,6 +1565,54 @@ module Aws::Comprehend
     #
     class DescribePiiEntitiesDetectionJobResponse < Struct.new(
       :pii_entities_detection_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendModelArn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the policy to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeResourcePolicyRequest AWS API Documentation
+    #
+    class DescribeResourcePolicyRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_policy
+    #   The JSON body of the resource-based policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time at which the policy was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The time at which the policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID of the policy. Each time you modify a policy, Amazon
+    #   Comprehend assigns a new revision ID, and it deletes the prior
+    #   version of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeResourcePolicyResponse AWS API Documentation
+    #
+    class DescribeResourcePolicyResponse < Struct.new(
+      :resource_policy,
+      :creation_time,
+      :last_modified_time,
+      :policy_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2321,6 +2441,12 @@ module Aws::Comprehend
     #   The version name that you assigned to the document classifier.
     #   @return [String]
     #
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the source model. This model was
+    #   imported from a different AWS account to create the document
+    #   classifier model in your AWS account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassifierProperties AWS API Documentation
     #
     class DocumentClassifierProperties < Struct.new(
@@ -2340,7 +2466,8 @@ module Aws::Comprehend
       :vpc_config,
       :mode,
       :model_kms_key_id,
-      :version_name)
+      :version_name,
+      :source_model_arn)
       SENSITIVE = [:classifier_metadata]
       include Aws::Structure
     end
@@ -3400,6 +3527,12 @@ module Aws::Comprehend
     #   The version name you assigned to the entity recognizer.
     #   @return [String]
     #
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the source model. This model was
+    #   imported from a different AWS account to create the entity
+    #   recognizer model in your AWS account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerProperties AWS API Documentation
     #
     class EntityRecognizerProperties < Struct.new(
@@ -3417,7 +3550,8 @@ module Aws::Comprehend
       :volume_kms_key_id,
       :vpc_config,
       :model_kms_key_id,
-      :version_name)
+      :version_name,
+      :source_model_arn)
       SENSITIVE = [:recognizer_metadata]
       include Aws::Structure
     end
@@ -3643,6 +3777,90 @@ module Aws::Comprehend
       :language_code,
       :data_access_role_arn,
       :target_event_types)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ImportModelRequest
+    #   data as a hash:
+    #
+    #       {
+    #         source_model_arn: "ComprehendModelArn", # required
+    #         model_name: "ComprehendArnName",
+    #         version_name: "VersionName",
+    #         model_kms_key_id: "KmsKeyId",
+    #         data_access_role_arn: "IamRoleArn",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] source_model_arn
+    #   The Amazon Resource Name (ARN) of the custom model to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_name
+    #   The name to assign to the custom model that is created in Amazon
+    #   Comprehend by this import.
+    #   @return [String]
+    #
+    # @!attribute [rw] version_name
+    #   The version name given to the custom model that is created by this
+    #   import. Version names can have a maximum of 256 characters.
+    #   Alphanumeric characters, hyphens (-) and underscores (\_) are
+    #   allowed. The version name must be unique among all models with the
+    #   same classifier name in the account/AWS Region.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt trained custom models. The ModelKmsKeyId
+    #   can be either of the following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Management
+    #   (IAM) role that allows Amazon Comprehend to use Amazon Key
+    #   Management Service (KMS) to encrypt or decrypt the custom model.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the custom model that is created by this
+    #   import. A tag is a key-value pair that adds as a metadata to a
+    #   resource used by Amazon Comprehend. For example, a tag with
+    #   "Sales" as the key might be added to a resource to indicate its
+    #   use by the sales department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ImportModelRequest AWS API Documentation
+    #
+    class ImportModelRequest < Struct.new(
+      :source_model_arn,
+      :model_name,
+      :version_name,
+      :model_kms_key_id,
+      :data_access_role_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_arn
+    #   The Amazon Resource Name (ARN) of the custom model being imported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ImportModelResponse AWS API Documentation
+    #
+    class ImportModelResponse < Struct.new(
+      :model_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4972,6 +5190,67 @@ module Aws::Comprehend
     class PiiOutputDataConfig < Struct.new(
       :s3_uri,
       :kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass PutResourcePolicyRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "ComprehendModelArn", # required
+    #         resource_policy: "Policy", # required
+    #         policy_revision_id: "PolicyRevisionId",
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the custom model to attach the
+    #   policy to.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_policy
+    #   The JSON resource-based policy to attach to your custom model.
+    #   Provide your JSON as a UTF-8 encoded string without line breaks. To
+    #   provide valid JSON for your policy, enclose the attribute names and
+    #   values in double quotes. If the JSON body is also enclosed in double
+    #   quotes, then you must escape the double quotes that are inside the
+    #   policy:
+    #
+    #   `"\{"attribute": "value", "attribute": ["value"]\}"`
+    #
+    #   To avoid escaping quotes, you can use single quotes to enclose the
+    #   policy and double quotes to enclose the JSON names and values:
+    #
+    #   `'\{"attribute": "value", "attribute": ["value"]\}'`
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID that Amazon Comprehend assigned to the policy that
+    #   you are updating. If you are creating a new policy that has no prior
+    #   version, don't use this parameter. Amazon Comprehend creates the
+    #   revision ID for you.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PutResourcePolicyRequest AWS API Documentation
+    #
+    class PutResourcePolicyRequest < Struct.new(
+      :resource_arn,
+      :resource_policy,
+      :policy_revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_revision_id
+    #   The revision ID of the policy. Each time you modify a policy, Amazon
+    #   Comprehend assigns a new revision ID, and it deletes the prior
+    #   version of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/PutResourcePolicyResponse AWS API Documentation
+    #
+    class PutResourcePolicyResponse < Struct.new(
+      :policy_revision_id)
       SENSITIVE = []
       include Aws::Structure
     end
