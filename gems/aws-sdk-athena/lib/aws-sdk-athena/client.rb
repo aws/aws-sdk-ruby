@@ -438,6 +438,7 @@ module Aws::Athena
     #   resp.query_executions[0].result_configuration.output_location #=> String
     #   resp.query_executions[0].result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_executions[0].result_configuration.encryption_configuration.kms_key #=> String
+    #   resp.query_executions[0].result_configuration.expected_bucket_owner #=> String
     #   resp.query_executions[0].query_execution_context.database #=> String
     #   resp.query_executions[0].query_execution_context.catalog #=> String
     #   resp.query_executions[0].status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -703,6 +704,7 @@ module Aws::Athena
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
+    #         expected_bucket_owner: "String",
     #       },
     #       enforce_work_group_configuration: false,
     #       publish_cloud_watch_metrics_enabled: false,
@@ -1005,6 +1007,7 @@ module Aws::Athena
     #   resp.query_execution.result_configuration.output_location #=> String
     #   resp.query_execution.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.query_execution.result_configuration.encryption_configuration.kms_key #=> String
+    #   resp.query_execution.result_configuration.expected_bucket_owner #=> String
     #   resp.query_execution.query_execution_context.database #=> String
     #   resp.query_execution.query_execution_context.catalog #=> String
     #   resp.query_execution.status.state #=> String, one of "QUEUED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLED"
@@ -1037,6 +1040,14 @@ module Aws::Athena
     # S3. For more information, see [Query Results][1] in the *Amazon Athena
     # User Guide*. This request does not execute the query but returns
     # results. Use StartQueryExecution to run a query.
+    #
+    # If the original query execution ran using an
+    # ResultConfiguration$ExpectedBucketOwner setting, the setting also
+    # applies to Amazon S3 read operations when `GetQueryResults` is called.
+    # If an expected bucket owner has been specified and the query results
+    # are in an Amazon S3 bucket whose owner account ID is different from
+    # the expected bucket owner, the `GetQueryResults` call fails with an
+    # Amazon S3 permissions error.
     #
     # To stream query results successfully, the IAM principal with
     # permission to call `GetQueryResults` also must have permissions to the
@@ -1180,6 +1191,7 @@ module Aws::Athena
     #   resp.work_group.configuration.result_configuration.output_location #=> String
     #   resp.work_group.configuration.result_configuration.encryption_configuration.encryption_option #=> String, one of "SSE_S3", "SSE_KMS", "CSE_KMS"
     #   resp.work_group.configuration.result_configuration.encryption_configuration.kms_key #=> String
+    #   resp.work_group.configuration.result_configuration.expected_bucket_owner #=> String
     #   resp.work_group.configuration.enforce_work_group_configuration #=> Boolean
     #   resp.work_group.configuration.publish_cloud_watch_metrics_enabled #=> Boolean
     #   resp.work_group.configuration.bytes_scanned_cutoff_per_query #=> Integer
@@ -1706,6 +1718,7 @@ module Aws::Athena
     #         encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #         kms_key: "String",
     #       },
+    #       expected_bucket_owner: "String",
     #     },
     #     work_group: "WorkGroupName",
     #   })
@@ -1965,6 +1978,8 @@ module Aws::Athena
     #           kms_key: "String",
     #         },
     #         remove_encryption_configuration: false,
+    #         expected_bucket_owner: "String",
+    #         remove_expected_bucket_owner: false,
     #       },
     #       publish_cloud_watch_metrics_enabled: false,
     #       bytes_scanned_cutoff_per_query: 1,
@@ -2000,7 +2015,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

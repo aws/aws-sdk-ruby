@@ -645,7 +645,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing DB subnet
     #   group.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :database_name

@@ -528,12 +528,15 @@ module Aws::Athena
 
     ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
+    ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
 
     ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfigurationUpdates.add_member(:remove_output_location, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveOutputLocation"))
     ResultConfigurationUpdates.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfigurationUpdates.add_member(:remove_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveEncryptionConfiguration"))
+    ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfigurationUpdates.add_member(:remove_expected_bucket_owner, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveExpectedBucketOwner"))
     ResultConfigurationUpdates.struct_class = Types::ResultConfigurationUpdates
 
     ResultSet.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, location_name: "Rows"))

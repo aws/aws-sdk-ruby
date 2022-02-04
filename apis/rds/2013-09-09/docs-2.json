@@ -1391,7 +1391,7 @@
       }
     },
     "SNSInvalidTopicFault": {
-      "base": "<p>SNS has responded that there is a problem with the SND topic specified.</p>",
+      "base": "<p>SNS has responded that there is a problem with the SNS topic specified.</p>",
       "refs": {
       }
     },

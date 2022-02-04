@@ -679,7 +679,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     # @option options [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
     #   deployment.
@@ -831,8 +831,21 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html
     # @option options [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   instance to snapshots of the DB instance.
+    #
+    #   In most cases, tags aren't copied by default. However, when you
+    #   restore a DB instance from a DB snapshot, RDS checks whether you
+    #   specify new tags. If yes, the new tags are added to the restored DB
+    #   instance. If there are no new tags, RDS looks for the tags from the
+    #   source DB instance for the DB snapshot, and then adds those tags to
+    #   the restored DB instance.
+    #
+    #   For more information, see [ Copying tags to DB instance snapshots][1]
+    #   in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags
     # @option options [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
     #   the Directory Service.
@@ -935,8 +948,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
