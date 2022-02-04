@@ -146,7 +146,7 @@ module Aws
                     body: body,
                     part_number: thread_part_number,
                   )
-                  resp = @client.upload_part(**part)
+                  resp = @client.upload_part(part)
                   completed << {etag: resp.etag, part_number: part[:part_number]}
                 ensure
                   if Tempfile === body
