@@ -309,27 +309,27 @@ module Aws
               body: instance_of(Tempfile),
               part_number: 1
             ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 2
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 3
-            ).once.and_return(double(:upload_part, etag: 'etag'))
-            expect(client).to receive(:upload_part).with(
+            }).once.and_return(double(:upload_part, etag: 'etag'))
+            expect(client).to receive(:upload_part).with({
               bucket: 'bucket',
               key: 'key',
               upload_id: 'id',
               body: instance_of(Tempfile),
               part_number: 4
-            ).once.and_return(double(:upload_part, etag: 'etag'))
+            }).once.and_return(double(:upload_part, etag: 'etag'))
             object.upload_stream(tempfile: true) do |write_stream|
               write_stream << seventeen_mb
             end
