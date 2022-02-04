@@ -14,7 +14,7 @@ unless ENV['PURE_RUBY']
 
   unless defined?(JRUBY_VERSION)
     gem 'libxml-ruby'
-    gem 'ox'
+    gem 'ox', " <= 2.14.6"
   end
 end
 
@@ -28,6 +28,7 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
+  gem 'rspec-mocks', '<= 3.10.2'
 end
 
 group :build do
