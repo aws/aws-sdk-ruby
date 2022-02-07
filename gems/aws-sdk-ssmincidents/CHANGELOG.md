@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-02-07)
+------------------
+
+* Feature - Update RelatedItem enum to support SSM Automation
+
 1.10.0 (2022-02-03)
 ------------------
 

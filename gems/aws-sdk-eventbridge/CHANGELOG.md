@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-02-07)
+------------------
+
+* Feature - Documentation updates for EventBridge
+
 1.35.0 (2022-02-03)
 ------------------
 

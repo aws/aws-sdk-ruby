@@ -1561,7 +1561,7 @@ module Aws::AuditManager
     #   data as a hash:
     #
     #       {
-    #         id: "UUID",
+    #         id: "UUID", # required
     #       }
     #
     # @!attribute [rw] id
@@ -1586,7 +1586,7 @@ module Aws::AuditManager
     #         name: "ControlSetName", # required
     #         controls: [
     #           {
-    #             id: "UUID",
+    #             id: "UUID", # required
     #           },
     #         ],
     #       }
@@ -1621,7 +1621,7 @@ module Aws::AuditManager
     #             name: "ControlSetName", # required
     #             controls: [
     #               {
-    #                 id: "UUID",
+    #                 id: "UUID", # required
     #               },
     #             ],
     #           },
@@ -4584,9 +4584,9 @@ module Aws::AuditManager
     #       {
     #         id: "ControlSetName",
     #         name: "ControlSetName", # required
-    #         controls: [
+    #         controls: [ # required
     #           {
-    #             id: "UUID",
+    #             id: "UUID", # required
     #           },
     #         ],
     #       }
@@ -4625,9 +4625,9 @@ module Aws::AuditManager
     #           {
     #             id: "ControlSetName",
     #             name: "ControlSetName", # required
-    #             controls: [
+    #             controls: [ # required
     #               {
-    #                 id: "UUID",
+    #                 id: "UUID", # required
     #               },
     #             ],
     #           },

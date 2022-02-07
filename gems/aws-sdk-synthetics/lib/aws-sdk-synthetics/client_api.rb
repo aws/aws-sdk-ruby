@@ -47,8 +47,10 @@ module Aws::Synthetics
     CreateCanaryResponse = Shapes::StructureShape.new(name: 'CreateCanaryResponse')
     DeleteCanaryRequest = Shapes::StructureShape.new(name: 'DeleteCanaryRequest')
     DeleteCanaryResponse = Shapes::StructureShape.new(name: 'DeleteCanaryResponse')
+    DescribeCanariesLastRunNameFilter = Shapes::ListShape.new(name: 'DescribeCanariesLastRunNameFilter')
     DescribeCanariesLastRunRequest = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunRequest')
     DescribeCanariesLastRunResponse = Shapes::StructureShape.new(name: 'DescribeCanariesLastRunResponse')
+    DescribeCanariesNameFilter = Shapes::ListShape.new(name: 'DescribeCanariesNameFilter')
     DescribeCanariesRequest = Shapes::StructureShape.new(name: 'DescribeCanariesRequest')
     DescribeCanariesResponse = Shapes::StructureShape.new(name: 'DescribeCanariesResponse')
     DescribeRuntimeVersionsRequest = Shapes::StructureShape.new(name: 'DescribeRuntimeVersionsRequest')
@@ -74,6 +76,7 @@ module Aws::Synthetics
     MaxSize1024 = Shapes::IntegerShape.new(name: 'MaxSize1024')
     MaxSize3008 = Shapes::IntegerShape.new(name: 'MaxSize3008')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
+    RequestEntityTooLargeException = Shapes::StructureShape.new(name: 'RequestEntityTooLargeException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     RuntimeVersion = Shapes::StructureShape.new(name: 'RuntimeVersion')
@@ -233,16 +236,22 @@ module Aws::Synthetics
 
     DeleteCanaryResponse.struct_class = Types::DeleteCanaryResponse
 
+    DescribeCanariesLastRunNameFilter.member = Shapes::ShapeRef.new(shape: CanaryName)
+
     DescribeCanariesLastRunRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeCanariesLastRunRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSize100, location_name: "MaxResults"))
+    DescribeCanariesLastRunRequest.add_member(:names, Shapes::ShapeRef.new(shape: DescribeCanariesLastRunNameFilter, location_name: "Names"))
     DescribeCanariesLastRunRequest.struct_class = Types::DescribeCanariesLastRunRequest
 
     DescribeCanariesLastRunResponse.add_member(:canaries_last_run, Shapes::ShapeRef.new(shape: CanariesLastRun, location_name: "CanariesLastRun"))
     DescribeCanariesLastRunResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeCanariesLastRunResponse.struct_class = Types::DescribeCanariesLastRunResponse
 
+    DescribeCanariesNameFilter.member = Shapes::ShapeRef.new(shape: CanaryName)
+
     DescribeCanariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     DescribeCanariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxCanaryResults, location_name: "MaxResults"))
+    DescribeCanariesRequest.add_member(:names, Shapes::ShapeRef.new(shape: DescribeCanariesNameFilter, location_name: "Names"))
     DescribeCanariesRequest.struct_class = Types::DescribeCanariesRequest
 
     DescribeCanariesResponse.add_member(:canaries, Shapes::ShapeRef.new(shape: Canaries, location_name: "Canaries"))
@@ -283,6 +292,9 @@ module Aws::Synthetics
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    RequestEntityTooLargeException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    RequestEntityTooLargeException.struct_class = Types::RequestEntityTooLargeException
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
@@ -393,6 +405,7 @@ module Aws::Synthetics
         o.output = Shapes::ShapeRef.new(shape: CreateCanaryResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestEntityTooLargeException)
       end)
 
       api.add_operation(:delete_canary, Seahorse::Model::Operation.new.tap do |o|
@@ -549,6 +562,7 @@ module Aws::Synthetics
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: RequestEntityTooLargeException)
       end)
     end
 

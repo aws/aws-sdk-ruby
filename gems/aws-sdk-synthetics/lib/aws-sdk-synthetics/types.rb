@@ -261,7 +261,10 @@ module Aws::Synthetics
     #   If you input your canary script directly into the canary instead of
     #   referring to an S3 location, the value of this parameter is the
     #   base64-encoded contents of the .zip file that contains the script.
-    #   It must be smaller than 256 Kb.
+    #   It must be smaller than 225 Kb.
+    #
+    #   For large canary scripts, we recommend that you use an S3 location
+    #   instead of inputting it directly with this parameter.
     #   @return [String]
     #
     # @!attribute [rw] handler
@@ -881,6 +884,7 @@ module Aws::Synthetics
     #       {
     #         next_token: "Token",
     #         max_results: 1,
+    #         names: ["CanaryName"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -895,11 +899,31 @@ module Aws::Synthetics
     #   the default of 100 is used.
     #   @return [Integer]
     #
+    # @!attribute [rw] names
+    #   Use this parameter to return only canaries that match the names that
+    #   you specify here. You can specify as many as five canary names.
+    #
+    #   If you specify this parameter, the operation is successful only if
+    #   you have authorization to view all the canaries that you specify in
+    #   your request. If you do not have permission to view any of the
+    #   canaries, the request fails with a 403 response.
+    #
+    #   You are required to use the `Names` parameter if you are logged on
+    #   to a user or role that has an IAM policy that restricts which
+    #   canaries that you are allowed to view. For more information, see [
+    #   Limiting a user to viewing specific canaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DescribeCanariesLastRunRequest AWS API Documentation
     #
     class DescribeCanariesLastRunRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -930,6 +954,7 @@ module Aws::Synthetics
     #       {
     #         next_token: "Token",
     #         max_results: 1,
+    #         names: ["CanaryName"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -944,11 +969,31 @@ module Aws::Synthetics
     #   parameter, the default of 100 is used.
     #   @return [Integer]
     #
+    # @!attribute [rw] names
+    #   Use this parameter to return only canaries that match the names that
+    #   you specify here. You can specify as many as five canary names.
+    #
+    #   If you specify this parameter, the operation is successful only if
+    #   you have authorization to view all the canaries that you specify in
+    #   your request. If you do not have permission to view any of the
+    #   canaries, the request fails with a 403 response.
+    #
+    #   You are required to use this parameter if you are logged on to a
+    #   user or role that has an IAM policy that restricts which canaries
+    #   that you are allowed to view. For more information, see [ Limiting a
+    #   user to viewing specific canaries][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Restricted.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DescribeCanariesRequest AWS API Documentation
     #
     class DescribeCanariesRequest < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :names)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1152,6 +1197,19 @@ module Aws::Synthetics
     #
     class ListTagsForResourceResponse < Struct.new(
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # One of the input resources is larger than is allowed.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/RequestEntityTooLargeException AWS API Documentation
+    #
+    class RequestEntityTooLargeException < Struct.new(
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end

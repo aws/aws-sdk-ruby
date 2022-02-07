@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-02-07)
+------------------
+
+* Feature - Adding names parameters to the Describe APIs.
+
 1.23.0 (2022-02-03)
 ------------------
 
