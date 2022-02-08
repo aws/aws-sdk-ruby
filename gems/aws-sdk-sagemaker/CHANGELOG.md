@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2022-02-08)
+------------------
+
+* Feature - Autopilot now generates an additional report with information on the performance of the best model, such as a Confusion matrix and  Area under the receiver operating characteristic (AUC-ROC). The path to the report can be found in CandidateArtifactLocations.
+
 1.118.0 (2022-02-03)
 ------------------
 

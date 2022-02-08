@@ -8268,12 +8268,13 @@ module Aws::SageMaker
     #   resp.best_candidate.last_modified_time #=> Time
     #   resp.best_candidate.failure_reason #=> String
     #   resp.best_candidate.candidate_properties.candidate_artifact_locations.explainability #=> String
+    #   resp.best_candidate.candidate_properties.candidate_artifact_locations.model_insights #=> String
     #   resp.best_candidate.candidate_properties.candidate_metrics #=> Array
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].value #=> Float
     #   resp.best_candidate.candidate_properties.candidate_metrics[0].set #=> String, one of "Train", "Validation", "Test"
     #   resp.auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError"
+    #   resp.auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError"
     #   resp.generate_candidate_definitions_only #=> Boolean
     #   resp.auto_ml_job_artifacts.candidate_definition_notebook_location #=> String
     #   resp.auto_ml_job_artifacts.data_exploration_notebook_location #=> String
@@ -12302,7 +12303,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_summaries[0].auto_ml_job_name #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_arn #=> String
     #   resp.auto_ml_job_summaries[0].auto_ml_job_status #=> String, one of "Completed", "InProgress", "Failed", "Stopped", "Stopping"
-    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError"
+    #   resp.auto_ml_job_summaries[0].auto_ml_job_secondary_status #=> String, one of "Starting", "AnalyzingData", "FeatureEngineering", "ModelTuning", "MaxCandidatesReached", "Failed", "Stopped", "MaxAutoMLJobRuntimeReached", "Stopping", "CandidateDefinitionsGenerated", "GeneratingExplainabilityReport", "Completed", "ExplainabilityError", "DeployingModel", "ModelDeploymentError", "GeneratingModelInsightsReport", "ModelInsightsError"
     #   resp.auto_ml_job_summaries[0].creation_time #=> Time
     #   resp.auto_ml_job_summaries[0].end_time #=> Time
     #   resp.auto_ml_job_summaries[0].last_modified_time #=> Time
@@ -12387,6 +12388,7 @@ module Aws::SageMaker
     #   resp.candidates[0].last_modified_time #=> Time
     #   resp.candidates[0].failure_reason #=> String
     #   resp.candidates[0].candidate_properties.candidate_artifact_locations.explainability #=> String
+    #   resp.candidates[0].candidate_properties.candidate_artifact_locations.model_insights #=> String
     #   resp.candidates[0].candidate_properties.candidate_metrics #=> Array
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].metric_name #=> String, one of "Accuracy", "MSE", "F1", "F1macro", "AUC"
     #   resp.candidates[0].candidate_properties.candidate_metrics[0].value #=> Float
@@ -19448,7 +19450,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

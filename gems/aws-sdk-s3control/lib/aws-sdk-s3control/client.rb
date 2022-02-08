@@ -726,7 +726,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
@@ -760,7 +760,7 @@ module Aws::S3Control
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
-    # @option params [required, Types::JobManifest] :manifest
+    # @option params [Types::JobManifest] :manifest
     #   Configuration parameters for the manifest.
     #
     # @option params [String] :description
@@ -780,6 +780,11 @@ module Aws::S3Control
     # @option params [Array<Types::S3Tag>] :tags
     #   A set of tags to associate with the S3 Batch Operations job. This is
     #   an optional parameter.
+    #
+    # @option params [Types::JobManifestGenerator] :manifest_generator
+    #   The attribute container for the ManifestGenerator details. Jobs must
+    #   be created with either a manifest file or a ManifestGenerator, but not
+    #   both.
     #
     # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -832,7 +837,7 @@ module Aws::S3Control
     #         ],
     #         redirect_location: "NonEmptyMaxLength2048String",
     #         requester_pays: false,
-    #         storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE
+    #         storage_class: "STANDARD", # accepts STANDARD, STANDARD_IA, ONEZONE_IA, GLACIER, INTELLIGENT_TIERING, DEEP_ARCHIVE, GLACIER_IR
     #         un_modified_since_constraint: Time.now,
     #         sse_aws_kms_key_id: "KmsKeyArnString",
     #         target_key_prefix: "NonEmptyMaxLength1024String",
@@ -888,6 +893,8 @@ module Aws::S3Control
     #           mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         },
     #       },
+    #       s3_replicate_object: {
+    #       },
     #     },
     #     report: { # required
     #       bucket: "S3BucketArnString",
@@ -897,7 +904,7 @@ module Aws::S3Control
     #       report_scope: "AllTasks", # accepts AllTasks, FailedTasksOnly
     #     },
     #     client_request_token: "NonEmptyMaxLength64String", # required
-    #     manifest: { # required
+    #     manifest: {
     #       spec: { # required
     #         format: "S3BatchOperations_CSV_20180820", # required, accepts S3BatchOperations_CSV_20180820, S3InventoryReport_CSV_20161130
     #         fields: ["Ignore"], # accepts Ignore, Bucket, Key, VersionId
@@ -917,6 +924,32 @@ module Aws::S3Control
     #         value: "TagValueString", # required
     #       },
     #     ],
+    #     manifest_generator: {
+    #       s3_job_manifest_generator: {
+    #         expected_bucket_owner: "AccountId",
+    #         source_bucket: "S3BucketArnString", # required
+    #         manifest_output_location: {
+    #           expected_manifest_bucket_owner: "AccountId",
+    #           bucket: "S3BucketArnString", # required
+    #           manifest_prefix: "ManifestPrefixString",
+    #           manifest_encryption: {
+    #             sses3: {
+    #             },
+    #             ssekms: {
+    #               key_id: "KmsKeyArnString", # required
+    #             },
+    #           },
+    #           manifest_format: "S3InventoryReport_CSV_20211130", # required, accepts S3InventoryReport_CSV_20211130
+    #         },
+    #         filter: {
+    #           eligible_for_replication: false,
+    #           created_after: Time.now,
+    #           created_before: Time.now,
+    #           object_replication_statuses: ["COMPLETED"], # accepts COMPLETED, FAILED, REPLICA, NONE
+    #         },
+    #         enable_manifest_output: false, # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1797,7 +1830,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
@@ -1861,7 +1894,7 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_copy.new_object_tagging[0].value #=> String
     #   resp.job.operation.s3_put_object_copy.redirect_location #=> String
     #   resp.job.operation.s3_put_object_copy.requester_pays #=> Boolean
-    #   resp.job.operation.s3_put_object_copy.storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "INTELLIGENT_TIERING", "DEEP_ARCHIVE"
+    #   resp.job.operation.s3_put_object_copy.storage_class #=> String, one of "STANDARD", "STANDARD_IA", "ONEZONE_IA", "GLACIER", "INTELLIGENT_TIERING", "DEEP_ARCHIVE", "GLACIER_IR"
     #   resp.job.operation.s3_put_object_copy.un_modified_since_constraint #=> Time
     #   resp.job.operation.s3_put_object_copy.sse_aws_kms_key_id #=> String
     #   resp.job.operation.s3_put_object_copy.target_key_prefix #=> String
@@ -1890,6 +1923,7 @@ module Aws::S3Control
     #   resp.job.progress_summary.total_number_of_tasks #=> Integer
     #   resp.job.progress_summary.number_of_tasks_succeeded #=> Integer
     #   resp.job.progress_summary.number_of_tasks_failed #=> Integer
+    #   resp.job.progress_summary.timers.elapsed_time_in_active_seconds #=> Integer
     #   resp.job.status_update_reason #=> String
     #   resp.job.failure_reasons #=> Array
     #   resp.job.failure_reasons[0].failure_code #=> String
@@ -1904,6 +1938,23 @@ module Aws::S3Control
     #   resp.job.role_arn #=> String
     #   resp.job.suspended_date #=> Time
     #   resp.job.suspended_cause #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.expected_bucket_owner #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.source_bucket #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.manifest_output_location.expected_manifest_bucket_owner #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.manifest_output_location.bucket #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.manifest_output_location.manifest_prefix #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.manifest_output_location.manifest_encryption.ssekms.key_id #=> String
+    #   resp.job.manifest_generator.s3_job_manifest_generator.manifest_output_location.manifest_format #=> String, one of "S3InventoryReport_CSV_20211130"
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.eligible_for_replication #=> Boolean
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.created_after #=> Time
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.created_before #=> Time
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses #=> Array
+    #   resp.job.manifest_generator.s3_job_manifest_generator.filter.object_replication_statuses[0] #=> String, one of "COMPLETED", "FAILED", "REPLICA", "NONE"
+    #   resp.job.manifest_generator.s3_job_manifest_generator.enable_manifest_output #=> Boolean
+    #   resp.job.generated_manifest_descriptor.format #=> String, one of "S3InventoryReport_CSV_20211130"
+    #   resp.job.generated_manifest_descriptor.location.object_arn #=> String
+    #   resp.job.generated_manifest_descriptor.location.object_version_id #=> String
+    #   resp.job.generated_manifest_descriptor.location.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/DescribeJob AWS API Documentation
     #
@@ -3277,10 +3328,9 @@ module Aws::S3Control
       req.send_request(options)
     end
 
-    # Returns a list of the access points associated with the Object Lambda
-    # Access Point. You can retrieve up to 1000 access points per call. If
-    # there are more than 1,000 access points (or the number specified in
-    # `maxResults`, whichever is less), the response will include a
+    # Returns some or all (up to 1,000) access points associated with the
+    # Object Lambda Access Point per call. If there are more access points
+    # than what can be returned in one call, the response will include a
     # continuation token that you can use to list the additional access
     # points.
     #
@@ -3311,9 +3361,10 @@ module Aws::S3Control
     #
     # @option params [Integer] :max_results
     #   The maximum number of access points that you want to include in the
-    #   list. If there are more than this number of access points, then the
-    #   response will include a continuation token in the `NextToken` field
-    #   that you can use to retrieve the next page of access points.
+    #   list. The response may contain fewer access points but will never
+    #   contain more. If there are more than this number of access points,
+    #   then the response will include a continuation token in the `NextToken`
+    #   field that you can use to retrieve the next page of access points.
     #
     # @return [Types::ListAccessPointsForObjectLambdaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3365,7 +3416,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
@@ -3412,7 +3463,7 @@ module Aws::S3Control
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].description #=> String
-    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention"
+    #   resp.jobs[0].operation #=> String, one of "LambdaInvoke", "S3PutObjectCopy", "S3PutObjectAcl", "S3PutObjectTagging", "S3DeleteObjectTagging", "S3InitiateRestoreObject", "S3PutObjectLegalHold", "S3PutObjectRetention", "S3ReplicateObject"
     #   resp.jobs[0].priority #=> Integer
     #   resp.jobs[0].status #=> String, one of "Active", "Cancelled", "Cancelling", "Complete", "Completing", "Failed", "Failing", "New", "Paused", "Pausing", "Preparing", "Ready", "Suspended"
     #   resp.jobs[0].creation_time #=> Time
@@ -3420,6 +3471,7 @@ module Aws::S3Control
     #   resp.jobs[0].progress_summary.total_number_of_tasks #=> Integer
     #   resp.jobs[0].progress_summary.number_of_tasks_succeeded #=> Integer
     #   resp.jobs[0].progress_summary.number_of_tasks_failed #=> Integer
+    #   resp.jobs[0].progress_summary.timers.elapsed_time_in_active_seconds #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListJobs AWS API Documentation
     #
@@ -4320,8 +4372,9 @@ module Aws::S3Control
     end
 
     # Creates or modifies the `PublicAccessBlock` configuration for an
-    # Amazon Web Services account. For more information, see [ Using Amazon
-    # S3 block public access][1].
+    # Amazon Web Services account. For this operation, users must have the
+    # `s3:PutBucketPublicAccessBlock` permission. For more information, see
+    # [ Using Amazon S3 block public access][1].
     #
     # Related actions include:
     #
@@ -4549,7 +4602,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
@@ -4611,7 +4664,7 @@ module Aws::S3Control
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
@@ -4674,7 +4727,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

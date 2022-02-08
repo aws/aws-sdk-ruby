@@ -92,6 +92,8 @@ module Aws::S3Control
     ExpiredObjectDeleteMarker = Shapes::BooleanShape.new(name: 'ExpiredObjectDeleteMarker')
     Format = Shapes::StringShape.new(name: 'Format')
     FunctionArnString = Shapes::StringShape.new(name: 'FunctionArnString')
+    GeneratedManifestEncryption = Shapes::StructureShape.new(name: 'GeneratedManifestEncryption')
+    GeneratedManifestFormat = Shapes::StringShape.new(name: 'GeneratedManifestFormat')
     GetAccessPointConfigurationForObjectLambdaRequest = Shapes::StructureShape.new(name: 'GetAccessPointConfigurationForObjectLambdaRequest')
     GetAccessPointConfigurationForObjectLambdaResult = Shapes::StructureShape.new(name: 'GetAccessPointConfigurationForObjectLambdaResult')
     GetAccessPointForObjectLambdaRequest = Shapes::StructureShape.new(name: 'GetAccessPointForObjectLambdaRequest')
@@ -156,6 +158,8 @@ module Aws::S3Control
     JobManifestFieldList = Shapes::ListShape.new(name: 'JobManifestFieldList')
     JobManifestFieldName = Shapes::StringShape.new(name: 'JobManifestFieldName')
     JobManifestFormat = Shapes::StringShape.new(name: 'JobManifestFormat')
+    JobManifestGenerator = Shapes::UnionShape.new(name: 'JobManifestGenerator')
+    JobManifestGeneratorFilter = Shapes::StructureShape.new(name: 'JobManifestGeneratorFilter')
     JobManifestLocation = Shapes::StructureShape.new(name: 'JobManifestLocation')
     JobManifestSpec = Shapes::StructureShape.new(name: 'JobManifestSpec')
     JobNumberOfTasksFailed = Shapes::IntegerShape.new(name: 'JobNumberOfTasksFailed')
@@ -171,6 +175,8 @@ module Aws::S3Control
     JobStatusList = Shapes::ListShape.new(name: 'JobStatusList')
     JobStatusUpdateReason = Shapes::StringShape.new(name: 'JobStatusUpdateReason')
     JobTerminationDate = Shapes::TimestampShape.new(name: 'JobTerminationDate')
+    JobTimeInStateSeconds = Shapes::IntegerShape.new(name: 'JobTimeInStateSeconds')
+    JobTimers = Shapes::StructureShape.new(name: 'JobTimers')
     JobTotalNumberOfTasks = Shapes::IntegerShape.new(name: 'JobTotalNumberOfTasks')
     KmsKeyArnString = Shapes::StringShape.new(name: 'KmsKeyArnString')
     LambdaInvokeOperation = Shapes::StructureShape.new(name: 'LambdaInvokeOperation')
@@ -194,6 +200,7 @@ module Aws::S3Control
     ListStorageLensConfigurationsRequest = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsRequest')
     ListStorageLensConfigurationsResult = Shapes::StructureShape.new(name: 'ListStorageLensConfigurationsResult')
     Location = Shapes::StringShape.new(name: 'Location')
+    ManifestPrefixString = Shapes::StringShape.new(name: 'ManifestPrefixString')
     MaxLength1024String = Shapes::StringShape.new(name: 'MaxLength1024String')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MinStorageBytesPercentage = Shapes::FloatShape.new(name: 'MinStorageBytesPercentage')
@@ -218,6 +225,7 @@ module Aws::S3Control
     NoncurrentVersionTransition = Shapes::StructureShape.new(name: 'NoncurrentVersionTransition')
     NoncurrentVersionTransitionList = Shapes::ListShape.new(name: 'NoncurrentVersionTransitionList')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
+    ObjectCreationTime = Shapes::TimestampShape.new(name: 'ObjectCreationTime')
     ObjectLambdaAccessPoint = Shapes::StructureShape.new(name: 'ObjectLambdaAccessPoint')
     ObjectLambdaAccessPointArn = Shapes::StringShape.new(name: 'ObjectLambdaAccessPointArn')
     ObjectLambdaAccessPointList = Shapes::ListShape.new(name: 'ObjectLambdaAccessPointList')
@@ -266,6 +274,8 @@ module Aws::S3Control
     RegionalBucket = Shapes::StructureShape.new(name: 'RegionalBucket')
     RegionalBucketList = Shapes::ListShape.new(name: 'RegionalBucketList')
     Regions = Shapes::ListShape.new(name: 'Regions')
+    ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
+    ReplicationStatusFilterList = Shapes::ListShape.new(name: 'ReplicationStatusFilterList')
     ReportPrefixString = Shapes::StringShape.new(name: 'ReportPrefixString')
     RequestedJobStatus = Shapes::StringShape.new(name: 'RequestedJobStatus')
     S3AWSRegion = Shapes::StringShape.new(name: 'S3AWSRegion')
@@ -279,13 +289,16 @@ module Aws::S3Control
     S3CopyObjectOperation = Shapes::StructureShape.new(name: 'S3CopyObjectOperation')
     S3DeleteObjectTaggingOperation = Shapes::StructureShape.new(name: 'S3DeleteObjectTaggingOperation')
     S3ExpirationInDays = Shapes::IntegerShape.new(name: 'S3ExpirationInDays')
+    S3GeneratedManifestDescriptor = Shapes::StructureShape.new(name: 'S3GeneratedManifestDescriptor')
     S3GlacierJobTier = Shapes::StringShape.new(name: 'S3GlacierJobTier')
     S3Grant = Shapes::StructureShape.new(name: 'S3Grant')
     S3GrantList = Shapes::ListShape.new(name: 'S3GrantList')
     S3Grantee = Shapes::StructureShape.new(name: 'S3Grantee')
     S3GranteeTypeIdentifier = Shapes::StringShape.new(name: 'S3GranteeTypeIdentifier')
     S3InitiateRestoreObjectOperation = Shapes::StructureShape.new(name: 'S3InitiateRestoreObjectOperation')
+    S3JobManifestGenerator = Shapes::StructureShape.new(name: 'S3JobManifestGenerator')
     S3KeyArnString = Shapes::StringShape.new(name: 'S3KeyArnString')
+    S3ManifestOutputLocation = Shapes::StructureShape.new(name: 'S3ManifestOutputLocation')
     S3MetadataDirective = Shapes::StringShape.new(name: 'S3MetadataDirective')
     S3ObjectLockLegalHold = Shapes::StructureShape.new(name: 'S3ObjectLockLegalHold')
     S3ObjectLockLegalHoldStatus = Shapes::StringShape.new(name: 'S3ObjectLockLegalHoldStatus')
@@ -296,6 +309,7 @@ module Aws::S3Control
     S3ObjectVersionId = Shapes::StringShape.new(name: 'S3ObjectVersionId')
     S3Permission = Shapes::StringShape.new(name: 'S3Permission')
     S3RegionalBucketArn = Shapes::StringShape.new(name: 'S3RegionalBucketArn')
+    S3ReplicateObjectOperation = Shapes::StructureShape.new(name: 'S3ReplicateObjectOperation')
     S3Retention = Shapes::StructureShape.new(name: 'S3Retention')
     S3SSEAlgorithm = Shapes::StringShape.new(name: 'S3SSEAlgorithm')
     S3SetObjectAclOperation = Shapes::StructureShape.new(name: 'S3SetObjectAclOperation')
@@ -307,8 +321,10 @@ module Aws::S3Control
     S3TagSet = Shapes::ListShape.new(name: 'S3TagSet')
     S3UserMetadata = Shapes::MapShape.new(name: 'S3UserMetadata')
     SSEKMS = Shapes::StructureShape.new(name: 'SSEKMS')
+    SSEKMSEncryption = Shapes::StructureShape.new(name: 'SSEKMSEncryption')
     SSEKMSKeyId = Shapes::StringShape.new(name: 'SSEKMSKeyId')
     SSES3 = Shapes::StructureShape.new(name: 'SSES3')
+    SSES3Encryption = Shapes::StructureShape.new(name: 'SSES3Encryption')
     SelectionCriteria = Shapes::StructureShape.new(name: 'SelectionCriteria')
     Setting = Shapes::BooleanShape.new(name: 'Setting')
     StorageLensArn = Shapes::StringShape.new(name: 'StorageLensArn')
@@ -448,11 +464,12 @@ module Aws::S3Control
     CreateJobRequest.add_member(:operation, Shapes::ShapeRef.new(shape: JobOperation, required: true, location_name: "Operation"))
     CreateJobRequest.add_member(:report, Shapes::ShapeRef.new(shape: JobReport, required: true, location_name: "Report"))
     CreateJobRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: NonEmptyMaxLength64String, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
-    CreateJobRequest.add_member(:manifest, Shapes::ShapeRef.new(shape: JobManifest, required: true, location_name: "Manifest"))
+    CreateJobRequest.add_member(:manifest, Shapes::ShapeRef.new(shape: JobManifest, location_name: "Manifest"))
     CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyMaxLength256String, location_name: "Description"))
     CreateJobRequest.add_member(:priority, Shapes::ShapeRef.new(shape: JobPriority, required: true, location_name: "Priority", metadata: {"box"=>true}))
     CreateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, required: true, location_name: "RoleArn"))
     CreateJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: S3TagSet, location_name: "Tags"))
+    CreateJobRequest.add_member(:manifest_generator, Shapes::ShapeRef.new(shape: JobManifestGenerator, location_name: "ManifestGenerator"))
     CreateJobRequest.struct_class = Types::CreateJobRequest
 
     CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -556,6 +573,10 @@ module Aws::S3Control
     Exclude.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
     Exclude.add_member(:regions, Shapes::ShapeRef.new(shape: Regions, location_name: "Regions"))
     Exclude.struct_class = Types::Exclude
+
+    GeneratedManifestEncryption.add_member(:sses3, Shapes::ShapeRef.new(shape: SSES3Encryption, location_name: "SSE-S3"))
+    GeneratedManifestEncryption.add_member(:ssekms, Shapes::ShapeRef.new(shape: SSEKMSEncryption, location_name: "SSE-KMS"))
+    GeneratedManifestEncryption.struct_class = Types::GeneratedManifestEncryption
 
     GetAccessPointConfigurationForObjectLambdaRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location: "header", location_name: "x-amz-account-id", metadata: {"hostLabel"=>true, "hostLabelName"=>"AccountId"}))
     GetAccessPointConfigurationForObjectLambdaRequest.add_member(:name, Shapes::ShapeRef.new(shape: ObjectLambdaAccessPointName, required: true, location: "uri", location_name: "name"))
@@ -731,6 +752,8 @@ module Aws::S3Control
     JobDescriptor.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "RoleArn", metadata: {"box"=>true}))
     JobDescriptor.add_member(:suspended_date, Shapes::ShapeRef.new(shape: SuspendedDate, location_name: "SuspendedDate", metadata: {"box"=>true}))
     JobDescriptor.add_member(:suspended_cause, Shapes::ShapeRef.new(shape: SuspendedCause, location_name: "SuspendedCause", metadata: {"box"=>true}))
+    JobDescriptor.add_member(:manifest_generator, Shapes::ShapeRef.new(shape: JobManifestGenerator, location_name: "ManifestGenerator"))
+    JobDescriptor.add_member(:generated_manifest_descriptor, Shapes::ShapeRef.new(shape: S3GeneratedManifestDescriptor, location_name: "GeneratedManifestDescriptor"))
     JobDescriptor.struct_class = Types::JobDescriptor
 
     JobFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: JobFailureCode, location_name: "FailureCode"))
@@ -757,6 +780,18 @@ module Aws::S3Control
 
     JobManifestFieldList.member = Shapes::ShapeRef.new(shape: JobManifestFieldName)
 
+    JobManifestGenerator.add_member(:s3_job_manifest_generator, Shapes::ShapeRef.new(shape: S3JobManifestGenerator, location_name: "S3JobManifestGenerator"))
+    JobManifestGenerator.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    JobManifestGenerator.add_member_subclass(:s3_job_manifest_generator, Types::JobManifestGenerator::S3JobManifestGenerator)
+    JobManifestGenerator.add_member_subclass(:unknown, Types::JobManifestGenerator::Unknown)
+    JobManifestGenerator.struct_class = Types::JobManifestGenerator
+
+    JobManifestGeneratorFilter.add_member(:eligible_for_replication, Shapes::ShapeRef.new(shape: Boolean, location_name: "EligibleForReplication", metadata: {"box"=>true}))
+    JobManifestGeneratorFilter.add_member(:created_after, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedAfter"))
+    JobManifestGeneratorFilter.add_member(:created_before, Shapes::ShapeRef.new(shape: ObjectCreationTime, location_name: "CreatedBefore"))
+    JobManifestGeneratorFilter.add_member(:object_replication_statuses, Shapes::ShapeRef.new(shape: ReplicationStatusFilterList, location_name: "ObjectReplicationStatuses"))
+    JobManifestGeneratorFilter.struct_class = Types::JobManifestGeneratorFilter
+
     JobManifestLocation.add_member(:object_arn, Shapes::ShapeRef.new(shape: S3KeyArnString, required: true, location_name: "ObjectArn"))
     JobManifestLocation.add_member(:object_version_id, Shapes::ShapeRef.new(shape: S3ObjectVersionId, location_name: "ObjectVersionId", metadata: {"box"=>true}))
     JobManifestLocation.add_member(:etag, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, required: true, location_name: "ETag"))
@@ -774,11 +809,13 @@ module Aws::S3Control
     JobOperation.add_member(:s3_initiate_restore_object, Shapes::ShapeRef.new(shape: S3InitiateRestoreObjectOperation, location_name: "S3InitiateRestoreObject", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_legal_hold, Shapes::ShapeRef.new(shape: S3SetObjectLegalHoldOperation, location_name: "S3PutObjectLegalHold", metadata: {"box"=>true}))
     JobOperation.add_member(:s3_put_object_retention, Shapes::ShapeRef.new(shape: S3SetObjectRetentionOperation, location_name: "S3PutObjectRetention", metadata: {"box"=>true}))
+    JobOperation.add_member(:s3_replicate_object, Shapes::ShapeRef.new(shape: S3ReplicateObjectOperation, location_name: "S3ReplicateObject", metadata: {"box"=>true}))
     JobOperation.struct_class = Types::JobOperation
 
     JobProgressSummary.add_member(:total_number_of_tasks, Shapes::ShapeRef.new(shape: JobTotalNumberOfTasks, location_name: "TotalNumberOfTasks", metadata: {"box"=>true}))
     JobProgressSummary.add_member(:number_of_tasks_succeeded, Shapes::ShapeRef.new(shape: JobNumberOfTasksSucceeded, location_name: "NumberOfTasksSucceeded", metadata: {"box"=>true}))
     JobProgressSummary.add_member(:number_of_tasks_failed, Shapes::ShapeRef.new(shape: JobNumberOfTasksFailed, location_name: "NumberOfTasksFailed", metadata: {"box"=>true}))
+    JobProgressSummary.add_member(:timers, Shapes::ShapeRef.new(shape: JobTimers, location_name: "Timers"))
     JobProgressSummary.struct_class = Types::JobProgressSummary
 
     JobReport.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketArnString, location_name: "Bucket", metadata: {"box"=>true}))
@@ -792,6 +829,9 @@ module Aws::S3Control
     JobStatusException.struct_class = Types::JobStatusException
 
     JobStatusList.member = Shapes::ShapeRef.new(shape: JobStatus)
+
+    JobTimers.add_member(:elapsed_time_in_active_seconds, Shapes::ShapeRef.new(shape: JobTimeInStateSeconds, location_name: "ElapsedTimeInActiveSeconds", metadata: {"box"=>true}))
+    JobTimers.struct_class = Types::JobTimers
 
     LambdaInvokeOperation.add_member(:function_arn, Shapes::ShapeRef.new(shape: FunctionArnString, location_name: "FunctionArn"))
     LambdaInvokeOperation.struct_class = Types::LambdaInvokeOperation
@@ -1067,6 +1107,8 @@ module Aws::S3Control
 
     Regions.member = Shapes::ShapeRef.new(shape: S3AWSRegion, location_name: "Region")
 
+    ReplicationStatusFilterList.member = Shapes::ShapeRef.new(shape: ReplicationStatus)
+
     S3AccessControlList.add_member(:owner, Shapes::ShapeRef.new(shape: S3ObjectOwner, required: true, location_name: "Owner"))
     S3AccessControlList.add_member(:grants, Shapes::ShapeRef.new(shape: S3GrantList, location_name: "Grants"))
     S3AccessControlList.struct_class = Types::S3AccessControlList
@@ -1104,6 +1146,10 @@ module Aws::S3Control
 
     S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation
 
+    S3GeneratedManifestDescriptor.add_member(:format, Shapes::ShapeRef.new(shape: GeneratedManifestFormat, location_name: "Format"))
+    S3GeneratedManifestDescriptor.add_member(:location, Shapes::ShapeRef.new(shape: JobManifestLocation, location_name: "Location"))
+    S3GeneratedManifestDescriptor.struct_class = Types::S3GeneratedManifestDescriptor
+
     S3Grant.add_member(:grantee, Shapes::ShapeRef.new(shape: S3Grantee, location_name: "Grantee"))
     S3Grant.add_member(:permission, Shapes::ShapeRef.new(shape: S3Permission, location_name: "Permission"))
     S3Grant.struct_class = Types::S3Grant
@@ -1118,6 +1164,20 @@ module Aws::S3Control
     S3InitiateRestoreObjectOperation.add_member(:expiration_in_days, Shapes::ShapeRef.new(shape: S3ExpirationInDays, location_name: "ExpirationInDays", metadata: {"box"=>true}))
     S3InitiateRestoreObjectOperation.add_member(:glacier_job_tier, Shapes::ShapeRef.new(shape: S3GlacierJobTier, location_name: "GlacierJobTier"))
     S3InitiateRestoreObjectOperation.struct_class = Types::S3InitiateRestoreObjectOperation
+
+    S3JobManifestGenerator.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedBucketOwner"))
+    S3JobManifestGenerator.add_member(:source_bucket, Shapes::ShapeRef.new(shape: S3BucketArnString, required: true, location_name: "SourceBucket"))
+    S3JobManifestGenerator.add_member(:manifest_output_location, Shapes::ShapeRef.new(shape: S3ManifestOutputLocation, location_name: "ManifestOutputLocation"))
+    S3JobManifestGenerator.add_member(:filter, Shapes::ShapeRef.new(shape: JobManifestGeneratorFilter, location_name: "Filter"))
+    S3JobManifestGenerator.add_member(:enable_manifest_output, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "EnableManifestOutput"))
+    S3JobManifestGenerator.struct_class = Types::S3JobManifestGenerator
+
+    S3ManifestOutputLocation.add_member(:expected_manifest_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "ExpectedManifestBucketOwner"))
+    S3ManifestOutputLocation.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketArnString, required: true, location_name: "Bucket"))
+    S3ManifestOutputLocation.add_member(:manifest_prefix, Shapes::ShapeRef.new(shape: ManifestPrefixString, location_name: "ManifestPrefix"))
+    S3ManifestOutputLocation.add_member(:manifest_encryption, Shapes::ShapeRef.new(shape: GeneratedManifestEncryption, location_name: "ManifestEncryption"))
+    S3ManifestOutputLocation.add_member(:manifest_format, Shapes::ShapeRef.new(shape: GeneratedManifestFormat, required: true, location_name: "ManifestFormat"))
+    S3ManifestOutputLocation.struct_class = Types::S3ManifestOutputLocation
 
     S3ObjectLockLegalHold.add_member(:status, Shapes::ShapeRef.new(shape: S3ObjectLockLegalHoldStatus, required: true, location_name: "Status"))
     S3ObjectLockLegalHold.struct_class = Types::S3ObjectLockLegalHold
@@ -1138,6 +1198,8 @@ module Aws::S3Control
     S3ObjectOwner.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "ID"))
     S3ObjectOwner.add_member(:display_name, Shapes::ShapeRef.new(shape: NonEmptyMaxLength1024String, location_name: "DisplayName"))
     S3ObjectOwner.struct_class = Types::S3ObjectOwner
+
+    S3ReplicateObjectOperation.struct_class = Types::S3ReplicateObjectOperation
 
     S3Retention.add_member(:retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "RetainUntilDate"))
     S3Retention.add_member(:mode, Shapes::ShapeRef.new(shape: S3ObjectLockRetentionMode, location_name: "Mode"))
@@ -1168,7 +1230,12 @@ module Aws::S3Control
     SSEKMS.add_member(:key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, required: true, location_name: "KeyId"))
     SSEKMS.struct_class = Types::SSEKMS
 
+    SSEKMSEncryption.add_member(:key_id, Shapes::ShapeRef.new(shape: KmsKeyArnString, required: true, location_name: "KeyId"))
+    SSEKMSEncryption.struct_class = Types::SSEKMSEncryption
+
     SSES3.struct_class = Types::SSES3
+
+    SSES3Encryption.struct_class = Types::SSES3Encryption
 
     SelectionCriteria.add_member(:delimiter, Shapes::ShapeRef.new(shape: StorageLensPrefixLevelDelimiter, location_name: "Delimiter"))
     SelectionCriteria.add_member(:max_depth, Shapes::ShapeRef.new(shape: StorageLensPrefixLevelMaxDepth, location_name: "MaxDepth"))
