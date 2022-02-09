@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-02-09)
+------------------
+
+* Feature - This SDK release is for the feature launch of AWS CloudFormation Hooks.
+
 1.65.0 (2022-02-03)
 ------------------
 
