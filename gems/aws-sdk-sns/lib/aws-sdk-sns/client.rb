@@ -1562,7 +1562,7 @@ module Aws::SNS
     # endpoint.
     #
     # When a `messageId` is returned, the message is saved and Amazon SNS
-    # immediately deliverers it to subscribers.
+    # immediately delivers it to subscribers.
     #
     # To use the `Publish` action for publishing a message to a mobile
     # endpoint, such as an app on a Kindle device or mobile phone, you must
@@ -2604,7 +2604,7 @@ module Aws::SNS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sns'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

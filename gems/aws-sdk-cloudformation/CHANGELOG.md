@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-02-10)
+------------------
+
+* Feature - This SDK release adds AWS CloudFormation Hooks HandlerErrorCodes
+
 1.66.0 (2022-02-09)
 ------------------
 

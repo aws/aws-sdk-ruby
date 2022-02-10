@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2022-02-10)
+------------------
+
+* Feature - Adds support for AWS WAF Fraud Control account takeover prevention (ATP), with configuration options for the new managed rule group AWSManagedRulesATPRuleSet and support for application integration SDKs for Android and iOS mobile apps.
+
 1.34.0 (2022-02-03)
 ------------------
 

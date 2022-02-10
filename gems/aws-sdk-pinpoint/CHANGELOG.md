@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-02-10)
+------------------
+
+* Feature - This SDK release adds a new paramater creation date for GetApp and GetApps Api call
+
 1.65.0 (2022-02-03)
 ------------------
 

@@ -377,6 +377,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/CreateApp AWS API Documentation
     #
@@ -2709,6 +2710,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/DeleteApp AWS API Documentation
     #
@@ -4157,6 +4159,7 @@ module Aws::Pinpoint
     #   resp.application_response.name #=> String
     #   resp.application_response.tags #=> Hash
     #   resp.application_response.tags["__string"] #=> String
+    #   resp.application_response.creation_date #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApp AWS API Documentation
     #
@@ -4287,6 +4290,7 @@ module Aws::Pinpoint
     #   resp.applications_response.item[0].name #=> String
     #   resp.applications_response.item[0].tags #=> Hash
     #   resp.applications_response.item[0].tags["__string"] #=> String
+    #   resp.applications_response.item[0].creation_date #=> String
     #   resp.applications_response.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/pinpoint-2016-12-01/GetApps AWS API Documentation
@@ -12050,7 +12054,7 @@ module Aws::Pinpoint
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pinpoint'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

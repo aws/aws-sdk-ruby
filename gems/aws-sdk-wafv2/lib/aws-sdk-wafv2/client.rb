@@ -700,6 +700,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -1342,6 +1354,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -1855,6 +1879,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -2460,6 +2496,45 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
+    # Generates a presigned download URL for the specified release of the
+    # mobile SDK.
+    #
+    # The mobile SDK is not generally available. Customers who have access
+    # to the mobile SDK can use it to establish and manage Security Token
+    # Service (STS) security tokens for use in HTTP(S) requests from a
+    # mobile device to WAF.
+    #
+    # @option params [required, String] :platform
+    #   The device platform.
+    #
+    # @option params [required, String] :release_version
+    #   The release version. For the latest available version, specify
+    #   `LATEST`.
+    #
+    # @return [Types::GenerateMobileSdkReleaseUrlResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateMobileSdkReleaseUrlResponse#url #url} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_mobile_sdk_release_url({
+    #     platform: "IOS", # required, accepts IOS, ANDROID
+    #     release_version: "VersionKeyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.url #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GenerateMobileSdkReleaseUrl AWS API Documentation
+    #
+    # @overload generate_mobile_sdk_release_url(params = {})
+    # @param [Hash] params ({})
+    def generate_mobile_sdk_release_url(params = {}, options = {})
+      req = build_request(:generate_mobile_sdk_release_url, params)
+      req.send_request(options)
+    end
+
     # Retrieves the specified IPSet.
     #
     # @option params [required, String] :name
@@ -2639,6 +2714,50 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def get_managed_rule_set(params = {}, options = {})
       req = build_request(:get_managed_rule_set, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information for the specified mobile SDK release, including
+    # release notes and tags.
+    #
+    # The mobile SDK is not generally available. Customers who have access
+    # to the mobile SDK can use it to establish and manage Security Token
+    # Service (STS) security tokens for use in HTTP(S) requests from a
+    # mobile device to WAF.
+    #
+    # @option params [required, String] :platform
+    #   The device platform.
+    #
+    # @option params [required, String] :release_version
+    #   The release version. For the latest available version, specify
+    #   `LATEST`.
+    #
+    # @return [Types::GetMobileSdkReleaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetMobileSdkReleaseResponse#mobile_sdk_release #mobile_sdk_release} => Types::MobileSdkRelease
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_mobile_sdk_release({
+    #     platform: "IOS", # required, accepts IOS, ANDROID
+    #     release_version: "VersionKeyString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.mobile_sdk_release.release_version #=> String
+    #   resp.mobile_sdk_release.timestamp #=> Time
+    #   resp.mobile_sdk_release.release_notes #=> String
+    #   resp.mobile_sdk_release.tags #=> Array
+    #   resp.mobile_sdk_release.tags[0].key #=> String
+    #   resp.mobile_sdk_release.tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetMobileSdkRelease AWS API Documentation
+    #
+    # @overload get_mobile_sdk_release(params = {})
+    # @param [Hash] params ({})
+    def get_mobile_sdk_release(params = {}, options = {})
+      req = build_request(:get_mobile_sdk_release, params)
       req.send_request(options)
     end
 
@@ -2945,6 +3064,11 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.rule_group.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.rule_group.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.rule_group.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.rule_group.rules[0].statement.label_match_statement.key #=> String
     #   resp.rule_group.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -3138,6 +3262,7 @@ module Aws::WAFV2
     #
     #   * {Types::GetWebACLResponse#web_acl #web_acl} => Types::WebACL
     #   * {Types::GetWebACLResponse#lock_token #lock_token} => String
+    #   * {Types::GetWebACLResponse#application_integration_url #application_integration_url} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3241,6 +3366,11 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -3372,6 +3502,11 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3473,6 +3608,11 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3489,6 +3629,7 @@ module Aws::WAFV2
     #   resp.web_acl.custom_response_bodies["EntityName"].content #=> String
     #   resp.web_acl.captcha_config.immunity_time_property.immunity_time #=> Integer
     #   resp.lock_token #=> String
+    #   resp.application_integration_url #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACL AWS API Documentation
     #
@@ -3608,6 +3749,11 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules #=> Array
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.excluded_rules[0].name #=> String
     #   resp.web_acl.rules[0].statement.managed_rule_group_statement.scope_down_statement #=> Types::Statement
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.rules[0].statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.rules[0].statement.label_match_statement.scope #=> String, one of "LABEL", "NAMESPACE"
     #   resp.web_acl.rules[0].statement.label_match_statement.key #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
@@ -3739,6 +3885,11 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -3840,6 +3991,11 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].login_path #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].username_field.identifier #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.managed_rule_group_configs[0].password_field.identifier #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.rule_group_reference_statement.excluded_rules[0].name #=> String
@@ -4202,6 +4358,59 @@ module Aws::WAFV2
     # @param [Hash] params ({})
     def list_managed_rule_sets(params = {}, options = {})
       req = build_request(:list_managed_rule_sets, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the available releases for the mobile SDK and the
+    # specified device platform.
+    #
+    # The mobile SDK is not generally available. Customers who have access
+    # to the mobile SDK can use it to establish and manage Security Token
+    # Service (STS) security tokens for use in HTTP(S) requests from a
+    # mobile device to WAF.
+    #
+    # @option params [required, String] :platform
+    #   The device platform to retrieve the list for.
+    #
+    # @option params [String] :next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #
+    # @option params [Integer] :limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF provides
+    #   a `NextMarker` value that you can use in a subsequent call to get the
+    #   next batch of objects.
+    #
+    # @return [Types::ListMobileSdkReleasesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMobileSdkReleasesResponse#release_summaries #release_summaries} => Array&lt;Types::ReleaseSummary&gt;
+    #   * {Types::ListMobileSdkReleasesResponse#next_marker #next_marker} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_mobile_sdk_releases({
+    #     platform: "IOS", # required, accepts IOS, ANDROID
+    #     next_marker: "NextMarker",
+    #     limit: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.release_summaries #=> Array
+    #   resp.release_summaries[0].release_version #=> String
+    #   resp.release_summaries[0].timestamp #=> Time
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListMobileSdkReleases AWS API Documentation
+    #
+    # @overload list_mobile_sdk_releases(params = {})
+    # @param [Hash] params ({})
+    def list_mobile_sdk_releases(params = {}, options = {})
+      req = build_request(:list_mobile_sdk_releases, params)
       req.send_request(options)
     end
 
@@ -5476,6 +5685,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -6001,6 +6222,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -6163,7 +6396,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
