@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.130.0 (2022-02-11)
+------------------
+
+* Feature - Documentation updates for AWS Systems Manager.
+
 1.129.0 (2022-02-03)
 ------------------
 
