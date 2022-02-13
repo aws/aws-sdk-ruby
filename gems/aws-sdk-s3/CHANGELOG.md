@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix documentation for progress_callback in example.
+
 1.112.0 (2022-02-03)
 ------------------
 
