@@ -464,7 +464,7 @@ module Aws
       #  customizing each range size in multipart_download,
       #  By default, `auto` mode is enabled, which performs multipart_download
       #
-      # @option options [String] chunk_size required in get_range mode.
+      # @option options [Integer] chunk_size required in get_range mode.
       #
       # @option options [Integer] thread_count (10) Customize threads used in
       #   the multipart download.
