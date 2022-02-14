@@ -1,8 +1,6 @@
 Unreleased Changes
 ------------------
 
-* Issue - [docs] chunk_size should be Integer instead of String.
-
 1.112.0 (2022-02-03)
 ------------------
 
