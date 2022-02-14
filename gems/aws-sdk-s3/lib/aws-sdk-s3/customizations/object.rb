@@ -400,7 +400,7 @@ module Aws
       #     progress = Proc.new do |bytes, totals|
       #       puts bytes.map.with_index { |b, i| "Part #{i+1}: #{b} / #{totals[i]}"}.join(' ') + "Total: #{100.0 * bytes.sum / totals.sum }%" }
       #     end
-      #     obj.upload_file('/path/to/file')
+      #     obj.upload_file('/path/to/file', progress_callback: progress)
       #
       # @param [String, Pathname, File, Tempfile] source A file on the local
       #   file system that will be uploaded as this object. This can either be
@@ -464,7 +464,7 @@ module Aws
       #  customizing each range size in multipart_download,
       #  By default, `auto` mode is enabled, which performs multipart_download
       #
-      # @option options [String] chunk_size required in get_range mode.
+      # @option options [Integer] chunk_size required in get_range mode.
       #
       # @option options [Integer] thread_count (10) Customize threads used in
       #   the multipart download.

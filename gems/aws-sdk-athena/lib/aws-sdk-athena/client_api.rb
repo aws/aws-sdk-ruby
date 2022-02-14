@@ -62,6 +62,7 @@ module Aws::Athena
     ErrorCategory = Shapes::IntegerShape.new(name: 'ErrorCategory')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    ErrorType = Shapes::IntegerShape.new(name: 'ErrorType')
     ExpressionString = Shapes::StringShape.new(name: 'ExpressionString')
     GetDataCatalogInput = Shapes::StructureShape.new(name: 'GetDataCatalogInput')
     GetDataCatalogOutput = Shapes::StructureShape.new(name: 'GetDataCatalogOutput')
@@ -186,6 +187,7 @@ module Aws::Athena
     datumString = Shapes::StringShape.new(name: 'datumString')
 
     AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
+    AthenaError.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
     AthenaError.struct_class = Types::AthenaError
 
     BatchGetNamedQueryInput.add_member(:named_query_ids, Shapes::ShapeRef.new(shape: NamedQueryIdList, required: true, location_name: "NamedQueryIds"))

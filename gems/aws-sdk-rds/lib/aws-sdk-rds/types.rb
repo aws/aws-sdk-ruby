@@ -7191,6 +7191,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] supports_babelfish
+    #   A value that indicates whether the engine version supports Babelfish
+    #   for Aurora PostgreSQL.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7218,7 +7223,8 @@ module Aws::RDS
       :db_engine_version_arn,
       :kms_key_id,
       :create_time,
-      :tag_list)
+      :tag_list,
+      :supports_babelfish)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10649,19 +10655,19 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `clone-group-id` - Accepts clone group identifiers. The results
-    #     list will only include information about the DB clusters
-    #     associated with these clone groups.
+    #     list only includes information about the DB clusters associated
+    #     with these clone groups.
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results
-    #     list will only include information about the DB clusters
-    #     associated with these domains.
+    #     list only includes information about the DB clusters associated
+    #     with these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only
-    #     include information about the DB clusters for these engines.
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB clusters for these engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10774,7 +10780,42 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family
+    #     names. The results list only includes information about the DB
+    #     engine versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10974,12 +11015,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances identified by these ARNs.
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
@@ -10987,11 +11028,11 @@ module Aws::RDS
     #     identified by these DB instance resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results
-    #     list will only include information about the DB instances
-    #     associated with these domains.
+    #     list only includes information about the DB instances associated
+    #     with these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only
-    #     include information about the DB instances for these engines.
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB instances for these engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -12770,13 +12811,13 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     pending maintenance actions for the DB clusters identified by
     #     these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance
-    #     actions for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions
+    #     for the DB instances identified by these ARNs.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] marker
@@ -15075,9 +15116,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied
-    #   during the next maintenance window but instead are applied
-    #   immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -15088,8 +15128,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group
     #     family as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter for a
+    #     major version upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     #   @return [String]
@@ -20225,7 +20266,7 @@ module Aws::RDS
     #   For the full list of DB instance classes, and availability for your
     #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #   Valid for: Multi-AZ DB clusters only
     #
     #
     #
@@ -23637,6 +23678,11 @@ module Aws::RDS
     #   with the target engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_babelfish
+    #   A value that indicates whether you can use Babelfish for Aurora
+    #   PostgreSQL with the target engine version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
     #
     class UpgradeTarget < Struct.new(
@@ -23647,7 +23693,8 @@ module Aws::RDS
       :is_major_version_upgrade,
       :supported_engine_modes,
       :supports_parallel_query,
-      :supports_global_databases)
+      :supports_global_databases,
+      :supports_babelfish)
       SENSITIVE = []
       include Aws::Structure
     end

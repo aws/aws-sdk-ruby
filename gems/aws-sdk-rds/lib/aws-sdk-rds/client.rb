@@ -2025,6 +2025,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -2069,6 +2070,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -2091,6 +2093,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomDBEngineVersion AWS API Documentation
     #
@@ -6559,6 +6562,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -6592,6 +6596,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -6614,6 +6619,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomDBEngineVersion AWS API Documentation
     #
@@ -8850,18 +8856,18 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `clone-group-id` - Accepts clone group identifiers. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these clone groups.
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB clusters for these engines.
     #
     # @option params [Integer] :max_records
@@ -9086,7 +9092,42 @@ module Aws::RDS
     #   ^
     #
     # @option params [Array<Types::Filter>] :filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family names.
+    #     The results list only includes information about the DB engine
+    #     versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     #
     # @option params [Integer] :max_records
     #   The maximum number of records to include in the response. If more than
@@ -9207,6 +9248,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.db_engine_versions[0].valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.db_engine_versions[0].supported_timezones #=> Array
     #   resp.db_engine_versions[0].supported_timezones[0].timezone_name #=> String
     #   resp.db_engine_versions[0].exportable_log_types #=> Array
@@ -9229,6 +9271,7 @@ module Aws::RDS
     #   resp.db_engine_versions[0].tag_list #=> Array
     #   resp.db_engine_versions[0].tag_list[0].key #=> String
     #   resp.db_engine_versions[0].tag_list[0].value #=> String
+    #   resp.db_engine_versions[0].supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBEngineVersions AWS API Documentation
     #
@@ -9393,12 +9436,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances identified by these ARNs.
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
@@ -9406,10 +9449,10 @@ module Aws::RDS
     #     identified by these DB instance resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB instances associated with
+    #     only includes information about the DB instances associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB instances for these engines.
     #
     # @option params [Integer] :max_records
@@ -11913,13 +11956,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     pending maintenance actions for the DB clusters identified by these
-    #     ARNs.
+    #     Amazon Resource Names (ARNs). The results list only includes pending
+    #     maintenance actions for the DB clusters identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions for
+    #     the DB instances identified by these ARNs.
     #
     # @option params [String] :marker
     #   An optional pagination token provided by a previous
@@ -13250,6 +13292,7 @@ module Aws::RDS
     #   * {Types::DBEngineVersion#kms_key_id #kms_key_id} => String
     #   * {Types::DBEngineVersion#create_time #create_time} => Time
     #   * {Types::DBEngineVersion#tag_list #tag_list} => Array&lt;Types::Tag&gt;
+    #   * {Types::DBEngineVersion#supports_babelfish #supports_babelfish} => Boolean
     #
     # @example Request syntax with placeholder values
     #
@@ -13285,6 +13328,7 @@ module Aws::RDS
     #   resp.valid_upgrade_target[0].supported_engine_modes[0] #=> String
     #   resp.valid_upgrade_target[0].supports_parallel_query #=> Boolean
     #   resp.valid_upgrade_target[0].supports_global_databases #=> Boolean
+    #   resp.valid_upgrade_target[0].supports_babelfish #=> Boolean
     #   resp.supported_timezones #=> Array
     #   resp.supported_timezones[0].timezone_name #=> String
     #   resp.exportable_log_types #=> Array
@@ -13307,6 +13351,7 @@ module Aws::RDS
     #   resp.tag_list #=> Array
     #   resp.tag_list[0].key #=> String
     #   resp.tag_list[0].value #=> String
+    #   resp.supports_babelfish #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyCustomDBEngineVersion AWS API Documentation
     #
@@ -13567,8 +13612,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied during
-    #   the next maintenance window but instead are applied immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -13579,8 +13624,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group family
     #     as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in combination
+    #     with the `AllowMajorVersionUpgrade` parameter for a major version
+    #     upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -18423,7 +18469,7 @@ module Aws::RDS
     #   For the full list of DB instance classes, and availability for your
     #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #   Valid for: Multi-AZ DB clusters only
     #
     #
     #
@@ -22386,7 +22432,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.138.0'
+      context[:gem_version] = '1.139.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

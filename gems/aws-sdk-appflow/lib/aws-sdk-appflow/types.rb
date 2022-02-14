@@ -2156,6 +2156,20 @@ module Aws::Appflow
     #                   "CustomPropertyKey" => "CustomPropertyValue",
     #                 },
     #               },
+    #               sapo_data: {
+    #                 object_path: "Object", # required
+    #                 success_response_handling_config: {
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #               },
     #             },
     #           },
     #         ],
@@ -2181,7 +2195,7 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
@@ -3176,6 +3190,20 @@ module Aws::Appflow
     #             "CustomPropertyKey" => "CustomPropertyValue",
     #           },
     #         },
+    #         sapo_data: {
+    #           object_path: "Object", # required
+    #           success_response_handling_config: {
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           id_field_names: ["Name"],
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #         },
     #       }
     #
     # @!attribute [rw] redshift
@@ -3222,6 +3250,10 @@ module Aws::Appflow
     #   The properties that are required to query the custom Connector.
     #   @return [Types::CustomConnectorDestinationProperties]
     #
+    # @!attribute [rw] sapo_data
+    #   The properties required to query SAPOData.
+    #   @return [Types::SAPODataDestinationProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/DestinationConnectorProperties AWS API Documentation
     #
     class DestinationConnectorProperties < Struct.new(
@@ -3235,7 +3267,8 @@ module Aws::Appflow
       :honeycode,
       :customer_profiles,
       :zendesk,
-      :custom_connector)
+      :custom_connector,
+      :sapo_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3400,6 +3433,20 @@ module Aws::Appflow
     #             custom_properties: {
     #               "CustomPropertyKey" => "CustomPropertyValue",
     #             },
+    #           },
+    #           sapo_data: {
+    #             object_path: "Object", # required
+    #             success_response_handling_config: {
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             id_field_names: ["Name"],
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
     #         },
     #       }
@@ -5187,6 +5234,71 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # The properties that are applied when using SAPOData as a flow
+    # destination
+    #
+    # @note When making an API call, you may pass SAPODataDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object_path: "Object", # required
+    #         success_response_handling_config: {
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         id_field_names: ["Name"],
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #         write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #       }
+    #
+    # @!attribute [rw] object_path
+    #   The object path specified in the SAPOData flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] success_response_handling_config
+    #   Determines how Amazon AppFlow handles the success response that it
+    #   gets from the connector after placing data.
+    #
+    #   For example, this setting would determine where to write the
+    #   response from a destination connector upon a successful insert
+    #   operation.
+    #   @return [Types::SuccessResponseHandlingConfig]
+    #
+    # @!attribute [rw] id_field_names
+    #   A list of field names that can be used as an ID field when
+    #   performing a write operation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @!attribute [rw] write_operation_type
+    #   The possible write operations in the destination connector. When
+    #   this value is not provided, this defaults to the `INSERT` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataDestinationProperties AWS API Documentation
+    #
+    class SAPODataDestinationProperties < Struct.new(
+      :object_path,
+      :success_response_handling_config,
+      :id_field_names,
+      :error_handling_config,
+      :write_operation_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The connector metadata specific to SAPOData.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SAPODataMetadata AWS API Documentation
@@ -6245,6 +6357,37 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Determines how Amazon AppFlow handles the success response that it
+    # gets from the connector after placing data.
+    #
+    # For example, this setting would determine where to write the response
+    # from the destination connector upon a successful insert operation.
+    #
+    # @note When making an API call, you may pass SuccessResponseHandlingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_prefix: "BucketPrefix",
+    #         bucket_name: "BucketName",
+    #       }
+    #
+    # @!attribute [rw] bucket_prefix
+    #   The Amazon S3 bucket prefix.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/SuccessResponseHandlingConfig AWS API Documentation
+    #
+    class SuccessResponseHandlingConfig < Struct.new(
+      :bucket_prefix,
+      :bucket_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details regarding all the supported `FieldTypes` and their
     # corresponding `filterOperators` and `supportedValues`.
     #
@@ -6319,7 +6462,7 @@ module Aws::Appflow
     #           custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #         },
     #         destination_field: "DestinationField",
-    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #         task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #         task_properties: {
     #           "VALUE" => "Property",
     #         },
@@ -7042,6 +7185,20 @@ module Aws::Appflow
     #                   "CustomPropertyKey" => "CustomPropertyValue",
     #                 },
     #               },
+    #               sapo_data: {
+    #                 object_path: "Object", # required
+    #                 success_response_handling_config: {
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 id_field_names: ["Name"],
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #               },
     #             },
     #           },
     #         ],
@@ -7067,7 +7224,7 @@ module Aws::Appflow
     #               custom_connector: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, CONTAINS, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
     #             },
     #             destination_field: "DestinationField",
-    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Truncate, Validate
+    #             task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Map_all, Mask, Merge, Passthrough, Truncate, Validate
     #             task_properties: {
     #               "VALUE" => "Property",
     #             },
