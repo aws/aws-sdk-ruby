@@ -36,7 +36,7 @@ module Aws
 
         it 'constructs a client with passed arguments when not given' do
           expect(CognitoIdentity::Client).to receive(:new)
-            .with(region: 'us-east-1', credentials: false)
+            .with({region: 'us-east-1', credentials: false})
             .and_return(client)
 
           creds = CognitoIdentityCredentials.new(
@@ -77,7 +77,7 @@ module Aws
           expect(client).to receive(:get_id)
             .with(identity_pool_id: identity_pool_id)
             .and_return(double("getid", identity_id: identity_id))
-          
+
           creds = CognitoIdentityCredentials.new(
             client: client, identity_pool_id: identity_pool_id
           )
@@ -112,7 +112,7 @@ module Aws
             before_refresh_called = true
             expect(cred_provider).to be_instance_of(CognitoIdentityCredentials)
           end
-          
+
           CognitoIdentityCredentials.new(
             client: client,
             identity_id: identity_id,
