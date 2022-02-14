@@ -66,7 +66,7 @@ module Aws
 
       it 'constructs an client with passed arguments when not given' do
         expect(SSO::Client).to receive(:new)
-           .with(region: sso_region, credentials: nil)
+           .with({region: sso_region, credentials: nil})
            .and_return(client)
 
         mock_token_file(sso_start_url, cached_token)

@@ -60,11 +60,11 @@ module Aws
     end
 
     it 'auto populates :session_name when not provided' do
-      expect(client).to receive(:assume_role_with_web_identity).with(
+      expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
-        web_identity_token: '', 
+        web_identity_token: '',
         role_session_name: generate_name
-      )
+      })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
@@ -74,24 +74,24 @@ module Aws
     it 'populates :web_identity_token from file when valid' do
       expect {
         AssumeRoleWebIdentityCredentials.new(
-          role_arn: 'arn') 
+          role_arn: 'arn')
       }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
       expect {
         AssumeRoleWebIdentityCredentials.new(
           role_arn: 'arn',
           web_identity_token_file: '/not/exist/file/foo',
-        ) 
+        )
       }.to raise_error(Aws::Errors::MissingWebIdentityTokenFile)
 
       token_file.write('token')
       token_file.flush
       token_file.close
 
-      expect(client).to receive(:assume_role_with_web_identity).with(
+      expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
         web_identity_token: 'token',
         role_session_name: "session-name"
-      )
+      })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
@@ -112,7 +112,7 @@ module Aws
       expected_client = STS::Client.new(
         credentials: false, stub_responses: true)
       expect(STS::Client).to receive(:new).
-        with(region: 'region-name', credentials: false).
+        with({region: 'region-name', credentials: false}).
         and_return(expected_client)
       creds = AssumeRoleWebIdentityCredentials.new(
         region: 'region-name',
@@ -123,13 +123,13 @@ module Aws
     end
 
     it 'assumes role with web identity using the client' do
-      expect(client).to receive(:assume_role_with_web_identity).with(
+      expect(client).to receive(:assume_role_with_web_identity).with({
         role_arn: 'arn',
-        web_identity_token: '', 
+        web_identity_token: '',
         role_session_name: "session-name",
         provider_id: "urlType",
         policy: "sessionPolicyDocumentType"
-      )
+      })
       AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
@@ -143,7 +143,7 @@ module Aws
       c = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
-      ) 
+      )
       expect(c).to be_set
       expect(c.credentials.access_key_id).to eq('akid')
       expect(c.credentials.secret_access_key).to eq('secret')
