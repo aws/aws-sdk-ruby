@@ -27,7 +27,7 @@ group :test do
   gem 'webmock'
 
   gem 'multipart-post'
-  gem 'rspec'
+  gem 'rspec', '>= 3.11.0'
 end
 
 group :build do
