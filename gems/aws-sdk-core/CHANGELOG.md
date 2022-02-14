@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens.
+* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens and retry failures due to using expired tokens.
 
 3.126.0 (2022-02-03)
 ------------------
