@@ -2769,10 +2769,16 @@ module Aws::SageMaker
     #   the AutoML candidate.
     #   @return [String]
     #
+    # @!attribute [rw] model_insights
+    #   The Amazon S3 prefix to the model insight artifacts generated for
+    #   the AutoML candidate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CandidateArtifactLocations AWS API Documentation
     #
     class CandidateArtifactLocations < Struct.new(
-      :explainability)
+      :explainability,
+      :model_insights)
       SENSITIVE = []
       include Aws::Structure
     end

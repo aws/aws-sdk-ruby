@@ -642,7 +642,7 @@ module Aws::AuditManager
 
     Controls.member = Shapes::ShapeRef.new(shape: Control)
 
-    CreateAssessmentFrameworkControl.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "id"))
+    CreateAssessmentFrameworkControl.add_member(:id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "id"))
     CreateAssessmentFrameworkControl.struct_class = Types::CreateAssessmentFrameworkControl
 
     CreateAssessmentFrameworkControlSet.add_member(:name, Shapes::ShapeRef.new(shape: ControlSetName, required: true, location_name: "name"))
@@ -1215,7 +1215,7 @@ module Aws::AuditManager
 
     UpdateAssessmentFrameworkControlSet.add_member(:id, Shapes::ShapeRef.new(shape: ControlSetName, location_name: "id"))
     UpdateAssessmentFrameworkControlSet.add_member(:name, Shapes::ShapeRef.new(shape: ControlSetName, required: true, location_name: "name"))
-    UpdateAssessmentFrameworkControlSet.add_member(:controls, Shapes::ShapeRef.new(shape: CreateAssessmentFrameworkControls, location_name: "controls"))
+    UpdateAssessmentFrameworkControlSet.add_member(:controls, Shapes::ShapeRef.new(shape: CreateAssessmentFrameworkControls, required: true, location_name: "controls"))
     UpdateAssessmentFrameworkControlSet.struct_class = Types::UpdateAssessmentFrameworkControlSet
 
     UpdateAssessmentFrameworkControlSets.member = Shapes::ShapeRef.new(shape: UpdateAssessmentFrameworkControlSet)

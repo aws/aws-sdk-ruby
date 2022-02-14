@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-02-04)
+------------------
+
+* Feature - Add support for calling Update Table Objects without a TransactionId.
+
 1.23.0 (2022-02-03)
 ------------------
 

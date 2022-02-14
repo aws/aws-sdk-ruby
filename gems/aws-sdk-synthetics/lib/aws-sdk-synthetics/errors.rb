@@ -29,6 +29,7 @@ module Aws::Synthetics
   # ## Error Classes
   # * {ConflictException}
   # * {InternalServerException}
+  # * {RequestEntityTooLargeException}
   # * {ResourceNotFoundException}
   # * {ValidationException}
   #
@@ -58,6 +59,21 @@ module Aws::Synthetics
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Synthetics::Types::InternalServerException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class RequestEntityTooLargeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Synthetics::Types::RequestEntityTooLargeException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

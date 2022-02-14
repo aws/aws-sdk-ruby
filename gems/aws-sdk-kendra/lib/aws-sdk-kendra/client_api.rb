@@ -220,6 +220,9 @@ module Aws::Kendra
     FaqSummary = Shapes::StructureShape.new(name: 'FaqSummary')
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
     FeedbackToken = Shapes::StringShape.new(name: 'FeedbackToken')
+    FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
+    FsxConfiguration = Shapes::StructureShape.new(name: 'FsxConfiguration')
+    FsxFileSystemType = Shapes::StringShape.new(name: 'FsxFileSystemType')
     GetQuerySuggestionsRequest = Shapes::StructureShape.new(name: 'GetQuerySuggestionsRequest')
     GetQuerySuggestionsResponse = Shapes::StructureShape.new(name: 'GetQuerySuggestionsResponse')
     GetSnapshotsRequest = Shapes::StructureShape.new(name: 'GetSnapshotsRequest')
@@ -780,6 +783,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:google_drive_configuration, Shapes::ShapeRef.new(shape: GoogleDriveConfiguration, location_name: "GoogleDriveConfiguration"))
     DataSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "WebCrawlerConfiguration"))
     DataSourceConfiguration.add_member(:work_docs_configuration, Shapes::ShapeRef.new(shape: WorkDocsConfiguration, location_name: "WorkDocsConfiguration"))
+    DataSourceConfiguration.add_member(:fsx_configuration, Shapes::ShapeRef.new(shape: FsxConfiguration, location_name: "FsxConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1187,6 +1191,15 @@ module Aws::Kendra
     FaqSummary.struct_class = Types::FaqSummary
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
+
+    FsxConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
+    FsxConfiguration.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FsxFileSystemType, required: true, location_name: "FileSystemType"))
+    FsxConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, required: true, location_name: "VpcConfiguration"))
+    FsxConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, location_name: "SecretArn"))
+    FsxConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    FsxConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    FsxConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    FsxConfiguration.struct_class = Types::FsxConfiguration
 
     GetQuerySuggestionsRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     GetQuerySuggestionsRequest.add_member(:query_text, Shapes::ShapeRef.new(shape: SuggestionQueryText, required: true, location_name: "QueryText"))

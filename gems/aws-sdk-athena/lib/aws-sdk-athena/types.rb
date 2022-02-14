@@ -28,10 +28,21 @@ module Aws::Athena
     #   **3** - Unknown
     #   @return [Integer]
     #
+    # @!attribute [rw] error_type
+    #   An integer value that provides specific information about an Athena
+    #   query error. For the meaning of specific values, see the [Error Type
+    #   Reference][1] in the *Amazon Athena User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AthenaError AWS API Documentation
     #
     class AthenaError < Struct.new(
-      :error_category)
+      :error_category,
+      :error_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -422,6 +433,7 @@ module Aws::Athena
     #               encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #               kms_key: "String",
     #             },
+    #             expected_bucket_owner: "String",
     #           },
     #           enforce_work_group_configuration: false,
     #           publish_cloud_watch_metrics_enabled: false,
@@ -1960,6 +1972,7 @@ module Aws::Athena
     #           encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #           kms_key: "String",
     #         },
+    #         expected_bucket_owner: "String",
     #       }
     #
     # @!attribute [rw] output_location
@@ -1994,11 +2007,33 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that you expect to be the owner
+    #   of the Amazon S3 bucket specified by
+    #   ResultConfiguration$OutputLocation. If set, Athena uses the value
+    #   for `ExpectedBucketOwner` when it makes Amazon S3 calls to your
+    #   specified output location. If the `ExpectedBucketOwner` Amazon Web
+    #   Services account ID does not match the actual owner of the Amazon S3
+    #   bucket, the call fails with a permissions error.
+    #
+    #   This is a client-side setting. If workgroup settings override
+    #   client-side settings, then the query uses the `ExpectedBucketOwner`
+    #   setting that is specified for the workgroup, and also uses the
+    #   location for storing query results specified in the workgroup. See
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfiguration AWS API Documentation
     #
     class ResultConfiguration < Struct.new(
       :output_location,
-      :encryption_configuration)
+      :encryption_configuration,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2017,6 +2052,8 @@ module Aws::Athena
     #           kms_key: "String",
     #         },
     #         remove_encryption_configuration: false,
+    #         expected_bucket_owner: "String",
+    #         remove_expected_bucket_owner: false,
     #       }
     #
     # @!attribute [rw] output_location
@@ -2070,13 +2107,51 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID that you expect to be the owner
+    #   of the Amazon S3 bucket specified by
+    #   ResultConfiguration$OutputLocation. If set, Athena uses the value
+    #   for `ExpectedBucketOwner` when it makes Amazon S3 calls to your
+    #   specified output location. If the `ExpectedBucketOwner` Amazon Web
+    #   Services account ID does not match the actual owner of the Amazon S3
+    #   bucket, the call fails with a permissions error.
+    #
+    #   If workgroup settings override client-side settings, then the query
+    #   uses the `ExpectedBucketOwner` setting that is specified for the
+    #   workgroup, and also uses the location for storing query results
+    #   specified in the workgroup. See
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [String]
+    #
+    # @!attribute [rw] remove_expected_bucket_owner
+    #   If set to "true", removes the Amazon Web Services account ID
+    #   previously specified for ResultConfiguration$ExpectedBucketOwner. If
+    #   set to "false" or not set, and a value is present in the
+    #   `ExpectedBucketOwner` in `ResultConfigurationUpdates` (the
+    #   client-side setting), the `ExpectedBucketOwner` in the workgroup's
+    #   `ResultConfiguration` is updated with the new value. For more
+    #   information, see [Workgroup Settings Override Client-Side
+    #   Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfigurationUpdates AWS API Documentation
     #
     class ResultConfigurationUpdates < Struct.new(
       :output_location,
       :remove_output_location,
       :encryption_configuration,
-      :remove_encryption_configuration)
+      :remove_encryption_configuration,
+      :expected_bucket_owner,
+      :remove_expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2149,6 +2224,7 @@ module Aws::Athena
     #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #             kms_key: "String",
     #           },
+    #           expected_bucket_owner: "String",
     #         },
     #         work_group: "WorkGroupName",
     #       }
@@ -2601,6 +2677,8 @@ module Aws::Athena
     #               kms_key: "String",
     #             },
     #             remove_encryption_configuration: false,
+    #             expected_bucket_owner: "String",
+    #             remove_expected_bucket_owner: false,
     #           },
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
@@ -2719,6 +2797,7 @@ module Aws::Athena
     #             encryption_option: "SSE_S3", # required, accepts SSE_S3, SSE_KMS, CSE_KMS
     #             kms_key: "String",
     #           },
+    #           expected_bucket_owner: "String",
     #         },
     #         enforce_work_group_configuration: false,
     #         publish_cloud_watch_metrics_enabled: false,
@@ -2820,6 +2899,8 @@ module Aws::Athena
     #             kms_key: "String",
     #           },
     #           remove_encryption_configuration: false,
+    #           expected_bucket_owner: "String",
+    #           remove_expected_bucket_owner: false,
     #         },
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,

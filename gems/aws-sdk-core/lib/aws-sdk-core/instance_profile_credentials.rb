@@ -155,10 +155,11 @@ module Aws
               begin
                 retry_errors(NETWORK_ERRORS, max_retries: @retries) do
                   unless token_set?
+                    created_time = Time.now
                     token_value, ttl = http_put(
                       conn, METADATA_TOKEN_PATH, @token_ttl
                     )
-                    @token = Token.new(token_value, ttl) if token_value && ttl
+                    @token = Token.new(token_value, ttl, created_time) if token_value && ttl
                   end
                 end
               rescue *NETWORK_ERRORS
@@ -168,9 +169,17 @@ module Aws
               end
 
               token = @token.value if token_set?
-              metadata = http_get(conn, METADATA_PATH_BASE, token)
-              profile_name = metadata.lines.first.strip
-              http_get(conn, METADATA_PATH_BASE + profile_name, token)
+
+              begin
+                metadata = http_get(conn, METADATA_PATH_BASE, token)
+                profile_name = metadata.lines.first.strip
+                http_get(conn, METADATA_PATH_BASE + profile_name, token)
+              rescue TokenExpiredError
+                # Token has expired, reset it
+                # The next retry should fetch it
+                @token = nil
+                raise Non200Response
+              end
             end
           end
         rescue
@@ -202,9 +211,15 @@ module Aws
       headers = { 'User-Agent' => "aws-sdk-ruby3/#{CORE_GEM_VERSION}" }
       headers['x-aws-ec2-metadata-token'] = token if token
       response = connection.request(Net::HTTP::Get.new(path, headers))
-      raise Non200Response unless response.code.to_i == 200
 
-      response.body
+      case response.code.to_i
+      when 200
+        response.body
+      when 401
+        raise TokenExpiredError
+      else
+        raise Non200Response
+      end
     end
 
     # PUT request fetch token with ttl
@@ -246,10 +261,10 @@ module Aws
     # @api private
     # Token used to fetch IMDS profile and credentials
     class Token
-      def initialize(value, ttl)
+      def initialize(value, ttl, created_time = Time.now)
         @ttl = ttl
         @value = value
-        @created_time = Time.now
+        @created_time = created_time
       end
 
       # [String] token value

@@ -1443,7 +1443,7 @@ module Aws::LookoutforVision
     #
     # This operation requires the following permissions:
     #
-    # * `lookoutvision:StartModelPackagingJobs`
+    # * `lookoutvision:StartModelPackagingJob`
     #
     # * `s3:PutObject`
     #
@@ -1513,7 +1513,7 @@ module Aws::LookoutforVision
     #     job_name: "ModelPackagingJobName",
     #     configuration: { # required
     #       greengrass: { # required
-    #         compiler_options: "CompilerOptions", # required
+    #         compiler_options: "CompilerOptions",
     #         target_device: "jetson_xavier", # accepts jetson_xavier
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
@@ -1775,7 +1775,7 @@ module Aws::LookoutforVision
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutforvision'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

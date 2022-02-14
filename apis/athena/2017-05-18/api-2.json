@@ -480,7 +480,8 @@
     "AthenaError":{
       "type":"structure",
       "members":{
-        "ErrorCategory":{"shape":"ErrorCategory"}
+        "ErrorCategory":{"shape":"ErrorCategory"},
+        "ErrorType":{"shape":"ErrorType"}
       }
     },
     "BatchGetNamedQueryInput":{
@@ -810,6 +811,12 @@
       "min":1
     },
     "ErrorMessage":{"type":"string"},
+    "ErrorType":{
+      "type":"integer",
+      "box":true,
+      "max":9999,
+      "min":0
+    },
     "ExpressionString":{
       "type":"string",
       "max":256,
@@ -1318,7 +1325,8 @@
       "type":"structure",
       "members":{
         "OutputLocation":{"shape":"String"},
-        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"}
+        "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
+        "ExpectedBucketOwner":{"shape":"String"}
       }
     },
     "ResultConfigurationUpdates":{
@@ -1327,7 +1335,9 @@
         "OutputLocation":{"shape":"String"},
         "RemoveOutputLocation":{"shape":"BoxedBoolean"},
         "EncryptionConfiguration":{"shape":"EncryptionConfiguration"},
-        "RemoveEncryptionConfiguration":{"shape":"BoxedBoolean"}
+        "RemoveEncryptionConfiguration":{"shape":"BoxedBoolean"},
+        "ExpectedBucketOwner":{"shape":"String"},
+        "RemoveExpectedBucketOwner":{"shape":"BoxedBoolean"}
       }
     },
     "ResultSet":{

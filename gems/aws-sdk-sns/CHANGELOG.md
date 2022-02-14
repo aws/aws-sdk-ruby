@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-02-10)
+------------------
+
+* Feature - Customer requested typo fix in API documentation.
+
 1.51.0 (2022-02-03)
 ------------------
 

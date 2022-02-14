@@ -2019,7 +2019,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -3427,7 +3427,10 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
-    #   If there is no DB subnet group, then it is a non-VPC DB instance.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -4401,7 +4404,7 @@ module Aws::RDS
     #     * Not specify a DB subnet group. All these read replicas are
     #       created outside of any VPC.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -5301,10 +5304,16 @@ module Aws::RDS
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string.
     #
-    #   Constraints: Must contain no more than 255 letters, numbers,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints:
     #
-    #   Example: `mySubnetgroup`
+    #   * Must contain no more than 255 letters, numbers, periods,
+    #     underscores, spaces, or hyphens.
+    #
+    #   * Must not be default.
+    #
+    #   * First character must be a letter.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
@@ -7182,6 +7191,11 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] supports_babelfish
+    #   A value that indicates whether the engine version supports Babelfish
+    #   for Aurora PostgreSQL.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBEngineVersion AWS API Documentation
     #
     class DBEngineVersion < Struct.new(
@@ -7209,7 +7223,8 @@ module Aws::RDS
       :db_engine_version_arn,
       :kms_key_id,
       :create_time,
-      :tag_list)
+      :tag_list,
+      :supports_babelfish)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9836,12 +9851,10 @@ module Aws::RDS
     #
     #    </note>
     #
-    #   Constraints:
-    #
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupMessage AWS API Documentation
@@ -10642,19 +10655,19 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `clone-group-id` - Accepts clone group identifiers. The results
-    #     list will only include information about the DB clusters
-    #     associated with these clone groups.
+    #     list only includes information about the DB clusters associated
+    #     with these clone groups.
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results
-    #     list will only include information about the DB clusters
-    #     associated with these domains.
+    #     list only includes information about the DB clusters associated
+    #     with these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only
-    #     include information about the DB clusters for these engines.
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB clusters for these engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10767,7 +10780,42 @@ module Aws::RDS
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family
+    #     names. The results list only includes information about the DB
+    #     engine versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -10967,12 +11015,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances identified by these ARNs.
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
@@ -10980,11 +11028,11 @@ module Aws::RDS
     #     identified by these DB instance resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results
-    #     list will only include information about the DB instances
-    #     associated with these domains.
+    #     list only includes information about the DB instances associated
+    #     with these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only
-    #     include information about the DB instances for these engines.
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB instances for these engines.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_records
@@ -12763,13 +12811,13 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     pending maintenance actions for the DB clusters identified by
     #     these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance
-    #     actions for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions
+    #     for the DB instances identified by these ARNs.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] marker
@@ -15068,9 +15116,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied
-    #   during the next maintenance window but instead are applied
-    #   immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -15081,8 +15128,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group
     #     family as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in
+    #     combination with the `AllowMajorVersionUpgrade` parameter for a
+    #     major version upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     #   @return [String]
@@ -15646,7 +15694,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetGroup`
+    #   Example: `mydbsubnetgroup`
     #
     #
     #
@@ -16957,7 +17005,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
@@ -19509,7 +19557,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -20026,7 +20074,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing DB
     #   subnet group.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20218,7 +20266,7 @@ module Aws::RDS
     #   For the full list of DB instance classes, and availability for your
     #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #   Valid for: Multi-AZ DB clusters only
     #
     #
     #
@@ -20512,7 +20560,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20968,7 +21016,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] multi_az
@@ -21153,8 +21201,21 @@ module Aws::RDS
     #
     # @!attribute [rw] copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   instance to snapshots of the DB instance.
+    #
+    #   In most cases, tags aren't copied by default. However, when you
+    #   restore a DB instance from a DB snapshot, RDS checks whether you
+    #   specify new tags. If yes, the new tags are added to the restored DB
+    #   instance. If there are no new tags, RDS looks for the tags from the
+    #   source DB instance for the DB snapshot, and then adds those tags to
+    #   the restored DB instance.
+    #
+    #   For more information, see [ Copying tags to DB instance
+    #   snapshots][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -21277,8 +21338,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [
-    #   Configure IAM and your VPC][1] in the *Amazon Relational Database
-    #   Service User Guide*.
+    #   Configure IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -21525,6 +21585,11 @@ module Aws::RDS
     #
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
+    #
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -22054,7 +22119,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] multi_az
@@ -22559,7 +22624,7 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # SNS has responded that there is a problem with the SND topic
+    # SNS has responded that there is a problem with the SNS topic
     # specified.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSInvalidTopicFault AWS API Documentation
@@ -23613,6 +23678,11 @@ module Aws::RDS
     #   with the target engine version.
     #   @return [Boolean]
     #
+    # @!attribute [rw] supports_babelfish
+    #   A value that indicates whether you can use Babelfish for Aurora
+    #   PostgreSQL with the target engine version.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/UpgradeTarget AWS API Documentation
     #
     class UpgradeTarget < Struct.new(
@@ -23623,7 +23693,8 @@ module Aws::RDS
       :is_major_version_upgrade,
       :supported_engine_modes,
       :supports_parallel_query,
-      :supports_global_databases)
+      :supports_global_databases,
+      :supports_babelfish)
       SENSITIVE = []
       include Aws::Structure
     end

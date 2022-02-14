@@ -471,7 +471,7 @@ module Aws::Kendra
     end
 
     # Removes one or more documents from an index. The documents must have
-    # been added with the `BatchPutDocument` operation.
+    # been added with the `BatchPutDocument` API.
     #
     # The documents are deleted asynchronously. You can see the progress of
     # the deletion by using Amazon Web Services CloudWatch. Any error
@@ -519,17 +519,16 @@ module Aws::Kendra
     end
 
     # Returns the indexing status for one or more documents submitted with
-    # the [ BatchPutDocument][1] operation.
+    # the [ BatchPutDocument][1] API.
     #
-    # When you use the `BatchPutDocument` operation, documents are indexed
-    # asynchronously. You can use the `BatchGetDocumentStatus` operation to
-    # get the current status of a list of documents so that you can
-    # determine if they have been successfully indexed.
+    # When you use the `BatchPutDocument` API, documents are indexed
+    # asynchronously. You can use the `BatchGetDocumentStatus` API to get
+    # the current status of a list of documents so that you can determine if
+    # they have been successfully indexed.
     #
-    # You can also use the `BatchGetDocumentStatus` operation to check the
-    # status of the [ BatchDeleteDocument][2] operation. When a document is
-    # deleted from the index, Amazon Kendra returns `NOT_FOUND` as the
-    # status.
+    # You can also use the `BatchGetDocumentStatus` API to check the status
+    # of the [ BatchDeleteDocument][2] API. When a document is deleted from
+    # the index, Amazon Kendra returns `NOT_FOUND` as the status.
     #
     #
     #
@@ -538,7 +537,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The identifier of the index to add documents to. The index ID is
-    #   returned by the [ CreateIndex ][1] operation.
+    #   returned by the [CreateIndex ][1] API.
     #
     #
     #
@@ -599,11 +598,11 @@ module Aws::Kendra
 
     # Adds one or more documents to an index.
     #
-    # The `BatchPutDocument` operation enables you to ingest inline
-    # documents or a set of documents stored in an Amazon S3 bucket. Use
-    # this operation to ingest your text and unstructured text into an
-    # index, add custom attributes to the documents, and to attach an access
-    # control list to the documents added to the index.
+    # The `BatchPutDocument` API enables you to ingest inline documents or a
+    # set of documents stored in an Amazon S3 bucket. Use this API to ingest
+    # your text and unstructured text into an index, add custom attributes
+    # to the documents, and to attach an access control list to the
+    # documents added to the index.
     #
     # The documents are indexed asynchronously. You can see the progress of
     # the batch using Amazon Web Services CloudWatch. Any error messages
@@ -612,11 +611,11 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The identifier of the index to add the documents to. You need to
-    #   create the index first using the `CreateIndex` operation.
+    #   create the index first using the `CreateIndex` API.
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role that is allowed to run the
-    #   `BatchPutDocument` operation. For more information, see [IAM Roles for
+    #   `BatchPutDocument` API. For more information, see [IAM Roles for
     #   Amazon Kendra][1].
     #
     #
@@ -625,12 +624,6 @@ module Aws::Kendra
     #
     # @option params [required, Array<Types::Document>] :documents
     #   One or more documents to add to the index.
-    #
-    #   Documents can include custom attributes. For example, 'DataSourceId'
-    #   and 'DataSourceSyncJobId' are custom attributes that provide
-    #   information on the synchronization of documents running on a data
-    #   source. Note, 'DataSourceSyncJobId' could be an optional custom
-    #   attribute as Amazon Kendra will use the ID of a running sync job.
     #
     #   Documents have the following file size limits.
     #
@@ -650,7 +643,7 @@ module Aws::Kendra
     # @option params [Types::CustomDocumentEnrichmentConfiguration] :custom_document_enrichment_configuration
     #   Configuration information for altering your document metadata and
     #   content during the document ingestion process when you use the
-    #   `BatchPutDocument` operation.
+    #   `BatchPutDocument` API.
     #
     #   For more information on how to create, modify and delete document
     #   metadata, or make other content alterations when you ingest documents
@@ -861,10 +854,10 @@ module Aws::Kendra
     #   A description for the data source.
     #
     # @option params [String] :schedule
-    #   Sets the frequency that Amazon Kendra will check the documents in your
+    #   Sets the frequency for Amazon Kendra to check the documents in your
     #   repository and update the index. If you don't set a schedule Amazon
     #   Kendra will not periodically update the index. You can call the
-    #   `StartDataSourceSyncJob` operation to update the index.
+    #   `StartDataSourceSyncJob` API to update the index.
     #
     #   You can't specify the `Schedule` parameter when the `Type` parameter
     #   is set to `CUSTOM`. If you do, you receive a `ValidationException`
@@ -892,8 +885,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a data
-    #   source. Multiple calls to the `CreateDataSource` operation with the
-    #   same client token will create only one data source.
+    #   source. Multiple calls to the `CreateDataSource` API with the same
+    #   client token will create only one data source.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -930,7 +923,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1242,6 +1235,24 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       fsx_configuration: {
+    #         file_system_id: "FileSystemId", # required
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1341,10 +1352,9 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
+    #   Web Services SSO that stores your user and group information. For more
+    #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -1362,8 +1372,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create your Amazon
-    #   Kendra experience. Multiple calls to the `CreateExperience` operation
-    #   with the same client token creates only one Amazon Kendra experience.
+    #   Kendra experience. Multiple calls to the `CreateExperience` API with
+    #   the same client token creates only one Amazon Kendra experience.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1452,8 +1462,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a FAQ.
-    #   Multiple calls to the `CreateFaqRequest` operation with the same
-    #   client token will create only one FAQ.
+    #   Multiple calls to the `CreateFaqRequest` API with the same client
+    #   token will create only one FAQ.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1508,13 +1518,12 @@ module Aws::Kendra
     end
 
     # Creates a new Amazon Kendra index. Index creation is an asynchronous
-    # operation. To determine if index creation has completed, check the
-    # `Status` field returned from a call to `DescribeIndex`. The `Status`
-    # field is set to `ACTIVE` when the index is ready to use.
+    # API. To determine if index creation has completed, check the `Status`
+    # field returned from a call to `DescribeIndex`. The `Status` field is
+    # set to `ACTIVE` when the index is ready to use.
     #
     # Once the index is active you can index your documents using the
-    # `BatchPutDocument` operation or using one of the supported data
-    # sources.
+    # `BatchPutDocument` API or using one of the supported data sources.
     #
     # @option params [required, String] :name
     #   The name for the new index.
@@ -1539,8 +1548,8 @@ module Aws::Kendra
     # @option params [required, String] :role_arn
     #   An Identity and Access Management(IAM) role that gives Amazon Kendra
     #   permissions to access your Amazon CloudWatch logs and metrics. This is
-    #   also the role used when you use the `BatchPutDocument` operation to
-    #   index documents from an Amazon S3 bucket.
+    #   also the role used when you use the `BatchPutDocument` API to index
+    #   documents from an Amazon S3 bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
     #   The identifier of the KMScustomer managed key (CMK) to use to encrypt
@@ -1552,8 +1561,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create an index.
-    #   Multiple calls to the `CreateIndex` operation with the same client
-    #   token will create only one index.
+    #   Multiple calls to the `CreateIndex` API with the same client token
+    #   will create only one index.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1707,9 +1716,10 @@ module Aws::Kendra
     #   The IAM (Identity and Access Management) role used by Amazon Kendra to
     #   access the block list text file in your S3 bucket.
     #
-    #   You need permissions to the role ARN (Amazon Resource Name). The role
-    #   needs S3 read permissions to your file in S3 and needs to give STS
-    #   (Security Token Service) assume role permissions to Amazon Kendra.
+    #   You need permissions to the role ARN (Amazon Web Services Resource
+    #   Name). The role needs S3 read permissions to your file in S3 and needs
+    #   to give STS (Security Token Service) assume role permissions to Amazon
+    #   Kendra.
     #
     # @option params [Array<Types::Tag>] :tags
     #   A tag that you can assign to a block list that categorizes the block
@@ -1778,8 +1788,8 @@ module Aws::Kendra
     #
     # @option params [String] :client_token
     #   A token that you provide to identify the request to create a
-    #   thesaurus. Multiple calls to the `CreateThesaurus` operation with the
-    #   same client token will create only one thesaurus.
+    #   thesaurus. Multiple calls to the `CreateThesaurus` API with the same
+    #   client token will create only one thesaurus.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1824,8 +1834,8 @@ module Aws::Kendra
     # Deletes an Amazon Kendra data source. An exception is not thrown if
     # the data source is already being deleted. While the data source is
     # being deleted, the `Status` field returned by a call to the
-    # `DescribeDataSource` operation is set to `DELETING`. For more
-    # information, see [Deleting Data Sources][1].
+    # `DescribeDataSource` API is set to `DELETING`. For more information,
+    # see [Deleting Data Sources][1].
     #
     #
     #
@@ -1916,8 +1926,8 @@ module Aws::Kendra
 
     # Deletes an existing Amazon Kendra index. An exception is not thrown if
     # the index is already being deleted. While the index is being deleted,
-    # the `Status` field returned by a call to the `DescribeIndex` operation
-    # is set to `DELETING`.
+    # the `Status` field returned by a call to the `DescribeIndex` API is
+    # set to `DELETING`.
     #
     # @option params [required, String] :id
     #   The identifier of the index to delete.
@@ -2073,7 +2083,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Gets information about a Amazon Kendra data source.
+    # Gets information about an Amazon Kendra data source.
     #
     # @option params [required, String] :id
     #   The unique identifier of the data source to describe.
@@ -2110,7 +2120,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2329,6 +2339,21 @@ module Aws::Kendra
     #   resp.configuration.work_docs_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.work_docs_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.work_docs_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.fsx_configuration.file_system_id #=> String
+    #   resp.configuration.fsx_configuration.file_system_type #=> String, one of "WINDOWS"
+    #   resp.configuration.fsx_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.fsx_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.fsx_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.fsx_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.fsx_configuration.secret_arn #=> String
+    #   resp.configuration.fsx_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.fsx_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.fsx_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.fsx_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.fsx_configuration.field_mappings #=> Array
+    #   resp.configuration.fsx_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.fsx_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.fsx_configuration.field_mappings[0].index_field_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3163,7 +3188,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -3767,8 +3792,8 @@ module Aws::Kendra
     end
 
     # Searches an active index. Use this API to search your documents using
-    # query. The `Query` operation enables to do faceted search and to
-    # filter results based on document attributes.
+    # query. The `Query` API enables to do faceted search and to filter
+    # results based on document attributes.
     #
     # It also enables you to provide user context that Amazon Kendra uses to
     # enforce document access control in the search results.
@@ -3790,7 +3815,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :index_id
     #   The unique identifier of the index to search. The identifier is
-    #   returned in the response from the `CreateIndex` operation.
+    #   returned in the response from the `CreateIndex` API.
     #
     # @option params [String] :query_text
     #   The text to search for.
@@ -4093,8 +4118,8 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Stops a running synchronization job. You can't stop a scheduled
-    # synchronization job.
+    # Stops a synchronization job that is currently running. You can't stop
+    # a scheduled synchronization job.
     #
     # @option params [required, String] :id
     #   The identifier of the data source for which to stop the
@@ -4132,8 +4157,7 @@ module Aws::Kendra
     #
     # @option params [required, String] :query_id
     #   The identifier of the specific query for which you are submitting
-    #   feedback. The query ID is returned in the response to the `Query`
-    #   operation.
+    #   feedback. The query ID is returned in the response to the `Query` API.
     #
     # @option params [Array<Types::ClickFeedback>] :click_feedback_items
     #   Tells Amazon Kendra that a particular search result link was chosen by
@@ -4604,6 +4628,24 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       fsx_configuration: {
+    #         file_system_id: "FileSystemId", # required
+    #         file_system_type: "WINDOWS", # required, accepts WINDOWS
+    #         vpc_configuration: { # required
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -4696,10 +4738,9 @@ module Aws::Kendra
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of a role with permission to access
-    #   `Query` operations, `QuerySuggestions` operations, `SubmitFeedback`
-    #   operations, and Amazon Web Services SSO that stores your user and
-    #   group information. For more information, see [IAM roles for Amazon
-    #   Kendra][1].
+    #   `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and Amazon
+    #   Web Services SSO that stores your user and group information. For more
+    #   information, see [IAM roles for Amazon Kendra][1].
     #
     #
     #
@@ -5076,7 +5117,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-02-10)
+------------------
+
+* Feature - This release makes CompilerOptions in Lookout for Vision's StartModelPackagingJob's Configuration object optional.
+
 1.12.0 (2022-02-03)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-02-07)
+------------------
+
+* Feature - This release updates 3 API parameters. UpdateAssessmentFrameworkControlSet now requires the controls attribute, and CreateAssessmentFrameworkControl requires the id attribute. Additionally, UpdateAssessmentFramework now has a minimum length constraint for the controlSets attribute.
+
 1.19.0 (2022-02-03)
 ------------------
 

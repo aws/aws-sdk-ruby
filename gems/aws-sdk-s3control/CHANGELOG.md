@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-02-08)
+------------------
+
+* Feature - This release adds support for S3 Batch Replication. Batch Replication lets you replicate existing objects, already replicated objects to new destinations, and objects that previously failed to replicate. Customers will receive object-level visibility of progress and a detailed completion report.
+
 1.47.0 (2022-02-03)
 ------------------
 

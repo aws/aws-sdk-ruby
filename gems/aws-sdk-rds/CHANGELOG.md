@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2022-02-14)
+------------------
+
+* Feature - Adds support for determining which Aurora PostgreSQL versions support Babelfish.
+
+1.138.0 (2022-02-04)
+------------------
+
+* Feature - updates for RDS Custom for Oracle 12.1 support
+
 1.137.0 (2022-02-03)
 ------------------
 

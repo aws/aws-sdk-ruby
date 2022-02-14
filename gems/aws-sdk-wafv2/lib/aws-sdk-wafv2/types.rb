@@ -352,6 +352,18 @@ module Aws::WAFV2
     #               scope_down_statement: {
     #                 # recursive Statement
     #               },
+    #               managed_rule_group_configs: [
+    #                 {
+    #                   login_path: "LoginPathString",
+    #                   payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                   username_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   password_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -1034,6 +1046,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -1715,6 +1739,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -2242,6 +2278,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -3605,6 +3653,44 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GenerateMobileSdkReleaseUrlRequest
+    #   data as a hash:
+    #
+    #       {
+    #         platform: "IOS", # required, accepts IOS, ANDROID
+    #         release_version: "VersionKeyString", # required
+    #       }
+    #
+    # @!attribute [rw] platform
+    #   The device platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_version
+    #   The release version. For the latest available version, specify
+    #   `LATEST`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GenerateMobileSdkReleaseUrlRequest AWS API Documentation
+    #
+    class GenerateMobileSdkReleaseUrlRequest < Struct.new(
+      :platform,
+      :release_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] url
+    #   The presigned download URL for the specified SDK release.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GenerateMobileSdkReleaseUrlResponse AWS API Documentation
+    #
+    class GenerateMobileSdkReleaseUrlResponse < Struct.new(
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule statement used to identify web requests based on country of
     # origin.
     #
@@ -3816,6 +3902,45 @@ module Aws::WAFV2
     class GetManagedRuleSetResponse < Struct.new(
       :managed_rule_set,
       :lock_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetMobileSdkReleaseRequest
+    #   data as a hash:
+    #
+    #       {
+    #         platform: "IOS", # required, accepts IOS, ANDROID
+    #         release_version: "VersionKeyString", # required
+    #       }
+    #
+    # @!attribute [rw] platform
+    #   The device platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] release_version
+    #   The release version. For the latest available version, specify
+    #   `LATEST`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetMobileSdkReleaseRequest AWS API Documentation
+    #
+    class GetMobileSdkReleaseRequest < Struct.new(
+      :platform,
+      :release_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] mobile_sdk_release
+    #   Information for a specified SDK release, including release notes and
+    #   tags.
+    #   @return [Types::MobileSdkRelease]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetMobileSdkReleaseResponse AWS API Documentation
+    #
+    class GetMobileSdkReleaseResponse < Struct.new(
+      :mobile_sdk_release)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4269,11 +4394,26 @@ module Aws::WAFV2
     #   that operation.
     #   @return [String]
     #
+    # @!attribute [rw] application_integration_url
+    #   The URL to use in SDK integrations with Amazon Web Services managed
+    #   rule groups. For example, you can use the integration SDKs with the
+    #   account takeover prevention managed rule group
+    #   `AWSManagedRulesATPRuleSet`. This is only populated if you are using
+    #   a rule group in your web ACL that integrates with your applications
+    #   in this way. For more information, see [WAF application
+    #   integration][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/GetWebACLResponse AWS API Documentation
     #
     class GetWebACLResponse < Struct.new(
       :web_acl,
-      :lock_token)
+      :lock_token,
+      :application_integration_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5257,6 +5397,65 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMobileSdkReleasesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         platform: "IOS", # required, accepts IOS, ANDROID
+    #         next_marker: "NextMarker",
+    #         limit: 1,
+    #       }
+    #
+    # @!attribute [rw] platform
+    #   The device platform to retrieve the list for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit
+    #   The maximum number of objects that you want WAF to return for this
+    #   request. If more objects are available, in the response, WAF
+    #   provides a `NextMarker` value that you can use in a subsequent call
+    #   to get the next batch of objects.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListMobileSdkReleasesRequest AWS API Documentation
+    #
+    class ListMobileSdkReleasesRequest < Struct.new(
+      :platform,
+      :next_marker,
+      :limit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] release_summaries
+    #   High level information for the available SDK releases.
+    #   @return [Array<Types::ReleaseSummary>]
+    #
+    # @!attribute [rw] next_marker
+    #   When you request a list of objects with a `Limit` setting, if the
+    #   number of objects that are still available for retrieval exceeds the
+    #   limit, WAF returns a `NextMarker` value in the response. To retrieve
+    #   the next batch of objects, provide the marker from the prior call in
+    #   your next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListMobileSdkReleasesResponse AWS API Documentation
+    #
+    class ListMobileSdkReleasesResponse < Struct.new(
+      :release_summaries,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListRegexPatternSetsRequest
     #   data as a hash:
     #
@@ -5726,6 +5925,56 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # Additional information that's used by a managed rule group. Most
+    # managed rule groups don't require this.
+    #
+    # Use this for the account takeover prevention managed rule group
+    # `AWSManagedRulesATPRuleSet`, to provide information about the sign-in
+    # page of your application.
+    #
+    # @note When making an API call, you may pass ManagedRuleGroupConfig
+    #   data as a hash:
+    #
+    #       {
+    #         login_path: "LoginPathString",
+    #         payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #         username_field: {
+    #           identifier: "FieldIdentifier", # required
+    #         },
+    #         password_field: {
+    #           identifier: "FieldIdentifier", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] login_path
+    #   The login endpoint for your application. For example
+    #   `https://example.com/web/login`.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_type
+    #   The payload type for your login endpoint, either JSON or form
+    #   encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_field
+    #   Details about your login page username field.
+    #   @return [Types::UsernameField]
+    #
+    # @!attribute [rw] password_field
+    #   Details about your login page password field.
+    #   @return [Types::PasswordField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupConfig AWS API Documentation
+    #
+    class ManagedRuleGroupConfig < Struct.new(
+      :login_path,
+      :payload_type,
+      :username_field,
+      :password_field)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A rule statement used to run the rules that are defined in a managed
     # rule group. To use this, provide the vendor name and the name of the
     # rule group in this statement. You can retrieve the required names by
@@ -5993,6 +6242,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -6035,6 +6296,18 @@ module Aws::WAFV2
     #             ],
     #           },
     #         },
+    #         managed_rule_group_configs: [
+    #           {
+    #             login_path: "LoginPathString",
+    #             payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #             username_field: {
+    #               identifier: "FieldIdentifier", # required
+    #             },
+    #             password_field: {
+    #               identifier: "FieldIdentifier", # required
+    #             },
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] vendor_name
@@ -6072,6 +6345,15 @@ module Aws::WAFV2
     #   can for a rule statement.
     #   @return [Types::Statement]
     #
+    # @!attribute [rw] managed_rule_group_configs
+    #   Additional information that's used by a managed rule group. Most
+    #   managed rule groups don't require this.
+    #
+    #   Use this for the account takeover prevention managed rule group
+    #   `AWSManagedRulesATPRuleSet`, to provide information about the
+    #   sign-in page of your application.
+    #   @return [Array<Types::ManagedRuleGroupConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupStatement AWS API Documentation
     #
     class ManagedRuleGroupStatement < Struct.new(
@@ -6079,7 +6361,8 @@ module Aws::WAFV2
       :name,
       :version,
       :excluded_rules,
-      :scope_down_statement)
+      :scope_down_statement,
+      :managed_rule_group_configs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6382,6 +6665,41 @@ module Aws::WAFV2
     #
     class Method < Aws::EmptyStructure; end
 
+    # Information for a release of the mobile SDK, including release notes
+    # and tags.
+    #
+    # The mobile SDK is not generally available. Customers who have access
+    # to the mobile SDK can use it to establish and manage Security Token
+    # Service (STS) security tokens for use in HTTP(S) requests from a
+    # mobile device to WAF.
+    #
+    # @!attribute [rw] release_version
+    #   The release version.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the release.
+    #   @return [Time]
+    #
+    # @!attribute [rw] release_notes
+    #   Notes describing the release.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags that are associated with the release.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/MobileSdkRelease AWS API Documentation
+    #
+    class MobileSdkRelease < Struct.new(
+      :release_version,
+      :timestamp,
+      :release_notes,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies that WAF should do nothing. This is used for the
     # `OverrideAction` setting on a Rule when the rule uses a rule group
     # reference statement.
@@ -6650,6 +6968,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -6957,6 +7287,18 @@ module Aws::WAFV2
     #               scope_down_statement: {
     #                 # recursive Statement
     #               },
+    #               managed_rule_group_configs: [
+    #                 {
+    #                   login_path: "LoginPathString",
+    #                   payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                   username_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   password_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -7069,6 +7411,28 @@ module Aws::WAFV2
     class OverrideAction < Struct.new(
       :count,
       :none)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about your login page password field, used in a
+    # `ManagedRuleGroupConfig`.
+    #
+    # @note When making an API call, you may pass PasswordField
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "FieldIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   The name of the password field. For example `/form/password`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/PasswordField AWS API Documentation
+    #
+    class PasswordField < Struct.new(
+      :identifier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7615,6 +7979,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -7998,6 +8374,25 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # High level information for an SDK release.
+    #
+    # @!attribute [rw] release_version
+    #   The release version.
+    #   @return [String]
+    #
+    # @!attribute [rw] timestamp
+    #   The timestamp of the release.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ReleaseSummary AWS API Documentation
+    #
+    class ReleaseSummary < Struct.new(
+      :release_version,
+      :timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A single rule, which you can use in a WebACL or RuleGroup to identify
     # web requests that you want to allow, block, or count. Each rule
     # includes one top-level Statement that WAF uses to identify matching
@@ -8255,6 +8650,18 @@ module Aws::WAFV2
     #             scope_down_statement: {
     #               # recursive Statement
     #             },
+    #             managed_rule_group_configs: [
+    #               {
+    #                 login_path: "LoginPathString",
+    #                 payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                 username_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #                 password_field: {
+    #                   identifier: "FieldIdentifier", # required
+    #                 },
+    #               },
+    #             ],
     #           },
     #           label_match_statement: {
     #             scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -9535,6 +9942,18 @@ module Aws::WAFV2
     #               scope_down_statement: {
     #                 # recursive Statement
     #               },
+    #               managed_rule_group_configs: [
+    #                 {
+    #                   login_path: "LoginPathString",
+    #                   payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                   username_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   password_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -9824,6 +10243,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -10110,6 +10541,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -10399,6 +10842,18 @@ module Aws::WAFV2
     #               scope_down_statement: {
     #                 # recursive Statement
     #               },
+    #               managed_rule_group_configs: [
+    #                 {
+    #                   login_path: "LoginPathString",
+    #                   payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                   username_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                   password_field: {
+    #                     identifier: "FieldIdentifier", # required
+    #                   },
+    #                 },
+    #               ],
     #             },
     #             label_match_statement: {
     #               scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -10729,6 +11184,18 @@ module Aws::WAFV2
     #               ],
     #             },
     #           },
+    #           managed_rule_group_configs: [
+    #             {
+    #               login_path: "LoginPathString",
+    #               payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #               username_field: {
+    #                 identifier: "FieldIdentifier", # required
+    #               },
+    #               password_field: {
+    #                 identifier: "FieldIdentifier", # required
+    #               },
+    #             },
+    #           ],
     #         },
     #         label_match_statement: {
     #           scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -11894,6 +12361,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -12411,6 +12890,18 @@ module Aws::WAFV2
     #                 scope_down_statement: {
     #                   # recursive Statement
     #                 },
+    #                 managed_rule_group_configs: [
+    #                   {
+    #                     login_path: "LoginPathString",
+    #                     payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #                     username_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                     password_field: {
+    #                       identifier: "FieldIdentifier", # required
+    #                     },
+    #                   },
+    #                 ],
     #               },
     #               label_match_statement: {
     #                 scope: "LABEL", # required, accepts LABEL, NAMESPACE
@@ -12678,6 +13169,28 @@ module Aws::WAFV2
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UriPath AWS API Documentation
     #
     class UriPath < Aws::EmptyStructure; end
+
+    # Details about your login page username field, used in a
+    # `ManagedRuleGroupConfig`.
+    #
+    # @note When making an API call, you may pass UsernameField
+    #   data as a hash:
+    #
+    #       {
+    #         identifier: "FieldIdentifier", # required
+    #       }
+    #
+    # @!attribute [rw] identifier
+    #   The name of the username field. For example `/form/username`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/UsernameField AWS API Documentation
+    #
+    class UsernameField < Struct.new(
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A version of the named managed rule group, that the rule group's
     # vendor publishes for use by customers.
