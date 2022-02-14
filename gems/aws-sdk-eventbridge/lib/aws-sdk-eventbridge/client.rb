@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -75,6 +76,7 @@ module Aws::EventBridge
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -2306,6 +2308,10 @@ module Aws::EventBridge
     #   external account, specify this `StatementId` when you run
     #   [RemovePermission][1].
     #
+    #   <note markdown="1"> Each `StatementId` must be unique.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_RemovePermission.html
@@ -2507,6 +2513,11 @@ module Aws::EventBridge
     #
     # Targets are the resources that are invoked when a rule is triggered.
     #
+    # <note markdown="1"> Each rule can have up to five (5) targets associated with it at one
+    # time.
+    #
+    #  </note>
+    #
     # You can configure the following as targets for Events:
     #
     # * [API destination][1]
@@ -2524,6 +2535,8 @@ module Aws::EventBridge
     # * CodePipeline
     #
     # * Amazon EC2 `CreateSnapshot` API call
+    #
+    # * EC2 Image Builder
     #
     # * Amazon EC2 `RebootInstances` API call
     #
@@ -2551,7 +2564,7 @@ module Aws::EventBridge
     #
     # * Amazon SNS topic
     #
-    # * Amazon SQS queues (includes FIFO queues
+    # * Amazon SQS queues (includes FIFO queues)
     #
     # * SSM Automation
     #
@@ -2844,6 +2857,12 @@ module Aws::EventBridge
 
     # Removes the specified targets from the specified rule. When the rule
     # is triggered, those targets are no longer be invoked.
+    #
+    # <note markdown="1"> A successful execution of `RemoveTargets` doesn't guarantee all
+    # targets are removed from the rule, it means that the target(s) listed
+    # in the request are removed.
+    #
+    #  </note>
     #
     # When you remove a target, when the associated rule triggers, removed
     # targets might continue to be invoked. Allow a short period of time for
@@ -3333,7 +3352,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

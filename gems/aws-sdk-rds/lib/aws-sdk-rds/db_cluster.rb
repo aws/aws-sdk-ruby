@@ -844,7 +844,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [required, String] :engine
@@ -1797,8 +1797,8 @@ module Aws::RDS
     #
     #   <note markdown="1"> When you apply a parameter group using the
     #   `DBInstanceParameterGroupName` parameter, the DB cluster isn't
-    #   rebooted automatically. Also, parameter changes aren't applied during
-    #   the next maintenance window but instead are applied immediately.
+    #   rebooted automatically. Also, parameter changes are applied
+    #   immediately rather than during the next maintenance window.
     #
     #    </note>
     #
@@ -1809,8 +1809,9 @@ module Aws::RDS
     #   * The DB parameter group must be in the same DB parameter group family
     #     as this DB cluster.
     #
-    #   * The `DBInstanceParameterGroupName` parameter is only valid in
-    #     combination with the `AllowMajorVersionUpgrade` parameter.
+    #   * The `DBInstanceParameterGroupName` parameter is valid in combination
+    #     with the `AllowMajorVersionUpgrade` parameter for a major version
+    #     upgrade only.
     #
     #   Valid for: Aurora DB clusters only
     # @option options [String] :domain
@@ -2117,7 +2118,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [String] :option_group_name

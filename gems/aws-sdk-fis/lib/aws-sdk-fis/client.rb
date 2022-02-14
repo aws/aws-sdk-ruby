@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -75,6 +76,7 @@ module Aws::FIS
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -413,7 +415,7 @@ module Aws::FIS
     #     ],
     #     targets: {
     #       "ExperimentTemplateTargetName" => {
-    #         resource_type: "ResourceType", # required
+    #         resource_type: "TargetResourceTypeId", # required
     #         resource_arns: ["ResourceArn"],
     #         resource_tags: {
     #           "TagKey" => "TagValue",
@@ -425,6 +427,9 @@ module Aws::FIS
     #           },
     #         ],
     #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #         parameters: {
+    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #         },
     #       },
     #     },
     #     actions: { # required
@@ -461,6 +466,8 @@ module Aws::FIS
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values #=> Array
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values[0] #=> String
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].selection_mode #=> String
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters #=> Hash
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters["ExperimentTemplateTargetParameterName"] #=> String
     #   resp.experiment_template.actions #=> Hash
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].action_id #=> String
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].description #=> String
@@ -518,6 +525,8 @@ module Aws::FIS
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values #=> Array
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values[0] #=> String
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].selection_mode #=> String
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters #=> Hash
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters["ExperimentTemplateTargetParameterName"] #=> String
     #   resp.experiment_template.actions #=> Hash
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].action_id #=> String
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].description #=> String
@@ -614,6 +623,8 @@ module Aws::FIS
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values #=> Array
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values[0] #=> String
     #   resp.experiment.targets["ExperimentTargetName"].selection_mode #=> String
+    #   resp.experiment.targets["ExperimentTargetName"].parameters #=> Hash
+    #   resp.experiment.targets["ExperimentTargetName"].parameters["ExperimentTargetParameterName"] #=> String
     #   resp.experiment.actions #=> Hash
     #   resp.experiment.actions["ExperimentActionName"].action_id #=> String
     #   resp.experiment.actions["ExperimentActionName"].description #=> String
@@ -675,6 +686,8 @@ module Aws::FIS
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values #=> Array
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values[0] #=> String
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].selection_mode #=> String
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters #=> Hash
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters["ExperimentTemplateTargetParameterName"] #=> String
     #   resp.experiment_template.actions #=> Hash
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].action_id #=> String
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].description #=> String
@@ -699,6 +712,38 @@ module Aws::FIS
     # @param [Hash] params ({})
     def get_experiment_template(params = {}, options = {})
       req = build_request(:get_experiment_template, params)
+      req.send_request(options)
+    end
+
+    # Gets information about the specified resource type.
+    #
+    # @option params [required, String] :resource_type
+    #   The resource type.
+    #
+    # @return [Types::GetTargetResourceTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTargetResourceTypeResponse#target_resource_type #target_resource_type} => Types::TargetResourceType
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_target_resource_type({
+    #     resource_type: "TargetResourceTypeId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_resource_type.resource_type #=> String
+    #   resp.target_resource_type.description #=> String
+    #   resp.target_resource_type.parameters #=> Hash
+    #   resp.target_resource_type.parameters["TargetResourceTypeParameterName"].description #=> String
+    #   resp.target_resource_type.parameters["TargetResourceTypeParameterName"].required #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetTargetResourceType AWS API Documentation
+    #
+    # @overload get_target_resource_type(params = {})
+    # @param [Hash] params ({})
+    def get_target_resource_type(params = {}, options = {})
+      req = build_request(:get_target_resource_type, params)
       req.send_request(options)
     end
 
@@ -864,6 +909,46 @@ module Aws::FIS
       req.send_request(options)
     end
 
+    # Lists the target resource types.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListTargetResourceTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTargetResourceTypesResponse#target_resource_types #target_resource_types} => Array&lt;Types::TargetResourceTypeSummary&gt;
+    #   * {Types::ListTargetResourceTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_target_resource_types({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.target_resource_types #=> Array
+    #   resp.target_resource_types[0].resource_type #=> String
+    #   resp.target_resource_types[0].description #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/ListTargetResourceTypes AWS API Documentation
+    #
+    # @overload list_target_resource_types(params = {})
+    # @param [Hash] params ({})
+    def list_target_resource_types(params = {}, options = {})
+      req = build_request(:list_target_resource_types, params)
+      req.send_request(options)
+    end
+
     # Starts running an experiment from the specified experiment template.
     #
     # @option params [required, String] :client_token
@@ -911,6 +996,8 @@ module Aws::FIS
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values #=> Array
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values[0] #=> String
     #   resp.experiment.targets["ExperimentTargetName"].selection_mode #=> String
+    #   resp.experiment.targets["ExperimentTargetName"].parameters #=> Hash
+    #   resp.experiment.targets["ExperimentTargetName"].parameters["ExperimentTargetParameterName"] #=> String
     #   resp.experiment.actions #=> Hash
     #   resp.experiment.actions["ExperimentActionName"].action_id #=> String
     #   resp.experiment.actions["ExperimentActionName"].description #=> String
@@ -975,6 +1062,8 @@ module Aws::FIS
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values #=> Array
     #   resp.experiment.targets["ExperimentTargetName"].filters[0].values[0] #=> String
     #   resp.experiment.targets["ExperimentTargetName"].selection_mode #=> String
+    #   resp.experiment.targets["ExperimentTargetName"].parameters #=> Hash
+    #   resp.experiment.targets["ExperimentTargetName"].parameters["ExperimentTargetParameterName"] #=> String
     #   resp.experiment.actions #=> Hash
     #   resp.experiment.actions["ExperimentActionName"].action_id #=> String
     #   resp.experiment.actions["ExperimentActionName"].description #=> String
@@ -1098,7 +1187,7 @@ module Aws::FIS
     #     ],
     #     targets: {
     #       "ExperimentTemplateTargetName" => {
-    #         resource_type: "ResourceType", # required
+    #         resource_type: "TargetResourceTypeId", # required
     #         resource_arns: ["ResourceArn"],
     #         resource_tags: {
     #           "TagKey" => "TagValue",
@@ -1110,6 +1199,9 @@ module Aws::FIS
     #           },
     #         ],
     #         selection_mode: "ExperimentTemplateTargetSelectionMode", # required
+    #         parameters: {
+    #           "ExperimentTemplateTargetParameterName" => "ExperimentTemplateTargetParameterValue",
+    #         },
     #       },
     #     },
     #     actions: {
@@ -1143,6 +1235,8 @@ module Aws::FIS
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values #=> Array
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].filters[0].values[0] #=> String
     #   resp.experiment_template.targets["ExperimentTemplateTargetName"].selection_mode #=> String
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters #=> Hash
+    #   resp.experiment_template.targets["ExperimentTemplateTargetName"].parameters["ExperimentTemplateTargetParameterName"] #=> String
     #   resp.experiment_template.actions #=> Hash
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].action_id #=> String
     #   resp.experiment_template.actions["ExperimentTemplateActionName"].description #=> String
@@ -1183,7 +1277,7 @@ module Aws::FIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

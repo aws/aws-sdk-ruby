@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.72.0 (2022-02-02)
+------------------
+
+* Feature - Doc-only update for Cost Explorer API that adds INVOICING_ENTITY dimensions
+
 1.71.0 (2022-01-11)
 ------------------
 

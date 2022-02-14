@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-02-03)
+------------------
+
+* Feature - Add EC2 Image recycle bin support.
+
+1.3.0 (2022-02-03)
+------------------
+
+* Feature - Add EC2 Image recycle bin support.
+
 1.2.0 (2021-12-21)
 ------------------
 

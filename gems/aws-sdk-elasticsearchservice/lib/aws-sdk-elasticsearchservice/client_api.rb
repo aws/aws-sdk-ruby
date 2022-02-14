@@ -47,6 +47,12 @@ module Aws::ElasticsearchService
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelElasticsearchServiceSoftwareUpdateRequest = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateRequest')
     CancelElasticsearchServiceSoftwareUpdateResponse = Shapes::StructureShape.new(name: 'CancelElasticsearchServiceSoftwareUpdateResponse')
+    ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
+    ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
+    ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
+    ChangeProgressStageName = Shapes::StringShape.new(name: 'ChangeProgressStageName')
+    ChangeProgressStageStatus = Shapes::StringShape.new(name: 'ChangeProgressStageStatus')
+    ChangeProgressStatusDetails = Shapes::StructureShape.new(name: 'ChangeProgressStatusDetails')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     CognitoOptions = Shapes::StructureShape.new(name: 'CognitoOptions')
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
@@ -78,6 +84,8 @@ module Aws::ElasticsearchService
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DescribeDomainAutoTunesRequest = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesRequest')
     DescribeDomainAutoTunesResponse = Shapes::StructureShape.new(name: 'DescribeDomainAutoTunesResponse')
+    DescribeDomainChangeProgressRequest = Shapes::StructureShape.new(name: 'DescribeDomainChangeProgressRequest')
+    DescribeDomainChangeProgressResponse = Shapes::StructureShape.new(name: 'DescribeDomainChangeProgressResponse')
     DescribeElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigRequest')
     DescribeElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainConfigResponse')
     DescribeElasticsearchDomainRequest = Shapes::StructureShape.new(name: 'DescribeElasticsearchDomainRequest')
@@ -101,6 +109,7 @@ module Aws::ElasticsearchService
     DescribeReservedElasticsearchInstanceOfferingsResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstanceOfferingsResponse')
     DescribeReservedElasticsearchInstancesRequest = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesRequest')
     DescribeReservedElasticsearchInstancesResponse = Shapes::StructureShape.new(name: 'DescribeReservedElasticsearchInstancesResponse')
+    Description = Shapes::StringShape.new(name: 'Description')
     DisableTimestamp = Shapes::TimestampShape.new(name: 'DisableTimestamp')
     DisabledOperationException = Shapes::StructureShape.new(name: 'DisabledOperationException')
     DissociatePackageRequest = Shapes::StructureShape.new(name: 'DissociatePackageRequest')
@@ -208,6 +217,7 @@ module Aws::ElasticsearchService
     OutboundCrossClusterSearchConnectionStatus = Shapes::StructureShape.new(name: 'OutboundCrossClusterSearchConnectionStatus')
     OutboundCrossClusterSearchConnectionStatusCode = Shapes::StringShape.new(name: 'OutboundCrossClusterSearchConnectionStatusCode')
     OutboundCrossClusterSearchConnections = Shapes::ListShape.new(name: 'OutboundCrossClusterSearchConnections')
+    OverallChangeStatus = Shapes::StringShape.new(name: 'OverallChangeStatus')
     OwnerId = Shapes::StringShape.new(name: 'OwnerId')
     PackageDescription = Shapes::StringShape.new(name: 'PackageDescription')
     PackageDetails = Shapes::StructureShape.new(name: 'PackageDetails')
@@ -274,6 +284,7 @@ module Aws::ElasticsearchService
     TagList = Shapes::ListShape.new(name: 'TagList')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
+    TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UpdateElasticsearchDomainConfigRequest = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigRequest')
     UpdateElasticsearchDomainConfigResponse = Shapes::StructureShape.new(name: 'UpdateElasticsearchDomainConfigResponse')
@@ -403,6 +414,27 @@ module Aws::ElasticsearchService
     CancelElasticsearchServiceSoftwareUpdateResponse.add_member(:service_software_options, Shapes::ShapeRef.new(shape: ServiceSoftwareOptions, location_name: "ServiceSoftwareOptions"))
     CancelElasticsearchServiceSoftwareUpdateResponse.struct_class = Types::CancelElasticsearchServiceSoftwareUpdateResponse
 
+    ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
+    ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    ChangeProgressDetails.struct_class = Types::ChangeProgressDetails
+
+    ChangeProgressStage.add_member(:name, Shapes::ShapeRef.new(shape: ChangeProgressStageName, location_name: "Name"))
+    ChangeProgressStage.add_member(:status, Shapes::ShapeRef.new(shape: ChangeProgressStageStatus, location_name: "Status"))
+    ChangeProgressStage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+    ChangeProgressStage.add_member(:last_updated, Shapes::ShapeRef.new(shape: LastUpdated, location_name: "LastUpdated"))
+    ChangeProgressStage.struct_class = Types::ChangeProgressStage
+
+    ChangeProgressStageList.member = Shapes::ShapeRef.new(shape: ChangeProgressStage)
+
+    ChangeProgressStatusDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
+    ChangeProgressStatusDetails.add_member(:start_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "StartTime"))
+    ChangeProgressStatusDetails.add_member(:status, Shapes::ShapeRef.new(shape: OverallChangeStatus, location_name: "Status"))
+    ChangeProgressStatusDetails.add_member(:pending_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "PendingProperties"))
+    ChangeProgressStatusDetails.add_member(:completed_properties, Shapes::ShapeRef.new(shape: StringList, location_name: "CompletedProperties"))
+    ChangeProgressStatusDetails.add_member(:total_number_of_stages, Shapes::ShapeRef.new(shape: TotalNumberOfStages, location_name: "TotalNumberOfStages"))
+    ChangeProgressStatusDetails.add_member(:change_progress_stages, Shapes::ShapeRef.new(shape: ChangeProgressStageList, location_name: "ChangeProgressStages"))
+    ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
+
     CognitoOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
     CognitoOptions.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolId, location_name: "UserPoolId"))
     CognitoOptions.add_member(:identity_pool_id, Shapes::ShapeRef.new(shape: IdentityPoolId, location_name: "IdentityPoolId"))
@@ -498,6 +530,13 @@ module Aws::ElasticsearchService
     DescribeDomainAutoTunesResponse.add_member(:auto_tunes, Shapes::ShapeRef.new(shape: AutoTuneList, location_name: "AutoTunes"))
     DescribeDomainAutoTunesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     DescribeDomainAutoTunesResponse.struct_class = Types::DescribeDomainAutoTunesResponse
+
+    DescribeDomainChangeProgressRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDomainChangeProgressRequest.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location: "querystring", location_name: "changeid"))
+    DescribeDomainChangeProgressRequest.struct_class = Types::DescribeDomainChangeProgressRequest
+
+    DescribeDomainChangeProgressResponse.add_member(:change_progress_status, Shapes::ShapeRef.new(shape: ChangeProgressStatusDetails, location_name: "ChangeProgressStatus"))
+    DescribeDomainChangeProgressResponse.struct_class = Types::DescribeDomainChangeProgressResponse
 
     DescribeElasticsearchDomainConfigRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeElasticsearchDomainConfigRequest.struct_class = Types::DescribeElasticsearchDomainConfigRequest
@@ -673,6 +712,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainConfig.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptionsStatus, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainConfig.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptionsStatus, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainConfig.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsStatus, location_name: "AutoTuneOptions"))
+    ElasticsearchDomainConfig.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     ElasticsearchDomainConfig.struct_class = Types::ElasticsearchDomainConfig
 
     ElasticsearchDomainStatus.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "DomainId"))
@@ -699,6 +739,7 @@ module Aws::ElasticsearchService
     ElasticsearchDomainStatus.add_member(:domain_endpoint_options, Shapes::ShapeRef.new(shape: DomainEndpointOptions, location_name: "DomainEndpointOptions"))
     ElasticsearchDomainStatus.add_member(:advanced_security_options, Shapes::ShapeRef.new(shape: AdvancedSecurityOptions, location_name: "AdvancedSecurityOptions"))
     ElasticsearchDomainStatus.add_member(:auto_tune_options, Shapes::ShapeRef.new(shape: AutoTuneOptionsOutput, location_name: "AutoTuneOptions"))
+    ElasticsearchDomainStatus.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     ElasticsearchDomainStatus.struct_class = Types::ElasticsearchDomainStatus
 
     ElasticsearchDomainStatusList.member = Shapes::ShapeRef.new(shape: ElasticsearchDomainStatus)
@@ -1085,6 +1126,7 @@ module Aws::ElasticsearchService
     UpgradeElasticsearchDomainResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, location_name: "DomainName"))
     UpgradeElasticsearchDomainResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: ElasticsearchVersionString, location_name: "TargetVersion"))
     UpgradeElasticsearchDomainResponse.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
+    UpgradeElasticsearchDomainResponse.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     UpgradeElasticsearchDomainResponse.struct_class = Types::UpgradeElasticsearchDomainResponse
 
     UpgradeHistory.add_member(:upgrade_name, Shapes::ShapeRef.new(shape: UpgradeName, location_name: "UpgradeName"))
@@ -1304,6 +1346,18 @@ module Aws::ElasticsearchService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:describe_domain_change_progress, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainChangeProgress"
+        o.http_method = "GET"
+        o.http_request_uri = "/2015-01-01/es/domain/{DomainName}/progress"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainChangeProgressRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainChangeProgressResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:describe_elasticsearch_domain, Seahorse::Model::Operation.new.tap do |o|

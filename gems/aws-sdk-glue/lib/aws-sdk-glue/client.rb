@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -75,6 +76,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -1486,8 +1488,8 @@ module Aws::Glue
     # checks are performed.
     #
     # @option params [required, String] :data_format
-    #   The data format of the schema definition. Currently `AVRO` and `JSON`
-    #   are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON` and
+    #   `PROTOBUF` are supported.
     #
     # @option params [required, String] :schema_definition
     #   The definition of the schema that has to be validated.
@@ -1500,7 +1502,7 @@ module Aws::Glue
     # @example Request syntax with placeholder values
     #
     #   resp = client.check_schema_version_validity({
-    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     data_format: "AVRO", # required, accepts AVRO, JSON, PROTOBUF
     #     schema_definition: "SchemaDefinitionString", # required
     #   })
     #
@@ -2702,8 +2704,8 @@ module Aws::Glue
     #   mark. No whitespace.
     #
     # @option params [required, String] :data_format
-    #   The data format of the schema definition. Currently `AVRO` and `JSON`
-    #   are supported.
+    #   The data format of the schema definition. Currently `AVRO`, `JSON` and
+    #   `PROTOBUF` are supported.
     #
     # @option params [String] :compatibility
     #   The compatibility mode of the schema. The possible values are:
@@ -2788,7 +2790,7 @@ module Aws::Glue
     #       registry_arn: "GlueResourceArn",
     #     },
     #     schema_name: "SchemaRegistryNameString", # required
-    #     data_format: "AVRO", # required, accepts AVRO, JSON
+    #     data_format: "AVRO", # required, accepts AVRO, JSON, PROTOBUF
     #     compatibility: "NONE", # accepts NONE, DISABLED, BACKWARD, BACKWARD_ALL, FORWARD, FORWARD_ALL, FULL, FULL_ALL
     #     description: "DescriptionString",
     #     tags: {
@@ -2804,7 +2806,7 @@ module Aws::Glue
     #   resp.schema_name #=> String
     #   resp.schema_arn #=> String
     #   resp.description #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO", "JSON", "PROTOBUF"
     #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
     #   resp.schema_checkpoint #=> Integer
     #   resp.latest_schema_version #=> Integer
@@ -6482,7 +6484,7 @@ module Aws::Glue
     #   resp.schema_name #=> String
     #   resp.schema_arn #=> String
     #   resp.description #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO", "JSON", "PROTOBUF"
     #   resp.compatibility #=> String, one of "NONE", "DISABLED", "BACKWARD", "BACKWARD_ALL", "FORWARD", "FORWARD_ALL", "FULL", "FULL_ALL"
     #   resp.schema_checkpoint #=> Integer
     #   resp.latest_schema_version #=> Integer
@@ -6543,7 +6545,7 @@ module Aws::Glue
     #
     #   resp.schema_version_id #=> String
     #   resp.schema_arn #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO", "JSON", "PROTOBUF"
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
     #   resp.created_time #=> String
     #
@@ -6608,7 +6610,7 @@ module Aws::Glue
     #
     #   resp.schema_version_id #=> String
     #   resp.schema_definition #=> String
-    #   resp.data_format #=> String, one of "AVRO", "JSON"
+    #   resp.data_format #=> String, one of "AVRO", "JSON", "PROTOBUF"
     #   resp.schema_arn #=> String
     #   resp.version_number #=> Integer
     #   resp.status #=> String, one of "AVAILABLE", "PENDING", "FAILURE", "DELETING"
@@ -11524,7 +11526,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.103.0'
+      context[:gem_version] = '1.105.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

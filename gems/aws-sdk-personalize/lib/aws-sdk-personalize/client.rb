@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -75,6 +76,7 @@ module Aws::Personalize
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -1074,6 +1076,32 @@ module Aws::Personalize
     # and specify the recommender's Amazon Resource Name (ARN) when you
     # make a [GetRecommendations][1] request.
     #
+    # **Minimum recommendation requests per second**
+    #
+    # When you create a recommender, you can configure the recommender's
+    # minimum recommendation requests per second. The minimum recommendation
+    # requests per second (`minRecommendationRequestsPerSecond`) specifies
+    # the baseline recommendation request throughput provisioned by Amazon
+    # Personalize. The default minRecommendationRequestsPerSecond is `1`. A
+    # recommendation request is a single `GetRecommendations` operation.
+    # Request throughput is measured in requests per second and Amazon
+    # Personalize uses your requests per second to derive your requests per
+    # hour and the price of your recommender usage.
+    #
+    # If your requests per second increases beyond
+    # `minRecommendationRequestsPerSecond`, Amazon Personalize auto-scales
+    # the provisioned capacity up and down, but never below
+    # `minRecommendationRequestsPerSecond`. There's a short time delay
+    # while the capacity is increased that might cause loss of requests.
+    #
+    # Your bill is the greater of either the minimum requests per hour
+    # (based on minRecommendationRequestsPerSecond) or the actual number of
+    # requests. The actual request throughput used is calculated as the
+    # average requests/second within a one-hour window. We recommend
+    # starting with the default `minRecommendationRequestsPerSecond`, track
+    # your usage using Amazon CloudWatch metrics, and then increase the
+    # `minRecommendationRequestsPerSecond` as necessary.
+    #
     # **Status**
     #
     # A recommender can be in one of the following states:
@@ -1139,6 +1167,7 @@ module Aws::Personalize
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
     #       },
+    #       min_recommendation_requests_per_second: 1,
     #     },
     #   })
     #
@@ -2234,12 +2263,14 @@ module Aws::Personalize
     #   resp.recommender.recipe_arn #=> String
     #   resp.recommender.recommender_config.item_exploration_config #=> Hash
     #   resp.recommender.recommender_config.item_exploration_config["ParameterName"] #=> String
+    #   resp.recommender.recommender_config.min_recommendation_requests_per_second #=> Integer
     #   resp.recommender.creation_date_time #=> Time
     #   resp.recommender.last_updated_date_time #=> Time
     #   resp.recommender.status #=> String
     #   resp.recommender.failure_reason #=> String
     #   resp.recommender.latest_recommender_update.recommender_config.item_exploration_config #=> Hash
     #   resp.recommender.latest_recommender_update.recommender_config.item_exploration_config["ParameterName"] #=> String
+    #   resp.recommender.latest_recommender_update.recommender_config.min_recommendation_requests_per_second #=> Integer
     #   resp.recommender.latest_recommender_update.creation_date_time #=> Time
     #   resp.recommender.latest_recommender_update.last_updated_date_time #=> Time
     #   resp.recommender.latest_recommender_update.status #=> String
@@ -3015,6 +3046,7 @@ module Aws::Personalize
     #   resp.recommenders[0].recipe_arn #=> String
     #   resp.recommenders[0].recommender_config.item_exploration_config #=> Hash
     #   resp.recommenders[0].recommender_config.item_exploration_config["ParameterName"] #=> String
+    #   resp.recommenders[0].recommender_config.min_recommendation_requests_per_second #=> Integer
     #   resp.recommenders[0].status #=> String
     #   resp.recommenders[0].creation_date_time #=> Time
     #   resp.recommenders[0].last_updated_date_time #=> Time
@@ -3286,6 +3318,7 @@ module Aws::Personalize
     #       item_exploration_config: {
     #         "ParameterName" => "ParameterValue",
     #       },
+    #       min_recommendation_requests_per_second: 1,
     #     },
     #   })
     #
@@ -3315,7 +3348,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-02-10)
+------------------
+
+* Feature - This SDK release adds a new paramater creation date for GetApp and GetApps Api call
+
+1.65.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2022-01-13)
 ------------------
 

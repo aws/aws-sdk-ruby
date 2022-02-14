@@ -1,6 +1,25 @@
 Unreleased Changes
 ------------------
 
+* Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
+
+3.126.1 (2022-02-14)
+------------------
+
+* Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens and retry failures due to using expired tokens.
+
+3.126.0 (2022-02-03)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Add support for recursion detection.
+
+3.125.6 (2022-02-02)
+------------------
+
+* Issue - Ensure default message for ServiceError is a string (#2643).
+
 3.125.5 (2022-01-19)
 ------------------
 

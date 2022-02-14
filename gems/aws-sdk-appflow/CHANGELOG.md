@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2022-02-14)
+------------------
+
+* Feature - Launching Amazon AppFlow SAP as a destination connector SDK.
+
+1.22.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2022-02-02)
+------------------
+
+* Feature - Launching Amazon AppFlow Custom Connector SDK.
+
 1.20.0 (2021-12-21)
 ------------------
 

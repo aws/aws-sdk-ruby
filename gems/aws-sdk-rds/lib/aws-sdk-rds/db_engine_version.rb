@@ -218,6 +218,13 @@ module Aws::RDS
       data[:tag_list]
     end
 
+    # A value that indicates whether the engine version supports Babelfish
+    # for Aurora PostgreSQL.
+    # @return [Boolean]
+    def supports_babelfish
+      data[:supports_babelfish]
+    end
+
     # @!endgroup
 
     # @return [Client]

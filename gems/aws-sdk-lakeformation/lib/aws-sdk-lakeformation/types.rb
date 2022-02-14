@@ -4288,7 +4288,7 @@ module Aws::LakeFormation
     #         catalog_id: "CatalogIdString",
     #         database_name: "NameString", # required
     #         table_name: "NameString", # required
-    #         transaction_id: "TransactionIdString", # required
+    #         transaction_id: "TransactionIdString",
     #         write_operations: [ # required
     #           {
     #             add_object: {

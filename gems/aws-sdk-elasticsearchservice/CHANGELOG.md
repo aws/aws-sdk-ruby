@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2022-02-02)
+------------------
+
+* Feature - Allows customers to get progress updates for blue/green deployments
+
 1.62.0 (2022-01-06)
 ------------------
 

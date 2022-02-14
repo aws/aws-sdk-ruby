@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -77,6 +78,7 @@ module Aws::EC2
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::EC2)
     add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -4791,8 +4793,16 @@ module Aws::EC2
     #   connections.
     #
     # @option params [Integer] :session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #
+    #   Valid values: `8 | 10 | 12 | 24`
+    #
+    #   Default value: `24`
     #
     # @option params [Types::ClientLoginBannerOptions] :client_login_banner_options
+    #   Options for enabling a customizable text banner that will be displayed
+    #   on Amazon Web Services provided clients when a VPN session is
+    #   established.
     #
     # @return [Types::CreateClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6108,6 +6118,13 @@ module Aws::EC2
 
     # Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance
     # that is either running or stopped.
+    #
+    # By default, Amazon EC2 shuts down and reboots the instance before
+    # creating the AMI to ensure that everything on the instance is stopped
+    # and in a consistent state during the creation process. If you're
+    # confident that your instance is in a consistent state appropriate for
+    # AMI creation, use the **NoReboot** parameter to prevent Amazon EC2
+    # from shutting down and rebooting the instance.
     #
     # If you customized your instance with instance store volumes or Amazon
     # EBS volumes in addition to the root device volume, the new AMI
@@ -16189,15 +16206,26 @@ module Aws::EC2
     end
 
     # Deregisters the specified AMI. After you deregister an AMI, it can't
-    # be used to launch new instances; however, it doesn't affect any
-    # instances that you've already launched from the AMI. You'll continue
-    # to incur usage costs for those instances until you terminate them.
+    # be used to launch new instances.
+    #
+    # If you deregister an AMI that matches a Recycle Bin retention rule,
+    # the AMI is retained in the Recycle Bin for the specified retention
+    # period. For more information, see [Recycle Bin][1] in the Amazon
+    # Elastic Compute Cloud User Guide.
+    #
+    # When you deregister an AMI, it doesn't affect any instances that
+    # you've already launched from the AMI. You'll continue to incur usage
+    # costs for those instances until you terminate them.
     #
     # When you deregister an Amazon EBS-backed AMI, it doesn't affect the
     # snapshot that was created for the root volume of the instance during
     # the AMI creation process. When you deregister an instance store-backed
     # AMI, it doesn't affect the files that you uploaded to Amazon S3 when
     # you created the AMI.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html
     #
     # @option params [required, String] :image_id
     #   The ID of the AMI.
@@ -32511,6 +32539,10 @@ module Aws::EC2
     # pre-provisioned snapshots must be removed before you can enable faster
     # launching again.
     #
+    # <note markdown="1"> To change these settings, you must own the AMI.
+    #
+    #  </note>
+    #
     # @option params [required, String] :image_id
     #   The ID of the image for which you’re turning off faster launching, and
     #   removing pre-provisioned snapshots.
@@ -33544,6 +33576,10 @@ module Aws::EC2
     # reserved snapshots are automatically replenished as they are used,
     # depending on your settings for launch frequency.
     #
+    # <note markdown="1"> To change these settings, you must own the AMI.
+    #
+    #  </note>
+    #
     # @option params [required, String] :image_id
     #   The ID of the image for which you’re enabling faster launching.
     #
@@ -33564,7 +33600,7 @@ module Aws::EC2
     #
     # @option params [Integer] :max_parallel_launches
     #   The maximum number of parallel instances to launch for creating
-    #   resources.
+    #   resources. Value must be `6` or greater.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -37694,6 +37730,76 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Lists one or more AMIs that are currently in the Recycle Bin. For more
+    # information, see [Recycle Bin][1] in the Amazon Elastic Compute Cloud
+    # User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html
+    #
+    # @option params [Array<String>] :image_ids
+    #   The IDs of the AMIs to list. Omit this parameter to list all of the
+    #   AMIs that are in the Recycle Bin. You can specify up to 20 IDs in a
+    #   single request.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `nextToken` value.
+    #
+    #   If you do not specify a value for *MaxResults*, the request returns
+    #   1,000 items per page by default. For more information, see [
+    #   Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ListImagesInRecycleBinResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListImagesInRecycleBinResult#images #images} => Array&lt;Types::ImageRecycleBinInfo&gt;
+    #   * {Types::ListImagesInRecycleBinResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_images_in_recycle_bin({
+    #     image_ids: ["ImageId"],
+    #     next_token: "String",
+    #     max_results: 1,
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.images #=> Array
+    #   resp.images[0].image_id #=> String
+    #   resp.images[0].name #=> String
+    #   resp.images[0].description #=> String
+    #   resp.images[0].recycle_bin_enter_time #=> Time
+    #   resp.images[0].recycle_bin_exit_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ListImagesInRecycleBin AWS API Documentation
+    #
+    # @overload list_images_in_recycle_bin(params = {})
+    # @param [Hash] params ({})
+    def list_images_in_recycle_bin(params = {}, options = {})
+      req = build_request(:list_images_in_recycle_bin, params)
+      req.send_request(options)
+    end
+
     # Lists one or more snapshots that are currently in the Recycle Bin.
     #
     # @option params [Integer] :max_results
@@ -38088,8 +38194,16 @@ module Aws::EC2
     #   connections.
     #
     # @option params [Integer] :session_timeout_hours
+    #   The maximum VPN session duration time in hours.
+    #
+    #   Valid values: `8 | 10 | 12 | 24`
+    #
+    #   Default value: `24`
     #
     # @option params [Types::ClientLoginBannerOptions] :client_login_banner_options
+    #   Options for enabling a customizable text banner that will be displayed
+    #   on Amazon Web Services provided clients when a VPN session is
+    #   established.
     #
     # @return [Types::ModifyClientVpnEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -45912,6 +46026,46 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # Restores an AMI from the Recycle Bin. For more information, see
+    # [Recycle Bin][1] in the Amazon Elastic Compute Cloud User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI to restore.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::RestoreImageFromRecycleBinResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreImageFromRecycleBinResult#return #return} => Boolean
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_image_from_recycle_bin({
+    #     image_id: "ImageId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.return #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RestoreImageFromRecycleBin AWS API Documentation
+    #
+    # @overload restore_image_from_recycle_bin(params = {})
+    # @param [Hash] params ({})
+    def restore_image_from_recycle_bin(params = {}, options = {})
+      req = build_request(:restore_image_from_recycle_bin, params)
+      req.send_request(options)
+    end
+
     # Restores the entries from a previous version of a managed prefix list
     # to a new version of the prefix list.
     #
@@ -49093,7 +49247,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.296.0'
+      context[:gem_version] = '1.298.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

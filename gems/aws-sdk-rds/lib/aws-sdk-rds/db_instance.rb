@@ -1243,7 +1243,10 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
-    #   If there is no DB subnet group, then it is a non-VPC DB instance.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
+    #
+    #   Example: `mydbsubnetgroup`
     # @option options [String] :preferred_maintenance_window
     #   The time range each week during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC). For more information, see [Amazon
@@ -2014,7 +2017,7 @@ module Aws::RDS
     #     * Not specify a DB subnet group. All these read replicas are created
     #       outside of any VPC.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     # @option options [Array<String>] :vpc_security_group_ids
     #   A list of Amazon EC2 VPC security groups to associate with the read
     #   replica.
@@ -2534,7 +2537,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetGroup`
+    #   Example: `mydbsubnetgroup`
     #
     #
     #
@@ -3414,7 +3417,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     # @option options [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
     #   deployment.
@@ -3939,13 +3942,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     pending maintenance actions for the DB clusters identified by these
-    #     ARNs.
+    #     Amazon Resource Names (ARNs). The results list only includes pending
+    #     maintenance actions for the DB clusters identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions for
+    #     the DB instances identified by these ARNs.
     # @return [PendingMaintenanceAction::Collection]
     def pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|

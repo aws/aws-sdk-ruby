@@ -100,7 +100,7 @@ module Aws
     #   or `nil` if no valid credentials were found.
     def credentials(opts = {})
       p = opts[:profile] || @profile_name
-      validate_profile_exists(p) if credentials_present?
+      validate_profile_exists(p)
       if (credentials = credentials_from_shared(p, opts))
         credentials
       elsif (credentials = credentials_from_config(p, opts))
@@ -193,11 +193,6 @@ module Aws
       value = @parsed_credentials.fetch(p, {})[key] if @parsed_credentials
       value ||= @parsed_config.fetch(p, {})[key] if @config_enabled && @parsed_config
       value
-    end
-
-    def credentials_present?
-      (@parsed_credentials && !@parsed_credentials.empty?) ||
-        (@parsed_config && !@parsed_config.empty?)
     end
 
     def assume_role_from_profile(cfg, profile, opts, chain_config)

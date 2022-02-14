@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2022-02-02)
+------------------
+
+* Feature - Amazon Comprehend now supports sharing and importing custom trained models from one AWS account to another within the same region.
+
 1.56.0 (2021-12-21)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.24.0 (2022-02-04)
+------------------
+
+* Feature - Add support for calling Update Table Objects without a TransactionId.
+
+1.23.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.22.0 (2022-01-05)
 ------------------
 

@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -75,6 +76,7 @@ module Aws::RoboMaker
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -501,6 +503,9 @@ module Aws::RoboMaker
 
     # Cancels the specified deployment job.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [required, String] :job
     #   The deployment job ARN to cancel.
     #
@@ -613,6 +618,8 @@ module Aws::RoboMaker
 
     # Deploys a specific version of a robot application to robots in a
     # fleet.
+    #
+    # This API is no longer supported and will throw an error if used.
     #
     # The robot application must have a numbered `applicationVersion` for
     # consistency reasons. To create a new version, use
@@ -733,6 +740,8 @@ module Aws::RoboMaker
     # Creates a fleet, a logical group of robots running the same robot
     # application.
     #
+    # This API is no longer supported and will throw an error if used.
+    #
     # @option params [required, String] :name
     #   The name of the fleet.
     #
@@ -774,6 +783,8 @@ module Aws::RoboMaker
     end
 
     # Creates a robot.
+    #
+    # This API is no longer supported and will throw an error if used.
     #
     # @option params [required, String] :name
     #   The name for the robot.
@@ -1671,6 +1682,9 @@ module Aws::RoboMaker
 
     # Deletes a fleet.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [required, String] :fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #
@@ -1692,6 +1706,9 @@ module Aws::RoboMaker
     end
 
     # Deletes a robot.
+    #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
     #
     # @option params [required, String] :robot
     #   The Amazon Resource Name (ARN) of the robot.
@@ -1790,6 +1807,9 @@ module Aws::RoboMaker
 
     # Deregisters a robot.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [required, String] :fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #
@@ -1823,6 +1843,9 @@ module Aws::RoboMaker
     end
 
     # Describes a deployment job.
+    #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
     #
     # @option params [required, String] :job
     #   The Amazon Resource Name (ARN) of the deployment job.
@@ -1894,6 +1917,9 @@ module Aws::RoboMaker
 
     # Describes a fleet.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [required, String] :fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #
@@ -1945,6 +1971,9 @@ module Aws::RoboMaker
     end
 
     # Describes a robot.
+    #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
     #
     # @option params [required, String] :robot
     #   The Amazon Resource Name (ARN) of the robot to be described.
@@ -2693,6 +2722,9 @@ module Aws::RoboMaker
     # Returns a list of deployment jobs for a fleet. You can optionally
     # provide filters to retrieve specific deployment jobs.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [Array<Types::Filter>] :filters
     #   Optional filters to limit results.
     #
@@ -2776,6 +2808,9 @@ module Aws::RoboMaker
 
     # Returns a list of fleets. You can optionally provide filters to
     # retrieve specific fleets.
+    #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
     #
     # @option params [String] :next_token
     #   If the previous paginated request did not return all of the remaining
@@ -2918,6 +2953,9 @@ module Aws::RoboMaker
 
     # Returns a list of robots. You can optionally provide filters to
     # retrieve specific robots.
+    #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
     #
     # @option params [String] :next_token
     #   If the previous paginated request did not return all of the remaining
@@ -3468,6 +3506,8 @@ module Aws::RoboMaker
 
     # Registers a robot with a fleet.
     #
+    # This API is no longer supported and will throw an error if used.
+    #
     # @option params [required, String] :fleet
     #   The Amazon Resource Name (ARN) of the fleet.
     #
@@ -3893,6 +3933,9 @@ module Aws::RoboMaker
     # Syncrhonizes robots in a fleet to the latest deployment. This is
     # helpful if robots were added after a deployment.
     #
+    # This API will no longer be supported as of May 2, 2022. Use it to
+    # remove resources that were created for Deployment Service.
+    #
     # @option params [required, String] :client_request_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request.
@@ -4263,7 +4306,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

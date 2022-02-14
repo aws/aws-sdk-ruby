@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.58.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.57.0 (2022-02-02)
+------------------
+
+* Feature - Documentation updates for Amazon EMR.
+
 1.56.0 (2021-12-21)
 ------------------
 

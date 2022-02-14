@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.298.0 (2022-02-03)
+------------------
+
+* Feature - adds support for AMIs in Recycle Bin
+
+1.297.0 (2022-02-03)
+------------------
+
+* Feature - adds support for AMIs in Recycle Bin
+
 1.296.0 (2022-01-27)
 ------------------
 

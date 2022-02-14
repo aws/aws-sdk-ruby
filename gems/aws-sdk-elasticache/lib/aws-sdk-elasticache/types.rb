@@ -1009,7 +1009,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \|
+    #   `redis5.0` \| `redis6.x` \|
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -1913,7 +1913,7 @@ module Aws::ElastiCache
     #   Specifies the weekly time range during which maintenance on the
     #   cluster is performed. It is specified as a range in the format
     #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-    #   window is a 60 minute period. Valid values for `ddd` are:
+    #   window is a 60 minute period.
     #   @return [String]
     #
     # @!attribute [rw] port
@@ -2078,7 +2078,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.2`
+    #   `redis5.0` \| `redis6.x`
     #   @return [String]
     #
     # @!attribute [rw] description

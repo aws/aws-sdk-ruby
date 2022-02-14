@@ -2302,7 +2302,7 @@ module Aws::EventBridge
     #   Specifies the launch type on which your task is running. The launch
     #   type that you specify here must match one of the launch type
     #   (compatibilities) of the target task. The `FARGATE` value is
-    #   supported only in the Regions where Fargate witt Amazon ECS is
+    #   supported only in the Regions where Fargate with Amazon ECS is
     #   supported. For more information, see [Fargate on Amazon ECS][1] in
     #   the *Amazon Elastic Container Service Developer Guide*.
     #
@@ -3665,7 +3665,7 @@ module Aws::EventBridge
     #   @return [String]
     #
     # @!attribute [rw] trace_header
-    #   An X-Ray trade header, which is an http header (X-Amzn-Trace-Id)
+    #   An X-Ray trace header, which is an http header (X-Amzn-Trace-Id)
     #   that contains the trace-id associated with the event.
     #
     #   To learn more about X-Ray trace headers, see [Tracing header][1] in
@@ -3710,7 +3710,12 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # Represents an event that failed to be submitted.
+    # Represents an event that failed to be submitted. For information about
+    # the errors that are common to all actions, see [Common Errors][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/CommonErrors.html
     #
     # @!attribute [rw] event_id
     #   The ID of the event.
@@ -3896,6 +3901,10 @@ module Aws::EventBridge
     #   permissions to. If you later want to revoke the permission for this
     #   external account, specify this `StatementId` when you run
     #   [RemovePermission][1].
+    #
+    #   <note markdown="1"> Each `StatementId` must be unique.
+    #
+    #    </note>
     #
     #
     #
@@ -5025,8 +5034,9 @@ module Aws::EventBridge
     #       }
     #
     # @!attribute [rw] id
-    #   The ID of the target. We recommend using a memorable and unique
-    #   string.
+    #   The ID of the target within the specified rule. Use this ID to
+    #   reference the target when updating the rule. We recommend using a
+    #   memorable and unique string.
     #   @return [String]
     #
     # @!attribute [rw] arn
