@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Raise a `NoSuchProfileError` when config or credentials files don't exist.
+* Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
 
 3.126.1 (2022-02-14)
 ------------------
