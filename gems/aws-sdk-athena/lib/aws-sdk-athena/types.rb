@@ -28,10 +28,21 @@ module Aws::Athena
     #   **3** - Unknown
     #   @return [Integer]
     #
+    # @!attribute [rw] error_type
+    #   An integer value that provides specific information about an Athena
+    #   query error. For the meaning of specific values, see the [Error Type
+    #   Reference][1] in the *Amazon Athena User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AthenaError AWS API Documentation
     #
     class AthenaError < Struct.new(
-      :error_category)
+      :error_category,
+      :error_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2067,7 +2078,7 @@ module Aws::Athena
     #   in this workgroup should be ignored and set to null. If set to
     #   "false" or not set, and a value is present in the `OutputLocation`
     #   in `ResultConfigurationUpdates` (the client-side setting), the
-    #   `OutputLocation` in the workgroup's `ResultConfiguration` is
+    #   `OutputLocation` in the workgroup's `ResultConfiguration` will be
     #   updated with the new value. For more information, see [Workgroup
     #   Settings Override Client-Side Settings][1].
     #
@@ -2087,9 +2098,9 @@ module Aws::Athena
     #   to "false" or not set, and a value is present in the
     #   `EncryptionConfiguration` in `ResultConfigurationUpdates` (the
     #   client-side setting), the `EncryptionConfiguration` in the
-    #   workgroup's `ResultConfiguration` is updated with the new value.
-    #   For more information, see [Workgroup Settings Override Client-Side
-    #   Settings][1].
+    #   workgroup's `ResultConfiguration` will be updated with the new
+    #   value. For more information, see [Workgroup Settings Override
+    #   Client-Side Settings][1].
     #
     #
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.139.0 (2022-02-14)
+------------------
+
+* Feature - Adds support for determining which Aurora PostgreSQL versions support Babelfish.
+
 1.138.0 (2022-02-04)
 ------------------
 

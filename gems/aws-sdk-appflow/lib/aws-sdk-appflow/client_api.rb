@@ -273,6 +273,7 @@ module Aws::Appflow
     SAPODataConnectorOperator = Shapes::StringShape.new(name: 'SAPODataConnectorOperator')
     SAPODataConnectorProfileCredentials = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileCredentials')
     SAPODataConnectorProfileProperties = Shapes::StructureShape.new(name: 'SAPODataConnectorProfileProperties')
+    SAPODataDestinationProperties = Shapes::StructureShape.new(name: 'SAPODataDestinationProperties')
     SAPODataMetadata = Shapes::StructureShape.new(name: 'SAPODataMetadata')
     SAPODataSourceProperties = Shapes::StructureShape.new(name: 'SAPODataSourceProperties')
     SalesforceConnectorOperator = Shapes::StringShape.new(name: 'SalesforceConnectorOperator')
@@ -317,6 +318,7 @@ module Aws::Appflow
     StopFlowRequest = Shapes::StructureShape.new(name: 'StopFlowRequest')
     StopFlowResponse = Shapes::StructureShape.new(name: 'StopFlowResponse')
     String = Shapes::StringShape.new(name: 'String')
+    SuccessResponseHandlingConfig = Shapes::StructureShape.new(name: 'SuccessResponseHandlingConfig')
     SupportedApiVersion = Shapes::StringShape.new(name: 'SupportedApiVersion')
     SupportedApiVersionList = Shapes::ListShape.new(name: 'SupportedApiVersionList')
     SupportedFieldTypeDetails = Shapes::StructureShape.new(name: 'SupportedFieldTypeDetails')
@@ -800,6 +802,7 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesDestinationProperties, location_name: "CustomerProfiles"))
     DestinationConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskDestinationProperties, location_name: "Zendesk"))
     DestinationConnectorProperties.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorDestinationProperties, location_name: "CustomConnector"))
+    DestinationConnectorProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataDestinationProperties, location_name: "SAPOData"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
 
     DestinationFieldProperties.add_member(:is_creatable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCreatable"))
@@ -1111,6 +1114,13 @@ module Aws::Appflow
     SAPODataConnectorProfileProperties.add_member(:o_auth_properties, Shapes::ShapeRef.new(shape: OAuthProperties, location_name: "oAuthProperties"))
     SAPODataConnectorProfileProperties.struct_class = Types::SAPODataConnectorProfileProperties
 
+    SAPODataDestinationProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "objectPath"))
+    SAPODataDestinationProperties.add_member(:success_response_handling_config, Shapes::ShapeRef.new(shape: SuccessResponseHandlingConfig, location_name: "successResponseHandlingConfig"))
+    SAPODataDestinationProperties.add_member(:id_field_names, Shapes::ShapeRef.new(shape: IdFieldNameList, location_name: "idFieldNames"))
+    SAPODataDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    SAPODataDestinationProperties.add_member(:write_operation_type, Shapes::ShapeRef.new(shape: WriteOperationType, location_name: "writeOperationType"))
+    SAPODataDestinationProperties.struct_class = Types::SAPODataDestinationProperties
+
     SAPODataMetadata.struct_class = Types::SAPODataMetadata
 
     SAPODataSourceProperties.add_member(:object_path, Shapes::ShapeRef.new(shape: Object, location_name: "objectPath"))
@@ -1259,6 +1269,10 @@ module Aws::Appflow
     StopFlowResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: FlowArn, location_name: "flowArn"))
     StopFlowResponse.add_member(:flow_status, Shapes::ShapeRef.new(shape: FlowStatus, location_name: "flowStatus"))
     StopFlowResponse.struct_class = Types::StopFlowResponse
+
+    SuccessResponseHandlingConfig.add_member(:bucket_prefix, Shapes::ShapeRef.new(shape: BucketPrefix, location_name: "bucketPrefix"))
+    SuccessResponseHandlingConfig.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, location_name: "bucketName"))
+    SuccessResponseHandlingConfig.struct_class = Types::SuccessResponseHandlingConfig
 
     SupportedApiVersionList.member = Shapes::ShapeRef.new(shape: SupportedApiVersion)
 

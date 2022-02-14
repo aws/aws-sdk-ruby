@@ -281,7 +281,42 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family names.
+    #     The results list only includes information about the DB engine
+    #     versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     # @option options [Boolean] :default_only
     #   A value that indicates whether only the default version of the
     #   specified engine or engine and major version combination is returned.

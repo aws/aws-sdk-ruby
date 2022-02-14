@@ -2411,18 +2411,18 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `clone-group-id` - Accepts clone group identifiers. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these clone groups.
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB clusters identified by these ARNs.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB clusters associated with
+    #     only includes information about the DB clusters associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB clusters for these engines.
     # @option options [Boolean] :include_shared
     #   Optional Boolean parameter that specifies whether the output includes
@@ -2532,7 +2532,42 @@ module Aws::RDS
     #
     #   ^
     # @option options [Array<Types::Filter>] :filters
-    #   This parameter isn't currently supported.
+    #   A filter that specifies one or more DB engine versions to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-parameter-group-family` - Accepts parameter groups family names.
+    #     The results list only includes information about the DB engine
+    #     versions for these parameter group families.
+    #
+    #   * `engine` - Accepts engine names. The results list only includes
+    #     information about the DB engine versions for these engines.
+    #
+    #   * `engine-mode` - Accepts DB engine modes. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     modes. Valid DB engine modes are the following:
+    #
+    #     * `global`
+    #
+    #     * `multimaster`
+    #
+    #     * `parallelquery`
+    #
+    #     * `provisioned`
+    #
+    #     * `serverless`
+    #
+    #   * `engine-version` - Accepts engine versions. The results list only
+    #     includes information about the DB engine versions for these engine
+    #     versions.
+    #
+    #   * `status` - Accepts engine version statuses. The results list only
+    #     includes information about the DB engine versions for these
+    #     statuses. Valid statuses are the following:
+    #
+    #     * `available`
+    #
+    #     * `deprecated`
     # @option options [Boolean] :default_only
     #   A value that indicates whether only the default version of the
     #   specified engine or engine and major version combination is returned.
@@ -2619,12 +2654,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances associated with the DB clusters
     #     identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     Amazon Resource Names (ARNs). The results list will only include
+    #     Amazon Resource Names (ARNs). The results list only includes
     #     information about the DB instances identified by these ARNs.
     #
     #   * `dbi-resource-id` - Accepts DB instance resource identifiers. The
@@ -2632,10 +2667,10 @@ module Aws::RDS
     #     identified by these DB instance resource identifiers.
     #
     #   * `domain` - Accepts Active Directory directory IDs. The results list
-    #     will only include information about the DB instances associated with
+    #     only includes information about the DB instances associated with
     #     these domains.
     #
-    #   * `engine` - Accepts engine names. The results list will only include
+    #   * `engine` - Accepts engine names. The results list only includes
     #     information about the DB instances for these engines.
     # @return [DBInstance::Collection]
     def db_instances(options = {})
@@ -3410,13 +3445,12 @@ module Aws::RDS
     #   Supported filters:
     #
     #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
-    #     Amazon Resource Names (ARNs). The results list will only include
-    #     pending maintenance actions for the DB clusters identified by these
-    #     ARNs.
+    #     Amazon Resource Names (ARNs). The results list only includes pending
+    #     maintenance actions for the DB clusters identified by these ARNs.
     #
     #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
-    #     ARNs. The results list will only include pending maintenance actions
-    #     for the DB instances identified by these ARNs.
+    #     ARNs. The results list only includes pending maintenance actions for
+    #     the DB instances identified by these ARNs.
     # @return [ResourcePendingMaintenanceActionList::Collection]
     def resources_with_pending_maintenance_actions(options = {})
       batches = Enumerator.new do |y|

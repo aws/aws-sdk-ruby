@@ -802,7 +802,7 @@ module Aws::RDS
     #   For the full list of DB instance classes, and availability for your
     #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
     #
-    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #   Valid for: Multi-AZ DB clusters only
     #
     #
     #

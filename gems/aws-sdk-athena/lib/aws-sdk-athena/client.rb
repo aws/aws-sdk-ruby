@@ -446,6 +446,7 @@ module Aws::Athena
     #   resp.query_executions[0].status.submission_date_time #=> Time
     #   resp.query_executions[0].status.completion_date_time #=> Time
     #   resp.query_executions[0].status.athena_error.error_category #=> Integer
+    #   resp.query_executions[0].status.athena_error.error_type #=> Integer
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
@@ -1015,6 +1016,7 @@ module Aws::Athena
     #   resp.query_execution.status.submission_date_time #=> Time
     #   resp.query_execution.status.completion_date_time #=> Time
     #   resp.query_execution.status.athena_error.error_category #=> Integer
+    #   resp.query_execution.status.athena_error.error_type #=> Integer
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_execution.statistics.data_manifest_location #=> String
@@ -1040,14 +1042,6 @@ module Aws::Athena
     # S3. For more information, see [Query Results][1] in the *Amazon Athena
     # User Guide*. This request does not execute the query but returns
     # results. Use StartQueryExecution to run a query.
-    #
-    # If the original query execution ran using an
-    # ResultConfiguration$ExpectedBucketOwner setting, the setting also
-    # applies to Amazon S3 read operations when `GetQueryResults` is called.
-    # If an expected bucket owner has been specified and the query results
-    # are in an Amazon S3 bucket whose owner account ID is different from
-    # the expected bucket owner, the `GetQueryResults` call fails with an
-    # Amazon S3 permissions error.
     #
     # To stream query results successfully, the IAM principal with
     # permission to call `GetQueryResults` also must have permissions to the
@@ -2015,7 +2009,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
