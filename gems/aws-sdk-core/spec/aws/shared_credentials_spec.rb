@@ -45,23 +45,36 @@ module Aws
       expect(creds.session_token).to eq('TOKEN_1')
     end
 
-    it 'raises when a profile does not exist' do
-      msg = /^Profile `bazprofile' not found in .+mock_shared_credentials/
+    it 'raises when a path does not exist' do
+      msg = /^Profile `doesnotexist' not found in \/no\/file\/here/
       expect {
         SharedCredentials.new(
-          path: mock_credential_file,
-          profile_name: 'bazprofile'
+          path: '/no/file/here',
+          profile_name: 'doesnotexist'
         )
       }.to raise_error(Errors::NoSuchProfileError, msg)
     end
 
-    it 'is set when credentails is valid' do
+    it 'raises when a profile does not exist' do
+      msg = /^Profile `doesnotexist' not found in .+mock_shared_credentials/
+      expect {
+        SharedCredentials.new(
+          path: mock_credential_file,
+          profile_name: 'doesnotexist'
+        )
+      }.to raise_error(Errors::NoSuchProfileError, msg)
+    end
+
+    it 'is set when credentials is valid' do
       creds = SharedCredentials.new(path:mock_credential_file)
       expect(creds.set?).to eq(true)
     end
 
     it 'is not set when key_id or access_key is missing' do
-      creds = SharedCredentials.new(path:'/no/file/here')
+      creds = SharedCredentials.new(
+        path: mock_credential_file,
+        profile_name: 'no_creds'
+      )
       expect(creds.set?).to eq(false)
     end
 
