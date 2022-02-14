@@ -936,7 +936,7 @@ module Aws::LakeFormation
     UpdateTableObjectsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UpdateTableObjectsRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     UpdateTableObjectsRequest.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
-    UpdateTableObjectsRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, required: true, location_name: "TransactionId"))
+    UpdateTableObjectsRequest.add_member(:transaction_id, Shapes::ShapeRef.new(shape: TransactionIdString, location_name: "TransactionId"))
     UpdateTableObjectsRequest.add_member(:write_operations, Shapes::ShapeRef.new(shape: WriteOperationList, required: true, location_name: "WriteOperations"))
     UpdateTableObjectsRequest.struct_class = Types::UpdateTableObjectsRequest
 

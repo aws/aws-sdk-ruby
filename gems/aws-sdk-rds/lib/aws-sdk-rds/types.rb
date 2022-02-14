@@ -2019,7 +2019,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -3427,7 +3427,10 @@ module Aws::RDS
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
-    #   If there is no DB subnet group, then it is a non-VPC DB instance.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -4401,7 +4404,7 @@ module Aws::RDS
     #     * Not specify a DB subnet group. All these read replicas are
     #       created outside of any VPC.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] vpc_security_group_ids
@@ -5301,10 +5304,16 @@ module Aws::RDS
     #   The name for the DB subnet group. This value is stored as a
     #   lowercase string.
     #
-    #   Constraints: Must contain no more than 255 letters, numbers,
-    #   periods, underscores, spaces, or hyphens. Must not be default.
+    #   Constraints:
     #
-    #   Example: `mySubnetgroup`
+    #   * Must contain no more than 255 letters, numbers, periods,
+    #     underscores, spaces, or hyphens.
+    #
+    #   * Must not be default.
+    #
+    #   * First character must be a letter.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
@@ -9836,12 +9845,10 @@ module Aws::RDS
     #
     #    </note>
     #
-    #   Constraints:
-    #
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBSubnetGroupMessage AWS API Documentation
@@ -15646,7 +15653,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetGroup`
+    #   Example: `mydbsubnetgroup`
     #
     #
     #
@@ -16957,7 +16964,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] db_subnet_group_description
@@ -19509,7 +19516,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] engine
@@ -20026,7 +20033,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing DB
     #   subnet group.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20512,7 +20519,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [String]
@@ -20968,7 +20975,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] multi_az
@@ -21153,8 +21160,21 @@ module Aws::RDS
     #
     # @!attribute [rw] copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   instance to snapshots of the DB instance.
+    #
+    #   In most cases, tags aren't copied by default. However, when you
+    #   restore a DB instance from a DB snapshot, RDS checks whether you
+    #   specify new tags. If yes, the new tags are added to the restored DB
+    #   instance. If there are no new tags, RDS looks for the tags from the
+    #   source DB instance for the DB snapshot, and then adds those tags to
+    #   the restored DB instance.
+    #
+    #   For more information, see [ Copying tags to DB instance
+    #   snapshots][1] in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags
     #   @return [Boolean]
     #
     # @!attribute [rw] domain_iam_role_name
@@ -21277,8 +21297,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [
-    #   Configure IAM and your VPC][1] in the *Amazon Relational Database
-    #   Service User Guide*.
+    #   Configure IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -21525,6 +21544,11 @@ module Aws::RDS
     #
     # @!attribute [rw] db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
+    #
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
+    #
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] preferred_maintenance_window
@@ -22054,7 +22078,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #   @return [String]
     #
     # @!attribute [rw] multi_az
@@ -22559,7 +22583,7 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # SNS has responded that there is a problem with the SND topic
+    # SNS has responded that there is a problem with the SNS topic
     # specified.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SNSInvalidTopicFault AWS API Documentation

@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-rds/plugins/cross_region_copying.rb'
@@ -76,6 +77,7 @@ module Aws::RDS
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::Query)
     add_plugin(Aws::RDS::Plugins::CrossRegionCopying)
@@ -1863,9 +1865,14 @@ module Aws::RDS
     end
 
     # Creates a custom DB engine version (CEV). A CEV is a binary volume
-    # snapshot of a database engine and specific AMI. The only supported
-    # engine is Oracle Database 19c Enterprise Edition with the January 2021
-    # or later RU/RUR.
+    # snapshot of a database engine and specific AMI. The supported engines
+    # are the following:
+    #
+    # * Oracle Database 12.1 Enterprise Edition with the January 2021 or
+    #   later RU/RUR
+    #
+    # * Oracle Database 19c Enterprise Edition with the January 2021 or
+    #   later RU/RUR
     #
     # Amazon RDS, which is a fully managed service, supplies the Amazon
     # Machine Image (AMI) and database software. The Amazon RDS database
@@ -2203,7 +2210,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -3792,7 +3799,10 @@ module Aws::RDS
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
-    #   If there is no DB subnet group, then it is a non-VPC DB instance.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
+    #
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [String] :preferred_maintenance_window
     #   The time range each week during which system maintenance can occur, in
@@ -4854,7 +4864,7 @@ module Aws::RDS
     #     * Not specify a DB subnet group. All these read replicas are created
     #       outside of any VPC.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [Array<String>] :vpc_security_group_ids
     #   A list of Amazon EC2 VPC security groups to associate with the read
@@ -5962,10 +5972,16 @@ module Aws::RDS
     #   The name for the DB subnet group. This value is stored as a lowercase
     #   string.
     #
-    #   Constraints: Must contain no more than 255 letters, numbers, periods,
-    #   underscores, spaces, or hyphens. Must not be default.
+    #   Constraints:
     #
-    #   Example: `mySubnetgroup`
+    #   * Must contain no more than 255 letters, numbers, periods,
+    #     underscores, spaces, or hyphens.
+    #
+    #   * Must not be default.
+    #
+    #   * First character must be a letter.
+    #
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [required, String] :db_subnet_group_description
     #   The description for the DB subnet group.
@@ -7632,12 +7648,10 @@ module Aws::RDS
     #
     #    </note>
     #
-    #   Constraints:
-    #
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -14323,7 +14337,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetGroup`
+    #   Example: `mydbsubnetgroup`
     #
     #
     #
@@ -15849,7 +15863,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [String] :db_subnet_group_description
     #   The description for the DB subnet group.
@@ -17689,7 +17703,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [required, String] :engine
     #   The name of the database engine to be used for this DB cluster.
@@ -18236,7 +18250,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing DB subnet
     #   group.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -18782,7 +18796,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -19290,7 +19304,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
@@ -19457,8 +19471,21 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_tags_to_snapshot
     #   A value that indicates whether to copy all tags from the restored DB
-    #   instance to snapshots of the DB instance. By default, tags are not
-    #   copied.
+    #   instance to snapshots of the DB instance.
+    #
+    #   In most cases, tags aren't copied by default. However, when you
+    #   restore a DB instance from a DB snapshot, RDS checks whether you
+    #   specify new tags. If yes, the new tags are added to the restored DB
+    #   instance. If there are no new tags, RDS looks for the tags from the
+    #   source DB instance for the DB snapshot, and then adds those tags to
+    #   the restored DB instance.
+    #
+    #   For more information, see [ Copying tags to DB instance snapshots][1]
+    #   in the *Amazon RDS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#USER_Tagging.CopyTags
     #
     # @option params [String] :domain_iam_role_name
     #   Specify the name of the IAM role to be used when making API calls to
@@ -19570,8 +19597,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -19993,6 +20019,11 @@ module Aws::RDS
     #
     # @option params [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
+    #
+    #   Constraints: If supplied, must match the name of an existing
+    #   DBSubnetGroup.
+    #
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [String] :preferred_maintenance_window
     #   The time range each week during which system maintenance can occur, in
@@ -20583,7 +20614,7 @@ module Aws::RDS
     #   Constraints: If supplied, must match the name of an existing
     #   DBSubnetGroup.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     # @option params [Boolean] :multi_az
     #   A value that indicates whether the DB instance is a Multi-AZ
@@ -22355,7 +22386,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

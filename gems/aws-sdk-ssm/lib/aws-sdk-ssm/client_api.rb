@@ -6233,7 +6233,6 @@ module Aws::SSM
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: TerminateSessionRequest)
         o.output = Shapes::ShapeRef.new(shape: TerminateSessionResponse)
-        o.errors << Shapes::ShapeRef.new(shape: DoesNotExistException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 

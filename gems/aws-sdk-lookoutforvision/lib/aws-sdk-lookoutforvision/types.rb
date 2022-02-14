@@ -852,7 +852,7 @@ module Aws::LookoutforVision
     #   data as a hash:
     #
     #       {
-    #         compiler_options: "CompilerOptions", # required
+    #         compiler_options: "CompilerOptions",
     #         target_device: "jetson_xavier", # accepts jetson_xavier
     #         target_platform: {
     #           os: "LINUX", # required, accepts LINUX
@@ -876,7 +876,9 @@ module Aws::LookoutforVision
     #
     # @!attribute [rw] compiler_options
     #   Additional compiler options for the Greengrass component. Currently,
-    #   only NVIDIA Graphics Processing Units (GPU) are supported.
+    #   only NVIDIA Graphics Processing Units (GPU) are supported. If you
+    #   specify `TargetPlatform`, you must specify `CompilerOptions`. If you
+    #   specify `TargetDevice`, don't specify `CompilerOptions`.
     #
     #   For more information, see *Compiler options* in the Amazon Lookout
     #   for Vision Developer Guide.
@@ -1450,7 +1452,7 @@ module Aws::LookoutforVision
     #
     #       {
     #         greengrass: { # required
-    #           compiler_options: "CompilerOptions", # required
+    #           compiler_options: "CompilerOptions",
     #           target_device: "jetson_xavier", # accepts jetson_xavier
     #           target_platform: {
     #             os: "LINUX", # required, accepts LINUX
@@ -1853,7 +1855,7 @@ module Aws::LookoutforVision
     #         job_name: "ModelPackagingJobName",
     #         configuration: { # required
     #           greengrass: { # required
-    #             compiler_options: "CompilerOptions", # required
+    #             compiler_options: "CompilerOptions",
     #             target_device: "jetson_xavier", # accepts jetson_xavier
     #             target_platform: {
     #               os: "LINUX", # required, accepts LINUX

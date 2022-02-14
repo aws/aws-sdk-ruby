@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-02-08)
+------------------
+
+* Feature - This release adds support for App Runner to route outbound network traffic of a service through an Amazon VPC. New API: CreateVpcConnector, DescribeVpcConnector, ListVpcConnectors, and DeleteVpcConnector. Updated API: CreateService, DescribeService, and UpdateService.
+
+1.9.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.8.0 (2021-12-21)
 ------------------
 

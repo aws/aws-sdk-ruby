@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2022-02-08)
+------------------
+
+* Feature - Autopilot now generates an additional report with information on the performance of the best model, such as a Confusion matrix and  Area under the receiver operating characteristic (AUC-ROC). The path to the report can be found in CandidateArtifactLocations.
+
+1.118.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.117.0 (2022-01-28)
 ------------------
 

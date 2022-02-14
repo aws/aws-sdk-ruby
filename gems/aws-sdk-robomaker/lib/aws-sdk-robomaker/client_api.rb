@@ -1459,6 +1459,7 @@ module Aws::RoboMaker
         o.name = "CancelDeploymentJob"
         o.http_method = "POST"
         o.http_request_uri = "/cancelDeploymentJob"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CancelDeploymentJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CancelDeploymentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1519,6 +1520,7 @@ module Aws::RoboMaker
         o.name = "CreateDeploymentJob"
         o.http_method = "POST"
         o.http_request_uri = "/createDeploymentJob"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateDeploymentJobRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDeploymentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1534,6 +1536,7 @@ module Aws::RoboMaker
         o.name = "CreateFleet"
         o.http_method = "POST"
         o.http_request_uri = "/createFleet"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1546,6 +1549,7 @@ module Aws::RoboMaker
         o.name = "CreateRobot"
         o.http_method = "POST"
         o.http_request_uri = "/createRobot"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateRobotRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRobotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1671,6 +1675,7 @@ module Aws::RoboMaker
         o.name = "DeleteFleet"
         o.http_method = "POST"
         o.http_request_uri = "/deleteFleet"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1682,6 +1687,7 @@ module Aws::RoboMaker
         o.name = "DeleteRobot"
         o.http_method = "POST"
         o.http_request_uri = "/deleteRobot"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteRobotRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteRobotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1727,6 +1733,7 @@ module Aws::RoboMaker
         o.name = "DeregisterRobot"
         o.http_method = "POST"
         o.http_request_uri = "/deregisterRobot"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeregisterRobotRequest)
         o.output = Shapes::ShapeRef.new(shape: DeregisterRobotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -1739,6 +1746,7 @@ module Aws::RoboMaker
         o.name = "DescribeDeploymentJob"
         o.http_method = "POST"
         o.http_request_uri = "/describeDeploymentJob"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDeploymentJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeploymentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1751,6 +1759,7 @@ module Aws::RoboMaker
         o.name = "DescribeFleet"
         o.http_method = "POST"
         o.http_request_uri = "/describeFleet"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1763,6 +1772,7 @@ module Aws::RoboMaker
         o.name = "DescribeRobot"
         o.http_method = "POST"
         o.http_request_uri = "/describeRobot"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeRobotRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRobotResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1882,6 +1892,7 @@ module Aws::RoboMaker
         o.name = "ListDeploymentJobs"
         o.http_method = "POST"
         o.http_request_uri = "/listDeploymentJobs"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDeploymentJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDeploymentJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1900,6 +1911,7 @@ module Aws::RoboMaker
         o.name = "ListFleets"
         o.http_method = "POST"
         o.http_request_uri = "/listFleets"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListFleetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFleetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1935,6 +1947,7 @@ module Aws::RoboMaker
         o.name = "ListRobots"
         o.http_method = "POST"
         o.http_request_uri = "/listRobots"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListRobotsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRobotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -2083,6 +2096,7 @@ module Aws::RoboMaker
         o.name = "RegisterRobot"
         o.http_method = "POST"
         o.http_request_uri = "/registerRobot"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RegisterRobotRequest)
         o.output = Shapes::ShapeRef.new(shape: RegisterRobotResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
@@ -2122,6 +2136,7 @@ module Aws::RoboMaker
         o.name = "SyncDeploymentJob"
         o.http_method = "POST"
         o.http_request_uri = "/syncDeploymentJob"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SyncDeploymentJobRequest)
         o.output = Shapes::ShapeRef.new(shape: SyncDeploymentJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

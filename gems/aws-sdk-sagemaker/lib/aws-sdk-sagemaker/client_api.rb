@@ -989,6 +989,7 @@ module Aws::SageMaker
     ModelExplainabilityBaselineConfig = Shapes::StructureShape.new(name: 'ModelExplainabilityBaselineConfig')
     ModelExplainabilityJobInput = Shapes::StructureShape.new(name: 'ModelExplainabilityJobInput')
     ModelInput = Shapes::StructureShape.new(name: 'ModelInput')
+    ModelInsightsLocation = Shapes::StringShape.new(name: 'ModelInsightsLocation')
     ModelLatencyThreshold = Shapes::StructureShape.new(name: 'ModelLatencyThreshold')
     ModelLatencyThresholds = Shapes::ListShape.new(name: 'ModelLatencyThresholds')
     ModelMetadataFilter = Shapes::StructureShape.new(name: 'ModelMetadataFilter')
@@ -1937,6 +1938,7 @@ module Aws::SageMaker
     CallbackStepMetadata.struct_class = Types::CallbackStepMetadata
 
     CandidateArtifactLocations.add_member(:explainability, Shapes::ShapeRef.new(shape: ExplainabilityLocation, required: true, location_name: "Explainability"))
+    CandidateArtifactLocations.add_member(:model_insights, Shapes::ShapeRef.new(shape: ModelInsightsLocation, location_name: "ModelInsights"))
     CandidateArtifactLocations.struct_class = Types::CandidateArtifactLocations
 
     CandidateProperties.add_member(:candidate_artifact_locations, Shapes::ShapeRef.new(shape: CandidateArtifactLocations, location_name: "CandidateArtifactLocations"))

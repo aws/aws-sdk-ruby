@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-02-08)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Amazon FSx. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-fsx.html
+
+1.43.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.42.0 (2022-01-11)
 ------------------
 

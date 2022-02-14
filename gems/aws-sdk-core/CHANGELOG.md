@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens.
 
+3.126.0 (2022-02-03)
+------------------
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Add support for recursion detection.
 
 3.125.6 (2022-02-02)

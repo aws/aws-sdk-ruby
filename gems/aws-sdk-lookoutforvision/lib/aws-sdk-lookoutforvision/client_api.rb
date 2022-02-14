@@ -280,7 +280,7 @@ module Aws::LookoutforVision
     DetectAnomalyResult.add_member(:confidence, Shapes::ShapeRef.new(shape: Float, location_name: "Confidence"))
     DetectAnomalyResult.struct_class = Types::DetectAnomalyResult
 
-    GreengrassConfiguration.add_member(:compiler_options, Shapes::ShapeRef.new(shape: CompilerOptions, required: true, location_name: "CompilerOptions"))
+    GreengrassConfiguration.add_member(:compiler_options, Shapes::ShapeRef.new(shape: CompilerOptions, location_name: "CompilerOptions"))
     GreengrassConfiguration.add_member(:target_device, Shapes::ShapeRef.new(shape: TargetDevice, location_name: "TargetDevice"))
     GreengrassConfiguration.add_member(:target_platform, Shapes::ShapeRef.new(shape: TargetPlatform, location_name: "TargetPlatform"))
     GreengrassConfiguration.add_member(:s3_output_location, Shapes::ShapeRef.new(shape: S3Location, required: true, location_name: "S3OutputLocation"))

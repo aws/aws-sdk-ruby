@@ -46,6 +46,8 @@ module Aws::AppRunner
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
     CreateServiceRequest = Shapes::StructureShape.new(name: 'CreateServiceRequest')
     CreateServiceResponse = Shapes::StructureShape.new(name: 'CreateServiceResponse')
+    CreateVpcConnectorRequest = Shapes::StructureShape.new(name: 'CreateVpcConnectorRequest')
+    CreateVpcConnectorResponse = Shapes::StructureShape.new(name: 'CreateVpcConnectorResponse')
     CustomDomain = Shapes::StructureShape.new(name: 'CustomDomain')
     CustomDomainAssociationStatus = Shapes::StringShape.new(name: 'CustomDomainAssociationStatus')
     CustomDomainList = Shapes::ListShape.new(name: 'CustomDomainList')
@@ -55,6 +57,8 @@ module Aws::AppRunner
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
     DeleteServiceRequest = Shapes::StructureShape.new(name: 'DeleteServiceRequest')
     DeleteServiceResponse = Shapes::StructureShape.new(name: 'DeleteServiceResponse')
+    DeleteVpcConnectorRequest = Shapes::StructureShape.new(name: 'DeleteVpcConnectorRequest')
+    DeleteVpcConnectorResponse = Shapes::StructureShape.new(name: 'DeleteVpcConnectorResponse')
     DescribeAutoScalingConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationRequest')
     DescribeAutoScalingConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeAutoScalingConfigurationResponse')
     DescribeCustomDomainsMaxResults = Shapes::IntegerShape.new(name: 'DescribeCustomDomainsMaxResults')
@@ -62,9 +66,13 @@ module Aws::AppRunner
     DescribeCustomDomainsResponse = Shapes::StructureShape.new(name: 'DescribeCustomDomainsResponse')
     DescribeServiceRequest = Shapes::StructureShape.new(name: 'DescribeServiceRequest')
     DescribeServiceResponse = Shapes::StructureShape.new(name: 'DescribeServiceResponse')
+    DescribeVpcConnectorRequest = Shapes::StructureShape.new(name: 'DescribeVpcConnectorRequest')
+    DescribeVpcConnectorResponse = Shapes::StructureShape.new(name: 'DescribeVpcConnectorResponse')
     DisassociateCustomDomainRequest = Shapes::StructureShape.new(name: 'DisassociateCustomDomainRequest')
     DisassociateCustomDomainResponse = Shapes::StructureShape.new(name: 'DisassociateCustomDomainResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
+    EgressConfiguration = Shapes::StructureShape.new(name: 'EgressConfiguration')
+    EgressType = Shapes::StringShape.new(name: 'EgressType')
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     HealthCheckConfiguration = Shapes::StructureShape.new(name: 'HealthCheckConfiguration')
@@ -95,8 +103,11 @@ module Aws::AppRunner
     ListServicesResponse = Shapes::StructureShape.new(name: 'ListServicesResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListVpcConnectorsRequest = Shapes::StructureShape.new(name: 'ListVpcConnectorsRequest')
+    ListVpcConnectorsResponse = Shapes::StructureShape.new(name: 'ListVpcConnectorsResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Memory = Shapes::StringShape.new(name: 'Memory')
+    NetworkConfiguration = Shapes::StructureShape.new(name: 'NetworkConfiguration')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
@@ -129,6 +140,7 @@ module Aws::AppRunner
     StartDeploymentRequest = Shapes::StructureShape.new(name: 'StartDeploymentRequest')
     StartDeploymentResponse = Shapes::StructureShape.new(name: 'StartDeploymentResponse')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -142,6 +154,10 @@ module Aws::AppRunner
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateServiceRequest = Shapes::StructureShape.new(name: 'UpdateServiceRequest')
     UpdateServiceResponse = Shapes::StructureShape.new(name: 'UpdateServiceResponse')
+    VpcConnector = Shapes::StructureShape.new(name: 'VpcConnector')
+    VpcConnectorName = Shapes::StringShape.new(name: 'VpcConnectorName')
+    VpcConnectorStatus = Shapes::StringShape.new(name: 'VpcConnectorStatus')
+    VpcConnectors = Shapes::ListShape.new(name: 'VpcConnectors')
 
     AssociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     AssociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
@@ -241,11 +257,21 @@ module Aws::AppRunner
     CreateServiceRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     CreateServiceRequest.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
     CreateServiceRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
+    CreateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
     CreateServiceRequest.struct_class = Types::CreateServiceRequest
 
     CreateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     CreateServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     CreateServiceResponse.struct_class = Types::CreateServiceResponse
+
+    CreateVpcConnectorRequest.add_member(:vpc_connector_name, Shapes::ShapeRef.new(shape: VpcConnectorName, required: true, location_name: "VpcConnectorName"))
+    CreateVpcConnectorRequest.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "Subnets"))
+    CreateVpcConnectorRequest.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    CreateVpcConnectorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateVpcConnectorRequest.struct_class = Types::CreateVpcConnectorRequest
+
+    CreateVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    CreateVpcConnectorResponse.struct_class = Types::CreateVpcConnectorResponse
 
     CustomDomain.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     CustomDomain.add_member(:enable_www_subdomain, Shapes::ShapeRef.new(shape: NullableBoolean, required: true, location_name: "EnableWWWSubdomain"))
@@ -274,6 +300,12 @@ module Aws::AppRunner
     DeleteServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     DeleteServiceResponse.struct_class = Types::DeleteServiceResponse
 
+    DeleteVpcConnectorRequest.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcConnectorArn"))
+    DeleteVpcConnectorRequest.struct_class = Types::DeleteVpcConnectorRequest
+
+    DeleteVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    DeleteVpcConnectorResponse.struct_class = Types::DeleteVpcConnectorResponse
+
     DescribeAutoScalingConfigurationRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "AutoScalingConfigurationArn"))
     DescribeAutoScalingConfigurationRequest.struct_class = Types::DescribeAutoScalingConfigurationRequest
 
@@ -297,6 +329,12 @@ module Aws::AppRunner
     DescribeServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     DescribeServiceResponse.struct_class = Types::DescribeServiceResponse
 
+    DescribeVpcConnectorRequest.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "VpcConnectorArn"))
+    DescribeVpcConnectorRequest.struct_class = Types::DescribeVpcConnectorRequest
+
+    DescribeVpcConnectorResponse.add_member(:vpc_connector, Shapes::ShapeRef.new(shape: VpcConnector, required: true, location_name: "VpcConnector"))
+    DescribeVpcConnectorResponse.struct_class = Types::DescribeVpcConnectorResponse
+
     DisassociateCustomDomainRequest.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     DisassociateCustomDomainRequest.struct_class = Types::DisassociateCustomDomainRequest
@@ -305,6 +343,10 @@ module Aws::AppRunner
     DisassociateCustomDomainResponse.add_member(:service_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, required: true, location_name: "ServiceArn"))
     DisassociateCustomDomainResponse.add_member(:custom_domain, Shapes::ShapeRef.new(shape: CustomDomain, required: true, location_name: "CustomDomain"))
     DisassociateCustomDomainResponse.struct_class = Types::DisassociateCustomDomainResponse
+
+    EgressConfiguration.add_member(:egress_type, Shapes::ShapeRef.new(shape: EgressType, location_name: "EgressType"))
+    EgressConfiguration.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcConnectorArn"))
+    EgressConfiguration.struct_class = Types::EgressConfiguration
 
     EncryptionConfiguration.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKeyArn, required: true, location_name: "KmsKey"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
@@ -318,7 +360,7 @@ module Aws::AppRunner
     HealthCheckConfiguration.struct_class = Types::HealthCheckConfiguration
 
     ImageConfiguration.add_member(:runtime_environment_variables, Shapes::ShapeRef.new(shape: RuntimeEnvironmentVariables, location_name: "RuntimeEnvironmentVariables"))
-    ImageConfiguration.add_member(:start_command, Shapes::ShapeRef.new(shape: String, location_name: "StartCommand"))
+    ImageConfiguration.add_member(:start_command, Shapes::ShapeRef.new(shape: StartCommand, location_name: "StartCommand"))
     ImageConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: String, location_name: "Port"))
     ImageConfiguration.struct_class = Types::ImageConfiguration
 
@@ -383,6 +425,17 @@ module Aws::AppRunner
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    ListVpcConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListVpcConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcConnectorsRequest.struct_class = Types::ListVpcConnectorsRequest
+
+    ListVpcConnectorsResponse.add_member(:vpc_connectors, Shapes::ShapeRef.new(shape: VpcConnectors, required: true, location_name: "VpcConnectors"))
+    ListVpcConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListVpcConnectorsResponse.struct_class = Types::ListVpcConnectorsResponse
+
+    NetworkConfiguration.add_member(:egress_configuration, Shapes::ShapeRef.new(shape: EgressConfiguration, location_name: "EgressConfiguration"))
+    NetworkConfiguration.struct_class = Types::NetworkConfiguration
+
     OperationSummary.add_member(:id, Shapes::ShapeRef.new(shape: UUID, location_name: "Id"))
     OperationSummary.add_member(:type, Shapes::ShapeRef.new(shape: OperationType, location_name: "Type"))
     OperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: OperationStatus, location_name: "Status"))
@@ -427,6 +480,7 @@ module Aws::AppRunner
     Service.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     Service.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
     Service.add_member(:auto_scaling_configuration_summary, Shapes::ShapeRef.new(shape: AutoScalingConfigurationSummary, required: true, location_name: "AutoScalingConfigurationSummary"))
+    Service.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, required: true, location_name: "NetworkConfiguration"))
     Service.struct_class = Types::Service
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
@@ -459,6 +513,8 @@ module Aws::AppRunner
     StartDeploymentResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     StartDeploymentResponse.struct_class = Types::StartDeploymentResponse
 
+    StringList.member = Shapes::ShapeRef.new(shape: String)
+
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
     Tag.struct_class = Types::Tag
@@ -484,11 +540,24 @@ module Aws::AppRunner
     UpdateServiceRequest.add_member(:instance_configuration, Shapes::ShapeRef.new(shape: InstanceConfiguration, location_name: "InstanceConfiguration"))
     UpdateServiceRequest.add_member(:auto_scaling_configuration_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "AutoScalingConfigurationArn"))
     UpdateServiceRequest.add_member(:health_check_configuration, Shapes::ShapeRef.new(shape: HealthCheckConfiguration, location_name: "HealthCheckConfiguration"))
+    UpdateServiceRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
     UpdateServiceRequest.struct_class = Types::UpdateServiceRequest
 
     UpdateServiceResponse.add_member(:service, Shapes::ShapeRef.new(shape: Service, required: true, location_name: "Service"))
     UpdateServiceResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: UUID, required: true, location_name: "OperationId"))
     UpdateServiceResponse.struct_class = Types::UpdateServiceResponse
+
+    VpcConnector.add_member(:vpc_connector_name, Shapes::ShapeRef.new(shape: VpcConnectorName, location_name: "VpcConnectorName"))
+    VpcConnector.add_member(:vpc_connector_arn, Shapes::ShapeRef.new(shape: AppRunnerResourceArn, location_name: "VpcConnectorArn"))
+    VpcConnector.add_member(:vpc_connector_revision, Shapes::ShapeRef.new(shape: Integer, location_name: "VpcConnectorRevision"))
+    VpcConnector.add_member(:subnets, Shapes::ShapeRef.new(shape: StringList, location_name: "Subnets"))
+    VpcConnector.add_member(:security_groups, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroups"))
+    VpcConnector.add_member(:status, Shapes::ShapeRef.new(shape: VpcConnectorStatus, location_name: "Status"))
+    VpcConnector.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    VpcConnector.add_member(:deleted_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DeletedAt"))
+    VpcConnector.struct_class = Types::VpcConnector
+
+    VpcConnectors.member = Shapes::ShapeRef.new(shape: VpcConnector)
 
 
     # @api private
@@ -553,6 +622,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAutoScalingConfiguration"
         o.http_method = "POST"
@@ -585,6 +665,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:delete_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_auto_scaling_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -624,6 +715,17 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+      end)
+
+      api.add_operation(:describe_vpc_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeVpcConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeVpcConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeVpcConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disassociate_custom_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -713,6 +815,22 @@ module Aws::AppRunner
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidStateException)
+      end)
+
+      api.add_operation(:list_vpc_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListVpcConnectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListVpcConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListVpcConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:pause_service, Seahorse::Model::Operation.new.tap do |o|

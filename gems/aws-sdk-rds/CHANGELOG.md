@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2022-02-04)
+------------------
+
+* Feature - updates for RDS Custom for Oracle 12.1 support
+
+1.137.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.136.0 (2022-01-11)
 ------------------
 

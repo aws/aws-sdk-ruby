@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-02-10)
+------------------
+
+* Feature - This release makes CompilerOptions in Lookout for Vision's StartModelPackagingJob's Configuration object optional.
+
+1.12.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.11.0 (2021-12-21)
 ------------------
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-02-04)
+------------------
+
+* Feature - You can now optionally specify the account ID that you expect to be the owner of your query results output location bucket in Athena. If the account ID of the query results bucket owner does not match the specified account ID, attempts to output to the bucket will fail with an S3 permissions error.
+
+1.47.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2022-01-28)
 ------------------
 

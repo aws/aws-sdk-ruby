@@ -1128,7 +1128,7 @@ module Aws::SSMIncidents
     #   data as a hash:
     #
     #       {
-    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
@@ -1667,7 +1667,7 @@ module Aws::SSMIncidents
     #
     #       {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1942,7 +1942,7 @@ module Aws::SSMIncidents
     #         related_items: [
     #           {
     #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
@@ -2360,7 +2360,7 @@ module Aws::SSMIncidents
     #         related_items_update: { # required
     #           item_to_add: {
     #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
@@ -2370,7 +2370,7 @@ module Aws::SSMIncidents
     #             title: "RelatedItemTitleString",
     #           },
     #           item_to_remove: {
-    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER
+    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
     #             value: { # required
     #               arn: "Arn",
     #               metric_definition: "MetricDefinition",

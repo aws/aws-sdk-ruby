@@ -106,9 +106,6 @@ module Aws::AppRunner
     end
 
     # Describes an App Runner automatic scaling configuration resource.
-    # Multiple revisions of a configuration have the same
-    # `AutoScalingConfigurationName` and different
-    # `AutoScalingConfigurationRevision` values.
     #
     # A higher `MinSize` increases the spread of your App Runner service
     # over more Availability Zones in the Amazon Web Services Region. The
@@ -116,6 +113,10 @@ module Aws::AppRunner
     #
     # A lower `MaxSize` controls your cost. The tradeoff is lower
     # responsiveness during peak demand.
+    #
+    # Multiple revisions of a configuration might have the same
+    # `AutoScalingConfigurationName` and different
+    # `AutoScalingConfigurationRevision` values.
     #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of this auto scaling configuration.
@@ -516,6 +517,17 @@ module Aws::AppRunner
     #   revision number `1` of this name. When you use the same name in
     #   subsequent calls, App Runner creates incremental revisions of the
     #   configuration.
+    #
+    #   <note markdown="1"> The name `DefaultConfiguration` is reserved (it's the configuration
+    #   that App Runner uses if you don't provide a custome one). You
+    #   can't use it to create a new auto scaling configuration, and you
+    #   can't create a revision of it.
+    #
+    #    When you want to use your own auto scaling configuration for your
+    #   App Runner service, *create a configuration with a different name*,
+    #   and then provide it when you create or update your service.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_concurrency
@@ -662,7 +674,7 @@ module Aws::AppRunner
     #               runtime_environment_variables: {
     #                 "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #               },
-    #               start_command: "String",
+    #               start_command: "StartCommand",
     #               port: "String",
     #             },
     #             image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -696,12 +708,18 @@ module Aws::AppRunner
     #           unhealthy_threshold: 1,
     #         },
     #         auto_scaling_configuration_arn: "AppRunnerResourceArn",
+    #         network_configuration: {
+    #           egress_configuration: {
+    #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #             vpc_connector_arn: "AppRunnerResourceArn",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] service_name
-    #   A name for the new service. It must be unique across all the running
-    #   App Runner services in your Amazon Web Services account in the
-    #   Amazon Web Services Region.
+    #   A name for the App Runner service. It must be unique across all the
+    #   running App Runner services in your Amazon Web Services account in
+    #   the Amazon Web Services Region.
     #   @return [String]
     #
     # @!attribute [rw] source_configuration
@@ -715,28 +733,33 @@ module Aws::AppRunner
     #   @return [Types::InstanceConfiguration]
     #
     # @!attribute [rw] tags
-    #   An optional list of metadata items that you can associate with your
-    #   service resource. A tag is a key-value pair.
+    #   An optional list of metadata items that you can associate with the
+    #   App Runner service resource. A tag is a key-value pair.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] encryption_configuration
     #   An optional custom encryption key that App Runner uses to encrypt
     #   the copy of your source repository that it maintains and your
     #   service logs. By default, App Runner uses an Amazon Web Services
-    #   managed CMK.
+    #   managed key.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] health_check_configuration
     #   The settings for the health check that App Runner performs to
-    #   monitor the health of your service.
+    #   monitor the health of the App Runner service.
     #   @return [Types::HealthCheckConfiguration]
     #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
-    #   configuration resource that you want to associate with your service.
-    #   If not provided, App Runner associates the latest revision of a
-    #   default auto scaling configuration.
+    #   configuration resource that you want to associate with the App
+    #   Runner service. If not provided, App Runner associates the latest
+    #   revision of a default auto scaling configuration.
     #   @return [String]
+    #
+    # @!attribute [rw] network_configuration
+    #   Configuration settings related to network traffic of the web
+    #   application that the App Runner service runs.
+    #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateServiceRequest AWS API Documentation
     #
@@ -747,7 +770,8 @@ module Aws::AppRunner
       :tags,
       :encryption_configuration,
       :health_check_configuration,
-      :auto_scaling_configuration_arn)
+      :auto_scaling_configuration_arn,
+      :network_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -772,6 +796,68 @@ module Aws::AppRunner
     class CreateServiceResponse < Struct.new(
       :service,
       :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateVpcConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_connector_name: "VpcConnectorName", # required
+    #         subnets: ["String"], # required
+    #         security_groups: ["String"],
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] vpc_connector_name
+    #   A name for the VPC connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnets
+    #   A list of IDs of subnets that App Runner should use when it
+    #   associates your service with a custom Amazon VPC. Specify IDs of
+    #   subnets of a single Amazon VPC. App Runner determines the Amazon VPC
+    #   from the subnets you specify.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   A list of IDs of security groups that App Runner should use for
+    #   access to Amazon Web Services resources under the specified subnets.
+    #   If not specified, App Runner uses the default security group of the
+    #   Amazon VPC. The default security group allows all outbound traffic.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   A list of metadata items that you can associate with your VPC
+    #   connector resource. A tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcConnectorRequest AWS API Documentation
+    #
+    class CreateVpcConnectorRequest < Struct.new(
+      :vpc_connector_name,
+      :subnets,
+      :security_groups,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connector
+    #   A description of the App Runner VPC connector that's created by
+    #   this request.
+    #   @return [Types::VpcConnector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateVpcConnectorResponse AWS API Documentation
+    #
+    class CreateVpcConnectorResponse < Struct.new(
+      :vpc_connector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -921,6 +1007,41 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteVpcConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_connector_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
+    #   you want to delete.
+    #
+    #   The ARN must be a full VPC connector ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcConnectorRequest AWS API Documentation
+    #
+    class DeleteVpcConnectorRequest < Struct.new(
+      :vpc_connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connector
+    #   A description of the App Runner VPC connector that this request just
+    #   deleted.
+    #   @return [Types::VpcConnector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteVpcConnectorResponse AWS API Documentation
+    #
+    class DeleteVpcConnectorResponse < Struct.new(
+      :vpc_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeAutoScalingConfigurationRequest
     #   data as a hash:
     #
@@ -1065,6 +1186,41 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeVpcConnectorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         vpc_connector_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
+    #   you want a description for.
+    #
+    #   The ARN must be a full VPC connector ARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcConnectorRequest AWS API Documentation
+    #
+    class DescribeVpcConnectorRequest < Struct.new(
+      :vpc_connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connector
+    #   A description of the App Runner VPC connector that you specified in
+    #   this request.
+    #   @return [Types::VpcConnector]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeVpcConnectorResponse AWS API Documentation
+    #
+    class DescribeVpcConnectorResponse < Struct.new(
+      :vpc_connector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisassociateCustomDomainRequest
     #   data as a hash:
     #
@@ -1112,6 +1268,41 @@ module Aws::AppRunner
       :dns_target,
       :service_arn,
       :custom_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes configuration settings related to outbound network traffic
+    # of an App Runner service.
+    #
+    # @note When making an API call, you may pass EgressConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #         vpc_connector_arn: "AppRunnerResourceArn",
+    #       }
+    #
+    # @!attribute [rw] egress_type
+    #   The type of egress configuration.
+    #
+    #   Set to `DEFAULT` for access to resources hosted on public networks.
+    #
+    #   Set to `VPC` to associate your service to a custom VPC specified by
+    #   `VpcConnectorArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of the App Runner VPC connector that
+    #   you want to associate with your App Runner service. Only valid when
+    #   `EgressType = VPC`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/EgressConfiguration AWS API Documentation
+    #
+    class EgressConfiguration < Struct.new(
+      :egress_type,
+      :vpc_connector_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1221,7 +1412,7 @@ module Aws::AppRunner
     #         runtime_environment_variables: {
     #           "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #         },
-    #         start_command: "String",
+    #         start_command: "StartCommand",
     #         port: "String",
     #       }
     #
@@ -1249,7 +1440,7 @@ module Aws::AppRunner
       :runtime_environment_variables,
       :start_command,
       :port)
-      SENSITIVE = []
+      SENSITIVE = [:start_command]
       include Aws::Structure
     end
 
@@ -1264,7 +1455,7 @@ module Aws::AppRunner
     #           runtime_environment_variables: {
     #             "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #           },
-    #           start_command: "String",
+    #           start_command: "StartCommand",
     #           port: "String",
     #         },
     #         image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -1674,6 +1865,87 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListVpcConnectorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcConnectorsRequest AWS API Documentation
+    #
+    class ListVpcConnectorsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vpc_connectors
+    #   A list of information records for VPC connectors. In a paginated
+    #   request, the request returns up to `MaxResults` records for each
+    #   call.
+    #   @return [Array<Types::VpcConnector>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can pass in a subsequent request to get the next
+    #   result page. It's returned in a paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListVpcConnectorsResponse AWS API Documentation
+    #
+    class ListVpcConnectorsResponse < Struct.new(
+      :vpc_connectors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes configuration settings related to network traffic of an App
+    # Runner service. Consists of embedded objects for each configurable
+    # network feature.
+    #
+    # @note When making an API call, you may pass NetworkConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         egress_configuration: {
+    #           egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #           vpc_connector_arn: "AppRunnerResourceArn",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] egress_configuration
+    #   Network configuration settings for outbound message traffic.
+    #   @return [Types::EgressConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/NetworkConfiguration AWS API Documentation
+    #
+    class NetworkConfiguration < Struct.new(
+      :egress_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information for an operation that occurred on an App
     # Runner service.
     #
@@ -1900,7 +2172,7 @@ module Aws::AppRunner
     #   The encryption key that App Runner uses to encrypt the service logs
     #   and the copy of the source repository that App Runner maintains for
     #   the service. It can be either a customer-provided encryption key or
-    #   an Amazon Web Services managed CMK.
+    #   an Amazon Web Services managed key.
     #   @return [Types::EncryptionConfiguration]
     #
     # @!attribute [rw] health_check_configuration
@@ -1912,6 +2184,11 @@ module Aws::AppRunner
     #   Summary information for the App Runner automatic scaling
     #   configuration resource that's associated with this service.
     #   @return [Types::AutoScalingConfigurationSummary]
+    #
+    # @!attribute [rw] network_configuration
+    #   Configuration settings related to network traffic of the web
+    #   application that this service runs.
+    #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/Service AWS API Documentation
     #
@@ -1928,7 +2205,8 @@ module Aws::AppRunner
       :instance_configuration,
       :encryption_configuration,
       :health_check_configuration,
-      :auto_scaling_configuration_summary)
+      :auto_scaling_configuration_summary,
+      :network_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2094,7 +2372,7 @@ module Aws::AppRunner
     #             runtime_environment_variables: {
     #               "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #             },
-    #             start_command: "String",
+    #             start_command: "StartCommand",
     #             port: "String",
     #           },
     #           image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -2315,7 +2593,7 @@ module Aws::AppRunner
     #               runtime_environment_variables: {
     #                 "RuntimeEnvironmentVariablesKey" => "RuntimeEnvironmentVariablesValue",
     #               },
-    #               start_command: "String",
+    #               start_command: "StartCommand",
     #               port: "String",
     #             },
     #             image_repository_type: "ECR", # required, accepts ECR, ECR_PUBLIC
@@ -2339,6 +2617,12 @@ module Aws::AppRunner
     #           timeout: 1,
     #           healthy_threshold: 1,
     #           unhealthy_threshold: 1,
+    #         },
+    #         network_configuration: {
+    #           egress_configuration: {
+    #             egress_type: "DEFAULT", # accepts DEFAULT, VPC
+    #             vpc_connector_arn: "AppRunnerResourceArn",
+    #           },
     #         },
     #       }
     #
@@ -2367,13 +2651,19 @@ module Aws::AppRunner
     #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
-    #   configuration resource that you want to associate with your service.
+    #   configuration resource that you want to associate with the App
+    #   Runner service.
     #   @return [String]
     #
     # @!attribute [rw] health_check_configuration
     #   The settings for the health check that App Runner performs to
-    #   monitor the health of your service.
+    #   monitor the health of the App Runner service.
     #   @return [Types::HealthCheckConfiguration]
+    #
+    # @!attribute [rw] network_configuration
+    #   Configuration settings related to network traffic of the web
+    #   application that the App Runner service runs.
+    #   @return [Types::NetworkConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateServiceRequest AWS API Documentation
     #
@@ -2382,7 +2672,8 @@ module Aws::AppRunner
       :source_configuration,
       :instance_configuration,
       :auto_scaling_configuration_arn,
-      :health_check_configuration)
+      :health_check_configuration,
+      :network_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2404,6 +2695,79 @@ module Aws::AppRunner
     class UpdateServiceResponse < Struct.new(
       :service,
       :operation_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an App Runner VPC connector resource. A VPC connector
+    # describes the Amazon Virtual Private Cloud (Amazon VPC) that an App
+    # Runner service is associated with, and the subnets and security group
+    # that are used.
+    #
+    # Multiple revisions of a connector might have the same `Name` and
+    # different `Revision` values.
+    #
+    # <note markdown="1"> At this time, App Runner supports only one revision per name.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] vpc_connector_name
+    #   The customer-provided VPC connector name.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connector_arn
+    #   The Amazon Resource Name (ARN) of this VPC connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_connector_revision
+    #   The revision of this VPC connector. It's unique among all the
+    #   active connectors (`"Status": "ACTIVE"`) that share the same `Name`.
+    #
+    #   <note markdown="1"> At this time, App Runner supports only one revision per name.
+    #
+    #    </note>
+    #   @return [Integer]
+    #
+    # @!attribute [rw] subnets
+    #   A list of IDs of subnets that App Runner uses for your service. All
+    #   IDs are of subnets of a single Amazon VPC.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] security_groups
+    #   A list of IDs of security groups that App Runner uses for access to
+    #   Amazon Web Services resources under the specified subnets. If not
+    #   specified, App Runner uses the default security group of the Amazon
+    #   VPC. The default security group allows all outbound traffic.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   The current state of the VPC connector. If the status of a connector
+    #   revision is `INACTIVE`, it was deleted and can't be used. Inactive
+    #   connector revisions are permanently removed some time after they are
+    #   deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the VPC connector was created. It's in Unix time
+    #   stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted_at
+    #   The time when the VPC connector was deleted. It's in Unix time
+    #   stamp format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/VpcConnector AWS API Documentation
+    #
+    class VpcConnector < Struct.new(
+      :vpc_connector_name,
+      :vpc_connector_arn,
+      :vpc_connector_revision,
+      :subnets,
+      :security_groups,
+      :status,
+      :created_at,
+      :deleted_at)
       SENSITIVE = []
       include Aws::Structure
     end

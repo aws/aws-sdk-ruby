@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-02-07)
+------------------
+
+* Feature - Documentation updates for EventBridge
+
+1.35.0 (2022-02-03)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.34.0 (2021-12-21)
 ------------------
 

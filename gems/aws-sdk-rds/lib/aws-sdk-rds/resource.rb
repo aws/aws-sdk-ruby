@@ -173,7 +173,7 @@ module Aws::RDS
     #   Constraints: Must match the name of an existing DBSubnetGroup. Must
     #   not be default.
     #
-    #   Example: `mySubnetgroup`
+    #   Example: `mydbsubnetgroup`
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [required, String] :engine
@@ -1297,7 +1297,10 @@ module Aws::RDS
     # @option options [String] :db_subnet_group_name
     #   A DB subnet group to associate with this DB instance.
     #
-    #   If there is no DB subnet group, then it is a non-VPC DB instance.
+    #   Constraints: Must match the name of an existing DBSubnetGroup. Must
+    #   not be default.
+    #
+    #   Example: `mydbsubnetgroup`
     # @option options [String] :preferred_maintenance_window
     #   The time range each week during which system maintenance can occur, in
     #   Universal Coordinated Time (UTC). For more information, see [Amazon
@@ -2048,10 +2051,16 @@ module Aws::RDS
     #   The name for the DB subnet group. This value is stored as a lowercase
     #   string.
     #
-    #   Constraints: Must contain no more than 255 letters, numbers, periods,
-    #   underscores, spaces, or hyphens. Must not be default.
+    #   Constraints:
     #
-    #   Example: `mySubnetgroup`
+    #   * Must contain no more than 255 letters, numbers, periods,
+    #     underscores, spaces, or hyphens.
+    #
+    #   * Must not be default.
+    #
+    #   * First character must be a letter.
+    #
+    #   Example: `mydbsubnetgroup`
     # @option options [required, String] :db_subnet_group_description
     #   The description for the DB subnet group.
     # @option options [required, Array<String>] :subnet_ids

@@ -28,6 +28,7 @@ require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
+require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -75,6 +76,7 @@ module Aws::RecycleBin
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
     add_plugin(Aws::Plugins::DefaultsMode)
+    add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -348,7 +350,8 @@ module Aws::RecycleBin
     # @!group API Operations
 
     # Creates a Recycle Bin retention rule. For more information, see [
-    # Create Recycle Bin retention rules][1] in the *Amazon EC2 User Guide*.
+    # Create Recycle Bin retention rules][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
     #
     #
     #
@@ -359,25 +362,34 @@ module Aws::RecycleBin
     #   to retain resources.
     #
     # @option params [String] :description
-    #   A brief description for the retention rule.
+    #   The retention rule description.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Information about the tags to assign to the retention rule.
     #
     # @option params [required, String] :resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots are supported.
+    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain
+    #   snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs, specify
+    #   `EC2_IMAGE`.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   Information about the resource tags to use to identify resources that
-    #   are to be retained by the retention rule. The retention rule retains
-    #   only deleted snapshots that have one or more of the specified tag key
-    #   and value pairs. If a snapshot is deleted, but it does not have any of
-    #   the specified tag key and value pairs, it is immediately deleted
-    #   without being retained by the retention rule.
+    #   Specifies the resource tags to use to identify resources that are to
+    #   be retained by a tag-level retention rule. For tag-level retention
+    #   rules, only deleted resources, of the specified resource type, that
+    #   have one or more of the specified tag key and value pairs are
+    #   retained. If a resource is deleted, but it does not have any of the
+    #   specified tag key and value pairs, it is immediately deleted without
+    #   being retained by the retention rule.
     #
     #   You can add the same tag key and value pair to a maximum or five
     #   retention rules.
+    #
+    #   To create a Region-level retention rule, omit this parameter. A
+    #   Region-level retention rule does not have any resource tags specified.
+    #   It retains all deleted resources of the specified resource type in the
+    #   Region in which the rule is created, even if the resources are not
+    #   tagged.
     #
     # @return [Types::CreateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -403,7 +415,7 @@ module Aws::RecycleBin
     #         value: "TagValue", # required
     #       },
     #     ],
-    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT
+    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -421,7 +433,7 @@ module Aws::RecycleBin
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
     #   resp.resource_tags #=> Array
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
@@ -437,14 +449,15 @@ module Aws::RecycleBin
     end
 
     # Deletes a Recycle Bin retention rule. For more information, see [
-    # Delete Recycle Bin retention rules][1] in the *Amazon EC2 User Guide*.
+    # Delete Recycle Bin retention rules][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-delete-rule
     #
     # @option params [required, String] :identifier
-    #   The unique ID of the retention rule to delete.
+    #   The unique ID of the retention rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -487,7 +500,7 @@ module Aws::RecycleBin
     #
     #   resp.identifier #=> String
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.resource_tags #=> Array
@@ -507,22 +520,23 @@ module Aws::RecycleBin
     # Lists the Recycle Bin retention rules in the Region.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to return for the request in a single
-    #   page. The remaining results can be seen by sending another request
-    #   with the returned `nextToken` value. This value can be between 5 and
-    #   500. If `maxResults` is given a larger value than 500, you receive an
-    #   error.
+    #   The maximum number of results to return with a single call. To
+    #   retrieve the remaining results, make another call with the returned
+    #   `NextToken` value.
     #
     # @option params [String] :next_token
-    #   The token to use to retrieve the next page of results.
+    #   The token for the next page of results.
     #
     # @option params [required, String] :resource_type
     #   The resource type retained by the retention rule. Only retention rules
-    #   that retain the specified resource type are listed.
+    #   that retain the specified resource type are listed. Currently, only
+    #   Amazon EBS snapshots and EBS-backed AMIs are supported. To list
+    #   retention rules that retain snapshots, specify `EBS_SNAPSHOT`. To list
+    #   retention rules that retain EBS-backed AMIs, specify `EC2_IMAGE`.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   The tags used to identify resources that are to be retained by the
-    #   retention rule.
+    #   Information about the resource tags used to identify resources that
+    #   are retained by the retention rule.
     #
     # @return [Types::ListRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -536,7 +550,7 @@ module Aws::RecycleBin
     #   resp = client.list_rules({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT
+    #     resource_type: "EBS_SNAPSHOT", # required, accepts EBS_SNAPSHOT, EC2_IMAGE
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -563,11 +577,10 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
-    # Lists the tags assigned a specific resource.
+    # Lists the tags assigned to a retention rule.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource for which to list the
-    #   tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #
     # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -594,14 +607,13 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
-    # Assigns tags to the specified resource.
+    # Assigns tags to the specified retention rule.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource to which to assign the
-    #   tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   Information about the tags to assign to the resource.
+    #   Information about the tags to assign to the retention rule.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -626,14 +638,14 @@ module Aws::RecycleBin
       req.send_request(options)
     end
 
-    # Unassigns a tag from a resource.
+    # Unassigns a tag from a retention rule.
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource from which to unassign
-    #   the tags.
+    #   The Amazon Resource Name (ARN) of the retention rule.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   Information about the tags to unassign from the resource.
+    #   The tag keys of the tags to unassign. All tags that have the specified
+    #   tag key are unassigned.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -654,15 +666,15 @@ module Aws::RecycleBin
     end
 
     # Updates an existing Recycle Bin retention rule. For more information,
-    # see [ Update Recycle Bin retention rules][1] in the *Amazon EC2 User
-    # Guide*.
+    # see [ Update Recycle Bin retention rules][1] in the *Amazon Elastic
+    # Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule
     #
     # @option params [required, String] :identifier
-    #   The unique ID of the retention rule to update.
+    #   The unique ID of the retention rule.
     #
     # @option params [Types::RetentionPeriod] :retention_period
     #   Information about the retention period for which the retention rule is
@@ -673,18 +685,27 @@ module Aws::RecycleBin
     #
     # @option params [String] :resource_type
     #   The resource type to be retained by the retention rule. Currently,
-    #   only Amazon EBS snapshots are supported.
+    #   only Amazon EBS snapshots and EBS-backed AMIs are supported. To retain
+    #   snapshots, specify `EBS_SNAPSHOT`. To retain EBS-backed AMIs, specify
+    #   `EC2_IMAGE`.
     #
     # @option params [Array<Types::ResourceTag>] :resource_tags
-    #   Information about the resource tags to use to identify resources that
-    #   are to be retained by the retention rule. The retention rule retains
-    #   only deleted snapshots that have one or more of the specified tag key
-    #   and value pairs. If a snapshot is deleted, but it does not have any of
-    #   the specified tag key and value pairs, it is immediately deleted
-    #   without being retained by the retention rule.
+    #   Specifies the resource tags to use to identify resources that are to
+    #   be retained by a tag-level retention rule. For tag-level retention
+    #   rules, only deleted resources, of the specified resource type, that
+    #   have one or more of the specified tag key and value pairs are
+    #   retained. If a resource is deleted, but it does not have any of the
+    #   specified tag key and value pairs, it is immediately deleted without
+    #   being retained by the retention rule.
     #
     #   You can add the same tag key and value pair to a maximum or five
     #   retention rules.
+    #
+    #   To create a Region-level retention rule, omit this parameter. A
+    #   Region-level retention rule does not have any resource tags specified.
+    #   It retains all deleted resources of the specified resource type in the
+    #   Region in which the rule is created, even if the resources are not
+    #   tagged.
     #
     # @return [Types::UpdateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -704,7 +725,7 @@ module Aws::RecycleBin
     #       retention_period_unit: "DAYS", # required, accepts DAYS
     #     },
     #     description: "Description",
-    #     resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT
+    #     resource_type: "EBS_SNAPSHOT", # accepts EBS_SNAPSHOT, EC2_IMAGE
     #     resource_tags: [
     #       {
     #         resource_tag_key: "ResourceTagKey", # required
@@ -719,7 +740,7 @@ module Aws::RecycleBin
     #   resp.retention_period.retention_period_value #=> Integer
     #   resp.retention_period.retention_period_unit #=> String, one of "DAYS"
     #   resp.description #=> String
-    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT"
+    #   resp.resource_type #=> String, one of "EBS_SNAPSHOT", "EC2_IMAGE"
     #   resp.resource_tags #=> Array
     #   resp.resource_tags[0].resource_tag_key #=> String
     #   resp.resource_tags[0].resource_tag_value #=> String
@@ -747,7 +768,7 @@ module Aws::RecycleBin
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-recyclebin'
-      context[:gem_version] = '1.2.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
