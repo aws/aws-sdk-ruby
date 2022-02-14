@@ -28,6 +28,16 @@ module Aws
     # @option options [Integer] :duration_seconds
     # @option options [String] :external_id
     # @option options [STS::Client] :client
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed.  Useful for updating tokens.
+    #   `before_refresh` is called when AWS credentials are
+    #   required and need to be refreshed. Tokens can be refreshed using
+    #   the following example:
+    #
+    #      before_refresh = Proc.new do |assume_role_credentials| do
+    #        assume_role_credentials.assume_role_params['token_code'] = update_token
+    #      end
+    #
     def initialize(options = {})
       client_opts = {}
       @assume_role_params = {}
@@ -39,15 +49,23 @@ module Aws
         end
       end
       @client = client_opts[:client] || STS::Client.new(client_opts)
+      @before_refresh = options.delete(:before_refresh)
+
       super
     end
 
     # @return [STS::Client]
     attr_reader :client
 
+    # @return [Hash]
+    attr_reader :assume_role_params
+
     private
 
     def refresh
+
+      @before_refresh.call(self) if @before_refresh
+
       c = @client.assume_role(@assume_role_params).credentials
       @credentials = Credentials.new(
         c.access_key_id,
