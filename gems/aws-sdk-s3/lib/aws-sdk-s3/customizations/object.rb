@@ -400,7 +400,7 @@ module Aws
       #     progress = Proc.new do |bytes, totals|
       #       puts bytes.map.with_index { |b, i| "Part #{i+1}: #{b} / #{totals[i]}"}.join(' ') + "Total: #{100.0 * bytes.sum / totals.sum }%" }
       #     end
-      #     obj.upload_file('/path/to/file')
+      #     obj.upload_file('/path/to/file', progress_callback: progress)
       #
       # @param [String, Pathname, File, Tempfile] source A file on the local
       #   file system that will be uploaded as this object. This can either be
