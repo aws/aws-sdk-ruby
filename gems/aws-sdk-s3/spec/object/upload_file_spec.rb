@@ -53,11 +53,11 @@ module Aws
 
         it 'uploads objects with custom options without mutating them' do
           options = {}.freeze
-          expect(client).to receive(:put_object).with(
+          expect(client).to receive(:put_object).with({
             bucket: 'bucket',
             key: 'key',
             body: one_meg_file
-          )
+          })
           object.upload_file(one_meg_file, options)
         end
 
@@ -70,21 +70,21 @@ module Aws
 
         context 'small objects' do
           it 'uploads small objects using Client#put_object' do
-            expect(client).to receive(:put_object).with(
+            expect(client).to receive(:put_object).with({
               bucket: 'bucket',
               key: 'key',
               body: ten_meg_file
-            )
+            })
             object.upload_file(ten_meg_file)
           end
 
           it 'reports progress for small objects' do
-            expect(client).to receive(:put_object).with(
+            expect(client).to receive(:put_object).with({
               bucket: 'bucket',
               key: 'key',
               body: ten_meg_file,
               on_chunk_sent: instance_of(Proc)
-            ) do |args|
+            }) do |args|
               args[:on_chunk_sent].call(ten_meg_file, ten_meg_file.size, ten_meg_file.size)
             end
             callback = proc do |bytes, totals|
@@ -95,11 +95,11 @@ module Aws
           end
 
           it 'accepts an alternative multipart file threshold' do
-            expect(client).to receive(:put_object).with(
+            expect(client).to receive(:put_object).with({
               bucket: 'bucket',
               key: 'key',
               body: one_hundred_seventeen_meg_file
-            )
+            })
             object.upload_file(
               one_hundred_seventeen_meg_file,
               multipart_threshold: 200 * one_meg
@@ -110,20 +110,20 @@ module Aws
             file = double('file')
             expect(File).to receive(:open)
               .with(ten_meg_file.path, 'rb').and_yield(file)
-            expect(client).to receive(:put_object).with(
+            expect(client).to receive(:put_object).with({
               bucket: 'bucket',
               key: 'key',
               body: file
-            )
+            })
             object.upload_file(ten_meg_file.path)
           end
 
           it 'does not fail when given :thread_count' do
-            expect(client).to receive(:put_object).with(
+            expect(client).to receive(:put_object).with({
               bucket: 'bucket',
               key: 'key',
               body: ten_meg_file
-            )
+            })
             object.upload_file(ten_meg_file, thread_count: 1)
           end
         end

@@ -51,8 +51,7 @@ module Aws
 
               expect(presigner).to receive(:presigned_url).with(
                 expected_method,
-                bucket: bucket_name,
-                key: key
+                { bucket: bucket_name, key: key }
               )
 
               obj.presigned_url(method)
@@ -140,8 +139,7 @@ module Aws
 
               expect(presigner).to receive(:presigned_request).with(
                 expected_method,
-                bucket: bucket_name,
-                key: key
+                { bucket: bucket_name, key: key }
               )
 
               obj.presigned_request(method)
