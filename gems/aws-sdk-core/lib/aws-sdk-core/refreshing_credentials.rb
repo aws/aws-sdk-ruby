@@ -19,7 +19,7 @@ module Aws
 
     def initialize(options = {})
       @mutex = Mutex.new
-      @before_refresh = options.delete(:before_refresh)
+      @before_refresh = options.delete(:before_refresh) if Hash === options
 
       @before_refresh.call(self) if @before_refresh
       refresh
