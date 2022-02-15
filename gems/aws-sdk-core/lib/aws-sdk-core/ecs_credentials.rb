@@ -43,6 +43,10 @@ module Aws
     # @option options [IO] :http_debug_output (nil) HTTP wire
     #   traces are sent to this object.  You can specify something
     #   like $stdout.
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize options = {}
       @retries = options[:retries] || 5
       @ip_address = options[:ip_address] || '169.254.170.2'

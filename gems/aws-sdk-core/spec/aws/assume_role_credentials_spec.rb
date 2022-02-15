@@ -102,5 +102,21 @@ module Aws
       c.credentials
     end
 
+    it 'calls before_refresh with self' do
+      before_refresh_called = false
+      before_refresh = proc do |cred_provider|
+        before_refresh_called = true
+        expect(cred_provider).to be_instance_of(AssumeRoleCredentials)
+      end
+
+      AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session',
+        before_refresh: before_refresh
+      )
+
+      expect(before_refresh_called).to be(true)
+    end
+
   end
 end
