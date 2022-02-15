@@ -19,6 +19,9 @@ module Aws
 
     def initialize(options = {})
       @mutex = Mutex.new
+      @before_refresh = options.delete(:before_refresh)
+
+      @before_refresh.call(self) if @before_refresh
       refresh
     end
 
@@ -37,7 +40,11 @@ module Aws
     # Refresh credentials.
     # @return [void]
     def refresh!
-      @mutex.synchronize { refresh }
+      @mutex.synchronize do
+        @before_refresh.call(self) if @before_refresh
+
+        refresh
+      end
     end
 
     private
@@ -47,7 +54,11 @@ module Aws
     def refresh_if_near_expiration
       if near_expiration?
         @mutex.synchronize do
-          refresh if near_expiration?
+          if near_expiration?
+            @before_refresh.call(self) if @before_refresh
+
+            refresh
+          end
         end
       end
     end
