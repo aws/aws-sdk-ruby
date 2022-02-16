@@ -7,7 +7,7 @@ module Aws
       class Dualstack < Seahorse::Client::Plugin
         def add_handlers(handlers, config)
           handlers.add(OptionHandler, step: :initialize)
-          handlers.add(DualstackHandler, step: :build, priority: 11)
+          # handlers.add(DualstackHandler, step: :build, priority: 11)
         end
 
         # @api private

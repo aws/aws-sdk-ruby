@@ -28,7 +28,7 @@ client's region instead.
         # endpoint pattern is build:10 (prefix account id to host)
         def add_handlers(handlers, _config)
           handlers.add(ARNHandler, step: :validate, priority: 75)
-          handlers.add(UrlHandler)
+          # handlers.add(UrlHandler)
         end
 
         # After extracting out any ARN input, resolve a new URL with it.
@@ -61,28 +61,28 @@ client's region instead.
                 context.config.region,
                 context.config.s3_use_arn_region
               )
-              validate_outpost_dualstack!(context)
-              if arn
-                validate_config!(context, arn)
-
-                if arn.is_a?(OutpostAccessPointARN) ||
-                   arn.is_a?(OutpostBucketARN)
-                  set_outpost_header!(context, arn)
-                  # disable account_id prefix for outposts urls
-                  context.config.disable_host_prefix_injection = true
-                end
-                set_account_param!(context, arn)
-
-                # depending on the ARN's resource type, put the resource value
-                # back onto params
-                context.params[arn_member] = arn.input_member
-                context.metadata[:s3_arn] = {
-                  arn: arn,
-                  resolved_region: resolved_region,
-                  fips: context.config.use_fips_endpoint,
-                  dualstack: extract_dualstack_config!(context)
-                }
-              end
+              # validate_outpost_dualstack!(context)
+              # if arn
+              #   validate_config!(context, arn)
+              #
+              #   if arn.is_a?(OutpostAccessPointARN) ||
+              #      arn.is_a?(OutpostBucketARN)
+              #     set_outpost_header!(context, arn)
+              #     # disable account_id prefix for outposts urls
+              #     context.config.disable_host_prefix_injection = true
+              #   end
+              #   set_account_param!(context, arn)
+              #
+              #   # depending on the ARN's resource type, put the resource value
+              #   # back onto params
+              #   context.params[arn_member] = arn.input_member
+              #   context.metadata[:s3_arn] = {
+              #     arn: arn,
+              #     resolved_region: resolved_region,
+              #     fips: context.config.use_fips_endpoint,
+              #     dualstack: extract_dualstack_config!(context)
+              #   }
+              # end
             end
             @handler.call(context)
           end

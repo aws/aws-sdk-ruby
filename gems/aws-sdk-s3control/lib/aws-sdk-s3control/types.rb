@@ -465,7 +465,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #         bucket: "BucketName", # required
     #         vpc_configuration: {
@@ -1945,7 +1945,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         name: "AccessPointName", # required
     #       }
     #
@@ -2159,7 +2159,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         bucket: "BucketName", # required
     #       }
     #
@@ -3782,7 +3782,7 @@ module Aws::S3Control
     #   data as a hash:
     #
     #       {
-    #         account_id: "AccountId", # required
+    #         account_id: "AccountId",
     #         next_token: "NonEmptyMaxLength1024String",
     #         max_results: 1,
     #         outpost_id: "NonEmptyMaxLength64String",

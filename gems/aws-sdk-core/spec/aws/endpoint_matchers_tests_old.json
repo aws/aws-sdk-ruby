@@ -1,0 +1,677 @@
+[
+  {
+    "description": "aws partition - true",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-west-2"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "aws partition - false",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "cn-north-1"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "aws-cn partition - true",
+    "input": {
+      "partition": "aws-cn",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "cn-north-1"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "aws-cn partition - false",
+    "input": {
+      "partition": "aws-cn",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-west-2"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "aws-us-gov partition - true",
+    "input": {
+      "partition": "aws-us-gov",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-gov-east-1"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "aws-us-gov partition - false",
+    "input": {
+      "partition": "aws-us-gov",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-west-2"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "aws-iso partition - true",
+    "input": {
+      "partition": "aws-iso",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-iso-east-1"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "aws-iso partition - false",
+    "input": {
+      "partition": "aws-iso",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-west-2"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "aws-iso-b partition - true",
+    "input": {
+      "partition": "aws-iso-b",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-isob-east-1"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "aws-iso-b partition - false",
+    "input": {
+      "partition": "aws-iso-b",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "us-west-2"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "partition - aws forwards compatibility",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": "mars-east-1"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "partition - empty param returns false",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": ""
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "partition - null param returns false",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "partition - param must be a string type",
+    "input": {
+      "partition": "aws",
+      "matcher": "partition",
+      "param": "SDK::Region"
+    },
+    "data": {
+      "SDK::Region": false
+    },
+    "expect": {
+      "Error": "ArgumentError"
+    }
+  },
+  {
+    "description": "startsWith - true",
+    "input": {
+      "startsWith": "foo",
+      "matcher": "startsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "foo-bucket"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "startsWith - false",
+    "input": {
+      "startsWith": "foo",
+      "matcher": "startsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "startsWith - empty param returns false",
+    "input": {
+      "startsWith": "foo",
+      "matcher": "startsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": ""
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "startsWith - null param returns false",
+    "input": {
+      "startsWith": "foo",
+      "matcher": "startsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "startsWith - param must be a string type",
+    "input": {
+      "startsWith": "foo",
+      "matcher": "startsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": false
+    },
+    "expect": {
+      "Error": "ArgumentError"
+    }
+  },
+  {
+    "description": "endsWith - true",
+    "input": {
+      "endsWith": "foo",
+      "matcher": "endsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket-foo"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "endsWith - false",
+    "input": {
+      "endsWith": "foo",
+      "matcher": "endsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "endsWith - empty param returns false",
+    "input": {
+      "endsWith": "foo",
+      "matcher": "endsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": ""
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "endsWith - null param returns false",
+    "input": {
+      "endsWith": "foo",
+      "matcher": "endsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "endsWith - param must be a string type",
+    "input": {
+      "endsWith": "foo",
+      "matcher": "endsWith",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": false
+    },
+    "expect": {
+      "Error": "ArgumentError"
+    }
+  },
+  {
+    "description": "stringEquals - true",
+    "input": {
+      "stringEquals": "bucket",
+      "matcher": "stringEquals",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "stringEquals - false",
+    "input": {
+      "stringEquals": "bucket",
+      "matcher": "stringEquals",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "foo"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "stringEquals - empty param returns false",
+    "input": {
+      "stringEquals": "bucket",
+      "matcher": "stringEquals",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": ""
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "stringEquals - null param returns false",
+    "input": {
+      "stringEquals": "bucket",
+      "matcher": "stringEquals",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "stringEquals - param must be a string type",
+    "input": {
+      "stringEquals": "bucket",
+      "matcher": "stringEquals",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": false
+    },
+    "expect": {
+      "Error": "ArgumentError"
+    }
+  },
+  {
+    "description": "booleanEquals - matcher true, param true",
+    "input": {
+      "booleanEquals": true,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": true
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "booleanEquals - matcher true, param false",
+    "input": {
+      "booleanEquals": true,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": false
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "booleanEquals - matcher false, param true",
+    "input": {
+      "booleanEquals": false,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": true
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "booleanEquals - matcher false, param false",
+    "input": {
+      "booleanEquals": false,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": false
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "booleanEquals - null param returns false",
+    "input": {
+      "booleanEquals": false,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "booleanEquals - param must be a boolean type",
+    "input": {
+      "booleanEquals": false,
+      "matcher": "booleanEquals",
+      "param": "SDK::DualStack"
+    },
+    "data": {
+      "SDK::DualStack": "false"
+    },
+    "expect": {
+      "Error": "ArgumentError"
+    }
+  },
+  {
+    "description": "isSet - matcher true, param set",
+    "input": {
+      "isSet": true,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "isSet - matcher true, param empty",
+    "input": {
+      "isSet": true,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": ""
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "isSet - matcher true, param unset",
+    "input": {
+      "isSet": true,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": null
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isSet - matcher false, param set",
+    "input": {
+      "isSet": false,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "bucket"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isSet - matcher false, param empty",
+    "input": {
+      "isSet": false,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": ""
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isSet - matcher false, param unset",
+    "input": {
+      "isSet": false,
+      "matcher": "isSet",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": null
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+
+
+
+  {
+    "description": "isArn - matcher true, param is arn",
+    "input": {
+      "isArn": true,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint/accesspoint"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "isArn - matcher true, incomplete arn is false 1",
+    "input": {
+      "isArn": true,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn:"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isArn - incomplete arn is false 2",
+    "input": {
+      "isArn": true,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn::::"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isArn - matcher false, param is arn",
+    "input": {
+      "isArn": false,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint/accesspoint"
+    },
+    "expect": {
+      "Ok": false
+    }
+  },
+  {
+    "description": "isArn - matcher true, incomplete arn is false 1",
+    "input": {
+      "isArn": false,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn:"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "isArn - incomplete arn is false 2",
+    "input": {
+      "isArn": false,
+      "matcher": "isArn",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "arn::::"
+    },
+    "expect": {
+      "Ok": true
+    }
+  },
+  {
+    "description": "unknown - matches false",
+    "input": {
+      "unknown": "unknown",
+      "matcher": "unknown",
+      "param": "Bucket"
+    },
+    "data": {
+      "Bucket": "foo"
+    },
+    "expect": {
+      "Ok": false
+    }
+  }
+]

@@ -8,10 +8,10 @@ module Aws
       # This plugin is an implementation detail and may be modified.
       # @api private
       class S3ControlSigner < Seahorse::Client::Plugin
-        SPECIAL_OUTPOST_OPERATIONS = [
-          'CreateBucket',
-          'ListRegionalBuckets'
-        ].freeze
+        # SPECIAL_OUTPOST_OPERATIONS = [
+        #   'CreateBucket',
+        #   'ListRegionalBuckets'
+        # ].freeze
 
         option(:sigv4_signer) do |cfg|
           S3ControlSigner.build_v4_signer(
@@ -43,38 +43,52 @@ module Aws
           private
 
           def sigv4_signer(context)
-            if (arn = context.metadata[:s3_arn]) &&
-               arn[:arn].respond_to?(:outpost_id)
+            endpoint = context.metadata[:endpoint]
+            if endpoint
+              service = endpoint.auth_params['v4']['signingName']
+              region = endpoint.auth_params['v4']['signingScope']
+
               S3ControlSigner.build_v4_signer(
-                service: 's3-outposts',
-                region: arn[:resolved_region],
-                credentials: context.config.credentials
-              )
-            elsif outpost_operation?(context)
-              # outpost operations should go to the outposts endpoint only if
-              # it's not a custom endpoint. the ARN class changes this for ARNs
-              if context.config.regional_endpoint
-                fips = context.config.use_fips_endpoint
-                context.http_request.endpoint.host =
-                  "s3-outposts#{'-fips' if fips}.#{context.config.region}.amazonaws.com"
-              end
-              S3ControlSigner.build_v4_signer(
-                service: 's3-outposts',
-                region: context.config.region,
+                service: service,
+                region: region,
                 credentials: context.config.credentials
               )
             else
               context.config.sigv4_signer
             end
+
+            # if (arn = context.metadata[:s3_arn]) &&
+            #    arn[:arn].respond_to?(:outpost_id)
+            #   S3ControlSigner.build_v4_signer(
+            #     service: 's3-outposts',
+            #     region: arn[:resolved_region],
+            #     credentials: context.config.credentials
+            #   )
+            # elsif outpost_operation?(context)
+            #   # outpost operations should go to the outposts endpoint only if
+            #   # it's not a custom endpoint. the ARN class changes this for ARNs
+            #   if context.config.regional_endpoint
+            #     fips = context.config.use_fips_endpoint
+            #     context.http_request.endpoint.host =
+            #       "s3-outposts#{'-fips' if fips}.#{context.config.region}.amazonaws.com"
+            #   end
+            #   S3ControlSigner.build_v4_signer(
+            #     service: 's3-outposts',
+            #     region: context.config.region,
+            #     credentials: context.config.credentials
+            #   )
+            # else
+            #   context.config.sigv4_signer
+            # end
           end
 
           # Some operations do not take an ARN parameter and are special cases
           # For these operations, the presence of the outpost_id parameter
           # must trigger special endpoint and signer redirection
-          def outpost_operation?(context)
-            SPECIAL_OUTPOST_OPERATIONS.include?(context.operation.name) &&
-              context.params[:outpost_id]
-          end
+          # def outpost_operation?(context)
+          #   SPECIAL_OUTPOST_OPERATIONS.include?(context.operation.name) &&
+          #     context.params[:outpost_id]
+          # end
         end
 
         class << self

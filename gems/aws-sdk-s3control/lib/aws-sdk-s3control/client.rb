@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3control/plugins/arn.rb'
 require 'aws-sdk-s3control/plugins/dualstack.rb'
+require 'aws-sdk-s3control/plugins/endpoint.rb'
 require 'aws-sdk-s3control/plugins/s3_control_signer.rb'
 require 'aws-sdk-s3control/plugins/s3_host_id.rb'
 
@@ -83,6 +84,7 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::Protocols::RestXml)
     add_plugin(Aws::S3Control::Plugins::ARN)
     add_plugin(Aws::S3Control::Plugins::Dualstack)
+    add_plugin(Aws::S3Control::Plugins::Endpoint)
     add_plugin(Aws::S3Control::Plugins::S3ControlSigner)
     add_plugin(Aws::S3Control::Plugins::S3HostId)
 
@@ -402,7 +404,7 @@ module Aws::S3Control
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [6]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The Amazon Web Services account ID for the owner of the bucket for
     #   which you want to create an access point.
     #
@@ -447,7 +449,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_access_point({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     name: "AccessPointName", # required
     #     bucket: "BucketName", # required
     #     vpc_configuration: {
@@ -2019,7 +2021,7 @@ module Aws::S3Control
     # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The account ID for the account that owns the specified access point.
     #
     # @option params [required, String] :name
@@ -2054,7 +2056,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_access_point({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     name: "AccessPointName", # required
     #   })
     #
@@ -2406,7 +2408,7 @@ module Aws::S3Control
     # [4]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html
     # [5]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [required, String] :bucket
@@ -2434,7 +2436,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_bucket({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     bucket: "BucketName", # required
     #   })
     #
@@ -3522,7 +3524,7 @@ module Aws::S3Control
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
     # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples
     #
-    # @option params [required, String] :account_id
+    # @option params [String] :account_id
     #   The Amazon Web Services account ID of the Outposts bucket.
     #
     # @option params [String] :next_token
@@ -3546,7 +3548,7 @@ module Aws::S3Control
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_regional_buckets({
-    #     account_id: "AccountId", # required
+    #     account_id: "AccountId",
     #     next_token: "NonEmptyMaxLength1024String",
     #     max_results: 1,
     #     outpost_id: "NonEmptyMaxLength64String",

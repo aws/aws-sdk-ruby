@@ -1,0 +1,2562 @@
+[
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws partition - true",
+        "params": {
+          "SDK::Region": "us-west-2"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws partition - false",
+        "params": {
+          "SDK::Region": "cn-north-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-cn",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-cn partition - true",
+        "params": {
+          "SDK::Region": "cn-north-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-cn",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-cn partition - false",
+        "params": {
+          "SDK::Region": "us-west-2"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-us-gov",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-us-gov partition - true",
+        "params": {
+          "SDK::Region": "us-gov-east-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-us-gov",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-us-gov partition - false",
+        "params": {
+          "SDK::Region": "us-west-2"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-iso",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-iso partition - true",
+        "params": {
+          "SDK::Region": "us-iso-east-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-iso",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-iso partition - false",
+        "params": {
+          "SDK::Region": "us-west-2"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-iso-b",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-iso-b partition - true",
+        "params": {
+          "SDK::Region": "us-isob-east-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws-iso-b",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "aws-iso-b partition - false",
+        "params": {
+          "SDK::Region": "us-west-2"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "partition - aws forwards compatibility",
+        "params": {
+          "SDK::Region": "us-peccy-1"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "partition - empty param returns false",
+        "params": {
+          "SDK::Region": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "partition - null param returns false",
+        "params": {
+          "SDK::Region": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "partition",
+              "partition": "aws",
+              "param": "SDK::Region"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "partition - param must be a string type",
+        "params": {
+          "SDK::Region": false
+        },
+        "expect": {
+          "error": "ArgumentError"
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "startsWith",
+              "startsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "startsWith - true",
+        "params": {
+          "Bucket": "foo-bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "startsWith",
+              "startsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "startsWith - false",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "startsWith",
+              "startsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "startsWith - empty param returns false",
+        "params": {
+          "Bucket": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "startsWith",
+              "startsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "startsWith - null param returns false",
+        "params": {
+          "Bucket": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "startsWith",
+              "startsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "startsWith - param must be a string type",
+        "params": {
+          "Bucket": false
+        },
+        "expect": {
+          "error": "ArgumentError"
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "endsWith",
+              "endsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "endsWith - true",
+        "params": {
+          "Bucket": "bucket-foo"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "endsWith",
+              "endsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "endsWith - false",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "endsWith",
+              "endsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "endsWith - empty param returns false",
+        "params": {
+          "Bucket": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "endsWith",
+              "endsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "endsWith - null param returns false",
+        "params": {
+          "Bucket": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "endsWith",
+              "endsWith": "foo",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "endsWith - param must be a string type",
+        "params": {
+          "Bucket": false
+        },
+        "expect": {
+          "error": "ArgumentError"
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "stringEquals",
+              "stringEquals": "bucket",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "stringEquals - true",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "stringEquals",
+              "stringEquals": "bucket",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "stringEquals - false",
+        "params": {
+          "Bucket": "foo"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "stringEquals",
+              "stringEquals": "bucket",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "stringEquals - empty param returns false",
+        "params": {
+          "Bucket": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "stringEquals",
+              "stringEquals": "bucket",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "stringEquals - null param returns false",
+        "params": {
+          "Bucket": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "stringEquals",
+              "stringEquals": "bucket",
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "stringEquals - param must be a string type",
+        "params": {
+          "Bucket": false
+        },
+        "expect": {
+          "error": "ArgumentError"
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": true,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - matcher true, param true",
+        "params": {
+          "SDK::DualStack": true
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": true,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - matcher true, param false",
+        "params": {
+          "SDK::DualStack": false
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": false,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - matcher false, param true",
+        "params": {
+          "SDK::DualStack": true
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": false,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - matcher false, param false",
+        "params": {
+          "SDK::DualStack": false
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": false,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - null param returns false",
+        "params": {
+          "SDK::DualStack": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "booleanEquals",
+              "booleanEquals": false,
+              "param": "SDK::DualStack"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "booleanEquals - param must be a boolean type",
+        "params": {
+          "SDK::DualStack": "false"
+        },
+        "expect": {
+          "error": "ArgumentError"
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": true,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher true, param set",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": true,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher true, param empty",
+        "params": {
+          "Bucket": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": true,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher true, param unset",
+        "params": {
+          "Bucket": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher false, param set",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher false, param empty",
+        "params": {
+          "Bucket": ""
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isSet - matcher false, param unset",
+        "params": {
+          "Bucket": null
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": true
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - matcher true, param is arn",
+        "params": {
+          "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint/accesspoint"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": true
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - matcher true, incomplete arn is false 1",
+        "params": {
+          "Bucket": "arn:"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": true
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - incomplete arn is false 2",
+        "params": {
+          "Bucket": "arn::::"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": false
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - matcher false, param is arn",
+        "params": {
+          "Bucket": "arn:aws:s3:us-west-2:123456789012:accesspoint/accesspoint"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": false
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - matcher true, incomplete arn is false 1",
+        "params": {
+          "Bucket": "arn:"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  },
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "param": "Bucket",
+              "isArn": false
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "rule under test"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isSet",
+              "isSet": false,
+              "param": "thisFieldIsNotSet"
+            }
+          ],
+          "endpoint": {
+            "url": "https://rule-should-not-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Fallback rule that will always match"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "isArn - incomplete arn is false 2",
+        "params": {
+          "Bucket": "arn::::"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://rule-should-match.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  }
+]

@@ -23,8 +23,8 @@
         "xmlNamespace":{"uri":"http://awss3control.amazonaws.com/doc/2018-08-20/"}
       },
       "output":{"shape":"CreateAccessPointResult"},
-      "endpoint":{
-        "hostPrefix":"{AccountId}."
+      "endpointOptions": {
+        "RequiresAccountId": true
       }
     },
     "CreateAccessPointForObjectLambda":{
@@ -292,8 +292,8 @@
       },
       "input":{"shape":"GetAccessPointRequest"},
       "output":{"shape":"GetAccessPointResult"},
-      "endpoint":{
-        "hostPrefix":"{AccountId}."
+      "endpointOptions": {
+        "RequiresAccountId": true
       }
     },
     "GetAccessPointConfigurationForObjectLambda":{
@@ -376,8 +376,8 @@
       },
       "input":{"shape":"GetBucketRequest"},
       "output":{"shape":"GetBucketResult"},
-      "endpoint":{
-        "hostPrefix":"{AccountId}."
+      "endpointOptions": {
+        "RequiresAccountId": true
       }
     },
     "GetBucketLifecycleConfiguration":{
@@ -573,8 +573,8 @@
       },
       "input":{"shape":"ListRegionalBucketsRequest"},
       "output":{"shape":"ListRegionalBucketsResult"},
-      "endpoint":{
-        "hostPrefix":"{AccountId}."
+      "endpointOptions": {
+        "RequiresAccountId": true
       }
     },
     "ListStorageLensConfigurations":{
@@ -1029,23 +1029,25 @@
     "CreateAccessPointRequest":{
       "type":"structure",
       "required":[
-        "AccountId",
         "Name",
         "Bucket"
       ],
       "members":{
         "AccountId":{
           "shape":"AccountId",
-          "hostLabel":true,
           "location":"header",
-          "locationName":"x-amz-account-id"
+          "locationName":"x-amz-account-id",
+          "endpointOption":"AccountId"
         },
         "Name":{
           "shape":"AccessPointName",
           "location":"uri",
           "locationName":"name"
         },
-        "Bucket":{"shape":"BucketName"},
+        "Bucket":{
+          "shape":"BucketName",
+          "endpointOption":"BucketName"
+        },
         "VpcConfiguration":{"shape":"VpcConfiguration"},
         "PublicAccessBlockConfiguration":{"shape":"PublicAccessBlockConfiguration"}
       }
@@ -1115,7 +1117,8 @@
         "OutpostId":{
           "shape":"NonEmptyMaxLength64String",
           "location":"header",
-          "locationName":"x-amz-outpost-id"
+          "locationName":"x-amz-outpost-id",
+          "endpointOption":"OutpostId"
         }
       },
       "payload":"CreateBucketConfiguration"
@@ -1752,20 +1755,20 @@
     "GetAccessPointRequest":{
       "type":"structure",
       "required":[
-        "AccountId",
         "Name"
       ],
       "members":{
         "AccountId":{
           "shape":"AccountId",
-          "hostLabel":true,
           "location":"header",
-          "locationName":"x-amz-account-id"
+          "locationName":"x-amz-account-id",
+          "endpointOption":"AccountId"
         },
         "Name":{
           "shape":"AccessPointName",
           "location":"uri",
-          "locationName":"name"
+          "locationName":"name",
+          "endpointOption":"AccessPointName"
         }
       }
     },
@@ -1838,20 +1841,20 @@
     "GetBucketRequest":{
       "type":"structure",
       "required":[
-        "AccountId",
         "Bucket"
       ],
       "members":{
         "AccountId":{
           "shape":"AccountId",
-          "hostLabel":true,
           "location":"header",
-          "locationName":"x-amz-account-id"
+          "locationName":"x-amz-account-id",
+          "endpointOption":"AccountId"
         },
         "Bucket":{
           "shape":"BucketName",
           "location":"uri",
-          "locationName":"name"
+          "locationName":"name",
+          "endpointOption":"BucketName"
         }
       }
     },
@@ -2615,13 +2618,12 @@
     },
     "ListRegionalBucketsRequest":{
       "type":"structure",
-      "required":["AccountId"],
       "members":{
         "AccountId":{
           "shape":"AccountId",
-          "hostLabel":true,
           "location":"header",
-          "locationName":"x-amz-account-id"
+          "locationName":"x-amz-account-id",
+          "endpointOption":"AccountId"
         },
         "NextToken":{
           "shape":"NonEmptyMaxLength1024String",
@@ -2636,7 +2638,8 @@
         "OutpostId":{
           "shape":"NonEmptyMaxLength64String",
           "location":"header",
-          "locationName":"x-amz-outpost-id"
+          "locationName":"x-amz-outpost-id",
+          "endpointOption":"OutpostId"
         }
       }
     },

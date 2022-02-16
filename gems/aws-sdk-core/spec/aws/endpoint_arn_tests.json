@@ -1,0 +1,93 @@
+[
+  {
+    "ruleSet": {
+      "rules": [
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "isArn": false,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://not-an-arn.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          },
+          "description": "Rule when bucket is not an ARN"
+        },
+        {
+          "matchers": [
+            {
+              "matcher": "isArn",
+              "isArn": true,
+              "param": "Bucket"
+            }
+          ],
+          "endpoint": {
+            "url": "https://service-{Bucket.arn-service}.partition-{Bucket.arn-partition}.account-id-{Bucket.arn-account-id}.r0-{Bucket.arn-resource.0}.r1-{Bucket.arn-resource.1}.r2-{Bucket.arn-resource.2}",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {
+              "id": "resource-{Bucket.arn-resource}"
+            }
+          },
+          "description": "Rule under test"
+        }
+      ],
+      "parameters": {}
+    },
+    "testCases": [
+      {
+        "description": "Valid ARN test case: the arn is templated into the URL",
+        "params": {
+          "Bucket": "arn:aws:s3::123456789012:accesspoint/mfzwi23gnjvgw.mrap/nested"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://service-s3.partition-aws.account-id-123456789012.r0-accesspoint.r1-mfzwi23gnjvgw.mrap.r2-nested",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {
+              "id": "resource-accesspoint/mfzwi23gnjvgw.mrap/nested"
+            }
+          }
+        }
+      },
+      {
+        "description": "Invalid ARN: the ARN resource does not have a resource type",
+        "params": {
+          "Bucket": "arn:aws:s3::123456789012:accesspoint"
+        },
+        "expect": {
+          "error": "Invalid ARN"
+        }
+      },
+      {
+        "description": "Invalid ARN: the ARN resource does not have 3 components",
+        "params": {
+          "Bucket": "arn:aws:s3::123456789012:accesspoint/foo"
+        },
+        "expect": {
+          "error": "Invalid ARN"
+        }
+      },
+      {
+        "description": "The Bucket is not an arn, the first rule should match",
+        "params": {
+          "Bucket": "bucket"
+        },
+        "expect": {
+          "ok": {
+            "url": "https://not-an-arn.com",
+            "authSchemes": [],
+            "authParams": {},
+            "headers": {}
+          }
+        }
+      }
+    ]
+  }
+]
