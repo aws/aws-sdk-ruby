@@ -380,8 +380,8 @@ module Aws::Budgets
     #   A notification that you want to associate with a budget. A budget can
     #   have up to five notifications, and each notification can have one SNS
     #   subscriber and up to 10 email subscribers. If you include
-    #   notifications and subscribers in your `CreateBudget` call, AWS creates
-    #   the notifications and subscribers for you.
+    #   notifications and subscribers in your `CreateBudget` call, Amazon Web
+    #   Services creates the notifications and subscribers for you.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -434,6 +434,14 @@ module Aws::Budgets
     #       },
     #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #       last_updated_time: Time.now,
+    #       auto_adjust_data: {
+    #         auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
+    #         historical_options: {
+    #           budget_adjustment_period: 1, # required
+    #           look_back_available_periods: 1,
+    #         },
+    #         last_auto_adjust_time: Time.now,
+    #       },
     #     },
     #     notifications_with_subscribers: [
     #       {
@@ -464,7 +472,7 @@ module Aws::Budgets
     # Creates a budget action.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -559,8 +567,8 @@ module Aws::Budgets
     #   create a notification for.
     #
     # @option params [required, String] :budget_name
-    #   The name of the budget that you want AWS to notify you about. Budget
-    #   names must be unique within an account.
+    #   The name of the budget that you want Amazon Web Services to notify you
+    #   about. Budget names must be unique within an account.
     #
     # @option params [required, Types::Notification] :notification
     #   The notification that you want to create.
@@ -674,7 +682,7 @@ module Aws::Budgets
     # Deletes a budget action.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -877,6 +885,10 @@ module Aws::Budgets
     #   resp.budget.calculated_spend.forecasted_spend.unit #=> String
     #   resp.budget.budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE", "SAVINGS_PLANS_UTILIZATION", "SAVINGS_PLANS_COVERAGE"
     #   resp.budget.last_updated_time #=> Time
+    #   resp.budget.auto_adjust_data.auto_adjust_type #=> String, one of "HISTORICAL", "FORECAST"
+    #   resp.budget.auto_adjust_data.historical_options.budget_adjustment_period #=> Integer
+    #   resp.budget.auto_adjust_data.historical_options.look_back_available_periods #=> Integer
+    #   resp.budget.auto_adjust_data.last_auto_adjust_time #=> Time
     #
     # @overload describe_budget(params = {})
     # @param [Hash] params ({})
@@ -888,7 +900,7 @@ module Aws::Budgets
     # Describes a budget action detail.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -953,7 +965,7 @@ module Aws::Budgets
     # Describes a budget action history detail.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -964,7 +976,7 @@ module Aws::Budgets
     #   action.
     #
     # @option params [Types::TimePeriod] :time_period
-    #   The period of time that is covered by a budget. The period has a start
+    #   The period of time that's covered by a budget. The period has a start
     #   date and an end date. The start date must come before the end date.
     #   There are no restrictions on the end date.
     #
@@ -1041,7 +1053,7 @@ module Aws::Budgets
     # Describes all of the budget actions for an account.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [Integer] :max_results
     #   An integer that represents how many entries a paginated response
@@ -1106,7 +1118,7 @@ module Aws::Budgets
     # Describes all of the budget actions for a budget.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -1177,7 +1189,7 @@ module Aws::Budgets
     # Budget history isn't available for `ANNUAL` budgets.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -1317,6 +1329,10 @@ module Aws::Budgets
     #   resp.budgets[0].calculated_spend.forecasted_spend.unit #=> String
     #   resp.budgets[0].budget_type #=> String, one of "USAGE", "COST", "RI_UTILIZATION", "RI_COVERAGE", "SAVINGS_PLANS_UTILIZATION", "SAVINGS_PLANS_COVERAGE"
     #   resp.budgets[0].last_updated_time #=> Time
+    #   resp.budgets[0].auto_adjust_data.auto_adjust_type #=> String, one of "HISTORICAL", "FORECAST"
+    #   resp.budgets[0].auto_adjust_data.historical_options.budget_adjustment_period #=> Integer
+    #   resp.budgets[0].auto_adjust_data.historical_options.look_back_available_periods #=> Integer
+    #   resp.budgets[0].auto_adjust_data.last_auto_adjust_time #=> Time
     #   resp.next_token #=> String
     #
     # @overload describe_budgets(params = {})
@@ -1436,7 +1452,7 @@ module Aws::Budgets
     # Executes a budget action.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -1481,8 +1497,8 @@ module Aws::Budgets
 
     # Updates a budget. You can change every part of a budget except for the
     # `budgetName` and the `calculatedSpend`. When you modify a budget, the
-    # `calculatedSpend` drops to zero until AWS has new usage data to use
-    # for forecasting.
+    # `calculatedSpend` drops to zero until Amazon Web Services has new
+    # usage data to use for forecasting.
     #
     # Only one of `BudgetLimit` or `PlannedBudgetLimits` can be present in
     # the syntax at one time. Use the syntax that matches your case. The
@@ -1551,6 +1567,14 @@ module Aws::Budgets
     #       },
     #       budget_type: "USAGE", # required, accepts USAGE, COST, RI_UTILIZATION, RI_COVERAGE, SAVINGS_PLANS_UTILIZATION, SAVINGS_PLANS_COVERAGE
     #       last_updated_time: Time.now,
+    #       auto_adjust_data: {
+    #         auto_adjust_type: "HISTORICAL", # required, accepts HISTORICAL, FORECAST
+    #         historical_options: {
+    #           budget_adjustment_period: 1, # required
+    #           look_back_available_periods: 1,
+    #         },
+    #         last_auto_adjust_time: Time.now,
+    #       },
     #     },
     #   })
     #
@@ -1564,7 +1588,7 @@ module Aws::Budgets
     # Updates a budget action.
     #
     # @option params [required, String] :account_id
-    #   The account ID of the user. It should be a 12-digit number.
+    #   The account ID of the user. It's a 12-digit number.
     #
     # @option params [required, String] :budget_name
     #   A string that represents the budget name. The ":" and "\\"
@@ -1809,7 +1833,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

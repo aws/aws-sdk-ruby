@@ -3339,6 +3339,7 @@ module Aws::EC2
     #
     # @!attribute [rw] state
     #   The state of the Availability Zone, Local Zone, or Wavelength Zone.
+    #   This value is always `available`.
     #   @return [String]
     #
     # @!attribute [rw] opt_in_status
@@ -7584,7 +7585,7 @@ module Aws::EC2
     # @!attribute [rw] error_code
     #   The error code that indicates why the instance could not be
     #   launched. For more information about error codes, see [Error
-    #   Codes][1].
+    #   codes][1].
     #
     #
     #
@@ -7594,7 +7595,7 @@ module Aws::EC2
     # @!attribute [rw] error_message
     #   The error message that describes why the instance could not be
     #   launched. For more information about error messages, see [Error
-    #   Codes][1].
+    #   codes][1].
     #
     #
     #
@@ -7794,7 +7795,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
@@ -10527,14 +10528,9 @@ module Aws::EC2
     #   @return [Integer]
     #
     # @!attribute [rw] interface_type
-    #   Indicates the type of network interface. To create an Elastic Fabric
-    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
-    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #   To create a trunk network interface, specify `trunk`.
+    #   The type of network interface. The default is `interface`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   The only supported values are `efa` and `trunk`.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
@@ -17317,8 +17313,7 @@ module Aws::EC2
     #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone, the Local Zone, or
-    #     the Wavelength Zone (`available` \| `information` \| `impaired` \|
-    #     `unavailable`).
+    #     the Wavelength Zone (`available`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
@@ -17715,6 +17710,9 @@ module Aws::EC2
     #       Availability Zone), and explicitly target the Capacity
     #       Reservation. This ensures that only permitted instances can use
     #       the reserved capacity.
+    #
+    #   * `placement-group-arn` - The ARN of the cluster placement group in
+    #     which the Capacity Reservation was created.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -18354,16 +18352,12 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   The filters. The following are the possible values:
+    #   One or more filters.
     #
-    #   * `coip-pool.pool-id`
+    #   * `coip-pool.local-gateway-route-table-id` - The ID of the local
+    #     gateway route table.
     #
-    #   ^
-    #   ^
-    #
-    #   * `coip-pool.local-gateway-route-table-id`
-    #
-    #   ^
+    #   * `coip-pool.pool-id` - The ID of the address pool.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -19229,7 +19223,7 @@ module Aws::EC2
     # @!attribute [rw] error_code
     #   The error code that indicates why the instance could not be
     #   launched. For more information about error codes, see [Error
-    #   Codes][1].
+    #   codes][1].
     #
     #
     #
@@ -19239,7 +19233,7 @@ module Aws::EC2
     # @!attribute [rw] error_message
     #   The error message that describes why the instance could not be
     #   launched. For more information about error messages, see [Error
-    #   Codes][1].
+    #   codes][1].
     #
     #
     #
@@ -19506,7 +19500,12 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] fleet_ids
-    #   The ID of the EC2 Fleets.
+    #   The IDs of the EC2 Fleets.
+    #
+    #   <note markdown="1"> If a fleet is of type `instant`, you must specify the fleet ID,
+    #   otherwise it does not appear in the response.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
@@ -21172,8 +21171,9 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks (`hdd` \| `ssd`).
     #
-    #   * `instance-storage-info.encryption-supported` - Indicates whether
-    #     data is encrypted at rest (`required` \| `unsupported`).
+    #   * `instance-storage-info.encryption-support` - Indicates whether
+    #     data is encrypted at rest (`required` \| `supported` \|
+    #     `unsupported`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
     #     non-volatile memory express (NVMe) is supported for instance store
@@ -21212,6 +21212,9 @@ module Aws::EC2
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance
     #     type supports IPv6 (`true` \| `false`).
+    #
+    #   * `network-info.maximum-network-cards` - The maximum number of
+    #     network cards per instance.
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -22394,6 +22397,9 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN)
+    #     of the local gateway route table for the virtual interface group.
+    #
     #   * `local-gateway-route-table-id` - The ID of the local gateway route
     #     table.
     #
@@ -22402,6 +22408,9 @@ module Aws::EC2
     #
     #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
     #     the virtual interface group.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway virtual interface group association.
     #
     #   * `state` - The state of the association.
     #   @return [Array<Types::Filter>]
@@ -22478,11 +22487,17 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN)
+    #     of the local gateway route table for the association.
+    #
     #   * `local-gateway-route-table-id` - The ID of the local gateway route
     #     table.
     #
     #   * `local-gateway-route-table-vpc-association-id` - The ID of the
     #     association.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway route table for the association.
     #
     #   * `state` - The state of the association.
     #
@@ -22561,10 +22576,16 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN)
+    #     of the local gateway route table.
+    #
     #   * `local-gateway-route-table-id` - The ID of a local gateway route
     #     table.
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway route table.
     #
     #   * `state` - The state of the local gateway route table.
     #   @return [Array<Types::Filter>]
@@ -22641,11 +22662,14 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
+    #
     #   * `local-gateway-virtual-interface-id` - The ID of the virtual
     #     interface.
     #
-    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
-    #     interface group.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway virtual interface group.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -22717,6 +22741,28 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-address` - The local address.
+    #
+    #   * `local-bgp-asn` - The Border Gateway Protocol (BGP) Autonomous
+    #     System Number (ASN) of the local gateway.
+    #
+    #   * `local-gateway-id` - The ID of the local gateway.
+    #
+    #   * `local-gateway-virtual-interface-id` - The ID of the virtual
+    #     interface.
+    #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway virtual interface.
+    #
+    #   * `peer-address` - The peer address.
+    #
+    #   * `peer-bgp-asn` - The peer BGP ASN.
+    #
+    #   * `vlan` - The ID of the VLAN.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -22783,26 +22829,20 @@ module Aws::EC2
     #       }
     #
     # @!attribute [rw] local_gateway_ids
-    #   One or more filters.
-    #
-    #   * `local-gateway-id` - The ID of a local gateway.
-    #
-    #   * `local-gateway-route-table-id` - The ID of the local gateway route
-    #     table.
-    #
-    #   * `local-gateway-route-table-virtual-interface-group-association-id`
-    #     - The ID of the association.
-    #
-    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
-    #     the virtual interface group.
-    #
-    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
-    #
-    #   * `state` - The state of the association.
+    #   The IDs of the local gateways.
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `local-gateway-id` - The ID of a local gateway.
+    #
+    #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns
+    #     the local gateway.
+    #
+    #   * `state` - The state of the association.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -23799,6 +23839,14 @@ module Aws::EC2
     #
     #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with
     #     the network interface.
+    #
+    #   * `interface-type` - The type of network interface
+    #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
+    #     `branch` \| `efa` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed`
+    #     \| `interface` \| `iot_rules_managed` \| `lambda` \|
+    #     `load_balancer` \| `nat_gateway` \| `network_load_balancer` \|
+    #     `quicksight` \| `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #
@@ -31080,12 +31128,13 @@ module Aws::EC2
     #   Amazon EBS encryption. For more information, see [Supported instance
     #   types][2].
     #
-    #   This parameter is not returned by .
+    #   This parameter is not returned by [DescribeImageAttribute][3].
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImageAttribute.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/EbsBlockDevice AWS API Documentation
@@ -33425,7 +33474,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraints: Maximum 64 ASCII characters
     #
@@ -34698,26 +34747,18 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] filters
-    #   The filters. The following are the possible values:
+    #   One or more filters.
     #
-    #   * `coip-address-usage.allocation-id`
+    #   * `coip-address-usage.allocation-id` - The allocation ID of the
+    #     address.
     #
-    #   ^
-    #   ^
+    #   * `coip-address-usage.aws-account-id` - The ID of the Amazon Web
+    #     Services account that is using the customer-owned IP address.
     #
-    #   * `coip-address-usage.aws-account-id`
+    #   * `coip-address-usage.aws-service` - The Amazon Web Services service
+    #     that is using the customer-owned IP address.
     #
-    #   ^
-    #   ^
-    #
-    #   * `coip-address-usage.aws-service`
-    #
-    #   ^
-    #   ^
-    #
-    #   * `coip-address-usage.co-ip`
-    #
-    #   ^
+    #   * `coip-address-usage.co-ip` - The customer-owned IP address.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -40304,7 +40345,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] interface_type
-    #   Describes the type of network interface.
+    #   The type of network interface.
     #
     #   Valid values: `interface` \| `efa` \| `trunk`
     #   @return [String]
@@ -40571,15 +40612,7 @@ module Aws::EC2
     # @!attribute [rw] interface_type
     #   The type of network interface.
     #
-    #   To create an Elastic Fabric Adapter (EFA), specify `efa`. For more
-    #   information, see [Elastic Fabric Adapter][1] in the *Amazon Elastic
-    #   Compute Cloud User Guide*.
-    #
     #   Valid values: `interface` \| `efa`
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
     #   @return [String]
     #
     # @!attribute [rw] network_card_index
@@ -44247,6 +44280,16 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_metadata_tags
+    #   Set to `enabled` to allow access to instance tags from the instance
+    #   metadata. Set to `disabled` to turn off access to instance tags from
+    #   the instance metadata. For more information, see [Work with instance
+    #   tags using the instance metadata][1].
+    #
+    #   Default: `disabled`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMetadataOptions AWS API Documentation
@@ -45166,8 +45209,9 @@ module Aws::EC2
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag. Currently, the resource types that
-    #   support tagging on creation are `instance` and `volume`. To tag a
-    #   resource after it has been created, see [CreateTags][1].
+    #   support tagging on creation are `instance`, `volume`, `elastic-gpu`,
+    #   `network-interface`, and `spot-instances-request`. To tag a resource
+    #   after it has been created, see [CreateTags][1].
     #
     #
     #
@@ -60433,6 +60477,25 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that
+    #     match the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29
+    #     and 10.0.1.0/31 routes in your route table and you specify
+    #     `supernet-of-match` as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the route.
+    #
+    #   * `type` - The route type.
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
@@ -64262,7 +64325,7 @@ module Aws::EC2
     #   The value of the tag.
     #
     #   Constraints: Tag values are case-sensitive and accept a maximum of
-    #   255 Unicode characters.
+    #   256 Unicode characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Tag AWS API Documentation

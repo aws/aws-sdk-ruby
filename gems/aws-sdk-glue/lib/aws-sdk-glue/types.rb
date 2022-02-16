@@ -15607,6 +15607,9 @@ module Aws::Glue
     #   The ID of the Data Catalog in which the table resides.
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -15628,7 +15631,8 @@ module Aws::Glue
       :created_by,
       :is_registered_with_lake_formation,
       :target_table,
-      :catalog_id)
+      :catalog_id,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17909,6 +17913,7 @@ module Aws::Glue
     #         },
     #         skip_archive: false,
     #         transaction_id: "TransactionIdString",
+    #         version_id: "VersionString",
     #       }
     #
     # @!attribute [rw] catalog_id
@@ -17936,6 +17941,9 @@ module Aws::Glue
     #   The transaction ID at which to update the table contents.
     #   @return [String]
     #
+    # @!attribute [rw] version_id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTableRequest AWS API Documentation
     #
     class UpdateTableRequest < Struct.new(
@@ -17943,7 +17951,8 @@ module Aws::Glue
       :database_name,
       :table_input,
       :skip_archive,
-      :transaction_id)
+      :transaction_id,
+      :version_id)
       SENSITIVE = []
       include Aws::Structure
     end

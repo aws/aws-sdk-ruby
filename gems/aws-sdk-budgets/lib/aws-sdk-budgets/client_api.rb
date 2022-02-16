@@ -25,7 +25,10 @@ module Aws::Budgets
     ActionThreshold = Shapes::StructureShape.new(name: 'ActionThreshold')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     Actions = Shapes::ListShape.new(name: 'Actions')
+    AdjustmentPeriod = Shapes::IntegerShape.new(name: 'AdjustmentPeriod')
     ApprovalModel = Shapes::StringShape.new(name: 'ApprovalModel')
+    AutoAdjustData = Shapes::StructureShape.new(name: 'AutoAdjustData')
+    AutoAdjustType = Shapes::StringShape.new(name: 'AutoAdjustType')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
     BudgetPerformanceHistory = Shapes::StructureShape.new(name: 'BudgetPerformanceHistory')
@@ -84,6 +87,7 @@ module Aws::Budgets
     GenericTimestamp = Shapes::TimestampShape.new(name: 'GenericTimestamp')
     Group = Shapes::StringShape.new(name: 'Group')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HistoricalOptions = Shapes::StructureShape.new(name: 'HistoricalOptions')
     IamActionDefinition = Shapes::StructureShape.new(name: 'IamActionDefinition')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
@@ -167,6 +171,11 @@ module Aws::Budgets
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
 
+    AutoAdjustData.add_member(:auto_adjust_type, Shapes::ShapeRef.new(shape: AutoAdjustType, required: true, location_name: "AutoAdjustType"))
+    AutoAdjustData.add_member(:historical_options, Shapes::ShapeRef.new(shape: HistoricalOptions, location_name: "HistoricalOptions"))
+    AutoAdjustData.add_member(:last_auto_adjust_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastAutoAdjustTime"))
+    AutoAdjustData.struct_class = Types::AutoAdjustData
+
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
     Budget.add_member(:planned_budget_limits, Shapes::ShapeRef.new(shape: PlannedBudgetLimits, location_name: "PlannedBudgetLimits"))
@@ -177,6 +186,7 @@ module Aws::Budgets
     Budget.add_member(:calculated_spend, Shapes::ShapeRef.new(shape: CalculatedSpend, location_name: "CalculatedSpend"))
     Budget.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, required: true, location_name: "BudgetType"))
     Budget.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastUpdatedTime"))
+    Budget.add_member(:auto_adjust_data, Shapes::ShapeRef.new(shape: AutoAdjustData, location_name: "AutoAdjustData"))
     Budget.struct_class = Types::Budget
 
     BudgetPerformanceHistory.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
@@ -404,6 +414,10 @@ module Aws::Budgets
     ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
+
+    HistoricalOptions.add_member(:budget_adjustment_period, Shapes::ShapeRef.new(shape: AdjustmentPeriod, required: true, location_name: "BudgetAdjustmentPeriod"))
+    HistoricalOptions.add_member(:look_back_available_periods, Shapes::ShapeRef.new(shape: AdjustmentPeriod, location_name: "LookBackAvailablePeriods"))
+    HistoricalOptions.struct_class = Types::HistoricalOptions
 
     IamActionDefinition.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
     IamActionDefinition.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))

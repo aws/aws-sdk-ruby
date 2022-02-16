@@ -899,14 +899,9 @@ module Aws::EC2
     #   assigns to the network interface. You cannot use this option if you
     #   use the `Ipv6Prefixes` option.
     # @option options [String] :interface_type
-    #   Indicates the type of network interface. To create an Elastic Fabric
-    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
-    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #   To create a trunk network interface, specify `trunk`.
+    #   The type of network interface. The default is `interface`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   The only supported values are `efa` and `trunk`.
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new network interface.
     # @option options [String] :client_token
@@ -1498,6 +1493,14 @@ module Aws::EC2
     #
     #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with the
     #     network interface.
+    #
+    #   * `interface-type` - The type of network interface
+    #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
+    #     `branch` \| `efa` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
     #
     #   * `mac-address` - The MAC address of the network interface.
     #

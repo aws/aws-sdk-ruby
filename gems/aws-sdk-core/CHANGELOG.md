@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.126.2 (2022-02-16)
+------------------
+
 * Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529). 
 * Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
 

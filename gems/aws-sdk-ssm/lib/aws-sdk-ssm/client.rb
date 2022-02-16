@@ -1205,6 +1205,11 @@ module Aws::SSM
     # @option params [String] :document_type
     #   The type of document to create.
     #
+    #   <note markdown="1"> The `DeploymentStrategy` document type is an internal-use-only
+    #   document type reserved for AppConfig.
+    #
+    #    </note>
+    #
     # @option params [String] :document_format
     #   Specify the document format for the request. The document format can
     #   be JSON, YAML, or TEXT. JSON is the default format.
@@ -6396,8 +6401,8 @@ module Aws::SSM
     #
     # @option params [required, String] :path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/). The hierachy is the parameter name except the last part of
-    #   the parameter. For the API call to succeeed, the last part of the
+    #   slash (/). The hierarchy is the parameter name except the last part of
+    #   the parameter. For the API call to succeed, the last part of the
     #   parameter name can't be in the path. A parameter name hierarchy can
     #   have a maximum of 15 levels. Here is an example of a hierarchy:
     #   `/Finance/Prod/IAD/WinServ2016/license33 `
@@ -8345,6 +8350,8 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
+    #   * `aws:ssm:integration`
+    #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that the
@@ -8655,25 +8662,41 @@ module Aws::SSM
     #   scheduled in parallel.
     #
     # @option params [String] :max_concurrency
-    #   The maximum number of targets this task can be run for in parallel.
+    #   The maximum number of targets this task can be run for, in parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [String] :max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   A structure containing information about an Amazon Simple Storage
@@ -9679,7 +9702,7 @@ module Aws::SSM
 
     # Permanently ends a session and closes the data connection between the
     # Session Manager client and SSM Agent on the managed node. A terminated
-    # session isn't be resumed.
+    # session can't be resumed.
     #
     # @option params [required, String] :session_id
     #   The ID of the session to terminate.
@@ -9752,7 +9775,7 @@ module Aws::SSM
     # Updates an association. You can update the association name and
     # version, the document version, schedule, parameters, and Amazon Simple
     # Storage Service (Amazon S3) output. When you call `UpdateAssociation`,
-    # the system drops all optional parameters from the request and
+    # the system removes all optional parameters from the request and
     # overwrites the association with null values for those parameters. This
     # is by design. You must specify all optional parameters in the call,
     # even if you are not changing the parameters. This includes the `Name`
@@ -10330,14 +10353,9 @@ module Aws::SSM
     #   An optional description for the update request.
     #
     # @option params [String] :start_date
-    #   The time zone that the scheduled maintenance window executions are
-    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
-    #   more information, see the [Time Zone Database][1] on the IANA website.
-    #
-    #
-    #
-    #   [1]: https://www.iana.org/time-zones
+    #   The date and time, in ISO-8601 Extended format, for when you want the
+    #   maintenance window to become active. `StartDate` allows you to delay
+    #   activation of the maintenance window until the specified future date.
     #
     # @option params [String] :end_date
     #   The date and time, in ISO-8601 Extended format, for when you want the
@@ -10675,29 +10693,43 @@ module Aws::SSM
     #
     # @option params [String] :max_concurrency
     #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
-    #   is the number of targets that are allowed to run this task in
+    #   is the number of targets that are allowed to run this task, in
     #   parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task and
-    #   can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [String] :max_errors
     #   The new `MaxErrors` value to specify. `MaxErrors` is the maximum
     #   number of errors that are allowed before the task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task and
-    #   can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #
     # @option params [Types::LoggingInfo] :logging_info
     #   The new logging location in Amazon S3 to specify.
@@ -11077,7 +11109,7 @@ module Aws::SSM
     # edit OpsMetadata in Application Manager.
     #
     # @option params [required, String] :ops_metadata_arn
-    #   The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
     #
     # @option params [Hash<String,Types::MetadataValue>] :metadata_to_update
     #   Metadata to add to an OpsMetadata object.
@@ -11447,7 +11479,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.130.0'
+      context[:gem_version] = '1.131.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5473,8 +5473,8 @@ module Aws::EC2
     # specifications that vary by instance type, AMI, Availability Zone, or
     # subnet.
     #
-    # For more information, see [Launching an EC2 Fleet][1] in the *Amazon
-    # EC2 User Guide*.
+    # For more information, see [EC2 Fleet][1] in the *Amazon EC2 User
+    # Guide*.
     #
     #
     #
@@ -5489,7 +5489,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #
     #
@@ -8898,14 +8898,9 @@ module Aws::EC2
     #   use the `Ipv6Prefixes` option.
     #
     # @option params [String] :interface_type
-    #   Indicates the type of network interface. To create an Elastic Fabric
-    #   Adapter (EFA), specify `efa`. For more information, see [ Elastic
-    #   Fabric Adapter][1] in the *Amazon Elastic Compute Cloud User Guide*.
-    #   To create a trunk network interface, specify `trunk`.
+    #   The type of network interface. The default is `interface`.
     #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html
+    #   The only supported values are `efa` and `trunk`.
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet to associate with the network interface.
@@ -9045,7 +9040,7 @@ module Aws::EC2
     #   resp.network_interface.groups #=> Array
     #   resp.network_interface.groups[0].group_name #=> String
     #   resp.network_interface.groups[0].group_id #=> String
-    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "trunk"
+    #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interface.ipv_6_addresses #=> Array
     #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interface.mac_address #=> String
@@ -13474,8 +13469,8 @@ module Aws::EC2
     # * Up to 1000 instances can be terminated in a single request to delete
     #   `instant` fleets.
     #
-    # For more information, see [Deleting an EC2 Fleet][1] in the *Amazon
-    # EC2 User Guide*.
+    # For more information, see [Delete an EC2 Fleet][1] in the *Amazon EC2
+    # User Guide*.
     #
     #
     #
@@ -16254,8 +16249,6 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # c
-    #
     # Deregisters tag keys to prevent tags that have the specified tag keys
     # from being included in scheduled event notifications for resources in
     # the Region.
@@ -16900,8 +16893,7 @@ module Aws::EC2
     #     `us-east-1`).
     #
     #   * `state` - The state of the Availability Zone, the Local Zone, or the
-    #     Wavelength Zone (`available` \| `information` \| `impaired` \|
-    #     `unavailable`).
+    #     Wavelength Zone (`available`).
     #
     #   * `zone-id` - The ID of the Availability Zone (for example,
     #     `use1-az1`), the Local Zone (for example, `usw2-lax1-az1`), or the
@@ -17366,6 +17358,9 @@ module Aws::EC2
     #       Availability Zone), and explicitly target the Capacity
     #       Reservation. This ensures that only permitted instances can use
     #       the reserved capacity.
+    #
+    #   * `placement-group-arn` - The ARN of the cluster placement group in
+    #     which the Capacity Reservation was created.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -18026,16 +18021,12 @@ module Aws::EC2
     #   The IDs of the address pools.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. The following are the possible values:
+    #   One or more filters.
     #
-    #   * `coip-pool.pool-id`
+    #   * `coip-pool.local-gateway-route-table-id` - The ID of the local
+    #     gateway route table.
     #
-    #   ^
-    #   ^
-    #
-    #   * `coip-pool.local-gateway-route-table-id`
-    #
-    #   ^
+    #   * `coip-pool.pool-id` - The ID of the address pool.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -18949,12 +18940,12 @@ module Aws::EC2
 
     # Describes the running instances for the specified EC2 Fleet.
     #
-    # For more information, see [Monitoring your EC2 Fleet][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Monitor your EC2 Fleet][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19023,12 +19014,12 @@ module Aws::EC2
 
     # Describes the specified EC2 Fleets or all of your EC2 Fleets.
     #
-    # For more information, see [Monitoring your EC2 Fleet][1] in the
-    # *Amazon EC2 User Guide*.
+    # For more information, see [Monitor your EC2 Fleet][1] in the *Amazon
+    # EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet.html#monitor-ec2-fleet
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#monitor-ec2-fleet
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -19046,7 +19037,12 @@ module Aws::EC2
     #   The token for the next set of results.
     #
     # @option params [Array<String>] :fleet_ids
-    #   The ID of the EC2 Fleets.
+    #   The IDs of the EC2 Fleets.
+    #
+    #   <note markdown="1"> If a fleet is of type `instant`, you must specify the fleet ID,
+    #   otherwise it does not appear in the response.
+    #
+    #    </note>
     #
     # @option params [Array<Types::Filter>] :filters
     #   The filters.
@@ -21407,8 +21403,8 @@ module Aws::EC2
     #   * `instance-storage-info.disk.type` - The storage technology for the
     #     local instance storage disks (`hdd` \| `ssd`).
     #
-    #   * `instance-storage-info.encryption-supported` - Indicates whether
-    #     data is encrypted at rest (`required` \| `unsupported`).
+    #   * `instance-storage-info.encryption-support` - Indicates whether data
+    #     is encrypted at rest (`required` \| `supported` \| `unsupported`).
     #
     #   * `instance-storage-info.nvme-support` - Indicates whether
     #     non-volatile memory express (NVMe) is supported for instance store
@@ -21447,6 +21443,9 @@ module Aws::EC2
     #
     #   * `network-info.ipv6-supported` - Indicates whether the instance type
     #     supports IPv6 (`true` \| `false`).
+    #
+    #   * `network-info.maximum-network-cards` - The maximum number of network
+    #     cards per instance.
     #
     #   * `network-info.maximum-network-interfaces` - The maximum number of
     #     network interfaces per instance.
@@ -23181,6 +23180,9 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN) of
+    #     the local gateway route table for the virtual interface group.
+    #
     #   * `local-gateway-route-table-id` - The ID of the local gateway route
     #     table.
     #
@@ -23189,6 +23191,9 @@ module Aws::EC2
     #
     #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
     #     the virtual interface group.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway virtual interface group association.
     #
     #   * `state` - The state of the association.
     #
@@ -23263,11 +23268,17 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN) of
+    #     the local gateway route table for the association.
+    #
     #   * `local-gateway-route-table-id` - The ID of the local gateway route
     #     table.
     #
     #   * `local-gateway-route-table-vpc-association-id` - The ID of the
     #     association.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway route table for the association.
     #
     #   * `state` - The state of the association.
     #
@@ -23345,10 +23356,16 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-route-table-arn` - The Amazon Resource Name (ARN) of
+    #     the local gateway route table.
+    #
     #   * `local-gateway-route-table-id` - The ID of a local gateway route
     #     table.
     #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway route table.
     #
     #   * `state` - The state of the local gateway route table.
     #
@@ -23421,11 +23438,14 @@ module Aws::EC2
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
+    #
     #   * `local-gateway-virtual-interface-id` - The ID of the virtual
     #     interface.
     #
-    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
-    #     interface group.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway virtual interface group.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -23493,6 +23513,28 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `local-address` - The local address.
+    #
+    #   * `local-bgp-asn` - The Border Gateway Protocol (BGP) Autonomous
+    #     System Number (ASN) of the local gateway.
+    #
+    #   * `local-gateway-id` - The ID of the local gateway.
+    #
+    #   * `local-gateway-virtual-interface-id` - The ID of the virtual
+    #     interface.
+    #
+    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
+    #     interface group.
+    #
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway virtual interface.
+    #
+    #   * `peer-address` - The peer address.
+    #
+    #   * `peer-bgp-asn` - The peer BGP ASN.
+    #
+    #   * `vlan` - The ID of the VLAN.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -23558,25 +23600,19 @@ module Aws::EC2
     # are described. Alternatively, you can filter the results.
     #
     # @option params [Array<String>] :local_gateway_ids
+    #   The IDs of the local gateways.
+    #
+    # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
     #   * `local-gateway-id` - The ID of a local gateway.
     #
-    #   * `local-gateway-route-table-id` - The ID of the local gateway route
-    #     table.
-    #
-    #   * `local-gateway-route-table-virtual-interface-group-association-id` -
-    #     The ID of the association.
-    #
-    #   * `local-gateway-route-table-virtual-interface-group-id` - The ID of
-    #     the virtual interface group.
-    #
     #   * `outpost-arn` - The Amazon Resource Name (ARN) of the Outpost.
     #
-    #   * `state` - The state of the association.
+    #   * `owner-id` - The ID of the Amazon Web Services account that owns the
+    #     local gateway.
     #
-    # @option params [Array<Types::Filter>] :filters
-    #   One or more filters.
+    #   * `state` - The state of the association.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -24995,6 +25031,14 @@ module Aws::EC2
     #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with the
     #     network interface.
     #
+    #   * `interface-type` - The type of network interface
+    #     (`api_gateway_managed` \| `aws_codestar_connections_managed` \|
+    #     `branch` \| `efa` \| `gateway_load_balancer` \|
+    #     `gateway_load_balancer_endpoint` \| `global_accelerator_managed` \|
+    #     `interface` \| `iot_rules_managed` \| `lambda` \| `load_balancer` \|
+    #     `nat_gateway` \| `network_load_balancer` \| `quicksight` \|
+    #     `transit_gateway` \| `trunk` \| `vpc_endpoint`).
+    #
     #   * `mac-address` - The MAC address of the network interface.
     #
     #   * `network-interface-id` - The ID of the network interface.
@@ -25170,7 +25214,7 @@ module Aws::EC2
     #   resp.network_interfaces[0].groups #=> Array
     #   resp.network_interfaces[0].groups[0].group_name #=> String
     #   resp.network_interfaces[0].groups[0].group_id #=> String
-    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "trunk"
+    #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway", "efa", "trunk", "load_balancer", "network_load_balancer", "vpc_endpoint", "branch", "transit_gateway", "lambda", "quicksight", "global_accelerator_managed", "api_gateway_managed", "gateway_load_balancer", "gateway_load_balancer_endpoint", "iot_rules_managed", "aws_codestar_connections_managed"
     #   resp.network_interfaces[0].ipv_6_addresses #=> Array
     #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
     #   resp.network_interfaces[0].mac_address #=> String
@@ -34518,26 +34562,18 @@ module Aws::EC2
     #   The ID of the address pool.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. The following are the possible values:
+    #   One or more filters.
     #
-    #   * `coip-address-usage.allocation-id`
+    #   * `coip-address-usage.allocation-id` - The allocation ID of the
+    #     address.
     #
-    #   ^
-    #   ^
+    #   * `coip-address-usage.aws-account-id` - The ID of the Amazon Web
+    #     Services account that is using the customer-owned IP address.
     #
-    #   * `coip-address-usage.aws-account-id`
+    #   * `coip-address-usage.aws-service` - The Amazon Web Services service
+    #     that is using the customer-owned IP address.
     #
-    #   ^
-    #   ^
-    #
-    #   * `coip-address-usage.aws-service`
-    #
-    #   ^
-    #   ^
-    #
-    #   * `coip-address-usage.co-ip`
-    #
-    #   ^
+    #   * `coip-address-usage.co-ip` - The customer-owned IP address.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
@@ -42746,11 +42782,12 @@ module Aws::EC2
     # monitoring is enabled. For more information, see [Monitor your
     # instances using CloudWatch][1] in the *Amazon EC2 User Guide*.
     #
-    # To disable detailed monitoring, see .
+    # To disable detailed monitoring, see [UnmonitorInstances][2].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_UnmonitorInstances.html
     #
     # @option params [required, Array<String>] :instance_ids
     #   The IDs of the instances.
@@ -43663,7 +43700,12 @@ module Aws::EC2
     # Registers a set of tag keys to include in scheduled event
     # notifications for your resources.
     #
-    # To remove tags, use .
+    # To remove tags, use
+    # [DeregisterInstanceEventNotificationAttributes][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeregisterInstanceEventNotificationAttributes.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47621,6 +47663,25 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `route-search.exact-match` - The exact match of the specified
+    #     filter.
+    #
+    #   * `route-search.longest-prefix-match` - The longest prefix that
+    #     matches the route.
+    #
+    #   * `route-search.subnet-of-match` - The routes with a subnet that match
+    #     the specified CIDR filter.
+    #
+    #   * `route-search.supernet-of-match` - The routes with a CIDR that
+    #     encompass the CIDR filter. For example, if you have 10.0.1.0/29 and
+    #     10.0.1.0/31 routes in your route table and you specify
+    #     `supernet-of-match` as 10.0.1.0/30, then the result returns
+    #     10.0.1.0/29.
+    #
+    #   * `state` - The state of the route.
+    #
+    #   * `type` - The route type.
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return with a single call. To
     #   retrieve the remaining results, make another call with the returned
@@ -49247,7 +49308,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.298.0'
+      context[:gem_version] = '1.299.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

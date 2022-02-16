@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2022-02-16)
+------------------
+
+* Feature - Support for optimistic locking in UpdateTable
+
 1.105.0 (2022-02-03)
 ------------------
 
