@@ -388,7 +388,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           resp = client.get_access_point(name: arn)
           account_header = '123456789012'
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
@@ -399,7 +399,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           resp = client.get_access_point(name: arn, account_id: '123456789012')
           account_header = '123456789012'
           expect(resp.context.http_request.headers['x-amz-account-id']).to eq(account_header)
@@ -432,7 +432,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2::outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_access_point(name: arn)
           end.to raise_error(ArgumentError)
@@ -443,7 +443,7 @@ module Aws
             stub_responses: true,
             region: 'us-west-2'
           )
-          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket'
+          arn = 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint'
           expect do
             client.get_access_point(name: arn, account_id: '923456789012')
           end.to raise_error(ArgumentError)

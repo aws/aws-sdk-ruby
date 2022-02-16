@@ -19,7 +19,7 @@ module Aws
         raise ArgumentError, endpoint.error
       end
       # TODO - maybe these shouldn't exist here
-      # endpoint.sub_modify_params!(endpoint_options)
+      endpoint.sub_modify_params!(endpoint_options)
       endpoint.sub_auth_params!(endpoint_options)
       endpoint.sub_headers!(endpoint_options)
       endpoint.sub_url!(endpoint_options)

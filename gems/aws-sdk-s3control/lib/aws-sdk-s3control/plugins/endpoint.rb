@@ -13,12 +13,17 @@ module Aws
           def call(context)
             klass_str = 'Aws::S3Control::Endpoints::' + context.operation.name
             klass = Object.const_get(klass_str)
-            endpoint = klass.endpoint(context.config, context.params)
+            endpoint = klass.endpoint(context)
             if endpoint
               context.metadata[:endpoint] = endpoint
               context.http_request.endpoint = endpoint.url
               endpoint.headers.each do |key, value|
                 context.http_request.headers[key] = value
+              end
+              endpoint.modify_params.each do |key, value|
+                # quick hack, do something better
+                key = :bucket if key == 'BucketName'
+                context.params[key] = value
               end
             end
             @handler.call(context)

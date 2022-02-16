@@ -3,77 +3,12 @@
     {
       "description": "Vanilla outposts without ARN region + access point ARN",
       "params": {
-        "SDK::FIPS": false,
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
         "S3Control::UseArnRegion": false,
-        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "SDK::DualStack": false,
-        "SDK::Region": "us-west-2",
-        "RequiresAccountId": true
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-outposts.us-west-2.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3-outposts",
-              "signingScope": "us-west-2"
-            }
-          },
-          "headers": {
-            "x-amz-outpost-id": "op-01234567890123456",
-            "x-amz-account-id": "123456789012"
-          }
-        }
-      },
-      "tags": [
-        "vanilla_outposts",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "Vanilla outposts with ARN region + access point ARN",
-      "params": {
         "SDK::FIPS": false,
-        "AccessPointName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::DualStack": false,
-        "RequiresAccountId": true,
-        "S3Control::UseArnRegion": true,
         "SDK::Region": "us-west-2"
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-outposts.us-east-1.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3-outposts",
-              "signingScope": "us-east-1"
-            }
-          },
-          "headers": {
-            "x-amz-outpost-id": "op-01234567890123456",
-            "x-amz-account-id": "123456789012"
-          }
-        }
-      },
-      "tags": [
-        "vanilla_outposts",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "accept an access point ARN",
-      "params": {
-        "RequiresAccountId": true,
-        "SDK::Region": "us-west-2",
-        "SDK::FIPS": false,
-        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::DualStack": false
       },
       "expect": {
         "ok": {
@@ -96,16 +31,123 @@
       "tags": [
         "vanilla_outposts",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Vanilla outposts with ARN region + access point ARN",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "vanilla_outposts",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "accept an access point ARN",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-west-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-west-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "vanilla_outposts",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
       "description": "vanilla outposts china",
       "params": {
-        "RequiresAccountId": true,
         "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
         "SDK::DualStack": false,
-        "SDK::Region": "cn-north-1",
-        "SDK::FIPS": false
+        "SDK::FIPS": false,
+        "SDK::Region": "cn-north-1"
       },
       "expect": {
         "ok": {
@@ -128,16 +170,30 @@
       "tags": [
         "vanilla_outposts_other_partitions",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
       "description": "vanilla outposts iso",
       "params": {
-        "SDK::Region": "us-iso-east-1",
-        "SDK::DualStack": false,
+        "AccessPointName": "arn:aws-iso:s3-outposts:us-iso-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "RequiresAccountId": true,
+        "SDK::DualStack": false,
         "SDK::FIPS": false,
-        "AccessPointName": "arn:aws-iso:s3-outposts:us-iso-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+        "SDK::Region": "us-iso-east-1"
       },
       "expect": {
         "ok": {
@@ -160,59 +216,41 @@
       "tags": [
         "vanilla_outposts_other_partitions",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-iso:s3-outposts:us-iso-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-iso:s3-outposts:us-iso-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
       "description": "gov region",
       "params": {
-        "SDK::FIPS": false,
-        "SDK::DualStack": false,
-        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::Region": "us-gov-east-1",
-        "RequiresAccountId": true
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3-outposts",
-              "signingScope": "us-gov-east-1"
-            }
-          },
-          "headers": {
-            "x-amz-outpost-id": "op-01234567890123456",
-            "x-amz-account-id": "123456789012"
-          }
-        }
-      },
-      "tags": [
-        "govcloud_and_fips",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "gov cloud with fips",
-      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "RequiresAccountId": true,
-        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::Region": "us-gov-west-1",
         "SDK::DualStack": false,
-        "SDK::FIPS": true
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
-          "url": "https://s3-outposts-fips.us-gov-west-1.amazonaws.com",
+          "url": "https://s3-outposts.us-west-2.amazonaws.com",
           "authSchemes": [
             "v4"
           ],
           "authParams": {
             "v4": {
               "signingName": "s3-outposts",
-              "signingScope": "us-gov-west-1"
+              "signingScope": "us-west-2"
             }
           },
           "headers": {
@@ -224,6 +262,66 @@
       "tags": [
         "govcloud_and_fips",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov cloud with fips",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-west-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-west-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
@@ -231,10 +329,10 @@
       "params": {
         "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
         "SDK::DualStack": false,
         "SDK::FIPS": true,
-        "SDK::Region": "us-gov-west-1",
-        "S3Control::UseArnRegion": true
+        "SDK::Region": "us-gov-west-1"
       },
       "expect": {
         "ok": {
@@ -249,25 +347,457 @@
             }
           },
           "headers": {
-            "x-amz-outpost-id": "op-01234567890123456",
-            "x-amz-account-id": "123456789012"
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
           }
         }
       },
       "tags": [
         "govcloud_and_fips",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov region",
+      "params": {
+        "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "cn-north-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.cn-north-1.amazonaws.com.cn",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "cn-north-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov cloud with fips",
+      "params": {
+        "AccessPointName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "cn-north-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.cn-north-1.amazonaws.com.cn",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "cn-north-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "govcloud with fips + arn region",
+      "params": {
+        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov region",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "af-south-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.af-south-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "af-south-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov cloud with fips",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "af-south-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.af-south-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "af-south-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "govcloud with fips + arn region",
+      "params": {
+        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov region",
+      "params": {
+        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "gov cloud with fips",
+      "params": {
+        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
+      ]
+    },
+    {
+      "description": "govcloud with fips + arn region",
+      "params": {
+        "AccessPointName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "govcloud_and_fips",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        },
+        {
+          "operation_name": "DeleteAccessPoint",
+          "params": {
+            "Name": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
       "description": "CreateBucket + OutpostId = outposts endpoint",
       "params": {
-        "SDK::Region": "us-east-2",
-        "OutpostId": "123",
-        "SDK::DualStack": false,
+        "BucketName": "blah",
         "Operation": "CreateBucket",
+        "OutpostId": "123",
         "RequiresAccountId": false,
-        "SDK::FIPS": false
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-east-2"
       },
       "expect": {
         "ok": {
@@ -281,140 +811,34 @@
               "signingScope": "us-east-2"
             }
           },
-          "headers": {}
+          "headers": {
+            "x-amz-outpost-id": "123"
+          }
         }
       },
       "tags": [
         "special_cased_operations",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateBucket",
+          "params": {
+            "Bucket": "blah",
+            "OutpostId": "123"
+          }
+        }
       ]
     },
     {
       "description": "CreateBucket + OutpostId with fips = outposts endpoint",
       "params": {
-        "SDK::Region": "us-east-2",
-        "RequiresAccountId": false,
-        "OutpostId": "123",
-        "SDK::FIPS": true,
+        "BucketName": "blah",
         "Operation": "CreateBucket",
-        "SDK::DualStack": false
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3-outposts",
-              "signingScope": "us-east-2"
-            }
-          },
-          "headers": {}
-        }
-      },
-      "tags": [
-        "special_cased_operations",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "CreateBucket without OutpostId = regular endpoint",
-      "params": {
-        "SDK::Region": "us-east-2",
+        "OutpostId": "123",
         "RequiresAccountId": false,
         "SDK::DualStack": false,
-        "SDK::FIPS": false,
-        "Operation": "CreateBucket"
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-control.us-east-2.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3",
-              "signingScope": "us-east-2"
-            }
-          },
-          "headers": {}
-        }
-      },
-      "tags": [
-        "special_cased_operations",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "ListRegionalBuckets + OutpostId = outposts endpoint",
-      "params": {
-        "OutpostId": "123",
-        "Operation": "ListRegionalBuckets",
-        "SDK::Region": "us-east-2",
-        "RequiresAccountId": false,
-        "SDK::FIPS": false,
-        "SDK::DualStack": false
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-outposts.us-east-2.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3-outposts",
-              "signingScope": "us-east-2"
-            }
-          },
-          "headers": {}
-        }
-      },
-      "tags": [
-        "special_cased_operations",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "ListRegionalBuckets without OutpostId = regular endpoint",
-      "params": {
-        "SDK::FIPS": false,
-        "Operation": "ListRegionalBuckets",
-        "SDK::Region": "us-east-2",
-        "RequiresAccountId": false,
-        "SDK::DualStack": false
-      },
-      "expect": {
-        "ok": {
-          "url": "https://s3-control.us-east-2.amazonaws.com",
-          "authSchemes": [
-            "v4"
-          ],
-          "authParams": {
-            "v4": {
-              "signingName": "s3",
-              "signingScope": "us-east-2"
-            }
-          },
-          "headers": {}
-        }
-      },
-      "tags": [
-        "special_cased_operations",
-        "s3-outposts-control"
-      ]
-    },
-    {
-      "description": "ListRegionalBucket + OutpostId with fips = outposts endpoint",
-      "params": {
         "SDK::FIPS": true,
-        "SDK::DualStack": false,
-        "RequiresAccountId": false,
-        "OutpostId": "123",
-        "Operation": "CreateBucket",
         "SDK::Region": "us-east-2"
       },
       "expect": {
@@ -429,21 +853,197 @@
               "signingScope": "us-east-2"
             }
           },
+          "headers": {
+            "x-amz-outpost-id": "123"
+          }
+        }
+      },
+      "tags": [
+        "special_cased_operations",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateBucket",
+          "params": {
+            "Bucket": "blah",
+            "OutpostId": "123"
+          }
+        }
+      ]
+    },
+    {
+      "description": "CreateBucket without OutpostId = regular endpoint",
+      "params": {
+        "BucketName": "blah",
+        "Operation": "CreateBucket",
+        "RequiresAccountId": false,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-control.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3",
+              "signingScope": "us-east-2"
+            }
+          },
           "headers": {}
         }
       },
       "tags": [
         "special_cased_operations",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateBucket",
+          "params": {
+            "Bucket": "blah"
+          }
+        }
+      ]
+    },
+    {
+      "description": "ListRegionalBuckets + OutpostId = outposts endpoint",
+      "params": {
+        "AccountId": "123",
+        "Operation": "ListRegionalBuckets",
+        "OutpostId": "op-123",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123",
+            "x-amz-outpost-id": "op-123"
+          }
+        }
+      },
+      "tags": [
+        "special_cased_operations",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "ListRegionalBuckets",
+          "params": {
+            "AccountId": "123",
+            "OutpostId": "op-123"
+          }
+        }
+      ]
+    },
+    {
+      "description": "ListRegionalBuckets without OutpostId = regular endpoint",
+      "params": {
+        "AccountId": "123",
+        "Operation": "ListRegionalBuckets",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://123.s3-control.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123"
+          }
+        }
+      },
+      "tags": [
+        "special_cased_operations",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "ListRegionalBuckets",
+          "params": {
+            "AccountId": "123"
+          }
+        }
+      ]
+    },
+    {
+      "description": "ListRegionalBucket + OutpostId with fips = outposts endpoint",
+      "params": {
+        "AccountId": "123",
+        "Operation": "CreateBucket",
+        "OutpostId": "op-123",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123",
+            "x-amz-outpost-id": "op-123"
+          }
+        }
+      },
+      "tags": [
+        "special_cased_operations",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "ListRegionalBuckets",
+          "params": {
+            "AccountId": "123",
+            "OutpostId": "op-123"
+          }
+        }
       ]
     },
     {
       "description": "outpost access points do not support dualstack",
       "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "RequiresAccountId": true,
         "SDK::DualStack": true,
-        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::FIPS": false
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Outpost Access Points do not support dual-stack."
@@ -456,11 +1056,117 @@
     {
       "description": "outpost access points do not support accelerate",
       "params": {
-        "S3Control::Accelerate": true,
-        "SDK::DualStack": false,
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
         "RequiresAccountId": true,
-        "SDK::FIPS": false
+        "S3Control::Accelerate": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support dualstack",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "cn-north-1"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support accelerate",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::Accelerate": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "cn-north-1"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support dualstack",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "af-south-1"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support accelerate",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::Accelerate": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "af-south-1"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support dualstack",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "error": "Outpost Access Points do not support dual-stack."
+      },
+      "tags": [
+        "dualstack_accelerate",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "outpost access points do not support accelerate",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "RequiresAccountId": true,
+        "S3Control::Accelerate": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
       },
       "expect": {
         "error": "Outpost Access Points do not support dual-stack."
@@ -474,10 +1180,10 @@
       "description": "invalid ARN: must be include outpost ID",
       "params": {
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
-        "SDK::Region": "us-west-2",
         "RequiresAccountId": true,
+        "SDK::DualStack": false,
         "SDK::FIPS": false,
-        "SDK::DualStack": false
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Invalid ARN: Outpost resource format is incorrect"
@@ -490,11 +1196,11 @@
     {
       "description": "invalid ARN: must specify access point",
       "params": {
-        "SDK::Region": "us-west-2",
-        "RequiresAccountId": true,
-        "SDK::FIPS": false,
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
-        "SDK::DualStack": false
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Invalid ARN: Outpost resource format is incorrect"
@@ -507,11 +1213,11 @@
     {
       "description": "invalid ARN",
       "params": {
-        "SDK::DualStack": false,
-        "SDK::Region": "us-west-2",
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:myaccesspoint",
         "RequiresAccountId": true,
-        "SDK::FIPS": false
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Invalid ARN: Outpost resource format is incorrect"
@@ -524,12 +1230,12 @@
     {
       "description": "when set, AccountId drives AP construction",
       "params": {
-        "RequiresAccountId": true,
-        "SDK::Region": "us-west-2",
-        "SDK::FIPS": false,
         "AccessPointName": "myaccesspoint",
         "AccountId": "myid-1234",
-        "SDK::DualStack": false
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
@@ -556,13 +1262,13 @@
     {
       "description": "Account ID set inline & in ARN but they both match",
       "params": {
-        "SDK::FIPS": false,
-        "SDK::DualStack": false,
-        "RequiresAccountId": true,
-        "AccountId": "123456789012",
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::Region": "us-west-2",
-        "S3Control::UseArnRegion": false
+        "AccountId": "123456789012",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": false,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
@@ -577,27 +1283,37 @@
             }
           },
           "headers": {
-            "x-amz-outpost-id": "op-01234567890123456",
-            "x-amz-account-id": "123456789012"
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
           }
         }
       },
       "tags": [
         "multiple_account_id_sources",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "AccountId": "123456789012",
+            "Name": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"
+          }
+        }
       ]
     },
     {
       "description": "get access point prefixed with account id",
       "params": {
-        "Operation": "GetAccessPoint",
-        "SDK::FIPS": false,
-        "PrivateLink": "vpce-1a2b3c4d-5e6f",
-        "SDK::Region": "us-west-2",
-        "SDK::DualStack": false,
         "AccessPointName": "apname",
+        "AccountId": "123456789012",
+        "Operation": "GetAccessPoint",
+        "PrivateLink": "vpce-1a2b3c4d-5e6f",
         "RequiresAccountId": true,
-        "AccountId": "123456789012"
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Host": "control.vpce-1a2b3c4d-5e6f.s3.us-west-2.vpce.amazonaws.com",
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
@@ -619,18 +1335,129 @@
       "tags": [
         "private_link_tests",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetAccessPoint",
+          "params": {
+            "AccountId": "123456789012",
+            "Name": "apname"
+          }
+        }
+      ]
+    },
+    {
+      "description": "endpoint url with s3-outposts",
+      "params": {
+        "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+        "Operation": "GetAccessPoint",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Host": "beta.example.com",
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://beta.example.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-west-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "private_link_tests",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "create bucket with outposts",
+      "params": {
+        "BucketName": "bucketname",
+        "Operation": "CreateBucket",
+        "OutpostId": "op-123",
+        "RequiresAccountId": false,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Host": "beta.example.com",
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://beta.example.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-west-2"
+            }
+          },
+          "headers": {
+            "x-amz-outpost-id": "op-123"
+          }
+        }
+      },
+      "tags": [
+        "private_link_tests",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "get bucket with endpoint_url",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "Operation": "GetBucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Host": "beta.example.com",
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://beta.example.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-west-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "private_link_tests",
+        "s3-outposts-control"
       ]
     },
     {
       "description": "dualstack cannot be used with private link",
       "params": {
-        "PrivateLink": "vpce-1a2b3c4d-5e6f",
-        "SDK::FIPS": false,
+        "AccessPointName": "apname",
         "AccountId": "123456789012",
         "Operation": "GetAccessPoint",
-        "SDK::DualStack": true,
-        "AccessPointName": "apname",
+        "PrivateLink": "vpce-1a2b3c4d-5e6f",
         "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
         "SDK::Region": "us-west-2"
       },
       "expect": {
@@ -645,12 +1472,12 @@
       "description": "dualstack cannot be used with outposts",
       "params": {
         "AccessPointName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-        "SDK::Region": "us-west-2",
-        "SDK::DualStack": true,
-        "SDK::Endpoint": "beta.example.com",
         "Operation": "GetAccessPoint",
         "RequiresAccountId": true,
-        "SDK::FIPS": false
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Host": "beta.example.com",
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Dual-stack cannot be used with outposts"
@@ -663,14 +1490,14 @@
     {
       "description": "Dual-stack cannot be used with outposts",
       "params": {
-        "SDK::DualStack": true,
-        "SDK::Region": "us-west-2",
-        "RequiresAccountId": false,
         "BucketName": "bucketname",
+        "Operation": "CreateBucket",
         "OutpostId": "op-123",
-        "SDK::Endpoint": "beta.example.com",
+        "RequiresAccountId": false,
+        "SDK::DualStack": true,
         "SDK::FIPS": false,
-        "Operation": "CreateBucket"
+        "SDK::Host": "beta.example.com",
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "dual-stack cannot be used with outposts"
@@ -683,11 +1510,12 @@
     {
       "description": "vanilla bucket arn requires account id",
       "params": {
+        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
         "SDK::FIPS": false,
         "SDK::Region": "us-west-2",
-        "SDK::DualStack": false,
-        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-        "RequiresAccountId": true
+        "__name": "apname"
       },
       "expect": {
         "ok": {
@@ -710,17 +1538,26 @@
       "tags": [
         "bucket_arn_tests",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateAccessPoint",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+            "Name": "apname"
+          }
+        }
       ]
     },
     {
       "description": "bucket arn with UseArnRegion = true (arn region supercedes client configured region)",
       "params": {
-        "SDK::Region": "us-west-2",
         "BucketName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
         "RequiresAccountId": true,
-        "SDK::FIPS": false,
+        "S3Control::UseArnRegion": true,
         "SDK::DualStack": false,
-        "S3Control::UseArnRegion": true
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
@@ -743,16 +1580,24 @@
       "tags": [
         "bucket_arn_tests",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
       ]
     },
     {
       "description": "bucket ARN in gov partition (non-fips)",
       "params": {
-        "S3Control::UseArnRegion": true,
-        "SDK::FIPS": false,
-        "SDK::DualStack": false,
         "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
         "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
         "SDK::Region": "us-gov-east-1"
       },
       "expect": {
@@ -776,15 +1621,23 @@
       "tags": [
         "bucket_arn_tests",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
       ]
     },
     {
       "description": "bucket ARN in gov partition with FIPS",
       "params": {
-        "SDK::FIPS": true,
-        "SDK::DualStack": false,
         "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
         "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
         "SDK::Region": "us-gov-west-1"
       },
       "expect": {
@@ -808,16 +1661,727 @@
       "tags": [
         "bucket_arn_tests",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in aws partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
       ]
     },
     {
       "description": "Outposts do not support dualstack",
       "params": {
-        "RequiresAccountId": true,
         "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-        "SDK::Region": "us-west-2",
+        "RequiresAccountId": true,
         "SDK::DualStack": true,
-        "SDK::FIPS": false
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "error": "Invalid configuration: Outpost buckets do not support dual-stack"
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "vanilla bucket arn requires account id",
+      "params": {
+        "BucketName": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "cn-north-1",
+        "__name": "apname"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.cn-north-1.amazonaws.com.cn",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "cn-north-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateAccessPoint",
+          "params": {
+            "Bucket": "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+            "Name": "apname"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket arn with UseArnRegion = true (arn region supercedes client configured region)",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition (non-fips)",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-west-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-west-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in aws partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Outposts do not support dualstack",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "error": "Invalid configuration: Outpost buckets do not support dual-stack"
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "vanilla bucket arn requires account id",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "af-south-1",
+        "__name": "apname"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.af-south-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "af-south-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateAccessPoint",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:af-south-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+            "Name": "apname"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket arn with UseArnRegion = true (arn region supercedes client configured region)",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition (non-fips)",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-west-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-west-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in aws partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Outposts do not support dualstack",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "error": "Invalid configuration: Outpost buckets do not support dual-stack"
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ]
+    },
+    {
+      "description": "vanilla bucket arn requires account id",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1",
+        "__name": "apname"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "CreateAccessPoint",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+            "Name": "apname"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket arn with UseArnRegion = true (arn region supercedes client configured region)",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition (non-fips)",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "S3Control::UseArnRegion": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-gov-east-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts.us-gov-east-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-east-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in gov partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-gov-west-1"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-gov-west-1.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-gov-west-1"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "bucket ARN in aws partition with FIPS",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-2"
+      },
+      "expect": {
+        "ok": {
+          "url": "https://s3-outposts-fips.us-east-2.amazonaws.com",
+          "authSchemes": [
+            "v4"
+          ],
+          "authParams": {
+            "v4": {
+              "signingName": "s3-outposts",
+              "signingScope": "us-east-2"
+            }
+          },
+          "headers": {
+            "x-amz-account-id": "123456789012",
+            "x-amz-outpost-id": "op-01234567890123456"
+          }
+        }
+      },
+      "tags": [
+        "bucket_arn_tests",
+        "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "GetBucket",
+          "params": {
+            "Bucket": "arn:aws:s3-outposts:us-east-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"
+          }
+        }
+      ]
+    },
+    {
+      "description": "Outposts do not support dualstack",
+      "params": {
+        "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+        "RequiresAccountId": true,
+        "SDK::DualStack": true,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "error": "Invalid configuration: Outpost buckets do not support dual-stack"
@@ -830,13 +2394,14 @@
     {
       "description": "Invalid ARN: missing outpost id and bucket",
       "params": {
-        "RequiresAccountId": true,
         "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
         "SDK::FIPS": false,
-        "SDK::DualStack": false
+        "SDK::Region": "us-west-2"
       },
       "expect": {
-        "error": "Invalid ARN: Outpost resource format is incorrect"
+        "error": "Invalid ARN"
       },
       "tags": [
         "invalid_bucket_arn",
@@ -846,13 +2411,14 @@
     {
       "description": "Invalid ARN: missing bucket",
       "params": {
-        "SDK::DualStack": false,
         "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
         "SDK::FIPS": false,
-        "RequiresAccountId": true
+        "SDK::Region": "us-west-2"
       },
       "expect": {
-        "error": "Invalid ARN: Outpost resource format is incorrect"
+        "error": "Invalid ARN"
       },
       "tags": [
         "invalid_bucket_arn",
@@ -862,13 +2428,14 @@
     {
       "description": "Invalid ARN: missing outpost and bucket ids",
       "params": {
-        "SDK::FIPS": false,
-        "RequiresAccountId": true,
         "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:bucket",
-        "SDK::DualStack": false
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
-        "error": "Invalid ARN: Outpost resource format is incorrect"
+        "error": "Invalid ARN"
       },
       "tags": [
         "invalid_bucket_arn",
@@ -879,12 +2446,13 @@
       "description": "Invalid ARN: missing bucket id",
       "params": {
         "BucketName": "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket",
-        "SDK::FIPS": false,
         "RequiresAccountId": true,
-        "SDK::DualStack": false
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
-        "error": "Invalid ARN: Outpost resource format is incorrect"
+        "error": "Invalid ARN"
       },
       "tags": [
         "invalid_bucket_arn",
@@ -894,11 +2462,11 @@
     {
       "description": "account id inserted into hostname",
       "params": {
-        "SDK::Region": "us-west-2",
-        "SDK::FIPS": false,
-        "SDK::DualStack": false,
+        "AccountId": "1234567890",
         "RequiresAccountId": true,
-        "AccountId": "1234567890"
+        "SDK::DualStack": false,
+        "SDK::FIPS": false,
+        "SDK::Region": "us-west-2"
       },
       "expect": {
         "ok": {
@@ -920,6 +2488,14 @@
       "tags": [
         "host_prefix",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "PutPublicAccessBlock",
+          "params": {
+            "AccountId": "1234567890"
+          }
+        }
       ]
     },
     {
@@ -927,9 +2503,9 @@
       "params": {
         "AccountId": "1234567890",
         "RequiresAccountId": true,
+        "SDK::DualStack": true,
         "SDK::FIPS": false,
-        "SDK::Region": "us-east-1",
-        "SDK::DualStack": true
+        "SDK::Region": "us-east-1"
       },
       "expect": {
         "ok": {
@@ -951,16 +2527,24 @@
       "tags": [
         "host_prefix",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "PutPublicAccessBlock",
+          "params": {
+            "AccountId": "1234567890"
+          }
+        }
       ]
     },
     {
       "description": "account id prefix with fips",
       "params": {
-        "SDK::FIPS": true,
-        "SDK::DualStack": false,
         "AccountId": "1234567890",
-        "SDK::Region": "us-east-1",
-        "RequiresAccountId": true
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-1"
       },
       "expect": {
         "ok": {
@@ -982,16 +2566,24 @@
       "tags": [
         "host_prefix",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "PutPublicAccessBlock",
+          "params": {
+            "AccountId": "1234567890"
+          }
+        }
       ]
     },
     {
       "description": "custom account id prefix with fips",
       "params": {
-        "RequiresAccountId": true,
-        "SDK::Region": "us-east-1",
-        "SDK::DualStack": false,
         "AccountId": "1234567890-aBC",
-        "SDK::FIPS": true
+        "RequiresAccountId": true,
+        "SDK::DualStack": false,
+        "SDK::FIPS": true,
+        "SDK::Region": "us-east-1"
       },
       "expect": {
         "ok": {
@@ -1013,6 +2605,14 @@
       "tags": [
         "host_prefix",
         "s3-outposts-control"
+      ],
+      "operation_inputs": [
+        {
+          "operation_name": "PutPublicAccessBlock",
+          "params": {
+            "AccountId": "1234567890-aBC"
+          }
+        }
       ]
     }
   ]

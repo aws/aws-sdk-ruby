@@ -23,9 +23,250 @@
     "RequiresAccountId": {
       "name": "RequiresAccountId",
       "type": "Boolean"
+    },
+    "S3Control::Accelerate": {
+      "name": "S3Control::Accelerate",
+      "type": "String"
     }
   },
   "rules": [
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "S3Control::Accelerate"
+        }
+      ],
+      "error": "outpost does not support accelerate endpoints",
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:179)"
+    },
     {
       "matchers": [
         {
@@ -81,7 +322,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -138,7 +379,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -148,18 +389,23 @@
           "param": "SDK::Region"
         },
         {
-          "matcher": "isSet",
-          "isSet": true,
-          "param": "AccessPointName"
-        },
-        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:149)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:216)"
     },
     {
       "matchers": [
@@ -175,7 +421,7 @@
         }
       ],
       "error": "unsupported arn provided for AccessPointName endpoint parameter",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:162)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:232)"
     },
     {
       "matchers": [
@@ -190,6 +436,11 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::FIPS"
@@ -198,6 +449,217 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -211,10 +673,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -229,6 +693,63 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts.{SDK::Region}.amazonaws.com",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::FIPS"
@@ -237,6 +758,11 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -250,10 +776,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -268,13 +796,70 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts-fips.{SDK::Region}.amazonaws.com",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "outpostIdPartitionEndpointRules (main.go:193)"
+      "description": "outpostIdPartitionEndpointRules (main.go:298)"
     },
     {
       "matchers": [
@@ -328,7 +913,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -382,7 +967,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -403,7 +988,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:233)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:377)"
     },
     {
       "matchers": [
@@ -441,6 +1026,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -459,10 +1049,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -500,6 +1090,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -518,10 +1113,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -559,6 +1154,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -577,10 +1177,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -618,6 +1218,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -636,10 +1241,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -665,7 +1270,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:318)"
+      "description": "outpostArnPartitionEndpointRules (main.go:462)"
     },
     {
       "matchers": [
@@ -681,7 +1286,98 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:335)"
+      "description": "outpostArnPartitionEndpointRules (main.go:479)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{AccountId}.{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:135)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        }
+      ],
+      "error": "operation requires AccountId but was not set",
+      "description": "endpointHostRules (main.go:151)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {},
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:164)"
     },
     {
       "matchers": [
@@ -702,7 +1398,7 @@
         }
       ],
       "error": "Private link cannot be used in combination with DualStack.",
-      "description": "invalidPrivateLinkEndpoint (main.go:286)"
+      "description": "invalidPrivateLinkEndpoint (main.go:430)"
     },
     {
       "matchers": [
@@ -748,7 +1444,7 @@
         },
         "modifyParams": {}
       },
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:250)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:394)"
     },
     {
       "matchers": [
@@ -779,7 +1475,7 @@
         }
       ],
       "error": "accountId was expected but not present",
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:266)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:410)"
     },
     {
       "matchers": [
@@ -808,7 +1504,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "privateLinkValidCase (main.go:299)"
+      "description": "privateLinkValidCase (main.go:443)"
     },
     {
       "matchers": [
@@ -829,7 +1525,7 @@
         }
       ],
       "error": "accountId must be set to resolve endpoint",
-      "description": "accountPartitionEndpointRules (main.go:486)"
+      "description": "accountPartitionEndpointRules (main.go:642)"
     },
     {
       "matchers": [
@@ -875,7 +1571,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -921,7 +1617,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -967,7 +1663,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -1013,7 +1709,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -1047,7 +1743,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -1081,7 +1777,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -1115,7 +1811,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -1149,7 +1845,244 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-cn",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-cn",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-cn",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-cn",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "S3Control::Accelerate"
+        }
+      ],
+      "error": "outpost does not support accelerate endpoints",
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:179)"
     },
     {
       "matchers": [
@@ -1206,7 +2139,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -1263,7 +2196,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -1273,18 +2206,23 @@
           "param": "SDK::Region"
         },
         {
-          "matcher": "isSet",
-          "isSet": true,
-          "param": "AccessPointName"
-        },
-        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:149)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:216)"
     },
     {
       "matchers": [
@@ -1300,7 +2238,7 @@
         }
       ],
       "error": "unsupported arn provided for AccessPointName endpoint parameter",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:162)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:232)"
     },
     {
       "matchers": [
@@ -1315,6 +2253,11 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::FIPS"
@@ -1323,6 +2266,217 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -1336,10 +2490,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -1354,6 +2510,63 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts.{SDK::Region}.amazonaws.com.cn",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::FIPS"
@@ -1362,6 +2575,11 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -1375,10 +2593,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -1393,13 +2613,70 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts-fips.{SDK::Region}.amazonaws.com.cn",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "outpostIdPartitionEndpointRules (main.go:193)"
+      "description": "outpostIdPartitionEndpointRules (main.go:298)"
     },
     {
       "matchers": [
@@ -1453,7 +2730,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -1507,7 +2784,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -1528,7 +2805,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:233)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:377)"
     },
     {
       "matchers": [
@@ -1566,6 +2843,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -1584,10 +2866,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -1625,6 +2907,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -1643,10 +2930,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -1684,6 +2971,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -1702,10 +2994,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -1743,6 +3035,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -1761,10 +3058,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -1790,7 +3087,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:318)"
+      "description": "outpostArnPartitionEndpointRules (main.go:462)"
     },
     {
       "matchers": [
@@ -1806,7 +3103,98 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:335)"
+      "description": "outpostArnPartitionEndpointRules (main.go:479)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{AccountId}.{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:135)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        }
+      ],
+      "error": "operation requires AccountId but was not set",
+      "description": "endpointHostRules (main.go:151)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-cn",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {},
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:164)"
     },
     {
       "matchers": [
@@ -1827,7 +3215,7 @@
         }
       ],
       "error": "Private link cannot be used in combination with DualStack.",
-      "description": "invalidPrivateLinkEndpoint (main.go:286)"
+      "description": "invalidPrivateLinkEndpoint (main.go:430)"
     },
     {
       "matchers": [
@@ -1873,7 +3261,7 @@
         },
         "modifyParams": {}
       },
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:250)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:394)"
     },
     {
       "matchers": [
@@ -1904,7 +3292,7 @@
         }
       ],
       "error": "accountId was expected but not present",
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:266)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:410)"
     },
     {
       "matchers": [
@@ -1933,7 +3321,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "privateLinkValidCase (main.go:299)"
+      "description": "privateLinkValidCase (main.go:443)"
     },
     {
       "matchers": [
@@ -1954,7 +3342,7 @@
         }
       ],
       "error": "accountId must be set to resolve endpoint",
-      "description": "accountPartitionEndpointRules (main.go:486)"
+      "description": "accountPartitionEndpointRules (main.go:642)"
     },
     {
       "matchers": [
@@ -2000,7 +3388,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -2046,7 +3434,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -2092,7 +3480,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -2138,7 +3526,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -2172,7 +3560,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -2206,7 +3594,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -2240,7 +3628,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -2274,7 +3662,244 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "S3Control::Accelerate"
+        }
+      ],
+      "error": "outpost does not support accelerate endpoints",
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:179)"
     },
     {
       "matchers": [
@@ -2331,7 +3956,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -2388,7 +4013,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -2398,18 +4023,23 @@
           "param": "SDK::Region"
         },
         {
-          "matcher": "isSet",
-          "isSet": true,
-          "param": "AccessPointName"
-        },
-        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:149)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:216)"
     },
     {
       "matchers": [
@@ -2425,7 +4055,7 @@
         }
       ],
       "error": "unsupported arn provided for AccessPointName endpoint parameter",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:162)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:232)"
     },
     {
       "matchers": [
@@ -2440,6 +4070,11 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::FIPS"
@@ -2448,6 +4083,217 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -2461,10 +4307,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -2479,6 +4327,63 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts.{SDK::Region}.c2s.ic.gov",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::FIPS"
@@ -2487,6 +4392,11 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -2500,10 +4410,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -2518,13 +4430,70 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts-fips.{SDK::Region}.c2s.ic.gov",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "outpostIdPartitionEndpointRules (main.go:193)"
+      "description": "outpostIdPartitionEndpointRules (main.go:298)"
     },
     {
       "matchers": [
@@ -2578,7 +4547,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -2632,7 +4601,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -2653,7 +4622,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:233)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:377)"
     },
     {
       "matchers": [
@@ -2691,6 +4660,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -2709,10 +4683,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -2750,6 +4724,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -2768,10 +4747,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -2809,6 +4788,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -2827,10 +4811,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -2868,6 +4852,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -2886,10 +4875,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -2915,7 +4904,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:318)"
+      "description": "outpostArnPartitionEndpointRules (main.go:462)"
     },
     {
       "matchers": [
@@ -2931,7 +4920,98 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:335)"
+      "description": "outpostArnPartitionEndpointRules (main.go:479)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{AccountId}.{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:135)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        }
+      ],
+      "error": "operation requires AccountId but was not set",
+      "description": "endpointHostRules (main.go:151)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {},
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:164)"
     },
     {
       "matchers": [
@@ -2952,7 +5032,7 @@
         }
       ],
       "error": "Private link cannot be used in combination with DualStack.",
-      "description": "invalidPrivateLinkEndpoint (main.go:286)"
+      "description": "invalidPrivateLinkEndpoint (main.go:430)"
     },
     {
       "matchers": [
@@ -2998,7 +5078,7 @@
         },
         "modifyParams": {}
       },
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:250)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:394)"
     },
     {
       "matchers": [
@@ -3029,7 +5109,7 @@
         }
       ],
       "error": "accountId was expected but not present",
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:266)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:410)"
     },
     {
       "matchers": [
@@ -3058,7 +5138,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "privateLinkValidCase (main.go:299)"
+      "description": "privateLinkValidCase (main.go:443)"
     },
     {
       "matchers": [
@@ -3079,7 +5159,7 @@
         }
       ],
       "error": "accountId must be set to resolve endpoint",
-      "description": "accountPartitionEndpointRules (main.go:486)"
+      "description": "accountPartitionEndpointRules (main.go:642)"
     },
     {
       "matchers": [
@@ -3125,7 +5205,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -3171,7 +5251,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -3217,7 +5297,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -3263,7 +5343,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -3297,7 +5377,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -3331,7 +5411,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -3365,7 +5445,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -3399,7 +5479,244 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso-b",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso-b",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso-b",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-iso-b",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "S3Control::Accelerate"
+        }
+      ],
+      "error": "outpost does not support accelerate endpoints",
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:179)"
     },
     {
       "matchers": [
@@ -3456,7 +5773,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -3513,7 +5830,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -3523,18 +5840,23 @@
           "param": "SDK::Region"
         },
         {
-          "matcher": "isSet",
-          "isSet": true,
-          "param": "AccessPointName"
-        },
-        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:149)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:216)"
     },
     {
       "matchers": [
@@ -3550,7 +5872,7 @@
         }
       ],
       "error": "unsupported arn provided for AccessPointName endpoint parameter",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:162)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:232)"
     },
     {
       "matchers": [
@@ -3565,6 +5887,11 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::FIPS"
@@ -3573,6 +5900,217 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -3586,10 +6124,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -3604,6 +6144,63 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts.{SDK::Region}.sc2s.sgov.gov",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::FIPS"
@@ -3612,6 +6209,11 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -3625,10 +6227,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -3643,13 +6247,70 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts-fips.{SDK::Region}.sc2s.sgov.gov",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "outpostIdPartitionEndpointRules (main.go:193)"
+      "description": "outpostIdPartitionEndpointRules (main.go:298)"
     },
     {
       "matchers": [
@@ -3703,7 +6364,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -3757,7 +6418,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -3778,7 +6439,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:233)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:377)"
     },
     {
       "matchers": [
@@ -3816,6 +6477,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -3834,10 +6500,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -3875,6 +6541,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -3893,10 +6564,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -3934,6 +6605,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -3952,10 +6628,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -3993,6 +6669,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -4011,10 +6692,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -4040,7 +6721,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:318)"
+      "description": "outpostArnPartitionEndpointRules (main.go:462)"
     },
     {
       "matchers": [
@@ -4056,7 +6737,98 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:335)"
+      "description": "outpostArnPartitionEndpointRules (main.go:479)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{AccountId}.{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:135)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        }
+      ],
+      "error": "operation requires AccountId but was not set",
+      "description": "endpointHostRules (main.go:151)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-iso-b",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {},
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:164)"
     },
     {
       "matchers": [
@@ -4077,7 +6849,7 @@
         }
       ],
       "error": "Private link cannot be used in combination with DualStack.",
-      "description": "invalidPrivateLinkEndpoint (main.go:286)"
+      "description": "invalidPrivateLinkEndpoint (main.go:430)"
     },
     {
       "matchers": [
@@ -4123,7 +6895,7 @@
         },
         "modifyParams": {}
       },
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:250)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:394)"
     },
     {
       "matchers": [
@@ -4154,7 +6926,7 @@
         }
       ],
       "error": "accountId was expected but not present",
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:266)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:410)"
     },
     {
       "matchers": [
@@ -4183,7 +6955,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "privateLinkValidCase (main.go:299)"
+      "description": "privateLinkValidCase (main.go:443)"
     },
     {
       "matchers": [
@@ -4204,7 +6976,7 @@
         }
       ],
       "error": "accountId must be set to resolve endpoint",
-      "description": "accountPartitionEndpointRules (main.go:486)"
+      "description": "accountPartitionEndpointRules (main.go:642)"
     },
     {
       "matchers": [
@@ -4250,7 +7022,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -4296,7 +7068,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -4342,7 +7114,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -4388,7 +7160,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -4422,7 +7194,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -4456,7 +7228,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -4490,7 +7262,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -4524,7 +7296,244 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-us-gov",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-us-gov",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "accesspoint",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-us-gov",
+          "param": "AccessPointName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "AccessPointName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{AccessPointName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccessPointName.arn-account-id}",
+          "x-amz-outpost-id": "{AccessPointName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{AccessPointName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "BucketName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "aws-us-gov",
+          "param": "BucketName.arn-partition"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "BucketName.arn-resource.0"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "bucket",
+          "param": "BucketName.arn-resource.2"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{BucketName.arn-region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{BucketName.arn-account-id}",
+          "x-amz-outpost-id": "{BucketName.arn-resource.1}"
+        },
+        "modifyParams": {
+          "BucketName": "{BucketName.arn-resource.2}"
+        }
+      },
+      "description": "endpointHostOutpostARN (main.go:319)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "S3Control::Accelerate"
+        }
+      ],
+      "error": "outpost does not support accelerate endpoints",
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:179)"
     },
     {
       "matchers": [
@@ -4581,7 +7590,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -4638,7 +7647,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:126)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:193)"
     },
     {
       "matchers": [
@@ -4648,18 +7657,23 @@
           "param": "SDK::Region"
         },
         {
-          "matcher": "isSet",
-          "isSet": true,
-          "param": "AccessPointName"
-        },
-        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:149)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:216)"
     },
     {
       "matchers": [
@@ -4675,7 +7689,7 @@
         }
       ],
       "error": "unsupported arn provided for AccessPointName endpoint parameter",
-      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:162)"
+      "description": "accessPointNameOutpostARNPartitionEndpointRules (main.go:232)"
     },
     {
       "matchers": [
@@ -4690,6 +7704,11 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::FIPS"
@@ -4698,6 +7717,217 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -4711,10 +7941,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -4729,6 +7961,63 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts.{SDK::Region}.amazonaws.com",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "OutpostId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "AccountId"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::FIPS"
@@ -4737,6 +8026,11 @@
           "matcher": "booleanEquals",
           "booleanEquals": false,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
         }
       ],
       "endpoint": {
@@ -4750,10 +8044,12 @@
             "signingScope": "{SDK::Region}"
           }
         },
-        "headers": {},
+        "headers": {
+          "x-amz-outpost-id": "{OutpostId}"
+        },
         "modifyParams": {}
       },
-      "description": "outpostIdPartitionEndpointRules (main.go:177)"
+      "description": "outpostIdPartitionEndpointRules (main.go:249)"
     },
     {
       "matchers": [
@@ -4768,13 +8064,70 @@
           "param": "OutpostId"
         },
         {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": true,
+          "param": "SDK::FIPS"
+        },
+        {
+          "matcher": "booleanEquals",
+          "booleanEquals": false,
+          "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": false,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://s3-outposts-fips.{SDK::Region}.amazonaws.com",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3-outposts",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}",
+          "x-amz-outpost-id": "{OutpostId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "outpostIdPartitionEndpointRules (main.go:272)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
           "matcher": "booleanEquals",
           "booleanEquals": true,
           "param": "SDK::DualStack"
+        },
+        {
+          "matcher": "isArn",
+          "isArn": true,
+          "param": "AccessPointName"
+        },
+        {
+          "matcher": "stringEquals",
+          "stringEquals": "outpost",
+          "param": "AccessPointName.arn-resource.0"
         }
       ],
       "error": "outpost does not support dualstack endpoints",
-      "description": "outpostIdPartitionEndpointRules (main.go:193)"
+      "description": "outpostIdPartitionEndpointRules (main.go:298)"
     },
     {
       "matchers": [
@@ -4828,7 +8181,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -4882,7 +8235,7 @@
           "BucketName": "{BucketName.arn-resource.2}"
         }
       },
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:209)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:353)"
     },
     {
       "matchers": [
@@ -4903,7 +8256,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:233)"
+      "description": "privateLinkOutpostArnPartitionEndpointRules (main.go:377)"
     },
     {
       "matchers": [
@@ -4941,6 +8294,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -4959,10 +8317,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -5000,6 +8358,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -5018,10 +8381,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -5059,6 +8422,11 @@
           "matcher": "stringEquals",
           "stringEquals": "bucket",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -5077,10 +8445,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -5118,6 +8486,11 @@
           "matcher": "stringEquals",
           "stringEquals": "accesspoint",
           "param": "BucketName.arn-resource.2"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "BucketName.arn-resource.3"
         }
       ],
       "endpoint": {
@@ -5136,10 +8509,10 @@
           "x-amz-outpost-id": "{BucketName.arn-resource.1}"
         },
         "modifyParams": {
-          "BucketName": "{BucketName.arn-resource.2}"
+          "BucketName": "{BucketName.arn-resource.3}"
         }
       },
-      "description": "bucketNameOutpostARNRule (main.go:355)"
+      "description": "bucketNameOutpostARNRule (main.go:499)"
     },
     {
       "matchers": [
@@ -5165,7 +8538,7 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:318)"
+      "description": "outpostArnPartitionEndpointRules (main.go:462)"
     },
     {
       "matchers": [
@@ -5181,7 +8554,98 @@
         }
       ],
       "error": "invalid arn, expect outpost Bucket or AccessPoint ARN",
-      "description": "outpostArnPartitionEndpointRules (main.go:335)"
+      "description": "outpostArnPartitionEndpointRules (main.go:479)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "AccountId"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{AccountId}.{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {
+          "x-amz-account-id": "{AccountId}"
+        },
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:135)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "RequiresAccountId"
+        }
+      ],
+      "error": "operation requires AccountId but was not set",
+      "description": "endpointHostRules (main.go:151)"
+    },
+    {
+      "matchers": [
+        {
+          "matcher": "partition",
+          "partition": "aws-us-gov",
+          "param": "SDK::Region"
+        },
+        {
+          "matcher": "isSet",
+          "isSet": true,
+          "param": "SDK::Host"
+        }
+      ],
+      "endpoint": {
+        "url": "https://{SDK::Host}",
+        "authSchemes": [
+          "v4"
+        ],
+        "authParams": {
+          "v4": {
+            "signingName": "s3",
+            "signingScope": "{SDK::Region}"
+          }
+        },
+        "headers": {},
+        "modifyParams": {}
+      },
+      "description": "endpointHostRules (main.go:164)"
     },
     {
       "matchers": [
@@ -5202,7 +8666,7 @@
         }
       ],
       "error": "Private link cannot be used in combination with DualStack.",
-      "description": "invalidPrivateLinkEndpoint (main.go:286)"
+      "description": "invalidPrivateLinkEndpoint (main.go:430)"
     },
     {
       "matchers": [
@@ -5248,7 +8712,7 @@
         },
         "modifyParams": {}
       },
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:250)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:394)"
     },
     {
       "matchers": [
@@ -5279,7 +8743,7 @@
         }
       ],
       "error": "accountId was expected but not present",
-      "description": "privateLinkAccountPartitionEndpointRules (main.go:266)"
+      "description": "privateLinkAccountPartitionEndpointRules (main.go:410)"
     },
     {
       "matchers": [
@@ -5308,7 +8772,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "privateLinkValidCase (main.go:299)"
+      "description": "privateLinkValidCase (main.go:443)"
     },
     {
       "matchers": [
@@ -5329,7 +8793,7 @@
         }
       ],
       "error": "accountId must be set to resolve endpoint",
-      "description": "accountPartitionEndpointRules (main.go:486)"
+      "description": "accountPartitionEndpointRules (main.go:642)"
     },
     {
       "matchers": [
@@ -5375,7 +8839,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -5421,7 +8885,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -5467,7 +8931,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -5513,7 +8977,7 @@
         },
         "modifyParams": {}
       },
-      "description": "accountPartitionEndpointRule (main.go:466)"
+      "description": "accountPartitionEndpointRule (main.go:622)"
     },
     {
       "matchers": [
@@ -5547,7 +9011,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -5581,7 +9045,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -5615,7 +9079,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     },
     {
       "matchers": [
@@ -5649,7 +9113,7 @@
         "headers": {},
         "modifyParams": {}
       },
-      "description": "partitionEndpointRule (main.go:504)"
+      "description": "partitionEndpointRule (main.go:660)"
     }
   ]
 }

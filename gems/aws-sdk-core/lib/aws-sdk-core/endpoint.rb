@@ -16,6 +16,7 @@ module Aws
       @auth_schemes = endpoint['authSchemes'] || []
       @auth_params = endpoint['authParams'] || {}
       @headers = endpoint['headers'] || {}
+      @modify_params = endpoint['modifyParams'] || {}
     end
 
     attr_accessor :description
@@ -25,7 +26,7 @@ module Aws
     attr_accessor :auth_params
     attr_accessor :auth_schemes
     attr_accessor :headers
-    # attr_accessor :modify_params
+    attr_accessor :modify_params
 
     # calls the proc which will return true or false
     def match?(options)
@@ -71,13 +72,13 @@ module Aws
       end
     end
 
-    # def sub_modify_params!(endpoint_options = {})
-    #   @modify_params.each_pair do |key, value|
-    #     value.scan(/\{.+?\}/).each do |cap|
-    #       @modify_params[key] = value.gsub(cap, _sub(cap[1..-2], endpoint_options))
-    #     end
-    #   end
-    # end
+    def sub_modify_params!(endpoint_options = {})
+      @modify_params.each_pair do |key, value|
+        value.scan(/\{.+?\}/).each do |cap|
+          @modify_params[key] = value.gsub(cap, _sub(cap[1..-2], endpoint_options))
+        end
+      end
+    end
 
     private
 
