@@ -182,6 +182,11 @@ module Aws
       #   the post policy.
       # @param [String] bucket_region Region of the target bucket.
       # @param [String] bucket_name Name of the target bucket.
+      # @option options [Boolean] :use_accelerate_endpoint (false) When `true`,
+      #   PresignedPost will attempt to use accelerated endpoint.
+      # @option options [String] :url See {PresignedPost#url}.
+      # @option options [Sting, Array<String>] :allow_any
+      #   See {PresignedPost#allow_any}.
       # @option options [Time] :signature_expiration Specify when the signature on
       #   the post will expire. Defaults to one hour from creation of the
       #   presigned post. May not exceed one week from creation time.
@@ -233,6 +238,8 @@ module Aws
       #   See {PresignedPost#server_side_encryption_customer_algorithm}.
       # @option options [String] :server_side_encryption_customer_key
       #   See {PresignedPost#server_side_encryption_customer_key}.
+      # @option options [String] :server_side_encryption_customer_key_starts_with
+      #   See {PresignedPost#server_side_encryption_customer_key_starts_with}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
         @credentials = credentials.credentials
         @bucket_region = bucket_region
