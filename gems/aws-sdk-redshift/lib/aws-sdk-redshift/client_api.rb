@@ -568,6 +568,7 @@ module Aws::Redshift
     AssociateDataShareConsumerMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     AssociateDataShareConsumerMessage.add_member(:associate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AssociateEntireAccount"))
     AssociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
+    AssociateDataShareConsumerMessage.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
     AssociateDataShareConsumerMessage.struct_class = Types::AssociateDataShareConsumerMessage
 
     AssociatedClusterList.member = Shapes::ShapeRef.new(shape: ClusterAssociatedToSchedule, location_name: "ClusterAssociatedToSchedule")
@@ -1055,6 +1056,7 @@ module Aws::Redshift
 
     DataShareAssociation.add_member(:consumer_identifier, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerIdentifier"))
     DataShareAssociation.add_member(:status, Shapes::ShapeRef.new(shape: DataShareStatus, location_name: "Status"))
+    DataShareAssociation.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
     DataShareAssociation.add_member(:created_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedDate"))
     DataShareAssociation.add_member(:status_change_date, Shapes::ShapeRef.new(shape: TStamp, location_name: "StatusChangeDate"))
     DataShareAssociation.struct_class = Types::DataShareAssociation
@@ -1426,6 +1428,7 @@ module Aws::Redshift
     DisassociateDataShareConsumerMessage.add_member(:data_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DataShareArn"))
     DisassociateDataShareConsumerMessage.add_member(:disassociate_entire_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DisassociateEntireAccount"))
     DisassociateDataShareConsumerMessage.add_member(:consumer_arn, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerArn"))
+    DisassociateDataShareConsumerMessage.add_member(:consumer_region, Shapes::ShapeRef.new(shape: String, location_name: "ConsumerRegion"))
     DisassociateDataShareConsumerMessage.struct_class = Types::DisassociateDataShareConsumerMessage
 
     EC2SecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))

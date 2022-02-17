@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-02-17)
+------------------
+
+* Feature - Add support for filtering list of experiments and launches by status
+
 1.3.0 (2022-02-03)
 ------------------
 

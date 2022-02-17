@@ -541,6 +541,7 @@ module Aws::CloudWatchEvidently
     ListExperimentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxExperiments, location: "querystring", location_name: "maxResults"))
     ListExperimentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListExperimentsRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
+    ListExperimentsRequest.add_member(:status, Shapes::ShapeRef.new(shape: ExperimentStatus, location: "querystring", location_name: "status"))
     ListExperimentsRequest.struct_class = Types::ListExperimentsRequest
 
     ListExperimentsResponse.add_member(:experiments, Shapes::ShapeRef.new(shape: ExperimentList, location_name: "experiments"))
@@ -559,6 +560,7 @@ module Aws::CloudWatchEvidently
     ListLaunchesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxLaunches, location: "querystring", location_name: "maxResults"))
     ListLaunchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListLaunchesRequest.add_member(:project, Shapes::ShapeRef.new(shape: ProjectRef, required: true, location: "uri", location_name: "project"))
+    ListLaunchesRequest.add_member(:status, Shapes::ShapeRef.new(shape: LaunchStatus, location: "querystring", location_name: "status"))
     ListLaunchesRequest.struct_class = Types::ListLaunchesRequest
 
     ListLaunchesResponse.add_member(:launches, Shapes::ShapeRef.new(shape: LaunchesList, location_name: "launches"))
@@ -586,11 +588,11 @@ module Aws::CloudWatchEvidently
     MetricDefinition.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "valueKey"))
     MetricDefinition.struct_class = Types::MetricDefinition
 
-    MetricDefinitionConfig.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "entityIdKey"))
+    MetricDefinitionConfig.add_member(:entity_id_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "entityIdKey"))
     MetricDefinitionConfig.add_member(:event_pattern, Shapes::ShapeRef.new(shape: MetricDefinitionConfigEventPatternString, location_name: "eventPattern", metadata: {"jsonvalue"=>true}))
-    MetricDefinitionConfig.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, location_name: "name"))
+    MetricDefinitionConfig.add_member(:name, Shapes::ShapeRef.new(shape: CwDimensionSafeName, required: true, location_name: "name"))
     MetricDefinitionConfig.add_member(:unit_label, Shapes::ShapeRef.new(shape: MetricUnitLabel, location_name: "unitLabel"))
-    MetricDefinitionConfig.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, location_name: "valueKey"))
+    MetricDefinitionConfig.add_member(:value_key, Shapes::ShapeRef.new(shape: JsonPath, required: true, location_name: "valueKey"))
     MetricDefinitionConfig.struct_class = Types::MetricDefinitionConfig
 
     MetricGoal.add_member(:desired_change, Shapes::ShapeRef.new(shape: ChangeDirectionEnum, location_name: "desiredChange"))
@@ -977,6 +979,7 @@ module Aws::CloudWatchEvidently
         o.http_request_uri = "/projects/{project}/experiments/{experiment}"
         o.input = Shapes::ShapeRef.new(shape: DeleteExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteExperimentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
@@ -1045,6 +1048,7 @@ module Aws::CloudWatchEvidently
         o.input = Shapes::ShapeRef.new(shape: GetExperimentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExperimentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -1081,6 +1085,7 @@ module Aws::CloudWatchEvidently
         o.input = Shapes::ShapeRef.new(shape: GetLaunchRequest)
         o.output = Shapes::ShapeRef.new(shape: GetLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
@@ -1105,6 +1110,7 @@ module Aws::CloudWatchEvidently
         o.output = Shapes::ShapeRef.new(shape: ListExperimentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1213,6 +1219,7 @@ module Aws::CloudWatchEvidently
         o.output = Shapes::ShapeRef.new(shape: StartLaunchResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

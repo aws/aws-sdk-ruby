@@ -142,8 +142,8 @@ module Aws::IAM
     # @option options [Boolean] :allow_users_to_change_password
     #   Allows all IAM users in your account to use the Amazon Web Services
     #   Management Console to change their own passwords. For more
-    #   information, see [Letting IAM users change their own passwords][1] in
-    #   the *IAM User Guide*.
+    #   information, see [Permitting IAM users to change their own
+    #   passwords][1] in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the
@@ -152,7 +152,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_enable-user-change.html
     # @option options [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
     #
@@ -167,14 +167,26 @@ module Aws::IAM
     #   uses the default value of `0`. The result is that IAM users are not
     #   prevented from reusing previous passwords.
     # @option options [Boolean] :hard_expiry
-    #   Prevents IAM users from setting a new password after their password
-    #   has expired. The IAM user cannot be accessed until an administrator
-    #   resets the password.
+    #   Prevents IAM users who are accessing the account via the Amazon Web
+    #   Services Management Console from setting a new console password after
+    #   their password has expired. The IAM user cannot access the console
+    #   until an administrator resets the password.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users can
     #   change their passwords after they expire and continue to sign in as
     #   the user.
+    #
+    #   <note markdown="1"> In the Amazon Web Services Management Console, the custom password
+    #   policy option **Allow users to change their own password** gives IAM
+    #   users permissions to `iam:ChangePassword` for only their user and to
+    #   the `iam:GetAccountPasswordPolicy` action. This option does not attach
+    #   a permissions policy to each user, rather the permissions are applied
+    #   at the account-level for all users by IAM. IAM users with
+    #   `iam:ChangePassword` permission and active access keys can reset their
+    #   own expired console password using the CLI or API.
+    #
+    #    </note>
     # @return [AccountPasswordPolicy]
     def create_account_password_policy(options = {})
       @client.update_account_password_policy(options)

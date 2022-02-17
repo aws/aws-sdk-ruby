@@ -141,11 +141,11 @@ module Aws::CloudWatchEvidently
     #           {
     #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -391,11 +391,11 @@ module Aws::CloudWatchEvidently
     #         metric_monitors: [
     #           {
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -1757,6 +1757,7 @@ module Aws::CloudWatchEvidently
     #         max_results: 1,
     #         next_token: "NextToken",
     #         project: "ProjectRef", # required
+    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #       }
     #
     # @!attribute [rw] max_results
@@ -1772,12 +1773,18 @@ module Aws::CloudWatchEvidently
     #   The name or ARN of the project to return the experiment list from.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Use this optional parameter to limit the returned results to only
+    #   the experiments with the status that you specify here.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListExperimentsRequest AWS API Documentation
     #
     class ListExperimentsRequest < Struct.new(
       :max_results,
       :next_token,
-      :project)
+      :project,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1859,6 +1866,7 @@ module Aws::CloudWatchEvidently
     #         max_results: 1,
     #         next_token: "NextToken",
     #         project: "ProjectRef", # required
+    #         status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #       }
     #
     # @!attribute [rw] max_results
@@ -1874,12 +1882,18 @@ module Aws::CloudWatchEvidently
     #   The name or ARN of the project to return the launch list from.
     #   @return [String]
     #
+    # @!attribute [rw] status
+    #   Use this optional parameter to limit the returned results to only
+    #   the launches with the status that you specify here.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/ListLaunchesRequest AWS API Documentation
     #
     class ListLaunchesRequest < Struct.new(
       :max_results,
       :next_token,
-      :project)
+      :project,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2031,11 +2045,11 @@ module Aws::CloudWatchEvidently
     #   data as a hash:
     #
     #       {
-    #         entity_id_key: "JsonPath",
+    #         entity_id_key: "JsonPath", # required
     #         event_pattern: "MetricDefinitionConfigEventPatternString",
-    #         name: "CwDimensionSafeName",
+    #         name: "CwDimensionSafeName", # required
     #         unit_label: "MetricUnitLabel",
-    #         value_key: "JsonPath",
+    #         value_key: "JsonPath", # required
     #       }
     #
     # @!attribute [rw] entity_id_key
@@ -2113,11 +2127,11 @@ module Aws::CloudWatchEvidently
     #       {
     #         desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       }
     #
@@ -2165,11 +2179,11 @@ module Aws::CloudWatchEvidently
     #
     #       {
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       }
     #
@@ -3110,11 +3124,11 @@ module Aws::CloudWatchEvidently
     #           {
     #             desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
@@ -3334,11 +3348,11 @@ module Aws::CloudWatchEvidently
     #         metric_monitors: [
     #           {
     #             metric_definition: { # required
-    #               entity_id_key: "JsonPath",
+    #               entity_id_key: "JsonPath", # required
     #               event_pattern: "MetricDefinitionConfigEventPatternString",
-    #               name: "CwDimensionSafeName",
+    #               name: "CwDimensionSafeName", # required
     #               unit_label: "MetricUnitLabel",
-    #               value_key: "JsonPath",
+    #               value_key: "JsonPath", # required
     #             },
     #           },
     #         ],
