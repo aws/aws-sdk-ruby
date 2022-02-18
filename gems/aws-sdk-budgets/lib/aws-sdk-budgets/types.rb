@@ -402,6 +402,24 @@ module Aws::Budgets
       include Aws::Structure
     end
 
+    # The budget name and associated notifications for an account.
+    #
+    # @!attribute [rw] notifications
+    #   A list of notifications.
+    #   @return [Array<Types::Notification>]
+    #
+    # @!attribute [rw] budget_name
+    #   A string that represents the budget name. The ":" and "\\"
+    #   characters aren't allowed.
+    #   @return [String]
+    #
+    class BudgetNotificationsForAccount < Struct.new(
+      :notifications,
+      :budget_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A history of the state of a budget at the end of the budget's
     # specified time period.
     #
@@ -1393,6 +1411,51 @@ module Aws::Budgets
     #
     class DescribeBudgetActionsForBudgetResponse < Struct.new(
       :actions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBudgetNotificationsForAccountRequest
+    #   data as a hash:
+    #
+    #       {
+    #         account_id: "AccountId", # required
+    #         max_results: 1,
+    #         next_token: "GenericString",
+    #       }
+    #
+    # @!attribute [rw] account_id
+    #   The account ID of the user. It's a 12-digit number.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An integer that shows how many budget name entries a paginated
+    #   response contains.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A generic string.
+    #   @return [String]
+    #
+    class DescribeBudgetNotificationsForAccountRequest < Struct.new(
+      :account_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] budget_notifications_for_account
+    #   A list of budget names and associated notifications for an account.
+    #   @return [Array<Types::BudgetNotificationsForAccount>]
+    #
+    # @!attribute [rw] next_token
+    #   A generic string.
+    #   @return [String]
+    #
+    class DescribeBudgetNotificationsForAccountResponse < Struct.new(
+      :budget_notifications_for_account,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

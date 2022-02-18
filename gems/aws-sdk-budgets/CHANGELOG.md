@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-02-18)
+------------------
+
+* Feature - This change introduces DescribeBudgetNotificationsForAccount API which returns budget notifications for the specified account
+
 1.47.0 (2022-02-16)
 ------------------
 

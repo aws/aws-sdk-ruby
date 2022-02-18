@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-02-18)
+------------------
+
+* Feature - Increase string list limit from 10 to 100.
+
 1.53.0 (2022-02-03)
 ------------------
 

@@ -289,6 +289,8 @@ module Aws::Transfer
     #         },
     #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #         logging_role: "Role",
+    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         protocol_details: {
     #           passive_ip: "PassiveIp",
@@ -457,6 +459,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -525,6 +533,8 @@ module Aws::Transfer
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :protocol_details,
       :security_policy_name,
@@ -1626,6 +1636,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -1690,6 +1706,8 @@ module Aws::Transfer
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :security_policy_name,
       :server_id,
@@ -3847,6 +3865,8 @@ module Aws::Transfer
     #           function: "Function",
     #         },
     #         logging_role: "NullableRole",
+    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         security_policy_name: "SecurityPolicyName",
     #         server_id: "ServerId", # required
@@ -3980,6 +4000,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -4036,6 +4062,8 @@ module Aws::Transfer
       :host_key,
       :identity_provider_details,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :security_policy_name,
       :server_id,

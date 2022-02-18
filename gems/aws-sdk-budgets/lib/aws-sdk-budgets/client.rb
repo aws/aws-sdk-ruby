@@ -1185,6 +1185,53 @@ module Aws::Budgets
       req.send_request(options)
     end
 
+    # Lists the budget names and notifications that are associated with an
+    # account.
+    #
+    # @option params [required, String] :account_id
+    #   The account ID of the user. It's a 12-digit number.
+    #
+    # @option params [Integer] :max_results
+    #   An integer that shows how many budget name entries a paginated
+    #   response contains.
+    #
+    # @option params [String] :next_token
+    #   A generic string.
+    #
+    # @return [Types::DescribeBudgetNotificationsForAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBudgetNotificationsForAccountResponse#budget_notifications_for_account #budget_notifications_for_account} => Array&lt;Types::BudgetNotificationsForAccount&gt;
+    #   * {Types::DescribeBudgetNotificationsForAccountResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_budget_notifications_for_account({
+    #     account_id: "AccountId", # required
+    #     max_results: 1,
+    #     next_token: "GenericString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.budget_notifications_for_account #=> Array
+    #   resp.budget_notifications_for_account[0].notifications #=> Array
+    #   resp.budget_notifications_for_account[0].notifications[0].notification_type #=> String, one of "ACTUAL", "FORECASTED"
+    #   resp.budget_notifications_for_account[0].notifications[0].comparison_operator #=> String, one of "GREATER_THAN", "LESS_THAN", "EQUAL_TO"
+    #   resp.budget_notifications_for_account[0].notifications[0].threshold #=> Float
+    #   resp.budget_notifications_for_account[0].notifications[0].threshold_type #=> String, one of "PERCENTAGE", "ABSOLUTE_VALUE"
+    #   resp.budget_notifications_for_account[0].notifications[0].notification_state #=> String, one of "OK", "ALARM"
+    #   resp.budget_notifications_for_account[0].budget_name #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload describe_budget_notifications_for_account(params = {})
+    # @param [Hash] params ({})
+    def describe_budget_notifications_for_account(params = {}, options = {})
+      req = build_request(:describe_budget_notifications_for_account, params)
+      req.send_request(options)
+    end
+
     # Describes the history for `DAILY`, `MONTHLY`, and `QUARTERLY` budgets.
     # Budget history isn't available for `ANNUAL` budgets.
     #
@@ -1833,7 +1880,7 @@ module Aws::Budgets
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-budgets'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

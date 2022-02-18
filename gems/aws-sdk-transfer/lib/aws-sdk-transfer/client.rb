@@ -665,6 +665,10 @@ module Aws::Transfer
     #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
     #   set, user activity can be viewed in your CloudWatch logs.
     #
+    # @option params [String] :post_authentication_login_banner
+    #
+    # @option params [String] :pre_authentication_login_banner
+    #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
     #   transfer protocol client can connect to your server's endpoint. The
@@ -743,6 +747,8 @@ module Aws::Transfer
     #     },
     #     identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #     logging_role: "Role",
+    #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #     protocol_details: {
     #       passive_ip: "PassiveIp",
@@ -1474,6 +1480,8 @@ module Aws::Transfer
     #   resp.server.identity_provider_details.function #=> String
     #   resp.server.identity_provider_type #=> String, one of "SERVICE_MANAGED", "API_GATEWAY", "AWS_DIRECTORY_SERVICE", "AWS_LAMBDA"
     #   resp.server.logging_role #=> String
+    #   resp.server.post_authentication_login_banner #=> String
+    #   resp.server.pre_authentication_login_banner #=> String
     #   resp.server.protocols #=> Array
     #   resp.server.protocols[0] #=> String, one of "SFTP", "FTP", "FTPS"
     #   resp.server.security_policy_name #=> String
@@ -2572,6 +2580,10 @@ module Aws::Transfer
     #   on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
     #   set, user activity can be viewed in your CloudWatch logs.
     #
+    # @option params [String] :post_authentication_login_banner
+    #
+    # @option params [String] :pre_authentication_login_banner
+    #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
     #   transfer protocol client can connect to your server's endpoint. The
@@ -2642,6 +2654,8 @@ module Aws::Transfer
     #       function: "Function",
     #     },
     #     logging_role: "NullableRole",
+    #     post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #     pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #     protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #     security_policy_name: "SecurityPolicyName",
     #     server_id: "ServerId", # required
@@ -2836,7 +2850,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

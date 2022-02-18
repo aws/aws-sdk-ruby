@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-02-18)
+------------------
+
+* Feature - Properties for Transfer Family used with SFTP, FTP, and FTPS protocols. Display Banners are bodies of text that can be displayed before and/or after a user authenticates onto a server using one of the previously mentioned protocols.
+
 1.46.0 (2022-02-03)
 ------------------
 
