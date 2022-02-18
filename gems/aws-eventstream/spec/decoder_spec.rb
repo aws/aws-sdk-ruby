@@ -72,7 +72,7 @@ module Aws
 
         it '#decode_chunk buffers partial prelude message' do
           file = Dir.glob(File.expand_path('../fixtures/encoded/positive/*', __FILE__)).first
-          data = File.read(file)
+          data = File.open(file, "r:UTF-8", &:read)
           first_part = data[0..3]
           second_part = data[4..-1]
           decoder = Decoder.new(format: false)
