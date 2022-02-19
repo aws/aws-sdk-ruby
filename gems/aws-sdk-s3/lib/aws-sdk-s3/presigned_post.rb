@@ -98,7 +98,7 @@ module Aws
     # or call the associated method.
     #
     # ```ruby
-    # post = Aws::S3::PresignedPost.new(creds, region, bucket).
+    # post = Aws::S3::PresignedPost.new(creds, region, bucket)
     # post.content_type('text/plain')
     # ```
     #
