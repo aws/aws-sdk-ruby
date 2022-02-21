@@ -98,7 +98,7 @@ module Aws
     # or call the associated method.
     #
     # ```ruby
-    # post = Aws::S3::PresignedPost.new(creds, region, bucket).
+    # post = Aws::S3::PresignedPost.new(creds, region, bucket)
     # post.content_type('text/plain')
     # ```
     #
@@ -211,7 +211,7 @@ module Aws
       #   See {PresignedPost#content_encoding}.
       # @option options [String] :content_encoding_starts_with
       #   See {PresignedPost#content_encoding_starts_with}.
-      # @option options [String] :expires See {PresignedPost#expires}.
+      # @option options [Time] :expires See {PresignedPost#expires}.
       # @option options [String] :expires_starts_with
       #   See {PresignedPost#expires_starts_with}.
       # @option options [Range<Integer>] :content_length_range
