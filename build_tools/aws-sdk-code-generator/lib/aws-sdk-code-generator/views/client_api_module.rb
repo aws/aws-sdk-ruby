@@ -198,7 +198,6 @@ module AwsSdkCodeGenerator
             o.http_request_uri = operation['http']['requestUri']
             o.http_checksum_required = true if operation['httpChecksumRequired']
             if operation.key?('httpChecksum')
-              o.http_checksum_available = true
               operation['httpChecksum']['requestAlgorithmMember'] = underscore(operation['httpChecksum']['requestAlgorithmMember']) if operation['httpChecksum']['requestAlgorithmMember']
               operation['httpChecksum']['requestValidationModeMember'] = underscore(operation['httpChecksum']['requestValidationModeMember']) if operation['httpChecksum']['requestValidationModeMember']
 
@@ -547,9 +546,6 @@ module AwsSdkCodeGenerator
 
         # @return [Hash]
         attr_accessor :http_checksum
-
-        # @return [Boolean]
-        attr_accessor :http_checksum_available
 
         # @return [Array<String>]
         attr_accessor :shape_references
