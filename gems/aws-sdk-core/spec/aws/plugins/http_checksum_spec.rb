@@ -25,6 +25,14 @@ module Aws
             'input' => { 'shape' => 'PayloadStructureShape' },
             'output' => { 'shape' => 'PayloadStructureShape' },
             'httpChecksumRequired' => { 'required' => 'true' }
+          },
+          'ChecksumAlgorithmOperation' => {
+            'http' => { 'method' => 'POST', 'requestUri' => '/' },
+            'input' => { 'shape' => 'StructureShape' },
+            'output' => { 'shape' => 'StructureShape' },
+            'httpChecksum' => {
+              "requestChecksumRequired" => true,
+            }
           }
         }
       ).const_get(:Client)
@@ -58,6 +66,15 @@ module Aws
         it 'does not compute MD5 and does not send the content-md5 header' do
           resp = client.operation(string: 'i am just a string')
           expect(resp.context.http_request.headers['content-md5']).to be_nil
+        end
+      end
+
+      context 'httpChecksum operation' do
+        it 'computes the MD5 when another checksum has not been computed' do
+          resp = client.checksum_algorithm_operation(string: 'md5 me captain')
+          expect(resp.context.http_request.headers['content-md5']).to eq(
+            'rqd/0N8H2GgZWzmo3oY9tA=='
+          )
         end
       end
     end

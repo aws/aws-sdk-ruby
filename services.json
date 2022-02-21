@@ -820,7 +820,8 @@
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
       "Aws::S3::Plugins::StreamingRetry",
-      "Aws::S3::Plugins::UrlEncodedKeys"
+      "Aws::S3::Plugins::UrlEncodedKeys",
+      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums"
     ]
   },
   "S3Control": {

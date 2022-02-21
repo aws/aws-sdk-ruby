@@ -22,9 +22,11 @@ module Aws
           CHUNK_SIZE = 1 * 1024 * 1024 # one MB
 
           def call(context)
-            body = context.http_request.body
-            if body.respond_to?(:size) && body.size > 0
-              context.http_request.headers['Content-Md5'] ||= md5(body)
+            if !context[:checksum_algorithms] # skip in favor of flexible checksum
+              body = context.http_request.body
+              if body.respond_to?(:size) && body.size > 0
+                context.http_request.headers['Content-Md5'] ||= md5(body)
+              end
             end
             @handler.call(context)
           end
