@@ -397,7 +397,13 @@ module Aws::Imagebuilder
     end
 
     # Creates a new component that can be used to build, validate, test, and
-    # assess your image.
+    # assess your image. The component is based on a YAML document that you
+    # specify using exactly one of the following methods:
+    #
+    # * Inline, using the `data` property in the request body.
+    #
+    # * A URL that points to a YAML document file stored in Amazon S3, using
+    #   the `uri` property in the request body.
     #
     # @option params [required, String] :name
     #   The name of the component.
@@ -440,14 +446,18 @@ module Aws::Imagebuilder
     #   base image OS version during image recipe creation.
     #
     # @option params [String] :data
-    #   The data of the component. Used to specify the data inline. Either
-    #   `data` or `uri` can be used to specify the data within the component.
+    #   Component `data` contains inline YAML document content for the
+    #   component. Alternatively, you can specify the `uri` of a YAML document
+    #   file stored in Amazon S3. However, you cannot specify both properties.
     #
     # @option params [String] :uri
-    #   The uri of the component. Must be an Amazon S3 URL and the requester
-    #   must have permission to access the Amazon S3 bucket. If you use Amazon
-    #   S3, you can specify component content up to your service quota. Either
-    #   `data` or `uri` can be used to specify the data within the component.
+    #   The `uri` of a YAML component document file. This must be an S3 URL
+    #   (`s3://bucket/key`), and the requester must have permission to access
+    #   the S3 bucket it points to. If you use Amazon S3, you can specify
+    #   component content up to your service quota.
+    #
+    #   Alternatively, you can specify the YAML document inline, using the
+    #   component `data` property. You cannot specify both properties.
     #
     # @option params [String] :kms_key_id
     #   The ID of the KMS key that should be used to encrypt this component.
@@ -724,6 +734,21 @@ module Aws::Imagebuilder
     #           s3_bucket: "NonEmptyString", # required
     #           s3_prefix: "NonEmptyString",
     #         },
+    #         fast_launch_configurations: [
+    #           {
+    #             enabled: false, # required
+    #             snapshot_configuration: {
+    #               target_resource_count: 1,
+    #             },
+    #             max_parallel_launches: 1,
+    #             launch_template: {
+    #               launch_template_id: "LaunchTemplateId",
+    #               launch_template_name: "NonEmptyString",
+    #               launch_template_version: "NonEmptyString",
+    #             },
+    #             account_id: "AccountId",
+    #           },
+    #         ],
     #       },
     #     ],
     #     tags: {
@@ -1640,6 +1665,14 @@ module Aws::Imagebuilder
     #   resp.distribution_configuration.distributions[0].s3_export_configuration.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
     #   resp.distribution_configuration.distributions[0].s3_export_configuration.s3_bucket #=> String
     #   resp.distribution_configuration.distributions[0].s3_export_configuration.s3_prefix #=> String
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations #=> Array
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].enabled #=> Boolean
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].snapshot_configuration.target_resource_count #=> Integer
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].max_parallel_launches #=> Integer
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_id #=> String
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_name #=> String
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_version #=> String
+    #   resp.distribution_configuration.distributions[0].fast_launch_configurations[0].account_id #=> String
     #   resp.distribution_configuration.timeout_minutes #=> Integer
     #   resp.distribution_configuration.date_created #=> String
     #   resp.distribution_configuration.date_updated #=> String
@@ -1810,6 +1843,14 @@ module Aws::Imagebuilder
     #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.disk_image_format #=> String, one of "VMDK", "RAW", "VHD"
     #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.s3_bucket #=> String
     #   resp.image.distribution_configuration.distributions[0].s3_export_configuration.s3_prefix #=> String
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations #=> Array
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].enabled #=> Boolean
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].snapshot_configuration.target_resource_count #=> Integer
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].max_parallel_launches #=> Integer
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_id #=> String
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_name #=> String
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].launch_template.launch_template_version #=> String
+    #   resp.image.distribution_configuration.distributions[0].fast_launch_configurations[0].account_id #=> String
     #   resp.image.distribution_configuration.timeout_minutes #=> Integer
     #   resp.image.distribution_configuration.date_created #=> String
     #   resp.image.distribution_configuration.date_updated #=> String
@@ -3458,6 +3499,21 @@ module Aws::Imagebuilder
     #           s3_bucket: "NonEmptyString", # required
     #           s3_prefix: "NonEmptyString",
     #         },
+    #         fast_launch_configurations: [
+    #           {
+    #             enabled: false, # required
+    #             snapshot_configuration: {
+    #               target_resource_count: 1,
+    #             },
+    #             max_parallel_launches: 1,
+    #             launch_template: {
+    #               launch_template_id: "LaunchTemplateId",
+    #               launch_template_name: "NonEmptyString",
+    #               launch_template_version: "NonEmptyString",
+    #             },
+    #             account_id: "AccountId",
+    #           },
+    #         ],
     #       },
     #     ],
     #     client_token: "ClientToken", # required
@@ -3715,7 +3771,7 @@ module Aws::Imagebuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

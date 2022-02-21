@@ -36,11 +36,21 @@ module Aws::Imagebuilder
     #   Use this property to provide commands or a command script to run
     #   when you launch your build instance.
     #
-    #   <note markdown="1"> The userDataOverride property replaces any commands that Image
+    #   The userDataOverride property replaces any commands that Image
     #   Builder might have added to ensure that Systems Manager is installed
     #   on your Linux build instance. If you override the user data, make
     #   sure that you add commands to install Systems Manager, if it is not
     #   pre-installed on your base image.
+    #
+    #   <note markdown="1"> The user data is always base 64 encoded. For example, the following
+    #   commands are encoded as
+    #   `IyEvYmluL2Jhc2gKbWtkaXIgLXAgL3Zhci9iYi8KdG91Y2ggL3Zhci$`\:
+    #
+    #    *#!/bin/bash*
+    #
+    #    mkdir -p /var/bb/
+    #
+    #    touch /var
     #
     #    </note>
     #   @return [String]
@@ -294,7 +304,7 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] data
-    #   The data of the component.
+    #   Component data contains the YAML document content for the component.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -925,17 +935,20 @@ module Aws::Imagebuilder
     #   @return [Array<String>]
     #
     # @!attribute [rw] data
-    #   The data of the component. Used to specify the data inline. Either
-    #   `data` or `uri` can be used to specify the data within the
-    #   component.
+    #   Component `data` contains inline YAML document content for the
+    #   component. Alternatively, you can specify the `uri` of a YAML
+    #   document file stored in Amazon S3. However, you cannot specify both
+    #   properties.
     #   @return [String]
     #
     # @!attribute [rw] uri
-    #   The uri of the component. Must be an Amazon S3 URL and the requester
-    #   must have permission to access the Amazon S3 bucket. If you use
-    #   Amazon S3, you can specify component content up to your service
-    #   quota. Either `data` or `uri` can be used to specify the data within
-    #   the component.
+    #   The `uri` of a YAML component document file. This must be an S3 URL
+    #   (`s3://bucket/key`), and the requester must have permission to
+    #   access the S3 bucket it points to. If you use Amazon S3, you can
+    #   specify component content up to your service quota.
+    #
+    #   Alternatively, you can specify the YAML document inline, using the
+    #   component `data` property. You cannot specify both properties.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -1231,6 +1244,21 @@ module Aws::Imagebuilder
     #               s3_bucket: "NonEmptyString", # required
     #               s3_prefix: "NonEmptyString",
     #             },
+    #             fast_launch_configurations: [
+    #               {
+    #                 enabled: false, # required
+    #                 snapshot_configuration: {
+    #                   target_resource_count: 1,
+    #                 },
+    #                 max_parallel_launches: 1,
+    #                 launch_template: {
+    #                   launch_template_id: "LaunchTemplateId",
+    #                   launch_template_name: "NonEmptyString",
+    #                   launch_template_version: "NonEmptyString",
+    #                 },
+    #                 account_id: "AccountId",
+    #               },
+    #             ],
     #           },
     #         ],
     #         tags: {
@@ -2141,6 +2169,21 @@ module Aws::Imagebuilder
     #           s3_bucket: "NonEmptyString", # required
     #           s3_prefix: "NonEmptyString",
     #         },
+    #         fast_launch_configurations: [
+    #           {
+    #             enabled: false, # required
+    #             snapshot_configuration: {
+    #               target_resource_count: 1,
+    #             },
+    #             max_parallel_launches: 1,
+    #             launch_template: {
+    #               launch_template_id: "LaunchTemplateId",
+    #               launch_template_name: "NonEmptyString",
+    #               launch_template_version: "NonEmptyString",
+    #             },
+    #             account_id: "AccountId",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] region
@@ -2173,6 +2216,11 @@ module Aws::Imagebuilder
     #   that Region.
     #   @return [Types::S3ExportConfiguration]
     #
+    # @!attribute [rw] fast_launch_configurations
+    #   The Windows faster-launching configurations to use for AMI
+    #   distribution.
+    #   @return [Array<Types::FastLaunchConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/Distribution AWS API Documentation
     #
     class Distribution < Struct.new(
@@ -2181,7 +2229,8 @@ module Aws::Imagebuilder
       :container_distribution_configuration,
       :license_configuration_arns,
       :launch_template_configurations,
-      :s3_export_configuration)
+      :s3_export_configuration,
+      :fast_launch_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2340,6 +2389,129 @@ module Aws::Imagebuilder
       :volume_size,
       :volume_type,
       :throughput)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Define and configure faster launching for output Windows AMIs.
+    #
+    # @note When making an API call, you may pass FastLaunchConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         snapshot_configuration: {
+    #           target_resource_count: 1,
+    #         },
+    #         max_parallel_launches: 1,
+    #         launch_template: {
+    #           launch_template_id: "LaunchTemplateId",
+    #           launch_template_name: "NonEmptyString",
+    #           launch_template_version: "NonEmptyString",
+    #         },
+    #         account_id: "AccountId",
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   A Boolean that represents the current state of faster launching for
+    #   the Windows AMI. Set to `true` to start using Windows faster
+    #   launching, or `false` to stop using it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] snapshot_configuration
+    #   Configuration settings for managing the number of snapshots that are
+    #   created from pre-provisioned instances for the Windows AMI when
+    #   faster launching is enabled.
+    #   @return [Types::FastLaunchSnapshotConfiguration]
+    #
+    # @!attribute [rw] max_parallel_launches
+    #   The maximum number of parallel instances that are launched for
+    #   creating resources.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] launch_template
+    #   The launch template that the fast-launch enabled Windows AMI uses
+    #   when it launches Windows instances to create pre-provisioned
+    #   snapshots.
+    #   @return [Types::FastLaunchLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] account_id
+    #   The owner account ID for the fast-launch enabled Windows AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/FastLaunchConfiguration AWS API Documentation
+    #
+    class FastLaunchConfiguration < Struct.new(
+      :enabled,
+      :snapshot_configuration,
+      :max_parallel_launches,
+      :launch_template,
+      :account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies the launch template that the associated Windows AMI uses
+    # for launching an instance when faster launching is enabled.
+    #
+    # <note markdown="1"> You can specify either the `launchTemplateName` or the
+    # `launchTemplateId`, but not both.
+    #
+    #  </note>
+    #
+    # @note When making an API call, you may pass FastLaunchLaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "LaunchTemplateId",
+    #         launch_template_name: "NonEmptyString",
+    #         launch_template_version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The ID of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_version
+    #   The version of the launch template to use for faster launching for a
+    #   Windows AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/FastLaunchLaunchTemplateSpecification AWS API Documentation
+    #
+    class FastLaunchLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :launch_template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for creating and managing pre-provisioned
+    # snapshots for a fast-launch enabled Windows AMI.
+    #
+    # @note When making an API call, you may pass FastLaunchSnapshotConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         target_resource_count: 1,
+    #       }
+    #
+    # @!attribute [rw] target_resource_count
+    #   The number of pre-provisioned snapshots to keep on hand for a
+    #   fast-launch enabled Windows AMI.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/FastLaunchSnapshotConfiguration AWS API Documentation
+    #
+    class FastLaunchSnapshotConfiguration < Struct.new(
+      :target_resource_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5717,6 +5889,21 @@ module Aws::Imagebuilder
     #               s3_bucket: "NonEmptyString", # required
     #               s3_prefix: "NonEmptyString",
     #             },
+    #             fast_launch_configurations: [
+    #               {
+    #                 enabled: false, # required
+    #                 snapshot_configuration: {
+    #                   target_resource_count: 1,
+    #                 },
+    #                 max_parallel_launches: 1,
+    #                 launch_template: {
+    #                   launch_template_id: "LaunchTemplateId",
+    #                   launch_template_name: "NonEmptyString",
+    #                   launch_template_version: "NonEmptyString",
+    #                 },
+    #                 account_id: "AccountId",
+    #               },
+    #             ],
     #           },
     #         ],
     #         client_token: "ClientToken", # required

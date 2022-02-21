@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-02-21)
+------------------
+
+* Feature - DynamoDB ExecuteStatement API now supports Limit as a request parameter to specify the maximum number of items to evaluate. If specified, the service will process up to the Limit and the results will include a LastEvaluatedKey value to continue the read in a subsequent operation.
+
 1.72.0 (2022-02-03)
 ------------------
 

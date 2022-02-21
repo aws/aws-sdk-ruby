@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-02-21)
+------------------
+
+* Feature - This release introduces apis CreateIntegrationWorkflow, DeleteWorkflow, ListWorkflows, GetWorkflow and GetWorkflowSteps. These apis are used to manage and view integration workflows.
+
 1.18.0 (2022-02-03)
 ------------------
 

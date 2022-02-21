@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-02-21)
+------------------
+
+* Feature - This release adds support to enable faster launching for Windows AMIs created by EC2 Image Builder.
+
 1.38.0 (2022-02-03)
 ------------------
 

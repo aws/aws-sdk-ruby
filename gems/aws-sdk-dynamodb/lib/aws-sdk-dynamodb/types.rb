@@ -3316,6 +3316,7 @@ module Aws::DynamoDB
     #         consistent_read: false,
     #         next_token: "PartiQLNextToken",
     #         return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #         limit: 1,
     #       }
     #
     # @!attribute [rw] statement
@@ -3357,6 +3358,19 @@ module Aws::DynamoDB
     #     response.
     #   @return [String]
     #
+    # @!attribute [rw] limit
+    #   The maximum number of items to evaluate (not necessarily the number
+    #   of matching items). If DynamoDB processes the number of items up to
+    #   the limit while processing the results, it stops the operation and
+    #   returns the matching values up to that point, along with a key in
+    #   `LastEvaluatedKey` to apply in a subsequent operation so you can
+    #   pick up where you left off. Also, if the processed dataset size
+    #   exceeds 1 MB before DynamoDB reaches this limit, it stops the
+    #   operation and returns the matching values up to the limit, and a key
+    #   in `LastEvaluatedKey` to apply in a subsequent operation to continue
+    #   the operation.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementInput AWS API Documentation
     #
     class ExecuteStatementInput < Struct.new(
@@ -3364,7 +3378,8 @@ module Aws::DynamoDB
       :parameters,
       :consistent_read,
       :next_token,
-      :return_consumed_capacity)
+      :return_consumed_capacity,
+      :limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3395,12 +3410,24 @@ module Aws::DynamoDB
     #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html
     #   @return [Types::ConsumedCapacity]
     #
+    # @!attribute [rw] last_evaluated_key
+    #   The primary key of the item where the operation stopped, inclusive
+    #   of the previous result set. Use this value to start a new operation,
+    #   excluding this value in the new request. If `LastEvaluatedKey` is
+    #   empty, then the "last page" of results has been processed and
+    #   there is no more data to be retrieved. If `LastEvaluatedKey` is not
+    #   empty, it does not necessarily mean that there is more data in the
+    #   result set. The only way to know when you have reached the end of
+    #   the result set is when `LastEvaluatedKey` is empty.
+    #   @return [Hash<String,Types::AttributeValue>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatementOutput AWS API Documentation
     #
     class ExecuteStatementOutput < Struct.new(
       :items,
       :next_token,
-      :consumed_capacity)
+      :consumed_capacity,
+      :last_evaluated_key)
       SENSITIVE = []
       include Aws::Structure
     end
