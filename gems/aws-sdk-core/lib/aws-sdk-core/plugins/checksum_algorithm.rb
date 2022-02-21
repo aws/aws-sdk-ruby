@@ -91,7 +91,11 @@ module Aws
           # validate request configuration
           if (request_input = ChecksumAlgorithm.request_algorithm_selection(context))
             unless CLIENT_ALGORITHMS.include? request_input
-              raise ArgumentError, "#{request_input} is not a supported checksum algorithm." # TODO: check for CRC32C and add specific crt help
+              if (request_input == 'CRC32C')
+                raise ArgumentError, "CRC32C requires crt support - install the aws-crt gem for support."
+              else
+                raise ArgumentError, "#{request_input} is not a supported checksum algorithm."
+              end
             end
           end
 
@@ -116,7 +120,7 @@ module Aws
             request_algorithm_input = ChecksumAlgorithm.request_algorithm_selection(context)
             context[:checksum_algorithms] = request_algorithm_input
 
-            request_checksum_property =           {
+            request_checksum_property = {
               'algorithm' => request_algorithm_input,
               'in' => checksum_request_in(context),
               'name' => "x-amz-checksum-#{request_algorithm_input.downcase}"
@@ -211,7 +215,9 @@ module Aws
               (computed = checksum_context[:digest].base64digest)
 
               if computed != checksum_context[:expected]
-                raise Aws::Errors::ChecksumError, "Checksum validation failed on #{checksum_context[:header_name]} computed: #{computed}, expected: #{checksum_context[:expected]}"
+                raise Aws::Errors::ChecksumError,
+                      "Checksum validation failed on #{checksum_context[:header_name]} "\
+                      "computed: #{computed}, expected: #{checksum_context[:expected]}"
               end
 
               context[:http_checksum][:validated] = checksum_context[:algorithm]
@@ -314,19 +320,19 @@ module Aws
             return @trailer_io.read(length, buf)
           end
 
-            chunk = @io.read(length)
-            if chunk
-              @digest.update(chunk)
-              application_chunked = "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
-              return StringIO.new(application_chunked).read(application_chunked.size, buf)
-            else
-              trailers = {}
-              trailers[@location_name] = @digest.base64digest
-              trailers = trailers.map { |k,v| "#{k}:#{v}"}.join("\r\n")
-              @trailer_io = StringIO.new("0\r\n#{trailers}\r\n\r\n")
-              chunk = @trailer_io.read(length, buf)
-            end
-            chunk
+          chunk = @io.read(length)
+          if chunk
+            @digest.update(chunk)
+            application_chunked = "#{chunk.bytesize.to_s(16)}\r\n#{chunk}\r\n"
+            return StringIO.new(application_chunked).read(application_chunked.size, buf)
+          else
+            trailers = {}
+            trailers[@location_name] = @digest.base64digest
+            trailers = trailers.map { |k,v| "#{k}:#{v}"}.join("\r\n")
+            @trailer_io = StringIO.new("0\r\n#{trailers}\r\n\r\n")
+            chunk = @trailer_io.read(length, buf)
+          end
+          chunk
         end
       end
     end

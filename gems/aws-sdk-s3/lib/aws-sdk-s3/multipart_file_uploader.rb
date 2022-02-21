@@ -21,10 +21,6 @@ module Aws
         Client.api.operation(:create_multipart_upload).input.shape.member_names
       )
 
-      COMPLETE_OPTIONS = Set.new(
-        Client.api.operation(:complete_multipart_upload).input.shape.member_names
-      )
-
       # @api private
       UPLOAD_PART_OPTIONS = Set.new(
         Client.api.operation(:upload_part).input.shape.member_names
@@ -46,7 +42,7 @@ module Aws
       # @option options [Proc] :progress_callback
       #   A Proc that will be called when each chunk of the upload is sent.
       #   It will be invoked with [bytes_read], [total_sizes]
-      # @return [Seahorse::Client::Response] - the CompleteMultipartUploadResponse
+      # @return [void]
       def upload(source, options = {})
         if File.size(source) < MIN_PART_SIZE
           raise ArgumentError, FILE_TOO_SMALL
@@ -65,10 +61,10 @@ module Aws
 
       def complete_upload(upload_id, parts, options)
         @client.complete_multipart_upload(
-          complete_opts(options).merge(
-            upload_id: upload_id,
-            multipart_upload: { parts: parts }
-          )
+          bucket: options[:bucket],
+          key: options[:key],
+          upload_id: upload_id,
+          multipart_upload: { parts: parts }
         )
       end
 
@@ -127,13 +123,6 @@ module Aws
         end
       end
 
-      def complete_opts(options)
-        COMPLETE_OPTIONS.inject({}) do |hash, key|
-          hash[key] = options[key] if options.key?(key)
-          hash
-        end
-      end
-
       def upload_part_opts(options)
         UPLOAD_PART_OPTIONS.inject({}) do |hash, key|
           hash[key] = options[key] if options.key?(key)
@@ -158,15 +147,7 @@ module Aws
                 end
                 resp = @client.upload_part(part)
                 part[:body].close
-                completed_part = {etag: resp.etag, part_number: part[:part_number]}
-
-                # get the requested checksum from the response
-                if part[:checksum_algorithm]
-                  k = "checksum_#{part[:checksum_algorithm].downcase}".to_sym
-                  completed_part[k] = resp[k]
-                end
-
-                completed.push(completed_part)
+                completed.push(etag: resp.etag, part_number: part[:part_number])
               end
               nil
             rescue => error
