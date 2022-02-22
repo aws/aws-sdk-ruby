@@ -1336,11 +1336,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] addresses
-    #   Contains an array of strings that specify one or more IP addresses
-    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   Contains an array of strings that specifies zero or more IP
+    #   addresses or blocks of IP addresses in Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for /0.
     #
-    #   Examples:
+    #   Example address strings:
     #
     #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
@@ -1363,6 +1364,17 @@ module Aws::WAFV2
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
+    #
+    #   Example JSON `Addresses` specifications:
+    #
+    #   * Empty array: `"Addresses": []`
+    #
+    #   * Array with one address: `"Addresses": ["192.0.2.44/32"]`
+    #
+    #   * Array with three addresses: `"Addresses": ["192.0.2.44/32",
+    #     "192.0.2.0/24", "192.0.0.0/16"]`
+    #
+    #   * INVALID specification: `"Addresses": [""]` INVALID
     #
     #
     #
@@ -4400,7 +4412,7 @@ module Aws::WAFV2
     #   account takeover prevention managed rule group
     #   `AWSManagedRulesATPRuleSet`. This is only populated if you are using
     #   a rule group in your web ACL that integrates with your applications
-    #   in this way. For more information, see [WAF application
+    #   in this way. For more information, see [WAF client application
     #   integration][1] in the *WAF Developer Guide*.
     #
     #
@@ -4498,7 +4510,7 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
-    # Contains one or more IP addresses or blocks of IP addresses specified
+    # Contains zero or more IP addresses or blocks of IP addresses specified
     # in Classless Inter-Domain Routing (CIDR) notation. WAF supports all
     # IPv4 and IPv6 CIDR ranges except for /0. For information about CIDR
     # notation, see the Wikipedia entry [Classless Inter-Domain Routing][1].
@@ -4535,11 +4547,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] addresses
-    #   Contains an array of strings that specify one or more IP addresses
-    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   Contains an array of strings that specifies zero or more IP
+    #   addresses or blocks of IP addresses in Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for /0.
     #
-    #   Examples:
+    #   Example address strings:
     #
     #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
@@ -4562,6 +4575,17 @@ module Aws::WAFV2
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
+    #
+    #   Example JSON `Addresses` specifications:
+    #
+    #   * Empty array: `"Addresses": []`
+    #
+    #   * Array with one address: `"Addresses": ["192.0.2.44/32"]`
+    #
+    #   * Array with three addresses: `"Addresses": ["192.0.2.44/32",
+    #     "192.0.2.0/24", "192.0.0.0/16"]`
+    #
+    #   * INVALID specification: `"Addresses": [""]` INVALID
     #
     #
     #
@@ -5768,8 +5792,32 @@ module Aws::WAFV2
     # and you can specify filters so that you log only a subset of the
     # logging records.
     #
-    # For information about configuring web ACL logging destinations, see
-    # [Logging web ACL traffic information][1] in the *WAF Developer Guide*.
+    # <note markdown="1"> You can define one logging destination per web ACL.
+    #
+    #  </note>
+    #
+    # You can access information about the traffic that WAF inspects using
+    # the following steps:
+    #
+    # 1.  Create your logging destination. You can use an Amazon CloudWatch
+    #     Logs log group, an Amazon Simple Storage Service (Amazon S3)
+    #     bucket, or an Amazon Kinesis Data Firehose. For information about
+    #     configuring logging destinations and the permissions that are
+    #     required for each, see [Logging web ACL traffic information][1] in
+    #     the *WAF Developer Guide*.
+    #
+    # 2.  Associate your logging destination to your web ACL using a
+    #     `PutLoggingConfiguration` request.
+    #
+    # When you successfully enable logging using a `PutLoggingConfiguration`
+    # request, WAF creates an additional role or policy that is required to
+    # write logs to the logging destination. For an Amazon CloudWatch Logs
+    # log group, WAF creates a resource policy on the log group. For an
+    # Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis
+    # Data Firehose, WAF creates a service-linked role.
+    #
+    # For additional information about web ACL logging, see [Logging web ACL
+    # traffic information][1] in the *WAF Developer Guide*.
     #
     #
     #
@@ -5838,8 +5886,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] log_destination_configs
-    #   The Amazon Resource Names (ARNs) of the logging destinations that
-    #   you want to associate with the web ACL.
+    #   The logging destination configuration that you want to associate
+    #   with the web ACL.
+    #
+    #   <note markdown="1"> You can associate one logging destination to a web ACL.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] redacted_fields
@@ -5947,8 +5999,9 @@ module Aws::WAFV2
     #       }
     #
     # @!attribute [rw] login_path
-    #   The login endpoint for your application. For example
-    #   `https://example.com/web/login`.
+    #   The path of the login endpoint for your application. For example,
+    #   for the URL `https://example.com/web/login`, you would provide the
+    #   path `/web/login`.
     #   @return [String]
     #
     # @!attribute [rw] payload_type
@@ -6671,7 +6724,12 @@ module Aws::WAFV2
     # The mobile SDK is not generally available. Customers who have access
     # to the mobile SDK can use it to establish and manage Security Token
     # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF.
+    # mobile device to WAF. For more information, see [WAF client
+    # application integration][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
     #
     # @!attribute [rw] release_version
     #   The release version.
@@ -11830,11 +11888,12 @@ module Aws::WAFV2
     #   @return [String]
     #
     # @!attribute [rw] addresses
-    #   Contains an array of strings that specify one or more IP addresses
-    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
-    #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
+    #   Contains an array of strings that specifies zero or more IP
+    #   addresses or blocks of IP addresses in Classless Inter-Domain
+    #   Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges
+    #   except for /0.
     #
-    #   Examples:
+    #   Example address strings:
     #
     #   * To configure WAF to allow, block, or count requests that
     #     originated from the IP address 192.0.2.44, specify
@@ -11857,6 +11916,17 @@ module Aws::WAFV2
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
+    #
+    #   Example JSON `Addresses` specifications:
+    #
+    #   * Empty array: `"Addresses": []`
+    #
+    #   * Array with one address: `"Addresses": ["192.0.2.44/32"]`
+    #
+    #   * Array with three addresses: `"Addresses": ["192.0.2.44/32",
+    #     "192.0.2.0/24", "192.0.0.0/16"]`
+    #
+    #   * INVALID specification: `"Addresses": [""]` INVALID
     #
     #
     #

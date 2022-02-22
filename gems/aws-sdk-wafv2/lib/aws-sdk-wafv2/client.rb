@@ -875,11 +875,11 @@ module Aws::WAFV2
     #   The version of the IP addresses, either `IPV4` or `IPV6`.
     #
     # @option params [required, Array<String>] :addresses
-    #   Contains an array of strings that specify one or more IP addresses or
-    #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
+    #   Contains an array of strings that specifies zero or more IP addresses
+    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
     #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
     #
-    #   Examples:
+    #   Example address strings:
     #
     #   * To configure WAF to allow, block, or count requests that originated
     #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
@@ -899,6 +899,17 @@ module Aws::WAFV2
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
+    #
+    #   Example JSON `Addresses` specifications:
+    #
+    #   * Empty array: `"Addresses": []`
+    #
+    #   * Array with one address: `"Addresses": ["192.0.2.44/32"]`
+    #
+    #   * Array with three addresses: `"Addresses": ["192.0.2.44/32",
+    #     "192.0.2.0/24", "192.0.0.0/16"]`
+    #
+    #   * INVALID specification: `"Addresses": [""]` INVALID
     #
     #
     #
@@ -2502,7 +2513,12 @@ module Aws::WAFV2
     # The mobile SDK is not generally available. Customers who have access
     # to the mobile SDK can use it to establish and manage Security Token
     # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF.
+    # mobile device to WAF. For more information, see [WAF client
+    # application integration][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
     #
     # @option params [required, String] :platform
     #   The device platform.
@@ -2723,7 +2739,12 @@ module Aws::WAFV2
     # The mobile SDK is not generally available. Customers who have access
     # to the mobile SDK can use it to establish and manage Security Token
     # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF.
+    # mobile device to WAF. For more information, see [WAF client
+    # application integration][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
     #
     # @option params [required, String] :platform
     #   The device platform.
@@ -4367,7 +4388,12 @@ module Aws::WAFV2
     # The mobile SDK is not generally available. Customers who have access
     # to the mobile SDK can use it to establish and manage Security Token
     # Service (STS) security tokens for use in HTTP(S) requests from a
-    # mobile device to WAF.
+    # mobile device to WAF. For more information, see [WAF client
+    # application integration][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
     #
     # @option params [required, String] :platform
     #   The device platform to retrieve the list for.
@@ -4698,7 +4724,11 @@ module Aws::WAFV2
     # Enables the specified LoggingConfiguration, to start logging from a
     # web ACL, according to the configuration provided.
     #
-    # You can access information about all traffic that WAF inspects using
+    # <note markdown="1"> You can define one logging destination per web ACL.
+    #
+    #  </note>
+    #
+    # You can access information about the traffic that WAF inspects using
     # the following steps:
     #
     # 1.  Create your logging destination. You can use an Amazon CloudWatch
@@ -4717,6 +4747,9 @@ module Aws::WAFV2
     # log group, WAF creates a resource policy on the log group. For an
     # Amazon S3 bucket, WAF creates a bucket policy. For an Amazon Kinesis
     # Data Firehose, WAF creates a service-linked role.
+    #
+    # For additional information about web ACL logging, see [Logging web ACL
+    # traffic information][1] in the *WAF Developer Guide*.
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the logging configuration with the ones that you
@@ -5100,11 +5133,11 @@ module Aws::WAFV2
     #   A description of the IP set that helps with identification.
     #
     # @option params [required, Array<String>] :addresses
-    #   Contains an array of strings that specify one or more IP addresses or
-    #   blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
+    #   Contains an array of strings that specifies zero or more IP addresses
+    #   or blocks of IP addresses in Classless Inter-Domain Routing (CIDR)
     #   notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
     #
-    #   Examples:
+    #   Example address strings:
     #
     #   * To configure WAF to allow, block, or count requests that originated
     #     from the IP address 192.0.2.44, specify `192.0.2.44/32`.
@@ -5124,6 +5157,17 @@ module Aws::WAFV2
     #
     #   For more information about CIDR notation, see the Wikipedia entry
     #   [Classless Inter-Domain Routing][1].
+    #
+    #   Example JSON `Addresses` specifications:
+    #
+    #   * Empty array: `"Addresses": []`
+    #
+    #   * Array with one address: `"Addresses": ["192.0.2.44/32"]`
+    #
+    #   * Array with three addresses: `"Addresses": ["192.0.2.44/32",
+    #     "192.0.2.0/24", "192.0.0.0/16"]`
+    #
+    #   * INVALID specification: `"Addresses": [""]` INVALID
     #
     #
     #
@@ -6396,7 +6440,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

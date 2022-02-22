@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-02-22)
+------------------
+
+* Feature - AWS App Runner adds a Java platform (Corretto 8, Corretto 11 runtimes) and a Node.js 14 runtime.
+
 1.10.0 (2022-02-08)
 ------------------
 

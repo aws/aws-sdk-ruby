@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-02-22)
+------------------
+
+* Feature - Updated descriptions for logging configuration.
+
 1.35.0 (2022-02-10)
 ------------------
 

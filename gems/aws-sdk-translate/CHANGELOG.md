@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-02-22)
+------------------
+
+* Feature - This release enables customers to use translation settings for formality customization in their synchronous translation output.
+
 1.42.0 (2022-02-03)
 ------------------
 

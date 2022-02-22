@@ -516,6 +516,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties.output_data_config.encryption_key.type #=> String, one of "KMS"
     #   resp.text_translation_job_properties.output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties.data_access_role_arn #=> String
+    #   resp.text_translation_job_properties.settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.text_translation_job_properties.settings.profanity #=> String, one of "MASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/DescribeTextTranslationJob AWS API Documentation
@@ -897,6 +898,7 @@ module Aws::Translate
     #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.type #=> String, one of "KMS"
     #   resp.text_translation_job_properties_list[0].output_data_config.encryption_key.id #=> String
     #   resp.text_translation_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.text_translation_job_properties_list[0].settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.text_translation_job_properties_list[0].settings.profanity #=> String, one of "MASK"
     #   resp.next_token #=> String
     #
@@ -1021,6 +1023,7 @@ module Aws::Translate
     #     parallel_data_names: ["ResourceName"],
     #     client_token: "ClientTokenString", # required
     #     settings: {
+    #       formality: "FORMAL", # accepts FORMAL, INFORMAL
     #       profanity: "MASK", # accepts MASK
     #     },
     #   })
@@ -1131,6 +1134,7 @@ module Aws::Translate
     #     source_language_code: "LanguageCodeString", # required
     #     target_language_code: "LanguageCodeString", # required
     #     settings: {
+    #       formality: "FORMAL", # accepts FORMAL, INFORMAL
     #       profanity: "MASK", # accepts MASK
     #     },
     #   })
@@ -1145,6 +1149,7 @@ module Aws::Translate
     #   resp.applied_terminologies[0].terms #=> Array
     #   resp.applied_terminologies[0].terms[0].source_text #=> String
     #   resp.applied_terminologies[0].terms[0].target_text #=> String
+    #   resp.applied_settings.formality #=> String, one of "FORMAL", "INFORMAL"
     #   resp.applied_settings.profanity #=> String, one of "MASK"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslateText AWS API Documentation
@@ -1224,7 +1229,7 @@ module Aws::Translate
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-translate'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.43.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

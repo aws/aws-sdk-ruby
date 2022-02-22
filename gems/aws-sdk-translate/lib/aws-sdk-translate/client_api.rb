@@ -33,6 +33,7 @@ module Aws::Translate
     EncryptionKey = Shapes::StructureShape.new(name: 'EncryptionKey')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
     EncryptionKeyType = Shapes::StringShape.new(name: 'EncryptionKeyType')
+    Formality = Shapes::StringShape.new(name: 'Formality')
     GetParallelDataRequest = Shapes::StructureShape.new(name: 'GetParallelDataRequest')
     GetParallelDataResponse = Shapes::StructureShape.new(name: 'GetParallelDataResponse')
     GetTerminologyRequest = Shapes::StructureShape.new(name: 'GetTerminologyRequest')
@@ -377,6 +378,7 @@ module Aws::Translate
     TranslateTextResponse.add_member(:applied_settings, Shapes::ShapeRef.new(shape: TranslationSettings, location_name: "AppliedSettings"))
     TranslateTextResponse.struct_class = Types::TranslateTextResponse
 
+    TranslationSettings.add_member(:formality, Shapes::ShapeRef.new(shape: Formality, location_name: "Formality"))
     TranslationSettings.add_member(:profanity, Shapes::ShapeRef.new(shape: Profanity, location_name: "Profanity"))
     TranslationSettings.struct_class = Types::TranslationSettings
 
