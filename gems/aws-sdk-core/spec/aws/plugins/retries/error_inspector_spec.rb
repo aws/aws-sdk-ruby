@@ -103,10 +103,6 @@ module Aws
           ).to be(true)
         end
 
-        it 'returns true if the error extends Errors::ChecksumError' do
-          expect(inspector(Errors::ChecksumError.new).checksum?).to be(true)
-        end
-
         it 'returns false for other errors' do
           expect(
             inspector(RetryErrorsSvc::Errors::SomeRandomError).checksum?

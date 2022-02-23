@@ -25,6 +25,9 @@ module Seahorse
       # @return [Boolean]
       attr_accessor :http_checksum_required
 
+      # @return [Hash]
+      attr_accessor :http_checksum
+
       # @return [Boolean]
       attr_accessor :deprecated
 

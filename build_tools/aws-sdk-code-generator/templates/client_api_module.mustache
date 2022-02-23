@@ -44,6 +44,13 @@ module {{module_name}}
         {{#http_checksum_required}}
         o.http_checksum_required = true
         {{/http_checksum_required}}
+        {{#http_checksum}}
+        o.http_checksum = {
+          {{#http_checksum}}
+          {{{key}}} => {{{value}}},
+          {{/http_checksum}}
+        }
+        {{/http_checksum}}
         {{#deprecated}}
         o.deprecated = true
         {{/deprecated}}

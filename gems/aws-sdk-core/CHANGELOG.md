@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support `HttpChecksum` trait for requests and responses.
+
 3.126.2 (2022-02-16)
 ------------------
 

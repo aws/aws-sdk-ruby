@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
@@ -48,6 +49,7 @@ require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/streaming_retry.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
+require 'aws-sdk-s3/plugins/skip_whole_multipart_get_checksums.rb'
 require 'aws-sdk-core/plugins/event_stream_configuration.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
@@ -93,6 +95,7 @@ module Aws::S3
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Protocols::RestXml)
@@ -114,6 +117,7 @@ module Aws::S3
     add_plugin(Aws::S3::Plugins::SseCpk)
     add_plugin(Aws::S3::Plugins::StreamingRetry)
     add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
+    add_plugin(Aws::S3::Plugins::SkipWholeMultipartGetChecksums)
     add_plugin(Aws::Plugins::EventStreamConfiguration)
 
     # @overload initialize(options)
@@ -286,6 +290,10 @@ module Aws::S3
     #   @option options [String] :profile ("default")
     #     Used when loading credentials from the shared credentials file
     #     at HOME/.aws/credentials.  When not specified, 'default' is used.
+    #
+    #   @option options [Boolean] :put_object_unsigned (false)
+    #     When set to `true` put_object will use UNSIGNED_PAYLOAD and
+    #     checksum in trailer.
     #
     #   @option options [Boolean] :require_https_for_sse_cpk (true)
     #     When `true`, the endpoint **must** be HTTPS for all operations
