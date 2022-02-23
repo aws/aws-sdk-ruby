@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.79.0 (2022-02-23)
+------------------
+
+* Feature - Lambda releases .NET 6 managed runtime to be available in all commercial regions.
+
 1.78.0 (2022-02-03)
 ------------------
 

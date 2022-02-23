@@ -165,6 +165,7 @@ module Aws::Transfer
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SshPublicKey = Shapes::StructureShape.new(name: 'SshPublicKey')
     SshPublicKeyBody = Shapes::StringShape.new(name: 'SshPublicKeyBody')
@@ -223,6 +224,7 @@ module Aws::Transfer
     CopyStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, Shapes::ShapeRef.new(shape: InputFileLocation, location_name: "DestinationFileLocation"))
     CopyStepDetails.add_member(:overwrite_existing, Shapes::ShapeRef.new(shape: OverwriteExisting, location_name: "OverwriteExisting"))
+    CopyStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     CopyStepDetails.struct_class = Types::CopyStepDetails
 
     CreateAccessRequest.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
@@ -287,6 +289,7 @@ module Aws::Transfer
     CustomStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CustomStepDetails.add_member(:target, Shapes::ShapeRef.new(shape: CustomStepTarget, location_name: "Target"))
     CustomStepDetails.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: CustomStepTimeoutSeconds, location_name: "TimeoutSeconds"))
+    CustomStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     CustomStepDetails.struct_class = Types::CustomStepDetails
 
     DeleteAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -302,6 +305,7 @@ module Aws::Transfer
     DeleteSshPublicKeyRequest.struct_class = Types::DeleteSshPublicKeyRequest
 
     DeleteStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
+    DeleteStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     DeleteStepDetails.struct_class = Types::DeleteStepDetails
 
     DeleteUserRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -687,6 +691,7 @@ module Aws::Transfer
 
     TagStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     TagStepDetails.add_member(:tags, Shapes::ShapeRef.new(shape: S3Tags, location_name: "Tags"))
+    TagStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     TagStepDetails.struct_class = Types::TagStepDetails
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)

@@ -406,17 +406,6 @@ module Aws::Transfer
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
     #   across multiple users. This policy scopes down user access to portions
@@ -832,17 +821,6 @@ module Aws::Transfer
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
     #   across multiple users. This policy scopes down user access to portions
@@ -1029,14 +1007,17 @@ module Aws::Transfer
     #             },
     #           },
     #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         custom_step_details: {
     #           name: "WorkflowStepName",
     #           target: "CustomStepTarget",
     #           timeout_seconds: 1,
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         delete_step_details: {
     #           name: "WorkflowStepName",
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         tag_step_details: {
     #           name: "WorkflowStepName",
@@ -1046,6 +1027,7 @@ module Aws::Transfer
     #               value: "S3TagValue", # required
     #             },
     #           ],
+    #           source_file_location: "SourceFileLocation",
     #         },
     #       },
     #     ],
@@ -1065,14 +1047,17 @@ module Aws::Transfer
     #             },
     #           },
     #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         custom_step_details: {
     #           name: "WorkflowStepName",
     #           target: "CustomStepTarget",
     #           timeout_seconds: 1,
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         delete_step_details: {
     #           name: "WorkflowStepName",
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         tag_step_details: {
     #           name: "WorkflowStepName",
@@ -1082,6 +1067,7 @@ module Aws::Transfer
     #               value: "S3TagValue", # required
     #             },
     #           ],
+    #           source_file_location: "SourceFileLocation",
     #         },
     #       },
     #     ],
@@ -1591,14 +1577,18 @@ module Aws::Transfer
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
     #   resp.workflow.steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.steps[0].copy_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].custom_step_details.name #=> String
     #   resp.workflow.steps[0].custom_step_details.target #=> String
     #   resp.workflow.steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.steps[0].custom_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].delete_step_details.name #=> String
+    #   resp.workflow.steps[0].delete_step_details.source_file_location #=> String
     #   resp.workflow.steps[0].tag_step_details.name #=> String
     #   resp.workflow.steps[0].tag_step_details.tags #=> Array
     #   resp.workflow.steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.steps[0].tag_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps #=> Array
     #   resp.workflow.on_exception_steps[0].type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.workflow.on_exception_steps[0].copy_step_details.name #=> String
@@ -1607,14 +1597,18 @@ module Aws::Transfer
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.file_system_id #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.destination_file_location.efs_file_location.path #=> String
     #   resp.workflow.on_exception_steps[0].copy_step_details.overwrite_existing #=> String, one of "TRUE", "FALSE"
+    #   resp.workflow.on_exception_steps[0].copy_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.name #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.target #=> String
     #   resp.workflow.on_exception_steps[0].custom_step_details.timeout_seconds #=> Integer
+    #   resp.workflow.on_exception_steps[0].custom_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].delete_step_details.name #=> String
+    #   resp.workflow.on_exception_steps[0].delete_step_details.source_file_location #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.name #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags #=> Array
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].key #=> String
     #   resp.workflow.on_exception_steps[0].tag_step_details.tags[0].value #=> String
+    #   resp.workflow.on_exception_steps[0].tag_step_details.source_file_location #=> String
     #   resp.workflow.workflow_id #=> String
     #   resp.workflow.tags #=> Array
     #   resp.workflow.tags[0].key #=> String
@@ -2344,17 +2338,6 @@ module Aws::Transfer
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
     #   across multiple users. This policy scopes down user access to portions
@@ -2728,17 +2711,6 @@ module Aws::Transfer
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    #   or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    #   S3 API or EFS API to create 0 byte objects as place holders for your
-    #   directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    #   of `s3` or `efs` so you can use the put-object operation. For example,
-    #   you use the following: `aws s3api put-object --bucket bucketname --key
-    #   path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    #   for it to be considered a folder.
-    #
-    #    </note>
-    #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
     #   across multiple users. This policy scopes down user access to portions
@@ -2850,7 +2822,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
