@@ -294,12 +294,18 @@ module Aws::FMS
     #   [1]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   Metadata about the resource that doesn't comply with the policy
+    #   scope.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ComplianceViolator AWS API Documentation
     #
     class ComplianceViolator < Struct.new(
       :resource_id,
       :violation_reason,
-      :resource_type)
+      :resource_type,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -806,6 +812,73 @@ module Aws::FMS
       :contributing_subnets,
       :allowed_targets,
       :route_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the actions that you can take to remediate
+    # scope violations caused by your policy's `FirewallCreationConfig`.
+    # `FirewallCreationConfig` is an optional configuration that you can use
+    # to choose which Availability Zones Firewall Manager creates Network
+    # Firewall endpoints in.
+    #
+    # @!attribute [rw] description
+    #   Describes the remedial action.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_creation_config
+    #   A `FirewallCreationConfig` that you can copy into your current
+    #   policy's [SecurityServiceData][1] in order to remedy scope
+    #   violations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/FMSPolicyUpdateFirewallCreationConfigAction AWS API Documentation
+    #
+    class FMSPolicyUpdateFirewallCreationConfigAction < Struct.new(
+      :description,
+      :firewall_creation_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the firewall subnet that violates the policy
+    # scope.
+    #
+    # @!attribute [rw] firewall_subnet_id
+    #   The ID of the firewall subnet that violates the policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the firewall subnet that violates the policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_availability_zone
+    #   The Availability Zone of the firewall subnet that violates the
+    #   policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_availability_zone_id
+    #   The Availability Zone ID of the firewall subnet that violates the
+    #   policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_endpoint_id
+    #   The VPC endpoint ID of the firewall subnet that violates the policy
+    #   scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/FirewallSubnetIsOutOfScopeViolation AWS API Documentation
+    #
+    class FirewallSubnetIsOutOfScopeViolation < Struct.new(
+      :firewall_subnet_id,
+      :vpc_id,
+      :subnet_availability_zone,
+      :subnet_availability_zone_id,
+      :vpc_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1940,6 +2013,39 @@ module Aws::FMS
       include Aws::Structure
     end
 
+    # Configures the firewall policy deployment model of Network Firewall.
+    # For information about Network Firewall deployment models, see [Network
+    # Firewall example architectures with routing][1] in the *Network
+    # Firewall Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/architectures.html
+    #
+    # @note When making an API call, you may pass NetworkFirewallPolicy
+    #   data as a hash:
+    #
+    #       {
+    #         firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #       }
+    #
+    # @!attribute [rw] firewall_deployment_model
+    #   Defines the deployment model to use for the firewall policy. To use
+    #   a distributed model, set [PolicyOption][1] to `NULL`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/NetworkFirewallPolicy AWS API Documentation
+    #
+    class NetworkFirewallPolicy < Struct.new(
+      :firewall_deployment_model)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition of the Network Firewall firewall policy.
     #
     # @!attribute [rw] stateless_rule_groups
@@ -2104,6 +2210,11 @@ module Aws::FMS
     #         security_service_policy_data: { # required
     #           type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #           managed_service_data: "ManagedServiceData",
+    #           policy_option: {
+    #             network_firewall_policy: {
+    #               firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #             },
+    #           },
     #         },
     #         resource_type: "ResourceType", # required
     #         resource_type_list: ["ResourceType"],
@@ -2184,6 +2295,9 @@ module Aws::FMS
     #   `ResourceTag` array are not in scope of the policy. If set to
     #   `False`, and the `ResourceTag` array is not null, only resources
     #   with the specified tags are in scope of the policy.
+    #
+    #   This option isn't available for the centralized deployment model
+    #   when creating policies to configure Network Firewall.
     #   @return [Boolean]
     #
     # @!attribute [rw] remediation_enabled
@@ -2234,6 +2348,9 @@ module Aws::FMS
     #     a comma. For example, the following is a valid map: `\{“ACCOUNT” :
     #     [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
     #     “ouid112”]\}`.
+    #
+    #   This option isn't available for the centralized deployment model
+    #   when creating policies to configure Network Firewall.
     #   @return [Hash<String,Array<String>>]
     #
     # @!attribute [rw] exclude_map
@@ -2264,6 +2381,9 @@ module Aws::FMS
     #     a comma. For example, the following is a valid map: `\{“ACCOUNT” :
     #     [“accountID1”, “accountID2”], “ORG_UNIT” : [“ouid111”,
     #     “ouid112”]\}`.
+    #
+    #   This option isn't available for the centralized deployment model
+    #   when creating policies to configure Network Firewall.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/Policy AWS API Documentation
@@ -2385,6 +2505,30 @@ module Aws::FMS
       :evaluation_results,
       :last_updated,
       :issue_info_map)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Network Firewall firewall policy options to configure a
+    # centralized deployment model.
+    #
+    # @note When making an API call, you may pass PolicyOption
+    #   data as a hash:
+    #
+    #       {
+    #         network_firewall_policy: {
+    #           firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] network_firewall_policy
+    #   Defines the deployment model to use for the firewall policy.
+    #   @return [Types::NetworkFirewallPolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/PolicyOption AWS API Documentation
+    #
+    class PolicyOption < Struct.new(
+      :network_firewall_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2705,6 +2849,11 @@ module Aws::FMS
     #           security_service_policy_data: { # required
     #             type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #             managed_service_data: "ManagedServiceData",
+    #             policy_option: {
+    #               network_firewall_policy: {
+    #                 firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #               },
+    #             },
     #           },
     #           resource_type: "ResourceType", # required
     #           resource_type_list: ["ResourceType"],
@@ -2860,6 +3009,10 @@ module Aws::FMS
     #   Information about the CreateRouteTable action in the Amazon EC2 API.
     #   @return [Types::EC2CreateRouteTableAction]
     #
+    # @!attribute [rw] fms_policy_update_firewall_creation_config_action
+    #   The remedial action to take when updating a firewall configuration.
+    #   @return [Types::FMSPolicyUpdateFirewallCreationConfigAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/RemediationAction AWS API Documentation
     #
     class RemediationAction < Struct.new(
@@ -2870,7 +3023,8 @@ module Aws::FMS
       :ec2_copy_route_table_action,
       :ec2_replace_route_table_association_action,
       :ec2_associate_route_table_action,
-      :ec2_create_route_table_action)
+      :ec2_create_route_table_action,
+      :fms_policy_update_firewall_creation_config_action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3037,6 +3191,16 @@ module Aws::FMS
     #   actions.
     #   @return [Types::PossibleRemediationActions]
     #
+    # @!attribute [rw] firewall_subnet_is_out_of_scope_violation
+    #   Contains details about the firewall subnet that violates the policy
+    #   scope.
+    #   @return [Types::FirewallSubnetIsOutOfScopeViolation]
+    #
+    # @!attribute [rw] route_has_out_of_scope_endpoint_violation
+    #   Contains details about the route endpoint that violates the policy
+    #   scope.
+    #   @return [Types::RouteHasOutOfScopeEndpointViolation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/ResourceViolation AWS API Documentation
     #
     class ResourceViolation < Struct.new(
@@ -3056,7 +3220,9 @@ module Aws::FMS
       :dns_rule_group_priority_conflict_violation,
       :dns_duplicate_rule_group_violation,
       :dns_rule_group_limit_exceeded_violation,
-      :possible_remediation_actions)
+      :possible_remediation_actions,
+      :firewall_subnet_is_out_of_scope_violation,
+      :route_has_out_of_scope_endpoint_violation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3086,6 +3252,77 @@ module Aws::FMS
       :target_type,
       :destination,
       :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about the route endpoint that violates the policy
+    # scope.
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet associated with the route that violates the
+    #   policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   The VPC ID of the route that violates the policy scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_table_id
+    #   The ID of the route table.
+    #   @return [String]
+    #
+    # @!attribute [rw] violating_routes
+    #   The list of routes that violate the route table.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] subnet_availability_zone
+    #   The subnet's Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_availability_zone_id
+    #   The ID of the subnet's Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_firewall_subnet_route_table
+    #   The route table associated with the current firewall subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_subnet_id
+    #   The ID of the firewall subnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] firewall_subnet_routes
+    #   The list of firewall subnet routes.
+    #   @return [Array<Types::Route>]
+    #
+    # @!attribute [rw] internet_gateway_id
+    #   The ID of the Internet Gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_internet_gateway_route_table
+    #   The current route table associated with the Internet Gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] internet_gateway_routes
+    #   The routes in the route table associated with the Internet Gateway.
+    #   @return [Array<Types::Route>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/RouteHasOutOfScopeEndpointViolation AWS API Documentation
+    #
+    class RouteHasOutOfScopeEndpointViolation < Struct.new(
+      :subnet_id,
+      :vpc_id,
+      :route_table_id,
+      :violating_routes,
+      :subnet_availability_zone,
+      :subnet_availability_zone_id,
+      :current_firewall_subnet_route_table,
+      :firewall_subnet_id,
+      :firewall_subnet_routes,
+      :internet_gateway_id,
+      :current_internet_gateway_route_table,
+      :internet_gateway_routes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3171,6 +3408,11 @@ module Aws::FMS
     #       {
     #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #         managed_service_data: "ManagedServiceData",
+    #         policy_option: {
+    #           network_firewall_policy: {
+    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] type
@@ -3197,10 +3439,154 @@ module Aws::FMS
     #
     #      </note>
     #
-    #   * Example: `NETWORK_FIREWALL`
+    #   * Example: `NETWORK_FIREWALL` - Centralized deployment model.
     #
-    #     `"\{"type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2","priority":10\}],"networkFirewallStatelessDefaultActions":["aws:pass","custom1"],"networkFirewallStatelessFragmentDefaultActions":["custom2","aws:pass"],"networkFirewallStatelessCustomActions":[\{"actionName":"custom1","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension1"\}]\}\}\},\{"actionName":"custom2","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"dimension2"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1"\}],"networkFirewallOrchestrationConfig":\{"singleFirewallEndpointPerVPC":true,"allowedIPV4CidrList":["10.24.34.0/28"]\}
+    #     `"\{"type":"NETWORK_FIREWALL","awsNetworkFirewallConfig":\{"networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],"networkFirewallStatelessDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessFragmentDefaultActions":["aws:forward_to_sfe","customActionName"],"networkFirewallStatelessCustomActions":[\{"actionName":"customActionName","actionDefinition":\{"publishMetricAction":\{"dimensions":[\{"value":"metricdimensionvalue"\}]\}\}\}],"networkFirewallStatefulRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"\}],"networkFirewallLoggingConfiguration":\{"logDestinationConfigs":[\{"logDestinationType":"S3","logType":"ALERT","logDestination":\{"bucketName":"s3-bucket-name"\}\},\{"logDestinationType":"S3","logType":"FLOW","logDestination":\{"bucketName":"s3-bucket-name"\}\}],"overrideExistingConfig":true\}\},"firewallDeploymentModel":\{"centralizedFirewallDeploymentModel":\{"centralizedFirewallOrchestrationConfig":\{"inspectionVpcIds":[\{"resourceId":"vpc-1234","accountId":"123456789011"\}],"firewallCreationConfig":\{"endpointLocation":\{"availabilityZoneConfigList":[\{"availabilityZoneId":null,"availabilityZoneName":"us-east-1a","allowedIPV4CidrList":["10.0.0.0/28"]\}]\}\},"allowedIPV4CidrList":[]\}\}\}\}"`
+    #
+    #     To use the centralized deployment model, you must set
+    #     [PolicyOption][1] to `CENTRALIZED`.
+    #
+    #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
+    #     automatic Availability Zone configuration. With automatic
+    #     Availbility Zone configuration, Firewall Manager chooses which
+    #     Availability Zones to create the endpoints in.
+    #
+    #     `"\{ "type": "NETWORK_FIREWALL",
+    #     "networkFirewallStatelessRuleGroupReferences": [ \{
+    #     "resourceARN":
+    #     "arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test",
+    #     "priority": 1 \} ], "networkFirewallStatelessDefaultActions":
+    #     [ "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessFragmentDefaultActions": [
+    #     "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessCustomActions": [ \{ "actionName":
+    #     "customActionName", "actionDefinition": \{
+    #     "publishMetricAction": \{ "dimensions": [ \{ "value":
+    #     "metricdimensionvalue" \} ] \} \} \} ],
+    #     "networkFirewallStatefulRuleGroupReferences": [ \{
+    #     "resourceARN":
+    #     "arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"
+    #     \} ], "networkFirewallOrchestrationConfig": \{
+    #     "singleFirewallEndpointPerVPC": false, "allowedIPV4CidrList":
+    #     [ "10.0.0.0/28", "192.168.0.0/28" ],
+    #     "routeManagementAction": "OFF" \},
+    #     "networkFirewallLoggingConfiguration": \{
+    #     "logDestinationConfigs": [ \{ "logDestinationType": "S3",
+    #     "logType": "ALERT", "logDestination": \{ "bucketName":
+    #     "s3-bucket-name" \} \}, \{ "logDestinationType": "S3",
+    #     "logType": "FLOW", "logDestination": \{ "bucketName":
+    #     "s3-bucket-name" \} \} ], "overrideExistingConfig": true \}
     #     \}"`
+    #
+    #     To use the distributed deployment model, you must set
+    #     [PolicyOption][1] to `NULL`.
+    #
+    #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
+    #     automatic Availability Zone configuration, and route management.
+    #
+    #     `"\{ "type": "NETWORK_FIREWALL",
+    #     "networkFirewallStatelessRuleGroupReferences": [ \{
+    #     "resourceARN":
+    #     "arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test",
+    #     "priority": 1 \} ], "networkFirewallStatelessDefaultActions":
+    #     [ "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessFragmentDefaultActions": [
+    #     "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessCustomActions": [ \{ "actionName":
+    #     "customActionName", "actionDefinition": \{
+    #     "publishMetricAction": \{ "dimensions": [ \{ "value":
+    #     "metricdimensionvalue" \} ] \} \} \} ],
+    #     "networkFirewallStatefulRuleGroupReferences": [ \{
+    #     "resourceARN":
+    #     "arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"
+    #     \} ], "networkFirewallOrchestrationConfig": \{
+    #     "singleFirewallEndpointPerVPC": false, "allowedIPV4CidrList":
+    #     [ "10.0.0.0/28", "192.168.0.0/28" ],
+    #     "routeManagementAction": "MONITOR",
+    #     "routeManagementTargetTypes": [ "InternetGateway" ] \},
+    #     "networkFirewallLoggingConfiguration": \{
+    #     "logDestinationConfigs": [ \{ "logDestinationType": "S3",
+    #     "logType": "ALERT", "logDestination": \{ "bucketName":
+    #     "s3-bucket-name" \} \}, \{ "logDestinationType": "S3",
+    #     "logType": "FLOW", "logDestination": \{ "bucketName":
+    #     "s3-bucket-name" \} \} ], "overrideExistingConfig": true \}
+    #     \}"`
+    #
+    #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
+    #     custom Availability Zone configuration. With custom Availability
+    #     Zone configuration, you define which specific Availability Zones
+    #     to create endpoints in by configuring `firewallCreationConfig`.
+    #
+    #     `"\{
+    #     "type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],
+    #     "networkFirewallStatelessDefaultActions":[
+    #     "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessFragmentDefaultActions":[
+    #     "aws:forward_to_sfe", "fragmentcustomactionname" ],
+    #     "networkFirewallStatelessCustomActions":[ \{
+    #     "actionName":"customActionName", "actionDefinition":\{
+    #     "publishMetricAction":\{ "dimensions":[ \{
+    #     "value":"metricdimensionvalue" \} ] \} \} \}, \{
+    #     "actionName":"fragmentcustomactionname",
+    #     "actionDefinition":\{ "publishMetricAction":\{
+    #     "dimensions":[ \{ "value":"fragmentmetricdimensionvalue" \}
+    #     ] \} \} \} ], "networkFirewallStatefulRuleGroupReferences":[ \{
+    #     "resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"
+    #     \} ], "networkFirewallOrchestrationConfig":\{
+    #     "firewallCreationConfig":\{ "endpointLocation":\{
+    #     "availabilityZoneConfigList":[ \{ "availabilityZoneId":null,
+    #     "availabilityZoneName":"us-east-1a", "allowedIPV4CidrList":[
+    #     "10.0.0.0/28" ] \}, \{ ¯"availabilityZoneId":null,
+    #     "availabilityZoneName":"us-east-1b", "allowedIPV4CidrList":[
+    #     "10.0.0.0/28" ] \} ] \} \},
+    #     "singleFirewallEndpointPerVPC":false,
+    #     "allowedIPV4CidrList":null, "routeManagementAction":"OFF",
+    #     "networkFirewallLoggingConfiguration":\{
+    #     "logDestinationConfigs":[ \{ "logDestinationType":"S3",
+    #     "logType":"ALERT", "logDestination":\{
+    #     "bucketName":"s3-bucket-name" \} \}, \{
+    #     "logDestinationType":"S3", "logType":"FLOW",
+    #     "logDestination":\{ "bucketName":"s3-bucket-name" \} \} ],
+    #     "overrideExistingConfig":boolean \} \}"`
+    #
+    #   * Example: `NETWORK_FIREWALL` - Distributed deployment model with
+    #     custom Availability Zone configuration, and route management.
+    #
+    #     `"\{
+    #     "type":"NETWORK_FIREWALL","networkFirewallStatelessRuleGroupReferences":[\{"resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test","priority":1\}],
+    #     "networkFirewallStatelessDefaultActions":[
+    #     "aws:forward_to_sfe", "customActionName" ],
+    #     "networkFirewallStatelessFragmentDefaultActions":[
+    #     "aws:forward_to_sfe", "fragmentcustomactionname" ],
+    #     "networkFirewallStatelessCustomActions":[ \{
+    #     "actionName":"customActionName", "actionDefinition":\{
+    #     "publishMetricAction":\{ "dimensions":[ \{
+    #     "value":"metricdimensionvalue" \} ] \} \} \}, \{
+    #     "actionName":"fragmentcustomactionname",
+    #     "actionDefinition":\{ "publishMetricAction":\{
+    #     "dimensions":[ \{ "value":"fragmentmetricdimensionvalue" \}
+    #     ] \} \} \} ], "networkFirewallStatefulRuleGroupReferences":[ \{
+    #     "resourceARN":"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test"
+    #     \} ], "networkFirewallOrchestrationConfig":\{
+    #     "firewallCreationConfig":\{ "endpointLocation":\{
+    #     "availabilityZoneConfigList":[ \{ "availabilityZoneId":null,
+    #     "availabilityZoneName":"us-east-1a", "allowedIPV4CidrList":[
+    #     "10.0.0.0/28" ] \}, \{ ¯"availabilityZoneId":null,
+    #     "availabilityZoneName":"us-east-1b", "allowedIPV4CidrList":[
+    #     "10.0.0.0/28" ] \} ] \} \},
+    #     "singleFirewallEndpointPerVPC":false,
+    #     "allowedIPV4CidrList":null,
+    #     "routeManagementAction":"MONITOR",
+    #     "routeManagementTargetTypes":[ "InternetGateway" ],
+    #     "routeManagementConfig":\{
+    #     "allowCrossAZTrafficIfNoEndpoint":true \} \},
+    #     "networkFirewallLoggingConfiguration":\{
+    #     "logDestinationConfigs":[ \{ "logDestinationType":"S3",
+    #     "logType":"ALERT", "logDestination":\{
+    #     "bucketName":"s3-bucket-name" \} \}, \{
+    #     "logDestinationType":"S3", "logType":"FLOW",
+    #     "logDestination":\{ "bucketName":"s3-bucket-name" \} \} ],
+    #     "overrideExistingConfig":boolean \} \}"`
     #
     #   * Specification for `SHIELD_ADVANCED` for Amazon CloudFront
     #     distributions
@@ -3267,13 +3653,23 @@ module Aws::FMS
     #   * Example: `SECURITY_GROUPS_USAGE_AUDIT`
     #
     #     `"\{"type":"SECURITY_GROUPS_USAGE_AUDIT","deleteUnusedSecurityGroups":true,"coalesceRedundantSecurityGroups":true\}"`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
     #   @return [String]
+    #
+    # @!attribute [rw] policy_option
+    #   Contains the Network Firewall firewall policy options to configure a
+    #   centralized deployment model.
+    #   @return [Types::PolicyOption]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fms-2018-01-01/SecurityServicePolicyData AWS API Documentation
     #
     class SecurityServicePolicyData < Struct.new(
       :type,
-      :managed_service_data)
+      :managed_service_data,
+      :policy_option)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3455,6 +3851,9 @@ module Aws::FMS
     #
     # @!attribute [rw] resource_tags
     #   The `ResourceTag` objects associated with the resource.
+    #
+    #   This option isn't available for the centralized deployment model
+    #   when creating policies to configure Network Firewall.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] resource_description

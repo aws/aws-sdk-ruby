@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-02-24)
+------------------
+
+* Feature - AWS Firewall Manager now supports the configuration of AWS Network Firewall policies with either centralized or distributed deployment models. This release also adds support for custom endpoint configuration, where you can choose which Availability Zones to create firewall endpoints in.
+
 1.47.0 (2022-02-03)
 ------------------
 

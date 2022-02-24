@@ -40,9 +40,9 @@ module Aws::Lightsail
     #
     # Access keys grant full programmatic access to the specified bucket and
     # its objects. You can have a maximum of two access keys per bucket. Use
-    # the CreateBucketAccessKey action to create an access key for a
+    # the [CreateBucketAccessKey][1] action to create an access key for a
     # specific bucket. For more information about access keys, see [Creating
-    # access keys for a bucket in Amazon Lightsail][1] in the *Amazon
+    # access keys for a bucket in Amazon Lightsail][2] in the *Amazon
     # Lightsail Developer Guide*.
     #
     # The `secretAccessKey` value is returned only in response to the
@@ -53,7 +53,8 @@ module Aws::Lightsail
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
     #
     # @!attribute [rw] access_key_id
     #   The ID of the access key.
@@ -82,11 +83,15 @@ module Aws::Lightsail
     #   An object that describes the last time the access key was used.
     #
     #   <note markdown="1"> This object does not include data in the response of a
-    #   CreateBucketAccessKey action. If the access key has not been used,
-    #   the `region` and `serviceName` values are `N/A`, and the
+    #   [CreateBucketAccessKey][1] action. If the access key has not been
+    #   used, the `region` and `serviceName` values are `N/A`, and the
     #   `lastUsedDate` value is null.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html
     #   @return [Types::AccessKeyLastUsed]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/AccessKey AWS API Documentation
@@ -104,9 +109,13 @@ module Aws::Lightsail
     # Describes the last time an access key was used.
     #
     # <note markdown="1"> This object does not include data in the response of a
-    # CreateBucketAccessKey action.
+    # [CreateBucketAccessKey][1] action.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html
     #
     # @!attribute [rw] last_used_date
     #   The date and time when the access key was most recently used.
@@ -979,7 +988,12 @@ module Aws::Lightsail
     #   A bucket bundle specifies the monthly cost, storage space, and data
     #   transfer quota for a bucket.
     #
-    #   Use the UpdateBucketBundle action to change the bundle of a bucket.
+    #   Use the [UpdateBucketBundle][1] action to change the bundle of a
+    #   bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -1035,7 +1049,11 @@ module Aws::Lightsail
     #   You can update a bucket's bundle only one time within a monthly AWS
     #   billing cycle.
     #
-    #   Use the UpdateBucketBundle action to change a bucket's bundle.
+    #   Use the [UpdateBucketBundle][1] action to change a bucket's bundle.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #   @return [Boolean]
     #
     # @!attribute [rw] readonly_access_accounts
@@ -1047,8 +1065,12 @@ module Aws::Lightsail
     #   An array of objects that describe Lightsail instances that have
     #   access to the bucket.
     #
-    #   Use the SetResourceAccessForBucket action to update the instances
-    #   that have access to a bucket.
+    #   Use the [SetResourceAccessForBucket][1] action to update the
+    #   instances that have access to a bucket.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #   @return [Array<Types::ResourceReceivingAccess>]
     #
     # @!attribute [rw] state
@@ -1338,8 +1360,6 @@ module Aws::Lightsail
     # `cacheBehavior` is `dont-cache`, then a per-path cache behavior can be
     # used to specify a directory, file, or file type that your distribution
     # will not cache.
-    #
-    # if the cacheBehavior's behavior is set to 'cache', then
     #
     # @note When making an API call, you may pass CacheBehaviorPerPath
     #   data as a hash:
@@ -2834,18 +2854,28 @@ module Aws::Lightsail
     #   A bucket bundle specifies the monthly cost, storage space, and data
     #   transfer quota for a bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs
+    #   that you can specify.
     #
-    #   Use the UpdateBucketBundle action to change the bundle after the
-    #   bucket is created.
+    #   Use the [UpdateBucketBundle][2] action to change the bundle after
+    #   the bucket is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
+    #   [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #   @return [String]
     #
     # @!attribute [rw] tags
     #   The tag keys and optional values to add to the bucket during
     #   creation.
     #
-    #   Use the TagResource action to tag the bucket after it's created.
+    #   Use the [TagResource][1] action to tag the bucket after it's
+    #   created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] enable_object_versioning
@@ -3704,7 +3734,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #   @return [Types::InputOrigin]
@@ -5097,8 +5127,12 @@ module Aws::Lightsail
     # @!attribute [rw] access_key_id
     #   The ID of the access key to delete.
     #
-    #   Use the GetBucketAccessKeys action to get a list of access key IDs
-    #   that you can specify.
+    #   Use the [GetBucketAccessKeys][1] action to get a list of access key
+    #   IDs that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketAccessKeyRequest AWS API Documentation
@@ -5135,8 +5169,12 @@ module Aws::Lightsail
     # @!attribute [rw] bucket_name
     #   The name of the bucket to delete.
     #
-    #   Use the GetBuckets action to get a list of bucket names that you can
-    #   specify.
+    #   Use the [GetBuckets][1] action to get a list of bucket names that
+    #   you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
     #   @return [String]
     #
     # @!attribute [rw] force_delete
@@ -5148,7 +5186,7 @@ module Aws::Lightsail
     #   * The bucket is the origin of a distribution.
     #
     #   * The bucket has instances that were granted access to it using the
-    #     SetResourceAccessForBucket action.
+    #     [SetResourceAccessForBucket][1] action.
     #
     #   * The bucket has objects.
     #
@@ -5157,6 +5195,10 @@ module Aws::Lightsail
     #   Force deleting a bucket might impact other resources that rely on
     #   the bucket, such as instances, distributions, or software that use
     #   the issued access keys.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteBucketRequest AWS API Documentation
@@ -5593,16 +5635,27 @@ module Aws::Lightsail
     #
     #       {
     #         key_pair_name: "ResourceName", # required
+    #         expected_fingerprint: "string",
     #       }
     #
     # @!attribute [rw] key_pair_name
     #   The name of the key pair to delete.
     #   @return [String]
     #
+    # @!attribute [rw] expected_fingerprint
+    #   The RSA fingerprint of the Lightsail default key pair to delete.
+    #
+    #   <note markdown="1"> The `expectedFingerprint` parameter is required only when specifying
+    #   to delete a Lightsail default key pair.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DeleteKeyPairRequest AWS API Documentation
     #
     class DeleteKeyPairRequest < Struct.new(
-      :key_pair_name)
+      :key_pair_name,
+      :expected_fingerprint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6548,11 +6601,16 @@ module Aws::Lightsail
     #   A base64-encoded RSA private key.
     #   @return [String]
     #
+    # @!attribute [rw] created_at
+    #   The timestamp when the default key pair was created.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPairResult AWS API Documentation
     #
     class DownloadDefaultKeyPairResult < Struct.new(
       :public_key_base_64,
-      :private_key_base_64)
+      :private_key_base_64,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7216,7 +7274,11 @@ module Aws::Lightsail
     # @!attribute [rw] include_connected_resources
     #   A Boolean value that indicates whether to include Lightsail
     #   instances that were given access to the bucket using the
-    #   SetResourceAccessForBucket action.
+    #   [SetResourceAccessForBucket][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketsRequest AWS API Documentation
@@ -8921,6 +8983,7 @@ module Aws::Lightsail
     #
     #       {
     #         page_token: "string",
+    #         include_default_key_pair: false,
     #       }
     #
     # @!attribute [rw] page_token
@@ -8932,10 +8995,16 @@ module Aws::Lightsail
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] include_default_key_pair
+    #   A Boolean value that indicates whether to include the default key
+    #   pair in the response of your request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetKeyPairsRequest AWS API Documentation
     #
     class GetKeyPairsRequest < Struct.new(
-      :page_token)
+      :page_token,
+      :include_default_key_pair)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10472,9 +10541,9 @@ module Aws::Lightsail
     # Describes the origin resource of an Amazon Lightsail content delivery
     # network (CDN) distribution.
     #
-    # An origin can be a Lightsail instance or load balancer. A distribution
-    # pulls content from an origin, caches it, and serves it to viewers via
-    # a worldwide network of edge servers.
+    # An origin can be a Lightsail instance, bucket, or load balancer. A
+    # distribution pulls content from an origin, caches it, and serves it to
+    # viewers via a worldwide network of edge servers.
     #
     # @note When making an API call, you may pass InputOrigin
     #   data as a hash:
@@ -11600,7 +11669,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] origin
     #   An object that describes the origin resource of the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #   @return [Types::Origin]
@@ -12465,9 +12534,9 @@ module Aws::Lightsail
     # Describes the origin resource of an Amazon Lightsail content delivery
     # network (CDN) distribution.
     #
-    # An origin can be a Lightsail instance or load balancer. A distribution
-    # pulls content from an origin, caches it, and serves it to viewers via
-    # a worldwide network of edge servers.
+    # An origin can be a Lightsail instance, bucket, or load balancer. A
+    # distribution pulls content from an origin, caches it, and serves it to
+    # viewers via a worldwide network of edge servers.
     #
     # @!attribute [rw] name
     #   The name of the origin resource.
@@ -14567,8 +14636,12 @@ module Aws::Lightsail
     # @!attribute [rw] bundle_id
     #   The ID of the new bundle to apply to the bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs
+    #   that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateBucketBundleRequest AWS API Documentation
@@ -14860,7 +14933,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #   @return [Types::InputOrigin]

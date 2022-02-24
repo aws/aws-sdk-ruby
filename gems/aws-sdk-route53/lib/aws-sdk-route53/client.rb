@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -76,6 +77,7 @@ module Aws::Route53
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -404,6 +406,27 @@ module Aws::Route53
     #
     #  </note>
     #
+    # <note markdown="1"> When granting access, the hosted zone and the Amazon VPC must belong
+    # to the same partition. A partition is a group of Amazon Web Services
+    # Regions. Each Amazon Web Services account is scoped to one partition.
+    #
+    #  The following are the supported partitions:
+    #
+    #  * `aws` - Amazon Web Services Regions
+    #
+    # * `aws-cn` - China Regions
+    #
+    # * `aws-us-gov` - Amazon Web Services GovCloud (US) Region
+    #
+    #  For more information, see [Access Management][1] in the *Amazon Web
+    # Services General Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the private hosted zone that you want to associate an Amazon
     #   VPC with.
@@ -533,9 +556,8 @@ module Aws::Route53
     # * `DELETE`\: Deletes an existing resource record set that has the
     #   specified values.
     #
-    # * `UPSERT`\: If a resource record set does not already exist, Amazon
-    #   Web Services creates it. If a resource set does exist, Route 53
-    #   updates it with the values in the request.
+    # * `UPSERT`\: If a resource set exists Route 53 updates it with the
+    #   values in the request.
     #
     # **Syntaxes for Creating, Updating, and Deleting Resource Record Sets**
     #
@@ -1503,11 +1525,30 @@ module Aws::Route53
     # The `CreateHostedZone` request requires the caller to have an
     # `ec2:DescribeVpcs` permission.
     #
+    # <note markdown="1"> When creating private hosted zones, the Amazon VPC must belong to the
+    # same partition where the hosted zone is created. A partition is a
+    # group of Amazon Web Services Regions. Each Amazon Web Services account
+    # is scoped to one partition.
+    #
+    #  The following are the supported partitions:
+    #
+    #  * `aws` - Amazon Web Services Regions
+    #
+    # * `aws-cn` - China Regions
+    #
+    # * `aws-us-gov` - Amazon Web Services GovCloud (US) Region
+    #
+    #  For more information, see [Access Management][4] in the *Amazon Web
+    # Services General Reference*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: http://aws.amazon.com/route53/pricing/
     # [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
     # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/MigratingDNS.html
+    # [4]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :name
     #   The name of the domain. Specify a fully qualified domain name, for
@@ -1792,6 +1833,23 @@ module Aws::Route53
     #
     #       `arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/*`
     #
+    #       To avoid the confused deputy problem, a security issue where an
+    #       entity without a permission for an action can coerce a
+    #       more-privileged entity to perform it, you can optionally limit
+    #       the permissions that a service has to a resource in a
+    #       resource-based policy by supplying the following values:
+    #
+    #       * For `aws:SourceArn`, supply the hosted zone ARN used in
+    #         creating the query logging configuration. For example,
+    #         `aws:SourceArn: arn:aws:route53:::hostedzone/hosted zone ID`.
+    #
+    #       * For `aws:SourceAccount`, supply the account ID for the account
+    #         that creates the query logging configuration. For example,
+    #         `aws:SourceAccount:111111111111`.
+    #
+    #       For more information, see [The confused deputy problem][1] in
+    #       the *Amazon Web Services IAM User Guide*.
+    #
     #       <note markdown="1"> You can't use the CloudWatch console to create or edit a
     #       resource policy. You must use the CloudWatch API, one of the
     #       Amazon Web Services SDKs, or the CLI.
@@ -1819,7 +1877,7 @@ module Aws::Route53
     #   corresponds with the International Air Transport Association airport
     #   code for an airport near the edge location. (These abbreviations
     #   might change in the future.) For a list of edge locations, see "The
-    #   Route 53 Global Network" on the [Route 53 Product Details][1] page.
+    #   Route 53 Global Network" on the [Route 53 Product Details][2] page.
     #
     # Queries That Are Logged
     #
@@ -1834,32 +1892,33 @@ module Aws::Route53
     #   information about only one query out of every several thousand
     #   queries that are submitted to DNS. For more information about how
     #   DNS works, see [Routing Internet Traffic to Your Website or Web
-    #   Application][2] in the *Amazon Route 53 Developer Guide*.
+    #   Application][3] in the *Amazon Route 53 Developer Guide*.
     #
     # Log File Format
     #
     # : For a list of the values in each query log and the format of each
-    #   value, see [Logging DNS Queries][3] in the *Amazon Route 53
+    #   value, see [Logging DNS Queries][4] in the *Amazon Route 53
     #   Developer Guide*.
     #
     # Pricing
     #
     # : For information about charges for query logs, see [Amazon CloudWatch
-    #   Pricing][4].
+    #   Pricing][5].
     #
     # How to Stop Logging
     #
     # : If you want Route 53 to stop sending query logs to CloudWatch Logs,
     #   delete the query logging configuration. For more information, see
-    #   [DeleteQueryLoggingConfig][5].
+    #   [DeleteQueryLoggingConfig][6].
     #
     #
     #
-    # [1]: http://aws.amazon.com/route53/details/
-    # [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html
-    # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html
-    # [4]: http://aws.amazon.com/cloudwatch/pricing/
-    # [5]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteQueryLoggingConfig.html
+    # [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/confused-deputy.html
+    # [2]: http://aws.amazon.com/route53/details/
+    # [3]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html
+    # [4]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/query-logs.html
+    # [5]: http://aws.amazon.com/cloudwatch/pricing/
+    # [6]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteQueryLoggingConfig.html
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the hosted zone that you want to log queries for. You can
@@ -2691,9 +2750,27 @@ module Aws::Route53
     #   `DisassociateVPCFromHostedZone`. If the hosted zone has a value for
     #   `OwningService`, you can't use `DisassociateVPCFromHostedZone`.
     #
+    # <note markdown="1"> When revoking access, the hosted zone and the Amazon VPC must belong
+    # to the same partition. A partition is a group of Amazon Web Services
+    # Regions. Each Amazon Web Services account is scoped to one partition.
+    #
+    #  The following are the supported partitions:
+    #
+    #  * `aws` - Amazon Web Services Regions
+    #
+    # * `aws-cn` - China Regions
+    #
+    # * `aws-us-gov` - Amazon Web Services GovCloud (US) Region
+    #
+    #  For more information, see [Access Management][2] in the *Amazon Web
+    # Services General Reference*.
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListHostedZonesByVPC.html
+    # [2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :hosted_zone_id
     #   The ID of the private hosted zone that you want to disassociate a VPC
@@ -4013,6 +4090,28 @@ module Aws::Route53
     #   service that created and owns the hosted zone. For example, if a
     #   hosted zone was created by Amazon Elastic File System (Amazon EFS),
     #   the value of `Owner` is `efs.amazonaws.com`.
+    #
+    # <note markdown="1"> When listing private hosted zones, the hosted zone and the Amazon VPC
+    # must belong to the same partition where the hosted zones were created.
+    # A partition is a group of Amazon Web Services Regions. Each Amazon Web
+    # Services account is scoped to one partition.
+    #
+    #  The following are the supported partitions:
+    #
+    #  * `aws` - Amazon Web Services Regions
+    #
+    # * `aws-cn` - China Regions
+    #
+    # * `aws-us-gov` - Amazon Web Services GovCloud (US) Region
+    #
+    #  For more information, see [Access Management][1] in the *Amazon Web
+    # Services General Reference*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #
     # @option params [required, String] :vpc_id
     #   The ID of the Amazon VPC that you want to list hosted zones for.
@@ -5660,7 +5759,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

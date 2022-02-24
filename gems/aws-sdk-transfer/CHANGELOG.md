@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-02-24)
+------------------
+
+* Feature - Support automatic pagination when listing AWS Transfer Family resources.
+
 1.48.0 (2022-02-23)
 ------------------
 

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
@@ -78,6 +79,7 @@ module Aws::S3Control
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::Protocols::RestXml)
@@ -845,6 +847,7 @@ module Aws::S3Control
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
     #         bucket_key_enabled: false,
+    #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #       },
     #       s3_put_object_acl: {
     #         access_control_policy: {
@@ -1902,6 +1905,7 @@ module Aws::S3Control
     #   resp.job.operation.s3_put_object_copy.object_lock_mode #=> String, one of "COMPLIANCE", "GOVERNANCE"
     #   resp.job.operation.s3_put_object_copy.object_lock_retain_until_date #=> Time
     #   resp.job.operation.s3_put_object_copy.bucket_key_enabled #=> Boolean
+    #   resp.job.operation.s3_put_object_copy.checksum_algorithm #=> String, one of "CRC32", "CRC32C", "SHA1", "SHA256"
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.id #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.owner.display_name #=> String
     #   resp.job.operation.s3_put_object_acl.access_control_policy.access_control_list.grants #=> Array
@@ -4727,7 +4731,7 @@ module Aws::S3Control
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

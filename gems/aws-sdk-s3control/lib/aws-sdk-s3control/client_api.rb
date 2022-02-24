@@ -285,6 +285,7 @@ module Aws::S3Control
     S3BucketArnString = Shapes::StringShape.new(name: 'S3BucketArnString')
     S3BucketDestination = Shapes::StructureShape.new(name: 'S3BucketDestination')
     S3CannedAccessControlList = Shapes::StringShape.new(name: 'S3CannedAccessControlList')
+    S3ChecksumAlgorithm = Shapes::StringShape.new(name: 'S3ChecksumAlgorithm')
     S3ContentLength = Shapes::IntegerShape.new(name: 'S3ContentLength')
     S3CopyObjectOperation = Shapes::StructureShape.new(name: 'S3CopyObjectOperation')
     S3DeleteObjectTaggingOperation = Shapes::StructureShape.new(name: 'S3DeleteObjectTaggingOperation')
@@ -1142,6 +1143,7 @@ module Aws::S3Control
     S3CopyObjectOperation.add_member(:object_lock_mode, Shapes::ShapeRef.new(shape: S3ObjectLockMode, location_name: "ObjectLockMode"))
     S3CopyObjectOperation.add_member(:object_lock_retain_until_date, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "ObjectLockRetainUntilDate"))
     S3CopyObjectOperation.add_member(:bucket_key_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "BucketKeyEnabled"))
+    S3CopyObjectOperation.add_member(:checksum_algorithm, Shapes::ShapeRef.new(shape: S3ChecksumAlgorithm, location_name: "ChecksumAlgorithm"))
     S3CopyObjectOperation.struct_class = Types::S3CopyObjectOperation
 
     S3DeleteObjectTaggingOperation.struct_class = Types::S3DeleteObjectTaggingOperation

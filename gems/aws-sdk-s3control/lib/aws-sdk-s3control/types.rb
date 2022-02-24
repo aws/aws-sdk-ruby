@@ -785,6 +785,7 @@ module Aws::S3Control
     #             object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #             object_lock_retain_until_date: Time.now,
     #             bucket_key_enabled: false,
+    #             checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #           },
     #           s3_put_object_acl: {
     #             access_control_policy: {
@@ -3131,6 +3132,7 @@ module Aws::S3Control
     #           object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #           object_lock_retain_until_date: Time.now,
     #           bucket_key_enabled: false,
+    #           checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #         },
     #         s3_put_object_acl: {
     #           access_control_policy: {
@@ -5515,6 +5517,7 @@ module Aws::S3Control
     #         object_lock_mode: "COMPLIANCE", # accepts COMPLIANCE, GOVERNANCE
     #         object_lock_retain_until_date: Time.now,
     #         bucket_key_enabled: false,
+    #         checksum_algorithm: "CRC32", # accepts CRC32, CRC32C, SHA1, SHA256
     #       }
     #
     # @!attribute [rw] target_resource
@@ -5596,6 +5599,16 @@ module Aws::S3Control
     #   *bucket-level* settings for S3 Bucket Key.
     #   @return [Boolean]
     #
+    # @!attribute [rw] checksum_algorithm
+    #   Indicates the algorithm you want Amazon S3 to use to create the
+    #   checksum. For more information see [ Checking object integrity][1]
+    #   in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/S3CopyObjectOperation AWS API Documentation
     #
     class S3CopyObjectOperation < Struct.new(
@@ -5615,7 +5628,8 @@ module Aws::S3Control
       :object_lock_legal_hold_status,
       :object_lock_mode,
       :object_lock_retain_until_date,
-      :bucket_key_enabled)
+      :bucket_key_enabled,
+      :checksum_algorithm)
       SENSITIVE = []
       include Aws::Structure
     end

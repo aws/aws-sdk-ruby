@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-02-24)
+------------------
+
+* Feature - Amazon S3 Batch Operations adds support for new integrity checking capabilities in Amazon S3.
+
 1.48.0 (2022-02-08)
 ------------------
 

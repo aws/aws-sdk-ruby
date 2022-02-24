@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-02-24)
+------------------
+
+* Feature - This release adds support to delete and create Lightsail default key pairs that you can use with Lightsail instances.
+
 1.62.0 (2022-02-03)
 ------------------
 

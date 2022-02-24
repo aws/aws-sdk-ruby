@@ -263,8 +263,8 @@ module Aws::S3
     #   bucket.
     # @option options [String] :expected_bucket_owner
     #   The account ID of the expected bucket owner. If the bucket is owned by
-    #   a different account, the request will fail with an HTTP `403 (Access
-    #   Denied)` error.
+    #   a different account, the request fails with the HTTP status code `403
+    #   Forbidden` (access denied).
     # @option options [Boolean] :skip_destination_validation
     #   Skips validation of Amazon SQS, Amazon SNS, and Lambda destinations.
     #   True or false value.

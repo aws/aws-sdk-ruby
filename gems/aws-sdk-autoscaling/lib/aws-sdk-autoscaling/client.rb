@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::AutoScaling
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -678,22 +680,26 @@ module Aws::AutoScaling
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
-    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
-    #     Scaling launches or terminates instances.
+    # 1.  (Optional) Create a launch template or launch configuration with a
+    #     user data script that runs while an instance is in a wait state
+    #     due to a lifecycle hook.
     #
-    # 2.  (Optional) Create a notification target and an IAM role. The
+    # 2.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when an instance is put
+    #     into a wait state due to a lifecycle hook.
+    #
+    # 3.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
     #     The role allows Amazon EC2 Auto Scaling to publish lifecycle
     #     notifications to the target.
     #
-    # 3.  Create the lifecycle hook. Specify whether the hook is used when
+    # 4.  Create the lifecycle hook. Specify whether the hook is used when
     #     the instances launch or terminate.
     #
-    # 4.  If you need more time, record the lifecycle action heartbeat to
-    #     keep the instance in a pending state.
+    # 5.  If you need more time, record the lifecycle action heartbeat to
+    #     keep the instance in a wait state.
     #
-    # 5.  **If you finish before the timeout period ends, send a callback by
+    # 6.  **If you finish before the timeout period ends, send a callback by
     #     using the CompleteLifecycleAction API call.**
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
@@ -921,7 +927,7 @@ module Aws::AutoScaling
     #   The default value is `0`. For more information, see [Health check
     #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
@@ -1055,7 +1061,7 @@ module Aws::AutoScaling
     #   resp = client.create_auto_scaling_group({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
     #     launch_template: {
-    #       launch_template_id: "lt-0a20c965061f64abc", 
+    #       launch_template_name: "my-template-for-auto-scaling", 
     #       version: "$Latest", 
     #     }, 
     #     max_instance_lifetime: 2592000, 
@@ -1073,8 +1079,8 @@ module Aws::AutoScaling
     #     health_check_grace_period: 300, 
     #     health_check_type: "ELB", 
     #     launch_template: {
-    #       launch_template_id: "lt-0a20c965061f64abc", 
-    #       version: "$Default", 
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "$Latest", 
     #     }, 
     #     max_size: 3, 
     #     min_size: 1, 
@@ -2284,7 +2290,7 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].instances[0].instance_id #=> String
     #   resp.auto_scaling_groups[0].instances[0].instance_type #=> String
     #   resp.auto_scaling_groups[0].instances[0].availability_zone #=> String
-    #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running"
+    #   resp.auto_scaling_groups[0].instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running", "Warmed:Hibernated"
     #   resp.auto_scaling_groups[0].instances[0].health_status #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_configuration_name #=> String
     #   resp.auto_scaling_groups[0].instances[0].launch_template.launch_template_id #=> String
@@ -2316,8 +2322,9 @@ module Aws::AutoScaling
     #   resp.auto_scaling_groups[0].capacity_rebalance #=> Boolean
     #   resp.auto_scaling_groups[0].warm_pool_configuration.max_group_prepared_capacity #=> Integer
     #   resp.auto_scaling_groups[0].warm_pool_configuration.min_size #=> Integer
-    #   resp.auto_scaling_groups[0].warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running", "Hibernated"
     #   resp.auto_scaling_groups[0].warm_pool_configuration.status #=> String, one of "PendingDelete"
+    #   resp.auto_scaling_groups[0].warm_pool_configuration.instance_reuse_policy.reuse_on_scale_in #=> Boolean
     #   resp.auto_scaling_groups[0].warm_pool_size #=> Integer
     #   resp.auto_scaling_groups[0].context #=> String
     #   resp.auto_scaling_groups[0].desired_capacity_type #=> String
@@ -3831,13 +3838,14 @@ module Aws::AutoScaling
     #
     #   resp.warm_pool_configuration.max_group_prepared_capacity #=> Integer
     #   resp.warm_pool_configuration.min_size #=> Integer
-    #   resp.warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running"
+    #   resp.warm_pool_configuration.pool_state #=> String, one of "Stopped", "Running", "Hibernated"
     #   resp.warm_pool_configuration.status #=> String, one of "PendingDelete"
+    #   resp.warm_pool_configuration.instance_reuse_policy.reuse_on_scale_in #=> Boolean
     #   resp.instances #=> Array
     #   resp.instances[0].instance_id #=> String
     #   resp.instances[0].instance_type #=> String
     #   resp.instances[0].availability_zone #=> String
-    #   resp.instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running"
+    #   resp.instances[0].lifecycle_state #=> String, one of "Pending", "Pending:Wait", "Pending:Proceed", "Quarantined", "InService", "Terminating", "Terminating:Wait", "Terminating:Proceed", "Terminated", "Detaching", "Detached", "EnteringStandby", "Standby", "Warmed:Pending", "Warmed:Pending:Wait", "Warmed:Pending:Proceed", "Warmed:Terminating", "Warmed:Terminating:Wait", "Warmed:Terminating:Proceed", "Warmed:Terminated", "Warmed:Stopped", "Warmed:Running", "Warmed:Hibernated"
     #   resp.instances[0].health_status #=> String
     #   resp.instances[0].launch_configuration_name #=> String
     #   resp.instances[0].launch_template.launch_template_id #=> String
@@ -4588,30 +4596,34 @@ module Aws::AutoScaling
     # Creates or updates a lifecycle hook for the specified Auto Scaling
     # group.
     #
-    # A lifecycle hook enables an Auto Scaling group to be aware of events
-    # in the Auto Scaling instance lifecycle, and then perform a custom
-    # action when the corresponding lifecycle event occurs.
+    # Lifecycle hooks let you create solutions that are aware of events in
+    # the Auto Scaling instance lifecycle, and then perform a custom action
+    # on instances when the corresponding lifecycle event occurs.
     #
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
-    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
-    #     Scaling launches or terminates instances.
+    # 1.  (Optional) Create a launch template or launch configuration with a
+    #     user data script that runs while an instance is in a wait state
+    #     due to a lifecycle hook.
     #
-    # 2.  (Optional) Create a notification target and an IAM role. The
+    # 2.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when an instance is put
+    #     into a wait state due to a lifecycle hook.
+    #
+    # 3.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
     #     The role allows Amazon EC2 Auto Scaling to publish lifecycle
     #     notifications to the target.
     #
-    # 3.  **Create the lifecycle hook. Specify whether the hook is used when
+    # 4.  **Create the lifecycle hook. Specify whether the hook is used when
     #     the instances launch or terminate.**
     #
-    # 4.  If you need more time, record the lifecycle action heartbeat to
-    #     keep the instance in a pending state using the
+    # 5.  If you need more time, record the lifecycle action heartbeat to
+    #     keep the instance in a wait state using the
     #     RecordLifecycleActionHeartbeat API call.
     #
-    # 5.  If you finish before the timeout period ends, send a callback by
+    # 6.  If you finish before the timeout period ends, send a callback by
     #     using the CompleteLifecycleAction API call.
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
@@ -4648,11 +4660,11 @@ module Aws::AutoScaling
     #
     # @option params [String] :role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to publish
-    #   to the specified notification target, for example, an Amazon SNS topic
-    #   or an Amazon SQS queue.
+    #   to the specified notification target.
     #
-    #   Required for new lifecycle hooks, but optional when updating existing
-    #   hooks.
+    #   Valid only if the notification target is an Amazon SNS topic or an
+    #   Amazon SQS queue. Required for new lifecycle hooks, but optional when
+    #   updating existing hooks.
     #
     # @option params [String] :notification_target_arn
     #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
@@ -4693,16 +4705,16 @@ module Aws::AutoScaling
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To create a lifecycle hook
+    # @example Example: To create a launch lifecycle hook
     #
-    #   # This example creates a lifecycle hook.
+    #   # This example creates a lifecycle hook for instance launch.
     #
     #   resp = client.put_lifecycle_hook({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     lifecycle_hook_name: "my-lifecycle-hook", 
+    #     default_result: "CONTINUE", 
+    #     heartbeat_timeout: 300, 
+    #     lifecycle_hook_name: "my-launch-lifecycle-hook", 
     #     lifecycle_transition: "autoscaling:EC2_INSTANCE_LAUNCHING", 
-    #     notification_target_arn: "arn:aws:sns:us-west-2:123456789012:my-sns-topic --role-arn", 
-    #     role_arn: "arn:aws:iam::123456789012:role/my-auto-scaling-role", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -5336,17 +5348,25 @@ module Aws::AutoScaling
     #   Sets the instance state to transition to after the lifecycle actions
     #   are complete. Default is `Stopped`.
     #
+    # @option params [Types::InstanceReusePolicy] :instance_reuse_policy
+    #   Indicates whether instances in the Auto Scaling group can be returned
+    #   to the warm pool on scale in. The default is to terminate instances in
+    #   the Auto Scaling group when the group scales in.
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To add a warm pool to an Auto Scaling group
+    # @example Example: To create a warm pool for an Auto Scaling group
     #
-    #   # This example adds a warm pool to the specified Auto Scaling group.
+    #   # This example creates a warm pool for the specified Auto Scaling group.
     #
     #   resp = client.put_warm_pool({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     instance_reuse_policy: {
+    #       reuse_on_scale_in: true, 
+    #     }, 
     #     min_size: 30, 
-    #     pool_state: "Stopped", 
+    #     pool_state: "Hibernated", 
     #   })
     #
     # @example Request syntax with placeholder values
@@ -5355,7 +5375,10 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "XmlStringMaxLen255", # required
     #     max_group_prepared_capacity: 1,
     #     min_size: 1,
-    #     pool_state: "Stopped", # accepts Stopped, Running
+    #     pool_state: "Stopped", # accepts Stopped, Running, Hibernated
+    #     instance_reuse_policy: {
+    #       reuse_on_scale_in: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutWarmPool AWS API Documentation
@@ -5374,22 +5397,26 @@ module Aws::AutoScaling
     # This step is a part of the procedure for adding a lifecycle hook to an
     # Auto Scaling group:
     #
-    # 1.  (Optional) Create a Lambda function and a rule that allows Amazon
-    #     EventBridge to invoke your Lambda function when Amazon EC2 Auto
-    #     Scaling launches or terminates instances.
+    # 1.  (Optional) Create a launch template or launch configuration with a
+    #     user data script that runs while an instance is in a wait state
+    #     due to a lifecycle hook.
     #
-    # 2.  (Optional) Create a notification target and an IAM role. The
+    # 2.  (Optional) Create a Lambda function and a rule that allows Amazon
+    #     EventBridge to invoke your Lambda function when an instance is put
+    #     into a wait state due to a lifecycle hook.
+    #
+    # 3.  (Optional) Create a notification target and an IAM role. The
     #     target can be either an Amazon SQS queue or an Amazon SNS topic.
     #     The role allows Amazon EC2 Auto Scaling to publish lifecycle
     #     notifications to the target.
     #
-    # 3.  Create the lifecycle hook. Specify whether the hook is used when
+    # 4.  Create the lifecycle hook. Specify whether the hook is used when
     #     the instances launch or terminate.
     #
-    # 4.  **If you need more time, record the lifecycle action heartbeat to
-    #     keep the instance in a pending state.**
+    # 5.  **If you need more time, record the lifecycle action heartbeat to
+    #     keep the instance in a wait state.**
     #
-    # 5.  If you finish before the timeout period ends, send a callback by
+    # 6.  If you finish before the timeout period ends, send a callback by
     #     using the CompleteLifecycleAction API call.
     #
     # For more information, see [Amazon EC2 Auto Scaling lifecycle hooks][1]
@@ -5770,9 +5797,16 @@ module Aws::AutoScaling
     #
     #   resp = client.start_instance_refresh({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
+    #     desired_configuration: {
+    #       launch_template: {
+    #         launch_template_name: "my-template-for-auto-scaling", 
+    #         version: "$Latest", 
+    #       }, 
+    #     }, 
     #     preferences: {
     #       instance_warmup: 400, 
-    #       min_healthy_percentage: 50, 
+    #       min_healthy_percentage: 90, 
+    #       skip_matching: true, 
     #     }, 
     #   })
     #
@@ -6160,7 +6194,7 @@ module Aws::AutoScaling
     #   The default value is `0`. For more information, see [Health check
     #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
@@ -6259,31 +6293,18 @@ module Aws::AutoScaling
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
-    # @example Example: To update the launch configuration
+    # @example Example: To update an Auto Scaling group
     #
-    #   # This example updates the launch configuration of the specified Auto Scaling group.
-    #
-    #   resp = client.update_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     launch_configuration_name: "new-launch-config", 
-    #   })
-    #
-    # @example Example: To update the minimum and maximum size
-    #
-    #   # This example updates the minimum size and maximum size of the specified Auto Scaling group.
+    #   # This example updates multiple properties at the same time.
     #
     #   resp = client.update_auto_scaling_group({
     #     auto_scaling_group_name: "my-auto-scaling-group", 
-    #     max_size: 3, 
+    #     launch_template: {
+    #       launch_template_name: "my-template-for-auto-scaling", 
+    #       version: "2", 
+    #     }, 
+    #     max_size: 5, 
     #     min_size: 1, 
-    #   })
-    #
-    # @example Example: To enable instance protection
-    #
-    #   # This example enables instance protection for the specified Auto Scaling group.
-    #
-    #   resp = client.update_auto_scaling_group({
-    #     auto_scaling_group_name: "my-auto-scaling-group", 
     #     new_instances_protected_from_scale_in: true, 
     #   })
     #
@@ -6412,7 +6433,7 @@ module Aws::AutoScaling
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.77.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

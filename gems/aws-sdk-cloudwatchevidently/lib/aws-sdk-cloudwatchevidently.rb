@@ -48,6 +48,6 @@ require_relative 'aws-sdk-cloudwatchevidently/customizations'
 # @!group service
 module Aws::CloudWatchEvidently
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end

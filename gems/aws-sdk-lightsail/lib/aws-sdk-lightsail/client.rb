@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Lightsail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -923,16 +925,25 @@ module Aws::Lightsail
     #   A bucket bundle specifies the monthly cost, storage space, and data
     #   transfer quota for a bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs that
+    #   you can specify.
     #
-    #   Use the UpdateBucketBundle action to change the bundle after the
+    #   Use the [UpdateBucketBundle][2] action to change the bundle after the
     #   bucket is created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
+    #   [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #
     # @option params [Array<Types::Tag>] :tags
     #   The tag keys and optional values to add to the bucket during creation.
     #
-    #   Use the TagResource action to tag the bucket after it's created.
+    #   Use the [TagResource][1] action to tag the bucket after it's created.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_TagResource.html
     #
     # @option params [Boolean] :enable_object_versioning
     #   A Boolean value that indicates whether to enable versioning of objects
@@ -1023,9 +1034,9 @@ module Aws::Lightsail
     #
     # Access keys grant full programmatic access to the specified bucket and
     # its objects. You can have a maximum of two access keys per bucket. Use
-    # the GetBucketAccessKeys action to get a list of current access keys
-    # for a specific bucket. For more information about access keys, see
-    # [Creating access keys for a bucket in Amazon Lightsail][1] in the
+    # the [GetBucketAccessKeys][1] action to get a list of current access
+    # keys for a specific bucket. For more information about access keys,
+    # see [Creating access keys for a bucket in Amazon Lightsail][2] in the
     # *Amazon Lightsail Developer Guide*.
     #
     # The `secretAccessKey` value is returned only in response to the
@@ -1036,7 +1047,8 @@ module Aws::Lightsail
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket that the new access key will belong to, and
@@ -2142,7 +2154,7 @@ module Aws::Lightsail
     #
     # @option params [required, Types::InputOrigin] :origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #
@@ -2851,15 +2863,23 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Creates an SSH key pair.
+    # Creates a custom SSH key pair that you can use with an Amazon
+    # Lightsail instance.
+    #
+    # <note markdown="1"> Use the [DownloadDefaultKeyPair][1] action to create a Lightsail
+    # default key pair in an Amazon Web Services Region where a default key
+    # pair does not currently exist.
+    #
+    #  </note>
     #
     # The `create key pair` operation supports tag-based access control via
     # request tags. For more information, see the [Amazon Lightsail
-    # Developer Guide][1].
+    # Developer Guide][2].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+    # [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name for your new key pair.
@@ -3710,8 +3730,12 @@ module Aws::Lightsail
     # @option params [required, String] :bucket_name
     #   The name of the bucket to delete.
     #
-    #   Use the GetBuckets action to get a list of bucket names that you can
-    #   specify.
+    #   Use the [GetBuckets][1] action to get a list of bucket names that you
+    #   can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
     #
     # @option params [Boolean] :force_delete
     #   A Boolean value that indicates whether to force delete the bucket.
@@ -3722,7 +3746,7 @@ module Aws::Lightsail
     #   * The bucket is the origin of a distribution.
     #
     #   * The bucket has instances that were granted access to it using the
-    #     SetResourceAccessForBucket action.
+    #     [SetResourceAccessForBucket][1] action.
     #
     #   * The bucket has objects.
     #
@@ -3731,6 +3755,10 @@ module Aws::Lightsail
     #   Force deleting a bucket might impact other resources that rely on the
     #   bucket, such as instances, distributions, or software that use the
     #   issued access keys.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #
     # @return [Types::DeleteBucketResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3788,8 +3816,12 @@ module Aws::Lightsail
     # @option params [required, String] :access_key_id
     #   The ID of the access key to delete.
     #
-    #   Use the GetBucketAccessKeys action to get a list of access key IDs
-    #   that you can specify.
+    #   Use the [GetBucketAccessKeys][1] action to get a list of access key
+    #   IDs that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
     #
     # @return [Types::DeleteBucketAccessKeyResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4374,18 +4406,36 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Deletes a specific SSH key pair.
+    # Deletes the specified key pair by removing the public key from Amazon
+    # Lightsail.
+    #
+    # You can delete key pairs that were created using the
+    # [ImportKeyPair][1] and [CreateKeyPair][2] actions, as well as the
+    # Lightsail default key pair. A new default key pair will not be created
+    # unless you launch an instance without specifying a custom key pair, or
+    # you call the [DownloadDefaultKeyPair][3] API.
     #
     # The `delete key pair` operation supports tag-based access control via
     # resource tags applied to the resource identified by `key pair name`.
-    # For more information, see the [Amazon Lightsail Developer Guide][1].
+    # For more information, see the [Amazon Lightsail Developer Guide][4].
     #
     #
     #
-    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html
+    # [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html
+    # [3]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+    # [4]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
     #
     # @option params [required, String] :key_pair_name
     #   The name of the key pair to delete.
+    #
+    # @option params [String] :expected_fingerprint
+    #   The RSA fingerprint of the Lightsail default key pair to delete.
+    #
+    #   <note markdown="1"> The `expectedFingerprint` parameter is required only when specifying
+    #   to delete a Lightsail default key pair.
+    #
+    #    </note>
     #
     # @return [Types::DeleteKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4395,6 +4445,7 @@ module Aws::Lightsail
     #
     #   resp = client.delete_key_pair({
     #     key_pair_name: "ResourceName", # required
+    #     expected_fingerprint: "string",
     #   })
     #
     # @example Response structure
@@ -4972,17 +5023,22 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Downloads the default SSH key pair from the user's account.
+    # Downloads the regional Amazon Lightsail default key pair.
+    #
+    # This action also creates a Lightsail default key pair if a default key
+    # pair does not currently exist in the Amazon Web Services Region.
     #
     # @return [Types::DownloadDefaultKeyPairResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DownloadDefaultKeyPairResult#public_key_base_64 #public_key_base_64} => String
     #   * {Types::DownloadDefaultKeyPairResult#private_key_base_64 #private_key_base_64} => String
+    #   * {Types::DownloadDefaultKeyPairResult#created_at #created_at} => Time
     #
     # @example Response structure
     #
     #   resp.public_key_base_64 #=> String
     #   resp.private_key_base_64 #=> String
+    #   resp.created_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/DownloadDefaultKeyPair AWS API Documentation
     #
@@ -5348,8 +5404,12 @@ module Aws::Lightsail
     #
     # This action does not return the secret access key value of an access
     # key. You can get a secret access key only when you create it from the
-    # response of the CreateBucketAccessKey action. If you lose the secret
-    # access key, you must create a new access key.
+    # response of the [CreateBucketAccessKey][1] action. If you lose the
+    # secret access key, you must create a new access key.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateBucketAccessKey.html
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket for which to return access keys.
@@ -5389,7 +5449,12 @@ module Aws::Lightsail
     # The bucket bundle specifies the monthly cost, storage quota, and data
     # transfer quota for a bucket.
     #
-    # Use the UpdateBucketBundle action to update the bundle for a bucket.
+    # Use the [UpdateBucketBundle][1] action to update the bundle for a
+    # bucket.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateBucketBundle.html
     #
     # @option params [Boolean] :include_inactive
     #   A Boolean value that indicates whether to include inactive
@@ -5574,7 +5639,11 @@ module Aws::Lightsail
     # @option params [Boolean] :include_connected_resources
     #   A Boolean value that indicates whether to include Lightsail instances
     #   that were given access to the bucket using the
-    #   SetResourceAccessForBucket action.
+    #   [SetResourceAccessForBucket][1] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
     #
     # @return [Types::GetBucketsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7009,8 +7078,12 @@ module Aws::Lightsail
     # snapshot` operation.
     #
     # An export snapshot record can be used to create a new Amazon EC2
-    # instance and its related resources with the CreateCloudFormationStack
-    # action.
+    # instance and its related resources with the
+    # [CreateCloudFormationStack][1] action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateCloudFormationStack.html
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -7795,6 +7868,10 @@ module Aws::Lightsail
     #   results are paginated, the response will return a next page token that
     #   you can specify as the page token in a subsequent request.
     #
+    # @option params [Boolean] :include_default_key_pair
+    #   A Boolean value that indicates whether to include the default key pair
+    #   in the response of your request.
+    #
     # @return [Types::GetKeyPairsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetKeyPairsResult#key_pairs #key_pairs} => Array&lt;Types::KeyPair&gt;
@@ -7804,6 +7881,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_key_pairs({
     #     page_token: "string",
+    #     include_default_key_pair: false,
     #   })
     #
     # @example Response structure
@@ -10733,7 +10811,7 @@ module Aws::Lightsail
     # A bucket bundle specifies the monthly cost, storage space, and data
     # transfer quota for a bucket. You can update a bucket's bundle only
     # one time within a monthly AWS billing cycle. To determine if you can
-    # update a bucket's bundle, use the GetBuckets action. The
+    # update a bucket's bundle, use the [GetBuckets][1] action. The
     # `ableToUpdateBundle` parameter in the response will indicate whether
     # you can currently update a bucket's bundle.
     #
@@ -10746,14 +10824,22 @@ module Aws::Lightsail
     # measure. Choose a bucket bundle that will provide the bucket with
     # ample storage space and data transfer for a long time to come.
     #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
+    #
     # @option params [required, String] :bucket_name
     #   The name of the bucket for which to update the bundle.
     #
     # @option params [required, String] :bundle_id
     #   The ID of the new bundle to apply to the bucket.
     #
-    #   Use the GetBucketBundles action to get a list of bundle IDs that you
-    #   can specify.
+    #   Use the [GetBucketBundles][1] action to get a list of bundle IDs that
+    #   you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
     #
     # @return [Types::UpdateBucketBundleResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -10944,7 +11030,7 @@ module Aws::Lightsail
     #
     # @option params [Types::InputOrigin] :origin
     #   An object that describes the origin resource for the distribution,
-    #   such as a Lightsail instance or load balancer.
+    #   such as a Lightsail instance, bucket, or load balancer.
     #
     #   The distribution pulls, caches, and serves content from the origin.
     #
@@ -11464,7 +11550,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -30,6 +30,7 @@ module Aws::FMS
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     ComplianceViolator = Shapes::StructureShape.new(name: 'ComplianceViolator')
+    ComplianceViolatorMetadata = Shapes::MapShape.new(name: 'ComplianceViolatorMetadata')
     ComplianceViolators = Shapes::ListShape.new(name: 'ComplianceViolators')
     CustomerPolicyScopeId = Shapes::StringShape.new(name: 'CustomerPolicyScopeId')
     CustomerPolicyScopeIdList = Shapes::ListShape.new(name: 'CustomerPolicyScopeIdList')
@@ -60,6 +61,9 @@ module Aws::FMS
     EvaluationResults = Shapes::ListShape.new(name: 'EvaluationResults')
     ExpectedRoute = Shapes::StructureShape.new(name: 'ExpectedRoute')
     ExpectedRoutes = Shapes::ListShape.new(name: 'ExpectedRoutes')
+    FMSPolicyUpdateFirewallCreationConfigAction = Shapes::StructureShape.new(name: 'FMSPolicyUpdateFirewallCreationConfigAction')
+    FirewallDeploymentModel = Shapes::StringShape.new(name: 'FirewallDeploymentModel')
+    FirewallSubnetIsOutOfScopeViolation = Shapes::StructureShape.new(name: 'FirewallSubnetIsOutOfScopeViolation')
     GetAdminAccountRequest = Shapes::StructureShape.new(name: 'GetAdminAccountRequest')
     GetAdminAccountResponse = Shapes::StructureShape.new(name: 'GetAdminAccountResponse')
     GetAppsListRequest = Shapes::StructureShape.new(name: 'GetAppsListRequest')
@@ -109,6 +113,7 @@ module Aws::FMS
     NetworkFirewallMissingExpectedRoutesViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingExpectedRoutesViolation')
     NetworkFirewallMissingFirewallViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingFirewallViolation')
     NetworkFirewallMissingSubnetViolation = Shapes::StructureShape.new(name: 'NetworkFirewallMissingSubnetViolation')
+    NetworkFirewallPolicy = Shapes::StructureShape.new(name: 'NetworkFirewallPolicy')
     NetworkFirewallPolicyDescription = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyDescription')
     NetworkFirewallPolicyModifiedViolation = Shapes::StructureShape.new(name: 'NetworkFirewallPolicyModifiedViolation')
     NetworkFirewallResourceName = Shapes::StringShape.new(name: 'NetworkFirewallResourceName')
@@ -125,6 +130,7 @@ module Aws::FMS
     PolicyComplianceStatusList = Shapes::ListShape.new(name: 'PolicyComplianceStatusList')
     PolicyComplianceStatusType = Shapes::StringShape.new(name: 'PolicyComplianceStatusType')
     PolicyId = Shapes::StringShape.new(name: 'PolicyId')
+    PolicyOption = Shapes::StructureShape.new(name: 'PolicyOption')
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyUpdateToken = Shapes::StringShape.new(name: 'PolicyUpdateToken')
@@ -167,6 +173,7 @@ module Aws::FMS
     ResourceViolation = Shapes::StructureShape.new(name: 'ResourceViolation')
     ResourceViolations = Shapes::ListShape.new(name: 'ResourceViolations')
     Route = Shapes::StructureShape.new(name: 'Route')
+    RouteHasOutOfScopeEndpointViolation = Shapes::StructureShape.new(name: 'RouteHasOutOfScopeEndpointViolation')
     Routes = Shapes::ListShape.new(name: 'Routes')
     SecurityGroupRemediationAction = Shapes::StructureShape.new(name: 'SecurityGroupRemediationAction')
     SecurityGroupRemediationActions = Shapes::ListShape.new(name: 'SecurityGroupRemediationActions')
@@ -246,7 +253,11 @@ module Aws::FMS
     ComplianceViolator.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ResourceId"))
     ComplianceViolator.add_member(:violation_reason, Shapes::ShapeRef.new(shape: ViolationReason, location_name: "ViolationReason"))
     ComplianceViolator.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
+    ComplianceViolator.add_member(:metadata, Shapes::ShapeRef.new(shape: ComplianceViolatorMetadata, location_name: "Metadata"))
     ComplianceViolator.struct_class = Types::ComplianceViolator
+
+    ComplianceViolatorMetadata.key = Shapes::ShapeRef.new(shape: LengthBoundedString)
+    ComplianceViolatorMetadata.value = Shapes::ShapeRef.new(shape: LengthBoundedString)
 
     ComplianceViolators.member = Shapes::ShapeRef.new(shape: ComplianceViolator)
 
@@ -347,6 +358,17 @@ module Aws::FMS
     ExpectedRoute.struct_class = Types::ExpectedRoute
 
     ExpectedRoutes.member = Shapes::ShapeRef.new(shape: ExpectedRoute)
+
+    FMSPolicyUpdateFirewallCreationConfigAction.add_member(:description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Description"))
+    FMSPolicyUpdateFirewallCreationConfigAction.add_member(:firewall_creation_config, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "FirewallCreationConfig"))
+    FMSPolicyUpdateFirewallCreationConfigAction.struct_class = Types::FMSPolicyUpdateFirewallCreationConfigAction
+
+    FirewallSubnetIsOutOfScopeViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
+    FirewallSubnetIsOutOfScopeViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
+    FirewallSubnetIsOutOfScopeViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
+    FirewallSubnetIsOutOfScopeViolation.add_member(:subnet_availability_zone_id, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZoneId"))
+    FirewallSubnetIsOutOfScopeViolation.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcEndpointId"))
+    FirewallSubnetIsOutOfScopeViolation.struct_class = Types::FirewallSubnetIsOutOfScopeViolation
 
     GetAdminAccountRequest.struct_class = Types::GetAdminAccountRequest
 
@@ -551,6 +573,9 @@ module Aws::FMS
     NetworkFirewallMissingSubnetViolation.add_member(:target_violation_reason, Shapes::ShapeRef.new(shape: TargetViolationReason, location_name: "TargetViolationReason"))
     NetworkFirewallMissingSubnetViolation.struct_class = Types::NetworkFirewallMissingSubnetViolation
 
+    NetworkFirewallPolicy.add_member(:firewall_deployment_model, Shapes::ShapeRef.new(shape: FirewallDeploymentModel, location_name: "FirewallDeploymentModel"))
+    NetworkFirewallPolicy.struct_class = Types::NetworkFirewallPolicy
+
     NetworkFirewallPolicyDescription.add_member(:stateless_rule_groups, Shapes::ShapeRef.new(shape: StatelessRuleGroupList, location_name: "StatelessRuleGroups"))
     NetworkFirewallPolicyDescription.add_member(:stateless_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessDefaultActions"))
     NetworkFirewallPolicyDescription.add_member(:stateless_fragment_default_actions, Shapes::ShapeRef.new(shape: NetworkFirewallActionList, location_name: "StatelessFragmentDefaultActions"))
@@ -617,6 +642,9 @@ module Aws::FMS
     PolicyComplianceStatus.struct_class = Types::PolicyComplianceStatus
 
     PolicyComplianceStatusList.member = Shapes::ShapeRef.new(shape: PolicyComplianceStatus)
+
+    PolicyOption.add_member(:network_firewall_policy, Shapes::ShapeRef.new(shape: NetworkFirewallPolicy, location_name: "NetworkFirewallPolicy"))
+    PolicyOption.struct_class = Types::PolicyOption
 
     PolicySummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
     PolicySummary.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, location_name: "PolicyId"))
@@ -701,6 +729,7 @@ module Aws::FMS
     RemediationAction.add_member(:ec2_replace_route_table_association_action, Shapes::ShapeRef.new(shape: EC2ReplaceRouteTableAssociationAction, location_name: "EC2ReplaceRouteTableAssociationAction"))
     RemediationAction.add_member(:ec2_associate_route_table_action, Shapes::ShapeRef.new(shape: EC2AssociateRouteTableAction, location_name: "EC2AssociateRouteTableAction"))
     RemediationAction.add_member(:ec2_create_route_table_action, Shapes::ShapeRef.new(shape: EC2CreateRouteTableAction, location_name: "EC2CreateRouteTableAction"))
+    RemediationAction.add_member(:fms_policy_update_firewall_creation_config_action, Shapes::ShapeRef.new(shape: FMSPolicyUpdateFirewallCreationConfigAction, location_name: "FMSPolicyUpdateFirewallCreationConfigAction"))
     RemediationAction.struct_class = Types::RemediationAction
 
     RemediationActionWithOrder.add_member(:remediation_action, Shapes::ShapeRef.new(shape: RemediationAction, location_name: "RemediationAction"))
@@ -737,6 +766,8 @@ module Aws::FMS
     ResourceViolation.add_member(:dns_duplicate_rule_group_violation, Shapes::ShapeRef.new(shape: DnsDuplicateRuleGroupViolation, location_name: "DnsDuplicateRuleGroupViolation"))
     ResourceViolation.add_member(:dns_rule_group_limit_exceeded_violation, Shapes::ShapeRef.new(shape: DnsRuleGroupLimitExceededViolation, location_name: "DnsRuleGroupLimitExceededViolation"))
     ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
+    ResourceViolation.add_member(:firewall_subnet_is_out_of_scope_violation, Shapes::ShapeRef.new(shape: FirewallSubnetIsOutOfScopeViolation, location_name: "FirewallSubnetIsOutOfScopeViolation"))
+    ResourceViolation.add_member(:route_has_out_of_scope_endpoint_violation, Shapes::ShapeRef.new(shape: RouteHasOutOfScopeEndpointViolation, location_name: "RouteHasOutOfScopeEndpointViolation"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
@@ -746,6 +777,20 @@ module Aws::FMS
     Route.add_member(:destination, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Destination"))
     Route.add_member(:target, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "Target"))
     Route.struct_class = Types::Route
+
+    RouteHasOutOfScopeEndpointViolation.add_member(:subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "SubnetId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:route_table_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "RouteTableId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:violating_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "ViolatingRoutes"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:subnet_availability_zone_id, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZoneId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:current_firewall_subnet_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentFirewallSubnetRouteTable"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:firewall_subnet_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "FirewallSubnetRoutes"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:internet_gateway_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "InternetGatewayId"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:current_internet_gateway_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentInternetGatewayRouteTable"))
+    RouteHasOutOfScopeEndpointViolation.add_member(:internet_gateway_routes, Shapes::ShapeRef.new(shape: Routes, location_name: "InternetGatewayRoutes"))
+    RouteHasOutOfScopeEndpointViolation.struct_class = Types::RouteHasOutOfScopeEndpointViolation
 
     Routes.member = Shapes::ShapeRef.new(shape: Route)
 
@@ -767,6 +812,7 @@ module Aws::FMS
 
     SecurityServicePolicyData.add_member(:type, Shapes::ShapeRef.new(shape: SecurityServiceType, required: true, location_name: "Type"))
     SecurityServicePolicyData.add_member(:managed_service_data, Shapes::ShapeRef.new(shape: ManagedServiceData, location_name: "ManagedServiceData"))
+    SecurityServicePolicyData.add_member(:policy_option, Shapes::ShapeRef.new(shape: PolicyOption, location_name: "PolicyOption"))
     SecurityServicePolicyData.struct_class = Types::SecurityServicePolicyData
 
     StatefulRuleGroup.add_member(:rule_group_name, Shapes::ShapeRef.new(shape: NetworkFirewallResourceName, location_name: "RuleGroupName"))

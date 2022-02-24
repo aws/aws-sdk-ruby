@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2022-02-24)
+------------------
+
+* Feature - You can now hibernate instances in a warm pool to stop instances without deleting their RAM contents. You can now also return instances to the warm pool on scale in, instead of always terminating capacity that you will need later.
+
 1.77.0 (2022-02-03)
 ------------------
 

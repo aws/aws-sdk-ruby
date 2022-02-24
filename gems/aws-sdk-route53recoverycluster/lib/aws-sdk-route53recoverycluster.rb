@@ -48,6 +48,6 @@ require_relative 'aws-sdk-route53recoverycluster/customizations'
 # @!group service
 module Aws::Route53RecoveryCluster
 
-  GEM_VERSION = '1.8.0'
+  GEM_VERSION = '1.9.0'
 
 end

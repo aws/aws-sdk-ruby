@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.127.0 (2022-02-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
 * Feature - Support `HttpChecksum` trait for requests and responses.
 
 3.126.2 (2022-02-16)

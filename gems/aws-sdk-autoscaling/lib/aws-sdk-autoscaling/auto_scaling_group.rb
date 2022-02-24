@@ -1239,7 +1239,7 @@ module Aws::AutoScaling
     #   The default value is `0`. For more information, see [Health check
     #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
