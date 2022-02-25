@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-02-25)
+------------------
+
+* Feature - Added NTP server configuration parameter to ProvisionDevice operation. Added alternate software fields to DescribeDevice response
+
 1.5.0 (2022-02-24)
 ------------------
 

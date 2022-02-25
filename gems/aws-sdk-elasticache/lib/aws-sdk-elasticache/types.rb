@@ -1762,17 +1762,6 @@ module Aws::ElastiCache
     #
     #       **C1 node types:** `cache.c1.xlarge`
     #
-    #   * Memory optimized with data tiering:
-    #
-    #     * Current generation:
-    #
-    #       **R6gd node types** (available only for Redis engine version 6.2
-    #       onward).
-    #
-    #       `cache.r6gd.xlarge`, `cache.r6gd.2xlarge`, `cache.r6gd.4xlarge`,
-    #       `cache.r6gd.8xlarge`, `cache.r6gd.12xlarge`,
-    #       `cache.r6gd.16xlarge`
-    #
     #   * Memory optimized:
     #
     #     * Current generation:
