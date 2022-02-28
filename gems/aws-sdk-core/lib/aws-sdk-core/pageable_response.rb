@@ -48,11 +48,11 @@ module Aws
   #
   module PageableResponse
 
-    def self.extended(base)
-      base.extend Enumerable
-      base.extend UnsafeEnumerableMethods
-      base.instance_variable_set("@last_page", nil)
-      base.instance_variable_set("@more_results", nil)
+    def self.apply(base)
+      base.extend Extension
+      base.instance_variable_set(:@last_page, nil)
+      base.instance_variable_set(:@more_results, nil)
+      base
     end
 
     # @return [Paging::Pager]
@@ -62,39 +62,26 @@ module Aws
     # when this method returns `false` will raise an error.
     # @return [Boolean]
     def last_page?
-      if @last_page.nil?
-        @last_page = !@pager.truncated?(self)
-      end
-      @last_page
+      # Actual implementation is in PageableResponse::Extension
     end
 
     # Returns `true` if there are more results.  Calling {#next_page} will
     # return the next response.
     # @return [Boolean]
     def next_page?
-      !last_page?
+      # Actual implementation is in PageableResponse::Extension
     end
 
     # @return [Seahorse::Client::Response]
     def next_page(params = {})
-      if last_page?
-        raise LastPageError.new(self)
-      else
-        next_response(params)
-      end
+      # Actual implementation is in PageableResponse::Extension
     end
 
     # Yields the current and each following response to the given block.
     # @yieldparam [Response] response
     # @return [Enumerable,nil] Returns a new Enumerable if no block is given.
     def each(&block)
-      return enum_for(:each_page) unless block_given?
-      response = self
-      yield(response)
-      until response.last_page?
-        response = response.next_page
-        yield(response)
-      end
+      # Actual implementation is in PageableResponse::Extension
     end
     alias each_page each
 
@@ -105,9 +92,7 @@ module Aws
     # @return [Seahorse::Client::Response] Returns the next page of
     #   results.
     def next_response(params)
-      params = next_page_params(params)
-      request = context.client.build_request(context.operation_name, params)
-      request.send_request
+      # Actual implementation is in PageableResponse::Extension
     end
 
     # @param [Hash] params A hash of additional request params to
@@ -115,13 +100,7 @@ module Aws
     # @return [Hash] Returns the hash of request parameters for the
     #   next page, merging any given params.
     def next_page_params(params)
-      # Remove all previous tokens from original params
-      # Sometimes a token can be nil and merge would not include it.
-      tokens = @pager.tokens.values.map(&:to_sym)
-
-      params_without_tokens = context[:original_params].reject { |k, _v| tokens.include?(k) }
-      params_without_tokens.merge!(@pager.next_tokens(self).merge(params))
-      params_without_tokens
+      # Actual implementation is in PageableResponse::Extension
     end
 
     # Raised when calling {PageableResponse#next_page} on a pager that
@@ -165,6 +144,67 @@ module Aws
 
       def to_h
         data.to_h
+      end
+
+    end
+
+    # The actual decorator module implementation. It is in a distinct module
+    # so that it can be used to extend objects without busting Ruby's constant cache.
+    # object.extend(mod) bust the constant cache only if `mod` contains constants of its own.
+    # @api private
+    module Extension
+
+      include Enumerable
+      include UnsafeEnumerableMethods
+
+      attr_accessor :pager
+
+      def last_page?
+        if @last_page.nil?
+          @last_page = !@pager.truncated?(self)
+        end
+        @last_page
+      end
+
+      def next_page?
+        !last_page?
+      end
+
+      def next_page(params = {})
+        if last_page?
+          raise LastPageError.new(self)
+        else
+          next_response(params)
+        end
+      end
+
+      def each(&block)
+        return enum_for(:each_page) unless block_given?
+        response = self
+        yield(response)
+        until response.last_page?
+          response = response.next_page
+          yield(response)
+        end
+      end
+      alias each_page each
+
+      private
+
+      def next_response(params)
+        params = next_page_params(params)
+        request = context.client.build_request(context.operation_name, params)
+        request.send_request
+      end
+
+      def next_page_params(params)
+        # Remove all previous tokens from original params
+        # Sometimes a token can be nil and merge would not include it.
+        tokens = @pager.tokens.values.map(&:to_sym)
+
+        params_without_tokens = context[:original_params].reject { |k, _v| tokens.include?(k) }
+        params_without_tokens.merge!(@pager.next_tokens(self).merge(params))
+        params_without_tokens
       end
 
     end

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fixed `Aws::PageableResponse` invalidating Ruby's global constant cache.
+
 3.128.0 (2022-03-04)
 ------------------
 

@@ -6,7 +6,7 @@ module Aws
   describe PageableResponse do
 
     def pageable(resp, pager)
-      resp.extend(PageableResponse)
+      PageableResponse.apply(resp)
       resp.pager = pager
       resp.context[:original_params] = resp.context.params.freeze
       resp
@@ -257,6 +257,18 @@ module Aws
         expect(page.respond_to?(:foo)).to be(true)
       end
 
+    end
+
+    describe '.apply' do
+
+      it 'does not bump RubyVM.stat(:global_constant_state)' do
+        skip "Only applies to MRI"  unless defined? RubyVM.stat
+
+        object = Object.new
+        expect {
+          PageableResponse.apply(object)
+        }.to_not change { RubyVM.stat(:global_constant_state) }
+      end
     end
 
   end

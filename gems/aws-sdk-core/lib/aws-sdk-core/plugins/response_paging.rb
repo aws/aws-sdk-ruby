@@ -10,7 +10,7 @@ module Aws
         def call(context)
           context[:original_params] = context.params
           resp = @handler.call(context)
-          resp.extend(PageableResponse)
+          PageableResponse.apply(resp)
           resp.pager = context.operation[:pager] || Aws::Pager::NullPager.new
           resp
         end
