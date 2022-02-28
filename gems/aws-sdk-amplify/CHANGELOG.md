@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-02-28)
+------------------
+
+* Feature - Add repositoryCloneMethod field for hosting an Amplify app. This field shows what authorization method is used to clone the repo: SSH, TOKEN, or SIGV4.
+
 1.39.0 (2022-02-24)
 ------------------
 

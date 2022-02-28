@@ -429,7 +429,7 @@ module Aws::Amplify
     #     name: "Name", # required
     #     description: "Description",
     #     repository: "Repository",
-    #     platform: "WEB", # accepts WEB
+    #     platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #     iam_service_role_arn: "ServiceRoleArn",
     #     oauth_token: "OauthToken",
     #     access_token: "AccessToken",
@@ -480,7 +480,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -516,6 +516,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/CreateApp AWS API Documentation
     #
@@ -891,7 +892,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -927,6 +928,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/DeleteApp AWS API Documentation
     #
@@ -1226,7 +1228,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -1262,6 +1264,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/GetApp AWS API Documentation
     #
@@ -1569,7 +1572,7 @@ module Aws::Amplify
     #   resp.apps[0].tags["TagKey"] #=> String
     #   resp.apps[0].description #=> String
     #   resp.apps[0].repository #=> String
-    #   resp.apps[0].platform #=> String, one of "WEB"
+    #   resp.apps[0].platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.apps[0].create_time #=> Time
     #   resp.apps[0].update_time #=> Time
     #   resp.apps[0].iam_service_role_arn #=> String
@@ -1605,6 +1608,7 @@ module Aws::Amplify
     #   resp.apps[0].auto_branch_creation_config.build_spec #=> String
     #   resp.apps[0].auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.apps[0].auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.apps[0].repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/ListApps AWS API Documentation
@@ -2267,7 +2271,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     name: "Name",
     #     description: "Description",
-    #     platform: "WEB", # accepts WEB
+    #     platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #     iam_service_role_arn: "ServiceRoleArn",
     #     environment_variables: {
     #       "EnvKey" => "EnvValue",
@@ -2316,7 +2320,7 @@ module Aws::Amplify
     #   resp.app.tags["TagKey"] #=> String
     #   resp.app.description #=> String
     #   resp.app.repository #=> String
-    #   resp.app.platform #=> String, one of "WEB"
+    #   resp.app.platform #=> String, one of "WEB", "WEB_DYNAMIC"
     #   resp.app.create_time #=> Time
     #   resp.app.update_time #=> Time
     #   resp.app.iam_service_role_arn #=> String
@@ -2352,6 +2356,7 @@ module Aws::Amplify
     #   resp.app.auto_branch_creation_config.build_spec #=> String
     #   resp.app.auto_branch_creation_config.enable_pull_request_preview #=> Boolean
     #   resp.app.auto_branch_creation_config.pull_request_environment_name #=> String
+    #   resp.app.repository_clone_method #=> String, one of "SSH", "TOKEN", "SIGV4"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/UpdateApp AWS API Documentation
     #
@@ -2506,7 +2511,7 @@ module Aws::Amplify
     # @option params [Boolean] :enable_auto_sub_domain
     #   Enables the automated creation of subdomains for branches.
     #
-    # @option params [required, Array<Types::SubDomainSetting>] :sub_domain_settings
+    # @option params [Array<Types::SubDomainSetting>] :sub_domain_settings
     #   Describes the settings for the subdomain.
     #
     # @option params [Array<String>] :auto_sub_domain_creation_patterns
@@ -2526,7 +2531,7 @@ module Aws::Amplify
     #     app_id: "AppId", # required
     #     domain_name: "DomainName", # required
     #     enable_auto_sub_domain: false,
-    #     sub_domain_settings: [ # required
+    #     sub_domain_settings: [
     #       {
     #         prefix: "DomainPrefix", # required
     #         branch_name: "BranchName", # required
@@ -2617,7 +2622,7 @@ module Aws::Amplify
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplify'
-      context[:gem_version] = '1.39.0'
+      context[:gem_version] = '1.40.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

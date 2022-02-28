@@ -15,6 +15,9 @@ module Aws::FinSpaceData
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AliasString = Shapes::StringShape.new(name: 'AliasString')
+    ApiAccess = Shapes::StringShape.new(name: 'ApiAccess')
+    ApplicationPermission = Shapes::StringShape.new(name: 'ApplicationPermission')
+    ApplicationPermissionList = Shapes::ListShape.new(name: 'ApplicationPermissionList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ChangeType = Shapes::StringShape.new(name: 'ChangeType')
     ChangesetArn = Shapes::StringShape.new(name: 'ChangesetArn')
@@ -36,6 +39,10 @@ module Aws::FinSpaceData
     CreateDataViewResponse = Shapes::StructureShape.new(name: 'CreateDataViewResponse')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
+    CreatePermissionGroupRequest = Shapes::StructureShape.new(name: 'CreatePermissionGroupRequest')
+    CreatePermissionGroupResponse = Shapes::StructureShape.new(name: 'CreatePermissionGroupResponse')
+    CreateUserRequest = Shapes::StructureShape.new(name: 'CreateUserRequest')
+    CreateUserResponse = Shapes::StructureShape.new(name: 'CreateUserResponse')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     DataViewArn = Shapes::StringShape.new(name: 'DataViewArn')
     DataViewDestinationType = Shapes::StringShape.new(name: 'DataViewDestinationType')
@@ -56,10 +63,17 @@ module Aws::FinSpaceData
     DatasetTitle = Shapes::StringShape.new(name: 'DatasetTitle')
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
     DeleteDatasetResponse = Shapes::StructureShape.new(name: 'DeleteDatasetResponse')
+    DeletePermissionGroupRequest = Shapes::StructureShape.new(name: 'DeletePermissionGroupRequest')
+    DeletePermissionGroupResponse = Shapes::StructureShape.new(name: 'DeletePermissionGroupResponse')
+    DisableUserRequest = Shapes::StructureShape.new(name: 'DisableUserRequest')
+    DisableUserResponse = Shapes::StructureShape.new(name: 'DisableUserResponse')
     Email = Shapes::StringShape.new(name: 'Email')
+    EnableUserRequest = Shapes::StructureShape.new(name: 'EnableUserRequest')
+    EnableUserResponse = Shapes::StructureShape.new(name: 'EnableUserResponse')
     ErrorCategory = Shapes::StringShape.new(name: 'ErrorCategory')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExportFileFormat = Shapes::StringShape.new(name: 'ExportFileFormat')
+    FirstName = Shapes::StringShape.new(name: 'FirstName')
     FormatParams = Shapes::MapShape.new(name: 'FormatParams')
     GetChangesetRequest = Shapes::StructureShape.new(name: 'GetChangesetRequest')
     GetChangesetResponse = Shapes::StructureShape.new(name: 'GetChangesetResponse')
@@ -69,11 +83,14 @@ module Aws::FinSpaceData
     GetDatasetResponse = Shapes::StructureShape.new(name: 'GetDatasetResponse')
     GetProgrammaticAccessCredentialsRequest = Shapes::StructureShape.new(name: 'GetProgrammaticAccessCredentialsRequest')
     GetProgrammaticAccessCredentialsResponse = Shapes::StructureShape.new(name: 'GetProgrammaticAccessCredentialsResponse')
+    GetUserRequest = Shapes::StructureShape.new(name: 'GetUserRequest')
+    GetUserResponse = Shapes::StructureShape.new(name: 'GetUserResponse')
     GetWorkingLocationRequest = Shapes::StructureShape.new(name: 'GetWorkingLocationRequest')
     GetWorkingLocationResponse = Shapes::StructureShape.new(name: 'GetWorkingLocationResponse')
     IdType = Shapes::StringShape.new(name: 'IdType')
     IngestionStatus = Shapes::StringShape.new(name: 'IngestionStatus')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    LastName = Shapes::StringShape.new(name: 'LastName')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListChangesetsRequest = Shapes::StructureShape.new(name: 'ListChangesetsRequest')
     ListChangesetsResponse = Shapes::StructureShape.new(name: 'ListChangesetsResponse')
@@ -81,16 +98,28 @@ module Aws::FinSpaceData
     ListDataViewsResponse = Shapes::StructureShape.new(name: 'ListDataViewsResponse')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
     ListDatasetsResponse = Shapes::StructureShape.new(name: 'ListDatasetsResponse')
+    ListPermissionGroupsRequest = Shapes::StructureShape.new(name: 'ListPermissionGroupsRequest')
+    ListPermissionGroupsResponse = Shapes::StructureShape.new(name: 'ListPermissionGroupsResponse')
+    ListUsersRequest = Shapes::StructureShape.new(name: 'ListUsersRequest')
+    ListUsersResponse = Shapes::StructureShape.new(name: 'ListUsersResponse')
     OwnerName = Shapes::StringShape.new(name: 'OwnerName')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
     PartitionColumnList = Shapes::ListShape.new(name: 'PartitionColumnList')
+    Password = Shapes::StringShape.new(name: 'Password')
+    PermissionGroup = Shapes::StructureShape.new(name: 'PermissionGroup')
+    PermissionGroupDescription = Shapes::StringShape.new(name: 'PermissionGroupDescription')
     PermissionGroupId = Shapes::StringShape.new(name: 'PermissionGroupId')
+    PermissionGroupList = Shapes::ListShape.new(name: 'PermissionGroupList')
+    PermissionGroupName = Shapes::StringShape.new(name: 'PermissionGroupName')
     PermissionGroupParams = Shapes::StructureShape.new(name: 'PermissionGroupParams')
     PhoneNumber = Shapes::StringShape.new(name: 'PhoneNumber')
+    ResetUserPasswordRequest = Shapes::StructureShape.new(name: 'ResetUserPasswordRequest')
+    ResetUserPasswordResponse = Shapes::StructureShape.new(name: 'ResetUserPasswordResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourcePermission = Shapes::StructureShape.new(name: 'ResourcePermission')
     ResourcePermissionsList = Shapes::ListShape.new(name: 'ResourcePermissionsList')
     ResultLimit = Shapes::IntegerShape.new(name: 'ResultLimit')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3DestinationFormatOptions = Shapes::MapShape.new(name: 'S3DestinationFormatOptions')
     SchemaDefinition = Shapes::StructureShape.new(name: 'SchemaDefinition')
     SchemaUnion = Shapes::StructureShape.new(name: 'SchemaUnion')
@@ -107,6 +136,15 @@ module Aws::FinSpaceData
     UpdateChangesetResponse = Shapes::StructureShape.new(name: 'UpdateChangesetResponse')
     UpdateDatasetRequest = Shapes::StructureShape.new(name: 'UpdateDatasetRequest')
     UpdateDatasetResponse = Shapes::StructureShape.new(name: 'UpdateDatasetResponse')
+    UpdatePermissionGroupRequest = Shapes::StructureShape.new(name: 'UpdatePermissionGroupRequest')
+    UpdatePermissionGroupResponse = Shapes::StructureShape.new(name: 'UpdatePermissionGroupResponse')
+    UpdateUserRequest = Shapes::StructureShape.new(name: 'UpdateUserRequest')
+    UpdateUserResponse = Shapes::StructureShape.new(name: 'UpdateUserResponse')
+    User = Shapes::StructureShape.new(name: 'User')
+    UserId = Shapes::StringShape.new(name: 'UserId')
+    UserList = Shapes::ListShape.new(name: 'UserList')
+    UserStatus = Shapes::StringShape.new(name: 'UserStatus')
+    UserType = Shapes::StringShape.new(name: 'UserType')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     errorMessage = Shapes::StringShape.new(name: 'errorMessage')
     locationType = Shapes::StringShape.new(name: 'locationType')
@@ -117,6 +155,8 @@ module Aws::FinSpaceData
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    ApplicationPermissionList.member = Shapes::ShapeRef.new(shape: ApplicationPermission)
 
     ChangesetErrorInfo.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "errorMessage"))
     ChangesetErrorInfo.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "errorCategory"))
@@ -149,6 +189,7 @@ module Aws::FinSpaceData
     ColumnNameList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ConflictException.add_member(:reason, Shapes::ShapeRef.new(shape: errorMessage, location_name: "reason"))
     ConflictException.struct_class = Types::ConflictException
 
     CreateChangesetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -187,6 +228,27 @@ module Aws::FinSpaceData
 
     CreateDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
     CreateDatasetResponse.struct_class = Types::CreateDatasetResponse
+
+    CreatePermissionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionGroupName, required: true, location_name: "name"))
+    CreatePermissionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionGroupDescription, location_name: "description"))
+    CreatePermissionGroupRequest.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissionList, required: true, location_name: "applicationPermissions"))
+    CreatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreatePermissionGroupRequest.struct_class = Types::CreatePermissionGroupRequest
+
+    CreatePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
+    CreatePermissionGroupResponse.struct_class = Types::CreatePermissionGroupResponse
+
+    CreateUserRequest.add_member(:email_address, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "emailAddress"))
+    CreateUserRequest.add_member(:type, Shapes::ShapeRef.new(shape: UserType, required: true, location_name: "type"))
+    CreateUserRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: FirstName, location_name: "firstName"))
+    CreateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
+    CreateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "ApiAccess"))
+    CreateUserRequest.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
+    CreateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    CreateUserRequest.struct_class = Types::CreateUserRequest
+
+    CreateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    CreateUserResponse.struct_class = Types::CreateUserResponse
 
     Credentials.add_member(:access_key_id, Shapes::ShapeRef.new(shape: stringValueLength1to255, location_name: "accessKeyId"))
     Credentials.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: stringValueMaxLength1000, location_name: "secretAccessKey"))
@@ -243,6 +305,27 @@ module Aws::FinSpaceData
 
     DeleteDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
     DeleteDatasetResponse.struct_class = Types::DeleteDatasetResponse
+
+    DeletePermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
+    DeletePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DeletePermissionGroupRequest.struct_class = Types::DeletePermissionGroupRequest
+
+    DeletePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
+    DeletePermissionGroupResponse.struct_class = Types::DeletePermissionGroupResponse
+
+    DisableUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    DisableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    DisableUserRequest.struct_class = Types::DisableUserRequest
+
+    DisableUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    DisableUserResponse.struct_class = Types::DisableUserResponse
+
+    EnableUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    EnableUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    EnableUserRequest.struct_class = Types::EnableUserRequest
+
+    EnableUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    EnableUserResponse.struct_class = Types::EnableUserResponse
 
     FormatParams.key = Shapes::ShapeRef.new(shape: StringMapKey)
     FormatParams.value = Shapes::ShapeRef.new(shape: StringMapValue)
@@ -307,6 +390,24 @@ module Aws::FinSpaceData
     GetProgrammaticAccessCredentialsResponse.add_member(:duration_in_minutes, Shapes::ShapeRef.new(shape: SessionDuration, location_name: "durationInMinutes"))
     GetProgrammaticAccessCredentialsResponse.struct_class = Types::GetProgrammaticAccessCredentialsResponse
 
+    GetUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    GetUserRequest.struct_class = Types::GetUserRequest
+
+    GetUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    GetUserResponse.add_member(:status, Shapes::ShapeRef.new(shape: UserStatus, location_name: "status"))
+    GetUserResponse.add_member(:first_name, Shapes::ShapeRef.new(shape: FirstName, location_name: "firstName"))
+    GetUserResponse.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
+    GetUserResponse.add_member(:email_address, Shapes::ShapeRef.new(shape: Email, location_name: "emailAddress"))
+    GetUserResponse.add_member(:type, Shapes::ShapeRef.new(shape: UserType, location_name: "type"))
+    GetUserResponse.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
+    GetUserResponse.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
+    GetUserResponse.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
+    GetUserResponse.add_member(:last_enabled_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastEnabledTime"))
+    GetUserResponse.add_member(:last_disabled_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastDisabledTime"))
+    GetUserResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastModifiedTime"))
+    GetUserResponse.add_member(:last_login_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastLoginTime"))
+    GetUserResponse.struct_class = Types::GetUserResponse
+
     GetWorkingLocationRequest.add_member(:location_type, Shapes::ShapeRef.new(shape: locationType, location_name: "locationType"))
     GetWorkingLocationRequest.struct_class = Types::GetWorkingLocationRequest
 
@@ -347,13 +448,48 @@ module Aws::FinSpaceData
     ListDatasetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListDatasetsResponse.struct_class = Types::ListDatasetsResponse
 
+    ListPermissionGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListPermissionGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, required: true, location: "querystring", location_name: "maxResults"))
+    ListPermissionGroupsRequest.struct_class = Types::ListPermissionGroupsRequest
+
+    ListPermissionGroupsResponse.add_member(:permission_groups, Shapes::ShapeRef.new(shape: PermissionGroupList, location_name: "permissionGroups"))
+    ListPermissionGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListPermissionGroupsResponse.struct_class = Types::ListPermissionGroupsResponse
+
+    ListUsersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListUsersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ResultLimit, required: true, location: "querystring", location_name: "maxResults"))
+    ListUsersRequest.struct_class = Types::ListUsersRequest
+
+    ListUsersResponse.add_member(:users, Shapes::ShapeRef.new(shape: UserList, location_name: "users"))
+    ListUsersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListUsersResponse.struct_class = Types::ListUsersResponse
+
     PartitionColumnList.member = Shapes::ShapeRef.new(shape: StringValueLength1to255)
+
+    PermissionGroup.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
+    PermissionGroup.add_member(:name, Shapes::ShapeRef.new(shape: PermissionGroupName, location_name: "name"))
+    PermissionGroup.add_member(:description, Shapes::ShapeRef.new(shape: PermissionGroupDescription, location_name: "description"))
+    PermissionGroup.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissionList, location_name: "applicationPermissions"))
+    PermissionGroup.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
+    PermissionGroup.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastModifiedTime"))
+    PermissionGroup.struct_class = Types::PermissionGroup
+
+    PermissionGroupList.member = Shapes::ShapeRef.new(shape: PermissionGroup)
 
     PermissionGroupParams.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
     PermissionGroupParams.add_member(:dataset_permissions, Shapes::ShapeRef.new(shape: ResourcePermissionsList, location_name: "datasetPermissions"))
     PermissionGroupParams.struct_class = Types::PermissionGroupParams
 
+    ResetUserPasswordRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    ResetUserPasswordRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    ResetUserPasswordRequest.struct_class = Types::ResetUserPasswordRequest
+
+    ResetUserPasswordResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    ResetUserPasswordResponse.add_member(:temporary_password, Shapes::ShapeRef.new(shape: Password, location_name: "temporaryPassword"))
+    ResetUserPasswordResponse.struct_class = Types::ResetUserPasswordResponse
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ResourceNotFoundException.add_member(:reason, Shapes::ShapeRef.new(shape: errorMessage, location_name: "reason"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourcePermission.add_member(:permission, Shapes::ShapeRef.new(shape: StringValueLength1to250, location_name: "permission"))
@@ -401,7 +537,47 @@ module Aws::FinSpaceData
     UpdateDatasetResponse.add_member(:dataset_id, Shapes::ShapeRef.new(shape: DatasetId, location_name: "datasetId"))
     UpdateDatasetResponse.struct_class = Types::UpdateDatasetResponse
 
+    UpdatePermissionGroupRequest.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, required: true, location: "uri", location_name: "permissionGroupId"))
+    UpdatePermissionGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionGroupName, location_name: "name"))
+    UpdatePermissionGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: PermissionGroupDescription, location_name: "description"))
+    UpdatePermissionGroupRequest.add_member(:application_permissions, Shapes::ShapeRef.new(shape: ApplicationPermissionList, location_name: "applicationPermissions"))
+    UpdatePermissionGroupRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdatePermissionGroupRequest.struct_class = Types::UpdatePermissionGroupRequest
+
+    UpdatePermissionGroupResponse.add_member(:permission_group_id, Shapes::ShapeRef.new(shape: PermissionGroupId, location_name: "permissionGroupId"))
+    UpdatePermissionGroupResponse.struct_class = Types::UpdatePermissionGroupResponse
+
+    UpdateUserRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "userId"))
+    UpdateUserRequest.add_member(:type, Shapes::ShapeRef.new(shape: UserType, location_name: "type"))
+    UpdateUserRequest.add_member(:first_name, Shapes::ShapeRef.new(shape: FirstName, location_name: "firstName"))
+    UpdateUserRequest.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
+    UpdateUserRequest.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
+    UpdateUserRequest.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
+    UpdateUserRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
+    UpdateUserRequest.struct_class = Types::UpdateUserRequest
+
+    UpdateUserResponse.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    UpdateUserResponse.struct_class = Types::UpdateUserResponse
+
+    User.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, location_name: "userId"))
+    User.add_member(:status, Shapes::ShapeRef.new(shape: UserStatus, location_name: "status"))
+    User.add_member(:first_name, Shapes::ShapeRef.new(shape: FirstName, location_name: "firstName"))
+    User.add_member(:last_name, Shapes::ShapeRef.new(shape: LastName, location_name: "lastName"))
+    User.add_member(:email_address, Shapes::ShapeRef.new(shape: Email, location_name: "emailAddress"))
+    User.add_member(:type, Shapes::ShapeRef.new(shape: UserType, location_name: "type"))
+    User.add_member(:api_access, Shapes::ShapeRef.new(shape: ApiAccess, location_name: "apiAccess"))
+    User.add_member(:api_access_principal_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "apiAccessPrincipalArn"))
+    User.add_member(:create_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "createTime"))
+    User.add_member(:last_enabled_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastEnabledTime"))
+    User.add_member(:last_disabled_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastDisabledTime"))
+    User.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastModifiedTime"))
+    User.add_member(:last_login_time, Shapes::ShapeRef.new(shape: TimestampEpoch, location_name: "lastLoginTime"))
+    User.struct_class = Types::User
+
+    UserList.member = Shapes::ShapeRef.new(shape: User)
+
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "message"))
+    ValidationException.add_member(:reason, Shapes::ShapeRef.new(shape: errorMessage, location_name: "reason"))
     ValidationException.struct_class = Types::ValidationException
 
 
@@ -467,12 +643,84 @@ module Aws::FinSpaceData
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_permission_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePermissionGroup"
+        o.http_method = "POST"
+        o.http_request_uri = "/permission-group"
+        o.input = Shapes::ShapeRef.new(shape: CreatePermissionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePermissionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:create_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/user"
+        o.input = Shapes::ShapeRef.new(shape: CreateUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_dataset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDataset"
         o.http_method = "DELETE"
         o.http_request_uri = "/datasetsv2/{datasetId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteDatasetResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_permission_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePermissionGroup"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/permission-group/{permissionGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePermissionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePermissionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:disable_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisableUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/user/{userId}/disable"
+        o.input = Shapes::ShapeRef.new(shape: DisableUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisableUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:enable_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "EnableUser"
+        o.http_method = "POST"
+        o.http_request_uri = "/user/{userId}/enable"
+        o.input = Shapes::ShapeRef.new(shape: EnableUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: EnableUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -533,6 +781,19 @@ module Aws::FinSpaceData
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:get_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetUser"
+        o.http_method = "GET"
+        o.http_request_uri = "/user/{userId}"
+        o.input = Shapes::ShapeRef.new(shape: GetUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_working_location, Seahorse::Model::Operation.new.tap do |o|
@@ -605,6 +866,56 @@ module Aws::FinSpaceData
         )
       end)
 
+      api.add_operation(:list_permission_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPermissionGroups"
+        o.http_method = "GET"
+        o.http_request_uri = "/permission-group"
+        o.input = Shapes::ShapeRef.new(shape: ListPermissionGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPermissionGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_users, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListUsers"
+        o.http_method = "GET"
+        o.http_request_uri = "/user"
+        o.input = Shapes::ShapeRef.new(shape: ListUsersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListUsersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:reset_user_password, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetUserPassword"
+        o.http_method = "POST"
+        o.http_request_uri = "/user/{userId}/password"
+        o.input = Shapes::ShapeRef.new(shape: ResetUserPasswordRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetUserPasswordResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:update_changeset, Seahorse::Model::Operation.new.tap do |o|
         o.name = "UpdateChangeset"
         o.http_method = "PUT"
@@ -631,6 +942,34 @@ module Aws::FinSpaceData
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_permission_group, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePermissionGroup"
+        o.http_method = "PUT"
+        o.http_request_uri = "/permission-group/{permissionGroupId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePermissionGroupRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePermissionGroupResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_user, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateUser"
+        o.http_method = "PUT"
+        o.http_request_uri = "/user/{userId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateUserRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateUserResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-02-28)
+------------------
+
+* Feature - We are adding the ability to configure workflows and actions for components.
+
 1.3.0 (2022-02-24)
 ------------------
 

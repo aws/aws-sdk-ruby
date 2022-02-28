@@ -10,6 +10,438 @@
 module Aws::AmplifyUIBuilder
   module Types
 
+    # Represents the event action configuration for an element of a
+    # `Component` or `ComponentChild`. Use for the workflow feature in
+    # Amplify Studio that allows you to bind events and actions to
+    # components. `ActionParameters` defines the action that is performed
+    # when an event occurs on the component.
+    #
+    # @note When making an API call, you may pass ActionParameters
+    #   data as a hash:
+    #
+    #       {
+    #         anchor: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #         fields: {
+    #           "String" => {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #         },
+    #         global: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #         id: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #         model: "String",
+    #         state: {
+    #           component_name: "String", # required
+    #           property: "String", # required
+    #           set: { # required
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #         },
+    #         target: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #         type: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #         url: {
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] anchor
+    #   The HTML anchor link to the location to open. Specify this value for
+    #   a navigation action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] fields
+    #   A dictionary of key-value pairs mapping Amplify Studio properties to
+    #   fields in a data model. Use when the action performs an operation on
+    #   an Amplify DataStore model.
+    #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] global
+    #   Specifies whether the user should be signed out globally. Specify
+    #   this value for an auth sign out action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the component that the `ActionParameters` apply to.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] model
+    #   The name of the data model. Use when the action performs an
+    #   operation on an Amplify DataStore model.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   A key-value pair that specifies the state property name and its
+    #   initial value.
+    #   @return [Types::MutationActionSetStateParameter]
+    #
+    # @!attribute [rw] target
+    #   The element within the same component to modify when the action
+    #   occurs.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] type
+    #   The type of navigation action. Valid values are `url` and `anchor`.
+    #   This value is required for a navigation action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @!attribute [rw] url
+    #   The URL to the location to open. Specify this value for a navigation
+    #   action.
+    #   @return [Types::ComponentProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ActionParameters AWS API Documentation
+    #
+    class ActionParameters < Struct.new(
+      :anchor,
+      :fields,
+      :global,
+      :id,
+      :model,
+      :state,
+      :target,
+      :type,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration settings for a user interface (UI) element
     # for an Amplify app. A component is configured as a primary,
     # stand-alone UI element. Use `ComponentChild` to configure an instance
@@ -22,7 +454,8 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] binding_properties
     #   The information to connect a component's properties to data at
-    #   runtime.
+    #   runtime. You can't specify `tags` as a valid property for
+    #   `bindingProperties`.
     #   @return [Hash<String,Types::ComponentBindingPropertiesValue>]
     #
     # @!attribute [rw] children
@@ -31,7 +464,8 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] collection_properties
     #   The data binding configuration for the component's properties. Use
-    #   this for a collection component.
+    #   this for a collection component. You can't specify `tags` as a
+    #   valid property for `collectionProperties`.
     #   @return [Hash<String,Types::ComponentDataConfiguration>]
     #
     # @!attribute [rw] component_type
@@ -48,6 +482,12 @@ module Aws::AmplifyUIBuilder
     #   app.
     #   @return [String]
     #
+    # @!attribute [rw] events
+    #   Describes the events that can be raised on the component. Use for
+    #   the workflow feature in Amplify Studio that allows you to bind
+    #   events and actions to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
     # @!attribute [rw] id
     #   The unique ID of the component.
     #   @return [String]
@@ -62,12 +502,18 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] overrides
     #   Describes the component's properties that can be overriden in a
-    #   customized instance of the component.
+    #   customized instance of the component. You can't specify `tags` as a
+    #   valid property for `overrides`.
     #   @return [Hash<String,Hash<String,String>>]
     #
     # @!attribute [rw] properties
-    #   Describes the component's properties.
+    #   Describes the component's properties. You can't specify `tags` as
+    #   a valid property for `properties`.
     #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
     #
     # @!attribute [rw] source_id
     #   The unique ID of the component in its original source system, such
@@ -93,11 +539,13 @@ module Aws::AmplifyUIBuilder
       :component_type,
       :created_at,
       :environment_name,
+      :events,
       :id,
       :modified_at,
       :name,
       :overrides,
       :properties,
+      :schema_version,
       :source_id,
       :tags,
       :variants)
@@ -246,6 +694,372 @@ module Aws::AmplifyUIBuilder
     #               # recursive ComponentChildList
     #             },
     #             component_type: "String", # required
+    #             events: {
+    #               "String" => {
+    #                 action: "String",
+    #                 parameters: {
+    #                   anchor: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   fields: {
+    #                     "String" => {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   global: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   id: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   model: "String",
+    #                   state: {
+    #                     component_name: "String", # required
+    #                     property: "String", # required
+    #                     set: { # required
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   target: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   type: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   url: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             name: "String", # required
     #             properties: { # required
     #               "String" => {
@@ -263,6 +1077,7 @@ module Aws::AmplifyUIBuilder
     #                   field: "String",
     #                   property: "String", # required
     #                 },
+    #                 component_name: "String",
     #                 concat: [
     #                   {
     #                     # recursive ComponentProperty
@@ -274,6 +1089,7 @@ module Aws::AmplifyUIBuilder
     #                   },
     #                   field: "String",
     #                   operand: "String",
+    #                   operand_type: "String",
     #                   operator: "String",
     #                   property: "String",
     #                   then: {
@@ -285,6 +1101,7 @@ module Aws::AmplifyUIBuilder
     #                 event: "String",
     #                 imported_value: "String",
     #                 model: "String",
+    #                 property: "String",
     #                 type: "String",
     #                 user_attribute: "String",
     #                 value: "String",
@@ -293,6 +1110,372 @@ module Aws::AmplifyUIBuilder
     #           },
     #         ],
     #         component_type: "String", # required
+    #         events: {
+    #           "String" => {
+    #             action: "String",
+    #             parameters: {
+    #               anchor: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               fields: {
+    #                 "String" => {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               global: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               id: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               model: "String",
+    #               state: {
+    #                 component_name: "String", # required
+    #                 property: "String", # required
+    #                 set: { # required
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               target: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               type: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               url: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #             },
+    #           },
+    #         },
     #         name: "String", # required
     #         properties: { # required
     #           "String" => {
@@ -310,6 +1493,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: [
     #               {
     #                 # recursive ComponentProperty
@@ -321,6 +1505,7 @@ module Aws::AmplifyUIBuilder
     #               },
     #               field: "String",
     #               operand: "String",
+    #               operand_type: "String",
     #               operator: "String",
     #               property: "String",
     #               then: {
@@ -332,6 +1517,7 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
@@ -347,12 +1533,19 @@ module Aws::AmplifyUIBuilder
     #   The type of the child component.
     #   @return [String]
     #
+    # @!attribute [rw] events
+    #   Describes the events that can be raised on the child component. Use
+    #   for the workflow feature in Amplify Studio that allows you to bind
+    #   events and actions to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
     # @!attribute [rw] name
     #   The name of the child component.
     #   @return [String]
     #
     # @!attribute [rw] properties
-    #   Describes the properties of the child component.
+    #   Describes the properties of the child component. You can't specify
+    #   `tags` as a valid property for `properties`.
     #   @return [Hash<String,Types::ComponentProperty>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentChild AWS API Documentation
@@ -360,6 +1553,7 @@ module Aws::AmplifyUIBuilder
     class ComponentChild < Struct.new(
       :children,
       :component_type,
+      :events,
       :name,
       :properties)
       SENSITIVE = []
@@ -389,6 +1583,7 @@ module Aws::AmplifyUIBuilder
     #             field: "String",
     #             property: "String", # required
     #           },
+    #           component_name: "String",
     #           concat: [
     #             {
     #               # recursive ComponentProperty
@@ -400,6 +1595,7 @@ module Aws::AmplifyUIBuilder
     #             },
     #             field: "String",
     #             operand: "String",
+    #             operand_type: "String",
     #             operator: "String",
     #             property: "String",
     #             then: {
@@ -411,12 +1607,14 @@ module Aws::AmplifyUIBuilder
     #           event: "String",
     #           imported_value: "String",
     #           model: "String",
+    #           property: "String",
     #           type: "String",
     #           user_attribute: "String",
     #           value: "String",
     #         },
     #         field: "String",
     #         operand: "String",
+    #         operand_type: "String",
     #         operator: "String",
     #         property: "String",
     #         then: {
@@ -434,6 +1632,7 @@ module Aws::AmplifyUIBuilder
     #             field: "String",
     #             property: "String", # required
     #           },
+    #           component_name: "String",
     #           concat: [
     #             {
     #               # recursive ComponentProperty
@@ -445,6 +1644,7 @@ module Aws::AmplifyUIBuilder
     #             },
     #             field: "String",
     #             operand: "String",
+    #             operand_type: "String",
     #             operator: "String",
     #             property: "String",
     #             then: {
@@ -456,6 +1656,7 @@ module Aws::AmplifyUIBuilder
     #           event: "String",
     #           imported_value: "String",
     #           model: "String",
+    #           property: "String",
     #           type: "String",
     #           user_attribute: "String",
     #           value: "String",
@@ -472,6 +1673,10 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] operand
     #   The value of the property to evaluate.
+    #   @return [String]
+    #
+    # @!attribute [rw] operand_type
+    #   The type of the property to evaluate.
     #   @return [String]
     #
     # @!attribute [rw] operator
@@ -493,6 +1698,7 @@ module Aws::AmplifyUIBuilder
       :else,
       :field,
       :operand,
+      :operand_type,
       :operator,
       :property,
       :then)
@@ -563,6 +1769,395 @@ module Aws::AmplifyUIBuilder
       include Aws::Structure
     end
 
+    # Describes the configuration of an event. You can bind an event and a
+    # corresponding action to a `Component` or a `ComponentChild`. A button
+    # click is an example of an event.
+    #
+    # @note When making an API call, you may pass ComponentEvent
+    #   data as a hash:
+    #
+    #       {
+    #         action: "String",
+    #         parameters: {
+    #           anchor: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #           fields: {
+    #             "String" => {
+    #               binding_properties: {
+    #                 field: "String",
+    #                 property: "String", # required
+    #               },
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               collection_binding_properties: {
+    #                 field: "String",
+    #                 property: "String", # required
+    #               },
+    #               component_name: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 field: "String",
+    #                 operand: "String",
+    #                 operand_type: "String",
+    #                 operator: "String",
+    #                 property: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               },
+    #               configured: false,
+    #               default_value: "String",
+    #               event: "String",
+    #               imported_value: "String",
+    #               model: "String",
+    #               property: "String",
+    #               type: "String",
+    #               user_attribute: "String",
+    #               value: "String",
+    #             },
+    #           },
+    #           global: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #           id: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #           model: "String",
+    #           state: {
+    #             component_name: "String", # required
+    #             property: "String", # required
+    #             set: { # required
+    #               binding_properties: {
+    #                 field: "String",
+    #                 property: "String", # required
+    #               },
+    #               bindings: {
+    #                 "String" => {
+    #                   element: "String", # required
+    #                   property: "String", # required
+    #                 },
+    #               },
+    #               collection_binding_properties: {
+    #                 field: "String",
+    #                 property: "String", # required
+    #               },
+    #               component_name: "String",
+    #               concat: [
+    #                 {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               ],
+    #               condition: {
+    #                 else: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #                 field: "String",
+    #                 operand: "String",
+    #                 operand_type: "String",
+    #                 operator: "String",
+    #                 property: "String",
+    #                 then: {
+    #                   # recursive ComponentProperty
+    #                 },
+    #               },
+    #               configured: false,
+    #               default_value: "String",
+    #               event: "String",
+    #               imported_value: "String",
+    #               model: "String",
+    #               property: "String",
+    #               type: "String",
+    #               user_attribute: "String",
+    #               value: "String",
+    #             },
+    #           },
+    #           target: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #           type: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #           url: {
+    #             binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             bindings: {
+    #               "String" => {
+    #                 element: "String", # required
+    #                 property: "String", # required
+    #               },
+    #             },
+    #             collection_binding_properties: {
+    #               field: "String",
+    #               property: "String", # required
+    #             },
+    #             component_name: "String",
+    #             concat: [
+    #               {
+    #                 # recursive ComponentProperty
+    #               },
+    #             ],
+    #             condition: {
+    #               else: {
+    #                 # recursive ComponentProperty
+    #               },
+    #               field: "String",
+    #               operand: "String",
+    #               operand_type: "String",
+    #               operator: "String",
+    #               property: "String",
+    #               then: {
+    #                 # recursive ComponentProperty
+    #               },
+    #             },
+    #             configured: false,
+    #             default_value: "String",
+    #             event: "String",
+    #             imported_value: "String",
+    #             model: "String",
+    #             property: "String",
+    #             type: "String",
+    #             user_attribute: "String",
+    #             value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] action
+    #   The action to perform when a specific event is raised.
+    #   @return [String]
+    #
+    # @!attribute [rw] parameters
+    #   Describes information about the action.
+    #   @return [Types::ActionParameters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentEvent AWS API Documentation
+    #
+    class ComponentEvent < Struct.new(
+      :action,
+      :parameters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration for all of a component's properties. Use
     # `ComponentProperty` to specify the values to render or bind by
     # default.
@@ -585,6 +2180,7 @@ module Aws::AmplifyUIBuilder
     #           field: "String",
     #           property: "String", # required
     #         },
+    #         component_name: "String",
     #         concat: [
     #           {
     #             binding_properties: {
@@ -601,6 +2197,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: {
     #               # recursive ComponentPropertyList
     #             },
@@ -610,6 +2207,7 @@ module Aws::AmplifyUIBuilder
     #               },
     #               field: "String",
     #               operand: "String",
+    #               operand_type: "String",
     #               operator: "String",
     #               property: "String",
     #               then: {
@@ -621,6 +2219,7 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
@@ -642,6 +2241,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: [
     #               {
     #                 # recursive ComponentProperty
@@ -655,12 +2255,14 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
     #           },
     #           field: "String",
     #           operand: "String",
+    #           operand_type: "String",
     #           operator: "String",
     #           property: "String",
     #           then: {
@@ -678,6 +2280,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: [
     #               {
     #                 # recursive ComponentProperty
@@ -691,6 +2294,7 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
@@ -701,6 +2305,7 @@ module Aws::AmplifyUIBuilder
     #         event: "String",
     #         imported_value: "String",
     #         model: "String",
+    #         property: "String",
     #         type: "String",
     #         user_attribute: "String",
     #         value: "String",
@@ -719,6 +2324,10 @@ module Aws::AmplifyUIBuilder
     #   Use this for collection components.
     #   @return [Types::ComponentPropertyBindingProperties]
     #
+    # @!attribute [rw] component_name
+    #   The name of the component that is affected by an event.
+    #   @return [String]
+    #
     # @!attribute [rw] concat
     #   A list of component properties to concatenate to create the value to
     #   assign to this component property.
@@ -726,7 +2335,7 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] condition
     #   The conditional expression to use to assign a value to the component
-    #   property..
+    #   property.
     #   @return [Types::ComponentConditionProperty]
     #
     # @!attribute [rw] configured
@@ -744,12 +2353,16 @@ module Aws::AmplifyUIBuilder
     #   @return [String]
     #
     # @!attribute [rw] imported_value
-    #   The default value assigned to property when the component is
+    #   The default value assigned to the property when the component is
     #   imported into an app.
     #   @return [String]
     #
     # @!attribute [rw] model
     #   The data model to use to assign a value to the component property.
+    #   @return [String]
+    #
+    # @!attribute [rw] property
+    #   The name of the component's property that is affected by an event.
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -771,6 +2384,7 @@ module Aws::AmplifyUIBuilder
       :binding_properties,
       :bindings,
       :collection_binding_properties,
+      :component_name,
       :concat,
       :condition,
       :configured,
@@ -778,6 +2392,7 @@ module Aws::AmplifyUIBuilder
       :event,
       :imported_value,
       :model,
+      :property,
       :type,
       :user_attribute,
       :value)
@@ -869,11 +2484,13 @@ module Aws::AmplifyUIBuilder
     #
     # @!attribute [rw] overrides
     #   The properties of the component variant that can be overriden when
-    #   customizing an instance of the component.
+    #   customizing an instance of the component. You can't specify `tags`
+    #   as a valid property for `overrides`.
     #   @return [Hash<String,Hash<String,String>>]
     #
     # @!attribute [rw] variant_values
-    #   The combination of variants that comprise this variant.
+    #   The combination of variants that comprise this variant. You can't
+    #   specify `tags` as a valid property for `variantValues`.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentVariant AWS API Documentation
@@ -925,6 +2542,372 @@ module Aws::AmplifyUIBuilder
     #               # recursive ComponentChildList
     #             },
     #             component_type: "String", # required
+    #             events: {
+    #               "String" => {
+    #                 action: "String",
+    #                 parameters: {
+    #                   anchor: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   fields: {
+    #                     "String" => {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   global: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   id: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   model: "String",
+    #                   state: {
+    #                     component_name: "String", # required
+    #                     property: "String", # required
+    #                     set: { # required
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   target: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   type: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   url: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             name: "String", # required
     #             properties: { # required
     #               "String" => {
@@ -942,6 +2925,7 @@ module Aws::AmplifyUIBuilder
     #                   field: "String",
     #                   property: "String", # required
     #                 },
+    #                 component_name: "String",
     #                 concat: [
     #                   {
     #                     # recursive ComponentProperty
@@ -953,6 +2937,7 @@ module Aws::AmplifyUIBuilder
     #                   },
     #                   field: "String",
     #                   operand: "String",
+    #                   operand_type: "String",
     #                   operator: "String",
     #                   property: "String",
     #                   then: {
@@ -964,6 +2949,7 @@ module Aws::AmplifyUIBuilder
     #                 event: "String",
     #                 imported_value: "String",
     #                 model: "String",
+    #                 property: "String",
     #                 type: "String",
     #                 user_attribute: "String",
     #                 value: "String",
@@ -999,6 +2985,372 @@ module Aws::AmplifyUIBuilder
     #           },
     #         },
     #         component_type: "ComponentType", # required
+    #         events: {
+    #           "String" => {
+    #             action: "String",
+    #             parameters: {
+    #               anchor: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               fields: {
+    #                 "String" => {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               global: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               id: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               model: "String",
+    #               state: {
+    #                 component_name: "String", # required
+    #                 property: "String", # required
+    #                 set: { # required
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               target: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               type: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               url: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #             },
+    #           },
+    #         },
     #         name: "ComponentName", # required
     #         overrides: { # required
     #           "String" => {
@@ -1021,6 +3373,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: [
     #               {
     #                 # recursive ComponentProperty
@@ -1032,6 +3385,7 @@ module Aws::AmplifyUIBuilder
     #               },
     #               field: "String",
     #               operand: "String",
+    #               operand_type: "String",
     #               operator: "String",
     #               property: "String",
     #               then: {
@@ -1043,11 +3397,13 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
     #           },
     #         },
+    #         schema_version: "String",
     #         source_id: "String",
     #         tags: {
     #           "TagKey" => "TagValue",
@@ -1084,6 +3440,12 @@ module Aws::AmplifyUIBuilder
     #   another custom component.
     #   @return [String]
     #
+    # @!attribute [rw] events
+    #   The event configuration for the component. Use for the workflow
+    #   feature in Amplify Studio that allows you to bind events and actions
+    #   to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
     # @!attribute [rw] name
     #   The name of the component
     #   @return [String]
@@ -1096,6 +3458,10 @@ module Aws::AmplifyUIBuilder
     # @!attribute [rw] properties
     #   Describes the component's properties.
     #   @return [Hash<String,Types::ComponentProperty>]
+    #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
     #
     # @!attribute [rw] source_id
     #   The unique ID of the component in its original source system, such
@@ -1117,9 +3483,11 @@ module Aws::AmplifyUIBuilder
       :children,
       :collection_properties,
       :component_type,
+      :events,
       :name,
       :overrides,
       :properties,
+      :schema_version,
       :source_id,
       :tags,
       :variants)
@@ -1167,6 +3535,372 @@ module Aws::AmplifyUIBuilder
     #                 # recursive ComponentChildList
     #               },
     #               component_type: "String", # required
+    #               events: {
+    #                 "String" => {
+    #                   action: "String",
+    #                   parameters: {
+    #                     anchor: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     fields: {
+    #                       "String" => {
+    #                         binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         bindings: {
+    #                           "String" => {
+    #                             element: "String", # required
+    #                             property: "String", # required
+    #                           },
+    #                         },
+    #                         collection_binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         component_name: "String",
+    #                         concat: [
+    #                           {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         ],
+    #                         condition: {
+    #                           else: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                           field: "String",
+    #                           operand: "String",
+    #                           operand_type: "String",
+    #                           operator: "String",
+    #                           property: "String",
+    #                           then: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         },
+    #                         configured: false,
+    #                         default_value: "String",
+    #                         event: "String",
+    #                         imported_value: "String",
+    #                         model: "String",
+    #                         property: "String",
+    #                         type: "String",
+    #                         user_attribute: "String",
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                     global: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     id: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     model: "String",
+    #                     state: {
+    #                       component_name: "String", # required
+    #                       property: "String", # required
+    #                       set: { # required
+    #                         binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         bindings: {
+    #                           "String" => {
+    #                             element: "String", # required
+    #                             property: "String", # required
+    #                           },
+    #                         },
+    #                         collection_binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         component_name: "String",
+    #                         concat: [
+    #                           {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         ],
+    #                         condition: {
+    #                           else: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                           field: "String",
+    #                           operand: "String",
+    #                           operand_type: "String",
+    #                           operator: "String",
+    #                           property: "String",
+    #                           then: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         },
+    #                         configured: false,
+    #                         default_value: "String",
+    #                         event: "String",
+    #                         imported_value: "String",
+    #                         model: "String",
+    #                         property: "String",
+    #                         type: "String",
+    #                         user_attribute: "String",
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                     target: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     type: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     url: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                 },
+    #               },
     #               name: "String", # required
     #               properties: { # required
     #                 "String" => {
@@ -1184,6 +3918,7 @@ module Aws::AmplifyUIBuilder
     #                     field: "String",
     #                     property: "String", # required
     #                   },
+    #                   component_name: "String",
     #                   concat: [
     #                     {
     #                       # recursive ComponentProperty
@@ -1195,6 +3930,7 @@ module Aws::AmplifyUIBuilder
     #                     },
     #                     field: "String",
     #                     operand: "String",
+    #                     operand_type: "String",
     #                     operator: "String",
     #                     property: "String",
     #                     then: {
@@ -1206,6 +3942,7 @@ module Aws::AmplifyUIBuilder
     #                   event: "String",
     #                   imported_value: "String",
     #                   model: "String",
+    #                   property: "String",
     #                   type: "String",
     #                   user_attribute: "String",
     #                   value: "String",
@@ -1241,6 +3978,372 @@ module Aws::AmplifyUIBuilder
     #             },
     #           },
     #           component_type: "ComponentType", # required
+    #           events: {
+    #             "String" => {
+    #               action: "String",
+    #               parameters: {
+    #                 anchor: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 fields: {
+    #                   "String" => {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #                 global: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 id: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 model: "String",
+    #                 state: {
+    #                   component_name: "String", # required
+    #                   property: "String", # required
+    #                   set: { # required
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #                 target: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 type: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 url: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #             },
+    #           },
     #           name: "ComponentName", # required
     #           overrides: { # required
     #             "String" => {
@@ -1263,6 +4366,7 @@ module Aws::AmplifyUIBuilder
     #                 field: "String",
     #                 property: "String", # required
     #               },
+    #               component_name: "String",
     #               concat: [
     #                 {
     #                   # recursive ComponentProperty
@@ -1274,6 +4378,7 @@ module Aws::AmplifyUIBuilder
     #                 },
     #                 field: "String",
     #                 operand: "String",
+    #                 operand_type: "String",
     #                 operator: "String",
     #                 property: "String",
     #                 then: {
@@ -1285,11 +4390,13 @@ module Aws::AmplifyUIBuilder
     #               event: "String",
     #               imported_value: "String",
     #               model: "String",
+    #               property: "String",
     #               type: "String",
     #               user_attribute: "String",
     #               value: "String",
     #             },
     #           },
+    #           schema_version: "String",
     #           source_id: "String",
     #           tags: {
     #             "TagKey" => "TagValue",
@@ -1647,6 +4754,7 @@ module Aws::AmplifyUIBuilder
     #       {
     #         app_id: "String", # required
     #         environment_name: "String", # required
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] app_id
@@ -1658,11 +4766,16 @@ module Aws::AmplifyUIBuilder
     #   app.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportComponentsRequest AWS API Documentation
     #
     class ExportComponentsRequest < Struct.new(
       :app_id,
-      :environment_name)
+      :environment_name,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1671,10 +4784,15 @@ module Aws::AmplifyUIBuilder
     #   Represents the configuration of the exported components.
     #   @return [Array<Types::Component>]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportComponentsResponse AWS API Documentation
     #
     class ExportComponentsResponse < Struct.new(
-      :entities)
+      :entities,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1685,6 +4803,7 @@ module Aws::AmplifyUIBuilder
     #       {
     #         app_id: "String", # required
     #         environment_name: "String", # required
+    #         next_token: "String",
     #       }
     #
     # @!attribute [rw] app_id
@@ -1695,11 +4814,16 @@ module Aws::AmplifyUIBuilder
     #   The name of the backend environment that is part of the Amplify app.
     #   @return [String]
     #
+    # @!attribute [rw] next_token
+    #   The token to request the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportThemesRequest AWS API Documentation
     #
     class ExportThemesRequest < Struct.new(
       :app_id,
-      :environment_name)
+      :environment_name,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1708,10 +4832,15 @@ module Aws::AmplifyUIBuilder
     #   Represents the configuration of the exported themes.
     #   @return [Array<Types::Theme>]
     #
+    # @!attribute [rw] next_token
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ExportThemesResponse AWS API Documentation
     #
     class ExportThemesResponse < Struct.new(
-      :entities)
+      :entities,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1961,6 +5090,84 @@ module Aws::AmplifyUIBuilder
     class ListThemesResponse < Struct.new(
       :entities,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the state configuration when an action modifies a property
+    # of another element within the same component.
+    #
+    # @note When making an API call, you may pass MutationActionSetStateParameter
+    #   data as a hash:
+    #
+    #       {
+    #         component_name: "String", # required
+    #         property: "String", # required
+    #         set: { # required
+    #           binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           bindings: {
+    #             "String" => {
+    #               element: "String", # required
+    #               property: "String", # required
+    #             },
+    #           },
+    #           collection_binding_properties: {
+    #             field: "String",
+    #             property: "String", # required
+    #           },
+    #           component_name: "String",
+    #           concat: [
+    #             {
+    #               # recursive ComponentProperty
+    #             },
+    #           ],
+    #           condition: {
+    #             else: {
+    #               # recursive ComponentProperty
+    #             },
+    #             field: "String",
+    #             operand: "String",
+    #             operand_type: "String",
+    #             operator: "String",
+    #             property: "String",
+    #             then: {
+    #               # recursive ComponentProperty
+    #             },
+    #           },
+    #           configured: false,
+    #           default_value: "String",
+    #           event: "String",
+    #           imported_value: "String",
+    #           model: "String",
+    #           property: "String",
+    #           type: "String",
+    #           user_attribute: "String",
+    #           value: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] component_name
+    #   The name of the component that is being modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] property
+    #   The name of the component property to apply the state configuration
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] set
+    #   The state configuration to assign to the property.
+    #   @return [Types::ComponentProperty]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/MutationActionSetStateParameter AWS API Documentation
+    #
+    class MutationActionSetStateParameter < Struct.new(
+      :component_name,
+      :property,
+      :set)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2370,6 +5577,372 @@ module Aws::AmplifyUIBuilder
     #               # recursive ComponentChildList
     #             },
     #             component_type: "String", # required
+    #             events: {
+    #               "String" => {
+    #                 action: "String",
+    #                 parameters: {
+    #                   anchor: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   fields: {
+    #                     "String" => {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   global: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   id: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   model: "String",
+    #                   state: {
+    #                     component_name: "String", # required
+    #                     property: "String", # required
+    #                     set: { # required
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                   target: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   type: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                   url: {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #               },
+    #             },
     #             name: "String", # required
     #             properties: { # required
     #               "String" => {
@@ -2387,6 +5960,7 @@ module Aws::AmplifyUIBuilder
     #                   field: "String",
     #                   property: "String", # required
     #                 },
+    #                 component_name: "String",
     #                 concat: [
     #                   {
     #                     # recursive ComponentProperty
@@ -2398,6 +5972,7 @@ module Aws::AmplifyUIBuilder
     #                   },
     #                   field: "String",
     #                   operand: "String",
+    #                   operand_type: "String",
     #                   operator: "String",
     #                   property: "String",
     #                   then: {
@@ -2409,6 +5984,7 @@ module Aws::AmplifyUIBuilder
     #                 event: "String",
     #                 imported_value: "String",
     #                 model: "String",
+    #                 property: "String",
     #                 type: "String",
     #                 user_attribute: "String",
     #                 value: "String",
@@ -2444,6 +6020,372 @@ module Aws::AmplifyUIBuilder
     #           },
     #         },
     #         component_type: "ComponentType",
+    #         events: {
+    #           "String" => {
+    #             action: "String",
+    #             parameters: {
+    #               anchor: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               fields: {
+    #                 "String" => {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               global: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               id: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               model: "String",
+    #               state: {
+    #                 component_name: "String", # required
+    #                 property: "String", # required
+    #                 set: { # required
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #               target: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               type: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #               url: {
+    #                 binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 bindings: {
+    #                   "String" => {
+    #                     element: "String", # required
+    #                     property: "String", # required
+    #                   },
+    #                 },
+    #                 collection_binding_properties: {
+    #                   field: "String",
+    #                   property: "String", # required
+    #                 },
+    #                 component_name: "String",
+    #                 concat: [
+    #                   {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 ],
+    #                 condition: {
+    #                   else: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                   field: "String",
+    #                   operand: "String",
+    #                   operand_type: "String",
+    #                   operator: "String",
+    #                   property: "String",
+    #                   then: {
+    #                     # recursive ComponentProperty
+    #                   },
+    #                 },
+    #                 configured: false,
+    #                 default_value: "String",
+    #                 event: "String",
+    #                 imported_value: "String",
+    #                 model: "String",
+    #                 property: "String",
+    #                 type: "String",
+    #                 user_attribute: "String",
+    #                 value: "String",
+    #               },
+    #             },
+    #           },
+    #         },
     #         id: "Uuid",
     #         name: "ComponentName",
     #         overrides: {
@@ -2467,6 +6409,7 @@ module Aws::AmplifyUIBuilder
     #               field: "String",
     #               property: "String", # required
     #             },
+    #             component_name: "String",
     #             concat: [
     #               {
     #                 # recursive ComponentProperty
@@ -2478,6 +6421,7 @@ module Aws::AmplifyUIBuilder
     #               },
     #               field: "String",
     #               operand: "String",
+    #               operand_type: "String",
     #               operator: "String",
     #               property: "String",
     #               then: {
@@ -2489,11 +6433,13 @@ module Aws::AmplifyUIBuilder
     #             event: "String",
     #             imported_value: "String",
     #             model: "String",
+    #             property: "String",
     #             type: "String",
     #             user_attribute: "String",
     #             value: "String",
     #           },
     #         },
+    #         schema_version: "String",
     #         source_id: "String",
     #         variants: [
     #           {
@@ -2527,6 +6473,12 @@ module Aws::AmplifyUIBuilder
     #   component or another custom component.
     #   @return [String]
     #
+    # @!attribute [rw] events
+    #   The event configuration for the component. Use for the workflow
+    #   feature in Amplify Studio that allows you to bind events and actions
+    #   to components.
+    #   @return [Hash<String,Types::ComponentEvent>]
+    #
     # @!attribute [rw] id
     #   The unique ID of the component to update.
     #   @return [String]
@@ -2544,6 +6496,10 @@ module Aws::AmplifyUIBuilder
     #   Describes the component's properties.
     #   @return [Hash<String,Types::ComponentProperty>]
     #
+    # @!attribute [rw] schema_version
+    #   The schema version of the component when it was imported.
+    #   @return [String]
+    #
     # @!attribute [rw] source_id
     #   The unique ID of the component in its original source system, such
     #   as Figma.
@@ -2560,10 +6516,12 @@ module Aws::AmplifyUIBuilder
       :children,
       :collection_properties,
       :component_type,
+      :events,
       :id,
       :name,
       :overrides,
       :properties,
+      :schema_version,
       :source_id,
       :variants)
       SENSITIVE = []
@@ -2612,6 +6570,372 @@ module Aws::AmplifyUIBuilder
     #                 # recursive ComponentChildList
     #               },
     #               component_type: "String", # required
+    #               events: {
+    #                 "String" => {
+    #                   action: "String",
+    #                   parameters: {
+    #                     anchor: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     fields: {
+    #                       "String" => {
+    #                         binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         bindings: {
+    #                           "String" => {
+    #                             element: "String", # required
+    #                             property: "String", # required
+    #                           },
+    #                         },
+    #                         collection_binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         component_name: "String",
+    #                         concat: [
+    #                           {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         ],
+    #                         condition: {
+    #                           else: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                           field: "String",
+    #                           operand: "String",
+    #                           operand_type: "String",
+    #                           operator: "String",
+    #                           property: "String",
+    #                           then: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         },
+    #                         configured: false,
+    #                         default_value: "String",
+    #                         event: "String",
+    #                         imported_value: "String",
+    #                         model: "String",
+    #                         property: "String",
+    #                         type: "String",
+    #                         user_attribute: "String",
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                     global: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     id: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     model: "String",
+    #                     state: {
+    #                       component_name: "String", # required
+    #                       property: "String", # required
+    #                       set: { # required
+    #                         binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         bindings: {
+    #                           "String" => {
+    #                             element: "String", # required
+    #                             property: "String", # required
+    #                           },
+    #                         },
+    #                         collection_binding_properties: {
+    #                           field: "String",
+    #                           property: "String", # required
+    #                         },
+    #                         component_name: "String",
+    #                         concat: [
+    #                           {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         ],
+    #                         condition: {
+    #                           else: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                           field: "String",
+    #                           operand: "String",
+    #                           operand_type: "String",
+    #                           operator: "String",
+    #                           property: "String",
+    #                           then: {
+    #                             # recursive ComponentProperty
+    #                           },
+    #                         },
+    #                         configured: false,
+    #                         default_value: "String",
+    #                         event: "String",
+    #                         imported_value: "String",
+    #                         model: "String",
+    #                         property: "String",
+    #                         type: "String",
+    #                         user_attribute: "String",
+    #                         value: "String",
+    #                       },
+    #                     },
+    #                     target: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     type: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                     url: {
+    #                       binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       bindings: {
+    #                         "String" => {
+    #                           element: "String", # required
+    #                           property: "String", # required
+    #                         },
+    #                       },
+    #                       collection_binding_properties: {
+    #                         field: "String",
+    #                         property: "String", # required
+    #                       },
+    #                       component_name: "String",
+    #                       concat: [
+    #                         {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       ],
+    #                       condition: {
+    #                         else: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                         field: "String",
+    #                         operand: "String",
+    #                         operand_type: "String",
+    #                         operator: "String",
+    #                         property: "String",
+    #                         then: {
+    #                           # recursive ComponentProperty
+    #                         },
+    #                       },
+    #                       configured: false,
+    #                       default_value: "String",
+    #                       event: "String",
+    #                       imported_value: "String",
+    #                       model: "String",
+    #                       property: "String",
+    #                       type: "String",
+    #                       user_attribute: "String",
+    #                       value: "String",
+    #                     },
+    #                   },
+    #                 },
+    #               },
     #               name: "String", # required
     #               properties: { # required
     #                 "String" => {
@@ -2629,6 +6953,7 @@ module Aws::AmplifyUIBuilder
     #                     field: "String",
     #                     property: "String", # required
     #                   },
+    #                   component_name: "String",
     #                   concat: [
     #                     {
     #                       # recursive ComponentProperty
@@ -2640,6 +6965,7 @@ module Aws::AmplifyUIBuilder
     #                     },
     #                     field: "String",
     #                     operand: "String",
+    #                     operand_type: "String",
     #                     operator: "String",
     #                     property: "String",
     #                     then: {
@@ -2651,6 +6977,7 @@ module Aws::AmplifyUIBuilder
     #                   event: "String",
     #                   imported_value: "String",
     #                   model: "String",
+    #                   property: "String",
     #                   type: "String",
     #                   user_attribute: "String",
     #                   value: "String",
@@ -2686,6 +7013,372 @@ module Aws::AmplifyUIBuilder
     #             },
     #           },
     #           component_type: "ComponentType",
+    #           events: {
+    #             "String" => {
+    #               action: "String",
+    #               parameters: {
+    #                 anchor: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 fields: {
+    #                   "String" => {
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #                 global: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 id: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 model: "String",
+    #                 state: {
+    #                   component_name: "String", # required
+    #                   property: "String", # required
+    #                   set: { # required
+    #                     binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     bindings: {
+    #                       "String" => {
+    #                         element: "String", # required
+    #                         property: "String", # required
+    #                       },
+    #                     },
+    #                     collection_binding_properties: {
+    #                       field: "String",
+    #                       property: "String", # required
+    #                     },
+    #                     component_name: "String",
+    #                     concat: [
+    #                       {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     ],
+    #                     condition: {
+    #                       else: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                       field: "String",
+    #                       operand: "String",
+    #                       operand_type: "String",
+    #                       operator: "String",
+    #                       property: "String",
+    #                       then: {
+    #                         # recursive ComponentProperty
+    #                       },
+    #                     },
+    #                     configured: false,
+    #                     default_value: "String",
+    #                     event: "String",
+    #                     imported_value: "String",
+    #                     model: "String",
+    #                     property: "String",
+    #                     type: "String",
+    #                     user_attribute: "String",
+    #                     value: "String",
+    #                   },
+    #                 },
+    #                 target: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 type: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #                 url: {
+    #                   binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   bindings: {
+    #                     "String" => {
+    #                       element: "String", # required
+    #                       property: "String", # required
+    #                     },
+    #                   },
+    #                   collection_binding_properties: {
+    #                     field: "String",
+    #                     property: "String", # required
+    #                   },
+    #                   component_name: "String",
+    #                   concat: [
+    #                     {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   ],
+    #                   condition: {
+    #                     else: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                     field: "String",
+    #                     operand: "String",
+    #                     operand_type: "String",
+    #                     operator: "String",
+    #                     property: "String",
+    #                     then: {
+    #                       # recursive ComponentProperty
+    #                     },
+    #                   },
+    #                   configured: false,
+    #                   default_value: "String",
+    #                   event: "String",
+    #                   imported_value: "String",
+    #                   model: "String",
+    #                   property: "String",
+    #                   type: "String",
+    #                   user_attribute: "String",
+    #                   value: "String",
+    #                 },
+    #               },
+    #             },
+    #           },
     #           id: "Uuid",
     #           name: "ComponentName",
     #           overrides: {
@@ -2709,6 +7402,7 @@ module Aws::AmplifyUIBuilder
     #                 field: "String",
     #                 property: "String", # required
     #               },
+    #               component_name: "String",
     #               concat: [
     #                 {
     #                   # recursive ComponentProperty
@@ -2720,6 +7414,7 @@ module Aws::AmplifyUIBuilder
     #                 },
     #                 field: "String",
     #                 operand: "String",
+    #                 operand_type: "String",
     #                 operator: "String",
     #                 property: "String",
     #                 then: {
@@ -2731,11 +7426,13 @@ module Aws::AmplifyUIBuilder
     #               event: "String",
     #               imported_value: "String",
     #               model: "String",
+    #               property: "String",
     #               type: "String",
     #               user_attribute: "String",
     #               value: "String",
     #             },
     #           },
+    #           schema_version: "String",
     #           source_id: "String",
     #           variants: [
     #             {

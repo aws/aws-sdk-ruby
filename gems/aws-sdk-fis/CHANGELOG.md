@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-02-28)
+------------------
+
+* Feature - This release adds logging support for AWS Fault Injection Simulator experiments. Experiment templates can now be configured to send experiment activity logs to Amazon CloudWatch Logs or to an S3 bucket.
+
 1.12.0 (2022-02-24)
 ------------------
 

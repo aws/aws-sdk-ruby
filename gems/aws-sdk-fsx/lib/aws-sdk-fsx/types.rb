@@ -1209,7 +1209,8 @@ module Aws::FSx
     #             iops: 1,
     #           },
     #           root_volume_configuration: {
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD
+    #             record_size_ki_b: 1,
+    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #             nfs_exports: [
     #               {
     #                 client_configurations: [ # required
@@ -1796,8 +1797,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The OpenZFS configuration properties for the file system that you are
-    # creating.
+    # The Amazon FSx for OpenZFS configuration properties for the file
+    # system that you are creating.
     #
     # @note When making an API call, you may pass CreateFileSystemOpenZFSConfiguration
     #   data as a hash:
@@ -1815,7 +1816,8 @@ module Aws::FSx
     #           iops: 1,
     #         },
     #         root_volume_configuration: {
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           nfs_exports: [
     #             {
     #               client_configurations: [ # required
@@ -2022,7 +2024,8 @@ module Aws::FSx
     #             iops: 1,
     #           },
     #           root_volume_configuration: {
-    #             data_compression_type: "NONE", # accepts NONE, ZSTD
+    #             record_size_ki_b: 1,
+    #             data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #             nfs_exports: [
     #               {
     #                 client_configurations: [ # required
@@ -2583,8 +2586,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Specifies the configuration of the OpenZFS volume that you are
-    # creating.
+    # Specifies the configuration of the Amazon FSx for OpenZFS volume that
+    # you are creating.
     #
     # @note When making an API call, you may pass CreateOpenZFSVolumeConfiguration
     #   data as a hash:
@@ -2593,7 +2596,8 @@ module Aws::FSx
     #         parent_volume_id: "VolumeId", # required
     #         storage_capacity_reservation_gi_b: 1,
     #         storage_capacity_quota_gi_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         copy_tags_to_snapshots: false,
     #         origin_snapshot: {
     #           snapshot_arn: "ResourceARN", # required
@@ -2626,26 +2630,47 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity_reservation_gi_b
     #   The amount of storage in gibibytes (GiB) to reserve from the parent
     #   volume. You can't reserve more storage than the parent volume has
-    #   reserved.
+    #   reserved. To not specify a storage capacity reservation, set this to
+    #   `-1`.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
     #   The maximum amount of storage in gibibytes (GiB) that the volume can
-    #   use from its parent. You can specify a quota larger than the storage
-    #   on the parent volume.
+    #   use from its parent. You can't specify a quota larger than the
+    #   storage on the parent volume. To not specify a storage capacity
+    #   quota, set this to `-1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the record size of an OpenZFS volume, in kibibytes (KiB).
+    #   Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The
+    #   default is 128 KiB. Most workloads should use the default record
+    #   size. Database workflows can benefit from a smaller record size,
+    #   while streaming workflows can benefit from a larger record size. For
+    #   additional guidance on when to set a custom record size, see [ Tips
+    #   for maximizing performance][1] in the *Amazon FSx for OpenZFS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
     #   @return [Integer]
     #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshots
@@ -2683,6 +2708,7 @@ module Aws::FSx
       :parent_volume_id,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :copy_tags_to_snapshots,
       :origin_snapshot,
@@ -3013,7 +3039,8 @@ module Aws::FSx
     #           parent_volume_id: "VolumeId", # required
     #           storage_capacity_reservation_gi_b: 1,
     #           storage_capacity_quota_gi_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           copy_tags_to_snapshots: false,
     #           origin_snapshot: {
     #             snapshot_arn: "ResourceARN", # required
@@ -3821,8 +3848,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The configuration object for the OpenZFS file system used in the
-    # `DeleteFileSystem` operation.
+    # The configuration object for the Amazon FSx for OpenZFS file system
+    # used in the `DeleteFileSystem` operation.
     #
     # @note When making an API call, you may pass DeleteFileSystemOpenZFSConfiguration
     #   data as a hash:
@@ -3835,25 +3862,34 @@ module Aws::FSx
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
     #       }
     #
     # @!attribute [rw] skip_final_backup
     #   By default, Amazon FSx for OpenZFS takes a final backup on your
     #   behalf when the `DeleteFileSystem` operation is invoked. Doing this
     #   helps protect you from data loss, and we highly recommend taking the
-    #   final backup. If you want to skip this backup, use this value to do
-    #   so.
+    #   final backup. If you want to skip taking a final backup, set this
+    #   value to `true`.
     #   @return [Boolean]
     #
     # @!attribute [rw] final_backup_tags
-    #   A list of `Tag` values, with a maximum of 50 elements.
+    #   A list of tags to apply to the file system's final backup.
     #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] options
+    #   To delete a file system if there are child volumes present below the
+    #   root volume, use the string `DELETE_CHILD_VOLUMES_AND_SNAPSHOTS`. If
+    #   your file system has child volumes and you don't use this option,
+    #   the delete request will fail.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/DeleteFileSystemOpenZFSConfiguration AWS API Documentation
     #
     class DeleteFileSystemOpenZFSConfiguration < Struct.new(
       :skip_final_backup,
-      :final_backup_tags)
+      :final_backup_tags,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3913,6 +3949,7 @@ module Aws::FSx
     #               value: "TagValue", # required
     #             },
     #           ],
+    #           options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
     #         },
     #       }
     #
@@ -5997,7 +6034,7 @@ module Aws::FSx
     # @!attribute [rw] clients
     #   A value that specifies who can mount the file system. You can
     #   provide a wildcard character (`*`), an IP address (`0.0.0.0`), or a
-    #   CIDR address (`192.0.2.0/24`. By default, Amazon FSx uses the
+    #   CIDR address (`192.0.2.0/24`). By default, Amazon FSx uses the
     #   wildcard character when specifying the client.
     #   @return [String]
     #
@@ -6007,10 +6044,9 @@ module Aws::FSx
     #   [exports(5) - Linux man page][1]. When choosing your options,
     #   consider the following:
     #
-    #   * `crossmount` is used by default. If you don't specify
-    #     `crossmount` when changing the client configuration, you won't be
-    #     able to see or access snapshots in your file system's snapshot
-    #     directory.
+    #   * `crossmnt` is used by default. If you don't specify `crossmnt`
+    #     when changing the client configuration, you won't be able to see
+    #     or access snapshots in your file system's snapshot directory.
     #
     #   * `sync` is used by default. If you instead specify `async`, the
     #     system acknowledges writes before writing to disk. If the system
@@ -6037,7 +6073,8 @@ module Aws::FSx
     #   data as a hash:
     #
     #       {
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -6059,17 +6096,36 @@ module Aws::FSx
     #         read_only: false,
     #       }
     #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the record size of an OpenZFS root volume, in kibibytes
+    #   (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024
+    #   KiB. The default is 128 KiB. Most workloads should use the default
+    #   record size. Database workflows can benefit from a smaller record
+    #   size, while streaming workflows can benefit from a larger record
+    #   size. For additional guidance on setting a custom record size, see [
+    #   Tips for maximizing performance][1] in the *Amazon FSx for OpenZFS
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
+    #   @return [Integer]
+    #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
-    #   * `ZSTD` - Compresses the data in the volume using the ZStandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #   * `ZSTD` - Compresses the data in the volume using the Zstandard
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] nfs_exports
@@ -6083,12 +6139,13 @@ module Aws::FSx
     #
     # @!attribute [rw] copy_tags_to_snapshots
     #   A Boolean value indicating whether tags for the volume should be
-    #   copied to snapshots. This value defaults to `false`. If it's set to
-    #   `true`, all tags for the volume are copied to snapshots where the
-    #   user doesn't specify tags. If this value is `true` and you specify
-    #   one or more tags, only the specified tags are copied to snapshots.
-    #   If you specify one or more tags when creating the snapshot, no tags
-    #   are copied from the volume, regardless of this value.
+    #   copied to snapshots of the volume. This value defaults to `false`.
+    #   If it's set to `true`, all tags for the volume are copied to
+    #   snapshots where the user doesn't specify tags. If this value is
+    #   `true` and you specify one or more tags, only the specified tags are
+    #   copied to snapshots. If you specify one or more tags when creating
+    #   the snapshot, no tags are copied from the volume, regardless of this
+    #   value.
     #   @return [Boolean]
     #
     # @!attribute [rw] read_only
@@ -6100,6 +6157,7 @@ module Aws::FSx
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/OpenZFSCreateRootVolumeConfiguration AWS API Documentation
     #
     class OpenZFSCreateRootVolumeConfiguration < Struct.new(
+      :record_size_ki_b,
       :data_compression_type,
       :nfs_exports,
       :user_and_group_quotas,
@@ -6152,8 +6210,8 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps), in 2 to the nth increments, between 2^3 (8) and
-    #   2^11 (2048).
+    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
+    #   3072, or 4096 MB/s.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -6325,17 +6383,29 @@ module Aws::FSx
     #   on the parent volume.
     #   @return [Integer]
     #
-    # @!attribute [rw] data_compression_type
-    #   The method used to compress the data on the volume. Unless a
-    #   compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    # @!attribute [rw] record_size_ki_b
+    #   The record size of an OpenZFS volume, in kibibytes (KiB). Valid
+    #   values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The default
+    #   is 128 KiB. Most workloads should use the default record size. For
+    #   guidance on when to set a custom record size, see the *Amazon FSx
+    #   for OpenZFS User Guide*.
+    #   @return [Integer]
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    # @!attribute [rw] data_compression_type
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
+    #
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshots
@@ -6374,6 +6444,7 @@ module Aws::FSx
       :volume_path,
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :copy_tags_to_snapshots,
       :origin_snapshot,
@@ -6810,6 +6881,10 @@ module Aws::FSx
     #   * `AVAILABLE` - The snapshot is fully available.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_transition_reason
+    #   Describes why a resource lifecycle state changed.
+    #   @return [Types::LifecycleTransitionReason]
+    #
     # @!attribute [rw] tags
     #   A list of `Tag` values, with a maximum of 50 elements.
     #   @return [Array<Types::Tag>]
@@ -6829,6 +6904,7 @@ module Aws::FSx
       :volume_id,
       :creation_time,
       :lifecycle,
+      :lifecycle_transition_reason,
       :tags,
       :administrative_actions)
       SENSITIVE = []
@@ -7625,8 +7701,8 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   The throughput of an Amazon FSx file system, measured in megabytes
-    #   per second (MBps), in 2 to the nth increments, between 2^3 (8) and
-    #   2^12 (4096).
+    #   per second (MBps). Valid values are 64, 128, 256, 512, 1024, 2048,
+    #   3072, or 4096 MB/s.
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -7987,7 +8063,8 @@ module Aws::FSx
     #       {
     #         storage_capacity_reservation_gi_b: 1,
     #         storage_capacity_quota_gi_b: 1,
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -8011,26 +8088,47 @@ module Aws::FSx
     # @!attribute [rw] storage_capacity_reservation_gi_b
     #   The amount of storage in gibibytes (GiB) to reserve from the parent
     #   volume. You can't reserve more storage than the parent volume has
-    #   reserved.
+    #   reserved. You can specify a value of `-1` to unset a volume's
+    #   storage capacity reservation.
     #   @return [Integer]
     #
     # @!attribute [rw] storage_capacity_quota_gi_b
     #   The maximum amount of storage in gibibytes (GiB) that the volume can
     #   use from its parent. You can specify a quota larger than the storage
-    #   on the parent volume.
+    #   on the parent volume. You can specify a value of `-1` to unset a
+    #   volume's storage capacity quota.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the record size of an OpenZFS volume, in kibibytes (KiB).
+    #   Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The
+    #   default is 128 KiB. Most workloads should use the default record
+    #   size. Database workflows can benefit from a smaller record size,
+    #   while streaming workflows can benefit from a larger record size. For
+    #   additional guidance on when to set a custom record size, see [ Tips
+    #   for maximizing performance][1] in the *Amazon FSx for OpenZFS User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
     #   @return [Integer]
     #
     # @!attribute [rw] data_compression_type
-    #   Specifies the method used to compress the data on the volume. Unless
-    #   the compression type is specified, volumes inherit the
-    #   `DataCompressionType` value of their parent volume.
+    #   Specifies the method used to compress the data on the volume. The
+    #   compression type is `NONE` by default.
     #
-    #   * `NONE` - Doesn't compress the data on the volume.
+    #   * `NONE` - Doesn't compress the data on the volume. `NONE` is the
+    #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. This algorithm reduces the amount of
-    #     space used on your volume and has very little impact on compute
-    #     resources.
+    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
+    #     a better compression ratio to minimize on-disk storage
+    #     utilization.
+    #
+    #   * `LZ4` - Compresses the data in the volume using the LZ4
+    #     compression algorithm. Compared to Z-Standard, LZ4 is less
+    #     compute-intensive and delivers higher write throughput speeds.
     #   @return [String]
     #
     # @!attribute [rw] nfs_exports
@@ -8052,6 +8150,7 @@ module Aws::FSx
     class UpdateOpenZFSVolumeConfiguration < Struct.new(
       :storage_capacity_reservation_gi_b,
       :storage_capacity_quota_gi_b,
+      :record_size_ki_b,
       :data_compression_type,
       :nfs_exports,
       :user_and_group_quotas,
@@ -8224,7 +8323,8 @@ module Aws::FSx
     #         open_zfs_configuration: {
     #           storage_capacity_reservation_gi_b: 1,
     #           storage_capacity_quota_gi_b: 1,
-    #           data_compression_type: "NONE", # accepts NONE, ZSTD
+    #           record_size_ki_b: 1,
+    #           data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #           nfs_exports: [
     #             {
     #               client_configurations: [ # required
@@ -8427,8 +8527,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # No Amazon FSx for NetApp ONTAP volumes were found based upon the
-    # supplied parameters.
+    # No Amazon FSx volumes were found based upon the supplied parameters.
     #
     # @!attribute [rw] message
     #   A detailed error message.

@@ -1907,6 +1907,41 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Updates a NamedQuery object. The database or workgroup cannot be
+    # updated.
+    #
+    # @option params [required, String] :named_query_id
+    #   The unique identifier (UUID) of the query.
+    #
+    # @option params [required, String] :name
+    #   The name of the query.
+    #
+    # @option params [String] :description
+    #   The query description.
+    #
+    # @option params [required, String] :query_string
+    #   The contents of the query with all query statements.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_named_query({
+    #     named_query_id: "NamedQueryId", # required
+    #     name: "NameString", # required
+    #     description: "NamedQueryDescriptionString",
+    #     query_string: "QueryString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQuery AWS API Documentation
+    #
+    # @overload update_named_query(params = {})
+    # @param [Hash] params ({})
+    def update_named_query(params = {}, options = {})
+      req = build_request(:update_named_query, params)
+      req.send_request(options)
+    end
+
     # Updates a prepared statement.
     #
     # @option params [required, String] :statement_name
@@ -2011,7 +2046,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

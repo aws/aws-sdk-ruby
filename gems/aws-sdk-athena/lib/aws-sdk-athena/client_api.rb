@@ -117,6 +117,7 @@ module Aws::Athena
     MetadataException = Shapes::StructureShape.new(name: 'MetadataException')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NamedQuery = Shapes::StructureShape.new(name: 'NamedQuery')
+    NamedQueryDescriptionString = Shapes::StringShape.new(name: 'NamedQueryDescriptionString')
     NamedQueryId = Shapes::StringShape.new(name: 'NamedQueryId')
     NamedQueryIdList = Shapes::ListShape.new(name: 'NamedQueryIdList')
     NamedQueryList = Shapes::ListShape.new(name: 'NamedQueryList')
@@ -171,6 +172,8 @@ module Aws::Athena
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateDataCatalogInput = Shapes::StructureShape.new(name: 'UpdateDataCatalogInput')
     UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
+    UpdateNamedQueryInput = Shapes::StructureShape.new(name: 'UpdateNamedQueryInput')
+    UpdateNamedQueryOutput = Shapes::StructureShape.new(name: 'UpdateNamedQueryOutput')
     UpdatePreparedStatementInput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementInput')
     UpdatePreparedStatementOutput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
@@ -625,6 +628,14 @@ module Aws::Athena
 
     UpdateDataCatalogOutput.struct_class = Types::UpdateDataCatalogOutput
 
+    UpdateNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId"))
+    UpdateNamedQueryInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateNamedQueryInput.add_member(:description, Shapes::ShapeRef.new(shape: NamedQueryDescriptionString, location_name: "Description"))
+    UpdateNamedQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
+    UpdateNamedQueryInput.struct_class = Types::UpdateNamedQueryInput
+
+    UpdateNamedQueryOutput.struct_class = Types::UpdateNamedQueryOutput
+
     UpdatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     UpdatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdatePreparedStatementInput.add_member(:query_statement, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryStatement"))
@@ -1074,6 +1085,16 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataCatalogInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataCatalogOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_named_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNamedQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNamedQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)

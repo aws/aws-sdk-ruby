@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for updating an existing named query.
+
 1.50.0 (2022-02-24)
 ------------------
 

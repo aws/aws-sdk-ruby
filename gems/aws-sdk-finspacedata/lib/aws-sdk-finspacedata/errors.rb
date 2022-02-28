@@ -69,6 +69,11 @@ module Aws::FinSpaceData
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class InternalServerException < ServiceError
@@ -114,6 +119,11 @@ module Aws::FinSpaceData
       def message
         @message || @data[:message]
       end
+
+      # @return [String]
+      def reason
+        @data[:reason]
+      end
     end
 
     class ThrottlingException < ServiceError
@@ -138,6 +148,11 @@ module Aws::FinSpaceData
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 

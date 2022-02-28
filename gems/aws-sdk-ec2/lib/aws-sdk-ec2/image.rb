@@ -502,7 +502,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, lastLaunchedTime
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

@@ -15,6 +15,7 @@ module Aws::Route53RecoveryCluster
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    Arns = Shapes::ListShape.new(name: 'Arns')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     EndpointTemporarilyUnavailableException = Shapes::StructureShape.new(name: 'EndpointTemporarilyUnavailableException')
     GetRoutingControlStateRequest = Shapes::StructureShape.new(name: 'GetRoutingControlStateRequest')
@@ -38,6 +39,8 @@ module Aws::Route53RecoveryCluster
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Arns.member = Shapes::ShapeRef.new(shape: Arn)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
@@ -75,11 +78,13 @@ module Aws::Route53RecoveryCluster
 
     UpdateRoutingControlStateRequest.add_member(:routing_control_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoutingControlArn"))
     UpdateRoutingControlStateRequest.add_member(:routing_control_state, Shapes::ShapeRef.new(shape: RoutingControlState, required: true, location_name: "RoutingControlState"))
+    UpdateRoutingControlStateRequest.add_member(:safety_rules_to_override, Shapes::ShapeRef.new(shape: Arns, location_name: "SafetyRulesToOverride"))
     UpdateRoutingControlStateRequest.struct_class = Types::UpdateRoutingControlStateRequest
 
     UpdateRoutingControlStateResponse.struct_class = Types::UpdateRoutingControlStateResponse
 
     UpdateRoutingControlStatesRequest.add_member(:update_routing_control_state_entries, Shapes::ShapeRef.new(shape: UpdateRoutingControlStateEntries, required: true, location_name: "UpdateRoutingControlStateEntries"))
+    UpdateRoutingControlStatesRequest.add_member(:safety_rules_to_override, Shapes::ShapeRef.new(shape: Arns, location_name: "SafetyRulesToOverride"))
     UpdateRoutingControlStatesRequest.struct_class = Types::UpdateRoutingControlStatesRequest
 
     UpdateRoutingControlStatesResponse.struct_class = Types::UpdateRoutingControlStatesResponse

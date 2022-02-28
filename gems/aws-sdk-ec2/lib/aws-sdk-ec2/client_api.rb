@@ -8029,6 +8029,7 @@ module Aws::EC2
     ImageAttribute.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "ramdisk"))
     ImageAttribute.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "sriovNetSupport"))
     ImageAttribute.add_member(:boot_mode, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "bootMode"))
+    ImageAttribute.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "lastLaunchedTime"))
     ImageAttribute.struct_class = Types::ImageAttribute
 
     ImageDiskContainer.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))

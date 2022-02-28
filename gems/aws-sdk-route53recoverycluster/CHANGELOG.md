@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-02-28)
+------------------
+
+* Feature - This release adds a new API option to enable overriding safety rules to allow routing control state updates.
+
 1.9.0 (2022-02-24)
 ------------------
 

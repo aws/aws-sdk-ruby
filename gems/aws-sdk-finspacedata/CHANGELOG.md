@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-02-28)
+------------------
+
+* Feature - Add new APIs for managing Users and Permission Groups.
+
 1.13.0 (2022-02-24)
 ------------------
 

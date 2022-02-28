@@ -15,7 +15,7 @@ module Aws::Athena
     # failed queries and take steps after a query failure occurs.
     # `AthenaError` includes an `ErrorCategory` field that specifies whether
     # the cause of the failed query is due to system error, user error, or
-    # unknown error.
+    # other error.
     #
     # @!attribute [rw] error_category
     #   An integer value that specifies the category of a query failure
@@ -25,7 +25,7 @@ module Aws::Athena
     #
     #   **2** - User
     #
-    #   **3** - Unknown
+    #   **3** - Other
     #   @return [Integer]
     #
     # @!attribute [rw] error_type
@@ -1642,8 +1642,8 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # A query, where `QueryString` is the list of SQL query statements that
-    # comprise the query.
+    # A query, where `QueryString` contains the SQL statements that make up
+    # the query.
     #
     # @!attribute [rw] name
     #   The query name.
@@ -1658,7 +1658,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] query_string
-    #   The SQL query statements that comprise the query.
+    #   The SQL statements that make up the query.
     #   @return [String]
     #
     # @!attribute [rw] named_query_id
@@ -2156,7 +2156,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The metadata and rows that comprise a query result set. The metadata
+    # The metadata and rows that make up a query result set. The metadata
     # describes the column structure and data types. To return a `ResultSet`
     # object, use GetQueryResults.
     #
@@ -2194,7 +2194,7 @@ module Aws::Athena
       include Aws::Structure
     end
 
-    # The rows that comprise a query result table.
+    # The rows that make up a query result table.
     #
     # @!attribute [rw] data
     #   The data that populates a row in a query result table.
@@ -2619,6 +2619,47 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateDataCatalogOutput AWS API Documentation
     #
     class UpdateDataCatalogOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNamedQueryInput
+    #   data as a hash:
+    #
+    #       {
+    #         named_query_id: "NamedQueryId", # required
+    #         name: "NameString", # required
+    #         description: "NamedQueryDescriptionString",
+    #         query_string: "QueryString", # required
+    #       }
+    #
+    # @!attribute [rw] named_query_id
+    #   The unique identifier (UUID) of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the query.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The query description.
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string
+    #   The contents of the query with all query statements.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQueryInput AWS API Documentation
+    #
+    class UpdateNamedQueryInput < Struct.new(
+      :named_query_id,
+      :name,
+      :description,
+      :query_string)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateNamedQueryOutput AWS API Documentation
+    #
+    class UpdateNamedQueryOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdatePreparedStatementInput
     #   data as a hash:

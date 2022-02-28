@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.301.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for new AMI property 'lastLaunchedTime'
+
 1.300.0 (2022-02-24)
 ------------------
 
