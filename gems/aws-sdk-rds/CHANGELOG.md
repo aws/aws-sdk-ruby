@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2022-03-01)
+------------------
+
+* Feature - Documentation updates for Multi-AZ DB clusters.
+
 1.140.0 (2022-02-24)
 ------------------
 

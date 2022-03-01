@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-03-01)
+------------------
+
+* Feature - This release adds Hybridcast as an available profile option for Dash Origin Endpoints.
+
 1.51.0 (2022-02-24)
 ------------------
 

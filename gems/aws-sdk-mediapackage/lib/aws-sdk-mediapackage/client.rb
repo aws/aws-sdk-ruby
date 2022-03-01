@@ -645,7 +645,7 @@ module Aws::MediaPackage
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
     #       period_triggers: ["ADS"], # accepts ADS
-    #       profile: "NONE", # accepts NONE, HBBTV_1_5
+    #       profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
     #       segment_duration_seconds: 1,
     #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #       stream_selection: {
@@ -773,7 +773,7 @@ module Aws::MediaPackage
     #   resp.dash_package.min_update_period_seconds #=> Integer
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
-    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5", "HYBRIDCAST"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -1050,7 +1050,7 @@ module Aws::MediaPackage
     #   resp.dash_package.min_update_period_seconds #=> Integer
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
-    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5", "HYBRIDCAST"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -1289,7 +1289,7 @@ module Aws::MediaPackage
     #   resp.origin_endpoints[0].dash_package.min_update_period_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.period_triggers #=> Array
     #   resp.origin_endpoints[0].dash_package.period_triggers[0] #=> String, one of "ADS"
-    #   resp.origin_endpoints[0].dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.origin_endpoints[0].dash_package.profile #=> String, one of "NONE", "HBBTV_1_5", "HYBRIDCAST"
     #   resp.origin_endpoints[0].dash_package.segment_duration_seconds #=> Integer
     #   resp.origin_endpoints[0].dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.origin_endpoints[0].dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -1687,7 +1687,7 @@ module Aws::MediaPackage
     #       min_buffer_time_seconds: 1,
     #       min_update_period_seconds: 1,
     #       period_triggers: ["ADS"], # accepts ADS
-    #       profile: "NONE", # accepts NONE, HBBTV_1_5
+    #       profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
     #       segment_duration_seconds: 1,
     #       segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #       stream_selection: {
@@ -1812,7 +1812,7 @@ module Aws::MediaPackage
     #   resp.dash_package.min_update_period_seconds #=> Integer
     #   resp.dash_package.period_triggers #=> Array
     #   resp.dash_package.period_triggers[0] #=> String, one of "ADS"
-    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5"
+    #   resp.dash_package.profile #=> String, one of "NONE", "HBBTV_1_5", "HYBRIDCAST"
     #   resp.dash_package.segment_duration_seconds #=> Integer
     #   resp.dash_package.segment_template_format #=> String, one of "NUMBER_WITH_TIMELINE", "TIME_WITH_TIMELINE", "NUMBER_WITH_DURATION"
     #   resp.dash_package.stream_selection.max_video_bits_per_second #=> Integer
@@ -1894,7 +1894,7 @@ module Aws::MediaPackage
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediapackage'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

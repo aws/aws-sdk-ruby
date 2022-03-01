@@ -1099,11 +1099,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][5] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
@@ -2122,11 +2117,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -2525,8 +2515,15 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   used.
+    #
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
     #
     #   **Aurora MySQL**
     #
@@ -2536,11 +2533,20 @@ module Aws::RDS
     #
     #   Possible value is `postgresql`.
     #
-    #   Valid for: Aurora DB clusters only
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon Relational Database Service User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
@@ -2624,7 +2630,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   The Active Directory directory ID to create the DB cluster in.
@@ -3161,11 +3167,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][3] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://console.aws.amazon.com/rds/
@@ -3303,11 +3304,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -6644,11 +6640,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -6900,11 +6891,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -6961,11 +6947,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -8342,11 +8323,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -8443,11 +8419,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -8621,11 +8592,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -8827,11 +8793,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     # This operation can also return information for Amazon Neptune DB
     # instances and Amazon DocumentDB instances.
@@ -12613,11 +12574,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -13375,11 +13331,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -13557,9 +13508,39 @@ module Aws::RDS
     #
     # @option params [Types::CloudwatchLogsExportConfiguration] :cloudwatch_logs_export_configuration
     #   The configuration setting for the log types to be enabled for export
-    #   to CloudWatch Logs for a specific DB cluster.
+    #   to CloudWatch Logs for a specific DB cluster. The values in the list
+    #   depend on the DB engine being used.
     #
-    #   Valid for: Aurora DB clusters only
+    #   **RDS for MySQL**
+    #
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon Relational Database Service User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_version
     #   The version number of the database engine to which you want to
@@ -13688,7 +13669,7 @@ module Aws::RDS
     #   A value that indicates whether to copy all tags from the DB cluster to
     #   snapshots of the DB cluster. The default is not to copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [Boolean] :enable_global_write_forwarding
     #   A value that indicates whether to enable this DB cluster to forward
@@ -14109,11 +14090,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][3] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -16800,8 +16776,7 @@ module Aws::RDS
     # a DB cluster results in a momentary outage, during which the DB
     # cluster status is set to rebooting.
     #
-    # Use this operation only for a non-Aurora Multi-AZ DB cluster. The
-    # Multi-AZ DB clusters feature is in preview and is subject to change.
+    # Use this operation only for a non-Aurora Multi-AZ DB cluster.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][1] in the *Amazon
@@ -17273,11 +17248,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -17483,11 +17453,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -17952,8 +17917,19 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of logs that the restored DB cluster is to export to
     #   CloudWatch Logs. The values in the list depend on the DB engine being
-    #   used. For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   used.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][1] in
+    #   the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -18164,11 +18140,6 @@ module Aws::RDS
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
-    #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
     #
     #
     #
@@ -18382,14 +18353,36 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used.
     #
-    #   For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs ][1] in the *Amazon Aurora User Guide*.
+    #   **RDS for MySQL**
     #
-    #   Valid for: Aurora DB clusters only
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon Relational Database Service User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :engine_mode
     #   The DB engine mode of the DB cluster, either `provisioned`,
@@ -18439,7 +18432,7 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
@@ -18744,11 +18737,6 @@ module Aws::RDS
     # deployments with two readable standby DB instances][2] in the *Amazon
     # RDS User Guide.*
     #
-    # <note markdown="1"> The Multi-AZ DB clusters feature is in preview and is subject to
-    # change.
-    #
-    #  </note>
-    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
@@ -18930,14 +18918,36 @@ module Aws::RDS
     #   CloudWatch Logs. The values in the list depend on the DB engine being
     #   used.
     #
-    #   For more information, see [Publishing Database Logs to Amazon
-    #   CloudWatch Logs][1] in the *Amazon Aurora User Guide*.
+    #   **RDS for MySQL**
     #
-    #   Valid for: Aurora DB clusters only
+    #   Possible values are `error`, `general`, and `slowquery`.
+    #
+    #   **RDS for PostgreSQL**
+    #
+    #   Possible values are `postgresql` and `upgrade`.
+    #
+    #   **Aurora MySQL**
+    #
+    #   Possible values are `audit`, `error`, `general`, and `slowquery`.
+    #
+    #   **Aurora PostgreSQL**
+    #
+    #   Possible value is `postgresql`.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon RDS,
+    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon Relational Database Service User Guide*.
+    #
+    #   For more information about exporting CloudWatch Logs for Amazon
+    #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch
     #
     # @option params [String] :db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group to associate with this DB
@@ -18969,7 +18979,7 @@ module Aws::RDS
     #   cluster to snapshots of the restored DB cluster. The default is not to
     #   copy them.
     #
-    #   Valid for: Aurora DB clusters only
+    #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
     # @option params [String] :domain
     #   Specify the Active Directory directory ID to restore the DB cluster
@@ -22434,7 +22444,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

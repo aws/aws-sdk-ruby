@@ -565,7 +565,7 @@ module Aws::KafkaConnect
     #   resp = client.create_worker_configuration({
     #     description: "__stringMax1024",
     #     name: "__stringMin1Max128", # required
-    #     properties_file_content: "__string", # required
+    #     properties_file_content: "SyntheticCreateWorkerConfigurationRequest__string", # required
     #   })
     #
     # @example Response structure
@@ -621,6 +621,37 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
+    # Deletes a custom plugin.
+    #
+    # @option params [required, String] :custom_plugin_arn
+    #   The Amazon Resource Name (ARN) of the custom plugin that you want to
+    #   delete.
+    #
+    # @return [Types::DeleteCustomPluginResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomPluginResponse#custom_plugin_arn #custom_plugin_arn} => String
+    #   * {Types::DeleteCustomPluginResponse#custom_plugin_state #custom_plugin_state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_plugin({
+    #     custom_plugin_arn: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_plugin_arn #=> String
+    #   resp.custom_plugin_state #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DeleteCustomPlugin AWS API Documentation
+    #
+    # @overload delete_custom_plugin(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_plugin(params = {}, options = {})
+      req = build_request(:delete_custom_plugin, params)
+      req.send_request(options)
+    end
+
     # Returns summary information about the connector.
     #
     # @option params [required, String] :connector_arn
@@ -644,6 +675,7 @@ module Aws::KafkaConnect
     #   * {Types::DescribeConnectorResponse#log_delivery #log_delivery} => Types::LogDeliveryDescription
     #   * {Types::DescribeConnectorResponse#plugins #plugins} => Array&lt;Types::PluginDescription&gt;
     #   * {Types::DescribeConnectorResponse#service_execution_role_arn #service_execution_role_arn} => String
+    #   * {Types::DescribeConnectorResponse#state_description #state_description} => Types::StateDescription
     #   * {Types::DescribeConnectorResponse#worker_configuration #worker_configuration} => Types::WorkerConfigurationDescription
     #
     # @example Request syntax with placeholder values
@@ -688,6 +720,8 @@ module Aws::KafkaConnect
     #   resp.plugins[0].custom_plugin.custom_plugin_arn #=> String
     #   resp.plugins[0].custom_plugin.revision #=> Integer
     #   resp.service_execution_role_arn #=> String
+    #   resp.state_description.code #=> String
+    #   resp.state_description.message #=> String
     #   resp.worker_configuration.revision #=> Integer
     #   resp.worker_configuration.worker_configuration_arn #=> String
     #
@@ -713,6 +747,7 @@ module Aws::KafkaConnect
     #   * {Types::DescribeCustomPluginResponse#description #description} => String
     #   * {Types::DescribeCustomPluginResponse#latest_revision #latest_revision} => Types::CustomPluginRevisionSummary
     #   * {Types::DescribeCustomPluginResponse#name #name} => String
+    #   * {Types::DescribeCustomPluginResponse#state_description #state_description} => Types::StateDescription
     #
     # @example Request syntax with placeholder values
     #
@@ -736,6 +771,8 @@ module Aws::KafkaConnect
     #   resp.latest_revision.location.s3_location.object_version #=> String
     #   resp.latest_revision.revision #=> Integer
     #   resp.name #=> String
+    #   resp.state_description.code #=> String
+    #   resp.state_description.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/DescribeCustomPlugin AWS API Documentation
     #
@@ -1034,7 +1071,7 @@ module Aws::KafkaConnect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
