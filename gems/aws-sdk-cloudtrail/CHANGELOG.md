@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-03-02)
+------------------
+
+* Feature - Add bytesScanned field into responses of DescribeQuery and GetQueryResults.
+
 1.47.0 (2022-02-24)
 ------------------
 

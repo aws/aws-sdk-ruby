@@ -209,6 +209,7 @@ module Aws::ECR
     Reason = Shapes::StringShape.new(name: 'Reason')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
     RecommendationText = Shapes::StringShape.new(name: 'RecommendationText')
+    RecordedPullTimestamp = Shapes::TimestampShape.new(name: 'RecordedPullTimestamp')
     ReferenceUrlsList = Shapes::ListShape.new(name: 'ReferenceUrlsList')
     ReferencedImagesNotFoundException = Shapes::StructureShape.new(name: 'ReferencedImagesNotFoundException')
     Region = Shapes::StringShape.new(name: 'Region')
@@ -646,6 +647,7 @@ module Aws::ECR
     ImageDetail.add_member(:image_scan_findings_summary, Shapes::ShapeRef.new(shape: ImageScanFindingsSummary, location_name: "imageScanFindingsSummary"))
     ImageDetail.add_member(:image_manifest_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "imageManifestMediaType"))
     ImageDetail.add_member(:artifact_media_type, Shapes::ShapeRef.new(shape: MediaType, location_name: "artifactMediaType"))
+    ImageDetail.add_member(:last_recorded_pull_time, Shapes::ShapeRef.new(shape: RecordedPullTimestamp, location_name: "lastRecordedPullTime"))
     ImageDetail.struct_class = Types::ImageDetail
 
     ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)

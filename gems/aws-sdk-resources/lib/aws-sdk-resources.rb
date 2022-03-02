@@ -162,6 +162,7 @@ module Aws
   autoload :Kafka, 'aws-sdk-kafka'
   autoload :KafkaConnect, 'aws-sdk-kafkaconnect'
   autoload :Kendra, 'aws-sdk-kendra'
+  autoload :Keyspaces, 'aws-sdk-keyspaces'
   autoload :Kinesis, 'aws-sdk-kinesis'
   autoload :KinesisAnalytics, 'aws-sdk-kinesisanalytics'
   autoload :KinesisAnalyticsV2, 'aws-sdk-kinesisanalyticsv2'

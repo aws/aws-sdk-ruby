@@ -1074,7 +1074,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] query_status
     #   The status of a query. Values for `QueryStatus` include `QUEUED`,
-    #   `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`
+    #   `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`
     #   @return [String]
     #
     # @!attribute [rw] query_statistics
@@ -1671,7 +1671,7 @@ module Aws::CloudTrail
 
     # @!attribute [rw] query_status
     #   The status of the query. Values include `QUEUED`, `RUNNING`,
-    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] query_statistics
@@ -1907,7 +1907,7 @@ module Aws::CloudTrail
     class InactiveEventDataStoreException < Aws::EmptyStructure; end
 
     # The specified query cannot be canceled because it is in the
-    # `FINISHED`, `FAILED`, or `CANCELLED` state.
+    # `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED` state.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/InactiveQueryException AWS API Documentation
     #
@@ -2317,7 +2317,7 @@ module Aws::CloudTrail
     #         max_results: 1,
     #         start_time: Time.now,
     #         end_time: Time.now,
-    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #         query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED, TIMED_OUT
     #       }
     #
     # @!attribute [rw] event_data_store
@@ -2346,7 +2346,7 @@ module Aws::CloudTrail
     # @!attribute [rw] query_status
     #   The status of queries that you want to return in results. Valid
     #   values for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`,
-    #   `FAILED`, or `CANCELLED`.
+    #   `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/ListQueriesRequest AWS API Documentation
@@ -2863,7 +2863,7 @@ module Aws::CloudTrail
     #
     # @!attribute [rw] query_status
     #   The status of the query. This can be `QUEUED`, `RUNNING`,
-    #   `FINISHED`, `FAILED`, or `CANCELLED`.
+    #   `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2896,11 +2896,18 @@ module Aws::CloudTrail
     #   The total number of results returned by a query.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_scanned
+    #   The total bytes that the query scanned in the event data store. This
+    #   value matches the number of bytes for which your account is billed
+    #   for the query, unless the query is still running.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/QueryStatistics AWS API Documentation
     #
     class QueryStatistics < Struct.new(
       :results_count,
-      :total_results_count)
+      :total_results_count,
+      :bytes_scanned)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2917,6 +2924,12 @@ module Aws::CloudTrail
     #   The number of events that the query scanned in the event data store.
     #   @return [Integer]
     #
+    # @!attribute [rw] bytes_scanned
+    #   The total bytes that the query scanned in the event data store. This
+    #   value matches the number of bytes for which your account is billed
+    #   for the query, unless the query is still running.
+    #   @return [Integer]
+    #
     # @!attribute [rw] execution_time_in_millis
     #   The query's run time, in milliseconds.
     #   @return [Integer]
@@ -2930,6 +2943,7 @@ module Aws::CloudTrail
     class QueryStatisticsForDescribeQuery < Struct.new(
       :events_matched,
       :events_scanned,
+      :bytes_scanned,
       :execution_time_in_millis,
       :creation_time)
       SENSITIVE = []

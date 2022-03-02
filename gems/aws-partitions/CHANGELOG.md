@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.562.0 (2022-03-02)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Keyspaces`.
+
 1.561.0 (2022-03-01)
 ------------------
 

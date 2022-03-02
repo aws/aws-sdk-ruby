@@ -514,6 +514,9 @@
   "Kendra": {
     "models": "kendra/2019-02-03"
   },
+  "Keyspaces": {
+    "models": "keyspaces/2022-02-10"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },

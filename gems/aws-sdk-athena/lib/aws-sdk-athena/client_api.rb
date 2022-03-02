@@ -13,6 +13,7 @@ module Aws::Athena
 
     include Seahorse::Model
 
+    AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
@@ -142,6 +143,7 @@ module Aws::Athena
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::StructureShape.new(name: 'Row')
     RowList = Shapes::ListShape.new(name: 'RowList')
+    S3AclOption = Shapes::StringShape.new(name: 'S3AclOption')
     StartQueryExecutionInput = Shapes::StructureShape.new(name: 'StartQueryExecutionInput')
     StartQueryExecutionOutput = Shapes::StructureShape.new(name: 'StartQueryExecutionOutput')
     StatementName = Shapes::StringShape.new(name: 'StatementName')
@@ -188,6 +190,9 @@ module Aws::Athena
     WorkGroupsList = Shapes::ListShape.new(name: 'WorkGroupsList')
     datumList = Shapes::ListShape.new(name: 'datumList')
     datumString = Shapes::StringShape.new(name: 'datumString')
+
+    AclConfiguration.add_member(:s3_acl_option, Shapes::ShapeRef.new(shape: S3AclOption, required: true, location_name: "S3AclOption"))
+    AclConfiguration.struct_class = Types::AclConfiguration
 
     AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
     AthenaError.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
@@ -534,6 +539,7 @@ module Aws::Athena
     ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
 
     ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
@@ -542,6 +548,8 @@ module Aws::Athena
     ResultConfigurationUpdates.add_member(:remove_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveEncryptionConfiguration"))
     ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:remove_expected_bucket_owner, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveExpectedBucketOwner"))
+    ResultConfigurationUpdates.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
+    ResultConfigurationUpdates.add_member(:remove_acl_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveAclConfiguration"))
     ResultConfigurationUpdates.struct_class = Types::ResultConfigurationUpdates
 
     ResultSet.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, location_name: "Rows"))

@@ -3437,8 +3437,8 @@ module Aws::GameLift
       req.send_request(options)
     end
 
-    # The GameLift service limits and current utilization for an Amazon Web
-    # Services Region or location. Instance limits control the number of
+    # Retrieves the instance limits and current utilization for an Amazon
+    # Web Services Region or location. Instance limits control the number of
     # instances, per instance type, per location, that your Amazon Web
     # Services account can use. Learn more at [Amazon EC2 Instance
     # Types][1]. The information returned includes the maximum number of
@@ -5075,7 +5075,7 @@ module Aws::GameLift
     # API limit, which results in errors. Instead, as a best practice, set
     # up an Amazon Simple Notification Service to receive notifications, and
     # provide the topic ARN in the matchmaking configuration. Continuously
-    # poling ticket status with DescribeMatchmaking should only be used for
+    # polling ticket status with DescribeMatchmaking should only be used for
     # games in development with low matchmaking usage.
     #
     #
@@ -9495,7 +9495,7 @@ module Aws::GameLift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gamelift'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

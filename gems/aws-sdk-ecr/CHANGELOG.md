@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-03-02)
+------------------
+
+* Feature - This release adds support for tracking images lastRecordedPullTime.
+
 1.54.0 (2022-02-24)
 ------------------
 

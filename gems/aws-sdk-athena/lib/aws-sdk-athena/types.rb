@@ -10,6 +10,45 @@
 module Aws::Athena
   module Types
 
+    # Indicates that an Amazon S3 canned ACL should be set to control
+    # ownership of stored query results. When Athena stores query results in
+    # Amazon S3, the canned ACL is set with the `x-amz-acl` request header.
+    # For more information about S3 Object Ownership, see [Object Ownership
+    # settings][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview
+    #
+    # @note When making an API call, you may pass AclConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #       }
+    #
+    # @!attribute [rw] s3_acl_option
+    #   The Amazon S3 canned ACL that Athena should specify when storing
+    #   query results. Currently the only supported canned ACL is
+    #   `BUCKET_OWNER_FULL_CONTROL`. If a query runs in a workgroup and the
+    #   workgroup overrides client-side settings, then the Amazon S3 canned
+    #   ACL specified in the workgroup's settings is used for all queries
+    #   that run in the workgroup. For more information about Amazon S3
+    #   canned ACLs, see [Canned ACL][1] in the *Amazon S3 User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AclConfiguration AWS API Documentation
+    #
+    class AclConfiguration < Struct.new(
+      :s3_acl_option)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information about an Athena query error. The `AthenaError`
     # feature provides standardized error information to help you understand
     # failed queries and take steps after a query failure occurs.
@@ -434,6 +473,9 @@ module Aws::Athena
     #               kms_key: "String",
     #             },
     #             expected_bucket_owner: "String",
+    #             acl_configuration: {
+    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #             },
     #           },
     #           enforce_work_group_configuration: false,
     #           publish_cloud_watch_metrics_enabled: false,
@@ -1973,6 +2015,9 @@ module Aws::Athena
     #           kms_key: "String",
     #         },
     #         expected_bucket_owner: "String",
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
     #       }
     #
     # @!attribute [rw] output_location
@@ -2028,12 +2073,29 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [String]
     #
+    # @!attribute [rw] acl_configuration
+    #   Indicates that an Amazon S3 canned ACL should be set to control
+    #   ownership of stored query results. Currently the only supported
+    #   canned ACL is `BUCKET_OWNER_FULL_CONTROL`. This is a client-side
+    #   setting. If workgroup settings override client-side settings, then
+    #   the query uses the ACL configuration that is specified for the
+    #   workgroup, and also uses the location for storing query results
+    #   specified in the workgroup. For more information, see
+    #   WorkGroupConfiguration$EnforceWorkGroupConfiguration and [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [Types::AclConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfiguration AWS API Documentation
     #
     class ResultConfiguration < Struct.new(
       :output_location,
       :encryption_configuration,
-      :expected_bucket_owner)
+      :expected_bucket_owner,
+      :acl_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2054,6 +2116,10 @@ module Aws::Athena
     #         remove_encryption_configuration: false,
     #         expected_bucket_owner: "String",
     #         remove_expected_bucket_owner: false,
+    #         acl_configuration: {
+    #           s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #         },
+    #         remove_acl_configuration: false,
     #       }
     #
     # @!attribute [rw] output_location
@@ -2143,6 +2209,24 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] acl_configuration
+    #   The ACL configuration for the query results.
+    #   @return [Types::AclConfiguration]
+    #
+    # @!attribute [rw] remove_acl_configuration
+    #   If set to `true`, indicates that the previously-specified ACL
+    #   configuration for queries in this workgroup should be ignored and
+    #   set to null. If set to `false` or not set, and a value is present in
+    #   the `AclConfiguration` of `ResultConfigurationUpdates`, the
+    #   `AclConfiguration` in the workgroup's `ResultConfiguration` is
+    #   updated with the new value. For more information, see [Workgroup
+    #   Settings Override Client-Side Settings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ResultConfigurationUpdates AWS API Documentation
     #
     class ResultConfigurationUpdates < Struct.new(
@@ -2151,7 +2235,9 @@ module Aws::Athena
       :encryption_configuration,
       :remove_encryption_configuration,
       :expected_bucket_owner,
-      :remove_expected_bucket_owner)
+      :remove_expected_bucket_owner,
+      :acl_configuration,
+      :remove_acl_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2225,6 +2311,9 @@ module Aws::Athena
     #             kms_key: "String",
     #           },
     #           expected_bucket_owner: "String",
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
     #         },
     #         work_group: "WorkGroupName",
     #       }
@@ -2720,6 +2809,10 @@ module Aws::Athena
     #             remove_encryption_configuration: false,
     #             expected_bucket_owner: "String",
     #             remove_expected_bucket_owner: false,
+    #             acl_configuration: {
+    #               s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #             },
+    #             remove_acl_configuration: false,
     #           },
     #           publish_cloud_watch_metrics_enabled: false,
     #           bytes_scanned_cutoff_per_query: 1,
@@ -2839,6 +2932,9 @@ module Aws::Athena
     #             kms_key: "String",
     #           },
     #           expected_bucket_owner: "String",
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
     #         },
     #         enforce_work_group_configuration: false,
     #         publish_cloud_watch_metrics_enabled: false,
@@ -2942,6 +3038,10 @@ module Aws::Athena
     #           remove_encryption_configuration: false,
     #           expected_bucket_owner: "String",
     #           remove_expected_bucket_owner: false,
+    #           acl_configuration: {
+    #             s3_acl_option: "BUCKET_OWNER_FULL_CONTROL", # required, accepts BUCKET_OWNER_FULL_CONTROL
+    #           },
+    #           remove_acl_configuration: false,
     #         },
     #         publish_cloud_watch_metrics_enabled: false,
     #         bytes_scanned_cutoff_per_query: 1,
