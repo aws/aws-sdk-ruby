@@ -80,6 +80,8 @@ module Aws::Kendra
     ConnectionConfiguration = Shapes::StructureShape.new(name: 'ConnectionConfiguration')
     ContentSourceConfiguration = Shapes::StructureShape.new(name: 'ContentSourceConfiguration')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    Correction = Shapes::StructureShape.new(name: 'Correction')
+    CorrectionList = Shapes::ListShape.new(name: 'CorrectionList')
     CrawlDepth = Shapes::IntegerShape.new(name: 'CrawlDepth')
     CreateDataSourceRequest = Shapes::StructureShape.new(name: 'CreateDataSourceRequest')
     CreateDataSourceResponse = Shapes::StructureShape.new(name: 'CreateDataSourceResponse')
@@ -411,6 +413,9 @@ module Aws::Kendra
     SnapshotsDataRecords = Shapes::ListShape.new(name: 'SnapshotsDataRecords')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     SortingConfiguration = Shapes::StructureShape.new(name: 'SortingConfiguration')
+    SpellCorrectedQuery = Shapes::StructureShape.new(name: 'SpellCorrectedQuery')
+    SpellCorrectedQueryList = Shapes::ListShape.new(name: 'SpellCorrectedQueryList')
+    SpellCorrectionConfiguration = Shapes::StructureShape.new(name: 'SpellCorrectionConfiguration')
     SqlConfiguration = Shapes::StructureShape.new(name: 'SqlConfiguration')
     StartDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobRequest')
     StartDataSourceSyncJobResponse = Shapes::StructureShape.new(name: 'StartDataSourceSyncJobResponse')
@@ -421,6 +426,7 @@ module Aws::Kendra
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
+    SuggestedQueryText = Shapes::StringShape.new(name: 'SuggestedQueryText')
     Suggestion = Shapes::StructureShape.new(name: 'Suggestion')
     SuggestionHighlight = Shapes::StructureShape.new(name: 'SuggestionHighlight')
     SuggestionHighlightList = Shapes::ListShape.new(name: 'SuggestionHighlightList')
@@ -686,6 +692,14 @@ module Aws::Kendra
     ContentSourceConfiguration.add_member(:faq_ids, Shapes::ShapeRef.new(shape: FaqIdsList, location_name: "FaqIds"))
     ContentSourceConfiguration.add_member(:direct_put_content, Shapes::ShapeRef.new(shape: Boolean, location_name: "DirectPutContent"))
     ContentSourceConfiguration.struct_class = Types::ContentSourceConfiguration
+
+    Correction.add_member(:begin_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "BeginOffset"))
+    Correction.add_member(:end_offset, Shapes::ShapeRef.new(shape: Integer, location_name: "EndOffset"))
+    Correction.add_member(:term, Shapes::ShapeRef.new(shape: String, location_name: "Term"))
+    Correction.add_member(:corrected_term, Shapes::ShapeRef.new(shape: String, location_name: "CorrectedTerm"))
+    Correction.struct_class = Types::Correction
+
+    CorrectionList.member = Shapes::ShapeRef.new(shape: Correction)
 
     CreateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location_name: "Name"))
     CreateDataSourceRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
@@ -1480,6 +1494,7 @@ module Aws::Kendra
     QueryRequest.add_member(:sorting_configuration, Shapes::ShapeRef.new(shape: SortingConfiguration, location_name: "SortingConfiguration"))
     QueryRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "UserContext"))
     QueryRequest.add_member(:visitor_id, Shapes::ShapeRef.new(shape: VisitorId, location_name: "VisitorId"))
+    QueryRequest.add_member(:spell_correction_configuration, Shapes::ShapeRef.new(shape: SpellCorrectionConfiguration, location_name: "SpellCorrectionConfiguration"))
     QueryRequest.struct_class = Types::QueryRequest
 
     QueryResult.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "QueryId"))
@@ -1487,6 +1502,7 @@ module Aws::Kendra
     QueryResult.add_member(:facet_results, Shapes::ShapeRef.new(shape: FacetResultList, location_name: "FacetResults"))
     QueryResult.add_member(:total_number_of_results, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalNumberOfResults"))
     QueryResult.add_member(:warnings, Shapes::ShapeRef.new(shape: WarningList, location_name: "Warnings"))
+    QueryResult.add_member(:spell_corrected_queries, Shapes::ShapeRef.new(shape: SpellCorrectedQueryList, location_name: "SpellCorrectedQueries"))
     QueryResult.struct_class = Types::QueryResult
 
     QueryResultItem.add_member(:id, Shapes::ShapeRef.new(shape: ResultId, location_name: "Id"))
@@ -1679,6 +1695,15 @@ module Aws::Kendra
     SortingConfiguration.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, required: true, location_name: "DocumentAttributeKey"))
     SortingConfiguration.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     SortingConfiguration.struct_class = Types::SortingConfiguration
+
+    SpellCorrectedQuery.add_member(:suggested_query_text, Shapes::ShapeRef.new(shape: SuggestedQueryText, location_name: "SuggestedQueryText"))
+    SpellCorrectedQuery.add_member(:corrections, Shapes::ShapeRef.new(shape: CorrectionList, location_name: "Corrections"))
+    SpellCorrectedQuery.struct_class = Types::SpellCorrectedQuery
+
+    SpellCorrectedQueryList.member = Shapes::ShapeRef.new(shape: SpellCorrectedQuery)
+
+    SpellCorrectionConfiguration.add_member(:include_query_spell_check_suggestions, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "IncludeQuerySpellCheckSuggestions"))
+    SpellCorrectionConfiguration.struct_class = Types::SpellCorrectionConfiguration
 
     SqlConfiguration.add_member(:query_identifiers_enclosing_option, Shapes::ShapeRef.new(shape: QueryIdentifiersEnclosingOption, location_name: "QueryIdentifiersEnclosingOption"))
     SqlConfiguration.struct_class = Types::SqlConfiguration

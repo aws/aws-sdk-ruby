@@ -721,8 +721,7 @@ module Aws::GreengrassV2
     #
     # Every deployment has a revision number that indicates how many
     # deployment revisions you define for a target. Use this operation to
-    # create a new revision of an existing deployment. This operation
-    # returns the revision number of the new deployment when you create it.
+    # create a new revision of an existing deployment.
     #
     # For more information, see the [Create deployments][1] in the *IoT
     # Greengrass V2 Developer Guide*.
@@ -1105,11 +1104,11 @@ module Aws::GreengrassV2
     #
     # Connectivity information includes endpoints and ports where client
     # devices can connect to an MQTT broker on the core device. When a
-    # client device calls the [Greengrass discovery API][1], IoT Greengrass
-    # returns connectivity information for all of the core devices where the
-    # client device can connect. For more information, see [Connect client
-    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
-    # Guide*.
+    # client device calls the [IoT Greengrass discovery API][1], IoT
+    # Greengrass returns connectivity information for all of the core
+    # devices where the client device can connect. For more information, see
+    # [Connect client devices to core devices][2] in the *IoT Greengrass
+    # Version 2 Developer Guide*.
     #
     #
     #
@@ -1838,11 +1837,11 @@ module Aws::GreengrassV2
     #
     # Connectivity information includes endpoints and ports where client
     # devices can connect to an MQTT broker on the core device. When a
-    # client device calls the [Greengrass discovery API][1], IoT Greengrass
-    # returns connectivity information for all of the core devices where the
-    # client device can connect. For more information, see [Connect client
-    # devices to core devices][2] in the *IoT Greengrass Version 2 Developer
-    # Guide*.
+    # client device calls the [IoT Greengrass discovery API][1], IoT
+    # Greengrass returns connectivity information for all of the core
+    # devices where the client device can connect. For more information, see
+    # [Connect client devices to core devices][2] in the *IoT Greengrass
+    # Version 2 Developer Guide*.
     #
     #
     #
@@ -1901,7 +1900,7 @@ module Aws::GreengrassV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-greengrassv2'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

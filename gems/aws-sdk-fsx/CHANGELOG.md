@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-03-03)
+------------------
+
+* Feature - This release adds support for data repository associations to use root ("/") as the file system path
+
 1.51.0 (2022-02-28)
 ------------------
 

@@ -966,6 +966,13 @@ module Aws::FSx
     #   from or imported to. This file system directory can be linked to
     #   only one Amazon S3 bucket, and no other S3 bucket can be linked to
     #   the directory.
+    #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
+    #   you can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] data_repository_path
@@ -1571,14 +1578,14 @@ module Aws::FSx
     #
     #   <note markdown="1"> This parameter is not supported for file systems with the
     #   `Persistent_2` deployment type. Instead, use
-    #   `CreateDataRepositoryAssociation"` to create a data repository
+    #   `CreateDataRepositoryAssociation` to create a data repository
     #   association to link your Lustre file system to a data repository.
     #
     #    </note>
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/LustreGuide/older-deployment-types.html#legacy-auto-import-from-s3
     #   @return [String]
     #
     # @!attribute [rw] per_unit_storage_throughput
@@ -1732,6 +1739,10 @@ module Aws::FSx
     #   Specifies the IP address range in which the endpoints to access your
     #   file system will be created. By default, Amazon FSx selects an
     #   unused IP address range for you from the 198.19.* range.
+    #
+    #   The Endpoint IP address range you select for your file system must
+    #   exist outside the VPC's CIDR range and must be at least /30 or
+    #   larger.
     #   @return [String]
     #
     # @!attribute [rw] fsx_admin_password
@@ -1875,8 +1886,8 @@ module Aws::FSx
     #
     # @!attribute [rw] deployment_type
     #   Specifies the file system deployment type. Amazon FSx for OpenZFS
-    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` is a file system configured
-    #   for a single Availability Zone (AZ) of redundancy.
+    #   supports `SINGLE_AZ_1`. `SINGLE_AZ_1` deployment type is configured
+    #   for redundancy within a single Availability Zone.
     #   @return [String]
     #
     # @!attribute [rw] throughput_capacity
@@ -2624,36 +2635,56 @@ module Aws::FSx
     #       }
     #
     # @!attribute [rw] parent_volume_id
-    #   The ID of the volume to use as the parent volume.
+    #   The ID of the volume to use as the parent volume of the volume that
+    #   you are creating.
     #   @return [String]
     #
     # @!attribute [rw] storage_capacity_reservation_gi_b
-    #   The amount of storage in gibibytes (GiB) to reserve from the parent
-    #   volume. You can't reserve more storage than the parent volume has
-    #   reserved. To not specify a storage capacity reservation, set this to
-    #   `-1`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] storage_capacity_quota_gi_b
-    #   The maximum amount of storage in gibibytes (GiB) that the volume can
-    #   use from its parent. You can't specify a quota larger than the
-    #   storage on the parent volume. To not specify a storage capacity
-    #   quota, set this to `-1`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] record_size_ki_b
-    #   Specifies the record size of an OpenZFS volume, in kibibytes (KiB).
-    #   Valid values are 4, 8, 16, 32, 64, 128, 256, 512, or 1024 KiB. The
-    #   default is 128 KiB. Most workloads should use the default record
-    #   size. Database workflows can benefit from a smaller record size,
-    #   while streaming workflows can benefit from a larger record size. For
-    #   additional guidance on when to set a custom record size, see [ Tips
-    #   for maximizing performance][1] in the *Amazon FSx for OpenZFS User
+    #   Specifies the amount of storage in gibibytes (GiB) to reserve from
+    #   the parent volume. Setting `StorageCapacityReservationGiB`
+    #   guarantees that the specified amount of storage space on the parent
+    #   volume will always be available for the volume. You can't reserve
+    #   more storage than the parent volume has. To *not* specify a storage
+    #   capacity reservation, set this to `0` or `-1`. For more information,
+    #   see [Volume properties][1] in the *Amazon FSx for OpenZFS User
     #   Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
+    #   @return [Integer]
+    #
+    # @!attribute [rw] storage_capacity_quota_gi_b
+    #   Sets the maximum storage size in gibibytes (GiB) for the volume. You
+    #   can specify a quota that is larger than the storage on the parent
+    #   volume. A volume quota limits the amount of storage that the volume
+    #   can consume to the configured amount, but does not guarantee the
+    #   space will be available on the parent volume. To guarantee quota
+    #   space, you must also set `StorageCapacityReservationGiB`. To *not*
+    #   specify a storage capacity quota, set this to `-1`.
+    #
+    #   For more information, see [Volume properties][1] in the *Amazon FSx
+    #   for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/managing-volumes.html#volume-properties
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_size_ki_b
+    #   Specifies the suggested block size for a volume in a ZFS dataset, in
+    #   kibibytes (KiB). Valid values are 4, 8, 16, 32, 64, 128, 256, 512,
+    #   or 1024 KiB. The default is 128 KiB. We recommend using the default
+    #   setting for the majority of use cases. Generally, workloads that
+    #   write in fixed small or large record sizes may benefit from setting
+    #   a custom record size, like database workloads (small record size) or
+    #   media streaming workloads (large record size). For additional
+    #   guidance on when to set a custom record size, see [ ZFS Record
+    #   size][1] in the *Amazon FSx for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#record-size-performance
     #   @return [Integer]
     #
     # @!attribute [rw] data_compression_type
@@ -2664,13 +2695,23 @@ module Aws::FSx
     #     default.
     #
     #   * `ZSTD` - Compresses the data in the volume using the Zstandard
-    #     (ZSTD) compression algorithm. Compared to LZ4, Z-Standard provides
-    #     a better compression ratio to minimize on-disk storage
-    #     utilization.
+    #     (ZSTD) compression algorithm. ZSTD compression provides a higher
+    #     level of data compression and higher read throughput performance
+    #     than LZ4 compression.
     #
     #   * `LZ4` - Compresses the data in the volume using the LZ4
-    #     compression algorithm. Compared to Z-Standard, LZ4 is less
-    #     compute-intensive and delivers higher write throughput speeds.
+    #     compression algorithm. LZ4 compression provides a lower level of
+    #     compression and higher write throughput performance than ZSTD
+    #     compression.
+    #
+    #   For more information about volume compression types and the
+    #   performance of your Amazon FSx for OpenZFS file system, see [ Tips
+    #   for maximizing performance][1] File system and volume settings in
+    #   the *Amazon FSx for OpenZFS User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#performance-tips-zfs
     #   @return [String]
     #
     # @!attribute [rw] copy_tags_to_snapshots
@@ -3203,6 +3244,13 @@ module Aws::FSx
     #   from or imported to. This file system directory can be linked to
     #   only one Amazon S3 bucket, and no other S3 bucket can be linked to
     #   the directory.
+    #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path,
+    #   you can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] data_repository_path
@@ -5860,6 +5908,11 @@ module Aws::FSx
     # @!attribute [rw] endpoint_ip_address_range
     #   The IP address range in which the endpoints to access your file
     #   system are created.
+    #
+    #   The Endpoint IP address range you select for your file system must
+    #   exist outside the VPC's CIDR range and must be at least /30 or
+    #   larger. If you do not specify this optional parameter, Amazon FSx
+    #   will automatically select a CIDR block for you.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
@@ -6260,8 +6313,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # The Network File System NFS) configurations for mounting an Amazon FSx
-    # for OpenZFS file system.
+    # The Network File System (NFS) configurations for mounting an Amazon
+    # FSx for OpenZFS file system.
     #
     # @note When making an API call, you may pass OpenZFSNfsExport
     #   data as a hash:
@@ -7105,8 +7158,7 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied
-    # parameters.
+    # No FSx for ONTAP SVMs were found based upon the supplied parameters.
     #
     # @!attribute [rw] message
     #   A detailed error message.

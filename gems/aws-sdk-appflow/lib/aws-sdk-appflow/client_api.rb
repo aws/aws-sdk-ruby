@@ -215,6 +215,7 @@ module Aws::Appflow
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoConnectorProfileCredentials = Shapes::StructureShape.new(name: 'MarketoConnectorProfileCredentials')
     MarketoConnectorProfileProperties = Shapes::StructureShape.new(name: 'MarketoConnectorProfileProperties')
+    MarketoDestinationProperties = Shapes::StructureShape.new(name: 'MarketoDestinationProperties')
     MarketoMetadata = Shapes::StructureShape.new(name: 'MarketoMetadata')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -801,6 +802,7 @@ module Aws::Appflow
     DestinationConnectorProperties.add_member(:honeycode, Shapes::ShapeRef.new(shape: HoneycodeDestinationProperties, location_name: "Honeycode"))
     DestinationConnectorProperties.add_member(:customer_profiles, Shapes::ShapeRef.new(shape: CustomerProfilesDestinationProperties, location_name: "CustomerProfiles"))
     DestinationConnectorProperties.add_member(:zendesk, Shapes::ShapeRef.new(shape: ZendeskDestinationProperties, location_name: "Zendesk"))
+    DestinationConnectorProperties.add_member(:marketo, Shapes::ShapeRef.new(shape: MarketoDestinationProperties, location_name: "Marketo"))
     DestinationConnectorProperties.add_member(:custom_connector, Shapes::ShapeRef.new(shape: CustomConnectorDestinationProperties, location_name: "CustomConnector"))
     DestinationConnectorProperties.add_member(:sapo_data, Shapes::ShapeRef.new(shape: SAPODataDestinationProperties, location_name: "SAPOData"))
     DestinationConnectorProperties.struct_class = Types::DestinationConnectorProperties
@@ -994,6 +996,10 @@ module Aws::Appflow
 
     MarketoConnectorProfileProperties.add_member(:instance_url, Shapes::ShapeRef.new(shape: InstanceUrl, required: true, location_name: "instanceUrl"))
     MarketoConnectorProfileProperties.struct_class = Types::MarketoConnectorProfileProperties
+
+    MarketoDestinationProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "object"))
+    MarketoDestinationProperties.add_member(:error_handling_config, Shapes::ShapeRef.new(shape: ErrorHandlingConfig, location_name: "errorHandlingConfig"))
+    MarketoDestinationProperties.struct_class = Types::MarketoDestinationProperties
 
     MarketoMetadata.struct_class = Types::MarketoMetadata
 

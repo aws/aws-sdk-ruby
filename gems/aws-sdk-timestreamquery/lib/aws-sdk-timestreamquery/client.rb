@@ -370,7 +370,7 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.cancel-query.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.cancel-query.html
     #
     # @option params [required, String] :query_id
     #   The ID of the query that needs to be cancelled. `QueryID` is returned
@@ -599,8 +599,8 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/VPCEndpoints
-    # [2]: https://docs.aws.amazon.com/Timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints
+    # [2]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
     #
     # @return [Types::DescribeEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -926,7 +926,7 @@ module Aws::TimestreamQuery
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/Timestream/latest/developerguide/code-samples.run-query.html
+    # [1]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.run-query.html
     #
     # @option params [required, String] :query_string
     #   The query to be run by Timestream.
@@ -1161,7 +1161,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

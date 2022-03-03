@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-03-03)
+------------------
+
+* Feature - Documentation only update for SDK and CLI
+
 1.14.0 (2022-02-24)
 ------------------
 

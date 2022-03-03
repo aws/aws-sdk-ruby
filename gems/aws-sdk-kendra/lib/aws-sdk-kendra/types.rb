@@ -1397,8 +1397,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # Confluence.
+    # Provides the configuration information to connect to Confluence as
+    # your data source.
     #
     # @note When making an API call, you may pass ConfluenceConfiguration
     #   data as a hash:
@@ -1721,7 +1721,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the information necessary to connect to a database.
+    # Provides the configuration information that's required to connect to
+    # a database.
     #
     # @note When making an API call, you may pass ConnectionConfiguration
     #   data as a hash:
@@ -1776,8 +1777,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for your content sources, such as data
-    # sources, FAQs, and content indexed directly via [BatchPutDocument][1].
+    # Provides the configuration information for your content sources, such
+    # as data sources, FAQs, and content indexed directly via
+    # [BatchPutDocument][1].
     #
     #
     #
@@ -1813,6 +1815,37 @@ module Aws::Kendra
       :data_source_ids,
       :faq_ids,
       :direct_put_content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A corrected misspelled word in a query.
+    #
+    # @!attribute [rw] begin_offset
+    #   The zero-based location in the response string or text where the
+    #   corrected word starts.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] end_offset
+    #   The zero-based location in the response string or text where the
+    #   corrected word ends.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] term
+    #   The string or text of a misspelled word in a query.
+    #   @return [String]
+    #
+    # @!attribute [rw] corrected_term
+    #   The string or text of a corrected misspelled word in a query.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Correction AWS API Documentation
+    #
+    class Correction < Struct.new(
+      :begin_offset,
+      :end_offset,
+      :term,
+      :corrected_term)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2238,8 +2271,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   The connector configuration information that is required to access
-    #   the repository.
+    #   Configuration information that is required to access the data source
+    #   repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
     #   parameter is set to `CUSTOM`. If you do, you receive a
@@ -2392,11 +2425,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Provides the configuration information for your Amazon Kendra
-    #   experience. This includes `ContentSourceConfiguration`, which
-    #   specifies the data source IDs and/or FAQ IDs, and
-    #   `UserIdentityConfiguration`, which specifies the user or group
-    #   information to grant access to your Amazon Kendra experience.
+    #   Configuration information for your Amazon Kendra experience. This
+    #   includes `ContentSourceConfiguration`, which specifies the data
+    #   source IDs and/or FAQ IDs, and `UserIdentityConfiguration`, which
+    #   specifies the user or group information to grant access to your
+    #   Amazon Kendra experience.
     #   @return [Types::ExperienceConfiguration]
     #
     # @!attribute [rw] description
@@ -3022,7 +3055,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for an Amazon Kendra data source.
+    # Provides the configuration information for an Amazon Kendra data
+    # source.
     #
     # @note When making an API call, you may pass DataSourceConfiguration
     #   data as a hash:
@@ -3359,33 +3393,33 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] s3_configuration
-    #   Provides information to create a data source connector for a
-    #   document repository in an Amazon S3 bucket.
+    #   Provides the configuration information to connect to an Amazon S3
+    #   bucket as your data source.
     #   @return [Types::S3DataSourceConfiguration]
     #
     # @!attribute [rw] share_point_configuration
-    #   Provides information necessary to create a data source connector for
-    #   a Microsoft SharePoint site.
+    #   Provides the configuration information to connect to Microsoft
+    #   SharePoint as your data source.
     #   @return [Types::SharePointConfiguration]
     #
     # @!attribute [rw] database_configuration
-    #   Provides information necessary to create a data source connector for
-    #   a database.
+    #   Provides the configuration information to connect to a database as
+    #   your data source.
     #   @return [Types::DatabaseConfiguration]
     #
     # @!attribute [rw] salesforce_configuration
-    #   Provides configuration information for data sources that connect to
-    #   a Salesforce site.
+    #   Provides the configuration information to connect to Salesforce as
+    #   your data source.
     #   @return [Types::SalesforceConfiguration]
     #
     # @!attribute [rw] one_drive_configuration
-    #   Provides configuration for data sources that connect to Microsoft
-    #   OneDrive.
+    #   Provides the configuration information to connect to Microsoft
+    #   OneDrive as your data source.
     #   @return [Types::OneDriveConfiguration]
     #
     # @!attribute [rw] service_now_configuration
-    #   Provides configuration for data sources that connect to ServiceNow
-    #   instances.
+    #   Provides the configuration information to connect to ServiceNow as
+    #   your data source.
     #   @return [Types::ServiceNowConfiguration]
     #
     # @!attribute [rw] confluence_configuration
@@ -3394,8 +3428,8 @@ module Aws::Kendra
     #   @return [Types::ConfluenceConfiguration]
     #
     # @!attribute [rw] google_drive_configuration
-    #   Provides configuration for data sources that connect to Google
-    #   Drive.
+    #   Provides the configuration information to connect to Google Drive as
+    #   your data source.
     #   @return [Types::GoogleDriveConfiguration]
     #
     # @!attribute [rw] web_crawler_configuration
@@ -3685,7 +3719,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information for connecting to an Amazon VPC.
+    # Provides the configuration information to connect to an Amazon VPC.
     #
     # @note When making an API call, you may pass DataSourceVpcConfiguration
     #   data as a hash:
@@ -3716,7 +3750,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the information necessary to connect a database to an index.
+    # Provides the configuration information to connect to a index.
     #
     # @note When making an API call, you may pass DatabaseConfiguration
     #   data as a hash:
@@ -3760,11 +3794,11 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] connection_configuration
-    #   The information necessary to connect to a database.
+    #   Configuration information that's required to connect to a database.
     #   @return [Types::ConnectionConfiguration]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides information for connecting to an Amazon VPC.
+    #   Provides the configuration information to connect to an Amazon VPC.
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] column_configuration
@@ -4048,9 +4082,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Information that describes where the data source is located and how
-    #   the data source is configured. The specific information in the
-    #   description depends on the data source provider.
+    #   Describes how the data source is configured. The specific
+    #   information in the description depends on the data source provider.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] created_at
@@ -5484,7 +5517,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of users or groups in your
+    # Provides the configuration information for users or groups in your
     # Amazon Web Services SSO identity source to grant access your Amazon
     # Kendra experience.
     #
@@ -5548,7 +5581,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of users or groups in your
+    # Provides the configuration information for users or groups in your
     # Amazon Web Services SSO identity source for access to your Amazon
     # Kendra experience. Specific permissions are defined for each user or
     # group once they are granted access to your Amazon Kendra experience.
@@ -5587,7 +5620,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the configuration information for your Amazon Kendra
+    # Provides the configuration information for your Amazon Kendra
     # experience. This includes the data source IDs and/or FAQ IDs, and user
     # or group information to grant access to your Amazon Kendra experience.
     #
@@ -5626,8 +5659,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of the endpoint for your Amazon
-    # Kendra experience.
+    # Provides the configuration information for the endpoint for your
+    # Amazon Kendra experience.
     #
     # @!attribute [rw] endpoint_type
     #   The type of endpoint for your Amazon Kendra experience. The type
@@ -5912,9 +5945,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides the configuration information for connecting to an Amazon
-    #   Virtual Private Cloud for your Amazon FSx. Your Amazon FSx instance
-    #   must reside inside your VPC.
+    #   Configuration information for connecting to an Amazon Virtual
+    #   Private Cloud for your Amazon FSx. Your Amazon FSx instance must
+    #   reside inside your VPC.
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] secret_arn
@@ -5929,8 +5962,8 @@ module Aws::Kendra
     #     have read and mounting access to the Amazon FSx file system for
     #     Windows.
     #
-    #   * password—The password of the active directory user with read and
-    #     mounting access Amazon FSx Windows file system.
+    #   * password—The password of the Active Directory user account with
+    #     read and mounting access to the Amazon FSx Windows file system.
     #   @return [String]
     #
     # @!attribute [rw] inclusion_patterns
@@ -5954,11 +5987,10 @@ module Aws::Kendra
     # @!attribute [rw] field_mappings
     #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
     #   FSx data source attributes or field names to Amazon Kendra index
-    #   field names in Amazon Kendra. To create custom fields, use the
-    #   `UpdateIndex` API before you map to Amazon FSx fields. For more
-    #   information, see [Mapping data source fields][1]. The Amazon FSx
-    #   data source field names must exist in your Amazon FSx custom
-    #   metadata.
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Amazon FSx fields. For more information, see
+    #   [Mapping data source fields][1]. The Amazon FSx data source field
+    #   names must exist in your Amazon FSx custom metadata.
     #
     #
     #
@@ -6141,8 +6173,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # Google Drive.
+    # Provides the configuration information to connect to Google Drive as
+    # your data source.
     #
     # @note When making an API call, you may pass GoogleDriveConfiguration
     #   data as a hash:
@@ -6506,7 +6538,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A summary of information about an index.
+    # A summary of information on the configuration of an index.
     #
     # @!attribute [rw] name
     #   The name of the index.
@@ -6661,7 +6693,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the JSON token type.
+    # Provides the configuration information for the JSON token type.
     #
     # @note When making an API call, you may pass JsonTokenTypeConfiguration
     #   data as a hash:
@@ -6688,7 +6720,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the JWT token type.
+    # Provides the configuration information for the JWT token type.
     #
     # @note When making an API call, you may pass JwtTokenTypeConfiguration
     #   data as a hash:
@@ -7198,7 +7230,8 @@ module Aws::Kendra
     end
 
     # @!attribute [rw] index_configuration_summary_items
-    #   An array of summary information for one or more indexes.
+    #   An array of summary information on the configuration of one or more
+    #   indexes.
     #   @return [Array<Types::IndexConfigurationSummary>]
     #
     # @!attribute [rw] next_token
@@ -7423,8 +7456,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for data sources that connect to
-    # OneDrive.
+    # Provides the configuration information to connect to OneDrive as your
+    # data source.
     #
     # @note When making an API call, you may pass OneDriveConfiguration
     #   data as a hash:
@@ -7915,6 +7948,9 @@ module Aws::Kendra
     #           ],
     #         },
     #         visitor_id: "VisitorId",
+    #         spell_correction_configuration: {
+    #           include_query_spell_check_suggestions: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] index_id
@@ -8008,6 +8044,10 @@ module Aws::Kendra
     #   `VisitorId`.
     #   @return [String]
     #
+    # @!attribute [rw] spell_correction_configuration
+    #   Enables suggested spell corrections for queries.
+    #   @return [Types::SpellCorrectionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryRequest AWS API Documentation
     #
     class QueryRequest < Struct.new(
@@ -8022,7 +8062,8 @@ module Aws::Kendra
       :page_size,
       :sorting_configuration,
       :user_context,
-      :visitor_id)
+      :visitor_id,
+      :spell_correction_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8061,6 +8102,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax
     #   @return [Array<Types::Warning>]
     #
+    # @!attribute [rw] spell_corrected_queries
+    #   A list of information related to suggested spell corrections for a
+    #   query.
+    #   @return [Array<Types::SpellCorrectedQuery>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QueryResult AWS API Documentation
     #
     class QueryResult < Struct.new(
@@ -8068,7 +8114,8 @@ module Aws::Kendra
       :result_items,
       :facet_results,
       :total_number_of_results,
-      :warnings)
+      :warnings,
+      :spell_corrected_queries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8363,8 +8410,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for a data source to index
-    # documents in an Amazon S3 bucket.
+    # Provides the configuration information to connect to an Amazon S3
+    # bucket.
     #
     # @note When making an API call, you may pass S3DataSourceConfiguration
     #   data as a hash:
@@ -8492,8 +8539,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines configuration for syncing a Salesforce chatter feed. The
-    # contents of the object comes from the Salesforce FeedItem table.
+    # The configuration information for syncing a Salesforce chatter feed.
+    # The contents of the object comes from the Salesforce FeedItem table.
     #
     # @note When making an API call, you may pass SalesforceChatterFeedConfiguration
     #   data as a hash:
@@ -8675,8 +8722,8 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] standard_object_attachment_configuration
-    #   Provides configuration information for processing attachments to
-    #   Salesforce standard objects.
+    #   Configuration information for processing attachments to Salesforce
+    #   standard objects.
     #   @return [Types::SalesforceStandardObjectAttachmentConfiguration]
     #
     # @!attribute [rw] include_attachment_file_patterns
@@ -8764,7 +8811,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies configuration information for the knowledge article types
+    # Provides the configuration information for the knowledge article types
     # that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     # articles and the standard fields of knowledge articles, or the custom
     # fields of custom knowledge articles, but not both
@@ -8808,13 +8855,12 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] standard_knowledge_article_type_configuration
-    #   Provides configuration information for standard Salesforce knowledge
+    #   Configuration information for standard Salesforce knowledge
     #   articles.
     #   @return [Types::SalesforceStandardKnowledgeArticleTypeConfiguration]
     #
     # @!attribute [rw] custom_knowledge_article_type_configurations
-    #   Provides configuration information for custom Salesforce knowledge
-    #   articles.
+    #   Configuration information for custom Salesforce knowledge articles.
     #   @return [Array<Types::SalesforceCustomKnowledgeArticleTypeConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceKnowledgeArticleConfiguration AWS API Documentation
@@ -8827,8 +8873,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for standard Salesforce knowledge
-    # articles.
+    # Configuration information for standard Salesforce knowledge articles.
     #
     # @note When making an API call, you may pass SalesforceStandardKnowledgeArticleTypeConfiguration
     #   data as a hash:
@@ -8869,7 +8914,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for processing attachments to
+    # Provides the configuration information for processing attachments to
     # Salesforce standard objects.
     #
     # @note When making an API call, you may pass SalesforceStandardObjectAttachmentConfiguration
@@ -8904,7 +8949,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies configuration information for indexing a single standard
+    # Provides the configuration information for indexing a single standard
     # object.
     #
     # @note When making an API call, you may pass SalesforceStandardObjectConfiguration
@@ -9019,7 +9064,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of the seed or starting point
+    # Provides the configuration information for the seed or starting point
     # URLs to crawl.
     #
     # *When selecting websites to index, you must adhere to the [Amazon
@@ -9096,8 +9141,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information required to connect to a ServiceNow
-    # data source.
+    # Provides the configuration information to connect to ServiceNow as
+    # your data source.
     #
     # @note When making an API call, you may pass ServiceNowConfiguration
     #   data as a hash:
@@ -9156,13 +9201,13 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] knowledge_article_configuration
-    #   Provides configuration information for crawling knowledge articles
-    #   in the ServiceNow site.
+    #   Configuration information for crawling knowledge articles in the
+    #   ServiceNow site.
     #   @return [Types::ServiceNowKnowledgeArticleConfiguration]
     #
     # @!attribute [rw] service_catalog_configuration
-    #   Provides configuration information for crawling service catalogs in
-    #   the ServiceNow site.
+    #   Configuration information for crawling service catalogs in the
+    #   ServiceNow site.
     #   @return [Types::ServiceNowServiceCatalogConfiguration]
     #
     # @!attribute [rw] authentication_type
@@ -9197,8 +9242,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for crawling knowledge articles in
-    # the ServiceNow site.
+    # Provides the configuration information for crawling knowledge articles
+    # in the ServiceNow site.
     #
     # @note When making an API call, you may pass ServiceNowKnowledgeArticleConfiguration
     #   data as a hash:
@@ -9279,8 +9324,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for crawling service catalog items
-    # in the ServiceNow site
+    # Provides the configuration information for crawling service catalog
+    # items in the ServiceNow site
     #
     # @note When making an API call, you may pass ServiceNowServiceCatalogConfiguration
     #   data as a hash:
@@ -9364,8 +9409,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for connecting to a Microsoft
-    # SharePoint data source.
+    # Provides the configuration information to connect to Microsoft
+    # SharePoint as your data source.
     #
     # @note When making an API call, you may pass SharePointConfiguration
     #   data as a hash:
@@ -9457,7 +9502,7 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_configuration
-    #   Provides information for connecting to an Amazon VPC.
+    #   Provides the configuration information to connect to an Amazon VPC.
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] field_mappings
@@ -9505,7 +9550,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the configuration information of the sitemap URLs to crawl.
+    # Provides the configuration information for the sitemap URLs to crawl.
     #
     # *When selecting websites to index, you must adhere to the [Amazon
     # Acceptable Use Policy][1] and all other Amazon terms. Remember that
@@ -9596,8 +9641,60 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides information that configures Amazon Kendra to use a SQL
-    # database.
+    # A query with suggested spell corrections.
+    #
+    # @!attribute [rw] suggested_query_text
+    #   The query with the suggested spell corrections.
+    #   @return [String]
+    #
+    # @!attribute [rw] corrections
+    #   The corrected misspelled word or words in a query.
+    #   @return [Array<Types::Correction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SpellCorrectedQuery AWS API Documentation
+    #
+    class SpellCorrectedQuery < Struct.new(
+      :suggested_query_text,
+      :corrections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information for suggested query spell
+    # corrections.
+    #
+    # Suggested spell corrections are based on words that appear in your
+    # indexed documents and how closely a corrected word matches a
+    # misspelled word.
+    #
+    # This feature is designed with certain defaults or limits. For
+    # information on the current limits and how to request more support for
+    # some limits, see the [Spell Checker documentation][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
+    #
+    # @note When making an API call, you may pass SpellCorrectionConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         include_query_spell_check_suggestions: false, # required
+    #       }
+    #
+    # @!attribute [rw] include_query_spell_check_suggestions
+    #   `TRUE` to suggest spell corrections for queries.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SpellCorrectionConfiguration AWS API Documentation
+    #
+    class SpellCorrectionConfiguration < Struct.new(
+      :include_query_spell_check_suggestions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to use a SQL database.
     #
     # @note When making an API call, you may pass SqlConfiguration
     #   data as a hash:
@@ -10483,7 +10580,8 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Configuration information for an Amazon Kendra data source.
+    #   Configuration information for an Amazon Kendra data source you want
+    #   to update.
     #   @return [Types::DataSourceConfiguration]
     #
     # @!attribute [rw] description
@@ -10587,9 +10685,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] configuration
-    #   Provides the user configuration information. This includes the
-    #   Amazon Web Services SSO field name that contains the identifiers of
-    #   your users, such as their emails.
+    #   Configuration information for your Amazon Kendra you want to update.
     #   @return [Types::ExperienceConfiguration]
     #
     # @!attribute [rw] description
@@ -10683,7 +10779,7 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_metadata_configuration_updates
-    #   The document metadata to update.
+    #   The document metadata you want to update.
     #   @return [Array<Types::DocumentMetadataConfiguration>]
     #
     # @!attribute [rw] capacity_units
@@ -10964,8 +11060,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] seed_url_configuration
-    #   Provides the configuration of the seed or starting point URLs of the
-    #   websites you want to crawl.
+    #   Configuration of the seed or starting point URLs of the websites you
+    #   want to crawl.
     #
     #   You can choose to crawl only the website host names, or the website
     #   host names with subdomains, or the website host names with
@@ -10975,8 +11071,7 @@ module Aws::Kendra
     #   @return [Types::SeedUrlConfiguration]
     #
     # @!attribute [rw] site_maps_configuration
-    #   Provides the configuration of the sitemap URLs of the websites you
-    #   want to crawl.
+    #   Configuration of the sitemap URLs of the websites you want to crawl.
     #
     #   Only URLs belonging to the same website host names are crawled. You
     #   can list up to three sitemap URLs.
@@ -11101,7 +11196,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for the identifiers of your users.
+    # Provides the configuration information for the identifiers of your
+    # users.
     #
     # @note When making an API call, you may pass UserIdentityConfiguration
     #   data as a hash:
@@ -11134,7 +11230,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for a token configuration.
+    # Provides the configuration information for a token.
     #
     # @note When making an API call, you may pass UserTokenConfiguration
     #   data as a hash:
@@ -11319,8 +11415,8 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] proxy_configuration
-    #   Provides configuration information required to connect to your
-    #   internal websites via a web proxy.
+    #   Configuration information required to connect to your internal
+    #   websites via a web proxy.
     #
     #   You must provide the website host name and port number. For example,
     #   the host name of https://a.example.com/page1.html is
@@ -11336,8 +11432,8 @@ module Aws::Kendra
     #   @return [Types::ProxyConfiguration]
     #
     # @!attribute [rw] authentication_configuration
-    #   Provides configuration information required to connect to websites
-    #   using authentication.
+    #   Configuration information required to connect to websites using
+    #   authentication.
     #
     #   You can connect to websites using basic authentication of user name
     #   and password.

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2022-03-03)
+------------------
+
+* Feature - Launching Amazon AppFlow Marketo as a destination connector SDK.
+
 1.24.0 (2022-02-24)
 ------------------
 

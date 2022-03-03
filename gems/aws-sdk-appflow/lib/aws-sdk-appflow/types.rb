@@ -2143,6 +2143,14 @@ module Aws::Appflow
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #               },
+    #               marketo: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
+    #               },
     #               custom_connector: {
     #                 entity_name: "EntityName", # required
     #                 error_handling_config: {
@@ -3177,6 +3185,14 @@ module Aws::Appflow
     #           },
     #           write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #         },
+    #         marketo: {
+    #           object: "Object", # required
+    #           error_handling_config: {
+    #             fail_on_first_destination_error: false,
+    #             bucket_prefix: "BucketPrefix",
+    #             bucket_name: "BucketName",
+    #           },
+    #         },
     #         custom_connector: {
     #           entity_name: "EntityName", # required
     #           error_handling_config: {
@@ -3246,6 +3262,10 @@ module Aws::Appflow
     #   The properties required to query Zendesk.
     #   @return [Types::ZendeskDestinationProperties]
     #
+    # @!attribute [rw] marketo
+    #   The properties required to query Marketo.
+    #   @return [Types::MarketoDestinationProperties]
+    #
     # @!attribute [rw] custom_connector
     #   The properties that are required to query the custom Connector.
     #   @return [Types::CustomConnectorDestinationProperties]
@@ -3267,6 +3287,7 @@ module Aws::Appflow
       :honeycode,
       :customer_profiles,
       :zendesk,
+      :marketo,
       :custom_connector,
       :sapo_data)
       SENSITIVE = []
@@ -3420,6 +3441,14 @@ module Aws::Appflow
     #               bucket_name: "BucketName",
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
     #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
@@ -4482,6 +4511,43 @@ module Aws::Appflow
     #
     class MarketoConnectorProfileProperties < Struct.new(
       :instance_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties that Amazon AppFlow applies when you use Marketo as a
+    # flow destination.
+    #
+    # @note When making an API call, you may pass MarketoDestinationProperties
+    #   data as a hash:
+    #
+    #       {
+    #         object: "Object", # required
+    #         error_handling_config: {
+    #           fail_on_first_destination_error: false,
+    #           bucket_prefix: "BucketPrefix",
+    #           bucket_name: "BucketName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] object
+    #   The object specified in the Marketo flow destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_handling_config
+    #   The settings that determine how Amazon AppFlow handles an error when
+    #   placing data in the destination. For example, this setting would
+    #   determine if the flow should fail after one insertion error, or
+    #   continue and attempt to insert every record regardless of the
+    #   initial failure. `ErrorHandlingConfig` is a part of the destination
+    #   connector details.
+    #   @return [Types::ErrorHandlingConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/MarketoDestinationProperties AWS API Documentation
+    #
+    class MarketoDestinationProperties < Struct.new(
+      :object,
+      :error_handling_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7171,6 +7237,14 @@ module Aws::Appflow
     #                   bucket_name: "BucketName",
     #                 },
     #                 write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
+    #               },
+    #               marketo: {
+    #                 object: "Object", # required
+    #                 error_handling_config: {
+    #                   fail_on_first_destination_error: false,
+    #                   bucket_prefix: "BucketPrefix",
+    #                   bucket_name: "BucketName",
+    #                 },
     #               },
     #               custom_connector: {
     #                 entity_name: "EntityName", # required

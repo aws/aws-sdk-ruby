@@ -843,7 +843,7 @@ module Aws::Kendra
     #   The type of repository that contains the data source.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   The connector configuration information that is required to access the
+    #   Configuration information that is required to access the data source
     #   repository.
     #
     #   You can't specify the `Configuration` parameter when the `Type`
@@ -1363,11 +1363,11 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ExperienceConfiguration] :configuration
-    #   Provides the configuration information for your Amazon Kendra
-    #   experience. This includes `ContentSourceConfiguration`, which
-    #   specifies the data source IDs and/or FAQ IDs, and
-    #   `UserIdentityConfiguration`, which specifies the user or group
-    #   information to grant access to your Amazon Kendra experience.
+    #   Configuration information for your Amazon Kendra experience. This
+    #   includes `ContentSourceConfiguration`, which specifies the data source
+    #   IDs and/or FAQ IDs, and `UserIdentityConfiguration`, which specifies
+    #   the user or group information to grant access to your Amazon Kendra
+    #   experience.
     #
     # @option params [String] :description
     #   A description for your Amazon Kendra experience.
@@ -3892,6 +3892,9 @@ module Aws::Kendra
     #   identifiable information, such as the user's email address, as the
     #   `VisitorId`.
     #
+    # @option params [Types::SpellCorrectionConfiguration] :spell_correction_configuration
+    #   Enables suggested spell corrections for queries.
+    #
     # @return [Types::QueryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::QueryResult#query_id #query_id} => String
@@ -3899,6 +3902,7 @@ module Aws::Kendra
     #   * {Types::QueryResult#facet_results #facet_results} => Array&lt;Types::FacetResult&gt;
     #   * {Types::QueryResult#total_number_of_results #total_number_of_results} => Integer
     #   * {Types::QueryResult#warnings #warnings} => Array&lt;Types::Warning&gt;
+    #   * {Types::QueryResult#spell_corrected_queries #spell_corrected_queries} => Array&lt;Types::SpellCorrectedQuery&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -4022,6 +4026,9 @@ module Aws::Kendra
     #       ],
     #     },
     #     visitor_id: "VisitorId",
+    #     spell_correction_configuration: {
+    #       include_query_spell_check_suggestions: false, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4076,6 +4083,13 @@ module Aws::Kendra
     #   resp.warnings #=> Array
     #   resp.warnings[0].message #=> String
     #   resp.warnings[0].code #=> String, one of "QUERY_LANGUAGE_INVALID_SYNTAX"
+    #   resp.spell_corrected_queries #=> Array
+    #   resp.spell_corrected_queries[0].suggested_query_text #=> String
+    #   resp.spell_corrected_queries[0].corrections #=> Array
+    #   resp.spell_corrected_queries[0].corrections[0].begin_offset #=> Integer
+    #   resp.spell_corrected_queries[0].corrections[0].end_offset #=> Integer
+    #   resp.spell_corrected_queries[0].corrections[0].term #=> String
+    #   resp.spell_corrected_queries[0].corrections[0].corrected_term #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Query AWS API Documentation
     #
@@ -4276,7 +4290,8 @@ module Aws::Kendra
     #   The identifier of the index that contains the data source to update.
     #
     # @option params [Types::DataSourceConfiguration] :configuration
-    #   Configuration information for an Amazon Kendra data source.
+    #   Configuration information for an Amazon Kendra data source you want to
+    #   update.
     #
     # @option params [String] :description
     #   The new description for the data source.
@@ -4749,9 +4764,7 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
     #
     # @option params [Types::ExperienceConfiguration] :configuration
-    #   Provides the user configuration information. This includes the Amazon
-    #   Web Services SSO field name that contains the identifiers of your
-    #   users, such as their emails.
+    #   Configuration information for your Amazon Kendra you want to update.
     #
     # @option params [String] :description
     #   The description of your Amazon Kendra experience you want to update.
@@ -4803,7 +4816,7 @@ module Aws::Kendra
     #   A new description for the index.
     #
     # @option params [Array<Types::DocumentMetadataConfiguration>] :document_metadata_configuration_updates
-    #   The document metadata to update.
+    #   The document metadata you want to update.
     #
     # @option params [Types::CapacityUnitsConfiguration] :capacity_units
     #   Sets the number of additional storage and query capacity units that
@@ -5119,7 +5132,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

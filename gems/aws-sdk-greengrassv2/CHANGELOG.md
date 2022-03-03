@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-03-03)
+------------------
+
+* Feature - Doc only update that clarifies Create Deployment section.
+
 1.16.0 (2022-02-24)
 ------------------
 

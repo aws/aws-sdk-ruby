@@ -1459,6 +1459,13 @@ module Aws::FSx
     #   one Amazon S3 bucket, and no other S3 bucket can be linked to the
     #   directory.
     #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path, you
+    #   can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
+    #
     # @option params [required, String] :data_repository_path
     #   The path to the Amazon S3 data repository that will be linked to the
     #   file system. The path can be an S3 bucket or prefix in the format
@@ -3055,8 +3062,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
-    # storage volume.
+    # Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -6880,7 +6886,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
