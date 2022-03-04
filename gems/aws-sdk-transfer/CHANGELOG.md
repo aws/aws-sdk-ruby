@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-03-04)
+------------------
+
+* Feature - Add waiters for server online and offline.
+
 1.49.0 (2022-02-24)
 ------------------
 

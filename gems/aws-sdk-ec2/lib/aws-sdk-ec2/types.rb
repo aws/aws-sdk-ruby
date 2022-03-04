@@ -7850,7 +7850,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/ec2-fleet-request-type.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-request-type.html
     #   @return [String]
     #
     # @!attribute [rw] valid_from
@@ -8602,7 +8602,7 @@ module Aws::EC2
     #         locale: "String",
     #         source_ipam_pool_id: "IpamPoolId",
     #         description: "String",
-    #         address_family: "ipv4", # accepts ipv4, ipv6
+    #         address_family: "ipv4", # required, accepts ipv4, ipv6
     #         auto_import: false,
     #         publicly_advertisable: false,
     #         allocation_min_netmask_length: 1,
@@ -40885,6 +40885,12 @@ module Aws::EC2
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
+    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
+    #
+    #    </note>
+    #
     #   Default: `100`
     #
     #
@@ -40909,6 +40915,12 @@ module Aws::EC2
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
+    #
+    #    </note>
     #
     #   Default: `20`
     #
@@ -41273,6 +41285,12 @@ module Aws::EC2
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
     #
+    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
+    #
+    #    </note>
+    #
     #   Default: `100`
     #
     #
@@ -41297,6 +41315,12 @@ module Aws::EC2
     #
     #   This parameter is not supported for [GetSpotPlacementScores][1] and
     #   [GetInstanceTypesFromInstanceRequirements][2].
+    #
+    #   <note markdown="1"> If you set `TargetCapacityUnitType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per-vCPU or
+    #   per-memory price instead of the per-instance price.
+    #
+    #    </note>
     #
     #   Default: `20`
     #

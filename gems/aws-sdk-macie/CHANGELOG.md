@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-03-04)
+------------------
+
+* Feature - Amazon Macie Classic (macie) has been discontinued and is no longer available. A new Amazon Macie (macie2) is now available with significant design improvements and additional features.
+
 1.37.0 (2022-02-24)
 ------------------
 

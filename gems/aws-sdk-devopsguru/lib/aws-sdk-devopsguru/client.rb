@@ -555,6 +555,12 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomaly.resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_anomaly.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomaly.limit #=> Float
+    #   resp.proactive_anomaly.source_metadata.source #=> String
+    #   resp.proactive_anomaly.source_metadata.source_resource_name #=> String
+    #   resp.proactive_anomaly.source_metadata.source_resource_type #=> String
+    #   resp.proactive_anomaly.anomaly_resources #=> Array
+    #   resp.proactive_anomaly.anomaly_resources[0].name #=> String
+    #   resp.proactive_anomaly.anomaly_resources[0].type #=> String
     #   resp.reactive_anomaly.id #=> String
     #   resp.reactive_anomaly.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
     #   resp.reactive_anomaly.status #=> String, one of "ONGOING", "CLOSED"
@@ -625,6 +631,26 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # This operation lists details about a DevOps Guru event source that is
+    # shared with your  account.
+    #
+    # @return [Types::DescribeEventSourcesConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEventSourcesConfigResponse#event_sources #event_sources} => Types::EventSourcesConfig
+    #
+    # @example Response structure
+    #
+    #   resp.event_sources.amazon_code_guru_profiler.status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfig AWS API Documentation
+    #
+    # @overload describe_event_sources_config(params = {})
+    # @param [Hash] params ({})
+    def describe_event_sources_config(params = {}, options = {})
+      req = build_request(:describe_event_sources_config, params)
+      req.send_request(options)
+    end
+
     # Returns the most recent feedback submitted in the current Amazon Web
     # Services account and Region.
     #
@@ -692,6 +718,7 @@ module Aws::DevOpsGuru
     #   resp.proactive_insight.resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_insight.ssm_ops_item_id #=> String
+    #   resp.proactive_insight.description #=> String
     #   resp.reactive_insight.id #=> String
     #   resp.reactive_insight.name #=> String
     #   resp.reactive_insight.severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -705,6 +732,7 @@ module Aws::DevOpsGuru
     #   resp.reactive_insight.resource_collection.tags[0].tag_values #=> Array
     #   resp.reactive_insight.resource_collection.tags[0].tag_values[0] #=> String
     #   resp.reactive_insight.ssm_ops_item_id #=> String
+    #   resp.reactive_insight.description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeInsight AWS API Documentation
     #
@@ -1189,6 +1217,12 @@ module Aws::DevOpsGuru
     #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values #=> Array
     #   resp.proactive_anomalies[0].resource_collection.tags[0].tag_values[0] #=> String
     #   resp.proactive_anomalies[0].limit #=> Float
+    #   resp.proactive_anomalies[0].source_metadata.source #=> String
+    #   resp.proactive_anomalies[0].source_metadata.source_resource_name #=> String
+    #   resp.proactive_anomalies[0].source_metadata.source_resource_type #=> String
+    #   resp.proactive_anomalies[0].anomaly_resources #=> Array
+    #   resp.proactive_anomalies[0].anomaly_resources[0].name #=> String
+    #   resp.proactive_anomalies[0].anomaly_resources[0].type #=> String
     #   resp.reactive_anomalies #=> Array
     #   resp.reactive_anomalies[0].id #=> String
     #   resp.reactive_anomalies[0].severity #=> String, one of "LOW", "MEDIUM", "HIGH"
@@ -1644,6 +1678,7 @@ module Aws::DevOpsGuru
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].metric_name #=> String
     #   resp.recommendations[0].related_anomalies[0].source_details[0].cloud_watch_metrics[0].namespace #=> String
     #   resp.recommendations[0].related_anomalies[0].anomaly_id #=> String
+    #   resp.recommendations[0].category #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ListRecommendations AWS API Documentation
@@ -1985,6 +2020,32 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
+    # Updates the event source configuration.
+    #
+    # @option params [Types::EventSourcesConfig] :event_sources
+    #   The name of the event source.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_event_sources_config({
+    #     event_sources: {
+    #       amazon_code_guru_profiler: {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       },
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfig AWS API Documentation
+    #
+    # @overload update_event_sources_config(params = {})
+    # @param [Hash] params ({})
+    def update_event_sources_config(params = {}, options = {})
+      req = build_request(:update_event_sources_config, params)
+      req.send_request(options)
+    end
+
     # Updates the collection of resources that DevOps Guru analyzes. The two
     # types of Amazon Web Services resource collections supported are Amazon
     # Web Services CloudFormation stacks and Amazon Web Services resources
@@ -2074,7 +2135,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5539,7 +5539,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/ec2-fleet-request-type.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-request-type.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :valid_from
     #   The start date and time of the request, in UTC format (for example,
@@ -6721,7 +6721,7 @@ module Aws::EC2
     # @option params [String] :description
     #   A description for the IPAM pool.
     #
-    # @option params [String] :address_family
+    # @option params [required, String] :address_family
     #   The IP protocol assigned to this IPAM pool. You must choose either
     #   IPv4 or IPv6 protocol for a pool.
     #
@@ -6805,7 +6805,7 @@ module Aws::EC2
     #     locale: "String",
     #     source_ipam_pool_id: "IpamPoolId",
     #     description: "String",
-    #     address_family: "ipv4", # accepts ipv4, ipv6
+    #     address_family: "ipv4", # required, accepts ipv4, ipv6
     #     auto_import: false,
     #     publicly_advertisable: false,
     #     allocation_min_netmask_length: 1,
@@ -49312,7 +49312,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.301.0'
+      context[:gem_version] = '1.302.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

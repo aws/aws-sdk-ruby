@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-04)
+------------------
+
+* Feature - Allow custom handler function.
+
 1.25.0 (2022-02-24)
 ------------------
 

@@ -20,6 +20,7 @@ module Aws::DevOpsGuru
     AccountInsightHealth = Shapes::StructureShape.new(name: 'AccountInsightHealth')
     AddNotificationChannelRequest = Shapes::StructureShape.new(name: 'AddNotificationChannelRequest')
     AddNotificationChannelResponse = Shapes::StructureShape.new(name: 'AddNotificationChannelResponse')
+    AmazonCodeGuruProfilerIntegration = Shapes::StructureShape.new(name: 'AmazonCodeGuruProfilerIntegration')
     AnomalyDescription = Shapes::StringShape.new(name: 'AnomalyDescription')
     AnomalyId = Shapes::StringShape.new(name: 'AnomalyId')
     AnomalyLimit = Shapes::FloatShape.new(name: 'AnomalyLimit')
@@ -28,7 +29,9 @@ module Aws::DevOpsGuru
     AnomalyResource = Shapes::StructureShape.new(name: 'AnomalyResource')
     AnomalyResources = Shapes::ListShape.new(name: 'AnomalyResources')
     AnomalySeverity = Shapes::StringShape.new(name: 'AnomalySeverity')
+    AnomalySource = Shapes::StringShape.new(name: 'AnomalySource')
     AnomalySourceDetails = Shapes::StructureShape.new(name: 'AnomalySourceDetails')
+    AnomalySourceMetadata = Shapes::StructureShape.new(name: 'AnomalySourceMetadata')
     AnomalyStatus = Shapes::StringShape.new(name: 'AnomalyStatus')
     AnomalyTimeRange = Shapes::StructureShape.new(name: 'AnomalyTimeRange')
     AnomalyType = Shapes::StringShape.new(name: 'AnomalyType')
@@ -70,6 +73,8 @@ module Aws::DevOpsGuru
     DescribeAccountOverviewResponse = Shapes::StructureShape.new(name: 'DescribeAccountOverviewResponse')
     DescribeAnomalyRequest = Shapes::StructureShape.new(name: 'DescribeAnomalyRequest')
     DescribeAnomalyResponse = Shapes::StructureShape.new(name: 'DescribeAnomalyResponse')
+    DescribeEventSourcesConfigRequest = Shapes::StructureShape.new(name: 'DescribeEventSourcesConfigRequest')
+    DescribeEventSourcesConfigResponse = Shapes::StructureShape.new(name: 'DescribeEventSourcesConfigResponse')
     DescribeFeedbackRequest = Shapes::StructureShape.new(name: 'DescribeFeedbackRequest')
     DescribeFeedbackResponse = Shapes::StructureShape.new(name: 'DescribeFeedbackResponse')
     DescribeInsightRequest = Shapes::StructureShape.new(name: 'DescribeInsightRequest')
@@ -100,12 +105,15 @@ module Aws::DevOpsGuru
     EventResourceType = Shapes::StringShape.new(name: 'EventResourceType')
     EventResources = Shapes::ListShape.new(name: 'EventResources')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
+    EventSourceOptInStatus = Shapes::StringShape.new(name: 'EventSourceOptInStatus')
+    EventSourcesConfig = Shapes::StructureShape.new(name: 'EventSourcesConfig')
     EventTimeRange = Shapes::StructureShape.new(name: 'EventTimeRange')
     Events = Shapes::ListShape.new(name: 'Events')
     GetCostEstimationRequest = Shapes::StructureShape.new(name: 'GetCostEstimationRequest')
     GetCostEstimationResponse = Shapes::StructureShape.new(name: 'GetCostEstimationResponse')
     GetResourceCollectionRequest = Shapes::StructureShape.new(name: 'GetResourceCollectionRequest')
     GetResourceCollectionResponse = Shapes::StructureShape.new(name: 'GetResourceCollectionResponse')
+    InsightDescription = Shapes::StringShape.new(name: 'InsightDescription')
     InsightFeedback = Shapes::StructureShape.new(name: 'InsightFeedback')
     InsightFeedbackOption = Shapes::StringShape.new(name: 'InsightFeedbackOption')
     InsightHealth = Shapes::StructureShape.new(name: 'InsightHealth')
@@ -202,6 +210,7 @@ module Aws::DevOpsGuru
     ReactiveOrganizationInsightSummary = Shapes::StructureShape.new(name: 'ReactiveOrganizationInsightSummary')
     ReactiveOrganizationInsights = Shapes::ListShape.new(name: 'ReactiveOrganizationInsights')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationCategory = Shapes::StringShape.new(name: 'RecommendationCategory')
     RecommendationDescription = Shapes::StringShape.new(name: 'RecommendationDescription')
     RecommendationLink = Shapes::StringShape.new(name: 'RecommendationLink')
     RecommendationName = Shapes::StringShape.new(name: 'RecommendationName')
@@ -281,6 +290,8 @@ module Aws::DevOpsGuru
     TimestampMetricValuePairList = Shapes::ListShape.new(name: 'TimestampMetricValuePairList')
     TopicArn = Shapes::StringShape.new(name: 'TopicArn')
     UpdateCloudFormationCollectionFilter = Shapes::StructureShape.new(name: 'UpdateCloudFormationCollectionFilter')
+    UpdateEventSourcesConfigRequest = Shapes::StructureShape.new(name: 'UpdateEventSourcesConfigRequest')
+    UpdateEventSourcesConfigResponse = Shapes::StructureShape.new(name: 'UpdateEventSourcesConfigResponse')
     UpdateResourceCollectionAction = Shapes::StringShape.new(name: 'UpdateResourceCollectionAction')
     UpdateResourceCollectionFilter = Shapes::StructureShape.new(name: 'UpdateResourceCollectionFilter')
     UpdateResourceCollectionRequest = Shapes::StructureShape.new(name: 'UpdateResourceCollectionRequest')
@@ -319,6 +330,9 @@ module Aws::DevOpsGuru
     AddNotificationChannelResponse.add_member(:id, Shapes::ShapeRef.new(shape: NotificationChannelId, required: true, location_name: "Id"))
     AddNotificationChannelResponse.struct_class = Types::AddNotificationChannelResponse
 
+    AmazonCodeGuruProfilerIntegration.add_member(:status, Shapes::ShapeRef.new(shape: EventSourceOptInStatus, location_name: "Status"))
+    AmazonCodeGuruProfilerIntegration.struct_class = Types::AmazonCodeGuruProfilerIntegration
+
     AnomalyReportedTimeRange.add_member(:open_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "OpenTime"))
     AnomalyReportedTimeRange.add_member(:close_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CloseTime"))
     AnomalyReportedTimeRange.struct_class = Types::AnomalyReportedTimeRange
@@ -332,6 +346,11 @@ module Aws::DevOpsGuru
     AnomalySourceDetails.add_member(:cloud_watch_metrics, Shapes::ShapeRef.new(shape: CloudWatchMetricsDetails, location_name: "CloudWatchMetrics"))
     AnomalySourceDetails.add_member(:performance_insights_metrics, Shapes::ShapeRef.new(shape: PerformanceInsightsMetricsDetails, location_name: "PerformanceInsightsMetrics"))
     AnomalySourceDetails.struct_class = Types::AnomalySourceDetails
+
+    AnomalySourceMetadata.add_member(:source, Shapes::ShapeRef.new(shape: AnomalySource, location_name: "Source"))
+    AnomalySourceMetadata.add_member(:source_resource_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "SourceResourceName"))
+    AnomalySourceMetadata.add_member(:source_resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "SourceResourceType"))
+    AnomalySourceMetadata.struct_class = Types::AnomalySourceMetadata
 
     AnomalyTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
     AnomalyTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
@@ -419,6 +438,11 @@ module Aws::DevOpsGuru
     DescribeAnomalyResponse.add_member(:reactive_anomaly, Shapes::ShapeRef.new(shape: ReactiveAnomaly, location_name: "ReactiveAnomaly"))
     DescribeAnomalyResponse.struct_class = Types::DescribeAnomalyResponse
 
+    DescribeEventSourcesConfigRequest.struct_class = Types::DescribeEventSourcesConfigRequest
+
+    DescribeEventSourcesConfigResponse.add_member(:event_sources, Shapes::ShapeRef.new(shape: EventSourcesConfig, location_name: "EventSources"))
+    DescribeEventSourcesConfigResponse.struct_class = Types::DescribeEventSourcesConfigResponse
+
     DescribeFeedbackRequest.add_member(:insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "InsightId"))
     DescribeFeedbackRequest.struct_class = Types::DescribeFeedbackRequest
 
@@ -502,6 +526,9 @@ module Aws::DevOpsGuru
     EventResource.struct_class = Types::EventResource
 
     EventResources.member = Shapes::ShapeRef.new(shape: EventResource)
+
+    EventSourcesConfig.add_member(:amazon_code_guru_profiler, Shapes::ShapeRef.new(shape: AmazonCodeGuruProfilerIntegration, location_name: "AmazonCodeGuruProfiler"))
+    EventSourcesConfig.struct_class = Types::EventSourcesConfig
 
     EventTimeRange.add_member(:from_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "FromTime"))
     EventTimeRange.add_member(:to_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "ToTime"))
@@ -717,6 +744,8 @@ module Aws::DevOpsGuru
     ProactiveAnomaly.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
     ProactiveAnomaly.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
     ProactiveAnomaly.add_member(:limit, Shapes::ShapeRef.new(shape: AnomalyLimit, location_name: "Limit"))
+    ProactiveAnomaly.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnomalySourceMetadata, location_name: "SourceMetadata"))
+    ProactiveAnomaly.add_member(:anomaly_resources, Shapes::ShapeRef.new(shape: AnomalyResources, location_name: "AnomalyResources"))
     ProactiveAnomaly.struct_class = Types::ProactiveAnomaly
 
     ProactiveAnomalySummary.add_member(:id, Shapes::ShapeRef.new(shape: AnomalyId, location_name: "Id"))
@@ -730,6 +759,8 @@ module Aws::DevOpsGuru
     ProactiveAnomalySummary.add_member(:associated_insight_id, Shapes::ShapeRef.new(shape: InsightId, location_name: "AssociatedInsightId"))
     ProactiveAnomalySummary.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
     ProactiveAnomalySummary.add_member(:limit, Shapes::ShapeRef.new(shape: AnomalyLimit, location_name: "Limit"))
+    ProactiveAnomalySummary.add_member(:source_metadata, Shapes::ShapeRef.new(shape: AnomalySourceMetadata, location_name: "SourceMetadata"))
+    ProactiveAnomalySummary.add_member(:anomaly_resources, Shapes::ShapeRef.new(shape: AnomalyResources, location_name: "AnomalyResources"))
     ProactiveAnomalySummary.struct_class = Types::ProactiveAnomalySummary
 
     ProactiveInsight.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))
@@ -740,6 +771,7 @@ module Aws::DevOpsGuru
     ProactiveInsight.add_member(:prediction_time_range, Shapes::ShapeRef.new(shape: PredictionTimeRange, location_name: "PredictionTimeRange"))
     ProactiveInsight.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
     ProactiveInsight.add_member(:ssm_ops_item_id, Shapes::ShapeRef.new(shape: SsmOpsItemId, location_name: "SsmOpsItemId"))
+    ProactiveInsight.add_member(:description, Shapes::ShapeRef.new(shape: InsightDescription, location_name: "Description"))
     ProactiveInsight.struct_class = Types::ProactiveInsight
 
     ProactiveInsightSummary.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))
@@ -813,6 +845,7 @@ module Aws::DevOpsGuru
     ReactiveInsight.add_member(:insight_time_range, Shapes::ShapeRef.new(shape: InsightTimeRange, location_name: "InsightTimeRange"))
     ReactiveInsight.add_member(:resource_collection, Shapes::ShapeRef.new(shape: ResourceCollection, location_name: "ResourceCollection"))
     ReactiveInsight.add_member(:ssm_ops_item_id, Shapes::ShapeRef.new(shape: SsmOpsItemId, location_name: "SsmOpsItemId"))
+    ReactiveInsight.add_member(:description, Shapes::ShapeRef.new(shape: InsightDescription, location_name: "Description"))
     ReactiveInsight.struct_class = Types::ReactiveInsight
 
     ReactiveInsightSummary.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, location_name: "Id"))
@@ -846,6 +879,7 @@ module Aws::DevOpsGuru
     Recommendation.add_member(:reason, Shapes::ShapeRef.new(shape: RecommendationReason, location_name: "Reason"))
     Recommendation.add_member(:related_events, Shapes::ShapeRef.new(shape: RecommendationRelatedEvents, location_name: "RelatedEvents"))
     Recommendation.add_member(:related_anomalies, Shapes::ShapeRef.new(shape: RecommendationRelatedAnomalies, location_name: "RelatedAnomalies"))
+    Recommendation.add_member(:category, Shapes::ShapeRef.new(shape: RecommendationCategory, location_name: "Category"))
     Recommendation.struct_class = Types::Recommendation
 
     RecommendationRelatedAnomalies.member = Shapes::ShapeRef.new(shape: RecommendationRelatedAnomaly)
@@ -1030,6 +1064,11 @@ module Aws::DevOpsGuru
     UpdateCloudFormationCollectionFilter.add_member(:stack_names, Shapes::ShapeRef.new(shape: UpdateStackNames, location_name: "StackNames"))
     UpdateCloudFormationCollectionFilter.struct_class = Types::UpdateCloudFormationCollectionFilter
 
+    UpdateEventSourcesConfigRequest.add_member(:event_sources, Shapes::ShapeRef.new(shape: EventSourcesConfig, location_name: "EventSources"))
+    UpdateEventSourcesConfigRequest.struct_class = Types::UpdateEventSourcesConfigRequest
+
+    UpdateEventSourcesConfigResponse.struct_class = Types::UpdateEventSourcesConfigResponse
+
     UpdateResourceCollectionFilter.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: UpdateCloudFormationCollectionFilter, location_name: "CloudFormation"))
     UpdateResourceCollectionFilter.add_member(:tags, Shapes::ShapeRef.new(shape: UpdateTagCollectionFilters, location_name: "Tags"))
     UpdateResourceCollectionFilter.struct_class = Types::UpdateResourceCollectionFilter
@@ -1135,6 +1174,18 @@ module Aws::DevOpsGuru
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:describe_event_sources_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEventSourcesConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/event-sources"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEventSourcesConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEventSourcesConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1454,6 +1505,18 @@ module Aws::DevOpsGuru
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_event_sources_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEventSourcesConfig"
+        o.http_method = "PUT"
+        o.http_request_uri = "/event-sources"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEventSourcesConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEventSourcesConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)

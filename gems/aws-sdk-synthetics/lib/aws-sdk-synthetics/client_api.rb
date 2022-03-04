@@ -42,6 +42,7 @@ module Aws::Synthetics
     CanaryStateReasonCode = Shapes::StringShape.new(name: 'CanaryStateReasonCode')
     CanaryStatus = Shapes::StructureShape.new(name: 'CanaryStatus')
     CanaryTimeline = Shapes::StructureShape.new(name: 'CanaryTimeline')
+    CodeHandler = Shapes::StringShape.new(name: 'CodeHandler')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateCanaryRequest = Shapes::StructureShape.new(name: 'CreateCanaryRequest')
     CreateCanaryResponse = Shapes::StructureShape.new(name: 'CreateCanaryResponse')
@@ -152,7 +153,7 @@ module Aws::Synthetics
     CanaryCodeInput.add_member(:s3_key, Shapes::ShapeRef.new(shape: String, location_name: "S3Key"))
     CanaryCodeInput.add_member(:s3_version, Shapes::ShapeRef.new(shape: String, location_name: "S3Version"))
     CanaryCodeInput.add_member(:zip_file, Shapes::ShapeRef.new(shape: Blob, location_name: "ZipFile"))
-    CanaryCodeInput.add_member(:handler, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Handler"))
+    CanaryCodeInput.add_member(:handler, Shapes::ShapeRef.new(shape: CodeHandler, required: true, location_name: "Handler"))
     CanaryCodeInput.struct_class = Types::CanaryCodeInput
 
     CanaryCodeOutput.add_member(:source_location_arn, Shapes::ShapeRef.new(shape: String, location_name: "SourceLocationArn"))

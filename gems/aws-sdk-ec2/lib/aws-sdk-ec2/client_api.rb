@@ -4017,7 +4017,7 @@ module Aws::EC2
     CreateIpamPoolRequest.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
     CreateIpamPoolRequest.add_member(:source_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "SourceIpamPoolId"))
     CreateIpamPoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateIpamPoolRequest.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "AddressFamily"))
+    CreateIpamPoolRequest.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, required: true, location_name: "AddressFamily"))
     CreateIpamPoolRequest.add_member(:auto_import, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoImport"))
     CreateIpamPoolRequest.add_member(:publicly_advertisable, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAdvertisable"))
     CreateIpamPoolRequest.add_member(:allocation_min_netmask_length, Shapes::ShapeRef.new(shape: IpamNetmaskLength, location_name: "AllocationMinNetmaskLength"))

@@ -483,7 +483,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     artifact_s3_location: "String", # required
     #     execution_role_arn: "RoleArn", # required
@@ -1273,7 +1273,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     execution_role_arn: "RoleArn",
     #     runtime_version: "String",
@@ -1335,7 +1335,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
