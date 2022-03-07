@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-03-07)
+------------------
+
+* Feature - Adds support for Transcribe language identification feature to the StartMeetingTranscription API.
+
 1.7.0 (2022-02-24)
 ------------------
 

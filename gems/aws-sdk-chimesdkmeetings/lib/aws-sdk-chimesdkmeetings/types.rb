@@ -257,11 +257,14 @@ module Aws::ChimeSDKMeetings
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting.
     #
-    #   Available values: `af-south-1` , `ap-northeast-1` , `ap-northeast-2`
-    #   , `ap-south-1` , `ap-southeast-1` , `ap-southeast-2` ,
-    #   `ca-central-1` , `eu-central-1` , `eu-north-1` , `eu-south-1` ,
-    #   `eu-west-1` , `eu-west-2` , `eu-west-3` , `sa-east-1` , `us-east-1`
-    #   , `us-east-2` , `us-west-1` , `us-west-2` .
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -343,6 +346,15 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] media_region
     #   The Region in which to create the meeting.
+    #
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`,
+    #   `eu-west-2`, `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`,
+    #   `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] meeting_host_id
@@ -510,7 +522,7 @@ module Aws::ChimeSDKMeetings
     #   data as a hash:
     #
     #       {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
@@ -521,6 +533,9 @@ module Aws::ChimeSDKMeetings
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "TranscribePiiEntityTypes",
     #         language_model_name: "TranscribeLanguageModelName",
+    #         identify_language: false,
+    #         language_options: "TranscribeLanguageOptions",
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #       }
     #
     # @!attribute [rw] language_code
@@ -576,7 +591,7 @@ module Aws::ChimeSDKMeetings
     #   specify entity types, you must enable `ContentIdentificationType` or
     #   `ContentRedactionType`.
     #
-    #   PIIEntityTypes must be comma-separated. The available values are:
+    #   `PIIEntityTypes` must be comma-separated. The available values are:
     #   `BANK_ACCOUNT_NUMBER`, `BANK_ROUTING, CREDIT_DEBIT_NUMBER`,
     #   `CREDIT_DEBIT_CVV`, `CREDIT_DEBIT_EXPIRY`, `PIN`, `EMAIL`,
     #   `ADDRESS`, `NAME`, `PHONE`, `SSN`, and `ALL`.
@@ -587,6 +602,19 @@ module Aws::ChimeSDKMeetings
     #
     # @!attribute [rw] language_model_name
     #   The name of the language model used during transcription.
+    #   @return [String]
+    #
+    # @!attribute [rw] identify_language
+    #   Automatically identifies the language spoken in media files.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] language_options
+    #   Language codes for the languages that you want to identify. You must
+    #   provide at least 2 codes.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_language
+    #   Language code for the preferred language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/EngineTranscribeSettings AWS API Documentation
@@ -602,7 +630,10 @@ module Aws::ChimeSDKMeetings
       :content_identification_type,
       :content_redaction_type,
       :pii_entity_types,
-      :language_model_name)
+      :language_model_name,
+      :identify_language,
+      :language_options,
+      :preferred_language)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -839,6 +870,9 @@ module Aws::ChimeSDKMeetings
     #   `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`, `eu-central-1`,
     #   `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`, `eu-west-3`,
     #   `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #   @return [String]
     #
     # @!attribute [rw] media_placement
@@ -862,7 +896,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The configuration settings of the features available to a meeting.
+    # The configuration settings of the features available to a meeting.&gt;
     #
     # @note When making an API call, you may pass MeetingFeaturesConfiguration
     #   data as a hash:
@@ -980,7 +1014,7 @@ module Aws::ChimeSDKMeetings
     #         meeting_id: "GuidString", # required
     #         transcription_configuration: { # required
     #           engine_transcribe_settings: {
-    #             language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #             language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #             vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #             vocabulary_filter_name: "String",
     #             vocabulary_name: "String",
@@ -991,6 +1025,9 @@ module Aws::ChimeSDKMeetings
     #             content_redaction_type: "PII", # accepts PII
     #             pii_entity_types: "TranscribePiiEntityTypes",
     #             language_model_name: "TranscribeLanguageModelName",
+    #             identify_language: false,
+    #             language_options: "TranscribeLanguageOptions",
+    #             preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #           },
     #           engine_transcribe_medical_settings: {
     #             language_code: "en-US", # required, accepts en-US
@@ -1050,7 +1087,7 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         engine_transcribe_settings: {
-    #           language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #           language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #           vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #           vocabulary_filter_name: "String",
     #           vocabulary_name: "String",
@@ -1061,6 +1098,9 @@ module Aws::ChimeSDKMeetings
     #           content_redaction_type: "PII", # accepts PII
     #           pii_entity_types: "TranscribePiiEntityTypes",
     #           language_model_name: "TranscribeLanguageModelName",
+    #           identify_language: false,
+    #           language_options: "TranscribeLanguageOptions",
+    #           preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         },
     #         engine_transcribe_medical_settings: {
     #           language_code: "en-US", # required, accepts en-US

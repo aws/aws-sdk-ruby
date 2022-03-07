@@ -161,7 +161,7 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] arn
-    #   he Amazon Resource Name (ARN) of the application.
+    #   The Amazon Resource Name (ARN) of the application.
     #   @return [String]
     #
     # @!attribute [rw] created_by_account_id
@@ -189,7 +189,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   The Amazon Web Services account ID of the application owner.
+    #   The Amazon Web Services account ID of the application owner (which
+    #   is always the same as the environment owner account ID).
     #   @return [String]
     #
     # @!attribute [rw] proxy_type
@@ -361,7 +362,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   The Amazon Web Services account ID of the application owner.
+    #   The Amazon Web Services account ID of the application owner (which
+    #   is always the same as the environment owner account ID).
     #   @return [String]
     #
     # @!attribute [rw] proxy_type
@@ -626,12 +628,12 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] service_id
-    #   The ID of service in which the rute iscreated. Traffic that matches
-    #   this route is forwarded to this service.
+    #   The ID of service in which the route is created. Traffic that
+    #   matches this route is forwarded to this service.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   he current state of the route.
+    #   The current state of the route.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -1008,7 +1010,7 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     # @!attribute [rw] application_id
-    #   he ID of the application that the route belongs to.
+    #   The ID of the application that the route belongs to.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1343,7 +1345,8 @@ module Aws::MigrationHubRefactorSpaces
     #   @return [String]
     #
     # @!attribute [rw] owner_account_id
-    #   The Amazon Web Services account ID of the application owner.
+    #   The Amazon Web Services account ID of the application owner (which
+    #   is always the same as the environment owner account ID).
     #   @return [String]
     #
     # @!attribute [rw] proxy_type
