@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-module Enumerable
-  class Enumerator; end
-end
 require_relative '../../spec_helper'
 
 module Aws
