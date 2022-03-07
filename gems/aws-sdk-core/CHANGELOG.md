@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Static stability improvements for `InstanceProfileCredentials` (IMDS Credentials).
+
 3.128.1 (2022-03-07)
 ------------------
 
