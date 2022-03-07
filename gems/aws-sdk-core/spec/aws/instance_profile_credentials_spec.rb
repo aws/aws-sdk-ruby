@@ -491,5 +491,81 @@ module Aws
         assert_requested(expected_request, times: 4)
       end
     end
+
+    describe 'static stability' do
+      let(:expired) { Time.now.utc - 3600 }
+      let(:near_expiration) { Time.now.utc + 10 }
+
+      let(:expired_resp) { <<-JSON.strip }
+        {
+          "Code" : "Success",
+          "LastUpdated" : "2013-11-22T20:03:48Z",
+          "Type" : "AWS-HMAC",
+          "AccessKeyId" : "akid",
+          "SecretAccessKey" : "secret",
+          "Token" : "session-token",
+          "Expiration" : "#{expired.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+        }
+      JSON
+
+      let(:near_expiration_resp) { <<-JSON.strip }
+        {
+          "Code" : "Success",
+          "LastUpdated" : "2013-11-22T20:03:48Z",
+          "Type" : "AWS-HMAC",
+          "AccessKeyId" : "akid-2",
+          "SecretAccessKey" : "secret-2",
+          "Token" : "session-token-2",
+          "Expiration" : "#{near_expiration.strftime('%Y-%m-%dT%H:%M:%SZ')}"
+        }
+      JSON
+
+      before(:each) do
+        stub_request(:put, "http://169.254.169.254#{token_path}")
+          .to_return(
+            status: 200,
+            body: "my-token\n",
+            headers: { 'x-aws-ec2-metadata-token-ttl-seconds' => '21600' }
+          )
+        stub_request(:get, "http://169.254.169.254#{path}")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: "profile-name\n")
+      end
+
+      it 'provides credentials when the first call returns expired credentials' do
+        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn).at_least(:once)
+
+        expected_request = stub_request(:get, "http://169.254.169.254#{path}profile-name")
+          .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+          .to_return(status: 200, body: expired_resp)
+
+        provider = InstanceProfileCredentials.new(backoff: 0)
+        creds = provider.credentials
+        expect(creds.access_key_id).to eq('akid')
+        assert_requested(expected_request, times: 1)
+
+        # successive requests/credential gets don't result in more calls to imds
+        provider.credentials
+        provider.credentials
+        provider.credentials
+
+        assert_requested(expected_request, times: 1)
+      end
+
+      it 'provides credentials after a read timeout during a refresh' do
+        expect_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+        expected_request = stub_request(:get, "http://169.254.169.254#{path}profile-name")
+                             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+                             .to_return(status: 200, body: near_expiration_resp)
+                             .to_raise(Timeout::Error)
+
+        provider = InstanceProfileCredentials.new(backoff: 0, retries: 0)
+
+        creds = provider.credentials
+
+        expect(creds.access_key_id).to eq('akid-2')
+        assert_requested(expected_request, times: 2)
+      end
+    end
   end
 end
