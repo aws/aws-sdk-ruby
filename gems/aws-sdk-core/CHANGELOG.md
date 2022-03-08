@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.129.0 (2022-03-08)
+------------------
+
 * Feature - Add support for cases when `InstanceProfileCredentials` (IMDS) is unable to refresh credentials.
 
 3.128.1 (2022-03-07)

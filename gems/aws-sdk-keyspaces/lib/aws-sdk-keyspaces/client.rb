@@ -702,6 +702,10 @@ module Aws::Keyspaces
     # current status, the keyspace name, configuration settings, and
     # metadata.
     #
+    # To read table metadata using `GetTable`, `Select` action permissions
+    # for the table and system tables are required to complete the
+    # operation.
+    #
     # @option params [required, String] :keyspace_name
     #   The name of the keyspace that the table is stored in.
     #
@@ -1067,14 +1071,18 @@ module Aws::Keyspaces
 
     # Associates a set of tags with a Amazon Keyspaces resource. You can
     # then activate these user-defined tags so that they appear on the Cost
-    # Management Console for cost allocation tracking.
+    # Management Console for cost allocation tracking. For more information,
+    # see [Adding tags and labels to Amazon Keyspaces resources][1] in the
+    # *Amazon Keyspaces Developer Guide*.
     #
-    # For more information, see [Adding tags and labels to Amazon Keyspaces
-    # resources][1] in the *Amazon Keyspaces Developer Guide*.
+    # For IAM policy examples that show how to control access to Amazon
+    # Keyspaces resources based on tags, see [Amazon Keyspaces resource
+    # access based on tags][2] in the *Amazon Keyspaces Developer Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html
+    # [2]: https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples-tags
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Amazon Keyspaces resource to
@@ -1289,7 +1297,7 @@ module Aws::Keyspaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-keyspaces'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

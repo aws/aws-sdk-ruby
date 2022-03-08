@@ -657,6 +657,7 @@ module Aws::MediaConvert
     #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #             embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
     #               blue_primary_y: 1,
@@ -888,6 +889,7 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #               caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
@@ -1887,6 +1889,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -2045,6 +2048,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -2930,6 +2934,7 @@ module Aws::MediaConvert
     #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #             embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
     #               blue_primary_y: 1,
@@ -3161,6 +3166,7 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #               caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
@@ -4130,6 +4136,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -4288,6 +4295,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -6666,6 +6674,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -6824,6 +6833,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -7609,6 +7619,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -7767,6 +7778,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -9236,6 +9248,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_templates[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job_templates[0].settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -9394,6 +9407,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -10229,6 +10243,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.jobs[0].settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -10387,6 +10402,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -12088,6 +12104,7 @@ module Aws::MediaConvert
     #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #             color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #             embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #             hdr_10_metadata: {
     #               blue_primary_x: 1,
     #               blue_primary_y: 1,
@@ -12319,6 +12336,7 @@ module Aws::MediaConvert
     #                 },
     #               ],
     #               caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #               caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #               client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #               codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #               destination: "__stringPatternS3",
@@ -13285,6 +13303,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job_template.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job_template.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
+    #   resp.job_template.settings.inputs[0].video_selector.embedded_timecode_override #=> String, one of "NONE", "USE_MDPM"
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.blue_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.green_primary_x #=> Integer
@@ -13443,6 +13462,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_mappings[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_language_setting #=> String, one of "INSERT", "OMIT", "NONE"
+    #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.caption_segment_length_control #=> String, one of "LARGE_SEGMENTS", "MATCH_VIDEO"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.client_cache #=> String, one of "DISABLED", "ENABLED"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.codec_specification #=> String, one of "RFC_6381", "RFC_4281"
     #   resp.job_template.settings.output_groups[0].output_group_settings.hls_group_settings.destination #=> String
@@ -15513,7 +15533,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

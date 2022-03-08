@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-03-08)
+------------------
+
+* Feature - Introducing a new enum for NodeGroup error code: Ec2SubnetMissingIpv6Assignment
+
 1.73.0 (2022-02-24)
 ------------------
 
