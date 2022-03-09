@@ -235,8 +235,8 @@ module Aws
         stubs = @stubs[operation_name] || []
         case stubs.length
         when 0 then default_stub(operation_name)
-        when 1 then stubs.first
-        else stubs.shift
+        when 1 then convert_stub(operation_name, stubs.first)
+        else convert_stub(operation_name, stubs.shift)
         end
       end
       Proc === stub ? convert_stub(operation_name, stub.call(context)) : stub
@@ -255,9 +255,10 @@ module Aws
     # during response handling.
     def apply_stubs(operation_name, stubs)
       @stub_mutex.synchronize do
-        @stubs[operation_name.to_sym] = stubs.map do |stub|
-          convert_stub(operation_name, stub)
+        stubs.each do |stub|
+          validate_stub(operation_name, stub)
         end
+        @stubs[operation_name.to_sym] = stubs
       end
     end
 
@@ -296,6 +297,14 @@ module Aws
       operation = api.operation(operation_name)
       ParamValidator.new(operation.output, input: false).validate!(data)
       protocol_helper.stub_data(api, operation, data)
+    end
+
+    def validate_stub(operation_name, data)
+      if Hash === data && data.keys.sort != [:body, :headers, :status_code]
+        api = config.api
+        operation = api.operation(operation_name)
+        ParamValidator.new(operation.output, input: false).validate!(data)
+      end
     end
 
     def protocol_helper
