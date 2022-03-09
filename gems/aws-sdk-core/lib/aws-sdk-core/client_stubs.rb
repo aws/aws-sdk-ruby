@@ -301,9 +301,7 @@ module Aws
 
     def validate_stub(operation_name, data)
       if Hash === data && data.keys.sort != [:body, :headers, :status_code]
-        api = config.api
-        operation = api.operation(operation_name)
-        ParamValidator.new(operation.output, input: false).validate!(data)
+        data_to_http_resp(operation_name, data)
       end
     end
 
