@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Make stubs thread safe by creating new responses for each operation call (#2675).
+
 3.129.0 (2022-03-08)
 ------------------
 
