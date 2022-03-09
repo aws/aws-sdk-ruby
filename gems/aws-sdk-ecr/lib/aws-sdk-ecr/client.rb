@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ECR
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -1377,6 +1379,7 @@ module Aws::ECR
     #   resp.image_details[0].image_scan_findings_summary.finding_severity_counts["FindingSeverity"] #=> Integer
     #   resp.image_details[0].image_manifest_media_type #=> String
     #   resp.image_details[0].artifact_media_type #=> String
+    #   resp.image_details[0].last_recorded_pull_time #=> Time
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeImages AWS API Documentation
@@ -2191,6 +2194,10 @@ module Aws::ECR
       req.send_request(options)
     end
 
+    # The `PutImageScanningConfiguration` API is being deprecated, in favor
+    # of specifying the image scanning configuration at the registry level.
+    # For more information, see PutRegistryScanningConfiguration.
+    #
     # Updates the image scanning configuration for the specified repository.
     #
     # @option params [String] :registry_id
@@ -2391,13 +2398,17 @@ module Aws::ECR
     # @option params [String] :scan_type
     #   The scanning type to set for the registry.
     #
-    #   By default, the `BASIC` scan type is used. When basic scanning is set,
-    #   you may specify filters to determine which individual repositories, or
-    #   all repositories, are scanned when new images are pushed.
-    #   Alternatively, you can do manual scans of images with basic scanning.
+    #   When a registry scanning configuration is not defined, by default the
+    #   `BASIC` scan type is used. When basic scanning is used, you may
+    #   specify filters to determine which individual repositories, or all
+    #   repositories, are scanned when new images are pushed to those
+    #   repositories. Alternatively, you can do manual scans of images with
+    #   basic scanning.
     #
     #   When the `ENHANCED` scan type is set, Amazon Inspector provides
-    #   automated, continuous scanning of all repositories in your registry.
+    #   automated vulnerability scanning. You may choose between continuous
+    #   scanning or scan on push and you may specify filters to determine
+    #   which individual repositories, or all repositories, are scanned.
     #
     # @option params [Array<Types::RegistryScanningRule>] :rules
     #   The scanning rules to use for the registry. A scanning rule is used to
@@ -2824,7 +2835,7 @@ module Aws::ECR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecr'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

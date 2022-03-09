@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.80.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.79.0 (2022-02-23)
+------------------
+
+* Feature - Lambda releases .NET 6 managed runtime to be available in all commercial regions.
+
 1.78.0 (2022-02-03)
 ------------------
 

@@ -1066,6 +1066,7 @@ module Aws::Translate
     #         parallel_data_names: ["ResourceName"],
     #         client_token: "ClientTokenString", # required
     #         settings: {
+    #           formality: "FORMAL", # accepts FORMAL, INFORMAL
     #           profanity: "MASK", # accepts MASK
     #         },
     #       }
@@ -1633,6 +1634,7 @@ module Aws::Translate
     #         source_language_code: "LanguageCodeString", # required
     #         target_language_code: "LanguageCodeString", # required
     #         settings: {
+    #           formality: "FORMAL", # accepts FORMAL, INFORMAL
     #           profanity: "MASK", # accepts MASK
     #         },
     #       }
@@ -1726,8 +1728,12 @@ module Aws::Translate
     #   data as a hash:
     #
     #       {
+    #         formality: "FORMAL", # accepts FORMAL, INFORMAL
     #         profanity: "MASK", # accepts MASK
     #       }
+    #
+    # @!attribute [rw] formality
+    #   @return [String]
     #
     # @!attribute [rw] profanity
     #   Enable the profanity setting if you want Amazon Translate to mask
@@ -1751,6 +1757,7 @@ module Aws::Translate
     # @see http://docs.aws.amazon.com/goto/WebAPI/translate-2017-07-01/TranslationSettings AWS API Documentation
     #
     class TranslationSettings < Struct.new(
+      :formality,
       :profanity)
       SENSITIVE = []
       include Aws::Structure

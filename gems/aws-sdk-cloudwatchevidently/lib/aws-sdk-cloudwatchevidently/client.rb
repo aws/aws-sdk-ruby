@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CloudWatchEvidently
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -502,11 +504,11 @@ module Aws::CloudWatchEvidently
     #       {
     #         desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       },
     #     ],
@@ -779,11 +781,11 @@ module Aws::CloudWatchEvidently
     #     metric_monitors: [
     #       {
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       },
     #     ],
@@ -1492,6 +1494,10 @@ module Aws::CloudWatchEvidently
     # @option params [required, String] :project
     #   The name or ARN of the project to return the experiment list from.
     #
+    # @option params [String] :status
+    #   Use this optional parameter to limit the returned results to only the
+    #   experiments with the status that you specify here.
+    #
     # @return [Types::ListExperimentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExperimentsResponse#experiments #experiments} => Array&lt;Types::Experiment&gt;
@@ -1505,6 +1511,7 @@ module Aws::CloudWatchEvidently
     #     max_results: 1,
     #     next_token: "NextToken",
     #     project: "ProjectRef", # required
+    #     status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #   })
     #
     # @example Response structure
@@ -1620,6 +1627,10 @@ module Aws::CloudWatchEvidently
     # @option params [required, String] :project
     #   The name or ARN of the project to return the launch list from.
     #
+    # @option params [String] :status
+    #   Use this optional parameter to limit the returned results to only the
+    #   launches with the status that you specify here.
+    #
     # @return [Types::ListLaunchesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListLaunchesResponse#launches #launches} => Array&lt;Types::Launch&gt;
@@ -1633,6 +1644,7 @@ module Aws::CloudWatchEvidently
     #     max_results: 1,
     #     next_token: "NextToken",
     #     project: "ProjectRef", # required
+    #     status: "CREATED", # accepts CREATED, UPDATING, RUNNING, COMPLETED, CANCELLED
     #   })
     #
     # @example Response structure
@@ -2139,11 +2151,11 @@ module Aws::CloudWatchEvidently
     #       {
     #         desired_change: "INCREASE", # accepts INCREASE, DECREASE
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       },
     #     ],
@@ -2382,11 +2394,11 @@ module Aws::CloudWatchEvidently
     #     metric_monitors: [
     #       {
     #         metric_definition: { # required
-    #           entity_id_key: "JsonPath",
+    #           entity_id_key: "JsonPath", # required
     #           event_pattern: "MetricDefinitionConfigEventPatternString",
-    #           name: "CwDimensionSafeName",
+    #           name: "CwDimensionSafeName", # required
     #           unit_label: "MetricUnitLabel",
-    #           value_key: "JsonPath",
+    #           value_key: "JsonPath", # required
     #         },
     #       },
     #     ],
@@ -2585,7 +2597,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

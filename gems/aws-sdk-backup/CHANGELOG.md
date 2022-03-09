@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.42.0 (2022-02-17)
+------------------
+
+* Feature - AWS Backup add new S3_BACKUP_OBJECT_FAILED and S3_RESTORE_OBJECT_FAILED event types in BackupVaultNotifications events list.
+
 1.41.0 (2022-02-03)
 ------------------
 

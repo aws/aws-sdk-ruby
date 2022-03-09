@@ -56,6 +56,7 @@ module Aws::Transfer
     #           },
     #         },
     #         overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #         source_file_location: "SourceFileLocation",
     #       }
     #
     # @!attribute [rw] name
@@ -64,7 +65,8 @@ module Aws::Transfer
     #
     # @!attribute [rw] destination_file_location
     #   Specifies the location for the file being copied. Only applicable
-    #   for the Copy type of workflow steps.
+    #   for Copy type workflow steps. Use `$\{Transfer:username\}` in this
+    #   field to parametrize the destination prefix by username.
     #   @return [Types::InputFileLocation]
     #
     # @!attribute [rw] overwrite_existing
@@ -72,12 +74,26 @@ module Aws::Transfer
     #   of the same name. The default is `FALSE`.
     #   @return [String]
     #
+    # @!attribute [rw] source_file_location
+    #   Specifies which file to use as input to the workflow step: either
+    #   the output from the previous step, or the originally uploaded file
+    #   for the workflow.
+    #
+    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #     In this case, this workflow step uses the output file from the
+    #     previous workflow step as input. This is the default value.
+    #
+    #   * Enter `$\{original.file\}` to use the originally-uploaded file
+    #     location as input for this step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CopyStepDetails AWS API Documentation
     #
     class CopyStepDetails < Struct.new(
       :name,
       :destination_file_location,
-      :overwrite_existing)
+      :overwrite_existing,
+      :source_file_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -146,17 +162,6 @@ module Aws::Transfer
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
-    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
-    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
-    #   call instead of `s3` or `efs` so you can use the put-object
-    #   operation. For example, you use the following: `aws s3api put-object
-    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
-    #   of the key name ends in a `/` for it to be considered a folder.
-    #
-    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -289,6 +294,8 @@ module Aws::Transfer
     #         },
     #         identity_provider_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, API_GATEWAY, AWS_DIRECTORY_SERVICE, AWS_LAMBDA
     #         logging_role: "Role",
+    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         protocol_details: {
     #           passive_ip: "PassiveIp",
@@ -457,6 +464,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -525,6 +538,8 @@ module Aws::Transfer
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :protocol_details,
       :security_policy_name,
@@ -617,17 +632,6 @@ module Aws::Transfer
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
-    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
-    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
-    #   call instead of `s3` or `efs` so you can use the put-object
-    #   operation. For example, you use the following: `aws s3api put-object
-    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
-    #   of the key name ends in a `/` for it to be considered a folder.
-    #
-    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -762,14 +766,17 @@ module Aws::Transfer
     #                 },
     #               },
     #               overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             custom_step_details: {
     #               name: "WorkflowStepName",
     #               target: "CustomStepTarget",
     #               timeout_seconds: 1,
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             delete_step_details: {
     #               name: "WorkflowStepName",
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             tag_step_details: {
     #               name: "WorkflowStepName",
@@ -779,6 +786,7 @@ module Aws::Transfer
     #                   value: "S3TagValue", # required
     #                 },
     #               ],
+    #               source_file_location: "SourceFileLocation",
     #             },
     #           },
     #         ],
@@ -798,14 +806,17 @@ module Aws::Transfer
     #                 },
     #               },
     #               overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             custom_step_details: {
     #               name: "WorkflowStepName",
     #               target: "CustomStepTarget",
     #               timeout_seconds: 1,
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             delete_step_details: {
     #               name: "WorkflowStepName",
+    #               source_file_location: "SourceFileLocation",
     #             },
     #             tag_step_details: {
     #               name: "WorkflowStepName",
@@ -815,6 +826,7 @@ module Aws::Transfer
     #                   value: "S3TagValue", # required
     #                 },
     #               ],
+    #               source_file_location: "SourceFileLocation",
     #             },
     #           },
     #         ],
@@ -902,6 +914,7 @@ module Aws::Transfer
     #         name: "WorkflowStepName",
     #         target: "CustomStepTarget",
     #         timeout_seconds: 1,
+    #         source_file_location: "SourceFileLocation",
     #       }
     #
     # @!attribute [rw] name
@@ -916,12 +929,26 @@ module Aws::Transfer
     #   Timeout, in seconds, for the step.
     #   @return [Integer]
     #
+    # @!attribute [rw] source_file_location
+    #   Specifies which file to use as input to the workflow step: either
+    #   the output from the previous step, or the originally uploaded file
+    #   for the workflow.
+    #
+    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #     In this case, this workflow step uses the output file from the
+    #     previous workflow step as input. This is the default value.
+    #
+    #   * Enter `$\{original.file\}` to use the originally-uploaded file
+    #     location as input for this step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CustomStepDetails AWS API Documentation
     #
     class CustomStepDetails < Struct.new(
       :name,
       :target,
-      :timeout_seconds)
+      :timeout_seconds,
+      :source_file_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1027,16 +1054,31 @@ module Aws::Transfer
     #
     #       {
     #         name: "WorkflowStepName",
+    #         source_file_location: "SourceFileLocation",
     #       }
     #
     # @!attribute [rw] name
     #   The name of the step, used as an identifier.
     #   @return [String]
     #
+    # @!attribute [rw] source_file_location
+    #   Specifies which file to use as input to the workflow step: either
+    #   the output from the previous step, or the originally uploaded file
+    #   for the workflow.
+    #
+    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #     In this case, this workflow step uses the output file from the
+    #     previous workflow step as input. This is the default value.
+    #
+    #   * Enter `$\{original.file\}` to use the originally-uploaded file
+    #     location as input for this step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DeleteStepDetails AWS API Documentation
     #
     class DeleteStepDetails < Struct.new(
-      :name)
+      :name,
+      :source_file_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1626,6 +1668,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -1690,6 +1738,8 @@ module Aws::Transfer
       :identity_provider_details,
       :identity_provider_type,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :security_policy_name,
       :server_id,
@@ -2080,17 +2130,6 @@ module Aws::Transfer
     # The following is an `Entry` and `Target` pair example for `chroot`.
     #
     # `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    # <note markdown="1"> If the target of a logical directory entry does not exist in Amazon S3
-    # or EFS, the entry is ignored. As a workaround, you can use the Amazon
-    # S3 API or EFS API to create 0 byte objects as place holders for your
-    # directory. If using the CLI, use the `s3api` or `efsapi` call instead
-    # of `s3` or `efs` so you can use the put-object operation. For example,
-    # you use the following: `aws s3api put-object --bucket bucketname --key
-    # path/to/folder/`. Make sure that the end of the key name ends in a `/`
-    # for it to be considered a folder.
-    #
-    #  </note>
     #
     # @note When making an API call, you may pass HomeDirectoryMapEntry
     #   data as a hash:
@@ -3496,6 +3535,7 @@ module Aws::Transfer
     #             value: "S3TagValue", # required
     #           },
     #         ],
+    #         source_file_location: "SourceFileLocation",
     #       }
     #
     # @!attribute [rw] name
@@ -3506,11 +3546,25 @@ module Aws::Transfer
     #   Array that contains from 1 to 10 key/value pairs.
     #   @return [Array<Types::S3Tag>]
     #
+    # @!attribute [rw] source_file_location
+    #   Specifies which file to use as input to the workflow step: either
+    #   the output from the previous step, or the originally uploaded file
+    #   for the workflow.
+    #
+    #   * Enter `$\{previous.file\}` to use the previous file as the input.
+    #     In this case, this workflow step uses the output file from the
+    #     previous workflow step as input. This is the default value.
+    #
+    #   * Enter `$\{original.file\}` to use the originally-uploaded file
+    #     location as input for this step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/TagStepDetails AWS API Documentation
     #
     class TagStepDetails < Struct.new(
       :name,
-      :tags)
+      :tags,
+      :source_file_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3577,6 +3631,11 @@ module Aws::Transfer
     #
     # @!attribute [rw] message
     #   A message that indicates whether the test was successful or not.
+    #
+    #   <note markdown="1"> If an empty string is returned, the most likely cause is that the
+    #   authentication failed due to an incorrect username or password.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] url
@@ -3702,17 +3761,6 @@ module Aws::Transfer
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
-    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
-    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
-    #   call instead of `s3` or `efs` so you can use the put-object
-    #   operation. For example, you use the following: `aws s3api put-object
-    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
-    #   of the key name ends in a `/` for it to be considered a folder.
-    #
-    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -3847,6 +3895,8 @@ module Aws::Transfer
     #           function: "Function",
     #         },
     #         logging_role: "NullableRole",
+    #         post_authentication_login_banner: "PostAuthenticationLoginBanner",
+    #         pre_authentication_login_banner: "PreAuthenticationLoginBanner",
     #         protocols: ["SFTP"], # accepts SFTP, FTP, FTPS
     #         security_policy_name: "SecurityPolicyName",
     #         server_id: "ServerId", # required
@@ -3980,6 +4030,12 @@ module Aws::Transfer
     #   logs.
     #   @return [String]
     #
+    # @!attribute [rw] post_authentication_login_banner
+    #   @return [String]
+    #
+    # @!attribute [rw] pre_authentication_login_banner
+    #   @return [String]
+    #
     # @!attribute [rw] protocols
     #   Specifies the file transfer protocol or protocols over which your
     #   file transfer protocol client can connect to your server's
@@ -4036,6 +4092,8 @@ module Aws::Transfer
       :host_key,
       :identity_provider_details,
       :logging_role,
+      :post_authentication_login_banner,
+      :pre_authentication_login_banner,
       :protocols,
       :security_policy_name,
       :server_id,
@@ -4121,17 +4179,6 @@ module Aws::Transfer
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
     #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
-    #
-    #   <note markdown="1"> If the target of a logical directory entry does not exist in Amazon
-    #   S3 or EFS, the entry is ignored. As a workaround, you can use the
-    #   Amazon S3 API or EFS API to create 0 byte objects as place holders
-    #   for your directory. If using the CLI, use the `s3api` or `efsapi`
-    #   call instead of `s3` or `efs` so you can use the put-object
-    #   operation. For example, you use the following: `aws s3api put-object
-    #   --bucket bucketname --key path/to/folder/`. Make sure that the end
-    #   of the key name ends in a `/` for it to be considered a folder.
-    #
-    #    </note>
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -4340,14 +4387,17 @@ module Aws::Transfer
     #             },
     #           },
     #           overwrite_existing: "TRUE", # accepts TRUE, FALSE
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         custom_step_details: {
     #           name: "WorkflowStepName",
     #           target: "CustomStepTarget",
     #           timeout_seconds: 1,
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         delete_step_details: {
     #           name: "WorkflowStepName",
+    #           source_file_location: "SourceFileLocation",
     #         },
     #         tag_step_details: {
     #           name: "WorkflowStepName",
@@ -4357,6 +4407,7 @@ module Aws::Transfer
     #               value: "S3TagValue", # required
     #             },
     #           ],
+    #           source_file_location: "SourceFileLocation",
     #         },
     #       }
     #

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CustomerProfiles
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -534,6 +536,136 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Creates an integration workflow. An integration workflow is an async
+    # process which ingests historic data and sets up an integration for
+    # ongoing updates. The supported Amazon AppFlow sources are Salesforce,
+    # ServiceNow, and Marketo.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #
+    # @option params [required, Types::IntegrationConfig] :integration_config
+    #   Configuration data for integration workflow.
+    #
+    # @option params [required, String] :object_type_name
+    #   The name of the profile object type.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role. Customer Profiles
+    #   assumes this role to create resources on your behalf as part of
+    #   workflow execution.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @return [Types::CreateIntegrationWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateIntegrationWorkflowResponse#workflow_id #workflow_id} => String
+    #   * {Types::CreateIntegrationWorkflowResponse#message #message} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_integration_workflow({
+    #     domain_name: "name", # required
+    #     workflow_type: "APPFLOW_INTEGRATION", # required, accepts APPFLOW_INTEGRATION
+    #     integration_config: { # required
+    #       appflow_integration: {
+    #         flow_definition: { # required
+    #           description: "FlowDescription",
+    #           flow_name: "FlowName", # required
+    #           kms_arn: "KmsArn", # required
+    #           source_flow_config: { # required
+    #             connector_profile_name: "ConnectorProfileName",
+    #             connector_type: "Salesforce", # required, accepts Salesforce, Marketo, Zendesk, Servicenow, S3
+    #             incremental_pull_config: {
+    #               datetime_type_field_name: "DatetimeTypeFieldName",
+    #             },
+    #             source_connector_properties: { # required
+    #               marketo: {
+    #                 object: "Object", # required
+    #               },
+    #               s3: {
+    #                 bucket_name: "BucketName", # required
+    #                 bucket_prefix: "BucketPrefix",
+    #               },
+    #               salesforce: {
+    #                 object: "Object", # required
+    #                 enable_dynamic_field_update: false,
+    #                 include_deleted_records: false,
+    #               },
+    #               service_now: {
+    #                 object: "Object", # required
+    #               },
+    #               zendesk: {
+    #                 object: "Object", # required
+    #               },
+    #             },
+    #           },
+    #           tasks: [ # required
+    #             {
+    #               connector_operator: {
+    #                 marketo: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 s3: "PROJECTION", # accepts PROJECTION, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 salesforce: "PROJECTION", # accepts PROJECTION, LESS_THAN, CONTAINS, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 service_now: "PROJECTION", # accepts PROJECTION, CONTAINS, LESS_THAN, GREATER_THAN, BETWEEN, LESS_THAN_OR_EQUAL_TO, GREATER_THAN_OR_EQUAL_TO, EQUAL_TO, NOT_EQUAL_TO, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #                 zendesk: "PROJECTION", # accepts PROJECTION, GREATER_THAN, ADDITION, MULTIPLICATION, DIVISION, SUBTRACTION, MASK_ALL, MASK_FIRST_N, MASK_LAST_N, VALIDATE_NON_NULL, VALIDATE_NON_ZERO, VALIDATE_NON_NEGATIVE, VALIDATE_NUMERIC, NO_OP
+    #               },
+    #               destination_field: "DestinationField",
+    #               source_fields: ["stringTo2048"], # required
+    #               task_properties: {
+    #                 "VALUE" => "Property",
+    #               },
+    #               task_type: "Arithmetic", # required, accepts Arithmetic, Filter, Map, Mask, Merge, Truncate, Validate
+    #             },
+    #           ],
+    #           trigger_config: { # required
+    #             trigger_type: "Scheduled", # required, accepts Scheduled, Event, OnDemand
+    #             trigger_properties: {
+    #               scheduled: {
+    #                 schedule_expression: "ScheduleExpression", # required
+    #                 data_pull_mode: "Incremental", # accepts Incremental, Complete
+    #                 schedule_start_time: Time.now,
+    #                 schedule_end_time: Time.now,
+    #                 timezone: "Timezone",
+    #                 schedule_offset: 1,
+    #                 first_execution_from: Time.now,
+    #               },
+    #             },
+    #           },
+    #         },
+    #         batches: [
+    #           {
+    #             start_time: Time.now, # required
+    #             end_time: Time.now, # required
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     object_type_name: "typeName", # required
+    #     role_arn: "RoleArn", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_id #=> String
+    #   resp.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateIntegrationWorkflow AWS API Documentation
+    #
+    # @overload create_integration_workflow(params = {})
+    # @param [Hash] params ({})
+    def create_integration_workflow(params = {}, options = {})
+      req = build_request(:create_integration_workflow, params)
+      req.send_request(options)
+    end
+
     # Creates a standard profile.
     #
     # A standard profile represents the following attributes for a customer
@@ -909,6 +1041,33 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Deletes the specified workflow and all its corresponding resources.
+    # This is an async process.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :workflow_id
+    #   Unique identifier for the workflow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workflow({
+    #     domain_name: "name", # required
+    #     workflow_id: "string1To255", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/DeleteWorkflow AWS API Documentation
+    #
+    # @overload delete_workflow(params = {})
+    # @param [Hash] params ({})
+    def delete_workflow(params = {}, options = {})
+      req = build_request(:delete_workflow, params)
+      req.send_request(options)
+    end
+
     # Tests the auto-merging settings of your Identity Resolution Job
     # without merging your data. It randomly selects a sample of matching
     # groups from the existing matching results, and applies the automerging
@@ -1118,6 +1277,7 @@ module Aws::CustomerProfiles
     #   * {Types::GetIntegrationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::GetIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
+    #   * {Types::GetIntegrationResponse#workflow_id #workflow_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1137,6 +1297,7 @@ module Aws::CustomerProfiles
     #   resp.tags["TagKey"] #=> String
     #   resp.object_type_names #=> Hash
     #   resp.object_type_names["string1To255"] #=> String
+    #   resp.workflow_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetIntegration AWS API Documentation
     #
@@ -1182,8 +1343,6 @@ module Aws::CustomerProfiles
     # * BusinessEmailAddress
     #
     # * FullName
-    #
-    # * BusinessName
     #
     # For example, two or more profiles—with spelling mistakes such as
     # **John Doe** and **Jhn Doe**, or different casing email addresses such
@@ -1361,6 +1520,112 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Get details of specified workflow.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :workflow_id
+    #   Unique identifier for the workflow.
+    #
+    # @return [Types::GetWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowResponse#workflow_id #workflow_id} => String
+    #   * {Types::GetWorkflowResponse#workflow_type #workflow_type} => String
+    #   * {Types::GetWorkflowResponse#status #status} => String
+    #   * {Types::GetWorkflowResponse#error_description #error_description} => String
+    #   * {Types::GetWorkflowResponse#start_date #start_date} => Time
+    #   * {Types::GetWorkflowResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetWorkflowResponse#attributes #attributes} => Types::WorkflowAttributes
+    #   * {Types::GetWorkflowResponse#metrics #metrics} => Types::WorkflowMetrics
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow({
+    #     domain_name: "name", # required
+    #     workflow_id: "uuid", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_id #=> String
+    #   resp.workflow_type #=> String, one of "APPFLOW_INTEGRATION"
+    #   resp.status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "FAILED", "SPLIT", "RETRY", "CANCELLED"
+    #   resp.error_description #=> String
+    #   resp.start_date #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.attributes.appflow_integration.source_connector_type #=> String, one of "Salesforce", "Marketo", "Zendesk", "Servicenow", "S3"
+    #   resp.attributes.appflow_integration.connector_profile_name #=> String
+    #   resp.attributes.appflow_integration.role_arn #=> String
+    #   resp.metrics.appflow_integration.records_processed #=> Integer
+    #   resp.metrics.appflow_integration.steps_completed #=> Integer
+    #   resp.metrics.appflow_integration.total_steps #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflow AWS API Documentation
+    #
+    # @overload get_workflow(params = {})
+    # @param [Hash] params ({})
+    def get_workflow(params = {}, options = {})
+      req = build_request(:get_workflow, params)
+      req.send_request(options)
+    end
+
+    # Get granular list of steps in workflow.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [required, String] :workflow_id
+    #   Unique identifier for the workflow.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::GetWorkflowStepsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetWorkflowStepsResponse#workflow_id #workflow_id} => String
+    #   * {Types::GetWorkflowStepsResponse#workflow_type #workflow_type} => String
+    #   * {Types::GetWorkflowStepsResponse#items #items} => Array&lt;Types::WorkflowStepItem&gt;
+    #   * {Types::GetWorkflowStepsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_workflow_steps({
+    #     domain_name: "name", # required
+    #     workflow_id: "uuid", # required
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.workflow_id #=> String
+    #   resp.workflow_type #=> String, one of "APPFLOW_INTEGRATION"
+    #   resp.items #=> Array
+    #   resp.items[0].appflow_integration.flow_name #=> String
+    #   resp.items[0].appflow_integration.status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "FAILED", "SPLIT", "RETRY", "CANCELLED"
+    #   resp.items[0].appflow_integration.execution_message #=> String
+    #   resp.items[0].appflow_integration.records_processed #=> Integer
+    #   resp.items[0].appflow_integration.batch_records_start_time #=> String
+    #   resp.items[0].appflow_integration.batch_records_end_time #=> String
+    #   resp.items[0].appflow_integration.created_at #=> Time
+    #   resp.items[0].appflow_integration.last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetWorkflowSteps AWS API Documentation
+    #
+    # @overload get_workflow_steps(params = {})
+    # @param [Hash] params ({})
+    def get_workflow_steps(params = {}, options = {})
+      req = build_request(:get_workflow_steps, params)
+      req.send_request(options)
+    end
+
     # Lists all of the integrations associated to a specific URI in the AWS
     # account.
     #
@@ -1374,6 +1639,10 @@ module Aws::CustomerProfiles
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
     #
+    # @option params [Boolean] :include_hidden
+    #   Boolean to indicate if hidden integration should be returned. Defaults
+    #   to `False`.
+    #
     # @return [Types::ListAccountIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListAccountIntegrationsResponse#items #items} => Array&lt;Types::ListIntegrationItem&gt;
@@ -1385,6 +1654,7 @@ module Aws::CustomerProfiles
     #     uri: "string1To255", # required
     #     next_token: "token",
     #     max_results: 1,
+    #     include_hidden: false,
     #   })
     #
     # @example Response structure
@@ -1399,6 +1669,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].object_type_names #=> Hash
     #   resp.items[0].object_type_names["string1To255"] #=> String
+    #   resp.items[0].workflow_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListAccountIntegrations AWS API Documentation
@@ -1513,6 +1784,10 @@ module Aws::CustomerProfiles
     # @option params [Integer] :max_results
     #   The maximum number of objects returned per page.
     #
+    # @option params [Boolean] :include_hidden
+    #   Boolean to indicate if hidden integration should be returned. Defaults
+    #   to `False`.
+    #
     # @return [Types::ListIntegrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListIntegrationsResponse#items #items} => Array&lt;Types::ListIntegrationItem&gt;
@@ -1524,6 +1799,7 @@ module Aws::CustomerProfiles
     #     domain_name: "name", # required
     #     next_token: "token",
     #     max_results: 1,
+    #     include_hidden: false,
     #   })
     #
     # @example Response structure
@@ -1538,6 +1814,7 @@ module Aws::CustomerProfiles
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.items[0].object_type_names #=> Hash
     #   resp.items[0].object_type_names["string1To255"] #=> String
+    #   resp.items[0].workflow_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListIntegrations AWS API Documentation
@@ -1721,6 +1998,69 @@ module Aws::CustomerProfiles
       req.send_request(options)
     end
 
+    # Query to list all workflows.
+    #
+    # @option params [required, String] :domain_name
+    #   The unique name of the domain.
+    #
+    # @option params [String] :workflow_type
+    #   The type of workflow. The only supported value is
+    #   APPFLOW\_INTEGRATION.
+    #
+    # @option params [String] :status
+    #   Status of workflow execution.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_start_date
+    #   Retrieve workflows started after timestamp.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :query_end_date
+    #   Retrieve workflows ended after timestamp.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListWorkflowsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListWorkflowsResponse#items #items} => Array&lt;Types::ListWorkflowsItem&gt;
+    #   * {Types::ListWorkflowsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_workflows({
+    #     domain_name: "name", # required
+    #     workflow_type: "APPFLOW_INTEGRATION", # accepts APPFLOW_INTEGRATION
+    #     status: "NOT_STARTED", # accepts NOT_STARTED, IN_PROGRESS, COMPLETE, FAILED, SPLIT, RETRY, CANCELLED
+    #     query_start_date: Time.now,
+    #     query_end_date: Time.now,
+    #     next_token: "token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].workflow_type #=> String, one of "APPFLOW_INTEGRATION"
+    #   resp.items[0].workflow_id #=> String
+    #   resp.items[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETE", "FAILED", "SPLIT", "RETRY", "CANCELLED"
+    #   resp.items[0].status_description #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/ListWorkflows AWS API Documentation
+    #
+    # @overload list_workflows(params = {})
+    # @param [Hash] params ({})
+    def list_workflows(params = {}, options = {})
+      req = build_request(:list_workflows, params)
+      req.send_request(options)
+    end
+
     # Runs an AWS Lambda job that does the following:
     #
     # 1.  All the profileKeys in the `ProfileToBeMerged` will be moved to
@@ -1860,6 +2200,7 @@ module Aws::CustomerProfiles
     #   * {Types::PutIntegrationResponse#last_updated_at #last_updated_at} => Time
     #   * {Types::PutIntegrationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::PutIntegrationResponse#object_type_names #object_type_names} => Hash&lt;String,String&gt;
+    #   * {Types::PutIntegrationResponse#workflow_id #workflow_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1949,6 +2290,7 @@ module Aws::CustomerProfiles
     #   resp.tags["TagKey"] #=> String
     #   resp.object_type_names #=> Hash
     #   resp.object_type_names["string1To255"] #=> String
+    #   resp.workflow_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/PutIntegration AWS API Documentation
     #
@@ -2632,7 +2974,7 @@ module Aws::CustomerProfiles
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

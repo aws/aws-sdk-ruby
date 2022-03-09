@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.12.0 (2022-03-01)
+------------------
+
+* Feature - Add support for GP3 and IO2 volume types. Add bootMode to LaunchConfiguration object (and as a parameter to UpdateLaunchConfigurationRequest).
+
+1.11.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.10.0 (2022-02-03)
 ------------------
 

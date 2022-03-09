@@ -32,26 +32,26 @@ module Aws::FinSpaceData
     # @!attribute [rw] error_category
     #   The category of the error.
     #
-    #   * `VALIDATION` -The inputs to this request are invalid.
+    #   * `VALIDATION` – The inputs to this request are invalid.
     #
-    #   * `SERVICE_QUOTA_EXCEEDED` - Service quotas have been exceeded.
+    #   * `SERVICE_QUOTA_EXCEEDED` – Service quotas have been exceeded.
     #     Please contact AWS support to increase quotas.
     #
-    #   * `ACCESS_DENIED` - Missing required permission to perform this
+    #   * `ACCESS_DENIED` – Missing required permission to perform this
     #     request.
     #
-    #   * `RESOURCE_NOT_FOUND` - One or more inputs to this request were not
+    #   * `RESOURCE_NOT_FOUND` – One or more inputs to this request were not
     #     found.
     #
-    #   * `THROTTLING` - The system temporarily lacks sufficient resources
+    #   * `THROTTLING` – The system temporarily lacks sufficient resources
     #     to process the request.
     #
-    #   * `INTERNAL_SERVICE_EXCEPTION` - An internal service error has
+    #   * `INTERNAL_SERVICE_EXCEPTION` – An internal service error has
     #     occurred.
     #
-    #   * `CANCELLED` - Cancelled.
+    #   * `CANCELLED` – Cancelled.
     #
-    #   * `USER_RECOVERABLE` - A user recoverable error has occurred.
+    #   * `USER_RECOVERABLE` – A user recoverable error has occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ChangesetErrorInfo AWS API Documentation
@@ -81,13 +81,13 @@ module Aws::FinSpaceData
     # @!attribute [rw] change_type
     #   Type that indicates how a Changeset is applied to a Dataset.
     #
-    #   * `REPLACE` - Changeset is considered as a replacement to all prior
+    #   * `REPLACE` – Changeset is considered as a replacement to all prior
     #     loaded Changesets.
     #
-    #   * `APPEND` - Changeset is considered as an addition to the end of
+    #   * `APPEND` – Changeset is considered as an addition to the end of
     #     all prior loaded Changesets.
     #
-    #   * `MODIFY` - Changeset is considered as a replacement to a specific
+    #   * `MODIFY` – Changeset is considered as a replacement to a specific
     #     prior ingested Changeset.
     #   @return [String]
     #
@@ -101,7 +101,7 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Changeset was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
@@ -109,15 +109,15 @@ module Aws::FinSpaceData
     # @!attribute [rw] status
     #   Status of the Changeset ingestion.
     #
-    #   * `PENDING` - Changeset is pending creation.
+    #   * `PENDING` – Changeset is pending creation.
     #
-    #   * `FAILED` - Changeset creation has failed.
+    #   * `FAILED` – Changeset creation has failed.
     #
-    #   * `SUCCESS` - Changeset creation has succeeded.
+    #   * `SUCCESS` – Changeset creation has succeeded.
     #
-    #   * `RUNNING` - Changeset creation is running.
+    #   * `RUNNING` – Changeset creation is running.
     #
-    #   * `STOP_REQUESTED` - User requested Changeset creation to stop.
+    #   * `STOP_REQUESTED` – User requested Changeset creation to stop.
     #   @return [String]
     #
     # @!attribute [rw] error_info
@@ -126,13 +126,13 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] active_until_timestamp
     #   Time until which the Changeset is active. The value is determined as
-    #   Epoch time in milliseconds. For example, the value for Monday,
+    #   epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] active_from_timestamp
     #   Beginning time from which the Changeset is active. The value is
-    #   determined as Epoch time in milliseconds. For example, the value for
+    #   determined as epoch time in milliseconds. For example, the value for
     #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
@@ -179,33 +179,33 @@ module Aws::FinSpaceData
     # @!attribute [rw] data_type
     #   Data type of a column.
     #
-    #   * `STRING` - A String data type.
+    #   * `STRING` – A String data type.
     #
-    #     `CHAR` - A char data type.
+    #     `CHAR` – A char data type.
     #
-    #     `INTEGER` - An integer data type.
+    #     `INTEGER` – An integer data type.
     #
-    #     `TINYINT` - A tinyint data type.
+    #     `TINYINT` – A tinyint data type.
     #
-    #     `SMALLINT` - A smallint data type.
+    #     `SMALLINT` – A smallint data type.
     #
-    #     `BIGINT` - A bigint data type.
+    #     `BIGINT` – A bigint data type.
     #
-    #     `FLOAT` - A float data type.
+    #     `FLOAT` – A float data type.
     #
-    #     `DOUBLE` - A double data type.
+    #     `DOUBLE` – A double data type.
     #
-    #     `DATE` - A date data type.
+    #     `DATE` – A date data type.
     #
-    #     `DATETIME` - A datetime data type.
+    #     `DATETIME` – A datetime data type.
     #
-    #     `BOOLEAN` - A boolean data type.
+    #     `BOOLEAN` – A boolean data type.
     #
-    #     `BINARY` - A binary data type.
+    #     `BINARY` – A binary data type.
     #   @return [String]
     #
     # @!attribute [rw] column_name
-    #   Name for a column.
+    #   The name of a column.
     #   @return [String]
     #
     # @!attribute [rw] column_description
@@ -227,10 +227,14 @@ module Aws::FinSpaceData
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ConflictException AWS API Documentation
     #
     class ConflictException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -265,15 +269,15 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] change_type
-    #   Option to indicate how a Changeset will be applied to a Dataset.
+    #   The option to indicate how a Changeset will be applied to a Dataset.
     #
-    #   * `REPLACE` - Changeset will be considered as a replacement to all
+    #   * `REPLACE` – Changeset will be considered as a replacement to all
     #     prior loaded Changesets.
     #
-    #   * `APPEND` - Changeset will be considered as an addition to the end
+    #   * `APPEND` – Changeset will be considered as an addition to the end
     #     of all prior loaded Changesets.
     #
-    #   * `MODIFY` - Changeset is considered as a replacement to a specific
+    #   * `MODIFY` – Changeset is considered as a replacement to a specific
     #     prior ingested Changeset.
     #   @return [String]
     #
@@ -292,7 +296,7 @@ module Aws::FinSpaceData
     #   The S3 path that you specify must allow the FinSpace role access. To
     #   do that, you first need to configure the IAM policy on S3 bucket.
     #   For more information, see [Loading data from an Amazon S3 Bucket
-    #   using the FinSpace API][1]section.
+    #   using the FinSpace API][1] section.
     #
     #
     #
@@ -308,13 +312,13 @@ module Aws::FinSpaceData
     #   `formatType` is a required attribute and can have the following
     #   values:
     #
-    #   * `PARQUET` - Parquet source file format.
+    #   * `PARQUET` – Parquet source file format.
     #
-    #   * `CSV` - CSV source file format.
+    #   * `CSV` – CSV source file format.
     #
-    #   * `JSON` - JSON source file format.
+    #   * `JSON` – JSON source file format.
     #
-    #   * `XML` - XML source file format.
+    #   * `XML` – XML source file format.
     #
     #   Here is an example of how you could specify the `formatParams`\:
     #
@@ -412,7 +416,7 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] as_of_timestamp
     #   Beginning time to use for the Dataview. The value is determined as
-    #   Epoch time in milliseconds. For example, the value for Monday,
+    #   epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
@@ -505,9 +509,9 @@ module Aws::FinSpaceData
     # @!attribute [rw] kind
     #   The format in which Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #   @return [String]
     #
     # @!attribute [rw] dataset_description
@@ -559,6 +563,166 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreatePermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "PermissionGroupName", # required
+    #         description: "PermissionGroupDescription",
+    #         application_permissions: ["CreateDataset"], # required, accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_permissions
+    #   The option to indicate FinSpace application permissions that are
+    #   granted to a specific group.
+    #
+    #   * `CreateDataset` – Group members can create new datasets.
+    #
+    #   * `ManageClusters` – Group members can manage Apache Spark clusters
+    #     from FinSpace notebooks.
+    #
+    #   * `ManageUsersAndGroups` – Group members can manage users and
+    #     permission groups.
+    #
+    #   * `ManageAttributeSets` – Group members can manage attribute sets.
+    #
+    #   * `ViewAuditData` – Group members can view audit data.
+    #
+    #   * `AccessNotebooks` – Group members will have access to FinSpace
+    #     notebooks.
+    #
+    #   * `GetTemporaryCredentials` – Group members can get temporary API
+    #     credentials.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreatePermissionGroupRequest AWS API Documentation
+    #
+    class CreatePermissionGroupRequest < Struct.new(
+      :name,
+      :description,
+      :application_permissions,
+      :client_token)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreatePermissionGroupResponse AWS API Documentation
+    #
+    class CreatePermissionGroupResponse < Struct.new(
+      :permission_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         email_address: "Email", # required
+    #         type: "SUPER_USER", # required, accepts SUPER_USER, APP_USER
+    #         first_name: "FirstName",
+    #         last_name: "LastName",
+    #         api_access: "ENABLED", # accepts ENABLED, DISABLED
+    #         api_access_principal_arn: "RoleArn",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user that you want to register. The email
+    #   address serves as a uniquer identifier for each user and cannot be
+    #   changed after it's created.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The option to indicate the type of user. Use one of the following
+    #   options to specify this parameter:
+    #
+    #   * `SUPER_USER` – A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The
+    #     users are assigned permissions by adding them to a permission
+    #     group.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user that you want to register.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user that you want to register.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access
+    #   The option to indicate whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that
+    #   can then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call
+    #   the `GetProgrammaticAccessCredentials` API to obtain a credentials
+    #   token for a specific FinSpace user. This must be an IAM role within
+    #   your FinSpace account.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateUserRequest AWS API Documentation
+    #
+    class CreateUserRequest < Struct.new(
+      :email_address,
+      :type,
+      :first_name,
+      :last_name,
+      :api_access,
+      :api_access_principal_arn,
+      :client_token)
+      SENSITIVE = [:email_address, :first_name, :last_name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/CreateUserResponse AWS API Documentation
+    #
+    class CreateUserResponse < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Short term API credentials.
     #
     # @!attribute [rw] access_key_id
@@ -599,17 +763,17 @@ module Aws::FinSpaceData
     # @!attribute [rw] destination_type
     #   Destination type for a Dataview.
     #
-    #   * `GLUE_TABLE` - Glue table destination type.
+    #   * `GLUE_TABLE` – Glue table destination type.
     #
-    #   * `S3` - S3 destination type.
+    #   * `S3` – S3 destination type.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_export_file_format
     #   Data view export file format.
     #
-    #   * `PARQUET` - Parquet export file format.
+    #   * `PARQUET` – Parquet export file format.
     #
-    #   * `DELIMITED_TEXT` - Delimited text export file format.
+    #   * `DELIMITED_TEXT` – Delimited text export file format.
     #   @return [String]
     #
     # @!attribute [rw] s3_destination_export_file_format_options
@@ -640,26 +804,26 @@ module Aws::FinSpaceData
     # @!attribute [rw] error_category
     #   The category of the error.
     #
-    #   * `VALIDATION` -The inputs to this request are invalid.
+    #   * `VALIDATION` – The inputs to this request are invalid.
     #
-    #   * `SERVICE_QUOTA_EXCEEDED` - Service quotas have been exceeded.
+    #   * `SERVICE_QUOTA_EXCEEDED` – Service quotas have been exceeded.
     #     Please contact AWS support to increase quotas.
     #
-    #   * `ACCESS_DENIED` - Missing required permission to perform this
+    #   * `ACCESS_DENIED` – Missing required permission to perform this
     #     request.
     #
-    #   * `RESOURCE_NOT_FOUND` - One or more inputs to this request were not
+    #   * `RESOURCE_NOT_FOUND` – One or more inputs to this request were not
     #     found.
     #
-    #   * `THROTTLING` - The system temporarily lacks sufficient resources
+    #   * `THROTTLING` – The system temporarily lacks sufficient resources
     #     to process the request.
     #
-    #   * `INTERNAL_SERVICE_EXCEPTION` - An internal service error has
+    #   * `INTERNAL_SERVICE_EXCEPTION` – An internal service error has
     #     occurred.
     #
-    #   * `CANCELLED` - Cancelled.
+    #   * `CANCELLED` – Cancelled.
     #
-    #   * `USER_RECOVERABLE` - A user recoverable error has occurred.
+    #   * `USER_RECOVERABLE` – A user recoverable error has occurred.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DataViewErrorInfo AWS API Documentation
@@ -686,7 +850,7 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] as_of_timestamp
-    #   Time range to use for the Dataview. The value is determined as Epoch
+    #   Time range to use for the Dataview. The value is determined as epoch
     #   time in milliseconds. For example, the value for Monday, November 1,
     #   2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
@@ -702,21 +866,21 @@ module Aws::FinSpaceData
     # @!attribute [rw] status
     #   The status of a Dataview creation.
     #
-    #   * `RUNNING` - Dataview creation is running.
+    #   * `RUNNING` – Dataview creation is running.
     #
-    #   * `STARTING` - Dataview creation is starting.
+    #   * `STARTING` – Dataview creation is starting.
     #
-    #   * `FAILED` - Dataview creation has failed.
+    #   * `FAILED` – Dataview creation has failed.
     #
-    #   * `CANCELLED` - Dataview creation has been cancelled.
+    #   * `CANCELLED` – Dataview creation has been cancelled.
     #
-    #   * `TIMEOUT` - Dataview creation has timed out.
+    #   * `TIMEOUT` – Dataview creation has timed out.
     #
-    #   * `SUCCESS` - Dataview creation has succeeded.
+    #   * `SUCCESS` – Dataview creation has succeeded.
     #
-    #   * `PENDING` - Dataview creation is pending.
+    #   * `PENDING` – Dataview creation is pending.
     #
-    #   * `FAILED_CLEANUP_FAILED` - Dataview creation failed and resource
+    #   * `FAILED_CLEANUP_FAILED` – Dataview creation failed and resource
     #     cleanup failed.
     #   @return [String]
     #
@@ -734,14 +898,14 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Dataview was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
     #   The last time that a Dataview was modified. The value is determined
-    #   as Epoch time in milliseconds. For example, the value for Monday,
+    #   as epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
@@ -781,9 +945,9 @@ module Aws::FinSpaceData
     # @!attribute [rw] kind
     #   The format in which Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #   @return [String]
     #
     # @!attribute [rw] dataset_description
@@ -796,14 +960,14 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Dataset was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
     #   The last time that the Dataset was modified. The value is determined
-    #   as Epoch time in milliseconds. For example, the value for Monday,
+    #   as epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
@@ -844,7 +1008,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] name
-    #   Name of the Dataset owner.
+    #   The name of the Dataset owner.
     #   @return [String]
     #
     # @!attribute [rw] phone_number
@@ -861,7 +1025,7 @@ module Aws::FinSpaceData
       :name,
       :phone_number,
       :email)
-      SENSITIVE = []
+      SENSITIVE = [:email]
       include Aws::Structure
     end
 
@@ -905,6 +1069,127 @@ module Aws::FinSpaceData
     #
     class DeleteDatasetResponse < Struct.new(
       :dataset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeletePermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group that you want to
+    #   delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DeletePermissionGroupRequest AWS API Documentation
+    #
+    class DeletePermissionGroupRequest < Struct.new(
+      :permission_group_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the deleted permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DeletePermissionGroupResponse AWS API Documentation
+    #
+    class DeletePermissionGroupResponse < Struct.new(
+      :permission_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisableUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user account that you want to disable.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisableUserRequest AWS API Documentation
+    #
+    class DisableUserRequest < Struct.new(
+      :user_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier for the disabled user account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/DisableUserResponse AWS API Documentation
+    #
+    class DisableUserResponse < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass EnableUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user account that you want to enable.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/EnableUserRequest AWS API Documentation
+    #
+    class EnableUserRequest < Struct.new(
+      :user_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier for the enabled user account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/EnableUserResponse AWS API Documentation
+    #
+    class EnableUserResponse < Struct.new(
+      :user_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -955,13 +1240,13 @@ module Aws::FinSpaceData
     # @!attribute [rw] change_type
     #   Type that indicates how a Changeset is applied to a Dataset.
     #
-    #   * `REPLACE` - Changeset is considered as a replacement to all prior
+    #   * `REPLACE` – Changeset is considered as a replacement to all prior
     #     loaded Changesets.
     #
-    #   * `APPEND` - Changeset is considered as an addition to the end of
+    #   * `APPEND` – Changeset is considered as an addition to the end of
     #     all prior loaded Changesets.
     #
-    #   * `MODIFY` - Changeset is considered as a replacement to a specific
+    #   * `MODIFY` – Changeset is considered as a replacement to a specific
     #     prior ingested Changeset.
     #   @return [String]
     #
@@ -975,7 +1260,7 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Changeset was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
@@ -990,13 +1275,13 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] active_until_timestamp
     #   Time until which the Changeset is active. The value is determined as
-    #   Epoch time in milliseconds. For example, the value for Monday,
+    #   epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] active_from_timestamp
     #   Beginning time from which the Changeset is active. The value is
-    #   determined as Epoch time in milliseconds. For example, the value for
+    #   determined as epoch time in milliseconds. For example, the value for
     #   Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
@@ -1073,7 +1358,7 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] as_of_timestamp
-    #   Time range to use for the Dataview. The value is determined as Epoch
+    #   Time range to use for the Dataview. The value is determined as epoch
     #   time in milliseconds. For example, the value for Monday, November 1,
     #   2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
@@ -1084,13 +1369,13 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] last_modified_time
     #   The last time that a Dataview was modified. The value is determined
-    #   as Epoch time in milliseconds. For example, the value for Monday,
+    #   as epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Dataview was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
@@ -1114,21 +1399,21 @@ module Aws::FinSpaceData
     # @!attribute [rw] status
     #   The status of a Dataview creation.
     #
-    #   * `RUNNING` - Dataview creation is running.
+    #   * `RUNNING` – Dataview creation is running.
     #
-    #   * `STARTING` - Dataview creation is starting.
+    #   * `STARTING` – Dataview creation is starting.
     #
-    #   * `FAILED` - Dataview creation has failed.
+    #   * `FAILED` – Dataview creation has failed.
     #
-    #   * `CANCELLED` - Dataview creation has been cancelled.
+    #   * `CANCELLED` – Dataview creation has been cancelled.
     #
-    #   * `TIMEOUT` - Dataview creation has timed out.
+    #   * `TIMEOUT` – Dataview creation has timed out.
     #
-    #   * `SUCCESS` - Dataview creation has succeeded.
+    #   * `SUCCESS` – Dataview creation has succeeded.
     #
-    #   * `PENDING` - Dataview creation is pending.
+    #   * `PENDING` – Dataview creation is pending.
     #
-    #   * `FAILED_CLEANUP_FAILED` - Dataview creation failed and resource
+    #   * `FAILED_CLEANUP_FAILED` – Dataview creation failed and resource
     #     cleanup failed.
     #   @return [String]
     #
@@ -1189,9 +1474,9 @@ module Aws::FinSpaceData
     # @!attribute [rw] kind
     #   The format in which Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #   @return [String]
     #
     # @!attribute [rw] dataset_description
@@ -1200,14 +1485,14 @@ module Aws::FinSpaceData
     #
     # @!attribute [rw] create_time
     #   The timestamp at which the Dataset was created in FinSpace. The
-    #   value is determined as Epoch time in milliseconds. For example, the
+    #   value is determined as epoch time in milliseconds. For example, the
     #   value for Monday, November 1, 2021 12:00:00 PM UTC is specified as
     #   1635768000000.
     #   @return [Integer]
     #
     # @!attribute [rw] last_modified_time
     #   The last time that the Dataset was modified. The value is determined
-    #   as Epoch time in milliseconds. For example, the value for Monday,
+    #   as epoch time in milliseconds. For example, the value for Monday,
     #   November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
     #   @return [Integer]
     #
@@ -1222,13 +1507,13 @@ module Aws::FinSpaceData
     # @!attribute [rw] status
     #   Status of the Dataset creation.
     #
-    #   * `PENDING` - Dataset is pending creation.
+    #   * `PENDING` – Dataset is pending creation.
     #
-    #   * `FAILED` - Dataset creation has failed.
+    #   * `FAILED` – Dataset creation has failed.
     #
-    #   * `SUCCESS` - Dataset creation has succeeded.
+    #   * `SUCCESS` – Dataset creation has succeeded.
     #
-    #   * `RUNNING` - Dataset creation is running.
+    #   * `RUNNING` – Dataset creation is running.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetDatasetResponse AWS API Documentation
@@ -1294,6 +1579,129 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier of the user to get data for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetUserRequest AWS API Documentation
+    #
+    class GetUserRequest < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user account that is retrieved.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the user account.
+    #
+    #   * `CREATING` – The user account creation is in progress.
+    #
+    #   * `ENABLED` – The user account is created and is currently active.
+    #
+    #   * `DISABLED` – The user account is currently inactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address that is associated with the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of user.
+    #
+    #   * `SUPER_USER` – A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   ^
+    #   ^
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The
+    #     users are assigned permissions by adding them to a permissions
+    #     group.
+    #
+    #   ^
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access
+    #   Indicates whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that
+    #   can then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call
+    #   the `GetProgrammaticAccessCredentials` API to obtain a credentials
+    #   token for a specific FinSpace user. This must be an IAM role within
+    #   your FinSpace account.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp at which the user account was created in FinSpace. The
+    #   value is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_enabled_time
+    #   Describes the last time the user account was enabled. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_disabled_time
+    #   Describes the last time the user account was disabled. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Describes the last time the user account was updated. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_login_time
+    #   Describes the last time that the user logged into their account. The
+    #   value is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/GetUserResponse AWS API Documentation
+    #
+    class GetUserResponse < Struct.new(
+      :user_id,
+      :status,
+      :first_name,
+      :last_name,
+      :email_address,
+      :type,
+      :api_access,
+      :api_access_principal_arn,
+      :create_time,
+      :last_enabled_time,
+      :last_disabled_time,
+      :last_modified_time,
+      :last_login_time)
+      SENSITIVE = [:first_name, :last_name, :email_address]
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetWorkingLocationRequest
     #   data as a hash:
     #
@@ -1304,11 +1712,11 @@ module Aws::FinSpaceData
     # @!attribute [rw] location_type
     #   Specify the type of the working location.
     #
-    #   * `SAGEMAKER` - Use the Amazon S3 location as a temporary location
+    #   * `SAGEMAKER` – Use the Amazon S3 location as a temporary location
     #     to store data content when working with FinSpace Notebooks that
     #     run on SageMaker studio.
     #
-    #   * `INGESTION` - Use the Amazon S3 location as a staging location to
+    #   * `INGESTION` – Use the Amazon S3 location as a staging location to
     #     copy your data content and then use the location with the
     #     Changeset creation operation.
     #   @return [String]
@@ -1391,7 +1799,7 @@ module Aws::FinSpaceData
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListChangesetsRequest AWS API Documentation
@@ -1412,7 +1820,7 @@ module Aws::FinSpaceData
     #   @return [Array<Types::ChangesetSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListChangesetsResponse AWS API Documentation
@@ -1441,7 +1849,7 @@ module Aws::FinSpaceData
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1459,7 +1867,7 @@ module Aws::FinSpaceData
     end
 
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @!attribute [rw] data_views
@@ -1486,7 +1894,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1509,7 +1917,7 @@ module Aws::FinSpaceData
     #   @return [Array<Types::Dataset>]
     #
     # @!attribute [rw] next_token
-    #   A token indicating where a results page should begin.
+    #   A token that indicates where a results page should begin.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListDatasetsResponse AWS API Documentation
@@ -1518,6 +1926,150 @@ module Aws::FinSpaceData
       :datasets,
       :next_token)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPermissionGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1, # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroupsRequest AWS API Documentation
+    #
+    class ListPermissionGroupsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_groups
+    #   A list of all the permission groups.
+    #   @return [Array<Types::PermissionGroup>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListPermissionGroupsResponse AWS API Documentation
+    #
+    class ListPermissionGroupsResponse < Struct.new(
+      :permission_groups,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1, # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsersRequest AWS API Documentation
+    #
+    class ListUsersRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   A list of all the user accounts.
+    #   @return [Array<Types::User>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that indicates where a results page should begin.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ListUsersResponse AWS API Documentation
+    #
+    class ListUsersResponse < Struct.new(
+      :users,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure for a permission group.
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_permissions
+    #   Indicates the permissions that are granted to a specific group for
+    #   accessing the FinSpace application.
+    #
+    #   * `CreateDataset` – Group members can create new datasets.
+    #
+    #   * `ManageClusters` – Group members can manage Apache Spark clusters
+    #     from FinSpace notebooks.
+    #
+    #   * `ManageUsersAndGroups` – Group members can manage users and
+    #     permission groups.
+    #
+    #   * `ManageAttributeSets` – Group members can manage attribute sets.
+    #
+    #   * `ViewAuditData` – Group members can view audit data.
+    #
+    #   * `AccessNotebooks` – Group members will have access to FinSpace
+    #     notebooks.
+    #
+    #   * `GetTemporaryCredentials` – Group members can get temporary API
+    #     credentials.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp at which the group was created in FinSpace. The value
+    #   is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Describes the last time the permission group was updated. The value
+    #   is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/PermissionGroup AWS API Documentation
+    #
+    class PermissionGroup < Struct.new(
+      :permission_group_id,
+      :name,
+      :description,
+      :application_permissions,
+      :create_time,
+      :last_modified_time)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -1544,7 +2096,7 @@ module Aws::FinSpaceData
     #       }
     #
     # @!attribute [rw] permission_group_id
-    #   The unique identifier of the PermissionGroup.
+    #   The unique identifier for the `PermissionGroup`.
     #   @return [String]
     #
     # @!attribute [rw] dataset_permissions
@@ -1560,15 +2112,67 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResetUserPasswordRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier of the user that a temporary password is
+    #   requested for.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ResetUserPasswordRequest AWS API Documentation
+    #
+    class ResetUserPasswordRequest < Struct.new(
+      :user_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier of the user that a new password is generated
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] temporary_password
+    #   A randomly generated temporary password for the requested user
+    #   account. This password expires in 7 days.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ResetUserPasswordResponse AWS API Documentation
+    #
+    class ResetUserPasswordResponse < Struct.new(
+      :user_id,
+      :temporary_password)
+      SENSITIVE = [:temporary_password]
+      include Aws::Structure
+    end
+
     # One or more resources can't be found.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1593,8 +2197,8 @@ module Aws::FinSpaceData
     #
     # * `DeleteDataset`
     #
-    # For more information on the ataset permissions, see [Supported Dataset
-    # Permissions][1] in the FinSpace User Guide.
+    # For more information on the dataset permissions, see [Supported
+    # Dataset Permissions][1] in the FinSpace User Guide.
     #
     #
     #
@@ -1752,13 +2356,13 @@ module Aws::FinSpaceData
     #   `formatType` is a required attribute and can have the following
     #   values:
     #
-    #   * `PARQUET` - Parquet source file format.
+    #   * `PARQUET` – Parquet source file format.
     #
-    #   * `CSV` - CSV source file format.
+    #   * `CSV` – CSV source file format.
     #
-    #   * `JSON` - JSON source file format.
+    #   * `JSON` – JSON source file format.
     #
-    #   * `XML` - XML source file format.
+    #   * `XML` – XML source file format.
     #
     #   Here is an example of how you could specify the `formatParams`\:
     #
@@ -1854,9 +2458,9 @@ module Aws::FinSpaceData
     # @!attribute [rw] kind
     #   The format in which the Dataset data is structured.
     #
-    #   * `TABULAR` - Data is structured in a tabular format.
+    #   * `TABULAR` – Data is structured in a tabular format.
     #
-    #   * `NON_TABULAR` - Data is structured in a non-tabular format.
+    #   * `NON_TABULAR` – Data is structured in a non-tabular format.
     #   @return [String]
     #
     # @!attribute [rw] dataset_description
@@ -1899,16 +2503,285 @@ module Aws::FinSpaceData
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass UpdatePermissionGroupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         permission_group_id: "PermissionGroupId", # required
+    #         name: "PermissionGroupName",
+    #         description: "PermissionGroupDescription",
+    #         application_permissions: ["CreateDataset"], # accepts CreateDataset, ManageClusters, ManageUsersAndGroups, ManageAttributeSets, ViewAuditData, AccessNotebooks, GetTemporaryCredentials
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the permission group to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A brief description for the permission group.
+    #   @return [String]
+    #
+    # @!attribute [rw] application_permissions
+    #   The permissions that are granted to a specific group for accessing
+    #   the FinSpace application.
+    #
+    #   * `CreateDataset` – Group members can create new datasets.
+    #
+    #   * `ManageClusters` – Group members can manage Apache Spark clusters
+    #     from FinSpace notebooks.
+    #
+    #   * `ManageUsersAndGroups` – Group members can manage users and
+    #     permission groups.
+    #
+    #   * `ManageAttributeSets` – Group members can manage attribute sets.
+    #
+    #   * `ViewAuditData` – Group members can view audit data.
+    #
+    #   * `AccessNotebooks` – Group members will have access to FinSpace
+    #     notebooks.
+    #
+    #   * `GetTemporaryCredentials` – Group members can get temporary API
+    #     credentials.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdatePermissionGroupRequest AWS API Documentation
+    #
+    class UpdatePermissionGroupRequest < Struct.new(
+      :permission_group_id,
+      :name,
+      :description,
+      :application_permissions,
+      :client_token)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_group_id
+    #   The unique identifier for the updated permission group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdatePermissionGroupResponse AWS API Documentation
+    #
+    class UpdatePermissionGroupResponse < Struct.new(
+      :permission_group_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateUserRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         type: "SUPER_USER", # accepts SUPER_USER, APP_USER
+    #         first_name: "FirstName",
+    #         last_name: "LastName",
+    #         api_access: "ENABLED", # accepts ENABLED, DISABLED
+    #         api_access_principal_arn: "RoleArn",
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user account to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The option to indicate the type of user.
+    #
+    #   * `SUPER_USER`– A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The
+    #     users are assigned permissions by adding them to a permissions
+    #     group.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access
+    #   The option to indicate whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that
+    #   can then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call
+    #   the `GetProgrammaticAccessCredentials` API to obtain a credentials
+    #   token for a specific FinSpace user. This must be an IAM role within
+    #   your FinSpace account.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A token that ensures idempotency. This token expires in 10 minutes.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateUserRequest AWS API Documentation
+    #
+    class UpdateUserRequest < Struct.new(
+      :user_id,
+      :type,
+      :first_name,
+      :last_name,
+      :api_access,
+      :api_access_principal_arn,
+      :client_token)
+      SENSITIVE = [:first_name, :last_name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] user_id
+    #   The unique identifier of the updated user account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/UpdateUserResponse AWS API Documentation
+    #
+    class UpdateUserResponse < Struct.new(
+      :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the user account.
+    #
+    # @!attribute [rw] user_id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the user account.
+    #
+    #   * `CREATING` – The user account creation is in progress.
+    #
+    #   * `ENABLED` – The user account is created and is currently active.
+    #
+    #   * `DISABLED` – The user account is currently inactive.
+    #   @return [String]
+    #
+    # @!attribute [rw] first_name
+    #   The first name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The last name of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address of the user. The email address serves as a uniquer
+    #   identifier for each user and cannot be changed after it's created.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of user.
+    #
+    #   * `SUPER_USER` – A user with permission to all the functionality and
+    #     data in FinSpace.
+    #
+    #   * `APP_USER` – A user with specific permissions in FinSpace. The
+    #     users are assigned permissions by adding them to a permissions
+    #     group.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access
+    #   Indicates whether the user can use the
+    #   `GetProgrammaticAccessCredentials` API to obtain credentials that
+    #   can then be used to access other FinSpace Data API operations.
+    #
+    #   * `ENABLED` – The user has permissions to use the APIs.
+    #
+    #   * `DISABLED` – The user does not have permissions to use any APIs.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_access_principal_arn
+    #   The ARN identifier of an AWS user or role that is allowed to call
+    #   the `GetProgrammaticAccessCredentials` API to obtain a credentials
+    #   token for a specific FinSpace user. This must be an IAM role within
+    #   your FinSpace account.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The timestamp at which the user account was created in FinSpace. The
+    #   value is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_enabled_time
+    #   Describes the last time the user account was enabled. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_disabled_time
+    #   Describes the last time the user account was disabled. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Describes the last time the user account was updated. The value is
+    #   determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] last_login_time
+    #   Describes the last time that the user logged into their account. The
+    #   value is determined as epoch time in milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/User AWS API Documentation
+    #
+    class User < Struct.new(
+      :user_id,
+      :status,
+      :first_name,
+      :last_name,
+      :email_address,
+      :type,
+      :api_access,
+      :api_access_principal_arn,
+      :create_time,
+      :last_enabled_time,
+      :last_disabled_time,
+      :last_modified_time,
+      :last_login_time)
+      SENSITIVE = [:first_name, :last_name, :email_address]
+      include Aws::Structure
+    end
+
     # The input fails to satisfy the constraints specified by an AWS
     # service.
     #
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/finspace-2020-07-13/ValidationException AWS API Documentation
     #
     class ValidationException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -157,6 +157,7 @@ module Aws::Redshift
     #         data_share_arn: "String", # required
     #         associate_entire_account: false,
     #         consumer_arn: "String",
+    #         consumer_region: "String",
     #       }
     #
     # @!attribute [rw] data_share_arn
@@ -174,12 +175,19 @@ module Aws::Redshift
     #   with the datashare.
     #   @return [String]
     #
+    # @!attribute [rw] consumer_region
+    #   From a datashare consumer account, associates a datashare with all
+    #   existing and future namespaces in the specified Amazon Web Services
+    #   Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/AssociateDataShareConsumerMessage AWS API Documentation
     #
     class AssociateDataShareConsumerMessage < Struct.new(
       :data_share_arn,
       :associate_entire_account,
-      :consumer_arn)
+      :consumer_arn,
+      :consumer_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1983,8 +1991,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-    #     ' (single quote), " (double quote), \\, /, @, or space.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except '
+    #     (single quote), " (double quote), \\, /, or @.
     #   @return [String]
     #
     # @!attribute [rw] cluster_security_groups
@@ -2213,10 +2221,15 @@ module Aws::Redshift
     #   A list of Identity and Access Management (IAM) roles that can be
     #   used by the cluster to access other Amazon Web Services services.
     #   You must supply the IAM roles in their Amazon Resource Name (ARN)
-    #   format. You can supply up to 10 IAM roles in a single request.
+    #   format.
     #
-    #   A cluster can have up to 10 IAM roles associated with it at any
-    #   time.
+    #   The maximum number of IAM roles that you can associate is subject to
+    #   a quota. For more information, go to [Quotas and limits][1] in the
+    #   *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] maintenance_track_name
@@ -2997,7 +3010,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The unique identifier of the customer master key (CMK) to which to
+    #   The unique identifier of the encrypted symmetric key to which to
     #   grant Amazon Redshift permission. If no key is specified, the
     #   default key is used.
     #   @return [String]
@@ -3018,8 +3031,8 @@ module Aws::Redshift
 
     # @!attribute [rw] snapshot_copy_grant
     #   The snapshot copy grant that grants Amazon Redshift permission to
-    #   encrypt copied snapshots with the specified customer master key
-    #   (CMK) from Amazon Web Services KMS in the destination region.
+    #   encrypt copied snapshots with the specified encrypted symmetric key
+    #   from Amazon Web Services KMS in the destination region.
     #
     #   For more information about managing snapshot copy grants, go to
     #   [Amazon Redshift Database Encryption][1] in the *Amazon Redshift
@@ -3138,7 +3151,7 @@ module Aws::Redshift
     #
     #       {
     #         cluster_identifier: "String", # required
-    #         feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling
+    #         feature_type: "spectrum", # required, accepts spectrum, concurrency-scaling, cross-region-datasharing
     #         limit_type: "time", # required, accepts time, data-scanned
     #         amount: 1, # required
     #         period: "daily", # accepts daily, weekly, monthly
@@ -3163,7 +3176,9 @@ module Aws::Redshift
     #   The type of limit. Depending on the feature type, this can be based
     #   on a time duration or data size. If `FeatureType` is `spectrum`,
     #   then `LimitType` must be `data-scanned`. If `FeatureType` is
-    #   `concurrency-scaling`, then `LimitType` must be `time`.
+    #   `concurrency-scaling`, then `LimitType` must be `time`. If
+    #   `FeatureType` is `cross-region-datasharing`, then `LimitType` must
+    #   be `data-scanned`.
     #   @return [String]
     #
     # @!attribute [rw] amount
@@ -3268,6 +3283,11 @@ module Aws::Redshift
     #   The status of the datashare that is associated.
     #   @return [String]
     #
+    # @!attribute [rw] consumer_region
+    #   The Amazon Web Services Region of the consumer accounts that have an
+    #   association with a producer datashare.
+    #   @return [String]
+    #
     # @!attribute [rw] created_date
     #   The creation date of the datashare that is associated.
     #   @return [Time]
@@ -3281,6 +3301,7 @@ module Aws::Redshift
     class DataShareAssociation < Struct.new(
       :consumer_identifier,
       :status,
+      :consumer_region,
       :created_date,
       :status_change_date)
       SENSITIVE = []
@@ -6076,7 +6097,7 @@ module Aws::Redshift
     #       {
     #         usage_limit_id: "String",
     #         cluster_identifier: "String",
-    #         feature_type: "spectrum", # accepts spectrum, concurrency-scaling
+    #         feature_type: "spectrum", # accepts spectrum, concurrency-scaling, cross-region-datasharing
     #         max_records: 1,
     #         marker: "String",
     #         tag_keys: ["String"],
@@ -6215,6 +6236,7 @@ module Aws::Redshift
     #         data_share_arn: "String", # required
     #         disassociate_entire_account: false,
     #         consumer_arn: "String",
+    #         consumer_region: "String",
     #       }
     #
     # @!attribute [rw] data_share_arn
@@ -6232,12 +6254,19 @@ module Aws::Redshift
     #   the datashare is removed from.
     #   @return [String]
     #
+    # @!attribute [rw] consumer_region
+    #   From a datashare consumer account, removes association of a
+    #   datashare from all the existing and future namespaces in the
+    #   specified Amazon Web Services Region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisassociateDataShareConsumerMessage AWS API Documentation
     #
     class DisassociateDataShareConsumerMessage < Struct.new(
       :data_share_arn,
       :disassociate_entire_account,
-      :consumer_arn)
+      :consumer_arn,
+      :consumer_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7852,14 +7881,12 @@ module Aws::Redshift
     #
     # @!attribute [rw] add_iam_roles
     #   Zero or more IAM roles to associate with the cluster. The roles must
-    #   be in their Amazon Resource Name (ARN) format. You can associate up
-    #   to 10 IAM roles with a single cluster in a single request.
+    #   be in their Amazon Resource Name (ARN) format.
     #   @return [Array<String>]
     #
     # @!attribute [rw] remove_iam_roles
     #   Zero or more IAM roles in ARN format to disassociate from the
-    #   cluster. You can disassociate up to 10 IAM roles from a single
-    #   cluster in a single request.
+    #   cluster.
     #   @return [Array<String>]
     #
     # @!attribute [rw] default_iam_role_arn
@@ -8085,8 +8112,8 @@ module Aws::Redshift
     #
     #   * Must contain one number.
     #
-    #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-    #     ' (single quote), " (double quote), \\, /, @, or space.
+    #   * Can be any printable ASCII character (ASCII code 33-126) except '
+    #     (single quote), " (double quote), \\, /, or @.
     #   @return [String]
     #
     # @!attribute [rw] cluster_parameter_group_name
@@ -10298,9 +10325,15 @@ module Aws::Redshift
     #   A list of Identity and Access Management (IAM) roles that can be
     #   used by the cluster to access other Amazon Web Services services.
     #   You must supply the IAM roles in their Amazon Resource Name (ARN)
-    #   format. You can supply up to 10 IAM roles in a single request.
+    #   format.
     #
-    #   A cluster can have up to 10 IAM roles associated at any time.
+    #   The maximum number of IAM roles that you can associate is subject to
+    #   a quota. For more information, go to [Quotas and limits][1] in the
+    #   *Amazon Redshift Cluster Management Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
     #   @return [Array<String>]
     #
     # @!attribute [rw] maintenance_track_name
@@ -11269,7 +11302,7 @@ module Aws::Redshift
     class SnapshotCopyDisabledFault < Aws::EmptyStructure; end
 
     # The snapshot copy grant that grants Amazon Redshift permission to
-    # encrypt copied snapshots with the specified customer master key (CMK)
+    # encrypt copied snapshots with the specified encrypted symmetric key
     # from Amazon Web Services KMS in the destination region.
     #
     # For more information about managing snapshot copy grants, go to
@@ -11285,7 +11318,7 @@ module Aws::Redshift
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The unique identifier of the customer master key (CMK) in Amazon Web
+    #   The unique identifier of the encrypted symmetric key in Amazon Web
     #   Services KMS to which Amazon Redshift is granted permission.
     #   @return [String]
     #

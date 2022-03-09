@@ -25,9 +25,14 @@ module Aws::Budgets
     ActionThreshold = Shapes::StructureShape.new(name: 'ActionThreshold')
     ActionType = Shapes::StringShape.new(name: 'ActionType')
     Actions = Shapes::ListShape.new(name: 'Actions')
+    AdjustmentPeriod = Shapes::IntegerShape.new(name: 'AdjustmentPeriod')
     ApprovalModel = Shapes::StringShape.new(name: 'ApprovalModel')
+    AutoAdjustData = Shapes::StructureShape.new(name: 'AutoAdjustData')
+    AutoAdjustType = Shapes::StringShape.new(name: 'AutoAdjustType')
     Budget = Shapes::StructureShape.new(name: 'Budget')
     BudgetName = Shapes::StringShape.new(name: 'BudgetName')
+    BudgetNotificationsForAccount = Shapes::StructureShape.new(name: 'BudgetNotificationsForAccount')
+    BudgetNotificationsForAccountList = Shapes::ListShape.new(name: 'BudgetNotificationsForAccountList')
     BudgetPerformanceHistory = Shapes::StructureShape.new(name: 'BudgetPerformanceHistory')
     BudgetType = Shapes::StringShape.new(name: 'BudgetType')
     BudgetedAndActualAmounts = Shapes::StructureShape.new(name: 'BudgetedAndActualAmounts')
@@ -63,6 +68,8 @@ module Aws::Budgets
     DescribeBudgetActionsForAccountResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForAccountResponse')
     DescribeBudgetActionsForBudgetRequest = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForBudgetRequest')
     DescribeBudgetActionsForBudgetResponse = Shapes::StructureShape.new(name: 'DescribeBudgetActionsForBudgetResponse')
+    DescribeBudgetNotificationsForAccountRequest = Shapes::StructureShape.new(name: 'DescribeBudgetNotificationsForAccountRequest')
+    DescribeBudgetNotificationsForAccountResponse = Shapes::StructureShape.new(name: 'DescribeBudgetNotificationsForAccountResponse')
     DescribeBudgetPerformanceHistoryRequest = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryRequest')
     DescribeBudgetPerformanceHistoryResponse = Shapes::StructureShape.new(name: 'DescribeBudgetPerformanceHistoryResponse')
     DescribeBudgetRequest = Shapes::StructureShape.new(name: 'DescribeBudgetRequest')
@@ -84,6 +91,7 @@ module Aws::Budgets
     GenericTimestamp = Shapes::TimestampShape.new(name: 'GenericTimestamp')
     Group = Shapes::StringShape.new(name: 'Group')
     Groups = Shapes::ListShape.new(name: 'Groups')
+    HistoricalOptions = Shapes::StructureShape.new(name: 'HistoricalOptions')
     IamActionDefinition = Shapes::StructureShape.new(name: 'IamActionDefinition')
     InstanceId = Shapes::StringShape.new(name: 'InstanceId')
     InstanceIds = Shapes::ListShape.new(name: 'InstanceIds')
@@ -91,6 +99,7 @@ module Aws::Budgets
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidParameterException = Shapes::StructureShape.new(name: 'InvalidParameterException')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MaxResultsBudgetNotifications = Shapes::IntegerShape.new(name: 'MaxResultsBudgetNotifications')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     Notification = Shapes::StructureShape.new(name: 'Notification')
     NotificationState = Shapes::StringShape.new(name: 'NotificationState')
@@ -167,6 +176,11 @@ module Aws::Budgets
 
     Actions.member = Shapes::ShapeRef.new(shape: Action)
 
+    AutoAdjustData.add_member(:auto_adjust_type, Shapes::ShapeRef.new(shape: AutoAdjustType, required: true, location_name: "AutoAdjustType"))
+    AutoAdjustData.add_member(:historical_options, Shapes::ShapeRef.new(shape: HistoricalOptions, location_name: "HistoricalOptions"))
+    AutoAdjustData.add_member(:last_auto_adjust_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastAutoAdjustTime"))
+    AutoAdjustData.struct_class = Types::AutoAdjustData
+
     Budget.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     Budget.add_member(:budget_limit, Shapes::ShapeRef.new(shape: Spend, location_name: "BudgetLimit"))
     Budget.add_member(:planned_budget_limits, Shapes::ShapeRef.new(shape: PlannedBudgetLimits, location_name: "PlannedBudgetLimits"))
@@ -177,7 +191,14 @@ module Aws::Budgets
     Budget.add_member(:calculated_spend, Shapes::ShapeRef.new(shape: CalculatedSpend, location_name: "CalculatedSpend"))
     Budget.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, required: true, location_name: "BudgetType"))
     Budget.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: GenericTimestamp, location_name: "LastUpdatedTime"))
+    Budget.add_member(:auto_adjust_data, Shapes::ShapeRef.new(shape: AutoAdjustData, location_name: "AutoAdjustData"))
     Budget.struct_class = Types::Budget
+
+    BudgetNotificationsForAccount.add_member(:notifications, Shapes::ShapeRef.new(shape: Notifications, location_name: "Notifications"))
+    BudgetNotificationsForAccount.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
+    BudgetNotificationsForAccount.struct_class = Types::BudgetNotificationsForAccount
+
+    BudgetNotificationsForAccountList.member = Shapes::ShapeRef.new(shape: BudgetNotificationsForAccount)
 
     BudgetPerformanceHistory.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, location_name: "BudgetName"))
     BudgetPerformanceHistory.add_member(:budget_type, Shapes::ShapeRef.new(shape: BudgetType, location_name: "BudgetType"))
@@ -335,6 +356,15 @@ module Aws::Budgets
     DescribeBudgetActionsForBudgetResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     DescribeBudgetActionsForBudgetResponse.struct_class = Types::DescribeBudgetActionsForBudgetResponse
 
+    DescribeBudgetNotificationsForAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    DescribeBudgetNotificationsForAccountRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsBudgetNotifications, location_name: "MaxResults"))
+    DescribeBudgetNotificationsForAccountRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetNotificationsForAccountRequest.struct_class = Types::DescribeBudgetNotificationsForAccountRequest
+
+    DescribeBudgetNotificationsForAccountResponse.add_member(:budget_notifications_for_account, Shapes::ShapeRef.new(shape: BudgetNotificationsForAccountList, location_name: "BudgetNotificationsForAccount"))
+    DescribeBudgetNotificationsForAccountResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
+    DescribeBudgetNotificationsForAccountResponse.struct_class = Types::DescribeBudgetNotificationsForAccountResponse
+
     DescribeBudgetPerformanceHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
     DescribeBudgetPerformanceHistoryRequest.add_member(:budget_name, Shapes::ShapeRef.new(shape: BudgetName, required: true, location_name: "BudgetName"))
     DescribeBudgetPerformanceHistoryRequest.add_member(:time_period, Shapes::ShapeRef.new(shape: TimePeriod, location_name: "TimePeriod"))
@@ -404,6 +434,10 @@ module Aws::Budgets
     ExpiredNextTokenException.struct_class = Types::ExpiredNextTokenException
 
     Groups.member = Shapes::ShapeRef.new(shape: Group)
+
+    HistoricalOptions.add_member(:budget_adjustment_period, Shapes::ShapeRef.new(shape: AdjustmentPeriod, required: true, location_name: "BudgetAdjustmentPeriod"))
+    HistoricalOptions.add_member(:look_back_available_periods, Shapes::ShapeRef.new(shape: AdjustmentPeriod, location_name: "LookBackAvailablePeriods"))
+    HistoricalOptions.struct_class = Types::HistoricalOptions
 
     IamActionDefinition.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "PolicyArn"))
     IamActionDefinition.add_member(:roles, Shapes::ShapeRef.new(shape: Roles, location_name: "Roles"))
@@ -710,6 +744,26 @@ module Aws::Budgets
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:describe_budget_notifications_for_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBudgetNotificationsForAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeBudgetNotificationsForAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBudgetNotificationsForAccountResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: ExpiredNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

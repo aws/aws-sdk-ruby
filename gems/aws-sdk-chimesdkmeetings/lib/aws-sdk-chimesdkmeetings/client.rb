@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ChimeSDKMeetings
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -462,11 +464,14 @@ module Aws::ChimeSDKMeetings
     # @option params [required, String] :media_region
     #   The Region in which to create the meeting.
     #
-    #   Available values: `af-south-1` , `ap-northeast-1` , `ap-northeast-2` ,
-    #   `ap-south-1` , `ap-southeast-1` , `ap-southeast-2` , `ca-central-1` ,
-    #   `eu-central-1` , `eu-north-1` , `eu-south-1` , `eu-west-1` ,
-    #   `eu-west-2` , `eu-west-3` , `sa-east-1` , `us-east-1` , `us-east-2` ,
-    #   `us-west-1` , `us-west-2` .
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`,
+    #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
+    #   `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #
     # @option params [String] :meeting_host_id
     #   Reserved.
@@ -550,6 +555,15 @@ module Aws::ChimeSDKMeetings
     #
     # @option params [required, String] :media_region
     #   The Region in which to create the meeting.
+    #
+    #   Available values: `af-south-1`, `ap-northeast-1`, `ap-northeast-2`,
+    #   `ap-south-1`, `ap-southeast-1`, `ap-southeast-2`, `ca-central-1`,
+    #   `eu-central-1`, `eu-north-1`, `eu-south-1`, `eu-west-1`, `eu-west-2`,
+    #   `eu-west-3`, `sa-east-1`, `us-east-1`, `us-east-2`, `us-west-1`,
+    #   `us-west-2`.
+    #
+    #   Available values in AWS GovCloud (US) Regions: `us-gov-east-1`,
+    #   `us-gov-west-1`.
     #
     # @option params [String] :meeting_host_id
     #   Reserved.
@@ -848,7 +862,7 @@ module Aws::ChimeSDKMeetings
     #     meeting_id: "GuidString", # required
     #     transcription_configuration: { # required
     #       engine_transcribe_settings: {
-    #         language_code: "en-US", # required, accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
+    #         language_code: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #         vocabulary_filter_method: "remove", # accepts remove, mask, tag
     #         vocabulary_filter_name: "String",
     #         vocabulary_name: "String",
@@ -859,6 +873,9 @@ module Aws::ChimeSDKMeetings
     #         content_redaction_type: "PII", # accepts PII
     #         pii_entity_types: "TranscribePiiEntityTypes",
     #         language_model_name: "TranscribeLanguageModelName",
+    #         identify_language: false,
+    #         language_options: "TranscribeLanguageOptions",
+    #         preferred_language: "en-US", # accepts en-US, en-GB, es-US, fr-CA, fr-FR, en-AU, it-IT, de-DE, pt-BR, ja-JP, ko-KR, zh-CN
     #       },
     #       engine_transcribe_medical_settings: {
     #         language_code: "en-US", # required, accepts en-US
@@ -915,7 +932,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

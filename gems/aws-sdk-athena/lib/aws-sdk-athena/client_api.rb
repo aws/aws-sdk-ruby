@@ -13,6 +13,7 @@ module Aws::Athena
 
     include Seahorse::Model
 
+    AclConfiguration = Shapes::StructureShape.new(name: 'AclConfiguration')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AthenaError = Shapes::StructureShape.new(name: 'AthenaError')
     BatchGetNamedQueryInput = Shapes::StructureShape.new(name: 'BatchGetNamedQueryInput')
@@ -117,6 +118,7 @@ module Aws::Athena
     MetadataException = Shapes::StructureShape.new(name: 'MetadataException')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NamedQuery = Shapes::StructureShape.new(name: 'NamedQuery')
+    NamedQueryDescriptionString = Shapes::StringShape.new(name: 'NamedQueryDescriptionString')
     NamedQueryId = Shapes::StringShape.new(name: 'NamedQueryId')
     NamedQueryIdList = Shapes::ListShape.new(name: 'NamedQueryIdList')
     NamedQueryList = Shapes::ListShape.new(name: 'NamedQueryList')
@@ -141,6 +143,7 @@ module Aws::Athena
     ResultSetMetadata = Shapes::StructureShape.new(name: 'ResultSetMetadata')
     Row = Shapes::StructureShape.new(name: 'Row')
     RowList = Shapes::ListShape.new(name: 'RowList')
+    S3AclOption = Shapes::StringShape.new(name: 'S3AclOption')
     StartQueryExecutionInput = Shapes::StructureShape.new(name: 'StartQueryExecutionInput')
     StartQueryExecutionOutput = Shapes::StructureShape.new(name: 'StartQueryExecutionOutput')
     StatementName = Shapes::StringShape.new(name: 'StatementName')
@@ -171,6 +174,8 @@ module Aws::Athena
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateDataCatalogInput = Shapes::StructureShape.new(name: 'UpdateDataCatalogInput')
     UpdateDataCatalogOutput = Shapes::StructureShape.new(name: 'UpdateDataCatalogOutput')
+    UpdateNamedQueryInput = Shapes::StructureShape.new(name: 'UpdateNamedQueryInput')
+    UpdateNamedQueryOutput = Shapes::StructureShape.new(name: 'UpdateNamedQueryOutput')
     UpdatePreparedStatementInput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementInput')
     UpdatePreparedStatementOutput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
@@ -185,6 +190,9 @@ module Aws::Athena
     WorkGroupsList = Shapes::ListShape.new(name: 'WorkGroupsList')
     datumList = Shapes::ListShape.new(name: 'datumList')
     datumString = Shapes::StringShape.new(name: 'datumString')
+
+    AclConfiguration.add_member(:s3_acl_option, Shapes::ShapeRef.new(shape: S3AclOption, required: true, location_name: "S3AclOption"))
+    AclConfiguration.struct_class = Types::AclConfiguration
 
     AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
     AthenaError.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
@@ -531,6 +539,7 @@ module Aws::Athena
     ResultConfiguration.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
     ResultConfiguration.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "EncryptionConfiguration"))
     ResultConfiguration.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
+    ResultConfiguration.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
     ResultConfiguration.struct_class = Types::ResultConfiguration
 
     ResultConfigurationUpdates.add_member(:output_location, Shapes::ShapeRef.new(shape: String, location_name: "OutputLocation"))
@@ -539,6 +548,8 @@ module Aws::Athena
     ResultConfigurationUpdates.add_member(:remove_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveEncryptionConfiguration"))
     ResultConfigurationUpdates.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: String, location_name: "ExpectedBucketOwner"))
     ResultConfigurationUpdates.add_member(:remove_expected_bucket_owner, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveExpectedBucketOwner"))
+    ResultConfigurationUpdates.add_member(:acl_configuration, Shapes::ShapeRef.new(shape: AclConfiguration, location_name: "AclConfiguration"))
+    ResultConfigurationUpdates.add_member(:remove_acl_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RemoveAclConfiguration"))
     ResultConfigurationUpdates.struct_class = Types::ResultConfigurationUpdates
 
     ResultSet.add_member(:rows, Shapes::ShapeRef.new(shape: RowList, location_name: "Rows"))
@@ -624,6 +635,14 @@ module Aws::Athena
     UpdateDataCatalogInput.struct_class = Types::UpdateDataCatalogInput
 
     UpdateDataCatalogOutput.struct_class = Types::UpdateDataCatalogOutput
+
+    UpdateNamedQueryInput.add_member(:named_query_id, Shapes::ShapeRef.new(shape: NamedQueryId, required: true, location_name: "NamedQueryId"))
+    UpdateNamedQueryInput.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    UpdateNamedQueryInput.add_member(:description, Shapes::ShapeRef.new(shape: NamedQueryDescriptionString, location_name: "Description"))
+    UpdateNamedQueryInput.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "QueryString"))
+    UpdateNamedQueryInput.struct_class = Types::UpdateNamedQueryInput
+
+    UpdateNamedQueryOutput.struct_class = Types::UpdateNamedQueryOutput
 
     UpdatePreparedStatementInput.add_member(:statement_name, Shapes::ShapeRef.new(shape: StatementName, required: true, location_name: "StatementName"))
     UpdatePreparedStatementInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
@@ -1074,6 +1093,16 @@ module Aws::Athena
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateDataCatalogInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateDataCatalogOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+      end)
+
+      api.add_operation(:update_named_query, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNamedQuery"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNamedQueryInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNamedQueryOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
       end)

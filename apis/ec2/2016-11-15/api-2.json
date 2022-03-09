@@ -9218,7 +9218,10 @@
     },
     "CreateIpamPoolRequest":{
       "type":"structure",
-      "required":["IpamScopeId"],
+      "required":[
+        "IpamScopeId",
+        "AddressFamily"
+      ],
       "members":{
         "DryRun":{"shape":"Boolean"},
         "IpamScopeId":{"shape":"IpamScopeId"},
@@ -21379,6 +21382,10 @@
         "BootMode":{
           "shape":"AttributeValue",
           "locationName":"bootMode"
+        },
+        "LastLaunchedTime":{
+          "shape":"AttributeValue",
+          "locationName":"lastLaunchedTime"
         }
       }
     },
@@ -21392,7 +21399,8 @@
         "productCodes",
         "blockDeviceMapping",
         "sriovNetSupport",
-        "bootMode"
+        "bootMode",
+        "lastLaunchedTime"
       ]
     },
     "ImageDiskContainer":{
@@ -29402,7 +29410,20 @@
         "interface",
         "natGateway",
         "efa",
-        "trunk"
+        "trunk",
+        "load_balancer",
+        "network_load_balancer",
+        "vpc_endpoint",
+        "branch",
+        "transit_gateway",
+        "lambda",
+        "quicksight",
+        "global_accelerator_managed",
+        "api_gateway_managed",
+        "gateway_load_balancer",
+        "gateway_load_balancer_endpoint",
+        "iot_rules_managed",
+        "aws_codestar_connections_managed"
       ]
     },
     "NetworkPerformance":{"type":"string"},
@@ -32642,6 +32663,7 @@
         "spot-fleet-request",
         "spot-instances-request",
         "subnet",
+        "subnet-cidr-reservation",
         "traffic-mirror-filter",
         "traffic-mirror-session",
         "traffic-mirror-target",

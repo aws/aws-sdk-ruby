@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2022-02-16)
+------------------
+
+* Feature - AWS Cost Anomaly Detection now supports SNS FIFO topic subscribers.
+
 1.73.0 (2022-02-03)
 ------------------
 

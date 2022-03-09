@@ -34,7 +34,7 @@ module Aws::Amplify
     #   @return [String]
     #
     # @!attribute [rw] repository
-    #   The repository for the Amplify app.
+    #   The Git repository for the Amplify app.
     #   @return [String]
     #
     # @!attribute [rw] platform
@@ -113,6 +113,13 @@ module Aws::Amplify
     #   Amplify app.
     #   @return [Types::AutoBranchCreationConfig]
     #
+    # @!attribute [rw] repository_clone_method
+    #   The authentication protocol to use to access the Git repository for
+    #   an Amplify app. For a GitHub repository, specify `TOKEN`. For an
+    #   Amazon Web Services CodeCommit repository, specify `SIGV4`. For
+    #   GitLab and Bitbucket repositories, specify `SSH`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplify-2017-07-25/App AWS API Documentation
     #
     class App < Struct.new(
@@ -138,8 +145,9 @@ module Aws::Amplify
       :custom_headers,
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
-      :auto_branch_creation_config)
-      SENSITIVE = [:basic_auth_credentials]
+      :auto_branch_creation_config,
+      :repository_clone_method)
+      SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -242,7 +250,7 @@ module Aws::Amplify
       :build_spec,
       :enable_pull_request_preview,
       :pull_request_environment_name)
-      SENSITIVE = [:basic_auth_credentials]
+      SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -455,7 +463,7 @@ module Aws::Amplify
       :destination_branch,
       :source_branch,
       :backend_environment_arn)
-      SENSITIVE = [:basic_auth_credentials]
+      SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -468,7 +476,7 @@ module Aws::Amplify
     #         name: "Name", # required
     #         description: "Description",
     #         repository: "Repository",
-    #         platform: "WEB", # accepts WEB
+    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #         iam_service_role_arn: "ServiceRoleArn",
     #         oauth_token: "OauthToken",
     #         access_token: "AccessToken",
@@ -617,7 +625,7 @@ module Aws::Amplify
       :enable_auto_branch_creation,
       :auto_branch_creation_patterns,
       :auto_branch_creation_config)
-      SENSITIVE = [:oauth_token, :access_token, :basic_auth_credentials]
+      SENSITIVE = [:oauth_token, :access_token, :basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -819,7 +827,7 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
-      SENSITIVE = [:basic_auth_credentials]
+      SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -2728,7 +2736,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         name: "Name",
     #         description: "Description",
-    #         platform: "WEB", # accepts WEB
+    #         platform: "WEB", # accepts WEB, WEB_DYNAMIC
     #         iam_service_role_arn: "ServiceRoleArn",
     #         environment_variables: {
     #           "EnvKey" => "EnvValue",
@@ -2875,7 +2883,7 @@ module Aws::Amplify
       :repository,
       :oauth_token,
       :access_token)
-      SENSITIVE = [:basic_auth_credentials, :oauth_token, :access_token]
+      SENSITIVE = [:basic_auth_credentials, :build_spec, :oauth_token, :access_token]
       include Aws::Structure
     end
 
@@ -3017,7 +3025,7 @@ module Aws::Amplify
       :enable_pull_request_preview,
       :pull_request_environment_name,
       :backend_environment_arn)
-      SENSITIVE = [:basic_auth_credentials]
+      SENSITIVE = [:basic_auth_credentials, :build_spec]
       include Aws::Structure
     end
 
@@ -3045,7 +3053,7 @@ module Aws::Amplify
     #         app_id: "AppId", # required
     #         domain_name: "DomainName", # required
     #         enable_auto_sub_domain: false,
-    #         sub_domain_settings: [ # required
+    #         sub_domain_settings: [
     #           {
     #             prefix: "DomainPrefix", # required
     #             branch_name: "BranchName", # required

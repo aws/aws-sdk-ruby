@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-03-08)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for reading timecode from AVCHD sources and now provides the ability to segment WebVTT at the same interval as the video and audio in HLS packages.
+
+1.86.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2022-02-03)
 ------------------
 

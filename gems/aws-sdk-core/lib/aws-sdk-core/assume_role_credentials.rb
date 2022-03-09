@@ -17,6 +17,11 @@ module Aws
   #
   # If you omit `:client` option, a new {STS::Client} object will be
   # constructed.
+  #
+  # The AssumeRoleCredentials also provides a `before_refresh` callback
+  # that can be used to help manage refreshing tokens.
+  # `before_refresh` is called when AWS credentials are required and need
+  # to be refreshed and it is called with the AssumeRoleCredentials object.
   class AssumeRoleCredentials
 
     include CredentialProvider
@@ -28,6 +33,16 @@ module Aws
     # @option options [Integer] :duration_seconds
     # @option options [String] :external_id
     # @option options [STS::Client] :client
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed.  Useful for updating tokens.
+    #   `before_refresh` is called when AWS credentials are
+    #   required and need to be refreshed. Tokens can be refreshed using
+    #   the following example:
+    #
+    #      before_refresh = Proc.new do |assume_role_credentials| do
+    #        assume_role_credentials.assume_role_params['token_code'] = update_token
+    #      end
+    #
     def initialize(options = {})
       client_opts = {}
       @assume_role_params = {}
@@ -45,6 +60,9 @@ module Aws
 
     # @return [STS::Client]
     attr_reader :client
+
+    # @return [Hash]
+    attr_reader :assume_role_params
 
     private
 

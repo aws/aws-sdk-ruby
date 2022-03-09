@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-03-02)
+------------------
+
+* Feature - Add bytesScanned field into responses of DescribeQuery and GetQueryResults.
+
+1.47.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.46.0 (2022-02-03)
 ------------------
 

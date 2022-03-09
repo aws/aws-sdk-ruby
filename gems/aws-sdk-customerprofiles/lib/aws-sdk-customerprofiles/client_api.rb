@@ -17,10 +17,16 @@ module Aws::CustomerProfiles
     AddProfileKeyRequest = Shapes::StructureShape.new(name: 'AddProfileKeyRequest')
     AddProfileKeyResponse = Shapes::StructureShape.new(name: 'AddProfileKeyResponse')
     Address = Shapes::StructureShape.new(name: 'Address')
+    AppflowIntegration = Shapes::StructureShape.new(name: 'AppflowIntegration')
+    AppflowIntegrationWorkflowAttributes = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowAttributes')
+    AppflowIntegrationWorkflowMetrics = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowMetrics')
+    AppflowIntegrationWorkflowStep = Shapes::StructureShape.new(name: 'AppflowIntegrationWorkflowStep')
     AttributeSourceIdMap = Shapes::MapShape.new(name: 'AttributeSourceIdMap')
     Attributes = Shapes::MapShape.new(name: 'Attributes')
     AutoMerging = Shapes::StructureShape.new(name: 'AutoMerging')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
+    Batch = Shapes::StructureShape.new(name: 'Batch')
+    Batches = Shapes::ListShape.new(name: 'Batches')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     BucketPrefix = Shapes::StringShape.new(name: 'BucketPrefix')
     ConflictResolution = Shapes::StructureShape.new(name: 'ConflictResolution')
@@ -30,6 +36,8 @@ module Aws::CustomerProfiles
     Consolidation = Shapes::StructureShape.new(name: 'Consolidation')
     CreateDomainRequest = Shapes::StructureShape.new(name: 'CreateDomainRequest')
     CreateDomainResponse = Shapes::StructureShape.new(name: 'CreateDomainResponse')
+    CreateIntegrationWorkflowRequest = Shapes::StructureShape.new(name: 'CreateIntegrationWorkflowRequest')
+    CreateIntegrationWorkflowResponse = Shapes::StructureShape.new(name: 'CreateIntegrationWorkflowResponse')
     CreateProfileRequest = Shapes::StructureShape.new(name: 'CreateProfileRequest')
     CreateProfileResponse = Shapes::StructureShape.new(name: 'CreateProfileResponse')
     DataPullMode = Shapes::StringShape.new(name: 'DataPullMode')
@@ -47,6 +55,8 @@ module Aws::CustomerProfiles
     DeleteProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'DeleteProfileObjectTypeResponse')
     DeleteProfileRequest = Shapes::StructureShape.new(name: 'DeleteProfileRequest')
     DeleteProfileResponse = Shapes::StructureShape.new(name: 'DeleteProfileResponse')
+    DeleteWorkflowRequest = Shapes::StructureShape.new(name: 'DeleteWorkflowRequest')
+    DeleteWorkflowResponse = Shapes::StructureShape.new(name: 'DeleteWorkflowResponse')
     DestinationField = Shapes::StringShape.new(name: 'DestinationField')
     DomainList = Shapes::ListShape.new(name: 'DomainList')
     DomainStats = Shapes::StructureShape.new(name: 'DomainStats')
@@ -75,10 +85,15 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeResponse')
     GetProfileObjectTypeTemplateRequest = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateRequest')
     GetProfileObjectTypeTemplateResponse = Shapes::StructureShape.new(name: 'GetProfileObjectTypeTemplateResponse')
+    GetWorkflowRequest = Shapes::StructureShape.new(name: 'GetWorkflowRequest')
+    GetWorkflowResponse = Shapes::StructureShape.new(name: 'GetWorkflowResponse')
+    GetWorkflowStepsRequest = Shapes::StructureShape.new(name: 'GetWorkflowStepsRequest')
+    GetWorkflowStepsResponse = Shapes::StructureShape.new(name: 'GetWorkflowStepsResponse')
     IdentityResolutionJob = Shapes::StructureShape.new(name: 'IdentityResolutionJob')
     IdentityResolutionJobStatus = Shapes::StringShape.new(name: 'IdentityResolutionJobStatus')
     IdentityResolutionJobsList = Shapes::ListShape.new(name: 'IdentityResolutionJobsList')
     IncrementalPullConfig = Shapes::StructureShape.new(name: 'IncrementalPullConfig')
+    IntegrationConfig = Shapes::StructureShape.new(name: 'IntegrationConfig')
     IntegrationList = Shapes::ListShape.new(name: 'IntegrationList')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     JobSchedule = Shapes::StructureShape.new(name: 'JobSchedule')
@@ -108,6 +123,9 @@ module Aws::CustomerProfiles
     ListProfileObjectsResponse = Shapes::StructureShape.new(name: 'ListProfileObjectsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListWorkflowsItem = Shapes::StructureShape.new(name: 'ListWorkflowsItem')
+    ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
+    ListWorkflowsResponse = Shapes::StructureShape.new(name: 'ListWorkflowsResponse')
     MarketoConnectorOperator = Shapes::StringShape.new(name: 'MarketoConnectorOperator')
     MarketoSourceProperties = Shapes::StructureShape.new(name: 'MarketoSourceProperties')
     MatchItem = Shapes::StructureShape.new(name: 'MatchItem')
@@ -141,6 +159,7 @@ module Aws::CustomerProfiles
     PutProfileObjectTypeRequest = Shapes::StructureShape.new(name: 'PutProfileObjectTypeRequest')
     PutProfileObjectTypeResponse = Shapes::StructureShape.new(name: 'PutProfileObjectTypeResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3ConnectorOperator = Shapes::StringShape.new(name: 'S3ConnectorOperator')
     S3ExportingConfig = Shapes::StructureShape.new(name: 'S3ExportingConfig')
     S3ExportingLocation = Shapes::StructureShape.new(name: 'S3ExportingLocation')
@@ -160,6 +179,7 @@ module Aws::CustomerProfiles
     SourceFlowConfig = Shapes::StructureShape.new(name: 'SourceFlowConfig')
     StandardIdentifier = Shapes::StringShape.new(name: 'StandardIdentifier')
     StandardIdentifierList = Shapes::ListShape.new(name: 'StandardIdentifierList')
+    Status = Shapes::StringShape.new(name: 'Status')
     TagArn = Shapes::StringShape.new(name: 'TagArn')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -184,6 +204,12 @@ module Aws::CustomerProfiles
     UpdateDomainResponse = Shapes::StructureShape.new(name: 'UpdateDomainResponse')
     UpdateProfileRequest = Shapes::StructureShape.new(name: 'UpdateProfileRequest')
     UpdateProfileResponse = Shapes::StructureShape.new(name: 'UpdateProfileResponse')
+    WorkflowAttributes = Shapes::StructureShape.new(name: 'WorkflowAttributes')
+    WorkflowList = Shapes::ListShape.new(name: 'WorkflowList')
+    WorkflowMetrics = Shapes::StructureShape.new(name: 'WorkflowMetrics')
+    WorkflowStepItem = Shapes::StructureShape.new(name: 'WorkflowStepItem')
+    WorkflowStepsList = Shapes::ListShape.new(name: 'WorkflowStepsList')
+    WorkflowType = Shapes::StringShape.new(name: 'WorkflowType')
     ZendeskConnectorOperator = Shapes::StringShape.new(name: 'ZendeskConnectorOperator')
     ZendeskSourceProperties = Shapes::StructureShape.new(name: 'ZendeskSourceProperties')
     boolean = Shapes::BooleanShape.new(name: 'boolean')
@@ -237,6 +263,30 @@ module Aws::CustomerProfiles
     Address.add_member(:postal_code, Shapes::ShapeRef.new(shape: string1To255, location_name: "PostalCode"))
     Address.struct_class = Types::Address
 
+    AppflowIntegration.add_member(:flow_definition, Shapes::ShapeRef.new(shape: FlowDefinition, required: true, location_name: "FlowDefinition"))
+    AppflowIntegration.add_member(:batches, Shapes::ShapeRef.new(shape: Batches, location_name: "Batches"))
+    AppflowIntegration.struct_class = Types::AppflowIntegration
+
+    AppflowIntegrationWorkflowAttributes.add_member(:source_connector_type, Shapes::ShapeRef.new(shape: SourceConnectorType, required: true, location_name: "SourceConnectorType"))
+    AppflowIntegrationWorkflowAttributes.add_member(:connector_profile_name, Shapes::ShapeRef.new(shape: ConnectorProfileName, required: true, location_name: "ConnectorProfileName"))
+    AppflowIntegrationWorkflowAttributes.add_member(:role_arn, Shapes::ShapeRef.new(shape: string1To255, location_name: "RoleArn"))
+    AppflowIntegrationWorkflowAttributes.struct_class = Types::AppflowIntegrationWorkflowAttributes
+
+    AppflowIntegrationWorkflowMetrics.add_member(:records_processed, Shapes::ShapeRef.new(shape: long, required: true, location_name: "RecordsProcessed"))
+    AppflowIntegrationWorkflowMetrics.add_member(:steps_completed, Shapes::ShapeRef.new(shape: long, required: true, location_name: "StepsCompleted"))
+    AppflowIntegrationWorkflowMetrics.add_member(:total_steps, Shapes::ShapeRef.new(shape: long, required: true, location_name: "TotalSteps"))
+    AppflowIntegrationWorkflowMetrics.struct_class = Types::AppflowIntegrationWorkflowMetrics
+
+    AppflowIntegrationWorkflowStep.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, required: true, location_name: "FlowName"))
+    AppflowIntegrationWorkflowStep.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
+    AppflowIntegrationWorkflowStep.add_member(:execution_message, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "ExecutionMessage"))
+    AppflowIntegrationWorkflowStep.add_member(:records_processed, Shapes::ShapeRef.new(shape: long, required: true, location_name: "RecordsProcessed"))
+    AppflowIntegrationWorkflowStep.add_member(:batch_records_start_time, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "BatchRecordsStartTime"))
+    AppflowIntegrationWorkflowStep.add_member(:batch_records_end_time, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "BatchRecordsEndTime"))
+    AppflowIntegrationWorkflowStep.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    AppflowIntegrationWorkflowStep.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
+    AppflowIntegrationWorkflowStep.struct_class = Types::AppflowIntegrationWorkflowStep
+
     AttributeSourceIdMap.key = Shapes::ShapeRef.new(shape: string1To255)
     AttributeSourceIdMap.value = Shapes::ShapeRef.new(shape: uuid)
 
@@ -250,6 +300,12 @@ module Aws::CustomerProfiles
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    Batch.add_member(:start_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "StartTime"))
+    Batch.add_member(:end_time, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "EndTime"))
+    Batch.struct_class = Types::Batch
+
+    Batches.member = Shapes::ShapeRef.new(shape: Batch)
 
     ConflictResolution.add_member(:conflict_resolving_model, Shapes::ShapeRef.new(shape: ConflictResolvingModel, required: true, location_name: "ConflictResolvingModel"))
     ConflictResolution.add_member(:source_name, Shapes::ShapeRef.new(shape: string1To255, location_name: "SourceName"))
@@ -282,6 +338,18 @@ module Aws::CustomerProfiles
     CreateDomainResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     CreateDomainResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     CreateDomainResponse.struct_class = Types::CreateDomainResponse
+
+    CreateIntegrationWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    CreateIntegrationWorkflowRequest.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "WorkflowType"))
+    CreateIntegrationWorkflowRequest.add_member(:integration_config, Shapes::ShapeRef.new(shape: IntegrationConfig, required: true, location_name: "IntegrationConfig"))
+    CreateIntegrationWorkflowRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
+    CreateIntegrationWorkflowRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
+    CreateIntegrationWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateIntegrationWorkflowRequest.struct_class = Types::CreateIntegrationWorkflowRequest
+
+    CreateIntegrationWorkflowResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "WorkflowId"))
+    CreateIntegrationWorkflowResponse.add_member(:message, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Message"))
+    CreateIntegrationWorkflowResponse.struct_class = Types::CreateIntegrationWorkflowResponse
 
     CreateProfileRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     CreateProfileRequest.add_member(:account_number, Shapes::ShapeRef.new(shape: string1To255, location_name: "AccountNumber"))
@@ -354,6 +422,12 @@ module Aws::CustomerProfiles
 
     DeleteProfileResponse.add_member(:message, Shapes::ShapeRef.new(shape: message, location_name: "Message"))
     DeleteProfileResponse.struct_class = Types::DeleteProfileResponse
+
+    DeleteWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    DeleteWorkflowRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, required: true, location: "uri", location_name: "WorkflowId"))
+    DeleteWorkflowRequest.struct_class = Types::DeleteWorkflowRequest
+
+    DeleteWorkflowResponse.struct_class = Types::DeleteWorkflowResponse
 
     DomainList.member = Shapes::ShapeRef.new(shape: ListDomainItem)
 
@@ -458,6 +532,7 @@ module Aws::CustomerProfiles
     GetIntegrationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     GetIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     GetIntegrationResponse.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
+    GetIntegrationResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     GetIntegrationResponse.struct_class = Types::GetIntegrationResponse
 
     GetMatchesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
@@ -501,6 +576,32 @@ module Aws::CustomerProfiles
     GetProfileObjectTypeTemplateResponse.add_member(:keys, Shapes::ShapeRef.new(shape: KeyMap, location_name: "Keys"))
     GetProfileObjectTypeTemplateResponse.struct_class = Types::GetProfileObjectTypeTemplateResponse
 
+    GetWorkflowRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetWorkflowRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "WorkflowId"))
+    GetWorkflowRequest.struct_class = Types::GetWorkflowRequest
+
+    GetWorkflowResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, location_name: "WorkflowId"))
+    GetWorkflowResponse.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "WorkflowType"))
+    GetWorkflowResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    GetWorkflowResponse.add_member(:error_description, Shapes::ShapeRef.new(shape: string1To255, location_name: "ErrorDescription"))
+    GetWorkflowResponse.add_member(:start_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "StartDate"))
+    GetWorkflowResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdatedAt"))
+    GetWorkflowResponse.add_member(:attributes, Shapes::ShapeRef.new(shape: WorkflowAttributes, location_name: "Attributes"))
+    GetWorkflowResponse.add_member(:metrics, Shapes::ShapeRef.new(shape: WorkflowMetrics, location_name: "Metrics"))
+    GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
+
+    GetWorkflowStepsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    GetWorkflowStepsRequest.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, required: true, location: "uri", location_name: "WorkflowId"))
+    GetWorkflowStepsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    GetWorkflowStepsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    GetWorkflowStepsRequest.struct_class = Types::GetWorkflowStepsRequest
+
+    GetWorkflowStepsResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: uuid, location_name: "WorkflowId"))
+    GetWorkflowStepsResponse.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "WorkflowType"))
+    GetWorkflowStepsResponse.add_member(:items, Shapes::ShapeRef.new(shape: WorkflowStepsList, location_name: "Items"))
+    GetWorkflowStepsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    GetWorkflowStepsResponse.struct_class = Types::GetWorkflowStepsResponse
+
     IdentityResolutionJob.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, location_name: "DomainName"))
     IdentityResolutionJob.add_member(:job_id, Shapes::ShapeRef.new(shape: uuid, location_name: "JobId"))
     IdentityResolutionJob.add_member(:status, Shapes::ShapeRef.new(shape: IdentityResolutionJobStatus, location_name: "Status"))
@@ -515,6 +616,9 @@ module Aws::CustomerProfiles
 
     IncrementalPullConfig.add_member(:datetime_type_field_name, Shapes::ShapeRef.new(shape: DatetimeTypeFieldName, location_name: "DatetimeTypeFieldName"))
     IncrementalPullConfig.struct_class = Types::IncrementalPullConfig
+
+    IntegrationConfig.add_member(:appflow_integration, Shapes::ShapeRef.new(shape: AppflowIntegration, location_name: "AppflowIntegration"))
+    IntegrationConfig.struct_class = Types::IntegrationConfig
 
     IntegrationList.member = Shapes::ShapeRef.new(shape: ListIntegrationItem)
 
@@ -536,6 +640,7 @@ module Aws::CustomerProfiles
     ListAccountIntegrationsRequest.add_member(:uri, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "Uri"))
     ListAccountIntegrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     ListAccountIntegrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListAccountIntegrationsRequest.add_member(:include_hidden, Shapes::ShapeRef.new(shape: optionalBoolean, location: "querystring", location_name: "include-hidden"))
     ListAccountIntegrationsRequest.struct_class = Types::ListAccountIntegrationsRequest
 
     ListAccountIntegrationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: IntegrationList, location_name: "Items"))
@@ -572,11 +677,13 @@ module Aws::CustomerProfiles
     ListIntegrationItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     ListIntegrationItem.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     ListIntegrationItem.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
+    ListIntegrationItem.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     ListIntegrationItem.struct_class = Types::ListIntegrationItem
 
     ListIntegrationsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
     ListIntegrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
     ListIntegrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListIntegrationsRequest.add_member(:include_hidden, Shapes::ShapeRef.new(shape: optionalBoolean, location: "querystring", location_name: "include-hidden"))
     ListIntegrationsRequest.struct_class = Types::ListIntegrationsRequest
 
     ListIntegrationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: IntegrationList, location_name: "Items"))
@@ -634,6 +741,27 @@ module Aws::CustomerProfiles
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListWorkflowsItem.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, required: true, location_name: "WorkflowType"))
+    ListWorkflowsItem.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "WorkflowId"))
+    ListWorkflowsItem.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "Status"))
+    ListWorkflowsItem.add_member(:status_description, Shapes::ShapeRef.new(shape: string1To255, required: true, location_name: "StatusDescription"))
+    ListWorkflowsItem.add_member(:created_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "CreatedAt"))
+    ListWorkflowsItem.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
+    ListWorkflowsItem.struct_class = Types::ListWorkflowsItem
+
+    ListWorkflowsRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: name, required: true, location: "uri", location_name: "DomainName"))
+    ListWorkflowsRequest.add_member(:workflow_type, Shapes::ShapeRef.new(shape: WorkflowType, location_name: "WorkflowType"))
+    ListWorkflowsRequest.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
+    ListWorkflowsRequest.add_member(:query_start_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "QueryStartDate"))
+    ListWorkflowsRequest.add_member(:query_end_date, Shapes::ShapeRef.new(shape: timestamp, location_name: "QueryEndDate"))
+    ListWorkflowsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location: "querystring", location_name: "next-token"))
+    ListWorkflowsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: maxSize100, location: "querystring", location_name: "max-results"))
+    ListWorkflowsRequest.struct_class = Types::ListWorkflowsRequest
+
+    ListWorkflowsResponse.add_member(:items, Shapes::ShapeRef.new(shape: WorkflowList, location_name: "Items"))
+    ListWorkflowsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: token, location_name: "NextToken"))
+    ListWorkflowsResponse.struct_class = Types::ListWorkflowsResponse
 
     MarketoSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     MarketoSourceProperties.struct_class = Types::MarketoSourceProperties
@@ -739,6 +867,7 @@ module Aws::CustomerProfiles
     PutIntegrationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: timestamp, required: true, location_name: "LastUpdatedAt"))
     PutIntegrationResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     PutIntegrationResponse.add_member(:object_type_names, Shapes::ShapeRef.new(shape: ObjectTypeNames, location_name: "ObjectTypeNames"))
+    PutIntegrationResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: string1To255, location_name: "WorkflowId"))
     PutIntegrationResponse.struct_class = Types::PutIntegrationResponse
 
     PutProfileObjectRequest.add_member(:object_type_name, Shapes::ShapeRef.new(shape: typeName, required: true, location_name: "ObjectTypeName"))
@@ -936,6 +1065,19 @@ module Aws::CustomerProfiles
     UpdateProfileResponse.add_member(:profile_id, Shapes::ShapeRef.new(shape: uuid, required: true, location_name: "ProfileId"))
     UpdateProfileResponse.struct_class = Types::UpdateProfileResponse
 
+    WorkflowAttributes.add_member(:appflow_integration, Shapes::ShapeRef.new(shape: AppflowIntegrationWorkflowAttributes, location_name: "AppflowIntegration"))
+    WorkflowAttributes.struct_class = Types::WorkflowAttributes
+
+    WorkflowList.member = Shapes::ShapeRef.new(shape: ListWorkflowsItem)
+
+    WorkflowMetrics.add_member(:appflow_integration, Shapes::ShapeRef.new(shape: AppflowIntegrationWorkflowMetrics, location_name: "AppflowIntegration"))
+    WorkflowMetrics.struct_class = Types::WorkflowMetrics
+
+    WorkflowStepItem.add_member(:appflow_integration, Shapes::ShapeRef.new(shape: AppflowIntegrationWorkflowStep, location_name: "AppflowIntegration"))
+    WorkflowStepItem.struct_class = Types::WorkflowStepItem
+
+    WorkflowStepsList.member = Shapes::ShapeRef.new(shape: WorkflowStepItem)
+
     ZendeskSourceProperties.add_member(:object, Shapes::ShapeRef.new(shape: Object, required: true, location_name: "Object"))
     ZendeskSourceProperties.struct_class = Types::ZendeskSourceProperties
 
@@ -979,6 +1121,19 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/domains/{DomainName}"
         o.input = Shapes::ShapeRef.new(shape: CreateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_integration_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateIntegrationWorkflow"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/workflows/integrations"
+        o.input = Shapes::ShapeRef.new(shape: CreateIntegrationWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateIntegrationWorkflowResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1077,6 +1232,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:delete_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkflow"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/domains/{DomainName}/workflows/{WorkflowId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkflowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_auto_merging_preview, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutoMergingPreview"
         o.http_method = "POST"
@@ -1161,6 +1329,32 @@ module Aws::CustomerProfiles
         o.http_request_uri = "/templates/{TemplateId}"
         o.input = Shapes::ShapeRef.new(shape: GetProfileObjectTypeTemplateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetProfileObjectTypeTemplateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_workflow, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkflow"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/workflows/{WorkflowId}"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkflowRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkflowResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_workflow_steps, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetWorkflowSteps"
+        o.http_method = "GET"
+        o.http_request_uri = "/domains/{DomainName}/workflows/{WorkflowId}/steps"
+        o.input = Shapes::ShapeRef.new(shape: GetWorkflowStepsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetWorkflowStepsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -1268,6 +1462,19 @@ module Aws::CustomerProfiles
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:list_workflows, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListWorkflows"
+        o.http_method = "POST"
+        o.http_request_uri = "/domains/{DomainName}/workflows"
+        o.input = Shapes::ShapeRef.new(shape: ListWorkflowsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListWorkflowsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:merge_profiles, Seahorse::Model::Operation.new.tap do |o|

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::FIS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -398,6 +400,9 @@ module Aws::FIS
     # @option params [Hash<String,String>] :tags
     #   The tags to apply to the experiment template.
     #
+    # @option params [Types::CreateExperimentTemplateLogConfigurationInput] :log_configuration
+    #   The configuration for experiment logging.
+    #
     # @return [Types::CreateExperimentTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateExperimentTemplateResponse#experiment_template #experiment_template} => Types::ExperimentTemplate
@@ -449,6 +454,16 @@ module Aws::FIS
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     log_configuration: {
+    #       cloud_watch_logs_configuration: {
+    #         log_group_arn: "CloudWatchLogGroupArn", # required
+    #       },
+    #       s3_configuration: {
+    #         bucket_name: "S3BucketName", # required
+    #         prefix: "S3ObjectKey",
+    #       },
+    #       log_schema_version: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -485,6 +500,10 @@ module Aws::FIS
     #   resp.experiment_template.role_arn #=> String
     #   resp.experiment_template.tags #=> Hash
     #   resp.experiment_template.tags["TagKey"] #=> String
+    #   resp.experiment_template.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment_template.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/CreateExperimentTemplate AWS API Documentation
     #
@@ -544,6 +563,10 @@ module Aws::FIS
     #   resp.experiment_template.role_arn #=> String
     #   resp.experiment_template.tags #=> Hash
     #   resp.experiment_template.tags["TagKey"] #=> String
+    #   resp.experiment_template.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment_template.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/DeleteExperimentTemplate AWS API Documentation
     #
@@ -646,6 +669,10 @@ module Aws::FIS
     #   resp.experiment.end_time #=> Time
     #   resp.experiment.tags #=> Hash
     #   resp.experiment.tags["TagKey"] #=> String
+    #   resp.experiment.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperiment AWS API Documentation
     #
@@ -705,6 +732,10 @@ module Aws::FIS
     #   resp.experiment_template.role_arn #=> String
     #   resp.experiment_template.tags #=> Hash
     #   resp.experiment_template.tags["TagKey"] #=> String
+    #   resp.experiment_template.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment_template.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/GetExperimentTemplate AWS API Documentation
     #
@@ -1019,6 +1050,10 @@ module Aws::FIS
     #   resp.experiment.end_time #=> Time
     #   resp.experiment.tags #=> Hash
     #   resp.experiment.tags["TagKey"] #=> String
+    #   resp.experiment.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StartExperiment AWS API Documentation
     #
@@ -1085,6 +1120,10 @@ module Aws::FIS
     #   resp.experiment.end_time #=> Time
     #   resp.experiment.tags #=> Hash
     #   resp.experiment.tags["TagKey"] #=> String
+    #   resp.experiment.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/StopExperiment AWS API Documentation
     #
@@ -1170,6 +1209,9 @@ module Aws::FIS
     #   The Amazon Resource Name (ARN) of an IAM role that grants the FIS
     #   service permission to perform service actions on your behalf.
     #
+    # @option params [Types::UpdateExperimentTemplateLogConfigurationInput] :log_configuration
+    #   The configuration for experiment logging.
+    #
     # @return [Types::UpdateExperimentTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateExperimentTemplateResponse#experiment_template #experiment_template} => Types::ExperimentTemplate
@@ -1218,6 +1260,16 @@ module Aws::FIS
     #       },
     #     },
     #     role_arn: "RoleArn",
+    #     log_configuration: {
+    #       cloud_watch_logs_configuration: {
+    #         log_group_arn: "CloudWatchLogGroupArn", # required
+    #       },
+    #       s3_configuration: {
+    #         bucket_name: "S3BucketName", # required
+    #         prefix: "S3ObjectKey",
+    #       },
+    #       log_schema_version: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1254,6 +1306,10 @@ module Aws::FIS
     #   resp.experiment_template.role_arn #=> String
     #   resp.experiment_template.tags #=> Hash
     #   resp.experiment_template.tags["TagKey"] #=> String
+    #   resp.experiment_template.log_configuration.cloud_watch_logs_configuration.log_group_arn #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.bucket_name #=> String
+    #   resp.experiment_template.log_configuration.s3_configuration.prefix #=> String
+    #   resp.experiment_template.log_configuration.log_schema_version #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fis-2020-12-01/UpdateExperimentTemplate AWS API Documentation
     #
@@ -1277,7 +1333,7 @@ module Aws::FIS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fis'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

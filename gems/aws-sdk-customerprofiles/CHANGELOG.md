@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2022-02-21)
+------------------
+
+* Feature - This release introduces apis CreateIntegrationWorkflow, DeleteWorkflow, ListWorkflows, GetWorkflow and GetWorkflowSteps. These apis are used to manage and view integration workflows.
+
 1.18.0 (2022-02-03)
 ------------------
 

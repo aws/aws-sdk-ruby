@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.131.0 (2022-02-16)
+------------------
+
+* Feature - Assorted ticket fixes and updates for AWS Systems Manager.
+
 1.130.0 (2022-02-11)
 ------------------
 

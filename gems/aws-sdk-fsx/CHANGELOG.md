@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-03-03)
+------------------
+
+* Feature - This release adds support for data repository associations to use root ("/") as the file system path
+
+1.51.0 (2022-02-28)
+------------------
+
+* Feature - This release adds support for the following FSx for OpenZFS features: snapshot lifecycle transition messages, force flag for deleting file systems with child resources, LZ4 data compression, custom record sizes, and unsetting volume quotas and reservations.
+
+1.50.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.49.0 (2022-02-03)
 ------------------
 

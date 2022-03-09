@@ -3,13 +3,40 @@ Unreleased Changes
 
 * Feature - Asynchronously refresh AWS credentials.
 
+3.129.0 (2022-03-08)
+------------------
+
+* Feature - Add support for cases when `InstanceProfileCredentials` (IMDS) is unable to refresh credentials.
+
+3.128.1 (2022-03-07)
+------------------
+
+* Issue - Fixed `Aws::PageableResponse` invalidating Ruby's global constant cache.
+
+3.128.0 (2022-03-04)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+3.127.0 (2022-02-24)
+------------------
+
+* Feature - Updated Aws::STS::Client with the latest API changes.
+
+* Feature - Updated Aws::SSO::Client with the latest API changes.
+
+* Feature - Support `HttpChecksum` trait for requests and responses.
+
+3.126.2 (2022-02-16)
+------------------
+
+* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529). 
 * Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
 
 3.126.1 (2022-02-14)
 ------------------
 
 * Issue - Set `create_time` on IMDS tokens before fetch to reduce chance of using expired tokens and retry failures due to using expired tokens.
-
 
 3.126.0 (2022-02-03)
 ------------------
@@ -32,6 +59,7 @@ Unreleased Changes
 ------------------
 
 * Issue - Add `InternalError` to `ErrorInspector` for S3 errors.
+
 
 3.125.3 (2022-01-12)
 ------------------

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-03-04)
+------------------
+
+* Feature - This release updates the *InstanceStorageConfig APIs so they support a new ResourceType: REAL_TIME_CONTACT_ANALYSIS_SEGMENTS. Use this resource type to enable streaming for real-time contact analysis and to associate the Kinesis stream where real-time contact analysis segments will be published.
+
+1.65.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.64.0 (2022-02-03)
 ------------------
 

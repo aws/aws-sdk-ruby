@@ -623,7 +623,7 @@ module Aws::MediaPackage
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
-    #           profile: "NONE", # accepts NONE, HBBTV_1_5
+    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {
@@ -918,7 +918,7 @@ module Aws::MediaPackage
     #         min_buffer_time_seconds: 1,
     #         min_update_period_seconds: 1,
     #         period_triggers: ["ADS"], # accepts ADS
-    #         profile: "NONE", # accepts NONE, HBBTV_1_5
+    #         profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
     #         segment_duration_seconds: 1,
     #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #         stream_selection: {
@@ -2960,7 +2960,7 @@ module Aws::MediaPackage
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
-    #           profile: "NONE", # accepts NONE, HBBTV_1_5
+    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {

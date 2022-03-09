@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-03-02)
+------------------
+
+* Feature - Minor updates to address errors.
+
+1.55.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.54.0 (2022-02-18)
+------------------
+
+* Feature - Increase string list limit from 10 to 100.
+
 1.53.0 (2022-02-03)
 ------------------
 

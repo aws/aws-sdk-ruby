@@ -63,6 +63,11 @@ module Aws
     #
     # @option options [SSO::Client] :client Optional `SSO::Client`.  If not
     #   provided, a client will be constructed.
+    #
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
 
       missing_keys = SSO_REQUIRED_OPTS.select { |k| options[k].nil? }

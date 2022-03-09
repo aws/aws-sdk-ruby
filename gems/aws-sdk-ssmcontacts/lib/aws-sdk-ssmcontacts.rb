@@ -48,6 +48,6 @@ require_relative 'aws-sdk-ssmcontacts/customizations'
 # @!group service
 module Aws::SSMContacts
 
-  GEM_VERSION = '1.12.0'
+  GEM_VERSION = '1.13.0'
 
 end

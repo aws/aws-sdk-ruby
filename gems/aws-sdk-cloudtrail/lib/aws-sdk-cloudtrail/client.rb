@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::CloudTrail
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -401,10 +403,10 @@ module Aws::CloudTrail
     end
 
     # Cancels a query if the query is not in a terminated state, such as
-    # `CANCELLED`, `FAILED` or `FINISHED`. You must specify an ARN value for
-    # `EventDataStore`. The ID of the query that you want to cancel is also
-    # required. When you run `CancelQuery`, the query status might show as
-    # `CANCELLED` even if the operation is not yet finished.
+    # `CANCELLED`, `FAILED`, `TIMED_OUT`, or `FINISHED`. You must specify an
+    # ARN value for `EventDataStore`. The ID of the query that you want to
+    # cancel is also required. When you run `CancelQuery`, the query status
+    # might show as `CANCELLED` even if the operation is not yet finished.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -429,7 +431,7 @@ module Aws::CloudTrail
     # @example Response structure
     #
     #   resp.query_id #=> String
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudtrail-2013-11-01/CancelQuery AWS API Documentation
     #
@@ -829,9 +831,10 @@ module Aws::CloudTrail
     #
     #   resp.query_id #=> String
     #   resp.query_string #=> String
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.query_statistics.events_matched #=> Integer
     #   resp.query_statistics.events_scanned #=> Integer
+    #   resp.query_statistics.bytes_scanned #=> Integer
     #   resp.query_statistics.execution_time_in_millis #=> Integer
     #   resp.query_statistics.creation_time #=> Time
     #   resp.error_message #=> String
@@ -1170,9 +1173,10 @@ module Aws::CloudTrail
     #
     # @example Response structure
     #
-    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.query_statistics.results_count #=> Integer
     #   resp.query_statistics.total_results_count #=> Integer
+    #   resp.query_statistics.bytes_scanned #=> Integer
     #   resp.query_result_rows #=> Array
     #   resp.query_result_rows[0] #=> Array
     #   resp.query_result_rows[0][0] #=> Hash
@@ -1428,7 +1432,7 @@ module Aws::CloudTrail
     # shorten the list of results, you can specify a time range, formatted
     # as timestamps, by adding `StartTime` and `EndTime` parameters, and a
     # `QueryStatus` value. Valid values for `QueryStatus` include `QUEUED`,
-    # `RUNNING`, `FINISHED`, `FAILED`, or `CANCELLED`.
+    # `RUNNING`, `FINISHED`, `FAILED`, `TIMED_OUT`, or `CANCELLED`.
     #
     # @option params [required, String] :event_data_store
     #   The ARN (or the ID suffix of the ARN) of an event data store on which
@@ -1451,7 +1455,7 @@ module Aws::CloudTrail
     # @option params [String] :query_status
     #   The status of queries that you want to return in results. Valid values
     #   for `QueryStatus` include `QUEUED`, `RUNNING`, `FINISHED`, `FAILED`,
-    #   or `CANCELLED`.
+    #   `TIMED_OUT`, or `CANCELLED`.
     #
     # @return [Types::ListQueriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1468,14 +1472,14 @@ module Aws::CloudTrail
     #     max_results: 1,
     #     start_time: Time.now,
     #     end_time: Time.now,
-    #     query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED
+    #     query_status: "QUEUED", # accepts QUEUED, RUNNING, FINISHED, FAILED, CANCELLED, TIMED_OUT
     #   })
     #
     # @example Response structure
     #
     #   resp.queries #=> Array
     #   resp.queries[0].query_id #=> String
-    #   resp.queries[0].query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED"
+    #   resp.queries[0].query_status #=> String, one of "QUEUED", "RUNNING", "FINISHED", "FAILED", "CANCELLED", "TIMED_OUT"
     #   resp.queries[0].creation_time #=> Time
     #   resp.next_token #=> String
     #
@@ -2410,7 +2414,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

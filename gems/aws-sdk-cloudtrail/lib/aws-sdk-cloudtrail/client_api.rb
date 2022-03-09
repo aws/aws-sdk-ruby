@@ -639,10 +639,12 @@ module Aws::CloudTrail
 
     QueryStatistics.add_member(:results_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ResultsCount"))
     QueryStatistics.add_member(:total_results_count, Shapes::ShapeRef.new(shape: Integer, location_name: "TotalResultsCount"))
+    QueryStatistics.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "BytesScanned"))
     QueryStatistics.struct_class = Types::QueryStatistics
 
     QueryStatisticsForDescribeQuery.add_member(:events_matched, Shapes::ShapeRef.new(shape: Long, location_name: "EventsMatched"))
     QueryStatisticsForDescribeQuery.add_member(:events_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "EventsScanned"))
+    QueryStatisticsForDescribeQuery.add_member(:bytes_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "BytesScanned"))
     QueryStatisticsForDescribeQuery.add_member(:execution_time_in_millis, Shapes::ShapeRef.new(shape: Integer, location_name: "ExecutionTimeInMillis"))
     QueryStatisticsForDescribeQuery.add_member(:creation_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationTime"))
     QueryStatisticsForDescribeQuery.struct_class = Types::QueryStatisticsForDescribeQuery

@@ -3446,6 +3446,11 @@ module Aws::SSM
     #
     # @!attribute [rw] document_type
     #   The type of document to create.
+    #
+    #   <note markdown="1"> The `DeploymentStrategy` document type is an internal-use-only
+    #   document type reserved for AppConfig.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] document_format
@@ -7450,8 +7455,6 @@ module Aws::SSM
     #
     #   * `Command`
     #
-    #   * `DeploymentStrategy`
-    #
     #   * `Package`
     #
     #   * `Policy`
@@ -9650,8 +9653,8 @@ module Aws::SSM
     #
     # @!attribute [rw] path
     #   The hierarchy for the parameter. Hierarchies start with a forward
-    #   slash (/). The hierachy is the parameter name except the last part
-    #   of the parameter. For the API call to succeeed, the last part of the
+    #   slash (/). The hierarchy is the parameter name except the last part
+    #   of the parameter. For the API call to succeed, the last part of the
     #   parameter name can't be in the path. A parameter name hierarchy can
     #   have a maximum of 15 levels. Here is an example of a hierarchy:
     #   `/Finance/Prod/IAD/WinServ2016/license33 `
@@ -13710,11 +13713,41 @@ module Aws::SSM
     #
     # @!attribute [rw] max_concurrency
     #   The maximum number of targets this task can be run for, in parallel.
+    #
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
+    #
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
+    #   supply a value for this option. Instead, the system inserts a
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -15038,10 +15071,20 @@ module Aws::SSM
     # @!attribute [rw] type
     #   The type of parameter. Valid values include the following: `String`,
     #   `StringList`, and `SecureString`.
+    #
+    #   <note markdown="1"> If type is `StringList`, the system returns a comma-separated string
+    #   with no spaces between commas in the `Value` field.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] value
     #   The parameter value.
+    #
+    #   <note markdown="1"> If type is `StringList`, the system returns a comma-separated string
+    #   with no spaces between commas in the `Value` field.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -15199,7 +15242,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] policy_type
-    #   The type of policy. Parameter Store, a capablility of Amazon Web
+    #   The type of policy. Parameter Store, a capability of Amazon Web
     #   Services Systems Manager, supports the following policy types:
     #   Expiration, ExpirationNotification, and NoChangeNotification.
     #   @return [String]
@@ -15688,7 +15731,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] severity
-    #   The severity of the patchsuch as `Critical`, `Important`, and
+    #   The severity of the patch such as `Critical`, `Important`, and
     #   `Moderate`.
     #   @return [String]
     #
@@ -16528,6 +16571,8 @@ module Aws::SSM
     #
     #   * `aws:ec2:image`
     #
+    #   * `aws:ssm:integration`
+    #
     #   When you create a `String` parameter and specify `aws:ec2:image`,
     #   Amazon Web Services Systems Manager validates the parameter value is
     #   in the required format, such as `ami-12345abcdeEXAMPLE`, and that
@@ -16941,26 +16986,42 @@ module Aws::SSM
     #   @return [Integer]
     #
     # @!attribute [rw] max_concurrency
-    #   The maximum number of targets this task can be run for in parallel.
+    #   The maximum number of targets this task can be run for, in parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
     #   The maximum number of errors allowed before this task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
     #   placeholder value of `1`. This value doesn't affect the running of
     #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] logging_info
@@ -20216,15 +20277,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] start_date
-    #   The time zone that the scheduled maintenance window executions are
-    #   based on, in Internet Assigned Numbers Authority (IANA) format. For
-    #   example: "America/Los\_Angeles", "UTC", or "Asia/Seoul". For
-    #   more information, see the [Time Zone Database][1] on the IANA
-    #   website.
-    #
-    #
-    #
-    #   [1]: https://www.iana.org/time-zones
+    #   The date and time, in ISO-8601 Extended format, for when you want
+    #   the maintenance window to become active. `StartDate` allows you to
+    #   delay activation of the maintenance window until the specified
+    #   future date.
     #   @return [String]
     #
     # @!attribute [rw] end_date
@@ -20665,16 +20721,23 @@ module Aws::SSM
     #
     # @!attribute [rw] max_concurrency
     #   The new `MaxConcurrency` value you want to specify. `MaxConcurrency`
-    #   is the number of targets that are allowed to run this task in
+    #   is the number of targets that are allowed to run this task, in
     #   parallel.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task
-    #   and can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] max_errors
@@ -20682,13 +20745,20 @@ module Aws::SSM
     #   number of errors that are allowed before the task stops being
     #   scheduled.
     #
-    #   <note markdown="1"> For maintenance window tasks without a target specified, you can't
+    #   <note markdown="1"> Although this element is listed as "Required: No", a value can be
+    #   omitted only when you are registering or updating a [targetless
+    #   task][1] You must provide a value in all other cases.
+    #
+    #    For maintenance window tasks without a target specified, you can't
     #   supply a value for this option. Instead, the system inserts a
-    #   placeholder value of `1`, which may be reported in the response to
-    #   this command. This value doesn't affect the running of your task
-    #   and can be ignored.
+    #   placeholder value of `1`. This value doesn't affect the running of
+    #   your task.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html
     #   @return [String]
     #
     # @!attribute [rw] logging_info
@@ -21076,7 +21146,7 @@ module Aws::SSM
     #       }
     #
     # @!attribute [rw] ops_metadata_arn
-    #   The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+    #   The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
     #   @return [String]
     #
     # @!attribute [rw] metadata_to_update

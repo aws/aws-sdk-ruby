@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -76,6 +77,7 @@ module Aws::STS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -639,7 +641,7 @@ module Aws::STS
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
-    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/session-tags.html#id_session-tags_ctlogs
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_ctlogs
     #
     # @option params [Array<String>] :transitive_tag_keys
     #   A list of keys for session tags that you want to set as transitive. If
@@ -1177,19 +1179,20 @@ module Aws::STS
 
     # Returns a set of temporary security credentials for users who have
     # been authenticated in a mobile or web application with a web identity
-    # provider. Example providers include Amazon Cognito, Login with Amazon,
-    # Facebook, Google, or any OpenID Connect-compatible identity provider.
+    # provider. Example providers include the OAuth 2.0 providers Login with
+    # Amazon and Facebook, or any OpenID Connect-compatible identity
+    # provider such as Google or [Amazon Cognito federated identities][1].
     #
     # <note markdown="1"> For mobile applications, we recommend that you use Amazon Cognito. You
     # can use Amazon Cognito with the [Amazon Web Services SDK for iOS
-    # Developer Guide][1] and the [Amazon Web Services SDK for Android
-    # Developer Guide][2] to uniquely identify a user. You can also supply
+    # Developer Guide][2] and the [Amazon Web Services SDK for Android
+    # Developer Guide][3] to uniquely identify a user. You can also supply
     # the user with a consistent identity throughout the lifetime of an
     # application.
     #
-    #  To learn more about Amazon Cognito, see [Amazon Cognito Overview][3]
+    #  To learn more about Amazon Cognito, see [Amazon Cognito Overview][4]
     # in *Amazon Web Services SDK for Android Developer Guide* and [Amazon
-    # Cognito Overview][4] in the *Amazon Web Services SDK for iOS Developer
+    # Cognito Overview][5] in the *Amazon Web Services SDK for iOS Developer
     # Guide*.
     #
     #  </note>
@@ -1204,8 +1207,8 @@ module Aws::STS
     # a token from the web identity provider. For a comparison of
     # `AssumeRoleWithWebIdentity` with the other API operations that produce
     # temporary credentials, see [Requesting Temporary Security
-    # Credentials][5] and [Comparing the Amazon Web Services STS API
-    # operations][6] in the *IAM User Guide*.
+    # Credentials][6] and [Comparing the Amazon Web Services STS API
+    # operations][7] in the *IAM User Guide*.
     #
     # The temporary security credentials returned by this API consist of an
     # access key ID, a secret access key, and a security token. Applications
@@ -1221,11 +1224,11 @@ module Aws::STS
     # to the maximum session duration setting for the role. This setting can
     # have a value from 1 hour to 12 hours. To learn how to view the maximum
     # value for your role, see [View the Maximum Session Duration Setting
-    # for a Role][7] in the *IAM User Guide*. The maximum session duration
+    # for a Role][8] in the *IAM User Guide*. The maximum session duration
     # limit applies when you use the `AssumeRole*` API operations or the
     # `assume-role*` CLI commands. However the limit does not apply when you
     # use those operations to create a console URL. For more information,
-    # see [Using IAM Roles][8] in the *IAM User Guide*.
+    # see [Using IAM Roles][9] in the *IAM User Guide*.
     #
     # **Permissions**
     #
@@ -1234,7 +1237,7 @@ module Aws::STS
     # Amazon Web Services service with the following exception: you cannot
     # call the STS `GetFederationToken` or `GetSessionToken` API operations.
     #
-    # (Optional) You can pass inline or managed [session policies][9] to
+    # (Optional) You can pass inline or managed [session policies][10] to
     # this operation. You can pass a single JSON policy document to use as
     # an inline session policy. You can also specify up to 10 managed
     # policies to use as managed session policies. The plaintext that you
@@ -1246,7 +1249,7 @@ module Aws::STS
     # Services API calls to access resources in the account that owns the
     # role. You cannot use session policies to grant more permissions than
     # those allowed by the identity-based policy of the role that is being
-    # assumed. For more information, see [Session Policies][9] in the *IAM
+    # assumed. For more information, see [Session Policies][10] in the *IAM
     # User Guide*.
     #
     # **Tags**
@@ -1254,12 +1257,12 @@ module Aws::STS
     # (Optional) You can configure your IdP to pass attributes into your web
     # identity token as session tags. Each session tag consists of a key
     # name and an associated value. For more information about session tags,
-    # see [Passing Session Tags in STS][10] in the *IAM User Guide*.
+    # see [Passing Session Tags in STS][11] in the *IAM User Guide*.
     #
     # You can pass up to 50 session tags. The plaintext session tag keys
     # can’t exceed 128 characters and the values can’t exceed 256
     # characters. For these and additional limits, see [IAM and STS
-    # Character Limits][11] in the *IAM User Guide*.
+    # Character Limits][12] in the *IAM User Guide*.
     #
     # <note markdown="1"> An Amazon Web Services conversion compresses the passed session
     # policies and session tags into a packed binary format that has a
@@ -1277,12 +1280,12 @@ module Aws::STS
     # An administrator must grant you the permissions necessary to pass
     # session tags. The administrator can also create granular permissions
     # to allow you to pass only specific session tags. For more information,
-    # see [Tutorial: Using Tags for Attribute-Based Access Control][12] in
+    # see [Tutorial: Using Tags for Attribute-Based Access Control][13] in
     # the *IAM User Guide*.
     #
     # You can set the session tags as transitive. Transitive tags persist
     # during role chaining. For more information, see [Chaining Roles with
-    # Session Tags][13] in the *IAM User Guide*.
+    # Session Tags][14] in the *IAM User Guide*.
     #
     # **Identities**
     #
@@ -1294,54 +1297,55 @@ module Aws::STS
     # specified in the role's trust policy.
     #
     # Calling `AssumeRoleWithWebIdentity` can result in an entry in your
-    # CloudTrail logs. The entry includes the [Subject][14] of the provided
+    # CloudTrail logs. The entry includes the [Subject][15] of the provided
     # web identity token. We recommend that you avoid using any personally
     # identifiable information (PII) in this field. For example, you could
     # instead use a GUID or a pairwise identifier, as [suggested in the OIDC
-    # specification][15].
+    # specification][16].
     #
     # For more information about how to use web identity federation and the
     # `AssumeRoleWithWebIdentity` API, see the following resources:
     #
-    # * [Using Web Identity Federation API Operations for Mobile Apps][16]
-    #   and [Federation Through a Web-based Identity Provider][17].
+    # * [Using Web Identity Federation API Operations for Mobile Apps][17]
+    #   and [Federation Through a Web-based Identity Provider][18].
     #
-    # * [ Web Identity Federation Playground][18]. Walk through the process
+    # * [ Web Identity Federation Playground][19]. Walk through the process
     #   of authenticating through Login with Amazon, Facebook, or Google,
     #   getting temporary security credentials, and then using those
     #   credentials to make a request to Amazon Web Services.
     #
-    # * [Amazon Web Services SDK for iOS Developer Guide][1] and [Amazon Web
-    #   Services SDK for Android Developer Guide][2]. These toolkits contain
+    # * [Amazon Web Services SDK for iOS Developer Guide][2] and [Amazon Web
+    #   Services SDK for Android Developer Guide][3]. These toolkits contain
     #   sample apps that show how to invoke the identity providers. The
     #   toolkits then show how to use the information from these providers
     #   to get and use temporary security credentials.
     #
-    # * [Web Identity Federation with Mobile Applications][19]. This article
+    # * [Web Identity Federation with Mobile Applications][20]. This article
     #   discusses web identity federation and shows an example of how to use
     #   web identity federation to get access to content in Amazon S3.
     #
     #
     #
-    # [1]: http://aws.amazon.com/sdkforios/
-    # [2]: http://aws.amazon.com/sdkforandroid/
-    # [3]: https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-auth.html#d0e840
-    # [4]: https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664
-    # [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
-    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
-    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
-    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
-    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
-    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
-    # [11]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
-    # [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html
-    # [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining
-    # [14]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
-    # [15]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
-    # [16]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
-    # [17]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
-    # [18]: https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/
-    # [19]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
+    # [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html
+    # [2]: http://aws.amazon.com/sdkforios/
+    # [3]: http://aws.amazon.com/sdkforandroid/
+    # [4]: https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-auth.html#d0e840
+    # [5]: https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664
+    # [6]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html
+    # [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison
+    # [8]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session
+    # [9]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
+    # [10]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session
+    # [11]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html
+    # [12]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length
+    # [13]: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html
+    # [14]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining
+    # [15]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
+    # [16]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
+    # [17]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
+    # [18]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
+    # [19]: https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/
+    # [20]: http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications
     #
     # @option params [required, String] :role_arn
     #   The Amazon Resource Name (ARN) of the role that the caller is
@@ -1368,13 +1372,13 @@ module Aws::STS
     #   `AssumeRoleWithWebIdentity` call.
     #
     # @option params [String] :provider_id
-    #   The fully qualified host component of the domain name of the identity
-    #   provider.
+    #   The fully qualified host component of the domain name of the OAuth 2.0
+    #   identity provider. Do not specify this value for an OpenID Connect
+    #   identity provider.
     #
-    #   Specify this value only for OAuth 2.0 access tokens. Currently
-    #   `www.amazon.com` and `graph.facebook.com` are the only supported
-    #   identity providers for OAuth 2.0 access tokens. Do not include URL
-    #   schemes and port numbers.
+    #   Currently `www.amazon.com` and `graph.facebook.com` are the only
+    #   supported identity providers for OAuth 2.0 access tokens. Do not
+    #   include URL schemes and port numbers.
     #
     #   Do not specify this value for OpenID Connect ID tokens.
     #
@@ -2286,7 +2290,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.126.1'
+      context[:gem_version] = '3.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

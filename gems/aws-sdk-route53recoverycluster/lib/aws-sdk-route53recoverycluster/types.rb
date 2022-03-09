@@ -157,7 +157,7 @@ module Aws::Route53RecoveryCluster
       include Aws::Structure
     end
 
-    # A routing control state.
+    # A routing control state entry.
     #
     # @note When making an API call, you may pass UpdateRoutingControlStateEntry
     #   data as a hash:
@@ -168,8 +168,7 @@ module Aws::Route53RecoveryCluster
     #       }
     #
     # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Number (ARN) for the routing control state
-    #   entry.
+    #   The Amazon Resource Number (ARN) for a routing control state entry.
     #   @return [String]
     #
     # @!attribute [rw] routing_control_state
@@ -191,6 +190,7 @@ module Aws::Route53RecoveryCluster
     #       {
     #         routing_control_arn: "Arn", # required
     #         routing_control_state: "On", # required, accepts On, Off
+    #         safety_rules_to_override: ["Arn"],
     #       }
     #
     # @!attribute [rw] routing_control_arn
@@ -203,11 +203,27 @@ module Aws::Route53RecoveryCluster
     #   Off.
     #   @return [String]
     #
+    # @!attribute [rw] safety_rules_to_override
+    #   The Amazon Resource Numbers (ARNs) for the safety rules that you
+    #   want to override when you're updating the state of a routing
+    #   control. You can override one safety rule or multiple safety rules
+    #   by including one or more ARNs, separated by commas.
+    #
+    #   For more information, see [ Override safety rules to reroute
+    #   traffic][1] in the Amazon Route 53 Application Recovery Controller
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/UpdateRoutingControlStateRequest AWS API Documentation
     #
     class UpdateRoutingControlStateRequest < Struct.new(
       :routing_control_arn,
-      :routing_control_state)
+      :routing_control_state,
+      :safety_rules_to_override)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -226,16 +242,33 @@ module Aws::Route53RecoveryCluster
     #             routing_control_state: "On", # required, accepts On, Off
     #           },
     #         ],
+    #         safety_rules_to_override: ["Arn"],
     #       }
     #
     # @!attribute [rw] update_routing_control_state_entries
     #   A set of routing control entries that you want to update.
     #   @return [Array<Types::UpdateRoutingControlStateEntry>]
     #
+    # @!attribute [rw] safety_rules_to_override
+    #   The Amazon Resource Numbers (ARNs) for the safety rules that you
+    #   want to override when you're updating routing control states. You
+    #   can override one safety rule or multiple safety rules by including
+    #   one or more ARNs, separated by commas.
+    #
+    #   For more information, see [ Override safety rules to reroute
+    #   traffic][1] in the Amazon Route 53 Application Recovery Controller
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/UpdateRoutingControlStatesRequest AWS API Documentation
     #
     class UpdateRoutingControlStatesRequest < Struct.new(
-      :update_routing_control_state_entries)
+      :update_routing_control_state_entries,
+      :safety_rules_to_override)
       SENSITIVE = []
       include Aws::Structure
     end

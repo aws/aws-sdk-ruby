@@ -279,7 +279,7 @@ module Aws::AppRunner
     #       {
     #         configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #         code_configuration_values: {
-    #           runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #           runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #           build_command: "BuildCommand",
     #           start_command: "StartCommand",
     #           port: "String",
@@ -327,7 +327,7 @@ module Aws::AppRunner
     #   data as a hash:
     #
     #       {
-    #         runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #         runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #         build_command: "BuildCommand",
     #         start_command: "StartCommand",
     #         port: "String",
@@ -387,7 +387,7 @@ module Aws::AppRunner
     #         code_configuration: {
     #           configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #           code_configuration_values: {
-    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #             runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #             build_command: "BuildCommand",
     #             start_command: "StartCommand",
     #             port: "String",
@@ -658,7 +658,7 @@ module Aws::AppRunner
     #             code_configuration: {
     #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #                 build_command: "BuildCommand",
     #                 start_command: "StartCommand",
     #                 port: "String",
@@ -2356,7 +2356,7 @@ module Aws::AppRunner
     #           code_configuration: {
     #             configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #             code_configuration_values: {
-    #               runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #               runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #               build_command: "BuildCommand",
     #               start_command: "StartCommand",
     #               port: "String",
@@ -2577,7 +2577,7 @@ module Aws::AppRunner
     #             code_configuration: {
     #               configuration_source: "REPOSITORY", # required, accepts REPOSITORY, API
     #               code_configuration_values: {
-    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12
+    #                 runtime: "PYTHON_3", # required, accepts PYTHON_3, NODEJS_12, NODEJS_14, CORRETTO_8, CORRETTO_11
     #                 build_command: "BuildCommand",
     #                 start_command: "StartCommand",
     #                 port: "String",

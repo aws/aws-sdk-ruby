@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.141.0 (2022-03-01)
+------------------
+
+* Feature - Documentation updates for Multi-AZ DB clusters.
+
+1.140.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.139.0 (2022-02-14)
 ------------------
 

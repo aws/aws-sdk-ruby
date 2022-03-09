@@ -113,6 +113,28 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # Information about your account's integration with Amazon CodeGuru
+    # Profiler.
+    #
+    # @note When making an API call, you may pass AmazonCodeGuruProfilerIntegration
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # accepts ENABLED, DISABLED
+    #       }
+    #
+    # @!attribute [rw] status
+    #   The status of the CodeGuru Profiler integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AmazonCodeGuruProfilerIntegration AWS API Documentation
+    #
+    class AmazonCodeGuruProfilerIntegration < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A time range that specifies when DevOps Guru opens and then closes an
     # anomaly. This is different from `AnomalyTimeRange`, which specifies
     # the time range when DevOps Guru actually observes the anomalous
@@ -178,6 +200,31 @@ module Aws::DevOpsGuru
     class AnomalySourceDetails < Struct.new(
       :cloud_watch_metrics,
       :performance_insights_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata about an anomaly. The anomaly is detected using analysis of
+    # the metric data  over a period of time
+    #
+    # @!attribute [rw] source
+    #   The source of the anomaly.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_resource_name
+    #   The name of the anomaly's resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_resource_type
+    #   The anomaly's resource type.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AnomalySourceMetadata AWS API Documentation
+    #
+    class AnomalySourceMetadata < Struct.new(
+      :source,
+      :source_resource_name,
+      :source_resource_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -667,6 +714,24 @@ module Aws::DevOpsGuru
     class DescribeAnomalyResponse < Struct.new(
       :proactive_anomaly,
       :reactive_anomaly)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigRequest AWS API Documentation
+    #
+    class DescribeEventSourcesConfigRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] event_sources
+    #   The name of the event source.
+    #   @return [Types::EventSourcesConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigResponse AWS API Documentation
+    #
+    class DescribeEventSourcesConfigResponse < Struct.new(
+      :event_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1219,6 +1284,28 @@ module Aws::DevOpsGuru
       :type,
       :name,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the event sources.
+    #
+    # @note When making an API call, you may pass EventSourcesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         amazon_code_guru_profiler: {
+    #           status: "ENABLED", # accepts ENABLED, DISABLED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] amazon_code_guru_profiler
+    #   @return [Types::AmazonCodeGuruProfilerIntegration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EventSourcesConfig AWS API Documentation
+    #
+    class EventSourcesConfig < Struct.new(
+      :amazon_code_guru_profiler)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2675,6 +2762,15 @@ module Aws::DevOpsGuru
     #   generated this anomaly.
     #   @return [Float]
     #
+    # @!attribute [rw] source_metadata
+    #   The metadata for the anomaly.
+    #   @return [Types::AnomalySourceMetadata]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   Information about a resource in which DevOps Guru detected anomalous
+    #   behavior.
+    #   @return [Array<Types::AnomalyResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomaly AWS API Documentation
     #
     class ProactiveAnomaly < Struct.new(
@@ -2688,7 +2784,9 @@ module Aws::DevOpsGuru
       :source_details,
       :associated_insight_id,
       :resource_collection,
-      :limit)
+      :limit,
+      :source_metadata,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2764,6 +2862,15 @@ module Aws::DevOpsGuru
     #   generated this anomaly.
     #   @return [Float]
     #
+    # @!attribute [rw] source_metadata
+    #   Returns the metadata of the source.
+    #   @return [Types::AnomalySourceMetadata]
+    #
+    # @!attribute [rw] anomaly_resources
+    #   Information about a resource in which DevOps Guru detected anomalous
+    #   behavior.
+    #   @return [Array<Types::AnomalyResource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveAnomalySummary AWS API Documentation
     #
     class ProactiveAnomalySummary < Struct.new(
@@ -2777,7 +2884,9 @@ module Aws::DevOpsGuru
       :source_details,
       :associated_insight_id,
       :resource_collection,
-      :limit)
+      :limit,
+      :source_metadata,
+      :anomaly_resources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2834,6 +2943,10 @@ module Aws::DevOpsGuru
     #   before they are created for each insight.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Describes the proactive insight.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ProactiveInsight AWS API Documentation
     #
     class ProactiveInsight < Struct.new(
@@ -2844,7 +2957,8 @@ module Aws::DevOpsGuru
       :insight_time_range,
       :prediction_time_range,
       :resource_collection,
-      :ssm_ops_item_id)
+      :ssm_ops_item_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3277,6 +3391,10 @@ module Aws::DevOpsGuru
     #   before they are created for each insight.
     #   @return [String]
     #
+    # @!attribute [rw] description
+    #   Describes the reactive insight.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/ReactiveInsight AWS API Documentation
     #
     class ReactiveInsight < Struct.new(
@@ -3286,7 +3404,8 @@ module Aws::DevOpsGuru
       :status,
       :insight_time_range,
       :resource_collection,
-      :ssm_ops_item_id)
+      :ssm_ops_item_id,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3454,6 +3573,10 @@ module Aws::DevOpsGuru
     #   learn more about what's happening and to help address the issue.
     #   @return [Array<Types::RecommendationRelatedAnomaly>]
     #
+    # @!attribute [rw] category
+    #   The category type of the recommendation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/Recommendation AWS API Documentation
     #
     class Recommendation < Struct.new(
@@ -3462,7 +3585,8 @@ module Aws::DevOpsGuru
       :name,
       :reason,
       :related_events,
-      :related_anomalies)
+      :related_anomalies,
+      :category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4668,6 +4792,33 @@ module Aws::DevOpsGuru
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UpdateEventSourcesConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         event_sources: {
+    #           amazon_code_guru_profiler: {
+    #             status: "ENABLED", # accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] event_sources
+    #   The name of the event source.
+    #   @return [Types::EventSourcesConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfigRequest AWS API Documentation
+    #
+    class UpdateEventSourcesConfigRequest < Struct.new(
+      :event_sources)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfigResponse AWS API Documentation
+    #
+    class UpdateEventSourcesConfigResponse < Aws::EmptyStructure; end
 
     # Contains information used to update a collection of Amazon Web
     # Services resources.

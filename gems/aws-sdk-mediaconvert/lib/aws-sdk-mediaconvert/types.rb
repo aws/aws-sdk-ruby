@@ -3255,9 +3255,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
-    #   Applies to CMAF outputs. Use this setting to specify whether the
-    #   service inserts the ID3 timed metadata from the input in this
-    #   output.
+    #   To include ID3 metadata in this output: Set ID3 metadata
+    #   (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3
+    #   metadata in Custom ID3 metadata inserter (timedMetadataInsertion).
+    #   MediaConvert writes each instance of ID3 metadata in a separate
+    #   Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3
+    #   metadata to None (NONE) or leave blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CmfcSettings AWS API Documentation
@@ -3763,6 +3766,7 @@ module Aws::MediaConvert
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
     #                   blue_primary_x: 1,
     #                   blue_primary_y: 1,
@@ -3994,6 +3998,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #                   caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
@@ -5157,6 +5162,7 @@ module Aws::MediaConvert
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
     #                   blue_primary_x: 1,
     #                   blue_primary_y: 1,
@@ -5388,6 +5394,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #                   caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
@@ -11005,6 +11012,7 @@ module Aws::MediaConvert
     #           },
     #         ],
     #         caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #         caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #         client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #         codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #         destination: "__stringPatternS3",
@@ -11110,6 +11118,16 @@ module Aws::MediaConvert
     #   manifest will not match up properly with the output captions. None:
     #   Include CLOSED-CAPTIONS=NONE line in the manifest. Omit: Omit any
     #   CLOSED-CAPTIONS line from the manifest.
+    #   @return [String]
+    #
+    # @!attribute [rw] caption_segment_length_control
+    #   Set Caption segment length control (CaptionSegmentLengthControl) to
+    #   Match video (MATCH\_VIDEO) to create caption segments that align
+    #   with the video segments from the first video output in this output
+    #   group. For example, if the video segments are 2 seconds long, your
+    #   WebVTT segments will also be 2 seconds long. Keep the default
+    #   setting, Large segments (LARGE\_SEGMENTS) to create caption segments
+    #   that are 300 seconds long.
     #   @return [String]
     #
     # @!attribute [rw] client_cache
@@ -11262,11 +11280,21 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata_id_3_frame
-    #   Indicates ID3 frame that has the timecode.
+    #   Specify the type of the ID3 frame (timedMetadataId3Frame) to use for
+    #   ID3 timestamps (timedMetadataId3Period) in your output. To include
+    #   ID3 timestamps: Specify PRIV (PRIV) or TDRL (TDRL) and set ID3
+    #   metadata (timedMetadata) to Passthrough (PASSTHROUGH). To exclude
+    #   ID3 timestamps: Set ID3 timestamp frame type to None (NONE).
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata_id_3_period
-    #   Timed Metadata interval in seconds.
+    #   Specify the interval in seconds to write ID3 timestamps in your
+    #   output. The first timestamp starts at the output timecode and date,
+    #   and increases incrementally with each ID3 timestamp. To use the
+    #   default interval of 10 seconds: Leave blank. To include this
+    #   metadata in your output: Set ID3 timestamp frame type
+    #   (timedMetadataId3Frame) to PRIV (PRIV) or TDRL (TDRL), and set ID3
+    #   metadata (timedMetadata) to Passthrough (PASSTHROUGH).
     #   @return [Integer]
     #
     # @!attribute [rw] timestamp_delta_milliseconds
@@ -11283,6 +11311,7 @@ module Aws::MediaConvert
       :base_url,
       :caption_language_mappings,
       :caption_language_setting,
+      :caption_segment_length_control,
       :client_cache,
       :codec_specification,
       :destination,
@@ -11572,7 +11601,8 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] id_3
-    #   Use ID3 tag (Id3) to provide a tag value in base64-encode format.
+    #   Use ID3 tag (Id3) to provide a fully formed ID3 tag in base64-encode
+    #   format.
     #   @return [String]
     #
     # @!attribute [rw] timecode
@@ -11645,13 +11675,15 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] accessibility
-    #   Specify whether to flag this caption track as accessibility in your
-    #   HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert
-    #   includes the parameters
+    #   Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if
+    #   the ISMC or WebVTT captions track is intended to provide
+    #   accessibility for people who are deaf or hard of hearing. When you
+    #   enable this feature, MediaConvert adds the following attributes
+    #   under EXT-X-MEDIA in the HLS or CMAF manifest for this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When
-    #   you keep the default choice, DISABLED, MediaConvert leaves this
-    #   parameter out.
+    #   and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED),
+    #   if the captions track is not intended to provide such accessibility.
+    #   MediaConvert will not add the above attributes.
     #   @return [String]
     #
     # @!attribute [rw] style_passthrough
@@ -11818,6 +11850,7 @@ module Aws::MediaConvert
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #           embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #           hdr_10_metadata: {
     #             blue_primary_x: 1,
     #             blue_primary_y: 1,
@@ -12283,6 +12316,7 @@ module Aws::MediaConvert
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #           color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #           embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #           hdr_10_metadata: {
     #             blue_primary_x: 1,
     #             blue_primary_y: 1,
@@ -12966,6 +13000,7 @@ module Aws::MediaConvert
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #               embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #               hdr_10_metadata: {
     #                 blue_primary_x: 1,
     #                 blue_primary_y: 1,
@@ -13197,6 +13232,7 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #                 caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
@@ -14145,10 +14181,10 @@ module Aws::MediaConvert
     #   @return [Types::TimecodeConfig]
     #
     # @!attribute [rw] timed_metadata_insertion
-    #   Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    #   ID3 tags in any HLS outputs. To include timed metadata, you must
-    #   enable it here, enable it in each output container, and specify tags
-    #   and timecodes in ID3 insertion (Id3Insertion) objects.
+    #   Insert user-defined custom ID3 metadata (id3) at timecodes
+    #   (timecode) that you specify. In each output that you want to include
+    #   this metadata, you must set ID3 metadata (timedMetadata) to
+    #   Passthrough (PASSTHROUGH).
     #   @return [Types::TimedMetadataInsertion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobSettings AWS API Documentation
@@ -14410,6 +14446,7 @@ module Aws::MediaConvert
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #               color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #               embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #               hdr_10_metadata: {
     #                 blue_primary_x: 1,
     #                 blue_primary_y: 1,
@@ -14641,6 +14678,7 @@ module Aws::MediaConvert
     #                   },
     #                 ],
     #                 caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #                 caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #                 client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                 codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                 destination: "__stringPatternS3",
@@ -15589,10 +15627,10 @@ module Aws::MediaConvert
     #   @return [Types::TimecodeConfig]
     #
     # @!attribute [rw] timed_metadata_insertion
-    #   Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    #   ID3 tags in any HLS outputs. To include timed metadata, you must
-    #   enable it here, enable it in each output container, and specify tags
-    #   and timecodes in ID3 insertion (Id3Insertion) objects.
+    #   Insert user-defined custom ID3 metadata (id3) at timecodes
+    #   (timecode) that you specify. In each output that you want to include
+    #   this metadata, you must set ID3 metadata (timedMetadata) to
+    #   Passthrough (PASSTHROUGH).
     #   @return [Types::TimedMetadataInsertion]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/JobTemplateSettings AWS API Documentation
@@ -16613,14 +16651,17 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
-    #   Applies to HLS outputs. Use this setting to specify whether the
-    #   service inserts the ID3 timed metadata from the input in this
-    #   output.
+    #   Set ID3 metadata (timedMetadata) to Passthrough (PASSTHROUGH) to
+    #   include ID3 metadata in this output. This includes ID3 metadata from
+    #   the following features: ID3 timestamp period
+    #   (timedMetadataId3Period), and Custom ID3 metadata inserter
+    #   (timedMetadataInsertion). To exclude this ID3 metadata in this
+    #   output: set ID3 metadata to None (NONE) or leave blank.
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata_pid
-    #   Packet Identifier (PID) of the timed metadata stream in the
-    #   transport stream.
+    #   Packet Identifier (PID) of the ID3 metadata stream in the transport
+    #   stream.
     #   @return [Integer]
     #
     # @!attribute [rw] transport_stream_id
@@ -17109,9 +17150,12 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] timed_metadata
-    #   Applies to DASH outputs. Use this setting to specify whether the
-    #   service inserts the ID3 timed metadata from the input in this
-    #   output.
+    #   To include ID3 metadata in this output: Set ID3 metadata
+    #   (timedMetadata) to Passthrough (PASSTHROUGH). Specify this ID3
+    #   metadata in Custom ID3 metadata inserter (timedMetadataInsertion).
+    #   MediaConvert writes each instance of ID3 metadata in a separate
+    #   Event Message (eMSG) box. To exclude this ID3 metadata: Set ID3
+    #   metadata to None (NONE) or leave blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/MpdSettings AWS API Documentation
@@ -18170,25 +18214,25 @@ module Aws::MediaConvert
     #
     # @!attribute [rw] post_temporal_sharpening
     #   When you set Noise reducer (noiseReducer) to Temporal (TEMPORAL),
-    #   the sharpness of your output is reduced. You can optionally use Post
-    #   temporal sharpening (PostTemporalSharpening) to apply sharpening to
-    #   the edges of your output. The default behavior, Auto (AUTO), allows
-    #   the transcoder to determine whether to apply sharpening, depending
-    #   on your input type and quality. When you set Post temporal
-    #   sharpening to Enabled (ENABLED), specify how much sharpening is
-    #   applied using Post temporal sharpening strength
-    #   (PostTemporalSharpeningStrength). Set Post temporal sharpening to
-    #   Disabled (DISABLED) to not apply sharpening.
+    #   the bandwidth and sharpness of your output is reduced. You can
+    #   optionally use Post temporal sharpening (postTemporalSharpening) to
+    #   apply sharpening to the edges of your output. Note that Post
+    #   temporal sharpening will also make the bandwidth reduction from the
+    #   Noise reducer smaller. The default behavior, Auto (AUTO), allows the
+    #   transcoder to determine whether to apply sharpening, depending on
+    #   your input type and quality. When you set Post temporal sharpening
+    #   to Enabled (ENABLED), specify how much sharpening is applied using
+    #   Post temporal sharpening strength (postTemporalSharpeningStrength).
+    #   Set Post temporal sharpening to Disabled (DISABLED) to not apply
+    #   sharpening.
     #   @return [String]
     #
     # @!attribute [rw] post_temporal_sharpening_strength
     #   Use Post temporal sharpening strength
-    #   (PostTemporalSharpeningStrength) to define the amount of sharpening
+    #   (postTemporalSharpeningStrength) to define the amount of sharpening
     #   the transcoder applies to your output. Set Post temporal sharpening
-    #   strength to Low (LOW), or leave blank, to apply a low amount of
-    #   sharpening. Set Post temporal sharpening strength to Medium (MEDIUM)
-    #   to apply medium amount of sharpening. Set Post temporal sharpening
-    #   strength to High (HIGH) to apply a high amount of sharpening.
+    #   strength to Low (LOW), Medium (MEDIUM), or High (HIGH) to indicate
+    #   the amount of sharpening.
     #   @return [String]
     #
     # @!attribute [rw] speed
@@ -19306,6 +19350,7 @@ module Aws::MediaConvert
     #               },
     #             ],
     #             caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #             caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #             client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #             codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #             destination: "__stringPatternS3",
@@ -20358,6 +20403,7 @@ module Aws::MediaConvert
     #             },
     #           ],
     #           caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #           caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #           client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #           codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #           destination: "__stringPatternS3",
@@ -22574,10 +22620,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Enable Timed metadata insertion (TimedMetadataInsertion) to include
-    # ID3 tags in any HLS outputs. To include timed metadata, you must
-    # enable it here, enable it in each output container, and specify tags
-    # and timecodes in ID3 insertion (Id3Insertion) objects.
+    # Insert user-defined custom ID3 metadata (id3) at timecodes (timecode)
+    # that you specify. In each output that you want to include this
+    # metadata, you must set ID3 metadata (timedMetadata) to Passthrough
+    # (PASSTHROUGH).
     #
     # @note When making an API call, you may pass TimedMetadataInsertion
     #   data as a hash:
@@ -22906,6 +22952,7 @@ module Aws::MediaConvert
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #                 color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #                 embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #                 hdr_10_metadata: {
     #                   blue_primary_x: 1,
     #                   blue_primary_y: 1,
@@ -23137,6 +23184,7 @@ module Aws::MediaConvert
     #                     },
     #                   ],
     #                   caption_language_setting: "INSERT", # accepts INSERT, OMIT, NONE
+    #                   caption_segment_length_control: "LARGE_SEGMENTS", # accepts LARGE_SEGMENTS, MATCH_VIDEO
     #                   client_cache: "DISABLED", # accepts DISABLED, ENABLED
     #                   codec_specification: "RFC_6381", # accepts RFC_6381, RFC_4281
     #                   destination: "__stringPatternS3",
@@ -26156,6 +26204,7 @@ module Aws::MediaConvert
     #         alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #         color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
     #         color_space_usage: "FORCE", # accepts FORCE, FALLBACK
+    #         embedded_timecode_override: "NONE", # accepts NONE, USE_MDPM
     #         hdr_10_metadata: {
     #           blue_primary_x: 1,
     #           blue_primary_y: 1,
@@ -26212,6 +26261,15 @@ module Aws::MediaConvert
     #   from the source when it is present. If there's no color metadata in
     #   your input file, the service defaults to using values you specify in
     #   the input settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] embedded_timecode_override
+    #   Set Embedded timecode override (embeddedTimecodeOverride) to Use
+    #   MDPM (USE\_MDPM) when your AVCHD input contains timecode tag data in
+    #   the Modified Digital Video Pack Metadata (MDPM). When you do, we
+    #   recommend you also set Timecode source (inputTimecodeSource) to
+    #   Embedded (EMBEDDED). Leave Embedded timecode override blank, or set
+    #   to None (NONE), when your input does not contain MDPM timecode.
     #   @return [String]
     #
     # @!attribute [rw] hdr_10_metadata
@@ -26277,6 +26335,7 @@ module Aws::MediaConvert
       :alpha_behavior,
       :color_space,
       :color_space_usage,
+      :embedded_timecode_override,
       :hdr_10_metadata,
       :pid,
       :program_number,
@@ -26694,13 +26753,15 @@ module Aws::MediaConvert
     #       }
     #
     # @!attribute [rw] accessibility
-    #   Specify whether to flag this caption track as accessibility in your
-    #   HLS/CMAF parent manifest. When you choose ENABLED, MediaConvert
-    #   includes the parameters
+    #   Set Accessibility subtitles (Accessibility) to Enabled (ENABLED) if
+    #   the ISMC or WebVTT captions track is intended to provide
+    #   accessibility for people who are deaf or hard of hearing. When you
+    #   enable this feature, MediaConvert adds the following attributes
+    #   under EXT-X-MEDIA in the HLS or CMAF manifest for this track:
     #   CHARACTERISTICS="public.accessibility.describes-spoken-dialog,public.accessibility.describes-music-and-sound"
-    #   and AUTOSELECT="YES" in the EXT-X-MEDIA entry for this track. When
-    #   you keep the default choice, DISABLED, MediaConvert leaves this
-    #   parameter out.
+    #   and AUTOSELECT="YES". Keep the default value, Disabled (DISABLED),
+    #   if the captions track is not intended to provide such accessibility.
+    #   MediaConvert will not add the above attributes.
     #   @return [String]
     #
     # @!attribute [rw] style_passthrough

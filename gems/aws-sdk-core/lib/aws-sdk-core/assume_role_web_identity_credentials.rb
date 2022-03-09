@@ -39,6 +39,11 @@ module Aws
     #   encoded UUID is generated as the session name
     #
     # @option options [STS::Client] :client
+    #
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       client_opts = {}
       @assume_role_web_identity_params = {}

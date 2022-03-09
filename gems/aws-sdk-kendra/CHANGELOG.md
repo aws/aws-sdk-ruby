@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-03-03)
+------------------
+
+* Feature - Amazon Kendra now suggests spell corrections for a query. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/query-spell-check.html
+
+1.45.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.44.0 (2022-02-08)
 ------------------
 

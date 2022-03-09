@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Panorama
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -351,26 +353,26 @@ module Aws::Panorama
 
     # Creates an application instance and deploys it to a device.
     #
-    # @option params [String] :name
-    #   A name for the application instance.
+    # @option params [String] :application_instance_id_to_replace
+    #   The ID of an application instance to replace with the new instance.
+    #
+    # @option params [required, String] :default_runtime_context_device
+    #   A device's ID.
     #
     # @option params [String] :description
     #   A description for the application instance.
     #
-    # @option params [required, Types::ManifestPayload] :manifest_payload
-    #   The application's manifest document.
-    #
     # @option params [Types::ManifestOverridesPayload] :manifest_overrides_payload
     #   Setting overrides for the application manifest.
     #
-    # @option params [String] :application_instance_id_to_replace
-    #   The ID of an application instance to replace with the new instance.
+    # @option params [required, Types::ManifestPayload] :manifest_payload
+    #   The application's manifest document.
+    #
+    # @option params [String] :name
+    #   A name for the application instance.
     #
     # @option params [String] :runtime_role_arn
     #   The ARN of a runtime role for the application instance.
-    #
-    # @option params [required, String] :default_runtime_context_device
-    #   A device's ID.
     #
     # @option params [Hash<String,String>] :tags
     #   Tags for the application instance.
@@ -382,17 +384,17 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_application_instance({
-    #     name: "ApplicationInstanceName",
+    #     application_instance_id_to_replace: "ApplicationInstanceId",
+    #     default_runtime_context_device: "DefaultRuntimeContextDevice", # required
     #     description: "Description",
-    #     manifest_payload: { # required
-    #       payload_data: "ManifestPayloadData",
-    #     },
     #     manifest_overrides_payload: {
     #       payload_data: "ManifestOverridesPayloadData",
     #     },
-    #     application_instance_id_to_replace: "ApplicationInstanceId",
+    #     manifest_payload: { # required
+    #       payload_data: "ManifestPayloadData",
+    #     },
+    #     name: "ApplicationInstanceName",
     #     runtime_role_arn: "RuntimeRoleArn",
-    #     default_runtime_context_device: "DefaultRuntimeContextDevice", # required
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -441,8 +443,8 @@ module Aws::Panorama
     # @example Response structure
     #
     #   resp.jobs #=> Array
-    #   resp.jobs[0].job_id #=> String
     #   resp.jobs[0].device_id #=> String
+    #   resp.jobs[0].job_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/CreateJobForDevices AWS API Documentation
     #
@@ -455,8 +457,14 @@ module Aws::Panorama
 
     # Creates a camera stream node.
     #
-    # @option params [required, String] :template_type
-    #   The type of node.
+    # @option params [Array<Types::JobResourceTags>] :job_tags
+    #   Tags for the job.
+    #
+    # @option params [String] :node_description
+    #   A description for the node.
+    #
+    # @option params [required, String] :node_name
+    #   A name for the node.
     #
     # @option params [required, String] :output_package_name
     #   An output package name for the node.
@@ -464,17 +472,11 @@ module Aws::Panorama
     # @option params [required, String] :output_package_version
     #   An output package version for the node.
     #
-    # @option params [required, String] :node_name
-    #   A name for the node.
-    #
-    # @option params [String] :node_description
-    #   A description for the node.
-    #
     # @option params [required, Hash<String,String>] :template_parameters
     #   Template parameters for the node.
     #
-    # @option params [Array<Types::JobResourceTags>] :job_tags
-    #   Tags for the job.
+    # @option params [required, String] :template_type
+    #   The type of node.
     #
     # @return [Types::CreateNodeFromTemplateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -483,14 +485,6 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_node_from_template_job({
-    #     template_type: "RTSP_CAMERA_STREAM", # required, accepts RTSP_CAMERA_STREAM
-    #     output_package_name: "NodePackageName", # required
-    #     output_package_version: "NodePackageVersion", # required
-    #     node_name: "NodeName", # required
-    #     node_description: "Description",
-    #     template_parameters: { # required
-    #       "TemplateKey" => "TemplateValue",
-    #     },
     #     job_tags: [
     #       {
     #         resource_type: "PACKAGE", # required, accepts PACKAGE
@@ -499,6 +493,14 @@ module Aws::Panorama
     #         },
     #       },
     #     ],
+    #     node_description: "Description",
+    #     node_name: "NodeName", # required
+    #     output_package_name: "NodePackageName", # required
+    #     output_package_version: "NodePackageVersion", # required
+    #     template_parameters: { # required
+    #       "TemplateKey" => "TemplateValue",
+    #     },
+    #     template_type: "RTSP_CAMERA_STREAM", # required, accepts RTSP_CAMERA_STREAM
     #   })
     #
     # @example Response structure
@@ -524,8 +526,8 @@ module Aws::Panorama
     #
     # @return [Types::CreatePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::CreatePackageResponse#package_id #package_id} => String
     #   * {Types::CreatePackageResponse#arn #arn} => String
+    #   * {Types::CreatePackageResponse#package_id #package_id} => String
     #   * {Types::CreatePackageResponse#storage_location #storage_location} => Types::StorageLocation
     #
     # @example Request syntax with placeholder values
@@ -539,13 +541,13 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.package_id #=> String
     #   resp.arn #=> String
-    #   resp.storage_location.bucket #=> String
-    #   resp.storage_location.repo_prefix_location #=> String
-    #   resp.storage_location.generated_prefix_location #=> String
+    #   resp.package_id #=> String
     #   resp.storage_location.binary_prefix_location #=> String
+    #   resp.storage_location.bucket #=> String
+    #   resp.storage_location.generated_prefix_location #=> String
     #   resp.storage_location.manifest_prefix_location #=> String
+    #   resp.storage_location.repo_prefix_location #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/CreatePackage AWS API Documentation
     #
@@ -558,20 +560,20 @@ module Aws::Panorama
 
     # Imports a node package.
     #
-    # @option params [required, String] :job_type
-    #   A job type for the package import job.
+    # @option params [required, String] :client_token
+    #   A client token for the package import job.
     #
     # @option params [required, Types::PackageImportJobInputConfig] :input_config
     #   An input config for the package import job.
     #
-    # @option params [required, Types::PackageImportJobOutputConfig] :output_config
-    #   An output config for the package import job.
-    #
-    # @option params [required, String] :client_token
-    #   A client token for the package import job.
-    #
     # @option params [Array<Types::JobResourceTags>] :job_tags
     #   Tags for the package import job.
+    #
+    # @option params [required, String] :job_type
+    #   A job type for the package import job.
+    #
+    # @option params [required, Types::PackageImportJobOutputConfig] :output_config
+    #   An output config for the package import job.
     #
     # @return [Types::CreatePackageImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -580,24 +582,16 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_package_import_job({
-    #     job_type: "NODE_PACKAGE_VERSION", # required, accepts NODE_PACKAGE_VERSION
+    #     client_token: "ClientToken", # required
     #     input_config: { # required
     #       package_version_input_config: {
     #         s3_location: { # required
-    #           region: "Region",
     #           bucket_name: "BucketName", # required
     #           object_key: "ObjectKey", # required
+    #           region: "Region",
     #         },
     #       },
     #     },
-    #     output_config: { # required
-    #       package_version_output_config: {
-    #         package_name: "NodePackageName", # required
-    #         package_version: "NodePackageVersion", # required
-    #         mark_latest: false,
-    #       },
-    #     },
-    #     client_token: "ClientToken", # required
     #     job_tags: [
     #       {
     #         resource_type: "PACKAGE", # required, accepts PACKAGE
@@ -606,6 +600,14 @@ module Aws::Panorama
     #         },
     #       },
     #     ],
+    #     job_type: "NODE_PACKAGE_VERSION", # required, accepts NODE_PACKAGE_VERSION, MARKETPLACE_NODE_PACKAGE_VERSION
+    #     output_config: { # required
+    #       package_version_output_config: {
+    #         mark_latest: false,
+    #         package_name: "NodePackageName", # required
+    #         package_version: "NodePackageVersion", # required
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -651,20 +653,25 @@ module Aws::Panorama
 
     # Deletes a package.
     #
-    # @option params [required, String] :package_id
-    #   The package's ID.
+    # <note markdown="1"> To delete a package, you need permission to call `s3:DeleteObject` in
+    # addition to permissions for the AWS Panorama API.
+    #
+    #  </note>
     #
     # @option params [Boolean] :force_delete
     #   Delete the package even if it has artifacts stored in its access
     #   point. Deletes the package's artifacts from Amazon S3.
+    #
+    # @option params [required, String] :package_id
+    #   The package's ID.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_package({
-    #     package_id: "NodePackageId", # required
     #     force_delete: false,
+    #     package_id: "NodePackageId", # required
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DeletePackage AWS API Documentation
@@ -721,19 +728,19 @@ module Aws::Panorama
     #
     # @return [Types::DescribeApplicationInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeApplicationInstanceResponse#name #name} => String
-    #   * {Types::DescribeApplicationInstanceResponse#description #description} => String
+    #   * {Types::DescribeApplicationInstanceResponse#application_instance_id #application_instance_id} => String
+    #   * {Types::DescribeApplicationInstanceResponse#application_instance_id_to_replace #application_instance_id_to_replace} => String
+    #   * {Types::DescribeApplicationInstanceResponse#arn #arn} => String
+    #   * {Types::DescribeApplicationInstanceResponse#created_time #created_time} => Time
     #   * {Types::DescribeApplicationInstanceResponse#default_runtime_context_device #default_runtime_context_device} => String
     #   * {Types::DescribeApplicationInstanceResponse#default_runtime_context_device_name #default_runtime_context_device_name} => String
-    #   * {Types::DescribeApplicationInstanceResponse#application_instance_id_to_replace #application_instance_id_to_replace} => String
+    #   * {Types::DescribeApplicationInstanceResponse#description #description} => String
+    #   * {Types::DescribeApplicationInstanceResponse#health_status #health_status} => String
+    #   * {Types::DescribeApplicationInstanceResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeApplicationInstanceResponse#name #name} => String
     #   * {Types::DescribeApplicationInstanceResponse#runtime_role_arn #runtime_role_arn} => String
     #   * {Types::DescribeApplicationInstanceResponse#status #status} => String
-    #   * {Types::DescribeApplicationInstanceResponse#health_status #health_status} => String
     #   * {Types::DescribeApplicationInstanceResponse#status_description #status_description} => String
-    #   * {Types::DescribeApplicationInstanceResponse#created_time #created_time} => Time
-    #   * {Types::DescribeApplicationInstanceResponse#last_updated_time #last_updated_time} => Time
-    #   * {Types::DescribeApplicationInstanceResponse#application_instance_id #application_instance_id} => String
-    #   * {Types::DescribeApplicationInstanceResponse#arn #arn} => String
     #   * {Types::DescribeApplicationInstanceResponse#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -744,19 +751,19 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.name #=> String
-    #   resp.description #=> String
+    #   resp.application_instance_id #=> String
+    #   resp.application_instance_id_to_replace #=> String
+    #   resp.arn #=> String
+    #   resp.created_time #=> Time
     #   resp.default_runtime_context_device #=> String
     #   resp.default_runtime_context_device_name #=> String
-    #   resp.application_instance_id_to_replace #=> String
+    #   resp.description #=> String
+    #   resp.health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
+    #   resp.last_updated_time #=> Time
+    #   resp.name #=> String
     #   resp.runtime_role_arn #=> String
     #   resp.status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED"
-    #   resp.health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
     #   resp.status_description #=> String
-    #   resp.created_time #=> Time
-    #   resp.last_updated_time #=> Time
-    #   resp.application_instance_id #=> String
-    #   resp.arn #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -777,14 +784,14 @@ module Aws::Panorama
     #
     # @return [Types::DescribeApplicationInstanceDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#name #name} => String
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#description #description} => String
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#default_runtime_context_device #default_runtime_context_device} => String
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#manifest_payload #manifest_payload} => Types::ManifestPayload
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#manifest_overrides_payload #manifest_overrides_payload} => Types::ManifestOverridesPayload
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#application_instance_id #application_instance_id} => String
     #   * {Types::DescribeApplicationInstanceDetailsResponse#application_instance_id_to_replace #application_instance_id_to_replace} => String
     #   * {Types::DescribeApplicationInstanceDetailsResponse#created_time #created_time} => Time
-    #   * {Types::DescribeApplicationInstanceDetailsResponse#application_instance_id #application_instance_id} => String
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#default_runtime_context_device #default_runtime_context_device} => String
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#description #description} => String
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#manifest_overrides_payload #manifest_overrides_payload} => Types::ManifestOverridesPayload
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#manifest_payload #manifest_payload} => Types::ManifestPayload
+    #   * {Types::DescribeApplicationInstanceDetailsResponse#name #name} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -794,14 +801,14 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.name #=> String
-    #   resp.description #=> String
-    #   resp.default_runtime_context_device #=> String
-    #   resp.manifest_payload.payload_data #=> String
-    #   resp.manifest_overrides_payload.payload_data #=> String
+    #   resp.application_instance_id #=> String
     #   resp.application_instance_id_to_replace #=> String
     #   resp.created_time #=> Time
-    #   resp.application_instance_id #=> String
+    #   resp.default_runtime_context_device #=> String
+    #   resp.description #=> String
+    #   resp.manifest_overrides_payload.payload_data #=> String
+    #   resp.manifest_payload.payload_data #=> String
+    #   resp.name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeApplicationInstanceDetails AWS API Documentation
     #
@@ -819,21 +826,23 @@ module Aws::Panorama
     #
     # @return [Types::DescribeDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeDeviceResponse#device_id #device_id} => String
-    #   * {Types::DescribeDeviceResponse#name #name} => String
+    #   * {Types::DescribeDeviceResponse#alternate_softwares #alternate_softwares} => Array&lt;Types::AlternateSoftwareMetadata&gt;
     #   * {Types::DescribeDeviceResponse#arn #arn} => String
-    #   * {Types::DescribeDeviceResponse#description #description} => String
-    #   * {Types::DescribeDeviceResponse#type #type} => String
-    #   * {Types::DescribeDeviceResponse#device_connection_status #device_connection_status} => String
     #   * {Types::DescribeDeviceResponse#created_time #created_time} => Time
-    #   * {Types::DescribeDeviceResponse#provisioning_status #provisioning_status} => String
-    #   * {Types::DescribeDeviceResponse#latest_software #latest_software} => String
+    #   * {Types::DescribeDeviceResponse#current_networking_status #current_networking_status} => Types::NetworkStatus
     #   * {Types::DescribeDeviceResponse#current_software #current_software} => String
+    #   * {Types::DescribeDeviceResponse#description #description} => String
+    #   * {Types::DescribeDeviceResponse#device_connection_status #device_connection_status} => String
+    #   * {Types::DescribeDeviceResponse#device_id #device_id} => String
+    #   * {Types::DescribeDeviceResponse#latest_alternate_software #latest_alternate_software} => String
+    #   * {Types::DescribeDeviceResponse#latest_software #latest_software} => String
+    #   * {Types::DescribeDeviceResponse#lease_expiration_time #lease_expiration_time} => Time
+    #   * {Types::DescribeDeviceResponse#name #name} => String
+    #   * {Types::DescribeDeviceResponse#networking_configuration #networking_configuration} => Types::NetworkPayload
+    #   * {Types::DescribeDeviceResponse#provisioning_status #provisioning_status} => String
     #   * {Types::DescribeDeviceResponse#serial_number #serial_number} => String
     #   * {Types::DescribeDeviceResponse#tags #tags} => Hash&lt;String,String&gt;
-    #   * {Types::DescribeDeviceResponse#networking_configuration #networking_configuration} => Types::NetworkPayload
-    #   * {Types::DescribeDeviceResponse#current_networking_status #current_networking_status} => Types::NetworkStatus
-    #   * {Types::DescribeDeviceResponse#lease_expiration_time #lease_expiration_time} => Time
+    #   * {Types::DescribeDeviceResponse#type #type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -843,38 +852,47 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.device_id #=> String
-    #   resp.name #=> String
+    #   resp.alternate_softwares #=> Array
+    #   resp.alternate_softwares[0].version #=> String
     #   resp.arn #=> String
-    #   resp.description #=> String
-    #   resp.type #=> String, one of "PANORAMA_APPLIANCE_DEVELOPER_KIT", "PANORAMA_APPLIANCE"
-    #   resp.device_connection_status #=> String, one of "ONLINE", "OFFLINE", "AWAITING_CREDENTIALS", "NOT_AVAILABLE", "ERROR"
     #   resp.created_time #=> Time
-    #   resp.provisioning_status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
-    #   resp.latest_software #=> String
+    #   resp.current_networking_status.ethernet_0_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED", "CONNECTING"
+    #   resp.current_networking_status.ethernet_0_status.hw_address #=> String
+    #   resp.current_networking_status.ethernet_0_status.ip_address #=> String
+    #   resp.current_networking_status.ethernet_1_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED", "CONNECTING"
+    #   resp.current_networking_status.ethernet_1_status.hw_address #=> String
+    #   resp.current_networking_status.ethernet_1_status.ip_address #=> String
+    #   resp.current_networking_status.last_updated_time #=> Time
+    #   resp.current_networking_status.ntp_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED", "CONNECTING"
+    #   resp.current_networking_status.ntp_status.ip_address #=> String
+    #   resp.current_networking_status.ntp_status.ntp_server_name #=> String
     #   resp.current_software #=> String
+    #   resp.description #=> String
+    #   resp.device_connection_status #=> String, one of "ONLINE", "OFFLINE", "AWAITING_CREDENTIALS", "NOT_AVAILABLE", "ERROR"
+    #   resp.device_id #=> String
+    #   resp.latest_alternate_software #=> String
+    #   resp.latest_software #=> String
+    #   resp.lease_expiration_time #=> Time
+    #   resp.name #=> String
+    #   resp.networking_configuration.ethernet_0.connection_type #=> String, one of "STATIC_IP", "DHCP"
+    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.default_gateway #=> String
+    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.dns #=> Array
+    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.dns[0] #=> String
+    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.ip_address #=> String
+    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.mask #=> String
+    #   resp.networking_configuration.ethernet_1.connection_type #=> String, one of "STATIC_IP", "DHCP"
+    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.default_gateway #=> String
+    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.dns #=> Array
+    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.dns[0] #=> String
+    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.ip_address #=> String
+    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.mask #=> String
+    #   resp.networking_configuration.ntp.ntp_servers #=> Array
+    #   resp.networking_configuration.ntp.ntp_servers[0] #=> String
+    #   resp.provisioning_status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
     #   resp.serial_number #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
-    #   resp.networking_configuration.ethernet_0.connection_type #=> String, one of "STATIC_IP", "DHCP"
-    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.ip_address #=> String
-    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.mask #=> String
-    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.dns #=> Array
-    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.dns[0] #=> String
-    #   resp.networking_configuration.ethernet_0.static_ip_connection_info.default_gateway #=> String
-    #   resp.networking_configuration.ethernet_1.connection_type #=> String, one of "STATIC_IP", "DHCP"
-    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.ip_address #=> String
-    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.mask #=> String
-    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.dns #=> Array
-    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.dns[0] #=> String
-    #   resp.networking_configuration.ethernet_1.static_ip_connection_info.default_gateway #=> String
-    #   resp.current_networking_status.ethernet_0_status.ip_address #=> String
-    #   resp.current_networking_status.ethernet_0_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED"
-    #   resp.current_networking_status.ethernet_0_status.hw_address #=> String
-    #   resp.current_networking_status.ethernet_1_status.ip_address #=> String
-    #   resp.current_networking_status.ethernet_1_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED"
-    #   resp.current_networking_status.ethernet_1_status.hw_address #=> String
-    #   resp.lease_expiration_time #=> Time
+    #   resp.type #=> String, one of "PANORAMA_APPLIANCE_DEVELOPER_KIT", "PANORAMA_APPLIANCE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeDevice AWS API Documentation
     #
@@ -892,14 +910,14 @@ module Aws::Panorama
     #
     # @return [Types::DescribeDeviceJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeDeviceJobResponse#job_id #job_id} => String
-    #   * {Types::DescribeDeviceJobResponse#device_id #device_id} => String
+    #   * {Types::DescribeDeviceJobResponse#created_time #created_time} => Time
     #   * {Types::DescribeDeviceJobResponse#device_arn #device_arn} => String
+    #   * {Types::DescribeDeviceJobResponse#device_id #device_id} => String
     #   * {Types::DescribeDeviceJobResponse#device_name #device_name} => String
     #   * {Types::DescribeDeviceJobResponse#device_type #device_type} => String
     #   * {Types::DescribeDeviceJobResponse#image_version #image_version} => String
+    #   * {Types::DescribeDeviceJobResponse#job_id #job_id} => String
     #   * {Types::DescribeDeviceJobResponse#status #status} => String
-    #   * {Types::DescribeDeviceJobResponse#created_time #created_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -909,14 +927,14 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.job_id #=> String
-    #   resp.device_id #=> String
+    #   resp.created_time #=> Time
     #   resp.device_arn #=> String
+    #   resp.device_id #=> String
     #   resp.device_name #=> String
     #   resp.device_type #=> String, one of "PANORAMA_APPLIANCE_DEVELOPER_KIT", "PANORAMA_APPLIANCE"
     #   resp.image_version #=> String
+    #   resp.job_id #=> String
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "VERIFYING", "REBOOTING", "DOWNLOADING", "COMPLETED", "FAILED"
-    #   resp.created_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeDeviceJob AWS API Documentation
     #
@@ -937,20 +955,20 @@ module Aws::Panorama
     #
     # @return [Types::DescribeNodeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeNodeResponse#node_id #node_id} => String
-    #   * {Types::DescribeNodeResponse#name #name} => String
+    #   * {Types::DescribeNodeResponse#asset_name #asset_name} => String
     #   * {Types::DescribeNodeResponse#category #category} => String
+    #   * {Types::DescribeNodeResponse#created_time #created_time} => Time
+    #   * {Types::DescribeNodeResponse#description #description} => String
+    #   * {Types::DescribeNodeResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeNodeResponse#name #name} => String
+    #   * {Types::DescribeNodeResponse#node_id #node_id} => String
+    #   * {Types::DescribeNodeResponse#node_interface #node_interface} => Types::NodeInterface
     #   * {Types::DescribeNodeResponse#owner_account #owner_account} => String
-    #   * {Types::DescribeNodeResponse#package_name #package_name} => String
-    #   * {Types::DescribeNodeResponse#package_id #package_id} => String
     #   * {Types::DescribeNodeResponse#package_arn #package_arn} => String
+    #   * {Types::DescribeNodeResponse#package_id #package_id} => String
+    #   * {Types::DescribeNodeResponse#package_name #package_name} => String
     #   * {Types::DescribeNodeResponse#package_version #package_version} => String
     #   * {Types::DescribeNodeResponse#patch_version #patch_version} => String
-    #   * {Types::DescribeNodeResponse#node_interface #node_interface} => Types::NodeInterface
-    #   * {Types::DescribeNodeResponse#asset_name #asset_name} => String
-    #   * {Types::DescribeNodeResponse#description #description} => String
-    #   * {Types::DescribeNodeResponse#created_time #created_time} => Time
-    #   * {Types::DescribeNodeResponse#last_updated_time #last_updated_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -961,29 +979,29 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.node_id #=> String
-    #   resp.name #=> String
+    #   resp.asset_name #=> String
     #   resp.category #=> String, one of "BUSINESS_LOGIC", "ML_MODEL", "MEDIA_SOURCE", "MEDIA_SINK"
+    #   resp.created_time #=> Time
+    #   resp.description #=> String
+    #   resp.last_updated_time #=> Time
+    #   resp.name #=> String
+    #   resp.node_id #=> String
+    #   resp.node_interface.inputs #=> Array
+    #   resp.node_interface.inputs[0].default_value #=> String
+    #   resp.node_interface.inputs[0].description #=> String
+    #   resp.node_interface.inputs[0].max_connections #=> Integer
+    #   resp.node_interface.inputs[0].name #=> String
+    #   resp.node_interface.inputs[0].type #=> String, one of "BOOLEAN", "STRING", "INT32", "FLOAT32", "MEDIA"
+    #   resp.node_interface.outputs #=> Array
+    #   resp.node_interface.outputs[0].description #=> String
+    #   resp.node_interface.outputs[0].name #=> String
+    #   resp.node_interface.outputs[0].type #=> String, one of "BOOLEAN", "STRING", "INT32", "FLOAT32", "MEDIA"
     #   resp.owner_account #=> String
-    #   resp.package_name #=> String
-    #   resp.package_id #=> String
     #   resp.package_arn #=> String
+    #   resp.package_id #=> String
+    #   resp.package_name #=> String
     #   resp.package_version #=> String
     #   resp.patch_version #=> String
-    #   resp.node_interface.inputs #=> Array
-    #   resp.node_interface.inputs[0].name #=> String
-    #   resp.node_interface.inputs[0].description #=> String
-    #   resp.node_interface.inputs[0].type #=> String, one of "BOOLEAN", "STRING", "INT32", "FLOAT32", "MEDIA"
-    #   resp.node_interface.inputs[0].default_value #=> String
-    #   resp.node_interface.inputs[0].max_connections #=> Integer
-    #   resp.node_interface.outputs #=> Array
-    #   resp.node_interface.outputs[0].name #=> String
-    #   resp.node_interface.outputs[0].description #=> String
-    #   resp.node_interface.outputs[0].type #=> String, one of "BOOLEAN", "STRING", "INT32", "FLOAT32", "MEDIA"
-    #   resp.asset_name #=> String
-    #   resp.description #=> String
-    #   resp.created_time #=> Time
-    #   resp.last_updated_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeNode AWS API Documentation
     #
@@ -1001,18 +1019,18 @@ module Aws::Panorama
     #
     # @return [Types::DescribeNodeFromTemplateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribeNodeFromTemplateJobResponse#job_id #job_id} => String
-    #   * {Types::DescribeNodeFromTemplateJobResponse#status #status} => String
-    #   * {Types::DescribeNodeFromTemplateJobResponse#status_message #status_message} => String
     #   * {Types::DescribeNodeFromTemplateJobResponse#created_time #created_time} => Time
+    #   * {Types::DescribeNodeFromTemplateJobResponse#job_id #job_id} => String
+    #   * {Types::DescribeNodeFromTemplateJobResponse#job_tags #job_tags} => Array&lt;Types::JobResourceTags&gt;
     #   * {Types::DescribeNodeFromTemplateJobResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribeNodeFromTemplateJobResponse#node_description #node_description} => String
+    #   * {Types::DescribeNodeFromTemplateJobResponse#node_name #node_name} => String
     #   * {Types::DescribeNodeFromTemplateJobResponse#output_package_name #output_package_name} => String
     #   * {Types::DescribeNodeFromTemplateJobResponse#output_package_version #output_package_version} => String
-    #   * {Types::DescribeNodeFromTemplateJobResponse#node_name #node_name} => String
-    #   * {Types::DescribeNodeFromTemplateJobResponse#node_description #node_description} => String
-    #   * {Types::DescribeNodeFromTemplateJobResponse#template_type #template_type} => String
+    #   * {Types::DescribeNodeFromTemplateJobResponse#status #status} => String
+    #   * {Types::DescribeNodeFromTemplateJobResponse#status_message #status_message} => String
     #   * {Types::DescribeNodeFromTemplateJobResponse#template_parameters #template_parameters} => Hash&lt;String,String&gt;
-    #   * {Types::DescribeNodeFromTemplateJobResponse#job_tags #job_tags} => Array&lt;Types::JobResourceTags&gt;
+    #   * {Types::DescribeNodeFromTemplateJobResponse#template_type #template_type} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1022,22 +1040,22 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.job_id #=> String
-    #   resp.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
-    #   resp.status_message #=> String
     #   resp.created_time #=> Time
-    #   resp.last_updated_time #=> Time
-    #   resp.output_package_name #=> String
-    #   resp.output_package_version #=> String
-    #   resp.node_name #=> String
-    #   resp.node_description #=> String
-    #   resp.template_type #=> String, one of "RTSP_CAMERA_STREAM"
-    #   resp.template_parameters #=> Hash
-    #   resp.template_parameters["TemplateKey"] #=> String
+    #   resp.job_id #=> String
     #   resp.job_tags #=> Array
     #   resp.job_tags[0].resource_type #=> String, one of "PACKAGE"
     #   resp.job_tags[0].tags #=> Hash
     #   resp.job_tags[0].tags["TagKey"] #=> String
+    #   resp.last_updated_time #=> Time
+    #   resp.node_description #=> String
+    #   resp.node_name #=> String
+    #   resp.output_package_name #=> String
+    #   resp.output_package_version #=> String
+    #   resp.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
+    #   resp.template_parameters #=> Hash
+    #   resp.template_parameters["TemplateKey"] #=> String
+    #   resp.template_type #=> String, one of "RTSP_CAMERA_STREAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribeNodeFromTemplateJob AWS API Documentation
     #
@@ -1055,14 +1073,14 @@ module Aws::Panorama
     #
     # @return [Types::DescribePackageResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribePackageResponse#arn #arn} => String
+    #   * {Types::DescribePackageResponse#created_time #created_time} => Time
     #   * {Types::DescribePackageResponse#package_id #package_id} => String
     #   * {Types::DescribePackageResponse#package_name #package_name} => String
-    #   * {Types::DescribePackageResponse#arn #arn} => String
-    #   * {Types::DescribePackageResponse#storage_location #storage_location} => Types::StorageLocation
     #   * {Types::DescribePackageResponse#read_access_principal_arns #read_access_principal_arns} => Array&lt;String&gt;
-    #   * {Types::DescribePackageResponse#write_access_principal_arns #write_access_principal_arns} => Array&lt;String&gt;
-    #   * {Types::DescribePackageResponse#created_time #created_time} => Time
+    #   * {Types::DescribePackageResponse#storage_location #storage_location} => Types::StorageLocation
     #   * {Types::DescribePackageResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::DescribePackageResponse#write_access_principal_arns #write_access_principal_arns} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1072,21 +1090,21 @@ module Aws::Panorama
     #
     # @example Response structure
     #
+    #   resp.arn #=> String
+    #   resp.created_time #=> Time
     #   resp.package_id #=> String
     #   resp.package_name #=> String
-    #   resp.arn #=> String
-    #   resp.storage_location.bucket #=> String
-    #   resp.storage_location.repo_prefix_location #=> String
-    #   resp.storage_location.generated_prefix_location #=> String
-    #   resp.storage_location.binary_prefix_location #=> String
-    #   resp.storage_location.manifest_prefix_location #=> String
     #   resp.read_access_principal_arns #=> Array
     #   resp.read_access_principal_arns[0] #=> String
-    #   resp.write_access_principal_arns #=> Array
-    #   resp.write_access_principal_arns[0] #=> String
-    #   resp.created_time #=> Time
+    #   resp.storage_location.binary_prefix_location #=> String
+    #   resp.storage_location.bucket #=> String
+    #   resp.storage_location.generated_prefix_location #=> String
+    #   resp.storage_location.manifest_prefix_location #=> String
+    #   resp.storage_location.repo_prefix_location #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
+    #   resp.write_access_principal_arns #=> Array
+    #   resp.write_access_principal_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribePackage AWS API Documentation
     #
@@ -1104,17 +1122,17 @@ module Aws::Panorama
     #
     # @return [Types::DescribePackageImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::DescribePackageImportJobResponse#job_id #job_id} => String
     #   * {Types::DescribePackageImportJobResponse#client_token #client_token} => String
-    #   * {Types::DescribePackageImportJobResponse#job_type #job_type} => String
-    #   * {Types::DescribePackageImportJobResponse#input_config #input_config} => Types::PackageImportJobInputConfig
-    #   * {Types::DescribePackageImportJobResponse#output_config #output_config} => Types::PackageImportJobOutputConfig
-    #   * {Types::DescribePackageImportJobResponse#output #output} => Types::PackageImportJobOutput
     #   * {Types::DescribePackageImportJobResponse#created_time #created_time} => Time
+    #   * {Types::DescribePackageImportJobResponse#input_config #input_config} => Types::PackageImportJobInputConfig
+    #   * {Types::DescribePackageImportJobResponse#job_id #job_id} => String
+    #   * {Types::DescribePackageImportJobResponse#job_tags #job_tags} => Array&lt;Types::JobResourceTags&gt;
+    #   * {Types::DescribePackageImportJobResponse#job_type #job_type} => String
     #   * {Types::DescribePackageImportJobResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::DescribePackageImportJobResponse#output #output} => Types::PackageImportJobOutput
+    #   * {Types::DescribePackageImportJobResponse#output_config #output_config} => Types::PackageImportJobOutputConfig
     #   * {Types::DescribePackageImportJobResponse#status #status} => String
     #   * {Types::DescribePackageImportJobResponse#status_message #status_message} => String
-    #   * {Types::DescribePackageImportJobResponse#job_tags #job_tags} => Array&lt;Types::JobResourceTags&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1124,28 +1142,28 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.job_id #=> String
     #   resp.client_token #=> String
-    #   resp.job_type #=> String, one of "NODE_PACKAGE_VERSION"
-    #   resp.input_config.package_version_input_config.s3_location.region #=> String
+    #   resp.created_time #=> Time
     #   resp.input_config.package_version_input_config.s3_location.bucket_name #=> String
     #   resp.input_config.package_version_input_config.s3_location.object_key #=> String
-    #   resp.output_config.package_version_output_config.package_name #=> String
-    #   resp.output_config.package_version_output_config.package_version #=> String
-    #   resp.output_config.package_version_output_config.mark_latest #=> Boolean
-    #   resp.output.package_id #=> String
-    #   resp.output.package_version #=> String
-    #   resp.output.patch_version #=> String
-    #   resp.output.output_s3_location.bucket_name #=> String
-    #   resp.output.output_s3_location.object_key #=> String
-    #   resp.created_time #=> Time
-    #   resp.last_updated_time #=> Time
-    #   resp.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
-    #   resp.status_message #=> String
+    #   resp.input_config.package_version_input_config.s3_location.region #=> String
+    #   resp.job_id #=> String
     #   resp.job_tags #=> Array
     #   resp.job_tags[0].resource_type #=> String, one of "PACKAGE"
     #   resp.job_tags[0].tags #=> Hash
     #   resp.job_tags[0].tags["TagKey"] #=> String
+    #   resp.job_type #=> String, one of "NODE_PACKAGE_VERSION", "MARKETPLACE_NODE_PACKAGE_VERSION"
+    #   resp.last_updated_time #=> Time
+    #   resp.output.output_s3_location.bucket_name #=> String
+    #   resp.output.output_s3_location.object_key #=> String
+    #   resp.output.package_id #=> String
+    #   resp.output.package_version #=> String
+    #   resp.output.patch_version #=> String
+    #   resp.output_config.package_version_output_config.mark_latest #=> Boolean
+    #   resp.output_config.package_version_output_config.package_name #=> String
+    #   resp.output_config.package_version_output_config.package_version #=> String
+    #   resp.status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribePackageImportJob AWS API Documentation
     #
@@ -1172,16 +1190,16 @@ module Aws::Panorama
     #
     # @return [Types::DescribePackageVersionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::DescribePackageVersionResponse#is_latest_patch #is_latest_patch} => Boolean
     #   * {Types::DescribePackageVersionResponse#owner_account #owner_account} => String
-    #   * {Types::DescribePackageVersionResponse#package_id #package_id} => String
     #   * {Types::DescribePackageVersionResponse#package_arn #package_arn} => String
+    #   * {Types::DescribePackageVersionResponse#package_id #package_id} => String
     #   * {Types::DescribePackageVersionResponse#package_name #package_name} => String
     #   * {Types::DescribePackageVersionResponse#package_version #package_version} => String
     #   * {Types::DescribePackageVersionResponse#patch_version #patch_version} => String
-    #   * {Types::DescribePackageVersionResponse#is_latest_patch #is_latest_patch} => Boolean
+    #   * {Types::DescribePackageVersionResponse#registered_time #registered_time} => Time
     #   * {Types::DescribePackageVersionResponse#status #status} => String
     #   * {Types::DescribePackageVersionResponse#status_description #status_description} => String
-    #   * {Types::DescribePackageVersionResponse#registered_time #registered_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1194,16 +1212,16 @@ module Aws::Panorama
     #
     # @example Response structure
     #
+    #   resp.is_latest_patch #=> Boolean
     #   resp.owner_account #=> String
-    #   resp.package_id #=> String
     #   resp.package_arn #=> String
+    #   resp.package_id #=> String
     #   resp.package_name #=> String
     #   resp.package_version #=> String
     #   resp.patch_version #=> String
-    #   resp.is_latest_patch #=> Boolean
+    #   resp.registered_time #=> Time
     #   resp.status #=> String, one of "REGISTER_PENDING", "REGISTER_COMPLETED", "FAILED", "DELETING"
     #   resp.status_description #=> String
-    #   resp.registered_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/DescribePackageVersion AWS API Documentation
     #
@@ -1229,8 +1247,8 @@ module Aws::Panorama
     #
     # @return [Types::ListApplicationInstanceDependenciesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListApplicationInstanceDependenciesResponse#package_objects #package_objects} => Array&lt;Types::PackageObject&gt;
     #   * {Types::ListApplicationInstanceDependenciesResponse#next_token #next_token} => String
+    #   * {Types::ListApplicationInstanceDependenciesResponse#package_objects #package_objects} => Array&lt;Types::PackageObject&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1244,11 +1262,11 @@ module Aws::Panorama
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.package_objects #=> Array
     #   resp.package_objects[0].name #=> String
     #   resp.package_objects[0].package_version #=> String
     #   resp.package_objects[0].patch_version #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListApplicationInstanceDependencies AWS API Documentation
     #
@@ -1273,8 +1291,8 @@ module Aws::Panorama
     #
     # @return [Types::ListApplicationInstanceNodeInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListApplicationInstanceNodeInstancesResponse#node_instances #node_instances} => Array&lt;Types::NodeInstance&gt;
     #   * {Types::ListApplicationInstanceNodeInstancesResponse#next_token #next_token} => String
+    #   * {Types::ListApplicationInstanceNodeInstancesResponse#node_instances #node_instances} => Array&lt;Types::NodeInstance&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1288,15 +1306,15 @@ module Aws::Panorama
     #
     # @example Response structure
     #
-    #   resp.node_instances #=> Array
-    #   resp.node_instances[0].node_instance_id #=> String
-    #   resp.node_instances[0].node_id #=> String
-    #   resp.node_instances[0].package_name #=> String
-    #   resp.node_instances[0].package_version #=> String
-    #   resp.node_instances[0].package_patch_version #=> String
-    #   resp.node_instances[0].node_name #=> String
-    #   resp.node_instances[0].current_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
     #   resp.next_token #=> String
+    #   resp.node_instances #=> Array
+    #   resp.node_instances[0].current_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
+    #   resp.node_instances[0].node_id #=> String
+    #   resp.node_instances[0].node_instance_id #=> String
+    #   resp.node_instances[0].node_name #=> String
+    #   resp.node_instances[0].package_name #=> String
+    #   resp.node_instances[0].package_patch_version #=> String
+    #   resp.node_instances[0].package_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListApplicationInstanceNodeInstances AWS API Documentation
     #
@@ -1312,9 +1330,6 @@ module Aws::Panorama
     # @option params [String] :device_id
     #   The application instances' device ID.
     #
-    # @option params [String] :status_filter
-    #   Only include instances with a specific status.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of application instances to return in one page of
     #   results.
@@ -1322,6 +1337,9 @@ module Aws::Panorama
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
+    #
+    # @option params [String] :status_filter
+    #   Only include instances with a specific status.
     #
     # @return [Types::ListApplicationInstancesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1334,24 +1352,24 @@ module Aws::Panorama
     #
     #   resp = client.list_application_instances({
     #     device_id: "DeviceId",
-    #     status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL
     #     max_results: 1,
     #     next_token: "NextToken",
+    #     status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL
     #   })
     #
     # @example Response structure
     #
     #   resp.application_instances #=> Array
-    #   resp.application_instances[0].name #=> String
     #   resp.application_instances[0].application_instance_id #=> String
+    #   resp.application_instances[0].arn #=> String
+    #   resp.application_instances[0].created_time #=> Time
     #   resp.application_instances[0].default_runtime_context_device #=> String
     #   resp.application_instances[0].default_runtime_context_device_name #=> String
     #   resp.application_instances[0].description #=> String
-    #   resp.application_instances[0].status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED"
     #   resp.application_instances[0].health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
+    #   resp.application_instances[0].name #=> String
+    #   resp.application_instances[0].status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED"
     #   resp.application_instances[0].status_description #=> String
-    #   resp.application_instances[0].created_time #=> Time
-    #   resp.application_instances[0].arn #=> String
     #   resp.application_instances[0].tags #=> Hash
     #   resp.application_instances[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1367,12 +1385,12 @@ module Aws::Panorama
 
     # Returns a list of devices.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of devices to return in one page of results.
+    #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of devices to return in one page of results.
     #
     # @return [Types::ListDevicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1384,19 +1402,19 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_devices({
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.devices #=> Array
-    #   resp.devices[0].device_id #=> String
-    #   resp.devices[0].name #=> String
     #   resp.devices[0].created_time #=> Time
-    #   resp.devices[0].provisioning_status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
+    #   resp.devices[0].device_id #=> String
     #   resp.devices[0].last_updated_time #=> Time
     #   resp.devices[0].lease_expiration_time #=> Time
+    #   resp.devices[0].name #=> String
+    #   resp.devices[0].provisioning_status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListDevices AWS API Documentation
@@ -1413,12 +1431,12 @@ module Aws::Panorama
     # @option params [String] :device_id
     #   Filter results by the job's target device ID.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of device jobs to return in one page of results.
+    #
     # @option params [String] :next_token
     #   Specify the pagination token from a previous request to retrieve the
     #   next page of results.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of device jobs to return in one page of results.
     #
     # @return [Types::ListDevicesJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1431,17 +1449,17 @@ module Aws::Panorama
     #
     #   resp = client.list_devices_jobs({
     #     device_id: "DeviceId",
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
     #   resp.device_jobs #=> Array
-    #   resp.device_jobs[0].device_name #=> String
-    #   resp.device_jobs[0].device_id #=> String
-    #   resp.device_jobs[0].job_id #=> String
     #   resp.device_jobs[0].created_time #=> Time
+    #   resp.device_jobs[0].device_id #=> String
+    #   resp.device_jobs[0].device_name #=> String
+    #   resp.device_jobs[0].job_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListDevicesJobs AWS API Documentation
@@ -1455,38 +1473,38 @@ module Aws::Panorama
 
     # Returns a list of camera stream node jobs.
     #
-    # @option params [String] :next_token
-    #   Specify the pagination token from a previous request to retrieve the
-    #   next page of results.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of node from template jobs to return in one page of
     #   results.
     #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
     # @return [Types::ListNodeFromTemplateJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListNodeFromTemplateJobsResponse#node_from_template_jobs #node_from_template_jobs} => Array&lt;Types::NodeFromTemplateJob&gt;
     #   * {Types::ListNodeFromTemplateJobsResponse#next_token #next_token} => String
+    #   * {Types::ListNodeFromTemplateJobsResponse#node_from_template_jobs #node_from_template_jobs} => Array&lt;Types::NodeFromTemplateJob&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_node_from_template_jobs({
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.node_from_template_jobs #=> Array
+    #   resp.node_from_template_jobs[0].created_time #=> Time
     #   resp.node_from_template_jobs[0].job_id #=> String
-    #   resp.node_from_template_jobs[0].template_type #=> String, one of "RTSP_CAMERA_STREAM"
+    #   resp.node_from_template_jobs[0].node_name #=> String
     #   resp.node_from_template_jobs[0].status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
     #   resp.node_from_template_jobs[0].status_message #=> String
-    #   resp.node_from_template_jobs[0].created_time #=> Time
-    #   resp.node_from_template_jobs[0].node_name #=> String
-    #   resp.next_token #=> String
+    #   resp.node_from_template_jobs[0].template_type #=> String, one of "RTSP_CAMERA_STREAM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListNodeFromTemplateJobs AWS API Documentation
     #
@@ -1502,6 +1520,13 @@ module Aws::Panorama
     # @option params [String] :category
     #   Search for nodes by category.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of nodes to return in one page of results.
+    #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
     # @option params [String] :owner_account
     #   Search for nodes by the account ID of the nodes' owner.
     #
@@ -1514,17 +1539,10 @@ module Aws::Panorama
     # @option params [String] :patch_version
     #   Search for nodes by patch version.
     #
-    # @option params [String] :next_token
-    #   Specify the pagination token from a previous request to retrieve the
-    #   next page of results.
-    #
-    # @option params [Integer] :max_results
-    #   The maximum number of nodes to return in one page of results.
-    #
     # @return [Types::ListNodesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListNodesResponse#nodes #nodes} => Array&lt;Types::Node&gt;
     #   * {Types::ListNodesResponse#next_token #next_token} => String
+    #   * {Types::ListNodesResponse#nodes #nodes} => Array&lt;Types::Node&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1532,29 +1550,29 @@ module Aws::Panorama
     #
     #   resp = client.list_nodes({
     #     category: "BUSINESS_LOGIC", # accepts BUSINESS_LOGIC, ML_MODEL, MEDIA_SOURCE, MEDIA_SINK
+    #     max_results: 1,
+    #     next_token: "Token",
     #     owner_account: "PackageOwnerAccount",
     #     package_name: "NodePackageName",
     #     package_version: "NodePackageVersion",
     #     patch_version: "NodePackagePatchVersion",
-    #     next_token: "Token",
-    #     max_results: 1,
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.nodes #=> Array
-    #   resp.nodes[0].node_id #=> String
-    #   resp.nodes[0].name #=> String
     #   resp.nodes[0].category #=> String, one of "BUSINESS_LOGIC", "ML_MODEL", "MEDIA_SOURCE", "MEDIA_SINK"
+    #   resp.nodes[0].created_time #=> Time
+    #   resp.nodes[0].description #=> String
+    #   resp.nodes[0].name #=> String
+    #   resp.nodes[0].node_id #=> String
     #   resp.nodes[0].owner_account #=> String
-    #   resp.nodes[0].package_name #=> String
-    #   resp.nodes[0].package_id #=> String
     #   resp.nodes[0].package_arn #=> String
+    #   resp.nodes[0].package_id #=> String
+    #   resp.nodes[0].package_name #=> String
     #   resp.nodes[0].package_version #=> String
     #   resp.nodes[0].patch_version #=> String
-    #   resp.nodes[0].description #=> String
-    #   resp.nodes[0].created_time #=> Time
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListNodes AWS API Documentation
     #
@@ -1567,38 +1585,38 @@ module Aws::Panorama
 
     # Returns a list of package import jobs.
     #
-    # @option params [String] :next_token
-    #   Specify the pagination token from a previous request to retrieve the
-    #   next page of results.
-    #
     # @option params [Integer] :max_results
     #   The maximum number of package import jobs to return in one page of
     #   results.
     #
+    # @option params [String] :next_token
+    #   Specify the pagination token from a previous request to retrieve the
+    #   next page of results.
+    #
     # @return [Types::ListPackageImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPackageImportJobsResponse#package_import_jobs #package_import_jobs} => Array&lt;Types::PackageImportJob&gt;
     #   * {Types::ListPackageImportJobsResponse#next_token #next_token} => String
+    #   * {Types::ListPackageImportJobsResponse#package_import_jobs #package_import_jobs} => Array&lt;Types::PackageImportJob&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_package_import_jobs({
-    #     next_token: "NextToken",
     #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.package_import_jobs #=> Array
+    #   resp.package_import_jobs[0].created_time #=> Time
     #   resp.package_import_jobs[0].job_id #=> String
-    #   resp.package_import_jobs[0].job_type #=> String, one of "NODE_PACKAGE_VERSION"
+    #   resp.package_import_jobs[0].job_type #=> String, one of "NODE_PACKAGE_VERSION", "MARKETPLACE_NODE_PACKAGE_VERSION"
+    #   resp.package_import_jobs[0].last_updated_time #=> Time
     #   resp.package_import_jobs[0].status #=> String, one of "PENDING", "SUCCEEDED", "FAILED"
     #   resp.package_import_jobs[0].status_message #=> String
-    #   resp.package_import_jobs[0].created_time #=> Time
-    #   resp.package_import_jobs[0].last_updated_time #=> Time
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListPackageImportJobs AWS API Documentation
     #
@@ -1620,8 +1638,8 @@ module Aws::Panorama
     #
     # @return [Types::ListPackagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ListPackagesResponse#packages #packages} => Array&lt;Types::PackageListItem&gt;
     #   * {Types::ListPackagesResponse#next_token #next_token} => String
+    #   * {Types::ListPackagesResponse#packages #packages} => Array&lt;Types::PackageListItem&gt;
     #
     # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
@@ -1634,14 +1652,14 @@ module Aws::Panorama
     #
     # @example Response structure
     #
+    #   resp.next_token #=> String
     #   resp.packages #=> Array
-    #   resp.packages[0].package_id #=> String
-    #   resp.packages[0].package_name #=> String
     #   resp.packages[0].arn #=> String
     #   resp.packages[0].created_time #=> Time
+    #   resp.packages[0].package_id #=> String
+    #   resp.packages[0].package_name #=> String
     #   resp.packages[0].tags #=> Hash
     #   resp.packages[0].tags["TagKey"] #=> String
-    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ListPackages AWS API Documentation
     #
@@ -1687,63 +1705,66 @@ module Aws::Panorama
     # archive to the device with the included USB storage device within 5
     # minutes.
     #
-    # @option params [required, String] :name
-    #   A name for the device.
-    #
     # @option params [String] :description
     #   A description for the device.
     #
-    # @option params [Hash<String,String>] :tags
-    #   Tags for the device.
+    # @option params [required, String] :name
+    #   A name for the device.
     #
     # @option params [Types::NetworkPayload] :networking_configuration
     #   A networking configuration for the device.
     #
+    # @option params [Hash<String,String>] :tags
+    #   Tags for the device.
+    #
     # @return [Types::ProvisionDeviceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
-    #   * {Types::ProvisionDeviceResponse#device_id #device_id} => String
     #   * {Types::ProvisionDeviceResponse#arn #arn} => String
-    #   * {Types::ProvisionDeviceResponse#status #status} => String
     #   * {Types::ProvisionDeviceResponse#certificates #certificates} => String
+    #   * {Types::ProvisionDeviceResponse#device_id #device_id} => String
     #   * {Types::ProvisionDeviceResponse#iot_thing_name #iot_thing_name} => String
+    #   * {Types::ProvisionDeviceResponse#status #status} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.provision_device({
-    #     name: "DeviceName", # required
     #     description: "Description",
-    #     tags: {
-    #       "TagKey" => "TagValue",
-    #     },
+    #     name: "DeviceName", # required
     #     networking_configuration: {
     #       ethernet_0: {
     #         connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
     #         static_ip_connection_info: {
+    #           default_gateway: "DefaultGateway", # required
+    #           dns: ["Dns"], # required
     #           ip_address: "IpAddress", # required
     #           mask: "Mask", # required
-    #           dns: ["Dns"], # required
-    #           default_gateway: "DefaultGateway", # required
     #         },
     #       },
     #       ethernet_1: {
     #         connection_type: "STATIC_IP", # required, accepts STATIC_IP, DHCP
     #         static_ip_connection_info: {
+    #           default_gateway: "DefaultGateway", # required
+    #           dns: ["Dns"], # required
     #           ip_address: "IpAddress", # required
     #           mask: "Mask", # required
-    #           dns: ["Dns"], # required
-    #           default_gateway: "DefaultGateway", # required
     #         },
     #       },
+    #       ntp: {
+    #         ntp_servers: ["IpAddressOrServerName"], # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
     #     },
     #   })
     #
     # @example Response structure
     #
-    #   resp.device_id #=> String
     #   resp.arn #=> String
-    #   resp.status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
     #   resp.certificates #=> String
+    #   resp.device_id #=> String
     #   resp.iot_thing_name #=> String
+    #   resp.status #=> String, one of "AWAITING_PROVISIONING", "PENDING", "SUCCEEDED", "FAILED", "ERROR", "DELETING"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/ProvisionDevice AWS API Documentation
     #
@@ -1755,6 +1776,9 @@ module Aws::Panorama
     end
 
     # Registers a package version.
+    #
+    # @option params [Boolean] :mark_latest
+    #   Whether to mark the new version as the latest version.
     #
     # @option params [String] :owner_account
     #   An owner account.
@@ -1768,19 +1792,16 @@ module Aws::Panorama
     # @option params [required, String] :patch_version
     #   A patch version.
     #
-    # @option params [Boolean] :mark_latest
-    #   Whether to mark the new version as the latest version.
-    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_package_version({
+    #     mark_latest: false,
     #     owner_account: "PackageOwnerAccount",
     #     package_id: "NodePackageId", # required
     #     package_version: "NodePackageVersion", # required
     #     patch_version: "NodePackagePatchVersion", # required
-    #     mark_latest: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/RegisterPackageVersion AWS API Documentation
@@ -1870,11 +1891,11 @@ module Aws::Panorama
 
     # Updates a device's metadata.
     #
-    # @option params [required, String] :device_id
-    #   The device's ID.
-    #
     # @option params [String] :description
     #   A description for the device.
+    #
+    # @option params [required, String] :device_id
+    #   The device's ID.
     #
     # @return [Types::UpdateDeviceMetadataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1883,8 +1904,8 @@ module Aws::Panorama
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_device_metadata({
-    #     device_id: "DeviceId", # required
     #     description: "Description",
+    #     device_id: "DeviceId", # required
     #   })
     #
     # @example Response structure
@@ -1913,7 +1934,7 @@ module Aws::Panorama
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

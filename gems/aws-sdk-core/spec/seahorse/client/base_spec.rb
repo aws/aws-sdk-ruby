@@ -143,7 +143,7 @@ module Seahorse
 
         it 'builds and sends a request when it receives a request method' do
           expect(client).to receive(:build_request).
-            with(:operation_name, foo:'bar').
+            with(:operation_name, {foo:'bar'}).
             and_return(request)
           expect(request).to receive(:send_request)
           client.operation_name(foo:'bar')

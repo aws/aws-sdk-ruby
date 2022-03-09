@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -78,6 +79,7 @@ module Aws::DynamoDB
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -3016,6 +3018,19 @@ module Aws::DynamoDB
     # This operation allows you to perform reads and singleton writes on
     # data stored in DynamoDB, using PartiQL.
     #
+    # For PartiQL reads (`SELECT` statement), if the total number of
+    # processed items exceeds the maximum dataset size limit of 1 MB, the
+    # read stops and results are returned to the user as a
+    # `LastEvaluatedKey` value to continue the read in a subsequent
+    # operation. If the filter criteria in `WHERE` clause does not match any
+    # data, the read will return an empty result set.
+    #
+    # A single `SELECT` statement response can return up to the maximum
+    # number of items (if using the Limit parameter) or a maximum of 1 MB of
+    # data (and then apply any filtering to the results using `WHERE`
+    # clause). If `LastEvaluatedKey` is present in the response, you need to
+    # paginate the result set.
+    #
     # @option params [required, String] :statement
     #   The PartiQL statement representing the operation to run.
     #
@@ -3048,11 +3063,24 @@ module Aws::DynamoDB
     #
     #   * `NONE` - No `ConsumedCapacity` details are included in the response.
     #
+    # @option params [Integer] :limit
+    #   The maximum number of items to evaluate (not necessarily the number of
+    #   matching items). If DynamoDB processes the number of items up to the
+    #   limit while processing the results, it stops the operation and returns
+    #   the matching values up to that point, along with a key in
+    #   `LastEvaluatedKey` to apply in a subsequent operation so you can pick
+    #   up where you left off. Also, if the processed dataset size exceeds 1
+    #   MB before DynamoDB reaches this limit, it stops the operation and
+    #   returns the matching values up to the limit, and a key in
+    #   `LastEvaluatedKey` to apply in a subsequent operation to continue the
+    #   operation.
+    #
     # @return [Types::ExecuteStatementOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementOutput#items #items} => Array&lt;Hash&lt;String,Types::AttributeValue&gt;&gt;
     #   * {Types::ExecuteStatementOutput#next_token #next_token} => String
     #   * {Types::ExecuteStatementOutput#consumed_capacity #consumed_capacity} => Types::ConsumedCapacity
+    #   * {Types::ExecuteStatementOutput#last_evaluated_key #last_evaluated_key} => Hash&lt;String,Types::AttributeValue&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3062,6 +3090,7 @@ module Aws::DynamoDB
     #     consistent_read: false,
     #     next_token: "PartiQLNextToken",
     #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+    #     limit: 1,
     #   })
     #
     # @example Response structure
@@ -3085,6 +3114,8 @@ module Aws::DynamoDB
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].read_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].write_capacity_units #=> Float
     #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+    #   resp.last_evaluated_key #=> Hash
+    #   resp.last_evaluated_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ExecuteStatement AWS API Documentation
     #
@@ -7320,7 +7351,7 @@ module Aws::DynamoDB
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

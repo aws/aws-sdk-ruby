@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::FSx
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -733,7 +735,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -753,6 +756,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -916,6 +920,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -924,7 +929,8 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backup.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backup.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backup.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -1199,7 +1205,8 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backup.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -1219,6 +1226,7 @@ module Aws::FSx
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -1382,6 +1390,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backup.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backup.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -1390,7 +1399,8 @@ module Aws::FSx
     #   resp.backup.volume.open_zfs_configuration.volume_path #=> String
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backup.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backup.volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backup.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backup.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backup.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backup.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -1448,6 +1458,13 @@ module Aws::FSx
     #   from or imported to. This file system directory can be linked to only
     #   one Amazon S3 bucket, and no other S3 bucket can be linked to the
     #   directory.
+    #
+    #   <note markdown="1"> If you specify only a forward slash (`/`) as the file system path, you
+    #   can link only 1 data repository to the file system. You can only
+    #   specify "/" as the file system path for the first data repository
+    #   associated with a file system.
+    #
+    #    </note>
     #
     # @option params [required, String] :data_repository_path
     #   The path to the Amazon S3 data repository that will be linked to the
@@ -2046,7 +2063,8 @@ module Aws::FSx
     #         iops: 1,
     #       },
     #       root_volume_configuration: {
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -2166,7 +2184,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -2186,6 +2205,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -2234,8 +2254,8 @@ module Aws::FSx
     #
     # If a file system with the specified client request token exists and
     # the parameters match, this operation returns the description of the
-    # file system. If a client request token with the specified by the file
-    # system exists and the parameters don't match, this call returns
+    # file system. If a file system with the specified client request token
+    # exists but the parameters don't match, this call returns
     # `IncompatibleParameterError`. If a file system with the specified
     # client request token doesn't exist, this operation does the
     # following:
@@ -2507,7 +2527,8 @@ module Aws::FSx
     #         iops: 1,
     #       },
     #       root_volume_configuration: {
-    #         data_compression_type: "NONE", # accepts NONE, ZSTD
+    #         record_size_ki_b: 1,
+    #         data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #         nfs_exports: [
     #           {
     #             client_configurations: [ # required
@@ -2627,7 +2648,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -2647,6 +2669,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -2689,9 +2712,9 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates a snapshot of an existing Amazon FSx for OpenZFS file system.
-    # With snapshots, you can easily undo file changes and compare file
-    # versions by restoring the volume to a previous version.
+    # Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With
+    # snapshots, you can easily undo file changes and compare file versions
+    # by restoring the volume to a previous version.
     #
     # If a snapshot with the specified client request token exists, and the
     # parameters match, this operation returns the description of the
@@ -2765,6 +2788,7 @@ module Aws::FSx
     #   resp.snapshot.volume_id #=> String
     #   resp.snapshot.creation_time #=> Time
     #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.lifecycle_transition_reason.message #=> String
     #   resp.snapshot.tags #=> Array
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
@@ -2890,7 +2914,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -3037,8 +3062,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Creates an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS
-    # storage volume.
+    # Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -3096,7 +3120,8 @@ module Aws::FSx
     #       parent_volume_id: "VolumeId", # required
     #       storage_capacity_reservation_gi_b: 1,
     #       storage_capacity_quota_gi_b: 1,
-    #       data_compression_type: "NONE", # accepts NONE, ZSTD
+    #       record_size_ki_b: 1,
+    #       data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #       copy_tags_to_snapshots: false,
     #       origin_snapshot: {
     #         snapshot_arn: "ResourceARN", # required
@@ -3249,6 +3274,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -3257,7 +3283,8 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -3461,6 +3488,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -3469,7 +3497,8 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -3718,6 +3747,7 @@ module Aws::FSx
     #           value: "TagValue", # required
     #         },
     #       ],
+    #       options: ["DELETE_CHILD_VOLUMES_AND_SNAPSHOTS"], # accepts DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
     #     },
     #   })
     #
@@ -3747,9 +3777,9 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Deletes the Amazon FSx snapshot. After deletion, the snapshot no
-    # longer exists, and its data is gone. Deleting a snapshot doesn't
-    # affect snapshots stored in a file system backup.
+    # Deletes an Amazon FSx for OpenZFS snapshot. After deletion, the
+    # snapshot no longer exists, and its data is gone. Deleting a snapshot
+    # doesn't affect snapshots stored in a file system backup.
     #
     # The `DeleteSnapshot` operation returns instantly. The snapshot appears
     # with the lifecycle status of `DELETING` until the deletion is
@@ -4116,7 +4146,8 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -4136,6 +4167,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backups[0].file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -4299,6 +4331,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -4307,7 +4340,8 @@ module Aws::FSx
     #   resp.backups[0].volume.open_zfs_configuration.volume_path #=> String
     #   resp.backups[0].volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.backups[0].volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.backups[0].volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.backups[0].volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.backups[0].volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.backups[0].volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.backups[0].volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.backups[0].volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -4779,7 +4813,8 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.file_systems[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -4799,6 +4834,7 @@ module Aws::FSx
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_systems[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -4842,10 +4878,10 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Returns the description of specific Amazon FSx snapshots, if a
-    # `SnapshotIds` value is provided. Otherwise, this operation returns all
-    # snapshots owned by your Amazon Web Services account in the Amazon Web
-    # Services Region of the endpoint that you're calling.
+    # Returns the description of specific Amazon FSx for OpenZFS snapshots,
+    # if a `SnapshotIds` value is provided. Otherwise, this operation
+    # returns all snapshots owned by your Amazon Web Services account in the
+    # Amazon Web Services Region of the endpoint that you're calling.
     #
     # When retrieving all snapshots, you can optionally specify the
     # `MaxResults` parameter to limit the number of snapshots in a response.
@@ -4918,6 +4954,7 @@ module Aws::FSx
     #   resp.snapshots[0].volume_id #=> String
     #   resp.snapshots[0].creation_time #=> Time
     #   resp.snapshots[0].lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshots[0].lifecycle_transition_reason.message #=> String
     #   resp.snapshots[0].tags #=> Array
     #   resp.snapshots[0].tags[0].key #=> String
     #   resp.snapshots[0].tags[0].value #=> String
@@ -5043,7 +5080,8 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.snapshots[0].administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -5323,6 +5361,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volumes[0].administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volumes[0].administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -5331,7 +5370,8 @@ module Aws::FSx
     #   resp.volumes[0].open_zfs_configuration.volume_path #=> String
     #   resp.volumes[0].open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.volumes[0].open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.volumes[0].open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volumes[0].open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.volumes[0].open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.volumes[0].open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.volumes[0].open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.volumes[0].open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -5625,7 +5665,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -5645,6 +5686,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -6258,7 +6300,8 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.file_system.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -6278,6 +6321,7 @@ module Aws::FSx
     #   resp.file_system.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.file_system.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.file_system.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -6320,7 +6364,7 @@ module Aws::FSx
       req.send_request(options)
     end
 
-    # Updates the name of a snapshot.
+    # Updates the name of an Amazon FSx for OpenZFS snapshot.
     #
     # @option params [String] :client_request_token
     #   (Optional) An idempotency token for resource creation, in a string of
@@ -6358,6 +6402,7 @@ module Aws::FSx
     #   resp.snapshot.volume_id #=> String
     #   resp.snapshot.creation_time #=> Time
     #   resp.snapshot.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.snapshot.lifecycle_transition_reason.message #=> String
     #   resp.snapshot.tags #=> Array
     #   resp.snapshot.tags[0].key #=> String
     #   resp.snapshot.tags[0].value #=> String
@@ -6483,7 +6528,8 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.volume_path #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.snapshot.administrative_actions[0].target_volume_values.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -6644,7 +6690,8 @@ module Aws::FSx
     #     open_zfs_configuration: {
     #       storage_capacity_reservation_gi_b: 1,
     #       storage_capacity_quota_gi_b: 1,
-    #       data_compression_type: "NONE", # accepts NONE, ZSTD
+    #       record_size_ki_b: 1,
+    #       data_compression_type: "NONE", # accepts NONE, ZSTD, LZ4
     #       nfs_exports: [
     #         {
     #           client_configurations: [ # required
@@ -6792,6 +6839,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_snapshot_values.volume_id #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle #=> String, one of "PENDING", "CREATING", "DELETING", "AVAILABLE"
+    #   resp.volume.administrative_actions[0].target_snapshot_values.lifecycle_transition_reason.message #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags #=> Array
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].key #=> String
     #   resp.volume.administrative_actions[0].target_snapshot_values.tags[0].value #=> String
@@ -6800,7 +6848,8 @@ module Aws::FSx
     #   resp.volume.open_zfs_configuration.volume_path #=> String
     #   resp.volume.open_zfs_configuration.storage_capacity_reservation_gi_b #=> Integer
     #   resp.volume.open_zfs_configuration.storage_capacity_quota_gi_b #=> Integer
-    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD"
+    #   resp.volume.open_zfs_configuration.record_size_ki_b #=> Integer
+    #   resp.volume.open_zfs_configuration.data_compression_type #=> String, one of "NONE", "ZSTD", "LZ4"
     #   resp.volume.open_zfs_configuration.copy_tags_to_snapshots #=> Boolean
     #   resp.volume.open_zfs_configuration.origin_snapshot.snapshot_arn #=> String
     #   resp.volume.open_zfs_configuration.origin_snapshot.copy_strategy #=> String, one of "CLONE", "FULL_COPY"
@@ -6837,7 +6886,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

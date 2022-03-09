@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Appflow
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -856,6 +858,14 @@ module Aws::Appflow
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
     #             error_handling_config: {
@@ -1533,6 +1543,10 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_prefix #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.zendesk.write_operation_type #=> String, one of "INSERT", "UPSERT", "UPDATE", "DELETE"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.object #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.fail_on_first_destination_error #=> Boolean
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.bucket_prefix #=> String
+    #   resp.destination_flow_config_list[0].destination_connector_properties.marketo.error_handling_config.bucket_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.entity_name #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.error_handling_config.fail_on_first_destination_error #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.custom_connector.error_handling_config.bucket_prefix #=> String
@@ -2514,6 +2528,14 @@ module Aws::Appflow
     #             },
     #             write_operation_type: "INSERT", # accepts INSERT, UPSERT, UPDATE, DELETE
     #           },
+    #           marketo: {
+    #             object: "Object", # required
+    #             error_handling_config: {
+    #               fail_on_first_destination_error: false,
+    #               bucket_prefix: "BucketPrefix",
+    #               bucket_name: "BucketName",
+    #             },
+    #           },
     #           custom_connector: {
     #             entity_name: "EntityName", # required
     #             error_handling_config: {
@@ -2600,7 +2622,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

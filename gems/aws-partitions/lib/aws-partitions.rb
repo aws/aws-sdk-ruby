@@ -379,6 +379,7 @@ module Aws
             'Kafka' => 'kafka',
             'KafkaConnect' => 'kafkaconnect',
             'Kendra' => 'kendra',
+            'Keyspaces' => 'cassandra',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',
             'KinesisAnalyticsV2' => 'kinesisanalytics',

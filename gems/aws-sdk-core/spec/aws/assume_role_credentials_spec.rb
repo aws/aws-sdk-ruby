@@ -53,7 +53,7 @@ module Aws
     it 'accepts client options' do
       client = STS::Client.new(stub_responses: true)
       expect(STS::Client).to receive(:new).
-        with(region: 'region-name').
+        with({region: 'region-name'}).
         and_return(client)
       creds = AssumeRoleCredentials.new(
         region: 'region-name',
@@ -64,13 +64,13 @@ module Aws
     end
 
     it 'assumes a role using the client' do
-      expect(client).to receive(:assume_role).with(
+      expect(client).to receive(:assume_role).with({
         role_arn: 'arn',
         role_session_name: 'session',
         policy: 'policy',
         duration_seconds: 100,
         external_id: 'id'
-      ).and_return(resp)
+      }).and_return(resp)
       AssumeRoleCredentials.new(
         client: client,
         role_arn: 'arn',
@@ -111,6 +111,22 @@ module Aws
       c.credentials
       c.credentials
       c.credentials
+    end
+
+    it 'calls before_refresh with self' do
+      before_refresh_called = false
+      before_refresh = proc do |cred_provider|
+        before_refresh_called = true
+        expect(cred_provider).to be_instance_of(AssumeRoleCredentials)
+      end
+
+      AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session',
+        before_refresh: before_refresh
+      )
+
+      expect(before_refresh_called).to be(true)
     end
 
   end

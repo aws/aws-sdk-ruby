@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.14.0 (2022-02-28)
+------------------
+
+* Feature - Add new APIs for managing Users and Permission Groups.
+
+1.13.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.12.0 (2022-02-03)
 ------------------
 

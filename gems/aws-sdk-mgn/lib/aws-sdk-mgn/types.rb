@@ -105,11 +105,11 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   A conflict occured when prompting for the Resource ID.
+    #   A conflict occurred when prompting for the Resource ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   A conflict occured when prompting for resource type.
+    #   A conflict occurred when prompting for resource type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ConflictException AWS API Documentation
@@ -131,7 +131,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1, # required
     #         create_public_ip: false, # required
     #         data_plane_routing: "PRIVATE_IP", # required, accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # required, accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # required, accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_server_instance_type: "EC2InstanceType", # required
@@ -167,17 +167,17 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] default_large_staging_disk_type
-    #   Request to configure the Staging Disk EBS volume type to "gp2"
+    #   Request to configure the default large staging disk EBS volume type
     #   during Replication Settings template creation.
     #   @return [String]
     #
     # @!attribute [rw] ebs_encryption
-    #   Request to configure EBS enryption during Replication Settings
+    #   Request to configure EBS encryption during Replication Settings
     #   template creation.
     #   @return [String]
     #
     # @!attribute [rw] ebs_encryption_key_arn
-    #   Request to configure an EBS enryption key during Replication
+    #   Request to configure an EBS encryption key during Replication
     #   Settings template creation.
     #   @return [String]
     #
@@ -187,8 +187,8 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] replication_servers_security_groups_i_ds
-    #   Request to configure the Replication Server Secuirity group ID
-    #   during Replication Settings template creation.
+    #   Request to configure the Replication Server Security group ID during
+    #   Replication Settings template creation.
     #   @return [Array<String>]
     #
     # @!attribute [rw] staging_area_subnet_id
@@ -197,7 +197,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] staging_area_tags
-    #   Request to configure Staiging Area tags during Replication Settings
+    #   Request to configure Staging Area tags during Replication Settings
     #   template creation.
     #   @return [Hash<String,String>]
     #
@@ -269,7 +269,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] lag_duration
-    #   Request to query data replication lag durating.
+    #   Request to query data replication lag duration.
     #   @return [String]
     #
     # @!attribute [rw] last_snapshot_date_time
@@ -352,7 +352,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Data replication intiation step.
+    # Data replication initiation step.
     #
     # @!attribute [rw] name
     #   Request to query data initiation step name.
@@ -526,11 +526,11 @@ module Aws::Mgn
     #   @return [Types::DescribeJobsRequestFilters]
     #
     # @!attribute [rw] max_results
-    #   Request to describe Job log by max results.
+    #   Request to describe job log items by max results.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Request to describe Job logby next token.
+    #   Request to describe job log items by next token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsRequest AWS API Documentation
@@ -563,7 +563,7 @@ module Aws::Mgn
     #   @return [Array<String>]
     #
     # @!attribute [rw] to_date
-    #   Request to describe Job log by last date.
+    #   Request to describe job log items by last date.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/DescribeJobsRequestFilters AWS API Documentation
@@ -825,7 +825,7 @@ module Aws::Mgn
     #       }
     #
     # @!attribute [rw] source_server_id
-    #   Request to finalize Cutover by Soure Server ID.
+    #   Request to finalize Cutover by Source Server ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/FinalizeCutoverRequest AWS API Documentation
@@ -863,7 +863,7 @@ module Aws::Mgn
     #       }
     #
     # @!attribute [rw] source_server_id
-    #   Request to get Replication Configuaration by Source Server ID.
+    #   Request to get Replication Configuration by Source Server ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/GetReplicationConfigurationRequest AWS API Documentation
@@ -970,7 +970,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags associated with spcific Job.
+    #   Tags associated with specific Job.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] type
@@ -1046,6 +1046,10 @@ module Aws::Mgn
       include Aws::Structure
     end
 
+    # @!attribute [rw] boot_mode
+    #   Launch configuration boot mode.
+    #   @return [String]
+    #
     # @!attribute [rw] copy_private_ip
     #   Copy Private IP during Launch Configuration.
     #   @return [Boolean]
@@ -1055,33 +1059,33 @@ module Aws::Mgn
     #   @return [Boolean]
     #
     # @!attribute [rw] ec2_launch_template_id
-    #   Configure EC2 lauch configuration template ID.
+    #   Launch configuration EC2 Launch template ID.
     #   @return [String]
     #
     # @!attribute [rw] launch_disposition
-    #   Configure launch dispostion for launch configuration.
+    #   Launch disposition for launch configuration.
     #   @return [String]
     #
     # @!attribute [rw] licensing
-    #   Configure launch configuration OS licensing.
+    #   Launch configuration OS licensing.
     #   @return [Types::Licensing]
     #
     # @!attribute [rw] name
-    #   Configure launch configuration name.
+    #   Launch configuration name.
     #   @return [String]
     #
     # @!attribute [rw] source_server_id
-    #   Configure launch configuration Source Server ID.
+    #   Launch configuration Source Server ID.
     #   @return [String]
     #
     # @!attribute [rw] target_instance_type_right_sizing_method
-    #   Configure launch configuration Target instance type right sizing
-    #   method.
+    #   Launch configuration Target instance type right sizing method.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchConfiguration AWS API Documentation
     #
     class LaunchConfiguration < Struct.new(
+      :boot_mode,
       :copy_private_ip,
       :copy_tags,
       :ec2_launch_template_id,
@@ -1094,18 +1098,18 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Configure launced instance.
+    # Launched instance.
     #
     # @!attribute [rw] ec2_instance_id
-    #   Configure launced instance EC2 ID.
+    #   Launched instance EC2 ID.
     #   @return [String]
     #
     # @!attribute [rw] first_boot
-    #   Configure launced instance first boot.
+    #   Launched instance first boot.
     #   @return [String]
     #
     # @!attribute [rw] job_id
-    #   Configure launced instance Job ID.
+    #   Launched instance Job ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/LaunchedInstance AWS API Documentation
@@ -1256,7 +1260,7 @@ module Aws::Mgn
     # Lifecycle last Test.
     #
     # @!attribute [rw] finalized
-    #   Lifecycle last Test finlized.
+    #   Lifecycle last Test finalized.
     #   @return [Types::LifeCycleLastTestFinalized]
     #
     # @!attribute [rw] initiated
@@ -1277,7 +1281,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Lifecycle last Test finlized.
+    # Lifecycle last Test finalized.
     #
     # @!attribute [rw] api_call_date_time
     #   Lifecycle Test failed API call date and time.
@@ -1523,7 +1527,8 @@ module Aws::Mgn
     #         device_name: "BoundedString",
     #         iops: 1,
     #         is_boot_disk: false,
-    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD
+    #         staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #         throughput: 1,
     #       }
     #
     # @!attribute [rw] device_name
@@ -1542,13 +1547,18 @@ module Aws::Mgn
     #   Replication Configuration replicated disk staging disk type.
     #   @return [String]
     #
+    # @!attribute [rw] throughput
+    #   Replication Configuration replicated disk throughput.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/ReplicationConfigurationReplicatedDisk AWS API Documentation
     #
     class ReplicationConfigurationReplicatedDisk < Struct.new(
       :device_name,
       :iops,
       :is_boot_disk,
-      :staging_disk_type)
+      :staging_disk_type,
+      :throughput)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1563,7 +1573,7 @@ module Aws::Mgn
     #   @return [Boolean]
     #
     # @!attribute [rw] bandwidth_throttling
-    #   Replication Configuration template bandwidth throtting.
+    #   Replication Configuration template bandwidth throttling.
     #   @return [Integer]
     #
     # @!attribute [rw] create_public_ip
@@ -1575,7 +1585,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] default_large_staging_disk_type
-    #   Replication Configuration template use dedault large Staging Disk
+    #   Replication Configuration template use default large Staging Disk
     #   type.
     #   @return [String]
     #
@@ -1588,7 +1598,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] replication_configuration_template_id
-    #   Replication Configuration template template ID.
+    #   Replication Configuration template ID.
     #   @return [String]
     #
     # @!attribute [rw] replication_server_instance_type
@@ -1697,7 +1707,7 @@ module Aws::Mgn
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   Exceeded the service quota resource Id.
+    #   Exceeded the service quota resource ID.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
@@ -2018,7 +2028,7 @@ module Aws::Mgn
       include Aws::Structure
     end
 
-    # Unitialized account exception.
+    # Uninitialized account exception.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -2064,6 +2074,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
+    #         boot_mode: "LEGACY_BIOS", # accepts LEGACY_BIOS, UEFI
     #         copy_private_ip: false,
     #         copy_tags: false,
     #         launch_disposition: "STOPPED", # accepts STOPPED, STARTED
@@ -2074,6 +2085,10 @@ module Aws::Mgn
     #         source_server_id: "SourceServerID", # required
     #         target_instance_type_right_sizing_method: "NONE", # accepts NONE, BASIC
     #       }
+    #
+    # @!attribute [rw] boot_mode
+    #   Update Launch configuration boot mode request.
+    #   @return [String]
     #
     # @!attribute [rw] copy_private_ip
     #   Update Launch configuration copy Private IP request.
@@ -2106,6 +2121,7 @@ module Aws::Mgn
     # @see http://docs.aws.amazon.com/goto/WebAPI/mgn-2020-02-26/UpdateLaunchConfigurationRequest AWS API Documentation
     #
     class UpdateLaunchConfigurationRequest < Struct.new(
+      :boot_mode,
       :copy_private_ip,
       :copy_tags,
       :launch_disposition,
@@ -2125,7 +2141,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         name: "SmallBoundedString",
@@ -2134,7 +2150,8 @@ module Aws::Mgn
     #             device_name: "BoundedString",
     #             iops: 1,
     #             is_boot_disk: false,
-    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD
+    #             staging_disk_type: "AUTO", # accepts AUTO, GP2, IO1, SC1, ST1, STANDARD, GP3, IO2
+    #             throughput: 1,
     #           },
     #         ],
     #         replication_server_instance_type: "EC2InstanceType",
@@ -2243,7 +2260,7 @@ module Aws::Mgn
     #         bandwidth_throttling: 1,
     #         create_public_ip: false,
     #         data_plane_routing: "PRIVATE_IP", # accepts PRIVATE_IP, PUBLIC_IP
-    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1
+    #         default_large_staging_disk_type: "GP2", # accepts GP2, ST1, GP3
     #         ebs_encryption: "DEFAULT", # accepts DEFAULT, CUSTOM
     #         ebs_encryption_key_arn: "ARN",
     #         replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required

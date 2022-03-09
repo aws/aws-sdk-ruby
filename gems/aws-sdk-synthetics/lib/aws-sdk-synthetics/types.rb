@@ -236,7 +236,7 @@ module Aws::Synthetics
     #         s3_key: "String",
     #         s3_version: "String",
     #         zip_file: "data",
-    #         handler: "String", # required
+    #         handler: "CodeHandler", # required
     #       }
     #
     # @!attribute [rw] s3_bucket
@@ -269,8 +269,13 @@ module Aws::Synthetics
     #
     # @!attribute [rw] handler
     #   The entry point to use for the source code when running the canary.
-    #   This value must end with the string `.handler`. The string is
-    #   limited to 29 characters or fewer.
+    #   For canaries that use the `syn-python-selenium-1.0` runtime or a
+    #   `syn-nodejs.puppeteer` runtime earlier than
+    #   `syn-nodejs.puppeteer-3.4`, the handler must be specified as `
+    #   fileName.handler`. For `syn-python-selenium-1.1`,
+    #   `syn-nodejs.puppeteer-3.4`, and later runtimes, the handler can be
+    #   specified as ` fileName.functionName `, or you can specify a folder
+    #   where canary scripts reside as ` folder/fileName.functionName `.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/CanaryCodeInput AWS API Documentation
@@ -678,7 +683,7 @@ module Aws::Synthetics
     #           s3_key: "String",
     #           s3_version: "String",
     #           zip_file: "data",
-    #           handler: "String", # required
+    #           handler: "CodeHandler", # required
     #         },
     #         artifact_s3_location: "String", # required
     #         execution_role_arn: "RoleArn", # required
@@ -1441,7 +1446,7 @@ module Aws::Synthetics
     #           s3_key: "String",
     #           s3_version: "String",
     #           zip_file: "data",
-    #           handler: "String", # required
+    #           handler: "CodeHandler", # required
     #         },
     #         execution_role_arn: "RoleArn",
     #         runtime_version: "String",

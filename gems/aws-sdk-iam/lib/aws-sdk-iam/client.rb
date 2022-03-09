@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::IAM
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -3991,9 +3993,9 @@ module Aws::IAM
     # Generates a report that includes details about when an IAM resource
     # (user, group, role, or policy) was last used in an attempt to access
     # Amazon Web Services services. Recent activity usually appears within
-    # four hours. IAM reports activity for the last 365 days, or less if
-    # your Region began supporting this feature within the last year. For
-    # more information, see [Regions where data is tracked][1].
+    # four hours. IAM reports activity for at least the last 400 days, or
+    # less if your Region began supporting this feature within the last
+    # year. For more information, see [Regions where data is tracked][1].
     #
     # The service last accessed data includes all attempts to access an
     # Amazon Web Services API, not just the successful ones. This includes
@@ -9107,8 +9109,8 @@ module Aws::IAM
     # <note markdown="1"> IAM resource-listing operations return a subset of the available
     # attributes for the resource. For example, this operation does not
     # return tags, even though they are an attribute of the returned object.
-    # To view all of the information for a virtual MFA device, see
-    # ListVirtualMFADevices.
+    # To view tag information for a virtual MFA device, see
+    # ListMFADeviceTags.
     #
     #  </note>
     #
@@ -11844,15 +11846,13 @@ module Aws::IAM
     # Updates the password policy settings for the Amazon Web Services
     # account.
     #
-    # <note markdown="1"> * This operation does not support partial updates. No parameters are
-    #   required, but if you do not specify a parameter, that parameter's
-    #   value reverts to its default value. See the **Request Parameters**
-    #   section for each parameter's default value. Also note that some
-    #   parameters do not allow the default parameter to be explicitly set.
-    #   Instead, to invoke the default value, do not include that parameter
-    #   when you invoke the operation.
-    #
-    # ^
+    # <note markdown="1"> This operation does not support partial updates. No parameters are
+    # required, but if you do not specify a parameter, that parameter's
+    # value reverts to its default value. See the **Request Parameters**
+    # section for each parameter's default value. Also note that some
+    # parameters do not allow the default parameter to be explicitly set.
+    # Instead, to invoke the default value, do not include that parameter
+    # when you invoke the operation.
     #
     #  </note>
     #
@@ -11906,8 +11906,8 @@ module Aws::IAM
     # @option params [Boolean] :allow_users_to_change_password
     #   Allows all IAM users in your account to use the Amazon Web Services
     #   Management Console to change their own passwords. For more
-    #   information, see [Letting IAM users change their own passwords][1] in
-    #   the *IAM User Guide*.
+    #   information, see [Permitting IAM users to change their own
+    #   passwords][1] in the *IAM User Guide*.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users in the
@@ -11916,7 +11916,7 @@ module Aws::IAM
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_enable-user-change.html
     #
     # @option params [Integer] :max_password_age
     #   The number of days that an IAM user password is valid.
@@ -11934,14 +11934,26 @@ module Aws::IAM
     #   prevented from reusing previous passwords.
     #
     # @option params [Boolean] :hard_expiry
-    #   Prevents IAM users from setting a new password after their password
-    #   has expired. The IAM user cannot be accessed until an administrator
-    #   resets the password.
+    #   Prevents IAM users who are accessing the account via the Amazon Web
+    #   Services Management Console from setting a new console password after
+    #   their password has expired. The IAM user cannot access the console
+    #   until an administrator resets the password.
     #
     #   If you do not specify a value for this parameter, then the operation
     #   uses the default value of `false`. The result is that IAM users can
     #   change their passwords after they expire and continue to sign in as
     #   the user.
+    #
+    #   <note markdown="1"> In the Amazon Web Services Management Console, the custom password
+    #   policy option **Allow users to change their own password** gives IAM
+    #   users permissions to `iam:ChangePassword` for only their user and to
+    #   the `iam:GetAccountPasswordPolicy` action. This option does not attach
+    #   a permissions policy to each user, rather the permissions are applied
+    #   at the account-level for all users by IAM. IAM users with
+    #   `iam:ChangePassword` permission and active access keys can reset their
+    #   own expired console password using the CLI or API.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -13213,7 +13225,7 @@ module Aws::IAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iam'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

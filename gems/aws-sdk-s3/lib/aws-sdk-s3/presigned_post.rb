@@ -98,7 +98,7 @@ module Aws
     # or call the associated method.
     #
     # ```ruby
-    # post = Aws::S3::PresignedPost.new(creds, region, bucket).
+    # post = Aws::S3::PresignedPost.new(creds, region, bucket)
     # post.content_type('text/plain')
     # ```
     #
@@ -182,6 +182,11 @@ module Aws
       #   the post policy.
       # @param [String] bucket_region Region of the target bucket.
       # @param [String] bucket_name Name of the target bucket.
+      # @option options [Boolean] :use_accelerate_endpoint (false) When `true`,
+      #   PresignedPost will attempt to use accelerated endpoint.
+      # @option options [String] :url See {PresignedPost#url}.
+      # @option options [Sting, Array<String>] :allow_any
+      #   See {PresignedPost#allow_any}.
       # @option options [Time] :signature_expiration Specify when the signature on
       #   the post will expire. Defaults to one hour from creation of the
       #   presigned post. May not exceed one week from creation time.
@@ -206,7 +211,7 @@ module Aws
       #   See {PresignedPost#content_encoding}.
       # @option options [String] :content_encoding_starts_with
       #   See {PresignedPost#content_encoding_starts_with}.
-      # @option options [String] :expires See {PresignedPost#expires}.
+      # @option options [Time] :expires See {PresignedPost#expires}.
       # @option options [String] :expires_starts_with
       #   See {PresignedPost#expires_starts_with}.
       # @option options [Range<Integer>] :content_length_range
@@ -233,6 +238,8 @@ module Aws
       #   See {PresignedPost#server_side_encryption_customer_algorithm}.
       # @option options [String] :server_side_encryption_customer_key
       #   See {PresignedPost#server_side_encryption_customer_key}.
+      # @option options [String] :server_side_encryption_customer_key_starts_with
+      #   See {PresignedPost#server_side_encryption_customer_key_starts_with}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
         @credentials = credentials.credentials
         @bucket_region = bucket_region

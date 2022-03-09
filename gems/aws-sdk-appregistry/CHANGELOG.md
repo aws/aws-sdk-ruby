@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-02-28)
+------------------
+
+* Feature - AppRegistry is deprecating Application and Attribute-Group Name update feature. In this release, we are marking the name attributes for Update APIs as deprecated to give a heads up to our customers.
+
+1.14.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2022-02-03)
 ------------------
 

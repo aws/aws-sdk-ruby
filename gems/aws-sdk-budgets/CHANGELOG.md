@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.48.0 (2022-02-18)
+------------------
+
+* Feature - This change introduces DescribeBudgetNotificationsForAccount API which returns budget notifications for the specified account
+
+1.47.0 (2022-02-16)
+------------------
+
+* Feature - Adds support for auto-adjusting budgets, a new budget method alongside fixed and planned. Auto-adjusting budgets introduces new metadata to configure a budget limit baseline using a historical lookback average or current period forecast.
+
 1.46.0 (2022-02-03)
 ------------------
 

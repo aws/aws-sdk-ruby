@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Glue
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -6868,6 +6870,7 @@ module Aws::Glue
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
+    #   resp.table.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTable AWS API Documentation
     #
@@ -6973,6 +6976,7 @@ module Aws::Glue
     #   resp.table_version.table.target_table.database_name #=> String
     #   resp.table_version.table.target_table.name #=> String
     #   resp.table_version.table.catalog_id #=> String
+    #   resp.table_version.table.version_id #=> String
     #   resp.table_version.version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTableVersion AWS API Documentation
@@ -7087,6 +7091,7 @@ module Aws::Glue
     #   resp.table_versions[0].table.target_table.database_name #=> String
     #   resp.table_versions[0].table.target_table.name #=> String
     #   resp.table_versions[0].table.catalog_id #=> String
+    #   resp.table_versions[0].table.version_id #=> String
     #   resp.table_versions[0].version_id #=> String
     #   resp.next_token #=> String
     #
@@ -7212,6 +7217,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
+    #   resp.table_list[0].version_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetTables AWS API Documentation
@@ -7664,6 +7670,7 @@ module Aws::Glue
     #   resp.table.target_table.database_name #=> String
     #   resp.table.target_table.name #=> String
     #   resp.table.catalog_id #=> String
+    #   resp.table.version_id #=> String
     #   resp.authorized_columns #=> Array
     #   resp.authorized_columns[0] #=> String
     #   resp.is_registered_with_lake_formation #=> Boolean
@@ -9437,6 +9444,7 @@ module Aws::Glue
     #   resp.table_list[0].target_table.database_name #=> String
     #   resp.table_list[0].target_table.name #=> String
     #   resp.table_list[0].catalog_id #=> String
+    #   resp.table_list[0].version_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SearchTables AWS API Documentation
     #
@@ -11227,6 +11235,8 @@ module Aws::Glue
     # @option params [String] :transaction_id
     #   The transaction ID at which to update the table contents.
     #
+    # @option params [String] :version_id
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -11317,6 +11327,7 @@ module Aws::Glue
     #     },
     #     skip_archive: false,
     #     transaction_id: "TransactionIdString",
+    #     version_id: "VersionString",
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateTable AWS API Documentation
@@ -11526,7 +11537,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.105.0'
+      context[:gem_version] = '1.107.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

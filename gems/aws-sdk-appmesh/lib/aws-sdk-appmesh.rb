@@ -48,6 +48,6 @@ require_relative 'aws-sdk-appmesh/customizations'
 # @!group service
 module Aws::AppMesh
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end

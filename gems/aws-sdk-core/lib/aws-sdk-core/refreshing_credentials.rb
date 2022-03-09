@@ -22,6 +22,9 @@ module Aws
 
     def initialize(options = {})
       @mutex = Mutex.new
+      @before_refresh = options.delete(:before_refresh) if Hash === options
+
+      @before_refresh.call(self) if @before_refresh
       refresh
     end
 
@@ -40,7 +43,11 @@ module Aws
     # Refresh credentials.
     # @return [void]
     def refresh!
-      @mutex.synchronize { refresh }
+      @mutex.synchronize do
+        @before_refresh.call(self) if @before_refresh
+
+        refresh
+      end
     end
 
     private
@@ -55,13 +62,19 @@ module Aws
       # See issue: https://github.com/aws/aws-sdk-ruby/issues/2641 for more info.
       if near_expiration?(SYNC_EXPIRATION_LENGTH)
         @mutex.synchronize do
-          refresh if near_expiration?(SYNC_EXPIRATION_LENGTH)
+          if near_expiration?(SYNC_EXPIRATION_LENGTH)
+            @before_refresh.call(self) if @before_refresh
+            refresh
+          end
         end
       elsif @async_refresh && near_expiration?(ASYNC_EXPIRATION_LENGTH)
         unless @mutex.locked?
           Thread.new do
             @mutex.synchronize do
-              refresh if near_expiration?(ASYNC_EXPIRATION_LENGTH)
+              if near_expiration?(ASYNC_EXPIRATION_LENGTH)
+                @before_refresh.call(self) if @before_refresh
+                refresh
+              end
             end
           end
         end

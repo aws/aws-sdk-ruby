@@ -1364,6 +1364,7 @@ module Aws::Lightsail
     DeleteInstanceSnapshotResult.struct_class = Types::DeleteInstanceSnapshotResult
 
     DeleteKeyPairRequest.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "keyPairName"))
+    DeleteKeyPairRequest.add_member(:expected_fingerprint, Shapes::ShapeRef.new(shape: string, location_name: "expectedFingerprint"))
     DeleteKeyPairRequest.struct_class = Types::DeleteKeyPairRequest
 
     DeleteKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
@@ -1544,6 +1545,7 @@ module Aws::Lightsail
 
     DownloadDefaultKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
     DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    DownloadDefaultKeyPairResult.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     DownloadDefaultKeyPairResult.struct_class = Types::DownloadDefaultKeyPairResult
 
     EnableAddOnRequest.add_member(:resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "resourceName"))
@@ -1877,6 +1879,7 @@ module Aws::Lightsail
     GetKeyPairResult.struct_class = Types::GetKeyPairResult
 
     GetKeyPairsRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetKeyPairsRequest.add_member(:include_default_key_pair, Shapes::ShapeRef.new(shape: boolean, location_name: "includeDefaultKeyPair"))
     GetKeyPairsRequest.struct_class = Types::GetKeyPairsRequest
 
     GetKeyPairsResult.add_member(:key_pairs, Shapes::ShapeRef.new(shape: KeyPairList, location_name: "keyPairs"))

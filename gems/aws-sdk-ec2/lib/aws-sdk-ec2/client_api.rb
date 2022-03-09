@@ -4017,7 +4017,7 @@ module Aws::EC2
     CreateIpamPoolRequest.add_member(:locale, Shapes::ShapeRef.new(shape: String, location_name: "Locale"))
     CreateIpamPoolRequest.add_member(:source_ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, location_name: "SourceIpamPoolId"))
     CreateIpamPoolRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-    CreateIpamPoolRequest.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "AddressFamily"))
+    CreateIpamPoolRequest.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, required: true, location_name: "AddressFamily"))
     CreateIpamPoolRequest.add_member(:auto_import, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoImport"))
     CreateIpamPoolRequest.add_member(:publicly_advertisable, Shapes::ShapeRef.new(shape: Boolean, location_name: "PubliclyAdvertisable"))
     CreateIpamPoolRequest.add_member(:allocation_min_netmask_length, Shapes::ShapeRef.new(shape: IpamNetmaskLength, location_name: "AllocationMinNetmaskLength"))
@@ -8029,6 +8029,7 @@ module Aws::EC2
     ImageAttribute.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "ramdisk"))
     ImageAttribute.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "sriovNetSupport"))
     ImageAttribute.add_member(:boot_mode, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "bootMode"))
+    ImageAttribute.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "lastLaunchedTime"))
     ImageAttribute.struct_class = Types::ImageAttribute
 
     ImageDiskContainer.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))

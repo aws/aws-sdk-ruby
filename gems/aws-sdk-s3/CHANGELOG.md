@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2022-02-24)
+------------------
+
+* Feature - This release adds support for new integrity checking capabilities in Amazon S3. You can choose from four supported checksum algorithms for data integrity checking on your upload and download requests. In addition, AWS SDK can automatically calculate a checksum as it streams data into S3
+
 1.112.0 (2022-02-03)
 ------------------
 

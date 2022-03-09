@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-02-25)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
+1.73.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2022-02-03)
 ------------------
 

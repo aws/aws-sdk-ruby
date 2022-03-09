@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-03-04)
+------------------
+
+* Feature - Add waiters for server online and offline.
+
+1.49.0 (2022-02-24)
+------------------
+
+* Feature - Support automatic pagination when listing AWS Transfer Family resources.
+
+1.48.0 (2022-02-23)
+------------------
+
+* Feature - The file input selection feature provides the ability to use either the originally uploaded file or the output file from the previous workflow step, enabling customers to make multiple copies of the original file while keeping the source file intact for file archival.
+
+1.47.0 (2022-02-18)
+------------------
+
+* Feature - Properties for Transfer Family used with SFTP, FTP, and FTPS protocols. Display Banners are bodies of text that can be displayed before and/or after a user authenticates onto a server using one of the previously mentioned protocols.
+
 1.46.0 (2022-02-03)
 ------------------
 

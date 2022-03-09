@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::ECS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -519,7 +521,7 @@ module Aws::ECS
     #
     # @option params [Array<Types::ClusterSetting>] :settings
     #   The setting to use when creating a cluster. This parameter is used to
-    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   turn on CloudWatch Container Insights for a cluster. If this value is
     #   specified, it overrides the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
@@ -688,8 +690,7 @@ module Aws::ECS
     # Tasks for services that don't use a load balancer are considered
     # healthy if they're in the `RUNNING` state. Tasks for services that
     # use a load balancer are considered healthy if they're in the
-    # `RUNNING` state and the container instance that they're hosted on is
-    # reported as healthy by the load balancer.
+    # `RUNNING` state and are reported as healthy by the load balancer.
     #
     # There are two service scheduler strategies available:
     #
@@ -842,11 +843,8 @@ module Aws::ECS
     #   listener that you can use to perform validation tests with Lambda
     #   functions before routing production traffic to it.
     #
-    #   After you create a service using the `ECS` deployment controller, the
-    #   load balancer name or target group ARN, container name, and container
-    #   port that's specified in the service definition are immutable. If you
-    #   use the `CODE_DEPLOY` deployment controller, these values can be
-    #   changed when updating the service.
+    #   If you use the `CODE_DEPLOY` deployment controller, these values can
+    #   be changed when updating the service.
     #
     #   For Application Load Balancers and Network Load Balancers, this object
     #   must contain the load balancer target group ARN, the container name,
@@ -1018,12 +1016,20 @@ module Aws::ECS
     #   defined and you don't specify a health check grace period value, the
     #   default value of `0` is used.
     #
+    #   If you do not use an Elastic Load Balancing, we recomend that you use
+    #   the `startPeriod` in the task definition healtch check parameters. For
+    #   more information, see [Health check][1].
+    #
     #   If your service's tasks take a while to start and respond to Elastic
     #   Load Balancing health checks, you can specify a health check grace
     #   period of up to 2,147,483,647 seconds (about 69 years). During that
     #   time, the Amazon ECS service scheduler ignores health check status.
     #   This grace period can prevent the service scheduler from marking tasks
     #   as unhealthy and stopping them before they have time to come up.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html
     #
     # @option params [String] :scheduling_strategy
     #   The scheduling strategy to use for the service. For more information,
@@ -1093,7 +1099,7 @@ module Aws::ECS
     #     your tags per resource limit.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the tasks
+    #   Specifies whether to turn on Amazon ECS managed tags for the tasks
     #   within the service. For more information, see [Tagging Your Amazon ECS
     #   Resources][1] in the *Amazon Elastic Container Service Developer
     #   Guide*.
@@ -1310,7 +1316,7 @@ module Aws::ECS
     #       },
     #     ],
     #     enable_ecs_managed_tags: false,
-    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
     #     enable_execute_command: false,
     #   })
     #
@@ -1437,7 +1443,7 @@ module Aws::ECS
     #   resp.service.tags[0].value #=> String
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
-    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateService AWS API Documentation
@@ -2160,7 +2166,7 @@ module Aws::ECS
     #   resp.service.tags[0].value #=> String
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
-    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeleteService AWS API Documentation
@@ -3211,7 +3217,7 @@ module Aws::ECS
     #   resp.services[0].tags[0].value #=> String
     #   resp.services[0].created_by #=> String
     #   resp.services[0].enable_ecs_managed_tags #=> Boolean
-    #   resp.services[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.services[0].propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.services[0].enable_execute_command #=> Boolean
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
@@ -4837,8 +4843,8 @@ module Aws::ECS
     # opt-in and opt-out account setting must be set for each Amazon ECS
     # resource separately. The ARN and resource ID format of a resource is
     # defined by the opt-in status of the IAM user or role that created the
-    # resource. You must enable this setting to use Amazon ECS features such
-    # as resource tagging.
+    # resource. You must turn on this setting to use Amazon ECS features
+    # such as resource tagging.
     #
     # When `awsvpcTrunking` is specified, the elastic network interface
     # (ENI) limit for any new container instances that support the feature
@@ -5692,7 +5698,7 @@ module Aws::ECS
     #
     #   For tasks hosted on Amazon EC2 instances, the container instances
     #   require at least version `1.26.0` of the container agent and at least
-    #   version `1.26.0-1` of the `ecs-init` package to enable a proxy
+    #   version `1.26.0-1` of the `ecs-init` package to use a proxy
     #   configuration. If your container instances are launched from the
     #   Amazon ECS-optimized AMI version `20190301` or later, then they
     #   contain the required versions of the container agent and `ecs-init`.
@@ -6265,7 +6271,7 @@ module Aws::ECS
     #   cluster. You can specify up to 10 tasks for each call.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   Specifies whether to use Amazon ECS managed tags for the task. For
     #   more information, see [Tagging Your Amazon ECS Resources][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -6274,7 +6280,7 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [Boolean] :enable_execute_command
-    #   Determines whether to enable the execute command functionality for the
+    #   Determines whether to use the execute command functionality for the
     #   containers in this task. If `true`, this enables execute command
     #   functionality on all containers in the task.
     #
@@ -6549,7 +6555,7 @@ module Aws::ECS
     #       },
     #     ],
     #     platform_version: "String",
-    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
     #     reference_id: "String",
     #     started_by: "String",
     #     tags: [
@@ -6702,7 +6708,7 @@ module Aws::ECS
     #   to 10 container instances.
     #
     # @option params [Boolean] :enable_ecs_managed_tags
-    #   Specifies whether to enable Amazon ECS managed tags for the task. For
+    #   Specifies whether to use Amazon ECS managed tags for the task. For
     #   more information, see [Tagging Your Amazon ECS Resources][1] in the
     #   *Amazon Elastic Container Service Developer Guide*.
     #
@@ -6857,7 +6863,7 @@ module Aws::ECS
     #         size_in_gi_b: 1, # required
     #       },
     #     },
-    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
     #     reference_id: "String",
     #     started_by: "String",
     #     tags: [
@@ -7638,7 +7644,7 @@ module Aws::ECS
     #
     # @option params [required, Array<Types::ClusterSetting>] :settings
     #   The setting to use by default for a cluster. This parameter is used to
-    #   enable CloudWatch Container Insights for a cluster. If this value is
+    #   turn on CloudWatch Container Insights for a cluster. If this value is
     #   specified, it overrides the `containerInsights` value set with
     #   PutAccountSetting or PutAccountSettingDefault.
     #
@@ -7851,8 +7857,7 @@ module Aws::ECS
     #   services that do not use a load balancer are considered healthy if
     #   they're in the `RUNNING` state. Tasks for services that use a load
     #   balancer are considered healthy if they're in the `RUNNING` state
-    #   and the container instance they're hosted on is reported as healthy
-    #   by the load balancer.
+    #   and are reported as healthy by the load balancer..
     #
     # * The `maximumPercent` parameter represents an upper limit on the
     #   number of running tasks during task replacement. You can use this to
@@ -7980,24 +7985,28 @@ module Aws::ECS
     #
     # Modifies the parameters of a service.
     #
-    # For services using the rolling update (`ECS`) deployment controller,
-    # the desired count, deployment configuration, network configuration,
-    # task placement constraints and strategies, or task definition used can
-    # be updated.
+    # For services using the rolling update (`ECS`) you can update the
+    # desired count, the deployment configuration, the network
+    # configuration, load balancers, service registries, enable ECS managed
+    # tags option, propagate tags option, task placement constraints and
+    # strategies, and the task definition. When you update any of these
+    # parameters, Amazon ECS starts new tasks with the new configuration.
     #
     # For services using the blue/green (`CODE_DEPLOY`) deployment
     # controller, only the desired count, deployment configuration, task
-    # placement constraints and strategies, and health check grace period
-    # can be updated using this API. If the network configuration, platform
-    # version, or task definition need to be updated, a new CodeDeploy
-    # deployment is created. For more information, see [CreateDeployment][2]
-    # in the *CodeDeploy API Reference*.
+    # placement constraints and strategies, enable ECS managed tags option,
+    # and propagate tags can be updated using this API. If the network
+    # configuration, platform version, task definition, or load balancer
+    # need to be updated, create a new CodeDeploy deployment. For more
+    # information, see [CreateDeployment][2] in the *CodeDeploy API
+    # Reference*.
     #
     # For services using an external deployment controller, you can update
-    # only the desired count, task placement constraints and strategies, and
-    # health check grace period using this API. If the launch type, load
+    # only the desired count, task placement constraints and strategies,
+    # health check grace period, enable ECS managed tags option, and
+    # propagate tags option, using this API. If the launch type, load
     # balancer, network configuration, platform version, or task definition
-    # need to be updated, create a new task set. For more information, see
+    # need to be updated, create a new task set For more information, see
     # CreateTaskSet.
     #
     # You can add to or subtract from the number of instantiations of a task
@@ -8033,8 +8042,7 @@ module Aws::ECS
     #   services that don't use a load balancer are considered healthy if
     #   they're in the `RUNNING` state. Tasks for services that use a load
     #   balancer are considered healthy if they're in the `RUNNING` state
-    #   and the container instance they're hosted on is reported as healthy
-    #   by the load balancer.
+    #   and are reported as healthy by the load balancer.
     #
     # * The `maximumPercent` parameter represents an upper limit on the
     #   number of running tasks during a deployment. You can use it to
@@ -8086,10 +8094,25 @@ module Aws::ECS
     #   Zone (based on the previous steps), favoring container instances
     #   with the largest number of running tasks for this service.
     #
+    # <note markdown="1"> You must have a service-linked role when you update any of the
+    # following service properties. If you specified a custom IAM role when
+    # you created the service, Amazon ECS automatically replaces the
+    # [roleARN][3] associated with the service with the ARN of your
+    # service-linked role. For more information, see [Service-linked
+    # roles][4] in the *Amazon Elastic Container Service Developer Guide*.
+    #
+    #  * `loadBalancers,`
+    #
+    # * `serviceRegistries`
+    #
+    #  </note>
+    #
     #
     #
     # [1]: https://aws.amazon.com/service-terms
     # [2]: https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html
+    # [3]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_Service.html#ECS-Type-Service-roleArn
+    # [4]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html
     #
     # @option params [String] :cluster
     #   The short name or full Amazon Resource Name (ARN) of the cluster that
@@ -8206,6 +8229,57 @@ module Aws::ECS
     #   If you do not want to override the value that was set when the service
     #   was created, you can set this to `null` when performing this action.
     #
+    # @option params [Boolean] :enable_ecs_managed_tags
+    #   Determines whether to turn on Amazon ECS managed tags for the tasks in
+    #   the service. For more information, see [Tagging Your Amazon ECS
+    #   Resources][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
+    #   Only tasks launched after the update will reflect the update. To
+    #   update the tags on all tasks, set `forceNewDeployment` to `true`, so
+    #   that Amazon ECS starts new tasks with the updated tags.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
+    #
+    # @option params [Array<Types::LoadBalancer>] :load_balancers
+    #   A list of Elastic Load Balancing load balancer objects. It contains
+    #   the load balancer name, the container name, and the container port to
+    #   access from the load balancer. The container name is as it appears in
+    #   a container definition.
+    #
+    #   When you add, update, or remove a load balancer configuration, Amazon
+    #   ECS starts new tasks with the updated Elastic Load Balancing
+    #   configuration, and then stops the old tasks when the new tasks are
+    #   running.
+    #
+    #   You can remove existing `loadBalancers` by passing an empty list.
+    #
+    # @option params [String] :propagate_tags
+    #   Determines whether to propagate the tags from the task definition or
+    #   the service to the task. If no value is specified, the tags aren't
+    #   propagated.
+    #
+    #   Only tasks launched after the update will reflect the update. To
+    #   update the tags on all tasks, set `forceNewDeployment` to `true`, so
+    #   that Amazon ECS starts new tasks with the updated tags.
+    #
+    # @option params [Array<Types::ServiceRegistry>] :service_registries
+    #   The details for the service discovery registries to assign to this
+    #   service. For more information, see [Service Discovery][1].
+    #
+    #   When you add, update, or remove the service registries configuration,
+    #   Amazon ECS starts new tasks with the updated service registries
+    #   configuration, and then stops the old tasks when the new tasks are
+    #   running.
+    #
+    #   You can remove existing `serviceRegistries` by passing an empty list.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
+    #
     # @return [Types::UpdateServiceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServiceResponse#service #service} => Types::Service
@@ -8282,6 +8356,24 @@ module Aws::ECS
     #     force_new_deployment: false,
     #     health_check_grace_period_seconds: 1,
     #     enable_execute_command: false,
+    #     enable_ecs_managed_tags: false,
+    #     load_balancers: [
+    #       {
+    #         target_group_arn: "String",
+    #         load_balancer_name: "String",
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
+    #     propagate_tags: "TASK_DEFINITION", # accepts TASK_DEFINITION, SERVICE, NONE
+    #     service_registries: [
+    #       {
+    #         registry_arn: "String",
+    #         port: 1,
+    #         container_name: "String",
+    #         container_port: 1,
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -8407,7 +8499,7 @@ module Aws::ECS
     #   resp.service.tags[0].value #=> String
     #   resp.service.created_by #=> String
     #   resp.service.enable_ecs_managed_tags #=> Boolean
-    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE"
+    #   resp.service.propagate_tags #=> String, one of "TASK_DEFINITION", "SERVICE", "NONE"
     #   resp.service.enable_execute_command #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateService AWS API Documentation
@@ -8616,7 +8708,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

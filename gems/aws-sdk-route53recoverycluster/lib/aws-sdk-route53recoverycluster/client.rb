@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Route53RecoveryCluster
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -361,22 +363,39 @@ module Aws::Route53RecoveryCluster
 
     # Get the state for a routing control. A routing control is a simple
     # on/off switch that you can use to route traffic to cells. When the
-    # state is On, traffic flows to a cell. When it's off, traffic does not
+    # state is On, traffic flows to a cell. When it's Off, traffic does not
     # flow.
     #
-    # Before you can create a routing control, you first must create a
-    # cluster to host the control. For more information, see
-    # [CreateCluster][1]. Access one of the endpoints for the cluster to get
-    # or update the routing control state to redirect traffic.
+    # Before you can create a routing control, you must first create a
+    # cluster to host the control in a control panel. For more information,
+    # see [ Create routing control structures][1] in the Amazon Route 53
+    # Application Recovery Controller Developer Guide. Then you access one
+    # of the endpoints for the cluster to get or update the routing control
+    # state to redirect traffic.
     #
-    # For more information about working with routing controls, see [Routing
-    # control][2] in the Route 53 Application Recovery Controller Developer
-    # Guide.
+    # *You must specify Regional endpoints when you work with API cluster
+    # operations to get or update routing control states in Application
+    # Recovery Controller.*
+    #
+    # To see a code example for getting a routing control state, including
+    # accessing Regional cluster endpoints in sequence, see [API
+    # examples][2] in the Amazon Route 53 Application Recovery Controller
+    # Developer Guide.
+    #
+    # Learn more about working with routing controls in the following topics
+    # in the Amazon Route 53 Application Recovery Controller Developer
+    # Guide:
+    #
+    # * [ Viewing and updating routing control states][3]
+    #
+    # * [Working with routing controls overall][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/recovery-cluster/latest/api/cluster.html
-    # [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html
+    # [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html
+    # [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html
+    # [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
     #
     # @option params [required, String] :routing_control_arn
     #   The Amazon Resource Number (ARN) for the routing control that you want
@@ -409,15 +428,44 @@ module Aws::Route53RecoveryCluster
 
     # Set the state of the routing control to reroute traffic. You can set
     # the value to be On or Off. When the state is On, traffic flows to a
-    # cell. When it's off, traffic does not flow.
+    # cell. When it's Off, traffic does not flow.
     #
-    # For more information about working with routing controls, see [Routing
-    # control][1] in the Route 53 Application Recovery Controller Developer
-    # Guide.
+    # With Application Recovery Controller, you can add safety rules for
+    # routing controls, which are safeguards for routing control state
+    # updates that help prevent unexpected outcomes, like fail open traffic
+    # routing. However, there are scenarios when you might want to bypass
+    # the routing control safeguards that are enforced with safety rules
+    # that you've configured. For example, you might want to fail over
+    # quickly for disaster recovery, and one or more safety rules might be
+    # unexpectedly preventing you from updating a routing control state to
+    # reroute traffic. In a "break glass" scenario like this, you can
+    # override one or more safety rules to change a routing control state
+    # and fail over your application.
+    #
+    # The `SafetyRulesToOverride` property enables you override one or more
+    # safety rules and update routing control states. For more information,
+    # see [ Override safety rules to reroute traffic][1] in the Amazon Route
+    # 53 Application Recovery Controller Developer Guide.
+    #
+    # *You must specify Regional endpoints when you work with API cluster
+    # operations to get or update routing control states in Application
+    # Recovery Controller.*
+    #
+    # To see a code example for getting a routing control state, including
+    # accessing Regional cluster endpoints in sequence, see [API
+    # examples][2] in the Amazon Route 53 Application Recovery Controller
+    # Developer Guide.
+    #
+    # * [ Viewing and updating routing control states][3]
+    #
+    # * [Working with routing controls overall][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
+    # [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html
+    # [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html
+    # [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
     #
     # @option params [required, String] :routing_control_arn
     #   The Amazon Resource Number (ARN) for the routing control that you want
@@ -427,6 +475,20 @@ module Aws::Route53RecoveryCluster
     #   The state of the routing control. You can set the value to be On or
     #   Off.
     #
+    # @option params [Array<String>] :safety_rules_to_override
+    #   The Amazon Resource Numbers (ARNs) for the safety rules that you want
+    #   to override when you're updating the state of a routing control. You
+    #   can override one safety rule or multiple safety rules by including one
+    #   or more ARNs, separated by commas.
+    #
+    #   For more information, see [ Override safety rules to reroute
+    #   traffic][1] in the Amazon Route 53 Application Recovery Controller
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -434,6 +496,7 @@ module Aws::Route53RecoveryCluster
     #   resp = client.update_routing_control_state({
     #     routing_control_arn: "Arn", # required
     #     routing_control_state: "On", # required, accepts On, Off
+    #     safety_rules_to_override: ["Arn"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/UpdateRoutingControlState AWS API Documentation
@@ -447,18 +510,61 @@ module Aws::Route53RecoveryCluster
 
     # Set multiple routing control states. You can set the value for each
     # state to be On or Off. When the state is On, traffic flows to a cell.
-    # When it's off, traffic does not flow.
+    # When it's Off, traffic does not flow.
     #
-    # For more information about working with routing controls, see [Routing
-    # control][1] in the Route 53 Application Recovery Controller Developer
-    # Guide.
+    # With Application Recovery Controller, you can add safety rules for
+    # routing controls, which are safeguards for routing control state
+    # updates that help prevent unexpected outcomes, like fail open traffic
+    # routing. However, there are scenarios when you might want to bypass
+    # the routing control safeguards that are enforced with safety rules
+    # that you've configured. For example, you might want to fail over
+    # quickly for disaster recovery, and one or more safety rules might be
+    # unexpectedly preventing you from updating a routing control state to
+    # reroute traffic. In a "break glass" scenario like this, you can
+    # override one or more safety rules to change a routing control state
+    # and fail over your application.
+    #
+    # The `SafetyRulesToOverride` property enables you override one or more
+    # safety rules and update routing control states. For more information,
+    # see [ Override safety rules to reroute traffic][1] in the Amazon Route
+    # 53 Application Recovery Controller Developer Guide.
+    #
+    # *You must specify Regional endpoints when you work with API cluster
+    # operations to get or update routing control states in Application
+    # Recovery Controller.*
+    #
+    # To see a code example for getting a routing control state, including
+    # accessing Regional cluster endpoints in sequence, see [API
+    # examples][2] in the Amazon Route 53 Application Recovery Controller
+    # Developer Guide.
+    #
+    # * [ Viewing and updating routing control states][3]
+    #
+    # * [Working with routing controls overall][4]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
+    # [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
+    # [2]: https://docs.aws.amazon.com/r53recovery/latest/dg/service_code_examples_actions.html
+    # [3]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html
+    # [4]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
     #
     # @option params [required, Array<Types::UpdateRoutingControlStateEntry>] :update_routing_control_state_entries
     #   A set of routing control entries that you want to update.
+    #
+    # @option params [Array<String>] :safety_rules_to_override
+    #   The Amazon Resource Numbers (ARNs) for the safety rules that you want
+    #   to override when you're updating routing control states. You can
+    #   override one safety rule or multiple safety rules by including one or
+    #   more ARNs, separated by commas.
+    #
+    #   For more information, see [ Override safety rules to reroute
+    #   traffic][1] in the Amazon Route 53 Application Recovery Controller
+    #   Developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.override-safety-rule.html
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -471,6 +577,7 @@ module Aws::Route53RecoveryCluster
     #         routing_control_state: "On", # required, accepts On, Off
     #       },
     #     ],
+    #     safety_rules_to_override: ["Arn"],
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/UpdateRoutingControlStates AWS API Documentation
@@ -495,7 +602,7 @@ module Aws::Route53RecoveryCluster
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53recoverycluster'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

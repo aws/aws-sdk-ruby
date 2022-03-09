@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-02-24)
+------------------
+
+* Feature - SDK doc update for Route 53 to update some parameters with new information.
+
 1.61.0 (2022-02-03)
 ------------------
 

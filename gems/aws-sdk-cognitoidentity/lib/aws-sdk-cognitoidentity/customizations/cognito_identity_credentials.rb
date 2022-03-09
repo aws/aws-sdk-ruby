@@ -85,7 +85,6 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
-        @before_refresh = options.delete(:before_refresh)
         @async_refresh = false
 
         if !@identity_pool_id && !@identity_id

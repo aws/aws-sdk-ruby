@@ -341,7 +341,7 @@ module Aws::AppRegistry
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateApplicationRequest.add_member(:application, Shapes::ShapeRef.new(shape: ApplicationSpecifier, required: true, location: "uri", location_name: "application"))
-    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage"=>"Name update for application is deprecated."}))
     UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
@@ -349,7 +349,7 @@ module Aws::AppRegistry
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
 
     UpdateAttributeGroupRequest.add_member(:attribute_group, Shapes::ShapeRef.new(shape: AttributeGroupSpecifier, required: true, location: "uri", location_name: "attributeGroup"))
-    UpdateAttributeGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "name"))
+    UpdateAttributeGroupRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, deprecated: true, location_name: "name", metadata: {"deprecatedMessage"=>"Name update for attribute group is deprecated."}))
     UpdateAttributeGroupRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdateAttributeGroupRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "attributes"))
     UpdateAttributeGroupRequest.struct_class = Types::UpdateAttributeGroupRequest

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Macie
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -359,12 +361,12 @@ module Aws::Macie
 
     # @!group API Operations
 
-    # Associates a specified AWS account with Amazon Macie Classic as a
-    # member account.
+    # (Discontinued) Associates a specified Amazon Web Services account with
+    # Amazon Macie Classic as a member account.
     #
     # @option params [required, String] :member_account_id
-    #   The ID of the AWS account that you want to associate with Amazon Macie
-    #   Classic as a member account.
+    #   (Discontinued) The ID of the Amazon Web Services account that you want
+    #   to associate with Amazon Macie Classic as a member account.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -383,20 +385,20 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Associates specified S3 resources with Amazon Macie Classic for
-    # monitoring and data classification. If memberAccountId isn't
-    # specified, the action associates specified S3 resources with Macie
-    # Classic for the current Macie Classic administrator account. If
-    # memberAccountId is specified, the action associates specified S3
+    # (Discontinued) Associates specified S3 resources with Amazon Macie
+    # Classic for monitoring and data classification. If `memberAccountId`
+    # isn't specified, the action associates specified S3 resources with
+    # Macie Classic for the current Macie Classic administrator account. If
+    # `memberAccountId` is specified, the action associates specified S3
     # resources with Macie Classic for the specified member account.
     #
     # @option params [String] :member_account_id
-    #   The ID of the Amazon Macie Classic member account whose resources you
-    #   want to associate with Macie Classic.
+    #   (Discontinued) The ID of the Amazon Macie Classic member account whose
+    #   resources you want to associate with Macie Classic.
     #
     # @option params [required, Array<Types::S3ResourceClassification>] :s3_resources
-    #   The S3 resources that you want to associate with Amazon Macie Classic
-    #   for monitoring and data classification.
+    #   (Discontinued) The S3 resources that you want to associate with Amazon
+    #   Macie Classic for monitoring and data classification.
     #
     # @return [Types::AssociateS3ResourcesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -435,11 +437,12 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Removes the specified member account from Amazon Macie Classic.
+    # (Discontinued) Removes the specified member account from Amazon Macie
+    # Classic.
     #
     # @option params [required, String] :member_account_id
-    #   The ID of the member account that you want to remove from Amazon Macie
-    #   Classic.
+    #   (Discontinued) The ID of the member account that you want to remove
+    #   from Amazon Macie Classic.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -458,20 +461,20 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Removes specified S3 resources from being monitored by Amazon Macie
-    # Classic. If memberAccountId isn't specified, the action removes
-    # specified S3 resources from Macie Classic for the current Macie
-    # Classic administrator account. If memberAccountId is specified, the
+    # (Discontinued) Removes specified S3 resources from being monitored by
+    # Amazon Macie Classic. If `memberAccountId` isn't specified, the
     # action removes specified S3 resources from Macie Classic for the
-    # specified member account.
+    # current Macie Classic administrator account. If `memberAccountId` is
+    # specified, the action removes specified S3 resources from Macie
+    # Classic for the specified member account.
     #
     # @option params [String] :member_account_id
-    #   The ID of the Amazon Macie Classic member account whose resources you
-    #   want to remove from being monitored by Macie Classic.
+    #   (Discontinued) The ID of the Amazon Macie Classic member account whose
+    #   resources you want to remove from being monitored by Macie Classic.
     #
     # @option params [required, Array<Types::S3Resource>] :associated_s3_resources
-    #   The S3 resources (buckets or prefixes) that you want to remove from
-    #   being monitored and classified by Amazon Macie Classic.
+    #   (Discontinued) The S3 resources (buckets or prefixes) that you want to
+    #   remove from being monitored and classified by Amazon Macie Classic.
     #
     # @return [Types::DisassociateS3ResourcesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -506,19 +509,19 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Lists all Amazon Macie Classic member accounts for the current Macie
-    # Classic administrator account.
+    # (Discontinued) Lists all Amazon Macie Classic member accounts for the
+    # current Macie Classic administrator account.
     #
     # @option params [String] :next_token
-    #   Use this parameter when paginating results. Set the value of this
-    #   parameter to null on your first call to the ListMemberAccounts action.
-    #   Subsequent calls to the action fill nextToken in the request with the
-    #   value of nextToken from the previous response to continue listing
-    #   data.
+    #   (Discontinued) Use this parameter when paginating results. Set the
+    #   value of this parameter to null on your first call to the
+    #   `ListMemberAccounts` action. Subsequent calls to the action fill
+    #   `nextToken` in the request with the value of `nextToken` from the
+    #   previous response to continue listing data.
     #
     # @option params [Integer] :max_results
-    #   Use this parameter to indicate the maximum number of items that you
-    #   want in the response. The default value is 250.
+    #   (Discontinued) Use this parameter to indicate the maximum number of
+    #   items that you want in the response. The default value is 250.
     #
     # @return [Types::ListMemberAccountsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -549,26 +552,27 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Lists all the S3 resources associated with Amazon Macie Classic. If
-    # memberAccountId isn't specified, the action lists the S3 resources
-    # associated with Macie Classic for the current Macie Classic
-    # administrator account. If memberAccountId is specified, the action
-    # lists the S3 resources associated with Macie Classic for the specified
-    # member account.
+    # (Discontinued) Lists all the S3 resources associated with Amazon Macie
+    # Classic. If `memberAccountId` isn't specified, the action lists the
+    # S3 resources associated with Macie Classic for the current Macie
+    # Classic administrator account. If `memberAccountId` is specified, the
+    # action lists the S3 resources associated with Macie Classic for the
+    # specified member account.
     #
     # @option params [String] :member_account_id
-    #   The Amazon Macie Classic member account ID whose associated S3
-    #   resources you want to list.
+    #   (Discontinued) The Amazon Macie Classic member account ID whose
+    #   associated S3 resources you want to list.
     #
     # @option params [String] :next_token
-    #   Use this parameter when paginating results. Set its value to null on
-    #   your first call to the ListS3Resources action. Subsequent calls to the
-    #   action fill nextToken in the request with the value of nextToken from
-    #   the previous response to continue listing data.
+    #   (Discontinued) Use this parameter when paginating results. Set its
+    #   value to null on your first call to the `ListS3Resources` action.
+    #   Subsequent calls to the action fill `nextToken` in the request with
+    #   the value of `nextToken` from the previous response to continue
+    #   listing data.
     #
     # @option params [Integer] :max_results
-    #   Use this parameter to indicate the maximum number of items that you
-    #   want in the response. The default value is 250.
+    #   (Discontinued) Use this parameter to indicate the maximum number of
+    #   items that you want in the response. The default value is 250.
     #
     # @return [Types::ListS3ResourcesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -603,20 +607,22 @@ module Aws::Macie
       req.send_request(options)
     end
 
-    # Updates the classification types for the specified S3 resources. If
-    # memberAccountId isn't specified, the action updates the
-    # classification types of the S3 resources associated with Amazon Macie
-    # Classic for the current Macie Classic administrator account. If
-    # memberAccountId is specified, the action updates the classification
+    # (Discontinued) Updates the classification types for the specified S3
+    # resources. If `memberAccountId` isn't specified, the action updates
+    # the classification types of the S3 resources associated with Amazon
+    # Macie Classic for the current Macie Classic administrator account. If
+    # `memberAccountId` is specified, the action updates the classification
     # types of the S3 resources associated with Macie Classic for the
     # specified member account.
     #
     # @option params [String] :member_account_id
-    #   The AWS ID of the Amazon Macie Classic member account whose S3
-    #   resources' classification types you want to update.
+    #   (Discontinued) The Amazon Web Services account ID of the Amazon Macie
+    #   Classic member account whose S3 resources' classification types you
+    #   want to update.
     #
     # @option params [required, Array<Types::S3ResourceClassificationUpdate>] :s3_resources_update
-    #   The S3 resources whose classification types you want to update.
+    #   (Discontinued) The S3 resources whose classification types you want to
+    #   update.
     #
     # @return [Types::UpdateS3ResourcesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -668,7 +674,7 @@ module Aws::Macie
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie'
-      context[:gem_version] = '1.36.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

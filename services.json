@@ -514,6 +514,9 @@
   "Kendra": {
     "models": "kendra/2019-02-03"
   },
+  "Keyspaces": {
+    "models": "keyspaces/2022-02-10"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },
@@ -820,7 +823,8 @@
       "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::SseCpk",
       "Aws::S3::Plugins::StreamingRetry",
-      "Aws::S3::Plugins::UrlEncodedKeys"
+      "Aws::S3::Plugins::UrlEncodedKeys",
+      "Aws::S3::Plugins::SkipWholeMultipartGetChecksums"
     ]
   },
   "S3Control": {

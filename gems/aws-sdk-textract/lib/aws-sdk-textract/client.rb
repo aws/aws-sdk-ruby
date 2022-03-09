@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Textract
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -450,7 +452,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -467,11 +469,11 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.human_loop_activation_output.human_loop_arn #=> String
@@ -712,7 +714,7 @@ module Aws::Textract
     #
     #   resp.document_metadata.pages #=> Integer
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -729,11 +731,11 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.detect_document_text_model_version #=> String
@@ -839,7 +841,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -856,11 +858,11 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.warnings #=> Array
@@ -957,7 +959,7 @@ module Aws::Textract
     #   resp.job_status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED", "PARTIAL_SUCCESS"
     #   resp.next_token #=> String
     #   resp.blocks #=> Array
-    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT"
+    #   resp.blocks[0].block_type #=> String, one of "KEY_VALUE_SET", "PAGE", "LINE", "WORD", "TABLE", "CELL", "SELECTION_ELEMENT", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].confidence #=> Float
     #   resp.blocks[0].text #=> String
     #   resp.blocks[0].text_type #=> String, one of "HANDWRITING", "PRINTED"
@@ -974,11 +976,11 @@ module Aws::Textract
     #   resp.blocks[0].geometry.polygon[0].y #=> Float
     #   resp.blocks[0].id #=> String
     #   resp.blocks[0].relationships #=> Array
-    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES"
+    #   resp.blocks[0].relationships[0].type #=> String, one of "VALUE", "CHILD", "COMPLEX_FEATURES", "MERGED_CELL", "TITLE"
     #   resp.blocks[0].relationships[0].ids #=> Array
     #   resp.blocks[0].relationships[0].ids[0] #=> String
     #   resp.blocks[0].entity_types #=> Array
-    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE"
+    #   resp.blocks[0].entity_types[0] #=> String, one of "KEY", "VALUE", "COLUMN_HEADER"
     #   resp.blocks[0].selection_status #=> String, one of "SELECTED", "NOT_SELECTED"
     #   resp.blocks[0].page #=> Integer
     #   resp.warnings #=> Array
@@ -1458,7 +1460,7 @@ module Aws::Textract
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-textract'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.37.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

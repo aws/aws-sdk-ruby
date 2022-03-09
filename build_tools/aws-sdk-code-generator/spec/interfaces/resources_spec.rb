@@ -31,7 +31,7 @@ describe 'Interfaces' do
         it 'constructs a client using options given' do
           client = double('client')
           expect(Sample::Client).to receive(:new).
-            with(region: 'us-west-2').
+            with({region: 'us-west-2'}).
             and_return(client)
           svc = Sample::Resource.new(region: 'us-west-2')
           expect(svc.client).to be(client)
@@ -49,7 +49,7 @@ describe 'Interfaces' do
 
         it 'supports actions returning a client response' do
           data = client.stub_data(:get_band)
-          expect(client).to receive(:get_band).with(foo:'bar').
+          expect(client).to receive(:get_band).with({foo:'bar'}).
             and_return(double('resp', data: data))
           svc = Sample::Resource.new(client: client)
           expect(svc.get_summary(foo: 'bar')).to be(data)
@@ -57,7 +57,7 @@ describe 'Interfaces' do
 
         it 'supports actions returning another resource' do
           data = client.stub_data(:create_band, band:{band_name:'abc'})
-          expect(client).to receive(:create_band).with(band_name:'abc').
+          expect(client).to receive(:create_band).with({band_name:'abc'}).
             and_return(double('resp', data: data))
           svc = Sample::Resource.new(client: client)
           band = svc.create_band(band_name:'abc')
@@ -243,7 +243,7 @@ describe 'Interfaces' do
       it 'constructs a client from options' do
         client = double('client')
         expect(Sample::Client).to receive(:new).
-          with(region:'us-west-2').
+          with({region:'us-west-2'}).
           and_return(client)
         band = Sample::Band.new(name:'name', region: 'us-west-2')
         expect(band.client).to be(client)
@@ -251,7 +251,7 @@ describe 'Interfaces' do
 
       it 'passes extra options to the client constructor' do
         client = double('client')
-        expect(Sample::Client).to receive(:new).with(foo:'bar').and_return(client)
+        expect(Sample::Client).to receive(:new).with({foo:'bar'}).and_return(client)
         band = Sample::Band.new(name:'name', data: double('data'), foo: 'bar')
         expect(band.client).to be(client)
       end
@@ -451,7 +451,7 @@ describe 'Interfaces' do
       it 'supports actions returning a client response' do
         data = client.stub_data(:update_band, {})
         expect(client).to receive(:update_band).
-          with(band_name: 'name', bio: 'updated-band-bio').
+          with({band_name: 'name', bio: 'updated-band-bio'}).
           and_return(double('resp', data: data))
         band = Sample::Band.new(name:'name', client: client)
         expect(band.update(bio: 'updated-band-bio')).to be(data)
@@ -463,7 +463,7 @@ describe 'Interfaces' do
           cover_band_for: 'The Who',
         })
         expect(client).to receive(:create_band).
-          with(band_name: 'Horton Heard a Who', cover_band_for: 'The Who').
+          with({band_name: 'Horton Heard a Who', cover_band_for: 'The Who'}).
           and_return(double('resp', data: data))
 
         band = Sample::Band.new(name:'The Who', client: client)
@@ -487,13 +487,13 @@ describe 'Interfaces' do
       end
 
       it 'supports actions that construct a batch from request params' do
-        expect(client).to receive(:create_tags).with(
+        expect(client).to receive(:create_tags).with({
           resources: ['band-name'],
           tags: [
             { key: 'tag-1-key', value: 'tag-1-value' },
             { key: 'tag-2-key', value: 'tag-2-value' },
           ]
-        ).and_return(double('resp', data: Aws::EmptyStructure.new))
+        }).and_return(double('resp', data: Aws::EmptyStructure.new))
         band = Sample::Band.new(name:'band-name', client: client)
         tags = band.create_tags(tags: [
           { key: 'tag-1-key', value: 'tag-1-value' },
@@ -583,7 +583,7 @@ describe 'Interfaces' do
           { fans: [{ name: 'fan-2' }] },
         ])
         expect(client).to receive(:list_fans).
-          with(favorite_band_name:'name').
+          with({favorite_band_name:'name'}).
           and_call_original
         band = Sample::Band.new(name: 'name', client: client)
         fans = band.fans.to_a # force enumeration
@@ -603,13 +603,13 @@ describe 'Interfaces' do
           { name: 'fan-1' },
           { name: 'fan-2' },
         ]})
-        expect(client).to receive(:list_fans).with(
+        expect(client).to receive(:list_fans).with({
           filters: [
             { name: 'favorite-band-name', values: ['band-name'] },
             { name: 'fandom-level', values: ['AAA'] },
           ],
           limit: 5
-        ).and_call_original
+        }).and_call_original
         band = Sample::Band.new(name: 'band-name', client: client)
         band.biggest_fans.to_a # force enumeration
       end
@@ -619,13 +619,13 @@ describe 'Interfaces' do
           { name: 'fan-1' },
           { name: 'fan-2' },
         ]})
-        expect(client).to receive(:list_fans).with(
+        expect(client).to receive(:list_fans).with({
           filters: [
             { name: 'favorite-band-name', values: ['band-name'] },
             { name: 'fandom-level', values: ['AAA'] },
           ],
           limit: 5
-        ).and_call_original
+        }).and_call_original
         band = Sample::Band.new(name: 'band-name', client: client)
         band.biggest_fans.to_a # force enumeration
       end
@@ -635,14 +635,14 @@ describe 'Interfaces' do
         # Aws::EC2::Client#describe_instances has a list of filter objets
         # with keys and values. The has many association requires lists
         # to be appended to each other for a proper merge.
-        expect(client).to receive(:list_fans).with(
+        expect(client).to receive(:list_fans).with({
           filters: [
             { name: 'favorite-band-name', values: ['band-name'] },
             { name: 'fandom-level', values: ['AAA'] },
             { name: 'location', values: ['Seattle', 'Tacoma'] },
           ],
           limit: 5
-        ).and_call_original
+        }).and_call_original
         band = Sample::Band.new(name: 'band-name', client: client)
         band.biggest_fans(
           filters: [
@@ -673,32 +673,32 @@ describe 'Interfaces' do
       it 'invokes the appropriate waiter' do
         waiter = double('waiter')
         expect(Sample::Waiters::BandExists).to receive(:new).
-          with(client: client).
+          with({client: client}).
           and_return(waiter)
-        expect(waiter).to receive(:wait).with(band_name: 'band-name')
+        expect(waiter).to receive(:wait).with({band_name: 'band-name'})
         band = Sample::Band.new(name: 'band-name', client: client)
         band.wait_until_exists
       end
 
       it 'accepts configuration options' do
         waiter = double('waiter')
-        expect(Sample::Waiters::BandExists).to receive(:new).with(
+        expect(Sample::Waiters::BandExists).to receive(:new).with({
           client: client,
           max_attempts: 2,
           delay: 2,
-        ).and_return(waiter)
-        expect(waiter).to receive(:wait).with(band_name: 'band-name')
+        }).and_return(waiter)
+        expect(waiter).to receive(:wait).with({band_name: 'band-name'})
         band = Sample::Band.new(name: 'band-name', client: client)
         band.wait_until_exists(max_attempts: 2, delay: 2)
       end
 
       it 'passes through params to the client waiter method' do
         waiter = double('waiter')
-        expect(Sample::Waiters::BandExists).to receive(:new).with(
+        expect(Sample::Waiters::BandExists).to receive(:new).with({
           client: client,
           max_attempts: 1,
-        ).and_return(waiter)
-        expect(waiter).to receive(:wait).with(band_name: 'band-name', extra_param: true)
+        }).and_return(waiter)
+        expect(waiter).to receive(:wait).with({band_name: 'band-name', extra_param: true})
         band = Sample::Band.new(name: 'band-name', client: client)
         band.exists?(extra_param: true)
       end
@@ -715,9 +715,9 @@ describe 'Interfaces' do
       it 'returns a new unhydrated resource if path is not given' do
         waiter = double('waiter')
         expect(Sample::Waiters::BandExists).to receive(:new).
-          with(client: client).
+          with({client: client}).
           and_return(waiter)
-        expect(waiter).to receive(:wait).with(band_name: 'band-name')
+        expect(waiter).to receive(:wait).with({band_name: 'band-name'})
         band = Sample::Band.new(name: 'band-name', client: client)
         result = band.wait_until_exists
         expect(result).to be_kind_of(Sample::Band)
@@ -741,10 +741,10 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-2' }] },
         ])
         expect(client).to receive(:delete_bands).
-          with(bands: [{ band_name: 'band-1' }]).
+          with({bands: [{ band_name: 'band-1' }]}).
           ordered
         expect(client).to receive(:delete_bands).
-          with(bands: [{ band_name: 'band-2' }]).
+          with({bands: [{ band_name: 'band-2' }]}).
           ordered
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
@@ -756,12 +756,12 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
           { bands: [{ band_name: 'band-2' }] },
         ])
-        expect(client).to receive(:create_tags).with(
+        expect(client).to receive(:create_tags).with({
           resources: ['band-1'], tags:[{ key: 'tag-1-key', value: 'tag-1-value' }]
-        ).ordered
-        expect(client).to receive(:create_tags).with(
+        }).ordered
+        expect(client).to receive(:create_tags).with({
           resources: ['band-2'], tags:[{ key: 'tag-1-key', value: 'tag-1-value' }]
-        ).ordered
+        }).ordered
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         bands.batch_create_tags(tags:[
@@ -775,10 +775,10 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-2' }] },
         ])
         expect(client).to receive(:delete_bands).
-          with(bands: [{ band_name: 'band-1' }]).
+          with({bands: [{ band_name: 'band-1' }]}).
           ordered
         expect(client).to receive(:delete_bands).
-          with(bands: [{ band_name: 'band-2' }]).
+          with({bands: [{ band_name: 'band-2' }]}).
           ordered
         svc = Sample::Resource.new(client: client)
         bands = svc.bands

@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::MigrationHubRefactorSpaces
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -352,9 +354,9 @@ module Aws::MigrationHubRefactorSpaces
     # Creates an Amazon Web Services Migration Hub Refactor Spaces
     # application. The account that owns the environment also owns the
     # applications created inside the environment, regardless of the account
-    # that creates the application. Refactor Spaces provisions the Amazon
-    # API Gateway and Network Load Balancer for the application proxy inside
-    # your account.
+    # that creates the application. Refactor Spaces provisions an Amazon API
+    # Gateway, API Gateway VPC link, and Network Load Balancer for the
+    # application proxy inside your account.
     #
     # @option params [Types::ApiGatewayProxyInput] :api_gateway_proxy
     #   A wrapper object holding the API Gateway endpoint type and stage name
@@ -445,12 +447,13 @@ module Aws::MigrationHubRefactorSpaces
     end
 
     # Creates an Amazon Web Services Migration Hub Refactor Spaces
-    # environment. The caller owns the environment resource, and they are
-    # referred to as the *environment owner*. The environment owner has
-    # cross-account visibility and control of Refactor Spaces resources that
-    # are added to the environment by other accounts that the environment is
-    # shared with. When creating an environment, Refactor Spaces provisions
-    # a transit gateway in your account.
+    # environment. The caller owns the environment resource, and all
+    # Refactor Spaces applications, services, and routes created within the
+    # environment. They are referred to as the *environment owner*. The
+    # environment owner has cross-account visibility and control of Refactor
+    # Spaces resources that are added to the environment by other accounts
+    # that the environment is shared with. When creating an environment,
+    # Refactor Spaces provisions a transit gateway in your account.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -540,11 +543,12 @@ module Aws::MigrationHubRefactorSpaces
     #   internet.
     #
     # * If the service has an Lambda function endpoint, then Refactor Spaces
-    #   uses the API Gateway Lambda integration.
+    #   configures the Lambda function's resource policy to allow the
+    #   application's API Gateway to invoke the function.
     #
-    # A health check is performed on the service when the route is created.
-    # If the health check fails, the route transitions to `FAILED`, and no
-    # traffic is sent to the service.
+    # A one-time health check is performed on the service when the route is
+    # created. If the health check fails, the route transitions to `FAILED`,
+    # and no traffic is sent to the service.
     #
     # For Lambda functions, the Lambda function state is checked. If the
     # function is not active, the function configuration is updated so that
@@ -563,6 +567,11 @@ module Aws::MigrationHubRefactorSpaces
     # in [Health checks for your target groups][2]. The health check is
     # considered successful if at least one target within the target group
     # transitions to a healthy state.
+    #
+    # Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs,
+    # publicly-signed certificates are supported. Private Certificate
+    # Authorities (CAs) are permitted only if the CA's domain is publicly
+    # resolvable.
     #
     #
     #
@@ -669,7 +678,7 @@ module Aws::MigrationHubRefactorSpaces
     # Services have either a URL endpoint in a virtual private cloud (VPC),
     # or a Lambda function endpoint.
     #
-    # If an Amazon Web Services resourceis launched in a service VPC, and
+    # If an Amazon Web Services resource is launched in a service VPC, and
     # you want it to be accessible to all of an environment’s services with
     # VPCs and routes, apply the `RefactorSpacesSecurityGroup` to the
     # resource. Alternatively, to add more cross-account constraints, apply
@@ -1368,8 +1377,8 @@ module Aws::MigrationHubRefactorSpaces
       req.send_request(options)
     end
 
-    # Lists all the virtual private clouds (VPCs) that are part of an Amazon
-    # Web Services Migration Hub Refactor Spaces environment.
+    # Lists all Amazon Web Services Migration Hub Refactor Spaces service
+    # virtual private clouds (VPCs) that are part of the environment.
     #
     # @option params [required, String] :environment_identifier
     #   The ID of the environment.
@@ -1765,7 +1774,7 @@ module Aws::MigrationHubRefactorSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-migrationhubrefactorspaces'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

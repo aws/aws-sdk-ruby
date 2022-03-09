@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::Synthetics
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -481,7 +483,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     artifact_s3_location: "String", # required
     #     execution_role_arn: "RoleArn", # required
@@ -1271,7 +1273,7 @@ module Aws::Synthetics
     #       s3_key: "String",
     #       s3_version: "String",
     #       zip_file: "data",
-    #       handler: "String", # required
+    #       handler: "CodeHandler", # required
     #     },
     #     execution_role_arn: "RoleArn",
     #     runtime_version: "String",
@@ -1333,7 +1335,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

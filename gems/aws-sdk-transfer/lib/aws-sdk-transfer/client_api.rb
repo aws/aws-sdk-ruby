@@ -129,6 +129,8 @@ module Aws::Transfer
     Policy = Shapes::StringShape.new(name: 'Policy')
     PosixId = Shapes::IntegerShape.new(name: 'PosixId')
     PosixProfile = Shapes::StructureShape.new(name: 'PosixProfile')
+    PostAuthenticationLoginBanner = Shapes::StringShape.new(name: 'PostAuthenticationLoginBanner')
+    PreAuthenticationLoginBanner = Shapes::StringShape.new(name: 'PreAuthenticationLoginBanner')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolDetails = Shapes::StructureShape.new(name: 'ProtocolDetails')
     Protocols = Shapes::ListShape.new(name: 'Protocols')
@@ -163,6 +165,7 @@ module Aws::Transfer
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SshPublicKey = Shapes::StructureShape.new(name: 'SshPublicKey')
     SshPublicKeyBody = Shapes::StringShape.new(name: 'SshPublicKeyBody')
@@ -221,6 +224,7 @@ module Aws::Transfer
     CopyStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CopyStepDetails.add_member(:destination_file_location, Shapes::ShapeRef.new(shape: InputFileLocation, location_name: "DestinationFileLocation"))
     CopyStepDetails.add_member(:overwrite_existing, Shapes::ShapeRef.new(shape: OverwriteExisting, location_name: "OverwriteExisting"))
+    CopyStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     CopyStepDetails.struct_class = Types::CopyStepDetails
 
     CreateAccessRequest.add_member(:home_directory, Shapes::ShapeRef.new(shape: HomeDirectory, location_name: "HomeDirectory"))
@@ -245,6 +249,8 @@ module Aws::Transfer
     CreateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     CreateServerRequest.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     CreateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    CreateServerRequest.add_member(:post_authentication_login_banner, Shapes::ShapeRef.new(shape: PostAuthenticationLoginBanner, location_name: "PostAuthenticationLoginBanner"))
+    CreateServerRequest.add_member(:pre_authentication_login_banner, Shapes::ShapeRef.new(shape: PreAuthenticationLoginBanner, location_name: "PreAuthenticationLoginBanner"))
     CreateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     CreateServerRequest.add_member(:protocol_details, Shapes::ShapeRef.new(shape: ProtocolDetails, location_name: "ProtocolDetails"))
     CreateServerRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
@@ -283,6 +289,7 @@ module Aws::Transfer
     CustomStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     CustomStepDetails.add_member(:target, Shapes::ShapeRef.new(shape: CustomStepTarget, location_name: "Target"))
     CustomStepDetails.add_member(:timeout_seconds, Shapes::ShapeRef.new(shape: CustomStepTimeoutSeconds, location_name: "TimeoutSeconds"))
+    CustomStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     CustomStepDetails.struct_class = Types::CustomStepDetails
 
     DeleteAccessRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -298,6 +305,7 @@ module Aws::Transfer
     DeleteSshPublicKeyRequest.struct_class = Types::DeleteSshPublicKeyRequest
 
     DeleteStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
+    DeleteStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     DeleteStepDetails.struct_class = Types::DeleteStepDetails
 
     DeleteUserRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -386,6 +394,8 @@ module Aws::Transfer
     DescribedServer.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     DescribedServer.add_member(:identity_provider_type, Shapes::ShapeRef.new(shape: IdentityProviderType, location_name: "IdentityProviderType"))
     DescribedServer.add_member(:logging_role, Shapes::ShapeRef.new(shape: Role, location_name: "LoggingRole"))
+    DescribedServer.add_member(:post_authentication_login_banner, Shapes::ShapeRef.new(shape: PostAuthenticationLoginBanner, location_name: "PostAuthenticationLoginBanner"))
+    DescribedServer.add_member(:pre_authentication_login_banner, Shapes::ShapeRef.new(shape: PreAuthenticationLoginBanner, location_name: "PreAuthenticationLoginBanner"))
     DescribedServer.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     DescribedServer.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
     DescribedServer.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, location_name: "ServerId"))
@@ -681,6 +691,7 @@ module Aws::Transfer
 
     TagStepDetails.add_member(:name, Shapes::ShapeRef.new(shape: WorkflowStepName, location_name: "Name"))
     TagStepDetails.add_member(:tags, Shapes::ShapeRef.new(shape: S3Tags, location_name: "Tags"))
+    TagStepDetails.add_member(:source_file_location, Shapes::ShapeRef.new(shape: SourceFileLocation, location_name: "SourceFileLocation"))
     TagStepDetails.struct_class = Types::TagStepDetails
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
@@ -726,6 +737,8 @@ module Aws::Transfer
     UpdateServerRequest.add_member(:host_key, Shapes::ShapeRef.new(shape: HostKey, location_name: "HostKey"))
     UpdateServerRequest.add_member(:identity_provider_details, Shapes::ShapeRef.new(shape: IdentityProviderDetails, location_name: "IdentityProviderDetails"))
     UpdateServerRequest.add_member(:logging_role, Shapes::ShapeRef.new(shape: NullableRole, location_name: "LoggingRole"))
+    UpdateServerRequest.add_member(:post_authentication_login_banner, Shapes::ShapeRef.new(shape: PostAuthenticationLoginBanner, location_name: "PostAuthenticationLoginBanner"))
+    UpdateServerRequest.add_member(:pre_authentication_login_banner, Shapes::ShapeRef.new(shape: PreAuthenticationLoginBanner, location_name: "PreAuthenticationLoginBanner"))
     UpdateServerRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: Protocols, location_name: "Protocols"))
     UpdateServerRequest.add_member(:security_policy_name, Shapes::ShapeRef.new(shape: SecurityPolicyName, location_name: "SecurityPolicyName"))
     UpdateServerRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

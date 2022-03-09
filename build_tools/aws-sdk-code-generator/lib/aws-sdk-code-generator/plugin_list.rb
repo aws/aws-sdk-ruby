@@ -59,6 +59,7 @@ module AwsSdkCodeGenerator
         'Aws::Plugins::ClientMetricsSendPlugin' => "#{core_plugins}/client_metrics_send_plugin.rb",
         'Aws::Plugins::TransferEncoding' => "#{core_plugins}/transfer_encoding.rb",
         'Aws::Plugins::HttpChecksum' => "#{core_plugins}/http_checksum.rb",
+        'Aws::Plugins::ChecksumAlgorithm' => "#{core_plugins}/checksum_algorithm.rb",
         'Aws::Plugins::DefaultsMode' => "#{core_plugins}/defaults_mode.rb",
         'Aws::Plugins::RecursionDetection' => "#{core_plugins}/recursion_detection.rb"
       }

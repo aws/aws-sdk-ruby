@@ -28,7 +28,6 @@ group :test do
 
   gem 'multipart-post'
   gem 'rspec'
-  gem 'rspec-mocks', '<= 3.10.2'
 end
 
 group :build do

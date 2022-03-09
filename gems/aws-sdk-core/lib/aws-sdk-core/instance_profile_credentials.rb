@@ -63,6 +63,10 @@ module Aws
     # @option options [Integer] :token_ttl Time-to-Live in seconds for EC2
     #   Metadata Token used for fetching Metadata Profile Credentials, defaults
     #   to 21600 seconds
+    # @option options [Callable] before_refresh Proc called before
+    #   credentials are refreshed. `before_refresh` is called
+    #   with an instance of this object when
+    #   AWS credentials are required and need to be refreshed.
     def initialize(options = {})
       @retries = options[:retries] || 1
       endpoint_mode = resolve_endpoint_mode(options)
@@ -74,8 +78,8 @@ module Aws
       @backoff = backoff(options[:backoff])
       @token_ttl = options[:token_ttl] || 21_600
       @token = nil
+      @no_refresh_until = nil
       @async_refresh = false
-
       super
     end
 
@@ -123,18 +127,48 @@ module Aws
     end
 
     def refresh
+      if @no_refresh_until && @no_refresh_until > Time.now
+        warn_expired_credentials
+        return
+      end
+
       # Retry loading credentials up to 3 times is the instance metadata
       # service is responding but is returning invalid JSON documents
       # in response to the GET profile credentials call.
       begin
         retry_errors([Aws::Json::ParseError, StandardError], max_retries: 3) do
           c = Aws::Json.load(get_credentials.to_s)
-          @credentials = Credentials.new(
-            c['AccessKeyId'],
-            c['SecretAccessKey'],
-            c['Token']
-          )
-          @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+          if empty_credentials?(@credentials)
+            @credentials = Credentials.new(
+              c['AccessKeyId'],
+              c['SecretAccessKey'],
+              c['Token']
+            )
+            @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+            if @expiration && @expiration < Time.now
+              @no_refresh_until = Time.now + refresh_offset
+              warn_expired_credentials
+            end
+          else
+            #  credentials are already set, update them only if the new ones are not empty
+            if !c['AccessKeyId'] || c['AccessKeyId'].empty?
+              # error getting new credentials
+              @no_refresh_until = Time.now + refresh_offset
+              warn_expired_credentials
+            else
+              @credentials = Credentials.new(
+                c['AccessKeyId'],
+                c['SecretAccessKey'],
+                c['Token']
+              )
+              @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
+              if @expiration && @expiration < Time.now
+                @no_refresh_until = Time.now + refresh_offset
+                warn_expired_credentials
+              end
+            end
+          end
+
         end
       rescue Aws::Json::ParseError
         raise Aws::Errors::MetadataParserError
@@ -256,6 +290,21 @@ module Aws
         retries += 1
         retry
       end
+    end
+
+    def warn_expired_credentials
+      warn("Attempting credential expiration extension due to a credential "\
+        "service availability issue. A refresh of these credentials "\
+        "will be attempted again in 5 minutes.")
+    end
+
+    def empty_credentials?(creds)
+      !creds || !creds.access_key_id || creds.access_key_id.empty?
+    end
+
+    # Compute an offset for refresh with jitter
+    def refresh_offset
+      300 + rand(0..60)
     end
 
     # @api private

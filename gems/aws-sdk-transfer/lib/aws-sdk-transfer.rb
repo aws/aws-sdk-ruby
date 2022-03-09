@@ -15,6 +15,7 @@ require_relative 'aws-sdk-transfer/types'
 require_relative 'aws-sdk-transfer/client_api'
 require_relative 'aws-sdk-transfer/client'
 require_relative 'aws-sdk-transfer/errors'
+require_relative 'aws-sdk-transfer/waiters'
 require_relative 'aws-sdk-transfer/resource'
 require_relative 'aws-sdk-transfer/customizations'
 
@@ -48,6 +49,6 @@ require_relative 'aws-sdk-transfer/customizations'
 # @!group service
 module Aws::Transfer
 
-  GEM_VERSION = '1.46.0'
+  GEM_VERSION = '1.50.0'
 
 end

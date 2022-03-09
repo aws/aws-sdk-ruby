@@ -1259,7 +1259,7 @@ module Aws::AutoScaling
     #   The default value is `0`. For more information, see [Health check
     #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
@@ -4098,6 +4098,10 @@ module Aws::AutoScaling
     #   To turn off price protection, specify a high value, such as
     #   `999999`.
     #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per vCPU or per
+    #   memory price instead of the per instance price.
+    #
     #   Default: `100`
     #   @return [Integer]
     #
@@ -4111,6 +4115,10 @@ module Aws::AutoScaling
     #   integer, which Amazon EC2 Auto Scaling interprets as a percentage.
     #   To turn off price protection, specify a high value, such as
     #   `999999`.
+    #
+    #   If you set `DesiredCapacityType` to `vcpu` or `memory-mib`, the
+    #   price protection threshold is applied based on the per vCPU or per
+    #   memory price instead of the per instance price.
     #
     #   Default: `20`
     #   @return [Integer]
@@ -4284,6 +4292,35 @@ module Aws::AutoScaling
       :accelerator_manufacturers,
       :accelerator_names,
       :accelerator_total_memory_mi_b)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an instance reuse policy for a warm pool.
+    #
+    # For more information, see [Warm pools for Amazon EC2 Auto Scaling][1]
+    # in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html
+    #
+    # @note When making an API call, you may pass InstanceReusePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         reuse_on_scale_in: false,
+    #       }
+    #
+    # @!attribute [rw] reuse_on_scale_in
+    #   Specifies whether instances in the Auto Scaling group can be
+    #   returned to the warm pool on scale in.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/InstanceReusePolicy AWS API Documentation
+    #
+    class InstanceReusePolicy < Struct.new(
+      :reuse_on_scale_in)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4893,23 +4930,23 @@ module Aws::AutoScaling
     #   remaining to fulfill capacity, and Amazon EC2 Auto Scaling can only
     #   launch an instance with a `WeightedCapacity` of five units, the
     #   instance is launched, and the desired capacity is exceeded by three
-    #   units. For more information, see [Instance weighting for Amazon EC2
-    #   Auto Scaling][1] in the *Amazon EC2 Auto Scaling User Guide*. Value
-    #   must be in the range of 1–999.
+    #   units. For more information, see [Configuring instance weighting for
+    #   Amazon EC2 Auto Scaling][1] in the *Amazon EC2 Auto Scaling User
+    #   Guide*. Value must be in the range of 1–999.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups-instance-weighting.html
     #   @return [String]
     #
     # @!attribute [rw] launch_template_specification
-    #   Provides the launch template to be used when launching the instance
-    #   type specified in `InstanceType`. For example, some instance types
-    #   might require a launch template with a different AMI. If not
-    #   provided, Amazon EC2 Auto Scaling uses the launch template that's
-    #   defined for your mixed instances policy. For more information, see
-    #   [Specifying a different launch template for an instance type][1] in
-    #   the *Amazon EC2 Auto Scaling User Guide*.
+    #   Provides a launch template for the specified instance type or
+    #   instance requirements. For example, some instance types might
+    #   require a launch template with a different AMI. If not provided,
+    #   Amazon EC2 Auto Scaling uses the launch template that's defined for
+    #   your mixed instances policy. For more information, see [Specifying a
+    #   different launch template for an instance type][1] in the *Amazon
+    #   EC2 Auto Scaling User Guide*.
     #
     #
     #
@@ -5010,9 +5047,10 @@ module Aws::AutoScaling
       include Aws::Structure
     end
 
-    # Describes a lifecycle hook, which enables an Auto Scaling group to be
-    # aware of events in the Auto Scaling instance lifecycle, and then
-    # perform a custom action when the corresponding lifecycle event occurs.
+    # Describes a lifecycle hook. A lifecycle hook lets you create solutions
+    # that are aware of events in the Auto Scaling instance lifecycle, and
+    # then perform a custom action on instances when the corresponding
+    # lifecycle event occurs.
     #
     # @!attribute [rw] lifecycle_hook_name
     #   The name of the lifecycle hook.
@@ -5040,7 +5078,8 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to
-    #   publish to the specified notification target.
+    #   publish to the specified notification target (an Amazon SNS topic or
+    #   an Amazon SQS queue).
     #   @return [String]
     #
     # @!attribute [rw] notification_metadata
@@ -5151,8 +5190,11 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to
-    #   publish to the specified notification target, for example, an Amazon
-    #   SNS topic or an Amazon SQS queue.
+    #   publish to the specified notification target.
+    #
+    #   Valid only if the notification target is an Amazon SNS topic or an
+    #   Amazon SQS queue. Required for new lifecycle hooks, but optional
+    #   when updating existing hooks.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LifecycleHookSpecification AWS API Documentation
@@ -5894,14 +5936,14 @@ module Aws::AutoScaling
     #   * `ASGAverageCPUUtilization` - Average CPU utilization of the Auto
     #     Scaling group.
     #
-    #   * `ASGAverageNetworkIn` - Average number of bytes received on all
-    #     network interfaces by the Auto Scaling group.
+    #   * `ASGAverageNetworkIn` - Average number of bytes received (per
+    #     instance per minute) for the Auto Scaling group.
     #
-    #   * `ASGAverageNetworkOut` - Average number of bytes sent out on all
-    #     network interfaces by the Auto Scaling group.
+    #   * `ASGAverageNetworkOut` - Average number of bytes sent out (per
+    #     instance per minute) for the Auto Scaling group.
     #
-    #   * `ALBRequestCountPerTarget` - Number of requests completed per
-    #     target in an Application Load Balancer target group.
+    #   * `ALBRequestCountPerTarget` - Average Application Load Balancer
+    #     request count (per target per minute) for your Auto Scaling group.
     #   @return [String]
     #
     # @!attribute [rw] resource_label
@@ -6714,11 +6756,11 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to
-    #   publish to the specified notification target, for example, an Amazon
-    #   SNS topic or an Amazon SQS queue.
+    #   publish to the specified notification target.
     #
-    #   Required for new lifecycle hooks, but optional when updating
-    #   existing hooks.
+    #   Valid only if the notification target is an Amazon SNS topic or an
+    #   Amazon SQS queue. Required for new lifecycle hooks, but optional
+    #   when updating existing hooks.
     #   @return [String]
     #
     # @!attribute [rw] notification_target_arn
@@ -7258,7 +7300,10 @@ module Aws::AutoScaling
     #         auto_scaling_group_name: "XmlStringMaxLen255", # required
     #         max_group_prepared_capacity: 1,
     #         min_size: 1,
-    #         pool_state: "Stopped", # accepts Stopped, Running
+    #         pool_state: "Stopped", # accepts Stopped, Running, Hibernated
+    #         instance_reuse_policy: {
+    #           reuse_on_scale_in: false,
+    #         },
     #       }
     #
     # @!attribute [rw] auto_scaling_group_name
@@ -7301,13 +7346,20 @@ module Aws::AutoScaling
     #   are complete. Default is `Stopped`.
     #   @return [String]
     #
+    # @!attribute [rw] instance_reuse_policy
+    #   Indicates whether instances in the Auto Scaling group can be
+    #   returned to the warm pool on scale in. The default is to terminate
+    #   instances in the Auto Scaling group when the group scales in.
+    #   @return [Types::InstanceReusePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/PutWarmPoolType AWS API Documentation
     #
     class PutWarmPoolType < Struct.new(
       :auto_scaling_group_name,
       :max_group_prepared_capacity,
       :min_size,
-      :pool_state)
+      :pool_state,
+      :instance_reuse_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8367,6 +8419,15 @@ module Aws::AutoScaling
     #
     # @!attribute [rw] target_value
     #   The target value for the metric.
+    #
+    #   <note markdown="1"> Some metrics are based on a count instead of a percentage, such as
+    #   the request count for an Application Load Balancer or the number of
+    #   messages in an SQS queue. If the scaling policy specifies one of
+    #   these metrics, specify the target utilization as the optimal average
+    #   request or message count per instance during any one-minute
+    #   interval.
+    #
+    #    </note>
     #   @return [Float]
     #
     # @!attribute [rw] disable_scale_in
@@ -8629,7 +8690,7 @@ module Aws::AutoScaling
     #   The default value is `0`. For more information, see [Health check
     #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Conditional: Required if you are adding an `ELB` health check.
+    #   Required if you are adding an `ELB` health check.
     #
     #
     #
@@ -8810,13 +8871,18 @@ module Aws::AutoScaling
     #   The status of a warm pool that is marked for deletion.
     #   @return [String]
     #
+    # @!attribute [rw] instance_reuse_policy
+    #   The instance reuse policy.
+    #   @return [Types::InstanceReusePolicy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/WarmPoolConfiguration AWS API Documentation
     #
     class WarmPoolConfiguration < Struct.new(
       :max_group_prepared_capacity,
       :min_size,
       :pool_state,
-      :status)
+      :status,
+      :instance_reuse_policy)
       SENSITIVE = []
       include Aws::Structure
     end

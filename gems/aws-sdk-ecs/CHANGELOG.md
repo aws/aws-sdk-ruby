@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2022-03-07)
+------------------
+
+* Feature - Amazon ECS UpdateService API now supports additional parameters: loadBalancers, propagateTags, enableECSManagedTags, and serviceRegistries
+
+1.96.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.95.0 (2022-02-03)
 ------------------
 

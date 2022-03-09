@@ -64,7 +64,8 @@ module Aws::AutoScaling
     end
 
     # The ARN of the IAM role that allows the Auto Scaling group to publish
-    # to the specified notification target.
+    # to the specified notification target (an Amazon SNS topic or an Amazon
+    # SQS queue).
     # @return [String]
     def role_arn
       data[:role_arn]
@@ -305,11 +306,11 @@ module Aws::AutoScaling
     #   hooks.
     # @option options [String] :role_arn
     #   The ARN of the IAM role that allows the Auto Scaling group to publish
-    #   to the specified notification target, for example, an Amazon SNS topic
-    #   or an Amazon SQS queue.
+    #   to the specified notification target.
     #
-    #   Required for new lifecycle hooks, but optional when updating existing
-    #   hooks.
+    #   Valid only if the notification target is an Amazon SNS topic or an
+    #   Amazon SQS queue. Required for new lifecycle hooks, but optional when
+    #   updating existing hooks.
     # @option options [String] :notification_target_arn
     #   The ARN of the notification target that Amazon EC2 Auto Scaling uses
     #   to notify you when an instance is in the transition state for the

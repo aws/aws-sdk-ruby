@@ -196,7 +196,8 @@ Known AWS regions include (not specific to this service):
                                                     :gem_version=>"1.0.0",
                                                     :response_target=>nil,
                                                     :original_params=>{:bucket=>"aws-sdk"},
-                                                    :request_id=>"stubbed-request-id"
+                                                    :request_id=>"stubbed-request-id",
+                                                    :http_checksum=>{}
                                                   })
         end
 

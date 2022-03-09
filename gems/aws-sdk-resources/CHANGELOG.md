@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.125.0 (2022-03-02)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-keyspaces` gem.
+
 3.124.0 (2021-12-02)
 ------------------
 

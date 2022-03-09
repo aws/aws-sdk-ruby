@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-02-24)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2022-02-17)
+------------------
+
+* Feature - Documentation updates for AWS Identity and Access Management (IAM).
+
 1.66.0 (2022-02-03)
 ------------------
 

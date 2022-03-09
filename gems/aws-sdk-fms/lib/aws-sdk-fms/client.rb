@@ -27,6 +27,7 @@ require 'aws-sdk-core/plugins/client_metrics_plugin.rb'
 require 'aws-sdk-core/plugins/client_metrics_send_plugin.rb'
 require 'aws-sdk-core/plugins/transfer_encoding.rb'
 require 'aws-sdk-core/plugins/http_checksum.rb'
+require 'aws-sdk-core/plugins/checksum_algorithm.rb'
 require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
@@ -75,6 +76,7 @@ module Aws::FMS
     add_plugin(Aws::Plugins::ClientMetricsSendPlugin)
     add_plugin(Aws::Plugins::TransferEncoding)
     add_plugin(Aws::Plugins::HttpChecksum)
+    add_plugin(Aws::Plugins::ChecksumAlgorithm)
     add_plugin(Aws::Plugins::DefaultsMode)
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
@@ -646,8 +648,10 @@ module Aws::FMS
     #   resp.policy_compliance_detail.member_account #=> String
     #   resp.policy_compliance_detail.violators #=> Array
     #   resp.policy_compliance_detail.violators[0].resource_id #=> String
-    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL"
+    #   resp.policy_compliance_detail.violators[0].violation_reason #=> String, one of "WEB_ACL_MISSING_RULE_GROUP", "RESOURCE_MISSING_WEB_ACL", "RESOURCE_INCORRECT_WEB_ACL", "RESOURCE_MISSING_SHIELD_PROTECTION", "RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION", "RESOURCE_MISSING_SECURITY_GROUP", "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP", "SECURITY_GROUP_UNUSED", "SECURITY_GROUP_REDUNDANT", "FMS_CREATED_SECURITY_GROUP_EDITED", "MISSING_FIREWALL", "MISSING_FIREWALL_SUBNET_IN_AZ", "MISSING_EXPECTED_ROUTE_TABLE", "NETWORK_FIREWALL_POLICY_MODIFIED", "INTERNET_GATEWAY_MISSING_EXPECTED_ROUTE", "FIREWALL_SUBNET_MISSING_EXPECTED_ROUTE", "UNEXPECTED_FIREWALL_ROUTES", "UNEXPECTED_TARGET_GATEWAY_ROUTES", "TRAFFIC_INSPECTION_CROSSES_AZ_BOUNDARY", "INVALID_ROUTE_CONFIGURATION", "MISSING_TARGET_GATEWAY", "INTERNET_TRAFFIC_NOT_INSPECTED", "BLACK_HOLE_ROUTE_DETECTED", "BLACK_HOLE_ROUTE_DETECTED_IN_FIREWALL_SUBNET", "RESOURCE_MISSING_DNS_FIREWALL", "FIREWALL_SUBNET_IS_OUT_OF_SCOPE", "ROUTE_HAS_OUT_OF_SCOPE_ENDPOINT"
     #   resp.policy_compliance_detail.violators[0].resource_type #=> String
+    #   resp.policy_compliance_detail.violators[0].metadata #=> Hash
+    #   resp.policy_compliance_detail.violators[0].metadata["LengthBoundedString"] #=> String
     #   resp.policy_compliance_detail.evaluation_limit_exceeded #=> Boolean
     #   resp.policy_compliance_detail.expired_at #=> Time
     #   resp.policy_compliance_detail.issue_info_map #=> Hash
@@ -707,6 +711,7 @@ module Aws::FMS
     #   resp.policy.policy_update_token #=> String
     #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED"
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -1142,8 +1147,39 @@ module Aws::FMS
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.description #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.vpc_id.resource_id #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.ec2_create_route_table_action.vpc_id.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.description #=> String
+    #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].remediation_action.fms_policy_update_firewall_creation_config_action.firewall_creation_config #=> String
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].ordered_remediation_actions[0].order #=> Integer
     #   resp.violation_detail.resource_violations[0].possible_remediation_actions.actions[0].is_default_action #=> Boolean
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].firewall_subnet_is_out_of_scope_violation.vpc_endpoint_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.vpc_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.route_table_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.violating_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.subnet_availability_zone_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_firewall_subnet_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.firewall_subnet_routes[0].target #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_id #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.current_internet_gateway_route_table #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes #=> Array
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination_type #=> String, one of "IPV4", "IPV6", "PREFIX_LIST"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target_type #=> String, one of "GATEWAY", "CARRIER_GATEWAY", "INSTANCE", "LOCAL_GATEWAY", "NAT_GATEWAY", "NETWORK_INTERFACE", "VPC_ENDPOINT", "VPC_PEERING_CONNECTION", "EGRESS_ONLY_INTERNET_GATEWAY", "TRANSIT_GATEWAY"
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].destination #=> String
+    #   resp.violation_detail.resource_violations[0].route_has_out_of_scope_endpoint_violation.internet_gateway_routes[0].target #=> String
     #   resp.violation_detail.resource_tags #=> Array
     #   resp.violation_detail.resource_tags[0].key #=> String
     #   resp.violation_detail.resource_tags[0].value #=> String
@@ -1641,6 +1677,11 @@ module Aws::FMS
     #       security_service_policy_data: { # required
     #         type: "WAF", # required, accepts WAF, WAFV2, SHIELD_ADVANCED, SECURITY_GROUPS_COMMON, SECURITY_GROUPS_CONTENT_AUDIT, SECURITY_GROUPS_USAGE_AUDIT, NETWORK_FIREWALL, DNS_FIREWALL
     #         managed_service_data: "ManagedServiceData",
+    #         policy_option: {
+    #           network_firewall_policy: {
+    #             firewall_deployment_model: "CENTRALIZED", # accepts CENTRALIZED
+    #           },
+    #         },
     #       },
     #       resource_type: "ResourceType", # required
     #       resource_type_list: ["ResourceType"],
@@ -1675,6 +1716,7 @@ module Aws::FMS
     #   resp.policy.policy_update_token #=> String
     #   resp.policy.security_service_policy_data.type #=> String, one of "WAF", "WAFV2", "SHIELD_ADVANCED", "SECURITY_GROUPS_COMMON", "SECURITY_GROUPS_CONTENT_AUDIT", "SECURITY_GROUPS_USAGE_AUDIT", "NETWORK_FIREWALL", "DNS_FIREWALL"
     #   resp.policy.security_service_policy_data.managed_service_data #=> String
+    #   resp.policy.security_service_policy_data.policy_option.network_firewall_policy.firewall_deployment_model #=> String, one of "CENTRALIZED"
     #   resp.policy.resource_type #=> String
     #   resp.policy.resource_type_list #=> Array
     #   resp.policy.resource_type_list[0] #=> String
@@ -1833,7 +1875,7 @@ module Aws::FMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fms'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

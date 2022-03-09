@@ -66,6 +66,7 @@ module Aws::ChimeSDKMeetings
     TranscribeContentRedactionType = Shapes::StringShape.new(name: 'TranscribeContentRedactionType')
     TranscribeLanguageCode = Shapes::StringShape.new(name: 'TranscribeLanguageCode')
     TranscribeLanguageModelName = Shapes::StringShape.new(name: 'TranscribeLanguageModelName')
+    TranscribeLanguageOptions = Shapes::StringShape.new(name: 'TranscribeLanguageOptions')
     TranscribeMedicalContentIdentificationType = Shapes::StringShape.new(name: 'TranscribeMedicalContentIdentificationType')
     TranscribeMedicalLanguageCode = Shapes::StringShape.new(name: 'TranscribeMedicalLanguageCode')
     TranscribeMedicalRegion = Shapes::StringShape.new(name: 'TranscribeMedicalRegion')
@@ -163,7 +164,7 @@ module Aws::ChimeSDKMeetings
     EngineTranscribeMedicalSettings.add_member(:content_identification_type, Shapes::ShapeRef.new(shape: TranscribeMedicalContentIdentificationType, location_name: "ContentIdentificationType"))
     EngineTranscribeMedicalSettings.struct_class = Types::EngineTranscribeMedicalSettings
 
-    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, required: true, location_name: "LanguageCode"))
+    EngineTranscribeSettings.add_member(:language_code, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, location_name: "LanguageCode"))
     EngineTranscribeSettings.add_member(:vocabulary_filter_method, Shapes::ShapeRef.new(shape: TranscribeVocabularyFilterMethod, location_name: "VocabularyFilterMethod"))
     EngineTranscribeSettings.add_member(:vocabulary_filter_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyFilterName"))
     EngineTranscribeSettings.add_member(:vocabulary_name, Shapes::ShapeRef.new(shape: String, location_name: "VocabularyName"))
@@ -174,6 +175,9 @@ module Aws::ChimeSDKMeetings
     EngineTranscribeSettings.add_member(:content_redaction_type, Shapes::ShapeRef.new(shape: TranscribeContentRedactionType, location_name: "ContentRedactionType"))
     EngineTranscribeSettings.add_member(:pii_entity_types, Shapes::ShapeRef.new(shape: TranscribePiiEntityTypes, location_name: "PiiEntityTypes"))
     EngineTranscribeSettings.add_member(:language_model_name, Shapes::ShapeRef.new(shape: TranscribeLanguageModelName, location_name: "LanguageModelName"))
+    EngineTranscribeSettings.add_member(:identify_language, Shapes::ShapeRef.new(shape: Boolean, location_name: "IdentifyLanguage"))
+    EngineTranscribeSettings.add_member(:language_options, Shapes::ShapeRef.new(shape: TranscribeLanguageOptions, location_name: "LanguageOptions"))
+    EngineTranscribeSettings.add_member(:preferred_language, Shapes::ShapeRef.new(shape: TranscribeLanguageCode, location_name: "PreferredLanguage"))
     EngineTranscribeSettings.struct_class = Types::EngineTranscribeSettings
 
     ForbiddenException.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "Code"))
