@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Add x-amz-region-set to list of headers deleted for re-sign.
+
 3.129.1 (2022-03-10)
 ------------------
 
