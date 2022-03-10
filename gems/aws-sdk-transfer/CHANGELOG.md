@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-03-10)
+------------------
+
+* Feature - Adding more descriptive error types for managed workflows
+
 1.50.0 (2022-03-04)
 ------------------
 

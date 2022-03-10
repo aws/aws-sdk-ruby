@@ -2874,7 +2874,7 @@ module Aws::LexModelsV2
     #       {
     #         slot_name: "Name", # required
     #         description: "Description",
-    #         slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         slot_type_id: "BuiltInOrCustomSlotTypeId",
     #         value_elicitation_setting: { # required
     #           default_value_specification: {
     #             default_value_list: [ # required
@@ -12441,7 +12441,7 @@ module Aws::LexModelsV2
     #         slot_id: "Id", # required
     #         slot_name: "Name", # required
     #         description: "Description",
-    #         slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #         slot_type_id: "BuiltInOrCustomSlotTypeId",
     #         value_elicitation_setting: { # required
     #           default_value_specification: {
     #             default_value_list: [ # required

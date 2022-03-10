@@ -657,8 +657,23 @@ module Aws::Transfer
     #   set, user activity can be viewed in your CloudWatch logs.
     #
     # @option params [String] :post_authentication_login_banner
+    #   Specify a string to display when users connect to a server. This
+    #   string is displayed after the user authenticates.
+    #
+    #   <note markdown="1"> The SFTP protocol does not support post-authentication display
+    #   banners.
+    #
+    #    </note>
     #
     # @option params [String] :pre_authentication_login_banner
+    #   Specify a string to display when users connect to a server. This
+    #   string is displayed before the user authenticates. For example, the
+    #   following banner displays details about using the system.
+    #
+    #   `This system is for the use of authorized users only. Individuals
+    #   using this computer system without authority, or in excess of their
+    #   authority, are subject to having all of their activities on this
+    #   system monitored and recorded by system personnel.`
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -1363,12 +1378,12 @@ module Aws::Transfer
     #   resp.execution.results.steps #=> Array
     #   resp.execution.results.steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.execution.results.steps[0].outputs #=> String
-    #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.steps[0].error.message #=> String
     #   resp.execution.results.on_exception_steps #=> Array
     #   resp.execution.results.on_exception_steps[0].step_type #=> String, one of "COPY", "CUSTOM", "TAG", "DELETE"
     #   resp.execution.results.on_exception_steps[0].outputs #=> String
-    #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED"
+    #   resp.execution.results.on_exception_steps[0].error.type #=> String, one of "PERMISSION_DENIED", "CUSTOM_STEP_FAILED", "THROTTLED", "ALREADY_EXISTS", "NOT_FOUND", "BAD_REQUEST", "TIMEOUT", "INTERNAL_SERVER_ERROR"
     #   resp.execution.results.on_exception_steps[0].error.message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeExecution AWS API Documentation
@@ -2572,8 +2587,23 @@ module Aws::Transfer
     #   set, user activity can be viewed in your CloudWatch logs.
     #
     # @option params [String] :post_authentication_login_banner
+    #   Specify a string to display when users connect to a server. This
+    #   string is displayed after the user authenticates.
+    #
+    #   <note markdown="1"> The SFTP protocol does not support post-authentication display
+    #   banners.
+    #
+    #    </note>
     #
     # @option params [String] :pre_authentication_login_banner
+    #   Specify a string to display when users connect to a server. This
+    #   string is displayed before the user authenticates. For example, the
+    #   following banner displays details about using the system.
+    #
+    #   `This system is for the use of authorized users only. Individuals
+    #   using this computer system without authority, or in excess of their
+    #   authority, are subject to having all of their activities on this
+    #   system monitored and recorded by system personnel.`
     #
     # @option params [Array<String>] :protocols
     #   Specifies the file transfer protocol or protocols over which your file
@@ -2830,7 +2860,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
