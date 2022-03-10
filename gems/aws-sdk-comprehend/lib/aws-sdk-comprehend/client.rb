@@ -1766,6 +1766,57 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets the properties associated with a targeted sentiment detection
+    # job. Use this operation to get the status of the job.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #
+    # @return [Types::DescribeTargetedSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeTargetedSentimentDetectionJobResponse#targeted_sentiment_detection_job_properties #targeted_sentiment_detection_job_properties} => Types::TargetedSentimentDetectionJobProperties
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_targeted_sentiment_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targeted_sentiment_detection_job_properties.job_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties.job_arn #=> String
+    #   resp.targeted_sentiment_detection_job_properties.job_name #=> String
+    #   resp.targeted_sentiment_detection_job_properties.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.targeted_sentiment_detection_job_properties.message #=> String
+    #   resp.targeted_sentiment_detection_job_properties.submit_time #=> Time
+    #   resp.targeted_sentiment_detection_job_properties.end_time #=> Time
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.s3_uri #=> String
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.targeted_sentiment_detection_job_properties.input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
+    #   resp.targeted_sentiment_detection_job_properties.output_data_config.s3_uri #=> String
+    #   resp.targeted_sentiment_detection_job_properties.output_data_config.kms_key_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.targeted_sentiment_detection_job_properties.data_access_role_arn #=> String
+    #   resp.targeted_sentiment_detection_job_properties.volume_kms_key_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties.vpc_config.security_group_ids #=> Array
+    #   resp.targeted_sentiment_detection_job_properties.vpc_config.security_group_ids[0] #=> String
+    #   resp.targeted_sentiment_detection_job_properties.vpc_config.subnets #=> Array
+    #   resp.targeted_sentiment_detection_job_properties.vpc_config.subnets[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTargetedSentimentDetectionJob AWS API Documentation
+    #
+    # @overload describe_targeted_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def describe_targeted_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:describe_targeted_sentiment_detection_job, params)
+      req.send_request(options)
+    end
+
     # Gets the properties associated with a topic detection job. Use this
     # operation to get the status of a detection job.
     #
@@ -3002,6 +3053,77 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Gets a list of targeted sentiment detection jobs that you have
+    # submitted.
+    #
+    # @option params [Types::TargetedSentimentDetectionJobFilter] :filter
+    #   Filters the jobs that are returned. You can filter jobs on their name,
+    #   status, or the date and time that they were submitted. You can only
+    #   set one filter at a time.
+    #
+    # @option params [String] :next_token
+    #   Identifies the next page of results to return.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #
+    # @return [Types::ListTargetedSentimentDetectionJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTargetedSentimentDetectionJobsResponse#targeted_sentiment_detection_job_properties_list #targeted_sentiment_detection_job_properties_list} => Array&lt;Types::TargetedSentimentDetectionJobProperties&gt;
+    #   * {Types::ListTargetedSentimentDetectionJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_targeted_sentiment_detection_jobs({
+    #     filter: {
+    #       job_name: "JobName",
+    #       job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #       submit_time_before: Time.now,
+    #       submit_time_after: Time.now,
+    #     },
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.targeted_sentiment_detection_job_properties_list #=> Array
+    #   resp.targeted_sentiment_detection_job_properties_list[0].job_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].job_arn #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].job_name #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].message #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].submit_time #=> Time
+    #   resp.targeted_sentiment_detection_job_properties_list[0].end_time #=> Time
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.s3_uri #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.input_format #=> String, one of "ONE_DOC_PER_FILE", "ONE_DOC_PER_LINE"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_action #=> String, one of "TEXTRACT_DETECT_DOCUMENT_TEXT", "TEXTRACT_ANALYZE_DOCUMENT"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.document_read_mode #=> String, one of "SERVICE_DEFAULT", "FORCE_DOCUMENT_READ_ACTION"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types #=> Array
+    #   resp.targeted_sentiment_detection_job_properties_list[0].input_data_config.document_reader_config.feature_types[0] #=> String, one of "TABLES", "FORMS"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].output_data_config.s3_uri #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
+    #   resp.targeted_sentiment_detection_job_properties_list[0].data_access_role_arn #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].volume_kms_key_id #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].vpc_config.security_group_ids #=> Array
+    #   resp.targeted_sentiment_detection_job_properties_list[0].vpc_config.security_group_ids[0] #=> String
+    #   resp.targeted_sentiment_detection_job_properties_list[0].vpc_config.subnets #=> Array
+    #   resp.targeted_sentiment_detection_job_properties_list[0].vpc_config.subnets[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTargetedSentimentDetectionJobs AWS API Documentation
+    #
+    # @overload list_targeted_sentiment_detection_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_targeted_sentiment_detection_jobs(params = {}, options = {})
+      req = build_request(:list_targeted_sentiment_detection_jobs, params)
+      req.send_request(options)
+    end
+
     # Gets a list of the topic detection jobs that you have submitted.
     #
     # @option params [Types::TopicsDetectionJobFilter] :filter
@@ -3770,7 +3892,7 @@ module Aws::Comprehend
     end
 
     # Starts an asynchronous sentiment detection job for a collection of
-    # documents. use the operation to track the status of a job.
+    # documents. Use the operation to track the status of a job.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   Specifies the format and location of the input data for the job.
@@ -3880,6 +4002,121 @@ module Aws::Comprehend
     # @param [Hash] params ({})
     def start_sentiment_detection_job(params = {}, options = {})
       req = build_request(:start_sentiment_detection_job, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous targeted sentiment detection job for a
+    # collection of documents. Use the operation to track the status of a
+    # job.
+    #
+    # @option params [required, Types::InputDataConfig] :input_data_config
+    #   The input properties for an inference job.
+    #
+    # @option params [required, Types::OutputDataConfig] :output_data_config
+    #   Specifies where to send the output files.
+    #
+    # @option params [required, String] :data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see [Role-based
+    #   permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #
+    # @option params [String] :job_name
+    #   The identifier of the job.
+    #
+    # @option params [required, String] :language_code
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
+    #
+    # @option params [String] :client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [String] :volume_kms_key_id
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt data on the
+    #   storage volume attached to the ML compute instance(s) that process the
+    #   analysis job. The VolumeKmsKeyId can be either of the following
+    #   formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    # @option params [Types::VpcConfig] :vpc_config
+    #   Configuration parameters for an optional private Virtual Private Cloud
+    #   (VPC) containing the resources you are using for the job. For more
+    #   information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to be associated with the targeted sentiment detection job. A tag
+    #   is a key-value pair that adds metadata to a resource used by Amazon
+    #   Comprehend. For example, a tag with "Sales" as the key might be
+    #   added to a resource to indicate its use by the sales department.
+    #
+    # @return [Types::StartTargetedSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTargetedSentimentDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StartTargetedSentimentDetectionJobResponse#job_arn #job_arn} => String
+    #   * {Types::StartTargetedSentimentDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_targeted_sentiment_detection_job({
+    #     input_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #       document_reader_config: {
+    #         document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #         document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #         feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #       },
+    #     },
+    #     output_data_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #       kms_key_id: "KmsKeyId",
+    #     },
+    #     data_access_role_arn: "IamRoleArn", # required
+    #     job_name: "JobName",
+    #     language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #     client_request_token: "ClientRequestTokenString",
+    #     volume_kms_key_id: "KmsKeyId",
+    #     vpc_config: {
+    #       security_group_ids: ["SecurityGroupId"], # required
+    #       subnets: ["SubnetId"], # required
+    #     },
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_arn #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTargetedSentimentDetectionJob AWS API Documentation
+    #
+    # @overload start_targeted_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def start_targeted_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:start_targeted_sentiment_detection_job, params)
       req.send_request(options)
     end
 
@@ -4226,6 +4463,48 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
+    # Stops a targeted sentiment detection job in progress.
+    #
+    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # and put into the `STOP_REQUESTED` state. If the job completes before
+    # it can be stopped, it is put into the `COMPLETED` state; otherwise the
+    # job is be stopped and put into the `STOPPED` state.
+    #
+    # If the job is in the `COMPLETED` or `FAILED` state when you call the
+    # `StopDominantLanguageDetectionJob` operation, the operation returns a
+    # 400 Internal Request Exception.
+    #
+    # When a job is stopped, any documents already processed are written to
+    # the output location.
+    #
+    # @option params [required, String] :job_id
+    #   The identifier of the targeted sentiment detection job to stop.
+    #
+    # @return [Types::StopTargetedSentimentDetectionJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopTargetedSentimentDetectionJobResponse#job_id #job_id} => String
+    #   * {Types::StopTargetedSentimentDetectionJobResponse#job_status #job_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_targeted_sentiment_detection_job({
+    #     job_id: "JobId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_id #=> String
+    #   resp.job_status #=> String, one of "SUBMITTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOP_REQUESTED", "STOPPED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTargetedSentimentDetectionJob AWS API Documentation
+    #
+    # @overload stop_targeted_sentiment_detection_job(params = {})
+    # @param [Hash] params ({})
+    def stop_targeted_sentiment_detection_job(params = {}, options = {})
+      req = build_request(:stop_targeted_sentiment_detection_job, params)
+      req.send_request(options)
+    end
+
     # Stops a document classifier training job while in progress.
     #
     # If the training job state is `TRAINING`, the job is marked for
@@ -4404,7 +4683,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -262,13 +262,17 @@ module Aws
     end
 
     def convert_stub(operation_name, stub)
-      case stub
+      stub = case stub
       when Proc then stub
       when Exception, Class then { error: stub }
       when String then service_error_stub(stub)
       when Hash then http_response_stub(operation_name, stub)
       else { data: stub }
       end
+      if Hash === stub
+        stub[:mutex] = Mutex.new
+      end
+      stub
     end
 
     def service_error_stub(error_code)

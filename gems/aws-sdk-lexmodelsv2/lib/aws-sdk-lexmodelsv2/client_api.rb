@@ -824,7 +824,7 @@ module Aws::LexModelsV2
 
     CreateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     CreateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    CreateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    CreateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, location_name: "slotTypeId"))
     CreateSlotRequest.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
     CreateSlotRequest.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
     CreateSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))
@@ -2001,7 +2001,7 @@ module Aws::LexModelsV2
     UpdateSlotRequest.add_member(:slot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "slotId"))
     UpdateSlotRequest.add_member(:slot_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "slotName"))
     UpdateSlotRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
-    UpdateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, required: true, location_name: "slotTypeId"))
+    UpdateSlotRequest.add_member(:slot_type_id, Shapes::ShapeRef.new(shape: BuiltInOrCustomSlotTypeId, location_name: "slotTypeId"))
     UpdateSlotRequest.add_member(:value_elicitation_setting, Shapes::ShapeRef.new(shape: SlotValueElicitationSetting, required: true, location_name: "valueElicitationSetting"))
     UpdateSlotRequest.add_member(:obfuscation_setting, Shapes::ShapeRef.new(shape: ObfuscationSetting, location_name: "obfuscationSetting"))
     UpdateSlotRequest.add_member(:bot_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "botId"))

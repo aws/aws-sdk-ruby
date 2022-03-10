@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2022-03-10)
+------------------
+
+* Feature - This release makes slotTypeId an optional parameter in CreateSlot and UpdateSlot APIs in Amazon Lex V2 for model building. Customers can create and update slots without specifying a slot type id.
+
 1.22.0 (2022-02-24)
 ------------------
 

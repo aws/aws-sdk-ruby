@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-03-09)
+------------------
+
+* Feature - Amazon Comprehend now supports extracting the sentiment associated with entities such as brands, products and services from text documents.
+
 1.59.0 (2022-02-24)
 ------------------
 

@@ -1893,7 +1893,7 @@ module Aws::LexModelsV2
     #   A description of the slot. Use this to help identify the slot in
     #   lists.
     #
-    # @option params [required, String] :slot_type_id
+    # @option params [String] :slot_type_id
     #   The unique identifier for the slot type associated with this slot. The
     #   slot type determines the values that can be entered into the slot.
     #
@@ -1957,7 +1957,7 @@ module Aws::LexModelsV2
     #   resp = client.create_slot({
     #     slot_name: "Name", # required
     #     description: "Description",
-    #     slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #     slot_type_id: "BuiltInOrCustomSlotTypeId",
     #     value_elicitation_setting: { # required
     #       default_value_specification: {
     #         default_value_list: [ # required
@@ -6969,7 +6969,7 @@ module Aws::LexModelsV2
     # @option params [String] :description
     #   The new description for the slot.
     #
-    # @option params [required, String] :slot_type_id
+    # @option params [String] :slot_type_id
     #   The unique identifier of the new slot type to associate with this
     #   slot.
     #
@@ -7030,7 +7030,7 @@ module Aws::LexModelsV2
     #     slot_id: "Id", # required
     #     slot_name: "Name", # required
     #     description: "Description",
-    #     slot_type_id: "BuiltInOrCustomSlotTypeId", # required
+    #     slot_type_id: "BuiltInOrCustomSlotTypeId",
     #     value_elicitation_setting: { # required
     #       default_value_specification: {
     #         default_value_list: [ # required
@@ -7536,7 +7536,7 @@ module Aws::LexModelsV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

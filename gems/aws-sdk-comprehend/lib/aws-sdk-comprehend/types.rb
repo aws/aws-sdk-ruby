@@ -1650,6 +1650,39 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeTargetedSentimentDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier that Amazon Comprehend generated for the job. The
+    #   operation returns this identifier in its response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTargetedSentimentDetectionJobRequest AWS API Documentation
+    #
+    class DescribeTargetedSentimentDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] targeted_sentiment_detection_job_properties
+    #   An object that contains the properties associated with a targeted
+    #   sentiment detection job.
+    #   @return [Types::TargetedSentimentDetectionJobProperties]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DescribeTargetedSentimentDetectionJobResponse AWS API Documentation
+    #
+    class DescribeTargetedSentimentDetectionJobResponse < Struct.new(
+      :targeted_sentiment_detection_job_properties)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeTopicsDetectionJobRequest
     #   data as a hash:
     #
@@ -3203,8 +3236,10 @@ module Aws::Comprehend
     # @!attribute [rw] f1_score
     #   A measure of how accurate the recognizer results are for the test
     #   data. It is derived from the `Precision` and `Recall` values. The
-    #   `F1Score` is the harmonic average of the two scores. The highest
-    #   score is 1, and the worst score is 0.
+    #   `F1Score` is the harmonic average of the two scores. For plain text
+    #   entity recognizer models, the range is 0 to 100, where 100 is the
+    #   best score. For PDF/Word entity recognizer models, the range is 0 to
+    #   1, where 1 is the best score.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/EntityRecognizerEvaluationMetrics AWS API Documentation
@@ -4865,6 +4900,62 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTargetedSentimentDetectionJobsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         filter: {
+    #           job_name: "JobName",
+    #           job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #           submit_time_before: Time.now,
+    #           submit_time_after: Time.now,
+    #         },
+    #         next_token: "String",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] filter
+    #   Filters the jobs that are returned. You can filter jobs on their
+    #   name, status, or the date and time that they were submitted. You can
+    #   only set one filter at a time.
+    #   @return [Types::TargetedSentimentDetectionJobFilter]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in each page. The default is
+    #   100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTargetedSentimentDetectionJobsRequest AWS API Documentation
+    #
+    class ListTargetedSentimentDetectionJobsRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] targeted_sentiment_detection_job_properties_list
+    #   A list containing the properties of each job that is returned.
+    #   @return [Array<Types::TargetedSentimentDetectionJobProperties>]
+    #
+    # @!attribute [rw] next_token
+    #   Identifies the next page of results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ListTargetedSentimentDetectionJobsResponse AWS API Documentation
+    #
+    class ListTargetedSentimentDetectionJobsResponse < Struct.new(
+      :targeted_sentiment_detection_job_properties_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTopicsDetectionJobsRequest
     #   data as a hash:
     #
@@ -4921,8 +5012,7 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Provides configuration parameters for the output of topic detection
-    # jobs.
+    # Provides configuration parameters for the output of inference jobs.
     #
     # @note When making an API call, you may pass OutputDataConfig
     #   data as a hash:
@@ -4943,6 +5033,10 @@ module Aws::Comprehend
     #   output file in a directory specific to the job. The `S3Uri` field
     #   contains the location of the output file, called `output.tar.gz`. It
     #   is a compressed archive that contains the ouput of the operation.
+    #
+    #   For a PII entity detection job, the output file is plain text, not a
+    #   compressed archive. The output file name is the same as the input
+    #   file, with `.out` appended at the end.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -5178,6 +5272,10 @@ module Aws::Comprehend
     #   When you use the `PiiOutputDataConfig` object with asynchronous
     #   operations, you specify the Amazon S3 location where you want to
     #   write the output data.
+    #
+    #   For a PII entity detection job, the output file is plain text, not a
+    #   compressed archive. The output file name is the same as the input
+    #   file, with `.out` appended at the end.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
@@ -6580,6 +6678,166 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartTargetedSentimentDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         input_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           input_format: "ONE_DOC_PER_FILE", # accepts ONE_DOC_PER_FILE, ONE_DOC_PER_LINE
+    #           document_reader_config: {
+    #             document_read_action: "TEXTRACT_DETECT_DOCUMENT_TEXT", # required, accepts TEXTRACT_DETECT_DOCUMENT_TEXT, TEXTRACT_ANALYZE_DOCUMENT
+    #             document_read_mode: "SERVICE_DEFAULT", # accepts SERVICE_DEFAULT, FORCE_DOCUMENT_READ_ACTION
+    #             feature_types: ["TABLES"], # accepts TABLES, FORMS
+    #           },
+    #         },
+    #         output_data_config: { # required
+    #           s3_uri: "S3Uri", # required
+    #           kms_key_id: "KmsKeyId",
+    #         },
+    #         data_access_role_arn: "IamRoleArn", # required
+    #         job_name: "JobName",
+    #         language_code: "en", # required, accepts en, es, fr, de, it, pt, ar, hi, ja, ko, zh, zh-TW
+    #         client_request_token: "ClientRequestTokenString",
+    #         volume_kms_key_id: "KmsKeyId",
+    #         vpc_config: {
+    #           security_group_ids: ["SecurityGroupId"], # required
+    #           subnets: ["SubnetId"], # required
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for an inference job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Specifies where to send the output files.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) of the AWS Identity and Access
+    #   Management (IAM) role that grants Amazon Comprehend read access to
+    #   your input data. For more information, see [Role-based
+    #   permissions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions.html#auth-role-permissions
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The identifier of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] language_code
+    #   The language of the input documents. You can specify any of the
+    #   primary languages supported by Amazon Comprehend. All documents must
+    #   be in the same language.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_request_token
+    #   A unique identifier for the request. If you don't set the client
+    #   request token, Amazon Comprehend generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the KMS key that Amazon Comprehend uses to encrypt data on
+    #   the storage volume attached to the ML compute instance(s) that
+    #   process the analysis job. The VolumeKmsKeyId can be either of the
+    #   following formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for the job. For
+    #   more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @!attribute [rw] tags
+    #   Tags to be associated with the targeted sentiment detection job. A
+    #   tag is a key-value pair that adds metadata to a resource used by
+    #   Amazon Comprehend. For example, a tag with "Sales" as the key
+    #   might be added to a resource to indicate its use by the sales
+    #   department.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTargetedSentimentDetectionJobRequest AWS API Documentation
+    #
+    class StartTargetedSentimentDetectionJobRequest < Struct.new(
+      :input_data_config,
+      :output_data_config,
+      :data_access_role_arn,
+      :job_name,
+      :language_code,
+      :client_request_token,
+      :volume_kms_key_id,
+      :vpc_config,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier generated for the job. To get the status of a job,
+    #   use this identifier with the operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the targeted sentiment detection
+    #   job. It is a unique, fully qualified identifier for the job. It
+    #   includes the AWS account, Region, and the job ID. The format of the
+    #   ARN is as follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The status of the job.
+    #
+    #   * SUBMITTED - The job has been received and is queued for
+    #     processing.
+    #
+    #   * IN\_PROGRESS - Amazon Comprehend is processing the job.
+    #
+    #   * COMPLETED - The job was successfully completed and the output is
+    #     available.
+    #
+    #   * FAILED - The job did not complete. To get details, use the
+    #     operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StartTargetedSentimentDetectionJobResponse AWS API Documentation
+    #
+    class StartTargetedSentimentDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_arn,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StartTopicsDetectionJobRequest
     #   data as a hash:
     #
@@ -6964,6 +7222,44 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StopTargetedSentimentDetectionJobRequest
+    #   data as a hash:
+    #
+    #       {
+    #         job_id: "JobId", # required
+    #       }
+    #
+    # @!attribute [rw] job_id
+    #   The identifier of the targeted sentiment detection job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTargetedSentimentDetectionJobRequest AWS API Documentation
+    #
+    class StopTargetedSentimentDetectionJobRequest < Struct.new(
+      :job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_id
+    #   The identifier of the targeted sentiment detection job to stop.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Either `STOP_REQUESTED` if the job is currently running, or
+    #   `STOPPED` if the job was previously stopped with the
+    #   `StopSentimentDetectionJob` operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/StopTargetedSentimentDetectionJobResponse AWS API Documentation
+    #
+    class StopTargetedSentimentDetectionJobResponse < Struct.new(
+      :job_id,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopTrainingDocumentClassifierRequest
     #   data as a hash:
     #
@@ -7126,6 +7422,155 @@ module Aws::Comprehend
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TagResourceResponse AWS API Documentation
     #
     class TagResourceResponse < Aws::EmptyStructure; end
+
+    # Provides information for filtering a list of dominant language
+    # detection jobs. For more information, see the operation.
+    #
+    # @note When making an API call, you may pass TargetedSentimentDetectionJobFilter
+    #   data as a hash:
+    #
+    #       {
+    #         job_name: "JobName",
+    #         job_status: "SUBMITTED", # accepts SUBMITTED, IN_PROGRESS, COMPLETED, FAILED, STOP_REQUESTED, STOPPED
+    #         submit_time_before: Time.now,
+    #         submit_time_after: Time.now,
+    #       }
+    #
+    # @!attribute [rw] job_name
+    #   Filters on the name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Filters the list of jobs based on job status. Returns only jobs with
+    #   the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time_before
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted before the
+    #   specified time. Jobs are returned in ascending order, oldest to
+    #   newest.
+    #   @return [Time]
+    #
+    # @!attribute [rw] submit_time_after
+    #   Filters the list of jobs based on the time that the job was
+    #   submitted for processing. Returns only jobs submitted after the
+    #   specified time. Jobs are returned in descending order, newest to
+    #   oldest.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TargetedSentimentDetectionJobFilter AWS API Documentation
+    #
+    class TargetedSentimentDetectionJobFilter < Struct.new(
+      :job_name,
+      :job_status,
+      :submit_time_before,
+      :submit_time_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a targeted sentiment detection job.
+    #
+    # @!attribute [rw] job_id
+    #   The identifier assigned to the targeted sentiment detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_arn
+    #   The Amazon Resource Name (ARN) of the targeted sentiment detection
+    #   job. It is a unique, fully qualified identifier for the job. It
+    #   includes the AWS account, Region, and the job ID. The format of the
+    #   ARN is as follows:
+    #
+    #   `arn:<partition>:comprehend:<region>:<account-id>:targeted-sentiment-detection-job/<job-id>`
+    #
+    #   The following is an example job ARN:
+    #
+    #   `arn:aws:comprehend:us-west-2:111122223333:targeted-sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab`
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name that you assigned to the targeted sentiment detection job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   The current status of the targeted sentiment detection job. If the
+    #   status is `FAILED`, the `Messages` field shows the reason for the
+    #   failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the status of a job.
+    #   @return [String]
+    #
+    # @!attribute [rw] submit_time
+    #   The time that the targeted sentiment detection job was submitted for
+    #   processing.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time that the targeted sentiment detection job ended.
+    #   @return [Time]
+    #
+    # @!attribute [rw] input_data_config
+    #   The input properties for an inference job.
+    #   @return [Types::InputDataConfig]
+    #
+    # @!attribute [rw] output_data_config
+    #   Provides configuration parameters for the output of inference jobs.
+    #   @return [Types::OutputDataConfig]
+    #
+    # @!attribute [rw] language_code
+    #   The language code of the input documents.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_access_role_arn
+    #   The Amazon Resource Name (ARN) that gives Amazon Comprehend read
+    #   access to your input data.
+    #   @return [String]
+    #
+    # @!attribute [rw] volume_kms_key_id
+    #   ID for the AWS Key Management Service (KMS) key that Amazon
+    #   Comprehend uses to encrypt data on the storage volume attached to
+    #   the ML compute instance(s) that process the targeted sentiment
+    #   detection job. The VolumeKmsKeyId can be either of the following
+    #   formats:
+    #
+    #   * KMS Key ID: `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * Amazon Resource Name (ARN) of a KMS Key:
+    #     `"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_config
+    #   Configuration parameters for an optional private Virtual Private
+    #   Cloud (VPC) containing the resources you are using for the job. For
+    #   more information, see [Amazon VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   @return [Types::VpcConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/TargetedSentimentDetectionJobProperties AWS API Documentation
+    #
+    class TargetedSentimentDetectionJobProperties < Struct.new(
+      :job_id,
+      :job_arn,
+      :job_name,
+      :job_status,
+      :message,
+      :submit_time,
+      :end_time,
+      :input_data_config,
+      :output_data_config,
+      :language_code,
+      :data_access_role_arn,
+      :volume_kms_key_id,
+      :vpc_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # The size of the input text exceeds the limit. Use a smaller document.
     #

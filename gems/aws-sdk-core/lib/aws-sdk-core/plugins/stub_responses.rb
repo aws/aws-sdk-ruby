@@ -51,7 +51,11 @@ requests are made, and retries are disabled.
           stub = context.client.next_stub(context)
           resp = Seahorse::Client::Response.new(context: context)
           async_mode = context.client.is_a? Seahorse::Client::AsyncBase
-          apply_stub(stub, resp, async_mode)
+          if Hash === stub && stub[:mutex]
+            stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }
+          else
+            apply_stub(stub, resp, async_mode)
+          end
 
           async_mode ? Seahorse::Client::AsyncResponse.new(
             context: context, stream: context[:input_event_stream_handler].event_emitter.stream, sync_queue: Queue.new) : resp
