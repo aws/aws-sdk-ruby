@@ -98,6 +98,7 @@ module Aws
           req.headers.delete('Authorization')
           req.headers.delete('X-Amz-Security-Token')
           req.headers.delete('X-Amz-Date')
+          req.headers.delete('x-Amz-Region-Set')
 
           if context.config.respond_to?(:clock_skew) &&
              context.config.clock_skew &&

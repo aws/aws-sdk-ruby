@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-03-10)
+------------------
+
+* Feature - Documentation fix for API `StartMedicalTranscriptionJobRequest`, now showing min sample rate as 16khz
+
 1.72.0 (2022-02-24)
 ------------------
 
