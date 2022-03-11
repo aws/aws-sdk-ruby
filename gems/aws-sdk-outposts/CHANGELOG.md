@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2022-03-11)
+------------------
+
+* Feature - This release adds address filters for listSites
+
 1.29.0 (2022-02-24)
 ------------------
 

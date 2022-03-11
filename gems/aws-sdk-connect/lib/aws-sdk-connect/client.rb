@@ -5202,6 +5202,10 @@ module Aws::Connect
     #   configurable time is 60 minutes. The maximum configurable time is
     #   10,080 minutes (7 days).
     #
+    # @option params [Array<String>] :supported_messaging_content_types
+    #   The supported chat message content types. Content types can be
+    #   text/plain or both text/plain and text/markdown.
+    #
     # @return [Types::StartChatContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartChatContactResponse#contact_id #contact_id} => String
@@ -5225,6 +5229,7 @@ module Aws::Connect
     #     },
     #     client_token: "ClientToken",
     #     chat_duration_in_minutes: 1,
+    #     supported_messaging_content_types: ["SupportedMessagingContentType"],
     #   })
     #
     # @example Response structure
@@ -5242,7 +5247,14 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Starts recording the contact when the agent joins the call.
+    # Starts recording the contact:
+    #
+    # * If the API is called *before* the agent joins the call, recording
+    #   starts when the agent joins the call.
+    #
+    # * If the API is called *after* the agent joins the call, recording
+    #   starts at the time of the API call.
+    #
     # StartContactRecording is a one-time action. For example, if you use
     # StopContactRecording to stop recording an ongoing call, you can't use
     # StartContactRecording to restart it. For scenarios where the recording
@@ -5567,7 +5579,16 @@ module Aws::Connect
       req.send_request(options)
     end
 
-    # Ends the specified contact.
+    # Ends the specified contact. This call does not work for the following
+    # initiation methods:
+    #
+    # * CALLBACK
+    #
+    # * DISCONNECT
+    #
+    # * TRANSFER
+    #
+    # * QUEUE\_TRANSFER
     #
     # @option params [required, String] :contact_id
     #   The ID of the contact.
@@ -7054,7 +7075,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

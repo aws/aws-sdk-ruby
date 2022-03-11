@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-03-11)
+------------------
+
+* Feature - Amazon Transcribe StartTranscription API now supports additional parameters for Language Identification feature: customVocabularies and customFilterVocabularies
+
 1.41.0 (2022-02-24)
 ------------------
 

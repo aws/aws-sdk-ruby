@@ -35,10 +35,12 @@ module Aws::Outposts
     CatalogItemStatus = Shapes::StringShape.new(name: 'CatalogItemStatus')
     CatalogItemWeightLbs = Shapes::IntegerShape.new(name: 'CatalogItemWeightLbs')
     City = Shapes::StringShape.new(name: 'City')
+    CityList = Shapes::ListShape.new(name: 'CityList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContactName = Shapes::StringShape.new(name: 'ContactName')
     ContactPhoneNumber = Shapes::StringShape.new(name: 'ContactPhoneNumber')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
+    CountryCodeList = Shapes::ListShape.new(name: 'CountryCodeList')
     CreateOrderInput = Shapes::StructureShape.new(name: 'CreateOrderInput')
     CreateOrderOutput = Shapes::StructureShape.new(name: 'CreateOrderOutput')
     CreateOutpostInput = Shapes::StructureShape.new(name: 'CreateOutpostInput')
@@ -132,6 +134,7 @@ module Aws::Outposts
     SiteNotes = Shapes::StringShape.new(name: 'SiteNotes')
     SkuCode = Shapes::StringShape.new(name: 'SkuCode')
     StateOrRegion = Shapes::StringShape.new(name: 'StateOrRegion')
+    StateOrRegionList = Shapes::ListShape.new(name: 'StateOrRegionList')
     String = Shapes::StringShape.new(name: 'String')
     SupportedHardwareType = Shapes::StringShape.new(name: 'SupportedHardwareType')
     SupportedStorageEnum = Shapes::StringShape.new(name: 'SupportedStorageEnum')
@@ -199,10 +202,14 @@ module Aws::Outposts
 
     CatalogItemListDefinition.member = Shapes::ShapeRef.new(shape: CatalogItem)
 
+    CityList.member = Shapes::ShapeRef.new(shape: City)
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ConflictException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "ResourceId"))
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ConflictException.struct_class = Types::ConflictException
+
+    CountryCodeList.member = Shapes::ShapeRef.new(shape: CountryCode)
 
     CreateOrderInput.add_member(:outpost_identifier, Shapes::ShapeRef.new(shape: OutpostIdentifier, required: true, location_name: "OutpostIdentifier"))
     CreateOrderInput.add_member(:line_items, Shapes::ShapeRef.new(shape: LineItemRequestListDefinition, required: true, location_name: "LineItems"))
@@ -360,6 +367,9 @@ module Aws::Outposts
 
     ListSitesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "NextToken"))
     ListSitesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults1000, location: "querystring", location_name: "MaxResults"))
+    ListSitesInput.add_member(:operating_address_country_code_filter, Shapes::ShapeRef.new(shape: CountryCodeList, location: "querystring", location_name: "OperatingAddressCountryCodeFilter"))
+    ListSitesInput.add_member(:operating_address_state_or_region_filter, Shapes::ShapeRef.new(shape: StateOrRegionList, location: "querystring", location_name: "OperatingAddressStateOrRegionFilter"))
+    ListSitesInput.add_member(:operating_address_city_filter, Shapes::ShapeRef.new(shape: CityList, location: "querystring", location_name: "OperatingAddressCityFilter"))
     ListSitesInput.struct_class = Types::ListSitesInput
 
     ListSitesOutput.add_member(:sites, Shapes::ShapeRef.new(shape: siteListDefinition, location_name: "Sites"))
@@ -435,6 +445,8 @@ module Aws::Outposts
     Site.add_member(:operating_address_city, Shapes::ShapeRef.new(shape: City, location_name: "OperatingAddressCity"))
     Site.add_member(:rack_physical_properties, Shapes::ShapeRef.new(shape: RackPhysicalProperties, location_name: "RackPhysicalProperties"))
     Site.struct_class = Types::Site
+
+    StateOrRegionList.member = Shapes::ShapeRef.new(shape: StateOrRegion)
 
     SupportedStorageList.member = Shapes::ShapeRef.new(shape: SupportedStorageEnum)
 

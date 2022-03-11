@@ -549,7 +549,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] content_type
-    #   The type of the content. Supported types are text and plain.
+    #   The type of the content. Supported types are `text/plain`.
     #   @return [String]
     #
     # @!attribute [rw] content
@@ -7527,6 +7527,7 @@ module Aws::Connect
     #         },
     #         client_token: "ClientToken",
     #         chat_duration_in_minutes: 1,
+    #         supported_messaging_content_types: ["SupportedMessagingContentType"],
     #       }
     #
     # @!attribute [rw] instance_id
@@ -7578,6 +7579,11 @@ module Aws::Connect
     #   time is 10,080 minutes (7 days).
     #   @return [Integer]
     #
+    # @!attribute [rw] supported_messaging_content_types
+    #   The supported chat message content types. Content types can be
+    #   text/plain or both text/plain and text/markdown.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartChatContactRequest AWS API Documentation
     #
     class StartChatContactRequest < Struct.new(
@@ -7587,7 +7593,8 @@ module Aws::Connect
       :participant_details,
       :initial_message,
       :client_token,
-      :chat_duration_in_minutes)
+      :chat_duration_in_minutes,
+      :supported_messaging_content_types)
       SENSITIVE = []
       include Aws::Structure
     end

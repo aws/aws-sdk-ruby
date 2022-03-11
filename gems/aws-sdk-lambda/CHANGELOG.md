@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.81.0 (2022-03-11)
+------------------
+
+* Feature - Adds PrincipalOrgID support to AddPermission API. Customers can use it to manage permissions to lambda functions at AWS Organizations level.
+
 1.80.0 (2022-02-24)
 ------------------
 

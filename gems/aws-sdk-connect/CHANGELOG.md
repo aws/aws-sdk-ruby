@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-03-11)
+------------------
+
+* Feature - This release adds support for enabling Rich Messaging when starting a new chat session via the StartChatContact API. Rich Messaging enables the following formatting options: bold, italics, hyperlinks, bulleted lists, and numbered lists.
+
 1.66.0 (2022-03-04)
 ------------------
 

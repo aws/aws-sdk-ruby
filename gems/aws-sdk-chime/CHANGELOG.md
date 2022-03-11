@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-03-11)
+------------------
+
+* Feature - Chime VoiceConnector Logging APIs will now support MediaMetricLogs. Also CreateMeetingDialOut now returns AccessDeniedException.
+
 1.66.0 (2022-02-24)
 ------------------
 

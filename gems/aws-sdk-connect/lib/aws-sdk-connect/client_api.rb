@@ -462,6 +462,8 @@ module Aws::Connect
     StorageType = Shapes::StringShape.new(name: 'StorageType')
     StreamingId = Shapes::StringShape.new(name: 'StreamingId')
     String = Shapes::StringShape.new(name: 'String')
+    SupportedMessagingContentType = Shapes::StringShape.new(name: 'SupportedMessagingContentType')
+    SupportedMessagingContentTypes = Shapes::ListShape.new(name: 'SupportedMessagingContentTypes')
     SuspendContactRecordingRequest = Shapes::StructureShape.new(name: 'SuspendContactRecordingRequest')
     SuspendContactRecordingResponse = Shapes::StructureShape.new(name: 'SuspendContactRecordingResponse')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -1864,6 +1866,7 @@ module Aws::Connect
     StartChatContactRequest.add_member(:initial_message, Shapes::ShapeRef.new(shape: ChatMessage, location_name: "InitialMessage"))
     StartChatContactRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     StartChatContactRequest.add_member(:chat_duration_in_minutes, Shapes::ShapeRef.new(shape: ChatDurationInMinutes, location_name: "ChatDurationInMinutes"))
+    StartChatContactRequest.add_member(:supported_messaging_content_types, Shapes::ShapeRef.new(shape: SupportedMessagingContentTypes, location_name: "SupportedMessagingContentTypes"))
     StartChatContactRequest.struct_class = Types::StartChatContactRequest
 
     StartChatContactResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
@@ -1936,6 +1939,8 @@ module Aws::Connect
     StopContactStreamingRequest.struct_class = Types::StopContactStreamingRequest
 
     StopContactStreamingResponse.struct_class = Types::StopContactStreamingResponse
+
+    SupportedMessagingContentTypes.member = Shapes::ShapeRef.new(shape: SupportedMessagingContentType)
 
     SuspendContactRecordingRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     SuspendContactRecordingRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))

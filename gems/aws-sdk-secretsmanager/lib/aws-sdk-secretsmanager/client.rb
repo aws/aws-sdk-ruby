@@ -648,7 +648,7 @@ module Aws::SecretsManager
     #     client_request_token: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
     #     description: "My test database secret created with the CLI", 
     #     name: "MyTestDatabaseSecret", 
-    #     secret_string: "{\"username\":\"david\",\"password\":\"BnQw!XDWgaEeT9XGTT29\"}", 
+    #     secret_string: "{\"username\":\"david\",\"password\":\"EXAMPLE-PASSWORD\"}", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -933,7 +933,9 @@ module Aws::SecretsManager
     #     rotation_enabled: true, 
     #     rotation_lambda_arn: "arn:aws:lambda:us-west-2:123456789012:function:MyTestRotationLambda", 
     #     rotation_rules: {
-    #       automatically_after_days: 30, 
+    #       automatically_after_days: 14, 
+    #       duration: "2h", 
+    #       schedule_expression: "cron(0 16 1,15 * ? *)", 
     #     }, 
     #     tags: [
     #       {
@@ -1068,7 +1070,7 @@ module Aws::SecretsManager
     #
     #   resp.to_h outputs the following:
     #   {
-    #     random_password: "N+Z43a,>vx7j O8^*<8i3", 
+    #     random_password: "EXAMPLE-PASSWORD", 
     #   }
     #
     # @example Request syntax with placeholder values
@@ -1225,13 +1227,10 @@ module Aws::SecretsManager
     #
     # @example Example: To retrieve the encrypted secret value of a secret
     #
-    #   # The following example shows how to retrieve the secret string value from the version of the secret that has the
-    #   # AWSPREVIOUS staging label attached. If you want to retrieve the AWSCURRENT version of the secret, then you can omit the
-    #   # VersionStage parameter because it defaults to AWSCURRENT.
+    #   # The following example shows how to retrieve a secret string value.
     #
     #   resp = client.get_secret_value({
     #     secret_id: "MyTestDatabaseSecret", 
-    #     version_stage: "AWSPREVIOUS", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -1239,7 +1238,7 @@ module Aws::SecretsManager
     #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
     #     created_date: Time.parse(1523477145.713), 
     #     name: "MyTestDatabaseSecret", 
-    #     secret_string: "{\n  \"username\":\"david\",\n  \"password\":\"BnQw&XDWgaEeT9XGTT29\"\n}\n", 
+    #     secret_string: "{\n  \"username\":\"david\",\n  \"password\":\"EXAMPLE-PASSWORD\"\n}\n", 
     #     version_id: "EXAMPLE1-90ab-cdef-fedc-ba987SECRET1", 
     #     version_stages: [
     #       "AWSPREVIOUS", 
@@ -1392,7 +1391,8 @@ module Aws::SecretsManager
     end
 
     # Lists the secrets that are stored by Secrets Manager in the Amazon Web
-    # Services account.
+    # Services account, not including secrets that are marked for deletion.
+    # To see secrets marked for deletion, use the Secrets Manager console.
     #
     # To list the versions of a secret, use ListSecretVersionIds.
     #
@@ -1742,7 +1742,7 @@ module Aws::SecretsManager
     #   resp = client.put_secret_value({
     #     client_request_token: "EXAMPLE2-90ab-cdef-fedc-ba987EXAMPLE", 
     #     secret_id: "MyTestDatabaseSecret", 
-    #     secret_string: "{\"username\":\"david\",\"password\":\"BnQw!XDWgaEeT9XGTT29\"}", 
+    #     secret_string: "{\"username\":\"david\",\"password\":\"EXAMPLE-PASSWORD\"}", 
     #   })
     #
     #   resp.to_h outputs the following:
@@ -2739,7 +2739,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.58.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

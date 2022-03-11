@@ -164,6 +164,7 @@ module Aws::Lambda
     #         event_source_token: "EventSourceToken",
     #         qualifier: "Qualifier",
     #         revision_id: "String",
+    #         principal_org_id: "PrincipalOrgID",
     #       }
     #
     # @!attribute [rw] function_name
@@ -233,6 +234,12 @@ module Aws::Lambda
     #   changed since you last read it.
     #   @return [String]
     #
+    # @!attribute [rw] principal_org_id
+    #   The identifier for your organization in Organizations. Use this to
+    #   grant permissions to all the Amazon Web Services accounts under this
+    #   organization.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
     #
     class AddPermissionRequest < Struct.new(
@@ -244,7 +251,8 @@ module Aws::Lambda
       :source_account,
       :event_source_token,
       :qualifier,
-      :revision_id)
+      :revision_id,
+      :principal_org_id)
       SENSITIVE = []
       include Aws::Structure
     end

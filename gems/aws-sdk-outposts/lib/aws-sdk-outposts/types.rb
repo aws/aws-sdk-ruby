@@ -1013,6 +1013,9 @@ module Aws::Outposts
     #       {
     #         next_token: "Token",
     #         max_results: 1,
+    #         operating_address_country_code_filter: ["CountryCode"],
+    #         operating_address_state_or_region_filter: ["StateOrRegion"],
+    #         operating_address_city_filter: ["City"],
     #       }
     #
     # @!attribute [rw] next_token
@@ -1023,11 +1026,38 @@ module Aws::Outposts
     #   The maximum page size.
     #   @return [Integer]
     #
+    # @!attribute [rw] operating_address_country_code_filter
+    #   A filter for the country code of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operating_address_state_or_region_filter
+    #   A filter for the state/region of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] operating_address_city_filter
+    #   A filter for the city of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListSitesInput AWS API Documentation
     #
     class ListSitesInput < Struct.new(
       :next_token,
-      :max_results)
+      :max_results,
+      :operating_address_country_code_filter,
+      :operating_address_state_or_region_filter,
+      :operating_address_city_filter)
       SENSITIVE = []
       include Aws::Structure
     end

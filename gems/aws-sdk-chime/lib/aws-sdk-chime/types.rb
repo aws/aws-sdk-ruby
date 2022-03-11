@@ -1777,7 +1777,7 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags assigned to the `AppInstanceUser`.
+    #   Tags assigned to the `AppInstance`.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/CreateAppInstanceRequest AWS API Documentation
@@ -4449,8 +4449,8 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] content_identification_type
-    #   Set this field to `PII` to identify personal health information in
-    #   the transcription output.
+    #   Set this field to `PII` to identify personally identifiable
+    #   information in the transcription output.
     #   @return [String]
     #
     # @!attribute [rw] content_redaction_type
@@ -7192,17 +7192,23 @@ module Aws::Chime
     #
     #       {
     #         enable_sip_logs: false,
+    #         enable_media_metric_logs: false,
     #       }
     #
     # @!attribute [rw] enable_sip_logs
-    #   When true, enables SIP message logs for sending to Amazon CloudWatch
-    #   Logs.
+    #   Boolean that enables SIP message logs to CloudWatch logs.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] enable_media_metric_logs
+    #   Boolean that enables logging of detailed media metrics for Voice
+    #   Connectors to CloudWatch logs.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/LoggingConfiguration AWS API Documentation
     #
     class LoggingConfiguration < Struct.new(
-      :enable_sip_logs)
+      :enable_sip_logs,
+      :enable_media_metric_logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7328,7 +7334,7 @@ module Aws::Chime
     #   @return [String]
     #
     # @!attribute [rw] event_ingestion_url
-    #   The event ingestion URL.
+    #   The event ingestion URL to which you send client meeting events.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-2018-05-01/MediaPlacement AWS API Documentation
@@ -8285,6 +8291,7 @@ module Aws::Chime
     #         voice_connector_id: "NonEmptyString", # required
     #         logging_configuration: { # required
     #           enable_sip_logs: false,
+    #           enable_media_metric_logs: false,
     #         },
     #       }
     #

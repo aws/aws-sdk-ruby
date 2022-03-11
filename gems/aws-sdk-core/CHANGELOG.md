@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.130.0 (2022-03-11)
+------------------
+
 * Feature - Asynchronously refresh AWS credentials (#2641).
 
 * Issue - Add x-amz-region-set to list of headers deleted for re-sign.

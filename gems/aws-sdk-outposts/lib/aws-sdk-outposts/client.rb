@@ -1120,13 +1120,41 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the sites for your Amazon Web Services account.
+    # Create a list of the Outpost sites for your Amazon Web Services
+    # account. Add operating address filters to your request to return a
+    # more specific list of results. Use filters to match site city, country
+    # code, or state/region of the operating address.
+    #
+    # If you specify multiple filters, the filters are joined with an `AND`,
+    # and the request returns only results that match all of the specified
+    # filters.
     #
     # @option params [String] :next_token
     #   The pagination token.
     #
     # @option params [Integer] :max_results
     #   The maximum page size.
+    #
+    # @option params [Array<String>] :operating_address_country_code_filter
+    #   A filter for the country code of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :operating_address_state_or_region_filter
+    #   A filter for the state/region of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Array<String>] :operating_address_city_filter
+    #   A filter for the city of the Outpost site.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
     #
     # @return [Types::ListSitesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1140,6 +1168,9 @@ module Aws::Outposts
     #   resp = client.list_sites({
     #     next_token: "Token",
     #     max_results: 1,
+    #     operating_address_country_code_filter: ["CountryCode"],
+    #     operating_address_state_or_region_filter: ["StateOrRegion"],
+    #     operating_address_city_filter: ["City"],
     #   })
     #
     # @example Response structure
@@ -1610,7 +1641,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

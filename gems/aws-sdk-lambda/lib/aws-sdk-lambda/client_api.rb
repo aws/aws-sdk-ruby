@@ -223,6 +223,7 @@ module Aws::Lambda
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PreconditionFailedException = Shapes::StructureShape.new(name: 'PreconditionFailedException')
     Principal = Shapes::StringShape.new(name: 'Principal')
+    PrincipalOrgID = Shapes::StringShape.new(name: 'PrincipalOrgID')
     ProvisionedConcurrencyConfigList = Shapes::ListShape.new(name: 'ProvisionedConcurrencyConfigList')
     ProvisionedConcurrencyConfigListItem = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigListItem')
     ProvisionedConcurrencyConfigNotFoundException = Shapes::StructureShape.new(name: 'ProvisionedConcurrencyConfigNotFoundException')
@@ -338,6 +339,7 @@ module Aws::Lambda
     AddPermissionRequest.add_member(:event_source_token, Shapes::ShapeRef.new(shape: EventSourceToken, location_name: "EventSourceToken"))
     AddPermissionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
     AddPermissionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: String, location_name: "RevisionId"))
+    AddPermissionRequest.add_member(:principal_org_id, Shapes::ShapeRef.new(shape: PrincipalOrgID, location_name: "PrincipalOrgID"))
     AddPermissionRequest.struct_class = Types::AddPermissionRequest
 
     AddPermissionResponse.add_member(:statement, Shapes::ShapeRef.new(shape: String, location_name: "Statement"))
