@@ -79,6 +79,7 @@ module Aws
       @token_ttl = options[:token_ttl] || 21_600
       @token = nil
       @no_refresh_until = nil
+      @async_refresh = false
       super
     end
 

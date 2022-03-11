@@ -86,6 +86,7 @@ module Aws
       options[:region] = @sso_region
       options[:credentials] = nil
       @client = options[:client] || Aws::SSO::Client.new(options)
+      @async_refresh = true
       super
     end
 

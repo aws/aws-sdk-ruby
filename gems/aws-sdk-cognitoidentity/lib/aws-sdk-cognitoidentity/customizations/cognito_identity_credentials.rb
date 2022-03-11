@@ -85,6 +85,7 @@ module Aws
         @identity_id = options.delete(:identity_id)
         @custom_role_arn = options.delete(:custom_role_arn)
         @logins = options.delete(:logins) || {}
+        @async_refresh = false
 
         if !@identity_pool_id && !@identity_id
           raise ArgumentError,
@@ -113,6 +114,8 @@ module Aws
       private
 
       def refresh
+        @before_refresh.call(self) if @before_refresh
+
         resp = @client.get_credentials_for_identity(
           identity_id: identity_id,
           custom_role_arn: @custom_role_arn

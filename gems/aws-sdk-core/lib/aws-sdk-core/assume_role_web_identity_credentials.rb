@@ -17,7 +17,7 @@ module Aws
   #       ...
   #     )
   #     For full list of parameters accepted
-  #     @see Aws::STS::Client#assume_role_with_web_identity 
+  #     @see Aws::STS::Client#assume_role_with_web_identity
   #
   #
   # If you omit `:client` option, a new {STS::Client} object will be
@@ -48,6 +48,7 @@ module Aws
       client_opts = {}
       @assume_role_web_identity_params = {}
       @token_file = options.delete(:web_identity_token_file)
+      @async_refresh = true
       options.each_pair do |key, value|
         if self.class.assume_role_web_identity_options.include?(key)
           @assume_role_web_identity_params[key] = value

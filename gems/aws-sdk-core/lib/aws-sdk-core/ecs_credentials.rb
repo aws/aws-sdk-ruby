@@ -62,6 +62,7 @@ module Aws
       @http_read_timeout = options[:http_read_timeout] || 5
       @http_debug_output = options[:http_debug_output]
       @backoff = backoff(options[:backoff])
+      @async_refresh = false
       super
     end
 
