@@ -294,6 +294,7 @@ module Aws::Kendra
     ListThesauriRequest = Shapes::StructureShape.new(name: 'ListThesauriRequest')
     ListThesauriResponse = Shapes::StructureShape.new(name: 'ListThesauriResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    LookBackPeriod = Shapes::IntegerShape.new(name: 'LookBackPeriod')
     MaxContentSizePerPageInMegaBytes = Shapes::FloatShape.new(name: 'MaxContentSizePerPageInMegaBytes')
     MaxLinksPerPage = Shapes::IntegerShape.new(name: 'MaxLinksPerPage')
     MaxResultsIntegerForListDataSourceSyncJobsRequest = Shapes::IntegerShape.new(name: 'MaxResultsIntegerForListDataSourceSyncJobsRequest')
@@ -335,7 +336,9 @@ module Aws::Kendra
     PrincipalName = Shapes::StringShape.new(name: 'PrincipalName')
     PrincipalOrderingId = Shapes::IntegerShape.new(name: 'PrincipalOrderingId')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
+    PrivateChannelFilter = Shapes::ListShape.new(name: 'PrivateChannelFilter')
     ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
+    PublicChannelFilter = Shapes::ListShape.new(name: 'PublicChannelFilter')
     PutPrincipalMappingRequest = Shapes::StructureShape.new(name: 'PutPrincipalMappingRequest')
     QueryCapacityUnit = Shapes::IntegerShape.new(name: 'QueryCapacityUnit')
     QueryId = Shapes::StringShape.new(name: 'QueryId')
@@ -405,9 +408,13 @@ module Aws::Kendra
     SharePointUrlList = Shapes::ListShape.new(name: 'SharePointUrlList')
     SharePointVersion = Shapes::StringShape.new(name: 'SharePointVersion')
     SharedDriveId = Shapes::StringShape.new(name: 'SharedDriveId')
+    SinceCrawlDate = Shapes::StringShape.new(name: 'SinceCrawlDate')
     SiteMap = Shapes::StringShape.new(name: 'SiteMap')
     SiteMapsConfiguration = Shapes::StructureShape.new(name: 'SiteMapsConfiguration')
     SiteMapsList = Shapes::ListShape.new(name: 'SiteMapsList')
+    SlackConfiguration = Shapes::StructureShape.new(name: 'SlackConfiguration')
+    SlackEntity = Shapes::StringShape.new(name: 'SlackEntity')
+    SlackEntityList = Shapes::ListShape.new(name: 'SlackEntityList')
     SnapshotsDataHeaderFields = Shapes::ListShape.new(name: 'SnapshotsDataHeaderFields')
     SnapshotsDataRecord = Shapes::ListShape.new(name: 'SnapshotsDataRecord')
     SnapshotsDataRecords = Shapes::ListShape.new(name: 'SnapshotsDataRecords')
@@ -442,6 +449,7 @@ module Aws::Kendra
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TeamId = Shapes::StringShape.new(name: 'TeamId')
     TenantDomain = Shapes::StringShape.new(name: 'TenantDomain')
     TextDocumentStatistics = Shapes::StructureShape.new(name: 'TextDocumentStatistics')
     TextWithHighlights = Shapes::StructureShape.new(name: 'TextWithHighlights')
@@ -798,6 +806,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:web_crawler_configuration, Shapes::ShapeRef.new(shape: WebCrawlerConfiguration, location_name: "WebCrawlerConfiguration"))
     DataSourceConfiguration.add_member(:work_docs_configuration, Shapes::ShapeRef.new(shape: WorkDocsConfiguration, location_name: "WorkDocsConfiguration"))
     DataSourceConfiguration.add_member(:fsx_configuration, Shapes::ShapeRef.new(shape: FsxConfiguration, location_name: "FsxConfiguration"))
+    DataSourceConfiguration.add_member(:slack_configuration, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "SlackConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1469,10 +1478,14 @@ module Aws::Kendra
 
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
+    PrivateChannelFilter.member = Shapes::ShapeRef.new(shape: String)
+
     ProxyConfiguration.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     ProxyConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))
     ProxyConfiguration.add_member(:credentials, Shapes::ShapeRef.new(shape: SecretArn, location_name: "Credentials"))
     ProxyConfiguration.struct_class = Types::ProxyConfiguration
+
+    PublicChannelFilter.member = Shapes::ShapeRef.new(shape: String)
 
     PutPrincipalMappingRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     PutPrincipalMappingRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, location_name: "DataSourceId"))
@@ -1685,6 +1698,24 @@ module Aws::Kendra
     SiteMapsConfiguration.struct_class = Types::SiteMapsConfiguration
 
     SiteMapsList.member = Shapes::ShapeRef.new(shape: SiteMap)
+
+    SlackConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: TeamId, required: true, location_name: "TeamId"))
+    SlackConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    SlackConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    SlackConfiguration.add_member(:slack_entity_list, Shapes::ShapeRef.new(shape: SlackEntityList, required: true, location_name: "SlackEntityList"))
+    SlackConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    SlackConfiguration.add_member(:crawl_bot_message, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlBotMessage"))
+    SlackConfiguration.add_member(:exclude_archived, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExcludeArchived"))
+    SlackConfiguration.add_member(:since_crawl_date, Shapes::ShapeRef.new(shape: SinceCrawlDate, required: true, location_name: "SinceCrawlDate"))
+    SlackConfiguration.add_member(:look_back_period, Shapes::ShapeRef.new(shape: LookBackPeriod, location_name: "LookBackPeriod"))
+    SlackConfiguration.add_member(:private_channel_filter, Shapes::ShapeRef.new(shape: PrivateChannelFilter, location_name: "PrivateChannelFilter"))
+    SlackConfiguration.add_member(:public_channel_filter, Shapes::ShapeRef.new(shape: PublicChannelFilter, location_name: "PublicChannelFilter"))
+    SlackConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    SlackConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    SlackConfiguration.add_member(:field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FieldMappings"))
+    SlackConfiguration.struct_class = Types::SlackConfiguration
+
+    SlackEntityList.member = Shapes::ShapeRef.new(shape: SlackEntity)
 
     SnapshotsDataHeaderFields.member = Shapes::ShapeRef.new(shape: String)
 

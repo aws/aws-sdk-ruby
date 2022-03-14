@@ -651,7 +651,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.2`
+    #   `redis5.0` \| `redis6.x`
     #   @return [String]
     #
     # @!attribute [rw] cache_engine_description
@@ -5026,7 +5026,7 @@ module Aws::ElastiCache
     #
     #   Valid values are: `memcached1.4` \| `memcached1.5` \| `memcached1.6`
     #   \| `redis2.6` \| `redis2.8` \| `redis3.2` \| `redis4.0` \|
-    #   `redis5.0` \| `redis6.0` \| `redis6.2`
+    #   `redis5.0` \| `redis6.0` \| `redis6.x`
     #   @return [String]
     #
     # @!attribute [rw] marker

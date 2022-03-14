@@ -925,7 +925,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1245,6 +1245,31 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #         secret_arn: "SecretArn",
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
+    #       slack_configuration: {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
     #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #         field_mappings: [
@@ -2122,7 +2147,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2356,6 +2381,31 @@ module Aws::Kendra
     #   resp.configuration.fsx_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.fsx_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.fsx_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.slack_configuration.team_id #=> String
+    #   resp.configuration.slack_configuration.secret_arn #=> String
+    #   resp.configuration.slack_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.slack_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.slack_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.slack_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.slack_configuration.slack_entity_list #=> Array
+    #   resp.configuration.slack_configuration.slack_entity_list[0] #=> String, one of "PUBLIC_CHANNEL", "PRIVATE_CHANNEL", "GROUP_MESSAGE", "DIRECT_MESSAGE"
+    #   resp.configuration.slack_configuration.use_change_log #=> Boolean
+    #   resp.configuration.slack_configuration.crawl_bot_message #=> Boolean
+    #   resp.configuration.slack_configuration.exclude_archived #=> Boolean
+    #   resp.configuration.slack_configuration.since_crawl_date #=> String
+    #   resp.configuration.slack_configuration.look_back_period #=> Integer
+    #   resp.configuration.slack_configuration.private_channel_filter #=> Array
+    #   resp.configuration.slack_configuration.private_channel_filter[0] #=> String
+    #   resp.configuration.slack_configuration.public_channel_filter #=> Array
+    #   resp.configuration.slack_configuration.public_channel_filter[0] #=> String
+    #   resp.configuration.slack_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.slack_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.slack_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.slack_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.slack_configuration.field_mappings #=> Array
+    #   resp.configuration.slack_configuration.field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.slack_configuration.field_mappings[0].date_field_format #=> String
+    #   resp.configuration.slack_configuration.field_mappings[0].index_field_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3190,7 +3240,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -4663,6 +4713,31 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       slack_configuration: {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -5132,7 +5207,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

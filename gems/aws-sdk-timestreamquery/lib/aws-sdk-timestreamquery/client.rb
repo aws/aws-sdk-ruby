@@ -502,7 +502,7 @@ module Aws::TimestreamQuery
     #             {
     #               source_column: "SchemaName", # required
     #               target_multi_measure_attribute_name: "SchemaName",
-    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #               measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #             },
     #           ],
     #         },
@@ -516,7 +516,7 @@ module Aws::TimestreamQuery
     #               {
     #                 source_column: "SchemaName", # required
     #                 target_multi_measure_attribute_name: "SchemaName",
-    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR
+    #                 measure_value_type: "BIGINT", # required, accepts BIGINT, BOOLEAN, DOUBLE, VARCHAR, TIMESTAMP
     #               },
     #             ],
     #           },
@@ -657,7 +657,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].source_column #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
-    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.multi_measure_mappings.multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "TIMESTAMP"
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].measure_name #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].source_column #=> String
@@ -666,7 +666,7 @@ module Aws::TimestreamQuery
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings #=> Array
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].source_column #=> String
     #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].target_multi_measure_attribute_name #=> String
-    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR"
+    #   resp.scheduled_query.target_configuration.timestream_configuration.mixed_measure_mappings[0].multi_measure_attribute_mappings[0].measure_value_type #=> String, one of "BIGINT", "BOOLEAN", "DOUBLE", "VARCHAR", "TIMESTAMP"
     #   resp.scheduled_query.target_configuration.timestream_configuration.measure_name_column #=> String
     #   resp.scheduled_query.scheduled_query_execution_role_arn #=> String
     #   resp.scheduled_query.kms_key_id #=> String
@@ -1161,7 +1161,7 @@ module Aws::TimestreamQuery
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-timestreamquery'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

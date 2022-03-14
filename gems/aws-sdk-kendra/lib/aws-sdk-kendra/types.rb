@@ -1238,7 +1238,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the attachment settings for the Confluence data source.
+    # Configuration of attachment settings for the Confluence data source.
     # Attachment settings are optional, if you don't specify settings
     # attachments, Amazon Kendra won't index them.
     #
@@ -1262,13 +1262,19 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] attachment_field_mappings
-    #   Defines how attachment metadata fields should be mapped to index
-    #   fields. Before you can map a field, you must first create an index
-    #   field with a matching type using the console or the `UpdateIndex`
-    #   API.
+    #   Maps attributes or field names of Confluence attachments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Confluence fields. For more
+    #   information, see [Mapping data source fields][1]. The Confluence
+    #   data source field names must exist in your Confluence custom
+    #   metadata.
     #
     #   If you specify the `AttachentFieldMappings` parameter, you must
     #   specify at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceAttachmentToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceAttachmentConfiguration AWS API Documentation
@@ -1280,10 +1286,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to a
-    # Amazon Kendra index field.
+    # Maps attributes or field names of Confluence attachments to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confuence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex` API.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceAttachmentToIndexFieldMapping
     #   data as a hash:
@@ -1322,8 +1333,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the blog settings for the Confluence data source. Blogs are
-    # always indexed unless filtered from the index by the
+    # Configuration of blog settings for the Confluence data source. Blogs
+    # are always indexed unless filtered from the index by the
     # `ExclusionPatterns` or `InclusionPatterns` fields in the
     # `ConfluenceConfiguration` object.
     #
@@ -1341,12 +1352,18 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] blog_field_mappings
-    #   Defines how blog metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex` API.
+    #   Maps attributes or field names of Confluence blogs to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `BlogFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceBlogToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceBlogConfiguration AWS API Documentation
@@ -1357,10 +1374,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a blog field in the Confluence data source
-    # to a Amazon Kendra index field.
+    # Maps attributes or field names of Confluence blog to Amazon Kendra
+    # index field names. To create custom fields, use the `UpdateIndex` API
+    # before you map to Confluence fields. For more information, see
+    # [Mapping data source fields][1]. The Confluence data source field
+    # names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex` API.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceBlogToIndexFieldMapping
     #   data as a hash:
@@ -1458,20 +1480,20 @@ module Aws::Kendra
     #
     # @!attribute [rw] server_url
     #   The URL of your Confluence instance. Use the full URL of the server.
-    #   For example, `https://server.example.com:port/`. You can also use an
-    #   IP address, for example, `https://192.168.1.113/`.
+    #   For example, *https://server.example.com:port/*. You can also use an
+    #   IP address, for example, *https://192.168.1.113/*.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
-    #   contains the key/value pairs required to connect to your Confluence
+    #   contains the key-value pairs required to connect to your Confluence
     #   server. The secret must contain a JSON structure with the following
     #   keys:
     #
-    #   * username - The user name or email address of a user with
+    #   * username—The user name or email address of a user with
     #     administrative privileges for the Confluence server.
     #
-    #   * password - The password associated with the user logging in to the
+    #   * password—The password associated with the user logging in to the
     #     Confluence server.
     #   @return [String]
     #
@@ -1481,43 +1503,50 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] space_configuration
-    #   Specifies configuration information for indexing Confluence spaces.
+    #   Configuration information for indexing Confluence spaces.
     #   @return [Types::ConfluenceSpaceConfiguration]
     #
     # @!attribute [rw] page_configuration
-    #   Specifies configuration information for indexing Confluence pages.
+    #   Configuration information for indexing Confluence pages.
     #   @return [Types::ConfluencePageConfiguration]
     #
     # @!attribute [rw] blog_configuration
-    #   Specifies configuration information for indexing Confluence blogs.
+    #   Configuration information for indexing Confluence blogs.
     #   @return [Types::ConfluenceBlogConfiguration]
     #
     # @!attribute [rw] attachment_configuration
-    #   Specifies configuration information for indexing attachments to
-    #   Confluence blogs and pages.
+    #   Configuration information for indexing attachments to Confluence
+    #   blogs and pages.
     #   @return [Types::ConfluenceAttachmentConfiguration]
     #
     # @!attribute [rw] vpc_configuration
-    #   Specifies the information for connecting to an Amazon VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Confluence. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns that apply to a URL on the
-    #   Confluence server. An inclusion pattern can apply to a blog post, a
-    #   page, a space, or an attachment. Items that match the patterns are
-    #   included in the index. Items that don't match the pattern are
-    #   excluded from the index. If an item matches both an inclusion
-    #   pattern and an exclusion pattern, the item isn't included in the
+    #   A list of regular expression patterns to include certain blog posts,
+    #   pages, spaces, or attachments in your Confluence. Content that
+    #   matches the patterns are included in the index. Content that
+    #   doesn't match the patterns is excluded from the index. If content
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the content isn't included in the
     #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns that apply to a URL on the
-    #   Confluence server. An exclusion pattern can apply to a blog post, a
-    #   page, a space, or an attachment. Items that match the pattern are
-    #   excluded from the index. Items that don't match the pattern are
-    #   included in the index. If a item matches both an exclusion pattern
-    #   and an inclusion pattern, the item isn't included in the index.
+    #   &gt;A list of regular expression patterns to exclude certain blog
+    #   posts, pages, spaces, or attachments in your Confluence. Content
+    #   that matches the patterns are excluded from the index. Content that
+    #   doesn't match the patterns is included in the index. If content
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the content isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceConfiguration AWS API Documentation
@@ -1537,7 +1566,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the page settings for the Confluence data source.
+    # Configuration of the page settings for the Confluence data source.
     #
     # @note When making an API call, you may pass ConfluencePageConfiguration
     #   data as a hash:
@@ -1553,12 +1582,19 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] page_field_mappings
-    #   Defines how page metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex` API.
+    #   &gt;Maps attributes or field names of Confluence pages to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Confluence fields. For more
+    #   information, see [Mapping data source fields][1]. The Confluence
+    #   data source field names must exist in your Confluence custom
+    #   metadata.
     #
     #   If you specify the `PageFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluencePageToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluencePageConfiguration AWS API Documentation
@@ -1569,10 +1605,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to a
-    # Amazon Kendra index field.
+    # &gt;Maps attributes or field names of Confluence pages to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confluence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex` API.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluencePageToIndexFieldMapping
     #   data as a hash:
@@ -1609,7 +1650,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Specifies the configuration for indexing Confluence spaces.
+    # Configuration information for indexing Confluence spaces.
     #
     # @note When making an API call, you may pass ConfluenceSpaceConfiguration
     #   data as a hash:
@@ -1661,12 +1702,18 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] space_field_mappings
-    #   Defines how space metadata fields should be mapped to index fields.
-    #   Before you can map a field, you must first create an index field
-    #   with a matching type using the console or the `UpdateIndex` API.
+    #   Maps attributes or field names of Confluence spaces to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Confluence fields. For more information, see
+    #   [Mapping data source fields][1]. The Confluence data source field
+    #   names must exist in your Confluence custom metadata.
     #
     #   If you specify the `SpaceFieldMappings` parameter, you must specify
     #   at least one field mapping.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::ConfluenceSpaceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ConfluenceSpaceConfiguration AWS API Documentation
@@ -1681,10 +1728,15 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Defines the mapping between a field in the Confluence data source to
-    # an Amazon Kendra index field.
+    # &gt;Maps attributes or field names of Confluence spaces to Amazon
+    # Kendra index field names. To create custom fields, use the
+    # `UpdateIndex` API before you map to Confluence fields. For more
+    # information, see [Mapping data source fields][1]. The Confluence data
+    # source field names must exist in your Confluence custom metadata.
     #
-    # You must first create the index field using the `UpdateIndex` API.
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #
     # @note When making an API call, you may pass ConfluenceSpaceToIndexFieldMapping
     #   data as a hash:
@@ -1856,7 +1908,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2176,6 +2228,31 @@ module Aws::Kendra
     #               security_group_ids: ["VpcSecurityGroupId"], # required
     #             },
     #             secret_arn: "SecretArn",
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
+    #           slack_configuration: {
+    #             team_id: "TeamId", # required
+    #             secret_arn: "SecretArn", # required
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #             use_change_log: false,
+    #             crawl_bot_message: false,
+    #             exclude_archived: false,
+    #             since_crawl_date: "SinceCrawlDate", # required
+    #             look_back_period: 1,
+    #             private_channel_filter: ["String"],
+    #             public_channel_filter: ["String"],
     #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
     #             field_mappings: [
@@ -3390,6 +3467,31 @@ module Aws::Kendra
     #             },
     #           ],
     #         },
+    #         slack_configuration: {
+    #           team_id: "TeamId", # required
+    #           secret_arn: "SecretArn", # required
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #           use_change_log: false,
+    #           crawl_bot_message: false,
+    #           exclude_archived: false,
+    #           since_crawl_date: "SinceCrawlDate", # required
+    #           look_back_period: 1,
+    #           private_channel_filter: ["String"],
+    #           public_channel_filter: ["String"],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -3423,8 +3525,8 @@ module Aws::Kendra
     #   @return [Types::ServiceNowConfiguration]
     #
     # @!attribute [rw] confluence_configuration
-    #   Provides configuration information for connecting to a Confluence
-    #   data source.
+    #   Provides the configuration information to connect to Confluence as
+    #   your data source.
     #   @return [Types::ConfluenceConfiguration]
     #
     # @!attribute [rw] google_drive_configuration
@@ -3447,6 +3549,11 @@ module Aws::Kendra
     #   your data source.
     #   @return [Types::FsxConfiguration]
     #
+    # @!attribute [rw] slack_configuration
+    #   Provides the configuration information to connect to Slack as your
+    #   data source.
+    #   @return [Types::SlackConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -3460,7 +3567,8 @@ module Aws::Kendra
       :google_drive_configuration,
       :web_crawler_configuration,
       :work_docs_configuration,
-      :fsx_configuration)
+      :fsx_configuration,
+      :slack_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5945,9 +6053,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] vpc_configuration
-    #   Configuration information for connecting to an Amazon Virtual
-    #   Private Cloud for your Amazon FSx. Your Amazon FSx instance must
-    #   reside inside your VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Amazon FSx. Your Amazon FSx instance must reside
+    #   inside your VPC.
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] secret_arn
@@ -5970,18 +6078,18 @@ module Aws::Kendra
     #   A list of regular expression patterns to include certain files in
     #   your Amazon FSx file system. Files that match the patterns are
     #   included in the index. Files that don't match the patterns are
-    #   excluded from the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn't included in the index.
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
     #   A list of regular expression patterns to exclude certain files in
     #   your Amazon FSx file system. Files that match the patterns are
-    #   excluded from the index. Files that don’t match the patterns are
-    #   included in the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn't included in the index.
+    #   excluded from the index. Files that don't match the patterns are
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
@@ -6207,30 +6315,34 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns that apply to path on Google
-    #   Drive. Items that match the pattern are included in the index from
-    #   both shared drives and users' My Drives. Items that don't match
-    #   the pattern are excluded from the index. If an item matches both an
-    #   inclusion pattern and an exclusion pattern, it is excluded from the
-    #   index.
+    #   A list of regular expression patterns to include certain items in
+    #   your Google Drive, including shared drives and users' My Drives.
+    #   Items that match the patterns are included in the index. Items that
+    #   don't match the patterns are excluded from the index. If an item
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns that apply to the path on
-    #   Google Drive. Items that match the pattern are excluded from the
-    #   index from both shared drives and users' My Drives. Items that
-    #   don't match the pattern are included in the index. If an item
-    #   matches both an exclusion pattern and an inclusion pattern, it is
-    #   excluded from the index.
+    #   A list of regular expression patterns to exclude certain items in
+    #   your Google Drive, including shared drives and users' My Drives.
+    #   Items that match the patterns are excluded from the index. Items
+    #   that don't match the patterns are included in the index. If an item
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the item isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
-    #   Defines mapping between a field in the Google Drive and a Amazon
-    #   Kendra index field.
+    #   Maps Google Drive data source attributes or field names to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Google Drive fields. For more
+    #   information, see [Mapping data source fields][1]. The Google Drive
+    #   data source field names must exist in your Google Drive custom
+    #   metadata.
     #
-    #   If you are using the console, you can define index fields when
-    #   creating the mapping. If you are using the API, you must first
-    #   create the field using the `UpdateIndex` API.
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] exclude_mime_types
@@ -7500,28 +7612,38 @@ module Aws::Kendra
     #   @return [Types::OneDriveUsers]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   pattern are included in the index. Documents that don't match the
-    #   pattern are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your OneDrive. Documents that match the patterns are included in
+    #   the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The exclusion pattern is applied to the file name.
+    #   The pattern is applied to the file name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   List of regular expressions applied to documents. Items that match
-    #   the exclusion pattern are not indexed. If you provide both an
-    #   inclusion pattern and an exclusion pattern, any item that matches
-    #   the exclusion pattern isn't indexed.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your OneDrive. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The exclusion pattern is applied to the file name.
+    #   The pattern is applied to the file name.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
-    #   A list of `DataSourceToIndexFieldMapping` objects that map Microsoft
-    #   OneDrive fields to custom fields in the Amazon Kendra index. You
-    #   must first create the index fields before you map OneDrive fields.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map OneDrive
+    #   data source attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to OneDrive fields. For more information, see [Mapping data
+    #   source fields][1]. The OneDrive data source field names must exist
+    #   in your OneDrive custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] disable_local_groups
@@ -8593,8 +8715,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for connecting to a Salesforce data
-    # source.
+    # Provides the configuration information to connect to Salesforce as
+    # your data source.
     #
     # @note When making an API call, you may pass SalesforceConfiguration
     #   data as a hash:
@@ -8701,19 +8823,19 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] standard_object_configurations
-    #   Specifies the Salesforce standard objects that Amazon Kendra
+    #   Configuration of the Salesforce standard objects that Amazon Kendra
     #   indexes.
     #   @return [Array<Types::SalesforceStandardObjectConfiguration>]
     #
     # @!attribute [rw] knowledge_article_configuration
-    #   Specifies configuration information for the knowledge article types
-    #   that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
+    #   Configuration information for the knowledge article types that
+    #   Amazon Kendra indexes. Amazon Kendra indexes standard knowledge
     #   articles and the standard fields of knowledge articles, or the
     #   custom fields of custom knowledge articles, but not both.
     #   @return [Types::SalesforceKnowledgeArticleConfiguration]
     #
     # @!attribute [rw] chatter_feed_configuration
-    #   Specifies configuration information for Salesforce chatter feeds.
+    #   Configuration information for Salesforce chatter feeds.
     #   @return [Types::SalesforceChatterFeedConfiguration]
     #
     # @!attribute [rw] crawl_attachments
@@ -8727,23 +8849,25 @@ module Aws::Kendra
     #   @return [Types::SalesforceStandardObjectAttachmentConfiguration]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your Salesforce. Documents that match the patterns are included
+    #   in the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the name of the attached file.
+    #   The pattern is applied to the name of the attached file.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your Salesforce. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
-    #   The regex is applied to the name of the attached file.
+    #   The pattern is applied to the name of the attached file.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceConfiguration AWS API Documentation
@@ -8762,7 +8886,7 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides configuration information for indexing Salesforce custom
+    # Provides the configuration information for indexing Salesforce custom
     # articles.
     #
     # @note When making an API call, you may pass SalesforceCustomKnowledgeArticleTypeConfiguration
@@ -8796,8 +8920,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the custom knowledge article
-    #   to fields in the Amazon Kendra index.
+    #   Maps attributes or field names of the custom knowledge article to
+    #   Amazon Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceCustomKnowledgeArticleTypeConfiguration AWS API Documentation
@@ -8873,7 +9005,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Configuration information for standard Salesforce knowledge articles.
+    # Provides the configuration information for standard Salesforce
+    # knowledge articles.
     #
     # @note When making an API call, you may pass SalesforceStandardKnowledgeArticleTypeConfiguration
     #   data as a hash:
@@ -8899,9 +9032,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the knowledge article to
-    #   Amazon Kendra index fields. The index field must exist before you
-    #   can map a Salesforce field to it.
+    #   Maps attributes or field names of the knowledge article to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceStandardKnowledgeArticleTypeConfiguration AWS API Documentation
@@ -8983,9 +9123,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   One or more objects that map fields in the standard object to Amazon
-    #   Kendra index fields. The index field must exist before you can map a
-    #   Salesforce field to it.
+    #   Maps attributes or field names of the standard object to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to Salesforce fields. For more
+    #   information, see [Mapping data source fields][1]. The Salesforce
+    #   data source field names must exist in your Salesforce custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SalesforceStandardObjectConfiguration AWS API Documentation
@@ -9186,7 +9333,7 @@ module Aws::Kendra
     # @!attribute [rw] host_url
     #   The ServiceNow instance that the data source connects to. The host
     #   endpoint should look like the following:
-    #   `\{instance\}.service-now.com.`
+    #   *\\\{instance\\}.service-now.com.*
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
@@ -9211,14 +9358,13 @@ module Aws::Kendra
     #   @return [Types::ServiceNowServiceCatalogConfiguration]
     #
     # @!attribute [rw] authentication_type
-    #   Determines the type of authentication used to connect to the
-    #   ServiceNow instance. If you choose `HTTP_BASIC`, Amazon Kendra is
-    #   authenticated using the user name and password provided in the
-    #   Secrets Manager secret in the `SecretArn` field. When you choose
-    #   `OAUTH2`, Amazon Kendra is authenticated using the OAuth token and
-    #   secret provided in the Secrets Manager secret, and the user name and
-    #   password are used to determine which information Amazon Kendra has
-    #   access to.
+    #   The type of authentication used to connect to the ServiceNow
+    #   instance. If you choose `HTTP_BASIC`, Amazon Kendra is authenticated
+    #   using the user name and password provided in the Secrets Manager
+    #   secret in the `SecretArn` field. When you choose `OAUTH2`, Amazon
+    #   Kendra is authenticated using the OAuth token and secret provided in
+    #   the Secrets Manager secret, and the user name and password are used
+    #   to determine which information Amazon Kendra has access to.
     #
     #   When you use `OAUTH2` authentication, you must generate a token and
     #   a client secret using the ServiceNow console. For more information,
@@ -9270,15 +9416,27 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   List of regular expressions applied to knowledge articles. Items
-    #   that don't match the inclusion pattern are not indexed. The regex
-    #   is applied to the field specified in the `PatternTargetField`.
+    #   A list of regular expression patterns to include certain attachments
+    #   of knowledge articles in your ServiceNow. Item that match the
+    #   patterns are included in the index. Items that don't match the
+    #   patterns are excluded from the index. If an item matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the item isn't included in the index.
+    #
+    #   The regex is applied to the field specified in the
+    #   `PatternTargetField`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   List of regular expressions applied to knowledge articles. Items
-    #   that don't match the inclusion pattern are not indexed. The regex
-    #   is applied to the field specified in the `PatternTargetField`
+    #   A list of regular expression patterns to exclude certain attachments
+    #   of knowledge articles in your ServiceNow. Item that match the
+    #   patterns are excluded from the index. Items that don't match the
+    #   patterns are included in the index. If an item matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the item isn't included in the index.
+    #
+    #   The regex is applied to the field specified in the
+    #   `PatternTargetField`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] document_data_field_name
@@ -9292,8 +9450,16 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   Mapping between ServiceNow fields and Amazon Kendra index fields.
-    #   You must create the index field before you map the field.
+    #   Maps attributes or field names of knoweldge articles to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to ServiceNow fields. For more
+    #   information, see [Mapping data source fields][1]. The ServiceNow
+    #   data source field names must exist in your ServiceNow custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] filter_query
@@ -9351,21 +9517,23 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] include_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain attachments
+    #   of catalogs in your ServiceNow. Item that match the patterns are
+    #   included in the index. Items that don't match the patterns are
+    #   excluded from the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #
     #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclude_attachment_file_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain attachments
+    #   of catalogs in your ServiceNow. Item that match the patterns are
+    #   excluded from the index. Items that don't match the patterns are
+    #   included in the index. If an item matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   item isn't included in the index.
     #
     #   The regex is applied to the file name of the attachment.
     #   @return [Array<String>]
@@ -9381,8 +9549,15 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] field_mappings
-    #   Mapping between ServiceNow fields and Amazon Kendra index fields.
-    #   You must create the index field before you map the field.
+    #   Maps attributes or field names of catalogs to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to ServiceNow fields. For more information, see
+    #   [Mapping data source fields][1]. The ServiceNow data source field
+    #   names must exist in your ServiceNow custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServiceNowServiceCatalogConfiguration AWS API Documentation
@@ -9473,30 +9648,30 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] use_change_log
-    #   Set to `TRUE` to use the Microsoft SharePoint change log to
-    #   determine the documents that need to be updated in the index.
-    #   Depending on the size of the SharePoint change log, it may take
-    #   longer for Amazon Kendra to use the change log than it takes it to
-    #   determine the changed documents using the Amazon Kendra document
-    #   crawler.
+    #   `TRUE` to use the SharePoint change log to determine which documents
+    #   require updating in the index. Depending on the change log's size,
+    #   it may take longer for Amazon Kendra to use the change log than to
+    #   scan all of your documents in SharePoint.
     #   @return [Boolean]
     #
     # @!attribute [rw] inclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are included in the index. Documents that don't match the
-    #   patterns are excluded from the index. If a document matches both an
-    #   inclusion pattern and an exclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to include certain documents
+    #   in your SharePoint. Documents that match the patterns are included
+    #   in the index. Documents that don't match the patterns are excluded
+    #   from the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
     #   The regex is applied to the display URL of the SharePoint document.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
-    #   A list of regular expression patterns. Documents that match the
-    #   patterns are excluded from the index. Documents that don't match
-    #   the patterns are included in the index. If a document matches both
-    #   an exclusion pattern and an inclusion pattern, the document is not
-    #   included in the index.
+    #   A list of regular expression patterns to exclude certain documents
+    #   in your SharePoint. Documents that match the patterns are excluded
+    #   from the index. Documents that don't match the patterns are
+    #   included in the index. If a document matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   document isn't included in the index.
     #
     #   The regex is applied to the display URL of the SharePoint document.
     #   @return [Array<String>]
@@ -9506,11 +9681,12 @@ module Aws::Kendra
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @!attribute [rw] field_mappings
-    #   A list of `DataSourceToIndexFieldMapping` objects that map Microsoft
-    #   SharePoint attributes to custom fields in the Amazon Kendra index.
-    #   You must first create the index fields using the `UpdateIndex` API
-    #   before you map SharePoint attributes. For more information, see
-    #   [Mapping Data Source Fields][1].
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   SharePoint data source attributes or field names to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to SharePoint fields. For more information, see
+    #   [Mapping data source fields][1]. The SharePoint data source field
+    #   names must exist in your SharePoint custom metadata.
     #
     #
     #
@@ -9578,6 +9754,180 @@ module Aws::Kendra
     #
     class SiteMapsConfiguration < Struct.new(
       :site_maps)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to Slack as your
+    # data source.
+    #
+    # @note When making an API call, you may pass SlackConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         team_id: "TeamId", # required
+    #         secret_arn: "SecretArn", # required
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #         use_change_log: false,
+    #         crawl_bot_message: false,
+    #         exclude_archived: false,
+    #         since_crawl_date: "SinceCrawlDate", # required
+    #         look_back_period: 1,
+    #         private_channel_filter: ["String"],
+    #         public_channel_filter: ["String"],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] team_id
+    #   The identifier of the team in the Slack workspace. For example,
+    #   *T0123456789*.
+    #
+    #   You can find your team ID in the URL of the main page of your Slack
+    #   workspace. When you log in to Slack via a browser, you are directed
+    #   to the URL of the main page. For example,
+    #   *https://app.slack.com/client/**T0123456789**/...*.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Slack
+    #   workspace team. The secret must contain a JSON structure with the
+    #   following keys:
+    #
+    #   * slackToken—The user or bot token created in Slack. For more
+    #     information on creating a token in Slack, see [Authentication for
+    #     a Slack data source][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#slack-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Slack. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] slack_entity_list
+    #   Specify whether to index public channels, private channels, group
+    #   messages, and direct messages. You can specify one or more of these
+    #   options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the Slack change log to determine which documents
+    #   require updating in the index. Depending on the Slack change log's
+    #   size, it may take longer for Amazon Kendra to use the change log
+    #   than to scan all of your documents in Slack.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_bot_message
+    #   `TRUE` to index bot messages from your Slack workspace team.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_archived
+    #   `TRUE` to exclude archived messages to index from your Slack
+    #   workspace team.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] since_crawl_date
+    #   The date to start crawling your data from your Slack workspace team.
+    #   The date must follow this format: `yyyy-mm-dd`.
+    #   @return [String]
+    #
+    # @!attribute [rw] look_back_period
+    #   The number of hours for change log to look back from when you last
+    #   synchronized your data. You can look back up to 7 days or 168 hours.
+    #
+    #   Change log updates your index only if new content was added since
+    #   you last synced your data. Updated or deleted content from before
+    #   you last synced does not get updated in your index. To capture
+    #   updated or deleted content before you last synced, set the
+    #   `LookBackPeriod` to the number of hours you want change log to look
+    #   back.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] private_channel_filter
+    #   The list of private channel names from your Slack workspace team.
+    #   You use this if you want to index specific private channels, not all
+    #   private channels. You can also use regular expression patterns to
+    #   filter private channels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] public_channel_filter
+    #   The list of public channel names to index from your Slack workspace
+    #   team. You use this if you want to index specific public channels,
+    #   not all public channels. You can also use regular expression
+    #   patterns to filter public channels.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain attached
+    #   files in your Slack workspace team. Files that match the patterns
+    #   are included in the index. Files that don't match the patterns are
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain attached
+    #   files in your Slack workspace team. Files that match the patterns
+    #   are excluded from the index. Files that don’t match the patterns are
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map Slack
+    #   data source attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to Slack fields. For more information, see [Mapping data source
+    #   fields][1]. The Slack data source field names must exist in your
+    #   Slack custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SlackConfiguration AWS API Documentation
+    #
+    class SlackConfiguration < Struct.new(
+      :team_id,
+      :secret_arn,
+      :vpc_configuration,
+      :slack_entity_list,
+      :use_change_log,
+      :crawl_bot_message,
+      :exclude_archived,
+      :since_crawl_date,
+      :look_back_period,
+      :private_channel_filter,
+      :public_channel_filter,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :field_mappings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10502,6 +10852,31 @@ module Aws::Kendra
     #               },
     #             ],
     #           },
+    #           slack_configuration: {
+    #             team_id: "TeamId", # required
+    #             secret_arn: "SecretArn", # required
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             slack_entity_list: ["PUBLIC_CHANNEL"], # required, accepts PUBLIC_CHANNEL, PRIVATE_CHANNEL, GROUP_MESSAGE, DIRECT_MESSAGE
+    #             use_change_log: false,
+    #             crawl_bot_message: false,
+    #             exclude_archived: false,
+    #             since_crawl_date: "SinceCrawlDate", # required
+    #             look_back_period: 1,
+    #             private_channel_filter: ["String"],
+    #             public_channel_filter: ["String"],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #           },
     #         },
     #         description: "Description",
     #         schedule: "ScanSchedule",
@@ -11399,19 +11774,21 @@ module Aws::Kendra
     #   @return [Integer]
     #
     # @!attribute [rw] url_inclusion_patterns
-    #   The regular expression pattern to include certain URLs to crawl.
-    #
-    #   If there is a regular expression pattern to exclude certain URLs
-    #   that conflicts with the include pattern, the exclude pattern takes
-    #   precedence.
+    #   A list of regular expression patterns to include certain URLs to
+    #   crawl. URLs that match the patterns are included in the index. URLs
+    #   that don't match the patterns are excluded from the index. If a URL
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the URL file isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] url_exclusion_patterns
-    #   The regular expression pattern to exclude certain URLs to crawl.
-    #
-    #   If there is a regular expression pattern to include certain URLs
-    #   that conflicts with the exclude pattern, the exclude pattern takes
-    #   precedence.
+    #   A list of regular expression patterns to exclude certain URLs to
+    #   crawl. URLs that match the patterns are excluded from the index.
+    #   URLs that don't match the patterns are included in the index. If a
+    #   URL matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the URL file isn't included in the
+    #   index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] proxy_configuration
@@ -11514,43 +11891,37 @@ module Aws::Kendra
     #   @return [Boolean]
     #
     # @!attribute [rw] use_change_log
-    #   `TRUE` to use the change logs to update documents in your index
-    #   instead of scanning all documents.
-    #
-    #   If you are syncing your Amazon WorkDocs data source with your index
-    #   for the first time, all documents are scanned. After your first
-    #   sync, you can use the change logs to update your documents in your
-    #   index for future syncs.
-    #
-    #   The default is set to `FALSE`.
+    #   `TRUE` to use the Amazon WorkDocs change log to determine which
+    #   documents require updating in the index. Depending on the change
+    #   log's size, it may take longer for Amazon Kendra to use the change
+    #   log than to scan all of your documents in Amazon WorkDocs.
     #   @return [Boolean]
     #
     # @!attribute [rw] inclusion_patterns
     #   A list of regular expression patterns to include certain files in
     #   your Amazon WorkDocs site repository. Files that match the patterns
     #   are included in the index. Files that don't match the patterns are
-    #   excluded from the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn’t included in the index.
+    #   excluded from the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] exclusion_patterns
     #   A list of regular expression patterns to exclude certain files in
     #   your Amazon WorkDocs site repository. Files that match the patterns
     #   are excluded from the index. Files that don’t match the patterns are
-    #   included in the index. If a file matches both an inclusion pattern
-    #   and an exclusion pattern, the exclusion pattern takes precedence and
-    #   the file isn’t included in the index.
+    #   included in the index. If a file matches both an inclusion and
+    #   exclusion pattern, the exclusion pattern takes precedence and the
+    #   file isn't included in the index.
     #   @return [Array<String>]
     #
     # @!attribute [rw] field_mappings
     #   A list of `DataSourceToIndexFieldMapping` objects that map Amazon
-    #   WorkDocs field names to custom index field names in Amazon Kendra.
-    #   You must first create the custom index fields using the
-    #   `UpdateIndex` API before you map to Amazon WorkDocs fields. For more
-    #   information, see [Mapping Data Source Fields][1]. The Amazon
-    #   WorkDocs data source field names need to exist in your Amazon
-    #   WorkDocs custom metadata.
+    #   WorkDocs data source attributes or field names to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to Amazon WorkDocs fields. For more information,
+    #   see [Mapping data source fields][1]. The Amazon WorkDocs data source
+    #   field names must exist in your Amazon WorkDocs custom metadata.
     #
     #
     #

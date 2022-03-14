@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-03-14)
+------------------
+
+* Feature - Amazon Timestream Scheduled Queries now support Timestamp datatype in a multi-measure record.
+
 1.15.0 (2022-03-03)
 ------------------
 
