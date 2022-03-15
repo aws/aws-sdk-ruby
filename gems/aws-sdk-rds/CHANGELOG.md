@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2022-03-15)
+------------------
+
+* Feature - Various documentation improvements
+
 1.141.0 (2022-03-01)
 ------------------
 

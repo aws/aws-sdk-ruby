@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-03-15)
+------------------
+
+* Feature - New HERE style "VectorHereExplore" and "VectorHereExploreTruck".
+
 1.19.0 (2022-02-24)
 ------------------
 

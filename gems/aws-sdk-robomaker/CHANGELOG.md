@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.51.0 (2022-03-15)
+------------------
+
+* Feature - This release deprecates ROS, Ubuntu and Gazbeo from RoboMaker Simulation Service Software Suites in favor of user-supplied containers and Relaxed Software Suites.
+
 1.50.0 (2022-02-24)
 ------------------
 

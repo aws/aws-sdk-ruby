@@ -332,6 +332,7 @@ module Aws::CognitoIdentityProvider
     RecoveryOptionType = Shapes::StructureShape.new(name: 'RecoveryOptionType')
     RedirectUrlType = Shapes::StringShape.new(name: 'RedirectUrlType')
     RefreshTokenValidityType = Shapes::IntegerShape.new(name: 'RefreshTokenValidityType')
+    RegionCodeType = Shapes::StringShape.new(name: 'RegionCodeType')
     ResendConfirmationCodeRequest = Shapes::StructureShape.new(name: 'ResendConfirmationCodeRequest')
     ResendConfirmationCodeResponse = Shapes::StructureShape.new(name: 'ResendConfirmationCodeResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -1616,6 +1617,7 @@ module Aws::CognitoIdentityProvider
 
     SmsConfigurationType.add_member(:sns_caller_arn, Shapes::ShapeRef.new(shape: ArnType, required: true, location_name: "SnsCallerArn"))
     SmsConfigurationType.add_member(:external_id, Shapes::ShapeRef.new(shape: StringType, location_name: "ExternalId"))
+    SmsConfigurationType.add_member(:sns_region, Shapes::ShapeRef.new(shape: RegionCodeType, location_name: "SnsRegion"))
     SmsConfigurationType.struct_class = Types::SmsConfigurationType
 
     SmsMfaConfigType.add_member(:sms_authentication_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
@@ -2896,7 +2898,6 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: InvalidEmailRoleAccessPolicyException)
         o.errors << Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 

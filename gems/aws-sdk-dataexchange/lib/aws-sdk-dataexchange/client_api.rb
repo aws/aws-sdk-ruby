@@ -119,6 +119,8 @@ module Aws::DataExchange
     RevisionDestinationEntry = Shapes::StructureShape.new(name: 'RevisionDestinationEntry')
     RevisionEntry = Shapes::StructureShape.new(name: 'RevisionEntry')
     RevisionPublished = Shapes::StructureShape.new(name: 'RevisionPublished')
+    RevokeRevisionRequest = Shapes::StructureShape.new(name: 'RevokeRevisionRequest')
+    RevokeRevisionResponse = Shapes::StructureShape.new(name: 'RevokeRevisionResponse')
     S3SnapshotAsset = Shapes::StructureShape.new(name: 'S3SnapshotAsset')
     SendApiAssetRequest = Shapes::StructureShape.new(name: 'SendApiAssetRequest')
     SendApiAssetResponse = Shapes::StructureShape.new(name: 'SendApiAssetResponse')
@@ -146,6 +148,7 @@ module Aws::DataExchange
     __doubleMin0 = Shapes::FloatShape.new(name: '__doubleMin0')
     __string = Shapes::StringShape.new(name: '__string')
     __stringMin0Max16384 = Shapes::StringShape.new(name: '__stringMin0Max16384')
+    __stringMin10Max512 = Shapes::StringShape.new(name: '__stringMin10Max512')
     __stringMin24Max24PatternAZaZ094AZaZ092AZaZ093 = Shapes::StringShape.new(name: '__stringMin24Max24PatternAZaZ094AZaZ092AZaZ093')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
@@ -266,6 +269,9 @@ module Aws::DataExchange
     CreateRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
     CreateRevisionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     CreateRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    CreateRevisionResponse.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
+    CreateRevisionResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
+    CreateRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     CreateRevisionResponse.struct_class = Types::CreateRevisionResponse
 
     DataSetEntry.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -419,6 +425,9 @@ module Aws::DataExchange
     GetRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
     GetRevisionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: MapOf__string, location_name: "Tags"))
     GetRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    GetRevisionResponse.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
+    GetRevisionResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
+    GetRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     GetRevisionResponse.struct_class = Types::GetRevisionResponse
 
     ImportAssetFromApiGatewayApiRequestDetails.add_member(:api_description, Shapes::ShapeRef.new(shape: ApiDescription, location_name: "ApiDescription"))
@@ -627,10 +636,31 @@ module Aws::DataExchange
     RevisionEntry.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))
     RevisionEntry.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
     RevisionEntry.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "UpdatedAt"))
+    RevisionEntry.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
+    RevisionEntry.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
+    RevisionEntry.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     RevisionEntry.struct_class = Types::RevisionEntry
 
     RevisionPublished.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "DataSetId"))
     RevisionPublished.struct_class = Types::RevisionPublished
+
+    RevokeRevisionRequest.add_member(:data_set_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "DataSetId"))
+    RevokeRevisionRequest.add_member(:revision_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "RevisionId"))
+    RevokeRevisionRequest.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, required: true, location_name: "RevocationComment"))
+    RevokeRevisionRequest.struct_class = Types::RevokeRevisionRequest
+
+    RevokeRevisionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
+    RevokeRevisionResponse.add_member(:comment, Shapes::ShapeRef.new(shape: __stringMin0Max16384, location_name: "Comment"))
+    RevokeRevisionResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    RevokeRevisionResponse.add_member(:data_set_id, Shapes::ShapeRef.new(shape: Id, location_name: "DataSetId"))
+    RevokeRevisionResponse.add_member(:finalized, Shapes::ShapeRef.new(shape: __boolean, location_name: "Finalized"))
+    RevokeRevisionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
+    RevokeRevisionResponse.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
+    RevokeRevisionResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
+    RevokeRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
+    RevokeRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
+    RevokeRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    RevokeRevisionResponse.struct_class = Types::RevokeRevisionResponse
 
     S3SnapshotAsset.add_member(:size, Shapes::ShapeRef.new(shape: __doubleMin0, required: true, location_name: "Size"))
     S3SnapshotAsset.struct_class = Types::S3SnapshotAsset
@@ -735,6 +765,9 @@ module Aws::DataExchange
     UpdateRevisionResponse.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
     UpdateRevisionResponse.add_member(:source_id, Shapes::ShapeRef.new(shape: Id, location_name: "SourceId"))
     UpdateRevisionResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    UpdateRevisionResponse.add_member(:revocation_comment, Shapes::ShapeRef.new(shape: __stringMin10Max512, location_name: "RevocationComment"))
+    UpdateRevisionResponse.add_member(:revoked, Shapes::ShapeRef.new(shape: __boolean, location_name: "Revoked"))
+    UpdateRevisionResponse.add_member(:revoked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RevokedAt"))
     UpdateRevisionResponse.struct_class = Types::UpdateRevisionResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Message"))
@@ -809,6 +842,7 @@ module Aws::DataExchange
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_revision, Seahorse::Model::Operation.new.tap do |o|
@@ -1034,6 +1068,20 @@ module Aws::DataExchange
         o.http_request_uri = "/tags/{resource-arn}"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+      end)
+
+      api.add_operation(:revoke_revision, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeRevision"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/revoke"
+        o.input = Shapes::ShapeRef.new(shape: RevokeRevisionRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeRevisionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:send_api_asset, Seahorse::Model::Operation.new.tap do |o|

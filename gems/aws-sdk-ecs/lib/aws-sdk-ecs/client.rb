@@ -526,7 +526,7 @@ module Aws::ECS
     #   PutAccountSetting or PutAccountSettingDefault.
     #
     # @option params [Types::ClusterConfiguration] :configuration
-    #   The execute command configuration for the cluster.
+    #   The `execute` command configuration for the cluster.
     #
     # @option params [Array<String>] :capacity_providers
     #   The short name of one or more capacity providers to associate with the
@@ -1109,12 +1109,10 @@ module Aws::ECS
     #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
     #
     # @option params [String] :propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks in the service. If no value is specified, the
-    #   tags aren't propagated. Tags can only be propagated to the tasks
-    #   within the service during service creation. To add tags to a task
-    #   after service creation or task creation, use the TagResource API
-    #   action.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags aren't propagated. Tags
+    #   can only be propagated to the task during task creation. To add tags
+    #   to a task after task creation, use the TagResource API action.
     #
     # @option params [Boolean] :enable_execute_command
     #   Determines whether the execute command functionality is enabled for
@@ -6284,6 +6282,9 @@ module Aws::ECS
     #   containers in this task. If `true`, this enables execute command
     #   functionality on all containers in the task.
     #
+    #   If `true`, then the task definition must have a task role, or you must
+    #   provide one as an override.
+    #
     # @option params [String] :group
     #   The name of the task group to associate with the task. The default
     #   value is the family name of the task definition (for example,
@@ -6427,12 +6428,32 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
+    #   When you create an IAM policy for run-task, you can set the resource
+    #   to be the latest task definition revision, or a specific revision.
+    #
     #   The full ARN value must match the value that you specified as the
-    #   `Resource` of the IAM principal's permissions policy. For example, if
-    #   the `Resource` is
-    #   arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*,
-    #   the `taskDefinition` ARN value must be
+    #   `Resource` of the IAM principal's permissions policy.
+    #
+    #   When you specify the policy resource as the latest task definition
+    #   version (by setting the `Resource` in the policy to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`),
+    #   then set this value to
     #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #
+    #   When you specify the policy resource as a specific task definition
+    #   version (by setting the `Resource` in the policy to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`
+    #   or
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`),
+    #   then set this value to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`.
+    #
+    #   For more information, see [Policy Resources for Amazon ECS][1] in the
+    #   Amazon Elastic Container Service developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
     #
     # @return [Types::RunTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7857,7 +7878,7 @@ module Aws::ECS
     #   services that do not use a load balancer are considered healthy if
     #   they're in the `RUNNING` state. Tasks for services that use a load
     #   balancer are considered healthy if they're in the `RUNNING` state
-    #   and are reported as healthy by the load balancer..
+    #   and are reported as healthy by the load balancer.
     #
     # * The `maximumPercent` parameter represents an upper limit on the
     #   number of running tasks during task replacement. You can use this to
@@ -7986,20 +8007,20 @@ module Aws::ECS
     # Modifies the parameters of a service.
     #
     # For services using the rolling update (`ECS`) you can update the
-    # desired count, the deployment configuration, the network
-    # configuration, load balancers, service registries, enable ECS managed
-    # tags option, propagate tags option, task placement constraints and
-    # strategies, and the task definition. When you update any of these
-    # parameters, Amazon ECS starts new tasks with the new configuration.
+    # desired count, deployment configuration, network configuration, load
+    # balancers, service registries, enable ECS managed tags option,
+    # propagate tags option, task placement constraints and strategies, and
+    # task definition. When you update any of these parameters, Amazon ECS
+    # starts new tasks with the new configuration.
     #
     # For services using the blue/green (`CODE_DEPLOY`) deployment
-    # controller, only the desired count, deployment configuration, task
-    # placement constraints and strategies, enable ECS managed tags option,
-    # and propagate tags can be updated using this API. If the network
-    # configuration, platform version, task definition, or load balancer
-    # need to be updated, create a new CodeDeploy deployment. For more
-    # information, see [CreateDeployment][2] in the *CodeDeploy API
-    # Reference*.
+    # controller, only the desired count, deployment configuration, health
+    # check grace period, task placement constraints and strategies, enable
+    # ECS managed tags option, and propagate tags can be updated using this
+    # API. If the network configuration, platform version, task definition,
+    # or load balancer need to be updated, create a new CodeDeploy
+    # deployment. For more information, see [CreateDeployment][2] in the
+    # *CodeDeploy API Reference*.
     #
     # For services using an external deployment controller, you can update
     # only the desired count, task placement constraints and strategies,
@@ -8708,7 +8729,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

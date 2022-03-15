@@ -461,8 +461,8 @@ module Aws::CognitoIdentityProvider
     #   can process the ClientMetadata value to enhance your workflow for your
     #   specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -511,22 +511,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -663,8 +663,8 @@ module Aws::CognitoIdentityProvider
     #   your function code in Lambda, you can process the `clientMetadata`
     #   value to enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -805,14 +805,14 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Disables the user from signing in with the specified external (SAML or
-    # social) identity provider. If the user to disable is a Amazon Cognito
-    # User Pools native username + password user, they aren't permitted to
-    # use their password to sign in. If the user to deactivate is a linked
-    # external identity provider (IdP) user, any link between that user and
-    # an existing user is removed. The next time the external user (no
-    # longer attached to the previously linked `DestinationUser`) signs in,
-    # they must create a new user account. See
+    # Prevents the user from signing in with the specified external (SAML or
+    # social) identity provider. If the user that you want to deactivate is
+    # a Amazon Cognito user pools native username + password user, they
+    # can't use their password to sign in. If the user to deactivate is a
+    # linked external identity provider (IdP) user, any link between that
+    # user and an existing user is removed. When the external user signs in
+    # again, and the user is no longer attached to the previously linked
+    # `DestinationUser`, the user must create a new user account. See
     # [AdminLinkProviderForUser][1].
     #
     # This action is enabled only for admin access and requires developer
@@ -1066,22 +1066,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -1194,8 +1194,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * Verify auth challenge
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -1312,12 +1312,13 @@ module Aws::CognitoIdentityProvider
     #   The user pool ID for the user pool.
     #
     # @option params [required, Types::ProviderUserIdentifierType] :destination_user
-    #   The existing user in the user pool to be linked to the external
-    #   identity provider user account. Can be a native (Username + Password)
-    #   Amazon Cognito User Pools user or a federated user (for example, a
-    #   SAML or Facebook user). If the user doesn't exist, an exception is
-    #   thrown. This is the user that is returned when the new user (with the
-    #   linked identity provider attribute) signs in.
+    #   The existing user in the user pool that you want to assign to the
+    #   external identity provider user account. This user can be a native
+    #   (Username + Password) Amazon Cognito user pools user or a federated
+    #   user (for example, a SAML or Facebook user). If the user doesn't
+    #   exist, Amazon Cognito generates an exception. Amazon Cognito returns
+    #   this user when the new user (with the linked identity provider
+    #   attribute) signs in.
     #
     #   For a native username + password user, the `ProviderAttributeValue`
     #   for the `DestinationUser` should be the username in the user pool. For
@@ -1601,22 +1602,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -1649,8 +1650,8 @@ module Aws::CognitoIdentityProvider
     #   `clientMetadata` value to enhance your workflow for your specific
     #   needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -1696,22 +1697,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -1790,20 +1791,35 @@ module Aws::CognitoIdentityProvider
     #
     #   You create custom workflows by assigning Lambda functions to user pool
     #   triggers. When you use the AdminRespondToAuthChallenge API action,
-    #   Amazon Cognito invokes any functions that are assigned to the
-    #   following triggers: *pre sign-up*, *custom message*, *post
-    #   authentication*, *user migration*, *pre token generation*, *define
-    #   auth challenge*, *create auth challenge*, and *verify auth challenge
-    #   response*. When Amazon Cognito invokes any of these functions, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the data
-    #   that you assigned to the ClientMetadata parameter in your
-    #   AdminRespondToAuthChallenge request. In your function code in Lambda,
-    #   you can process the `clientMetadata` value to enhance your workflow
-    #   for your specific needs.
+    #   Amazon Cognito invokes any functions that you have assigned to the
+    #   following triggers:
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   * pre sign-up
+    #
+    #   * custom message
+    #
+    #   * post authentication
+    #
+    #   * user migration
+    #
+    #   * pre token generation
+    #
+    #   * define auth challenge
+    #
+    #   * create auth challenge
+    #
+    #   * verify auth challenge response
+    #
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains a
+    #   `clientMetadata` attribute that provides the data that you assigned to
+    #   the ClientMetadata parameter in your AdminRespondToAuthChallenge
+    #   request. In your function code in Lambda, you can process the
+    #   `clientMetadata` value to enhance your workflow for your specific
+    #   needs.
+    #
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -2103,22 +2119,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -2157,8 +2173,8 @@ module Aws::CognitoIdentityProvider
     #   you can process the `clientMetadata` value to enhance your workflow
     #   for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -2410,8 +2426,8 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -2512,8 +2528,8 @@ module Aws::CognitoIdentityProvider
     #   function code in Lambda, you can process the `clientMetadata` value to
     #   enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -2868,22 +2884,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -2967,10 +2983,17 @@ module Aws::CognitoIdentityProvider
     #   The device configuration.
     #
     # @option params [Types::EmailConfigurationType] :email_configuration
-    #   The email configuration.
+    #   The email configuration of your user pool. The email configuration
+    #   type sets your preferred sending method, Amazon Web Services Region,
+    #   and sender for messages from your user pool.
     #
     # @option params [Types::SmsConfigurationType] :sms_configuration
-    #   The SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito user
+    #   pool must use to send an SMS message from your Amazon Web Services
+    #   account through Amazon Simple Notification Service. To send SMS
+    #   messages with Amazon SNS in the Amazon Web Services Region that you
+    #   want, the Amazon Cognito user pool uses an Identity and Access
+    #   Management (IAM) role in your Amazon Web Services account.
     #
     # @option params [Hash<String,String>] :user_pool_tags
     #   The tag keys and values to assign to the user pool. A tag is a label
@@ -3078,6 +3101,7 @@ module Aws::CognitoIdentityProvider
     #     sms_configuration: {
     #       sns_caller_arn: "ArnType", # required
     #       external_id: "StringType",
+    #       sns_region: "RegionCodeType",
     #     },
     #     user_pool_tags: {
     #       "TagKeysType" => "TagValueType",
@@ -3189,6 +3213,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.email_configuration.configuration_set #=> String
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
+    #   resp.user_pool.sms_configuration.sns_region #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
     #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
@@ -3262,13 +3287,13 @@ module Aws::CognitoIdentityProvider
     #   The user pool attributes that the app client can write to.
     #
     #   If your app client allows users to sign in through an identity
-    #   provider, this array must include all attributes that are mapped to
-    #   identity provider attributes. Amazon Cognito updates mapped attributes
-    #   when users sign in to your application through an identity provider.
-    #   If your app client lacks write access to a mapped attribute, Amazon
-    #   Cognito throws an error when it tries to update the attribute. For
-    #   more information, see [Specifying Identity Provider Attribute Mappings
-    #   for Your User Pool][1].
+    #   provider, this array must include all attributes that you have mapped
+    #   to identity provider attributes. Amazon Cognito updates mapped
+    #   attributes when users sign in to your application through an identity
+    #   provider. If your app client does not have write access to a mapped
+    #   attribute, Amazon Cognito throws an error when it tries to update the
+    #   attribute. For more information, see [Specifying Identity Provider
+    #   Attribute Mappings for Your user pool][1].
     #
     #
     #
@@ -3277,8 +3302,12 @@ module Aws::CognitoIdentityProvider
     # @option params [Array<String>] :explicit_auth_flows
     #   The authentication flows that are supported by the user pool clients.
     #   Flow names without the `ALLOW_` prefix are no longer supported, in
-    #   favor of new names with the `ALLOW_` prefix. Note that values with
-    #   `ALLOW_` prefix must be used only along with the `ALLOW_` prefix.
+    #   favor of new names with the `ALLOW_` prefix.
+    #
+    #   <note markdown="1"> Values with `ALLOW_` prefix must be used only along with the `ALLOW_`
+    #   prefix.
+    #
+    #    </note>
     #
     #   Valid values include:
     #
@@ -3376,14 +3405,14 @@ module Aws::CognitoIdentityProvider
     #   interacting with Amazon Cognito user pools.
     #
     # @option params [Types::AnalyticsConfigurationType] :analytics_configuration
-    #   The Amazon Pinpoint analytics configuration for collecting metrics for
-    #   this user pool.
+    #   The user pool analytics configuration for collecting metrics and
+    #   sending them to your Amazon Pinpoint campaign.
     #
-    #   <note markdown="1"> In Amazon Web Services Regions where isn't available, User Pools only
-    #   supports sending events to Amazon Pinpoint projects in Amazon Web
-    #   Services Region us-east-1. In Regions where is available, User Pools
-    #   will support sending events to Amazon Pinpoint projects within that
-    #   same Region.
+    #   <note markdown="1"> In Amazon Web Services Regions where Amazon Pinpoint isn't available,
+    #   user pools only support sending events to Amazon Pinpoint projects in
+    #   Amazon Web Services Region us-east-1. In Regions where Amazon Pinpoint
+    #   is available, user pools support sending events to Amazon Pinpoint
+    #   projects within that same Region.
     #
     #    </note>
     #
@@ -4029,6 +4058,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool.email_configuration.configuration_set #=> String
     #   resp.user_pool.sms_configuration.sns_caller_arn #=> String
     #   resp.user_pool.sms_configuration.external_id #=> String
+    #   resp.user_pool.sms_configuration.sns_region #=> String
     #   resp.user_pool.user_pool_tags #=> Hash
     #   resp.user_pool.user_pool_tags["TagKeysType"] #=> String
     #   resp.user_pool.sms_configuration_failure #=> String
@@ -4200,22 +4230,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][3]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][3]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][4] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][4] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -4262,8 +4292,8 @@ module Aws::CognitoIdentityProvider
     #   your function code in Lambda, you can process the `clientMetadata`
     #   value to enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -4591,22 +4621,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -4638,8 +4668,8 @@ module Aws::CognitoIdentityProvider
     #   Lambda, you can process the `clientMetadata` value to enhance your
     #   workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -4711,6 +4741,7 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_authentication_message #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
     #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #
@@ -4752,22 +4783,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -4865,8 +4896,8 @@ module Aws::CognitoIdentityProvider
     #
     #   * Verify auth challenge
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -5524,22 +5555,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -5584,8 +5615,8 @@ module Aws::CognitoIdentityProvider
     #   `clientMetadata` value to enhance your workflow for your specific
     #   needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -5646,22 +5677,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -5749,8 +5780,8 @@ module Aws::CognitoIdentityProvider
     #   `clientMetadata` value to enhance your workflow for your specific
     #   needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -6089,22 +6120,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -6124,9 +6155,9 @@ module Aws::CognitoIdentityProvider
     #
     # @option params [String] :mfa_configuration
     #   The MFA configuration. If you set the MfaConfiguration value to ‘ON’,
-    #   only users with an MFA factor set up can sign in. To learn more, see
-    #   [Adding Multi-Factor Authentication (MFA) to a User
-    #   Pool](cognito/latest/developerguide/user-pool-settings-mfa.html).
+    #   only users who have set up an MFA factor can sign in. To learn more,
+    #   see [Adding Multi-Factor Authentication (MFA) to a user
+    #   pool](cognito/latest/developerguide/user-pool-settings-mfa.html).
     #   Valid values include:
     #
     #   * `OFF` MFA won't be used for any users.
@@ -6151,6 +6182,7 @@ module Aws::CognitoIdentityProvider
     #       sms_configuration: {
     #         sns_caller_arn: "ArnType", # required
     #         external_id: "StringType",
+    #         sns_region: "RegionCodeType",
     #       },
     #     },
     #     software_token_mfa_configuration: {
@@ -6164,6 +6196,7 @@ module Aws::CognitoIdentityProvider
     #   resp.sms_mfa_configuration.sms_authentication_message #=> String
     #   resp.sms_mfa_configuration.sms_configuration.sns_caller_arn #=> String
     #   resp.sms_mfa_configuration.sms_configuration.external_id #=> String
+    #   resp.sms_mfa_configuration.sms_configuration.sns_region #=> String
     #   resp.software_token_mfa_configuration.enabled #=> Boolean
     #   resp.mfa_configuration #=> String, one of "OFF", "ON", "OPTIONAL"
     #
@@ -6220,22 +6253,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -6291,8 +6324,8 @@ module Aws::CognitoIdentityProvider
     #   function code in Lambda, you can process the `clientMetadata` value to
     #   enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -6777,22 +6810,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][1]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][1]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][2] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][2] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -6824,8 +6857,8 @@ module Aws::CognitoIdentityProvider
     #   In your function code in Lambda, you can process the `clientMetadata`
     #   value to enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with Lambda
-    #   Triggers][1] in the *Amazon Cognito Developer Guide*.
+    #   For more information, see [ Customizing user pool Workflows with
+    #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
     #   Cognito won't do the following:
@@ -6888,22 +6921,22 @@ module Aws::CognitoIdentityProvider
     #
     # <note markdown="1"> This action might generate an SMS text message. Starting June 1, 2021,
     # US telecom carriers require you to register an origination phone
-    # number before you can send SMS messages to U.S. phone numbers. If you
+    # number before you can send SMS messages to US phone numbers. If you
     # use SMS text messages in Amazon Cognito, you must register a phone
-    # number with [Amazon Pinpoint][2]. Amazon Cognito will use the
-    # registered number automatically. Otherwise, Amazon Cognito users that
-    # must receive SMS messages might be unable to sign up, activate their
-    # accounts, or sign in.
+    # number with [Amazon Pinpoint][2]. Amazon Cognito uses the registered
+    # number automatically. Otherwise, Amazon Cognito users who must receive
+    # SMS messages might not be able to sign up, activate their accounts, or
+    # sign in.
     #
     #  If you have never used SMS text messages with Amazon Cognito or any
     # other Amazon Web Service, Amazon Simple Notification Service might
-    # place your account in SMS sandbox. In <i> <a
+    # place your account in the SMS sandbox. In <i> <a
     # href="https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html">sandbox
-    # mode</a> </i>, you will have limitations, such as sending messages
-    # only to verified phone numbers. After testing in the sandbox
-    # environment, you can move out of the SMS sandbox and into production.
-    # For more information, see [ SMS message settings for Amazon Cognito
-    # User Pools][3] in the *Amazon Cognito Developer Guide*.
+    # mode</a> </i>, you can send messages only to verified phone numbers.
+    # After you test your app while in the sandbox environment, you can move
+    # out of the sandbox and into production. For more information, see [
+    # SMS message settings for Amazon Cognito user pools][3] in the *Amazon
+    # Cognito Developer Guide*.
     #
     #  </note>
     #
@@ -6964,10 +6997,18 @@ module Aws::CognitoIdentityProvider
     #   Device configuration.
     #
     # @option params [Types::EmailConfigurationType] :email_configuration
-    #   Email configuration.
+    #   The email configuration of your user pool. The email configuration
+    #   type sets your preferred sending method, Amazon Web Services Region,
+    #   and sender for email invitation and verification messages from your
+    #   user pool.
     #
     # @option params [Types::SmsConfigurationType] :sms_configuration
-    #   SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito user
+    #   pool must use to send an SMS message from your Amazon Web Services
+    #   account through Amazon Simple Notification Service. To send SMS
+    #   messages with Amazon SNS in the Amazon Web Services Region that you
+    #   want, the Amazon Cognito user pool uses an Identity and Access
+    #   Management (IAM) role in your Amazon Web Services account.
     #
     # @option params [Hash<String,String>] :user_pool_tags
     #   The tag keys and values to assign to the user pool. A tag is a label
@@ -7056,6 +7097,7 @@ module Aws::CognitoIdentityProvider
     #     sms_configuration: {
     #       sns_caller_arn: "ArnType", # required
     #       external_id: "StringType",
+    #       sns_region: "RegionCodeType",
     #     },
     #     user_pool_tags: {
     #       "TagKeysType" => "TagValueType",
@@ -7244,10 +7286,11 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics for
     #   this user pool.
     #
-    #   <note markdown="1"> In Amazon Web Services Regions where isn't available, User Pools only
-    #   supports sending events to Amazon Pinpoint projects in us-east-1. In
-    #   Regions where Pinpoint is available, User Pools will support sending
-    #   events to Amazon Pinpoint projects within that same Region.
+    #   <note markdown="1"> In Amazon Web Services Regions where Amazon Pinpoint isn't available,
+    #   user pools only support sending events to Amazon Pinpoint projects in
+    #   us-east-1. In Regions where Amazon Pinpoint is available, user pools
+    #   support sending events to Amazon Pinpoint projects within that same
+    #   Region.
     #
     #    </note>
     #
@@ -7539,7 +7582,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

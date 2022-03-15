@@ -26,12 +26,20 @@ module Aws::Keyspaces
     # Amazon Keyspaces has two read/write capacity modes for processing
     # reads and writes on your tables:
     #
-    # * On-demand (default)
+    # • On-demand (default)
     #
-    # * Provisioned
-    # ^
+    # • Provisioned
     #
-    #      <p> The read/write capacity mode that you choose controls how you are charged for read and write throughput and how table throughput capacity is managed. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html">Read/write capacity modes</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    # The read/write capacity mode that you choose controls how you are
+    # charged for read and write throughput and how table throughput
+    # capacity is managed.
+    #
+    # For more information, see [Read/write capacity modes][1] in the
+    # *Amazon Keyspaces Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/ReadWriteCapacityMode.html
     #
     # @note When making an API call, you may pass CapacitySpecification
     #   data as a hash:
@@ -46,10 +54,10 @@ module Aws::Keyspaces
     #   The read/write throughput capacity mode for a table. The options
     #   are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST` and
     #
-    #   * `throughputMode:PROVISIONED`. The provisioned capacity mode
-    #     requires `readCapacityUnits` and `writeCapacityUnits` as inputs.
+    #   • `throughputMode:PROVISIONED` - Provisioned capacity mode requires
+    #   `readCapacityUnits` and `writeCapacityUnits` as input.
     #
     #   The default is `throughput_mode:PAY_PER_REQUEST`.
     #
@@ -83,9 +91,9 @@ module Aws::Keyspaces
 
     # The read/write throughput capacity mode for a table. The options are:
     #
-    # * `throughputMode:PAY_PER_REQUEST` and
+    # • `throughputMode:PAY_PER_REQUEST` and
     #
-    # * `throughputMode:PROVISIONED`.
+    # • `throughputMode:PROVISIONED`.
     #
     # For more information, see [Read/write capacity modes][1] in the
     # *Amazon Keyspaces Developer Guide*.
@@ -98,10 +106,10 @@ module Aws::Keyspaces
     #   The read/write throughput capacity mode for a table. The options
     #   are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST` and
     #
-    #   * `throughputMode:PROVISIONED`. The provisioned capacity mode
-    #     requires `readCapacityUnits` and `writeCapacityUnits` as inputs.
+    #   • `throughputMode:PROVISIONED` - Provisioned capacity mode requires
+    #   `readCapacityUnits` and `writeCapacityUnits` as input.
     #
     #   The default is `throughput_mode:PAY_PER_REQUEST`.
     #
@@ -356,13 +364,35 @@ module Aws::Keyspaces
     #
     #   For each column to be created:
     #
-    #   * <i> <code>name</code> </i> - The name of the column.
+    #   • `name` - The name of the column.
     #
-    #   * ` type ` - An Amazon Keyspaces data type. For more information,
-    #     see [Data types][1] in the *Amazon Keyspaces Developer Guide*.
-    #   ^
+    #   • `type` - An Amazon Keyspaces data type. For more information, see
+    #   [Data types][1] in the *Amazon Keyspaces Developer Guide*.
     #
-    #        <p>The primary key of the table consists of the following columns:</p> <ul> <li> <p> <code>partitionKeys</code> - The partition key can be a single column, or it can be a compound value composed of two or more columns. The partition key portion of the primary key is required and determines how Amazon Keyspaces stores your data.</p> <ul> <li> <p> <i> <code>name</code> </i> - The name of each partition key column.</p> </li> </ul> </li> <li> <p> <code>clusteringKeys</code> - The optional clustering column portion of your primary key determines how the data is clustered and sorted within each partition.</p> <ul> <li> <p> <i> <code>name</code> </i> - The name of the clustering column. </p> </li> <li> <p> <i> <code>orderBy</code> </i> - Sets the ascendant (<code>ASC</code>) or descendant (<code>DESC</code>) order modifier.</p> </li> </ul> </li> </ul> <p>To define a column as static use <code> <i>staticColumns</i> </code> - Static columns store values that are shared by all rows in the same partition:</p> <ul> <li> <p> <i> <code>name</code> </i> - The name of the column.</p> </li> <li> <p> <code> <i>type</i> </code> - An Amazon Keyspaces data type.</p> </li> </ul>
+    #   The primary key of the table consists of the following columns:
+    #
+    #   • `partitionKeys` - The partition key can be a single column, or it
+    #   can be a compound value composed of two or more columns. The
+    #   partition key portion of the primary key is required and determines
+    #   how Amazon Keyspaces stores your data.
+    #
+    #   • `name` - The name of each partition key column.
+    #
+    #   • `clusteringKeys` - The optional clustering column portion of your
+    #   primary key determines how the data is clustered and sorted within
+    #   each partition.
+    #
+    #   • `name` - The name of the clustering column.
+    #
+    #   • `orderBy` - Sets the ascendant (`ASC`) or descendant (`DESC`)
+    #   order modifier.
+    #
+    #   To define a column as static use `staticColumns` - Static columns
+    #   store values that are shared by all rows in the same partition:
+    #
+    #   • `name` - The name of the column.
+    #
+    #   • `type` - An Amazon Keyspaces data type.
     #
     #
     #
@@ -377,10 +407,10 @@ module Aws::Keyspaces
     #   Specifies the read/write throughput capacity mode for the table. The
     #   options are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST` and
     #
-    #   * `throughputMode:PROVISIONED`. The provisioned capacity mode
-    #     requires `readCapacityUnits` and `writeCapacityUnits` as inputs.
+    #   • `throughputMode:PROVISIONED` - Provisioned capacity mode requires
+    #   `readCapacityUnits` and `writeCapacityUnits` as input.
     #
     #   The default is `throughput_mode:PAY_PER_REQUEST`.
     #
@@ -397,16 +427,30 @@ module Aws::Keyspaces
     #   for the table. You can choose one of the following KMS key (KMS
     #   key):
     #
-    #        <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    #   • `type:AWS_OWNED_KMS_KEY` - This key is owned by Amazon Keyspaces.
+    #
+    #   • `type:CUSTOMER_MANAGED_KMS_KEY` - This key is stored in your
+    #   account and is created, owned, and managed by you. This option
+    #   requires the `kms_key_identifier` of the KMS key in Amazon Resource
+    #   Name (ARN) format as input.
+    #
+    #   The default is `type:AWS_OWNED_KMS_KEY`.
+    #
+    #   For more information, see [Encryption at rest][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html
     #   @return [Types::EncryptionSpecification]
     #
     # @!attribute [rw] point_in_time_recovery
     #   Specifies if `pointInTimeRecovery` is enabled or disabled for the
     #   table. The options are:
     #
-    #   * `ENABLED`
+    #   • `ENABLED`
     #
-    #   * `DISABLED`
+    #   • `DISABLED`
     #
     #   If it's not specified, the default is `DISABLED`.
     #
@@ -421,9 +465,9 @@ module Aws::Keyspaces
     # @!attribute [rw] ttl
     #   Enables Time to Live custom settings for the table. The options are:
     #
-    #   * `status:enabled`
+    #   • `status:enabled`
     #
-    #   * `status:disabled`
+    #   • `status:disabled`
     #
     #   The default is `status:disabled`. After `ttl` is enabled, you can't
     #   disable it for the table.
@@ -545,12 +589,12 @@ module Aws::Keyspaces
     # and managing the encryption key. You can choose one of the following
     # KMS keys (KMS keys):
     #
-    # * Amazon Web Services owned key - This is the default encryption type.
-    #   The key is owned by Amazon Keyspaces (no additional charge).
+    # • Amazon Web Services owned key - This is the default encryption type.
+    # The key is owned by Amazon Keyspaces (no additional charge).
     #
-    # * Customer managed key - This key is stored in your account and is
-    #   created, owned, and managed by you. You have full control over the
-    #   customer managed key (KMS charges apply).
+    # • Customer managed key - This key is stored in your account and is
+    # created, owned, and managed by you. You have full control over the
+    # customer managed key (KMS charges apply).
     #
     # For more information about encryption at rest in Amazon Keyspaces, see
     # [Encryption at rest][1] in the *Amazon Keyspaces Developer Guide*.
@@ -574,12 +618,12 @@ module Aws::Keyspaces
     #   The encryption option specified for the table. You can choose one of
     #   the following KMS keys (KMS keys):
     #
-    #   * `type:AWS_OWNED_KMS_KEY` - This key is owned by Amazon Keyspaces.
+    #   • `type:AWS_OWNED_KMS_KEY` - This key is owned by Amazon Keyspaces.
     #
-    #   * `type:CUSTOMER_MANAGED_KMS_KEY` - This key is stored in your
-    #     account and is created, owned, and managed by you. This option
-    #     requires the `kms_key_identifier` of the KMS key in Amazon
-    #     Resource Name (ARN) format as input.
+    #   • `type:CUSTOMER_MANAGED_KMS_KEY` - This key is stored in your
+    #   account and is created, owned, and managed by you. This option
+    #   requires the `kms_key_identifier` of the KMS key in Amazon Resource
+    #   Name (ARN) format as input.
     #
     #   The default is `type:AWS_OWNED_KMS_KEY`.
     #
@@ -694,9 +738,9 @@ module Aws::Keyspaces
     #   The read/write throughput capacity mode for a table. The options
     #   are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST`
     #
-    #   * `throughputMode:PROVISIONED`.
+    #   • `throughputMode:PROVISIONED`
     #   @return [Types::CapacitySpecificationSummary]
     #
     # @!attribute [rw] encryption_specification
@@ -970,9 +1014,9 @@ module Aws::Keyspaces
     # @!attribute [rw] status
     #   The options are:
     #
-    #   * `ENABLED`
+    #   • `ENABLED`
     #
-    #   * `DISABLED`
+    #   • `DISABLED`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/keyspaces-2022-02-10/PointInTimeRecovery AWS API Documentation
@@ -1078,10 +1122,10 @@ module Aws::Keyspaces
     #   Specifies the read/write throughput capacity mode for the target
     #   table. The options are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST`
     #
-    #   * `throughputMode:PROVISIONED`. The provisioned capacity mode
-    #     requires `readCapacityUnits` and `writeCapacityUnits` as inputs.
+    #   • `throughputMode:PROVISIONED` - Provisioned capacity mode requires
+    #   `readCapacityUnits` and `writeCapacityUnits` as input.
     #
     #   The default is `throughput_mode:PAY_PER_REQUEST`.
     #
@@ -1097,16 +1141,30 @@ module Aws::Keyspaces
     #   Specifies the encryption settings for the target table. You can
     #   choose one of the following KMS key (KMS key):
     #
-    #        <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>type:AWS_OWNED_KMS_KEY</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    #   • `type:AWS_OWNED_KMS_KEY` - This key is owned by Amazon Keyspaces.
+    #
+    #   • `type:CUSTOMER_MANAGED_KMS_KEY` - This key is stored in your
+    #   account and is created, owned, and managed by you. This option
+    #   requires the `kms_key_identifier` of the KMS key in Amazon Resource
+    #   Name (ARN) format as input.
+    #
+    #   The default is `type:AWS_OWNED_KMS_KEY`.
+    #
+    #   For more information, see [Encryption at rest][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html
     #   @return [Types::EncryptionSpecification]
     #
     # @!attribute [rw] point_in_time_recovery_override
     #   Specifies the `pointInTimeRecovery` settings for the target table.
     #   The options are:
     #
-    #   * `ENABLED`
+    #   • `ENABLED`
     #
-    #   * `DISABLED`
+    #   • `DISABLED`
     #
     #   If it's not specified, the default is `DISABLED`.
     #
@@ -1469,10 +1527,10 @@ module Aws::Keyspaces
     # @!attribute [rw] add_columns
     #   For each column to be added to the specified table:
     #
-    #   * <i> <code>name</code> </i> - The name of the column.
+    #   • `name` - The name of the column.
     #
-    #   * ` type ` - An Amazon Keyspaces data type. For more information,
-    #     see [Data types][1] in the *Amazon Keyspaces Developer Guide*.
+    #   • `type` - An Amazon Keyspaces data type. For more information, see
+    #   [Data types][1] in the *Amazon Keyspaces Developer Guide*.
     #
     #
     #
@@ -1483,10 +1541,10 @@ module Aws::Keyspaces
     #   Modifies the read/write throughput capacity mode for the table. The
     #   options are:
     #
-    #   * `throughputMode:PAY_PER_REQUEST` and
+    #   • `throughputMode:PAY_PER_REQUEST` and
     #
-    #   * `throughputMode:PROVISIONED`. The provisioned capacity mode
-    #     requires `readCapacityUnits` and `writeCapacityUnits` as inputs.
+    #   • `throughputMode:PROVISIONED` - Provisioned capacity mode requires
+    #   `readCapacityUnits` and `writeCapacityUnits` as input.
     #
     #   The default is `throughput_mode:PAY_PER_REQUEST`.
     #
@@ -1502,16 +1560,30 @@ module Aws::Keyspaces
     #   Modifies the encryption settings of the table. You can choose one of
     #   the following KMS key (KMS key):
     #
-    #        <ul> <li> <p> <code>type:AWS_OWNED_KMS_KEY</code> - This key is owned by Amazon Keyspaces. </p> </li> <li> <p> <code>type:CUSTOMER_MANAGED_KMS_KEY</code> - This key is stored in your account and is created, owned, and managed by you. This option requires the <code>kms_key_identifier</code> of the KMS key in Amazon Resource Name (ARN) format as input. </p> </li> </ul> <p>The default is <code>AWS_OWNED_KMS_KEY</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html">Encryption at rest</a> in the <i>Amazon Keyspaces Developer Guide</i>.</p>
+    #   • `type:AWS_OWNED_KMS_KEY` - This key is owned by Amazon Keyspaces.
+    #
+    #   • `type:CUSTOMER_MANAGED_KMS_KEY` - This key is stored in your
+    #   account and is created, owned, and managed by you. This option
+    #   requires the `kms_key_identifier` of the KMS key in Amazon Resource
+    #   Name (ARN) format as input.
+    #
+    #   The default is `AWS_OWNED_KMS_KEY`.
+    #
+    #   For more information, see [Encryption at rest][1] in the *Amazon
+    #   Keyspaces Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/keyspaces/latest/devguide/EncryptionAtRest.html
     #   @return [Types::EncryptionSpecification]
     #
     # @!attribute [rw] point_in_time_recovery
     #   Modifies the `pointInTimeRecovery` settings of the table. The
     #   options are:
     #
-    #   * `ENABLED`
+    #   • `ENABLED`
     #
-    #   * `DISABLED`
+    #   • `DISABLED`
     #
     #   If it's not specified, the default is `DISABLED`.
     #
@@ -1527,9 +1599,9 @@ module Aws::Keyspaces
     #   Modifies Time to Live custom settings for the table. The options
     #   are:
     #
-    #   * `status:enabled`
+    #   • `status:enabled`
     #
-    #   * `status:disabled`
+    #   • `status:disabled`
     #
     #   The default is `status:disabled`. After `ttl` is enabled, you can't
     #   disable it for the table.

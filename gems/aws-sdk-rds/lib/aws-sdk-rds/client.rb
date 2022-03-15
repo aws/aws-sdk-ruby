@@ -763,7 +763,7 @@ module Aws::RDS
     # cluster.
     #
     # For more information on backtracking, see [ Backtracking an Aurora DB
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
     #
@@ -1090,14 +1090,14 @@ module Aws::RDS
     #
     # For more information on copying encrypted Amazon Aurora DB cluster
     # snapshots from one Amazon Web Services Region to another, see [
-    # Copying a Snapshot][3] in the *Amazon Aurora User Guide.*
+    # Copying a Snapshot][3] in the *Amazon Aurora User Guide*.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][4] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][4] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][5] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -1124,7 +1124,7 @@ module Aws::RDS
     #   * If the source snapshot is in a different Amazon Web Services Region
     #     than the copy, specify a valid DB cluster snapshot ARN. For more
     #     information, go to [ Copying Snapshots Across Amazon Web Services
-    #     Regions][1] in the *Amazon Aurora User Guide.*
+    #     Regions][1] in the *Amazon Aurora User Guide*.
     #
     #   Example: `my-cluster-snapshot1`
     #
@@ -1421,7 +1421,7 @@ module Aws::RDS
     # This command doesn't apply to RDS Custom.
     #
     # For more information about copying snapshots, see [Copying a DB
-    # Snapshot][1] in the *Amazon RDS User Guide.*
+    # Snapshot][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1580,7 +1580,7 @@ module Aws::RDS
     #   Encryption for Oracle or Microsoft SQL Server, you must specify this
     #   option when copying across Amazon Web Services Regions. For more
     #   information, see [Option group considerations][1] in the *Amazon RDS
-    #   User Guide.*
+    #   User Guide*.
     #
     #
     #
@@ -2111,11 +2111,11 @@ module Aws::RDS
     # `PreSignedUrl` parameter.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -2263,22 +2263,22 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][1] in the *Amazon
-    #   Aurora User Guide.*
+    #   Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   For information, see [Amazon Aurora PostgreSQL releases and engine
-    #   versions][2] in the *Amazon Aurora User Guide.*
+    #   versions][2] in the *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][3] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide.*
+    #   extensions][4] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -2343,7 +2343,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -2371,7 +2371,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -2489,7 +2489,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide.*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2535,7 +2535,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -2571,7 +2571,7 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [ Limitations of Aurora Serverless][1]
+    #   * [ Limitations of Aurora Serverless v1][1]
     #
     #   * [ Limitations of Parallel Query][2]
     #
@@ -2609,16 +2609,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2677,7 +2677,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -3161,11 +3161,11 @@ module Aws::RDS
     # that your DB cluster parameter group has been created or modified.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][3] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -3299,11 +3299,11 @@ module Aws::RDS
     # Creates a snapshot of a DB cluster.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -3647,7 +3647,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -3962,37 +3962,37 @@ module Aws::RDS
     #   setting is required for RDS Custom for Oracle. The CEV name has the
     #   following format: `19.customized_string `. An example identifier is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
-    #   Oracle DB instance][1] in the *Amazon RDS User Guide.*.
+    #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon RDS Custom for SQL Server**
     #
     #   See [RDS Custom for SQL Server general requirements][2] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **MariaDB**
     #
     #   For information, see [MariaDB on Amazon RDS Versions][3] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **Microsoft SQL Server**
     #
     #   For information, see [Microsoft SQL Server Versions on Amazon RDS][4]
-    #   in the *Amazon RDS User Guide.*
+    #   in the *Amazon RDS User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][5] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **Oracle**
     #
     #   For information, see [Oracle Database Engine Release Notes][6] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][7] in the *Amazon RDS User Guide.*
+    #   extensions][7] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -4260,7 +4260,7 @@ module Aws::RDS
     #   managed by the DB cluster.
     #
     #   For more information, see [ IAM Database Authentication for MySQL and
-    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #   PostgreSQL][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -4269,7 +4269,7 @@ module Aws::RDS
     # @option params [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance. For more information, see [Using Amazon Performance
-    #   Insights][1] in the *Amazon Relational Database Service User Guide*.
+    #   Insights][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -4300,8 +4300,8 @@ module Aws::RDS
     # @option params [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine. For
-    #   more information, see [Publishing Database Logs to Amazon CloudWatch
-    #   Logs][1] in the *Amazon Relational Database Service User Guide*.
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -4408,8 +4408,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -4739,7 +4738,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -5021,7 +5020,7 @@ module Aws::RDS
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -5169,8 +5168,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -6634,11 +6632,11 @@ module Aws::RDS
     # snapshots of the specified DB cluster are not deleted.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -6885,11 +6883,11 @@ module Aws::RDS
     # clusters.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -6942,11 +6940,11 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -8098,7 +8096,7 @@ module Aws::RDS
     # Returns information about backtracks for a DB cluster.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora MySQL DB clusters.
     #
@@ -8317,11 +8315,11 @@ module Aws::RDS
     # group.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -8414,11 +8412,11 @@ module Aws::RDS
     # parameter group.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -8587,11 +8585,11 @@ module Aws::RDS
     # supports pagination.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -8788,11 +8786,11 @@ module Aws::RDS
     # clusters. This API supports pagination.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     # This operation can also return information for Amazon Neptune DB
     # instances and Amazon DocumentDB instances.
@@ -10679,7 +10677,7 @@ module Aws::RDS
     # cluster database engine.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -11286,7 +11284,7 @@ module Aws::RDS
     # supports pagination.
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -11811,7 +11809,7 @@ module Aws::RDS
     #   An optional pagination token provided by a previous
     #   DescribeOrderableDBInstanceOptions request. If this parameter is
     #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords` .
+    #   the value specified by `MaxRecords`.
     #
     # @return [Types::OrderableDBInstanceOptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12568,11 +12566,11 @@ module Aws::RDS
     # complete.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -12750,7 +12748,7 @@ module Aws::RDS
     #
     # For more information about failing over an Amazon Aurora global
     # database, see [Managed planned failover for Amazon Aurora global
-    # databases][1] in the *Amazon Aurora User Guide.*
+    # databases][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action applies to GlobalCluster (Aurora global databases) only.
     # Use this action only on healthy Aurora global databases with running
@@ -12859,7 +12857,7 @@ module Aws::RDS
     #   **Microsoft SQL Server**
     #
     #   See [ Microsoft SQL Server Versions on Amazon RDS][1] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #
     #
@@ -13063,29 +13061,29 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Set the capacity of an Aurora Serverless DB cluster to a specific
+    # Set the capacity of an Aurora Serverless v1 DB cluster to a specific
     # value.
     #
-    # Aurora Serverless scales seamlessly based on the workload on the DB
+    # Aurora Serverless v1 scales seamlessly based on the workload on the DB
     # cluster. In some cases, the capacity might not scale fast enough to
     # meet a sudden change in workload, such as a large number of new
     # transactions. Call `ModifyCurrentDBClusterCapacity` to set the
     # capacity explicitly.
     #
-    # After this call sets the DB cluster capacity, Aurora Serverless can
+    # After this call sets the DB cluster capacity, Aurora Serverless v1 can
     # automatically scale the DB cluster based on the cooldown period for
     # scaling up and the cooldown period for scaling down.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information about Aurora Serverless v1, see [Using Amazon
+    # Aurora Serverless v1][1] in the *Amazon Aurora User Guide*.
     #
     # If you call `ModifyCurrentDBClusterCapacity` with the default
-    # `TimeoutAction`, connections that prevent Aurora Serverless from
+    # `TimeoutAction`, connections that prevent Aurora Serverless v1 from
     # finding a scaling point might be dropped. For more information about
-    # scaling points, see [ Autoscaling for Aurora Serverless][2] in the
+    # scaling points, see [ Autoscaling for Aurora Serverless v1][2] in the
     # *Amazon Aurora User Guide*.
     #
-    # <note markdown="1"> This action only applies to Aurora Serverless DB clusters.
+    # <note markdown="1"> This action only applies to Aurora Serverless v1 DB clusters.
     #
     #  </note>
     #
@@ -13107,8 +13105,8 @@ module Aws::RDS
     # @option params [Integer] :capacity
     #   The DB cluster capacity.
     #
-    #   When you change the capacity of a paused Aurora Serverless DB cluster,
-    #   it automatically resumes.
+    #   When you change the capacity of a paused Aurora Serverless v1 DB
+    #   cluster, it automatically resumes.
     #
     #   Constraints:
     #
@@ -13119,9 +13117,9 @@ module Aws::RDS
     #     `16`, `32`, `64`, `192`, and `384`.
     #
     # @option params [Integer] :seconds_before_timeout
-    #   The amount of time, in seconds, that Aurora Serverless tries to find a
-    #   scaling point to perform seamless scaling before enforcing the timeout
-    #   action. The default is 300.
+    #   The amount of time, in seconds, that Aurora Serverless v1 tries to
+    #   find a scaling point to perform seamless scaling before enforcing the
+    #   timeout action. The default is 300.
     #
     #   Specify a value between 10 and 600 seconds.
     #
@@ -13325,11 +13323,11 @@ module Aws::RDS
     # parameters and the new values in the request.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
-    # RDS User Guide.*
+    # RDS User Guide*.
     #
     #
     #
@@ -13437,7 +13435,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -13465,7 +13463,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -13483,7 +13481,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -13528,8 +13526,8 @@ module Aws::RDS
     #   Possible value is `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
-    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -13648,16 +13646,16 @@ module Aws::RDS
     #
     # @option params [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -13695,7 +13693,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [ DB Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -14079,13 +14077,13 @@ module Aws::RDS
     # cluster parameter group has been created or modified.
     #
     #  If the modified DB cluster parameter group is used by an Aurora
-    # Serverless cluster, Aurora applies the update immediately. The cluster
-    # restart might interrupt your workload. In that case, your application
-    # must reopen any connections and retry any transactions that were
-    # active when the parameter changes took effect.
+    # Serverless v1 cluster, Aurora applies the update immediately. The
+    # cluster restart might interrupt your workload. In that case, your
+    # application must reopen any connections and retry any transactions
+    # that were active when the parameter changes took effect.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][3] in the *Amazon
@@ -14920,7 +14918,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide.*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -15015,7 +15013,7 @@ module Aws::RDS
     #
     #   * For more information about rotating your SSL/TLS certificate for
     #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
-    #     the *Amazon Aurora User Guide.*
+    #     the *Amazon Aurora User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -16056,7 +16054,7 @@ module Aws::RDS
     # one or more database configuration parameters by specifying these
     # parameters and the new values in the request. For more information on
     # Amazon Aurora, see [ What is Amazon Aurora?][1] in the *Amazon Aurora
-    # User Guide.*
+    # User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -17242,7 +17240,7 @@ module Aws::RDS
     # Management (IAM) role from a DB cluster.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
@@ -17448,7 +17446,7 @@ module Aws::RDS
     # cluster that you want the updated static parameter to apply to.
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
@@ -17645,7 +17643,7 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora, see [ What is Amazon
-    # Aurora?][2] in the *Amazon Aurora User Guide.*
+    # Aurora?][2] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters. The source DB engine
     # must be MySQL.
@@ -17795,7 +17793,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -17821,7 +17819,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred Maintenance Window][1] in the *Amazon Aurora
-    #   User Guide.*
+    #   User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -17863,7 +17861,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #
     #
@@ -18135,7 +18133,7 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
@@ -18229,12 +18227,12 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   See [Amazon Aurora PostgreSQL releases and engine versions][2] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
@@ -18321,7 +18319,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -18371,7 +18369,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide.*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -18731,7 +18729,7 @@ module Aws::RDS
     #  </note>
     #
     # For more information on Amazon Aurora DB clusters, see [ What is
-    # Amazon Aurora?][1] in the *Amazon Aurora User Guide.*
+    # Amazon Aurora?][1] in the *Amazon Aurora User Guide*.
     #
     # For more information on Multi-AZ DB clusters, see [ Multi-AZ
     # deployments with two readable standby DB instances][2] in the *Amazon
@@ -18890,7 +18888,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -18936,7 +18934,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide.*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -19011,10 +19009,11 @@ module Aws::RDS
     # @option params [String] :engine_mode
     #   The engine mode of the new cluster. Specify `provisioned` or
     #   `serverless`, depending on the type of the cluster you are creating.
-    #   You can create an Aurora Serverless clone from a provisioned cluster,
-    #   or a provisioned clone from an Aurora Serverless cluster. To create a
-    #   clone that is an Aurora Serverless cluster, the original cluster must
-    #   be an Aurora Serverless cluster or an encrypted provisioned cluster.
+    #   You can create an Aurora Serverless v1 clone from a provisioned
+    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
+    #   To create a clone that is an Aurora Serverless v1 cluster, the
+    #   original cluster must be an Aurora Serverless v1 cluster or an
+    #   encrypted provisioned cluster.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -20301,7 +20300,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide.*.
     #
     #
     #
@@ -20641,7 +20640,7 @@ module Aws::RDS
     #   example db.m4.large. Not all DB instance classes are available in all
     #   Amazon Web Services Regions, or for all database engines. For the full
     #   list of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -20967,8 +20966,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -21454,7 +21452,7 @@ module Aws::RDS
     # StopDBCluster action.
     #
     # For more information, see [ Stopping and Starting an Aurora
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -22044,7 +22042,7 @@ module Aws::RDS
     # do a point-in-time restore if necessary.
     #
     # For more information, see [ Stopping and Starting an Aurora
-    # Cluster][1] in the *Amazon Aurora User Guide.*
+    # Cluster][1] in the *Amazon Aurora User Guide*.
     #
     # <note markdown="1"> This action only applies to Aurora DB clusters.
     #
@@ -22444,7 +22442,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

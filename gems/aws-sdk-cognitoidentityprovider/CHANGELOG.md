@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-03-15)
+------------------
+
+* Feature - Updated EmailConfigurationType and SmsConfigurationType to reflect that you can now choose Amazon SES and Amazon SNS resources in the same Region.
+
 1.64.0 (2022-02-24)
 ------------------
 

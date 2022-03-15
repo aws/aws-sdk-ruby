@@ -4753,6 +4753,7 @@ module Aws::EC2
 
     DeleteIpamRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DeleteIpamRequest.add_member(:ipam_id, Shapes::ShapeRef.new(shape: IpamId, required: true, location_name: "IpamId"))
+    DeleteIpamRequest.add_member(:cascade, Shapes::ShapeRef.new(shape: Boolean, location_name: "Cascade"))
     DeleteIpamRequest.struct_class = Types::DeleteIpamRequest
 
     DeleteIpamResult.add_member(:ipam, Shapes::ShapeRef.new(shape: Ipam, location_name: "ipam"))
@@ -10864,7 +10865,7 @@ module Aws::EC2
     ReleaseIpamPoolAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ReleaseIpamPoolAllocationRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
     ReleaseIpamPoolAllocationRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
-    ReleaseIpamPoolAllocationRequest.add_member(:ipam_pool_allocation_id, Shapes::ShapeRef.new(shape: IpamPoolAllocationId, location_name: "IpamPoolAllocationId"))
+    ReleaseIpamPoolAllocationRequest.add_member(:ipam_pool_allocation_id, Shapes::ShapeRef.new(shape: IpamPoolAllocationId, required: true, location_name: "IpamPoolAllocationId"))
     ReleaseIpamPoolAllocationRequest.struct_class = Types::ReleaseIpamPoolAllocationRequest
 
     ReleaseIpamPoolAllocationResult.add_member(:success, Shapes::ShapeRef.new(shape: Boolean, location_name: "success"))

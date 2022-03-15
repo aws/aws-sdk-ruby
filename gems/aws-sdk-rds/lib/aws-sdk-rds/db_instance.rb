@@ -661,8 +661,7 @@ module Aws::RDS
     #   start with the prefix `AWSRDSCustom`.
     #
     # For the list of permissions required for the IAM role, see [ Configure
-    # IAM and your VPC][1] in the *Amazon Relational Database Service User
-    # Guide*.
+    # IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1097,7 +1096,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1398,37 +1397,37 @@ module Aws::RDS
     #   setting is required for RDS Custom for Oracle. The CEV name has the
     #   following format: `19.customized_string `. An example identifier is
     #   `19.my_cev1`. For more information, see [ Creating an RDS Custom for
-    #   Oracle DB instance][1] in the *Amazon RDS User Guide.*.
+    #   Oracle DB instance][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon RDS Custom for SQL Server**
     #
     #   See [RDS Custom for SQL Server general requirements][2] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **MariaDB**
     #
     #   For information, see [MariaDB on Amazon RDS Versions][3] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **Microsoft SQL Server**
     #
     #   For information, see [Microsoft SQL Server Versions on Amazon RDS][4]
-    #   in the *Amazon RDS User Guide.*
+    #   in the *Amazon RDS User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][5] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **Oracle**
     #
     #   For information, see [Oracle Database Engine Release Notes][6] in the
-    #   *Amazon RDS User Guide.*
+    #   *Amazon RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][7] in the *Amazon RDS User Guide.*
+    #   extensions][7] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1674,7 +1673,7 @@ module Aws::RDS
     #   managed by the DB cluster.
     #
     #   For more information, see [ IAM Database Authentication for MySQL and
-    #   PostgreSQL][1] in the *Amazon RDS User Guide.*
+    #   PostgreSQL][1] in the *Amazon RDS User Guide*.
     #
     #
     #
@@ -1682,7 +1681,7 @@ module Aws::RDS
     # @option options [Boolean] :enable_performance_insights
     #   A value that indicates whether to enable Performance Insights for the
     #   DB instance. For more information, see [Using Amazon Performance
-    #   Insights][1] in the *Amazon Relational Database Service User Guide*.
+    #   Insights][1] in the *Amazon RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -1710,8 +1709,8 @@ module Aws::RDS
     # @option options [Array<String>] :enable_cloudwatch_logs_exports
     #   The list of log types that need to be enabled for exporting to
     #   CloudWatch Logs. The values in the list depend on the DB engine. For
-    #   more information, see [Publishing Database Logs to Amazon CloudWatch
-    #   Logs][1] in the *Amazon Relational Database Service User Guide*.
+    #   more information, see [ Publishing Database Logs to Amazon CloudWatch
+    #   Logs][1] in the *Amazon RDS User Guide*.
     #
     #   **Amazon Aurora**
     #
@@ -1813,8 +1812,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -1901,7 +1899,7 @@ module Aws::RDS
     #   db.m4.large. Not all DB instance classes are available in all Amazon
     #   Web Services Regions, or for all database engines. For the full list
     #   of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: Inherits from the source DB instance.
     #
@@ -2165,7 +2163,7 @@ module Aws::RDS
     #
     #   For more information about IAM database authentication, see [ IAM
     #   Database Authentication for MySQL and PostgreSQL][1] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -2301,8 +2299,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #
@@ -3066,7 +3063,7 @@ module Aws::RDS
     #   DB instance.
     #
     #   For more information, see [Using Amazon Performance Insights][1] in
-    #   the *Amazon Relational Database Service User Guide*.
+    #   the *Amazon RDS User Guide.*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -3153,7 +3150,7 @@ module Aws::RDS
     #
     #   * For more information about rotating your SSL/TLS certificate for
     #     Aurora DB engines, see [ Rotating Your SSL/TLS Certificate][2] in
-    #     the *Amazon Aurora User Guide.*
+    #     the *Amazon Aurora User Guide*.
     #
     #   This setting doesn't apply to RDS Custom.
     #
@@ -3389,7 +3386,7 @@ module Aws::RDS
     #   example db.m4.large. Not all DB instance classes are available in all
     #   Amazon Web Services Regions, or for all database engines. For the full
     #   list of DB instance classes, and availability for your engine, see [DB
-    #   Instance Class][1] in the *Amazon RDS User Guide.*
+    #   Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Default: The same DBInstanceClass as the original DB instance.
     #
@@ -3685,8 +3682,7 @@ module Aws::RDS
     #     start with the prefix `AWSRDSCustom`.
     #
     #   For the list of permissions required for the IAM role, see [ Configure
-    #   IAM and your VPC][1] in the *Amazon Relational Database Service User
-    #   Guide*.
+    #   IAM and your VPC][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required for RDS Custom.
     #

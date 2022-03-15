@@ -1257,7 +1257,7 @@ module Aws::RoboMaker
     #       s3_prefix: "S3Key",
     #     },
     #     logging_config: {
-    #       record_all_ros_topics: false, # required
+    #       record_all_ros_topics: false,
     #     },
     #     max_job_duration_in_seconds: 1, # required
     #     iam_role: "IamRole", # required
@@ -3317,6 +3317,8 @@ module Aws::RoboMaker
     #   resp.world_export_job_summaries[0].created_at #=> Time
     #   resp.world_export_job_summaries[0].worlds #=> Array
     #   resp.world_export_job_summaries[0].worlds[0] #=> String
+    #   resp.world_export_job_summaries[0].output_location.s3_bucket #=> String
+    #   resp.world_export_job_summaries[0].output_location.s3_prefix #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/robomaker-2018-06-29/ListWorldExportJobs AWS API Documentation
@@ -3613,7 +3615,7 @@ module Aws::RoboMaker
     #           s3_prefix: "S3Key",
     #         },
     #         logging_config: {
-    #           record_all_ros_topics: false, # required
+    #           record_all_ros_topics: false,
     #         },
     #         max_job_duration_in_seconds: 1, # required
     #         iam_role: "IamRole",
@@ -4308,7 +4310,7 @@ module Aws::RoboMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-robomaker'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

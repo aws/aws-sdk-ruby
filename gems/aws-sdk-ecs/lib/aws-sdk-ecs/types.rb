@@ -2624,7 +2624,7 @@ module Aws::ECS
     #   @return [Array<Types::ClusterSetting>]
     #
     # @!attribute [rw] configuration
-    #   The execute command configuration for the cluster.
+    #   The `execute` command configuration for the cluster.
     #   @return [Types::ClusterConfiguration]
     #
     # @!attribute [rw] capacity_providers
@@ -3101,12 +3101,10 @@ module Aws::ECS
     #   @return [Boolean]
     #
     # @!attribute [rw] propagate_tags
-    #   Specifies whether to propagate the tags from the task definition or
-    #   the service to the tasks in the service. If no value is specified,
-    #   the tags aren't propagated. Tags can only be propagated to the
-    #   tasks within the service during service creation. To add tags to a
-    #   task after service creation or task creation, use the TagResource
-    #   API action.
+    #   Specifies whether to propagate the tags from the task definition to
+    #   the task. If no value is specified, the tags aren't propagated.
+    #   Tags can only be propagated to the task during task creation. To add
+    #   tags to a task after task creation, use the TagResource API action.
     #   @return [String]
     #
     # @!attribute [rw] enable_execute_command
@@ -5316,6 +5314,15 @@ module Aws::ECS
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
     # specified in a parent image or from the image's Dockerfile).
+    #
+    # <note markdown="1"> The Amazon ECS container agent only monitors and reports on the health
+    # checks specified in the task definition. Amazon ECS does not monitor
+    # Docker health checks that are embedded in a container image and not
+    # specified in the container definition. Health check parameters that
+    # are specified in a container definition override any Docker health
+    # checks that exist in the container image.
+    #
+    #  </note>
     #
     # You can view the health status of both individual containers and a
     # task with the DescribeTasks API operation or when viewing the task
@@ -8772,6 +8779,9 @@ module Aws::ECS
     #   Determines whether to use the execute command functionality for the
     #   containers in this task. If `true`, this enables execute command
     #   functionality on all containers in the task.
+    #
+    #   If `true`, then the task definition must have a task role, or you
+    #   must provide one as an override.
     #   @return [Boolean]
     #
     # @!attribute [rw] group
@@ -8928,12 +8938,32 @@ module Aws::ECS
     #   task definition to run. If a `revision` isn't specified, the latest
     #   `ACTIVE` revision is used.
     #
+    #   When you create an IAM policy for run-task, you can set the resource
+    #   to be the latest task definition revision, or a specific revision.
+    #
     #   The full ARN value must match the value that you specified as the
-    #   `Resource` of the IAM principal's permissions policy. For example,
-    #   if the `Resource` is
-    #   arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*,
-    #   the `taskDefinition` ARN value must be
+    #   `Resource` of the IAM principal's permissions policy.
+    #
+    #   When you specify the policy resource as the latest task definition
+    #   version (by setting the `Resource` in the policy to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`),
+    #   then set this value to
     #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName`.
+    #
+    #   When you specify the policy resource as a specific task definition
+    #   version (by setting the `Resource` in the policy to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`
+    #   or
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:*`),
+    #   then set this value to
+    #   `arn:aws:ecs:us-east-1:111122223333:task-definition/TaskFamilyName:1`.
+    #
+    #   For more information, see [Policy Resources for Amazon ECS][1] in
+    #   the Amazon Elastic Container Service developer Guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-resources
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RunTaskRequest AWS API Documentation
@@ -10252,8 +10282,23 @@ module Aws::ECS
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
-    # The target container isn't properly configured with the execute
-    # command agent or the container is no longer active or running.
+    # The execute command cannot run. This error can be caused by any of the
+    # following configuration issues:
+    #
+    # * Incorrect IAM permissions
+    #
+    # * The SSM agent is not installed or is not running
+    #
+    # * There is an interface Amazon VPC endpoint for Amazon ECS, but there
+    #   is not one for for Systems Manager Session Manager
+    #
+    # For information about how to troubleshoot the issues, see
+    # [Troubleshooting issues with ECS Exec][1] in the *Amazon Elastic
+    # Container Service Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/TargetNotConnectedException AWS API Documentation
     #

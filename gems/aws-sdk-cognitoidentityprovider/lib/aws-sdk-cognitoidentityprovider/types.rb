@@ -51,7 +51,8 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     #
     # @!attribute [rw] event_action
-    #   The event action.
+    #   The action to take in response to the account takeover action. Valid
+    #   values are:
     #
     #   * `BLOCK` Choosing this action will block the request.
     #
@@ -292,7 +293,7 @@ module Aws::CognitoIdentityProvider
     #   you can process the ClientMetadata value to enhance your workflow
     #   for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -543,7 +544,7 @@ module Aws::CognitoIdentityProvider
     #   `clientMetadata` value to enhance your workflow for your specific
     #   needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -914,8 +915,6 @@ module Aws::CognitoIdentityProvider
     #
     #   * ARCHIVED - User is no longer active.
     #
-    #   * COMPROMISED - User is disabled due to a potential security threat.
-    #
     #   * UNKNOWN - User status isn't known.
     #
     #   * RESET\_REQUIRED - User is confirmed, but the user must request a
@@ -1099,7 +1098,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Verify auth challenge
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -1267,12 +1266,13 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] destination_user
-    #   The existing user in the user pool to be linked to the external
-    #   identity provider user account. Can be a native (Username +
-    #   Password) Amazon Cognito User Pools user or a federated user (for
-    #   example, a SAML or Facebook user). If the user doesn't exist, an
-    #   exception is thrown. This is the user that is returned when the new
-    #   user (with the linked identity provider attribute) signs in.
+    #   The existing user in the user pool that you want to assign to the
+    #   external identity provider user account. This user can be a native
+    #   (Username + Password) Amazon Cognito user pools user or a federated
+    #   user (for example, a SAML or Facebook user). If the user doesn't
+    #   exist, Amazon Cognito generates an exception. Amazon Cognito returns
+    #   this user when the new user (with the linked identity provider
+    #   attribute) signs in.
     #
     #   For a native username + password user, the `ProviderAttributeValue`
     #   for the `DestinationUser` should be the username in the user pool.
@@ -1569,7 +1569,7 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -1721,19 +1721,34 @@ module Aws::CognitoIdentityProvider
     #
     #   You create custom workflows by assigning Lambda functions to user
     #   pool triggers. When you use the AdminRespondToAuthChallenge API
-    #   action, Amazon Cognito invokes any functions that are assigned to
-    #   the following triggers: *pre sign-up*, *custom message*, *post
-    #   authentication*, *user migration*, *pre token generation*, *define
-    #   auth challenge*, *create auth challenge*, and *verify auth challenge
-    #   response*. When Amazon Cognito invokes any of these functions, it
-    #   passes a JSON payload, which the function receives as input. This
-    #   payload contains a `clientMetadata` attribute, which provides the
-    #   data that you assigned to the ClientMetadata parameter in your
+    #   action, Amazon Cognito invokes any functions that you have assigned
+    #   to the following triggers:
+    #
+    #   * pre sign-up
+    #
+    #   * custom message
+    #
+    #   * post authentication
+    #
+    #   * user migration
+    #
+    #   * pre token generation
+    #
+    #   * define auth challenge
+    #
+    #   * create auth challenge
+    #
+    #   * verify auth challenge response
+    #
+    #   When Amazon Cognito invokes any of these functions, it passes a JSON
+    #   payload, which the function receives as input. This payload contains
+    #   a `clientMetadata` attribute that provides the data that you
+    #   assigned to the ClientMetadata parameter in your
     #   AdminRespondToAuthChallenge request. In your function code in
     #   Lambda, you can process the `clientMetadata` value to enhance your
     #   workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -2091,7 +2106,7 @@ module Aws::CognitoIdentityProvider
     #   you can process the `clientMetadata` value to enhance your workflow
     #   for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -2185,10 +2200,10 @@ module Aws::CognitoIdentityProvider
     # The Amazon Pinpoint analytics configuration for collecting metrics for
     # a user pool.
     #
-    # <note markdown="1"> In Regions where Pinpoint isn't available, User Pools only supports
-    # sending events to Amazon Pinpoint projects in us-east-1. In Regions
-    # where Pinpoint is available, User Pools will support sending events to
-    # Amazon Pinpoint projects within that same Region.
+    # <note markdown="1"> In Regions where Amazon Pinpointisn't available, user pools only
+    # support sending events to Amazon Pinpoint projects in us-east-1. In
+    # Regions where Amazon Pinpoint is available, user pools support sending
+    # events to Amazon Pinpoint projects within that same Region.
     #
     #  </note>
     #
@@ -2209,8 +2224,8 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] application_arn
     #   The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You
-    #   can use the Amazon Pinpoint project for integration with the chosen
-    #   User Pool Client. Amazon Cognito publishes events to the Amazon
+    #   can use the Amazon Pinpoint project to integrate with the chosen
+    #   user pool Client. Amazon Cognito publishes events to the Amazon
     #   Pinpointproject declared by the app ARN.
     #   @return [String]
     #
@@ -2245,9 +2260,9 @@ module Aws::CognitoIdentityProvider
     # An endpoint uniquely identifies a mobile device, email address, or
     # phone number that can receive messages from Amazon Pinpoint analytics.
     #
-    # <note markdown="1"> Amazon Cognito User Pools only supports sending events to Amazon
+    # <note markdown="1"> Amazon Cognito user pools only support sending events to Amazon
     # Pinpoint projects in the US East (N. Virginia) us-east-1 Region,
-    # regardless of the Region in which the user pool resides.
+    # regardless of the Region where the user pool resides.
     #
     #  </note>
     #
@@ -2748,7 +2763,7 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -2870,7 +2885,7 @@ module Aws::CognitoIdentityProvider
     #   process the `clientMetadata` value to enhance your workflow for your
     #   specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -3358,13 +3373,13 @@ module Aws::CognitoIdentityProvider
     #   The user pool attributes that the app client can write to.
     #
     #   If your app client allows users to sign in through an identity
-    #   provider, this array must include all attributes that are mapped to
-    #   identity provider attributes. Amazon Cognito updates mapped
-    #   attributes when users sign in to your application through an
-    #   identity provider. If your app client lacks write access to a mapped
-    #   attribute, Amazon Cognito throws an error when it tries to update
-    #   the attribute. For more information, see [Specifying Identity
-    #   Provider Attribute Mappings for Your User Pool][1].
+    #   provider, this array must include all attributes that you have
+    #   mapped to identity provider attributes. Amazon Cognito updates
+    #   mapped attributes when users sign in to your application through an
+    #   identity provider. If your app client does not have write access to
+    #   a mapped attribute, Amazon Cognito throws an error when it tries to
+    #   update the attribute. For more information, see [Specifying Identity
+    #   Provider Attribute Mappings for Your user pool][1].
     #
     #
     #
@@ -3374,9 +3389,12 @@ module Aws::CognitoIdentityProvider
     # @!attribute [rw] explicit_auth_flows
     #   The authentication flows that are supported by the user pool
     #   clients. Flow names without the `ALLOW_` prefix are no longer
-    #   supported, in favor of new names with the `ALLOW_` prefix. Note that
-    #   values with `ALLOW_` prefix must be used only along with the
+    #   supported, in favor of new names with the `ALLOW_` prefix.
+    #
+    #   <note markdown="1"> Values with `ALLOW_` prefix must be used only along with the
     #   `ALLOW_` prefix.
+    #
+    #    </note>
     #
     #   Valid values include:
     #
@@ -3484,14 +3502,14 @@ module Aws::CognitoIdentityProvider
     #   @return [Boolean]
     #
     # @!attribute [rw] analytics_configuration
-    #   The Amazon Pinpoint analytics configuration for collecting metrics
-    #   for this user pool.
+    #   The user pool analytics configuration for collecting metrics and
+    #   sending them to your Amazon Pinpoint campaign.
     #
-    #   <note markdown="1"> In Amazon Web Services Regions where isn't available, User Pools
-    #   only supports sending events to Amazon Pinpoint projects in Amazon
-    #   Web Services Region us-east-1. In Regions where is available, User
-    #   Pools will support sending events to Amazon Pinpoint projects within
-    #   that same Region.
+    #   <note markdown="1"> In Amazon Web Services Regions where Amazon Pinpoint isn't
+    #   available, user pools only support sending events to Amazon Pinpoint
+    #   projects in Amazon Web Services Region us-east-1. In Regions where
+    #   Amazon Pinpoint is available, user pools support sending events to
+    #   Amazon Pinpoint projects within that same Region.
     #
     #    </note>
     #   @return [Types::AnalyticsConfigurationType]
@@ -3696,6 +3714,7 @@ module Aws::CognitoIdentityProvider
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required
     #           external_id: "StringType",
+    #           sns_region: "RegionCodeType",
     #         },
     #         user_pool_tags: {
     #           "TagKeysType" => "TagValueType",
@@ -3830,11 +3849,18 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::DeviceConfigurationType]
     #
     # @!attribute [rw] email_configuration
-    #   The email configuration.
+    #   The email configuration of your user pool. The email configuration
+    #   type sets your preferred sending method, Amazon Web Services Region,
+    #   and sender for messages from your user pool.
     #   @return [Types::EmailConfigurationType]
     #
     # @!attribute [rw] sms_configuration
-    #   The SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito
+    #   user pool must use to send an SMS message from your Amazon Web
+    #   Services account through Amazon Simple Notification Service. To send
+    #   SMS messages with Amazon SNS in the Amazon Web Services Region that
+    #   you want, the Amazon Cognito user pool uses an Identity and Access
+    #   Management (IAM) role in your Amazon Web Services account.
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
@@ -4658,11 +4684,15 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The email configuration type.
+    # The email configuration of your user pool. The email configuration
+    # type sets your preferred sending method, Amazon Web Services Region,
+    # and sender for messages from your user pool.
     #
-    # <note markdown="1"> Amazon Cognito has specific Regions for use with Amazon Simple Email
-    # Service. For more information on the supported Regions, see [Email
-    # settings for Amazon Cognito user pools][1].
+    # <note markdown="1"> Amazon Cognito can send email messages with Amazon Simple Email
+    # Service resources in the Amazon Web Services Region where you created
+    # your user pool, and in alternate Regions in some cases. For more
+    # information on the supported Regions, see [Email settings for Amazon
+    # Cognito user pools][1].
     #
     #  </note>
     #
@@ -4692,6 +4722,17 @@ module Aws::CognitoIdentityProvider
     #
     #   * If you specify `DEVELOPER`, Amazon Cognito emails your users with
     #     this address by calling Amazon SES on your behalf.
+    #
+    #   The Region value of the `SourceArn` parameter must indicate a
+    #   supported Amazon Web Services Region of your user pool. Typically,
+    #   the Region in the `SourceArn` and the user pool Region are the same.
+    #   For more information, see [Amazon SES email configuration
+    #   regions][1] in the [Amazon Cognito Developer Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-email.html#user-pool-email-developer-region-mapping
+    #   [2]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html
     #   @return [String]
     #
     # @!attribute [rw] reply_to_email_address
@@ -4699,9 +4740,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] email_sending_account
-    #   Specifies whether Amazon Cognito emails your users by using its
-    #   built-in email functionality or your Amazon Simple Email Service
-    #   email configuration. Specify one of the following values:
+    #   Specifies whether Amazon Cognito uses its built-in functionality to
+    #   send your users email messages, or uses your Amazon Simple Email
+    #   Service email configuration. Specify one of the following values:
     #
     #   COGNITO\_DEFAULT
     #
@@ -4787,16 +4828,20 @@ module Aws::CognitoIdentityProvider
     #   configuration set are applied to the email. Configuration sets can
     #   be used to apply the following types of rules to emails:
     #
-    #   * Event publishing – Amazon Simple Email Service can track the
-    #     number of send, delivery, open, click, bounce, and complaint
-    #     events for each email sent. Use event publishing to send
-    #     information about these events to other Amazon Web Services
-    #     services such as and Amazon CloudWatch.
+    #   Event publishing
     #
-    #   * IP pool management – When leasing dedicated IP addresses with
-    #     Amazon Simple Email Service, you can create groups of IP
-    #     addresses, called dedicated IP pools. You can then associate the
-    #     dedicated IP pools with configuration sets.
+    #   : Amazon Simple Email Service can track the number of send,
+    #     delivery, open, click, bounce, and complaint events for each email
+    #     sent. Use event publishing to send information about these events
+    #     to other Amazon Web Services services such as and Amazon
+    #     CloudWatch
+    #
+    #   IP pool management
+    #
+    #   : When leasing dedicated IP addresses with Amazon Simple Email
+    #     Service, you can create groups of IP addresses, called dedicated
+    #     IP pools. You can then associate the dedicated IP pools with
+    #     configuration sets.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/EmailConfigurationType AWS API Documentation
@@ -5013,7 +5058,7 @@ module Aws::CognitoIdentityProvider
     #   `clientMetadata` value to enhance your workflow for your specific
     #   needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -5334,7 +5379,7 @@ module Aws::CognitoIdentityProvider
     #   Lambda, you can process the `clientMetadata` value to enhance your
     #   workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -5852,7 +5897,7 @@ module Aws::CognitoIdentityProvider
     #
     #   * Verify auth challenge
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -5910,9 +5955,12 @@ module Aws::CognitoIdentityProvider
     #   This name is returned in the `AdminInitiateAuth` response if you
     #   must pass another challenge.
     #
-    #   Valid values include the following. Note that all of these
-    #   challenges require `USERNAME` and `SECRET_HASH` (if applicable) in
-    #   the parameters.
+    #   Valid values include the following:
+    #
+    #   <note markdown="1"> All of the following challenges require `USERNAME` and `SECRET_HASH`
+    #   (if applicable) in the parameters.
+    #
+    #    </note>
     #
     #   * `SMS_MFA`\: Next challenge is to supply an `SMS_MFA_CODE`,
     #     delivered via SMS.
@@ -6857,10 +6905,9 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # *This data type is no longer supported.* You can use it only for SMS
-    # multi-factor authentication (MFA) configurations. You can't use it
-    # for time-based one-time password (TOTP) software token MFA
-    # configurations.
+    # *This data type is no longer supported.* Applies only to SMS
+    # multi-factor authentication (MFA) configurations. Does not apply to
+    # time-based one-time password (TOTP) software token MFA configurations.
     #
     # @note When making an API call, you may pass MFAOptionType
     #   data as a hash:
@@ -7345,7 +7392,7 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -7580,7 +7627,7 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -8115,6 +8162,7 @@ module Aws::CognitoIdentityProvider
     #           sms_configuration: {
     #             sns_caller_arn: "ArnType", # required
     #             external_id: "StringType",
+    #             sns_region: "RegionCodeType",
     #           },
     #         },
     #         software_token_mfa_configuration: {
@@ -8137,9 +8185,9 @@ module Aws::CognitoIdentityProvider
     #
     # @!attribute [rw] mfa_configuration
     #   The MFA configuration. If you set the MfaConfiguration value to
-    #   ‘ON’, only users with an MFA factor set up can sign in. To learn
-    #   more, see [Adding Multi-Factor Authentication (MFA) to a User
-    #   Pool](cognito/latest/developerguide/user-pool-settings-mfa.html).
+    #   ‘ON’, only users who have set up an MFA factor can sign in. To learn
+    #   more, see [Adding Multi-Factor Authentication (MFA) to a user
+    #   pool](cognito/latest/developerguide/user-pool-settings-mfa.html).
     #   Valid values include:
     #
     #   * `OFF` MFA won't be used for any users.
@@ -8317,7 +8365,7 @@ module Aws::CognitoIdentityProvider
     #   your function code in Lambda, you can process the `clientMetadata`
     #   value to enhance your workflow for your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -8383,12 +8431,12 @@ module Aws::CognitoIdentityProvider
       include Aws::Structure
     end
 
-    # The SMS configuration type that includes the settings the Amazon
-    # Cognito User Pool must call for the Amazon Simple Notification Service
-    # service to send an SMS message from your Amazon Web Services account.
-    # The Amazon Cognito User Pool makes the request to the Amazon SNS
-    # Service by using an Identity and Access Management role that you
-    # provide for your Amazon Web Services account.
+    # The SMS configuration type is the settings that your Amazon Cognito
+    # user pool must use to send an SMS message from your Amazon Web
+    # Services account through Amazon Simple Notification Service. To send
+    # SMS messages with Amazon SNS in the Amazon Web Services Region that
+    # you want, the Amazon Cognito user pool uses an Identity and Access
+    # Management (IAM) role in your Amazon Web Services account.
     #
     # @note When making an API call, you may pass SmsConfigurationType
     #   data as a hash:
@@ -8396,6 +8444,7 @@ module Aws::CognitoIdentityProvider
     #       {
     #         sns_caller_arn: "ArnType", # required
     #         external_id: "StringType",
+    #         sns_region: "RegionCodeType",
     #       }
     #
     # @!attribute [rw] sns_caller_arn
@@ -8410,14 +8459,15 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] external_id
-    #   The external ID is a value that you should use to add security to
-    #   your IAM role that is used to call Amazon SNS to send SMS messages
-    #   for your user pool. If you provide an `ExternalId`, the Amazon
-    #   Cognito User Pool will include it when attempting to assume your IAM
-    #   role so that you can set your roles trust policy to require the
-    #   `ExternalID`. If you use the Amazon Cognito Management Console to
-    #   create a role for SMS multi-factor authentication (MFA), Amazon
-    #   Cognito will create a role with the required permissions and a trust
+    #   The external ID provides additional security for your IAM role. You
+    #   can use an `ExternalId` with the IAM role that you use with Amazon
+    #   SNS to send SMS messages for your user pool. If you provide an
+    #   `ExternalId`, your Amazon Cognito user pool includes it in the
+    #   request to assume your IAM role. You can configure the role trust
+    #   policy to require that Amazon Cognito, and any principal, provide
+    #   the `ExternalID`. If you use the Amazon Cognito Management Console
+    #   to create a role for SMS multi-factor authentication (MFA), Amazon
+    #   Cognito creates a role with the required permissions and a trust
     #   policy that demonstrates use of the `ExternalId`.
     #
     #   For more information about the `ExternalId` of a role, see [How to
@@ -8429,11 +8479,27 @@ module Aws::CognitoIdentityProvider
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
     #   @return [String]
     #
+    # @!attribute [rw] sns_region
+    #   The Amazon Web Services Region to use with Amazon SNS integration.
+    #   You can choose the same Region as your user pool, or a supported
+    #   **Legacy Amazon SNS alternate Region**.
+    #
+    #   Amazon Cognito resources in the Asia Pacific (Seoul) Amazon Web
+    #   Services Region must use your Amazon SNS configuration in the Asia
+    #   Pacific (Tokyo) Region. For more information, see [SMS message
+    #   settings for Amazon Cognito user pools][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsConfigurationType AWS API Documentation
     #
     class SmsConfigurationType < Struct.new(
       :sns_caller_arn,
-      :external_id)
+      :external_id,
+      :sns_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8449,6 +8515,7 @@ module Aws::CognitoIdentityProvider
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required
     #           external_id: "StringType",
+    #           sns_region: "RegionCodeType",
     #         },
     #       }
     #
@@ -8460,7 +8527,12 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] sms_configuration
-    #   The SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito
+    #   user pool must use to send an SMS message from your Amazon Web
+    #   Services account through Amazon Simple Notification Service. To
+    #   request Amazon SNS in the Amazon Web Services Region that you want,
+    #   the Amazon Cognito user pool uses an Identity and Access Management
+    #   (IAM) role that you provide for your Amazon Web Services account.
     #   @return [Types::SmsConfigurationType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/SmsMfaConfigType AWS API Documentation
@@ -9224,7 +9296,7 @@ module Aws::CognitoIdentityProvider
     #   can process the `clientMetadata` value to enhance your workflow for
     #   your specific needs.
     #
-    #   For more information, see [Customizing User Pool Workflows with
+    #   For more information, see [ Customizing user pool Workflows with
     #   Lambda Triggers][1] in the *Amazon Cognito Developer Guide*.
     #
     #   <note markdown="1"> When you use the ClientMetadata parameter, remember that Amazon
@@ -9467,11 +9539,11 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for collecting metrics
     #   for this user pool.
     #
-    #   <note markdown="1"> In Amazon Web Services Regions where isn't available, User Pools
-    #   only supports sending events to Amazon Pinpoint projects in
-    #   us-east-1. In Regions where Pinpoint is available, User Pools will
-    #   support sending events to Amazon Pinpoint projects within that same
-    #   Region.
+    #   <note markdown="1"> In Amazon Web Services Regions where Amazon Pinpoint isn't
+    #   available, user pools only support sending events to Amazon Pinpoint
+    #   projects in us-east-1. In Regions where Amazon Pinpoint is
+    #   available, user pools support sending events to Amazon Pinpoint
+    #   projects within that same Region.
     #
     #    </note>
     #   @return [Types::AnalyticsConfigurationType]
@@ -9672,6 +9744,7 @@ module Aws::CognitoIdentityProvider
     #         sms_configuration: {
     #           sns_caller_arn: "ArnType", # required
     #           external_id: "StringType",
+    #           sns_region: "RegionCodeType",
     #         },
     #         user_pool_tags: {
     #           "TagKeysType" => "TagValueType",
@@ -9760,11 +9833,19 @@ module Aws::CognitoIdentityProvider
     #   @return [Types::DeviceConfigurationType]
     #
     # @!attribute [rw] email_configuration
-    #   Email configuration.
+    #   The email configuration of your user pool. The email configuration
+    #   type sets your preferred sending method, Amazon Web Services Region,
+    #   and sender for email invitation and verification messages from your
+    #   user pool.
     #   @return [Types::EmailConfigurationType]
     #
     # @!attribute [rw] sms_configuration
-    #   SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito
+    #   user pool must use to send an SMS message from your Amazon Web
+    #   Services account through Amazon Simple Notification Service. To send
+    #   SMS messages with Amazon SNS in the Amazon Web Services Region that
+    #   you want, the Amazon Cognito user pool uses an Identity and Access
+    #   Management (IAM) role in your Amazon Web Services account.
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
@@ -10236,9 +10317,9 @@ module Aws::CognitoIdentityProvider
     #   The Amazon Pinpoint analytics configuration for the user pool
     #   client.
     #
-    #   <note markdown="1"> Amazon Cognito User Pools only supports sending events to Amazon
+    #   <note markdown="1"> Amazon Cognito user pools only support sending events to Amazon
     #   Pinpoint projects in the US East (N. Virginia) us-east-1 Region,
-    #   regardless of the Region in which the user pool resides.
+    #   regardless of the Region where the user pool resides.
     #
     #    </note>
     #   @return [Types::AnalyticsConfigurationType]
@@ -10473,11 +10554,18 @@ module Aws::CognitoIdentityProvider
     #   @return [Integer]
     #
     # @!attribute [rw] email_configuration
-    #   The email configuration.
+    #   The email configuration of your user pool. The email configuration
+    #   type sets your preferred sending method, Amazon Web Services Region,
+    #   and sender for messages tfrom your user pool.
     #   @return [Types::EmailConfigurationType]
     #
     # @!attribute [rw] sms_configuration
-    #   The SMS configuration.
+    #   The SMS configuration with the settings that your Amazon Cognito
+    #   user pool must use to send an SMS message from your Amazon Web
+    #   Services account through Amazon Simple Notification Service. To send
+    #   SMS messages with Amazon SNS in the Amazon Web Services Region that
+    #   you want, the Amazon Cognito user pool uses an Identity and Access
+    #   Management (IAM) role in your Amazon Web Services account.
     #   @return [Types::SmsConfigurationType]
     #
     # @!attribute [rw] user_pool_tags
@@ -10494,12 +10582,15 @@ module Aws::CognitoIdentityProvider
     #   This message might include comma-separated values to describe why
     #   your SMS configuration can't send messages to user pool end users.
     #
-    #   * InvalidSmsRoleAccessPolicyException - The Identity and Access
-    #     Management role that Amazon Cognito uses to send SMS messages
-    #     isn't properly configured. For more information, see
-    #     [SmsConfigurationType][1].
+    #   InvalidSmsRoleAccessPolicyException
     #
-    #   * SNSSandbox - The Amazon Web Services account is in SNS Sandbox and
+    #   : The Identity and Access Management role that Amazon Cognito uses
+    #     to send SMS messages isn't properly configured. For more
+    #     information, see [SmsConfigurationType][1].
+    #
+    #   SNSSandbox
+    #
+    #   : The Amazon Web Services account is in the SNS SMS Sandbox and
     #     messages will only reach verified end users. This parameter won’t
     #     get populated with SNSSandbox if the IAM user creating the user
     #     pool doesn’t have SNS permissions. To learn how to move your
@@ -10513,8 +10604,9 @@ module Aws::CognitoIdentityProvider
     #   @return [String]
     #
     # @!attribute [rw] email_configuration_failure
-    #   The reason why the email configuration can't send the messages to
-    #   your users.
+    #   Deprecated. Review error codes from API requests with
+    #   `EventSource:cognito-idp.amazonaws.com` in CloudTrail for
+    #   information about problems with user pool email configuration.
     #   @return [String]
     #
     # @!attribute [rw] domain
@@ -10639,8 +10731,6 @@ module Aws::CognitoIdentityProvider
     #
     #   * ARCHIVED - User is no longer active.
     #
-    #   * COMPROMISED - User is disabled due to a potential security threat.
-    #
     #   * UNKNOWN - User status isn't known.
     #
     #   * RESET\_REQUIRED - User is confirmed, but the user must request a
@@ -10685,16 +10775,20 @@ module Aws::CognitoIdentityProvider
     #
     #   Valid values include:
     #
-    #   * <b> <code>True</code> </b>\: Enables case sensitivity for all
-    #     username input. When this option is set to `True`, users must sign
-    #     in using the exact capitalization of their given username, such as
-    #     “UserName”. This is the default value.
+    #   True
     #
-    #   * <b> <code>False</code> </b>\: Enables case insensitivity for all
-    #     username input. For example, when this option is set to `False`,
-    #     users can sign in using either "username" or "Username". This
-    #     option also enables both `preferred_username` and `email` alias to
-    #     be case insensitive, in addition to the `username` attribute.
+    #   : Enables case sensitivity for all username input. When this option
+    #     is set to `True`, users must sign in using the exact
+    #     capitalization of their given username, such as “UserName”. This
+    #     is the default value.
+    #
+    #   False
+    #
+    #   : Enables case insensitivity for all username input. For example,
+    #     when this option is set to `False`, users can sign in using either
+    #     "username" or "Username". This option also enables both
+    #     `preferred_username` and `email` alias to be case insensitive, in
+    #     addition to the `username` attribute.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UsernameConfigurationType AWS API Documentation

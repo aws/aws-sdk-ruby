@@ -547,7 +547,7 @@ module Aws::RDS
     #   Encryption for Oracle or Microsoft SQL Server, you must specify this
     #   option when copying across Amazon Web Services Regions. For more
     #   information, see [Option group considerations][1] in the *Amazon RDS
-    #   User Guide.*
+    #   User Guide*.
     #
     #
     #

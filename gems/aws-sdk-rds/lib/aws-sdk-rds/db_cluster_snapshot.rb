@@ -607,12 +607,12 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   See [MySQL on Amazon RDS Versions][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   See [Amazon Aurora PostgreSQL releases and engine versions][2] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
@@ -691,7 +691,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -739,7 +739,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide.*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in

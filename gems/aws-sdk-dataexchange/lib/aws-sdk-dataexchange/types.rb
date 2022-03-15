@@ -169,9 +169,9 @@ module Aws::DataExchange
     # means of fulfilling data (Amazon Redshift datashare or Amazon API
     # Gateway API). The asset can be a structured data file, an image file,
     # or some other data file that can be stored as an S3 object, an Amazon
-    # API Gateway API, or an Amazon Redshift datashare (Preview). When you
-    # create an import job for your files, API Gateway APIs, or Amazon
-    # Redshift datashares, you create an asset in AWS Data Exchange.
+    # API Gateway API, or an Amazon Redshift datashare. When you create an
+    # import job for your files, API Gateway APIs, or Amazon Redshift
+    # datashares, you create an asset in AWS Data Exchange.
     #
     # @!attribute [rw] arn
     #   The ARN for the asset.
@@ -799,6 +799,17 @@ module Aws::DataExchange
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] revocation_comment
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/CreateRevisionResponse AWS API Documentation
     #
     class CreateRevisionResponse < Struct.new(
@@ -810,7 +821,10 @@ module Aws::DataExchange
       :id,
       :source_id,
       :tags,
-      :updated_at)
+      :updated_at,
+      :revocation_comment,
+      :revoked,
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1670,6 +1684,17 @@ module Aws::DataExchange
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] revocation_comment
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/GetRevisionResponse AWS API Documentation
     #
     class GetRevisionResponse < Struct.new(
@@ -1681,7 +1706,10 @@ module Aws::DataExchange
       :id,
       :source_id,
       :tags,
-      :updated_at)
+      :updated_at,
+      :revocation_comment,
+      :revoked,
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2752,6 +2780,20 @@ module Aws::DataExchange
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   A status indicating that subscribers' access to the revision was
+    #   revoked.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   The date and time that the revision was revoked, in ISO 8601 format.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevisionEntry AWS API Documentation
     #
     class RevisionEntry < Struct.new(
@@ -2762,7 +2804,10 @@ module Aws::DataExchange
       :finalized,
       :id,
       :source_id,
-      :updated_at)
+      :updated_at,
+      :revocation_comment,
+      :revoked,
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2784,6 +2829,100 @@ module Aws::DataExchange
     #
     class RevisionPublished < Struct.new(
       :data_set_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request sent to revoke the revision.
+    #
+    # @note When making an API call, you may pass RevokeRevisionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         data_set_id: "__string", # required
+    #         revision_id: "__string", # required
+    #         revocation_comment: "__stringMin10Max512", # required
+    #       }
+    #
+    # @!attribute [rw] data_set_id
+    #   @return [String]
+    #
+    # @!attribute [rw] revision_id
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_comment
+    #   A required comment to inform subscribers of the reason their access
+    #   to the revision was revoked.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevokeRevisionRequest AWS API Documentation
+    #
+    class RevokeRevisionRequest < Struct.new(
+      :data_set_id,
+      :revision_id,
+      :revocation_comment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   An Amazon Resource Name (ARN) that uniquely identifies an AWS
+    #   resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] data_set_id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] finalized
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] revocation_comment
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] source_id
+    #   A unique identifier.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/RevokeRevisionResponse AWS API Documentation
+    #
+    class RevokeRevisionResponse < Struct.new(
+      :arn,
+      :comment,
+      :created_at,
+      :data_set_id,
+      :finalized,
+      :id,
+      :revocation_comment,
+      :revoked,
+      :revoked_at,
+      :source_id,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3335,6 +3474,17 @@ module Aws::DataExchange
     #   format.
     #   @return [Time]
     #
+    # @!attribute [rw] revocation_comment
+    #   @return [String]
+    #
+    # @!attribute [rw] revoked
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] revoked_at
+    #   Dates and times in AWS Data Exchange are recorded in ISO 8601
+    #   format.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dataexchange-2017-07-25/UpdateRevisionResponse AWS API Documentation
     #
     class UpdateRevisionResponse < Struct.new(
@@ -3345,7 +3495,10 @@ module Aws::DataExchange
       :finalized,
       :id,
       :source_id,
-      :updated_at)
+      :updated_at,
+      :revocation_comment,
+      :revoked,
+      :revoked_at)
       SENSITIVE = []
       include Aws::Structure
     end

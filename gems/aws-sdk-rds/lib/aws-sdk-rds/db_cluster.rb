@@ -329,11 +329,11 @@ module Aws::RDS
       data[:enabled_cloudwatch_logs_exports]
     end
 
-    # The current capacity of an Aurora Serverless DB cluster. The capacity
-    # is 0 (zero) when the cluster is paused.
+    # The current capacity of an Aurora Serverless v1 DB cluster. The
+    # capacity is 0 (zero) when the cluster is paused.
     #
-    # For more information about Aurora Serverless, see [Using Amazon Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information about Aurora Serverless v1, see [Using Amazon
+    # Aurora Serverless v1][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -359,8 +359,8 @@ module Aws::RDS
     # Shows the scaling configuration for an Aurora DB cluster in
     # `serverless` DB engine mode.
     #
-    # For more information, see [Using Amazon Aurora Serverless][1] in the
-    # *Amazon Aurora User Guide*.
+    # For more information, see [Using Amazon Aurora Serverless v1][1] in
+    # the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -378,15 +378,15 @@ module Aws::RDS
     end
 
     # A value that indicates whether the HTTP endpoint for an Aurora
-    # Serverless DB cluster is enabled.
+    # Serverless v1 DB cluster is enabled.
     #
     # When enabled, the HTTP endpoint provides a connectionless web service
-    # API for running SQL queries on the Aurora Serverless DB cluster. You
-    # can also query your database from inside the RDS console with the
+    # API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    # You can also query your database from inside the RDS console with the
     # query editor.
     #
-    # For more information, see [Using the Data API for Aurora
-    # Serverless][1] in the *Amazon Aurora User Guide*.
+    # For more information, see [Using the Data API for Aurora Serverless
+    # v1][1] in the *Amazon Aurora User Guide*.
     #
     #
     #
@@ -900,22 +900,22 @@ module Aws::RDS
     #   **Aurora MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][1] in the *Amazon
-    #   Aurora User Guide.*
+    #   Aurora User Guide*.
     #
     #   **Aurora PostgreSQL**
     #
     #   For information, see [Amazon Aurora PostgreSQL releases and engine
-    #   versions][2] in the *Amazon Aurora User Guide.*
+    #   versions][2] in the *Amazon Aurora User Guide*.
     #
     #   **MySQL**
     #
     #   For information, see [MySQL on Amazon RDS Versions][3] in the *Amazon
-    #   RDS User Guide.*
+    #   RDS User Guide*.
     #
     #   **PostgreSQL**
     #
     #   For information, see [Amazon RDS for PostgreSQL versions and
-    #   extensions][4] in the *Amazon RDS User Guide.*
+    #   extensions][4] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #
@@ -975,7 +975,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -1002,7 +1002,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1114,7 +1114,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide.*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1158,7 +1158,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -1193,7 +1193,7 @@ module Aws::RDS
     #   information, see the following sections in the *Amazon Aurora User
     #   Guide*\:
     #
-    #   * [ Limitations of Aurora Serverless][1]
+    #   * [ Limitations of Aurora Serverless v1][1]
     #
     #   * [ Limitations of Parallel Query][2]
     #
@@ -1227,16 +1227,16 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters only
     # @option options [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1290,7 +1290,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [DB instance class][1] in the *Amazon RDS User Guide*.
     #
     #   This setting is required to create a Multi-AZ DB cluster.
     #
@@ -1692,7 +1692,7 @@ module Aws::RDS
     #   The default is a 30-minute window selected at random from an 8-hour
     #   block of time for each Amazon Web Services Region. To view the time
     #   blocks available, see [ Backup window][1] in the *Amazon Aurora User
-    #   Guide.*
+    #   Guide*.
     #
     #   Constraints:
     #
@@ -1719,7 +1719,7 @@ module Aws::RDS
     #   block of time for each Amazon Web Services Region, occurring on a
     #   random day of the week. To see the time blocks available, see [
     #   Adjusting the Preferred DB Cluster Maintenance Window][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
     #
@@ -1736,7 +1736,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1779,8 +1779,8 @@ module Aws::RDS
     #   Possible value is `postgresql`.
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
-    #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   see [ Publishing Database Logs to Amazon CloudWatch Logs][1] in the
+    #   *Amazon RDS User Guide*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -1891,16 +1891,16 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     # @option options [Boolean] :enable_http_endpoint
     #   A value that indicates whether to enable the HTTP endpoint for an
-    #   Aurora Serverless DB cluster. By default, the HTTP endpoint is
+    #   Aurora Serverless v1 DB cluster. By default, the HTTP endpoint is
     #   disabled.
     #
     #   When enabled, the HTTP endpoint provides a connectionless web service
-    #   API for running SQL queries on the Aurora Serverless DB cluster. You
-    #   can also query your database from inside the RDS console with the
+    #   API for running SQL queries on the Aurora Serverless v1 DB cluster.
+    #   You can also query your database from inside the RDS console with the
     #   query editor.
     #
-    #   For more information, see [Using the Data API for Aurora
-    #   Serverless][1] in the *Amazon Aurora User Guide*.
+    #   For more information, see [Using the Data API for Aurora Serverless
+    #   v1][1] in the *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -1935,7 +1935,7 @@ module Aws::RDS
     #   engines.
     #
     #   For the full list of DB instance classes and availability for your
-    #   engine, see [DB Instance Class][1] in the *Amazon RDS User Guide.*
+    #   engine, see [ DB Instance Class][1] in the *Amazon RDS User Guide*.
     #
     #   Valid for: Multi-AZ DB clusters only
     #
@@ -2217,7 +2217,7 @@ module Aws::RDS
     #   accounts. By default, mapping isn't enabled.
     #
     #   For more information, see [ IAM Database Authentication][1] in the
-    #   *Amazon Aurora User Guide.*
+    #   *Amazon Aurora User Guide*.
     #
     #   Valid for: Aurora DB clusters only
     #
@@ -2261,7 +2261,7 @@ module Aws::RDS
     #
     #   For more information about exporting CloudWatch Logs for Amazon RDS,
     #   see [Publishing Database Logs to Amazon CloudWatch Logs][1] in the
-    #   *Amazon Relational Database Service User Guide*.
+    #   *Amazon RDS User Guide.*.
     #
     #   For more information about exporting CloudWatch Logs for Amazon
     #   Aurora, see [Publishing Database Logs to Amazon CloudWatch Logs][2] in
@@ -2329,10 +2329,11 @@ module Aws::RDS
     # @option options [String] :engine_mode
     #   The engine mode of the new cluster. Specify `provisioned` or
     #   `serverless`, depending on the type of the cluster you are creating.
-    #   You can create an Aurora Serverless clone from a provisioned cluster,
-    #   or a provisioned clone from an Aurora Serverless cluster. To create a
-    #   clone that is an Aurora Serverless cluster, the original cluster must
-    #   be an Aurora Serverless cluster or an encrypted provisioned cluster.
+    #   You can create an Aurora Serverless v1 clone from a provisioned
+    #   cluster, or a provisioned clone from an Aurora Serverless v1 cluster.
+    #   To create a clone that is an Aurora Serverless v1 cluster, the
+    #   original cluster must be an Aurora Serverless v1 cluster or an
+    #   encrypted provisioned cluster.
     #
     #   Valid for: Aurora DB clusters only
     # @option options [String] :db_cluster_instance_class

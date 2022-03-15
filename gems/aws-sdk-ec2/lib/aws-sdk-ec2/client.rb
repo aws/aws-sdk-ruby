@@ -13721,6 +13721,30 @@ module Aws::EC2
     # @option params [required, String] :ipam_id
     #   The ID of the IPAM to delete.
     #
+    # @option params [Boolean] :cascade
+    #   Enables you to quickly delete an IPAM, private scopes, pools in
+    #   private scopes, and any allocations in the pools in private scopes.
+    #   You cannot delete the IPAM with this option if there is a pool in your
+    #   public scope. If you use this option, IPAM does the following:
+    #
+    #   * Deallocates any CIDRs allocated to VPC resources (such as VPCs) in
+    #     pools in private scopes.
+    #
+    #     <note markdown="1"> No VPC resources are deleted as a result of enabling this option.
+    #     The CIDR associated with the resource will no longer be allocated
+    #     from an IPAM pool, but the CIDR itself will remain unchanged.
+    #
+    #      </note>
+    #
+    #   * Deprovisions all IPv4 CIDRs provisioned to IPAM pools in private
+    #     scopes.
+    #
+    #   * Deletes all IPAM pools in private scopes.
+    #
+    #   * Deletes all non-default private scopes in the IPAM.
+    #
+    #   * Deletes the default public and private scopes and the IPAM.
+    #
     # @return [Types::DeleteIpamResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeleteIpamResult#ipam #ipam} => Types::Ipam
@@ -13730,6 +13754,7 @@ module Aws::EC2
     #   resp = client.delete_ipam({
     #     dry_run: false,
     #     ipam_id: "IpamId", # required
+    #     cascade: false,
     #   })
     #
     # @example Response structure
@@ -42888,6 +42913,12 @@ module Aws::EC2
 
     # Move an BYOIP IPv4 CIDR to IPAM from a public IPv4 pool.
     #
+    # If you already have an IPv4 BYOIP CIDR with Amazon Web Services, you
+    # can move the CIDR to IPAM from a public IPv4 pool. You cannot move an
+    # IPv6 CIDR to IPAM. If you are bringing a new IP address to Amazon Web
+    # Services for the first time, complete the steps in [Tutorial: BYOIP
+    # address CIDRs to IPAM](/vpc/latest/ipam/tutorials-byoip-ipam.html).
+    #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
     #   without actually making the request and provides an error response. If
@@ -43033,7 +43064,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Provision a CIDR to an IPAM pool. You can use thsi action to provision
+    # Provision a CIDR to an IPAM pool. You can use this action to provision
     # new CIDRs to a top-level pool or to transfer a CIDR from a top-level
     # pool to a pool within it.
     #
@@ -44258,7 +44289,7 @@ module Aws::EC2
     # @option params [required, String] :cidr
     #   The CIDR of the allocation you want to release.
     #
-    # @option params [String] :ipam_pool_allocation_id
+    # @option params [required, String] :ipam_pool_allocation_id
     #   The ID of the allocation.
     #
     # @return [Types::ReleaseIpamPoolAllocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -44271,7 +44302,7 @@ module Aws::EC2
     #     dry_run: false,
     #     ipam_pool_id: "IpamPoolId", # required
     #     cidr: "String", # required
-    #     ipam_pool_allocation_id: "IpamPoolAllocationId",
+    #     ipam_pool_allocation_id: "IpamPoolAllocationId", # required
     #   })
     #
     # @example Response structure
@@ -49312,7 +49343,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.302.0'
+      context[:gem_version] = '1.303.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

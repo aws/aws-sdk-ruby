@@ -14675,6 +14675,7 @@ module Aws::EC2
     #       {
     #         dry_run: false,
     #         ipam_id: "IpamId", # required
+    #         cascade: false,
     #       }
     #
     # @!attribute [rw] dry_run
@@ -14688,11 +14689,37 @@ module Aws::EC2
     #   The ID of the IPAM to delete.
     #   @return [String]
     #
+    # @!attribute [rw] cascade
+    #   Enables you to quickly delete an IPAM, private scopes, pools in
+    #   private scopes, and any allocations in the pools in private scopes.
+    #   You cannot delete the IPAM with this option if there is a pool in
+    #   your public scope. If you use this option, IPAM does the following:
+    #
+    #   * Deallocates any CIDRs allocated to VPC resources (such as VPCs) in
+    #     pools in private scopes.
+    #
+    #     <note markdown="1"> No VPC resources are deleted as a result of enabling this option.
+    #     The CIDR associated with the resource will no longer be allocated
+    #     from an IPAM pool, but the CIDR itself will remain unchanged.
+    #
+    #      </note>
+    #
+    #   * Deprovisions all IPv4 CIDRs provisioned to IPAM pools in private
+    #     scopes.
+    #
+    #   * Deletes all IPAM pools in private scopes.
+    #
+    #   * Deletes all non-default private scopes in the IPAM.
+    #
+    #   * Deletes the default public and private scopes and the IPAM.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DeleteIpamRequest AWS API Documentation
     #
     class DeleteIpamRequest < Struct.new(
       :dry_run,
-      :ipam_id)
+      :ipam_id,
+      :cascade)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -42927,7 +42954,7 @@ module Aws::EC2
     #
     # For more information, see [How IPAM
     # works](/vpc/latest/ipam/how-it-works-ipam.html) in the *Amazon VPC
-    # IPAM User Guide*
+    # IPAM User Guide*.
     #
     # @!attribute [rw] owner_id
     #   The Amazon Web Services account ID of the owner of the scope.
@@ -54913,7 +54940,7 @@ module Aws::EC2
     #         dry_run: false,
     #         ipam_pool_id: "IpamPoolId", # required
     #         cidr: "String", # required
-    #         ipam_pool_allocation_id: "IpamPoolAllocationId",
+    #         ipam_pool_allocation_id: "IpamPoolAllocationId", # required
     #       }
     #
     # @!attribute [rw] dry_run

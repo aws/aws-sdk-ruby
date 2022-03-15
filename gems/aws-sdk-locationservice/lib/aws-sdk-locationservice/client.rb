@@ -2379,7 +2379,9 @@ module Aws::LocationService
     #
     #   * VectorHereBerlin – `Fira GO Regular` \| `Fira GO Bold`
     #
-    #   ^
+    #   * VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` \|
+    #     `Fira GO Map` \| `Fira GO Map Bold` \| `Noto Sans CJK JP Bold` \|
+    #     `Noto Sans CJK JP Light` \| `Noto Sans CJK JP Regular`
     #
     #
     #
@@ -3750,7 +3752,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.19.0'
+      context[:gem_version] = '1.20.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
