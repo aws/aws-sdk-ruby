@@ -48,13 +48,12 @@ module Aws::S3Outposts
     #       }
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #   @return [String]
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet in the selected VPC. The endpoint subnet must
-    #   belong to the Outpost that has the Amazon S3 on Outposts
-    #   provisioned.
+    #   belong to the Outpost that has Amazon S3 on Outposts provisioned.
     #   @return [String]
     #
     # @!attribute [rw] security_group_id
@@ -62,15 +61,21 @@ module Aws::S3Outposts
     #   @return [String]
     #
     # @!attribute [rw] access_type
-    #   The type of access for the on-premise network connectivity for the
-    #   Outpost endpoint. To access the endpoint from an on-premises
-    #   network, you must specify the access type and provide the customer
-    #   owned IPv4 pool.
+    #   The type of access for the network connectivity for the Amazon S3 on
+    #   Outposts endpoint. To use the Amazon Web Services VPC, choose
+    #   `Private`. To use the endpoint with an on-premises network, choose
+    #   `CustomerOwnedIp`. If you choose `CustomerOwnedIp`, you must also
+    #   provide the customer-owned IP address pool (CoIP pool).
+    #
+    #   <note markdown="1"> `Private` is the default access type value.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
-    #   The ID of the customer-owned IPv4 pool for the endpoint. IP
-    #   addresses will be allocated from this pool for the endpoint.
+    #   The ID of the customer-owned IPv4 address pool (CoIP pool) for the
+    #   endpoint. IP addresses are allocated from this pool for the
+    #   endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/CreateEndpointRequest AWS API Documentation
@@ -110,7 +115,7 @@ module Aws::S3Outposts
     #   @return [String]
     #
     # @!attribute [rw] outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/DeleteEndpointRequest AWS API Documentation
@@ -126,18 +131,19 @@ module Aws::S3Outposts
     # scale for shared datasets in S3 on Outposts. S3 on Outposts uses
     # endpoints to connect to Outposts buckets so that you can perform
     # actions within your virtual private cloud (VPC). For more information,
-    # see [ Accessing S3 on Outposts using VPC only access points][1].
+    # see [ Accessing S3 on Outposts using VPC-only access points][1] in the
+    # *Amazon Simple Storage Service User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/WorkingWithS3Outposts.html
     #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] outposts_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #   @return [String]
     #
     # @!attribute [rw] cidr_block
@@ -169,10 +175,13 @@ module Aws::S3Outposts
     #   @return [String]
     #
     # @!attribute [rw] access_type
+    #   The type of connectivity used to access the Amazon S3 on Outposts
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] customer_owned_ipv_4_pool
-    #   The ID of the customer-owned IPv4 pool used for the endpoint.
+    #   The ID of the customer-owned IPv4 address pool used for the
+    #   endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/Endpoint AWS API Documentation
@@ -215,11 +224,13 @@ module Aws::S3Outposts
     #       }
     #
     # @!attribute [rw] next_token
-    #   The next endpoint requested in the list.
+    #   If a previous response from this operation included a `NextToken`
+    #   value, provide that value here to retrieve the next page of results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   The max number of endpoints that can be returned on the request.
+    #   The maximum number of endpoints that will be returned in the
+    #   response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListEndpointsRequest AWS API Documentation
@@ -232,16 +243,73 @@ module Aws::S3Outposts
     end
 
     # @!attribute [rw] endpoints
-    #   Returns an array of endpoints associated with AWS Outposts.
+    #   The list of endpoints associated with the specified Outpost.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] next_token
-    #   The next endpoint returned in the list.
+    #   If the number of endpoints associated with the specified Outpost
+    #   exceeds `MaxResults`, you can include this value in subsequent calls
+    #   to this operation to retrieve more results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListEndpointsResult AWS API Documentation
     #
     class ListEndpointsResult < Struct.new(
+      :endpoints,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSharedEndpointsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         outpost_id: "OutpostId", # required
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If a previous response from this operation included a `NextToken`
+    #   value, you can provide that value here to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of endpoints that will be returned in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] outpost_id
+    #   The ID of the Amazon Web Services Outpost.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListSharedEndpointsRequest AWS API Documentation
+    #
+    class ListSharedEndpointsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :outpost_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] endpoints
+    #   The list of endpoints associated with the specified Outpost that
+    #   have been shared by Amazon Web Services Resource Access Manager
+    #   (RAM).
+    #   @return [Array<Types::Endpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   If the number of endpoints associated with the specified Outpost
+    #   exceeds `MaxResults`, you can include this value in subsequent calls
+    #   to this operation to retrieve more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListSharedEndpointsResult AWS API Documentation
+    #
+    class ListSharedEndpointsResult < Struct.new(
       :endpoints,
       :next_token)
       SENSITIVE = []

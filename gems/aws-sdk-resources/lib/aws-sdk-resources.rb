@@ -37,6 +37,7 @@ module Aws
   autoload :Backup, 'aws-sdk-backup'
   autoload :BackupGateway, 'aws-sdk-backupgateway'
   autoload :Batch, 'aws-sdk-batch'
+  autoload :BillingConductor, 'aws-sdk-billingconductor'
   autoload :Braket, 'aws-sdk-braket'
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Chime, 'aws-sdk-chime'

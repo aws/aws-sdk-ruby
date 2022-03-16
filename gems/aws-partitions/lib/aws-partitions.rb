@@ -256,6 +256,7 @@ module Aws
             'Backup' => 'backup',
             'BackupGateway' => 'backup-gateway',
             'Batch' => 'batch',
+            'BillingConductor' => 'billingconductor',
             'Braket' => 'braket',
             'Budgets' => 'budgets',
             'Chime' => 'chime',

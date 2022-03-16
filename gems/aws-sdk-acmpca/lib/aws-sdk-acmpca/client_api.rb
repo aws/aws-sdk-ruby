@@ -28,6 +28,7 @@ module Aws::ACMPCA
     AuditReportId = Shapes::StringShape.new(name: 'AuditReportId')
     AuditReportResponseFormat = Shapes::StringShape.new(name: 'AuditReportResponseFormat')
     AuditReportStatus = Shapes::StringShape.new(name: 'AuditReportStatus')
+    Base64String1To4096 = Shapes::StringShape.new(name: 'Base64String1To4096')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CertificateAuthorities = Shapes::ListShape.new(name: 'CertificateAuthorities')
     CertificateAuthority = Shapes::StructureShape.new(name: 'CertificateAuthority')
@@ -51,6 +52,10 @@ module Aws::ACMPCA
     CsrBlob = Shapes::BlobShape.new(name: 'CsrBlob')
     CsrBody = Shapes::StringShape.new(name: 'CsrBody')
     CsrExtensions = Shapes::StructureShape.new(name: 'CsrExtensions')
+    CustomAttribute = Shapes::StructureShape.new(name: 'CustomAttribute')
+    CustomAttributeList = Shapes::ListShape.new(name: 'CustomAttributeList')
+    CustomExtension = Shapes::StructureShape.new(name: 'CustomExtension')
+    CustomExtensionList = Shapes::ListShape.new(name: 'CustomExtensionList')
     CustomObjectIdentifier = Shapes::StringShape.new(name: 'CustomObjectIdentifier')
     DeleteCertificateAuthorityRequest = Shapes::StructureShape.new(name: 'DeleteCertificateAuthorityRequest')
     DeletePermissionRequest = Shapes::StructureShape.new(name: 'DeletePermissionRequest')
@@ -132,6 +137,7 @@ module Aws::ACMPCA
     String = Shapes::StringShape.new(name: 'String')
     String128 = Shapes::StringShape.new(name: 'String128')
     String16 = Shapes::StringShape.new(name: 'String16')
+    String1To256 = Shapes::StringShape.new(name: 'String1To256')
     String253 = Shapes::StringShape.new(name: 'String253')
     String256 = Shapes::StringShape.new(name: 'String256')
     String3 = Shapes::StringShape.new(name: 'String3')
@@ -166,6 +172,7 @@ module Aws::ACMPCA
     ASN1Subject.add_member(:initials, Shapes::ShapeRef.new(shape: String5, location_name: "Initials"))
     ASN1Subject.add_member(:pseudonym, Shapes::ShapeRef.new(shape: String128, location_name: "Pseudonym"))
     ASN1Subject.add_member(:generation_qualifier, Shapes::ShapeRef.new(shape: String3, location_name: "GenerationQualifier"))
+    ASN1Subject.add_member(:custom_attributes, Shapes::ShapeRef.new(shape: CustomAttributeList, location_name: "CustomAttributes"))
     ASN1Subject.struct_class = Types::ASN1Subject
 
     AccessDescription.add_member(:access_method, Shapes::ShapeRef.new(shape: AccessMethod, required: true, location_name: "AccessMethod"))
@@ -253,6 +260,19 @@ module Aws::ACMPCA
     CsrExtensions.add_member(:subject_information_access, Shapes::ShapeRef.new(shape: AccessDescriptionList, location_name: "SubjectInformationAccess"))
     CsrExtensions.struct_class = Types::CsrExtensions
 
+    CustomAttribute.add_member(:object_identifier, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "ObjectIdentifier"))
+    CustomAttribute.add_member(:value, Shapes::ShapeRef.new(shape: String1To256, required: true, location_name: "Value"))
+    CustomAttribute.struct_class = Types::CustomAttribute
+
+    CustomAttributeList.member = Shapes::ShapeRef.new(shape: CustomAttribute)
+
+    CustomExtension.add_member(:object_identifier, Shapes::ShapeRef.new(shape: CustomObjectIdentifier, required: true, location_name: "ObjectIdentifier"))
+    CustomExtension.add_member(:value, Shapes::ShapeRef.new(shape: Base64String1To4096, required: true, location_name: "Value"))
+    CustomExtension.add_member(:critical, Shapes::ShapeRef.new(shape: Boolean, location_name: "Critical", metadata: {"box"=>true}))
+    CustomExtension.struct_class = Types::CustomExtension
+
+    CustomExtensionList.member = Shapes::ShapeRef.new(shape: CustomExtension)
+
     DeleteCertificateAuthorityRequest.add_member(:certificate_authority_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "CertificateAuthorityArn"))
     DeleteCertificateAuthorityRequest.add_member(:permanent_deletion_time_in_days, Shapes::ShapeRef.new(shape: PermanentDeletionTimeInDays, location_name: "PermanentDeletionTimeInDays"))
     DeleteCertificateAuthorityRequest.struct_class = Types::DeleteCertificateAuthorityRequest
@@ -295,6 +315,7 @@ module Aws::ACMPCA
     Extensions.add_member(:extended_key_usage, Shapes::ShapeRef.new(shape: ExtendedKeyUsageList, location_name: "ExtendedKeyUsage"))
     Extensions.add_member(:key_usage, Shapes::ShapeRef.new(shape: KeyUsage, location_name: "KeyUsage"))
     Extensions.add_member(:subject_alternative_names, Shapes::ShapeRef.new(shape: GeneralNameList, location_name: "SubjectAlternativeNames"))
+    Extensions.add_member(:custom_extensions, Shapes::ShapeRef.new(shape: CustomExtensionList, location_name: "CustomExtensions"))
     Extensions.struct_class = Types::Extensions
 
     GeneralName.add_member(:other_name, Shapes::ShapeRef.new(shape: OtherName, location_name: "OtherName"))

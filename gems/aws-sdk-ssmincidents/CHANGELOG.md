@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-03-16)
+------------------
+
+* Feature - Removed incorrect validation pattern for IncidentRecordSource.invokedBy
+
 1.12.0 (2022-02-24)
 ------------------
 

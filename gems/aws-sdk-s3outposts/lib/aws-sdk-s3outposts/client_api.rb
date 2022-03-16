@@ -31,6 +31,8 @@ module Aws::S3Outposts
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     ListEndpointsRequest = Shapes::StructureShape.new(name: 'ListEndpointsRequest')
     ListEndpointsResult = Shapes::StructureShape.new(name: 'ListEndpointsResult')
+    ListSharedEndpointsRequest = Shapes::StructureShape.new(name: 'ListSharedEndpointsRequest')
+    ListSharedEndpointsResult = Shapes::StructureShape.new(name: 'ListSharedEndpointsResult')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
@@ -88,6 +90,15 @@ module Aws::S3Outposts
     ListEndpointsResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
     ListEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEndpointsResult.struct_class = Types::ListEndpointsResult
+
+    ListSharedEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListSharedEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListSharedEndpointsRequest.add_member(:outpost_id, Shapes::ShapeRef.new(shape: OutpostId, required: true, location: "querystring", location_name: "outpostId"))
+    ListSharedEndpointsRequest.struct_class = Types::ListSharedEndpointsRequest
+
+    ListSharedEndpointsResult.add_member(:endpoints, Shapes::ShapeRef.new(shape: Endpoints, location_name: "Endpoints"))
+    ListSharedEndpointsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSharedEndpointsResult.struct_class = Types::ListSharedEndpointsResult
 
     NetworkInterface.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "NetworkInterfaceId"))
     NetworkInterface.struct_class = Types::NetworkInterface
@@ -150,6 +161,24 @@ module Aws::S3Outposts
         o.http_request_uri = "/S3Outposts/ListEndpoints"
         o.input = Shapes::ShapeRef.new(shape: ListEndpointsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEndpointsResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_shared_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSharedEndpoints"
+        o.http_method = "GET"
+        o.http_request_uri = "/S3Outposts/ListSharedEndpoints"
+        o.input = Shapes::ShapeRef.new(shape: ListSharedEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSharedEndpointsResult)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

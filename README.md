@@ -425,6 +425,7 @@ RubyGems.org page under "LINKS" section.
 | AWS WAFV2                                             | Aws::WAFV2                               | aws-sdk-wafv2                               | 2019-07-29  |
 | AWS Well-Architected Tool                             | Aws::WellArchitected                     | aws-sdk-wellarchitected                     | 2020-03-31  |
 | AWS X-Ray                                             | Aws::XRay                                | aws-sdk-xray                                | 2016-04-12  |
+| AWSBillingConductor                                   | Aws::BillingConductor                    | aws-sdk-billingconductor                    | 2021-07-30  |
 | AWSKendraFrontendService                              | Aws::Kendra                              | aws-sdk-kendra                              | 2019-02-03  |
 | AWSMarketplace Metering                               | Aws::MarketplaceMetering                 | aws-sdk-marketplacemetering                 | 2016-01-14  |
 | AWSServerlessApplicationRepository                    | Aws::ServerlessApplicationRepository     | aws-sdk-serverlessapplicationrepository     | 2017-09-08  |

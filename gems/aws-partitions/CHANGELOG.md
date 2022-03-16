@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.568.0 (2022-03-16)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::BillingConductor`.
+
 1.567.0 (2022-03-14)
 ------------------
 

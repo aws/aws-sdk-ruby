@@ -99,6 +99,9 @@
   "Batch": {
     "models": "batch/2016-08-10"
   },
+  "BillingConductor": {
+    "models": "billingconductor/2021-07-30"
+  },
   "Braket": {
     "models": "braket/2019-09-01"
   },

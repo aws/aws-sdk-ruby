@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-03-16)
+------------------
+
+* Feature - AWS Certificate Manager (ACM) Private Certificate Authority (CA) now supports customizable certificate subject names and extensions.
+
 1.46.0 (2022-02-24)
 ------------------
 

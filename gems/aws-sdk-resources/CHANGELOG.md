@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.126.0 (2022-03-16)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-billingconductor` gem.
+
 3.125.0 (2022-03-02)
 ------------------
 

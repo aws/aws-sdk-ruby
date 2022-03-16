@@ -125,6 +125,7 @@ module Aws::SSMIncidents
     ResponsePlanSummaryList = Shapes::ListShape.new(name: 'ResponsePlanSummaryList')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
+    ServicePrincipal = Shapes::StringShape.new(name: 'ServicePrincipal')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SnsArn = Shapes::StringShape.new(name: 'SnsArn')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -369,7 +370,7 @@ module Aws::SSMIncidents
     IncidentRecord.struct_class = Types::IncidentRecord
 
     IncidentRecordSource.add_member(:created_by, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "createdBy"))
-    IncidentRecordSource.add_member(:invoked_by, Shapes::ShapeRef.new(shape: Arn, location_name: "invokedBy"))
+    IncidentRecordSource.add_member(:invoked_by, Shapes::ShapeRef.new(shape: ServicePrincipal, location_name: "invokedBy"))
     IncidentRecordSource.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "resourceArn"))
     IncidentRecordSource.add_member(:source, Shapes::ShapeRef.new(shape: IncidentSource, required: true, location_name: "source"))
     IncidentRecordSource.struct_class = Types::IncidentRecordSource

@@ -50,6 +50,7 @@ module Aws::AmplifyBackend
     CreateBackendAuthResourceConfig = Shapes::StructureShape.new(name: 'CreateBackendAuthResourceConfig')
     CreateBackendAuthResponse = Shapes::StructureShape.new(name: 'CreateBackendAuthResponse')
     CreateBackendAuthUserPoolConfig = Shapes::StructureShape.new(name: 'CreateBackendAuthUserPoolConfig')
+    CreateBackendAuthVerificationMessageConfig = Shapes::StructureShape.new(name: 'CreateBackendAuthVerificationMessageConfig')
     CreateBackendConfigReqObj = Shapes::StructureShape.new(name: 'CreateBackendConfigReqObj')
     CreateBackendConfigRequest = Shapes::StructureShape.new(name: 'CreateBackendConfigRequest')
     CreateBackendConfigRespObj = Shapes::StructureShape.new(name: 'CreateBackendConfigRespObj')
@@ -173,6 +174,7 @@ module Aws::AmplifyBackend
     UpdateBackendAuthResourceConfig = Shapes::StructureShape.new(name: 'UpdateBackendAuthResourceConfig')
     UpdateBackendAuthResponse = Shapes::StructureShape.new(name: 'UpdateBackendAuthResponse')
     UpdateBackendAuthUserPoolConfig = Shapes::StructureShape.new(name: 'UpdateBackendAuthUserPoolConfig')
+    UpdateBackendAuthVerificationMessageConfig = Shapes::StructureShape.new(name: 'UpdateBackendAuthVerificationMessageConfig')
     UpdateBackendConfigReqObj = Shapes::StructureShape.new(name: 'UpdateBackendConfigReqObj')
     UpdateBackendConfigRequest = Shapes::StructureShape.new(name: 'UpdateBackendConfigRequest')
     UpdateBackendConfigResponse = Shapes::StructureShape.new(name: 'UpdateBackendConfigResponse')
@@ -390,7 +392,13 @@ module Aws::AmplifyBackend
     CreateBackendAuthUserPoolConfig.add_member(:required_sign_up_attributes, Shapes::ShapeRef.new(shape: ListOfRequiredSignUpAttributesElement, required: true, location_name: "requiredSignUpAttributes"))
     CreateBackendAuthUserPoolConfig.add_member(:sign_in_method, Shapes::ShapeRef.new(shape: SignInMethod, required: true, location_name: "signInMethod"))
     CreateBackendAuthUserPoolConfig.add_member(:user_pool_name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "userPoolName"))
+    CreateBackendAuthUserPoolConfig.add_member(:verification_message, Shapes::ShapeRef.new(shape: CreateBackendAuthVerificationMessageConfig, location_name: "verificationMessage"))
     CreateBackendAuthUserPoolConfig.struct_class = Types::CreateBackendAuthUserPoolConfig
+
+    CreateBackendAuthVerificationMessageConfig.add_member(:delivery_method, Shapes::ShapeRef.new(shape: DeliveryMethod, required: true, location_name: "deliveryMethod"))
+    CreateBackendAuthVerificationMessageConfig.add_member(:email_settings, Shapes::ShapeRef.new(shape: EmailSettings, location_name: "emailSettings"))
+    CreateBackendAuthVerificationMessageConfig.add_member(:sms_settings, Shapes::ShapeRef.new(shape: SmsSettings, location_name: "smsSettings"))
+    CreateBackendAuthVerificationMessageConfig.struct_class = Types::CreateBackendAuthVerificationMessageConfig
 
     CreateBackendConfigReqObj.add_member(:backend_manager_app_id, Shapes::ShapeRef.new(shape: __string, location_name: "backendManagerAppId"))
     CreateBackendConfigReqObj.struct_class = Types::CreateBackendConfigReqObj
@@ -943,7 +951,13 @@ module Aws::AmplifyBackend
     UpdateBackendAuthUserPoolConfig.add_member(:mfa, Shapes::ShapeRef.new(shape: UpdateBackendAuthMFAConfig, location_name: "mfa"))
     UpdateBackendAuthUserPoolConfig.add_member(:o_auth, Shapes::ShapeRef.new(shape: UpdateBackendAuthOAuthConfig, location_name: "oAuth"))
     UpdateBackendAuthUserPoolConfig.add_member(:password_policy, Shapes::ShapeRef.new(shape: UpdateBackendAuthPasswordPolicyConfig, location_name: "passwordPolicy"))
+    UpdateBackendAuthUserPoolConfig.add_member(:verification_message, Shapes::ShapeRef.new(shape: UpdateBackendAuthVerificationMessageConfig, location_name: "verificationMessage"))
     UpdateBackendAuthUserPoolConfig.struct_class = Types::UpdateBackendAuthUserPoolConfig
+
+    UpdateBackendAuthVerificationMessageConfig.add_member(:delivery_method, Shapes::ShapeRef.new(shape: DeliveryMethod, required: true, location_name: "deliveryMethod"))
+    UpdateBackendAuthVerificationMessageConfig.add_member(:email_settings, Shapes::ShapeRef.new(shape: EmailSettings, location_name: "emailSettings"))
+    UpdateBackendAuthVerificationMessageConfig.add_member(:sms_settings, Shapes::ShapeRef.new(shape: SmsSettings, location_name: "smsSettings"))
+    UpdateBackendAuthVerificationMessageConfig.struct_class = Types::UpdateBackendAuthVerificationMessageConfig
 
     UpdateBackendConfigReqObj.add_member(:login_auth_config, Shapes::ShapeRef.new(shape: LoginAuthConfigReqObj, location_name: "loginAuthConfig"))
     UpdateBackendConfigReqObj.struct_class = Types::UpdateBackendConfigReqObj

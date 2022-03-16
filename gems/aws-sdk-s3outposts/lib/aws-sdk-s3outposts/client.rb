@@ -351,16 +351,9 @@ module Aws::S3Outposts
 
     # @!group API Operations
 
-    # Amazon S3 on Outposts Access Points simplify managing data access at
-    # scale for shared datasets in S3 on Outposts. S3 on Outposts uses
-    # endpoints to connect to Outposts buckets so that you can perform
-    # actions within your virtual private cloud (VPC). For more information,
-    # see [ Accessing S3 on Outposts using VPC only access points][1].
+    # Creates an endpoint and associates it with the specified Outpost.
     #
-    # This action creates an endpoint and associates it with the specified
-    # Outposts.
-    #
-    # <note markdown="1"> It can take up to 5 minutes for this action to complete.
+    # <note markdown="1"> It can take up to 5 minutes for this action to finish.
     #
     #  </note>
     #
@@ -368,35 +361,39 @@ module Aws::S3Outposts
     #
     # Related actions include:
     #
-    # * [DeleteEndpoint][2]
+    # * [DeleteEndpoint][1]
     #
-    # * [ListEndpoints][3]
+    # * [ListEndpoints][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
     #
     # @option params [required, String] :outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet in the selected VPC. The endpoint subnet must
-    #   belong to the Outpost that has the Amazon S3 on Outposts provisioned.
+    #   belong to the Outpost that has Amazon S3 on Outposts provisioned.
     #
     # @option params [required, String] :security_group_id
     #   The ID of the security group to use with the endpoint.
     #
     # @option params [String] :access_type
-    #   The type of access for the on-premise network connectivity for the
-    #   Outpost endpoint. To access the endpoint from an on-premises network,
-    #   you must specify the access type and provide the customer owned IPv4
-    #   pool.
+    #   The type of access for the network connectivity for the Amazon S3 on
+    #   Outposts endpoint. To use the Amazon Web Services VPC, choose
+    #   `Private`. To use the endpoint with an on-premises network, choose
+    #   `CustomerOwnedIp`. If you choose `CustomerOwnedIp`, you must also
+    #   provide the customer-owned IP address pool (CoIP pool).
+    #
+    #   <note markdown="1"> `Private` is the default access type value.
+    #
+    #    </note>
     #
     # @option params [String] :customer_owned_ipv_4_pool
-    #   The ID of the customer-owned IPv4 pool for the endpoint. IP addresses
-    #   will be allocated from this pool for the endpoint.
+    #   The ID of the customer-owned IPv4 address pool (CoIP pool) for the
+    #   endpoint. IP addresses are allocated from this pool for the endpoint.
     #
     # @return [Types::CreateEndpointResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -425,15 +422,9 @@ module Aws::S3Outposts
       req.send_request(options)
     end
 
-    # Amazon S3 on Outposts Access Points simplify managing data access at
-    # scale for shared datasets in S3 on Outposts. S3 on Outposts uses
-    # endpoints to connect to Outposts buckets so that you can perform
-    # actions within your virtual private cloud (VPC). For more information,
-    # see [ Accessing S3 on Outposts using VPC only access points][1].
+    # Deletes an endpoint.
     #
-    # This action deletes an endpoint.
-    #
-    # <note markdown="1"> It can take up to 5 minutes for this action to complete.
+    # <note markdown="1"> It can take up to 5 minutes for this action to finish.
     #
     #  </note>
     #
@@ -441,21 +432,20 @@ module Aws::S3Outposts
     #
     # Related actions include:
     #
-    # * [CreateEndpoint][2]
+    # * [CreateEndpoint][1]
     #
-    # * [ListEndpoints][3]
+    # * [ListEndpoints][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
     #
     # @option params [required, String] :endpoint_id
     #   The ID of the endpoint.
     #
     # @option params [required, String] :outpost_id
-    #   The ID of the AWS Outposts.
+    #   The ID of the Outposts.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -475,33 +465,25 @@ module Aws::S3Outposts
       req.send_request(options)
     end
 
-    # Amazon S3 on Outposts Access Points simplify managing data access at
-    # scale for shared datasets in S3 on Outposts. S3 on Outposts uses
-    # endpoints to connect to Outposts buckets so that you can perform
-    # actions within your virtual private cloud (VPC). For more information,
-    # see [ Accessing S3 on Outposts using VPC only access points][1].
-    #
-    # This action lists endpoints associated with the Outposts.
-    #
-    #
+    # Lists endpoints associated with the specified Outpost.
     #
     # Related actions include:
     #
-    # * [CreateEndpoint][2]
+    # * [CreateEndpoint][1]
     #
-    # * [DeleteEndpoint][3]
+    # * [DeleteEndpoint][2]
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html
-    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
-    # [3]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
     #
     # @option params [String] :next_token
-    #   The next endpoint requested in the list.
+    #   If a previous response from this operation included a `NextToken`
+    #   value, provide that value here to retrieve the next page of results.
     #
     # @option params [Integer] :max_results
-    #   The max number of endpoints that can be returned on the request.
+    #   The maximum number of endpoints that will be returned in the response.
     #
     # @return [Types::ListEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -543,6 +525,72 @@ module Aws::S3Outposts
       req.send_request(options)
     end
 
+    # Lists all endpoints associated with an Outpost that has been shared by
+    # Amazon Web Services Resource Access Manager (RAM).
+    #
+    # Related actions include:
+    #
+    # * [CreateEndpoint][1]
+    #
+    # * [DeleteEndpoint][2]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
+    #
+    # @option params [String] :next_token
+    #   If a previous response from this operation included a `NextToken`
+    #   value, you can provide that value here to retrieve the next page of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of endpoints that will be returned in the response.
+    #
+    # @option params [required, String] :outpost_id
+    #   The ID of the Amazon Web Services Outpost.
+    #
+    # @return [Types::ListSharedEndpointsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSharedEndpointsResult#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #   * {Types::ListSharedEndpointsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_shared_endpoints({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     outpost_id: "OutpostId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].endpoint_arn #=> String
+    #   resp.endpoints[0].outposts_id #=> String
+    #   resp.endpoints[0].cidr_block #=> String
+    #   resp.endpoints[0].status #=> String, one of "Pending", "Available", "Deleting"
+    #   resp.endpoints[0].creation_time #=> Time
+    #   resp.endpoints[0].network_interfaces #=> Array
+    #   resp.endpoints[0].network_interfaces[0].network_interface_id #=> String
+    #   resp.endpoints[0].vpc_id #=> String
+    #   resp.endpoints[0].subnet_id #=> String
+    #   resp.endpoints[0].security_group_id #=> String
+    #   resp.endpoints[0].access_type #=> String, one of "Private", "CustomerOwnedIp"
+    #   resp.endpoints[0].customer_owned_ipv_4_pool #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3outposts-2017-07-25/ListSharedEndpoints AWS API Documentation
+    #
+    # @overload list_shared_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_shared_endpoints(params = {}, options = {})
+      req = build_request(:list_shared_endpoints, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -556,7 +604,7 @@ module Aws::S3Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-s3outposts'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
