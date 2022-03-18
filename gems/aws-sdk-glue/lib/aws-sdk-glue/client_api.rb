@@ -20,6 +20,7 @@ module Aws::Glue
     AdditionalPlanOptionsMap = Shapes::MapShape.new(name: 'AdditionalPlanOptionsMap')
     AlreadyExistsException = Shapes::StructureShape.new(name: 'AlreadyExistsException')
     AttemptCount = Shapes::IntegerShape.new(name: 'AttemptCount')
+    AuditColumnNamesList = Shapes::ListShape.new(name: 'AuditColumnNamesList')
     AuditContext = Shapes::StructureShape.new(name: 'AuditContext')
     AuditContextString = Shapes::StringShape.new(name: 'AuditContextString')
     BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
@@ -89,6 +90,8 @@ module Aws::Glue
     BoundedPartitionValueList = Shapes::ListShape.new(name: 'BoundedPartitionValueList')
     CancelMLTaskRunRequest = Shapes::StructureShape.new(name: 'CancelMLTaskRunRequest')
     CancelMLTaskRunResponse = Shapes::StructureShape.new(name: 'CancelMLTaskRunResponse')
+    CancelStatementRequest = Shapes::StructureShape.new(name: 'CancelStatementRequest')
+    CancelStatementResponse = Shapes::StructureShape.new(name: 'CancelStatementResponse')
     CatalogEncryptionMode = Shapes::StringShape.new(name: 'CatalogEncryptionMode')
     CatalogEntries = Shapes::ListShape.new(name: 'CatalogEntries')
     CatalogEntry = Shapes::StructureShape.new(name: 'CatalogEntry')
@@ -199,6 +202,8 @@ module Aws::Glue
     CreateScriptResponse = Shapes::StructureShape.new(name: 'CreateScriptResponse')
     CreateSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationRequest')
     CreateSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationResponse')
+    CreateSessionRequest = Shapes::StructureShape.new(name: 'CreateSessionRequest')
+    CreateSessionResponse = Shapes::StructureShape.new(name: 'CreateSessionResponse')
     CreateTableRequest = Shapes::StructureShape.new(name: 'CreateTableRequest')
     CreateTableResponse = Shapes::StructureShape.new(name: 'CreateTableResponse')
     CreateTriggerRequest = Shapes::StructureShape.new(name: 'CreateTriggerRequest')
@@ -266,6 +271,8 @@ module Aws::Glue
     DeleteSchemaVersionsResponse = Shapes::StructureShape.new(name: 'DeleteSchemaVersionsResponse')
     DeleteSecurityConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationRequest')
     DeleteSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationResponse')
+    DeleteSessionRequest = Shapes::StructureShape.new(name: 'DeleteSessionRequest')
+    DeleteSessionResponse = Shapes::StructureShape.new(name: 'DeleteSessionResponse')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
     DeleteTableResponse = Shapes::StructureShape.new(name: 'DeleteTableResponse')
     DeleteTableVersionRequest = Shapes::StructureShape.new(name: 'DeleteTableVersionRequest')
@@ -287,6 +294,7 @@ module Aws::Glue
     DevEndpointNames = Shapes::ListShape.new(name: 'DevEndpointNames')
     Double = Shapes::FloatShape.new(name: 'Double')
     DoubleColumnStatisticsData = Shapes::StructureShape.new(name: 'DoubleColumnStatisticsData')
+    DoubleValue = Shapes::FloatShape.new(name: 'DoubleValue')
     DynamoDBTarget = Shapes::StructureShape.new(name: 'DynamoDBTarget')
     DynamoDBTargetList = Shapes::ListShape.new(name: 'DynamoDBTargetList')
     Edge = Shapes::StructureShape.new(name: 'Edge')
@@ -405,6 +413,10 @@ module Aws::Glue
     GetSecurityConfigurationResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationResponse')
     GetSecurityConfigurationsRequest = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsRequest')
     GetSecurityConfigurationsResponse = Shapes::StructureShape.new(name: 'GetSecurityConfigurationsResponse')
+    GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
+    GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
+    GetStatementRequest = Shapes::StructureShape.new(name: 'GetStatementRequest')
+    GetStatementResponse = Shapes::StructureShape.new(name: 'GetStatementResponse')
     GetTableRequest = Shapes::StructureShape.new(name: 'GetTableRequest')
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     GetTableVersionRequest = Shapes::StructureShape.new(name: 'GetTableVersionRequest')
@@ -450,6 +462,7 @@ module Aws::Glue
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IllegalBlueprintStateException = Shapes::StructureShape.new(name: 'IllegalBlueprintStateException')
+    IllegalSessionStateException = Shapes::StructureShape.new(name: 'IllegalSessionStateException')
     IllegalWorkflowStateException = Shapes::StructureShape.new(name: 'IllegalWorkflowStateException')
     ImportCatalogToGlueRequest = Shapes::StructureShape.new(name: 'ImportCatalogToGlueRequest')
     ImportCatalogToGlueResponse = Shapes::StructureShape.new(name: 'ImportCatalogToGlueResponse')
@@ -509,6 +522,10 @@ module Aws::Glue
     ListSchemaVersionsResponse = Shapes::StructureShape.new(name: 'ListSchemaVersionsResponse')
     ListSchemasInput = Shapes::StructureShape.new(name: 'ListSchemasInput')
     ListSchemasResponse = Shapes::StructureShape.new(name: 'ListSchemasResponse')
+    ListSessionsRequest = Shapes::StructureShape.new(name: 'ListSessionsRequest')
+    ListSessionsResponse = Shapes::StructureShape.new(name: 'ListSessionsResponse')
+    ListStatementsRequest = Shapes::StructureShape.new(name: 'ListStatementsRequest')
+    ListStatementsResponse = Shapes::StructureShape.new(name: 'ListStatementsResponse')
     ListTriggersRequest = Shapes::StructureShape.new(name: 'ListTriggersRequest')
     ListTriggersResponse = Shapes::StructureShape.new(name: 'ListTriggersResponse')
     ListWorkflowsRequest = Shapes::StructureShape.new(name: 'ListWorkflowsRequest')
@@ -523,6 +540,7 @@ module Aws::Glue
     LogicalOperator = Shapes::StringShape.new(name: 'LogicalOperator')
     Long = Shapes::IntegerShape.new(name: 'Long')
     LongColumnStatisticsData = Shapes::StructureShape.new(name: 'LongColumnStatisticsData')
+    LongValue = Shapes::IntegerShape.new(name: 'LongValue')
     MLTransform = Shapes::StructureShape.new(name: 'MLTransform')
     MLTransformNotReadyException = Shapes::StructureShape.new(name: 'MLTransformNotReadyException')
     MLUserDataEncryption = Shapes::StructureShape.new(name: 'MLUserDataEncryption')
@@ -561,10 +579,15 @@ module Aws::Glue
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
     OperationTimeoutException = Shapes::StructureShape.new(name: 'OperationTimeoutException')
+    OrchestrationArgumentsMap = Shapes::MapShape.new(name: 'OrchestrationArgumentsMap')
+    OrchestrationArgumentsValue = Shapes::StringShape.new(name: 'OrchestrationArgumentsValue')
     OrchestrationIAMRoleArn = Shapes::StringShape.new(name: 'OrchestrationIAMRoleArn')
     OrchestrationNameString = Shapes::StringShape.new(name: 'OrchestrationNameString')
+    OrchestrationRoleArn = Shapes::StringShape.new(name: 'OrchestrationRoleArn')
     OrchestrationS3Location = Shapes::StringShape.new(name: 'OrchestrationS3Location')
+    OrchestrationStatementCodeString = Shapes::StringShape.new(name: 'OrchestrationStatementCodeString')
     OrchestrationStringList = Shapes::ListShape.new(name: 'OrchestrationStringList')
+    OrchestrationToken = Shapes::StringShape.new(name: 'OrchestrationToken')
     Order = Shapes::StructureShape.new(name: 'Order')
     OrderList = Shapes::ListShape.new(name: 'OrderList')
     OtherMetadataValueList = Shapes::ListShape.new(name: 'OtherMetadataValueList')
@@ -643,6 +666,8 @@ module Aws::Glue
     RoleString = Shapes::StringShape.new(name: 'RoleString')
     RowTag = Shapes::StringShape.new(name: 'RowTag')
     RunId = Shapes::StringShape.new(name: 'RunId')
+    RunStatementRequest = Shapes::StructureShape.new(name: 'RunStatementRequest')
+    RunStatementResponse = Shapes::StructureShape.new(name: 'RunStatementResponse')
     S3Encryption = Shapes::StructureShape.new(name: 'S3Encryption')
     S3EncryptionList = Shapes::ListShape.new(name: 'S3EncryptionList')
     S3EncryptionMode = Shapes::StringShape.new(name: 'S3EncryptionMode')
@@ -685,6 +710,11 @@ module Aws::Glue
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     Segment = Shapes::StructureShape.new(name: 'Segment')
     SerDeInfo = Shapes::StructureShape.new(name: 'SerDeInfo')
+    Session = Shapes::StructureShape.new(name: 'Session')
+    SessionCommand = Shapes::StructureShape.new(name: 'SessionCommand')
+    SessionIdList = Shapes::ListShape.new(name: 'SessionIdList')
+    SessionList = Shapes::ListShape.new(name: 'SessionList')
+    SessionStatus = Shapes::StringShape.new(name: 'SessionStatus')
     SkewedInfo = Shapes::StructureShape.new(name: 'SkewedInfo')
     Sort = Shapes::StringShape.new(name: 'Sort')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
@@ -711,10 +741,17 @@ module Aws::Glue
     StartWorkflowRunRequest = Shapes::StructureShape.new(name: 'StartWorkflowRunRequest')
     StartWorkflowRunResponse = Shapes::StructureShape.new(name: 'StartWorkflowRunResponse')
     StartingEventBatchCondition = Shapes::StructureShape.new(name: 'StartingEventBatchCondition')
+    Statement = Shapes::StructureShape.new(name: 'Statement')
+    StatementList = Shapes::ListShape.new(name: 'StatementList')
+    StatementOutput = Shapes::StructureShape.new(name: 'StatementOutput')
+    StatementOutputData = Shapes::StructureShape.new(name: 'StatementOutputData')
+    StatementState = Shapes::StringShape.new(name: 'StatementState')
     StopCrawlerRequest = Shapes::StructureShape.new(name: 'StopCrawlerRequest')
     StopCrawlerResponse = Shapes::StructureShape.new(name: 'StopCrawlerResponse')
     StopCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StopCrawlerScheduleRequest')
     StopCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StopCrawlerScheduleResponse')
+    StopSessionRequest = Shapes::StructureShape.new(name: 'StopSessionRequest')
+    StopSessionResponse = Shapes::StructureShape.new(name: 'StopSessionResponse')
     StopTriggerRequest = Shapes::StructureShape.new(name: 'StopTriggerRequest')
     StopTriggerResponse = Shapes::StructureShape.new(name: 'StopTriggerResponse')
     StopWorkflowRunRequest = Shapes::StructureShape.new(name: 'StopWorkflowRunRequest')
@@ -864,7 +901,11 @@ module Aws::Glue
     AlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     AlreadyExistsException.struct_class = Types::AlreadyExistsException
 
+    AuditColumnNamesList.member = Shapes::ShapeRef.new(shape: ColumnNameString)
+
     AuditContext.add_member(:additional_audit_context, Shapes::ShapeRef.new(shape: AuditContextString, location_name: "AdditionalAuditContext"))
+    AuditContext.add_member(:requested_columns, Shapes::ShapeRef.new(shape: AuditColumnNamesList, location_name: "RequestedColumns"))
+    AuditContext.add_member(:all_columns_requested, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllColumnsRequested"))
     AuditContext.struct_class = Types::AuditContext
 
     BackfillError.add_member(:code, Shapes::ShapeRef.new(shape: BackfillErrorCode, location_name: "Code"))
@@ -1082,6 +1123,13 @@ module Aws::Glue
     CancelMLTaskRunResponse.add_member(:task_run_id, Shapes::ShapeRef.new(shape: HashString, location_name: "TaskRunId"))
     CancelMLTaskRunResponse.add_member(:status, Shapes::ShapeRef.new(shape: TaskStatusType, location_name: "Status"))
     CancelMLTaskRunResponse.struct_class = Types::CancelMLTaskRunResponse
+
+    CancelStatementRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "SessionId"))
+    CancelStatementRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, required: true, location_name: "Id"))
+    CancelStatementRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    CancelStatementRequest.struct_class = Types::CancelStatementRequest
+
+    CancelStatementResponse.struct_class = Types::CancelStatementResponse
 
     CatalogEntries.member = Shapes::ShapeRef.new(shape: CatalogEntry)
 
@@ -1538,6 +1586,26 @@ module Aws::Glue
     CreateSecurityConfigurationResponse.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedTimestamp"))
     CreateSecurityConfigurationResponse.struct_class = Types::CreateSecurityConfigurationResponse
 
+    CreateSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
+    CreateSessionRequest.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    CreateSessionRequest.add_member(:role, Shapes::ShapeRef.new(shape: OrchestrationRoleArn, required: true, location_name: "Role"))
+    CreateSessionRequest.add_member(:command, Shapes::ShapeRef.new(shape: SessionCommand, required: true, location_name: "Command"))
+    CreateSessionRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
+    CreateSessionRequest.add_member(:idle_timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "IdleTimeout"))
+    CreateSessionRequest.add_member(:default_arguments, Shapes::ShapeRef.new(shape: OrchestrationArgumentsMap, location_name: "DefaultArguments"))
+    CreateSessionRequest.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionsList, location_name: "Connections"))
+    CreateSessionRequest.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    CreateSessionRequest.add_member(:number_of_workers, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "NumberOfWorkers"))
+    CreateSessionRequest.add_member(:worker_type, Shapes::ShapeRef.new(shape: WorkerType, location_name: "WorkerType"))
+    CreateSessionRequest.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    CreateSessionRequest.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
+    CreateSessionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    CreateSessionRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    CreateSessionRequest.struct_class = Types::CreateSessionRequest
+
+    CreateSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "Session"))
+    CreateSessionResponse.struct_class = Types::CreateSessionResponse
+
     CreateTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     CreateTableRequest.add_member(:table_input, Shapes::ShapeRef.new(shape: TableInput, required: true, location_name: "TableInput"))
@@ -1762,6 +1830,13 @@ module Aws::Glue
     DeleteSecurityConfigurationRequest.struct_class = Types::DeleteSecurityConfigurationRequest
 
     DeleteSecurityConfigurationResponse.struct_class = Types::DeleteSecurityConfigurationResponse
+
+    DeleteSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
+    DeleteSessionRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    DeleteSessionRequest.struct_class = Types::DeleteSessionRequest
+
+    DeleteSessionResponse.add_member(:id, Shapes::ShapeRef.new(shape: NameString, location_name: "Id"))
+    DeleteSessionResponse.struct_class = Types::DeleteSessionResponse
 
     DeleteTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -2327,6 +2402,21 @@ module Aws::Glue
     GetSecurityConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetSecurityConfigurationsResponse.struct_class = Types::GetSecurityConfigurationsResponse
 
+    GetSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
+    GetSessionRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    GetSessionRequest.struct_class = Types::GetSessionRequest
+
+    GetSessionResponse.add_member(:session, Shapes::ShapeRef.new(shape: Session, location_name: "Session"))
+    GetSessionResponse.struct_class = Types::GetSessionResponse
+
+    GetStatementRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "SessionId"))
+    GetStatementRequest.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, required: true, location_name: "Id"))
+    GetStatementRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    GetStatementRequest.struct_class = Types::GetStatementRequest
+
+    GetStatementResponse.add_member(:statement, Shapes::ShapeRef.new(shape: Statement, location_name: "Statement"))
+    GetStatementResponse.struct_class = Types::GetStatementResponse
+
     GetTableRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetTableRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2516,6 +2606,9 @@ module Aws::Glue
 
     IllegalBlueprintStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IllegalBlueprintStateException.struct_class = Types::IllegalBlueprintStateException
+
+    IllegalSessionStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
+    IllegalSessionStateException.struct_class = Types::IllegalSessionStateException
 
     IllegalWorkflowStateException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     IllegalWorkflowStateException.struct_class = Types::IllegalWorkflowStateException
@@ -2750,6 +2843,26 @@ module Aws::Glue
     ListSchemasResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SchemaRegistryTokenString, location_name: "NextToken"))
     ListSchemasResponse.struct_class = Types::ListSchemasResponse
 
+    ListSessionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListSessionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListSessionsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "Tags"))
+    ListSessionsRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    ListSessionsRequest.struct_class = Types::ListSessionsRequest
+
+    ListSessionsResponse.add_member(:ids, Shapes::ShapeRef.new(shape: SessionIdList, location_name: "Ids"))
+    ListSessionsResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionList, location_name: "Sessions"))
+    ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListSessionsResponse.struct_class = Types::ListSessionsResponse
+
+    ListStatementsRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "SessionId"))
+    ListStatementsRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    ListStatementsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListStatementsRequest.struct_class = Types::ListStatementsRequest
+
+    ListStatementsResponse.add_member(:statements, Shapes::ShapeRef.new(shape: StatementList, location_name: "Statements"))
+    ListStatementsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: OrchestrationToken, location_name: "NextToken"))
+    ListStatementsResponse.struct_class = Types::ListStatementsResponse
+
     ListTriggersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListTriggersRequest.add_member(:dependent_job_name, Shapes::ShapeRef.new(shape: NameString, location_name: "DependentJobName"))
     ListTriggersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -2870,6 +2983,9 @@ module Aws::Glue
 
     OperationTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: MessageString, location_name: "Message"))
     OperationTimeoutException.struct_class = Types::OperationTimeoutException
+
+    OrchestrationArgumentsMap.key = Shapes::ShapeRef.new(shape: OrchestrationNameString)
+    OrchestrationArgumentsMap.value = Shapes::ShapeRef.new(shape: OrchestrationArgumentsValue)
 
     OrchestrationStringList.member = Shapes::ShapeRef.new(shape: GenericString)
 
@@ -3092,6 +3208,14 @@ module Aws::Glue
     ResumeWorkflowRunResponse.add_member(:node_ids, Shapes::ShapeRef.new(shape: NodeIdList, location_name: "NodeIds"))
     ResumeWorkflowRunResponse.struct_class = Types::ResumeWorkflowRunResponse
 
+    RunStatementRequest.add_member(:session_id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "SessionId"))
+    RunStatementRequest.add_member(:code, Shapes::ShapeRef.new(shape: OrchestrationStatementCodeString, required: true, location_name: "Code"))
+    RunStatementRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    RunStatementRequest.struct_class = Types::RunStatementRequest
+
+    RunStatementResponse.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Id"))
+    RunStatementResponse.struct_class = Types::RunStatementResponse
+
     S3Encryption.add_member(:s3_encryption_mode, Shapes::ShapeRef.new(shape: S3EncryptionMode, location_name: "S3EncryptionMode"))
     S3Encryption.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
     S3Encryption.struct_class = Types::S3Encryption
@@ -3202,6 +3326,29 @@ module Aws::Glue
     SerDeInfo.add_member(:parameters, Shapes::ShapeRef.new(shape: ParametersMap, location_name: "Parameters"))
     SerDeInfo.struct_class = Types::SerDeInfo
 
+    Session.add_member(:id, Shapes::ShapeRef.new(shape: NameString, location_name: "Id"))
+    Session.add_member(:created_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CreatedOn"))
+    Session.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "Status"))
+    Session.add_member(:error_message, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "ErrorMessage"))
+    Session.add_member(:description, Shapes::ShapeRef.new(shape: DescriptionString, location_name: "Description"))
+    Session.add_member(:role, Shapes::ShapeRef.new(shape: OrchestrationRoleArn, location_name: "Role"))
+    Session.add_member(:command, Shapes::ShapeRef.new(shape: SessionCommand, location_name: "Command"))
+    Session.add_member(:default_arguments, Shapes::ShapeRef.new(shape: OrchestrationArgumentsMap, location_name: "DefaultArguments"))
+    Session.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionsList, location_name: "Connections"))
+    Session.add_member(:progress, Shapes::ShapeRef.new(shape: DoubleValue, location_name: "Progress"))
+    Session.add_member(:max_capacity, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "MaxCapacity"))
+    Session.add_member(:security_configuration, Shapes::ShapeRef.new(shape: NameString, location_name: "SecurityConfiguration"))
+    Session.add_member(:glue_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "GlueVersion"))
+    Session.struct_class = Types::Session
+
+    SessionCommand.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    SessionCommand.add_member(:python_version, Shapes::ShapeRef.new(shape: PythonVersionString, location_name: "PythonVersion"))
+    SessionCommand.struct_class = Types::SessionCommand
+
+    SessionIdList.member = Shapes::ShapeRef.new(shape: NameString)
+
+    SessionList.member = Shapes::ShapeRef.new(shape: Session)
+
     SkewedInfo.add_member(:skewed_column_names, Shapes::ShapeRef.new(shape: NameStringList, location_name: "SkewedColumnNames"))
     SkewedInfo.add_member(:skewed_column_values, Shapes::ShapeRef.new(shape: ColumnValueStringList, location_name: "SkewedColumnValues"))
     SkewedInfo.add_member(:skewed_column_value_location_maps, Shapes::ShapeRef.new(shape: LocationMap, location_name: "SkewedColumnValueLocationMaps"))
@@ -3291,6 +3438,28 @@ module Aws::Glue
     StartingEventBatchCondition.add_member(:batch_window, Shapes::ShapeRef.new(shape: NullableInteger, location_name: "BatchWindow"))
     StartingEventBatchCondition.struct_class = Types::StartingEventBatchCondition
 
+    Statement.add_member(:id, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "Id"))
+    Statement.add_member(:code, Shapes::ShapeRef.new(shape: GenericString, location_name: "Code"))
+    Statement.add_member(:state, Shapes::ShapeRef.new(shape: StatementState, location_name: "State"))
+    Statement.add_member(:output, Shapes::ShapeRef.new(shape: StatementOutput, location_name: "Output"))
+    Statement.add_member(:progress, Shapes::ShapeRef.new(shape: DoubleValue, location_name: "Progress"))
+    Statement.add_member(:started_on, Shapes::ShapeRef.new(shape: LongValue, location_name: "StartedOn"))
+    Statement.add_member(:completed_on, Shapes::ShapeRef.new(shape: LongValue, location_name: "CompletedOn"))
+    Statement.struct_class = Types::Statement
+
+    StatementList.member = Shapes::ShapeRef.new(shape: Statement)
+
+    StatementOutput.add_member(:data, Shapes::ShapeRef.new(shape: StatementOutputData, location_name: "Data"))
+    StatementOutput.add_member(:execution_count, Shapes::ShapeRef.new(shape: IntegerValue, location_name: "ExecutionCount"))
+    StatementOutput.add_member(:status, Shapes::ShapeRef.new(shape: StatementState, location_name: "Status"))
+    StatementOutput.add_member(:error_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorName"))
+    StatementOutput.add_member(:error_value, Shapes::ShapeRef.new(shape: GenericString, location_name: "ErrorValue"))
+    StatementOutput.add_member(:traceback, Shapes::ShapeRef.new(shape: OrchestrationStringList, location_name: "Traceback"))
+    StatementOutput.struct_class = Types::StatementOutput
+
+    StatementOutputData.add_member(:text_plain, Shapes::ShapeRef.new(shape: GenericString, location_name: "TextPlain"))
+    StatementOutputData.struct_class = Types::StatementOutputData
+
     StopCrawlerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StopCrawlerRequest.struct_class = Types::StopCrawlerRequest
 
@@ -3300,6 +3469,13 @@ module Aws::Glue
     StopCrawlerScheduleRequest.struct_class = Types::StopCrawlerScheduleRequest
 
     StopCrawlerScheduleResponse.struct_class = Types::StopCrawlerScheduleResponse
+
+    StopSessionRequest.add_member(:id, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Id"))
+    StopSessionRequest.add_member(:request_origin, Shapes::ShapeRef.new(shape: OrchestrationNameString, location_name: "RequestOrigin"))
+    StopSessionRequest.struct_class = Types::StopSessionRequest
+
+    StopSessionResponse.add_member(:id, Shapes::ShapeRef.new(shape: NameString, location_name: "Id"))
+    StopSessionResponse.struct_class = Types::StopSessionResponse
 
     StopTriggerRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     StopTriggerRequest.struct_class = Types::StopTriggerRequest
@@ -3982,6 +4158,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
+      api.add_operation(:cancel_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelStatementRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+      end)
+
       api.add_operation(:check_schema_version_validity, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CheckSchemaVersionValidity"
         o.http_method = "POST"
@@ -4183,6 +4373,22 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+      end)
+
+      api.add_operation(:create_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
 
@@ -4450,6 +4656,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:delete_table, Seahorse::Model::Operation.new.tap do |o|
@@ -5097,6 +5317,33 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:get_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:get_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetStatementRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+      end)
+
       api.add_operation(:get_table, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTable"
         o.http_method = "POST"
@@ -5487,6 +5734,38 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:list_sessions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSessions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSessionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSessionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_statements, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStatements"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListStatementsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStatementsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+      end)
+
       api.add_operation(:list_triggers, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTriggers"
         o.http_method = "POST"
@@ -5634,6 +5913,22 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalWorkflowStateException)
+      end)
+
+      api.add_operation(:run_statement, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RunStatement"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RunStatementRequest)
+        o.output = Shapes::ShapeRef.new(shape: RunStatementResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
       end)
 
       api.add_operation(:search_tables, Seahorse::Model::Operation.new.tap do |o|
@@ -5807,6 +6102,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: SchedulerNotRunningException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerTransitioningException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:stop_session, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopSession"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopSessionRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopSessionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalSessionStateException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:stop_trigger, Seahorse::Model::Operation.new.tap do |o|

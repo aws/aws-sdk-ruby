@@ -114,20 +114,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # A structure containing information for audit.
+    #
     # @note When making an API call, you may pass AuditContext
     #   data as a hash:
     #
     #       {
     #         additional_audit_context: "AuditContextString",
+    #         requested_columns: ["ColumnNameString"],
+    #         all_columns_requested: false,
     #       }
     #
     # @!attribute [rw] additional_audit_context
+    #   The context for the audit..
     #   @return [String]
+    #
+    # @!attribute [rw] requested_columns
+    #   The requested columns for audit.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] all_columns_requested
+    #   All columns request for audit.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AuditContext AWS API Documentation
     #
     class AuditContext < Struct.new(
-      :additional_audit_context)
+      :additional_audit_context,
+      :requested_columns,
+      :all_columns_requested)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1391,6 +1406,41 @@ module Aws::Glue
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass CancelStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "NameString", # required
+    #         id: 1, # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The Session ID of the statement to be cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The ID of the statement to be cancelled.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request to cancel the statement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelStatementRequest AWS API Documentation
+    #
+    class CancelStatementRequest < Struct.new(
+      :session_id,
+      :id,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelStatementResponse AWS API Documentation
+    #
+    class CancelStatementResponse < Aws::EmptyStructure; end
 
     # Specifies a table definition in the Glue Data Catalog.
     #
@@ -4689,6 +4739,137 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Request to create a new session.
+    #
+    # @note When making an API call, you may pass CreateSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NameString", # required
+    #         description: "DescriptionString",
+    #         role: "OrchestrationRoleArn", # required
+    #         command: { # required
+    #           name: "NameString",
+    #           python_version: "PythonVersionString",
+    #         },
+    #         timeout: 1,
+    #         idle_timeout: 1,
+    #         default_arguments: {
+    #           "OrchestrationNameString" => "OrchestrationArgumentsValue",
+    #         },
+    #         connections: {
+    #           connections: ["GenericString"],
+    #         },
+    #         max_capacity: 1.0,
+    #         number_of_workers: 1,
+    #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         security_configuration: "NameString",
+    #         glue_version: "GlueVersionString",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the session request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The IAM Role ARN
+    #   @return [String]
+    #
+    # @!attribute [rw] command
+    #   The `SessionCommand` that runs the job.
+    #   @return [Types::SessionCommand]
+    #
+    # @!attribute [rw] timeout
+    #   The number of seconds before request times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] idle_timeout
+    #   The number of seconds when idle before request times out.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] default_arguments
+    #   A map array of key-value pairs. Max is 75 pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] connections
+    #   The number of connections to use for the session.
+    #   @return [Types::ConnectionsList]
+    #
+    # @!attribute [rw] max_capacity
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when the job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB memory.
+    #   @return [Float]
+    #
+    # @!attribute [rw] number_of_workers
+    #   The number of workers to use for the session.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_type
+    #   The Worker Type. Can be one of G.1X, G.2X, Standard
+    #   @return [String]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with the
+    #   session
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   The Glue version determines the versions of Apache Spark and Python
+    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The map of key value pairs (tags) belonging to the session.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSessionRequest AWS API Documentation
+    #
+    class CreateSessionRequest < Struct.new(
+      :id,
+      :description,
+      :role,
+      :command,
+      :timeout,
+      :idle_timeout,
+      :default_arguments,
+      :connections,
+      :max_capacity,
+      :number_of_workers,
+      :worker_type,
+      :security_configuration,
+      :glue_version,
+      :tags,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session
+    #   Returns the session object in the response.
+    #   @return [Types::Session]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSessionResponse AWS API Documentation
+    #
+    class CreateSessionResponse < Struct.new(
+      :session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateTableRequest
     #   data as a hash:
     #
@@ -6084,6 +6265,43 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSecurityConfigurationResponse AWS API Documentation
     #
     class DeleteSecurityConfigurationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NameString", # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the session to be deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_origin
+    #   The name of the origin of the delete session request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSessionRequest AWS API Documentation
+    #
+    class DeleteSessionRequest < Struct.new(
+      :id,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Returns the ID of the deleted session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSessionResponse AWS API Documentation
+    #
+    class DeleteSessionResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteTableRequest
     #   data as a hash:
@@ -9592,6 +9810,86 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NameString", # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSessionRequest AWS API Documentation
+    #
+    class GetSessionRequest < Struct.new(
+      :id,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] session
+    #   The session object is returned in the response.
+    #   @return [Types::Session]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSessionResponse AWS API Documentation
+    #
+    class GetSessionResponse < Struct.new(
+      :session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "NameString", # required
+    #         id: 1, # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The Session ID of the statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The Id of the statement.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetStatementRequest AWS API Documentation
+    #
+    class GetStatementRequest < Struct.new(
+      :session_id,
+      :id,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statement
+    #   Returns the statement.
+    #   @return [Types::Statement]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetStatementResponse AWS API Documentation
+    #
+    class GetStatementResponse < Struct.new(
+      :statement)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetTableRequest
     #   data as a hash:
     #
@@ -9973,6 +10271,8 @@ module Aws::Glue
     #         partition_values: ["ValueString"], # required
     #         audit_context: {
     #           additional_audit_context: "AuditContextString",
+    #           requested_columns: ["ColumnNameString"],
+    #           all_columns_requested: false,
     #         },
     #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #       }
@@ -9990,6 +10290,7 @@ module Aws::Glue
     #   @return [Array<String>]
     #
     # @!attribute [rw] audit_context
+    #   A structure containing information for audit.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
@@ -10038,6 +10339,8 @@ module Aws::Glue
     #         expression: "PredicateString",
     #         audit_context: {
     #           additional_audit_context: "AuditContextString",
+    #           requested_columns: ["ColumnNameString"],
+    #           all_columns_requested: false,
     #         },
     #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #         next_token: "Token",
@@ -10061,6 +10364,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] audit_context
+    #   A structure containing information for audit.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
@@ -10117,6 +10421,8 @@ module Aws::Glue
     #         name: "NameString", # required
     #         audit_context: {
     #           additional_audit_context: "AuditContextString",
+    #           requested_columns: ["ColumnNameString"],
+    #           all_columns_requested: false,
     #         },
     #         supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #       }
@@ -10131,6 +10437,7 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] audit_context
+    #   A structure containing information for audit.
     #   @return [Types::AuditContext]
     #
     # @!attribute [rw] supported_permission_types
@@ -10460,7 +10767,7 @@ module Aws::Glue
     # An encryption operation failed.
     #
     # @!attribute [rw] message
-    #   A message describing the problem.
+    #   The message describing the problem.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueEncryptionException AWS API Documentation
@@ -10616,6 +10923,20 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalBlueprintStateException AWS API Documentation
     #
     class IllegalBlueprintStateException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The session is in an invalid state to perform a requested operation.
+    #
+    # @!attribute [rw] message
+    #   A message describing the problem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IllegalSessionStateException AWS API Documentation
+    #
+    class IllegalSessionStateException < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -12162,6 +12483,115 @@ module Aws::Glue
     #
     class ListSchemasResponse < Struct.new(
       :schemas,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListSessionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "OrchestrationToken",
+    #         max_results: 1,
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   result.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] tags
+    #   Tags belonging to the session.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessionsRequest AWS API Documentation
+    #
+    class ListSessionsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :tags,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ids
+    #   Returns the Id of the session.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sessions
+    #   Returns the session object.
+    #   @return [Array<Types::Session>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no more
+    #   result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessionsResponse AWS API Documentation
+    #
+    class ListSessionsResponse < Struct.new(
+      :ids,
+      :sessions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListStatementsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "NameString", # required
+    #         request_origin: "OrchestrationNameString",
+    #         next_token: "OrchestrationToken",
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The Session ID of the statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request to list statements.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatementsRequest AWS API Documentation
+    #
+    class ListStatementsRequest < Struct.new(
+      :session_id,
+      :request_origin,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] statements
+    #   Returns the list of statements.
+    #   @return [Array<Types::Statement>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatementsResponse AWS API Documentation
+    #
+    class ListStatementsResponse < Struct.new(
+      :statements,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -14059,6 +14489,49 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass RunStatementRequest
+    #   data as a hash:
+    #
+    #       {
+    #         session_id: "NameString", # required
+    #         code: "OrchestrationStatementCodeString", # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] session_id
+    #   The Session Id of the statement to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The statement code to be run.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunStatementRequest AWS API Documentation
+    #
+    class RunStatementRequest < Struct.new(
+      :session_id,
+      :code,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Returns the Id of the statement that was run.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunStatementResponse AWS API Documentation
+    #
+    class RunStatementResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Amazon Simple Storage Service (Amazon S3) data should be
     # encrypted.
     #
@@ -14673,6 +15146,115 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The period in which a remote Spark runtime environment is running.
+    #
+    # @!attribute [rw] id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_on
+    #   The time and date when the session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The session status.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The error message displayed during the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] role
+    #   The name or Amazon Resource Name (ARN) of the IAM role associated
+    #   with the Session.
+    #   @return [String]
+    #
+    # @!attribute [rw] command
+    #   The command object.See SessionCommand.
+    #   @return [Types::SessionCommand]
+    #
+    # @!attribute [rw] default_arguments
+    #   A map array of key-value pairs. Max is 75 pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] connections
+    #   The number of connections used for the session.
+    #   @return [Types::ConnectionsList]
+    #
+    # @!attribute [rw] progress
+    #   The code execution progress of the session.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when the job runs. A DPU is a relative measure of
+    #   processing power that consists of 4 vCPUs of compute capacity and 16
+    #   GB memory.
+    #   @return [Float]
+    #
+    # @!attribute [rw] security_configuration
+    #   The name of the SecurityConfiguration structure to be used with the
+    #   session.
+    #   @return [String]
+    #
+    # @!attribute [rw] glue_version
+    #   The Glue version determines the versions of Apache Spark and Python
+    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Session AWS API Documentation
+    #
+    class Session < Struct.new(
+      :id,
+      :created_on,
+      :status,
+      :error_message,
+      :description,
+      :role,
+      :command,
+      :default_arguments,
+      :connections,
+      :progress,
+      :max_capacity,
+      :security_configuration,
+      :glue_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `SessionCommand` that runs the job.
+    #
+    # @note When making an API call, you may pass SessionCommand
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString",
+    #         python_version: "PythonVersionString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the SessionCommand.Can be 'glueetl' or
+    #   'gluestreaming'.
+    #   @return [String]
+    #
+    # @!attribute [rw] python_version
+    #   Specifies the Python version. The Python version indicates the
+    #   version supported for jobs of type Spark.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SessionCommand AWS API Documentation
+    #
+    class SessionCommand < Struct.new(
+      :name,
+      :python_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies skewed values in a table. Skewed values are those that occur
     # with very high frequency.
     #
@@ -15224,6 +15806,104 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The statement or request for a particular action to occur in a
+    # session.
+    #
+    # @!attribute [rw] id
+    #   The ID of the statement.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code
+    #   The execution code of the statement.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state while request is actioned.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   The output in JSON.
+    #   @return [Types::StatementOutput]
+    #
+    # @!attribute [rw] progress
+    #   The code execution progress.
+    #   @return [Float]
+    #
+    # @!attribute [rw] started_on
+    #   The unix time and date that the job definition was started.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completed_on
+    #   The unix time and date that the job definition was completed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Statement AWS API Documentation
+    #
+    class Statement < Struct.new(
+      :id,
+      :code,
+      :state,
+      :output,
+      :progress,
+      :started_on,
+      :completed_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The code execution output in JSON format.
+    #
+    # @!attribute [rw] data
+    #   The code execution output.
+    #   @return [Types::StatementOutputData]
+    #
+    # @!attribute [rw] execution_count
+    #   The execution count of the output.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   The status of the code execution output.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_name
+    #   The name of the error in the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_value
+    #   The error value of the output.
+    #   @return [String]
+    #
+    # @!attribute [rw] traceback
+    #   The traceback of the output.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatementOutput AWS API Documentation
+    #
+    class StatementOutput < Struct.new(
+      :data,
+      :execution_count,
+      :status,
+      :error_name,
+      :error_value,
+      :traceback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The code execution output in JSON format.
+    #
+    # @!attribute [rw] text_plain
+    #   The code execution output in text format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StatementOutputData AWS API Documentation
+    #
+    class StatementOutputData < Struct.new(
+      :text_plain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopCrawlerRequest
     #   data as a hash:
     #
@@ -15269,6 +15949,43 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleResponse AWS API Documentation
     #
     class StopCrawlerScheduleResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass StopSessionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "NameString", # required
+    #         request_origin: "OrchestrationNameString",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the session to be stopped.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_origin
+    #   The origin of the request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopSessionRequest AWS API Documentation
+    #
+    class StopSessionRequest < Struct.new(
+      :id,
+      :request_origin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   Returns the Id of the stopped session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopSessionResponse AWS API Documentation
+    #
+    class StopSessionResponse < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass StopTriggerRequest
     #   data as a hash:

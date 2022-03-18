@@ -1484,6 +1484,36 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Cancels the statement..
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statement to be cancelled.
+    #
+    # @option params [required, Integer] :id
+    #   The ID of the statement to be cancelled.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request to cancel the statement.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_statement({
+    #     session_id: "NameString", # required
+    #     id: 1, # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CancelStatement AWS API Documentation
+    #
+    # @overload cancel_statement(params = {})
+    # @param [Hash] params ({})
+    def cancel_statement(params = {}, options = {})
+      req = build_request(:cancel_statement, params)
+      req.send_request(options)
+    end
+
     # Validates the supplied schema. This call has no side effects, it
     # simply validates using the supplied schema using `DataFormat` as the
     # format. Since it does not take a schema set name, no compatibility
@@ -2942,6 +2972,118 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a new session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session request.
+    #
+    # @option params [String] :description
+    #   The description of the session.
+    #
+    # @option params [required, String] :role
+    #   The IAM Role ARN
+    #
+    # @option params [required, Types::SessionCommand] :command
+    #   The `SessionCommand` that runs the job.
+    #
+    # @option params [Integer] :timeout
+    #   The number of seconds before request times out.
+    #
+    # @option params [Integer] :idle_timeout
+    #   The number of seconds when idle before request times out.
+    #
+    # @option params [Hash<String,String>] :default_arguments
+    #   A map array of key-value pairs. Max is 75 pairs.
+    #
+    # @option params [Types::ConnectionsList] :connections
+    #   The number of connections to use for the session.
+    #
+    # @option params [Float] :max_capacity
+    #   The number of AWS Glue data processing units (DPUs) that can be
+    #   allocated when the job runs. A DPU is a relative measure of processing
+    #   power that consists of 4 vCPUs of compute capacity and 16 GB memory.
+    #
+    # @option params [Integer] :number_of_workers
+    #   The number of workers to use for the session.
+    #
+    # @option params [String] :worker_type
+    #   The Worker Type. Can be one of G.1X, G.2X, Standard
+    #
+    # @option params [String] :security_configuration
+    #   The name of the SecurityConfiguration structure to be used with the
+    #   session
+    #
+    # @option params [String] :glue_version
+    #   The Glue version determines the versions of Apache Spark and Python
+    #   that AWS Glue supports. The GlueVersion must be greater than 2.0.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The map of key value pairs (tags) belonging to the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::CreateSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSessionResponse#session #session} => Types::Session
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_session({
+    #     id: "NameString", # required
+    #     description: "DescriptionString",
+    #     role: "OrchestrationRoleArn", # required
+    #     command: { # required
+    #       name: "NameString",
+    #       python_version: "PythonVersionString",
+    #     },
+    #     timeout: 1,
+    #     idle_timeout: 1,
+    #     default_arguments: {
+    #       "OrchestrationNameString" => "OrchestrationArgumentsValue",
+    #     },
+    #     connections: {
+    #       connections: ["GenericString"],
+    #     },
+    #     max_capacity: 1.0,
+    #     number_of_workers: 1,
+    #     worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #     security_configuration: "NameString",
+    #     glue_version: "GlueVersionString",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.id #=> String
+    #   resp.session.created_on #=> Time
+    #   resp.session.status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.session.error_message #=> String
+    #   resp.session.description #=> String
+    #   resp.session.role #=> String
+    #   resp.session.command.name #=> String
+    #   resp.session.command.python_version #=> String
+    #   resp.session.default_arguments #=> Hash
+    #   resp.session.default_arguments["OrchestrationNameString"] #=> String
+    #   resp.session.connections.connections #=> Array
+    #   resp.session.connections.connections[0] #=> String
+    #   resp.session.progress #=> Float
+    #   resp.session.max_capacity #=> Float
+    #   resp.session.security_configuration #=> String
+    #   resp.session.glue_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateSession AWS API Documentation
+    #
+    # @overload create_session(params = {})
+    # @param [Hash] params ({})
+    def create_session(params = {}, options = {})
+      req = build_request(:create_session, params)
+      req.send_request(options)
+    end
+
     # Creates a new table definition in the Data Catalog.
     #
     # @option params [String] :catalog_id
@@ -3849,6 +3991,38 @@ module Aws::Glue
     # @param [Hash] params ({})
     def delete_security_configuration(params = {}, options = {})
       req = build_request(:delete_security_configuration, params)
+      req.send_request(options)
+    end
+
+    # Deletes the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session to be deleted.
+    #
+    # @option params [String] :request_origin
+    #   The name of the origin of the delete session request.
+    #
+    # @return [Types::DeleteSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteSessionResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteSession AWS API Documentation
+    #
+    # @overload delete_session(params = {})
+    # @param [Hash] params ({})
+    def delete_session(params = {}, options = {})
+      req = build_request(:delete_session, params)
       req.send_request(options)
     end
 
@@ -6769,6 +6943,101 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::GetSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSessionResponse#session #session} => Types::Session
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session.id #=> String
+    #   resp.session.created_on #=> Time
+    #   resp.session.status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.session.error_message #=> String
+    #   resp.session.description #=> String
+    #   resp.session.role #=> String
+    #   resp.session.command.name #=> String
+    #   resp.session.command.python_version #=> String
+    #   resp.session.default_arguments #=> Hash
+    #   resp.session.default_arguments["OrchestrationNameString"] #=> String
+    #   resp.session.connections.connections #=> Array
+    #   resp.session.connections.connections[0] #=> String
+    #   resp.session.progress #=> Float
+    #   resp.session.max_capacity #=> Float
+    #   resp.session.security_configuration #=> String
+    #   resp.session.glue_version #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSession AWS API Documentation
+    #
+    # @overload get_session(params = {})
+    # @param [Hash] params ({})
+    def get_session(params = {}, options = {})
+      req = build_request(:get_session, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the statement.
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statement.
+    #
+    # @option params [required, Integer] :id
+    #   The Id of the statement.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::GetStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStatementResponse#statement #statement} => Types::Statement
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_statement({
+    #     session_id: "NameString", # required
+    #     id: 1, # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statement.id #=> Integer
+    #   resp.statement.code #=> String
+    #   resp.statement.state #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statement.output.data.text_plain #=> String
+    #   resp.statement.output.execution_count #=> Integer
+    #   resp.statement.output.status #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statement.output.error_name #=> String
+    #   resp.statement.output.error_value #=> String
+    #   resp.statement.output.traceback #=> Array
+    #   resp.statement.output.traceback[0] #=> String
+    #   resp.statement.progress #=> Float
+    #   resp.statement.started_on #=> Integer
+    #   resp.statement.completed_on #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetStatement AWS API Documentation
+    #
+    # @overload get_statement(params = {})
+    # @param [Hash] params ({})
+    def get_statement(params = {}, options = {})
+      req = build_request(:get_statement, params)
+      req.send_request(options)
+    end
+
     # Retrieves the `Table` definition in a Data Catalog for a specified
     # table.
     #
@@ -7385,6 +7654,7 @@ module Aws::Glue
     # @option params [required, Array<String>] :partition_values
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7403,6 +7673,8 @@ module Aws::Glue
     #     partition_values: ["ValueString"], # required
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #   })
@@ -7477,6 +7749,7 @@ module Aws::Glue
     # @option params [String] :expression
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7504,6 +7777,8 @@ module Aws::Glue
     #     expression: "PredicateString",
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #     next_token: "Token",
@@ -7584,6 +7859,7 @@ module Aws::Glue
     # @option params [required, String] :name
     #
     # @option params [Types::AuditContext] :audit_context
+    #   A structure containing information for audit.
     #
     # @option params [required, Array<String>] :supported_permission_types
     #
@@ -7602,6 +7878,8 @@ module Aws::Glue
     #     name: "NameString", # required
     #     audit_context: {
     #       additional_audit_context: "AuditContextString",
+    #       requested_columns: ["ColumnNameString"],
+    #       all_columns_requested: false,
     #     },
     #     supported_permission_types: ["COLUMN_PERMISSION"], # required, accepts COLUMN_PERMISSION, CELL_FILTER_PERMISSION
     #   })
@@ -8716,6 +8994,122 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieve a session..
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results, or null if there are no more
+    #   result.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Tags belonging to the session.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::ListSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSessionsResponse#ids #ids} => Array&lt;String&gt;
+    #   * {Types::ListSessionsResponse#sessions #sessions} => Array&lt;Types::Session&gt;
+    #   * {Types::ListSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sessions({
+    #     next_token: "OrchestrationToken",
+    #     max_results: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.ids #=> Array
+    #   resp.ids[0] #=> String
+    #   resp.sessions #=> Array
+    #   resp.sessions[0].id #=> String
+    #   resp.sessions[0].created_on #=> Time
+    #   resp.sessions[0].status #=> String, one of "PROVISIONING", "READY", "FAILED", "TIMEOUT", "STOPPING", "STOPPED"
+    #   resp.sessions[0].error_message #=> String
+    #   resp.sessions[0].description #=> String
+    #   resp.sessions[0].role #=> String
+    #   resp.sessions[0].command.name #=> String
+    #   resp.sessions[0].command.python_version #=> String
+    #   resp.sessions[0].default_arguments #=> Hash
+    #   resp.sessions[0].default_arguments["OrchestrationNameString"] #=> String
+    #   resp.sessions[0].connections.connections #=> Array
+    #   resp.sessions[0].connections.connections[0] #=> String
+    #   resp.sessions[0].progress #=> Float
+    #   resp.sessions[0].max_capacity #=> Float
+    #   resp.sessions[0].security_configuration #=> String
+    #   resp.sessions[0].glue_version #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListSessions AWS API Documentation
+    #
+    # @overload list_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_sessions(params = {}, options = {})
+      req = build_request(:list_sessions, params)
+      req.send_request(options)
+    end
+
+    # Lists statements for the session.
+    #
+    # @option params [required, String] :session_id
+    #   The Session ID of the statements.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request to list statements.
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListStatementsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStatementsResponse#statements #statements} => Array&lt;Types::Statement&gt;
+    #   * {Types::ListStatementsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_statements({
+    #     session_id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #     next_token: "OrchestrationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.statements #=> Array
+    #   resp.statements[0].id #=> Integer
+    #   resp.statements[0].code #=> String
+    #   resp.statements[0].state #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statements[0].output.data.text_plain #=> String
+    #   resp.statements[0].output.execution_count #=> Integer
+    #   resp.statements[0].output.status #=> String, one of "WAITING", "RUNNING", "AVAILABLE", "CANCELLING", "CANCELLED", "ERROR"
+    #   resp.statements[0].output.error_name #=> String
+    #   resp.statements[0].output.error_value #=> String
+    #   resp.statements[0].output.traceback #=> Array
+    #   resp.statements[0].output.traceback[0] #=> String
+    #   resp.statements[0].progress #=> Float
+    #   resp.statements[0].started_on #=> Integer
+    #   resp.statements[0].completed_on #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListStatements AWS API Documentation
+    #
+    # @overload list_statements(params = {})
+    # @param [Hash] params ({})
+    def list_statements(params = {}, options = {})
+      req = build_request(:list_statements, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all trigger resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -9289,6 +9683,42 @@ module Aws::Glue
     # @param [Hash] params ({})
     def resume_workflow_run(params = {}, options = {})
       req = build_request(:resume_workflow_run, params)
+      req.send_request(options)
+    end
+
+    # Executes the statement.
+    #
+    # @option params [required, String] :session_id
+    #   The Session Id of the statement to be run.
+    #
+    # @option params [required, String] :code
+    #   The statement code to be run.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::RunStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RunStatementResponse#id #id} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.run_statement({
+    #     session_id: "NameString", # required
+    #     code: "OrchestrationStatementCodeString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RunStatement AWS API Documentation
+    #
+    # @overload run_statement(params = {})
+    # @param [Hash] params ({})
+    def run_statement(params = {}, options = {})
+      req = build_request(:run_statement, params)
       req.send_request(options)
     end
 
@@ -9977,6 +10407,38 @@ module Aws::Glue
     # @param [Hash] params ({})
     def stop_crawler_schedule(params = {}, options = {})
       req = build_request(:stop_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Stops the session.
+    #
+    # @option params [required, String] :id
+    #   The ID of the session to be stopped.
+    #
+    # @option params [String] :request_origin
+    #   The origin of the request.
+    #
+    # @return [Types::StopSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopSessionResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_session({
+    #     id: "NameString", # required
+    #     request_origin: "OrchestrationNameString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopSession AWS API Documentation
+    #
+    # @overload stop_session(params = {})
+    # @param [Hash] params ({})
+    def stop_session(params = {}, options = {})
+      req = build_request(:stop_session, params)
       req.send_request(options)
     end
 
@@ -11537,7 +11999,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

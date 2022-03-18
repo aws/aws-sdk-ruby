@@ -40,6 +40,7 @@ module Aws::Glue
   # * {GlueEncryptionException}
   # * {IdempotentParameterMismatchException}
   # * {IllegalBlueprintStateException}
+  # * {IllegalSessionStateException}
   # * {IllegalWorkflowStateException}
   # * {InternalServiceException}
   # * {InvalidInputException}
@@ -247,6 +248,21 @@ module Aws::Glue
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Glue::Types::IllegalBlueprintStateException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class IllegalSessionStateException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Glue::Types::IllegalSessionStateException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
