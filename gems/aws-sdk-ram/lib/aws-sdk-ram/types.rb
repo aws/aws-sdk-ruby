@@ -1073,10 +1073,11 @@ module Aws::RAM
     #   Specifies that you want to retrieve details of only those resource
     #   shares that match the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – resource shares that your account
+    #     shares with other accounts
     #
-    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
-    #     accounts share with you
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resource shares that other
+    #     accounts share with your account
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1502,10 +1503,11 @@ module Aws::RAM
     #   Specifies that you want to list information for only resource shares
     #   that match the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – principals that your account is
+    #     sharing resources with
     #
-    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
-    #     accounts share with you
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – principals that are sharing
+    #     resources with your account
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1795,10 +1797,11 @@ module Aws::RAM
     #   Specifies that you want to list only the resource shares that match
     #   the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – resources that your account shares
+    #     with other accounts
     #
     #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other
-    #     accounts share with you
+    #     accounts share with your account
     #   @return [String]
     #
     # @!attribute [rw] principal

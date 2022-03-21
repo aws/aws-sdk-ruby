@@ -244,6 +244,7 @@ module Aws::ChimeSDKMeetings
     #             echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
     #           },
     #         },
+    #         primary_meeting_id: "PrimaryMeetingId",
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -285,6 +286,11 @@ module Aws::ChimeSDKMeetings
     #   echo reduction.
     #   @return [Types::MeetingFeaturesConfiguration]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingRequest AWS API Documentation
     #
     class CreateMeetingRequest < Struct.new(
@@ -293,7 +299,8 @@ module Aws::ChimeSDKMeetings
       :meeting_host_id,
       :external_meeting_id,
       :notifications_configuration,
-      :meeting_features)
+      :meeting_features,
+      :primary_meeting_id)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -334,6 +341,7 @@ module Aws::ChimeSDKMeetings
     #             external_user_id: "ExternalUserId", # required
     #           },
     #         ],
+    #         primary_meeting_id: "PrimaryMeetingId",
     #       }
     #
     # @!attribute [rw] client_request_token
@@ -379,6 +387,11 @@ module Aws::ChimeSDKMeetings
     #   The attendee information, including attendees' IDs and join tokens.
     #   @return [Array<Types::CreateAttendeeRequestItem>]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeetingWithAttendeesRequest AWS API Documentation
     #
     class CreateMeetingWithAttendeesRequest < Struct.new(
@@ -388,7 +401,8 @@ module Aws::ChimeSDKMeetings
       :external_meeting_id,
       :meeting_features,
       :notifications_configuration,
-      :attendees)
+      :attendees,
+      :primary_meeting_id)
       SENSITIVE = [:client_request_token, :meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end
@@ -883,6 +897,11 @@ module Aws::ChimeSDKMeetings
     #   The features available to a meeting, such as Amazon Voice Focus.
     #   @return [Types::MeetingFeaturesConfiguration]
     #
+    # @!attribute [rw] primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to
+    #   this meeting.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Meeting AWS API Documentation
     #
     class Meeting < Struct.new(
@@ -891,7 +910,8 @@ module Aws::ChimeSDKMeetings
       :external_meeting_id,
       :media_region,
       :media_placement,
-      :meeting_features)
+      :meeting_features,
+      :primary_meeting_id)
       SENSITIVE = [:meeting_host_id, :external_meeting_id]
       include Aws::Structure
     end

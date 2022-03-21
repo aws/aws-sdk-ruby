@@ -1467,7 +1467,7 @@ module Aws::QuickSight
     # Creates an Amazon QuickSight group.
     #
     # The permissions resource is
-    # `arn:aws:quicksight:us-east-1:<relevant-aws-account-id>:group/default/<group-name>
+    # `arn:aws:quicksight:<your-region>:<relevant-aws-account-id>:group/default/<group-name>
     # `.
     #
     # The response is a group object.
@@ -1484,7 +1484,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the group to be a part of.
     #
     # @return [Types::CreateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1533,7 +1533,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the user to be a part of.
     #
     # @return [Types::CreateGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2452,7 +2452,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to delete.
     #
     # @return [Types::DeleteGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2497,7 +2497,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to remove a user from.
     #
     # @return [Types::DeleteGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3751,7 +3751,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want described.
     #
     # @return [Types::DescribeGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3782,6 +3782,55 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def describe_group(params = {}, options = {})
       req = build_request(:describe_group, params)
+      req.send_request(options)
+    end
+
+    # Use the `DescribeGroupMembership` operation to determine if a user is
+    # a member of the specified group. If the user exists and is a member of
+    # the specified group, an associated `GroupMember` object is returned.
+    #
+    # @option params [required, String] :member_name
+    #   The user name of the user that you want to search for.
+    #
+    # @option params [required, String] :group_name
+    #   The name of the group that you want to search.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that includes the group you are searching within.
+    #
+    # @return [Types::DescribeGroupMembershipResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeGroupMembershipResponse#group_member #group_member} => Types::GroupMember
+    #   * {Types::DescribeGroupMembershipResponse#request_id #request_id} => String
+    #   * {Types::DescribeGroupMembershipResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_group_membership({
+    #     member_name: "GroupMemberName", # required
+    #     group_name: "GroupName", # required
+    #     aws_account_id: "AwsAccountId", # required
+    #     namespace: "Namespace", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_member.arn #=> String
+    #   resp.group_member.member_name #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupMembership AWS API Documentation
+    #
+    # @overload describe_group_membership(params = {})
+    # @param [Hash] params ({})
+    def describe_group_membership(params = {}, options = {})
+      req = build_request(:describe_group_membership, params)
       req.send_request(options)
     end
 
@@ -5283,7 +5332,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want a list of users from.
     #
     # @return [Types::ListGroupMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5334,7 +5383,7 @@ module Aws::QuickSight
     #   The maximum number of results to return.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want a list of groups from.
     #
     # @return [Types::ListGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6166,7 +6215,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM policies.
     #   Therefore, they override the permissions typically granted by
@@ -6486,6 +6535,70 @@ module Aws::QuickSight
     # @param [Hash] params ({})
     def search_folders(params = {}, options = {})
       req = build_request(:search_folders, params)
+      req.send_request(options)
+    end
+
+    # Use the `SearchGroups` operation to search groups in a specified
+    # Amazon QuickSight namespace using the supplied filters.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #
+    # @option params [String] :next_token
+    #   A pagination token that can be used in a subsequent request.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return from this request.
+    #
+    # @option params [required, String] :namespace
+    #   The namespace that you want to search.
+    #
+    # @option params [required, Array<Types::GroupSearchFilter>] :filters
+    #   The structure for the search filters that you want to apply to your
+    #   search.
+    #
+    # @return [Types::SearchGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchGroupsResponse#group_list #group_list} => Array&lt;Types::Group&gt;
+    #   * {Types::SearchGroupsResponse#next_token #next_token} => String
+    #   * {Types::SearchGroupsResponse#request_id #request_id} => String
+    #   * {Types::SearchGroupsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_groups({
+    #     aws_account_id: "AwsAccountId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #     namespace: "Namespace", # required
+    #     filters: [ # required
+    #       {
+    #         operator: "StartsWith", # required, accepts StartsWith
+    #         name: "GROUP_NAME", # required, accepts GROUP_NAME
+    #         value: "String", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_list #=> Array
+    #   resp.group_list[0].arn #=> String
+    #   resp.group_list[0].group_name #=> String
+    #   resp.group_list[0].description #=> String
+    #   resp.group_list[0].principal_id #=> String
+    #   resp.next_token #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchGroups AWS API Documentation
+    #
+    # @overload search_groups(params = {})
+    # @param [Hash] params ({})
+    def search_groups(params = {}, options = {})
+      req = build_request(:search_groups, params)
       req.send_request(options)
     end
 
@@ -7887,7 +8000,7 @@ module Aws::QuickSight
     #   contains your Amazon QuickSight account.
     #
     # @option params [required, String] :namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to update.
     #
     # @return [Types::UpdateGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8544,7 +8657,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM policies.
     #   Therefore, they override the permissions typically granted by
@@ -8649,7 +8762,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

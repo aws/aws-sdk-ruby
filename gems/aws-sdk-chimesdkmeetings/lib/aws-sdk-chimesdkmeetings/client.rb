@@ -487,6 +487,10 @@ module Aws::ChimeSDKMeetings
     #   Lists the audio and video features enabled for a meeting, such as echo
     #   reduction.
     #
+    # @option params [String] :primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #
     # @return [Types::CreateMeetingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingResponse#meeting #meeting} => Types::Meeting
@@ -508,6 +512,7 @@ module Aws::ChimeSDKMeetings
     #         echo_reduction: "AVAILABLE", # accepts AVAILABLE, UNAVAILABLE
     #       },
     #     },
+    #     primary_meeting_id: "PrimaryMeetingId",
     #   })
     #
     # @example Response structure
@@ -525,6 +530,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.primary_meeting_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateMeeting AWS API Documentation
     #
@@ -582,6 +588,10 @@ module Aws::ChimeSDKMeetings
     # @option params [required, Array<Types::CreateAttendeeRequestItem>] :attendees
     #   The attendee information, including attendees' IDs and join tokens.
     #
+    # @option params [String] :primary_meeting_id
+    #   When specified, replicates the media from the primary meeting to the
+    #   new meeting.
+    #
     # @return [Types::CreateMeetingWithAttendeesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateMeetingWithAttendeesResponse#meeting #meeting} => Types::Meeting
@@ -610,6 +620,7 @@ module Aws::ChimeSDKMeetings
     #         external_user_id: "ExternalUserId", # required
     #       },
     #     ],
+    #     primary_meeting_id: "PrimaryMeetingId",
     #   })
     #
     # @example Response structure
@@ -627,6 +638,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.primary_meeting_id #=> String
     #   resp.attendees #=> Array
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
@@ -785,6 +797,7 @@ module Aws::ChimeSDKMeetings
     #   resp.meeting.media_placement.screen_sharing_url #=> String
     #   resp.meeting.media_placement.event_ingestion_url #=> String
     #   resp.meeting.meeting_features.audio.echo_reduction #=> String, one of "AVAILABLE", "UNAVAILABLE"
+    #   resp.meeting.primary_meeting_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/GetMeeting AWS API Documentation
     #
@@ -932,7 +945,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.8.0'
+      context[:gem_version] = '1.9.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

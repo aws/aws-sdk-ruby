@@ -1344,10 +1344,11 @@ module Aws::RAM
     #   Specifies that you want to retrieve details of only those resource
     #   shares that match the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – resource shares that your account
+    #     shares with other accounts
     #
-    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
-    #     share with you
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resource shares that other
+    #     accounts share with your account
     #
     # @option params [String] :name
     #   Specifies the name of an individual resource share that you want to
@@ -1664,10 +1665,11 @@ module Aws::RAM
     #   Specifies that you want to list information for only resource shares
     #   that match the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – principals that your account is sharing
+    #     resources with
     #
-    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
-    #     share with you
+    #   * <b> <code>OTHER-ACCOUNTS</code> </b> – principals that are sharing
+    #     resources with your account
     #
     # @option params [String] :resource_arn
     #   Specifies that you want to list principal information for the resource
@@ -1916,17 +1918,18 @@ module Aws::RAM
       req.send_request(options)
     end
 
-    # Lists the resources that you added to a resource shares or the
+    # Lists the resources that you added to a resource share or the
     # resources that are shared with you.
     #
     # @option params [required, String] :resource_owner
     #   Specifies that you want to list only the resource shares that match
     #   the following:
     #
-    #   * <b> <code>SELF</code> </b> – resources that you are sharing
+    #   * <b> <code>SELF</code> </b> – resources that your account shares with
+    #     other accounts
     #
     #   * <b> <code>OTHER-ACCOUNTS</code> </b> – resources that other accounts
-    #     share with you
+    #     share with your account
     #
     # @option params [String] :principal
     #   Specifies that you want to list only the resource shares that are
@@ -2299,7 +2302,7 @@ module Aws::RAM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

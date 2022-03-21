@@ -224,6 +224,8 @@ module Aws::QuickSight
     DescribeFolderResolvedPermissionsRequest = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsRequest')
     DescribeFolderResolvedPermissionsResponse = Shapes::StructureShape.new(name: 'DescribeFolderResolvedPermissionsResponse')
     DescribeFolderResponse = Shapes::StructureShape.new(name: 'DescribeFolderResponse')
+    DescribeGroupMembershipRequest = Shapes::StructureShape.new(name: 'DescribeGroupMembershipRequest')
+    DescribeGroupMembershipResponse = Shapes::StructureShape.new(name: 'DescribeGroupMembershipResponse')
     DescribeGroupRequest = Shapes::StructureShape.new(name: 'DescribeGroupRequest')
     DescribeGroupResponse = Shapes::StructureShape.new(name: 'DescribeGroupResponse')
     DescribeIAMPolicyAssignmentRequest = Shapes::StructureShape.new(name: 'DescribeIAMPolicyAssignmentRequest')
@@ -293,11 +295,15 @@ module Aws::QuickSight
     GetSessionEmbedUrlResponse = Shapes::StructureShape.new(name: 'GetSessionEmbedUrlResponse')
     Group = Shapes::StructureShape.new(name: 'Group')
     GroupDescription = Shapes::StringShape.new(name: 'GroupDescription')
+    GroupFilterAttribute = Shapes::StringShape.new(name: 'GroupFilterAttribute')
+    GroupFilterOperator = Shapes::StringShape.new(name: 'GroupFilterOperator')
     GroupList = Shapes::ListShape.new(name: 'GroupList')
     GroupMember = Shapes::StructureShape.new(name: 'GroupMember')
     GroupMemberList = Shapes::ListShape.new(name: 'GroupMemberList')
     GroupMemberName = Shapes::StringShape.new(name: 'GroupMemberName')
     GroupName = Shapes::StringShape.new(name: 'GroupName')
+    GroupSearchFilter = Shapes::StructureShape.new(name: 'GroupSearchFilter')
+    GroupSearchFilterList = Shapes::ListShape.new(name: 'GroupSearchFilterList')
     GutterStyle = Shapes::StructureShape.new(name: 'GutterStyle')
     HexColor = Shapes::StringShape.new(name: 'HexColor')
     Host = Shapes::StringShape.new(name: 'Host')
@@ -471,6 +477,8 @@ module Aws::QuickSight
     SearchDashboardsResponse = Shapes::StructureShape.new(name: 'SearchDashboardsResponse')
     SearchFoldersRequest = Shapes::StructureShape.new(name: 'SearchFoldersRequest')
     SearchFoldersResponse = Shapes::StructureShape.new(name: 'SearchFoldersResponse')
+    SearchGroupsRequest = Shapes::StructureShape.new(name: 'SearchGroupsRequest')
+    SearchGroupsResponse = Shapes::StructureShape.new(name: 'SearchGroupsResponse')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -1541,6 +1549,17 @@ module Aws::QuickSight
     DescribeFolderResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeFolderResponse.struct_class = Types::DescribeFolderResponse
 
+    DescribeGroupMembershipRequest.add_member(:member_name, Shapes::ShapeRef.new(shape: GroupMemberName, required: true, location: "uri", location_name: "MemberName"))
+    DescribeGroupMembershipRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
+    DescribeGroupMembershipRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeGroupMembershipRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    DescribeGroupMembershipRequest.struct_class = Types::DescribeGroupMembershipRequest
+
+    DescribeGroupMembershipResponse.add_member(:group_member, Shapes::ShapeRef.new(shape: GroupMember, location_name: "GroupMember"))
+    DescribeGroupMembershipResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeGroupMembershipResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeGroupMembershipResponse.struct_class = Types::DescribeGroupMembershipResponse
+
     DescribeGroupRequest.add_member(:group_name, Shapes::ShapeRef.new(shape: GroupName, required: true, location: "uri", location_name: "GroupName"))
     DescribeGroupRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
     DescribeGroupRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
@@ -1795,6 +1814,13 @@ module Aws::QuickSight
     GroupMember.struct_class = Types::GroupMember
 
     GroupMemberList.member = Shapes::ShapeRef.new(shape: GroupMember)
+
+    GroupSearchFilter.add_member(:operator, Shapes::ShapeRef.new(shape: GroupFilterOperator, required: true, location_name: "Operator"))
+    GroupSearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: GroupFilterAttribute, required: true, location_name: "Name"))
+    GroupSearchFilter.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    GroupSearchFilter.struct_class = Types::GroupSearchFilter
+
+    GroupSearchFilterList.member = Shapes::ShapeRef.new(shape: GroupSearchFilter)
 
     GutterStyle.add_member(:show, Shapes::ShapeRef.new(shape: boolean, location_name: "Show", metadata: {"box"=>true}))
     GutterStyle.struct_class = Types::GutterStyle
@@ -2403,6 +2429,19 @@ module Aws::QuickSight
     SearchFoldersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     SearchFoldersResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     SearchFoldersResponse.struct_class = Types::SearchFoldersResponse
+
+    SearchGroupsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    SearchGroupsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "next-token"))
+    SearchGroupsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results", metadata: {"box"=>true}))
+    SearchGroupsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location: "uri", location_name: "Namespace"))
+    SearchGroupsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: GroupSearchFilterList, required: true, location_name: "Filters"))
+    SearchGroupsRequest.struct_class = Types::SearchGroupsRequest
+
+    SearchGroupsResponse.add_member(:group_list, Shapes::ShapeRef.new(shape: GroupList, location_name: "GroupList"))
+    SearchGroupsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    SearchGroupsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    SearchGroupsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    SearchGroupsResponse.struct_class = Types::SearchGroupsResponse
 
     ServiceNowParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     ServiceNowParameters.struct_class = Types::ServiceNowParameters
@@ -3733,6 +3772,21 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
+      api.add_operation(:describe_group_membership, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeGroupMembership"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups/{GroupName}/members/{MemberName}"
+        o.input = Shapes::ShapeRef.new(shape: DescribeGroupMembershipRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeGroupMembershipResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
+      end)
+
       api.add_operation(:describe_iam_policy_assignment, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIAMPolicyAssignment"
         o.http_method = "GET"
@@ -4430,6 +4484,22 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserEditionException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:search_groups, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchGroups"
+        o.http_method = "POST"
+        o.http_request_uri = "/accounts/{AwsAccountId}/namespaces/{Namespace}/groups-search"
+        o.input = Shapes::ShapeRef.new(shape: SearchGroupsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchGroupsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

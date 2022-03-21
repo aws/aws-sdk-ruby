@@ -3809,7 +3809,13 @@ module Aws::ECR
       include Aws::Structure
     end
 
-    # The details of a scanning repository filter.
+    # The details of a scanning repository filter. For more information on
+    # how to use filters, see [Using filters][1] in the *Amazon Elastic
+    # Container Registry User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html#image-scanning-filters
     #
     # @note When making an API call, you may pass ScanningRepositoryFilter
     #   data as a hash:

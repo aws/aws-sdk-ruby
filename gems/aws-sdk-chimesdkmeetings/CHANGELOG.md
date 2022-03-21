@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.9.0 (2022-03-21)
+------------------
+
+* Feature - Add support for media replication to link multiple WebRTC media sessions together to reach larger and global audiences. Participants connected to a replica session can be granted access to join the primary session and can switch sessions with their existing WebRTC connection
+
 1.8.0 (2022-03-07)
 ------------------
 

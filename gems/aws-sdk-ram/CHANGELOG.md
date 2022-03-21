@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-03-21)
+------------------
+
+* Feature - Document improvements to the RAM API operations and parameter descriptions.
+
 1.38.0 (2022-02-24)
 ------------------
 

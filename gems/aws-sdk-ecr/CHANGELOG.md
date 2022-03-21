@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-03-21)
+------------------
+
+* Feature - This release includes a fix in the DescribeImageScanFindings paginated output.
+
 1.55.0 (2022-03-02)
 ------------------
 

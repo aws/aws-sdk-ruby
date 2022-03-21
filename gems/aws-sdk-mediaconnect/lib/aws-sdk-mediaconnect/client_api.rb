@@ -22,6 +22,7 @@ module Aws::MediaConnect
     AddFlowSourcesResponse = Shapes::StructureShape.new(name: 'AddFlowSourcesResponse')
     AddFlowVpcInterfacesRequest = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesRequest')
     AddFlowVpcInterfacesResponse = Shapes::StructureShape.new(name: 'AddFlowVpcInterfacesResponse')
+    AddMaintenance = Shapes::StructureShape.new(name: 'AddMaintenance')
     AddMediaStreamRequest = Shapes::StructureShape.new(name: 'AddMediaStreamRequest')
     AddOutputRequest = Shapes::StructureShape.new(name: 'AddOutputRequest')
     Algorithm = Shapes::StringShape.new(name: 'Algorithm')
@@ -76,6 +77,8 @@ module Aws::MediaConnect
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListedEntitlement = Shapes::StructureShape.new(name: 'ListedEntitlement')
     ListedFlow = Shapes::StructureShape.new(name: 'ListedFlow')
+    Maintenance = Shapes::StructureShape.new(name: 'Maintenance')
+    MaintenanceDay = Shapes::StringShape.new(name: 'MaintenanceDay')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaStream = Shapes::StructureShape.new(name: 'MediaStream')
     MediaStreamAttributes = Shapes::StructureShape.new(name: 'MediaStreamAttributes')
@@ -139,6 +142,7 @@ module Aws::MediaConnect
     UpdateFlowResponse = Shapes::StructureShape.new(name: 'UpdateFlowResponse')
     UpdateFlowSourceRequest = Shapes::StructureShape.new(name: 'UpdateFlowSourceRequest')
     UpdateFlowSourceResponse = Shapes::StructureShape.new(name: 'UpdateFlowSourceResponse')
+    UpdateMaintenance = Shapes::StructureShape.new(name: 'UpdateMaintenance')
     VpcInterface = Shapes::StructureShape.new(name: 'VpcInterface')
     VpcInterfaceAttachment = Shapes::StructureShape.new(name: 'VpcInterfaceAttachment')
     VpcInterfaceRequest = Shapes::StructureShape.new(name: 'VpcInterfaceRequest')
@@ -210,6 +214,10 @@ module Aws::MediaConnect
     AddFlowVpcInterfacesResponse.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
     AddFlowVpcInterfacesResponse.struct_class = Types::AddFlowVpcInterfacesResponse
 
+    AddMaintenance.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, required: true, location_name: "maintenanceDay"))
+    AddMaintenance.add_member(:maintenance_start_hour, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "maintenanceStartHour"))
+    AddMaintenance.struct_class = Types::AddMaintenance
+
     AddMediaStreamRequest.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributesRequest, location_name: "attributes"))
     AddMediaStreamRequest.add_member(:clock_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "clockRate"))
     AddMediaStreamRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "description"))
@@ -251,6 +259,7 @@ module Aws::MediaConnect
     CreateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, location_name: "sourceFailoverConfig"))
     CreateFlowRequest.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSetSourceRequest, location_name: "sources"))
     CreateFlowRequest.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterfaceRequest, location_name: "vpcInterfaces"))
+    CreateFlowRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: AddMaintenance, location_name: "maintenance"))
     CreateFlowRequest.struct_class = Types::CreateFlowRequest
 
     CreateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -340,6 +349,7 @@ module Aws::MediaConnect
     Flow.add_member(:sources, Shapes::ShapeRef.new(shape: __listOfSource, location_name: "sources"))
     Flow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     Flow.add_member(:vpc_interfaces, Shapes::ShapeRef.new(shape: __listOfVpcInterface, location_name: "vpcInterfaces"))
+    Flow.add_member(:maintenance, Shapes::ShapeRef.new(shape: Maintenance, location_name: "maintenance"))
     Flow.struct_class = Types::Flow
 
     Fmtp.add_member(:channel_order, Shapes::ShapeRef.new(shape: __string, location_name: "channelOrder"))
@@ -449,7 +459,14 @@ module Aws::MediaConnect
     ListedFlow.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     ListedFlow.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "sourceType"))
     ListedFlow.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    ListedFlow.add_member(:maintenance, Shapes::ShapeRef.new(shape: Maintenance, location_name: "maintenance"))
     ListedFlow.struct_class = Types::ListedFlow
+
+    Maintenance.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
+    Maintenance.add_member(:maintenance_deadline, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceDeadline"))
+    Maintenance.add_member(:maintenance_scheduled_date, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceScheduledDate"))
+    Maintenance.add_member(:maintenance_start_hour, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceStartHour"))
+    Maintenance.struct_class = Types::Maintenance
 
     MediaStream.add_member(:attributes, Shapes::ShapeRef.new(shape: MediaStreamAttributes, location_name: "attributes"))
     MediaStream.add_member(:clock_rate, Shapes::ShapeRef.new(shape: __integer, location_name: "clockRate"))
@@ -738,6 +755,7 @@ module Aws::MediaConnect
 
     UpdateFlowRequest.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "flowArn"))
     UpdateFlowRequest.add_member(:source_failover_config, Shapes::ShapeRef.new(shape: UpdateFailoverConfig, location_name: "sourceFailoverConfig"))
+    UpdateFlowRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: UpdateMaintenance, location_name: "maintenance"))
     UpdateFlowRequest.struct_class = Types::UpdateFlowRequest
 
     UpdateFlowResponse.add_member(:flow, Shapes::ShapeRef.new(shape: Flow, location_name: "flow"))
@@ -765,6 +783,11 @@ module Aws::MediaConnect
     UpdateFlowSourceResponse.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     UpdateFlowSourceResponse.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     UpdateFlowSourceResponse.struct_class = Types::UpdateFlowSourceResponse
+
+    UpdateMaintenance.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
+    UpdateMaintenance.add_member(:maintenance_scheduled_date, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceScheduledDate"))
+    UpdateMaintenance.add_member(:maintenance_start_hour, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceStartHour"))
+    UpdateMaintenance.struct_class = Types::UpdateMaintenance
 
     VpcInterface.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "name"))
     VpcInterface.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: __listOf__string, required: true, location_name: "networkInterfaceIds"))

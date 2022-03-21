@@ -2211,7 +2211,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the user to be a part of.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupMembershipRequest AWS API Documentation
@@ -2274,7 +2274,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want the group to be a part of.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CreateGroupRequest AWS API Documentation
@@ -4768,7 +4768,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to remove a user from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteGroupMembershipRequest AWS API Documentation
@@ -4819,7 +4819,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DeleteGroupRequest AWS API Documentation
@@ -6049,6 +6049,68 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribeGroupMembershipRequest
+    #   data as a hash:
+    #
+    #       {
+    #         member_name: "GroupMemberName", # required
+    #         group_name: "GroupName", # required
+    #         aws_account_id: "AwsAccountId", # required
+    #         namespace: "Namespace", # required
+    #       }
+    #
+    # @!attribute [rw] member_name
+    #   The user name of the user that you want to search for.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_name
+    #   The name of the group that you want to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that includes the group you are searching within.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupMembershipRequest AWS API Documentation
+    #
+    class DescribeGroupMembershipRequest < Struct.new(
+      :member_name,
+      :group_name,
+      :aws_account_id,
+      :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_member
+    #   A member of an Amazon QuickSight group. Currently, group members
+    #   must be users. Groups can't be members of another group. .
+    #   @return [Types::GroupMember]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupMembershipResponse AWS API Documentation
+    #
+    class DescribeGroupMembershipResponse < Struct.new(
+      :group_member,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeGroupRequest
     #   data as a hash:
     #
@@ -6069,7 +6131,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want described.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeGroupRequest AWS API Documentation
@@ -7493,6 +7555,44 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A `GroupSearchFilter` object that you want to apply to your search.
+    #
+    # @note When making an API call, you may pass GroupSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         operator: "StartsWith", # required, accepts StartsWith
+    #         name: "GROUP_NAME", # required, accepts GROUP_NAME
+    #         value: "String", # required
+    #       }
+    #
+    # @!attribute [rw] operator
+    #   The comparison operator that you want to use as a filter, for
+    #   example `"Operator": "StartsWith"`. Currently, the only supported
+    #   operator is `StartsWith`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the value that you want to use as a filter, for example
+    #   `"Name": "GROUP_NAME"`. Currently, the only supported name is
+    #   `GROUP_NAME`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the named item, in this case `GROUP_NAME`, that you
+    #   want to use as a filter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GroupSearchFilter AWS API Documentation
+    #
+    class GroupSearchFilter < Struct.new(
+      :operator,
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The display options for gutter spacing between tiles on a sheet.
     #
     # @note When making an API call, you may pass GutterStyle
@@ -8371,7 +8471,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want a list of users from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupMembershipsRequest AWS API Documentation
@@ -8438,7 +8538,7 @@ module Aws::QuickSight
     #   @return [Integer]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace that you want a list of groups from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ListGroupsRequest AWS API Documentation
@@ -10187,7 +10287,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM
     #   policies. Therefore, they override the permissions typically granted
@@ -11161,6 +11261,86 @@ module Aws::QuickSight
       :folder_summary_list,
       :next_token,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchGroupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         next_token: "String",
+    #         max_results: 1,
+    #         namespace: "Namespace", # required
+    #         filters: [ # required
+    #           {
+    #             operator: "StartsWith", # required, accepts StartsWith
+    #             name: "GROUP_NAME", # required, accepts GROUP_NAME
+    #             value: "String", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The ID for the Amazon Web Services account that the group is in.
+    #   Currently, you use the ID for the Amazon Web Services account that
+    #   contains your Amazon QuickSight account.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return from this request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace that you want to search.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The structure for the search filters that you want to apply to your
+    #   search.
+    #   @return [Array<Types::GroupSearchFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchGroupsRequest AWS API Documentation
+    #
+    class SearchGroupsRequest < Struct.new(
+      :aws_account_id,
+      :next_token,
+      :max_results,
+      :namespace,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_list
+    #   A list of groups in a specified namespace that match the filters you
+    #   set in your `SearchGroups` request.
+    #   @return [Array<Types::Group>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in a subsequent request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SearchGroupsResponse AWS API Documentation
+    #
+    class SearchGroupsResponse < Struct.new(
+      :group_list,
+      :next_token,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14235,7 +14415,7 @@ module Aws::QuickSight
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace. Currently, you should set this to `default`.
+    #   The namespace of the group that you want to update.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateGroupRequest AWS API Documentation
@@ -15039,7 +15219,7 @@ module Aws::QuickSight
     #   restrictions. Currently, you need to create the profile names for
     #   custom permission sets by using the Amazon QuickSight console. Then,
     #   you use the `RegisterUser` API operation to assign the named set of
-    #   permissions to a QuickSight user.
+    #   permissions to a Amazon QuickSight user.
     #
     #   Amazon QuickSight custom permissions are applied through IAM
     #   policies. Therefore, they override the permissions typically granted

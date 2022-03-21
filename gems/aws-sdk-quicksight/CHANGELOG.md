@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-03-21)
+------------------
+
+* Feature - AWS QuickSight Service Features - Expand public API support for group management.
+
 1.63.0 (2022-02-24)
 ------------------
 
