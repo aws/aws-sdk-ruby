@@ -930,16 +930,55 @@ module Aws::CostExplorer
     #           },
     #           dimensional_value_count: 1,
     #         },
+    #         resource_tags: [
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] anomaly_monitor
     #   The cost anomaly detection monitor object that you want to create.
     #   @return [Types::AnomalyMonitor]
     #
+    # @!attribute [rw] resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `AnomalyMonitor` ][1]. You can use resource tags to control access
+    #   to your monitor using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can
+    #     assign a maximum of 50 user-tags to one resource. The remaining
+    #     are reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing
+    #     whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is
+    #     reserved for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalyMonitorRequest AWS API Documentation
     #
     class CreateAnomalyMonitorRequest < Struct.new(
-      :anomaly_monitor)
+      :anomaly_monitor,
+      :resource_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -976,16 +1015,55 @@ module Aws::CostExplorer
     #           frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
     #           subscription_name: "GenericString", # required
     #         },
+    #         resource_tags: [
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] anomaly_subscription
     #   The cost anomaly subscription object that you want to create.
     #   @return [Types::AnomalySubscription]
     #
+    # @!attribute [rw] resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `AnomalySubscription` ][1]. You can use resource tags to control
+    #   access to your `subscription` using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can
+    #     assign a maximum of 50 user-tags to one resource. The remaining
+    #     are reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing
+    #     whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is
+    #     reserved for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateAnomalySubscriptionRequest AWS API Documentation
     #
     class CreateAnomalySubscriptionRequest < Struct.new(
-      :anomaly_subscription)
+      :anomaly_subscription,
+      :resource_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1063,6 +1141,12 @@ module Aws::CostExplorer
     #             ],
     #           },
     #         ],
+    #         resource_tags: [
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue", # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -1091,6 +1175,38 @@ module Aws::CostExplorer
     #   Cost Category values.
     #   @return [Array<Types::CostCategorySplitChargeRule>]
     #
+    # @!attribute [rw] resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `CostCategory` ][1]. You can use resource tags to control access to
+    #   your `cost category` using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can
+    #     assign a maximum of 50 user-tags to one resource. The remaining
+    #     are reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing
+    #     whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is
+    #     reserved for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html
+    #   @return [Array<Types::ResourceTag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/CreateCostCategoryDefinitionRequest AWS API Documentation
     #
     class CreateCostCategoryDefinitionRequest < Struct.new(
@@ -1098,7 +1214,8 @@ module Aws::CostExplorer
       :rule_version,
       :rules,
       :default_value,
-      :split_charge_rules)
+      :split_charge_rules,
+      :resource_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2230,12 +2347,12 @@ module Aws::CostExplorer
     #   service. You can nest `Expression` objects to define any combination
     #   of dimension filters. For more information, see [Expression][1].
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
-    #
-    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values
-    #   for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are
+    #   `EQUALS` and `CASE_SENSITIVE`.
     #
     #
     #
@@ -2410,12 +2527,12 @@ module Aws::CostExplorer
     #   [Expression][1] `"SERVICE = Amazon Elastic Compute Cloud - Compute"`
     #   in the filter.
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
-    #
-    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values
-    #   for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
     #   `CASE_SENSITIVE`.
+    #
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are
+    #   `EQUALS` and `CASE_SENSITIVE`.
     #
     #
     #
@@ -5302,6 +5419,42 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_tags
+    #   A list of tag key value pairs that are associated with the response.
+    #   @return [Array<Types::ResourceTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The aggregated value for a metric.
     #
     # @!attribute [rw] amount
@@ -5919,10 +6072,53 @@ module Aws::CostExplorer
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceNotFoundException AWS API Documentation
     #
     class ResourceNotFoundException < Struct.new(
-      :message)
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The tag structure that contains a tag key and value.
+    #
+    # <note markdown="1"> Tagging is supported only for the following Cost Explorer resource
+    # types: [ `AnomalyMonitor` ][1], [ `AnomalySubscription` ][2], [
+    # `CostCategory` ][3].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html
+    # [2]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
+    # [3]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html
+    #
+    # @note When making an API call, you may pass ResourceTag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The key that is associated with the tag.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value that is associated with the tag.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ResourceTag AWS API Documentation
+    #
+    class ResourceTag < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6776,6 +6972,67 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         resource_tags: [ # required
+    #           {
+    #             key: "ResourceTagKey", # required
+    #             value: "ResourceTagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_tags
+    #   A list of tag key-value pairs to be added to the resource.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can
+    #     assign a maximum of 50 user-tags to one resource. The remaining
+    #     are reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing
+    #     whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is
+    #     reserved for Amazon Web Services use
+    #   @return [Array<Types::ResourceTag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :resource_tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The values that are available for a tag.
     #
     # If `Values` and `Key` aren't specified, the `ABSENT` `MatchOption` is
@@ -6890,6 +7147,24 @@ module Aws::CostExplorer
       include Aws::Structure
     end
 
+    # Can occur if you specify a number of tags for a resource greater than
+    # the maximum 50 user tags per resource.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message,
+      :resource_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Filters cost anomalies based on the total impact.
     #
     # @note When making an API call, you may pass TotalImpactFilter
@@ -6963,6 +7238,44 @@ module Aws::CostExplorer
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #         resource_tag_keys: ["ResourceTagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_tag_keys
+    #   A list of tag keys associated with tags that need to be removed from
+    #   the resource. If you specify a tag key that does not exist, it is
+    #   ignored. Although the maximum number of array members is 200,
+    #   user-tag maximum is 50. The remaining are reserved for Amazon Web
+    #   Services use.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :resource_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateAnomalyMonitorRequest
     #   data as a hash:

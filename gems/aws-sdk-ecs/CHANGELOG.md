@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2022-03-22)
+------------------
+
+* Feature - Documentation only update to address tickets
+
 1.98.0 (2022-03-15)
 ------------------
 

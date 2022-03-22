@@ -2243,6 +2243,12 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #
+    # @option params [Integer] :max_results
+    #   An optional limit for the number of device positions returned in a
+    #   single call.
+    #
+    #   Default value: `100`
+    #
     # @option params [String] :next_token
     #   The pagination token specifying which page of results to return in the
     #   response. If no token is provided, the default page is the first page.
@@ -2281,6 +2287,7 @@ module Aws::LocationService
     #   resp = client.get_device_position_history({
     #     device_id: "Id", # required
     #     end_time_exclusive: Time.now,
+    #     max_results: 1,
     #     next_token: "Token",
     #     start_time_inclusive: Time.now,
     #     tracker_name: "ResourceName", # required
@@ -3752,7 +3759,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

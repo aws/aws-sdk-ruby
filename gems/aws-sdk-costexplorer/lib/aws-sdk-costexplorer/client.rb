@@ -367,6 +367,36 @@ module Aws::CostExplorer
     # @option params [required, Types::AnomalyMonitor] :anomaly_monitor
     #   The cost anomaly detection monitor object that you want to create.
     #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `AnomalyMonitor` ][1]. You can use resource tags to control access to
+    #   your monitor using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can assign
+    #     a maximum of 50 user-tags to one resource. The remaining are
+    #     reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is reserved
+    #     for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalyMonitor.html
+    #
     # @return [Types::CreateAnomalyMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnomalyMonitorResponse#monitor_arn #monitor_arn} => String
@@ -414,6 +444,12 @@ module Aws::CostExplorer
     #       },
     #       dimensional_value_count: 1,
     #     },
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -437,6 +473,36 @@ module Aws::CostExplorer
     # @option params [required, Types::AnomalySubscription] :anomaly_subscription
     #   The cost anomaly subscription object that you want to create.
     #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `AnomalySubscription` ][1]. You can use resource tags to control
+    #   access to your `subscription` using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can assign
+    #     a maximum of 50 user-tags to one resource. The remaining are
+    #     reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is reserved
+    #     for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html
+    #
     # @return [Types::CreateAnomalySubscriptionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAnomalySubscriptionResponse#subscription_arn #subscription_arn} => String
@@ -459,6 +525,12 @@ module Aws::CostExplorer
     #       frequency: "DAILY", # required, accepts DAILY, IMMEDIATE, WEEKLY
     #       subscription_name: "GenericString", # required
     #     },
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -496,6 +568,36 @@ module Aws::CostExplorer
     # @option params [Array<Types::CostCategorySplitChargeRule>] :split_charge_rules
     #   The split charge rules used to allocate your charges between your Cost
     #   Category values.
+    #
+    # @option params [Array<Types::ResourceTag>] :resource_tags
+    #   An optional list of tags to associate with the specified [
+    #   `CostCategory` ][1]. You can use resource tags to control access to
+    #   your `cost category` using IAM policies.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can assign
+    #     a maximum of 50 user-tags to one resource. The remaining are
+    #     reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is reserved
+    #     for Amazon Web Services use
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategory.html
     #
     # @return [Types::CreateCostCategoryDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -559,6 +661,12 @@ module Aws::CostExplorer
     #             values: ["GenericString"], # required
     #           },
     #         ],
+    #       },
+    #     ],
+    #     resource_tags: [
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
     #       },
     #     ],
     #   })
@@ -978,11 +1086,12 @@ module Aws::CostExplorer
     #   You can nest `Expression` objects to define any combination of
     #   dimension filters. For more information, see [Expression][1].
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   `CASE_SENSITIVE`.
     #
-    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values for
-    #   `MatchOptions` for `Dimensions` are `EQUALS` and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are `EQUALS`
+    #   and `CASE_SENSITIVE`.
     #
     #
     #
@@ -1166,11 +1275,12 @@ module Aws::CostExplorer
     #   group by or filter by a `ResourceId`. It requires the [Expression][1]
     #   `"SERVICE = Amazon Elastic Compute Cloud - Compute"` in the filter.
     #
-    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
-    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `Dimensions` are `EQUALS` and
+    #   `CASE_SENSITIVE`.
     #
-    #   The default values are `EQUALS` and `CASE_SENSITIVE`. Valid values for
-    #   `MatchOptions` for `Dimensions` are `EQUALS` and `CASE_SENSITIVE`.
+    #   Valid values for `MatchOptions` for `CostCategories` and `Tags` are
+    #   `EQUALS`, `ABSENT`, and `CASE_SENSITIVE`. Default values are `EQUALS`
+    #   and `CASE_SENSITIVE`.
     #
     #
     #
@@ -4003,6 +4113,42 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # Returns a list of resource tags associated with the resource specified
+    # by the Amazon Resource Name (ARN).
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #
+    # @return [Types::ListTagsForResourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceResponse#resource_tags #resource_tags} => Array&lt;Types::ResourceTag&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.resource_tags #=> Array
+    #   resp.resource_tags[0].key #=> String
+    #   resp.resource_tags[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Modifies the feedback property of a given cost anomaly.
     #
     # @option params [required, String] :anomaly_id
@@ -4036,8 +4182,110 @@ module Aws::CostExplorer
       req.send_request(options)
     end
 
+    # An API operation for adding one or more tags (key-value pairs) to a
+    # resource.
+    #
+    # You can use the `TagResource` operation with a resource that already
+    # has tags. If you specify a new tag key for the resource, this tag is
+    # appended to the list of tags associated with the resource. If you
+    # specify a tag key that is already associated with the resource, the
+    # new tag value you specify replaces the previous value for that tag.
+    #
+    # Although the maximum number of array members is 200, user-tag maximum
+    # is 50. The remaining are reserved for Amazon Web Services use.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #
+    # @option params [required, Array<Types::ResourceTag>] :resource_tags
+    #   A list of tag key-value pairs to be added to the resource.
+    #
+    #   Each tag consists of a key and a value, and each key must be unique
+    #   for the resource. The following restrictions apply to resource tags:
+    #
+    #   * Although the maximum number of array members is 200, you can assign
+    #     a maximum of 50 user-tags to one resource. The remaining are
+    #     reserved for Amazon Web Services use
+    #
+    #   * The maximum length of a key is 128 characters
+    #
+    #   * The maximum length of a value is 256 characters
+    #
+    #   * Valid characters for keys and values are: `A-Z`, `a-z`, spaces,
+    #     `_.:/=+-`
+    #
+    #   * Keys and values are case sensitive
+    #
+    #   * Keys and values are trimmed for any leading or trailing whitespaces
+    #
+    #   * Don’t use `aws:` as a prefix for your keys. This prefix is reserved
+    #     for Amazon Web Services use
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "Arn", # required
+    #     resource_tags: [ # required
+    #       {
+    #         key: "ResourceTagKey", # required
+    #         value: "ResourceTagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Removes one or more tags from a resource. Specify only tag key(s) in
+    # your request. Do not specify the value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource. For a list of
+    #   supported resources, see [ResourceTag][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_ResourceTag.html
+    #
+    # @option params [required, Array<String>] :resource_tag_keys
+    #   A list of tag keys associated with tags that need to be removed from
+    #   the resource. If you specify a tag key that does not exist, it is
+    #   ignored. Although the maximum number of array members is 200, user-tag
+    #   maximum is 50. The remaining are reserved for Amazon Web Services use.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "Arn", # required
+    #     resource_tag_keys: ["ResourceTagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ce-2017-10-25/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # Updates an existing cost anomaly monitor. The changes made are applied
-    # going forward, and doesn'tt change anomalies detected in the past.
+    # going forward, and doesn't change anomalies detected in the past.
     #
     # @option params [required, String] :monitor_arn
     #   Cost anomaly monitor Amazon Resource Names (ARNs).
@@ -4243,7 +4491,7 @@ module Aws::CostExplorer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-costexplorer'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-22)
+------------------
+
+* Feature - The release fixes the incorrect permissions called out in the documentation - DESCRIBE_TAG, ASSOCIATE_TAG, DELETE_TAG, ALTER_TAG. This trebuchet release fixes the corresponding SDK and documentation.
+
 1.25.0 (2022-02-24)
 ------------------
 

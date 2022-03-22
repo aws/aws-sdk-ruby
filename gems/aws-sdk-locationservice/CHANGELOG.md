@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2022-03-22)
+------------------
+
+* Feature - Amazon Location Service now includes a MaxResults parameter for GetDevicePositionHistory requests.
+
 1.20.0 (2022-03-15)
 ------------------
 

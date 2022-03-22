@@ -2791,6 +2791,7 @@ module Aws::LocationService
     #       {
     #         device_id: "Id", # required
     #         end_time_exclusive: Time.now,
+    #         max_results: 1,
     #         next_token: "Token",
     #         start_time_inclusive: Time.now,
     #         tracker_name: "ResourceName", # required
@@ -2816,6 +2817,13 @@ module Aws::LocationService
     #
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   An optional limit for the number of device positions returned in a
+    #   single call.
+    #
+    #   Default value: `100`
+    #   @return [Integer]
     #
     # @!attribute [rw] next_token
     #   The pagination token specifying which page of results to return in
@@ -2852,6 +2860,7 @@ module Aws::LocationService
     class GetDevicePositionHistoryRequest < Struct.new(
       :device_id,
       :end_time_exclusive,
+      :max_results,
       :next_token,
       :start_time_inclusive,
       :tracker_name)

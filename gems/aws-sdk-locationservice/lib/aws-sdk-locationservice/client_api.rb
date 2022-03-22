@@ -118,6 +118,7 @@ module Aws::LocationService
     Double = Shapes::FloatShape.new(name: 'Double')
     GeofenceGeometry = Shapes::StructureShape.new(name: 'GeofenceGeometry')
     GetDevicePositionHistoryRequest = Shapes::StructureShape.new(name: 'GetDevicePositionHistoryRequest')
+    GetDevicePositionHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetDevicePositionHistoryRequestMaxResultsInteger')
     GetDevicePositionHistoryResponse = Shapes::StructureShape.new(name: 'GetDevicePositionHistoryResponse')
     GetDevicePositionRequest = Shapes::StructureShape.new(name: 'GetDevicePositionRequest')
     GetDevicePositionResponse = Shapes::StructureShape.new(name: 'GetDevicePositionResponse')
@@ -663,6 +664,7 @@ module Aws::LocationService
 
     GetDevicePositionHistoryRequest.add_member(:device_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "DeviceId"))
     GetDevicePositionHistoryRequest.add_member(:end_time_exclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimeExclusive"))
+    GetDevicePositionHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetDevicePositionHistoryRequestMaxResultsInteger, location_name: "MaxResults"))
     GetDevicePositionHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetDevicePositionHistoryRequest.add_member(:start_time_inclusive, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTimeInclusive"))
     GetDevicePositionHistoryRequest.add_member(:tracker_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "uri", location_name: "TrackerName"))
@@ -1594,6 +1596,7 @@ module Aws::LocationService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
           tokens: {
             "next_token" => "next_token"
           }

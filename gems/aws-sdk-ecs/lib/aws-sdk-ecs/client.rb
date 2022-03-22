@@ -8275,7 +8275,31 @@ module Aws::ECS
     #   configuration, and then stops the old tasks when the new tasks are
     #   running.
     #
+    #   For services that use rolling updates, you can add, update, or remove
+    #   Elastic Load Balancing target groups. You can update from a single
+    #   target group to multiple target groups and from multiple target groups
+    #   to a single target group.
+    #
+    #   For services that use blue/green deployments, you can update Elastic
+    #   Load Balancing target groups by using ` CreateDeployment ` through
+    #   CodeDeploy. Note that multiple target groups are not supported for
+    #   blue/green deployments. For more information see [Register multiple
+    #   target groups with a service][1] in the *Amazon Elastic Container
+    #   Service Developer Guide*.
+    #
+    #   For services that use the external deployment controller, you can add,
+    #   update, or remove load balancers by using [CreateTaskSet][2]. Note
+    #   that multiple target groups are not supported for external
+    #   deployments. For more information see [Register multiple target groups
+    #   with a service][1] in the *Amazon Elastic Container Service Developer
+    #   Guide*.
+    #
     #   You can remove existing `loadBalancers` by passing an empty list.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/register-multiple-targetgroups.html
+    #   [2]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateTaskSet.html
     #
     # @option params [String] :propagate_tags
     #   Determines whether to propagate the tags from the task definition or
@@ -8729,7 +8753,7 @@ module Aws::ECS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

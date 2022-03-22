@@ -159,6 +159,8 @@ module Aws::CostExplorer
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListCostCategoryDefinitionsRequest = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsRequest')
     ListCostCategoryDefinitionsResponse = Shapes::StructureShape.new(name: 'ListCostCategoryDefinitionsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LookbackPeriodInDays = Shapes::StringShape.new(name: 'LookbackPeriodInDays')
     MatchOption = Shapes::StringShape.new(name: 'MatchOption')
     MatchOptions = Shapes::ListShape.new(name: 'MatchOptions')
@@ -217,6 +219,11 @@ module Aws::CostExplorer
     ReservedNormalizedUnits = Shapes::StringShape.new(name: 'ReservedNormalizedUnits')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
+    ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
+    ResourceTagKeyList = Shapes::ListShape.new(name: 'ResourceTagKeyList')
+    ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
+    ResourceTagValue = Shapes::StringShape.new(name: 'ResourceTagValue')
     ResourceUtilization = Shapes::StructureShape.new(name: 'ResourceUtilization')
     ResultByTime = Shapes::StructureShape.new(name: 'ResultByTime')
     ResultsByTime = Shapes::ListShape.new(name: 'ResultsByTime')
@@ -263,12 +270,15 @@ module Aws::CostExplorer
     SupportedSavingsPlansType = Shapes::StringShape.new(name: 'SupportedSavingsPlansType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagList = Shapes::ListShape.new(name: 'TagList')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValues = Shapes::StructureShape.new(name: 'TagValues')
     TagValuesList = Shapes::ListShape.new(name: 'TagValuesList')
     TargetInstance = Shapes::StructureShape.new(name: 'TargetInstance')
     TargetInstancesList = Shapes::ListShape.new(name: 'TargetInstancesList')
     TermInYears = Shapes::StringShape.new(name: 'TermInYears')
     TerminateRecommendationDetail = Shapes::StructureShape.new(name: 'TerminateRecommendationDetail')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TotalActualHours = Shapes::StringShape.new(name: 'TotalActualHours')
     TotalActualUnits = Shapes::StringShape.new(name: 'TotalActualUnits')
     TotalAmortizedFee = Shapes::StringShape.new(name: 'TotalAmortizedFee')
@@ -280,6 +290,8 @@ module Aws::CostExplorer
     UnknownSubscriptionException = Shapes::StructureShape.new(name: 'UnknownSubscriptionException')
     UnrealizedSavings = Shapes::StringShape.new(name: 'UnrealizedSavings')
     UnresolvableUsageUnitException = Shapes::StructureShape.new(name: 'UnresolvableUsageUnitException')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UnusedHours = Shapes::StringShape.new(name: 'UnusedHours')
     UnusedUnits = Shapes::StringShape.new(name: 'UnusedUnits')
     UpdateAnomalyMonitorRequest = Shapes::StructureShape.new(name: 'UpdateAnomalyMonitorRequest')
@@ -444,12 +456,14 @@ module Aws::CostExplorer
     CoveragesByTime.member = Shapes::ShapeRef.new(shape: CoverageByTime)
 
     CreateAnomalyMonitorRequest.add_member(:anomaly_monitor, Shapes::ShapeRef.new(shape: AnomalyMonitor, required: true, location_name: "AnomalyMonitor"))
+    CreateAnomalyMonitorRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateAnomalyMonitorRequest.struct_class = Types::CreateAnomalyMonitorRequest
 
     CreateAnomalyMonitorResponse.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
     CreateAnomalyMonitorResponse.struct_class = Types::CreateAnomalyMonitorResponse
 
     CreateAnomalySubscriptionRequest.add_member(:anomaly_subscription, Shapes::ShapeRef.new(shape: AnomalySubscription, required: true, location_name: "AnomalySubscription"))
+    CreateAnomalySubscriptionRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateAnomalySubscriptionRequest.struct_class = Types::CreateAnomalySubscriptionRequest
 
     CreateAnomalySubscriptionResponse.add_member(:subscription_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "SubscriptionArn"))
@@ -460,6 +474,7 @@ module Aws::CostExplorer
     CreateCostCategoryDefinitionRequest.add_member(:rules, Shapes::ShapeRef.new(shape: CostCategoryRulesList, required: true, location_name: "Rules"))
     CreateCostCategoryDefinitionRequest.add_member(:default_value, Shapes::ShapeRef.new(shape: CostCategoryValue, location_name: "DefaultValue"))
     CreateCostCategoryDefinitionRequest.add_member(:split_charge_rules, Shapes::ShapeRef.new(shape: CostCategorySplitChargeRulesList, location_name: "SplitChargeRules"))
+    CreateCostCategoryDefinitionRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
     CreateCostCategoryDefinitionRequest.struct_class = Types::CreateCostCategoryDefinitionRequest
 
     CreateCostCategoryDefinitionResponse.add_member(:cost_category_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CostCategoryArn"))
@@ -881,6 +896,12 @@ module Aws::CostExplorer
     ListCostCategoryDefinitionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextPageToken, location_name: "NextToken"))
     ListCostCategoryDefinitionsResponse.struct_class = Types::ListCostCategoryDefinitionsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "ResourceTags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     MatchOptions.member = Shapes::ShapeRef.new(shape: MatchOption)
 
     MetricNames.member = Shapes::ShapeRef.new(shape: MetricName)
@@ -1013,7 +1034,16 @@ module Aws::CostExplorer
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ResourceNotFoundException.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceName"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ResourceTag.add_member(:key, Shapes::ShapeRef.new(shape: ResourceTagKey, required: true, location_name: "Key"))
+    ResourceTag.add_member(:value, Shapes::ShapeRef.new(shape: ResourceTagValue, required: true, location_name: "Value"))
+    ResourceTag.struct_class = Types::ResourceTag
+
+    ResourceTagKeyList.member = Shapes::ShapeRef.new(shape: ResourceTagKey)
+
+    ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
 
     ResourceUtilization.add_member(:ec2_resource_utilization, Shapes::ShapeRef.new(shape: EC2ResourceUtilization, location_name: "EC2ResourceUtilization"))
     ResourceUtilization.struct_class = Types::ResourceUtilization
@@ -1185,6 +1215,12 @@ module Aws::CostExplorer
 
     TagList.member = Shapes::ShapeRef.new(shape: Entity)
 
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    TagResourceRequest.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, required: true, location_name: "ResourceTags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
     TagValues.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
     TagValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, location_name: "Values"))
     TagValues.add_member(:match_options, Shapes::ShapeRef.new(shape: MatchOptions, location_name: "MatchOptions"))
@@ -1207,6 +1243,10 @@ module Aws::CostExplorer
     TerminateRecommendationDetail.add_member(:currency_code, Shapes::ShapeRef.new(shape: GenericString, location_name: "CurrencyCode"))
     TerminateRecommendationDetail.struct_class = Types::TerminateRecommendationDetail
 
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    TooManyTagsException.add_member(:resource_name, Shapes::ShapeRef.new(shape: Arn, location_name: "ResourceName"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     TotalImpactFilter.add_member(:numeric_operator, Shapes::ShapeRef.new(shape: NumericOperator, required: true, location_name: "NumericOperator"))
     TotalImpactFilter.add_member(:start_value, Shapes::ShapeRef.new(shape: GenericDouble, required: true, location_name: "StartValue"))
     TotalImpactFilter.add_member(:end_value, Shapes::ShapeRef.new(shape: GenericDouble, location_name: "EndValue"))
@@ -1220,6 +1260,12 @@ module Aws::CostExplorer
 
     UnresolvableUsageUnitException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     UnresolvableUsageUnitException.struct_class = Types::UnresolvableUsageUnitException
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ResourceArn"))
+    UntagResourceRequest.add_member(:resource_tag_keys, Shapes::ShapeRef.new(shape: ResourceTagKeyList, required: true, location_name: "ResourceTagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateAnomalyMonitorRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: GenericString, required: true, location_name: "MonitorArn"))
     UpdateAnomalyMonitorRequest.add_member(:monitor_name, Shapes::ShapeRef.new(shape: GenericString, location_name: "MonitorName"))
@@ -1578,12 +1624,43 @@ module Aws::CostExplorer
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
       api.add_operation(:provide_anomaly_feedback, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ProvideAnomalyFeedback"
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackRequest)
         o.output = Shapes::ShapeRef.new(shape: ProvideAnomalyFeedbackResponse)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
