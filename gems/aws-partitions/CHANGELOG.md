@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.569.0 (2022-03-23)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::GameSparks`.
+
 1.568.0 (2022-03-16)
 ------------------
 

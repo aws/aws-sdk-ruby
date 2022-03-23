@@ -2647,6 +2647,12 @@ module Aws::Transfer
     #   Specifies the workflow ID for the workflow to assign and the execution
     #   role used for executing the workflow.
     #
+    #   To remove an associated workflow from a server, you can provide an
+    #   empty `OnUpload` object, as in the following example.
+    #
+    #   `aws transfer update-server --server-id s-01234567890abcdef
+    #   --workflow-details '\{"OnUpload":[]\}'`
+    #
     # @return [Types::UpdateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateServerResponse#server_id #server_id} => String
@@ -2860,7 +2866,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

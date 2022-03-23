@@ -2145,6 +2145,7 @@ module Aws::Redshift
     RestoreFromClusterSnapshotMessage.add_member(:default_iam_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "DefaultIamRoleArn"))
     RestoreFromClusterSnapshotMessage.add_member(:reserved_node_id, Shapes::ShapeRef.new(shape: String, location_name: "ReservedNodeId"))
     RestoreFromClusterSnapshotMessage.add_member(:target_reserved_node_offering_id, Shapes::ShapeRef.new(shape: String, location_name: "TargetReservedNodeOfferingId"))
+    RestoreFromClusterSnapshotMessage.add_member(:encrypted, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "Encrypted"))
     RestoreFromClusterSnapshotMessage.struct_class = Types::RestoreFromClusterSnapshotMessage
 
     RestoreFromClusterSnapshotResult.add_member(:cluster, Shapes::ShapeRef.new(shape: Cluster, location_name: "Cluster"))

@@ -10089,9 +10089,13 @@ module Aws::Redshift
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [String] :kms_key_id
-    #   The Key Management Service (KMS) key ID of the encryption key that you
-    #   want to use to encrypt data in the cluster that you restore from a
-    #   shared snapshot.
+    #   The Key Management Service (KMS) key ID of the encryption key to
+    #   encrypt data in the cluster restored from a shared snapshot. You can
+    #   also provide the key ID when you restore from an unencrypted snapshot
+    #   to an encrypted cluster in the same account. Additionally, you can
+    #   specify a new KMS key ID when you restore from an encrypted snapshot
+    #   in the same account in order to change it. In that case, the restored
+    #   cluster is encrypted with the new KMS key ID.
     #
     # @option params [String] :node_type
     #   The node type that the restored cluster will be provisioned with.
@@ -10186,6 +10190,10 @@ module Aws::Redshift
     # @option params [String] :target_reserved_node_offering_id
     #   The identifier of the target reserved node offering.
     #
+    # @option params [Boolean] :encrypted
+    #   Enables support for restoring an unencrypted snapshot to a cluster
+    #   encrypted with Key Management Service (KMS) and a CMK.
+    #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreFromClusterSnapshotResult#cluster #cluster} => Types::Cluster
@@ -10224,6 +10232,7 @@ module Aws::Redshift
     #     default_iam_role_arn: "String",
     #     reserved_node_id: "String",
     #     target_reserved_node_offering_id: "String",
+    #     encrypted: false,
     #   })
     #
     # @example Response structure
@@ -11033,7 +11042,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

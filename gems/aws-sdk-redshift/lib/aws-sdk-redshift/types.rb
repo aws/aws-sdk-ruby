@@ -10102,6 +10102,7 @@ module Aws::Redshift
     #         default_iam_role_arn: "String",
     #         reserved_node_id: "String",
     #         target_reserved_node_offering_id: "String",
+    #         encrypted: false,
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -10275,9 +10276,13 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The Key Management Service (KMS) key ID of the encryption key that
-    #   you want to use to encrypt data in the cluster that you restore from
-    #   a shared snapshot.
+    #   The Key Management Service (KMS) key ID of the encryption key to
+    #   encrypt data in the cluster restored from a shared snapshot. You can
+    #   also provide the key ID when you restore from an unencrypted
+    #   snapshot to an encrypted cluster in the same account. Additionally,
+    #   you can specify a new KMS key ID when you restore from an encrypted
+    #   snapshot in the same account in order to change it. In that case,
+    #   the restored cluster is encrypted with the new KMS key ID.
     #   @return [String]
     #
     # @!attribute [rw] node_type
@@ -10388,6 +10393,11 @@ module Aws::Redshift
     #   The identifier of the target reserved node offering.
     #   @return [String]
     #
+    # @!attribute [rw] encrypted
+    #   Enables support for restoring an unencrypted snapshot to a cluster
+    #   encrypted with Key Management Service (KMS) and a CMK.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation
     #
     class RestoreFromClusterSnapshotMessage < Struct.new(
@@ -10421,7 +10431,8 @@ module Aws::Redshift
       :aqua_configuration_status,
       :default_iam_role_arn,
       :reserved_node_id,
-      :target_reserved_node_offering_id)
+      :target_reserved_node_offering_id,
+      :encrypted)
       SENSITIVE = []
       include Aws::Structure
     end

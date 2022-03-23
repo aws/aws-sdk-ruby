@@ -126,6 +126,7 @@ module Aws
   autoload :ForecastService, 'aws-sdk-forecastservice'
   autoload :FraudDetector, 'aws-sdk-frauddetector'
   autoload :GameLift, 'aws-sdk-gamelift'
+  autoload :GameSparks, 'aws-sdk-gamesparks'
   autoload :Glacier, 'aws-sdk-glacier'
   autoload :GlobalAccelerator, 'aws-sdk-globalaccelerator'
   autoload :Glue, 'aws-sdk-glue'

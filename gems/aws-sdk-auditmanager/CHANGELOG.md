@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-03-23)
+------------------
+
+* Feature - This release updates 1 API parameter, the SnsArn attribute. The character length and regex pattern for the SnsArn attribute have been updated, which enables you to deselect an SNS topic when using the UpdateSettings operation.
+
 1.21.0 (2022-02-24)
 ------------------
 

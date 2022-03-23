@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.127.0 (2022-03-23)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-gamesparks` gem.
+
 3.126.0 (2022-03-16)
 ------------------
 

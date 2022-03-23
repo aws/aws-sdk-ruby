@@ -136,6 +136,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-forecastservice', '~> 1')
   spec.add_dependency('aws-sdk-frauddetector', '~> 1')
   spec.add_dependency('aws-sdk-gamelift', '~> 1')
+  spec.add_dependency('aws-sdk-gamesparks', '~> 1')
   spec.add_dependency('aws-sdk-glacier', '~> 1')
   spec.add_dependency('aws-sdk-globalaccelerator', '~> 1')
   spec.add_dependency('aws-sdk-glue', '~> 1')

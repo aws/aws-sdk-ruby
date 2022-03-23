@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-03-23)
+------------------
+
+* Feature - Documentation updates for AWS Transfer Family to describe how to remove an associated workflow from a server.
+
 1.51.0 (2022-03-10)
 ------------------
 

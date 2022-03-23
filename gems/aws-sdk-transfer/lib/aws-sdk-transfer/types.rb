@@ -4153,6 +4153,12 @@ module Aws::Transfer
     # @!attribute [rw] workflow_details
     #   Specifies the workflow ID for the workflow to assign and the
     #   execution role used for executing the workflow.
+    #
+    #   To remove an associated workflow from a server, you can provide an
+    #   empty `OnUpload` object, as in the following example.
+    #
+    #   `aws transfer update-server --server-id s-01234567890abcdef
+    #   --workflow-details '\{"OnUpload":[]\}'`
     #   @return [Types::WorkflowDetails]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateServerRequest AWS API Documentation
@@ -4430,6 +4436,12 @@ module Aws::Transfer
     # @!attribute [rw] on_upload
     #   A trigger that starts a workflow: the workflow begins to execute
     #   after a file is uploaded.
+    #
+    #   To remove an associated workflow from a server, you can provide an
+    #   empty `OnUpload` object, as in the following example.
+    #
+    #   `aws transfer update-server --server-id s-01234567890abcdef
+    #   --workflow-details '\{"OnUpload":[]\}'`
     #   @return [Array<Types::WorkflowDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/WorkflowDetails AWS API Documentation

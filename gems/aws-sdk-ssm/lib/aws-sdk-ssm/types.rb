@@ -101,7 +101,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #         resource_id: "ResourceId", # required
     #         tags: [ # required
     #           {
@@ -129,6 +129,8 @@ module Aws::SSM
     #   `MaintenanceWindow`\: `mw-012345abcde`
     #
     #   `PatchBaseline`\: `pb-012345abcde`
+    #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
     #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically,
@@ -9792,7 +9794,7 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] operating_system
-    #   Returns he operating system rule specified for patch groups using
+    #   Returns the operating system rule specified for patch groups using
     #   the patch baseline.
     #   @return [String]
     #
@@ -12909,7 +12911,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #         resource_id: "ResourceId", # required
     #       }
     #
@@ -16351,13 +16353,12 @@ module Aws::SSM
     #   see [Creating Systems Manager parameters][1] in the *Amazon Web
     #   Services Systems Manager User Guide*.
     #
-    #   <note markdown="1"> The maximum length constraint listed below includes capacity for
-    #   additional system attributes that aren't part of the name. The
-    #   maximum length for a parameter name, including the full length of
-    #   the parameter ARN, is 1011 characters. For example, the length of
-    #   the following parameter name is 65 characters, not 20 characters:
-    #
-    #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
+    #   <note markdown="1"> The maximum length constraint of 2048 characters listed below
+    #   includes 1037 characters reserved for internal use by Systems
+    #   Manager. The maximum length for a parameter name that you create is
+    #   1011 characters. This includes the characters in the ARN that
+    #   precede the name you specify, such as
+    #   `arn:aws:ssm:us-east-2:111122223333:parameter/`.
     #
     #    </note>
     #
@@ -17164,7 +17165,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #         resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #         resource_id: "ResourceId", # required
     #         tag_keys: ["TagKey"], # required
     #       }
@@ -17187,6 +17188,8 @@ module Aws::SSM
     #   ManagedInstance: mi-012345abcde
     #
     #   MaintenanceWindow: mw-012345abcde
+    #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
     #
     #   PatchBaseline: pb-012345abcde
     #
@@ -18825,7 +18828,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -19063,7 +19066,8 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] parameters
-    #   Reserved for future use.
+    #   The values you want to specify for the parameters defined in the
+    #   Session document.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/StartSessionRequest AWS API Documentation

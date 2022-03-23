@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2022-03-23)
+------------------
+
+* Feature - Increased the maximum supported value for the Timeout parameter of the StartSnapshot API from 60 minutes to 4320 minutes.  Changed the HTTP error code for ConflictException from 503 to 409.
+
 1.25.0 (2022-02-24)
 ------------------
 

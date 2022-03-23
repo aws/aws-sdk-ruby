@@ -344,6 +344,7 @@ module Aws
             'ForecastService' => 'forecast',
             'FraudDetector' => 'frauddetector',
             'GameLift' => 'gamelift',
+            'GameSparks' => 'gamesparks',
             'Glacier' => 'glacier',
             'GlobalAccelerator' => 'globalaccelerator',
             'Glue' => 'glue',

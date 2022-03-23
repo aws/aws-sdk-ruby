@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2022-03-23)
+------------------
+
+* Feature - Update AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource APIs to reflect the support for tagging Automation resources. Includes other minor documentation updates.
+
 1.132.0 (2022-02-24)
 ------------------
 

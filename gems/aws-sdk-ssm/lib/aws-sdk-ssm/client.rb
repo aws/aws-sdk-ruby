@@ -362,13 +362,14 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you can assign to your documents, managed nodes,
-    # maintenance windows, Parameter Store parameters, and patch baselines.
-    # Tags enable you to categorize your resources in different ways, for
-    # example, by purpose, owner, or environment. Each tag consists of a key
-    # and an optional value, both of which you define. For example, you
-    # could define a set of tags for your account's managed nodes that
-    # helps you track each node's owner and stack level. For example:
+    # are metadata that you can assign to your automations, documents,
+    # managed nodes, maintenance windows, Parameter Store parameters, and
+    # patch baselines. Tags enable you to categorize your resources in
+    # different ways, for example, by purpose, owner, or environment. Each
+    # tag consists of a key and an optional value, both of which you define.
+    # For example, you could define a set of tags for your account's
+    # managed nodes that helps you track each node's owner and stack level.
+    # For example:
     #
     # * `Key=Owner,Value=DbAdmin`
     #
@@ -382,7 +383,8 @@ module Aws::SSM
     #
     # * `Key=Stack,Value=Test`
     #
-    # Each resource can have a maximum of 50 tags.
+    # Most resources can have a maximum of 50 tags. Automations can have a
+    # maximum of 5 tags.
     #
     # We recommend that you devise a set of tag keys that meets your needs
     # for each resource type. Using a consistent set of tag keys makes it
@@ -416,6 +418,8 @@ module Aws::SSM
     #
     #   `PatchBaseline`\: `pb-012345abcde`
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
     #   is created from the strings that come after the word `opsmetadata` in
@@ -446,7 +450,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.add_tags_to_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #     tags: [ # required
     #       {
@@ -6579,7 +6583,7 @@ module Aws::SSM
     #   The name of the patch group whose patch baseline should be retrieved.
     #
     # @option params [String] :operating_system
-    #   Returns he operating system rule specified for patch groups using the
+    #   Returns the operating system rule specified for patch groups using the
     #   patch baseline.
     #
     # @return [Types::GetPatchBaselineForPatchGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -7867,7 +7871,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tags_for_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #   })
     #
@@ -8145,13 +8149,12 @@ module Aws::SSM
     #   [Creating Systems Manager parameters][1] in the *Amazon Web Services
     #   Systems Manager User Guide*.
     #
-    #   <note markdown="1"> The maximum length constraint listed below includes capacity for
-    #   additional system attributes that aren't part of the name. The
-    #   maximum length for a parameter name, including the full length of the
-    #   parameter ARN, is 1011 characters. For example, the length of the
-    #   following parameter name is 65 characters, not 20 characters:
-    #
-    #    `arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName`
+    #   <note markdown="1"> The maximum length constraint of 2048 characters listed below includes
+    #   1037 characters reserved for internal use by Systems Manager. The
+    #   maximum length for a parameter name that you create is 1011
+    #   characters. This includes the characters in the ARN that precede the
+    #   name you specify, such as
+    #   `arn:aws:ssm:us-east-2:111122223333:parameter/`.
     #
     #    </note>
     #
@@ -8854,6 +8857,8 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   PatchBaseline: pb-012345abcde
     #
     #   OpsMetadata object: `ResourceID` for tagging is created from the
@@ -8880,7 +8885,7 @@ module Aws::SSM
     # @example Request syntax with placeholder values
     #
     #   resp = client.remove_tags_from_resource({
-    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata
+    #     resource_type: "Document", # required, accepts Document, ManagedInstance, MaintenanceWindow, Parameter, PatchBaseline, OpsItem, OpsMetadata, Automation
     #     resource_id: "ResourceId", # required
     #     tag_keys: ["TagKey"], # required
     #   })
@@ -9394,7 +9399,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -9641,7 +9646,8 @@ module Aws::SSM
     #   start the session.
     #
     # @option params [Hash<String,Array>] :parameters
-    #   Reserved for future use.
+    #   The values you want to specify for the parameters defined in the
+    #   Session document.
     #
     # @return [Types::StartSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11481,7 +11487,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
