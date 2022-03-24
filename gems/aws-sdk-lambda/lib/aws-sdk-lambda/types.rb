@@ -902,6 +902,9 @@ module Aws::Lambda
     #         },
     #         code_signing_config_arn: "CodeSigningConfigArn",
     #         architectures: ["x86_64"], # accepts x86_64, arm64
+    #         ephemeral_storage: {
+    #           size: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -1069,6 +1072,11 @@ module Aws::Lambda
     #   default value is `x86_64`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value
+    #   is 512, but can be any whole number between 512 and 10240 MB.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
@@ -1092,7 +1100,8 @@ module Aws::Lambda
       :file_system_configs,
       :image_config,
       :code_signing_config_arn,
-      :architectures)
+      :architectures,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1659,6 +1668,28 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # The size of the function’s /tmp directory in MB. The default value is
+    # 512, but can be any whole number between 512 and 10240 MB.
+    #
+    # @note When making an API call, you may pass EphemeralStorage
+    #   data as a hash:
+    #
+    #       {
+    #         size: 1, # required
+    #       }
+    #
+    # @!attribute [rw] size
+    #   The size of the function’s /tmp directory.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/EphemeralStorage AWS API Documentation
+    #
+    class EphemeralStorage < Struct.new(
+      :size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A mapping between an Amazon Web Services resource and a Lambda
     # function. For details, see CreateEventSourceMapping.
     #
@@ -2153,6 +2184,11 @@ module Aws::Lambda
     #   default architecture value is `x86_64`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value
+    #   is 512, but can be any whole number between 512 and 10240 MB.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionConfiguration AWS API Documentation
     #
     class FunctionConfiguration < Struct.new(
@@ -2187,7 +2223,8 @@ module Aws::Lambda
       :image_config_response,
       :signing_profile_version_arn,
       :signing_job_arn,
-      :architectures)
+      :architectures,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5696,6 +5733,9 @@ module Aws::Lambda
     #           command: ["String"],
     #           working_directory: "WorkingDirectory",
     #         },
+    #         ephemeral_storage: {
+    #           size: 1, # required
+    #         },
     #       }
     #
     # @!attribute [rw] function_name
@@ -5834,6 +5874,11 @@ module Aws::Lambda
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #   @return [Types::ImageConfig]
     #
+    # @!attribute [rw] ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value
+    #   is 512, but can be any whole number between 512 and 10240 MB.
+    #   @return [Types::EphemeralStorage]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfigurationRequest AWS API Documentation
     #
     class UpdateFunctionConfigurationRequest < Struct.new(
@@ -5852,7 +5897,8 @@ module Aws::Lambda
       :revision_id,
       :layers,
       :file_system_configs,
-      :image_config)
+      :image_config,
+      :ephemeral_storage)
       SENSITIVE = []
       include Aws::Structure
     end

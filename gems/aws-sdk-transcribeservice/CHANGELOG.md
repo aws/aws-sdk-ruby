@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.74.0 (2022-03-24)
+------------------
+
+* Feature - This release adds an additional parameter for subtitling with Amazon Transcribe batch jobs: outputStartIndex.
+
 1.73.0 (2022-03-10)
 ------------------
 

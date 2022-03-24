@@ -86,6 +86,8 @@ module Aws::Lambda
     EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
     EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
     EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
+    EphemeralStorage = Shapes::StructureShape.new(name: 'EphemeralStorage')
+    EphemeralStorageSize = Shapes::IntegerShape.new(name: 'EphemeralStorageSize')
     EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
     EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
     EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
@@ -455,6 +457,7 @@ module Aws::Lambda
     CreateFunctionRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
     CreateFunctionRequest.add_member(:code_signing_config_arn, Shapes::ShapeRef.new(shape: CodeSigningConfigArn, location_name: "CodeSigningConfigArn"))
     CreateFunctionRequest.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
+    CreateFunctionRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
@@ -550,6 +553,9 @@ module Aws::Lambda
     EnvironmentVariables.key = Shapes::ShapeRef.new(shape: EnvironmentVariableName)
     EnvironmentVariables.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
+    EphemeralStorage.add_member(:size, Shapes::ShapeRef.new(shape: EphemeralStorageSize, required: true, location_name: "Size"))
+    EphemeralStorage.struct_class = Types::EphemeralStorage
+
     EventSourceMappingConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: String, location_name: "UUID"))
     EventSourceMappingConfiguration.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, location_name: "StartingPosition"))
     EventSourceMappingConfiguration.add_member(:starting_position_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "StartingPositionTimestamp"))
@@ -638,6 +644,7 @@ module Aws::Lambda
     FunctionConfiguration.add_member(:signing_profile_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningProfileVersionArn"))
     FunctionConfiguration.add_member(:signing_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "SigningJobArn"))
     FunctionConfiguration.add_member(:architectures, Shapes::ShapeRef.new(shape: ArchitecturesList, location_name: "Architectures"))
+    FunctionConfiguration.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
     FunctionEventInvokeConfig.add_member(:last_modified, Shapes::ShapeRef.new(shape: Date, location_name: "LastModified"))
@@ -1213,6 +1220,7 @@ module Aws::Lambda
     UpdateFunctionConfigurationRequest.add_member(:layers, Shapes::ShapeRef.new(shape: LayerList, location_name: "Layers"))
     UpdateFunctionConfigurationRequest.add_member(:file_system_configs, Shapes::ShapeRef.new(shape: FileSystemConfigList, location_name: "FileSystemConfigs"))
     UpdateFunctionConfigurationRequest.add_member(:image_config, Shapes::ShapeRef.new(shape: ImageConfig, location_name: "ImageConfig"))
+    UpdateFunctionConfigurationRequest.add_member(:ephemeral_storage, Shapes::ShapeRef.new(shape: EphemeralStorage, location_name: "EphemeralStorage"))
     UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
     UpdateFunctionEventInvokeConfigRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))

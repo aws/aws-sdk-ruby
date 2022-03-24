@@ -128,7 +128,9 @@ module Aws::ConfigService
     ConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'ConformancePackTemplateValidationException')
     ControlsList = Shapes::ListShape.new(name: 'ControlsList')
     CosmosPageLimit = Shapes::IntegerShape.new(name: 'CosmosPageLimit')
+    CustomPolicyDetails = Shapes::StructureShape.new(name: 'CustomPolicyDetails')
     Date = Shapes::TimestampShape.new(name: 'Date')
+    DebugLogDeliveryAccounts = Shapes::ListShape.new(name: 'DebugLogDeliveryAccounts')
     DeleteAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteAggregationAuthorizationRequest')
     DeleteConfigRuleRequest = Shapes::StructureShape.new(name: 'DeleteConfigRuleRequest')
     DeleteConfigurationAggregatorRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationAggregatorRequest')
@@ -256,12 +258,16 @@ module Aws::ConfigService
     GetConformancePackComplianceDetailsResponse = Shapes::StructureShape.new(name: 'GetConformancePackComplianceDetailsResponse')
     GetConformancePackComplianceSummaryRequest = Shapes::StructureShape.new(name: 'GetConformancePackComplianceSummaryRequest')
     GetConformancePackComplianceSummaryResponse = Shapes::StructureShape.new(name: 'GetConformancePackComplianceSummaryResponse')
+    GetCustomRulePolicyRequest = Shapes::StructureShape.new(name: 'GetCustomRulePolicyRequest')
+    GetCustomRulePolicyResponse = Shapes::StructureShape.new(name: 'GetCustomRulePolicyResponse')
     GetDiscoveredResourceCountsRequest = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsRequest')
     GetDiscoveredResourceCountsResponse = Shapes::StructureShape.new(name: 'GetDiscoveredResourceCountsResponse')
     GetOrganizationConfigRuleDetailedStatusRequest = Shapes::StructureShape.new(name: 'GetOrganizationConfigRuleDetailedStatusRequest')
     GetOrganizationConfigRuleDetailedStatusResponse = Shapes::StructureShape.new(name: 'GetOrganizationConfigRuleDetailedStatusResponse')
     GetOrganizationConformancePackDetailedStatusRequest = Shapes::StructureShape.new(name: 'GetOrganizationConformancePackDetailedStatusRequest')
     GetOrganizationConformancePackDetailedStatusResponse = Shapes::StructureShape.new(name: 'GetOrganizationConformancePackDetailedStatusResponse')
+    GetOrganizationCustomRulePolicyRequest = Shapes::StructureShape.new(name: 'GetOrganizationCustomRulePolicyRequest')
+    GetOrganizationCustomRulePolicyResponse = Shapes::StructureShape.new(name: 'GetOrganizationCustomRulePolicyResponse')
     GetResourceConfigHistoryRequest = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryRequest')
     GetResourceConfigHistoryResponse = Shapes::StructureShape.new(name: 'GetResourceConfigHistoryResponse')
     GetStoredQueryRequest = Shapes::StructureShape.new(name: 'GetStoredQueryRequest')
@@ -340,6 +346,8 @@ module Aws::ConfigService
     OrganizationConfigRuleStatus = Shapes::StructureShape.new(name: 'OrganizationConfigRuleStatus')
     OrganizationConfigRuleStatuses = Shapes::ListShape.new(name: 'OrganizationConfigRuleStatuses')
     OrganizationConfigRuleTriggerType = Shapes::StringShape.new(name: 'OrganizationConfigRuleTriggerType')
+    OrganizationConfigRuleTriggerTypeNoSN = Shapes::StringShape.new(name: 'OrganizationConfigRuleTriggerTypeNoSN')
+    OrganizationConfigRuleTriggerTypeNoSNs = Shapes::ListShape.new(name: 'OrganizationConfigRuleTriggerTypeNoSNs')
     OrganizationConfigRuleTriggerTypes = Shapes::ListShape.new(name: 'OrganizationConfigRuleTriggerTypes')
     OrganizationConfigRules = Shapes::ListShape.new(name: 'OrganizationConfigRules')
     OrganizationConformancePack = Shapes::StructureShape.new(name: 'OrganizationConformancePack')
@@ -351,6 +359,8 @@ module Aws::ConfigService
     OrganizationConformancePackStatuses = Shapes::ListShape.new(name: 'OrganizationConformancePackStatuses')
     OrganizationConformancePackTemplateValidationException = Shapes::StructureShape.new(name: 'OrganizationConformancePackTemplateValidationException')
     OrganizationConformancePacks = Shapes::ListShape.new(name: 'OrganizationConformancePacks')
+    OrganizationCustomPolicyRuleMetadata = Shapes::StructureShape.new(name: 'OrganizationCustomPolicyRuleMetadata')
+    OrganizationCustomPolicyRuleMetadataNoPolicy = Shapes::StructureShape.new(name: 'OrganizationCustomPolicyRuleMetadataNoPolicy')
     OrganizationCustomRuleMetadata = Shapes::StructureShape.new(name: 'OrganizationCustomRuleMetadata')
     OrganizationManagedRuleMetadata = Shapes::StructureShape.new(name: 'OrganizationManagedRuleMetadata')
     OrganizationResourceDetailedStatus = Shapes::StringShape.new(name: 'OrganizationResourceDetailedStatus')
@@ -365,6 +375,8 @@ module Aws::ConfigService
     PendingAggregationRequest = Shapes::StructureShape.new(name: 'PendingAggregationRequest')
     PendingAggregationRequestList = Shapes::ListShape.new(name: 'PendingAggregationRequestList')
     Percentage = Shapes::IntegerShape.new(name: 'Percentage')
+    PolicyRuntime = Shapes::StringShape.new(name: 'PolicyRuntime')
+    PolicyText = Shapes::StringShape.new(name: 'PolicyText')
     PutAggregationAuthorizationRequest = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationRequest')
     PutAggregationAuthorizationResponse = Shapes::StructureShape.new(name: 'PutAggregationAuthorizationResponse')
     PutConfigRuleRequest = Shapes::StructureShape.new(name: 'PutConfigRuleRequest')
@@ -715,6 +727,9 @@ module Aws::ConfigService
     ConfigRuleEvaluationStatus.add_member(:last_error_code, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorCode"))
     ConfigRuleEvaluationStatus.add_member(:last_error_message, Shapes::ShapeRef.new(shape: String, location_name: "LastErrorMessage"))
     ConfigRuleEvaluationStatus.add_member(:first_evaluation_started, Shapes::ShapeRef.new(shape: Boolean, location_name: "FirstEvaluationStarted"))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status, Shapes::ShapeRef.new(shape: String, location_name: "LastDebugLogDeliveryStatus"))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "LastDebugLogDeliveryStatusReason"))
+    ConfigRuleEvaluationStatus.add_member(:last_debug_log_delivery_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastDebugLogDeliveryTime"))
     ConfigRuleEvaluationStatus.struct_class = Types::ConfigRuleEvaluationStatus
 
     ConfigRuleEvaluationStatusList.member = Shapes::ShapeRef.new(shape: ConfigRuleEvaluationStatus)
@@ -861,6 +876,13 @@ module Aws::ConfigService
     ConformancePackTemplateValidationException.struct_class = Types::ConformancePackTemplateValidationException
 
     ControlsList.member = Shapes::ShapeRef.new(shape: StringWithCharLimit128)
+
+    CustomPolicyDetails.add_member(:policy_runtime, Shapes::ShapeRef.new(shape: PolicyRuntime, required: true, location_name: "PolicyRuntime"))
+    CustomPolicyDetails.add_member(:policy_text, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "PolicyText"))
+    CustomPolicyDetails.add_member(:enable_debug_log_delivery, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnableDebugLogDelivery"))
+    CustomPolicyDetails.struct_class = Types::CustomPolicyDetails
+
+    DebugLogDeliveryAccounts.member = Shapes::ShapeRef.new(shape: AccountId)
 
     DeleteAggregationAuthorizationRequest.add_member(:authorized_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AuthorizedAccountId"))
     DeleteAggregationAuthorizationRequest.add_member(:authorized_aws_region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "AuthorizedAwsRegion"))
@@ -1333,6 +1355,12 @@ module Aws::ConfigService
     GetConformancePackComplianceSummaryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetConformancePackComplianceSummaryResponse.struct_class = Types::GetConformancePackComplianceSummaryResponse
 
+    GetCustomRulePolicyRequest.add_member(:config_rule_name, Shapes::ShapeRef.new(shape: ConfigRuleName, location_name: "ConfigRuleName"))
+    GetCustomRulePolicyRequest.struct_class = Types::GetCustomRulePolicyRequest
+
+    GetCustomRulePolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText"))
+    GetCustomRulePolicyResponse.struct_class = Types::GetCustomRulePolicyResponse
+
     GetDiscoveredResourceCountsRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "resourceTypes"))
     GetDiscoveredResourceCountsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "limit"))
     GetDiscoveredResourceCountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -1362,6 +1390,12 @@ module Aws::ConfigService
     GetOrganizationConformancePackDetailedStatusResponse.add_member(:organization_conformance_pack_detailed_statuses, Shapes::ShapeRef.new(shape: OrganizationConformancePackDetailedStatuses, location_name: "OrganizationConformancePackDetailedStatuses"))
     GetOrganizationConformancePackDetailedStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetOrganizationConformancePackDetailedStatusResponse.struct_class = Types::GetOrganizationConformancePackDetailedStatusResponse
+
+    GetOrganizationCustomRulePolicyRequest.add_member(:organization_config_rule_name, Shapes::ShapeRef.new(shape: OrganizationConfigRuleName, required: true, location_name: "OrganizationConfigRuleName"))
+    GetOrganizationCustomRulePolicyRequest.struct_class = Types::GetOrganizationCustomRulePolicyRequest
+
+    GetOrganizationCustomRulePolicyResponse.add_member(:policy_text, Shapes::ShapeRef.new(shape: PolicyText, location_name: "PolicyText"))
+    GetOrganizationCustomRulePolicyResponse.struct_class = Types::GetOrganizationCustomRulePolicyResponse
 
     GetResourceConfigHistoryRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "resourceType"))
     GetResourceConfigHistoryRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
@@ -1533,6 +1567,7 @@ module Aws::ConfigService
     OrganizationConfigRule.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
     OrganizationConfigRule.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
     OrganizationConfigRule.add_member(:last_update_time, Shapes::ShapeRef.new(shape: Date, location_name: "LastUpdateTime"))
+    OrganizationConfigRule.add_member(:organization_custom_policy_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomPolicyRuleMetadataNoPolicy, location_name: "OrganizationCustomPolicyRuleMetadata"))
     OrganizationConfigRule.struct_class = Types::OrganizationConfigRule
 
     OrganizationConfigRuleDetailedStatus.member = Shapes::ShapeRef.new(shape: MemberAccountStatus)
@@ -1547,6 +1582,8 @@ module Aws::ConfigService
     OrganizationConfigRuleStatus.struct_class = Types::OrganizationConfigRuleStatus
 
     OrganizationConfigRuleStatuses.member = Shapes::ShapeRef.new(shape: OrganizationConfigRuleStatus)
+
+    OrganizationConfigRuleTriggerTypeNoSNs.member = Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSN)
 
     OrganizationConfigRuleTriggerTypes.member = Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerType)
 
@@ -1585,6 +1622,31 @@ module Aws::ConfigService
     OrganizationConformancePackTemplateValidationException.struct_class = Types::OrganizationConformancePackTemplateValidationException
 
     OrganizationConformancePacks.member = Shapes::ShapeRef.new(shape: OrganizationConformancePack)
+
+    OrganizationCustomPolicyRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:tag_key_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:tag_value_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:policy_runtime, Shapes::ShapeRef.new(shape: PolicyRuntime, required: true, location_name: "PolicyRuntime"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:policy_text, Shapes::ShapeRef.new(shape: PolicyText, required: true, location_name: "PolicyText"))
+    OrganizationCustomPolicyRuleMetadata.add_member(:debug_log_delivery_accounts, Shapes::ShapeRef.new(shape: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
+    OrganizationCustomPolicyRuleMetadata.struct_class = Types::OrganizationCustomPolicyRuleMetadata
+
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:organization_config_rule_trigger_types, Shapes::ShapeRef.new(shape: OrganizationConfigRuleTriggerTypeNoSNs, location_name: "OrganizationConfigRuleTriggerTypes"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit2048, location_name: "InputParameters"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_types_scope, Shapes::ShapeRef.new(shape: ResourceTypesScope, location_name: "ResourceTypesScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:resource_id_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit768, location_name: "ResourceIdScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_key_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit128, location_name: "TagKeyScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:tag_value_scope, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "TagValueScope"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:policy_runtime, Shapes::ShapeRef.new(shape: PolicyRuntime, location_name: "PolicyRuntime"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.add_member(:debug_log_delivery_accounts, Shapes::ShapeRef.new(shape: DebugLogDeliveryAccounts, location_name: "DebugLogDeliveryAccounts"))
+    OrganizationCustomPolicyRuleMetadataNoPolicy.struct_class = Types::OrganizationCustomPolicyRuleMetadataNoPolicy
 
     OrganizationCustomRuleMetadata.add_member(:description, Shapes::ShapeRef.new(shape: StringWithCharLimit256Min0, location_name: "Description"))
     OrganizationCustomRuleMetadata.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "LambdaFunctionArn"))
@@ -1675,6 +1737,7 @@ module Aws::ConfigService
     PutOrganizationConfigRuleRequest.add_member(:organization_managed_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationManagedRuleMetadata, location_name: "OrganizationManagedRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:organization_custom_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomRuleMetadata, location_name: "OrganizationCustomRuleMetadata"))
     PutOrganizationConfigRuleRequest.add_member(:excluded_accounts, Shapes::ShapeRef.new(shape: ExcludedAccounts, location_name: "ExcludedAccounts"))
+    PutOrganizationConfigRuleRequest.add_member(:organization_custom_policy_rule_metadata, Shapes::ShapeRef.new(shape: OrganizationCustomPolicyRuleMetadata, location_name: "OrganizationCustomPolicyRuleMetadata"))
     PutOrganizationConfigRuleRequest.struct_class = Types::PutOrganizationConfigRuleRequest
 
     PutOrganizationConfigRuleResponse.add_member(:organization_config_rule_arn, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "OrganizationConfigRuleArn"))
@@ -1898,8 +1961,9 @@ module Aws::ConfigService
     SelectResourceConfigResponse.struct_class = Types::SelectResourceConfigResponse
 
     Source.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))
-    Source.add_member(:source_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "SourceIdentifier"))
+    Source.add_member(:source_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "SourceIdentifier"))
     Source.add_member(:source_details, Shapes::ShapeRef.new(shape: SourceDetails, location_name: "SourceDetails"))
+    Source.add_member(:custom_policy_details, Shapes::ShapeRef.new(shape: CustomPolicyDetails, location_name: "CustomPolicyDetails"))
     Source.struct_class = Types::Source
 
     SourceDetail.add_member(:event_source, Shapes::ShapeRef.new(shape: EventSource, location_name: "EventSource"))
@@ -2742,6 +2806,15 @@ module Aws::ConfigService
         )
       end)
 
+      api.add_operation(:get_custom_rule_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomRulePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomRulePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomRulePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+      end)
+
       api.add_operation(:get_discovered_resource_counts, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetDiscoveredResourceCounts"
         o.http_method = "POST"
@@ -2793,6 +2866,16 @@ module Aws::ConfigService
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_organization_custom_rule_policy, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOrganizationCustomRulePolicy"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetOrganizationCustomRulePolicyRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOrganizationCustomRulePolicyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NoSuchOrganizationConfigRuleException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationAccessDeniedException)
       end)
 
       api.add_operation(:get_resource_config_history, Seahorse::Model::Operation.new.tap do |o|

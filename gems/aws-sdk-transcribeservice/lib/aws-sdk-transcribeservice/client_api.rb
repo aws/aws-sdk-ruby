@@ -153,6 +153,7 @@ module Aws::TranscribeService
     SubtitleFileUris = Shapes::ListShape.new(name: 'SubtitleFileUris')
     SubtitleFormat = Shapes::StringShape.new(name: 'SubtitleFormat')
     SubtitleFormats = Shapes::ListShape.new(name: 'SubtitleFormats')
+    SubtitleOutputStartIndex = Shapes::IntegerShape.new(name: 'SubtitleOutputStartIndex')
     Subtitles = Shapes::StructureShape.new(name: 'Subtitles')
     SubtitlesOutput = Shapes::StructureShape.new(name: 'SubtitlesOutput')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -713,10 +714,12 @@ module Aws::TranscribeService
     SubtitleFormats.member = Shapes::ShapeRef.new(shape: SubtitleFormat)
 
     Subtitles.add_member(:formats, Shapes::ShapeRef.new(shape: SubtitleFormats, location_name: "Formats"))
+    Subtitles.add_member(:output_start_index, Shapes::ShapeRef.new(shape: SubtitleOutputStartIndex, location_name: "OutputStartIndex"))
     Subtitles.struct_class = Types::Subtitles
 
     SubtitlesOutput.add_member(:formats, Shapes::ShapeRef.new(shape: SubtitleFormats, location_name: "Formats"))
     SubtitlesOutput.add_member(:subtitle_file_uris, Shapes::ShapeRef.new(shape: SubtitleFileUris, location_name: "SubtitleFileUris"))
+    SubtitlesOutput.add_member(:output_start_index, Shapes::ShapeRef.new(shape: SubtitleOutputStartIndex, location_name: "OutputStartIndex"))
     SubtitlesOutput.struct_class = Types::SubtitlesOutput
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))

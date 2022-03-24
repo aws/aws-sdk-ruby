@@ -1209,6 +1209,10 @@ module Aws::Lambda
     #   string array with one of the valid values (arm64 or x86\_64). The
     #   default value is `x86_64`.
     #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value is
+    #   512, but can be any whole number between 512 and 10240 MB.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -1243,6 +1247,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -1296,6 +1301,9 @@ module Aws::Lambda
     #     },
     #     code_signing_config_arn: "CodeSigningConfigArn",
     #     architectures: ["x86_64"], # accepts x86_64, arm64
+    #     ephemeral_storage: {
+    #       size: 1, # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1352,6 +1360,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunction AWS API Documentation
     #
@@ -2046,6 +2055,7 @@ module Aws::Lambda
     #   resp.configuration.signing_job_arn #=> String
     #   resp.configuration.architectures #=> Array
     #   resp.configuration.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.configuration.ephemeral_storage.size #=> Integer
     #   resp.code.repository_type #=> String
     #   resp.code.location #=> String
     #   resp.code.image_uri #=> String
@@ -2216,6 +2226,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -2278,6 +2289,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3189,6 +3201,7 @@ module Aws::Lambda
     #   resp.functions[0].signing_job_arn #=> String
     #   resp.functions[0].architectures #=> Array
     #   resp.functions[0].architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.functions[0].ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctions AWS API Documentation
     #
@@ -3580,6 +3593,7 @@ module Aws::Lambda
     #   resp.versions[0].signing_job_arn #=> String
     #   resp.versions[0].architectures #=> Array
     #   resp.versions[0].architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.versions[0].ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListVersionsByFunction AWS API Documentation
     #
@@ -3775,6 +3789,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -3839,6 +3854,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/PublishVersion AWS API Documentation
     #
@@ -4820,6 +4836,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -4890,6 +4907,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionCode AWS API Documentation
     #
@@ -5044,6 +5062,10 @@ module Aws::Lambda
     #
     #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html
     #
+    # @option params [Types::EphemeralStorage] :ephemeral_storage
+    #   The size of the function’s /tmp directory in MB. The default value is
+    #   512, but can be any whole number between 512 and 10240 MB.
+    #
     # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::FunctionConfiguration#function_name #function_name} => String
@@ -5078,6 +5100,7 @@ module Aws::Lambda
     #   * {Types::FunctionConfiguration#signing_profile_version_arn #signing_profile_version_arn} => String
     #   * {Types::FunctionConfiguration#signing_job_arn #signing_job_arn} => String
     #   * {Types::FunctionConfiguration#architectures #architectures} => Array&lt;String&gt;
+    #   * {Types::FunctionConfiguration#ephemeral_storage #ephemeral_storage} => Types::EphemeralStorage
     #
     # @example Request syntax with placeholder values
     #
@@ -5117,6 +5140,9 @@ module Aws::Lambda
     #       entry_point: ["String"],
     #       command: ["String"],
     #       working_directory: "WorkingDirectory",
+    #     },
+    #     ephemeral_storage: {
+    #       size: 1, # required
     #     },
     #   })
     #
@@ -5174,6 +5200,7 @@ module Aws::Lambda
     #   resp.signing_job_arn #=> String
     #   resp.architectures #=> Array
     #   resp.architectures[0] #=> String, one of "x86_64", "arm64"
+    #   resp.ephemeral_storage.size #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionConfiguration AWS API Documentation
     #
@@ -5288,7 +5315,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.82.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

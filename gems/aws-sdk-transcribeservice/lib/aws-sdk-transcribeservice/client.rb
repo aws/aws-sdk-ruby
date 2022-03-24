@@ -1422,6 +1422,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
     #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
     #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
+    #   resp.transcription_job.subtitles.output_start_index #=> Integer
     #   resp.transcription_job.language_id_settings #=> Hash
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
@@ -2472,7 +2473,9 @@ module Aws::TranscribeService
     #   `ConflictException` error.
     #
     # @option params [String] :language_code
-    #   The language code for the language used in the input media file.
+    #   The language code for the language used in the input media file. You
+    #   must include either `LanguageCode` or `IdentifyLanguage` in your
+    #   request.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio or
     #   video file must be encoded at a sample rate of 16,000 Hz or higher.
@@ -2600,6 +2603,9 @@ module Aws::TranscribeService
     #   a `BadRequestException` error if you enter a value for a
     #   `LanguageCode`.
     #
+    #   You must include either `LanguageCode` or `IdentifyLanguage` in your
+    #   request.
+    #
     # @option params [Array<String>] :language_options
     #   An object containing a list of languages that might be present in your
     #   collection of audio files. Automatic language identification chooses a
@@ -2666,6 +2672,7 @@ module Aws::TranscribeService
     #     language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #     subtitles: {
     #       formats: ["vtt"], # accepts vtt, srt
+    #       output_start_index: 1,
     #     },
     #     tags: [
     #       {
@@ -2723,6 +2730,7 @@ module Aws::TranscribeService
     #   resp.transcription_job.subtitles.formats[0] #=> String, one of "vtt", "srt"
     #   resp.transcription_job.subtitles.subtitle_file_uris #=> Array
     #   resp.transcription_job.subtitles.subtitle_file_uris[0] #=> String
+    #   resp.transcription_job.subtitles.output_start_index #=> Integer
     #   resp.transcription_job.language_id_settings #=> Hash
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_name #=> String
     #   resp.transcription_job.language_id_settings["LanguageCode"].vocabulary_filter_name #=> String
@@ -3187,7 +3195,7 @@ module Aws::TranscribeService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transcribeservice'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -115,7 +115,7 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] media_sample_rate_hertz
-    #   The sample rate, in Hertz, of the audio.
+    #   The sample rate, in Hertz, of the input audio.
     #   @return [Integer]
     #
     # @!attribute [rw] media_format
@@ -3589,6 +3589,7 @@ module Aws::TranscribeService
     #         language_options: ["af-ZA"], # accepts af-ZA, ar-AE, ar-SA, cy-GB, da-DK, de-CH, de-DE, en-AB, en-AU, en-GB, en-IE, en-IN, en-US, en-WL, es-ES, es-US, fa-IR, fr-CA, fr-FR, ga-IE, gd-GB, he-IL, hi-IN, id-ID, it-IT, ja-JP, ko-KR, ms-MY, nl-NL, pt-BR, pt-PT, ru-RU, ta-IN, te-IN, tr-TR, zh-CN, zh-TW, th-TH, en-ZA, en-NZ
     #         subtitles: {
     #           formats: ["vtt"], # accepts vtt, srt
+    #           output_start_index: 1,
     #         },
     #         tags: [
     #           {
@@ -3614,7 +3615,9 @@ module Aws::TranscribeService
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language code for the language used in the input media file.
+    #   The language code for the language used in the input media file. You
+    #   must include either `LanguageCode` or `IdentifyLanguage` in your
+    #   request.
     #
     #   To transcribe speech in Modern Standard Arabic (ar-SA), your audio
     #   or video file must be encoded at a sample rate of 16,000 Hz or
@@ -3759,6 +3762,9 @@ module Aws::TranscribeService
     #   identification. Automatic language identification is disabled by
     #   default. You receive a `BadRequestException` error if you enter a
     #   value for a `LanguageCode`.
+    #
+    #   You must include either `LanguageCode` or `IdentifyLanguage` in your
+    #   request.
     #   @return [Boolean]
     #
     # @!attribute [rw] language_options
@@ -3812,7 +3818,7 @@ module Aws::TranscribeService
     end
 
     # @!attribute [rw] transcription_job
-    #   An object containing details of the asynchronous transcription job.
+    #   Provides information about your asynchronous transcription job.
     #   @return [Types::TranscriptionJob]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/StartTranscriptionJobResponse AWS API Documentation
@@ -3823,33 +3829,49 @@ module Aws::TranscribeService
       include Aws::Structure
     end
 
-    # Generate subtitles for your batch transcription job.
+    # Generate subtitles for your batch transcription job. Note that your
+    # subtitle files are placed in the same location as your transcription
+    # output.
     #
     # @note When making an API call, you may pass Subtitles
     #   data as a hash:
     #
     #       {
     #         formats: ["vtt"], # accepts vtt, srt
+    #         output_start_index: 1,
     #       }
     #
     # @!attribute [rw] formats
-    #   Specify the output format for your subtitle file.
+    #   Specify the output format for your subtitle file; if you select both
+    #   `srt` and `vtt` formats, two output files are generated.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_start_index
+    #   Defines the starting value that is assigned to the first subtitle
+    #   segment.
+    #
+    #   The default start index for Amazon Transcribe is `0`, which differs
+    #   from the more widely used standard of `1`. If you're uncertain
+    #   which value to use, we recommend choosing `1`, as this may improve
+    #   compatibility with other services.
+    #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/Subtitles AWS API Documentation
     #
     class Subtitles < Struct.new(
-      :formats)
+      :formats,
+      :output_start_index)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Choose the output format for your subtitle file and the S3 location
-    # where you want your file saved.
+    # The S3 location where your subtitle files are located. Note that your
+    # subtitle files are placed in the same location as your transcription
+    # output. Refer to `TranscriptFileUri` to download your files.
     #
     # @!attribute [rw] formats
-    #   Specify the output format for your subtitle file; if you select both
-    #   SRT and VTT formats, two output files are generated.
+    #   The format of your subtitle files. If your request specified both
+    #   `srt` and `vtt` formats, both formats are shown.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subtitle_file_uris
@@ -3857,11 +3879,18 @@ module Aws::TranscribeService
     #   must be an S3 bucket.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] output_start_index
+    #   Shows the output start index value for your subtitle files. If you
+    #   did not specify a value in your request, the default value of `0` is
+    #   used.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transcribe-2017-10-26/SubtitlesOutput AWS API Documentation
     #
     class SubtitlesOutput < Struct.new(
       :formats,
-      :subtitle_file_uris)
+      :subtitle_file_uris,
+      :output_start_index)
       SENSITIVE = []
       include Aws::Structure
     end
