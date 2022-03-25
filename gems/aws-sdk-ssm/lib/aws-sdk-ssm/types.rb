@@ -130,8 +130,6 @@ module Aws::SSM
     #
     #   `PatchBaseline`\: `pb-012345abcde`
     #
-    #   `Automation`\: `example-c160-4567-8519-012345abcde`
-    #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically,
     #   `ResourceID` is created from the strings that come after the word
@@ -276,7 +274,10 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] document_version
-    #   The version of the document used in the association.
+    #   The version of the document used in the association. If you change a
+    #   document version for a State Manager association, Systems Manager
+    #   immediately runs the association unless you previously specifed the
+    #   `apply-only-at-cron-interval` parameter.
     #
     #   State Manager doesn't support running associations that use a new
     #   version of a document if that document is shared from another
@@ -1564,7 +1565,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         global_filters: {
     #           patch_filters: [ # required
     #             {
@@ -3938,7 +3939,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         name: "BaselineName", # required
     #         global_filters: {
     #           patch_filters: [ # required
@@ -6927,7 +6928,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #         operating_system: "WINDOWS", # required, accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #         property: "PRODUCT", # required, accepts PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY, PRIORITY, SEVERITY
     #         patch_set: "OS", # accepts OS, APPLICATION
     #         max_results: 1,
@@ -8357,7 +8358,7 @@ module Aws::SSM
     #   data as a hash:
     #
     #       {
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #       }
     #
     # @!attribute [rw] operating_system
@@ -8397,7 +8398,7 @@ module Aws::SSM
     #         instance_id: "InstanceId", # required
     #         snapshot_id: "SnapshotId", # required
     #         baseline_override: {
-    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #           operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #           global_filters: {
     #             patch_filters: [ # required
     #               {
@@ -9785,7 +9786,7 @@ module Aws::SSM
     #
     #       {
     #         patch_group: "PatchGroup", # required
-    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN
+    #         operating_system: "WINDOWS", # accepts WINDOWS, AMAZON_LINUX, AMAZON_LINUX_2, UBUNTU, REDHAT_ENTERPRISE_LINUX, SUSE, CENTOS, ORACLE_LINUX, DEBIAN, MACOS, RASPBIAN, ROCKY_LINUX
     #       }
     #
     # @!attribute [rw] patch_group
@@ -17189,8 +17190,6 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
-    #   `Automation`\: `example-c160-4567-8519-012345abcde`
-    #
     #   PatchBaseline: pb-012345abcde
     #
     #   OpsMetadata object: `ResourceID` for tagging is created from the
@@ -18828,7 +18827,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -19962,8 +19961,19 @@ module Aws::SSM
     #   to run immediately after you update it. This parameter isn't
     #   supported for rate expressions.
     #
-    #   Also, if you specified this option when you created the association,
-    #   you can reset it. To do so, specify the
+    #   If you chose this option when you created an association and later
+    #   you edit that association or you make changes to the SSM document on
+    #   which that association is based (by using the Documents page in the
+    #   console), State Manager applies the association at the next
+    #   specified cron interval. For example, if you chose the `Latest`
+    #   version of an SSM document when you created an association and you
+    #   edit the association by choosing a different document version on the
+    #   Documents page, State Manager applies the association at the next
+    #   specified cron interval if you previously selected this option. If
+    #   this option wasn't selected, State Manager immediately runs the
+    #   association.
+    #
+    #   You can reset this option. To do so, specify the
     #   `no-apply-only-at-cron-interval` parameter when you update the
     #   association from the command line. This parameter forces the
     #   association to run immediately after updating it and according to
@@ -20210,6 +20220,12 @@ module Aws::SSM
     #   Systems Manager supports updating only the latest version of the
     #   document. You can specify the version number of the latest version
     #   or use the `$LATEST` variable.
+    #
+    #   <note markdown="1"> If you change a document version for a State Manager association,
+    #   Systems Manager immediately runs the association unless you
+    #   previously specifed the `apply-only-at-cron-interval` parameter.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] document_format

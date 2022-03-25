@@ -860,7 +860,7 @@ module Aws::Batch
     #   @return [Integer]
     #
     # @!attribute [rw] memory
-    #   For jobs run on EC2 resources that didn't specify memory
+    #   For jobs running on EC2 resources that didn't specify memory
     #   requirements using `resourceRequirements`, the number of MiB of
     #   memory reserved for the job. For other jobs, including all run on
     #   Fargate resources, see `resourceRequirements`.
@@ -1136,7 +1136,7 @@ module Aws::Batch
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to override
     #   the `vcpus` parameter that's set in the job definition. It's not
-    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   supported for jobs running on Fargate resources. For jobs running on
     #   EC2 resources, it overrides the `vcpus` parameter set in the job
     #   definition, but doesn't override any vCPU requirement specified in
     #   the `resourceRequirements` structure in the job definition. To
@@ -1155,7 +1155,7 @@ module Aws::Batch
     # @!attribute [rw] memory
     #   This parameter is deprecated, use `resourceRequirements` to override
     #   the memory requirements specified in the job definition. It's not
-    #   supported for jobs that run on Fargate resources. For jobs run on
+    #   supported for jobs running on Fargate resources. For jobs running on
     #   EC2 resources, it overrides the `memory` parameter set in the job
     #   definition, but doesn't override any memory requirement specified
     #   in the `resourceRequirements` structure in the job definition. To
@@ -1340,6 +1340,11 @@ module Aws::Batch
     #
     #    </note>
     #
+    #   * Images in Amazon ECR Public repositories use the full
+    #     `registry/repository[:tag]` or `registry/repository[@digest]`
+    #     naming conventions. For example,
+    #     `public.ecr.aws/registry_alias/my-web-app:latest `.
+    #
     #   * Images in Amazon ECR repositories use the full registry and
     #     repository URI (for example,
     #     `012345678910.dkr.ecr.<region-name>.amazonaws.com/<repository-name>`).
@@ -1363,7 +1368,7 @@ module Aws::Batch
     # @!attribute [rw] vcpus
     #   This parameter is deprecated, use `resourceRequirements` to specify
     #   the vCPU requirements for the job definition. It's not supported
-    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   for jobs running on Fargate resources. For jobs running on EC2
     #   resources, it specifies the number of vCPUs reserved for the job.
     #
     #   Each vCPU is equivalent to 1,024 CPU shares. This parameter maps to
@@ -1382,7 +1387,7 @@ module Aws::Batch
     # @!attribute [rw] memory
     #   This parameter is deprecated, use `resourceRequirements` to specify
     #   the memory requirements for the job definition. It's not supported
-    #   for jobs that run on Fargate resources. For jobs run on EC2
+    #   for jobs running on Fargate resources. For jobs running on EC2
     #   resources, it specifies the memory hard limit (in MiB) for a
     #   container. If your container attempts to exceed the specified
     #   number, it's terminated. You must specify at least 4 MiB of memory
@@ -1746,7 +1751,7 @@ module Aws::Batch
     #   provided for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
-    #   `UNMANAGED`/
+    #   `UNMANAGED`.
     #
     #    </note>
     #   @return [Integer]

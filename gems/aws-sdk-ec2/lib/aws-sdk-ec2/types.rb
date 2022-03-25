@@ -651,6 +651,25 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an additional detail for a path analysis.
+    #
+    # @!attribute [rw] additional_detail_type
+    #   The information type.
+    #   @return [String]
+    #
+    # @!attribute [rw] component
+    #   The path component.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AdditionalDetail AWS API Documentation
+    #
+    class AdditionalDetail < Struct.new(
+      :additional_detail_type,
+      :component)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an Elastic IP address, or a carrier IP address.
     #
     # @!attribute [rw] instance_id
@@ -1403,15 +1422,15 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] origin
-    #   Describes how the route was created. The following are possible
+    #   Describes how the route was created. The following are the possible
     #   values:
     #
-    #   * `CreateRouteTable` - The route was automatically created when the
+    #   * CreateRouteTable - The route was automatically created when the
     #     route table was created.
     #
-    #   * `CreateRoute` - The route was manually added to the route table.
+    #   * CreateRoute - The route was manually added to the route table.
     #
-    #   * `EnableVgwRoutePropagation` - The route was propagated by route
+    #   * EnableVgwRoutePropagation - The route was propagated by route
     #     propagation.
     #   @return [String]
     #
@@ -1447,7 +1466,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] direction
-    #   The direction. The following are possible values:
+    #   The direction. The following are the possible values:
     #
     #   * egress
     #
@@ -18362,7 +18381,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         pool_ids: ["CoipPoolId"],
+    #         pool_ids: ["Ipv4PoolCoipId"],
     #         filters: [
     #           {
     #             name: "String",
@@ -23492,7 +23511,7 @@ module Aws::EC2
     #   @return [Time]
     #
     # @!attribute [rw] filters
-    #   The filters. The following are possible values:
+    #   The filters. The following are the possible values:
     #
     #   * PathFound - A Boolean value that indicates whether a feasible path
     #     is found.
@@ -23572,7 +23591,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] filters
-    #   The filters. The following are possible values:
+    #   The filters. The following are the possible values:
     #
     #   * Destination - The ID of the resource.
     #
@@ -32432,7 +32451,7 @@ module Aws::EC2
     #   @return [Types::AnalysisComponent]
     #
     # @!attribute [rw] direction
-    #   The direction. The following are possible values:
+    #   The direction. The following are the possible values:
     #
     #   * egress
     #
@@ -32571,6 +32590,22 @@ module Aws::EC2
     #   The VPN gateway.
     #   @return [Types::AnalysisComponent]
     #
+    # @!attribute [rw] transit_gateway
+    #   The transit gateway.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] transit_gateway_route_table
+    #   The transit gateway route table.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] transit_gateway_route_table_route
+    #   The transit gateway route table route.
+    #   @return [Types::TransitGatewayRouteTableRoute]
+    #
+    # @!attribute [rw] transit_gateway_attachment
+    #   The transit gateway attachment.
+    #   @return [Types::AnalysisComponent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Explanation AWS API Documentation
     #
     class Explanation < Struct.new(
@@ -32618,7 +32653,11 @@ module Aws::EC2
       :vpc,
       :vpc_endpoint,
       :vpn_connection,
-      :vpn_gateway)
+      :vpn_gateway,
+      :transit_gateway,
+      :transit_gateway_route_table,
+      :transit_gateway_route_table_route,
+      :transit_gateway_attachment)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34757,7 +34796,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         pool_id: "CoipPoolId", # required
+    #         pool_id: "Ipv4PoolCoipId", # required
     #         filters: [
     #           {
     #             name: "String",
@@ -52339,6 +52378,18 @@ module Aws::EC2
     #   The component VPC.
     #   @return [Types::AnalysisComponent]
     #
+    # @!attribute [rw] additional_details
+    #   The additional details.
+    #   @return [Array<Types::AdditionalDetail>]
+    #
+    # @!attribute [rw] transit_gateway
+    #   Describes a path component.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] transit_gateway_route_table_route
+    #   The route in a transit gateway route table.
+    #   @return [Types::TransitGatewayRouteTableRoute]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PathComponent AWS API Documentation
     #
     class PathComponent < Struct.new(
@@ -52353,7 +52404,10 @@ module Aws::EC2
       :security_group_rule,
       :source_vpc,
       :subnet,
-      :vpc)
+      :vpc,
+      :additional_details,
+      :transit_gateway,
+      :transit_gateway_route_table_route)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -66383,6 +66437,54 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a route in a transit gateway route table.
+    #
+    # @!attribute [rw] destination_cidr
+    #   The CIDR block used for destination matches.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the route.
+    #   @return [String]
+    #
+    # @!attribute [rw] route_origin
+    #   The route origin. The following are the possible values:
+    #
+    #   * static
+    #
+    #   * propagated
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix_list_id
+    #   The ID of the prefix list.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the route attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource for the route attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type for the route attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayRouteTableRoute AWS API Documentation
+    #
+    class TransitGatewayRouteTableRoute < Struct.new(
+      :destination_cidr,
+      :state,
+      :route_origin,
+      :prefix_list_id,
+      :attachment_id,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.60.0 (2022-03-25)
+------------------
+
+* Feature - Bug Fix: Fixed a bug where shapes were marked as unboxed and were not serialized and sent over the wire, causing an API error from the service.
+
 1.59.0 (2022-02-24)
 ------------------
 

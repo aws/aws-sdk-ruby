@@ -491,7 +491,7 @@ module Aws::Batch
     #   for a fair share job queue, no vCPU capacity is reserved.
     #
     #   <note markdown="1"> This parameter is only supported when the `type` parameter is set to
-    #   `UNMANAGED`/
+    #   `UNMANAGED`.
     #
     #    </note>
     #
@@ -2623,7 +2623,7 @@ module Aws::Batch
     # `resourceRequirements` objects in the job definition are the
     # exception. They can't be overridden this way using the `memory` and
     # `vcpus` parameters. Rather, you must specify updates to job definition
-    # parameters in a `ResourceRequirements` object that's included in the
+    # parameters in a `resourceRequirements` object that's included in the
     # `containerOverrides` parameter.
     #
     # <note markdown="1"> Job queues with a scheduling policy are limited to 500 active fair
@@ -3282,7 +3282,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

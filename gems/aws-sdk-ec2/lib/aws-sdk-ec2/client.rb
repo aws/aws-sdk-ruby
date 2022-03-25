@@ -18079,7 +18079,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_coip_pools({
-    #     pool_ids: ["CoipPoolId"],
+    #     pool_ids: ["Ipv4PoolCoipId"],
     #     filters: [
     #       {
     #         name: "String",
@@ -24365,7 +24365,7 @@ module Aws::EC2
     #   The time when the network insights analyses ended.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. The following are possible values:
+    #   The filters. The following are the possible values:
     #
     #   * PathFound - A Boolean value that indicates whether a feasible path
     #     is found.
@@ -24491,6 +24491,21 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].forward_path_components[0].vpc.id #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].vpc.arn #=> String
     #   resp.network_insights_analyses[0].forward_path_components[0].vpc.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details #=> Array
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].additional_detail_type #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway.name #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analyses[0].forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
     #   resp.network_insights_analyses[0].return_path_components #=> Array
     #   resp.network_insights_analyses[0].return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analyses[0].return_path_components[0].acl_rule.cidr #=> String
@@ -24557,6 +24572,21 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].return_path_components[0].vpc.id #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].vpc.arn #=> String
     #   resp.network_insights_analyses[0].return_path_components[0].vpc.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details #=> Array
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].additional_detail_type #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway.name #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analyses[0].return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
     #   resp.network_insights_analyses[0].explanations #=> Array
     #   resp.network_insights_analyses[0].explanations[0].acl.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].acl.arn #=> String
@@ -24688,6 +24718,22 @@ module Aws::EC2
     #   resp.network_insights_analyses[0].explanations[0].vpn_gateway.id #=> String
     #   resp.network_insights_analyses[0].explanations[0].vpn_gateway.arn #=> String
     #   resp.network_insights_analyses[0].explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analyses[0].explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints #=> Array
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analyses[0].alternate_path_hints[0].component_arn #=> String
@@ -24711,7 +24757,7 @@ module Aws::EC2
     #   The IDs of the paths.
     #
     # @option params [Array<Types::Filter>] :filters
-    #   The filters. The following are possible values:
+    #   The filters. The following are the possible values:
     #
     #   * Destination - The ID of the resource.
     #
@@ -34627,7 +34673,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_coip_pool_usage({
-    #     pool_id: "CoipPoolId", # required
+    #     pool_id: "Ipv4PoolCoipId", # required
     #     filters: [
     #       {
     #         name: "String",
@@ -35988,6 +36034,21 @@ module Aws::EC2
     #   resp.analysis_findings[0].finding_components[0].vpc.id #=> String
     #   resp.analysis_findings[0].finding_components[0].vpc.arn #=> String
     #   resp.analysis_findings[0].finding_components[0].vpc.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details #=> Array
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].additional_detail_type #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].additional_details[0].component.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway.id #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway.arn #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway.name #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.state #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.analysis_findings[0].finding_components[0].transit_gateway_route_table_route.resource_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetNetworkInsightsAccessScopeAnalysisFindings AWS API Documentation
@@ -48319,6 +48380,21 @@ module Aws::EC2
     #   resp.network_insights_analysis.forward_path_components[0].vpc.id #=> String
     #   resp.network_insights_analysis.forward_path_components[0].vpc.arn #=> String
     #   resp.network_insights_analysis.forward_path_components[0].vpc.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details #=> Array
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].additional_detail_type #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway.name #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analysis.forward_path_components[0].transit_gateway_route_table_route.resource_type #=> String
     #   resp.network_insights_analysis.return_path_components #=> Array
     #   resp.network_insights_analysis.return_path_components[0].sequence_number #=> Integer
     #   resp.network_insights_analysis.return_path_components[0].acl_rule.cidr #=> String
@@ -48385,6 +48461,21 @@ module Aws::EC2
     #   resp.network_insights_analysis.return_path_components[0].vpc.id #=> String
     #   resp.network_insights_analysis.return_path_components[0].vpc.arn #=> String
     #   resp.network_insights_analysis.return_path_components[0].vpc.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details #=> Array
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].additional_detail_type #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].additional_details[0].component.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway.id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway.name #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analysis.return_path_components[0].transit_gateway_route_table_route.resource_type #=> String
     #   resp.network_insights_analysis.explanations #=> Array
     #   resp.network_insights_analysis.explanations[0].acl.id #=> String
     #   resp.network_insights_analysis.explanations[0].acl.arn #=> String
@@ -48516,6 +48607,22 @@ module Aws::EC2
     #   resp.network_insights_analysis.explanations[0].vpn_gateway.id #=> String
     #   resp.network_insights_analysis.explanations[0].vpn_gateway.arn #=> String
     #   resp.network_insights_analysis.explanations[0].vpn_gateway.name #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway.id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway.name #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table.id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table.name #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.destination_cidr #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.state #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.route_origin #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.prefix_list_id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.attachment_id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.resource_id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_route_table_route.resource_type #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.id #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.arn #=> String
+    #   resp.network_insights_analysis.explanations[0].transit_gateway_attachment.name #=> String
     #   resp.network_insights_analysis.alternate_path_hints #=> Array
     #   resp.network_insights_analysis.alternate_path_hints[0].component_id #=> String
     #   resp.network_insights_analysis.alternate_path_hints[0].component_arn #=> String
@@ -49343,7 +49450,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.303.0'
+      context[:gem_version] = '1.304.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.134.0 (2022-03-25)
+------------------
+
+* Feature - This Patch Manager release supports creating, updating, and deleting Patch Baselines for Rocky Linux OS.
+
 1.133.0 (2022-03-23)
 ------------------
 

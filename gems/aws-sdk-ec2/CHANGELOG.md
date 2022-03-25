@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.304.0 (2022-03-25)
+------------------
+
+* Feature - This is release adds support for Amazon VPC Reachability Analyzer to analyze path through a Transit Gateway.
+
 1.303.0 (2022-03-15)
 ------------------
 

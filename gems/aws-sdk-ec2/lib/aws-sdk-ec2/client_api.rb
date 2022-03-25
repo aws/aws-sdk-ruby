@@ -54,6 +54,8 @@ module Aws::EC2
     AddIpamOperatingRegionSet = Shapes::ListShape.new(name: 'AddIpamOperatingRegionSet')
     AddPrefixListEntries = Shapes::ListShape.new(name: 'AddPrefixListEntries')
     AddPrefixListEntry = Shapes::StructureShape.new(name: 'AddPrefixListEntry')
+    AdditionalDetail = Shapes::StructureShape.new(name: 'AdditionalDetail')
+    AdditionalDetailList = Shapes::ListShape.new(name: 'AdditionalDetailList')
     Address = Shapes::StructureShape.new(name: 'Address')
     AddressAttribute = Shapes::StructureShape.new(name: 'AddressAttribute')
     AddressAttributeName = Shapes::StringShape.new(name: 'AddressAttributeName')
@@ -1546,6 +1548,7 @@ module Aws::EC2
     IpamScopeType = Shapes::StringShape.new(name: 'IpamScopeType')
     IpamSet = Shapes::ListShape.new(name: 'IpamSet')
     IpamState = Shapes::StringShape.new(name: 'IpamState')
+    Ipv4PoolCoipId = Shapes::StringShape.new(name: 'Ipv4PoolCoipId')
     Ipv4PoolEc2Id = Shapes::StringShape.new(name: 'Ipv4PoolEc2Id')
     Ipv4PrefixList = Shapes::ListShape.new(name: 'Ipv4PrefixList')
     Ipv4PrefixListResponse = Shapes::ListShape.new(name: 'Ipv4PrefixListResponse')
@@ -2514,6 +2517,7 @@ module Aws::EC2
     TransitGatewayRouteTableList = Shapes::ListShape.new(name: 'TransitGatewayRouteTableList')
     TransitGatewayRouteTablePropagation = Shapes::StructureShape.new(name: 'TransitGatewayRouteTablePropagation')
     TransitGatewayRouteTablePropagationList = Shapes::ListShape.new(name: 'TransitGatewayRouteTablePropagationList')
+    TransitGatewayRouteTableRoute = Shapes::StructureShape.new(name: 'TransitGatewayRouteTableRoute')
     TransitGatewayRouteTableState = Shapes::StringShape.new(name: 'TransitGatewayRouteTableState')
     TransitGatewayRouteType = Shapes::StringShape.new(name: 'TransitGatewayRouteType')
     TransitGatewayState = Shapes::StringShape.new(name: 'TransitGatewayState')
@@ -2791,6 +2795,12 @@ module Aws::EC2
     AddPrefixListEntry.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     AddPrefixListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     AddPrefixListEntry.struct_class = Types::AddPrefixListEntry
+
+    AdditionalDetail.add_member(:additional_detail_type, Shapes::ShapeRef.new(shape: String, location_name: "additionalDetailType"))
+    AdditionalDetail.add_member(:component, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "component"))
+    AdditionalDetail.struct_class = Types::AdditionalDetail
+
+    AdditionalDetailList.member = Shapes::ShapeRef.new(shape: AdditionalDetail, location_name: "item")
 
     Address.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
     Address.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -3661,14 +3671,14 @@ module Aws::EC2
 
     CoipAddressUsageSet.member = Shapes::ShapeRef.new(shape: CoipAddressUsage, location_name: "item")
 
-    CoipPool.add_member(:pool_id, Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "poolId"))
+    CoipPool.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, location_name: "poolId"))
     CoipPool.add_member(:pool_cidrs, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "poolCidrSet"))
     CoipPool.add_member(:local_gateway_route_table_id, Shapes::ShapeRef.new(shape: LocalGatewayRoutetableId, location_name: "localGatewayRouteTableId"))
     CoipPool.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CoipPool.add_member(:pool_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "poolArn"))
     CoipPool.struct_class = Types::CoipPool
 
-    CoipPoolIdSet.member = Shapes::ShapeRef.new(shape: CoipPoolId, location_name: "item")
+    CoipPoolIdSet.member = Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, location_name: "item")
 
     CoipPoolSet.member = Shapes::ShapeRef.new(shape: CoipPool, location_name: "item")
 
@@ -7171,6 +7181,10 @@ module Aws::EC2
     Explanation.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "vpcEndpoint"))
     Explanation.add_member(:vpn_connection, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "vpnConnection"))
     Explanation.add_member(:vpn_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "vpnGateway"))
+    Explanation.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
+    Explanation.add_member(:transit_gateway_route_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayRouteTable"))
+    Explanation.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    Explanation.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayAttachment"))
     Explanation.struct_class = Types::Explanation
 
     ExplanationList.member = Shapes::ShapeRef.new(shape: Explanation, location_name: "item")
@@ -7516,7 +7530,7 @@ module Aws::EC2
     GetCapacityReservationUsageResult.add_member(:instance_usages, Shapes::ShapeRef.new(shape: InstanceUsageSet, location_name: "instanceUsageSet"))
     GetCapacityReservationUsageResult.struct_class = Types::GetCapacityReservationUsageResult
 
-    GetCoipPoolUsageRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: CoipPoolId, required: true, location_name: "PoolId"))
+    GetCoipPoolUsageRequest.add_member(:pool_id, Shapes::ShapeRef.new(shape: Ipv4PoolCoipId, required: true, location_name: "PoolId"))
     GetCoipPoolUsageRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetCoipPoolUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: CoipPoolMaxResults, location_name: "MaxResults"))
     GetCoipPoolUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -10360,6 +10374,9 @@ module Aws::EC2
     PathComponent.add_member(:source_vpc, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "sourceVpc"))
     PathComponent.add_member(:subnet, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "subnet"))
     PathComponent.add_member(:vpc, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "vpc"))
+    PathComponent.add_member(:additional_details, Shapes::ShapeRef.new(shape: AdditionalDetailList, location_name: "additionalDetailSet"))
+    PathComponent.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
+    PathComponent.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
     PathComponent.struct_class = Types::PathComponent
 
     PathComponentList.member = Shapes::ShapeRef.new(shape: PathComponent, location_name: "item")
@@ -12629,6 +12646,15 @@ module Aws::EC2
     TransitGatewayRouteTablePropagation.struct_class = Types::TransitGatewayRouteTablePropagation
 
     TransitGatewayRouteTablePropagationList.member = Shapes::ShapeRef.new(shape: TransitGatewayRouteTablePropagation, location_name: "item")
+
+    TransitGatewayRouteTableRoute.add_member(:destination_cidr, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidr"))
+    TransitGatewayRouteTableRoute.add_member(:state, Shapes::ShapeRef.new(shape: String, location_name: "state"))
+    TransitGatewayRouteTableRoute.add_member(:route_origin, Shapes::ShapeRef.new(shape: String, location_name: "routeOrigin"))
+    TransitGatewayRouteTableRoute.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListId"))
+    TransitGatewayRouteTableRoute.add_member(:attachment_id, Shapes::ShapeRef.new(shape: String, location_name: "attachmentId"))
+    TransitGatewayRouteTableRoute.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+    TransitGatewayRouteTableRoute.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    TransitGatewayRouteTableRoute.struct_class = Types::TransitGatewayRouteTableRoute
 
     TransitGatewaySubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId, location_name: "item")
 
