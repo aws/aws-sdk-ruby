@@ -453,6 +453,10 @@ module Aws::MediaLive
     M3u8Scte35Behavior = Shapes::StringShape.new(name: 'M3u8Scte35Behavior')
     M3u8Settings = Shapes::StructureShape.new(name: 'M3u8Settings')
     M3u8TimedMetadataBehavior = Shapes::StringShape.new(name: 'M3u8TimedMetadataBehavior')
+    MaintenanceCreateSettings = Shapes::StructureShape.new(name: 'MaintenanceCreateSettings')
+    MaintenanceDay = Shapes::StringShape.new(name: 'MaintenanceDay')
+    MaintenanceStatus = Shapes::StructureShape.new(name: 'MaintenanceStatus')
+    MaintenanceUpdateSettings = Shapes::StructureShape.new(name: 'MaintenanceUpdateSettings')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MediaConnectFlow = Shapes::StructureShape.new(name: 'MediaConnectFlow')
     MediaConnectFlowRequest = Shapes::StructureShape.new(name: 'MediaConnectFlowRequest')
@@ -805,6 +809,7 @@ module Aws::MediaLive
     __stringMin34Max34 = Shapes::StringShape.new(name: '__stringMin34Max34')
     __stringMin3Max3 = Shapes::StringShape.new(name: '__stringMin3Max3')
     __stringMin6Max6 = Shapes::StringShape.new(name: '__stringMin6Max6')
+    __stringPattern010920300 = Shapes::StringShape.new(name: '__stringPattern010920300')
     __timestamp = Shapes::TimestampShape.new(name: '__timestamp')
     __timestampIso8601 = Shapes::TimestampShape.new(name: '__timestampIso8601', timestampFormat: "iso8601")
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -1136,6 +1141,7 @@ module Aws::MediaLive
     Channel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     Channel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     Channel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    Channel.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     Channel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     Channel.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     Channel.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
@@ -1161,6 +1167,7 @@ module Aws::MediaLive
     ChannelSummary.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     ChannelSummary.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     ChannelSummary.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    ChannelSummary.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     ChannelSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     ChannelSummary.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
     ChannelSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
@@ -1186,6 +1193,7 @@ module Aws::MediaLive
     CreateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     CreateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     CreateChannel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    CreateChannel.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceCreateSettings, location_name: "maintenance"))
     CreateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannel.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannel.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
@@ -1201,6 +1209,7 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     CreateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     CreateChannelRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    CreateChannelRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceCreateSettings, location_name: "maintenance"))
     CreateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CreateChannelRequest.add_member(:request_id, Shapes::ShapeRef.new(shape: __string, location_name: "requestId", metadata: {"idempotencyToken"=>true}))
     CreateChannelRequest.add_member(:reserved, Shapes::ShapeRef.new(shape: __string, deprecated: true, location_name: "reserved"))
@@ -1326,6 +1335,7 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     DeleteChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     DeleteChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    DeleteChannelResponse.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     DeleteChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DeleteChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     DeleteChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
@@ -1416,6 +1426,7 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     DescribeChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     DescribeChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    DescribeChannelResponse.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     DescribeChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     DescribeChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     DescribeChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
@@ -2328,6 +2339,21 @@ module Aws::MediaLive
     M3u8Settings.add_member(:video_pid, Shapes::ShapeRef.new(shape: __string, location_name: "videoPid"))
     M3u8Settings.struct_class = Types::M3u8Settings
 
+    MaintenanceCreateSettings.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
+    MaintenanceCreateSettings.add_member(:maintenance_start_time, Shapes::ShapeRef.new(shape: __stringPattern010920300, location_name: "maintenanceStartTime"))
+    MaintenanceCreateSettings.struct_class = Types::MaintenanceCreateSettings
+
+    MaintenanceStatus.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
+    MaintenanceStatus.add_member(:maintenance_deadline, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceDeadline"))
+    MaintenanceStatus.add_member(:maintenance_scheduled_date, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceScheduledDate"))
+    MaintenanceStatus.add_member(:maintenance_start_time, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceStartTime"))
+    MaintenanceStatus.struct_class = Types::MaintenanceStatus
+
+    MaintenanceUpdateSettings.add_member(:maintenance_day, Shapes::ShapeRef.new(shape: MaintenanceDay, location_name: "maintenanceDay"))
+    MaintenanceUpdateSettings.add_member(:maintenance_scheduled_date, Shapes::ShapeRef.new(shape: __string, location_name: "maintenanceScheduledDate"))
+    MaintenanceUpdateSettings.add_member(:maintenance_start_time, Shapes::ShapeRef.new(shape: __stringPattern010920300, location_name: "maintenanceStartTime"))
+    MaintenanceUpdateSettings.struct_class = Types::MaintenanceUpdateSettings
+
     MediaConnectFlow.add_member(:flow_arn, Shapes::ShapeRef.new(shape: __string, location_name: "flowArn"))
     MediaConnectFlow.struct_class = Types::MediaConnectFlow
 
@@ -2804,6 +2830,7 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     StartChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     StartChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    StartChannelResponse.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     StartChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     StartChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     StartChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
@@ -2864,6 +2891,7 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     StopChannelResponse.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     StopChannelResponse.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    StopChannelResponse.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceStatus, location_name: "maintenance"))
     StopChannelResponse.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     StopChannelResponse.add_member(:pipeline_details, Shapes::ShapeRef.new(shape: __listOfPipelineDetail, location_name: "pipelineDetails"))
     StopChannelResponse.add_member(:pipelines_running_count, Shapes::ShapeRef.new(shape: __integer, location_name: "pipelinesRunningCount"))
@@ -2964,6 +2992,7 @@ module Aws::MediaLive
     UpdateChannel.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannel.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     UpdateChannel.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    UpdateChannel.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceUpdateSettings, location_name: "maintenance"))
     UpdateChannel.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannel.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannel.struct_class = Types::UpdateChannel
@@ -2987,6 +3016,7 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:input_attachments, Shapes::ShapeRef.new(shape: __listOfInputAttachment, location_name: "inputAttachments"))
     UpdateChannelRequest.add_member(:input_specification, Shapes::ShapeRef.new(shape: InputSpecification, location_name: "inputSpecification"))
     UpdateChannelRequest.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "logLevel"))
+    UpdateChannelRequest.add_member(:maintenance, Shapes::ShapeRef.new(shape: MaintenanceUpdateSettings, location_name: "maintenance"))
     UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     UpdateChannelRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: __string, location_name: "roleArn"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest

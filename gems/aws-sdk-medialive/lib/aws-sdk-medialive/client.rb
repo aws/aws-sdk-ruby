@@ -837,6 +837,8 @@ module Aws::MediaLive
     # @option params [String] :log_level
     #   The log level the user wants for their channel.
     #
+    # @option params [Types::MaintenanceCreateSettings] :maintenance
+    #
     # @option params [String] :name
     #
     # @option params [String] :request_id
@@ -1810,6 +1812,10 @@ module Aws::MediaLive
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
     #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #     maintenance: {
+    #       maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #       maintenance_start_time: "__stringPattern010920300",
+    #     },
     #     name: "__string",
     #     request_id: "__string",
     #     reserved: "__string",
@@ -2421,6 +2427,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.channel.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.channel.maintenance.maintenance_deadline #=> String
+    #   resp.channel.maintenance.maintenance_scheduled_date #=> String
+    #   resp.channel.maintenance.maintenance_start_time #=> String
     #   resp.channel.name #=> String
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
@@ -2867,6 +2877,7 @@ module Aws::MediaLive
     #   * {Types::DeleteChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DeleteChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::DeleteChannelResponse#log_level #log_level} => String
+    #   * {Types::DeleteChannelResponse#maintenance #maintenance} => Types::MaintenanceStatus
     #   * {Types::DeleteChannelResponse#name #name} => String
     #   * {Types::DeleteChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::DeleteChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
@@ -3478,6 +3489,10 @@ module Aws::MediaLive
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.maintenance.maintenance_deadline #=> String
+    #   resp.maintenance.maintenance_scheduled_date #=> String
+    #   resp.maintenance.maintenance_start_time #=> String
     #   resp.name #=> String
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
@@ -3794,6 +3809,7 @@ module Aws::MediaLive
     #   * {Types::DescribeChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::DescribeChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::DescribeChannelResponse#log_level #log_level} => String
+    #   * {Types::DescribeChannelResponse#maintenance #maintenance} => Types::MaintenanceStatus
     #   * {Types::DescribeChannelResponse#name #name} => String
     #   * {Types::DescribeChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::DescribeChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
@@ -4405,6 +4421,10 @@ module Aws::MediaLive
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.maintenance.maintenance_deadline #=> String
+    #   resp.maintenance.maintenance_scheduled_date #=> String
+    #   resp.maintenance.maintenance_start_time #=> String
     #   resp.name #=> String
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
@@ -5110,6 +5130,10 @@ module Aws::MediaLive
     #   resp.channels[0].input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channels[0].input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channels[0].log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.channels[0].maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.channels[0].maintenance.maintenance_deadline #=> String
+    #   resp.channels[0].maintenance.maintenance_scheduled_date #=> String
+    #   resp.channels[0].maintenance.maintenance_start_time #=> String
     #   resp.channels[0].name #=> String
     #   resp.channels[0].pipelines_running_count #=> Integer
     #   resp.channels[0].role_arn #=> String
@@ -5736,6 +5760,7 @@ module Aws::MediaLive
     #   * {Types::StartChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StartChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::StartChannelResponse#log_level #log_level} => String
+    #   * {Types::StartChannelResponse#maintenance #maintenance} => Types::MaintenanceStatus
     #   * {Types::StartChannelResponse#name #name} => String
     #   * {Types::StartChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::StartChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
@@ -6347,6 +6372,10 @@ module Aws::MediaLive
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.maintenance.maintenance_deadline #=> String
+    #   resp.maintenance.maintenance_scheduled_date #=> String
+    #   resp.maintenance.maintenance_start_time #=> String
     #   resp.name #=> String
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
@@ -6445,6 +6474,7 @@ module Aws::MediaLive
     #   * {Types::StopChannelResponse#input_attachments #input_attachments} => Array&lt;Types::InputAttachment&gt;
     #   * {Types::StopChannelResponse#input_specification #input_specification} => Types::InputSpecification
     #   * {Types::StopChannelResponse#log_level #log_level} => String
+    #   * {Types::StopChannelResponse#maintenance #maintenance} => Types::MaintenanceStatus
     #   * {Types::StopChannelResponse#name #name} => String
     #   * {Types::StopChannelResponse#pipeline_details #pipeline_details} => Array&lt;Types::PipelineDetail&gt;
     #   * {Types::StopChannelResponse#pipelines_running_count #pipelines_running_count} => Integer
@@ -7056,6 +7086,10 @@ module Aws::MediaLive
     #   resp.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.maintenance.maintenance_deadline #=> String
+    #   resp.maintenance.maintenance_scheduled_date #=> String
+    #   resp.maintenance.maintenance_start_time #=> String
     #   resp.name #=> String
     #   resp.pipeline_details #=> Array
     #   resp.pipeline_details[0].active_input_attachment_name #=> String
@@ -7186,6 +7220,8 @@ module Aws::MediaLive
     #
     # @option params [String] :log_level
     #   The log level the user wants for their channel.
+    #
+    # @option params [Types::MaintenanceUpdateSettings] :maintenance
     #
     # @option params [String] :name
     #
@@ -8147,6 +8183,11 @@ module Aws::MediaLive
     #       resolution: "SD", # accepts SD, HD, UHD
     #     },
     #     log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #     maintenance: {
+    #       maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #       maintenance_scheduled_date: "__string",
+    #       maintenance_start_time: "__stringPattern010920300",
+    #     },
     #     name: "__string",
     #     role_arn: "__string",
     #   })
@@ -8748,6 +8789,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.channel.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.channel.maintenance.maintenance_deadline #=> String
+    #   resp.channel.maintenance.maintenance_scheduled_date #=> String
+    #   resp.channel.maintenance.maintenance_start_time #=> String
     #   resp.channel.name #=> String
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
@@ -9418,6 +9463,10 @@ module Aws::MediaLive
     #   resp.channel.input_specification.maximum_bitrate #=> String, one of "MAX_10_MBPS", "MAX_20_MBPS", "MAX_50_MBPS"
     #   resp.channel.input_specification.resolution #=> String, one of "SD", "HD", "UHD"
     #   resp.channel.log_level #=> String, one of "ERROR", "WARNING", "INFO", "DEBUG", "DISABLED"
+    #   resp.channel.maintenance.maintenance_day #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.channel.maintenance.maintenance_deadline #=> String
+    #   resp.channel.maintenance.maintenance_scheduled_date #=> String
+    #   resp.channel.maintenance.maintenance_start_time #=> String
     #   resp.channel.name #=> String
     #   resp.channel.pipeline_details #=> Array
     #   resp.channel.pipeline_details[0].active_input_attachment_name #=> String
@@ -9875,7 +9924,7 @@ module Aws::MediaLive
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

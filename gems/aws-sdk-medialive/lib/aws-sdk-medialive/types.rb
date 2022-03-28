@@ -788,9 +788,6 @@ module Aws::MediaLive
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The name of this AudioDescription. Outputs will use this name to
-    #   uniquely identify this AudioDescription. Description names should be
-    #   unique within this Live Event.
     #   @return [String]
     #
     # @!attribute [rw] remix_settings
@@ -2935,6 +2932,10 @@ module Aws::MediaLive
     #   The log level being written to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -2976,6 +2977,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -3054,6 +3056,10 @@ module Aws::MediaLive
     #   The log level being written to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   The name of the channel. (user-mutable)
     #   @return [String]
@@ -3090,6 +3096,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipelines_running_count,
       :role_arn,
@@ -3173,6 +3180,10 @@ module Aws::MediaLive
     #   The log level to write to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceCreateSettings]
+    #
     # @!attribute [rw] name
     #   Name of channel.
     #   @return [String]
@@ -3209,6 +3220,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :request_id,
       :reserved,
@@ -4172,6 +4184,10 @@ module Aws::MediaLive
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
     #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #         maintenance: {
+    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           maintenance_start_time: "__stringPattern010920300",
+    #         },
     #         name: "__string",
     #         request_id: "__string",
     #         reserved: "__string",
@@ -4211,6 +4227,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceCreateSettings]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -4244,6 +4263,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :request_id,
       :reserved,
@@ -4877,6 +4897,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -4912,6 +4935,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -5284,6 +5308,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -5319,6 +5346,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -6433,10 +6461,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] copyright_holder
-    #   Applies only if you plan to convert these source captions to
-    #   EBU-TT-D or TTML in an output. Complete this field if you want to
-    #   include the name of the copyright holder in the copyright metadata
-    #   tag in the TTML
+    #   Complete this field if you want to include the name of the copyright
+    #   holder in the copyright tag in the captions metadata.
     #   @return [String]
     #
     # @!attribute [rw] fill_line_gap
@@ -12373,6 +12399,96 @@ module Aws::MediaLive
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass MaintenanceCreateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         maintenance_start_time: "__stringPattern010920300",
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   Choose one day of the week for maintenance. The chosen day is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   Choose the hour that maintenance will start. The chosen time is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceCreateSettings AWS API Documentation
+    #
+    class MaintenanceCreateSettings < Struct.new(
+      :maintenance_day,
+      :maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] maintenance_day
+    #   The currently selected maintenance day.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_deadline
+    #   Maintenance is required by the displayed date and time. Date and
+    #   time is in ISO.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   The currently scheduled maintenance date and time. Date and time is
+    #   in ISO.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   The currently selected maintenance start time. Time is in UTC.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceStatus AWS API Documentation
+    #
+    class MaintenanceStatus < Struct.new(
+      :maintenance_day,
+      :maintenance_deadline,
+      :maintenance_scheduled_date,
+      :maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass MaintenanceUpdateSettings
+    #   data as a hash:
+    #
+    #       {
+    #         maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         maintenance_scheduled_date: "__string",
+    #         maintenance_start_time: "__stringPattern010920300",
+    #       }
+    #
+    # @!attribute [rw] maintenance_day
+    #   Choose one day of the week for maintenance. The chosen day is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_scheduled_date
+    #   Choose a specific date for maintenance to occur. The chosen date is
+    #   used for the next maintenance window only.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_start_time
+    #   Choose the hour that maintenance will start. The chosen time is used
+    #   for all future maintenance windows.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MaintenanceUpdateSettings AWS API Documentation
+    #
+    class MaintenanceUpdateSettings < Struct.new(
+      :maintenance_day,
+      :maintenance_scheduled_date,
+      :maintenance_start_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The settings for a MediaConnect Flow.
     #
     # @!attribute [rw] flow_arn
@@ -14537,9 +14653,7 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] name
-    #   Custom output group name optionally defined by the user. Only
-    #   letters, numbers, and the underscore character allowed; only 32
-    #   characters allowed.
+    #   Custom output group name optionally defined by the user.
     #   @return [String]
     #
     # @!attribute [rw] output_group_settings
@@ -16645,6 +16759,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -16680,6 +16797,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -16996,6 +17114,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceStatus]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -17031,6 +17152,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :pipeline_details,
       :pipelines_running_count,
@@ -17392,9 +17514,8 @@ module Aws::MediaLive
     #       }
     #
     # @!attribute [rw] style_control
-    #   When set to passthrough, passes through style and position
-    #   information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT)
-    #   to the CFF-TT output or TTML output.
+    #   This field is not currently supported and will not affect the output
+    #   styling. Leave the default value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/TtmlDestinationSettings AWS API Documentation
@@ -17676,6 +17797,10 @@ module Aws::MediaLive
     #   The log level to write to CloudWatch Logs.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   Maintenance settings for this channel.
+    #   @return [Types::MaintenanceUpdateSettings]
+    #
     # @!attribute [rw] name
     #   The name of the channel.
     #   @return [String]
@@ -17695,6 +17820,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :role_arn)
       SENSITIVE = []
@@ -18733,6 +18859,11 @@ module Aws::MediaLive
     #           resolution: "SD", # accepts SD, HD, UHD
     #         },
     #         log_level: "ERROR", # accepts ERROR, WARNING, INFO, DEBUG, DISABLED
+    #         maintenance: {
+    #           maintenance_day: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           maintenance_scheduled_date: "__string",
+    #           maintenance_start_time: "__stringPattern010920300",
+    #         },
     #         name: "__string",
     #         role_arn: "__string",
     #       }
@@ -18760,6 +18891,9 @@ module Aws::MediaLive
     #   The log level the user wants for their channel.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance
+    #   @return [Types::MaintenanceUpdateSettings]
+    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -18776,6 +18910,7 @@ module Aws::MediaLive
       :input_attachments,
       :input_specification,
       :log_level,
+      :maintenance,
       :name,
       :role_arn)
       SENSITIVE = []

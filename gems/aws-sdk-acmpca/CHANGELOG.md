@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-03-28)
+------------------
+
+* Feature - Updating service name entities
+
 1.47.0 (2022-03-16)
 ------------------
 

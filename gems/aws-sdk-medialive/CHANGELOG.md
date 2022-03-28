@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2022-03-28)
+------------------
+
+* Feature - This release adds support for selecting a maintenance window.
+
 1.85.0 (2022-02-24)
 ------------------
 
