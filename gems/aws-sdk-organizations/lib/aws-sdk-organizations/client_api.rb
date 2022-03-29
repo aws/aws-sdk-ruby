@@ -20,6 +20,7 @@ module Aws::Organizations
     AccessDeniedForDependencyException = Shapes::StructureShape.new(name: 'AccessDeniedForDependencyException')
     AccessDeniedForDependencyExceptionReason = Shapes::StringShape.new(name: 'AccessDeniedForDependencyExceptionReason')
     Account = Shapes::StructureShape.new(name: 'Account')
+    AccountAlreadyClosedException = Shapes::StructureShape.new(name: 'AccountAlreadyClosedException')
     AccountAlreadyRegisteredException = Shapes::StructureShape.new(name: 'AccountAlreadyRegisteredException')
     AccountArn = Shapes::StringShape.new(name: 'AccountArn')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
@@ -41,10 +42,13 @@ module Aws::Organizations
     ChildNotFoundException = Shapes::StructureShape.new(name: 'ChildNotFoundException')
     ChildType = Shapes::StringShape.new(name: 'ChildType')
     Children = Shapes::ListShape.new(name: 'Children')
+    CloseAccountRequest = Shapes::StructureShape.new(name: 'CloseAccountRequest')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
+    ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConstraintViolationException = Shapes::StructureShape.new(name: 'ConstraintViolationException')
     ConstraintViolationExceptionReason = Shapes::StringShape.new(name: 'ConstraintViolationExceptionReason')
     CreateAccountFailureReason = Shapes::StringShape.new(name: 'CreateAccountFailureReason')
+    CreateAccountName = Shapes::StringShape.new(name: 'CreateAccountName')
     CreateAccountRequest = Shapes::StructureShape.new(name: 'CreateAccountRequest')
     CreateAccountRequestId = Shapes::StringShape.new(name: 'CreateAccountRequestId')
     CreateAccountResponse = Shapes::StructureShape.new(name: 'CreateAccountResponse')
@@ -265,6 +269,9 @@ module Aws::Organizations
     Account.add_member(:joined_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "JoinedTimestamp"))
     Account.struct_class = Types::Account
 
+    AccountAlreadyClosedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    AccountAlreadyClosedException.struct_class = Types::AccountAlreadyClosedException
+
     AccountAlreadyRegisteredException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     AccountAlreadyRegisteredException.struct_class = Types::AccountAlreadyRegisteredException
 
@@ -301,15 +308,21 @@ module Aws::Organizations
 
     Children.member = Shapes::ShapeRef.new(shape: Child)
 
+    CloseAccountRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "AccountId"))
+    CloseAccountRequest.struct_class = Types::CloseAccountRequest
+
     ConcurrentModificationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConcurrentModificationException.struct_class = Types::ConcurrentModificationException
+
+    ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
+    ConflictException.struct_class = Types::ConflictException
 
     ConstraintViolationException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "Message"))
     ConstraintViolationException.add_member(:reason, Shapes::ShapeRef.new(shape: ConstraintViolationExceptionReason, location_name: "Reason"))
     ConstraintViolationException.struct_class = Types::ConstraintViolationException
 
     CreateAccountRequest.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
-    CreateAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
+    CreateAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: CreateAccountName, required: true, location_name: "AccountName"))
     CreateAccountRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "RoleName"))
     CreateAccountRequest.add_member(:iam_user_access_to_billing, Shapes::ShapeRef.new(shape: IAMUserAccessToBilling, location_name: "IamUserAccessToBilling"))
     CreateAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -321,7 +334,7 @@ module Aws::Organizations
     CreateAccountStates.member = Shapes::ShapeRef.new(shape: CreateAccountState)
 
     CreateAccountStatus.add_member(:id, Shapes::ShapeRef.new(shape: CreateAccountRequestId, location_name: "Id"))
-    CreateAccountStatus.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, location_name: "AccountName"))
+    CreateAccountStatus.add_member(:account_name, Shapes::ShapeRef.new(shape: CreateAccountName, location_name: "AccountName"))
     CreateAccountStatus.add_member(:state, Shapes::ShapeRef.new(shape: CreateAccountState, location_name: "State"))
     CreateAccountStatus.add_member(:requested_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "RequestedTimestamp"))
     CreateAccountStatus.add_member(:completed_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CompletedTimestamp"))
@@ -336,7 +349,7 @@ module Aws::Organizations
     CreateAccountStatuses.member = Shapes::ShapeRef.new(shape: CreateAccountStatus)
 
     CreateGovCloudAccountRequest.add_member(:email, Shapes::ShapeRef.new(shape: Email, required: true, location_name: "Email"))
-    CreateGovCloudAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: AccountName, required: true, location_name: "AccountName"))
+    CreateGovCloudAccountRequest.add_member(:account_name, Shapes::ShapeRef.new(shape: CreateAccountName, required: true, location_name: "AccountName"))
     CreateGovCloudAccountRequest.add_member(:role_name, Shapes::ShapeRef.new(shape: RoleName, location_name: "RoleName"))
     CreateGovCloudAccountRequest.add_member(:iam_user_access_to_billing, Shapes::ShapeRef.new(shape: IAMUserAccessToBilling, location_name: "IamUserAccessToBilling"))
     CreateGovCloudAccountRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
@@ -937,6 +950,25 @@ module Aws::Organizations
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
+      api.add_operation(:close_account, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CloseAccount"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CloseAccountRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountAlreadyClosedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AWSOrganizationsNotInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedAPIEndpointException)
       end)
 
       api.add_operation(:create_account, Seahorse::Model::Operation.new.tap do |o|

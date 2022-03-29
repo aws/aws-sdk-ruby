@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-03-29)
+------------------
+
+* Feature - This release provides the new CloseAccount API that enables principals in the management account to close any member account within an organization.
+
 1.68.0 (2022-02-24)
 ------------------
 
