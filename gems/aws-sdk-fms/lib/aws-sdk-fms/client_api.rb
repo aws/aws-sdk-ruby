@@ -22,6 +22,8 @@ module Aws::FMS
     AppsListDataSummary = Shapes::StructureShape.new(name: 'AppsListDataSummary')
     AppsListsData = Shapes::ListShape.new(name: 'AppsListsData')
     AssociateAdminAccountRequest = Shapes::StructureShape.new(name: 'AssociateAdminAccountRequest')
+    AssociateThirdPartyFirewallRequest = Shapes::StructureShape.new(name: 'AssociateThirdPartyFirewallRequest')
+    AssociateThirdPartyFirewallResponse = Shapes::StructureShape.new(name: 'AssociateThirdPartyFirewallResponse')
     AwsEc2InstanceViolation = Shapes::StructureShape.new(name: 'AwsEc2InstanceViolation')
     AwsEc2NetworkInterfaceViolation = Shapes::StructureShape.new(name: 'AwsEc2NetworkInterfaceViolation')
     AwsEc2NetworkInterfaceViolations = Shapes::ListShape.new(name: 'AwsEc2NetworkInterfaceViolations')
@@ -44,6 +46,8 @@ module Aws::FMS
     DestinationType = Shapes::StringShape.new(name: 'DestinationType')
     DetailedInfo = Shapes::StringShape.new(name: 'DetailedInfo')
     DisassociateAdminAccountRequest = Shapes::StructureShape.new(name: 'DisassociateAdminAccountRequest')
+    DisassociateThirdPartyFirewallRequest = Shapes::StructureShape.new(name: 'DisassociateThirdPartyFirewallRequest')
+    DisassociateThirdPartyFirewallResponse = Shapes::StructureShape.new(name: 'DisassociateThirdPartyFirewallResponse')
     DnsDuplicateRuleGroupViolation = Shapes::StructureShape.new(name: 'DnsDuplicateRuleGroupViolation')
     DnsRuleGroupLimitExceededViolation = Shapes::StructureShape.new(name: 'DnsRuleGroupLimitExceededViolation')
     DnsRuleGroupPriorities = Shapes::ListShape.new(name: 'DnsRuleGroupPriorities')
@@ -63,7 +67,10 @@ module Aws::FMS
     ExpectedRoutes = Shapes::ListShape.new(name: 'ExpectedRoutes')
     FMSPolicyUpdateFirewallCreationConfigAction = Shapes::StructureShape.new(name: 'FMSPolicyUpdateFirewallCreationConfigAction')
     FirewallDeploymentModel = Shapes::StringShape.new(name: 'FirewallDeploymentModel')
+    FirewallPolicyId = Shapes::StringShape.new(name: 'FirewallPolicyId')
+    FirewallPolicyName = Shapes::StringShape.new(name: 'FirewallPolicyName')
     FirewallSubnetIsOutOfScopeViolation = Shapes::StructureShape.new(name: 'FirewallSubnetIsOutOfScopeViolation')
+    FirewallSubnetMissingVPCEndpointViolation = Shapes::StructureShape.new(name: 'FirewallSubnetMissingVPCEndpointViolation')
     GetAdminAccountRequest = Shapes::StructureShape.new(name: 'GetAdminAccountRequest')
     GetAdminAccountResponse = Shapes::StructureShape.new(name: 'GetAdminAccountResponse')
     GetAppsListRequest = Shapes::StructureShape.new(name: 'GetAppsListRequest')
@@ -78,6 +85,8 @@ module Aws::FMS
     GetProtectionStatusResponse = Shapes::StructureShape.new(name: 'GetProtectionStatusResponse')
     GetProtocolsListRequest = Shapes::StructureShape.new(name: 'GetProtocolsListRequest')
     GetProtocolsListResponse = Shapes::StructureShape.new(name: 'GetProtocolsListResponse')
+    GetThirdPartyFirewallAssociationStatusRequest = Shapes::StructureShape.new(name: 'GetThirdPartyFirewallAssociationStatusRequest')
+    GetThirdPartyFirewallAssociationStatusResponse = Shapes::StructureShape.new(name: 'GetThirdPartyFirewallAssociationStatusResponse')
     GetViolationDetailsRequest = Shapes::StructureShape.new(name: 'GetViolationDetailsRequest')
     GetViolationDetailsResponse = Shapes::StructureShape.new(name: 'GetViolationDetailsResponse')
     IPPortNumber = Shapes::IntegerShape.new(name: 'IPPortNumber')
@@ -102,7 +111,10 @@ module Aws::FMS
     ListProtocolsListsResponse = Shapes::StructureShape.new(name: 'ListProtocolsListsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    ListThirdPartyFirewallFirewallPoliciesRequest = Shapes::StructureShape.new(name: 'ListThirdPartyFirewallFirewallPoliciesRequest')
+    ListThirdPartyFirewallFirewallPoliciesResponse = Shapes::StructureShape.new(name: 'ListThirdPartyFirewallFirewallPoliciesResponse')
     ManagedServiceData = Shapes::StringShape.new(name: 'ManagedServiceData')
+    MarketplaceSubscriptionOnboardingStatus = Shapes::StringShape.new(name: 'MarketplaceSubscriptionOnboardingStatus')
     MemberAccounts = Shapes::ListShape.new(name: 'MemberAccounts')
     NetworkFirewallAction = Shapes::StringShape.new(name: 'NetworkFirewallAction')
     NetworkFirewallActionList = Shapes::ListShape.new(name: 'NetworkFirewallActionList')
@@ -195,6 +207,14 @@ module Aws::FMS
     TargetType = Shapes::StringShape.new(name: 'TargetType')
     TargetViolationReason = Shapes::StringShape.new(name: 'TargetViolationReason')
     TargetViolationReasons = Shapes::ListShape.new(name: 'TargetViolationReasons')
+    ThirdPartyFirewall = Shapes::StringShape.new(name: 'ThirdPartyFirewall')
+    ThirdPartyFirewallAssociationStatus = Shapes::StringShape.new(name: 'ThirdPartyFirewallAssociationStatus')
+    ThirdPartyFirewallFirewallPolicies = Shapes::ListShape.new(name: 'ThirdPartyFirewallFirewallPolicies')
+    ThirdPartyFirewallFirewallPolicy = Shapes::StructureShape.new(name: 'ThirdPartyFirewallFirewallPolicy')
+    ThirdPartyFirewallMissingExpectedRouteTableViolation = Shapes::StructureShape.new(name: 'ThirdPartyFirewallMissingExpectedRouteTableViolation')
+    ThirdPartyFirewallMissingFirewallViolation = Shapes::StructureShape.new(name: 'ThirdPartyFirewallMissingFirewallViolation')
+    ThirdPartyFirewallMissingSubnetViolation = Shapes::StructureShape.new(name: 'ThirdPartyFirewallMissingSubnetViolation')
+    ThirdPartyFirewallPolicy = Shapes::StructureShape.new(name: 'ThirdPartyFirewallPolicy')
     TimeStamp = Shapes::TimestampShape.new(name: 'TimeStamp')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
@@ -233,6 +253,12 @@ module Aws::FMS
 
     AssociateAdminAccountRequest.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "AdminAccount"))
     AssociateAdminAccountRequest.struct_class = Types::AssociateAdminAccountRequest
+
+    AssociateThirdPartyFirewallRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
+    AssociateThirdPartyFirewallRequest.struct_class = Types::AssociateThirdPartyFirewallRequest
+
+    AssociateThirdPartyFirewallResponse.add_member(:third_party_firewall_status, Shapes::ShapeRef.new(shape: ThirdPartyFirewallAssociationStatus, location_name: "ThirdPartyFirewallStatus"))
+    AssociateThirdPartyFirewallResponse.struct_class = Types::AssociateThirdPartyFirewallResponse
 
     AwsEc2InstanceViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
     AwsEc2InstanceViolation.add_member(:aws_ec2_network_interface_violations, Shapes::ShapeRef.new(shape: AwsEc2NetworkInterfaceViolations, location_name: "AwsEc2NetworkInterfaceViolations"))
@@ -279,6 +305,12 @@ module Aws::FMS
     DeleteProtocolsListRequest.struct_class = Types::DeleteProtocolsListRequest
 
     DisassociateAdminAccountRequest.struct_class = Types::DisassociateAdminAccountRequest
+
+    DisassociateThirdPartyFirewallRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
+    DisassociateThirdPartyFirewallRequest.struct_class = Types::DisassociateThirdPartyFirewallRequest
+
+    DisassociateThirdPartyFirewallResponse.add_member(:third_party_firewall_status, Shapes::ShapeRef.new(shape: ThirdPartyFirewallAssociationStatus, location_name: "ThirdPartyFirewallStatus"))
+    DisassociateThirdPartyFirewallResponse.struct_class = Types::DisassociateThirdPartyFirewallResponse
 
     DnsDuplicateRuleGroupViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
     DnsDuplicateRuleGroupViolation.add_member(:violation_target_description, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "ViolationTargetDescription"))
@@ -370,6 +402,12 @@ module Aws::FMS
     FirewallSubnetIsOutOfScopeViolation.add_member(:vpc_endpoint_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcEndpointId"))
     FirewallSubnetIsOutOfScopeViolation.struct_class = Types::FirewallSubnetIsOutOfScopeViolation
 
+    FirewallSubnetMissingVPCEndpointViolation.add_member(:firewall_subnet_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "FirewallSubnetId"))
+    FirewallSubnetMissingVPCEndpointViolation.add_member(:vpc_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VpcId"))
+    FirewallSubnetMissingVPCEndpointViolation.add_member(:subnet_availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZone"))
+    FirewallSubnetMissingVPCEndpointViolation.add_member(:subnet_availability_zone_id, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "SubnetAvailabilityZoneId"))
+    FirewallSubnetMissingVPCEndpointViolation.struct_class = Types::FirewallSubnetMissingVPCEndpointViolation
+
     GetAdminAccountRequest.struct_class = Types::GetAdminAccountRequest
 
     GetAdminAccountResponse.add_member(:admin_account, Shapes::ShapeRef.new(shape: AWSAccountId, location_name: "AdminAccount"))
@@ -425,6 +463,13 @@ module Aws::FMS
     GetProtocolsListResponse.add_member(:protocols_list, Shapes::ShapeRef.new(shape: ProtocolsListData, location_name: "ProtocolsList"))
     GetProtocolsListResponse.add_member(:protocols_list_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "ProtocolsListArn"))
     GetProtocolsListResponse.struct_class = Types::GetProtocolsListResponse
+
+    GetThirdPartyFirewallAssociationStatusRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
+    GetThirdPartyFirewallAssociationStatusRequest.struct_class = Types::GetThirdPartyFirewallAssociationStatusRequest
+
+    GetThirdPartyFirewallAssociationStatusResponse.add_member(:third_party_firewall_status, Shapes::ShapeRef.new(shape: ThirdPartyFirewallAssociationStatus, location_name: "ThirdPartyFirewallStatus"))
+    GetThirdPartyFirewallAssociationStatusResponse.add_member(:marketplace_onboarding_status, Shapes::ShapeRef.new(shape: MarketplaceSubscriptionOnboardingStatus, location_name: "MarketplaceOnboardingStatus"))
+    GetThirdPartyFirewallAssociationStatusResponse.struct_class = Types::GetThirdPartyFirewallAssociationStatusResponse
 
     GetViolationDetailsRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: PolicyId, required: true, location_name: "PolicyId"))
     GetViolationDetailsRequest.add_member(:member_account, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "MemberAccount"))
@@ -503,6 +548,15 @@ module Aws::FMS
 
     ListTagsForResourceResponse.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    ListThirdPartyFirewallFirewallPoliciesRequest.add_member(:third_party_firewall, Shapes::ShapeRef.new(shape: ThirdPartyFirewall, required: true, location_name: "ThirdPartyFirewall"))
+    ListThirdPartyFirewallFirewallPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListThirdPartyFirewallFirewallPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PaginationMaxResults, required: true, location_name: "MaxResults"))
+    ListThirdPartyFirewallFirewallPoliciesRequest.struct_class = Types::ListThirdPartyFirewallFirewallPoliciesRequest
+
+    ListThirdPartyFirewallFirewallPoliciesResponse.add_member(:third_party_firewall_firewall_policies, Shapes::ShapeRef.new(shape: ThirdPartyFirewallFirewallPolicies, location_name: "ThirdPartyFirewallFirewallPolicies"))
+    ListThirdPartyFirewallFirewallPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListThirdPartyFirewallFirewallPoliciesResponse.struct_class = Types::ListThirdPartyFirewallFirewallPoliciesResponse
 
     MemberAccounts.member = Shapes::ShapeRef.new(shape: AWSAccountId)
 
@@ -644,6 +698,7 @@ module Aws::FMS
     PolicyComplianceStatusList.member = Shapes::ShapeRef.new(shape: PolicyComplianceStatus)
 
     PolicyOption.add_member(:network_firewall_policy, Shapes::ShapeRef.new(shape: NetworkFirewallPolicy, location_name: "NetworkFirewallPolicy"))
+    PolicyOption.add_member(:third_party_firewall_policy, Shapes::ShapeRef.new(shape: ThirdPartyFirewallPolicy, location_name: "ThirdPartyFirewallPolicy"))
     PolicyOption.struct_class = Types::PolicyOption
 
     PolicySummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "PolicyArn"))
@@ -768,6 +823,10 @@ module Aws::FMS
     ResourceViolation.add_member(:possible_remediation_actions, Shapes::ShapeRef.new(shape: PossibleRemediationActions, location_name: "PossibleRemediationActions"))
     ResourceViolation.add_member(:firewall_subnet_is_out_of_scope_violation, Shapes::ShapeRef.new(shape: FirewallSubnetIsOutOfScopeViolation, location_name: "FirewallSubnetIsOutOfScopeViolation"))
     ResourceViolation.add_member(:route_has_out_of_scope_endpoint_violation, Shapes::ShapeRef.new(shape: RouteHasOutOfScopeEndpointViolation, location_name: "RouteHasOutOfScopeEndpointViolation"))
+    ResourceViolation.add_member(:third_party_firewall_missing_firewall_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingFirewallViolation, location_name: "ThirdPartyFirewallMissingFirewallViolation"))
+    ResourceViolation.add_member(:third_party_firewall_missing_subnet_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingSubnetViolation, location_name: "ThirdPartyFirewallMissingSubnetViolation"))
+    ResourceViolation.add_member(:third_party_firewall_missing_expected_route_table_violation, Shapes::ShapeRef.new(shape: ThirdPartyFirewallMissingExpectedRouteTableViolation, location_name: "ThirdPartyFirewallMissingExpectedRouteTableViolation"))
+    ResourceViolation.add_member(:firewall_subnet_missing_vpc_endpoint_violation, Shapes::ShapeRef.new(shape: FirewallSubnetMissingVPCEndpointViolation, location_name: "FirewallSubnetMissingVPCEndpointViolation"))
     ResourceViolation.struct_class = Types::ResourceViolation
 
     ResourceViolations.member = Shapes::ShapeRef.new(shape: ResourceViolation)
@@ -844,6 +903,34 @@ module Aws::FMS
 
     TargetViolationReasons.member = Shapes::ShapeRef.new(shape: TargetViolationReason)
 
+    ThirdPartyFirewallFirewallPolicies.member = Shapes::ShapeRef.new(shape: ThirdPartyFirewallFirewallPolicy)
+
+    ThirdPartyFirewallFirewallPolicy.add_member(:firewall_policy_id, Shapes::ShapeRef.new(shape: FirewallPolicyId, location_name: "FirewallPolicyId"))
+    ThirdPartyFirewallFirewallPolicy.add_member(:firewall_policy_name, Shapes::ShapeRef.new(shape: FirewallPolicyName, location_name: "FirewallPolicyName"))
+    ThirdPartyFirewallFirewallPolicy.struct_class = Types::ThirdPartyFirewallFirewallPolicy
+
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.add_member(:current_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "CurrentRouteTable"))
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.add_member(:expected_route_table, Shapes::ShapeRef.new(shape: ResourceId, location_name: "ExpectedRouteTable"))
+    ThirdPartyFirewallMissingExpectedRouteTableViolation.struct_class = Types::ThirdPartyFirewallMissingExpectedRouteTableViolation
+
+    ThirdPartyFirewallMissingFirewallViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    ThirdPartyFirewallMissingFirewallViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    ThirdPartyFirewallMissingFirewallViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    ThirdPartyFirewallMissingFirewallViolation.add_member(:target_violation_reason, Shapes::ShapeRef.new(shape: TargetViolationReason, location_name: "TargetViolationReason"))
+    ThirdPartyFirewallMissingFirewallViolation.struct_class = Types::ThirdPartyFirewallMissingFirewallViolation
+
+    ThirdPartyFirewallMissingSubnetViolation.add_member(:violation_target, Shapes::ShapeRef.new(shape: ViolationTarget, location_name: "ViolationTarget"))
+    ThirdPartyFirewallMissingSubnetViolation.add_member(:vpc, Shapes::ShapeRef.new(shape: ResourceId, location_name: "VPC"))
+    ThirdPartyFirewallMissingSubnetViolation.add_member(:availability_zone, Shapes::ShapeRef.new(shape: LengthBoundedString, location_name: "AvailabilityZone"))
+    ThirdPartyFirewallMissingSubnetViolation.add_member(:target_violation_reason, Shapes::ShapeRef.new(shape: TargetViolationReason, location_name: "TargetViolationReason"))
+    ThirdPartyFirewallMissingSubnetViolation.struct_class = Types::ThirdPartyFirewallMissingSubnetViolation
+
+    ThirdPartyFirewallPolicy.add_member(:firewall_deployment_model, Shapes::ShapeRef.new(shape: FirewallDeploymentModel, location_name: "FirewallDeploymentModel"))
+    ThirdPartyFirewallPolicy.struct_class = Types::ThirdPartyFirewallPolicy
+
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -889,6 +976,18 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:associate_third_party_firewall, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateThirdPartyFirewall"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateThirdPartyFirewallRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateThirdPartyFirewallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
       api.add_operation(:delete_apps_list, Seahorse::Model::Operation.new.tap do |o|
@@ -944,6 +1043,18 @@ module Aws::FMS
         o.input = Shapes::ShapeRef.new(shape: DisassociateAdminAccountRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:disassociate_third_party_firewall, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateThirdPartyFirewall"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateThirdPartyFirewallRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateThirdPartyFirewallResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
@@ -1024,6 +1135,18 @@ module Aws::FMS
         o.output = Shapes::ShapeRef.new(shape: GetProtocolsListResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+      end)
+
+      api.add_operation(:get_third_party_firewall_association_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetThirdPartyFirewallAssociationStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetThirdPartyFirewallAssociationStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetThirdPartyFirewallAssociationStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
       end)
 
@@ -1133,6 +1256,24 @@ module Aws::FMS
         o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+      end)
+
+      api.add_operation(:list_third_party_firewall_firewall_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListThirdPartyFirewallFirewallPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListThirdPartyFirewallFirewallPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListThirdPartyFirewallFirewallPoliciesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_apps_list, Seahorse::Model::Operation.new.tap do |o|

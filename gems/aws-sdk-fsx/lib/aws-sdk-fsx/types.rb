@@ -796,15 +796,24 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -1330,15 +1339,24 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -2166,15 +2184,24 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx
-    #   for Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest.
-    #   If this ID isn't specified, the key managed by Amazon FSx is used.
-    #   The Amazon FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems
-    #   are always encrypted at rest using Amazon FSx-managed keys. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -5137,23 +5164,25 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and `PERSISTENT`
-    #   Amazon FSx for Lustre file systems at rest. If this ID isn't
-    #   specified, the Amazon FSx-managed key for your account is used. The
-    #   scratch Amazon FSx for Lustre file systems are always encrypted at
-    #   rest using the Amazon FSx-managed key for your account. For more
-    #   information, see [Encrypt][1] in the *Key Management Service API
-    #   Reference*.
+    #   The ID of the Key Management Service (KMS) key used to encrypt
+    #   Amazon FSx file system data. Used as follows with Amazon FSx file
+    #   system types:
     #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
     #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon
+    #     FSx service KMS key for your account.
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) for the file system resource.
+    #   The Amazon Resource Name (ARN) of the file system resource.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -5167,7 +5196,8 @@ module Aws::FSx
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] windows_configuration
-    #   The configuration for this FSx for Windows File Server file system.
+    #   The configuration for this Amazon FSx for Windows File Server file
+    #   system.
     #   @return [Types::WindowsFileSystemConfiguration]
     #
     # @!attribute [rw] lustre_configuration
@@ -5182,7 +5212,7 @@ module Aws::FSx
     #   @return [Array<Types::AdministrativeAction>]
     #
     # @!attribute [rw] ontap_configuration
-    #   The configuration for this FSx for ONTAP file system.
+    #   The configuration for this Amazon FSx for NetApp ONTAP file system.
     #   @return [Types::OntapFileSystemConfiguration]
     #
     # @!attribute [rw] file_system_type_version
@@ -5942,7 +5972,8 @@ module Aws::FSx
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
-    #   The sustained throughput of an Amazon FSx file system in MBps.
+    #   The sustained throughput of an Amazon FSx file system in Megabytes
+    #   per second (MBps).
     #   @return [Integer]
     #
     # @!attribute [rw] weekly_maintenance_start_time
@@ -6073,8 +6104,8 @@ module Aws::FSx
       include Aws::Structure
     end
 
-    # Specifies who can mount the file system and the options that can be
-    # used while mounting the file system.
+    # Specifies who can mount an OpenZFS file system and the options
+    # available while mounting the file system.
     #
     # @note When making an API call, you may pass OpenZFSClientConfiguration
     #   data as a hash:
@@ -7030,7 +7061,7 @@ module Aws::FSx
     end
 
     # Describes the Amazon FSx for NetApp ONTAP storage virtual machine
-    # (SVM) configuraton.
+    # (SVM) configuration.
     #
     # @!attribute [rw] active_directory_configuration
     #   Describes the Microsoft Active Directory configuration to which the
@@ -7644,6 +7675,7 @@ module Aws::FSx
     #           mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #           iops: 1,
     #         },
+    #         throughput_capacity: 1,
     #       }
     #
     # @!attribute [rw] automatic_backup_retention_days
@@ -7688,6 +7720,12 @@ module Aws::FSx
     #   `USER_PROVISIONED` IOPS, the total number of SSD IOPS provisioned.
     #   @return [Types::DiskIopsConfiguration]
     #
+    # @!attribute [rw] throughput_capacity
+    #   Specifies the throughput of an FSx for NetApp ONTAP file system,
+    #   measured in megabytes per second (MBps). Valid values are 64, 128,
+    #   256, 512, 1024, 2048, 3072, or 4096 MB/s.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
     #
     class UpdateFileSystemOntapConfiguration < Struct.new(
@@ -7695,7 +7733,8 @@ module Aws::FSx
       :daily_automatic_backup_start_time,
       :fsx_admin_password,
       :weekly_maintenance_start_time,
-      :disk_iops_configuration)
+      :disk_iops_configuration,
+      :throughput_capacity)
       SENSITIVE = [:fsx_admin_password]
       include Aws::Structure
     end
@@ -7842,6 +7881,7 @@ module Aws::FSx
     #             mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #             iops: 1,
     #           },
+    #           throughput_capacity: 1,
     #         },
     #         open_zfs_configuration: {
     #           automatic_backup_retention_days: 1,
@@ -8315,7 +8355,7 @@ module Aws::FSx
 
     # @!attribute [rw] storage_virtual_machine
     #   Describes the Amazon FSx for NetApp ONTAP storage virtual machine
-    #   (SVM) configuraton.
+    #   (SVM) configuration.
     #   @return [Types::StorageVirtualMachine]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateStorageVirtualMachineResponse AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-03-30)
+------------------
+
+* Feature - This release adds support for modifying throughput capacity for FSx for ONTAP file systems.
+
 1.52.0 (2022-03-03)
 ------------------
 

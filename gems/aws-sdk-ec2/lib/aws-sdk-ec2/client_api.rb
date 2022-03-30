@@ -1390,6 +1390,7 @@ module Aws::EC2
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceAttribute = Shapes::StructureShape.new(name: 'InstanceAttribute')
     InstanceAttributeName = Shapes::StringShape.new(name: 'InstanceAttributeName')
+    InstanceAutoRecoveryState = Shapes::StringShape.new(name: 'InstanceAutoRecoveryState')
     InstanceBlockDeviceMapping = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMapping')
     InstanceBlockDeviceMappingList = Shapes::ListShape.new(name: 'InstanceBlockDeviceMappingList')
     InstanceBlockDeviceMappingSpecification = Shapes::StructureShape.new(name: 'InstanceBlockDeviceMappingSpecification')
@@ -1438,6 +1439,8 @@ module Aws::EC2
     InstanceLifecycle = Shapes::StringShape.new(name: 'InstanceLifecycle')
     InstanceLifecycleType = Shapes::StringShape.new(name: 'InstanceLifecycleType')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
+    InstanceMaintenanceOptions = Shapes::StructureShape.new(name: 'InstanceMaintenanceOptions')
+    InstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMaintenanceOptionsRequest')
     InstanceMarketOptionsRequest = Shapes::StructureShape.new(name: 'InstanceMarketOptionsRequest')
     InstanceMatchCriteria = Shapes::StringShape.new(name: 'InstanceMatchCriteria')
     InstanceMetadataEndpointState = Shapes::StringShape.new(name: 'InstanceMetadataEndpointState')
@@ -1595,6 +1598,7 @@ module Aws::EC2
     LaunchSpecsList = Shapes::ListShape.new(name: 'LaunchSpecsList')
     LaunchTemplate = Shapes::StructureShape.new(name: 'LaunchTemplate')
     LaunchTemplateAndOverridesResponse = Shapes::StructureShape.new(name: 'LaunchTemplateAndOverridesResponse')
+    LaunchTemplateAutoRecoveryState = Shapes::StringShape.new(name: 'LaunchTemplateAutoRecoveryState')
     LaunchTemplateBlockDeviceMapping = Shapes::StructureShape.new(name: 'LaunchTemplateBlockDeviceMapping')
     LaunchTemplateBlockDeviceMappingList = Shapes::ListShape.new(name: 'LaunchTemplateBlockDeviceMappingList')
     LaunchTemplateBlockDeviceMappingRequest = Shapes::StructureShape.new(name: 'LaunchTemplateBlockDeviceMappingRequest')
@@ -1622,6 +1626,8 @@ module Aws::EC2
     LaunchTemplateIamInstanceProfileSpecificationRequest = Shapes::StructureShape.new(name: 'LaunchTemplateIamInstanceProfileSpecificationRequest')
     LaunchTemplateId = Shapes::StringShape.new(name: 'LaunchTemplateId')
     LaunchTemplateIdStringList = Shapes::ListShape.new(name: 'LaunchTemplateIdStringList')
+    LaunchTemplateInstanceMaintenanceOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMaintenanceOptions')
+    LaunchTemplateInstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMaintenanceOptionsRequest')
     LaunchTemplateInstanceMarketOptions = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMarketOptions')
     LaunchTemplateInstanceMarketOptionsRequest = Shapes::StructureShape.new(name: 'LaunchTemplateInstanceMarketOptionsRequest')
     LaunchTemplateInstanceMetadataEndpointState = Shapes::StringShape.new(name: 'LaunchTemplateInstanceMetadataEndpointState')
@@ -1765,6 +1771,8 @@ module Aws::EC2
     ModifyInstanceEventStartTimeResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventStartTimeResult')
     ModifyInstanceEventWindowRequest = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowRequest')
     ModifyInstanceEventWindowResult = Shapes::StructureShape.new(name: 'ModifyInstanceEventWindowResult')
+    ModifyInstanceMaintenanceOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsRequest')
+    ModifyInstanceMaintenanceOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMaintenanceOptionsResult')
     ModifyInstanceMetadataOptionsRequest = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsRequest')
     ModifyInstanceMetadataOptionsResult = Shapes::StructureShape.new(name: 'ModifyInstanceMetadataOptionsResult')
     ModifyInstancePlacementRequest = Shapes::StructureShape.new(name: 'ModifyInstancePlacementRequest')
@@ -8311,6 +8319,7 @@ module Aws::EC2
     Instance.add_member(:usage_operation_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "usageOperationUpdateTime"))
     Instance.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsResponse, location_name: "privateDnsNameOptions"))
     Instance.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    Instance.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptions, location_name: "maintenanceOptions"))
     Instance.struct_class = Types::Instance
 
     InstanceAttribute.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierList, location_name: "groupSet"))
@@ -8455,6 +8464,12 @@ module Aws::EC2
     InstanceIpv6PrefixList.member = Shapes::ShapeRef.new(shape: InstanceIpv6Prefix, location_name: "item")
 
     InstanceList.member = Shapes::ShapeRef.new(shape: Instance, location_name: "item")
+
+    InstanceMaintenanceOptions.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
+    InstanceMaintenanceOptions.struct_class = Types::InstanceMaintenanceOptions
+
+    InstanceMaintenanceOptionsRequest.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "AutoRecovery"))
+    InstanceMaintenanceOptionsRequest.struct_class = Types::InstanceMaintenanceOptionsRequest
 
     InstanceMarketOptionsRequest.add_member(:market_type, Shapes::ShapeRef.new(shape: MarketType, location_name: "MarketType"))
     InstanceMarketOptionsRequest.add_member(:spot_options, Shapes::ShapeRef.new(shape: SpotMarketOptions, location_name: "SpotOptions"))
@@ -9099,6 +9114,12 @@ module Aws::EC2
 
     LaunchTemplateIdStringList.member = Shapes::ShapeRef.new(shape: LaunchTemplateId, location_name: "item")
 
+    LaunchTemplateInstanceMaintenanceOptions.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: LaunchTemplateAutoRecoveryState, location_name: "autoRecovery"))
+    LaunchTemplateInstanceMaintenanceOptions.struct_class = Types::LaunchTemplateInstanceMaintenanceOptions
+
+    LaunchTemplateInstanceMaintenanceOptionsRequest.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: LaunchTemplateAutoRecoveryState, location_name: "AutoRecovery"))
+    LaunchTemplateInstanceMaintenanceOptionsRequest.struct_class = Types::LaunchTemplateInstanceMaintenanceOptionsRequest
+
     LaunchTemplateInstanceMarketOptions.add_member(:market_type, Shapes::ShapeRef.new(shape: MarketType, location_name: "marketType"))
     LaunchTemplateInstanceMarketOptions.add_member(:spot_options, Shapes::ShapeRef.new(shape: LaunchTemplateSpotMarketOptions, location_name: "spotOptions"))
     LaunchTemplateInstanceMarketOptions.struct_class = Types::LaunchTemplateInstanceMarketOptions
@@ -9631,6 +9652,15 @@ module Aws::EC2
 
     ModifyInstanceEventWindowResult.add_member(:instance_event_window, Shapes::ShapeRef.new(shape: InstanceEventWindow, location_name: "instanceEventWindow"))
     ModifyInstanceEventWindowResult.struct_class = Types::ModifyInstanceEventWindowResult
+
+    ModifyInstanceMaintenanceOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    ModifyInstanceMaintenanceOptionsRequest.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "AutoRecovery"))
+    ModifyInstanceMaintenanceOptionsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyInstanceMaintenanceOptionsRequest.struct_class = Types::ModifyInstanceMaintenanceOptionsRequest
+
+    ModifyInstanceMaintenanceOptionsResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
+    ModifyInstanceMaintenanceOptionsResult.add_member(:auto_recovery, Shapes::ShapeRef.new(shape: InstanceAutoRecoveryState, location_name: "autoRecovery"))
+    ModifyInstanceMaintenanceOptionsResult.struct_class = Types::ModifyInstanceMaintenanceOptionsResult
 
     ModifyInstanceMetadataOptionsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     ModifyInstanceMetadataOptionsRequest.add_member(:http_tokens, Shapes::ShapeRef.new(shape: HttpTokensState, location_name: "HttpTokens"))
@@ -11025,6 +11055,7 @@ module Aws::EC2
     RequestLaunchTemplateData.add_member(:enclave_options, Shapes::ShapeRef.new(shape: LaunchTemplateEnclaveOptionsRequest, location_name: "EnclaveOptions"))
     RequestLaunchTemplateData.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
     RequestLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
+    RequestLaunchTemplateData.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMaintenanceOptionsRequest, location_name: "MaintenanceOptions"))
     RequestLaunchTemplateData.struct_class = Types::RequestLaunchTemplateData
 
     RequestSpotFleetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -11296,6 +11327,7 @@ module Aws::EC2
     ResponseLaunchTemplateData.add_member(:enclave_options, Shapes::ShapeRef.new(shape: LaunchTemplateEnclaveOptions, location_name: "enclaveOptions"))
     ResponseLaunchTemplateData.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirements, location_name: "instanceRequirements"))
     ResponseLaunchTemplateData.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: LaunchTemplatePrivateDnsNameOptions, location_name: "privateDnsNameOptions"))
+    ResponseLaunchTemplateData.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: LaunchTemplateInstanceMaintenanceOptions, location_name: "maintenanceOptions"))
     ResponseLaunchTemplateData.struct_class = Types::ResponseLaunchTemplateData
 
     RestorableByStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -11485,6 +11517,7 @@ module Aws::EC2
     RunInstancesRequest.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptionsRequest, location_name: "MetadataOptions"))
     RunInstancesRequest.add_member(:enclave_options, Shapes::ShapeRef.new(shape: EnclaveOptionsRequest, location_name: "EnclaveOptions"))
     RunInstancesRequest.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsRequest, location_name: "PrivateDnsNameOptions"))
+    RunInstancesRequest.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptionsRequest, location_name: "MaintenanceOptions"))
     RunInstancesRequest.struct_class = Types::RunInstancesRequest
 
     RunScheduledInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
@@ -17245,6 +17278,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyInstanceEventWindowRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyInstanceEventWindowResult)
+      end)
+
+      api.add_operation(:modify_instance_maintenance_options, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyInstanceMaintenanceOptions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyInstanceMaintenanceOptionsResult)
       end)
 
       api.add_operation(:modify_instance_metadata_options, Seahorse::Model::Operation.new.tap do |o|

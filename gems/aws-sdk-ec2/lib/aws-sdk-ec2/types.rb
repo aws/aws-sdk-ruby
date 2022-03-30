@@ -9238,6 +9238,9 @@ module Aws::EC2
     #             enable_resource_name_dns_a_record: false,
     #             enable_resource_name_dns_aaaa_record: false,
     #           },
+    #           maintenance_options: {
+    #             auto_recovery: "default", # accepts default, disabled
+    #           },
     #         },
     #         tag_specifications: [
     #           {
@@ -9530,6 +9533,9 @@ module Aws::EC2
     #             hostname_type: "ip-name", # accepts ip-name, resource-name
     #             enable_resource_name_dns_a_record: false,
     #             enable_resource_name_dns_aaaa_record: false,
+    #           },
+    #           maintenance_options: {
+    #             auto_recovery: "default", # accepts default, disabled
     #           },
     #         },
     #       }
@@ -39476,6 +39482,11 @@ module Aws::EC2
     #   The IPv6 address assigned to the instance.
     #   @return [String]
     #
+    # @!attribute [rw] maintenance_options
+    #   Provides information on the recovery and maintenance options of your
+    #   instance.
+    #   @return [Types::InstanceMaintenanceOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -39532,7 +39543,8 @@ module Aws::EC2
       :usage_operation,
       :usage_operation_update_time,
       :private_dns_name_options,
-      :ipv_6_address)
+      :ipv_6_address,
+      :maintenance_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40148,6 +40160,48 @@ module Aws::EC2
     #
     class InstanceIpv6Prefix < Struct.new(
       :ipv_6_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance options for the instance.
+    #
+    # @!attribute [rw] auto_recovery
+    #   Provides information on the current automatic recovery behavior of
+    #   your instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMaintenanceOptions AWS API Documentation
+    #
+    class InstanceMaintenanceOptions < Struct.new(
+      :auto_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance options for the instance.
+    #
+    # @note When making an API call, you may pass InstanceMaintenanceOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_recovery: "disabled", # accepts disabled, default
+    #       }
+    #
+    # @!attribute [rw] auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default. For more information, see [Simplified automatic
+    #   recovery][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceMaintenanceOptionsRequest AWS API Documentation
+    #
+    class InstanceMaintenanceOptionsRequest < Struct.new(
+      :auto_recovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44269,6 +44323,48 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The maintenance options of your instance.
+    #
+    # @!attribute [rw] auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMaintenanceOptions AWS API Documentation
+    #
+    class LaunchTemplateInstanceMaintenanceOptions < Struct.new(
+      :auto_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance options of your instance.
+    #
+    # @note When making an API call, you may pass LaunchTemplateInstanceMaintenanceOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         auto_recovery: "default", # accepts default, disabled
+    #       }
+    #
+    # @!attribute [rw] auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default. For more information, see [Simplified automatic
+    #   recovery][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/LaunchTemplateInstanceMaintenanceOptionsRequest AWS API Documentation
+    #
+    class LaunchTemplateInstanceMaintenanceOptionsRequest < Struct.new(
+      :auto_recovery)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The market (purchasing) option for the instances.
     #
     # @!attribute [rw] market_type
@@ -46909,7 +47005,9 @@ module Aws::EC2
     end
 
     # @!attribute [rw] return
-    #   Is `true` if the request succeeds, and an error otherwise.
+    #   If the request succeeds, the response returns `true`. If the request
+    #   fails, no response is returned, and instead an error message is
+    #   returned.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyFleetResult AWS API Documentation
@@ -47759,6 +47857,59 @@ module Aws::EC2
     #
     class ModifyInstanceEventWindowResult < Struct.new(
       :instance_event_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ModifyInstanceMaintenanceOptionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         auto_recovery: "disabled", # accepts disabled, default
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMaintenanceOptionsRequest AWS API Documentation
+    #
+    class ModifyInstanceMaintenanceOptionsRequest < Struct.new(
+      :instance_id,
+      :auto_recovery,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_recovery
+    #   Provides information on the current automatic recovery behavior of
+    #   your instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMaintenanceOptionsResult AWS API Documentation
+    #
+    class ModifyInstanceMaintenanceOptionsResult < Struct.new(
+      :instance_id,
+      :auto_recovery)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48924,7 +49075,9 @@ module Aws::EC2
     # Contains the output of ModifySpotFleetRequest.
     #
     # @!attribute [rw] return
-    #   Is `true` if the request succeeds, and an error otherwise.
+    #   If the request succeeds, the response returns `true`. If the request
+    #   fails, no response is returned, and instead an error message is
+    #   returned.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifySpotFleetRequestResponse AWS API Documentation
@@ -55886,6 +56039,9 @@ module Aws::EC2
     #           enable_resource_name_dns_a_record: false,
     #           enable_resource_name_dns_aaaa_record: false,
     #         },
+    #         maintenance_options: {
+    #           auto_recovery: "default", # accepts default, disabled
+    #         },
     #       }
     #
     # @!attribute [rw] kernel_id
@@ -56131,6 +56287,10 @@ module Aws::EC2
     #   inherited from the subnet.
     #   @return [Types::LaunchTemplatePrivateDnsNameOptionsRequest]
     #
+    # @!attribute [rw] maintenance_options
+    #   The maintenance options for the instance.
+    #   @return [Types::LaunchTemplateInstanceMaintenanceOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -56162,7 +56322,8 @@ module Aws::EC2
       :metadata_options,
       :enclave_options,
       :instance_requirements,
-      :private_dns_name_options)
+      :private_dns_name_options,
+      :maintenance_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -57728,8 +57889,7 @@ module Aws::EC2
     #   The attribute to reset.
     #
     #   You can only reset the following attributes: `kernel` \| `ramdisk`
-    #   \| `sourceDestCheck`. To change an instance attribute, use
-    #   ModifyInstanceAttribute.
+    #   \| `sourceDestCheck`.
     #   @return [String]
     #
     # @!attribute [rw] dry_run
@@ -58036,6 +58196,10 @@ module Aws::EC2
     #   The options for the instance hostname.
     #   @return [Types::LaunchTemplatePrivateDnsNameOptions]
     #
+    # @!attribute [rw] maintenance_options
+    #   The maintenance options for your instance.
+    #   @return [Types::LaunchTemplateInstanceMaintenanceOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -58067,7 +58231,8 @@ module Aws::EC2
       :metadata_options,
       :enclave_options,
       :instance_requirements,
-      :private_dns_name_options)
+      :private_dns_name_options,
+      :maintenance_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59143,6 +59308,9 @@ module Aws::EC2
     #           enable_resource_name_dns_a_record: false,
     #           enable_resource_name_dns_aaaa_record: false,
     #         },
+    #         maintenance_options: {
+    #           auto_recovery: "disabled", # accepts disabled, default
+    #         },
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -59534,6 +59702,10 @@ module Aws::EC2
     #   inherited from the subnet.
     #   @return [Types::PrivateDnsNameOptionsRequest]
     #
+    # @!attribute [rw] maintenance_options
+    #   The maintenance and recovery options for the instance.
+    #   @return [Types::InstanceMaintenanceOptionsRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -59574,7 +59746,8 @@ module Aws::EC2
       :license_specifications,
       :metadata_options,
       :enclave_options,
-      :private_dns_name_options)
+      :private_dns_name_options,
+      :maintenance_options)
       SENSITIVE = []
       include Aws::Structure
     end

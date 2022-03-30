@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.305.0 (2022-03-30)
+------------------
+
+* Feature - This release simplifies the auto-recovery configuration process enabling customers to set the recovery behavior to disabled or default
+
 1.304.0 (2022-03-25)
 ------------------
 

@@ -539,14 +539,24 @@ module Aws::FSx
     #   the Region where the request is sent from (in-Region copy).
     #
     # @option params [String] :kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
-    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
-    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
-    #   encrypted at rest using Amazon FSx-managed keys. For more information,
-    #   see [Encrypt][1] in the *Key Management Service API Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon FSx
+    #     service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -1714,7 +1724,7 @@ module Aws::FSx
     # * Creates a new, empty Amazon FSx file system with an assigned ID, and
     #   an initial lifecycle state of `CREATING`.
     #
-    # * Returns the description of the file system.
+    # * Returns the description of the file system in JSON format.
     #
     # This operation requires a client request token in the request that
     # Amazon FSx uses to ensure idempotent creation. This means that calling
@@ -1838,14 +1848,24 @@ module Aws::FSx
     #   name.
     #
     # @option params [String] :kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
-    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
-    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
-    #   encrypted at rest using Amazon FSx-managed keys. For more information,
-    #   see [Encrypt][1] in the *Key Management Service API Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon FSx
+    #     service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -2371,14 +2391,24 @@ module Aws::FSx
     #    </note>
     #
     # @option params [String] :kms_key_id
-    #   The ID of the Key Management Service (KMS) key used to encrypt the
-    #   file system's data for Amazon FSx for Windows File Server file
-    #   systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for
-    #   Lustre `PERSISTENT_1` and `PERSISTENT_2` file systems at rest. If this
-    #   ID isn't specified, the key managed by Amazon FSx is used. The Amazon
-    #   FSx for Lustre `SCRATCH_1` and `SCRATCH_2` file systems are always
-    #   encrypted at rest using Amazon FSx-managed keys. For more information,
-    #   see [Encrypt][1] in the *Key Management Service API Reference*.
+    #   Specifies the ID of the Key Management Service (KMS) key to use for
+    #   encrypting data on Amazon FSx file systems, as follows:
+    #
+    #   * Amazon FSx for Lustre `PERSISTENT_1` and `PERSISTENT_2` deployment
+    #     types only.
+    #
+    #     `SCRATCH_1` and `SCRATCH_2` types are encrypted using the Amazon FSx
+    #     service KMS key for your account.
+    #
+    #   * Amazon FSx for NetApp ONTAP
+    #
+    #   * Amazon FSx for OpenZFS
+    #
+    #   * Amazon FSx for Windows File Server
+    #
+    #   If a `KmsKeyId` isn't specified, the Amazon FSx-managed KMS key for
+    #   your account is used. For more information, see [Encrypt][1] in the
+    #   *Key Management Service API Reference*.
     #
     #
     #
@@ -6008,6 +6038,8 @@ module Aws::FSx
     #
     # * `StorageCapacity`
     #
+    # * `ThroughputCapacity`
+    #
     # * `WeeklyMaintenanceStartTime`
     #
     # For the Amazon FSx for OpenZFS file systems, you can update the
@@ -6189,6 +6221,7 @@ module Aws::FSx
     #         mode: "AUTOMATIC", # accepts AUTOMATIC, USER_PROVISIONED
     #         iops: 1,
     #       },
+    #       throughput_capacity: 1,
     #     },
     #     open_zfs_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -6886,7 +6919,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

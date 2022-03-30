@@ -1347,6 +1347,7 @@ module Aws::FSx
     UpdateFileSystemOntapConfiguration.add_member(:fsx_admin_password, Shapes::ShapeRef.new(shape: AdminPassword, location_name: "FsxAdminPassword"))
     UpdateFileSystemOntapConfiguration.add_member(:weekly_maintenance_start_time, Shapes::ShapeRef.new(shape: WeeklyTime, location_name: "WeeklyMaintenanceStartTime"))
     UpdateFileSystemOntapConfiguration.add_member(:disk_iops_configuration, Shapes::ShapeRef.new(shape: DiskIopsConfiguration, location_name: "DiskIopsConfiguration"))
+    UpdateFileSystemOntapConfiguration.add_member(:throughput_capacity, Shapes::ShapeRef.new(shape: MegabytesPerSecond, location_name: "ThroughputCapacity"))
     UpdateFileSystemOntapConfiguration.struct_class = Types::UpdateFileSystemOntapConfiguration
 
     UpdateFileSystemOpenZFSConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))

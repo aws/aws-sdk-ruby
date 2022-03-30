@@ -389,6 +389,13 @@ module Aws::EC2
       data[:ipv_6_address]
     end
 
+    # Provides information on the recovery and maintenance options of your
+    # instance.
+    # @return [Types::InstanceMaintenanceOptions]
+    def maintenance_options
+      data[:maintenance_options]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -1199,8 +1206,7 @@ module Aws::EC2
     #   The attribute to reset.
     #
     #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
-    #   `sourceDestCheck`. To change an instance attribute, use
-    #   ModifyInstanceAttribute.
+    #   `sourceDestCheck`.
     # @option options [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.

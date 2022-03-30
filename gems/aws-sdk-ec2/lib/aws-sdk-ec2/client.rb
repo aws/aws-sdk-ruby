@@ -7357,6 +7357,9 @@ module Aws::EC2
     #         enable_resource_name_dns_a_record: false,
     #         enable_resource_name_dns_aaaa_record: false,
     #       },
+    #       maintenance_options: {
+    #         auto_recovery: "default", # accepts default, disabled
+    #       },
     #     },
     #     tag_specifications: [
     #       {
@@ -7709,6 +7712,9 @@ module Aws::EC2
     #         enable_resource_name_dns_a_record: false,
     #         enable_resource_name_dns_aaaa_record: false,
     #       },
+    #       maintenance_options: {
+    #         auto_recovery: "default", # accepts default, disabled
+    #       },
     #     },
     #   })
     #
@@ -7854,6 +7860,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.launch_template_version.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -22186,6 +22193,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.reservations[0].instances[0].ipv_6_address #=> String
+    #   resp.reservations[0].instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
     #   resp.reservations[0].reservation_id #=> String
@@ -23077,6 +23085,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.launch_template_versions[0].launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -35806,6 +35815,7 @@ module Aws::EC2
     #   resp.launch_template_data.private_dns_name_options.hostname_type #=> String, one of "ip-name", "resource-name"
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
+    #   resp.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -39635,6 +39645,56 @@ module Aws::EC2
     # @param [Hash] params ({})
     def modify_instance_event_window(params = {}, options = {})
       req = build_request(:modify_instance_event_window, params)
+      req.send_request(options)
+    end
+
+    # Modifies the recovery behavior of your instance to disable simplified
+    # automatic recovery or set the recovery behavior to default. The
+    # default configuration will not enable simplified automatic recovery
+    # for an unsupported instance type. For more information, see
+    # [Simplified automatic recovery][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html#instance-configuration-recovery
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance.
+    #
+    # @option params [String] :auto_recovery
+    #   Disables the automatic recovery behavior of your instance or sets it
+    #   to default.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::ModifyInstanceMaintenanceOptionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyInstanceMaintenanceOptionsResult#instance_id #instance_id} => String
+    #   * {Types::ModifyInstanceMaintenanceOptionsResult#auto_recovery #auto_recovery} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_instance_maintenance_options({
+    #     instance_id: "InstanceId", # required
+    #     auto_recovery: "disabled", # accepts disabled, default
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.auto_recovery #=> String, one of "disabled", "default"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceMaintenanceOptions AWS API Documentation
+    #
+    # @overload modify_instance_maintenance_options(params = {})
+    # @param [Hash] params ({})
+    def modify_instance_maintenance_options(params = {}, options = {})
+      req = build_request(:modify_instance_maintenance_options, params)
       req.send_request(options)
     end
 
@@ -45973,8 +46033,7 @@ module Aws::EC2
     #   The attribute to reset.
     #
     #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
-    #   `sourceDestCheck`. To change an instance attribute, use
-    #   ModifyInstanceAttribute.
+    #   `sourceDestCheck`.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47171,6 +47230,9 @@ module Aws::EC2
     #   The options for the instance hostname. The default values are
     #   inherited from the subnet.
     #
+    # @option params [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
+    #   The maintenance and recovery options for the instance.
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
@@ -47396,6 +47458,9 @@ module Aws::EC2
     #       enable_resource_name_dns_a_record: false,
     #       enable_resource_name_dns_aaaa_record: false,
     #     },
+    #     maintenance_options: {
+    #       auto_recovery: "disabled", # accepts disabled, default
+    #     },
     #   })
     #
     # @example Response structure
@@ -47538,6 +47603,7 @@ module Aws::EC2
     #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.instances[0].ipv_6_address #=> String
+    #   resp.instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
     #   resp.reservation_id #=> String
@@ -49450,7 +49516,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.304.0'
+      context[:gem_version] = '1.305.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

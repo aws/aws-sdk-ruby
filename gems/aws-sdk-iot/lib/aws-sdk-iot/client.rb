@@ -1275,17 +1275,21 @@ module Aws::IoT
     #
     # @option params [required, String] :metric_name
     #   The name of the custom metric. This will be used in the metric report
-    #   submitted from the device/thing. Shouldn't begin with `aws:`. Cannot
-    #   be updated once defined.
+    #   submitted from the device/thing. The name can't begin with `aws:`.
+    #   You can't change the name after you define it.
     #
     # @option params [String] :display_name
-    #   Field represents a friendly name in the console for the custom metric;
-    #   it doesn't have to be unique. Don't use this name as the metric
-    #   identifier in the device metric report. Can be updated once defined.
+    #   The friendly name in the console for the custom metric. This name
+    #   doesn't have to be unique. Don't use this name as the metric
+    #   identifier in the device metric report. You can update the friendly
+    #   name after you define it.
     #
     # @option params [required, String] :metric_type
-    #   The type of the custom metric. Types include `string-list`,
-    #   `ip-address-list`, `number-list`, and `number`.
+    #   The type of the custom metric.
+    #
+    #   The type `number` only takes a single metric value as an input, but
+    #   when you submit the metrics value in the DeviceMetrics report, you
+    #   must pass it as an array with a single value.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata that can be used to manage the custom metric.
@@ -2574,6 +2578,9 @@ module Aws::IoT
     # @option params [Integer] :credential_duration_seconds
     #   How long (in seconds) the credentials will be valid. The default value
     #   is 3,600 seconds.
+    #
+    #   This value must be less than or equal to the maximum session duration
+    #   of the IAM role that the role alias references.
     #
     # @option params [Array<Types::Tag>] :tags
     #   Metadata which can be used to manage the role alias.
@@ -10559,6 +10566,8 @@ module Aws::IoT
     # @option params [Boolean] :set_as_active
     #   A boolean value that specifies if the CA certificate is set to active.
     #
+    #   Valid values: `ACTIVE | INACTIVE`
+    #
     # @option params [Boolean] :allow_auto_registration
     #   Allows this CA certificate to be used for auto registration of device
     #   certificates.
@@ -10637,8 +10646,11 @@ module Aws::IoT
     # @option params [Boolean] :set_as_active
     #   A boolean value that specifies if the certificate is set to active.
     #
+    #   Valid values: `ACTIVE | INACTIVE`
+    #
     # @option params [String] :status
-    #   The status of the register certificate request.
+    #   The status of the register certificate request. Valid values that you
+    #   can use include `ACTIVE`, `INACTIVE`, and `REVOKED`.
     #
     # @return [Types::RegisterCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12971,6 +12983,9 @@ module Aws::IoT
     # @option params [Integer] :credential_duration_seconds
     #   The number of seconds the credential will be valid.
     #
+    #   This value must be less than or equal to the maximum session duration
+    #   of the IAM role that the role alias references.
+    #
     # @return [Types::UpdateRoleAliasResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRoleAliasResponse#role_alias #role_alias} => String
@@ -13585,7 +13600,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -253,6 +253,9 @@ module Aws::EC2
     #       enable_resource_name_dns_a_record: false,
     #       enable_resource_name_dns_aaaa_record: false,
     #     },
+    #     maintenance_options: {
+    #       auto_recovery: "disabled", # accepts disabled, default
+    #     },
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -561,6 +564,8 @@ module Aws::EC2
     # @option options [Types::PrivateDnsNameOptionsRequest] :private_dns_name_options
     #   The options for the instance hostname. The default values are
     #   inherited from the subnet.
+    # @option options [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
+    #   The maintenance and recovery options for the instance.
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

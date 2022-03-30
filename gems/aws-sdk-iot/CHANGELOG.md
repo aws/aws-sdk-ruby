@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2022-03-30)
+------------------
+
+* Feature - Doc only update for IoT that fixes customer-reported issues.
+
 1.86.0 (2022-02-24)
 ------------------
 

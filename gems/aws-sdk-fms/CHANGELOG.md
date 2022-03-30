@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-03-30)
+------------------
+
+* Feature - AWS Firewall Manager now supports the configuration of third-party policies that can use either the centralized or distributed deployment models.
+
 1.48.0 (2022-02-24)
 ------------------
 
