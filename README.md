@@ -253,6 +253,37 @@ Simply downcase the service module name for the helper:
 * `ec2` => `#<Aws::EC2::Client>`
 * etc
 
+## Functionality requiring AWS Common Runtime (CRT)
+
+The AWS SDK for Ruby has optional functionality that requires the 
+[AWS Common Runtime (CRT)](https://docs.aws.amazon.com/sdkref/latest/guide/common-runtime.html) 
+bindings to be included as a dependency with your application. This functionality includes:
+* [Amazon S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
+* CRC-32c support for [S3 Additional Checksums](https://aws.amazon.com/blogs/aws/new-additional-checksum-algorithms-for-amazon-s3/)
+
+If the required AWS Common Runtime dependency is not installed you will receive an error
+indicating that the required dependency is missing to use the associated functionality. To install this dependency follow
+the provided [instructions](#installing-the-aws-common-runtime-crt-dependency).
+
+### Installing the AWS Common Runtime (CRT) Dependency
+AWS CRT bindings are in developer preview and are available in the
+the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  You can install them
+by adding the `aws-crt` gem to your Gemfile. 
+
+[Sigv4a](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
+is an extension to Sigv4 that allows signatures that are valid in more than one region.
+Sigv4a is required to use some services/operations such as
+[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html).
+Currently sigv4a requires the [aws-crt](https://rubygems.org/gems/aws-crt/) gem and a version of the 
+[aws-sigv4](https://rubygems.org/gems/aws-sigv4/versions/1.4.1.crt) gem built on top of aws-crt - 
+these versions end with "-crt".  To install and use a CRT enabled version, we recommend pinning the
+specific version of `aws-sigv4` in your Gemfile (this will also install the `aws-crt` gem):
+
+```ruby
+gem 'aws-sdk-s3', '~> 1'
+gem 'aws-sigv4', '1.4.1.crt'
+```
+
 ## Getting Help
 
 Please use any of these resources for getting help:
