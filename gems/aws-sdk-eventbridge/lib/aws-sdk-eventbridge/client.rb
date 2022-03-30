@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-eventbridge/plugins/multi_region_endpoint.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:eventbridge)
 
@@ -81,6 +82,7 @@ module Aws::EventBridge
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::EventBridge::Plugins::MultiRegionEndpoint)
 
     # @overload initialize(options)
     #   @param [Hash] options
@@ -643,6 +645,50 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # @option params [required, String] :name
+    #
+    # @option params [required, Types::RoutingConfig] :routing_config
+    #
+    # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEndpointResponse#name #name} => String
+    #   * {Types::CreateEndpointResponse#arn #arn} => String
+    #   * {Types::CreateEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::CreateEndpointResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_endpoint({
+    #     name: "EndpointName", # required
+    #     routing_config: { # required
+    #       failover_config: { # required
+    #         primary: { # required
+    #           health_check: "HealthCheck", # required
+    #         },
+    #         secondary: {
+    #           route: "Route", # required
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpoint AWS API Documentation
+    #
+    # @overload create_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_endpoint(params = {}, options = {})
+      req = build_request(:create_endpoint, params)
+      req.send_request(options)
+    end
+
     # Creates a new event bus within your account. This can be a custom
     # event bus which you can use to receive events from your custom
     # applications and services, or it can be a partner event bus which can
@@ -910,6 +956,25 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def delete_connection(params = {}, options = {})
       req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint({
+    #     name: "EndpointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpoint AWS API Documentation
+    #
+    # @overload delete_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint(params = {}, options = {})
+      req = build_request(:delete_endpoint, params)
       req.send_request(options)
     end
 
@@ -1192,6 +1257,51 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def describe_connection(params = {}, options = {})
       req = build_request(:describe_connection, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [String] :home_region
+    #
+    # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointResponse#name #name} => String
+    #   * {Types::DescribeEndpointResponse#arn #arn} => String
+    #   * {Types::DescribeEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::DescribeEndpointResponse#endpoint_id #endpoint_id} => String
+    #   * {Types::DescribeEndpointResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::DescribeEndpointResponse#state #state} => String
+    #   * {Types::DescribeEndpointResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeEndpointResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEndpointResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint({
+    #     name: "EndpointName", # required
+    #     home_region: "HomeRegion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.endpoint_id #=> String
+    #   resp.endpoint_url #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpoint AWS API Documentation
+    #
+    # @overload describe_endpoint(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint(params = {}, options = {})
+      req = build_request(:describe_endpoint, params)
       req.send_request(options)
     end
 
@@ -1664,6 +1774,52 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def list_connections(params = {}, options = {})
       req = build_request(:list_connections, params)
+      req.send_request(options)
+    end
+
+    # @option params [String] :name_prefix
+    #
+    # @option params [String] :home_region
+    #
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::ListEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #   * {Types::ListEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_endpoints({
+    #     name_prefix: "EndpointName",
+    #     home_region: "HomeRegion",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].name #=> String
+    #   resp.endpoints[0].arn #=> String
+    #   resp.endpoints[0].routing_config.failover_config.primary.health_check #=> String
+    #   resp.endpoints[0].routing_config.failover_config.secondary.route #=> String
+    #   resp.endpoints[0].endpoint_id #=> String
+    #   resp.endpoints[0].endpoint_url #=> String
+    #   resp.endpoints[0].state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #   resp.endpoints[0].state_reason #=> String
+    #   resp.endpoints[0].creation_time #=> Time
+    #   resp.endpoints[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpoints AWS API Documentation
+    #
+    # @overload list_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_endpoints(params = {}, options = {})
+      req = build_request(:list_endpoints, params)
       req.send_request(options)
     end
 
@@ -2175,6 +2331,8 @@ module Aws::EventBridge
     #   several parameters for the entry such as the source and type of the
     #   event, resources associated with the event, and so on.
     #
+    # @option params [String] :endpoint_id
+    #
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutEventsResponse#failed_entry_count #failed_entry_count} => Integer
@@ -2194,6 +2352,7 @@ module Aws::EventBridge
     #         trace_header: "TraceHeader",
     #       },
     #     ],
+    #     endpoint_id: "EndpointId",
     #   })
     #
     # @example Response structure
@@ -3338,6 +3497,54 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def update_connection(params = {}, options = {})
       req = build_request(:update_connection, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [required, Types::RoutingConfig] :routing_config
+    #
+    # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEndpointResponse#name #name} => String
+    #   * {Types::UpdateEndpointResponse#arn #arn} => String
+    #   * {Types::UpdateEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::UpdateEndpointResponse#endpoint_id #endpoint_id} => String
+    #   * {Types::UpdateEndpointResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::UpdateEndpointResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_endpoint({
+    #     name: "EndpointName", # required
+    #     routing_config: { # required
+    #       failover_config: { # required
+    #         primary: { # required
+    #           health_check: "HealthCheck", # required
+    #         },
+    #         secondary: {
+    #           route: "Route", # required
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.endpoint_id #=> String
+    #   resp.endpoint_url #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpoint AWS API Documentation
+    #
+    # @overload update_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_endpoint(params = {}, options = {})
+      req = build_request(:update_endpoint, params)
       req.send_request(options)
     end
 

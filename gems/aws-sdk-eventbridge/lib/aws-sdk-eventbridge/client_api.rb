@@ -80,6 +80,8 @@ module Aws::EventBridge
     CreateConnectionOAuthRequestParameters = Shapes::StructureShape.new(name: 'CreateConnectionOAuthRequestParameters')
     CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
     CreateConnectionResponse = Shapes::StructureShape.new(name: 'CreateConnectionResponse')
+    CreateEndpointRequest = Shapes::StructureShape.new(name: 'CreateEndpointRequest')
+    CreateEndpointResponse = Shapes::StructureShape.new(name: 'CreateEndpointResponse')
     CreateEventBusRequest = Shapes::StructureShape.new(name: 'CreateEventBusRequest')
     CreateEventBusResponse = Shapes::StructureShape.new(name: 'CreateEventBusResponse')
     CreatePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'CreatePartnerEventSourceRequest')
@@ -97,6 +99,8 @@ module Aws::EventBridge
     DeleteArchiveResponse = Shapes::StructureShape.new(name: 'DeleteArchiveResponse')
     DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
+    DeleteEndpointRequest = Shapes::StructureShape.new(name: 'DeleteEndpointRequest')
+    DeleteEndpointResponse = Shapes::StructureShape.new(name: 'DeleteEndpointResponse')
     DeleteEventBusRequest = Shapes::StructureShape.new(name: 'DeleteEventBusRequest')
     DeletePartnerEventSourceRequest = Shapes::StructureShape.new(name: 'DeletePartnerEventSourceRequest')
     DeleteRuleRequest = Shapes::StructureShape.new(name: 'DeleteRuleRequest')
@@ -106,6 +110,8 @@ module Aws::EventBridge
     DescribeArchiveResponse = Shapes::StructureShape.new(name: 'DescribeArchiveResponse')
     DescribeConnectionRequest = Shapes::StructureShape.new(name: 'DescribeConnectionRequest')
     DescribeConnectionResponse = Shapes::StructureShape.new(name: 'DescribeConnectionResponse')
+    DescribeEndpointRequest = Shapes::StructureShape.new(name: 'DescribeEndpointRequest')
+    DescribeEndpointResponse = Shapes::StructureShape.new(name: 'DescribeEndpointResponse')
     DescribeEventBusRequest = Shapes::StructureShape.new(name: 'DescribeEventBusRequest')
     DescribeEventBusResponse = Shapes::StructureShape.new(name: 'DescribeEventBusResponse')
     DescribeEventSourceRequest = Shapes::StructureShape.new(name: 'DescribeEventSourceRequest')
@@ -119,6 +125,14 @@ module Aws::EventBridge
     DisableRuleRequest = Shapes::StructureShape.new(name: 'DisableRuleRequest')
     EcsParameters = Shapes::StructureShape.new(name: 'EcsParameters')
     EnableRuleRequest = Shapes::StructureShape.new(name: 'EnableRuleRequest')
+    Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
+    EndpointArn = Shapes::StringShape.new(name: 'EndpointArn')
+    EndpointId = Shapes::StringShape.new(name: 'EndpointId')
+    EndpointList = Shapes::ListShape.new(name: 'EndpointList')
+    EndpointName = Shapes::StringShape.new(name: 'EndpointName')
+    EndpointState = Shapes::StringShape.new(name: 'EndpointState')
+    EndpointStateReason = Shapes::StringShape.new(name: 'EndpointStateReason')
+    EndpointUrl = Shapes::StringShape.new(name: 'EndpointUrl')
     ErrorCode = Shapes::StringShape.new(name: 'ErrorCode')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventBus = Shapes::StructureShape.new(name: 'EventBus')
@@ -135,9 +149,12 @@ module Aws::EventBridge
     EventSourceNamePrefix = Shapes::StringShape.new(name: 'EventSourceNamePrefix')
     EventSourceState = Shapes::StringShape.new(name: 'EventSourceState')
     EventTime = Shapes::TimestampShape.new(name: 'EventTime')
+    FailoverConfig = Shapes::StructureShape.new(name: 'FailoverConfig')
     HeaderKey = Shapes::StringShape.new(name: 'HeaderKey')
     HeaderParametersMap = Shapes::MapShape.new(name: 'HeaderParametersMap')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    HealthCheck = Shapes::StringShape.new(name: 'HealthCheck')
+    HomeRegion = Shapes::StringShape.new(name: 'HomeRegion')
     HttpParameters = Shapes::StructureShape.new(name: 'HttpParameters')
     HttpsEndpoint = Shapes::StringShape.new(name: 'HttpsEndpoint')
     IllegalStatusException = Shapes::StructureShape.new(name: 'IllegalStatusException')
@@ -158,6 +175,8 @@ module Aws::EventBridge
     ListArchivesResponse = Shapes::StructureShape.new(name: 'ListArchivesResponse')
     ListConnectionsRequest = Shapes::StructureShape.new(name: 'ListConnectionsRequest')
     ListConnectionsResponse = Shapes::StructureShape.new(name: 'ListConnectionsResponse')
+    ListEndpointsRequest = Shapes::StructureShape.new(name: 'ListEndpointsRequest')
+    ListEndpointsResponse = Shapes::StructureShape.new(name: 'ListEndpointsResponse')
     ListEventBusesRequest = Shapes::StructureShape.new(name: 'ListEventBusesRequest')
     ListEventBusesResponse = Shapes::StructureShape.new(name: 'ListEventBusesResponse')
     ListEventSourcesRequest = Shapes::StructureShape.new(name: 'ListEventSourcesRequest')
@@ -203,6 +222,7 @@ module Aws::EventBridge
     PlacementStrategyField = Shapes::StringShape.new(name: 'PlacementStrategyField')
     PlacementStrategyType = Shapes::StringShape.new(name: 'PlacementStrategyType')
     PolicyLengthExceededException = Shapes::StructureShape.new(name: 'PolicyLengthExceededException')
+    Primary = Shapes::StructureShape.new(name: 'Primary')
     Principal = Shapes::StringShape.new(name: 'Principal')
     PropagateTags = Shapes::StringShape.new(name: 'PropagateTags')
     PutEventsRequest = Shapes::StructureShape.new(name: 'PutEventsRequest')
@@ -250,6 +270,8 @@ module Aws::EventBridge
     RetentionDays = Shapes::IntegerShape.new(name: 'RetentionDays')
     RetryPolicy = Shapes::StructureShape.new(name: 'RetryPolicy')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    Route = Shapes::StringShape.new(name: 'Route')
+    RoutingConfig = Shapes::StructureShape.new(name: 'RoutingConfig')
     Rule = Shapes::StructureShape.new(name: 'Rule')
     RuleArn = Shapes::StringShape.new(name: 'RuleArn')
     RuleDescription = Shapes::StringShape.new(name: 'RuleDescription')
@@ -269,6 +291,7 @@ module Aws::EventBridge
     SageMakerPipelineParameterValue = Shapes::StringShape.new(name: 'SageMakerPipelineParameterValue')
     SageMakerPipelineParameters = Shapes::StructureShape.new(name: 'SageMakerPipelineParameters')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
+    Secondary = Shapes::StructureShape.new(name: 'Secondary')
     SecretsManagerSecretArn = Shapes::StringShape.new(name: 'SecretsManagerSecretArn')
     Sql = Shapes::StringShape.new(name: 'Sql')
     SqsParameters = Shapes::StructureShape.new(name: 'SqsParameters')
@@ -312,6 +335,8 @@ module Aws::EventBridge
     UpdateConnectionOAuthRequestParameters = Shapes::StructureShape.new(name: 'UpdateConnectionOAuthRequestParameters')
     UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
     UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
+    UpdateEndpointRequest = Shapes::StructureShape.new(name: 'UpdateEndpointRequest')
+    UpdateEndpointResponse = Shapes::StructureShape.new(name: 'UpdateEndpointResponse')
 
     ActivateEventSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventSourceName, required: true, location_name: "Name"))
     ActivateEventSourceRequest.struct_class = Types::ActivateEventSourceRequest
@@ -502,6 +527,16 @@ module Aws::EventBridge
     CreateConnectionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     CreateConnectionResponse.struct_class = Types::CreateConnectionResponse
 
+    CreateEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "Name"))
+    CreateEndpointRequest.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, required: true, location_name: "RoutingConfig"))
+    CreateEndpointRequest.struct_class = Types::CreateEndpointRequest
+
+    CreateEndpointResponse.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "Name"))
+    CreateEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    CreateEndpointResponse.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, location_name: "RoutingConfig"))
+    CreateEndpointResponse.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "State"))
+    CreateEndpointResponse.struct_class = Types::CreateEndpointResponse
+
     CreateEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     CreateEventBusRequest.add_member(:event_source_name, Shapes::ShapeRef.new(shape: EventSourceName, location_name: "EventSourceName"))
     CreateEventBusRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -552,6 +587,11 @@ module Aws::EventBridge
     DeleteConnectionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DeleteConnectionResponse.add_member(:last_authorized_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAuthorizedTime"))
     DeleteConnectionResponse.struct_class = Types::DeleteConnectionResponse
+
+    DeleteEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "Name"))
+    DeleteEndpointRequest.struct_class = Types::DeleteEndpointRequest
+
+    DeleteEndpointResponse.struct_class = Types::DeleteEndpointResponse
 
     DeleteEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusName, required: true, location_name: "Name"))
     DeleteEventBusRequest.struct_class = Types::DeleteEventBusRequest
@@ -611,6 +651,21 @@ module Aws::EventBridge
     DescribeConnectionResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     DescribeConnectionResponse.add_member(:last_authorized_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAuthorizedTime"))
     DescribeConnectionResponse.struct_class = Types::DescribeConnectionResponse
+
+    DescribeEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "Name"))
+    DescribeEndpointRequest.add_member(:home_region, Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
+    DescribeEndpointRequest.struct_class = Types::DescribeEndpointRequest
+
+    DescribeEndpointResponse.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "Name"))
+    DescribeEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    DescribeEndpointResponse.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, location_name: "RoutingConfig"))
+    DescribeEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
+    DescribeEndpointResponse.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: EndpointUrl, location_name: "EndpointUrl"))
+    DescribeEndpointResponse.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "State"))
+    DescribeEndpointResponse.add_member(:state_reason, Shapes::ShapeRef.new(shape: EndpointStateReason, location_name: "StateReason"))
+    DescribeEndpointResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    DescribeEndpointResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    DescribeEndpointResponse.struct_class = Types::DescribeEndpointResponse
 
     DescribeEventBusRequest.add_member(:name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "Name"))
     DescribeEventBusRequest.struct_class = Types::DescribeEventBusRequest
@@ -695,6 +750,19 @@ module Aws::EventBridge
     EnableRuleRequest.add_member(:event_bus_name, Shapes::ShapeRef.new(shape: EventBusNameOrArn, location_name: "EventBusName"))
     EnableRuleRequest.struct_class = Types::EnableRuleRequest
 
+    Endpoint.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "Name"))
+    Endpoint.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    Endpoint.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, location_name: "RoutingConfig"))
+    Endpoint.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
+    Endpoint.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: EndpointUrl, location_name: "EndpointUrl"))
+    Endpoint.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "State"))
+    Endpoint.add_member(:state_reason, Shapes::ShapeRef.new(shape: EndpointStateReason, location_name: "StateReason"))
+    Endpoint.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    Endpoint.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    Endpoint.struct_class = Types::Endpoint
+
+    EndpointList.member = Shapes::ShapeRef.new(shape: Endpoint)
+
     EventBus.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     EventBus.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
     EventBus.add_member(:policy, Shapes::ShapeRef.new(shape: String, location_name: "Policy"))
@@ -713,6 +781,10 @@ module Aws::EventBridge
     EventSource.struct_class = Types::EventSource
 
     EventSourceList.member = Shapes::ShapeRef.new(shape: EventSource)
+
+    FailoverConfig.add_member(:primary, Shapes::ShapeRef.new(shape: Primary, required: true, location_name: "Primary"))
+    FailoverConfig.add_member(:secondary, Shapes::ShapeRef.new(shape: Secondary, location_name: "Secondary"))
+    FailoverConfig.struct_class = Types::FailoverConfig
 
     HeaderParametersMap.key = Shapes::ShapeRef.new(shape: HeaderKey)
     HeaderParametersMap.value = Shapes::ShapeRef.new(shape: HeaderValue)
@@ -769,6 +841,16 @@ module Aws::EventBridge
     ListConnectionsResponse.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionResponseList, location_name: "Connections"))
     ListConnectionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListConnectionsResponse.struct_class = Types::ListConnectionsResponse
+
+    ListEndpointsRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: EndpointName, location_name: "NamePrefix"))
+    ListEndpointsRequest.add_member(:home_region, Shapes::ShapeRef.new(shape: HomeRegion, location_name: "HomeRegion"))
+    ListEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: LimitMax100, location_name: "MaxResults"))
+    ListEndpointsRequest.struct_class = Types::ListEndpointsRequest
+
+    ListEndpointsResponse.add_member(:endpoints, Shapes::ShapeRef.new(shape: EndpointList, location_name: "Endpoints"))
+    ListEndpointsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEndpointsResponse.struct_class = Types::ListEndpointsResponse
 
     ListEventBusesRequest.add_member(:name_prefix, Shapes::ShapeRef.new(shape: EventBusName, location_name: "NamePrefix"))
     ListEventBusesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -890,7 +972,11 @@ module Aws::EventBridge
 
     PolicyLengthExceededException.struct_class = Types::PolicyLengthExceededException
 
+    Primary.add_member(:health_check, Shapes::ShapeRef.new(shape: HealthCheck, required: true, location_name: "HealthCheck"))
+    Primary.struct_class = Types::Primary
+
     PutEventsRequest.add_member(:entries, Shapes::ShapeRef.new(shape: PutEventsRequestEntryList, required: true, location_name: "Entries"))
+    PutEventsRequest.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
     PutEventsRequest.struct_class = Types::PutEventsRequest
 
     PutEventsRequestEntry.add_member(:time, Shapes::ShapeRef.new(shape: EventTime, location_name: "Time"))
@@ -1035,6 +1121,9 @@ module Aws::EventBridge
     RetryPolicy.add_member(:maximum_event_age_in_seconds, Shapes::ShapeRef.new(shape: MaximumEventAgeInSeconds, location_name: "MaximumEventAgeInSeconds"))
     RetryPolicy.struct_class = Types::RetryPolicy
 
+    RoutingConfig.add_member(:failover_config, Shapes::ShapeRef.new(shape: FailoverConfig, required: true, location_name: "FailoverConfig"))
+    RoutingConfig.struct_class = Types::RoutingConfig
+
     Rule.add_member(:name, Shapes::ShapeRef.new(shape: RuleName, location_name: "Name"))
     Rule.add_member(:arn, Shapes::ShapeRef.new(shape: RuleArn, location_name: "Arn"))
     Rule.add_member(:event_pattern, Shapes::ShapeRef.new(shape: EventPattern, location_name: "EventPattern"))
@@ -1069,6 +1158,9 @@ module Aws::EventBridge
 
     SageMakerPipelineParameters.add_member(:pipeline_parameter_list, Shapes::ShapeRef.new(shape: SageMakerPipelineParameterList, location_name: "PipelineParameterList"))
     SageMakerPipelineParameters.struct_class = Types::SageMakerPipelineParameters
+
+    Secondary.add_member(:route, Shapes::ShapeRef.new(shape: Route, required: true, location_name: "Route"))
+    Secondary.struct_class = Types::Secondary
 
     SqsParameters.add_member(:message_group_id, Shapes::ShapeRef.new(shape: MessageGroupId, location_name: "MessageGroupId"))
     SqsParameters.struct_class = Types::SqsParameters
@@ -1204,6 +1296,18 @@ module Aws::EventBridge
     UpdateConnectionResponse.add_member(:last_authorized_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAuthorizedTime"))
     UpdateConnectionResponse.struct_class = Types::UpdateConnectionResponse
 
+    UpdateEndpointRequest.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, required: true, location_name: "Name"))
+    UpdateEndpointRequest.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, required: true, location_name: "RoutingConfig"))
+    UpdateEndpointRequest.struct_class = Types::UpdateEndpointRequest
+
+    UpdateEndpointResponse.add_member(:name, Shapes::ShapeRef.new(shape: EndpointName, location_name: "Name"))
+    UpdateEndpointResponse.add_member(:arn, Shapes::ShapeRef.new(shape: EndpointArn, location_name: "Arn"))
+    UpdateEndpointResponse.add_member(:routing_config, Shapes::ShapeRef.new(shape: RoutingConfig, location_name: "RoutingConfig"))
+    UpdateEndpointResponse.add_member(:endpoint_id, Shapes::ShapeRef.new(shape: EndpointId, location_name: "EndpointId"))
+    UpdateEndpointResponse.add_member(:endpoint_url, Shapes::ShapeRef.new(shape: EndpointUrl, location_name: "EndpointUrl"))
+    UpdateEndpointResponse.add_member(:state, Shapes::ShapeRef.new(shape: EndpointState, location_name: "State"))
+    UpdateEndpointResponse.struct_class = Types::UpdateEndpointResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -1281,6 +1385,16 @@ module Aws::EventBridge
         o.output = Shapes::ShapeRef.new(shape: CreateConnectionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:create_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -1369,6 +1483,17 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
+      api.add_operation(:delete_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
       api.add_operation(:delete_event_bus, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteEventBus"
         o.http_method = "POST"
@@ -1429,6 +1554,16 @@ module Aws::EventBridge
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeConnectionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeConnectionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:describe_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeEndpointResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
@@ -1534,6 +1669,15 @@ module Aws::EventBridge
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListConnectionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConnectionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+      end)
+
+      api.add_operation(:list_endpoints, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListEndpoints"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListEndpointsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListEndpointsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
 
@@ -1791,6 +1935,17 @@ module Aws::EventBridge
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:update_endpoint, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateEndpoint"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateEndpointRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateEndpointResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
       end)
     end
 
