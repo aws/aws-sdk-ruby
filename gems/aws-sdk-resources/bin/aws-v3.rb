@@ -90,10 +90,6 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-options[:require].each do |library|
-  require(library)
-end
-
 # When running the REPL locally, we want to load all of the gems from source.
 # First load aws-sdk-core and its dependencies.
 # (Sigv2 is still used by the deprecated SimpleDB service gem)
@@ -106,8 +102,6 @@ end
 # requiring aws-sdk-resources, we would get locally installed gems instead of
 # from source.
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
-$LOAD_PATH.unshift('/Users/alexwoo/ruby/aws-crt-ruby/gems/aws-crt/lib')
-$LOAD_PATH.unshift('/Users/alexwoo/ruby/aws-crt-ruby/gems/aws-sigv4/lib')
 
 # The Aws namespace used to check autoload requires aws-sdk-resources.
 require 'aws-sdk-resources'
@@ -168,6 +162,10 @@ if options[:debug]
 end
 
 Aws.config = cfg
+
+options[:require].each do |library|
+  require(library)
+end
 
 unless options[:execute].empty?
   eval(options[:execute].join("\n"))

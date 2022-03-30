@@ -1265,61 +1265,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         routing_config: { # required
-    #           failover_config: { # required
-    #             primary: { # required
-    #               health_check: "HealthCheck", # required
-    #             },
-    #             secondary: {
-    #               route: "Route", # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpointRequest AWS API Documentation
-    #
-    class CreateEndpointRequest < Struct.new(
-      :name,
-      :routing_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @!attribute [rw] state
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpointResponse AWS API Documentation
-    #
-    class CreateEndpointResponse < Struct.new(
-      :name,
-      :arn,
-      :routing_config,
-      :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateEventBusRequest
     #   data as a hash:
     #
@@ -1609,28 +1554,6 @@ module Aws::EventBridge
       SENSITIVE = []
       include Aws::Structure
     end
-
-    # @note When making an API call, you may pass DeleteEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #       }
-    #
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpointRequest AWS API Documentation
-    #
-    class DeleteEndpointRequest < Struct.new(
-      :name)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpointResponse AWS API Documentation
-    #
-    class DeleteEndpointResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteEventBusRequest
     #   data as a hash:
@@ -1958,72 +1881,6 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         home_region: "HomeRegion",
-    #       }
-    #
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] home_region
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpointRequest AWS API Documentation
-    #
-    class DescribeEndpointRequest < Struct.new(
-      :name,
-      :home_region)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @!attribute [rw] endpoint_id
-    #   @return [String]
-    #
-    # @!attribute [rw] endpoint_url
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   @return [String]
-    #
-    # @!attribute [rw] state_reason
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_modified_time
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpointResponse AWS API Documentation
-    #
-    class DescribeEndpointResponse < Struct.new(
-      :name,
-      :arn,
-      :routing_config,
-      :endpoint_id,
-      :endpoint_url,
-      :state,
-      :state_reason,
-      :creation_time,
-      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2589,49 +2446,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @!attribute [rw] endpoint_id
-    #   @return [String]
-    #
-    # @!attribute [rw] endpoint_url
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   @return [String]
-    #
-    # @!attribute [rw] state_reason
-    #   @return [String]
-    #
-    # @!attribute [rw] creation_time
-    #   @return [Time]
-    #
-    # @!attribute [rw] last_modified_time
-    #   @return [Time]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Endpoint AWS API Documentation
-    #
-    class Endpoint < Struct.new(
-      :name,
-      :arn,
-      :routing_config,
-      :endpoint_id,
-      :endpoint_url,
-      :state,
-      :state_reason,
-      :creation_time,
-      :last_modified_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # An event bus receives events from a source and routes them to rules
     # associated with that event bus. Your account's default event bus
     # receives events from Amazon Web Services services. A custom event bus
@@ -2707,33 +2521,6 @@ module Aws::EventBridge
       :expiration_time,
       :name,
       :state)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass FailoverConfig
-    #   data as a hash:
-    #
-    #       {
-    #         primary: { # required
-    #           health_check: "HealthCheck", # required
-    #         },
-    #         secondary: {
-    #           route: "Route", # required
-    #         },
-    #       }
-    #
-    # @!attribute [rw] primary
-    #   @return [Types::Primary]
-    #
-    # @!attribute [rw] secondary
-    #   @return [Types::Secondary]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/FailoverConfig AWS API Documentation
-    #
-    class FailoverConfig < Struct.new(
-      :primary,
-      :secondary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3110,54 +2897,6 @@ module Aws::EventBridge
     #
     class ListConnectionsResponse < Struct.new(
       :connections,
-      :next_token)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass ListEndpointsRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name_prefix: "EndpointName",
-    #         home_region: "HomeRegion",
-    #         next_token: "NextToken",
-    #         max_results: 1,
-    #       }
-    #
-    # @!attribute [rw] name_prefix
-    #   @return [String]
-    #
-    # @!attribute [rw] home_region
-    #   @return [String]
-    #
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
-    # @!attribute [rw] max_results
-    #   @return [Integer]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpointsRequest AWS API Documentation
-    #
-    class ListEndpointsRequest < Struct.new(
-      :name_prefix,
-      :home_region,
-      :next_token,
-      :max_results)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] endpoints
-    #   @return [Array<Types::Endpoint>]
-    #
-    # @!attribute [rw] next_token
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpointsResponse AWS API Documentation
-    #
-    class ListEndpointsResponse < Struct.new(
-      :endpoints,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3843,24 +3582,6 @@ module Aws::EventBridge
     #
     class PolicyLengthExceededException < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass Primary
-    #   data as a hash:
-    #
-    #       {
-    #         health_check: "HealthCheck", # required
-    #       }
-    #
-    # @!attribute [rw] health_check
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Primary AWS API Documentation
-    #
-    class Primary < Struct.new(
-      :health_check)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass PutEventsRequest
     #   data as a hash:
     #
@@ -3876,7 +3597,6 @@ module Aws::EventBridge
     #             trace_header: "TraceHeader",
     #           },
     #         ],
-    #         endpoint_id: "EndpointId",
     #       }
     #
     # @!attribute [rw] entries
@@ -3885,14 +3605,10 @@ module Aws::EventBridge
     #   event, resources associated with the event, and so on.
     #   @return [Array<Types::PutEventsRequestEntry>]
     #
-    # @!attribute [rw] endpoint_id
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/PutEventsRequest AWS API Documentation
     #
     class PutEventsRequest < Struct.new(
-      :entries,
-      :endpoint_id)
+      :entries)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4824,31 +4540,6 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass RoutingConfig
-    #   data as a hash:
-    #
-    #       {
-    #         failover_config: { # required
-    #           primary: { # required
-    #             health_check: "HealthCheck", # required
-    #           },
-    #           secondary: {
-    #             route: "Route", # required
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] failover_config
-    #   @return [Types::FailoverConfig]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/RoutingConfig AWS API Documentation
-    #
-    class RoutingConfig < Struct.new(
-      :failover_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # Contains information about a rule in Amazon EventBridge.
     #
     # @!attribute [rw] name
@@ -5037,24 +4728,6 @@ module Aws::EventBridge
     #
     class SageMakerPipelineParameters < Struct.new(
       :pipeline_parameter_list)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass Secondary
-    #   data as a hash:
-    #
-    #       {
-    #         route: "Route", # required
-    #       }
-    #
-    # @!attribute [rw] route
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/Secondary AWS API Documentation
-    #
-    class Secondary < Struct.new(
-      :route)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6123,69 +5796,6 @@ module Aws::EventBridge
       :creation_time,
       :last_modified_time,
       :last_authorized_time)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass UpdateEndpointRequest
-    #   data as a hash:
-    #
-    #       {
-    #         name: "EndpointName", # required
-    #         routing_config: { # required
-    #           failover_config: { # required
-    #             primary: { # required
-    #               health_check: "HealthCheck", # required
-    #             },
-    #             secondary: {
-    #               route: "Route", # required
-    #             },
-    #           },
-    #         },
-    #       }
-    #
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpointRequest AWS API Documentation
-    #
-    class UpdateEndpointRequest < Struct.new(
-      :name,
-      :routing_config)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] name
-    #   @return [String]
-    #
-    # @!attribute [rw] arn
-    #   @return [String]
-    #
-    # @!attribute [rw] routing_config
-    #   @return [Types::RoutingConfig]
-    #
-    # @!attribute [rw] endpoint_id
-    #   @return [String]
-    #
-    # @!attribute [rw] endpoint_url
-    #   @return [String]
-    #
-    # @!attribute [rw] state
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpointResponse AWS API Documentation
-    #
-    class UpdateEndpointResponse < Struct.new(
-      :name,
-      :arn,
-      :routing_config,
-      :endpoint_id,
-      :endpoint_url,
-      :state)
       SENSITIVE = []
       include Aws::Structure
     end
