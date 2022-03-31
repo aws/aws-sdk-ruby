@@ -223,7 +223,10 @@ module Aws::ManagedGrafana
     #         organization_role_name: "OrganizationRoleName",
     #         permission_type: "CUSTOMER_MANAGED", # required, accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #         stack_set_name: "StackSetName",
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
     #         workspace_description: "Description",
     #         workspace_name: "WorkspaceName",
     #         workspace_notification_destinations: ["SNS"], # accepts SNS
@@ -266,10 +269,12 @@ module Aws::ManagedGrafana
     #   @return [String]
     #
     # @!attribute [rw] permission_type
-    #   If you specify `Service Managed`, Amazon Managed Grafana
-    #   automatically creates the IAM roles and provisions the permissions
-    #   that the workspace needs to use Amazon Web Services data sources and
-    #   notification channels.
+    #   If you specify `SERVICE_MANAGED` on AWS Grafana console, Amazon
+    #   Managed Grafana automatically creates the IAM roles and provisions
+    #   the permissions that the workspace needs to use Amazon Web Services
+    #   data sources and notification channels. In CLI mode, the
+    #   permissionType `SERVICE_MANAGED` will not create the IAM role for
+    #   you.
     #
     #   If you specify `CUSTOMER_MANAGED`, you will manage those roles and
     #   permissions yourself. If you are creating this workspace in a member
@@ -280,7 +285,7 @@ module Aws::ManagedGrafana
     #
     #   For more information, see [Amazon Managed Grafana permissions and
     #   policies for Amazon Web Services data sources and notification
-    #   channels][1]
+    #   channels][1].
     #
     #
     #
@@ -291,6 +296,10 @@ module Aws::ManagedGrafana
     #   The name of the CloudFormation stack set to use to generate IAM
     #   roles to be used for this workspace.
     #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the workspace.
+    #   @return [Hash<String,String>]
     #
     # @!attribute [rw] workspace_data_sources
     #   Specify the Amazon Web Services data sources that you want to be
@@ -308,6 +317,8 @@ module Aws::ManagedGrafana
     # @!attribute [rw] workspace_description
     #   A description for the workspace. This is used only to help you
     #   identify this workspace.
+    #
+    #   Pattern: `^[\\p\{L\}\\p\{Z\}\\p\{N\}\\p\{P\}]\{0,2048\}$`
     #   @return [String]
     #
     # @!attribute [rw] workspace_name
@@ -331,10 +342,7 @@ module Aws::ManagedGrafana
     #   The workspace needs an IAM role that grants permissions to the
     #   Amazon Web Services resources that the workspace will view data
     #   from. If you already have a role that you want to use, specify it
-    #   here. If you omit this field and you specify some Amazon Web
-    #   Services resources in `workspaceDataSources` or
-    #   `workspaceNotificationDestinations`, a new IAM role with the
-    #   necessary permissions is automatically created.
+    #   here. The permission type should be set to `CUSTOMER_MANAGED`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceRequest AWS API Documentation
@@ -346,6 +354,7 @@ module Aws::ManagedGrafana
       :organization_role_name,
       :permission_type,
       :stack_set_name,
+      :tags,
       :workspace_data_sources,
       :workspace_description,
       :workspace_name,
@@ -626,6 +635,37 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource the list of tags are associated with.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListTagsForResourceRequest AWS API Documentation
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The list of tags that are associated with the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/ListTagsForResourceResponse AWS API Documentation
+    #
+    class ListTagsForResourceResponse < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListWorkspacesRequest
     #   data as a hash:
     #
@@ -868,6 +908,39 @@ module Aws::ManagedGrafana
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tags: { # required
+    #           "TagKey" => "TagValue",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource the tag is associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The list of tag keys and values to associate with the resource. You
+    #   can associate tag keys only, tags (key and values) only or a
+    #   combination of tag keys and tags.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/TagResourceRequest AWS API Documentation
+    #
+    class TagResourceRequest < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/TagResourceResponse AWS API Documentation
+    #
+    class TagResourceResponse < Aws::EmptyStructure; end
+
     # The request was denied because of request throttling. Retry the
     # request.
     #
@@ -897,6 +970,35 @@ module Aws::ManagedGrafana
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "String", # required
+    #         tag_keys: ["TagKey"], # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource the tag association is removed from.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The key values of the tag to be removed from the resource.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UntagResourceRequest AWS API Documentation
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UntagResourceResponse AWS API Documentation
+    #
+    class UntagResourceResponse < Aws::EmptyStructure; end
 
     # A structure containing information about one error encountered while
     # performing an [UpdatePermissions][1] operation.
@@ -1102,7 +1204,7 @@ module Aws::ManagedGrafana
     #         organization_role_name: "OrganizationRoleName",
     #         permission_type: "CUSTOMER_MANAGED", # accepts CUSTOMER_MANAGED, SERVICE_MANAGED
     #         stack_set_name: "StackSetName",
-    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE
+    #         workspace_data_sources: ["AMAZON_OPENSEARCH_SERVICE"], # accepts AMAZON_OPENSEARCH_SERVICE, CLOUDWATCH, PROMETHEUS, XRAY, TIMESTREAM, SITEWISE, ATHENA, REDSHIFT
     #         workspace_description: "Description",
     #         workspace_id: "WorkspaceId", # required
     #         workspace_name: "WorkspaceName",
@@ -1243,6 +1345,9 @@ module Aws::ManagedGrafana
     #
     # @!attribute [rw] id
     #   The ID of the user or group.
+    #
+    #   Pattern:
+    #   `^([0-9a-fA-F]\{10\}-|)[A-Fa-f0-9]\{8\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{4\}-[A-Fa-f0-9]\{12\}$`
     #   @return [String]
     #
     # @!attribute [rw] type
@@ -1422,6 +1527,10 @@ module Aws::ManagedGrafana
     #   The current status of the workspace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the workspace.
+    #   @return [Hash<String,String>]
+    #
     # @!attribute [rw] workspace_role_arn
     #   The IAM role that grants permissions to the Amazon Web Services
     #   resources that the workspace will view data from. This role must
@@ -1451,6 +1560,7 @@ module Aws::ManagedGrafana
       :permission_type,
       :stack_set_name,
       :status,
+      :tags,
       :workspace_role_arn)
       SENSITIVE = [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
       include Aws::Structure
@@ -1503,6 +1613,10 @@ module Aws::ManagedGrafana
     #   The current status of the workspace.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The list of tags associated with the workspace.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/WorkspaceSummary AWS API Documentation
     #
     class WorkspaceSummary < Struct.new(
@@ -1515,7 +1629,8 @@ module Aws::ManagedGrafana
       :modified,
       :name,
       :notification_destinations,
-      :status)
+      :status,
+      :tags)
       SENSITIVE = [:description, :name]
       include Aws::Structure
     end

@@ -833,6 +833,137 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # Returns default client branding attributes that were imported. These
+    # attributes display on the client login screen.
+    #
+    # Client branding attributes are public facing. Ensure that you don't
+    # include sensitive information.
+    #
+    # @!attribute [rw] logo_url
+    #   The logo URL. This is the link where users can download the logo
+    #   image. The only supported image format is `.png`.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_email
+    #   The support email. The company's customer support email address.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default email is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] support_link
+    #   The support link. The link for the company's customer support page
+    #   for their WorkSpace.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive.You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default support link is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] forgot_password_link
+    #   The forgotten password link. This is the web address that users can
+    #   go to if they forget the password for their WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_message
+    #   The login message. Specified as a key value pair, in which the key
+    #   is a locale and the value is the localized message for that locale.
+    #   The only key supported is `en_US`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultClientBrandingAttributes AWS API Documentation
+    #
+    class DefaultClientBrandingAttributes < Struct.new(
+      :logo_url,
+      :support_email,
+      :support_link,
+      :forgot_password_link,
+      :login_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The default client branding attributes to be imported. These
+    # attributes display on the client login screen.
+    #
+    # Client branding attributes are public facing. Ensure that you do not
+    # include sensitive information.
+    #
+    # @note When making an API call, you may pass DefaultImportClientBrandingAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         logo: "data",
+    #         support_email: "ClientEmail",
+    #         support_link: "ClientUrl",
+    #         forgot_password_link: "ClientUrl",
+    #         login_message: {
+    #           "ClientLocale" => "ClientLoginMessage",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] logo
+    #   The logo. This is the link where users can download the logo image.
+    #   The only image format accepted is `.png`.
+    #   @return [String]
+    #
+    # @!attribute [rw] support_email
+    #   The support email. The company's customer support email address.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default email is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] support_link
+    #   The support link. The link for the company's customer support page
+    #   for their WorkSpace.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default support link is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] forgot_password_link
+    #   The forgotten password link. This is the web address that users can
+    #   go to if they forget the password for their WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_message
+    #   The login message. Specified as a key value pair, in which the key
+    #   is a locale and the value is the localized message for that locale.
+    #   The only key supported is `en_US`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DefaultImportClientBrandingAttributes AWS API Documentation
+    #
+    class DefaultImportClientBrandingAttributes < Struct.new(
+      :logo,
+      :support_email,
+      :support_link,
+      :forgot_password_link,
+      :login_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the default values that are used to create WorkSpaces. For
     # more information, see [Update Directory Details for Your
     # WorkSpaces][1].
@@ -904,6 +1035,36 @@ module Aws::WorkSpaces
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteClientBrandingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         platforms: ["DeviceTypeWindows"], # required, accepts DeviceTypeWindows, DeviceTypeOsx, DeviceTypeAndroid, DeviceTypeIos, DeviceTypeLinux, DeviceTypeWeb
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier of the WorkSpace for which you want to
+    #   delete client branding.
+    #   @return [String]
+    #
+    # @!attribute [rw] platforms
+    #   The device type for which you want to delete client branding.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteClientBrandingRequest AWS API Documentation
+    #
+    class DeleteClientBrandingRequest < Struct.new(
+      :resource_id,
+      :platforms)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteClientBrandingResult AWS API Documentation
+    #
+    class DeleteClientBrandingResult < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteConnectClientAddInRequest
     #   data as a hash:
@@ -1146,6 +1307,63 @@ module Aws::WorkSpaces
     class DescribeAccountResult < Struct.new(
       :dedicated_tenancy_support,
       :dedicated_tenancy_management_cidr_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeClientBrandingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier of the WorkSpace for which you want to view
+    #   client branding information.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientBrandingRequest AWS API Documentation
+    #
+    class DescribeClientBrandingRequest < Struct.new(
+      :resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_type_windows
+    #   The branding information for Windows devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_osx
+    #   The branding information for macOS devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_android
+    #   The branding information for Android devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_ios
+    #   The branding information for iOS devices.
+    #   @return [Types::IosClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_linux
+    #   The branding information for Linux devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_web
+    #   The branding information for Web access.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientBrandingResult AWS API Documentation
+    #
+    class DescribeClientBrandingResult < Struct.new(
+      :device_type_windows,
+      :device_type_osx,
+      :device_type_android,
+      :device_type_ios,
+      :device_type_linux,
+      :device_type_web)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1938,6 +2156,149 @@ module Aws::WorkSpaces
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ImportClientBrandingRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_id: "DirectoryId", # required
+    #         device_type_windows: {
+    #           logo: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #         device_type_osx: {
+    #           logo: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #         device_type_android: {
+    #           logo: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #         device_type_ios: {
+    #           logo: "data",
+    #           logo_2x: "data",
+    #           logo_3x: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #         device_type_linux: {
+    #           logo: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #         device_type_web: {
+    #           logo: "data",
+    #           support_email: "ClientEmail",
+    #           support_link: "ClientUrl",
+    #           forgot_password_link: "ClientUrl",
+    #           login_message: {
+    #             "ClientLocale" => "ClientLoginMessage",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource_id
+    #   The directory identifier of the WorkSpace for which you want to
+    #   import client branding.
+    #   @return [String]
+    #
+    # @!attribute [rw] device_type_windows
+    #   The branding information to import for Windows devices.
+    #   @return [Types::DefaultImportClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_osx
+    #   The branding information to import for macOS devices.
+    #   @return [Types::DefaultImportClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_android
+    #   The branding information to import for Android devices.
+    #   @return [Types::DefaultImportClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_ios
+    #   The branding information to import for iOS devices.
+    #   @return [Types::IosImportClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_linux
+    #   The branding information to import for Linux devices.
+    #   @return [Types::DefaultImportClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_web
+    #   The branding information to import for web access.
+    #   @return [Types::DefaultImportClientBrandingAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportClientBrandingRequest AWS API Documentation
+    #
+    class ImportClientBrandingRequest < Struct.new(
+      :resource_id,
+      :device_type_windows,
+      :device_type_osx,
+      :device_type_android,
+      :device_type_ios,
+      :device_type_linux,
+      :device_type_web)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] device_type_windows
+    #   The branding information configured for Windows devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_osx
+    #   The branding information configured for macOS devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_android
+    #   The branding information configured for Android devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_ios
+    #   The branding information configured for iOS devices.
+    #   @return [Types::IosClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_linux
+    #   The branding information configured for Linux devices.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @!attribute [rw] device_type_web
+    #   The branding information configured for web access.
+    #   @return [Types::DefaultClientBrandingAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportClientBrandingResult AWS API Documentation
+    #
+    class ImportClientBrandingResult < Struct.new(
+      :device_type_windows,
+      :device_type_osx,
+      :device_type_android,
+      :device_type_ios,
+      :device_type_linux,
+      :device_type_web)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ImportWorkspaceImageRequest
     #   data as a hash:
     #
@@ -2047,6 +2408,201 @@ module Aws::WorkSpaces
     #
     class InvalidResourceStateException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client branding attributes for iOS device types. These attributes
+    # are displayed on the iOS client login screen only.
+    #
+    # Client branding attributes are public facing. Ensure you do not
+    # include sensitive information.
+    #
+    # @!attribute [rw] logo_url
+    #   The logo. This is the link where users can download the logo image.
+    #   This is the standard-resolution display that has a 1:1 pixel density
+    #   (or @1x), where one pixel is equal to one point.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_2x_url
+    #   The @2x version of the logo. This is the higher resolution display
+    #   that offers a scale factor of 2.0 (or @2x).
+    #
+    #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
+    #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_3x_url
+    #   The @3x version of the logo. This is the higher resolution display
+    #   that offers a scale factor of 3.0 (or @3x).
+    #
+    #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
+    #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/
+    #   @return [String]
+    #
+    # @!attribute [rw] support_email
+    #   The support email. The company's customer support email address.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default email is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] support_link
+    #   The support link. The link for the company's customer support page
+    #   for their WorkSpace.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default support link is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] forgot_password_link
+    #   The forgotten password link. This is the web address that users can
+    #   go to if they forget the password for their WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_message
+    #   The login message. Specified as a key value pair, in which the key
+    #   is a locale and the value is the localized message for that locale.
+    #   The only key supported is `en_US`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosClientBrandingAttributes AWS API Documentation
+    #
+    class IosClientBrandingAttributes < Struct.new(
+      :logo_url,
+      :logo_2x_url,
+      :logo_3x_url,
+      :support_email,
+      :support_link,
+      :forgot_password_link,
+      :login_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The client branding attributes to import for iOS device types. These
+    # attributes are displayed on the iOS client login screen.
+    #
+    # Client branding attributes are public facing. Ensure you do not
+    # include sensitive information.
+    #
+    # @note When making an API call, you may pass IosImportClientBrandingAttributes
+    #   data as a hash:
+    #
+    #       {
+    #         logo: "data",
+    #         logo_2x: "data",
+    #         logo_3x: "data",
+    #         support_email: "ClientEmail",
+    #         support_link: "ClientUrl",
+    #         forgot_password_link: "ClientUrl",
+    #         login_message: {
+    #           "ClientLocale" => "ClientLoginMessage",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] logo
+    #   The logo. This is the link where users can download the logo image.
+    #   This is the standard-resolution display that has a 1:1 pixel density
+    #   (or @1x), where one pixel is equal to one point.
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_2x
+    #   The @2x version of the logo. This is the higher resolution display
+    #   that offers a scale factor of 2.0 (or @2x).
+    #
+    #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
+    #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/
+    #   @return [String]
+    #
+    # @!attribute [rw] logo_3x
+    #   The @3x version of the logo. This is the higher resolution display
+    #   that offers a scale factor of 3.0 (or @3x).
+    #
+    #   <note markdown="1"> For more information about iOS image size and resolution, see [Image
+    #   Size and Resolution ][1] in the *Apple Human Interface Guidelines*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/image-size-and-resolution/
+    #   @return [String]
+    #
+    # @!attribute [rw] support_email
+    #   The support email. The company's customer support email address.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default email is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] support_link
+    #   The support link. The link for the company's customer support page
+    #   for their WorkSpace.
+    #
+    #   <note markdown="1"> * In each platform type, the `SupportEmail` and `SupportLink`
+    #     parameters are mutually exclusive. You can specify one parameter
+    #     for each platform type, but not both.
+    #
+    #   * The default support link is `workspaces-feedback@amazon.com`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] forgot_password_link
+    #   The forgotten password link. This is the web address that users can
+    #   go to if they forget the password for their WorkSpace.
+    #   @return [String]
+    #
+    # @!attribute [rw] login_message
+    #   The login message. Specified as a key value pair, in which the key
+    #   is a locale and the value is the localized message for that locale.
+    #   The only key supported is `en_US`.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/IosImportClientBrandingAttributes AWS API Documentation
+    #
+    class IosImportClientBrandingAttributes < Struct.new(
+      :logo,
+      :logo_2x,
+      :logo_3x,
+      :support_email,
+      :support_link,
+      :forgot_password_link,
+      :login_message)
       SENSITIVE = []
       include Aws::Structure
     end

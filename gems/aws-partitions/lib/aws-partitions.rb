@@ -446,6 +446,7 @@ module Aws
             'Pinpoint' => 'pinpoint',
             'PinpointEmail' => 'email',
             'PinpointSMSVoice' => 'sms-voice.pinpoint',
+            'PinpointSMSVoiceV2' => 'sms-voice',
             'Polly' => 'polly',
             'Pricing' => 'api.pricing',
             'PrometheusService' => 'aps',

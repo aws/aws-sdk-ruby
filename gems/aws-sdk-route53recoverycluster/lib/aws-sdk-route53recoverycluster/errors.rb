@@ -32,6 +32,7 @@ module Aws::Route53RecoveryCluster
   # * {EndpointTemporarilyUnavailableException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ServiceLimitExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -138,6 +139,41 @@ module Aws::Route53RecoveryCluster
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ServiceLimitExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53RecoveryCluster::Types::ServiceLimitExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def limit_code
+        @data[:limit_code]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
       end
     end
 

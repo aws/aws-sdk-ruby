@@ -528,6 +528,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Personalize Runtime                            | Aws::PersonalizeRuntime                  | aws-sdk-personalizeruntime                  | 2018-05-22  |
 | Amazon Pinpoint                                       | Aws::Pinpoint                            | aws-sdk-pinpoint                            | 2016-12-01  |
 | Amazon Pinpoint Email Service                         | Aws::PinpointEmail                       | aws-sdk-pinpointemail                       | 2018-07-26  |
+| Amazon Pinpoint SMS Voice V2                          | Aws::PinpointSMSVoiceV2                  | aws-sdk-pinpointsmsvoicev2                  | 2022-03-31  |
 | Amazon Pinpoint SMS and Voice Service                 | Aws::PinpointSMSVoice                    | aws-sdk-pinpointsmsvoice                    | 2018-09-05  |
 | Amazon Polly                                          | Aws::Polly                               | aws-sdk-polly                               | 2016-06-10  |
 | Amazon Prometheus Service                             | Aws::PrometheusService                   | aws-sdk-prometheusservice                   | 2020-08-01  |

@@ -721,6 +721,9 @@
   "PinpointSMSVoice": {
     "models": "sms-voice/2018-09-05"
   },
+  "PinpointSMSVoiceV2": {
+    "models": "pinpoint-sms-voice-v2/2022-03-31"
+  },
   "Polly": {
     "models": "polly/2016-06-10"
   },

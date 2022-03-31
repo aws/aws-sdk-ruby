@@ -229,6 +229,7 @@ module Aws
   autoload :Pinpoint, 'aws-sdk-pinpoint'
   autoload :PinpointEmail, 'aws-sdk-pinpointemail'
   autoload :PinpointSMSVoice, 'aws-sdk-pinpointsmsvoice'
+  autoload :PinpointSMSVoiceV2, 'aws-sdk-pinpointsmsvoicev2'
   autoload :Polly, 'aws-sdk-polly'
   autoload :Pricing, 'aws-sdk-pricing'
   autoload :PrometheusService, 'aws-sdk-prometheusservice'

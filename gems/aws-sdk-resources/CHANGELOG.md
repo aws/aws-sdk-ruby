@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.128.0 (2022-03-31)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-pinpointsmsvoicev2` gem.
+
 3.127.0 (2022-03-23)
 ------------------
 

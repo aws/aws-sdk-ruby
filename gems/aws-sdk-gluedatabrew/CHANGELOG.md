@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-03-31)
+------------------
+
+* Feature - This AWS Glue Databrew release adds feature to support ORC as an input format.
+
 1.21.0 (2022-02-24)
 ------------------
 

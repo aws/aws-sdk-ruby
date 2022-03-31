@@ -1113,6 +1113,48 @@ module Aws::AuditManager
 
     # Deregisters an account in Audit Manager.
     #
+    # <note markdown="1"> When you deregister your account from Audit Manager, your data isn’t
+    # deleted. If you want to delete your resource data, you must perform
+    # that task separately before you deregister your account. Either, you
+    # can do this in the Audit Manager console. Or, you can use one of the
+    # delete API operations that are provided by Audit Manager.
+    #
+    #  To delete your Audit Manager resource data, see the following
+    # instructions:
+    #
+    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
+    #   *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
+    #   framework][4] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
+    #   request][6] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
+    #   report][8] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
+    #   *Audit Manager User Guide*)
+    #
+    #  At this time, Audit Manager doesn't provide an option to delete
+    # evidence. All available delete operations are listed above.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
+    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
+    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
+    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
+    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
+    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
+    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
+    #
     # @return [Types::DeregisterAccountResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DeregisterAccountResponse#status #status} => String
@@ -1130,15 +1172,58 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Removes the specified member Amazon Web Services account as a
-    # delegated administrator for Audit Manager.
+    # Removes the specified Amazon Web Services account as a delegated
+    # administrator for Audit Manager.
     #
     # When you remove a delegated administrator from your Audit Manager
     # settings, you continue to have access to the evidence that you
     # previously collected under that account. This is also the case when
-    # you deregister a delegated administrator from Audit Manager. However,
+    # you deregister a delegated administrator from Organizations. However,
     # Audit Manager will stop collecting and attaching evidence to that
     # delegated administrator account moving forward.
+    #
+    # <note markdown="1"> When you deregister a delegated administrator account for Audit
+    # Manager, the data for that account isn’t deleted. If you want to
+    # delete resource data for a delegated administrator account, you must
+    # perform that task separately before you deregister the account.
+    # Either, you can do this in the Audit Manager console. Or, you can use
+    # one of the delete API operations that are provided by Audit Manager.
+    #
+    #  To delete your Audit Manager resource data, see the following
+    # instructions:
+    #
+    #  * [DeleteAssessment][1] (see also: [Deleting an assessment][2] in the
+    #   *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFramework][3] (see also: [Deleting a custom
+    #   framework][4] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentFrameworkShare][5] (see also: [Deleting a share
+    #   request][6] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteAssessmentReport][7] (see also: [Deleting an assessment
+    #   report][8] in the *Audit Manager User Guide*)
+    #
+    # * [DeleteControl][9] (see also: [Deleting a custom control][10] in the
+    #   *Audit Manager User Guide*)
+    #
+    #  At this time, Audit Manager doesn't provide an option to delete
+    # evidence. All available delete operations are listed above.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html
+    # [2]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-assessment.html
+    # [3]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFramework.html
+    # [4]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-custom-framework.html
+    # [5]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentFrameworkShare.html
+    # [6]: https://docs.aws.amazon.com/audit-manager/latest/userguide/deleting-shared-framework-requests.html
+    # [7]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessmentReport.html
+    # [8]: https://docs.aws.amazon.com/audit-manager/latest/userguide/generate-assessment-report.html#delete-assessment-report-steps
+    # [9]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteControl.html
+    # [10]: https://docs.aws.amazon.com/audit-manager/latest/userguide/delete-controls.html
     #
     # @option params [String] :admin_account_id
     #   The identifier for the administrator account.
@@ -3538,7 +3623,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

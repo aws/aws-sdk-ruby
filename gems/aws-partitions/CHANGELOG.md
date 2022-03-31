@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.572.0 (2022-03-31)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PinpointSMSVoiceV2`.
+
 1.571.0 (2022-03-28)
 ------------------
 
