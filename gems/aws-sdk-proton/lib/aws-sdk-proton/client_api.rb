@@ -368,6 +368,7 @@ module Aws::Proton
     CreateRepositoryInput.add_member(:encryption_key, Shapes::ShapeRef.new(shape: Arn, location_name: "encryptionKey"))
     CreateRepositoryInput.add_member(:name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "name"))
     CreateRepositoryInput.add_member(:provider, Shapes::ShapeRef.new(shape: RepositoryProvider, required: true, location_name: "provider"))
+    CreateRepositoryInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateRepositoryInput.struct_class = Types::CreateRepositoryInput
 
     CreateRepositoryOutput.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, required: true, location_name: "repository"))

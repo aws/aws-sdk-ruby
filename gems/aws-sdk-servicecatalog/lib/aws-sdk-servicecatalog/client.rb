@@ -2574,6 +2574,7 @@ module Aws::ServiceCatalog
     #   * {Types::DescribeProvisioningParametersOutput#tag_options #tag_options} => Array&lt;Types::TagOptionSummary&gt;
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_preferences #provisioning_artifact_preferences} => Types::ProvisioningArtifactPreferences
     #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_outputs #provisioning_artifact_outputs} => Array&lt;Types::ProvisioningArtifactOutput&gt;
+    #   * {Types::DescribeProvisioningParametersOutput#provisioning_artifact_output_keys #provisioning_artifact_output_keys} => Array&lt;Types::ProvisioningArtifactOutput&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2620,6 +2621,9 @@ module Aws::ServiceCatalog
     #   resp.provisioning_artifact_outputs #=> Array
     #   resp.provisioning_artifact_outputs[0].key #=> String
     #   resp.provisioning_artifact_outputs[0].description #=> String
+    #   resp.provisioning_artifact_output_keys #=> Array
+    #   resp.provisioning_artifact_output_keys[0].key #=> String
+    #   resp.provisioning_artifact_output_keys[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParameters AWS API Documentation
     #
@@ -5852,7 +5856,7 @@ module Aws::ServiceCatalog
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-servicecatalog'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5517,21 +5517,11 @@ module Aws::IoT
     #   @return [Types::CodeSigningCertificateChain]
     #
     # @!attribute [rw] hash_algorithm
-    #   The hash algorithm used to code sign the file. You can use a string
-    #   as the algorithm name if the target over-the-air (OTA) update
-    #   devices are able to verify the signature that was generated using
-    #   the same signature algorithm. For example, FreeRTOS uses `SHA256` or
-    #   `SHA1`, so you can pass either of them based on which was used for
-    #   generating the signature.
+    #   The hash algorithm used to code sign the file.
     #   @return [String]
     #
     # @!attribute [rw] signature_algorithm
-    #   The signature algorithm used to code sign the file. You can use a
-    #   string as the algorithm name if the target over-the-air (OTA) update
-    #   devices are able to verify the signature that was generated using
-    #   the same signature algorithm. For example, FreeRTOS uses `ECDSA` or
-    #   `RSA`, so you can pass either of them based on which was used for
-    #   generating the signature.
+    #   The signature algorithm used to code sign the file.
     #   @return [String]
     #
     class CustomCodeSigning < Struct.new(
@@ -12108,6 +12098,84 @@ module Aws::IoT
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMetricValuesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         thing_name: "DeviceDefenderThingName", # required
+    #         metric_name: "BehaviorMetric", # required
+    #         dimension_name: "DimensionName",
+    #         dimension_value_operator: "IN", # accepts IN, NOT_IN
+    #         start_time: Time.now, # required
+    #         end_time: Time.now, # required
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] thing_name
+    #   The name of the thing for which security profile metric values are
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the security profile metric for which values are
+    #   returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_name
+    #   The dimension name.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_value_operator
+    #   The dimension value operator.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The start of the time period for which metric values are returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The end of the time period for which metric values are returned.
+    #   @return [Time]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return at one time.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results.
+    #   @return [String]
+    #
+    class ListMetricValuesRequest < Struct.new(
+      :thing_name,
+      :metric_name,
+      :dimension_name,
+      :dimension_value_operator,
+      :start_time,
+      :end_time,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metric_datum_list
+    #   The data the thing reports for the metric during the specified time
+    #   period.
+    #   @return [Array<Types::MetricDatum>]
+    #
+    # @!attribute [rw] next_token
+    #   A token that can be used to retrieve the next set of results, or
+    #   `null` if there are no additional results.
+    #   @return [String]
+    #
+    class ListMetricValuesResponse < Struct.new(
+      :metric_datum_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListMitigationActionsRequest
     #   data as a hash:
     #
@@ -13788,6 +13856,23 @@ module Aws::IoT
       :description,
       :environments,
       :template_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A metric.
+    #
+    # @!attribute [rw] timestamp
+    #   The time the metric value was reported.
+    #   @return [Time]
+    #
+    # @!attribute [rw] value
+    #   The value reported for the metric.
+    #   @return [Types::MetricValue]
+    #
+    class MetricDatum < Struct.new(
+      :timestamp,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end

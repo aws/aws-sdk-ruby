@@ -8879,6 +8879,78 @@ module Aws::IoT
       req.send_request(options)
     end
 
+    # Lists the values reported for an IoT Device Defender metric
+    # (device-side metric, cloud-side metric, or custom metric) by the given
+    # thing during the specified time period.
+    #
+    # @option params [required, String] :thing_name
+    #   The name of the thing for which security profile metric values are
+    #   returned.
+    #
+    # @option params [required, String] :metric_name
+    #   The name of the security profile metric for which values are returned.
+    #
+    # @option params [String] :dimension_name
+    #   The dimension name.
+    #
+    # @option params [String] :dimension_value_operator
+    #   The dimension value operator.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :start_time
+    #   The start of the time period for which metric values are returned.
+    #
+    # @option params [required, Time,DateTime,Date,Integer,String] :end_time
+    #   The end of the time period for which metric values are returned.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return at one time.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results.
+    #
+    # @return [Types::ListMetricValuesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMetricValuesResponse#metric_datum_list #metric_datum_list} => Array&lt;Types::MetricDatum&gt;
+    #   * {Types::ListMetricValuesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_metric_values({
+    #     thing_name: "DeviceDefenderThingName", # required
+    #     metric_name: "BehaviorMetric", # required
+    #     dimension_name: "DimensionName",
+    #     dimension_value_operator: "IN", # accepts IN, NOT_IN
+    #     start_time: Time.now, # required
+    #     end_time: Time.now, # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.metric_datum_list #=> Array
+    #   resp.metric_datum_list[0].timestamp #=> Time
+    #   resp.metric_datum_list[0].value.count #=> Integer
+    #   resp.metric_datum_list[0].value.cidrs #=> Array
+    #   resp.metric_datum_list[0].value.cidrs[0] #=> String
+    #   resp.metric_datum_list[0].value.ports #=> Array
+    #   resp.metric_datum_list[0].value.ports[0] #=> Integer
+    #   resp.metric_datum_list[0].value.number #=> Float
+    #   resp.metric_datum_list[0].value.numbers #=> Array
+    #   resp.metric_datum_list[0].value.numbers[0] #=> Float
+    #   resp.metric_datum_list[0].value.strings #=> Array
+    #   resp.metric_datum_list[0].value.strings[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @overload list_metric_values(params = {})
+    # @param [Hash] params ({})
+    def list_metric_values(params = {}, options = {})
+      req = build_request(:list_metric_values, params)
+      req.send_request(options)
+    end
+
     # Gets a list of all mitigation actions that match the specified filter
     # criteria.
     #
@@ -13600,7 +13672,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
