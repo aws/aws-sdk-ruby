@@ -53,6 +53,7 @@ module Aws::SecurityHub
     AwsAutoScalingAutoScalingGroupAvailabilityZonesList = Shapes::ListShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesList')
     AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails')
     AwsAutoScalingAutoScalingGroupDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupDetails')
+    AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification')
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails')
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails')
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails = Shapes::StructureShape.new(name: 'AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails')
@@ -274,6 +275,8 @@ module Aws::SecurityHub
     AwsElbLbCookieStickinessPolicies = Shapes::ListShape.new(name: 'AwsElbLbCookieStickinessPolicies')
     AwsElbLbCookieStickinessPolicy = Shapes::StructureShape.new(name: 'AwsElbLbCookieStickinessPolicy')
     AwsElbLoadBalancerAccessLog = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerAccessLog')
+    AwsElbLoadBalancerAdditionalAttribute = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerAdditionalAttribute')
+    AwsElbLoadBalancerAdditionalAttributeList = Shapes::ListShape.new(name: 'AwsElbLoadBalancerAdditionalAttributeList')
     AwsElbLoadBalancerAttributes = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerAttributes')
     AwsElbLoadBalancerBackendServerDescription = Shapes::StructureShape.new(name: 'AwsElbLoadBalancerBackendServerDescription')
     AwsElbLoadBalancerBackendServerDescriptions = Shapes::ListShape.new(name: 'AwsElbLoadBalancerBackendServerDescriptions')
@@ -367,6 +370,11 @@ module Aws::SecurityHub
     AwsRdsDbPendingModifiedValues = Shapes::StructureShape.new(name: 'AwsRdsDbPendingModifiedValues')
     AwsRdsDbProcessorFeature = Shapes::StructureShape.new(name: 'AwsRdsDbProcessorFeature')
     AwsRdsDbProcessorFeatures = Shapes::ListShape.new(name: 'AwsRdsDbProcessorFeatures')
+    AwsRdsDbSecurityGroupDetails = Shapes::StructureShape.new(name: 'AwsRdsDbSecurityGroupDetails')
+    AwsRdsDbSecurityGroupEc2SecurityGroup = Shapes::StructureShape.new(name: 'AwsRdsDbSecurityGroupEc2SecurityGroup')
+    AwsRdsDbSecurityGroupEc2SecurityGroups = Shapes::ListShape.new(name: 'AwsRdsDbSecurityGroupEc2SecurityGroups')
+    AwsRdsDbSecurityGroupIpRange = Shapes::StructureShape.new(name: 'AwsRdsDbSecurityGroupIpRange')
+    AwsRdsDbSecurityGroupIpRanges = Shapes::ListShape.new(name: 'AwsRdsDbSecurityGroupIpRanges')
     AwsRdsDbSnapshotDetails = Shapes::StructureShape.new(name: 'AwsRdsDbSnapshotDetails')
     AwsRdsDbStatusInfo = Shapes::StructureShape.new(name: 'AwsRdsDbStatusInfo')
     AwsRdsDbStatusInfos = Shapes::ListShape.new(name: 'AwsRdsDbStatusInfos')
@@ -393,6 +401,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterHsmStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterHsmStatus')
     AwsRedshiftClusterIamRole = Shapes::StructureShape.new(name: 'AwsRedshiftClusterIamRole')
     AwsRedshiftClusterIamRoles = Shapes::ListShape.new(name: 'AwsRedshiftClusterIamRoles')
+    AwsRedshiftClusterLoggingStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterLoggingStatus')
     AwsRedshiftClusterPendingModifiedValues = Shapes::StructureShape.new(name: 'AwsRedshiftClusterPendingModifiedValues')
     AwsRedshiftClusterResizeInfo = Shapes::StructureShape.new(name: 'AwsRedshiftClusterResizeInfo')
     AwsRedshiftClusterRestoreStatus = Shapes::StructureShape.new(name: 'AwsRedshiftClusterRestoreStatus')
@@ -982,7 +991,14 @@ module Aws::SecurityHub
     AwsAutoScalingAutoScalingGroupDetails.add_member(:created_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CreatedTime"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:mixed_instances_policy, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails, location_name: "MixedInstancesPolicy"))
     AwsAutoScalingAutoScalingGroupDetails.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupAvailabilityZonesList, location_name: "AvailabilityZones"))
+    AwsAutoScalingAutoScalingGroupDetails.add_member(:launch_template, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification, location_name: "LaunchTemplate"))
+    AwsAutoScalingAutoScalingGroupDetails.add_member(:capacity_rebalance, Shapes::ShapeRef.new(shape: Boolean, location_name: "CapacityRebalance"))
     AwsAutoScalingAutoScalingGroupDetails.struct_class = Types::AwsAutoScalingAutoScalingGroupDetails
+
+    AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification.add_member(:launch_template_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchTemplateId"))
+    AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification.add_member(:launch_template_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LaunchTemplateName"))
+    AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
+    AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification.struct_class = Types::AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification
 
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails.add_member(:instances_distribution, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyInstancesDistributionDetails, location_name: "InstancesDistribution"))
     AwsAutoScalingAutoScalingGroupMixedInstancesPolicyDetails.add_member(:launch_template, Shapes::ShapeRef.new(shape: AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateDetails, location_name: "LaunchTemplate"))
@@ -1225,6 +1241,7 @@ module Aws::SecurityHub
     AwsCodeBuildProjectDetails.add_member(:service_role, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ServiceRole"))
     AwsCodeBuildProjectDetails.add_member(:logs_config, Shapes::ShapeRef.new(shape: AwsCodeBuildProjectLogsConfigDetails, location_name: "LogsConfig"))
     AwsCodeBuildProjectDetails.add_member(:vpc_config, Shapes::ShapeRef.new(shape: AwsCodeBuildProjectVpcConfig, location_name: "VpcConfig"))
+    AwsCodeBuildProjectDetails.add_member(:secondary_artifacts, Shapes::ShapeRef.new(shape: AwsCodeBuildProjectArtifactsList, location_name: "SecondaryArtifacts"))
     AwsCodeBuildProjectDetails.struct_class = Types::AwsCodeBuildProjectDetails
 
     AwsCodeBuildProjectEnvironment.add_member(:certificate, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Certificate"))
@@ -2137,10 +2154,17 @@ module Aws::SecurityHub
     AwsElbLoadBalancerAccessLog.add_member(:s3_bucket_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3BucketPrefix"))
     AwsElbLoadBalancerAccessLog.struct_class = Types::AwsElbLoadBalancerAccessLog
 
+    AwsElbLoadBalancerAdditionalAttribute.add_member(:key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Key"))
+    AwsElbLoadBalancerAdditionalAttribute.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
+    AwsElbLoadBalancerAdditionalAttribute.struct_class = Types::AwsElbLoadBalancerAdditionalAttribute
+
+    AwsElbLoadBalancerAdditionalAttributeList.member = Shapes::ShapeRef.new(shape: AwsElbLoadBalancerAdditionalAttribute)
+
     AwsElbLoadBalancerAttributes.add_member(:access_log, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerAccessLog, location_name: "AccessLog"))
     AwsElbLoadBalancerAttributes.add_member(:connection_draining, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerConnectionDraining, location_name: "ConnectionDraining"))
     AwsElbLoadBalancerAttributes.add_member(:connection_settings, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerConnectionSettings, location_name: "ConnectionSettings"))
     AwsElbLoadBalancerAttributes.add_member(:cross_zone_load_balancing, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerCrossZoneLoadBalancing, location_name: "CrossZoneLoadBalancing"))
+    AwsElbLoadBalancerAttributes.add_member(:additional_attributes, Shapes::ShapeRef.new(shape: AwsElbLoadBalancerAdditionalAttributeList, location_name: "AdditionalAttributes"))
     AwsElbLoadBalancerAttributes.struct_class = Types::AwsElbLoadBalancerAttributes
 
     AwsElbLoadBalancerBackendServerDescription.add_member(:instance_port, Shapes::ShapeRef.new(shape: Integer, location_name: "InstancePort"))
@@ -2718,6 +2742,29 @@ module Aws::SecurityHub
 
     AwsRdsDbProcessorFeatures.member = Shapes::ShapeRef.new(shape: AwsRdsDbProcessorFeature)
 
+    AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbSecurityGroupArn"))
+    AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbSecurityGroupDescription"))
+    AwsRdsDbSecurityGroupDetails.add_member(:db_security_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbSecurityGroupName"))
+    AwsRdsDbSecurityGroupDetails.add_member(:ec2_security_groups, Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupEc2SecurityGroups, location_name: "Ec2SecurityGroups"))
+    AwsRdsDbSecurityGroupDetails.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupIpRanges, location_name: "IpRanges"))
+    AwsRdsDbSecurityGroupDetails.add_member(:owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "OwnerId"))
+    AwsRdsDbSecurityGroupDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
+    AwsRdsDbSecurityGroupDetails.struct_class = Types::AwsRdsDbSecurityGroupDetails
+
+    AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:ec2_security_group_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ec2SecurityGroupId"))
+    AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:ec2_security_group_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ec2SecurityGroupName"))
+    AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:ec2_security_group_owner_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Ec2SecurityGroupOwnerId"))
+    AwsRdsDbSecurityGroupEc2SecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRdsDbSecurityGroupEc2SecurityGroup.struct_class = Types::AwsRdsDbSecurityGroupEc2SecurityGroup
+
+    AwsRdsDbSecurityGroupEc2SecurityGroups.member = Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupEc2SecurityGroup)
+
+    AwsRdsDbSecurityGroupIpRange.add_member(:cidr_ip, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CidrIp"))
+    AwsRdsDbSecurityGroupIpRange.add_member(:status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Status"))
+    AwsRdsDbSecurityGroupIpRange.struct_class = Types::AwsRdsDbSecurityGroupIpRange
+
+    AwsRdsDbSecurityGroupIpRanges.member = Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupIpRange)
+
     AwsRdsDbSnapshotDetails.add_member(:db_snapshot_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbSnapshotIdentifier"))
     AwsRdsDbSnapshotDetails.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "DbInstanceIdentifier"))
     AwsRdsDbSnapshotDetails.add_member(:snapshot_create_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotCreateTime"))
@@ -2872,6 +2919,7 @@ module Aws::SecurityHub
     AwsRedshiftClusterDetails.add_member(:snapshot_schedule_state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SnapshotScheduleState"))
     AwsRedshiftClusterDetails.add_member(:vpc_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VpcId"))
     AwsRedshiftClusterDetails.add_member(:vpc_security_groups, Shapes::ShapeRef.new(shape: AwsRedshiftClusterVpcSecurityGroups, location_name: "VpcSecurityGroups"))
+    AwsRedshiftClusterDetails.add_member(:logging_status, Shapes::ShapeRef.new(shape: AwsRedshiftClusterLoggingStatus, location_name: "LoggingStatus"))
     AwsRedshiftClusterDetails.struct_class = Types::AwsRedshiftClusterDetails
 
     AwsRedshiftClusterElasticIpStatus.add_member(:elastic_ip, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ElasticIp"))
@@ -2892,6 +2940,14 @@ module Aws::SecurityHub
     AwsRedshiftClusterIamRole.struct_class = Types::AwsRedshiftClusterIamRole
 
     AwsRedshiftClusterIamRoles.member = Shapes::ShapeRef.new(shape: AwsRedshiftClusterIamRole)
+
+    AwsRedshiftClusterLoggingStatus.add_member(:bucket_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "BucketName"))
+    AwsRedshiftClusterLoggingStatus.add_member(:last_failure_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastFailureMessage"))
+    AwsRedshiftClusterLoggingStatus.add_member(:last_failure_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastFailureTime"))
+    AwsRedshiftClusterLoggingStatus.add_member(:last_successful_delivery_time, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "LastSuccessfulDeliveryTime"))
+    AwsRedshiftClusterLoggingStatus.add_member(:logging_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "LoggingEnabled"))
+    AwsRedshiftClusterLoggingStatus.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "S3KeyPrefix"))
+    AwsRedshiftClusterLoggingStatus.struct_class = Types::AwsRedshiftClusterLoggingStatus
 
     AwsRedshiftClusterPendingModifiedValues.add_member(:automated_snapshot_retention_period, Shapes::ShapeRef.new(shape: Integer, location_name: "AutomatedSnapshotRetentionPeriod"))
     AwsRedshiftClusterPendingModifiedValues.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ClusterIdentifier"))
@@ -4143,6 +4199,7 @@ module Aws::SecurityHub
     ResourceDetails.add_member(:aws_network_firewall_firewall_policy, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallPolicyDetails, location_name: "AwsNetworkFirewallFirewallPolicy"))
     ResourceDetails.add_member(:aws_network_firewall_firewall, Shapes::ShapeRef.new(shape: AwsNetworkFirewallFirewallDetails, location_name: "AwsNetworkFirewallFirewall"))
     ResourceDetails.add_member(:aws_network_firewall_rule_group, Shapes::ShapeRef.new(shape: AwsNetworkFirewallRuleGroupDetails, location_name: "AwsNetworkFirewallRuleGroup"))
+    ResourceDetails.add_member(:aws_rds_db_security_group, Shapes::ShapeRef.new(shape: AwsRdsDbSecurityGroupDetails, location_name: "AwsRdsDbSecurityGroup"))
     ResourceDetails.struct_class = Types::ResourceDetails
 
     ResourceList.member = Shapes::ShapeRef.new(shape: Resource)

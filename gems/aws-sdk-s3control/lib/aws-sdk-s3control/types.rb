@@ -5570,8 +5570,8 @@ module Aws::S3Control
     # @!attribute [rw] target_key_prefix
     #   Specifies the folder prefix into which you would like the objects to
     #   be copied. For example, to copy objects into a folder named
-    #   "Folder1" in the destination bucket, set the TargetKeyPrefix to
-    #   "Folder1/".
+    #   `Folder1` in the destination bucket, set the TargetKeyPrefix to
+    #   `Folder1`.
     #   @return [String]
     #
     # @!attribute [rw] object_lock_legal_hold_status

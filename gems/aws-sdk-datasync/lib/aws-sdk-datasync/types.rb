@@ -336,6 +336,79 @@ module Aws::DataSync
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateLocationFsxOpenZfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #         protocol: { # required
+    #           nfs: {
+    #             mount_options: {
+    #               version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #             },
+    #           },
+    #         },
+    #         security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #         subdirectory: "FsxOpenZfsSubdirectory",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The type of protocol that DataSync uses to access your file system.
+    #   @return [Types::FsxProtocol]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The ARNs of the security groups that are used to configure the FSx
+    #   for OpenZFS file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subdirectory
+    #   A subdirectory in the location's path that must begin with `/fsx`.
+    #   DataSync uses this subdirectory to read or write data (depending on
+    #   whether the file system is a source or destination location).
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #   @return [Array<Types::TagListEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOpenZfsRequest AWS API Documentation
+    #
+    class CreateLocationFsxOpenZfsRequest < Struct.new(
+      :fsx_filesystem_arn,
+      :protocol,
+      :security_group_arns,
+      :subdirectory,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The ARN of the FSx for OpenZFS file system location that you
+    #   created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOpenZfsResponse AWS API Documentation
+    #
+    class CreateLocationFsxOpenZfsResponse < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateLocationFsxWindowsRequest
     #   data as a hash:
     #
@@ -367,8 +440,8 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are
-    #   used to configure the FSx for Windows File Server file system.
+    #   The ARNs of the security groups that are used to configure the FSx
+    #   for Windows File Server file system.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -413,7 +486,7 @@ module Aws::DataSync
 
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
-    #   file system location that is created.
+    #   file system location you created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxWindowsResponse AWS API Documentation
@@ -645,7 +718,7 @@ module Aws::DataSync
     # @!attribute [rw] server_hostname
     #   The name of the NFS server. This value is the IP address or Domain
     #   Name Service (DNS) name of the NFS server. An agent that is
-    #   installed on-premises uses this host name to mount the NFS server in
+    #   installed on-premises uses this hostname to mount the NFS server in
     #   a network.
     #
     #   If you are copying data to or from your Snowcone device, see [NFS
@@ -735,7 +808,7 @@ module Aws::DataSync
     # @!attribute [rw] server_hostname
     #   The name of the self-managed object storage server. This value is
     #   the IP address or Domain Name Service (DNS) name of the object
-    #   storage server. An agent uses this host name to mount the object
+    #   storage server. An agent uses this hostname to mount the object
     #   storage server in a network.
     #   @return [String]
     #
@@ -872,14 +945,14 @@ module Aws::DataSync
     #
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that is used to access an Amazon S3 bucket.
+    #   (IAM) role used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
     #   Location for Amazon S3 in the *DataSync User Guide*.
     #   @return [Types::S3Config]
     #
     # @!attribute [rw] agent_arns
-    #   If you are using DataSync on an Amazon Web Services Outpost, specify
+    #   If you're using DataSync on an Amazon Web Services Outpost, specify
     #   the Amazon Resource Names (ARNs) of the DataSync agents deployed on
     #   your Outpost. For more information about launching a DataSync agent
     #   on an Amazon Web Services Outpost, see [Deploy your DataSync agent
@@ -1373,11 +1446,10 @@ module Aws::DataSync
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   The subnet and the security group that DataSync uses to access
-    #   target EFS file system. The subnet must have at least one mount
-    #   target for that file system. The security group that you provide
-    #   needs to be able to communicate with the security group on the mount
-    #   target in the subnet specified.
+    #   The subnet that DataSync uses to access target EFS file system. The
+    #   subnet must have at least one mount target for that file system. The
+    #   security group that you provide needs to be able to communicate with
+    #   the security group on the mount target in the subnet specified.
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] creation_time
@@ -1439,6 +1511,62 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :security_group_arns,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeLocationFsxOpenZfsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         location_arn: "LocationArn", # required
+    #       }
+    #
+    # @!attribute [rw] location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for OpenZFS location to
+    #   describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOpenZfsRequest AWS API Documentation
+    #
+    class DescribeLocationFsxOpenZfsRequest < Struct.new(
+      :location_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] location_arn
+    #   The ARN of the FSx for OpenZFS location that was described.
+    #   @return [String]
+    #
+    # @!attribute [rw] location_uri
+    #   The uniform resource identifier (URI) of the FSx for OpenZFS
+    #   location that was described.
+    #
+    #   Example: `fsxz://us-west-2.fs-1234567890abcdef02/fsx/folderA/folder`
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_arns
+    #   The ARNs of the security groups that are configured for the FSx for
+    #   OpenZFS file system.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] protocol
+    #   The type of protocol that DataSync uses to access your file system.
+    #   @return [Types::FsxProtocol]
+    #
+    # @!attribute [rw] creation_time
+    #   The time that the FSx for OpenZFS location was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOpenZfsResponse AWS API Documentation
+    #
+    class DescribeLocationFsxOpenZfsResponse < Struct.new(
+      :location_arn,
+      :location_uri,
+      :security_group_arns,
+      :protocol,
       :creation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -1784,7 +1912,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] s3_config
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that is used to access an Amazon S3 bucket.
+    #   (IAM) role used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
     #   Location for Amazon S3 in the *DataSync User Guide*.
@@ -2169,11 +2297,10 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The subnet and the security group that DataSync uses to access target
-    # EFS file system. The subnet must have at least one mount target for
-    # that file system. The security group that you provide needs to be able
-    # to communicate with the security group on the mount target in the
-    # subnet specified.
+    # The subnet that DataSync uses to access target EFS file system. The
+    # subnet must have at least one mount target for that file system. The
+    # security group that you provide needs to be able to communicate with
+    # the security group on the mount target in the subnet specified.
     #
     # @note When making an API call, you may pass Ec2Config
     #   data as a hash:
@@ -2184,8 +2311,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] subnet_arn
-    #   The ARN of the subnet and the security group that DataSync uses to
-    #   access the target EFS file system.
+    #   The ARN of the subnet that DataSync uses to access the target EFS
+    #   file system.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
@@ -2229,6 +2356,58 @@ module Aws::DataSync
     class FilterRule < Struct.new(
       :filter_type,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the protocol that DataSync uses to access your Amazon FSx
+    # for OpenZFS file system.
+    #
+    # @note When making an API call, you may pass FsxProtocol
+    #   data as a hash:
+    #
+    #       {
+    #         nfs: {
+    #           mount_options: {
+    #             version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] nfs
+    #   Represents the Network File System (NFS) protocol that DataSync uses
+    #   to access your FSx for OpenZFS file system.
+    #   @return [Types::FsxProtocolNfs]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocol AWS API Documentation
+    #
+    class FsxProtocol < Struct.new(
+      :nfs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents the Network File System (NFS) protocol that DataSync uses
+    # to access your Amazon FSx for OpenZFS file system.
+    #
+    # @note When making an API call, you may pass FsxProtocolNfs
+    #   data as a hash:
+    #
+    #       {
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #         },
+    #       }
+    #
+    # @!attribute [rw] mount_options
+    #   Represents the mount options that are available for DataSync to
+    #   access an NFS location.
+    #   @return [Types::NfsMountOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/FsxProtocolNfs AWS API Documentation
+    #
+    class FsxProtocolNfs < Struct.new(
+      :mount_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2651,14 +2830,13 @@ module Aws::DataSync
     #
     #   Format: `TYPE://GLOBAL_ID/SUBDIR`.
     #
-    #   TYPE designates the type of location. Valid values: NFS \| EFS \|
-    #   S3.
+    #   TYPE designates the type of location (for example, `nfs` or `s3`).
     #
     #   GLOBAL\_ID is the globally unique identifier of the resource that
     #   backs the location. An example for EFS is `us-east-2.fs-abcd1234`.
     #   An example for Amazon S3 is the bucket name, such as `myBucket`. An
-    #   example for NFS is a valid IPv4 address or a host name compliant
-    #   with Domain Name Service (DNS).
+    #   example for NFS is a valid IPv4 address or a hostname that is
+    #   compliant with Domain Name Service (DNS).
     #
     #   SUBDIR is a valid file system path, delimited by forward slashes as
     #   is the *nix convention. For NFS and Amazon EFS, it's the export
@@ -3161,7 +3339,7 @@ module Aws::DataSync
     end
 
     # The Amazon Resource Name (ARN) of the Identity and Access Management
-    # (IAM) role that is used to access an Amazon S3 bucket.
+    # (IAM) role used to access an Amazon S3 bucket.
     #
     # For detailed information about using such a role, see Creating a
     # Location for Amazon S3 in the *DataSync User Guide*.
@@ -3174,12 +3352,7 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] bucket_access_role_arn
-    #   The Amazon S3 bucket to access. This bucket is used as a parameter
-    #   in the [CreateLocationS3][1] operation.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html
+    #   The ARN of the IAM role for accessing the S3 bucket.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/S3Config AWS API Documentation
@@ -3720,15 +3893,15 @@ module Aws::DataSync
     #   The Kerberos key table (keytab) that contains mappings between the
     #   defined Kerberos principal and the encrypted keys. You can load the
     #   keytab from a file by providing the file's address. If you use the
-    #   AWS CLI, it performs base64 encoding for you. Otherwise, provide the
+    #   CLI, it performs base64 encoding for you. Otherwise, provide the
     #   base64-encoded text.
     #   @return [String]
     #
     # @!attribute [rw] kerberos_krb_5_conf
     #   The `krb5.conf` file that contains the Kerberos configuration
     #   information. You can load the `krb5.conf` file by providing the
-    #   file's address. If you're using the AWS CLI, it performs the
-    #   base64 encoding for you. Otherwise, provide the base64-encoded text.
+    #   file's address. If you're using the CLI, it performs the base64
+    #   encoding for you. Otherwise, provide the base64-encoded text.
     #   @return [String]
     #
     # @!attribute [rw] agent_arns

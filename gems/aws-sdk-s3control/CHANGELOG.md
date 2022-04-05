@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.50.0 (2022-04-05)
+------------------
+
+* Feature - Documentation-only update for doc bug fixes for the S3 Control API docs.
+
 1.49.0 (2022-02-24)
 ------------------
 

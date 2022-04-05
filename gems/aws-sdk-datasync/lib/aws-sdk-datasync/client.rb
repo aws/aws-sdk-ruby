@@ -638,6 +638,67 @@ module Aws::DataSync
       req.send_request(options)
     end
 
+    # Creates an endpoint for an Amazon FSx for OpenZFS file system.
+    #
+    # @option params [required, String] :fsx_filesystem_arn
+    #   The Amazon Resource Name (ARN) of the FSx for OpenZFS file system.
+    #
+    # @option params [required, Types::FsxProtocol] :protocol
+    #   The type of protocol that DataSync uses to access your file system.
+    #
+    # @option params [required, Array<String>] :security_group_arns
+    #   The ARNs of the security groups that are used to configure the FSx for
+    #   OpenZFS file system.
+    #
+    # @option params [String] :subdirectory
+    #   A subdirectory in the location's path that must begin with `/fsx`.
+    #   DataSync uses this subdirectory to read or write data (depending on
+    #   whether the file system is a source or destination location).
+    #
+    # @option params [Array<Types::TagListEntry>] :tags
+    #   The key-value pair that represents a tag that you want to add to the
+    #   resource. The value can be an empty string. This value helps you
+    #   manage, filter, and search for your resources. We recommend that you
+    #   create a name tag for your location.
+    #
+    # @return [Types::CreateLocationFsxOpenZfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLocationFsxOpenZfsResponse#location_arn #location_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_location_fsx_open_zfs({
+    #     fsx_filesystem_arn: "FsxFilesystemArn", # required
+    #     protocol: { # required
+    #       nfs: {
+    #         mount_options: {
+    #           version: "AUTOMATIC", # accepts AUTOMATIC, NFS3, NFS4_0, NFS4_1
+    #         },
+    #       },
+    #     },
+    #     security_group_arns: ["Ec2SecurityGroupArn"], # required
+    #     subdirectory: "FsxOpenZfsSubdirectory",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationFsxOpenZfs AWS API Documentation
+    #
+    # @overload create_location_fsx_open_zfs(params = {})
+    # @param [Hash] params ({})
+    def create_location_fsx_open_zfs(params = {}, options = {})
+      req = build_request(:create_location_fsx_open_zfs, params)
+      req.send_request(options)
+    end
+
     # Creates an endpoint for an Amazon FSx for Windows File Server file
     # system.
     #
@@ -652,8 +713,8 @@ module Aws::DataSync
     #   file system.
     #
     # @option params [required, Array<String>] :security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are used
-    #   to configure the FSx for Windows File Server file system.
+    #   The ARNs of the security groups that are used to configure the FSx for
+    #   Windows File Server file system.
     #
     # @option params [Array<Types::TagListEntry>] :tags
     #   The key-value pair that represents a tag that you want to add to the
@@ -884,7 +945,7 @@ module Aws::DataSync
     # @option params [required, String] :server_hostname
     #   The name of the NFS server. This value is the IP address or Domain
     #   Name Service (DNS) name of the NFS server. An agent that is installed
-    #   on-premises uses this host name to mount the NFS server in a network.
+    #   on-premises uses this hostname to mount the NFS server in a network.
     #
     #   If you are copying data to or from your Snowcone device, see [NFS
     #   Server on Snowcone][1] for more information.
@@ -964,8 +1025,8 @@ module Aws::DataSync
     # @option params [required, String] :server_hostname
     #   The name of the self-managed object storage server. This value is the
     #   IP address or Domain Name Service (DNS) name of the object storage
-    #   server. An agent uses this host name to mount the object storage
-    #   server in a network.
+    #   server. An agent uses this hostname to mount the object storage server
+    #   in a network.
     #
     # @option params [Integer] :server_port
     #   The port that your self-managed object storage server accepts inbound
@@ -1079,13 +1140,13 @@ module Aws::DataSync
     #
     # @option params [required, Types::S3Config] :s3_config
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) role that is used to access an Amazon S3 bucket.
+    #   (IAM) role used to access an Amazon S3 bucket.
     #
     #   For detailed information about using such a role, see Creating a
     #   Location for Amazon S3 in the *DataSync User Guide*.
     #
     # @option params [Array<String>] :agent_arns
-    #   If you are using DataSync on an Amazon Web Services Outpost, specify
+    #   If you're using DataSync on an Amazon Web Services Outpost, specify
     #   the Amazon Resource Names (ARNs) of the DataSync agents deployed on
     #   your Outpost. For more information about launching a DataSync agent on
     #   an Amazon Web Services Outpost, see [Deploy your DataSync agent on
@@ -1537,8 +1598,8 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path information about an Amazon FSx for
-    # Lustre location.
+    # Returns metadata about an Amazon FSx for Lustre location, such as
+    # information about its path.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Lustre location to
@@ -1574,8 +1635,47 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path information about an Amazon FSx for
-    # Windows File Server location.
+    # Returns metadata about an Amazon FSx for OpenZFS location, such as
+    # information about its path.
+    #
+    # @option params [required, String] :location_arn
+    #   The Amazon Resource Name (ARN) of the FSx for OpenZFS location to
+    #   describe.
+    #
+    # @return [Types::DescribeLocationFsxOpenZfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeLocationFsxOpenZfsResponse#location_arn #location_arn} => String
+    #   * {Types::DescribeLocationFsxOpenZfsResponse#location_uri #location_uri} => String
+    #   * {Types::DescribeLocationFsxOpenZfsResponse#security_group_arns #security_group_arns} => Array&lt;String&gt;
+    #   * {Types::DescribeLocationFsxOpenZfsResponse#protocol #protocol} => Types::FsxProtocol
+    #   * {Types::DescribeLocationFsxOpenZfsResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_location_fsx_open_zfs({
+    #     location_arn: "LocationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.location_arn #=> String
+    #   resp.location_uri #=> String
+    #   resp.security_group_arns #=> Array
+    #   resp.security_group_arns[0] #=> String
+    #   resp.protocol.nfs.mount_options.version #=> String, one of "AUTOMATIC", "NFS3", "NFS4_0", "NFS4_1"
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationFsxOpenZfs AWS API Documentation
+    #
+    # @overload describe_location_fsx_open_zfs(params = {})
+    # @param [Hash] params ({})
+    def describe_location_fsx_open_zfs(params = {}, options = {})
+      req = build_request(:describe_location_fsx_open_zfs, params)
+      req.send_request(options)
+    end
+
+    # Returns metadata about an Amazon FSx for Windows File Server location,
+    # such as information about its path.
     #
     # @option params [required, String] :location_arn
     #   The Amazon Resource Name (ARN) of the FSx for Windows File Server
@@ -2460,13 +2560,13 @@ module Aws::DataSync
     #   The Kerberos key table (keytab) that contains mappings between the
     #   defined Kerberos principal and the encrypted keys. You can load the
     #   keytab from a file by providing the file's address. If you use the
-    #   AWS CLI, it performs base64 encoding for you. Otherwise, provide the
+    #   CLI, it performs base64 encoding for you. Otherwise, provide the
     #   base64-encoded text.
     #
     # @option params [String, StringIO, File] :kerberos_krb_5_conf
     #   The `krb5.conf` file that contains the Kerberos configuration
     #   information. You can load the `krb5.conf` file by providing the
-    #   file's address. If you're using the AWS CLI, it performs the base64
+    #   file's address. If you're using the CLI, it performs the base64
     #   encoding for you. Otherwise, provide the base64-encoded text.
     #
     # @option params [Array<String>] :agent_arns
@@ -2916,7 +3016,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

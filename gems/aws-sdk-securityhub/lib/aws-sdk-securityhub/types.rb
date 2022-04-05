@@ -1474,6 +1474,12 @@ module Aws::SecurityHub
     #             value: "NonEmptyString",
     #           },
     #         ],
+    #         launch_template: {
+    #           launch_template_id: "NonEmptyString",
+    #           launch_template_name: "NonEmptyString",
+    #           version: "NonEmptyString",
+    #         },
+    #         capacity_rebalance: false,
     #       }
     #
     # @!attribute [rw] launch_configuration_name
@@ -1514,6 +1520,14 @@ module Aws::SecurityHub
     #   The list of Availability Zones for the automatic scaling group.
     #   @return [Array<Types::AwsAutoScalingAutoScalingGroupAvailabilityZonesListDetails>]
     #
+    # @!attribute [rw] launch_template
+    #   The launch template to use.
+    #   @return [Types::AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification]
+    #
+    # @!attribute [rw] capacity_rebalance
+    #   Indicates whether capacity rebalancing is enabled.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupDetails AWS API Documentation
     #
     class AwsAutoScalingAutoScalingGroupDetails < Struct.new(
@@ -1523,7 +1537,45 @@ module Aws::SecurityHub
       :health_check_grace_period,
       :created_time,
       :mixed_instances_policy,
-      :availability_zones)
+      :availability_zones,
+      :launch_template,
+      :capacity_rebalance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the launch template to use.
+    #
+    # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         launch_template_id: "NonEmptyString",
+    #         launch_template_name: "NonEmptyString",
+    #         version: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] launch_template_id
+    #   The identifier of the launch template. You must specify either
+    #   `LaunchTemplateId` or `LaunchTemplateName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] launch_template_name
+    #   The name of the launch template. You must specify either
+    #   `LaunchTemplateId` or `LaunchTemplateName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   Identifies the version of the launch template. You can specify a
+    #   version identifier, or use the values `$Latest` or `$Default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification AWS API Documentation
+    #
+    class AwsAutoScalingAutoScalingGroupLaunchTemplateLaunchTemplateSpecification < Struct.new(
+      :launch_template_id,
+      :launch_template_name,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1654,7 +1706,7 @@ module Aws::SecurityHub
     #       }
     #
     # @!attribute [rw] launch_template_specification
-    #   The launch template to use.
+    #   The launch template to use for a mixed instances policy.
     #   @return [Types::AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification]
     #
     # @!attribute [rw] overrides
@@ -1671,7 +1723,7 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
-    # Details about the launch template to use.
+    # Details about the launch template to use for a mixed instances policy.
     #
     # @note When making an API call, you may pass AwsAutoScalingAutoScalingGroupMixedInstancesPolicyLaunchTemplateLaunchTemplateSpecification
     #   data as a hash:
@@ -3424,6 +3476,19 @@ module Aws::SecurityHub
     #           subnets: ["NonEmptyString"],
     #           security_group_ids: ["NonEmptyString"],
     #         },
+    #         secondary_artifacts: [
+    #           {
+    #             artifact_identifier: "NonEmptyString",
+    #             encryption_disabled: false,
+    #             location: "NonEmptyString",
+    #             name: "NonEmptyString",
+    #             namespace_type: "NonEmptyString",
+    #             override_artifact_name: false,
+    #             packaging: "NonEmptyString",
+    #             path: "NonEmptyString",
+    #             type: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] encryption_key
@@ -3464,6 +3529,10 @@ module Aws::SecurityHub
     #   Information about the VPC configuration that CodeBuild accesses.
     #   @return [Types::AwsCodeBuildProjectVpcConfig]
     #
+    # @!attribute [rw] secondary_artifacts
+    #   Information about the secondary artifacts for the CodeBuild project.
+    #   @return [Array<Types::AwsCodeBuildProjectArtifactsDetails>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsCodeBuildProjectDetails AWS API Documentation
     #
     class AwsCodeBuildProjectDetails < Struct.new(
@@ -3474,7 +3543,8 @@ module Aws::SecurityHub
       :source,
       :service_role,
       :logs_config,
-      :vpc_config)
+      :vpc_config,
+      :secondary_artifacts)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10211,6 +10281,34 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about additional attributes for the load
+    # balancer.
+    #
+    # @note When making an API call, you may pass AwsElbLoadBalancerAdditionalAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         key: "NonEmptyString",
+    #         value: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   The name of the attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the attribute.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerAdditionalAttribute AWS API Documentation
+    #
+    class AwsElbLoadBalancerAdditionalAttribute < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains attributes for the load balancer.
     #
     # @note When making an API call, you may pass AwsElbLoadBalancerAttributes
@@ -10233,6 +10331,12 @@ module Aws::SecurityHub
     #         cross_zone_load_balancing: {
     #           enabled: false,
     #         },
+    #         additional_attributes: [
+    #           {
+    #             key: "NonEmptyString",
+    #             value: "NonEmptyString",
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] access_log
@@ -10269,13 +10373,18 @@ module Aws::SecurityHub
     #   Availability Zones.
     #   @return [Types::AwsElbLoadBalancerCrossZoneLoadBalancing]
     #
+    # @!attribute [rw] additional_attributes
+    #   Any additional attributes for a load balancer.
+    #   @return [Array<Types::AwsElbLoadBalancerAdditionalAttribute>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsElbLoadBalancerAttributes AWS API Documentation
     #
     class AwsElbLoadBalancerAttributes < Struct.new(
       :access_log,
       :connection_draining,
       :connection_settings,
-      :cross_zone_load_balancing)
+      :cross_zone_load_balancing,
+      :additional_attributes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10440,6 +10549,12 @@ module Aws::SecurityHub
     #           cross_zone_load_balancing: {
     #             enabled: false,
     #           },
+    #           additional_attributes: [
+    #             {
+    #               key: "NonEmptyString",
+    #               value: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         load_balancer_name: "NonEmptyString",
     #         policies: {
@@ -14602,6 +14717,143 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Provides information about an Amazon RDS DB security group.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSecurityGroupDetails
+    #   data as a hash:
+    #
+    #       {
+    #         db_security_group_arn: "NonEmptyString",
+    #         db_security_group_description: "NonEmptyString",
+    #         db_security_group_name: "NonEmptyString",
+    #         ec2_security_groups: [
+    #           {
+    #             ec2_security_group_id: "NonEmptyString",
+    #             ec2_security_group_name: "NonEmptyString",
+    #             ec2_security_group_owner_id: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         ip_ranges: [
+    #           {
+    #             cidr_ip: "NonEmptyString",
+    #             status: "NonEmptyString",
+    #           },
+    #         ],
+    #         owner_id: "NonEmptyString",
+    #         vpc_id: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] db_security_group_arn
+    #   The ARN for the DB security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_security_group_description
+    #   Provides the description of the DB security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] db_security_group_name
+    #   Specifies the name of the DB security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_security_groups
+    #   Contains a list of EC2 security groups.
+    #   @return [Array<Types::AwsRdsDbSecurityGroupEc2SecurityGroup>]
+    #
+    # @!attribute [rw] ip_ranges
+    #   Contains a list of IP ranges.
+    #   @return [Array<Types::AwsRdsDbSecurityGroupIpRange>]
+    #
+    # @!attribute [rw] owner_id
+    #   Provides the Amazon Web Services ID of the owner of a specific DB
+    #   security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] vpc_id
+    #   Provides VPC ID associated with the DB security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSecurityGroupDetails AWS API Documentation
+    #
+    class AwsRdsDbSecurityGroupDetails < Struct.new(
+      :db_security_group_arn,
+      :db_security_group_description,
+      :db_security_group_name,
+      :ec2_security_groups,
+      :ip_ranges,
+      :owner_id,
+      :vpc_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # EC2 security group information for an RDS DB security group.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSecurityGroupEc2SecurityGroup
+    #   data as a hash:
+    #
+    #       {
+    #         ec2_security_group_id: "NonEmptyString",
+    #         ec2_security_group_name: "NonEmptyString",
+    #         ec2_security_group_owner_id: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] ec2_security_group_id
+    #   Specifies the ID for the EC2 security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_security_group_name
+    #   Specifies the name of the EC2 security group.
+    #   @return [String]
+    #
+    # @!attribute [rw] ec2_security_group_owner_id
+    #   Provides the Amazon Web Services ID of the owner of the EC2 security
+    #   group.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Provides the status of the EC2 security group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSecurityGroupEc2SecurityGroup AWS API Documentation
+    #
+    class AwsRdsDbSecurityGroupEc2SecurityGroup < Struct.new(
+      :ec2_security_group_id,
+      :ec2_security_group_name,
+      :ec2_security_group_owner_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # IP range information for an RDS DB security group.
+    #
+    # @note When making an API call, you may pass AwsRdsDbSecurityGroupIpRange
+    #   data as a hash:
+    #
+    #       {
+    #         cidr_ip: "NonEmptyString",
+    #         status: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] cidr_ip
+    #   Specifies the IP range.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies the status of the IP range.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRdsDbSecurityGroupIpRange AWS API Documentation
+    #
+    class AwsRdsDbSecurityGroupIpRange < Struct.new(
+      :cidr_ip,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides details about an Amazon RDS DB cluster snapshot.
     #
     # @note When making an API call, you may pass AwsRdsDbSnapshotDetails
@@ -15432,6 +15684,14 @@ module Aws::SecurityHub
     #             vpc_security_group_id: "NonEmptyString",
     #           },
     #         ],
+    #         logging_status: {
+    #           bucket_name: "NonEmptyString",
+    #           last_failure_message: "NonEmptyString",
+    #           last_failure_time: "NonEmptyString",
+    #           last_successful_delivery_time: "NonEmptyString",
+    #           logging_enabled: false,
+    #           s3_key_prefix: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] allow_version_upgrade
@@ -15694,6 +15954,10 @@ module Aws::SecurityHub
     #   cluster is in a VPC.
     #   @return [Array<Types::AwsRedshiftClusterVpcSecurityGroup>]
     #
+    # @!attribute [rw] logging_status
+    #   Information about the logging status of the cluster.
+    #   @return [Types::AwsRedshiftClusterLoggingStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterDetails AWS API Documentation
     #
     class AwsRedshiftClusterDetails < Struct.new(
@@ -15739,7 +16003,8 @@ module Aws::SecurityHub
       :snapshot_schedule_identifier,
       :snapshot_schedule_state,
       :vpc_id,
-      :vpc_security_groups)
+      :vpc_security_groups,
+      :logging_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15869,6 +16134,73 @@ module Aws::SecurityHub
     class AwsRedshiftClusterIamRole < Struct.new(
       :apply_status,
       :iam_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the logging status of the cluster.
+    #
+    # @note When making an API call, you may pass AwsRedshiftClusterLoggingStatus
+    #   data as a hash:
+    #
+    #       {
+    #         bucket_name: "NonEmptyString",
+    #         last_failure_message: "NonEmptyString",
+    #         last_failure_time: "NonEmptyString",
+    #         last_successful_delivery_time: "NonEmptyString",
+    #         logging_enabled: false,
+    #         s3_key_prefix: "NonEmptyString",
+    #       }
+    #
+    # @!attribute [rw] bucket_name
+    #   The name of the S3 bucket where the log files are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_failure_message
+    #   The message indicating that the logs failed to be delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_failure_time
+    #   The last time when logs failed to be delivered.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] last_successful_delivery_time
+    #   The last time that logs were delivered successfully.
+    #
+    #   Uses the `date-time` format specified in [RFC 3339 section 5.6,
+    #   Internet Date/Time Format][1]. The value cannot contain spaces. For
+    #   example, `2020-03-22T13:22:13.933Z`.
+    #
+    #
+    #
+    #   [1]: https://tools.ietf.org/html/rfc3339#section-5.6
+    #   @return [String]
+    #
+    # @!attribute [rw] logging_enabled
+    #   Indicates whether logging is enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   Provides the prefix applied to the log file names.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AwsRedshiftClusterLoggingStatus AWS API Documentation
+    #
+    class AwsRedshiftClusterLoggingStatus < Struct.new(
+      :bucket_name,
+      :last_failure_message,
+      :last_failure_time,
+      :last_successful_delivery_time,
+      :logging_enabled,
+      :s3_key_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17791,6 +18123,12 @@ module Aws::SecurityHub
     #                     value: "NonEmptyString",
     #                   },
     #                 ],
+    #                 launch_template: {
+    #                   launch_template_id: "NonEmptyString",
+    #                   launch_template_name: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 capacity_rebalance: false,
     #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
@@ -17849,6 +18187,19 @@ module Aws::SecurityHub
     #                   subnets: ["NonEmptyString"],
     #                   security_group_ids: ["NonEmptyString"],
     #                 },
+    #                 secondary_artifacts: [
+    #                   {
+    #                     artifact_identifier: "NonEmptyString",
+    #                     encryption_disabled: false,
+    #                     location: "NonEmptyString",
+    #                     name: "NonEmptyString",
+    #                     namespace_type: "NonEmptyString",
+    #                     override_artifact_name: false,
+    #                     packaging: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_cloud_front_distribution: {
     #                 cache_behaviors: {
@@ -18905,6 +19256,14 @@ module Aws::SecurityHub
     #                     vpc_security_group_id: "NonEmptyString",
     #                   },
     #                 ],
+    #                 logging_status: {
+    #                   bucket_name: "NonEmptyString",
+    #                   last_failure_message: "NonEmptyString",
+    #                   last_failure_time: "NonEmptyString",
+    #                   last_successful_delivery_time: "NonEmptyString",
+    #                   logging_enabled: false,
+    #                   s3_key_prefix: "NonEmptyString",
+    #                 },
     #               },
     #               aws_elb_load_balancer: {
     #                 availability_zones: ["NonEmptyString"],
@@ -18959,6 +19318,12 @@ module Aws::SecurityHub
     #                   cross_zone_load_balancing: {
     #                     enabled: false,
     #                   },
+    #                   additional_attributes: [
+    #                     {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
     #                 },
     #                 load_balancer_name: "NonEmptyString",
     #                 policies: {
@@ -20143,6 +20508,27 @@ module Aws::SecurityHub
     #                 rule_group_id: "NonEmptyString",
     #                 rule_group_name: "NonEmptyString",
     #                 type: "NonEmptyString",
+    #               },
+    #               aws_rds_db_security_group: {
+    #                 db_security_group_arn: "NonEmptyString",
+    #                 db_security_group_description: "NonEmptyString",
+    #                 db_security_group_name: "NonEmptyString",
+    #                 ec2_security_groups: [
+    #                   {
+    #                     ec2_security_group_id: "NonEmptyString",
+    #                     ec2_security_group_name: "NonEmptyString",
+    #                     ec2_security_group_owner_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ip_ranges: [
+    #                   {
+    #                     cidr_ip: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
     #               },
     #             },
     #           },
@@ -23046,6 +23432,12 @@ module Aws::SecurityHub
     #                         value: "NonEmptyString",
     #                       },
     #                     ],
+    #                     launch_template: {
+    #                       launch_template_id: "NonEmptyString",
+    #                       launch_template_name: "NonEmptyString",
+    #                       version: "NonEmptyString",
+    #                     },
+    #                     capacity_rebalance: false,
     #                   },
     #                   aws_code_build_project: {
     #                     encryption_key: "NonEmptyString",
@@ -23104,6 +23496,19 @@ module Aws::SecurityHub
     #                       subnets: ["NonEmptyString"],
     #                       security_group_ids: ["NonEmptyString"],
     #                     },
+    #                     secondary_artifacts: [
+    #                       {
+    #                         artifact_identifier: "NonEmptyString",
+    #                         encryption_disabled: false,
+    #                         location: "NonEmptyString",
+    #                         name: "NonEmptyString",
+    #                         namespace_type: "NonEmptyString",
+    #                         override_artifact_name: false,
+    #                         packaging: "NonEmptyString",
+    #                         path: "NonEmptyString",
+    #                         type: "NonEmptyString",
+    #                       },
+    #                     ],
     #                   },
     #                   aws_cloud_front_distribution: {
     #                     cache_behaviors: {
@@ -24160,6 +24565,14 @@ module Aws::SecurityHub
     #                         vpc_security_group_id: "NonEmptyString",
     #                       },
     #                     ],
+    #                     logging_status: {
+    #                       bucket_name: "NonEmptyString",
+    #                       last_failure_message: "NonEmptyString",
+    #                       last_failure_time: "NonEmptyString",
+    #                       last_successful_delivery_time: "NonEmptyString",
+    #                       logging_enabled: false,
+    #                       s3_key_prefix: "NonEmptyString",
+    #                     },
     #                   },
     #                   aws_elb_load_balancer: {
     #                     availability_zones: ["NonEmptyString"],
@@ -24214,6 +24627,12 @@ module Aws::SecurityHub
     #                       cross_zone_load_balancing: {
     #                         enabled: false,
     #                       },
+    #                       additional_attributes: [
+    #                         {
+    #                           key: "NonEmptyString",
+    #                           value: "NonEmptyString",
+    #                         },
+    #                       ],
     #                     },
     #                     load_balancer_name: "NonEmptyString",
     #                     policies: {
@@ -25398,6 +25817,27 @@ module Aws::SecurityHub
     #                     rule_group_id: "NonEmptyString",
     #                     rule_group_name: "NonEmptyString",
     #                     type: "NonEmptyString",
+    #                   },
+    #                   aws_rds_db_security_group: {
+    #                     db_security_group_arn: "NonEmptyString",
+    #                     db_security_group_description: "NonEmptyString",
+    #                     db_security_group_name: "NonEmptyString",
+    #                     ec2_security_groups: [
+    #                       {
+    #                         ec2_security_group_id: "NonEmptyString",
+    #                         ec2_security_group_name: "NonEmptyString",
+    #                         ec2_security_group_owner_id: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     ip_ranges: [
+    #                       {
+    #                         cidr_ip: "NonEmptyString",
+    #                         status: "NonEmptyString",
+    #                       },
+    #                     ],
+    #                     owner_id: "NonEmptyString",
+    #                     vpc_id: "NonEmptyString",
     #                   },
     #                 },
     #               },
@@ -31733,6 +32173,12 @@ module Aws::SecurityHub
     #                 value: "NonEmptyString",
     #               },
     #             ],
+    #             launch_template: {
+    #               launch_template_id: "NonEmptyString",
+    #               launch_template_name: "NonEmptyString",
+    #               version: "NonEmptyString",
+    #             },
+    #             capacity_rebalance: false,
     #           },
     #           aws_code_build_project: {
     #             encryption_key: "NonEmptyString",
@@ -31791,6 +32237,19 @@ module Aws::SecurityHub
     #               subnets: ["NonEmptyString"],
     #               security_group_ids: ["NonEmptyString"],
     #             },
+    #             secondary_artifacts: [
+    #               {
+    #                 artifact_identifier: "NonEmptyString",
+    #                 encryption_disabled: false,
+    #                 location: "NonEmptyString",
+    #                 name: "NonEmptyString",
+    #                 namespace_type: "NonEmptyString",
+    #                 override_artifact_name: false,
+    #                 packaging: "NonEmptyString",
+    #                 path: "NonEmptyString",
+    #                 type: "NonEmptyString",
+    #               },
+    #             ],
     #           },
     #           aws_cloud_front_distribution: {
     #             cache_behaviors: {
@@ -32847,6 +33306,14 @@ module Aws::SecurityHub
     #                 vpc_security_group_id: "NonEmptyString",
     #               },
     #             ],
+    #             logging_status: {
+    #               bucket_name: "NonEmptyString",
+    #               last_failure_message: "NonEmptyString",
+    #               last_failure_time: "NonEmptyString",
+    #               last_successful_delivery_time: "NonEmptyString",
+    #               logging_enabled: false,
+    #               s3_key_prefix: "NonEmptyString",
+    #             },
     #           },
     #           aws_elb_load_balancer: {
     #             availability_zones: ["NonEmptyString"],
@@ -32901,6 +33368,12 @@ module Aws::SecurityHub
     #               cross_zone_load_balancing: {
     #                 enabled: false,
     #               },
+    #               additional_attributes: [
+    #                 {
+    #                   key: "NonEmptyString",
+    #                   value: "NonEmptyString",
+    #                 },
+    #               ],
     #             },
     #             load_balancer_name: "NonEmptyString",
     #             policies: {
@@ -34086,6 +34559,27 @@ module Aws::SecurityHub
     #             rule_group_name: "NonEmptyString",
     #             type: "NonEmptyString",
     #           },
+    #           aws_rds_db_security_group: {
+    #             db_security_group_arn: "NonEmptyString",
+    #             db_security_group_description: "NonEmptyString",
+    #             db_security_group_name: "NonEmptyString",
+    #             ec2_security_groups: [
+    #               {
+    #                 ec2_security_group_id: "NonEmptyString",
+    #                 ec2_security_group_name: "NonEmptyString",
+    #                 ec2_security_group_owner_id: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             ip_ranges: [
+    #               {
+    #                 cidr_ip: "NonEmptyString",
+    #                 status: "NonEmptyString",
+    #               },
+    #             ],
+    #             owner_id: "NonEmptyString",
+    #             vpc_id: "NonEmptyString",
+    #           },
     #         },
     #       }
     #
@@ -34216,6 +34710,12 @@ module Aws::SecurityHub
     #               value: "NonEmptyString",
     #             },
     #           ],
+    #           launch_template: {
+    #             launch_template_id: "NonEmptyString",
+    #             launch_template_name: "NonEmptyString",
+    #             version: "NonEmptyString",
+    #           },
+    #           capacity_rebalance: false,
     #         },
     #         aws_code_build_project: {
     #           encryption_key: "NonEmptyString",
@@ -34274,6 +34774,19 @@ module Aws::SecurityHub
     #             subnets: ["NonEmptyString"],
     #             security_group_ids: ["NonEmptyString"],
     #           },
+    #           secondary_artifacts: [
+    #             {
+    #               artifact_identifier: "NonEmptyString",
+    #               encryption_disabled: false,
+    #               location: "NonEmptyString",
+    #               name: "NonEmptyString",
+    #               namespace_type: "NonEmptyString",
+    #               override_artifact_name: false,
+    #               packaging: "NonEmptyString",
+    #               path: "NonEmptyString",
+    #               type: "NonEmptyString",
+    #             },
+    #           ],
     #         },
     #         aws_cloud_front_distribution: {
     #           cache_behaviors: {
@@ -35330,6 +35843,14 @@ module Aws::SecurityHub
     #               vpc_security_group_id: "NonEmptyString",
     #             },
     #           ],
+    #           logging_status: {
+    #             bucket_name: "NonEmptyString",
+    #             last_failure_message: "NonEmptyString",
+    #             last_failure_time: "NonEmptyString",
+    #             last_successful_delivery_time: "NonEmptyString",
+    #             logging_enabled: false,
+    #             s3_key_prefix: "NonEmptyString",
+    #           },
     #         },
     #         aws_elb_load_balancer: {
     #           availability_zones: ["NonEmptyString"],
@@ -35384,6 +35905,12 @@ module Aws::SecurityHub
     #             cross_zone_load_balancing: {
     #               enabled: false,
     #             },
+    #             additional_attributes: [
+    #               {
+    #                 key: "NonEmptyString",
+    #                 value: "NonEmptyString",
+    #               },
+    #             ],
     #           },
     #           load_balancer_name: "NonEmptyString",
     #           policies: {
@@ -36569,6 +37096,27 @@ module Aws::SecurityHub
     #           rule_group_name: "NonEmptyString",
     #           type: "NonEmptyString",
     #         },
+    #         aws_rds_db_security_group: {
+    #           db_security_group_arn: "NonEmptyString",
+    #           db_security_group_description: "NonEmptyString",
+    #           db_security_group_name: "NonEmptyString",
+    #           ec2_security_groups: [
+    #             {
+    #               ec2_security_group_id: "NonEmptyString",
+    #               ec2_security_group_name: "NonEmptyString",
+    #               ec2_security_group_owner_id: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           ip_ranges: [
+    #             {
+    #               cidr_ip: "NonEmptyString",
+    #               status: "NonEmptyString",
+    #             },
+    #           ],
+    #           owner_id: "NonEmptyString",
+    #           vpc_id: "NonEmptyString",
+    #         },
     #       }
     #
     # @!attribute [rw] aws_auto_scaling_auto_scaling_group
@@ -36834,6 +37382,10 @@ module Aws::SecurityHub
     #   Details about an Network Firewall rule group.
     #   @return [Types::AwsNetworkFirewallRuleGroupDetails]
     #
+    # @!attribute [rw] aws_rds_db_security_group
+    #   Details about an Amazon RDS DB security group.
+    #   @return [Types::AwsRdsDbSecurityGroupDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceDetails AWS API Documentation
     #
     class ResourceDetails < Struct.new(
@@ -36898,7 +37450,8 @@ module Aws::SecurityHub
       :aws_eks_cluster,
       :aws_network_firewall_firewall_policy,
       :aws_network_firewall_firewall,
-      :aws_network_firewall_rule_group)
+      :aws_network_firewall_rule_group,
+      :aws_rds_db_security_group)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -655,7 +655,7 @@ module Aws::FSx
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
     #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
     #   resp.backup.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -837,7 +837,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -1125,7 +1125,7 @@ module Aws::FSx
     #   resp.backup.file_system.creation_time #=> Time
     #   resp.backup.file_system.file_system_id #=> String
     #   resp.backup.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backup.file_system.failure_details.message #=> String
     #   resp.backup.file_system.storage_capacity #=> Integer
     #   resp.backup.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -1307,7 +1307,7 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -2114,7 +2114,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -2588,7 +2588,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -2831,7 +2831,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -3211,7 +3211,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -3425,7 +3425,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -3784,7 +3784,7 @@ module Aws::FSx
     # @example Response structure
     #
     #   resp.file_system_id #=> String
-    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.windows_response.final_backup_id #=> String
     #   resp.windows_response.final_backup_tags #=> Array
     #   resp.windows_response.final_backup_tags[0].key #=> String
@@ -4086,7 +4086,7 @@ module Aws::FSx
     #   resp.backups[0].file_system.creation_time #=> Time
     #   resp.backups[0].file_system.file_system_id #=> String
     #   resp.backups[0].file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backups[0].file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backups[0].file_system.failure_details.message #=> String
     #   resp.backups[0].file_system.storage_capacity #=> Integer
     #   resp.backups[0].file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -4268,7 +4268,7 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -4753,7 +4753,7 @@ module Aws::FSx
     #   resp.file_systems[0].creation_time #=> Time
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_systems[0].lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.file_systems[0].failure_details.message #=> String
     #   resp.file_systems[0].storage_capacity #=> Integer
     #   resp.file_systems[0].storage_type #=> String, one of "SSD", "HDD"
@@ -4997,7 +4997,7 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -5298,7 +5298,7 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -5605,7 +5605,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -5786,8 +5786,9 @@ module Aws::FSx
     #     snapshots and this option isn't used, `RestoreVolumeFromSnapshot`
     #     fails.
     #
-    #   * `DELETE_CLONED_VOLUMES` - Deletes any volumes cloned from this
-    #     volume. If there are any cloned volumes and this option isn't used,
+    #   * `DELETE_CLONED_VOLUMES` - Deletes any dependent clone volumes
+    #     created from intermediate snapshots. If there are any dependent
+    #     clone volumes and this option isn't used,
     #     `RestoreVolumeFromSnapshot` fails.
     #
     # @return [Types::RestoreVolumeFromSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -6243,7 +6244,7 @@ module Aws::FSx
     #   resp.file_system.creation_time #=> Time
     #   resp.file_system.file_system_id #=> String
     #   resp.file_system.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.file_system.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.file_system.failure_details.message #=> String
     #   resp.file_system.storage_capacity #=> Integer
     #   resp.file_system.storage_type #=> String, one of "SSD", "HDD"
@@ -6448,7 +6449,7 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -6779,7 +6780,7 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.creation_time #=> Time
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_id #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.file_system_type #=> String, one of "WINDOWS", "LUSTRE", "ONTAP", "OPENZFS"
-    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING"
+    #   resp.volume.administrative_actions[0].target_file_system_values.lifecycle #=> String, one of "AVAILABLE", "CREATING", "FAILED", "DELETING", "MISCONFIGURED", "UPDATING", "MISCONFIGURED_UNAVAILABLE"
     #   resp.volume.administrative_actions[0].target_file_system_values.failure_details.message #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_capacity #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.storage_type #=> String, one of "SSD", "HDD"
@@ -6919,7 +6920,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

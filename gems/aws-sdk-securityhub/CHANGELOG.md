@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-04-05)
+------------------
+
+* Feature - Added additional ASFF details for RdsSecurityGroup AutoScalingGroup, ElbLoadBalancer, CodeBuildProject and RedshiftCluster.
+
 1.62.0 (2022-02-24)
 ------------------
 

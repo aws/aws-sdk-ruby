@@ -5105,6 +5105,10 @@ module Aws::FSx
     #   * `MISCONFIGURED` - The file system is in a failed but recoverable
     #     state.
     #
+    #   * `MISCONFIGURED_UNAVAILABLE` - (Amazon FSx for Windows File Server
+    #     only) The file system is currently unavailable due to a change in
+    #     your Active Directory configuration.
+    #
     #   * `UPDATING` - The file system is undergoing a customer-initiated
     #     update.
     #   @return [String]
@@ -6659,9 +6663,10 @@ module Aws::FSx
     #     intermediate snapshots and this option isn't used,
     #     `RestoreVolumeFromSnapshot` fails.
     #
-    #   * `DELETE_CLONED_VOLUMES` - Deletes any volumes cloned from this
-    #     volume. If there are any cloned volumes and this option isn't
-    #     used, `RestoreVolumeFromSnapshot` fails.
+    #   * `DELETE_CLONED_VOLUMES` - Deletes any dependent clone volumes
+    #     created from intermediate snapshots. If there are any dependent
+    #     clone volumes and this option isn't used,
+    #     `RestoreVolumeFromSnapshot` fails.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/RestoreVolumeFromSnapshotRequest AWS API Documentation
@@ -7722,8 +7727,8 @@ module Aws::FSx
     #
     # @!attribute [rw] throughput_capacity
     #   Specifies the throughput of an FSx for NetApp ONTAP file system,
-    #   measured in megabytes per second (MBps). Valid values are 64, 128,
-    #   256, 512, 1024, 2048, 3072, or 4096 MB/s.
+    #   measured in megabytes per second (MBps). Valid values are 128, 256,
+    #   512, 1024, or 2048 MB/s.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/fsx-2018-03-01/UpdateFileSystemOntapConfiguration AWS API Documentation
