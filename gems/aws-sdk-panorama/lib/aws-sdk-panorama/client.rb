@@ -762,7 +762,7 @@ module Aws::Panorama
     #   resp.last_updated_time #=> Time
     #   resp.name #=> String
     #   resp.runtime_role_arn #=> String
-    #   resp.status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED"
+    #   resp.status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED", "DEPLOYMENT_FAILED"
     #   resp.status_description #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
@@ -828,6 +828,7 @@ module Aws::Panorama
     #
     #   * {Types::DescribeDeviceResponse#alternate_softwares #alternate_softwares} => Array&lt;Types::AlternateSoftwareMetadata&gt;
     #   * {Types::DescribeDeviceResponse#arn #arn} => String
+    #   * {Types::DescribeDeviceResponse#brand #brand} => String
     #   * {Types::DescribeDeviceResponse#created_time #created_time} => Time
     #   * {Types::DescribeDeviceResponse#current_networking_status #current_networking_status} => Types::NetworkStatus
     #   * {Types::DescribeDeviceResponse#current_software #current_software} => String
@@ -855,6 +856,7 @@ module Aws::Panorama
     #   resp.alternate_softwares #=> Array
     #   resp.alternate_softwares[0].version #=> String
     #   resp.arn #=> String
+    #   resp.brand #=> String, one of "AWS_PANORAMA", "LENOVO"
     #   resp.created_time #=> Time
     #   resp.current_networking_status.ethernet_0_status.connection_status #=> String, one of "CONNECTED", "NOT_CONNECTED", "CONNECTING"
     #   resp.current_networking_status.ethernet_0_status.hw_address #=> String
@@ -1354,7 +1356,7 @@ module Aws::Panorama
     #     device_id: "DeviceId",
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL
+    #     status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL, DEPLOYMENT_FAILED
     #   })
     #
     # @example Response structure
@@ -1368,7 +1370,7 @@ module Aws::Panorama
     #   resp.application_instances[0].description #=> String
     #   resp.application_instances[0].health_status #=> String, one of "RUNNING", "ERROR", "NOT_AVAILABLE"
     #   resp.application_instances[0].name #=> String
-    #   resp.application_instances[0].status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED"
+    #   resp.application_instances[0].status #=> String, one of "DEPLOYMENT_PENDING", "DEPLOYMENT_REQUESTED", "DEPLOYMENT_IN_PROGRESS", "DEPLOYMENT_ERROR", "DEPLOYMENT_SUCCEEDED", "REMOVAL_PENDING", "REMOVAL_REQUESTED", "REMOVAL_IN_PROGRESS", "REMOVAL_FAILED", "REMOVAL_SUCCEEDED", "DEPLOYMENT_FAILED"
     #   resp.application_instances[0].status_description #=> String
     #   resp.application_instances[0].tags #=> Hash
     #   resp.application_instances[0].tags["TagKey"] #=> String
@@ -1409,6 +1411,7 @@ module Aws::Panorama
     # @example Response structure
     #
     #   resp.devices #=> Array
+    #   resp.devices[0].brand #=> String, one of "AWS_PANORAMA", "LENOVO"
     #   resp.devices[0].created_time #=> Time
     #   resp.devices[0].device_id #=> String
     #   resp.devices[0].last_updated_time #=> Time
@@ -1701,9 +1704,10 @@ module Aws::Panorama
 
     # Creates a device and returns a configuration archive. The
     # configuration archive is a ZIP file that contains a provisioning
-    # certificate that is valid for 5 minutes. Transfer the configuration
-    # archive to the device with the included USB storage device within 5
-    # minutes.
+    # certificate that is valid for 5 minutes. Name the configuration
+    # archive `certificates-omni_device-name.zip` and transfer it to the
+    # device within 5 minutes. Use the included USB storage device and
+    # connect it to the USB 3.0 port next to the HDMI output.
     #
     # @option params [String] :description
     #   A description for the device.
@@ -1934,7 +1938,7 @@ module Aws::Panorama
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-panorama'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

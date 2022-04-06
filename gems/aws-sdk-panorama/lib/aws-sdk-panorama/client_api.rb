@@ -74,6 +74,7 @@ module Aws::Panorama
     Description = Shapes::StringShape.new(name: 'Description')
     Device = Shapes::StructureShape.new(name: 'Device')
     DeviceArn = Shapes::StringShape.new(name: 'DeviceArn')
+    DeviceBrand = Shapes::StringShape.new(name: 'DeviceBrand')
     DeviceConnectionStatus = Shapes::StringShape.new(name: 'DeviceConnectionStatus')
     DeviceId = Shapes::StringShape.new(name: 'DeviceId')
     DeviceIdList = Shapes::ListShape.new(name: 'DeviceIdList')
@@ -394,6 +395,7 @@ module Aws::Panorama
 
     DescribeDeviceResponse.add_member(:alternate_softwares, Shapes::ShapeRef.new(shape: AlternateSoftwares, location_name: "AlternateSoftwares"))
     DescribeDeviceResponse.add_member(:arn, Shapes::ShapeRef.new(shape: DeviceArn, location_name: "Arn"))
+    DescribeDeviceResponse.add_member(:brand, Shapes::ShapeRef.new(shape: DeviceBrand, location_name: "Brand"))
     DescribeDeviceResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
     DescribeDeviceResponse.add_member(:current_networking_status, Shapes::ShapeRef.new(shape: NetworkStatus, location_name: "CurrentNetworkingStatus"))
     DescribeDeviceResponse.add_member(:current_software, Shapes::ShapeRef.new(shape: CurrentSoftware, location_name: "CurrentSoftware"))
@@ -495,6 +497,7 @@ module Aws::Panorama
     DescribePackageVersionResponse.add_member(:status_description, Shapes::ShapeRef.new(shape: PackageVersionStatusDescription, location_name: "StatusDescription"))
     DescribePackageVersionResponse.struct_class = Types::DescribePackageVersionResponse
 
+    Device.add_member(:brand, Shapes::ShapeRef.new(shape: DeviceBrand, location_name: "Brand"))
     Device.add_member(:created_time, Shapes::ShapeRef.new(shape: CreatedTime, location_name: "CreatedTime"))
     Device.add_member(:device_id, Shapes::ShapeRef.new(shape: DeviceId, location_name: "DeviceId"))
     Device.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: LastUpdatedTime, location_name: "LastUpdatedTime"))

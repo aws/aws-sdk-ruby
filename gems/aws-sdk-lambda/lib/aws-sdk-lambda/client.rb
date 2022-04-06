@@ -512,6 +512,17 @@ module Aws::Lambda
     #   grant permissions to all the Amazon Web Services accounts under this
     #   organization.
     #
+    # @option params [String] :function_url_auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
     # @return [Types::AddPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AddPermissionResponse#statement #statement} => String
@@ -529,6 +540,7 @@ module Aws::Lambda
     #     qualifier: "Qualifier",
     #     revision_id: "String",
     #     principal_org_id: "PrincipalOrgID",
+    #     function_url_auth_type: "NONE", # accepts NONE, AWS_IAM
     #   })
     #
     # @example Response structure
@@ -1371,6 +1383,97 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Creates a Lambda function URL with the specified configuration
+    # parameters. A function URL is a dedicated HTTP(S) endpoint that you
+    # can use to invoke your function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @option params [required, String] :auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
+    # @option params [Types::Cors] :cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #
+    # @return [Types::CreateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::CreateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::CreateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     auth_type: "NONE", # required, accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload create_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def create_function_url_config(params = {}, options = {})
+      req = build_request(:create_function_url_config, params)
+      req.send_request(options)
+    end
+
     # Deletes a Lambda function [alias][1].
     #
     #
@@ -1682,6 +1785,46 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def delete_function_event_invoke_config(params = {}, options = {})
       req = build_request(:delete_function_event_invoke_config, params)
+      req.send_request(options)
+    end
+
+    # Deletes a Lambda function URL. When you delete a function URL, you
+    # can't recover it. Creating a new function URL results in a different
+    # URL address.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionUrlConfig AWS API Documentation
+    #
+    # @overload delete_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def delete_function_url_config(params = {}, options = {})
+      req = build_request(:delete_function_url_config, params)
       req.send_request(options)
     end
 
@@ -2362,6 +2505,69 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def get_function_event_invoke_config(params = {}, options = {})
       req = build_request(:get_function_event_invoke_config, params)
+      req.send_request(options)
+    end
+
+    # Returns details about a Lambda function URL.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @return [Types::GetFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::GetFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::GetFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::GetFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::GetFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::GetFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfig AWS API Documentation
+    #
+    # @overload get_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def get_function_url_config(params = {}, options = {})
+      req = build_request(:get_function_url_config, params)
       req.send_request(options)
     end
 
@@ -3092,6 +3298,76 @@ module Aws::Lambda
     # @param [Hash] params ({})
     def list_function_event_invoke_configs(params = {}, options = {})
       req = build_request(:list_function_event_invoke_configs, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of Lambda function URLs for the specified function.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :marker
+    #   Specify the pagination token that's returned by a previous request to
+    #   retrieve the next page of results.
+    #
+    # @option params [Integer] :max_items
+    #   The maximum number of function URLs to return in the response. Note
+    #   that `ListFunctionUrlConfigs` returns a maximum of 50 items in each
+    #   response, even if you set the number higher.
+    #
+    # @return [Types::ListFunctionUrlConfigsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionUrlConfigsResponse#function_url_configs #function_url_configs} => Array&lt;Types::FunctionUrlConfig&gt;
+    #   * {Types::ListFunctionUrlConfigsResponse#next_marker #next_marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_function_url_configs({
+    #     function_name: "FunctionName", # required
+    #     marker: "String",
+    #     max_items: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url_configs #=> Array
+    #   resp.function_url_configs[0].function_url #=> String
+    #   resp.function_url_configs[0].function_arn #=> String
+    #   resp.function_url_configs[0].creation_time #=> Time
+    #   resp.function_url_configs[0].last_modified_time #=> Time
+    #   resp.function_url_configs[0].cors.allow_credentials #=> Boolean
+    #   resp.function_url_configs[0].cors.allow_headers #=> Array
+    #   resp.function_url_configs[0].cors.allow_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_methods #=> Array
+    #   resp.function_url_configs[0].cors.allow_methods[0] #=> String
+    #   resp.function_url_configs[0].cors.allow_origins #=> Array
+    #   resp.function_url_configs[0].cors.allow_origins[0] #=> String
+    #   resp.function_url_configs[0].cors.expose_headers #=> Array
+    #   resp.function_url_configs[0].cors.expose_headers[0] #=> String
+    #   resp.function_url_configs[0].cors.max_age #=> Integer
+    #   resp.function_url_configs[0].auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.next_marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigs AWS API Documentation
+    #
+    # @overload list_function_url_configs(params = {})
+    # @param [Hash] params ({})
+    def list_function_url_configs(params = {}, options = {})
+      req = build_request(:list_function_url_configs, params)
       req.send_request(options)
     end
 
@@ -5302,6 +5578,97 @@ module Aws::Lambda
       req.send_request(options)
     end
 
+    # Updates the configuration for a Lambda function URL.
+    #
+    # @option params [required, String] :function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #
+    # @option params [String] :qualifier
+    #   The alias name.
+    #
+    # @option params [String] :auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM` users
+    #   only. Set to `NONE` if you want to bypass IAM authentication to create
+    #   a public endpoint. For more information, see [ Security and auth model
+    #   for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #
+    # @option params [Types::Cors] :cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #
+    # @return [Types::UpdateFunctionUrlConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_url #function_url} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#function_arn #function_arn} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#auth_type #auth_type} => String
+    #   * {Types::UpdateFunctionUrlConfigResponse#cors #cors} => Types::Cors
+    #   * {Types::UpdateFunctionUrlConfigResponse#creation_time #creation_time} => Time
+    #   * {Types::UpdateFunctionUrlConfigResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_function_url_config({
+    #     function_name: "FunctionName", # required
+    #     qualifier: "FunctionUrlQualifier",
+    #     auth_type: "NONE", # accepts NONE, AWS_IAM
+    #     cors: {
+    #       allow_credentials: false,
+    #       allow_headers: ["Header"],
+    #       allow_methods: ["Method"],
+    #       allow_origins: ["Origin"],
+    #       expose_headers: ["Header"],
+    #       max_age: 1,
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_url #=> String
+    #   resp.function_arn #=> String
+    #   resp.auth_type #=> String, one of "NONE", "AWS_IAM"
+    #   resp.cors.allow_credentials #=> Boolean
+    #   resp.cors.allow_headers #=> Array
+    #   resp.cors.allow_headers[0] #=> String
+    #   resp.cors.allow_methods #=> Array
+    #   resp.cors.allow_methods[0] #=> String
+    #   resp.cors.allow_origins #=> Array
+    #   resp.cors.allow_origins[0] #=> String
+    #   resp.cors.expose_headers #=> Array
+    #   resp.cors.expose_headers[0] #=> String
+    #   resp.cors.max_age #=> Integer
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfig AWS API Documentation
+    #
+    # @overload update_function_url_config(params = {})
+    # @param [Hash] params ({})
+    def update_function_url_config(params = {}, options = {})
+      req = build_request(:update_function_url_config, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5315,7 +5682,7 @@ module Aws::Lambda
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

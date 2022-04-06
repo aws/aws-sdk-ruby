@@ -46,6 +46,7 @@ module Aws::Kendra
     BatchPutDocumentResponseFailedDocuments = Shapes::ListShape.new(name: 'BatchPutDocumentResponseFailedDocuments')
     Blob = Shapes::BlobShape.new(name: 'Blob')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoxConfiguration = Shapes::StructureShape.new(name: 'BoxConfiguration')
     CapacityUnitsConfiguration = Shapes::StructureShape.new(name: 'CapacityUnitsConfiguration')
     ChangeDetectingColumns = Shapes::ListShape.new(name: 'ChangeDetectingColumns')
     ClaimRegex = Shapes::StringShape.new(name: 'ClaimRegex')
@@ -184,6 +185,7 @@ module Aws::Kendra
     Duration = Shapes::StringShape.new(name: 'Duration')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
+    EnterpriseId = Shapes::StringShape.new(name: 'EnterpriseId')
     EntityConfiguration = Shapes::StructureShape.new(name: 'EntityConfiguration')
     EntityDisplayData = Shapes::StructureShape.new(name: 'EntityDisplayData')
     EntityId = Shapes::StringShape.new(name: 'EntityId')
@@ -605,6 +607,21 @@ module Aws::Kendra
 
     BatchPutDocumentResponseFailedDocuments.member = Shapes::ShapeRef.new(shape: BatchPutDocumentResponseFailedDocument)
 
+    BoxConfiguration.add_member(:enterprise_id, Shapes::ShapeRef.new(shape: EnterpriseId, required: true, location_name: "EnterpriseId"))
+    BoxConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    BoxConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    BoxConfiguration.add_member(:crawl_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlComments"))
+    BoxConfiguration.add_member(:crawl_tasks, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlTasks"))
+    BoxConfiguration.add_member(:crawl_web_links, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlWebLinks"))
+    BoxConfiguration.add_member(:file_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "FileFieldMappings"))
+    BoxConfiguration.add_member(:task_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "TaskFieldMappings"))
+    BoxConfiguration.add_member(:comment_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "CommentFieldMappings"))
+    BoxConfiguration.add_member(:web_link_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "WebLinkFieldMappings"))
+    BoxConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    BoxConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    BoxConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    BoxConfiguration.struct_class = Types::BoxConfiguration
+
     CapacityUnitsConfiguration.add_member(:storage_capacity_units, Shapes::ShapeRef.new(shape: StorageCapacityUnit, required: true, location_name: "StorageCapacityUnits"))
     CapacityUnitsConfiguration.add_member(:query_capacity_units, Shapes::ShapeRef.new(shape: QueryCapacityUnit, required: true, location_name: "QueryCapacityUnits"))
     CapacityUnitsConfiguration.struct_class = Types::CapacityUnitsConfiguration
@@ -807,6 +824,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:work_docs_configuration, Shapes::ShapeRef.new(shape: WorkDocsConfiguration, location_name: "WorkDocsConfiguration"))
     DataSourceConfiguration.add_member(:fsx_configuration, Shapes::ShapeRef.new(shape: FsxConfiguration, location_name: "FsxConfiguration"))
     DataSourceConfiguration.add_member(:slack_configuration, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "SlackConfiguration"))
+    DataSourceConfiguration.add_member(:box_configuration, Shapes::ShapeRef.new(shape: BoxConfiguration, location_name: "BoxConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
