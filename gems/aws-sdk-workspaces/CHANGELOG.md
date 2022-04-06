@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-03-31)
+------------------
+
+* Feature - Added APIs that allow you to customize the logo, login message, and help links in the WorkSpaces client login page. To learn more, visit https://docs.aws.amazon.com/workspaces/latest/adminguide/customize-branding.html
+
 1.65.0 (2022-02-24)
 ------------------
 

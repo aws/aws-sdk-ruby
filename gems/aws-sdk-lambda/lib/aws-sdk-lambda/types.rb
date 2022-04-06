@@ -165,6 +165,7 @@ module Aws::Lambda
     #         qualifier: "Qualifier",
     #         revision_id: "String",
     #         principal_org_id: "PrincipalOrgID",
+    #         function_url_auth_type: "NONE", # accepts NONE, AWS_IAM
     #       }
     #
     # @!attribute [rw] function_name
@@ -240,6 +241,18 @@ module Aws::Lambda
     #   organization.
     #   @return [String]
     #
+    # @!attribute [rw] function_url_auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/AddPermissionRequest AWS API Documentation
     #
     class AddPermissionRequest < Struct.new(
@@ -252,7 +265,8 @@ module Aws::Lambda
       :event_source_token,
       :qualifier,
       :revision_id,
-      :principal_org_id)
+      :principal_org_id,
+      :function_url_auth_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -515,6 +529,77 @@ module Aws::Lambda
     #
     class Concurrency < Struct.new(
       :reserved_concurrent_executions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The [cross-origin resource sharing (CORS)][1] settings for your Lambda
+    # function URL. Use CORS to grant access to your function URL from any
+    # origin. You can also use CORS to control access for specific HTTP
+    # headers and methods in requests to your function URL.
+    #
+    #
+    #
+    # [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #
+    # @note When making an API call, you may pass Cors
+    #   data as a hash:
+    #
+    #       {
+    #         allow_credentials: false,
+    #         allow_headers: ["Header"],
+    #         allow_methods: ["Method"],
+    #         allow_origins: ["Origin"],
+    #         expose_headers: ["Header"],
+    #         max_age: 1,
+    #       }
+    #
+    # @!attribute [rw] allow_credentials
+    #   Whether to allow cookies or other credentials in requests to your
+    #   function URL. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] allow_headers
+    #   The HTTP headers that origins can include in requests to your
+    #   function URL. For example: `Date`, `Keep-Alive`, `X-Custom-Header`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_methods
+    #   The HTTP methods that are allowed when calling your function URL.
+    #   For example: `GET`, `POST`, `DELETE`, or the wildcard character
+    #   (`*`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] allow_origins
+    #   The origins that can access your function URL. You can list any
+    #   number of specific origins, separated by a comma. For example:
+    #   `https://www.example.com`, `http://localhost:60905`.
+    #
+    #   Alternatively, you can grant access to all origins using the
+    #   wildcard character (`*`).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] expose_headers
+    #   The HTTP headers in your function response that you want to expose
+    #   to origins that call your function URL. For example: `Date`,
+    #   `Keep-Alive`, `X-Custom-Header`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_age
+    #   The maximum amount of time, in seconds, that web browsers can cache
+    #   results of a preflight request. By default, this is set to `0`,
+    #   which means that the browser doesn't cache results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/Cors AWS API Documentation
+    #
+    class Cors < Struct.new(
+      :allow_credentials,
+      :allow_headers,
+      :allow_methods,
+      :allow_origins,
+      :expose_headers,
+      :max_age)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1106,6 +1191,125 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #         auth_type: "NONE", # required, accepts NONE, AWS_IAM
+    #         cors: {
+    #           allow_credentials: false,
+    #           allow_headers: ["Header"],
+    #           allow_methods: ["Method"],
+    #           allow_origins: ["Origin"],
+    #           expose_headers: ["Header"],
+    #           max_age: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The alias name.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigRequest AWS API Documentation
+    #
+    class CreateFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :auth_type,
+      :cors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   The HTTP URL endpoint for your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   When the function URL was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/CreateFunctionUrlConfigResponse AWS API Documentation
+    #
+    class CreateFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :auth_type,
+      :cors,
+      :creation_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The [dead-letter queue][1] for failed asynchronous invocations.
     #
     #
@@ -1347,6 +1551,43 @@ module Aws::Lambda
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionRequest AWS API Documentation
     #
     class DeleteFunctionRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/DeleteFunctionUrlConfigRequest AWS API Documentation
+    #
+    class DeleteFunctionUrlConfigRequest < Struct.new(
       :function_name,
       :qualifier)
       SENSITIVE = []
@@ -2275,6 +2516,68 @@ module Aws::Lambda
       include Aws::Structure
     end
 
+    # Details about a Lambda function URL.
+    #
+    # @!attribute [rw] function_url
+    #   The HTTP URL endpoint for your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the function URL was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the function URL configuration was last updated, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/FunctionUrlConfig AWS API Documentation
+    #
+    class FunctionUrlConfig < Struct.new(
+      :function_url,
+      :function_arn,
+      :creation_time,
+      :last_modified_time,
+      :cors,
+      :auth_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetAccountSettingsRequest AWS API Documentation
@@ -2641,6 +2944,103 @@ module Aws::Lambda
       :code,
       :tags,
       :concurrency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The alias name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfigRequest AWS API Documentation
+    #
+    class GetFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   The HTTP URL endpoint for your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   When the function URL was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the function URL configuration was last updated, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/GetFunctionUrlConfigResponse AWS API Documentation
+    #
+    class GetFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :auth_type,
+      :cors,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3828,6 +4228,69 @@ module Aws::Lambda
     #
     class ListFunctionEventInvokeConfigsResponse < Struct.new(
       :function_event_invoke_configs,
+      :next_marker)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListFunctionUrlConfigsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         marker: "String",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Specify the pagination token that's returned by a previous request
+    #   to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of function URLs to return in the response. Note
+    #   that `ListFunctionUrlConfigs` returns a maximum of 50 items in each
+    #   response, even if you set the number higher.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigsRequest AWS API Documentation
+    #
+    class ListFunctionUrlConfigsRequest < Struct.new(
+      :function_name,
+      :marker,
+      :max_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url_configs
+    #   A list of function URL configurations.
+    #   @return [Array<Types::FunctionUrlConfig>]
+    #
+    # @!attribute [rw] next_marker
+    #   The pagination token that's included if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ListFunctionUrlConfigsResponse AWS API Documentation
+    #
+    class ListFunctionUrlConfigsResponse < Struct.new(
+      :function_url_configs,
       :next_marker)
       SENSITIVE = []
       include Aws::Structure
@@ -5977,6 +6440,135 @@ module Aws::Lambda
       :maximum_retry_attempts,
       :maximum_event_age_in_seconds,
       :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateFunctionUrlConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         function_name: "FunctionName", # required
+    #         qualifier: "FunctionUrlQualifier",
+    #         auth_type: "NONE", # accepts NONE, AWS_IAM
+    #         cors: {
+    #           allow_credentials: false,
+    #           allow_headers: ["Header"],
+    #           allow_methods: ["Method"],
+    #           allow_origins: ["Origin"],
+    #           expose_headers: ["Header"],
+    #           max_age: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] function_name
+    #   The name of the Lambda function.
+    #
+    #   **Name formats**
+    #
+    #   * **Function name** - `my-function`.
+    #
+    #   * **Function ARN** -
+    #     `arn:aws:lambda:us-west-2:123456789012:function:my-function`.
+    #
+    #   * **Partial ARN** - `123456789012:function:my-function`.
+    #
+    #   The length constraint applies only to the full ARN. If you specify
+    #   only the function name, it is limited to 64 characters in length.
+    #   @return [String]
+    #
+    # @!attribute [rw] qualifier
+    #   The alias name.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigRequest AWS API Documentation
+    #
+    class UpdateFunctionUrlConfigRequest < Struct.new(
+      :function_name,
+      :qualifier,
+      :auth_type,
+      :cors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] function_url
+    #   The HTTP URL endpoint for your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_arn
+    #   The Amazon Resource Name (ARN) of your function.
+    #   @return [String]
+    #
+    # @!attribute [rw] auth_type
+    #   The type of authentication that your function URL uses. Set to
+    #   `AWS_IAM` if you want to restrict access to authenticated `IAM`
+    #   users only. Set to `NONE` if you want to bypass IAM authentication
+    #   to create a public endpoint. For more information, see [ Security
+    #   and auth model for Lambda function URLs][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
+    #   @return [String]
+    #
+    # @!attribute [rw] cors
+    #   The [cross-origin resource sharing (CORS)][1] settings for your
+    #   function URL.
+    #
+    #
+    #
+    #   [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    #   @return [Types::Cors]
+    #
+    # @!attribute [rw] creation_time
+    #   When the function URL was created, in [ISO-8601 format][1]
+    #   (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   When the function URL configuration was last updated, in [ISO-8601
+    #   format][1] (YYYY-MM-DDThh:mm:ss.sTZD).
+    #
+    #
+    #
+    #   [1]: https://www.w3.org/TR/NOTE-datetime
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/UpdateFunctionUrlConfigResponse AWS API Documentation
+    #
+    class UpdateFunctionUrlConfigResponse < Struct.new(
+      :function_url,
+      :function_arn,
+      :auth_type,
+      :cors,
+      :creation_time,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end

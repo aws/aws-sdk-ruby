@@ -2529,6 +2529,12 @@ module Aws::ServiceCatalog
     #   The output of the provisioning artifact.
     #   @return [Array<Types::ProvisioningArtifactOutput>]
     #
+    # @!attribute [rw] provisioning_artifact_output_keys
+    #   A list of the keys and descriptions of the outputs. These outputs
+    #   can be referenced from a provisioned product launched from this
+    #   provisioning artifact.
+    #   @return [Array<Types::ProvisioningArtifactOutput>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/servicecatalog-2015-12-10/DescribeProvisioningParametersOutput AWS API Documentation
     #
     class DescribeProvisioningParametersOutput < Struct.new(
@@ -2537,7 +2543,8 @@ module Aws::ServiceCatalog
       :usage_instructions,
       :tag_options,
       :provisioning_artifact_preferences,
-      :provisioning_artifact_outputs)
+      :provisioning_artifact_outputs,
+      :provisioning_artifact_output_keys)
       SENSITIVE = []
       include Aws::Structure
     end

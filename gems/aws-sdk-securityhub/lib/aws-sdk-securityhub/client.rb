@@ -885,6 +885,12 @@ module Aws::SecurityHub
     #                     value: "NonEmptyString",
     #                   },
     #                 ],
+    #                 launch_template: {
+    #                   launch_template_id: "NonEmptyString",
+    #                   launch_template_name: "NonEmptyString",
+    #                   version: "NonEmptyString",
+    #                 },
+    #                 capacity_rebalance: false,
     #               },
     #               aws_code_build_project: {
     #                 encryption_key: "NonEmptyString",
@@ -943,6 +949,19 @@ module Aws::SecurityHub
     #                   subnets: ["NonEmptyString"],
     #                   security_group_ids: ["NonEmptyString"],
     #                 },
+    #                 secondary_artifacts: [
+    #                   {
+    #                     artifact_identifier: "NonEmptyString",
+    #                     encryption_disabled: false,
+    #                     location: "NonEmptyString",
+    #                     name: "NonEmptyString",
+    #                     namespace_type: "NonEmptyString",
+    #                     override_artifact_name: false,
+    #                     packaging: "NonEmptyString",
+    #                     path: "NonEmptyString",
+    #                     type: "NonEmptyString",
+    #                   },
+    #                 ],
     #               },
     #               aws_cloud_front_distribution: {
     #                 cache_behaviors: {
@@ -1999,6 +2018,14 @@ module Aws::SecurityHub
     #                     vpc_security_group_id: "NonEmptyString",
     #                   },
     #                 ],
+    #                 logging_status: {
+    #                   bucket_name: "NonEmptyString",
+    #                   last_failure_message: "NonEmptyString",
+    #                   last_failure_time: "NonEmptyString",
+    #                   last_successful_delivery_time: "NonEmptyString",
+    #                   logging_enabled: false,
+    #                   s3_key_prefix: "NonEmptyString",
+    #                 },
     #               },
     #               aws_elb_load_balancer: {
     #                 availability_zones: ["NonEmptyString"],
@@ -2053,6 +2080,12 @@ module Aws::SecurityHub
     #                   cross_zone_load_balancing: {
     #                     enabled: false,
     #                   },
+    #                   additional_attributes: [
+    #                     {
+    #                       key: "NonEmptyString",
+    #                       value: "NonEmptyString",
+    #                     },
+    #                   ],
     #                 },
     #                 load_balancer_name: "NonEmptyString",
     #                 policies: {
@@ -3237,6 +3270,27 @@ module Aws::SecurityHub
     #                 rule_group_id: "NonEmptyString",
     #                 rule_group_name: "NonEmptyString",
     #                 type: "NonEmptyString",
+    #               },
+    #               aws_rds_db_security_group: {
+    #                 db_security_group_arn: "NonEmptyString",
+    #                 db_security_group_description: "NonEmptyString",
+    #                 db_security_group_name: "NonEmptyString",
+    #                 ec2_security_groups: [
+    #                   {
+    #                     ec2_security_group_id: "NonEmptyString",
+    #                     ec2_security_group_name: "NonEmptyString",
+    #                     ec2_security_group_owner_id: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 ip_ranges: [
+    #                   {
+    #                     cidr_ip: "NonEmptyString",
+    #                     status: "NonEmptyString",
+    #                   },
+    #                 ],
+    #                 owner_id: "NonEmptyString",
+    #                 vpc_id: "NonEmptyString",
     #               },
     #             },
     #           },
@@ -6210,6 +6264,10 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.mixed_instances_policy.launch_template.overrides[0].weighted_capacity #=> String
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.availability_zones[0].value #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_template.launch_template_id #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_template.launch_template_name #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.launch_template.version #=> String
+    #   resp.findings[0].resources[0].details.aws_auto_scaling_auto_scaling_group.capacity_rebalance #=> Boolean
     #   resp.findings[0].resources[0].details.aws_code_build_project.encryption_key #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts #=> Array
     #   resp.findings[0].resources[0].details.aws_code_build_project.artifacts[0].artifact_identifier #=> String
@@ -6248,6 +6306,16 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.subnets[0] #=> String
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids #=> Array
     #   resp.findings[0].resources[0].details.aws_code_build_project.vpc_config.security_group_ids[0] #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts #=> Array
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].artifact_identifier #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].encryption_disabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].location #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].name #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].namespace_type #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].override_artifact_name #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].packaging #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].path #=> String
+    #   resp.findings[0].resources[0].details.aws_code_build_project.secondary_artifacts[0].type #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.cache_behaviors.items #=> Array
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.cache_behaviors.items[0].viewer_protocol_policy #=> String
     #   resp.findings[0].resources[0].details.aws_cloud_front_distribution.default_cache_behavior.viewer_protocol_policy #=> String
@@ -6936,6 +7004,12 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups #=> Array
     #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups[0].status #=> String
     #   resp.findings[0].resources[0].details.aws_redshift_cluster.vpc_security_groups[0].vpc_security_group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.bucket_name #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.last_failure_message #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.last_failure_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.last_successful_delivery_time #=> String
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.logging_enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_redshift_cluster.logging_status.s3_key_prefix #=> String
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.availability_zones #=> Array
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.availability_zones[0] #=> String
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.backend_server_descriptions #=> Array
@@ -6969,6 +7043,9 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.connection_draining.timeout #=> Integer
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.connection_settings.idle_timeout #=> Integer
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.cross_zone_load_balancing.enabled #=> Boolean
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.additional_attributes #=> Array
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.additional_attributes[0].key #=> String
+    #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_attributes.additional_attributes[0].value #=> String
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.load_balancer_name #=> String
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.app_cookie_stickiness_policies #=> Array
     #   resp.findings[0].resources[0].details.aws_elb_load_balancer.policies.app_cookie_stickiness_policies[0].cookie_name #=> String
@@ -7780,6 +7857,19 @@ module Aws::SecurityHub
     #   resp.findings[0].resources[0].details.aws_network_firewall_rule_group.rule_group_id #=> String
     #   resp.findings[0].resources[0].details.aws_network_firewall_rule_group.rule_group_name #=> String
     #   resp.findings[0].resources[0].details.aws_network_firewall_rule_group.type #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.db_security_group_arn #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.db_security_group_description #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.db_security_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ec2_security_groups #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ec2_security_groups[0].ec2_security_group_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ec2_security_groups[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ip_ranges #=> Array
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ip_ranges[0].cidr_ip #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.ip_ranges[0].status #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.owner_id #=> String
+    #   resp.findings[0].resources[0].details.aws_rds_db_security_group.vpc_id #=> String
     #   resp.findings[0].compliance.status #=> String, one of "PASSED", "WARNING", "FAILED", "NOT_AVAILABLE"
     #   resp.findings[0].compliance.related_requirements #=> Array
     #   resp.findings[0].compliance.related_requirements[0] #=> String
@@ -10310,7 +10400,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2022-04-04)
+------------------
+
+* Feature - AWS IoT - AWS IoT Device Defender adds support to list metric datapoints collected for IoT devices through the ListMetricValues API
+
 1.87.0 (2022-03-30)
 ------------------
 

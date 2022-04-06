@@ -366,7 +366,7 @@ module Aws::CloudControlApi
     # *Amazon Web Services Cloud Control API User Guide*.
     #
     # Only resource operations requests with a status of `PENDING` or
-    # `IN_PROGRESS` can be cancelled.
+    # `IN_PROGRESS` can be canceled.
     #
     #
     #
@@ -432,7 +432,7 @@ module Aws::CloudControlApi
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
+    #   (IAM) role for Cloud Control API to use when performing this resource
     #   operation. The role specified must have the permissions required for
     #   this operation. The necessary permissions for each event handler are
     #   defined in the ` handlers ` section of the [resource type definition
@@ -492,8 +492,7 @@ module Aws::CloudControlApi
     #
     #   For more information about the properties of a specific resource,
     #   refer to the related topic for the resource in the [Resource and
-    #   property types reference][2] in the *Amazon Web Services
-    #   CloudFormation Users Guide*.
+    #   property types reference][2] in the *CloudFormation Users Guide*.
     #
     #
     #
@@ -560,7 +559,7 @@ module Aws::CloudControlApi
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
+    #   (IAM) role for Cloud Control API to use when performing this resource
     #   operation. The role specified must have the permissions required for
     #   this operation. The necessary permissions for each event handler are
     #   defined in the ` handlers ` section of the [resource type definition
@@ -660,8 +659,8 @@ module Aws::CloudControlApi
     # For details, see [Reading a resource's current state][1].
     #
     # You can use this action to return information about an existing
-    # resource in your account and Amazon Web Services Region, whether or
-    # not those resources were provisioned using Cloud Control API.
+    # resource in your account and Amazon Web Services Region, whether those
+    # resources were provisioned using Cloud Control API.
     #
     #
     #
@@ -677,7 +676,7 @@ module Aws::CloudControlApi
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
+    #   (IAM) role for Cloud Control API to use when performing this resource
     #   operation. The role specified must have the permissions required for
     #   this operation. The necessary permissions for each event handler are
     #   defined in the ` handlers ` section of the [resource type definition
@@ -801,7 +800,7 @@ module Aws::CloudControlApi
     # resource operation requests][1] in the *Amazon Web Services Cloud
     # Control API User Guide*.
     #
-    # <note markdown="1"> Resource operation requests expire after seven days.
+    # <note markdown="1"> Resource operation requests expire after 7 days.
     #
     #  </note>
     #
@@ -871,13 +870,16 @@ module Aws::CloudControlApi
     end
 
     # Returns information about the specified resources. For more
-    # information, see [Discovering
-    # resources](cloudcontrolapi/latest/userguide/resource-operations-list.html)
-    # in the *Amazon Web Services Cloud Control API User Guide*.
+    # information, see [Discovering resources][1] in the *Amazon Web
+    # Services Cloud Control API User Guide*.
     #
     # You can use this action to return information about existing resources
-    # in your account and Amazon Web Services Region, whether or not those
+    # in your account and Amazon Web Services Region, whether those
     # resources were provisioned using Cloud Control API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html
     #
     # @option params [required, String] :type_name
     #   The name of the resource type.
@@ -889,7 +891,7 @@ module Aws::CloudControlApi
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
+    #   (IAM) role for Cloud Control API to use when performing this resource
     #   operation. The role specified must have the permissions required for
     #   this operation. The necessary permissions for each event handler are
     #   defined in the ` handlers ` section of the [resource type definition
@@ -915,12 +917,7 @@ module Aws::CloudControlApi
     #   `NextToken` parameter is set to `null`.
     #
     # @option params [Integer] :max_results
-    #   The maximum number of results to be returned with a single call. If
-    #   the number of available results exceeds this maximum, the response
-    #   includes a `NextToken` value that you can assign to the `NextToken`
-    #   request parameter to get the next set of results.
-    #
-    #   The default is `20`.
+    #   Reserved.
     #
     # @option params [String] :resource_model
     #   The resource model to use to select the resources to return.
@@ -978,8 +975,7 @@ module Aws::CloudControlApi
     #
     # For more information about the properties of a specific resource,
     # refer to the related topic for the resource in the [Resource and
-    # property types reference][4] in the *Amazon Web Services
-    # CloudFormation Users Guide*.
+    # property types reference][4] in the *CloudFormation Users Guide*.
     #
     #
     #
@@ -998,7 +994,7 @@ module Aws::CloudControlApi
     #
     # @option params [String] :role_arn
     #   The Amazon Resource Name (ARN) of the Identity and Access Management
-    #   (IAM) for Cloud Control API to use when performing this resource
+    #   (IAM) role for Cloud Control API to use when performing this resource
     #   operation. The role specified must have the permissions required for
     #   this operation. The necessary permissions for each event handler are
     #   defined in the ` handlers ` section of the [resource type definition
@@ -1118,7 +1114,7 @@ module Aws::CloudControlApi
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudcontrolapi'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

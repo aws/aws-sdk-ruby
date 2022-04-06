@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.574.0 (2022-04-06)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.573.0 (2022-04-01)
+------------------
+
+* Feature - Updated the partitions source data the determines the AWS service regions and endpoints.
+
+1.572.0 (2022-03-31)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::PinpointSMSVoiceV2`.
+
 1.571.0 (2022-03-28)
 ------------------
 

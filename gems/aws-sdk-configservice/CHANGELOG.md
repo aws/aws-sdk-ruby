@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-04-06)
+------------------
+
+* Feature - Add resourceType enums for AWS::EMR::SecurityConfiguration and AWS::SageMaker::CodeRepository
+
 1.76.0 (2022-03-24)
 ------------------
 

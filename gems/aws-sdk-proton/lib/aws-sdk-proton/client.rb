@@ -601,19 +601,20 @@ module Aws::Proton
     #
     # **You can provision environments using the following methods:**
     #
-    # * Standard provisioning: Proton makes direct calls to provision your
-    #   resources.
+    # * Amazon Web Services-managed provisioning: Proton makes direct calls
+    #   to provision your resources.
     #
-    # * Pull request provisioning: Proton makes pull requests on your
+    # * Self-managed provisioning: Proton makes pull requests on your
     #   repository to provide compiled infrastructure as code (IaC) files
     #   that your IaC engine uses to provision resources.
     #
-    # For more information, see the [Environments][1] in the *Proton
-    # Administrator Guide.*
+    # For more information, see [Environments][1] and [Provisioning
+    # methods][2] in the *Proton Administrator Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html
     #
     # @option params [String] :description
     #   A description of the environment that's being created and deployed.
@@ -621,11 +622,13 @@ module Aws::Proton
     # @option params [String] :environment_account_connection_id
     #   The ID of the environment account connection that you provide if
     #   you're provisioning your environment infrastructure resources to an
-    #   environment account. You must include either the
-    #   `environmentAccountConnectionId` or `protonServiceRoleArn` parameter
-    #   and value and omit the `provisioningRepository` parameter and values.
-    #   For more information, see [Environment account connections][1] in the
-    #   *Proton Administrator guide*.
+    #   environment account. For more information, see [Environment account
+    #   connections][1] in the *Proton Administrator guide*.
+    #
+    #   To use Amazon Web Services-managed provisioning for the environment,
+    #   specify either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and omit the `provisioningRepository`
+    #   parameter.
     #
     #
     #
@@ -636,39 +639,36 @@ module Aws::Proton
     #
     # @option params [String] :proton_service_role_arn
     #   The Amazon Resource Name (ARN) of the Proton service role that allows
-    #   Proton to make calls to other services on your behalf. You must
-    #   include either the `environmentAccountConnectionId` or
-    #   `protonServiceRoleArn` parameter and value and omit the
-    #   `provisioningRepository` parameter when you use standard provisioning.
+    #   Proton to make calls to other services on your behalf.
+    #
+    #   To use Amazon Web Services-managed provisioning for the environment,
+    #   specify either the `environmentAccountConnectionId` or
+    #   `protonServiceRoleArn` parameter and omit the `provisioningRepository`
+    #   parameter.
     #
     # @option params [Types::RepositoryBranchInput] :provisioning_repository
-    #   The repository that you provide with pull request provisioning. If you
-    #   provide this parameter, you must omit the
-    #   `environmentAccountConnectionId` and `protonServiceRoleArn`
-    #   parameters.
+    #   The infrastructure repository that you use to host your rendered
+    #   infrastructure templates for self-managed provisioning.
     #
-    #   Provisioning by pull request is currently in feature preview and is
-    #   only usable with Terraform based Proton Templates. To learn more about
-    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
-    #   and Previews.
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms
+    #   To use self-managed provisioning for the environment, specify this
+    #   parameter and omit the `environmentAccountConnectionId` and
+    #   `protonServiceRoleArn` parameters.
     #
     # @option params [required, String] :spec
-    #   A link to a YAML formatted spec file that provides inputs as defined
-    #   in the environment template bundle schema file. For more information,
-    #   see [Environments][1] in the *Proton Administrator Guide*.
+    #   A YAML formatted string that provides inputs as defined in the
+    #   environment template bundle schema file. For more information, see
+    #   [Environments][1] in the *Proton Administrator Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your environment. For more information, see *Proton
-    #   resources and tagging* in the [Proton Administrator Guide][1] or
-    #   [Proton User Guide][2].
+    #   An optional list of metadata items that you can associate with the
+    #   Proton environment. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -777,7 +777,7 @@ module Aws::Proton
     #
     # @option params [required, String] :management_account_id
     #   The ID of the management account that accepts or rejects the
-    #   environment account connection. You create an manage the Proton
+    #   environment account connection. You create and manage the Proton
     #   environment in this account. If the management account accepts the
     #   environment account connection, Proton can use the associated IAM role
     #   to provision environment infrastructure resources in the associated
@@ -789,9 +789,11 @@ module Aws::Proton
     #   infrastructure resources in the associated environment account.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Tags for your environment account connection. For more information,
-    #   see [Proton resources and tagging][1] in the *Proton Administrator
-    #   Guide*.
+    #   An optional list of metadata items that you can associate with the
+    #   Proton environment account connection. A tag is a key-value pair.
+    #
+    #   For more information, see [Proton resources and tagging][1] in the
+    #   *Proton Administrator Guide*.
     #
     #
     #
@@ -877,9 +879,11 @@ module Aws::Proton
     #   provisioned and managed infrastructure.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your environment template. For more information, see
-    #   *Proton resources and tagging* in the [Proton Administrator Guide][1]
-    #   or [Proton User Guide][2].
+    #   An optional list of metadata items that you can associate with the
+    #   Proton environment template. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -944,18 +948,27 @@ module Aws::Proton
     #   A description of the new version of an environment template.
     #
     # @option params [String] :major_version
-    #   To create a new minor version of the environment template, include a
+    #   To create a new minor version of the environment template, include
     #   `major Version`.
     #
     #   To create a new major and minor version of the environment template,
-    #   *exclude* `major Version`.
+    #   exclude `major Version`.
     #
     # @option params [required, Types::TemplateVersionSourceInput] :source
     #   An object that includes the template bundle S3 bucket path and name
     #   for the new version of an template.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for a new version of an environment template.
+    #   An optional list of metadata items that you can associate with the
+    #   Proton environment template version. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :template_name
     #   The name of the environment template.
@@ -1008,15 +1021,21 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Create and register a link to a repository that can be used with pull
-    # request provisioning or template sync configurations. For more
-    # information, see [Template bundles][1] and [Template sync
-    # configurations][2] in the *Proton Administrator Guide*.
+    # Create and register a link to a repository that can be used with
+    # self-managed provisioning (infrastructure or pipelines) or for
+    # template sync configurations. When you create a repository link,
+    # Proton creates a [service-linked role][1] for you.
+    #
+    # For more information, see [Self-managed provisioning][2], [Template
+    # bundles][3], and [Template sync configurations][4] in the *Proton
+    # Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
-    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/using-service-linked-roles.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self
+    # [3]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
+    # [4]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-sync-configs.html
     #
     # @option params [required, String] :connection_arn
     #   The Amazon Resource Name (ARN) of your Amazon Web Services CodeStar
@@ -1025,17 +1044,29 @@ module Aws::Proton
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/setting-up-for-service
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html
     #
     # @option params [String] :encryption_key
     #   The ARN of your customer Amazon Web Services Key Management Service
     #   (Amazon Web Services KMS) key.
     #
     # @option params [required, String] :name
-    #   The repository name, for example `myrepos/myrepo`.
+    #   The repository name (for example, `myrepos/myrepo`).
     #
     # @option params [required, String] :provider
     #   The repository provider.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   An optional list of metadata items that you can associate with the
+    #   Proton repository. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @return [Types::CreateRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1048,6 +1079,12 @@ module Aws::Proton
     #     encryption_key: "Arn",
     #     name: "RepositoryName", # required
     #     provider: "GITHUB", # required, accepts GITHUB, GITHUB_ENTERPRISE, BITBUCKET
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1106,7 +1143,7 @@ module Aws::Proton
     #
     # @option params [required, String] :spec
     #   A link to a spec file that provides inputs as defined in the service
-    #   template bundle schema file. The spec file is in YAML format. Don’t
+    #   template bundle schema file. The spec file is in YAML format. *Don’t*
     #   include pipeline inputs in the spec if your service template *doesn’t*
     #   include a service pipeline. For more information, see [Create a
     #   service][1] in the *Proton Administrator Guide* and [Create a
@@ -1118,9 +1155,11 @@ module Aws::Proton
     #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your service. For more information, see *Proton
-    #   resources and tagging* in the [Proton Administrator Guide][1] or
-    #   [Proton User Guide][2].
+    #   An optional list of metadata items that you can associate with the
+    #   Proton service. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -1197,7 +1236,7 @@ module Aws::Proton
     end
 
     # Create a service template. The administrator creates a service
-    # template to define standardized infrastructure and an optional CICD
+    # template to define standardized infrastructure and an optional CI/CD
     # service pipeline. Developers, in turn, select the service template
     # from Proton. If the selected service template includes a service
     # pipeline definition, they provide a link to their source code
@@ -1223,9 +1262,9 @@ module Aws::Proton
     #   The name of the service template.
     #
     # @option params [String] :pipeline_provisioning
-    #   Proton includes a service pipeline for your service by default. When
-    #   included, this parameter indicates that an Proton service pipeline
-    #   *won't* be included for your service. Once specified, this parameter
+    #   By default, Proton provides a service pipeline for your service. When
+    #   this parameter is included, it indicates that an Proton service
+    #   pipeline *isn't* provided for your service. After it's included, it
     #   *can't* be changed. For more information, see [Service template
     #   bundles][1] in the *Proton Administrator Guide*.
     #
@@ -1234,9 +1273,11 @@ module Aws::Proton
     #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for your service template. For more information, see
-    #   *Proton resources and tagging* in the [Proton Administrator Guide][1]
-    #   or [Proton User Guide][2].
+    #   An optional list of metadata items that you can associate with the
+    #   Proton service template. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -1316,7 +1357,16 @@ module Aws::Proton
     #   for the new version of a service template.
     #
     # @option params [Array<Types::Tag>] :tags
-    #   Create tags for a new version of a service template.
+    #   An optional list of metadata items that you can associate with the
+    #   Proton service template version. A tag is a key-value pair.
+    #
+    #   For more information, see *Proton resources and tagging* in the
+    #   [Proton Administrator Guide][1] or [Proton User Guide][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/proton/latest/adminguide/resources.html
+    #   [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :template_name
     #   The name of the service template.
@@ -1378,13 +1428,13 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Set up a template for automated template version creation. When a
-    # commit is pushed to your registered [repository][1], Proton checks for
-    # changes to your repository template bundles. If it detects a template
-    # bundle change, a new minor or major version of its template is
-    # created, if the version doesn’t already exist. For more information,
-    # see [Template sync configurations][2] in the *Proton Administrator
-    # Guide*.
+    # Set up a template to create new template versions automatically. When
+    # a commit is pushed to your registered [repository][1], Proton checks
+    # for changes to your repository template bundles. If it detects a
+    # template bundle change, a new major or minor version of its template
+    # is created, if the version doesn’t already exist. For more
+    # information, see [Template sync configurations][2] in the *Proton
+    # Administrator Guide*.
     #
     #
     #
@@ -1395,7 +1445,7 @@ module Aws::Proton
     #   The branch of the registered repository for your template.
     #
     # @option params [required, String] :repository_name
-    #   The name of your repository, for example `myrepos/myrepo`.
+    #   The name of your repository (for example, `myrepos/myrepo`).
     #
     # @option params [required, String] :repository_provider
     #   The provider type for your repository.
@@ -2100,7 +2150,23 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Get the repository sync status.
+    # Get the sync status of a repository used for Proton template sync. For
+    # more information about template sync, see .
+    #
+    # <note markdown="1"> A repository sync status isn't tied to the Proton Repository resource
+    # (or any other Proton resource). Therefore, tags on an Proton
+    # Repository resource have no effect on this action. Specifically, you
+    # can't use these tags to control access to this action using
+    # Attribute-based access control (ABAC).
+    #
+    #  For more information about ABAC, see [ABAC][1] in the *Proton
+    # Administrator Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags
     #
     # @option params [required, String] :branch
     #   The repository branch.
@@ -2204,7 +2270,7 @@ module Aws::Proton
     end
 
     # Get detail data for a service instance. A service instance is an
-    # instantiation of service template, which is running in a specific
+    # instantiation of service template and it runs in a specific
     # environment.
     #
     # @option params [required, String] :name
@@ -2393,7 +2459,7 @@ module Aws::Proton
     #   The template type.
     #
     # @option params [required, String] :template_version
-    #   The template version.
+    #   The template major version.
     #
     # @return [Types::GetTemplateSyncStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2479,7 +2545,7 @@ module Aws::Proton
     #   The maximum number of environment account connections to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next environment account
+    #   A token that indicates the location of the next environment account
     #   connection in the array of environment account connections, after the
     #   list of environment account connections that was previously requested.
     #
@@ -2536,9 +2602,9 @@ module Aws::Proton
     #   The environment name.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next environment output in the
-    #   array of environment outputs, after the list of environment outputs
-    #   that was previously requested.
+    #   A token that indicates the location of the next environment output in
+    #   the array of environment outputs, after the list of environment
+    #   outputs that was previously requested.
     #
     # @return [Types::ListEnvironmentOutputsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2576,10 +2642,10 @@ module Aws::Proton
     #   The environment name.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next environment provisioned
-    #   resource in the array of environment provisioned resources, after the
-    #   list of environment provisioned resources that was previously
-    #   requested.
+    #   A token that indicates the location of the next environment
+    #   provisioned resource in the array of environment provisioned
+    #   resources, after the list of environment provisioned resources that
+    #   was previously requested.
     #
     # @return [Types::ListEnvironmentProvisionedResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2627,9 +2693,10 @@ module Aws::Proton
     #   template to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next major or minor version in
-    #   the array of major or minor versions of an environment template, after
-    #   the list of major or minor versions that was previously requested.
+    #   A token that indicates the location of the next major or minor version
+    #   in the array of major or minor versions of an environment template,
+    #   after the list of major or minor versions that was previously
+    #   requested.
     #
     # @option params [required, String] :template_name
     #   The name of the environment template.
@@ -2680,8 +2747,8 @@ module Aws::Proton
     #   The maximum number of environment templates to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next environment template in
-    #   the array of environment templates, after the list of environment
+    #   A token that indicates the location of the next environment template
+    #   in the array of environment templates, after the list of environment
     #   templates that was previously requested.
     #
     # @return [Types::ListEnvironmentTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2729,9 +2796,9 @@ module Aws::Proton
     #   The maximum number of environments to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next environment in the array
-    #   of environments, after the list of environments that was previously
-    #   requested.
+    #   A token that indicates the location of the next environment in the
+    #   array of environments, after the list of environments that was
+    #   previously requested.
     #
     # @return [Types::ListEnvironmentsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2788,8 +2855,9 @@ module Aws::Proton
     #   The maximum number of repositories to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next repository in the array
-    #   of repositories, after the list of repositories previously requested.
+    #   A token that indicates the location of the next repository in the
+    #   array of repositories, after the list of repositories previously
+    #   requested.
     #
     # @return [Types::ListRepositoriesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2825,7 +2893,7 @@ module Aws::Proton
     # List repository sync definitions with detail data.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next repository sync
+    #   A token that indicates the location of the next repository sync
     #   definition in the array of repository sync definitions, after the list
     #   of repository sync definitions previously requested.
     #
@@ -2876,7 +2944,7 @@ module Aws::Proton
     # detail data.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next output in the array of
+    #   A token that indicates the location of the next output in the array of
     #   outputs, after the list of outputs that was previously requested.
     #
     # @option params [required, String] :service_instance_name
@@ -2919,8 +2987,8 @@ module Aws::Proton
     # List provisioned resources for a service instance with details.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next provisioned resource in
-    #   the array of provisioned resources, after the list of provisioned
+    #   A token that indicates the location of the next provisioned resource
+    #   in the array of provisioned resources, after the list of provisioned
     #   resources that was previously requested.
     #
     # @option params [required, String] :service_instance_name
@@ -2967,8 +3035,8 @@ module Aws::Proton
     #   The maximum number of service instances to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next service in the array of
-    #   service instances, after the list of service instances that was
+    #   A token that indicates the location of the next service in the array
+    #   of service instances, after the list of service instances that was
     #   previously requested.
     #
     # @option params [String] :service_name
@@ -3019,7 +3087,7 @@ module Aws::Proton
     # detail.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next output in the array of
+    #   A token that indicates the location of the next output in the array of
     #   outputs, after the list of outputs that was previously requested.
     #
     # @option params [required, String] :service_name
@@ -3058,8 +3126,8 @@ module Aws::Proton
     # List provisioned resources for a service and pipeline with details.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next provisioned resource in
-    #   the array of provisioned resources, after the list of provisioned
+    #   A token that indicates the location of the next provisioned resource
+    #   in the array of provisioned resources, after the list of provisioned
     #   resources that was previously requested.
     #
     # @option params [required, String] :service_name
@@ -3110,9 +3178,9 @@ module Aws::Proton
     #   list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next major or minor version in
-    #   the array of major or minor versions of a service template, after the
-    #   list of major or minor versions that was previously requested.
+    #   A token that indicates the location of the next major or minor version
+    #   in the array of major or minor versions of a service template, after
+    #   the list of major or minor versions that was previously requested.
     #
     # @option params [required, String] :template_name
     #   The name of the service template.
@@ -3163,8 +3231,8 @@ module Aws::Proton
     #   The maximum number of service templates to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next service template in the
-    #   array of service templates, after the list of service templates
+    #   A token that indicates the location of the next service template in
+    #   the array of service templates, after the list of service templates
     #   previously requested.
     #
     # @return [Types::ListServiceTemplatesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3209,8 +3277,8 @@ module Aws::Proton
     #   The maximum number of services to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next service in the array of
-    #   services, after the list of services that was previously requested.
+    #   A token that indicates the location of the next service in the array
+    #   of services, after the list of services that was previously requested.
     #
     # @return [Types::ListServicesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3261,9 +3329,9 @@ module Aws::Proton
     #   The maximum number of tags to list.
     #
     # @option params [String] :next_token
-    #   A token to indicate the location of the next resource tag in the array
-    #   of resource tags, after the list of resource tags that was previously
-    #   requested.
+    #   A token that indicates the location of the next resource tag in the
+    #   array of resource tags, after the list of resource tags that was
+    #   previously requested.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource for the listed tags.
@@ -3300,18 +3368,14 @@ module Aws::Proton
     end
 
     # Notify Proton of status changes to a provisioned resource when you use
-    # pull request provisioning. For more information, see [Template
-    # bundles][1].
+    # self-managed provisioning.
     #
-    # Provisioning by pull request is currently in feature preview and is
-    # only usable with Terraform based Proton Templates. To learn more about
-    # [Amazon Web Services Feature Preview terms][2], see section 2 on Beta
-    # and Previews.
+    # For more information, see [Self-managed provisioning][1] in the
+    # *Proton Administrator Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html
-    # [2]: https://aws.amazon.com/service-terms
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html#ag-works-prov-methods-self
     #
     # @option params [String] :deployment_id
     #   The deployment ID for your provisioned resource.
@@ -3359,10 +3423,9 @@ module Aws::Proton
     # another environment account.
     #
     # After you reject an environment account connection request, you
-    # *won’t* be able to accept or use the rejected environment account
-    # connection.
+    # *can't* accept or use the rejected environment account connection.
     #
-    # You *can’t* reject an environment account connection that is connected
+    # You *can’t* reject an environment account connection that's connected
     # to an environment.
     #
     # For more information, see [Environment account connections][1] in the
@@ -3406,9 +3469,11 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Tag a resource. For more information, see *Proton resources and
-    # tagging* in the [Proton Administrator Guide][1] or [Proton User
-    # Guide][2].
+    # Tag a resource. A tag is a key-value pair of metadata that you
+    # associate with an Proton resource.
+    #
+    # For more information, see *Proton resources and tagging* in the
+    # [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -3416,11 +3481,11 @@ module Aws::Proton
     # [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that the resource tag
-    #   is applied to.
+    #   The Amazon Resource Name (ARN) of the Proton resource to apply
+    #   customer tags to.
     #
     # @option params [required, Array<Types::Tag>] :tags
-    #   An array of resource tags to apply to a resource.
+    #   A list of customer tags to apply to the Proton resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3445,9 +3510,11 @@ module Aws::Proton
       req.send_request(options)
     end
 
-    # Remove a tag from a resource. For more information, see *Proton
-    # resources and tagging* in the [Proton Administrator Guide][1] or
-    # [Proton User Guide][2].
+    # Remove a customer tag from a resource. A tag is a key-value pair of
+    # metadata associated with an Proton resource.
+    #
+    # For more information, see *Proton resources and tagging* in the
+    # [Proton Administrator Guide][1] or [Proton User Guide][2].
     #
     #
     #
@@ -3455,12 +3522,12 @@ module Aws::Proton
     # [2]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
     #
     # @option params [required, String] :resource_arn
-    #   The Amazon Resource Name (ARN) of the resource that the tag is to be
-    #   removed from.
+    #   The Amazon Resource Name (ARN) of the resource to remove customer tags
+    #   from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   An array of tag keys indicating the resource tags to be removed from
-    #   the resource.
+    #   A list of customer tag keys that indicate the customer tags to be
+    #   removed from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3483,28 +3550,15 @@ module Aws::Proton
     # Update the Proton service pipeline role or repository settings.
     #
     # @option params [Types::RepositoryBranchInput] :pipeline_provisioning_repository
-    #   The repository that you provide with pull request provisioning.
-    #
-    #   Provisioning by pull request is currently in feature preview and is
-    #   only usable with Terraform based Proton Templates. To learn more about
-    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
-    #   and Previews.
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms
+    #   A repository for pipeline provisioning. Specify it if you have
+    #   environments configured for self-managed provisioning with services
+    #   that include pipelines.
     #
     # @option params [String] :pipeline_service_role_arn
-    #   The Amazon Resource Name (ARN) of the Proton pipeline service role.
-    #
-    #   Provisioning by pull request is currently in feature preview and is
-    #   only usable with Terraform based Proton Templates. To learn more about
-    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
-    #   and Previews.
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms
+    #   The Amazon Resource Name (ARN) of the service role you want to use for
+    #   provisioning pipelines. Assumed by Proton for Amazon Web
+    #   Services-managed provisioning, and by customer-owned automation for
+    #   self-managed provisioning.
     #
     # @return [Types::UpdateAccountSettingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3545,29 +3599,33 @@ module Aws::Proton
     # `provisioningRepository` parameter to update or connect to an
     # environment account connection.
     #
-    # You can only update to a new environment account connection if it was
-    # created in the same environment account that the current environment
-    # account connection was created in and is associated with the current
-    # environment.
+    # You can only update to a new environment account connection if that
+    # connection was created in the same environment account that the
+    # current environment account connection was created in. The account
+    # connection must also be associated with the current environment.
     #
     # If the environment *isn't* associated with an environment account
     # connection, *don't* update or include the
-    # `environmentAccountConnectionId` parameter to update or connect to an
-    # environment account connection.
+    # `environmentAccountConnectionId` parameter. You *can't* update or
+    # connect the environment to an environment account connection if it
+    # *isn't* already associated with an environment connection.
     #
     # You can update either the `environmentAccountConnectionId` or
     # `protonServiceRoleArn` parameter and value. You can’t update both.
     #
-    # If the environment was provisioned with pull request provisioning,
-    # include the `provisioningRepository` parameter and omit the
+    # If the environment was configured for Amazon Web Services-managed
+    # provisioning, omit the `provisioningRepository` parameter.
+    #
+    # If the environment was configured for self-managed provisioning,
+    # specify the `provisioningRepository` parameter and omit the
     # `protonServiceRoleArn` and `environmentAccountConnectionId`
     # parameters.
     #
-    # If the environment wasn't provisioned with pull request provisioning,
-    # omit the `provisioningRepository` parameter.
+    # For more information, see [Environments][1] and [Provisioning
+    # methods][2] in the *Proton Administrator Guide*.
     #
-    # There are four modes for updating an environment as described in the
-    # following. The `deploymentType` field defines the mode.
+    # There are four modes for updating an environment. The `deploymentType`
+    # field defines the mode.
     #
     #
     #
@@ -3602,11 +3660,16 @@ module Aws::Proton
     #   published, recommended (latest) major and minor version of the
     #   current template, by default. You can also specify a different major
     #   version that's higher than the major version in use and a minor
-    #   version (optional).
+    #   version.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html
+    # [2]: https://docs.aws.amazon.com/proton/latest/adminguide/ag-works-prov-methods.html
     #
     # @option params [required, String] :deployment_type
-    #   There are four modes for updating an environment as described in the
-    #   following. The `deploymentType` field defines the mode.
+    #   There are four modes for updating an environment. The `deploymentType`
+    #   field defines the mode.
     #
     #
     #
@@ -3621,7 +3684,7 @@ module Aws::Proton
     #
     #     In this mode, the environment is deployed and updated with the new
     #     spec that you provide. Only requested parameters are updated.
-    #     *Don’t* include minor or major version parameters when you use this
+    #     *Don’t* include major or minor version parameters when you use this
     #     `deployment-type`.
     #
     #
@@ -3662,16 +3725,8 @@ module Aws::Proton
     #   Proton to make API calls to other services your behalf.
     #
     # @option params [Types::RepositoryBranchInput] :provisioning_repository
-    #   The repository that you provide with pull request provisioning.
-    #
-    #   Provisioning by pull request is currently in feature preview and is
-    #   only usable with Terraform based Proton Templates. To learn more about
-    #   [Amazon Web Services Feature Preview terms][1], see section 2 on Beta
-    #   and Previews.
-    #
-    #
-    #
-    #   [1]: https://aws.amazon.com/service-terms
+    #   The infrastructure repository that you use to host your rendered
+    #   infrastructure templates for self-managed provisioning.
     #
     # @option params [String] :spec
     #   The formatted specification that defines the update.
@@ -3750,7 +3805,7 @@ module Aws::Proton
     #   The ID of the environment account connection to update.
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM service role that is
+    #   The Amazon Resource Name (ARN) of the IAM service role that's
     #   associated with the environment account connection to update.
     #
     # @return [Types::UpdateEnvironmentAccountConnectionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3964,8 +4019,8 @@ module Aws::Proton
 
     # Update a service instance.
     #
-    # There are four modes for updating a service instance as described in
-    # the following. The `deploymentType` field defines the mode.
+    # There are four modes for updating a service instance. The
+    # `deploymentType` field defines the mode.
     #
     #
     #
@@ -3999,14 +4054,14 @@ module Aws::Proton
     #   In this mode, the service instance is deployed and updated with the
     #   published, recommended (latest) major and minor version of the
     #   current template, by default. You can also specify a different major
-    #   version that is higher than the major version in use and a minor
-    #   version (optional).
+    #   version that's higher than the major version in use and a minor
+    #   version.
     #
     # @option params [required, String] :deployment_type
     #   The deployment type.
     #
-    #   There are four modes for updating a service instance as described in
-    #   the following. The `deploymentType` field defines the mode.
+    #   There are four modes for updating a service instance. The
+    #   `deploymentType` field defines the mode.
     #
     #
     #
@@ -4021,7 +4076,7 @@ module Aws::Proton
     #
     #     In this mode, the service instance is deployed and updated with the
     #     new spec that you provide. Only requested parameters are updated.
-    #     *Don’t* include minor or major version parameters when you use this
+    #     *Don’t* include major or minor version parameters when you use this
     #     `deployment-type`.
     #
     #
@@ -4039,9 +4094,9 @@ module Aws::Proton
     #
     #     In this mode, the service instance is deployed and updated with the
     #     published, recommended (latest) major and minor version of the
-    #     current template, by default. You can also specify a different major
-    #     version that is higher than the major version in use and a minor
-    #     version (optional).
+    #     current template, by default. You can specify a different major
+    #     version that's higher than the major version in use and a minor
+    #     version.
     #
     # @option params [required, String] :name
     #   The name of the service instance to update.
@@ -4100,8 +4155,8 @@ module Aws::Proton
 
     # Update the service pipeline.
     #
-    # There are four modes for updating a service pipeline as described in
-    # the following. The `deploymentType` field defines the mode.
+    # There are four modes for updating a service pipeline. The
+    # `deploymentType` field defines the mode.
     #
     #
     #
@@ -4116,7 +4171,7 @@ module Aws::Proton
     #
     #   In this mode, the service pipeline is deployed and updated with the
     #   new spec that you provide. Only requested parameters are updated.
-    #   *Don’t* include minor or major version parameters when you use this
+    #   *Don’t* include major or minor version parameters when you use this
     #   `deployment-type`.
     #
     #
@@ -4125,7 +4180,7 @@ module Aws::Proton
     #
     #   In this mode, the service pipeline is deployed and updated with the
     #   published, recommended (latest) minor version of the current major
-    #   version in use, by default. You can also specify a different minor
+    #   version in use, by default. You can specify a different minor
     #   version of the current major version in use.
     #
     #
@@ -4134,15 +4189,15 @@ module Aws::Proton
     #
     #   In this mode, the service pipeline is deployed and updated with the
     #   published, recommended (latest) major and minor version of the
-    #   current template by default. You can also specify a different major
-    #   version that is higher than the major version in use and a minor
-    #   version (optional).
+    #   current template by default. You can specify a different major
+    #   version that's higher than the major version in use and a minor
+    #   version.
     #
     # @option params [required, String] :deployment_type
     #   The deployment type.
     #
-    #   There are four modes for updating a service pipeline as described in
-    #   the following. The `deploymentType` field defines the mode.
+    #   There are four modes for updating a service pipeline. The
+    #   `deploymentType` field defines the mode.
     #
     #
     #
@@ -4157,7 +4212,7 @@ module Aws::Proton
     #
     #     In this mode, the service pipeline is deployed and updated with the
     #     new spec that you provide. Only requested parameters are updated.
-    #     *Don’t* include minor or major version parameters when you use this
+    #     *Don’t* include major or minor version parameters when you use this
     #     `deployment-type`.
     #
     #
@@ -4166,7 +4221,7 @@ module Aws::Proton
     #
     #     In this mode, the service pipeline is deployed and updated with the
     #     published, recommended (latest) minor version of the current major
-    #     version in use, by default. You can also specify a different minor
+    #     version in use, by default. You can specify a different minor
     #     version of the current major version in use.
     #
     #
@@ -4175,9 +4230,9 @@ module Aws::Proton
     #
     #     In this mode, the service pipeline is deployed and updated with the
     #     published, recommended (latest) major and minor version of the
-    #     current template, by default. You can also specify a different major
-    #     version that is higher than the major version in use and a minor
-    #     version (optional).
+    #     current template, by default. You can specify a different major
+    #     version that's higher than the major version in use and a minor
+    #     version.
     #
     # @option params [required, String] :service_name
     #   The name of the service to that the pipeline is associated with.
@@ -4235,7 +4290,7 @@ module Aws::Proton
     #   A description of the service template update.
     #
     # @option params [String] :display_name
-    #   The name of the service template to update as displayed in the
+    #   The name of the service template to update that's displayed in the
     #   developer interface.
     #
     # @option params [required, String] :name
@@ -4350,7 +4405,7 @@ module Aws::Proton
     #   The repository branch.
     #
     # @option params [required, String] :repository_name
-    #   The name of the repository, for example `myrepos/myrepo`.
+    #   The name of the repository (for example, `myrepos/myrepo`).
     #
     # @option params [required, String] :repository_provider
     #   The repository provider.
@@ -4411,7 +4466,7 @@ module Aws::Proton
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-proton'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

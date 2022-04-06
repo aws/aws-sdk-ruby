@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-04-04)
+------------------
+
+* Feature - SDK release to support tagging for AWS Proton Repository resource
+
 1.14.0 (2022-02-24)
 ------------------
 

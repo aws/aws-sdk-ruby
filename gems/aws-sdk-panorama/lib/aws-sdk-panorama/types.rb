@@ -845,6 +845,10 @@ module Aws::Panorama
     #   The device's ARN.
     #   @return [String]
     #
+    # @!attribute [rw] brand
+    #   The device's maker.
+    #   @return [String]
+    #
     # @!attribute [rw] created_time
     #   When the device was created.
     #   @return [Time]
@@ -910,6 +914,7 @@ module Aws::Panorama
     class DescribeDeviceResponse < Struct.new(
       :alternate_softwares,
       :arn,
+      :brand,
       :created_time,
       :current_networking_status,
       :current_software,
@@ -1360,6 +1365,10 @@ module Aws::Panorama
 
     # A device.
     #
+    # @!attribute [rw] brand
+    #   The device's maker.
+    #   @return [String]
+    #
     # @!attribute [rw] created_time
     #   When the device was created.
     #   @return [Time]
@@ -1387,6 +1396,7 @@ module Aws::Panorama
     # @see http://docs.aws.amazon.com/goto/WebAPI/panorama-2019-07-24/Device AWS API Documentation
     #
     class Device < Struct.new(
+      :brand,
       :created_time,
       :device_id,
       :last_updated_time,
@@ -1679,7 +1689,7 @@ module Aws::Panorama
     #         device_id: "DeviceId",
     #         max_results: 1,
     #         next_token: "NextToken",
-    #         status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL
+    #         status_filter: "DEPLOYMENT_SUCCEEDED", # accepts DEPLOYMENT_SUCCEEDED, DEPLOYMENT_ERROR, REMOVAL_SUCCEEDED, REMOVAL_FAILED, PROCESSING_DEPLOYMENT, PROCESSING_REMOVAL, DEPLOYMENT_FAILED
     #       }
     #
     # @!attribute [rw] device_id

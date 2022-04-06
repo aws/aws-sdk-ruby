@@ -973,6 +973,40 @@ module Aws::WorkSpaces
       req.send_request(options)
     end
 
+    # Deletes customized client branding. Client branding allows you to
+    # customize your WorkSpace's client login portal. You can tailor your
+    # login portal company logo, the support email address, support link,
+    # link to reset password, and a custom message for users trying to sign
+    # in.
+    #
+    # After you delete your customized client branding, your login portal
+    # reverts to the default client branding.
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier of the WorkSpace for which you want to delete
+    #   client branding.
+    #
+    # @option params [required, Array<String>] :platforms
+    #   The device type for which you want to delete client branding.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_client_branding({
+    #     resource_id: "DirectoryId", # required
+    #     platforms: ["DeviceTypeWindows"], # required, accepts DeviceTypeWindows, DeviceTypeOsx, DeviceTypeAndroid, DeviceTypeIos, DeviceTypeLinux, DeviceTypeWeb
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DeleteClientBranding AWS API Documentation
+    #
+    # @overload delete_client_branding(params = {})
+    # @param [Hash] params ({})
+    def delete_client_branding(params = {}, options = {})
+      req = build_request(:delete_client_branding, params)
+      req.send_request(options)
+    end
+
     # Deletes a client-add-in for Amazon Connect that is configured within a
     # directory.
     #
@@ -1252,6 +1286,86 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def describe_account_modifications(params = {}, options = {})
       req = build_request(:describe_account_modifications, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified client branding. Client branding allows you to
+    # customize the log in page of various device types for your users. You
+    # can add your company logo, the support email address, support link,
+    # link to reset password, and a custom message for users trying to sign
+    # in.
+    #
+    # <note markdown="1"> Only device types that have branding information configured will be
+    # shown in the response.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier of the WorkSpace for which you want to view
+    #   client branding information.
+    #
+    # @return [Types::DescribeClientBrandingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeClientBrandingResult#device_type_windows #device_type_windows} => Types::DefaultClientBrandingAttributes
+    #   * {Types::DescribeClientBrandingResult#device_type_osx #device_type_osx} => Types::DefaultClientBrandingAttributes
+    #   * {Types::DescribeClientBrandingResult#device_type_android #device_type_android} => Types::DefaultClientBrandingAttributes
+    #   * {Types::DescribeClientBrandingResult#device_type_ios #device_type_ios} => Types::IosClientBrandingAttributes
+    #   * {Types::DescribeClientBrandingResult#device_type_linux #device_type_linux} => Types::DefaultClientBrandingAttributes
+    #   * {Types::DescribeClientBrandingResult#device_type_web #device_type_web} => Types::DefaultClientBrandingAttributes
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_client_branding({
+    #     resource_id: "DirectoryId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_type_windows.logo_url #=> String
+    #   resp.device_type_windows.support_email #=> String
+    #   resp.device_type_windows.support_link #=> String
+    #   resp.device_type_windows.forgot_password_link #=> String
+    #   resp.device_type_windows.login_message #=> Hash
+    #   resp.device_type_windows.login_message["ClientLocale"] #=> String
+    #   resp.device_type_osx.logo_url #=> String
+    #   resp.device_type_osx.support_email #=> String
+    #   resp.device_type_osx.support_link #=> String
+    #   resp.device_type_osx.forgot_password_link #=> String
+    #   resp.device_type_osx.login_message #=> Hash
+    #   resp.device_type_osx.login_message["ClientLocale"] #=> String
+    #   resp.device_type_android.logo_url #=> String
+    #   resp.device_type_android.support_email #=> String
+    #   resp.device_type_android.support_link #=> String
+    #   resp.device_type_android.forgot_password_link #=> String
+    #   resp.device_type_android.login_message #=> Hash
+    #   resp.device_type_android.login_message["ClientLocale"] #=> String
+    #   resp.device_type_ios.logo_url #=> String
+    #   resp.device_type_ios.logo_2x_url #=> String
+    #   resp.device_type_ios.logo_3x_url #=> String
+    #   resp.device_type_ios.support_email #=> String
+    #   resp.device_type_ios.support_link #=> String
+    #   resp.device_type_ios.forgot_password_link #=> String
+    #   resp.device_type_ios.login_message #=> Hash
+    #   resp.device_type_ios.login_message["ClientLocale"] #=> String
+    #   resp.device_type_linux.logo_url #=> String
+    #   resp.device_type_linux.support_email #=> String
+    #   resp.device_type_linux.support_link #=> String
+    #   resp.device_type_linux.forgot_password_link #=> String
+    #   resp.device_type_linux.login_message #=> Hash
+    #   resp.device_type_linux.login_message["ClientLocale"] #=> String
+    #   resp.device_type_web.logo_url #=> String
+    #   resp.device_type_web.support_email #=> String
+    #   resp.device_type_web.support_link #=> String
+    #   resp.device_type_web.forgot_password_link #=> String
+    #   resp.device_type_web.login_message #=> Hash
+    #   resp.device_type_web.login_message["ClientLocale"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/DescribeClientBranding AWS API Documentation
+    #
+    # @overload describe_client_branding(params = {})
+    # @param [Hash] params ({})
+    def describe_client_branding(params = {}, options = {})
+      req = build_request(:describe_client_branding, params)
       req.send_request(options)
     end
 
@@ -1972,6 +2086,173 @@ module Aws::WorkSpaces
     # @param [Hash] params ({})
     def disassociate_ip_groups(params = {}, options = {})
       req = build_request(:disassociate_ip_groups, params)
+      req.send_request(options)
+    end
+
+    # Imports client branding. Client branding allows you to customize your
+    # WorkSpace's client login portal. You can tailor your login portal
+    # company logo, the support email address, support link, link to reset
+    # password, and a custom message for users trying to sign in.
+    #
+    # After you import client branding, the default branding experience for
+    # the specified platform type is replaced with the imported experience
+    #
+    # <note markdown="1"> * You must specify at least one platform type when importing client
+    #   branding.
+    #
+    # * You can import up to 6 MB of data with each request. If your request
+    #   exceeds this limit, you can import client branding for different
+    #   platform types using separate requests.
+    #
+    # * In each platform type, the `SupportEmail` and `SupportLink`
+    #   parameters are mutually exclusive. You can specify only one
+    #   parameter for each platform type, but not both.
+    #
+    # * Imported data can take up to a minute to appear in the WorkSpaces
+    #   client.
+    #
+    #  </note>
+    #
+    # @option params [required, String] :resource_id
+    #   The directory identifier of the WorkSpace for which you want to import
+    #   client branding.
+    #
+    # @option params [Types::DefaultImportClientBrandingAttributes] :device_type_windows
+    #   The branding information to import for Windows devices.
+    #
+    # @option params [Types::DefaultImportClientBrandingAttributes] :device_type_osx
+    #   The branding information to import for macOS devices.
+    #
+    # @option params [Types::DefaultImportClientBrandingAttributes] :device_type_android
+    #   The branding information to import for Android devices.
+    #
+    # @option params [Types::IosImportClientBrandingAttributes] :device_type_ios
+    #   The branding information to import for iOS devices.
+    #
+    # @option params [Types::DefaultImportClientBrandingAttributes] :device_type_linux
+    #   The branding information to import for Linux devices.
+    #
+    # @option params [Types::DefaultImportClientBrandingAttributes] :device_type_web
+    #   The branding information to import for web access.
+    #
+    # @return [Types::ImportClientBrandingResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ImportClientBrandingResult#device_type_windows #device_type_windows} => Types::DefaultClientBrandingAttributes
+    #   * {Types::ImportClientBrandingResult#device_type_osx #device_type_osx} => Types::DefaultClientBrandingAttributes
+    #   * {Types::ImportClientBrandingResult#device_type_android #device_type_android} => Types::DefaultClientBrandingAttributes
+    #   * {Types::ImportClientBrandingResult#device_type_ios #device_type_ios} => Types::IosClientBrandingAttributes
+    #   * {Types::ImportClientBrandingResult#device_type_linux #device_type_linux} => Types::DefaultClientBrandingAttributes
+    #   * {Types::ImportClientBrandingResult#device_type_web #device_type_web} => Types::DefaultClientBrandingAttributes
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.import_client_branding({
+    #     resource_id: "DirectoryId", # required
+    #     device_type_windows: {
+    #       logo: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #     device_type_osx: {
+    #       logo: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #     device_type_android: {
+    #       logo: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #     device_type_ios: {
+    #       logo: "data",
+    #       logo_2x: "data",
+    #       logo_3x: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #     device_type_linux: {
+    #       logo: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #     device_type_web: {
+    #       logo: "data",
+    #       support_email: "ClientEmail",
+    #       support_link: "ClientUrl",
+    #       forgot_password_link: "ClientUrl",
+    #       login_message: {
+    #         "ClientLocale" => "ClientLoginMessage",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.device_type_windows.logo_url #=> String
+    #   resp.device_type_windows.support_email #=> String
+    #   resp.device_type_windows.support_link #=> String
+    #   resp.device_type_windows.forgot_password_link #=> String
+    #   resp.device_type_windows.login_message #=> Hash
+    #   resp.device_type_windows.login_message["ClientLocale"] #=> String
+    #   resp.device_type_osx.logo_url #=> String
+    #   resp.device_type_osx.support_email #=> String
+    #   resp.device_type_osx.support_link #=> String
+    #   resp.device_type_osx.forgot_password_link #=> String
+    #   resp.device_type_osx.login_message #=> Hash
+    #   resp.device_type_osx.login_message["ClientLocale"] #=> String
+    #   resp.device_type_android.logo_url #=> String
+    #   resp.device_type_android.support_email #=> String
+    #   resp.device_type_android.support_link #=> String
+    #   resp.device_type_android.forgot_password_link #=> String
+    #   resp.device_type_android.login_message #=> Hash
+    #   resp.device_type_android.login_message["ClientLocale"] #=> String
+    #   resp.device_type_ios.logo_url #=> String
+    #   resp.device_type_ios.logo_2x_url #=> String
+    #   resp.device_type_ios.logo_3x_url #=> String
+    #   resp.device_type_ios.support_email #=> String
+    #   resp.device_type_ios.support_link #=> String
+    #   resp.device_type_ios.forgot_password_link #=> String
+    #   resp.device_type_ios.login_message #=> Hash
+    #   resp.device_type_ios.login_message["ClientLocale"] #=> String
+    #   resp.device_type_linux.logo_url #=> String
+    #   resp.device_type_linux.support_email #=> String
+    #   resp.device_type_linux.support_link #=> String
+    #   resp.device_type_linux.forgot_password_link #=> String
+    #   resp.device_type_linux.login_message #=> Hash
+    #   resp.device_type_linux.login_message["ClientLocale"] #=> String
+    #   resp.device_type_web.logo_url #=> String
+    #   resp.device_type_web.support_email #=> String
+    #   resp.device_type_web.support_link #=> String
+    #   resp.device_type_web.forgot_password_link #=> String
+    #   resp.device_type_web.login_message #=> Hash
+    #   resp.device_type_web.login_message["ClientLocale"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportClientBranding AWS API Documentation
+    #
+    # @overload import_client_branding(params = {})
+    # @param [Hash] params ({})
+    def import_client_branding(params = {}, options = {})
+      req = build_request(:import_client_branding, params)
       req.send_request(options)
     end
 
@@ -3015,7 +3296,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

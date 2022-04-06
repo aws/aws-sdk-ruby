@@ -450,7 +450,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.create_dataset({
     #     name: "DatasetName", # required
-    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -1303,7 +1303,7 @@ module Aws::GlueDataBrew
     #   resp.created_by #=> String
     #   resp.create_date #=> Time
     #   resp.name #=> String
-    #   resp.format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
+    #   resp.format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL", "ORC"
     #   resp.format_options.json.multi_line #=> Boolean
     #   resp.format_options.excel.sheet_names #=> Array
     #   resp.format_options.excel.sheet_names[0] #=> String
@@ -1867,7 +1867,7 @@ module Aws::GlueDataBrew
     #   resp.datasets[0].created_by #=> String
     #   resp.datasets[0].create_date #=> Time
     #   resp.datasets[0].name #=> String
-    #   resp.datasets[0].format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL"
+    #   resp.datasets[0].format #=> String, one of "CSV", "JSON", "PARQUET", "EXCEL", "ORC"
     #   resp.datasets[0].format_options.json.multi_line #=> Boolean
     #   resp.datasets[0].format_options.excel.sheet_names #=> Array
     #   resp.datasets[0].format_options.excel.sheet_names[0] #=> String
@@ -2737,7 +2737,7 @@ module Aws::GlueDataBrew
     #
     #   resp = client.update_dataset({
     #     name: "DatasetName", # required
-    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #     format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #     format_options: {
     #       json: {
     #         multi_line: false,
@@ -3317,7 +3317,7 @@ module Aws::GlueDataBrew
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-gluedatabrew'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

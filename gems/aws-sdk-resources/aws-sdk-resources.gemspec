@@ -239,6 +239,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-pinpoint', '~> 1')
   spec.add_dependency('aws-sdk-pinpointemail', '~> 1')
   spec.add_dependency('aws-sdk-pinpointsmsvoice', '~> 1')
+  spec.add_dependency('aws-sdk-pinpointsmsvoicev2', '~> 1')
   spec.add_dependency('aws-sdk-polly', '~> 1')
   spec.add_dependency('aws-sdk-pricing', '~> 1')
   spec.add_dependency('aws-sdk-prometheusservice', '~> 1')

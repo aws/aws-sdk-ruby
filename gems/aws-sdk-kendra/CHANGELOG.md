@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.48.0 (2022-04-06)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for Box. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html
+
 1.47.0 (2022-03-14)
 ------------------
 

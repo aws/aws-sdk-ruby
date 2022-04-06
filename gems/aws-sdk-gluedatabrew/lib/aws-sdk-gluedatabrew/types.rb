@@ -233,7 +233,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         name: "DatasetName", # required
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #         format_options: {
     #           json: {
     #             multi_line: false,
@@ -1402,7 +1402,7 @@ module Aws::GlueDataBrew
       include Aws::Structure
     end
 
-    # Represents a dataset paramater that defines type and conditions for a
+    # Represents a dataset parameter that defines type and conditions for a
     # parameter in the Amazon S3 path of the dataset.
     #
     # @note When making an API call, you may pass DatasetParameter
@@ -2607,7 +2607,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] order
     #   A criteria to use for Amazon S3 files sorting before their
     #   selection. By default uses DESCENDING order, i.e. most recent files
-    #   are selected first. Anotherpossible value is ASCENDING.
+    #   are selected first. Another possible value is ASCENDING.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/databrew-2017-07-25/FilesLimit AWS API Documentation
@@ -4228,7 +4228,7 @@ module Aws::GlueDataBrew
     #   value or a column name. These values are defined in the
     #   SubstitutionMap. If a CheckExpression starts with a column
     #   reference, then ColumnSelectors in the rule should be null. If
-    #   ColumnSelectors has been defined, then there should be no columnn
+    #   ColumnSelectors has been defined, then there should be no column
     #   reference in the left side of a condition, for example, `is_between
     #   :val1 and :val2`.
     #
@@ -4887,7 +4887,7 @@ module Aws::GlueDataBrew
     #
     #       {
     #         name: "DatasetName", # required
-    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL
+    #         format: "CSV", # accepts CSV, JSON, PARQUET, EXCEL, ORC
     #         format_options: {
     #           json: {
     #             multi_line: false,

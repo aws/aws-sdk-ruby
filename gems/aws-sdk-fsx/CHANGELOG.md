@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-04-05)
+------------------
+
+* Feature - Provide customers more visibility into file system status by adding new "Misconfigured Unavailable" status for Amazon FSx for Windows File Server.
+
 1.53.0 (2022-03-30)
 ------------------
 

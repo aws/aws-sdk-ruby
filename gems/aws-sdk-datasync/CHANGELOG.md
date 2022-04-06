@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-04-05)
+------------------
+
+* Feature - AWS DataSync now supports Amazon FSx for OpenZFS locations.
+
 1.44.0 (2022-02-24)
 ------------------
 

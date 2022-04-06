@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2022-04-06)
+------------------
+
+* Feature - Added Brand field to device listings.
+
 1.6.0 (2022-02-25)
 ------------------
 

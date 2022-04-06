@@ -10,8 +10,7 @@
 module Aws::Route53RecoveryCluster
   module Types
 
-    # You don't have sufficient permissions to query the routing control
-    # state.
+    # You don't have sufficient permissions to perform this action.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -69,8 +68,8 @@ module Aws::Route53RecoveryCluster
     #       }
     #
     # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Number (ARN) for the routing control that you
-    #   want to get the state for.
+    #   The Amazon Resource Name (ARN) for the routing control that you want
+    #   to get the state for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/GetRoutingControlStateRequest AWS API Documentation
@@ -82,18 +81,23 @@ module Aws::Route53RecoveryCluster
     end
 
     # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Number (ARN) of the response.
+    #   The Amazon Resource Name (ARN) of the response.
     #   @return [String]
     #
     # @!attribute [rw] routing_control_state
     #   The state of the routing control.
     #   @return [String]
     #
+    # @!attribute [rw] routing_control_name
+    #   The routing control name.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/GetRoutingControlStateResponse AWS API Documentation
     #
     class GetRoutingControlStateResponse < Struct.new(
       :routing_control_arn,
-      :routing_control_state)
+      :routing_control_state,
+      :routing_control_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -116,7 +120,60 @@ module Aws::Route53RecoveryCluster
       include Aws::Structure
     end
 
-    # The request references a routing control that was not found.
+    # @note When making an API call, you may pass ListRoutingControlsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         control_panel_arn: "Arn",
+    #         next_token: "PageToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] control_panel_arn
+    #   The Amazon Resource Name (ARN) of the control panel of the routing
+    #   controls to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The number of routing controls objects that you want to return with
+    #   this call. The default value is 500.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/ListRoutingControlsRequest AWS API Documentation
+    #
+    class ListRoutingControlsRequest < Struct.new(
+      :control_panel_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] routing_controls
+    #   The list of routing controls.
+    #   @return [Array<Types::RoutingControl>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. You receive this token from a
+    #   previous call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/ListRoutingControlsResponse AWS API Documentation
+    #
+    class ListRoutingControlsResponse < Struct.new(
+      :routing_controls,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request references a routing control or control panel that was not
+    # found.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -135,6 +192,79 @@ module Aws::Route53RecoveryCluster
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A routing control, which is a simple on/off switch that you can use to
+    # route traffic to cells. When a routing control state is On, traffic
+    # flows to a cell. When the state is Off, traffic does not flow.
+    #
+    # @!attribute [rw] control_panel_arn
+    #   The Amazon Resource Name (ARN) of the control panel where the
+    #   routing control is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] control_panel_name
+    #   The name of the control panel where the routing control is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_control_arn
+    #   The Amazon Resource Name (ARN) of the routing control.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_control_name
+    #   The name of the routing control.
+    #   @return [String]
+    #
+    # @!attribute [rw] routing_control_state
+    #   The current state of the routing control. When a routing control
+    #   state is On, traffic flows to a cell. When the state is Off, traffic
+    #   does not flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/RoutingControl AWS API Documentation
+    #
+    class RoutingControl < Struct.new(
+      :control_panel_arn,
+      :control_panel_name,
+      :routing_control_arn,
+      :routing_control_name,
+      :routing_control_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request can't update that many routing control states at the same
+    # time. Try again with fewer routing control states.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The resource identifier of the limit that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the limit that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] limit_code
+    #   The code of the limit that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service code of the limit that was exceeded.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-recovery-cluster-2019-12-02/ServiceLimitExceededException AWS API Documentation
+    #
+    class ServiceLimitExceededException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type,
+      :limit_code,
+      :service_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -168,7 +298,7 @@ module Aws::Route53RecoveryCluster
     #       }
     #
     # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Number (ARN) for a routing control state entry.
+    #   The Amazon Resource Name (ARN) for a routing control state entry.
     #   @return [String]
     #
     # @!attribute [rw] routing_control_state
@@ -194,8 +324,8 @@ module Aws::Route53RecoveryCluster
     #       }
     #
     # @!attribute [rw] routing_control_arn
-    #   The Amazon Resource Number (ARN) for the routing control that you
-    #   want to update the state for.
+    #   The Amazon Resource Name (ARN) for the routing control that you want
+    #   to update the state for.
     #   @return [String]
     #
     # @!attribute [rw] routing_control_state
@@ -204,10 +334,10 @@ module Aws::Route53RecoveryCluster
     #   @return [String]
     #
     # @!attribute [rw] safety_rules_to_override
-    #   The Amazon Resource Numbers (ARNs) for the safety rules that you
-    #   want to override when you're updating the state of a routing
-    #   control. You can override one safety rule or multiple safety rules
-    #   by including one or more ARNs, separated by commas.
+    #   The Amazon Resource Names (ARNs) for the safety rules that you want
+    #   to override when you're updating the state of a routing control.
+    #   You can override one safety rule or multiple safety rules by
+    #   including one or more ARNs, separated by commas.
     #
     #   For more information, see [ Override safety rules to reroute
     #   traffic][1] in the Amazon Route 53 Application Recovery Controller
@@ -250,10 +380,10 @@ module Aws::Route53RecoveryCluster
     #   @return [Array<Types::UpdateRoutingControlStateEntry>]
     #
     # @!attribute [rw] safety_rules_to_override
-    #   The Amazon Resource Numbers (ARNs) for the safety rules that you
-    #   want to override when you're updating routing control states. You
-    #   can override one safety rule or multiple safety rules by including
-    #   one or more ARNs, separated by commas.
+    #   The Amazon Resource Names (ARNs) for the safety rules that you want
+    #   to override when you're updating routing control states. You can
+    #   override one safety rule or multiple safety rules by including one
+    #   or more ARNs, separated by commas.
     #
     #   For more information, see [ Override safety rules to reroute
     #   traffic][1] in the Amazon Route 53 Application Recovery Controller

@@ -925,7 +925,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1280,6 +1280,48 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       box_configuration: {
+    #         enterprise_id: "EnterpriseId", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         crawl_comments: false,
+    #         crawl_tasks: false,
+    #         crawl_web_links: false,
+    #         file_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         task_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -1573,14 +1615,14 @@ module Aws::Kendra
     #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
     #
     # @option params [required, String] :role_arn
-    #   An Identity and Access Management(IAM) role that gives Amazon Kendra
+    #   An Identity and Access Management (IAM) role that gives Amazon Kendra
     #   permissions to access your Amazon CloudWatch logs and metrics. This is
-    #   also the role used when you use the `BatchPutDocument` API to index
-    #   documents from an Amazon S3 bucket.
+    #   also the role you use when you call the `BatchPutDocument` API to
+    #   index documents from an Amazon S3 bucket.
     #
     # @option params [Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The identifier of the KMScustomer managed key (CMK) to use to encrypt
-    #   data indexed by Amazon Kendra. Amazon Kendra doesn't support
+    #   The identifier of the KMS customer managed key (CMK) that's used to
+    #   encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
     #   asymmetric CMKs.
     #
     # @option params [String] :description
@@ -2147,7 +2189,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2406,6 +2448,36 @@ module Aws::Kendra
     #   resp.configuration.slack_configuration.field_mappings[0].data_source_field_name #=> String
     #   resp.configuration.slack_configuration.field_mappings[0].date_field_format #=> String
     #   resp.configuration.slack_configuration.field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.enterprise_id #=> String
+    #   resp.configuration.box_configuration.secret_arn #=> String
+    #   resp.configuration.box_configuration.use_change_log #=> Boolean
+    #   resp.configuration.box_configuration.crawl_comments #=> Boolean
+    #   resp.configuration.box_configuration.crawl_tasks #=> Boolean
+    #   resp.configuration.box_configuration.crawl_web_links #=> Boolean
+    #   resp.configuration.box_configuration.file_field_mappings #=> Array
+    #   resp.configuration.box_configuration.file_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.file_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.file_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.task_field_mappings #=> Array
+    #   resp.configuration.box_configuration.task_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.task_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.task_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings #=> Array
+    #   resp.configuration.box_configuration.comment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.comment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings #=> Array
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.box_configuration.web_link_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.box_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.box_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.box_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.box_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.box_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.box_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.box_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.box_configuration.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -2581,10 +2653,10 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Describes an existing Amazon Kendra index
+    # Describes an existing Amazon Kendra index.
     #
     # @option params [required, String] :id
-    #   The name of the index to describe.
+    #   The identifier of the index to describe.
     #
     # @return [Types::DescribeIndexResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3240,7 +3312,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -3532,7 +3604,7 @@ module Aws::Kendra
       req.send_request(options)
     end
 
-    # Lists the Amazon Kendra indexes that you have created.
+    # Lists the Amazon Kendra indexes that you created.
     #
     # @option params [String] :next_token
     #   If the previous response was incomplete (because there is more data to
@@ -4738,6 +4810,48 @@ module Aws::Kendra
     #           },
     #         ],
     #       },
+    #       box_configuration: {
+    #         enterprise_id: "EnterpriseId", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         crawl_comments: false,
+    #         crawl_tasks: false,
+    #         crawl_web_links: false,
+    #         file_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         task_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -4894,12 +5008,13 @@ module Aws::Kendra
     #   The document metadata you want to update.
     #
     # @option params [Types::CapacityUnitsConfiguration] :capacity_units
-    #   Sets the number of additional storage and query capacity units that
-    #   should be used by the index. You can change the capacity of the index
-    #   up to 5 times per day.
+    #   Sets the number of additional document storage and query capacity
+    #   units that should be used by the index. You can change the capacity of
+    #   the index up to 5 times per day, or make 5 API calls.
     #
     #   If you are using extra storage units, you can't reduce the storage
-    #   capacity below that required to meet the storage needs for your index.
+    #   capacity below what is required to meet the storage needs for your
+    #   index.
     #
     # @option params [Array<Types::UserTokenConfiguration>] :user_token_configurations
     #   The user token configuration.
@@ -5207,7 +5322,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.47.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
