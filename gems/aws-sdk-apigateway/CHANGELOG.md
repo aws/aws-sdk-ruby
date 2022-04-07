@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2022-04-07)
+------------------
+
+* Feature - ApiGateway CLI command get-usage now includes usagePlanId, startDate, and endDate fields in the output to match documentation.
+
 1.75.0 (2022-02-24)
 ------------------
 

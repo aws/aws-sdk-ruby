@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.40.0 (2022-04-07)
+------------------
+
+* Feature - This release provides tagging support in AWS Personalize.
+
 1.39.0 (2022-02-24)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-04-07)
+------------------
+
+* Feature - Adds support for DocumentDB to the Performance Insights API.
+
 1.38.0 (2022-02-24)
 ------------------
 

@@ -201,6 +201,8 @@ module Aws::Personalize
     ListSolutionVersionsResponse = Shapes::StructureShape.new(name: 'ListSolutionVersionsResponse')
     ListSolutionsRequest = Shapes::StructureShape.new(name: 'ListSolutionsRequest')
     ListSolutionsResponse = Shapes::StructureShape.new(name: 'ListSolutionsResponse')
+    ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
+    ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MetricRegex = Shapes::StringShape.new(name: 'MetricRegex')
@@ -242,6 +244,15 @@ module Aws::Personalize
     Solutions = Shapes::ListShape.new(name: 'Solutions')
     Status = Shapes::StringShape.new(name: 'Status')
     StopSolutionVersionCreationRequest = Shapes::StructureShape.new(name: 'StopSolutionVersionCreationRequest')
+    Tag = Shapes::StructureShape.new(name: 'Tag')
+    TagKey = Shapes::StringShape.new(name: 'TagKey')
+    TagKeys = Shapes::ListShape.new(name: 'TagKeys')
+    TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+    TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+    TagValue = Shapes::StringShape.new(name: 'TagValue')
+    Tags = Shapes::ListShape.new(name: 'Tags')
+    TooManyTagKeysException = Shapes::StructureShape.new(name: 'TooManyTagKeysException')
+    TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TrackingId = Shapes::StringShape.new(name: 'TrackingId')
     TrainingHours = Shapes::FloatShape.new(name: 'TrainingHours')
     TrainingInputMode = Shapes::StringShape.new(name: 'TrainingInputMode')
@@ -249,6 +260,8 @@ module Aws::Personalize
     TransactionsPerSecond = Shapes::IntegerShape.new(name: 'TransactionsPerSecond')
     Tunable = Shapes::BooleanShape.new(name: 'Tunable')
     TunedHPOParams = Shapes::StructureShape.new(name: 'TunedHPOParams')
+    UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateCampaignRequest = Shapes::StructureShape.new(name: 'UpdateCampaignRequest')
     UpdateCampaignResponse = Shapes::StructureShape.new(name: 'UpdateCampaignResponse')
     UpdateRecommenderRequest = Shapes::StructureShape.new(name: 'UpdateRecommenderRequest')
@@ -402,6 +415,7 @@ module Aws::Personalize
     CreateBatchInferenceJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchInferenceJobOutput, required: true, location_name: "jobOutput"))
     CreateBatchInferenceJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateBatchInferenceJobRequest.add_member(:batch_inference_job_config, Shapes::ShapeRef.new(shape: BatchInferenceJobConfig, location_name: "batchInferenceJobConfig"))
+    CreateBatchInferenceJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateBatchInferenceJobRequest.struct_class = Types::CreateBatchInferenceJobRequest
 
     CreateBatchInferenceJobResponse.add_member(:batch_inference_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchInferenceJobArn"))
@@ -414,6 +428,7 @@ module Aws::Personalize
     CreateBatchSegmentJobRequest.add_member(:job_input, Shapes::ShapeRef.new(shape: BatchSegmentJobInput, required: true, location_name: "jobInput"))
     CreateBatchSegmentJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: BatchSegmentJobOutput, required: true, location_name: "jobOutput"))
     CreateBatchSegmentJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateBatchSegmentJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateBatchSegmentJobRequest.struct_class = Types::CreateBatchSegmentJobRequest
 
     CreateBatchSegmentJobResponse.add_member(:batch_segment_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "batchSegmentJobArn"))
@@ -423,6 +438,7 @@ module Aws::Personalize
     CreateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     CreateCampaignRequest.add_member(:min_provisioned_tps, Shapes::ShapeRef.new(shape: TransactionsPerSecond, location_name: "minProvisionedTPS"))
     CreateCampaignRequest.add_member(:campaign_config, Shapes::ShapeRef.new(shape: CampaignConfig, location_name: "campaignConfig"))
+    CreateCampaignRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateCampaignRequest.struct_class = Types::CreateCampaignRequest
 
     CreateCampaignResponse.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "campaignArn"))
@@ -433,6 +449,7 @@ module Aws::Personalize
     CreateDatasetExportJobRequest.add_member(:ingestion_mode, Shapes::ShapeRef.new(shape: IngestionMode, location_name: "ingestionMode"))
     CreateDatasetExportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     CreateDatasetExportJobRequest.add_member(:job_output, Shapes::ShapeRef.new(shape: DatasetExportJobOutput, required: true, location_name: "jobOutput"))
+    CreateDatasetExportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDatasetExportJobRequest.struct_class = Types::CreateDatasetExportJobRequest
 
     CreateDatasetExportJobResponse.add_member(:dataset_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetExportJobArn"))
@@ -442,6 +459,7 @@ module Aws::Personalize
     CreateDatasetGroupRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
     CreateDatasetGroupRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     CreateDatasetGroupRequest.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, location_name: "domain"))
+    CreateDatasetGroupRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDatasetGroupRequest.struct_class = Types::CreateDatasetGroupRequest
 
     CreateDatasetGroupResponse.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetGroupArn"))
@@ -452,6 +470,7 @@ module Aws::Personalize
     CreateDatasetImportJobRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetArn"))
     CreateDatasetImportJobRequest.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "dataSource"))
     CreateDatasetImportJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
     CreateDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetImportJobArn"))
@@ -461,6 +480,7 @@ module Aws::Personalize
     CreateDatasetRequest.add_member(:schema_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "schemaArn"))
     CreateDatasetRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateDatasetRequest.add_member(:dataset_type, Shapes::ShapeRef.new(shape: DatasetType, required: true, location_name: "datasetType"))
+    CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateDatasetRequest.struct_class = Types::CreateDatasetRequest
 
     CreateDatasetResponse.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "datasetArn"))
@@ -468,6 +488,7 @@ module Aws::Personalize
 
     CreateEventTrackerRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateEventTrackerRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
+    CreateEventTrackerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateEventTrackerRequest.struct_class = Types::CreateEventTrackerRequest
 
     CreateEventTrackerResponse.add_member(:event_tracker_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "eventTrackerArn"))
@@ -477,6 +498,7 @@ module Aws::Personalize
     CreateFilterRequest.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
     CreateFilterRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateFilterRequest.add_member(:filter_expression, Shapes::ShapeRef.new(shape: FilterExpression, required: true, location_name: "filterExpression"))
+    CreateFilterRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateFilterRequest.struct_class = Types::CreateFilterRequest
 
     CreateFilterResponse.add_member(:filter_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "filterArn"))
@@ -486,6 +508,7 @@ module Aws::Personalize
     CreateRecommenderRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateRecommenderRequest.add_member(:recipe_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recipeArn"))
     CreateRecommenderRequest.add_member(:recommender_config, Shapes::ShapeRef.new(shape: RecommenderConfig, location_name: "recommenderConfig"))
+    CreateRecommenderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateRecommenderRequest.struct_class = Types::CreateRecommenderRequest
 
     CreateRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
@@ -506,6 +529,7 @@ module Aws::Personalize
     CreateSolutionRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "datasetGroupArn"))
     CreateSolutionRequest.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "eventType"))
     CreateSolutionRequest.add_member(:solution_config, Shapes::ShapeRef.new(shape: SolutionConfig, location_name: "solutionConfig"))
+    CreateSolutionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateSolutionRequest.struct_class = Types::CreateSolutionRequest
 
     CreateSolutionResponse.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionArn"))
@@ -513,6 +537,7 @@ module Aws::Personalize
 
     CreateSolutionVersionRequest.add_member(:solution_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionArn"))
     CreateSolutionVersionRequest.add_member(:training_mode, Shapes::ShapeRef.new(shape: TrainingMode, location_name: "trainingMode"))
+    CreateSolutionVersionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreateSolutionVersionRequest.struct_class = Types::CreateSolutionVersionRequest
 
     CreateSolutionVersionResponse.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
@@ -996,6 +1021,12 @@ module Aws::Personalize
     ListSolutionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListSolutionsResponse.struct_class = Types::ListSolutionsResponse
 
+    ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
+
+    ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
     Metrics.key = Shapes::ShapeRef.new(shape: MetricName)
     Metrics.value = Shapes::ShapeRef.new(shape: MetricValue)
 
@@ -1138,8 +1169,34 @@ module Aws::Personalize
     StopSolutionVersionCreationRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     StopSolutionVersionCreationRequest.struct_class = Types::StopSolutionVersionCreationRequest
 
+    Tag.add_member(:tag_key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "tagKey"))
+    Tag.add_member(:tag_value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "tagValue"))
+    Tag.struct_class = Types::Tag
+
+    TagKeys.member = Shapes::ShapeRef.new(shape: TagKey)
+
+    TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, required: true, location_name: "tags"))
+    TagResourceRequest.struct_class = Types::TagResourceRequest
+
+    TagResourceResponse.struct_class = Types::TagResourceResponse
+
+    Tags.member = Shapes::ShapeRef.new(shape: Tag)
+
+    TooManyTagKeysException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagKeysException.struct_class = Types::TooManyTagKeysException
+
+    TooManyTagsException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TooManyTagsException.struct_class = Types::TooManyTagsException
+
     TunedHPOParams.add_member(:algorithm_hyper_parameters, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "algorithmHyperParameters"))
     TunedHPOParams.struct_class = Types::TunedHPOParams
+
+    UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
+    UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeys, required: true, location_name: "tagKeys"))
+    UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+    UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
     UpdateCampaignRequest.add_member(:campaign_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "campaignArn"))
     UpdateCampaignRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "solutionVersionArn"))
@@ -1187,6 +1244,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_batch_segment_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1200,6 +1258,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_campaign, Seahorse::Model::Operation.new.tap do |o|
@@ -1213,6 +1272,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_dataset, Seahorse::Model::Operation.new.tap do |o|
@@ -1226,6 +1286,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_dataset_export_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1239,6 +1300,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_dataset_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1250,6 +1312,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_dataset_import_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1263,6 +1326,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_event_tracker, Seahorse::Model::Operation.new.tap do |o|
@@ -1276,6 +1340,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_filter, Seahorse::Model::Operation.new.tap do |o|
@@ -1288,6 +1353,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_recommender, Seahorse::Model::Operation.new.tap do |o|
@@ -1300,6 +1366,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_schema, Seahorse::Model::Operation.new.tap do |o|
@@ -1324,6 +1391,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:create_solution_version, Seahorse::Model::Operation.new.tap do |o|
@@ -1336,6 +1404,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
       api.add_operation(:delete_campaign, Seahorse::Model::Operation.new.tap do |o|
@@ -1820,6 +1889,17 @@ module Aws::Personalize
         )
       end)
 
+      api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTagsForResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
       api.add_operation(:stop_solution_version_creation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopSolutionVersionCreation"
         o.http_method = "POST"
@@ -1828,6 +1908,31 @@ module Aws::Personalize
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "TagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+      end)
+
+      api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UntagResource"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+        o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagKeysException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
       end)
 

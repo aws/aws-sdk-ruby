@@ -48,6 +48,6 @@ require_relative 'aws-sdk-personalize/customizations'
 # @!group service
 module Aws::Personalize
 
-  GEM_VERSION = '1.39.0'
+  GEM_VERSION = '1.40.0'
 
 end

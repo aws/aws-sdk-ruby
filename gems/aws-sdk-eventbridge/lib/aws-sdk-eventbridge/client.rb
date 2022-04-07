@@ -645,6 +645,93 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Creates a global endpoint. Global endpoints improve your
+    # application's availability by making it regional-fault tolerant. To
+    # do this, you define a primary and secondary Region with event buses in
+    # each Region. You also create a Amazon Route 53 health check that will
+    # tell EventBridge to route events to the secondary Region when an
+    # "unhealthy" state is encountered and events will be routed back to
+    # the primary Region when the health check reports a "healthy" state.
+    #
+    # @option params [required, String] :name
+    #   The name of the global endpoint. For example,
+    #   `"Name":"us-east-2-custom_bus_A-endpoint"`.
+    #
+    # @option params [String] :description
+    #   A description of the global endpoint.
+    #
+    # @option params [required, Types::RoutingConfig] :routing_config
+    #   Configure the routing policy, including the health check and secondary
+    #   Region..
+    #
+    # @option params [Types::ReplicationConfig] :replication_config
+    #   Enable or disable event replication.
+    #
+    # @option params [required, Array<Types::EndpointEventBus>] :event_buses
+    #   Define the event buses used.
+    #
+    #   The names of the event buses must be identical in each Region.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the role used for replication.
+    #
+    # @return [Types::CreateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateEndpointResponse#name #name} => String
+    #   * {Types::CreateEndpointResponse#arn #arn} => String
+    #   * {Types::CreateEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::CreateEndpointResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #   * {Types::CreateEndpointResponse#event_buses #event_buses} => Array&lt;Types::EndpointEventBus&gt;
+    #   * {Types::CreateEndpointResponse#role_arn #role_arn} => String
+    #   * {Types::CreateEndpointResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_endpoint({
+    #     name: "EndpointName", # required
+    #     description: "EndpointDescription",
+    #     routing_config: { # required
+    #       failover_config: { # required
+    #         primary: { # required
+    #           health_check: "HealthCheck", # required
+    #         },
+    #         secondary: { # required
+    #           route: "Route", # required
+    #         },
+    #       },
+    #     },
+    #     replication_config: {
+    #       state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     event_buses: [ # required
+    #       {
+    #         event_bus_arn: "NonPartnerEventBusArn", # required
+    #       },
+    #     ],
+    #     role_arn: "IamRoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.replication_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.event_buses #=> Array
+    #   resp.event_buses[0].event_bus_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEndpoint AWS API Documentation
+    #
+    # @overload create_endpoint(params = {})
+    # @param [Hash] params ({})
+    def create_endpoint(params = {}, options = {})
+      req = build_request(:create_endpoint, params)
+      req.send_request(options)
+    end
+
     # Creates a new event bus within your account. This can be a custom
     # event bus which you can use to receive events from your custom
     # applications and services, or it can be a partner event bus which can
@@ -912,6 +999,36 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def delete_connection(params = {}, options = {})
       req = build_request(:delete_connection, params)
+      req.send_request(options)
+    end
+
+    # Delete an existing global endpoint. For more information about global
+    # endpoints, see [Making applications Regional-fault tolerant with
+    # global endpoints and event replication][1] in the Amazon EventBridge
+    # User Guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html
+    #
+    # @option params [required, String] :name
+    #   The name of the endpoint you want to delete. For example,
+    #   `"Name":"us-east-2-custom_bus_A-endpoint"`..
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_endpoint({
+    #     name: "EndpointName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DeleteEndpoint AWS API Documentation
+    #
+    # @overload delete_endpoint(params = {})
+    # @param [Hash] params ({})
+    def delete_endpoint(params = {}, options = {})
+      req = build_request(:delete_endpoint, params)
       req.send_request(options)
     end
 
@@ -1194,6 +1311,73 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def describe_connection(params = {}, options = {})
       req = build_request(:describe_connection, params)
+      req.send_request(options)
+    end
+
+    # Get the information about an existing global endpoint. For more
+    # information about global endpoints, see [Making applications
+    # Regional-fault tolerant with global endpoints and event
+    # replication][1] in the Amazon EventBridge User Guide..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html
+    #
+    # @option params [required, String] :name
+    #   The name of the endpoint you want to get information about. For
+    #   example, `"Name":"us-east-2-custom_bus_A-endpoint"`.
+    #
+    # @option params [String] :home_region
+    #   The primary Region of the endpoint you want to get information about.
+    #   For example `"HomeRegion": "us-east-1"`.
+    #
+    # @return [Types::DescribeEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeEndpointResponse#name #name} => String
+    #   * {Types::DescribeEndpointResponse#description #description} => String
+    #   * {Types::DescribeEndpointResponse#arn #arn} => String
+    #   * {Types::DescribeEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::DescribeEndpointResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #   * {Types::DescribeEndpointResponse#event_buses #event_buses} => Array&lt;Types::EndpointEventBus&gt;
+    #   * {Types::DescribeEndpointResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeEndpointResponse#endpoint_id #endpoint_id} => String
+    #   * {Types::DescribeEndpointResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::DescribeEndpointResponse#state #state} => String
+    #   * {Types::DescribeEndpointResponse#state_reason #state_reason} => String
+    #   * {Types::DescribeEndpointResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeEndpointResponse#last_modified_time #last_modified_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_endpoint({
+    #     name: "EndpointName", # required
+    #     home_region: "HomeRegion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.replication_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.event_buses #=> Array
+    #   resp.event_buses[0].event_bus_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.endpoint_id #=> String
+    #   resp.endpoint_url #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.state_reason #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEndpoint AWS API Documentation
+    #
+    # @overload describe_endpoint(params = {})
+    # @param [Hash] params ({})
+    def describe_endpoint(params = {}, options = {})
+      req = build_request(:describe_endpoint, params)
       req.send_request(options)
     end
 
@@ -1666,6 +1850,78 @@ module Aws::EventBridge
     # @param [Hash] params ({})
     def list_connections(params = {}, options = {})
       req = build_request(:list_connections, params)
+      req.send_request(options)
+    end
+
+    # List the global endpoints associated with this account. For more
+    # information about global endpoints, see [Making applications
+    # Regional-fault tolerant with global endpoints and event
+    # replication][1] in the Amazon EventBridge User Guide..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html
+    #
+    # @option params [String] :name_prefix
+    #   A value that will return a subset of the endpoints associated with
+    #   this account. For example, `"NamePrefix": "ABC"` will return all
+    #   endpoints with "ABC" in the name.
+    #
+    # @option params [String] :home_region
+    #   The primary Region of the endpoints associated with this account. For
+    #   example `"HomeRegion": "us-east-1"`.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an HTTP
+    #   400 InvalidToken error.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results returned by the call.
+    #
+    # @return [Types::ListEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListEndpointsResponse#endpoints #endpoints} => Array&lt;Types::Endpoint&gt;
+    #   * {Types::ListEndpointsResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_endpoints({
+    #     name_prefix: "EndpointName",
+    #     home_region: "HomeRegion",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.endpoints #=> Array
+    #   resp.endpoints[0].name #=> String
+    #   resp.endpoints[0].description #=> String
+    #   resp.endpoints[0].arn #=> String
+    #   resp.endpoints[0].routing_config.failover_config.primary.health_check #=> String
+    #   resp.endpoints[0].routing_config.failover_config.secondary.route #=> String
+    #   resp.endpoints[0].replication_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.endpoints[0].event_buses #=> Array
+    #   resp.endpoints[0].event_buses[0].event_bus_arn #=> String
+    #   resp.endpoints[0].role_arn #=> String
+    #   resp.endpoints[0].endpoint_id #=> String
+    #   resp.endpoints[0].endpoint_url #=> String
+    #   resp.endpoints[0].state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.endpoints[0].state_reason #=> String
+    #   resp.endpoints[0].creation_time #=> Time
+    #   resp.endpoints[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/ListEndpoints AWS API Documentation
+    #
+    # @overload list_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_endpoints(params = {}, options = {})
+      req = build_request(:list_endpoints, params)
       req.send_request(options)
     end
 
@@ -2172,10 +2428,21 @@ module Aws::EventBridge
     # Sends custom events to Amazon EventBridge so that they can be matched
     # to rules.
     #
+    # <note markdown="1"> PutEvents will only process nested JSON up to 1100 levels deep.
+    #
+    #  </note>
+    #
     # @option params [required, Array<Types::PutEventsRequestEntry>] :entries
     #   The entry that defines an event in your system. You can specify
     #   several parameters for the entry such as the source and type of the
     #   event, resources associated with the event, and so on.
+    #
+    # @option params [String] :endpoint_id
+    #   The URL subdomain of the endpoint. For example, if the URL for
+    #   Endpoint is abcde.veo.endpoints.event.amazonaws.com, then the
+    #   EndpointId is `abcde.veo`.
+    #
+    #   When using Java, you must include `auth-crt` on the class path.
     #
     # @return [Types::PutEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2196,6 +2463,7 @@ module Aws::EventBridge
     #         trace_header: "TraceHeader",
     #       },
     #     ],
+    #     endpoint_id: "EndpointId",
     #   })
     #
     # @example Response structure
@@ -2447,12 +2715,12 @@ module Aws::EventBridge
     #   "rate(5 minutes)".
     #
     # @option params [String] :event_pattern
-    #   The event pattern. For more information, see [Events and Event
-    #   Patterns][1] in the *Amazon EventBridge User Guide*.
+    #   The event pattern. For more information, see [EventBridge event
+    #   patterns][1] in the *Amazon EventBridge User Guide*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html.html
     #
     # @option params [String] :state
     #   Indicates whether the rule is enabled or disabled.
@@ -2526,57 +2794,59 @@ module Aws::EventBridge
     #
     # * [API destination][1]
     #
-    # * Amazon API Gateway REST API endpoints
-    #
-    # * API Gateway
+    # * [API Gateway][2]
     #
     # * Batch job queue
     #
-    # * CloudWatch Logs group
+    # * CloudWatch group
     #
     # * CodeBuild project
     #
     # * CodePipeline
     #
-    # * Amazon EC2 `CreateSnapshot` API call
+    # * EC2 `CreateSnapshot` API call
     #
     # * EC2 Image Builder
     #
-    # * Amazon EC2 `RebootInstances` API call
+    # * EC2 `RebootInstances` API call
     #
-    # * Amazon EC2 `StopInstances` API call
+    # * EC2 `StopInstances` API call
     #
-    # * Amazon EC2 `TerminateInstances` API call
+    # * EC2 `TerminateInstances` API call
     #
-    # * Amazon ECS tasks
+    # * ECS task
     #
-    # * Event bus in a different Amazon Web Services account or Region.
+    # * [Event bus in a different account or Region][3]
     #
-    #   You can use an event bus in the US East (N. Virginia) us-east-1, US
-    #   West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a
-    #   target for a rule.
+    # * [Event bus in the same account and Region][4]
     #
-    # * Firehose delivery stream (Kinesis Data Firehose)
+    # * Firehose delivery stream
     #
-    # * Inspector assessment template (Amazon Inspector)
+    # * Glue workflow
     #
-    # * Kinesis stream (Kinesis Data Stream)
+    # * [Incident Manager response plan][5]
+    #
+    # * Inspector assessment template
+    #
+    # * Kinesis stream
     #
     # * Lambda function
     #
-    # * Redshift clusters (Data API statement execution)
+    # * Redshift cluster
     #
-    # * Amazon SNS topic
+    # * SageMaker Pipeline
     #
-    # * Amazon SQS queues (includes FIFO queues)
+    # * SNS topic
     #
-    # * SSM Automation
+    # * SQS queue
     #
-    # * SSM OpsItem
+    # * Step Functions state machine
     #
-    # * SSM Run Command
+    # * Systems Manager Automation
     #
-    # * Step Functions state machines
+    # * Systems Manager OpsItem
+    #
+    # * Systems Manager Run Command
     #
     # Creating rules with built-in targets is supported only in the Amazon
     # Web Services Management Console. The built-in targets are `EC2
@@ -2595,7 +2865,7 @@ module Aws::EventBridge
     # For EC2 instances, Kinesis Data Streams, Step Functions state machines
     # and API Gateway REST APIs, EventBridge relies on IAM roles that you
     # specify in the `RoleARN` argument in `PutTargets`. For more
-    # information, see [Authentication and Access Control][2] in the *Amazon
+    # information, see [Authentication and Access Control][6] in the *Amazon
     # EventBridge User Guide*.
     #
     # If another Amazon Web Services account is in the same region and has
@@ -2607,7 +2877,7 @@ module Aws::EventBridge
     # account is charged for each sent event. Each event sent to another
     # account is charged as a custom event. The account receiving the event
     # is not charged. For more information, see [Amazon EventBridge
-    # Pricing][3].
+    # Pricing][7].
     #
     # <note markdown="1"> `Input`, `InputPath`, and `InputTransformer` are not available with
     # `PutTarget` if the target is an event bus of a different Amazon Web
@@ -2620,10 +2890,10 @@ module Aws::EventBridge
     # organization instead of directly by the account ID, then you must
     # specify a `RoleArn` with proper permissions in the `Target` structure.
     # For more information, see [Sending and Receiving Events Between Amazon
-    # Web Services Accounts][4] in the *Amazon EventBridge User Guide*.
+    # Web Services Accounts][8] in the *Amazon EventBridge User Guide*.
     #
     # For more information about enabling cross-account events, see
-    # [PutPermission][5].
+    # [PutPermission][9].
     #
     # **Input**, **InputPath**, and **InputTransformer** are mutually
     # exclusive and optional parameters of a target. When a rule is
@@ -2661,10 +2931,14 @@ module Aws::EventBridge
     #
     #
     # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
-    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
-    # [3]: http://aws.amazon.com/eventbridge/pricing/
-    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
-    # [5]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html
+    # [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-gateway-target.html
+    # [3]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-cross-account.html
+    # [4]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-bus-to-bus.html
+    # [5]: https://docs.aws.amazon.com/incident-manager/latest/userguide/incident-creation.html#incident-tracking-auto-eventbridge
+    # [6]: https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html
+    # [7]: http://aws.amazon.com/eventbridge/pricing/
+    # [8]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html
+    # [9]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html
     #
     # @option params [required, String] :rule
     #   The name of the rule.
@@ -3343,6 +3617,95 @@ module Aws::EventBridge
       req.send_request(options)
     end
 
+    # Update an existing endpoint. For more information about global
+    # endpoints, see [Making applications Regional-fault tolerant with
+    # global endpoints and event replication][1] in the Amazon EventBridge
+    # User Guide..
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html
+    #
+    # @option params [required, String] :name
+    #   The name of the endpoint you want to update.
+    #
+    # @option params [String] :description
+    #   A description for the endpoint.
+    #
+    # @option params [Types::RoutingConfig] :routing_config
+    #   Configure the routing policy, including the health check and secondary
+    #   Region..
+    #
+    # @option params [Types::ReplicationConfig] :replication_config
+    #   Whether event replication was enabled or disabled by this request.
+    #
+    # @option params [Array<Types::EndpointEventBus>] :event_buses
+    #   Define event buses used for replication.
+    #
+    # @option params [String] :role_arn
+    #   The ARN of the role used by event replication for this request.
+    #
+    # @return [Types::UpdateEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateEndpointResponse#name #name} => String
+    #   * {Types::UpdateEndpointResponse#arn #arn} => String
+    #   * {Types::UpdateEndpointResponse#routing_config #routing_config} => Types::RoutingConfig
+    #   * {Types::UpdateEndpointResponse#replication_config #replication_config} => Types::ReplicationConfig
+    #   * {Types::UpdateEndpointResponse#event_buses #event_buses} => Array&lt;Types::EndpointEventBus&gt;
+    #   * {Types::UpdateEndpointResponse#role_arn #role_arn} => String
+    #   * {Types::UpdateEndpointResponse#endpoint_id #endpoint_id} => String
+    #   * {Types::UpdateEndpointResponse#endpoint_url #endpoint_url} => String
+    #   * {Types::UpdateEndpointResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_endpoint({
+    #     name: "EndpointName", # required
+    #     description: "EndpointDescription",
+    #     routing_config: {
+    #       failover_config: { # required
+    #         primary: { # required
+    #           health_check: "HealthCheck", # required
+    #         },
+    #         secondary: { # required
+    #           route: "Route", # required
+    #         },
+    #       },
+    #     },
+    #     replication_config: {
+    #       state: "ENABLED", # accepts ENABLED, DISABLED
+    #     },
+    #     event_buses: [
+    #       {
+    #         event_bus_arn: "NonPartnerEventBusArn", # required
+    #       },
+    #     ],
+    #     role_arn: "IamRoleArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.arn #=> String
+    #   resp.routing_config.failover_config.primary.health_check #=> String
+    #   resp.routing_config.failover_config.secondary.route #=> String
+    #   resp.replication_config.state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.event_buses #=> Array
+    #   resp.event_buses[0].event_bus_arn #=> String
+    #   resp.role_arn #=> String
+    #   resp.endpoint_id #=> String
+    #   resp.endpoint_url #=> String
+    #   resp.state #=> String, one of "ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEndpoint AWS API Documentation
+    #
+    # @overload update_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_endpoint(params = {}, options = {})
+      req = build_request(:update_endpoint, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -3356,7 +3719,7 @@ module Aws::EventBridge
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-eventbridge'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

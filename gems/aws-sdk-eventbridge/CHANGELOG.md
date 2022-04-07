@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-07)
+------------------
+
+* Feature - Adds new EventBridge Endpoint resources for disaster recovery, multi-region failover, and cross-region replication capabilities to help you build resilient event-driven applications.
+
 1.37.0 (2022-02-24)
 ------------------
 

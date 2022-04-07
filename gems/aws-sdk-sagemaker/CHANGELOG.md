@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.121.0 (2022-04-07)
+------------------
+
+* Feature - Amazon Sagemaker Notebook Instances now supports G5 instance types
+
 1.120.0 (2022-02-24)
 ------------------
 
