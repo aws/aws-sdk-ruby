@@ -273,7 +273,8 @@ by adding the `aws-crt` gem to your Gemfile.
 [Sigv4a](https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html)
 is an extension to Sigv4 that allows signatures that are valid in more than one region.
 Sigv4a is required to use some services/operations such as
-[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html).
+[S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
+and Amazon EventBridge Global Endpoints.
 Currently sigv4a requires the [aws-crt](https://rubygems.org/gems/aws-crt/) gem and a version of the 
 [aws-sigv4](https://rubygems.org/gems/aws-sigv4/versions/1.4.1.crt) gem built on top of aws-crt - 
 these versions end with "-crt".  To install and use a CRT enabled version, we recommend pinning the
