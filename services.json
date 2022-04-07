@@ -362,7 +362,10 @@
     "models": "es/2015-01-01"
   },
   "EventBridge": {
-    "models": "eventbridge/2015-10-07"
+    "models": "eventbridge/2015-10-07",
+    "addPlugins": [
+      "Aws::EventBridge::Plugins::MultiRegionEndpoint"
+    ]
   },
   "FIS": {
     "models": "fis/2020-12-01"

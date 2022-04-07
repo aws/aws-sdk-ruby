@@ -32,6 +32,7 @@ require 'aws-sdk-core/plugins/defaults_mode.rb'
 require 'aws-sdk-core/plugins/recursion_detection.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
+require 'aws-sdk-eventbridge/plugins/multi_region_endpoint.rb'
 
 Aws::Plugins::GlobalConfiguration.add_identifier(:eventbridge)
 
@@ -81,6 +82,7 @@ module Aws::EventBridge
     add_plugin(Aws::Plugins::RecursionDetection)
     add_plugin(Aws::Plugins::SignatureV4)
     add_plugin(Aws::Plugins::Protocols::JsonRpc)
+    add_plugin(Aws::EventBridge::Plugins::MultiRegionEndpoint)
 
     # @overload initialize(options)
     #   @param [Hash] options
