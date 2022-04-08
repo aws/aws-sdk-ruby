@@ -5133,11 +5133,16 @@ module Aws::WAFV2
     #   rule group.
     #   @return [Array<Types::ManagedRuleGroupVersion>]
     #
+    # @!attribute [rw] current_default_version
+    #   The name of the version that's currently set as the default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersionsResponse AWS API Documentation
     #
     class ListAvailableManagedRuleGroupVersionsResponse < Struct.new(
       :next_marker,
-      :versions)
+      :versions,
+      :current_default_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5984,6 +5989,13 @@ module Aws::WAFV2
     # `AWSManagedRulesATPRuleSet`, to provide information about the sign-in
     # page of your application.
     #
+    # You can provide multiple individual `ManagedRuleGroupConfig` objects
+    # for any rule group configuration, for example `UsernameField` and
+    # `PasswordField`. The configuration that you provide depends on the
+    # needs of the managed rule group. For the ATP managed rule group, you
+    # provide the following individual configuration objects: `LoginPath`,
+    # `PasswordField`, `PayloadType` and `UsernameField`.
+    #
     # @note When making an API call, you may pass ManagedRuleGroupConfig
     #   data as a hash:
     #
@@ -6405,6 +6417,13 @@ module Aws::WAFV2
     #   Use this for the account takeover prevention managed rule group
     #   `AWSManagedRulesATPRuleSet`, to provide information about the
     #   sign-in page of your application.
+    #
+    #   You can provide multiple individual `ManagedRuleGroupConfig` objects
+    #   for any rule group configuration, for example `UsernameField` and
+    #   `PasswordField`. The configuration that you provide depends on the
+    #   needs of the managed rule group. For the ATP managed rule group, you
+    #   provide the following individual configuration objects: `LoginPath`,
+    #   `PasswordField`, `PayloadType` and `UsernameField`.
     #   @return [Array<Types::ManagedRuleGroupConfig>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ManagedRuleGroupStatement AWS API Documentation
@@ -6439,6 +6458,12 @@ module Aws::WAFV2
     #   vendor name, to identify the rule group.
     #   @return [String]
     #
+    # @!attribute [rw] versioning_supported
+    #   Indicates whether the managed rule group is versioned. If it is, you
+    #   can retrieve the versions list by calling
+    #   ListAvailableManagedRuleGroupVersions.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] description
     #   The description of the managed rule group, provided by Amazon Web
     #   Services Managed Rules or the Amazon Web Services Marketplace seller
@@ -6450,6 +6475,7 @@ module Aws::WAFV2
     class ManagedRuleGroupSummary < Struct.new(
       :vendor_name,
       :name,
+      :versioning_supported,
       :description)
       SENSITIVE = []
       include Aws::Structure
@@ -7704,8 +7730,9 @@ module Aws::WAFV2
     #   * `Effect` must specify `Allow`.
     #
     #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #     and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
-    #     actions or wildcard actions in the policy.
+    #     and `wafv2:PutFirewallManagerRuleGroups` and may optionally
+    #     specify `wafv2:GetRuleGroup`. WAF rejects any extra actions or
+    #     wildcard actions in the policy.
     #
     #   * The policy must not include a `Resource` parameter.
     #
@@ -13474,8 +13501,9 @@ module Aws::WAFV2
     # * `Effect` must specify `Allow`.
     #
     # * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #   and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
-    #   actions or wildcard actions in the policy.
+    #   and `wafv2:PutFirewallManagerRuleGroups` and may optionally specify
+    #   `wafv2:GetRuleGroup`. WAF rejects any extra actions or wildcard
+    #   actions in the policy.
     #
     # * The policy must not include a `Resource` parameter.
     #

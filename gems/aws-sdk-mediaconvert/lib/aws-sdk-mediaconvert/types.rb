@@ -1944,7 +1944,7 @@ module Aws::MediaConvert
     #           },
     #           webvtt_destination_settings: {
     #             accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #           },
     #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -2090,7 +2090,7 @@ module Aws::MediaConvert
     #           },
     #           webvtt_destination_settings: {
     #             accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #             style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #           },
     #         },
     #         language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -2235,7 +2235,7 @@ module Aws::MediaConvert
     #         },
     #         webvtt_destination_settings: {
     #           accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #         },
     #       }
     #
@@ -3136,6 +3136,7 @@ module Aws::MediaConvert
     #         audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #         descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #         i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #         klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3239,6 +3240,11 @@ module Aws::MediaConvert
     #   value Exclude (EXCLUDE).
     #   @return [String]
     #
+    # @!attribute [rw] klv_metadata
+    #   Applies to CMAF outputs. Use this setting to specify whether the
+    #   service inserts the KLV metadata from the input in this output.
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
     #   Choose INSERT to put SCTE-35 markers in this output at the insertion
@@ -3272,6 +3278,7 @@ module Aws::MediaConvert
       :audio_track_type,
       :descriptive_video_service_flag,
       :i_frame_only_manifest,
+      :klv_metadata,
       :scte_35_esam,
       :scte_35_source,
       :timed_metadata)
@@ -3403,6 +3410,7 @@ module Aws::MediaConvert
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3440,6 +3448,7 @@ module Aws::MediaConvert
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -3504,6 +3513,7 @@ module Aws::MediaConvert
     #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -4313,7 +4323,7 @@ module Aws::MediaConvert
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -4328,6 +4338,7 @@ module Aws::MediaConvert
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -4365,6 +4376,7 @@ module Aws::MediaConvert
     #                       es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                       fragment_time: 1.0,
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -4429,6 +4441,7 @@ module Aws::MediaConvert
     #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5709,7 +5722,7 @@ module Aws::MediaConvert
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -5724,6 +5737,7 @@ module Aws::MediaConvert
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5761,6 +5775,7 @@ module Aws::MediaConvert
     #                       es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                       fragment_time: 1.0,
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -5825,6 +5840,7 @@ module Aws::MediaConvert
     #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -6574,7 +6590,7 @@ module Aws::MediaConvert
     #                 },
     #                 webvtt_destination_settings: {
     #                   accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -6589,6 +6605,7 @@ module Aws::MediaConvert
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #               descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -6626,6 +6643,7 @@ module Aws::MediaConvert
     #               es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #               fragment_time: 1.0,
+    #               klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               max_pcr_interval: 1,
     #               min_ebp_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -6690,6 +6708,7 @@ module Aws::MediaConvert
     #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #               klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -13547,7 +13566,7 @@ module Aws::MediaConvert
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -13562,6 +13581,7 @@ module Aws::MediaConvert
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -13599,6 +13619,7 @@ module Aws::MediaConvert
     #                     es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                     fragment_time: 1.0,
+    #                     klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     max_pcr_interval: 1,
     #                     min_ebp_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -13663,6 +13684,7 @@ module Aws::MediaConvert
     #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                     klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -14993,7 +15015,7 @@ module Aws::MediaConvert
     #                       },
     #                       webvtt_destination_settings: {
     #                         accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                       },
     #                     },
     #                     language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -15008,6 +15030,7 @@ module Aws::MediaConvert
     #                     audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                     descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                     i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                     klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -15045,6 +15068,7 @@ module Aws::MediaConvert
     #                     es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                     fragment_time: 1.0,
+    #                     klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     max_pcr_interval: 1,
     #                     min_ebp_interval: 1,
     #                     nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -15109,6 +15133,7 @@ module Aws::MediaConvert
     #                     accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                     audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                     caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                     klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                     scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                     scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                     timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -16182,6 +16207,7 @@ module Aws::MediaConvert
     #         es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #         fragment_time: 1.0,
+    #         klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         max_pcr_interval: 1,
     #         min_ebp_interval: 1,
     #         nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -16328,6 +16354,11 @@ module Aws::MediaConvert
     #   The length, in seconds, of each fragment. Only used with EBP
     #   markers.
     #   @return [Float]
+    #
+    # @!attribute [rw] klv_metadata
+    #   Applies to MPEG-TS outputs. Use this setting to specify whether the
+    #   service inserts the KLV metadata from the input in this output.
+    #   @return [String]
     #
     # @!attribute [rw] max_pcr_interval
     #   Specify the maximum time, in milliseconds, between Program Clock
@@ -16495,6 +16526,7 @@ module Aws::MediaConvert
       :es_rate_in_pes,
       :force_ts_video_ebp_order,
       :fragment_time,
+      :klv_metadata,
       :max_pcr_interval,
       :min_ebp_interval,
       :nielsen_id_3,
@@ -17096,6 +17128,7 @@ module Aws::MediaConvert
     #         accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #         audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #         caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #         klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #         scte_35_esam: "INSERT", # accepts INSERT, NONE
     #         scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #         timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -17134,6 +17167,11 @@ module Aws::MediaConvert
     #   from your video and audio fragmented MP4 files.
     #   @return [String]
     #
+    # @!attribute [rw] klv_metadata
+    #   Applies to DASH ISO outputs. Use this setting to specify whether the
+    #   service inserts the KLV metadata from the input in this output.
+    #   @return [String]
+    #
     # @!attribute [rw] scte_35_esam
     #   Use this setting only when you specify SCTE-35 markers from ESAM.
     #   Choose INSERT to put SCTE-35 markers in this output at the insertion
@@ -17164,6 +17202,7 @@ module Aws::MediaConvert
       :accessibility_caption_hints,
       :audio_duration,
       :caption_container_type,
+      :klv_metadata,
       :scte_35_esam,
       :scte_35_source,
       :timed_metadata)
@@ -18537,7 +18576,7 @@ module Aws::MediaConvert
     #               },
     #               webvtt_destination_settings: {
     #                 accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -18552,6 +18591,7 @@ module Aws::MediaConvert
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #             descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -18589,6 +18629,7 @@ module Aws::MediaConvert
     #             es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #             fragment_time: 1.0,
+    #             klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             max_pcr_interval: 1,
     #             min_ebp_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -18653,6 +18694,7 @@ module Aws::MediaConvert
     #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #             klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -19665,7 +19707,7 @@ module Aws::MediaConvert
     #                   },
     #                   webvtt_destination_settings: {
     #                     accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                     style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                   },
     #                 },
     #                 language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -19680,6 +19722,7 @@ module Aws::MediaConvert
     #                 audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                 descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                 i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                 klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -19717,6 +19760,7 @@ module Aws::MediaConvert
     #                 es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                 fragment_time: 1.0,
+    #                 klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 max_pcr_interval: 1,
     #                 min_ebp_interval: 1,
     #                 nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -19781,6 +19825,7 @@ module Aws::MediaConvert
     #                 accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                 audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                 caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                 klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                 scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                 scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                 timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -20932,7 +20977,7 @@ module Aws::MediaConvert
     #               },
     #               webvtt_destination_settings: {
     #                 accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                 style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #               },
     #             },
     #             language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -20947,6 +20992,7 @@ module Aws::MediaConvert
     #             audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #             descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #             i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #             klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -20984,6 +21030,7 @@ module Aws::MediaConvert
     #             es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #             fragment_time: 1.0,
+    #             klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             max_pcr_interval: 1,
     #             min_ebp_interval: 1,
     #             nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -21048,6 +21095,7 @@ module Aws::MediaConvert
     #             accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #             audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #             caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #             klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #             scte_35_esam: "INSERT", # accepts INSERT, NONE
     #             scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #             timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -23499,7 +23547,7 @@ module Aws::MediaConvert
     #                         },
     #                         webvtt_destination_settings: {
     #                           accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                           style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                         },
     #                       },
     #                       language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -23514,6 +23562,7 @@ module Aws::MediaConvert
     #                       audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                       descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                       i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -23551,6 +23600,7 @@ module Aws::MediaConvert
     #                       es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                       fragment_time: 1.0,
+    #                       klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       max_pcr_interval: 1,
     #                       min_ebp_interval: 1,
     #                       nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -23615,6 +23665,7 @@ module Aws::MediaConvert
     #                       accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                       audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                       caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                       klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                       scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                       scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                       timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -24351,7 +24402,7 @@ module Aws::MediaConvert
     #                 },
     #                 webvtt_destination_settings: {
     #                   accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                   style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                 },
     #               },
     #               language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -24366,6 +24417,7 @@ module Aws::MediaConvert
     #               audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #               descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #               i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #               klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -24403,6 +24455,7 @@ module Aws::MediaConvert
     #               es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #               fragment_time: 1.0,
+    #               klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               max_pcr_interval: 1,
     #               min_ebp_interval: 1,
     #               nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -24467,6 +24520,7 @@ module Aws::MediaConvert
     #               accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #               audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #               caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #               klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #               scte_35_esam: "INSERT", # accepts INSERT, NONE
     #               scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #               timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -26749,7 +26803,7 @@ module Aws::MediaConvert
     #
     #       {
     #         accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #         style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #       }
     #
     # @!attribute [rw] accessibility
@@ -26765,13 +26819,17 @@ module Aws::MediaConvert
     #   @return [String]
     #
     # @!attribute [rw] style_passthrough
-    #   Set Style passthrough (StylePassthrough) to ENABLED to use the
-    #   available style, color, and position information from your input
-    #   captions. MediaConvert uses default settings for any missing style
-    #   and position information in your input captions. Set Style
-    #   passthrough to DISABLED, or leave blank, to ignore the style and
-    #   position information from your input captions and use simplified
-    #   output captions.
+    #   To use the available style, color, and position information from
+    #   your input captions: Set Style passthrough (stylePassthrough) to
+    #   Enabled (ENABLED). MediaConvert uses default settings when style and
+    #   position information is missing from your input captions. To
+    #   recreate the input captions exactly: Set Style passthrough to Strict
+    #   (STRICT). MediaConvert automatically applies timing adjustments,
+    #   including adjustments for frame rate conversion, ad avails, and
+    #   input clipping. Your input captions format must be WebVTT. To ignore
+    #   the style and position information from your input captions and use
+    #   simplified output captions: Set Style passthrough to Disabled
+    #   (DISABLED), or leave blank.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/WebvttDestinationSettings AWS API Documentation

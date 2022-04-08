@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-08)
+------------------
+
+* Feature - Add a new CurrentDefaultVersion field to ListAvailableManagedRuleGroupVersions API response; add a new VersioningSupported boolean to each ManagedRuleGroup returned from ListAvailableManagedRuleGroups API response.
+
 1.37.0 (2022-02-24)
 ------------------
 

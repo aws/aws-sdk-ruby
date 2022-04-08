@@ -753,6 +753,7 @@ module Aws::WAFV2
 
     ListAvailableManagedRuleGroupVersionsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
     ListAvailableManagedRuleGroupVersionsResponse.add_member(:versions, Shapes::ShapeRef.new(shape: ManagedRuleGroupVersions, location_name: "Versions"))
+    ListAvailableManagedRuleGroupVersionsResponse.add_member(:current_default_version, Shapes::ShapeRef.new(shape: VersionKeyString, location_name: "CurrentDefaultVersion"))
     ListAvailableManagedRuleGroupVersionsResponse.struct_class = Types::ListAvailableManagedRuleGroupVersionsResponse
 
     ListAvailableManagedRuleGroupsRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "Scope"))
@@ -878,6 +879,7 @@ module Aws::WAFV2
 
     ManagedRuleGroupSummary.add_member(:vendor_name, Shapes::ShapeRef.new(shape: VendorName, location_name: "VendorName"))
     ManagedRuleGroupSummary.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, location_name: "Name"))
+    ManagedRuleGroupSummary.add_member(:versioning_supported, Shapes::ShapeRef.new(shape: Boolean, location_name: "VersioningSupported"))
     ManagedRuleGroupSummary.add_member(:description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "Description"))
     ManagedRuleGroupSummary.struct_class = Types::ManagedRuleGroupSummary
 
@@ -1708,6 +1710,7 @@ module Aws::WAFV2
         o.output = Shapes::ShapeRef.new(shape: ListAvailableManagedRuleGroupVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: WAFInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFNonexistentItemException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
       end)
 

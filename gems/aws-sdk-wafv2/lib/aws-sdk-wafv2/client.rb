@@ -4086,6 +4086,7 @@ module Aws::WAFV2
     #
     #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#next_marker #next_marker} => String
     #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#versions #versions} => Array&lt;Types::ManagedRuleGroupVersion&gt;
+    #   * {Types::ListAvailableManagedRuleGroupVersionsResponse#current_default_version #current_default_version} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4103,6 +4104,7 @@ module Aws::WAFV2
     #   resp.versions #=> Array
     #   resp.versions[0].name #=> String
     #   resp.versions[0].last_update_timestamp #=> Time
+    #   resp.current_default_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroupVersions AWS API Documentation
     #
@@ -4164,6 +4166,7 @@ module Aws::WAFV2
     #   resp.managed_rule_groups #=> Array
     #   resp.managed_rule_groups[0].vendor_name #=> String
     #   resp.managed_rule_groups[0].name #=> String
+    #   resp.managed_rule_groups[0].versioning_supported #=> Boolean
     #   resp.managed_rule_groups[0].description #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ListAvailableManagedRuleGroups AWS API Documentation
@@ -4997,8 +5000,9 @@ module Aws::WAFV2
     #   * `Effect` must specify `Allow`.
     #
     #   * `Action` must specify `wafv2:CreateWebACL`, `wafv2:UpdateWebACL`,
-    #     and `wafv2:PutFirewallManagerRuleGroups`. WAF rejects any extra
-    #     actions or wildcard actions in the policy.
+    #     and `wafv2:PutFirewallManagerRuleGroups` and may optionally specify
+    #     `wafv2:GetRuleGroup`. WAF rejects any extra actions or wildcard
+    #     actions in the policy.
     #
     #   * The policy must not include a `Resource` parameter.
     #
@@ -6442,7 +6446,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

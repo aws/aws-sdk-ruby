@@ -1204,7 +1204,7 @@ module Aws::MediaConvert
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -1219,6 +1219,7 @@ module Aws::MediaConvert
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -1256,6 +1257,7 @@ module Aws::MediaConvert
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -1320,6 +1322,7 @@ module Aws::MediaConvert
     #                   accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -2278,7 +2281,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -2287,6 +2290,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -2316,6 +2320,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -2371,6 +2376,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -3481,7 +3487,7 @@ module Aws::MediaConvert
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -3496,6 +3502,7 @@ module Aws::MediaConvert
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -3533,6 +3540,7 @@ module Aws::MediaConvert
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -3597,6 +3605,7 @@ module Aws::MediaConvert
     #                   accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -4525,7 +4534,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -4534,6 +4543,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -4563,6 +4573,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -4618,6 +4629,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -5199,7 +5211,7 @@ module Aws::MediaConvert
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #             },
     #           },
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -5214,6 +5226,7 @@ module Aws::MediaConvert
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5251,6 +5264,7 @@ module Aws::MediaConvert
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -5315,6 +5329,7 @@ module Aws::MediaConvert
     #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -5885,7 +5900,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -5894,6 +5909,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -5923,6 +5939,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -5978,6 +5995,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -7063,7 +7081,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -7072,6 +7090,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -7101,6 +7120,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -7156,6 +7176,7 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -8008,7 +8029,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -8017,6 +8038,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -8046,6 +8068,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -8101,6 +8124,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -8643,7 +8667,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -8652,6 +8676,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -8681,6 +8706,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -8736,6 +8762,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -9637,7 +9664,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -9646,6 +9673,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -9675,6 +9703,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -9730,6 +9759,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -10632,7 +10662,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -10641,6 +10671,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -10670,6 +10701,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -10725,6 +10757,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -11284,7 +11317,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.presets[0].settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.presets[0].settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.presets[0].settings.caption_descriptions[0].language_description #=> String
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -11293,6 +11326,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.presets[0].settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.presets[0].settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.presets[0].settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -11322,6 +11356,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.presets[0].settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.presets[0].settings.container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.presets[0].settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -11377,6 +11412,7 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.presets[0].settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.presets[0].settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.presets[0].settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.presets[0].settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -12651,7 +12687,7 @@ module Aws::MediaConvert
     #                     },
     #                     webvtt_destination_settings: {
     #                       accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #                       style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #                     },
     #                   },
     #                   language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -12666,6 +12702,7 @@ module Aws::MediaConvert
     #                   audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #                   descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #                   i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -12703,6 +12740,7 @@ module Aws::MediaConvert
     #                   es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #                   fragment_time: 1.0,
+    #                   klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   max_pcr_interval: 1,
     #                   min_ebp_interval: 1,
     #                   nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -12767,6 +12805,7 @@ module Aws::MediaConvert
     #                   accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #                   audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #                   caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #                   klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #                   scte_35_esam: "INSERT", # accepts INSERT, NONE
     #                   scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #                   timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -13692,7 +13731,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.job_template.settings.output_groups[0].outputs[0].caption_descriptions[0].language_description #=> String
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -13701,6 +13740,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -13730,6 +13770,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -13785,6 +13826,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.job_template.settings.output_groups[0].outputs[0].container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -14360,7 +14402,7 @@ module Aws::MediaConvert
     #             },
     #             webvtt_destination_settings: {
     #               accessibility: "DISABLED", # accepts DISABLED, ENABLED
-    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED
+    #               style_passthrough: "ENABLED", # accepts ENABLED, DISABLED, STRICT
     #             },
     #           },
     #           language_code: "ENG", # accepts ENG, SPA, FRA, DEU, GER, ZHO, ARA, HIN, JPN, RUS, POR, ITA, URD, VIE, KOR, PAN, ABK, AAR, AFR, AKA, SQI, AMH, ARG, HYE, ASM, AVA, AVE, AYM, AZE, BAM, BAK, EUS, BEL, BEN, BIH, BIS, BOS, BRE, BUL, MYA, CAT, KHM, CHA, CHE, NYA, CHU, CHV, COR, COS, CRE, HRV, CES, DAN, DIV, NLD, DZO, ENM, EPO, EST, EWE, FAO, FIJ, FIN, FRM, FUL, GLA, GLG, LUG, KAT, ELL, GRN, GUJ, HAT, HAU, HEB, HER, HMO, HUN, ISL, IDO, IBO, IND, INA, ILE, IKU, IPK, GLE, JAV, KAL, KAN, KAU, KAS, KAZ, KIK, KIN, KIR, KOM, KON, KUA, KUR, LAO, LAT, LAV, LIM, LIN, LIT, LUB, LTZ, MKD, MLG, MSA, MAL, MLT, GLV, MRI, MAR, MAH, MON, NAU, NAV, NDE, NBL, NDO, NEP, SME, NOR, NOB, NNO, OCI, OJI, ORI, ORM, OSS, PLI, FAS, POL, PUS, QUE, QAA, RON, ROH, RUN, SMO, SAG, SAN, SRD, SRB, SNA, III, SND, SIN, SLK, SLV, SOM, SOT, SUN, SWA, SSW, SWE, TGL, TAH, TGK, TAM, TAT, TEL, THA, BOD, TIR, TON, TSO, TSN, TUR, TUK, TWI, UIG, UKR, UZB, VEN, VOL, WLN, CYM, FRY, WOL, XHO, YID, YOR, ZHA, ZUL, ORJ, QPC, TNG, SRP
@@ -14375,6 +14417,7 @@ module Aws::MediaConvert
     #           audio_track_type: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", # accepts ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT, ALTERNATE_AUDIO_AUTO_SELECT, ALTERNATE_AUDIO_NOT_AUTO_SELECT
     #           descriptive_video_service_flag: "DONT_FLAG", # accepts DONT_FLAG, FLAG
     #           i_frame_only_manifest: "INCLUDE", # accepts INCLUDE, EXCLUDE
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -14412,6 +14455,7 @@ module Aws::MediaConvert
     #           es_rate_in_pes: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           force_ts_video_ebp_order: "FORCE", # accepts FORCE, DEFAULT
     #           fragment_time: 1.0,
+    #           klv_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           max_pcr_interval: 1,
     #           min_ebp_interval: 1,
     #           nielsen_id_3: "INSERT", # accepts INSERT, NONE
@@ -14476,6 +14520,7 @@ module Aws::MediaConvert
     #           accessibility_caption_hints: "INCLUDE", # accepts INCLUDE, EXCLUDE
     #           audio_duration: "DEFAULT_CODEC_DURATION", # accepts DEFAULT_CODEC_DURATION, MATCH_VIDEO_DURATION
     #           caption_container_type: "RAW", # accepts RAW, FRAGMENTED_MP4
+    #           klv_metadata: "NONE", # accepts NONE, PASSTHROUGH
     #           scte_35_esam: "INSERT", # accepts INSERT, NONE
     #           scte_35_source: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
     #           timed_metadata: "PASSTHROUGH", # accepts PASSTHROUGH, NONE
@@ -15043,7 +15088,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.caption_descriptions[0].destination_settings.teletext_destination_settings.page_types[0] #=> String, one of "PAGE_TYPE_INITIAL", "PAGE_TYPE_SUBTITLE", "PAGE_TYPE_ADDL_INFO", "PAGE_TYPE_PROGRAM_SCHEDULE", "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.ttml_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
     #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.accessibility #=> String, one of "DISABLED", "ENABLED"
-    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED"
+    #   resp.preset.settings.caption_descriptions[0].destination_settings.webvtt_destination_settings.style_passthrough #=> String, one of "ENABLED", "DISABLED", "STRICT"
     #   resp.preset.settings.caption_descriptions[0].language_code #=> String, one of "ENG", "SPA", "FRA", "DEU", "GER", "ZHO", "ARA", "HIN", "JPN", "RUS", "POR", "ITA", "URD", "VIE", "KOR", "PAN", "ABK", "AAR", "AFR", "AKA", "SQI", "AMH", "ARG", "HYE", "ASM", "AVA", "AVE", "AYM", "AZE", "BAM", "BAK", "EUS", "BEL", "BEN", "BIH", "BIS", "BOS", "BRE", "BUL", "MYA", "CAT", "KHM", "CHA", "CHE", "NYA", "CHU", "CHV", "COR", "COS", "CRE", "HRV", "CES", "DAN", "DIV", "NLD", "DZO", "ENM", "EPO", "EST", "EWE", "FAO", "FIJ", "FIN", "FRM", "FUL", "GLA", "GLG", "LUG", "KAT", "ELL", "GRN", "GUJ", "HAT", "HAU", "HEB", "HER", "HMO", "HUN", "ISL", "IDO", "IBO", "IND", "INA", "ILE", "IKU", "IPK", "GLE", "JAV", "KAL", "KAN", "KAU", "KAS", "KAZ", "KIK", "KIN", "KIR", "KOM", "KON", "KUA", "KUR", "LAO", "LAT", "LAV", "LIM", "LIN", "LIT", "LUB", "LTZ", "MKD", "MLG", "MSA", "MAL", "MLT", "GLV", "MRI", "MAR", "MAH", "MON", "NAU", "NAV", "NDE", "NBL", "NDO", "NEP", "SME", "NOR", "NOB", "NNO", "OCI", "OJI", "ORI", "ORM", "OSS", "PLI", "FAS", "POL", "PUS", "QUE", "QAA", "RON", "ROH", "RUN", "SMO", "SAG", "SAN", "SRD", "SRB", "SNA", "III", "SND", "SIN", "SLK", "SLV", "SOM", "SOT", "SUN", "SWA", "SSW", "SWE", "TGL", "TAH", "TGK", "TAM", "TAT", "TEL", "THA", "BOD", "TIR", "TON", "TSO", "TSN", "TUR", "TUK", "TWI", "UIG", "UKR", "UZB", "VEN", "VOL", "WLN", "CYM", "FRY", "WOL", "XHO", "YID", "YOR", "ZHA", "ZUL", "ORJ", "QPC", "TNG", "SRP"
     #   resp.preset.settings.caption_descriptions[0].language_description #=> String
     #   resp.preset.settings.container_settings.cmfc_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
@@ -15052,6 +15097,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.cmfc_settings.audio_track_type #=> String, one of "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", "ALTERNATE_AUDIO_AUTO_SELECT", "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
     #   resp.preset.settings.container_settings.cmfc_settings.descriptive_video_service_flag #=> String, one of "DONT_FLAG", "FLAG"
     #   resp.preset.settings.container_settings.cmfc_settings.i_frame_only_manifest #=> String, one of "INCLUDE", "EXCLUDE"
+    #   resp.preset.settings.container_settings.cmfc_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.cmfc_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -15081,6 +15127,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.m2ts_settings.es_rate_in_pes #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.m2ts_settings.force_ts_video_ebp_order #=> String, one of "FORCE", "DEFAULT"
     #   resp.preset.settings.container_settings.m2ts_settings.fragment_time #=> Float
+    #   resp.preset.settings.container_settings.m2ts_settings.klv_metadata #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.m2ts_settings.max_pcr_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.min_ebp_interval #=> Integer
     #   resp.preset.settings.container_settings.m2ts_settings.nielsen_id_3 #=> String, one of "INSERT", "NONE"
@@ -15136,6 +15183,7 @@ module Aws::MediaConvert
     #   resp.preset.settings.container_settings.mpd_settings.accessibility_caption_hints #=> String, one of "INCLUDE", "EXCLUDE"
     #   resp.preset.settings.container_settings.mpd_settings.audio_duration #=> String, one of "DEFAULT_CODEC_DURATION", "MATCH_VIDEO_DURATION"
     #   resp.preset.settings.container_settings.mpd_settings.caption_container_type #=> String, one of "RAW", "FRAGMENTED_MP4"
+    #   resp.preset.settings.container_settings.mpd_settings.klv_metadata #=> String, one of "NONE", "PASSTHROUGH"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_esam #=> String, one of "INSERT", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.scte_35_source #=> String, one of "PASSTHROUGH", "NONE"
     #   resp.preset.settings.container_settings.mpd_settings.timed_metadata #=> String, one of "PASSTHROUGH", "NONE"
@@ -15533,7 +15581,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
