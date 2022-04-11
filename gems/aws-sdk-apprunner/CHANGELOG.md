@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.13.0 (2022-04-11)
+------------------
+
+* Feature - This release adds tracing for App Runner services with X-Ray using AWS Distro for OpenTelemetry. New APIs: CreateObservabilityConfiguration, DescribeObservabilityConfiguration, ListObservabilityConfigurations, and DeleteObservabilityConfiguration. Updated APIs: CreateService and UpdateService.
+
 1.12.0 (2022-02-24)
 ------------------
 

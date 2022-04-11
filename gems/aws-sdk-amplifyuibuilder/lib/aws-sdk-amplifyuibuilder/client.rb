@@ -414,6 +414,7 @@ module Aws::AmplifyUIBuilder
     #           events: {
     #             "String" => {
     #               action: "String",
+    #               binding_event: "String",
     #               parameters: {
     #                 anchor: {
     #                   binding_properties: {
@@ -824,6 +825,7 @@ module Aws::AmplifyUIBuilder
     #               value: "String",
     #             },
     #           },
+    #           source_id: "String",
     #         },
     #       ],
     #       collection_properties: {
@@ -857,6 +859,7 @@ module Aws::AmplifyUIBuilder
     #       events: {
     #         "String" => {
     #           action: "String",
+    #           binding_event: "String",
     #           parameters: {
     #             anchor: {
     #               binding_properties: {
@@ -1316,6 +1319,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.children[0].component_type #=> String
     #   resp.entity.children[0].events #=> Hash
     #   resp.entity.children[0].events["String"].action #=> String
+    #   resp.entity.children[0].events["String"].binding_event #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
@@ -1556,6 +1560,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.children[0].properties["String"].type #=> String
     #   resp.entity.children[0].properties["String"].user_attribute #=> String
     #   resp.entity.children[0].properties["String"].value #=> String
+    #   resp.entity.children[0].source_id #=> String
     #   resp.entity.collection_properties #=> Hash
     #   resp.entity.collection_properties["String"].identifiers #=> Array
     #   resp.entity.collection_properties["String"].identifiers[0] #=> String
@@ -1575,6 +1580,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.environment_name #=> String
     #   resp.entity.events #=> Hash
     #   resp.entity.events["String"].action #=> String
+    #   resp.entity.events["String"].binding_event #=> String
     #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
@@ -2006,7 +2012,7 @@ module Aws::AmplifyUIBuilder
     #   resp = client.exchange_code_for_token({
     #     provider: "figma", # required, accepts figma
     #     request: { # required
-    #       code: "SyntheticExchangeCodeForTokenRequestBodyString", # required
+    #       code: "SensitiveString", # required
     #       redirect_uri: "String", # required
     #     },
     #   })
@@ -2077,6 +2083,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entities[0].children[0].component_type #=> String
     #   resp.entities[0].children[0].events #=> Hash
     #   resp.entities[0].children[0].events["String"].action #=> String
+    #   resp.entities[0].children[0].events["String"].binding_event #=> String
     #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entities[0].children[0].events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entities[0].children[0].events["String"].parameters.anchor.bindings #=> Hash
@@ -2317,6 +2324,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entities[0].children[0].properties["String"].type #=> String
     #   resp.entities[0].children[0].properties["String"].user_attribute #=> String
     #   resp.entities[0].children[0].properties["String"].value #=> String
+    #   resp.entities[0].children[0].source_id #=> String
     #   resp.entities[0].collection_properties #=> Hash
     #   resp.entities[0].collection_properties["String"].identifiers #=> Array
     #   resp.entities[0].collection_properties["String"].identifiers[0] #=> String
@@ -2336,6 +2344,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entities[0].environment_name #=> String
     #   resp.entities[0].events #=> Hash
     #   resp.entities[0].events["String"].action #=> String
+    #   resp.entities[0].events["String"].binding_event #=> String
     #   resp.entities[0].events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entities[0].events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entities[0].events["String"].parameters.anchor.bindings #=> Hash
@@ -2705,6 +2714,7 @@ module Aws::AmplifyUIBuilder
     #   resp.component.children[0].component_type #=> String
     #   resp.component.children[0].events #=> Hash
     #   resp.component.children[0].events["String"].action #=> String
+    #   resp.component.children[0].events["String"].binding_event #=> String
     #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.component.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.component.children[0].events["String"].parameters.anchor.bindings #=> Hash
@@ -2945,6 +2955,7 @@ module Aws::AmplifyUIBuilder
     #   resp.component.children[0].properties["String"].type #=> String
     #   resp.component.children[0].properties["String"].user_attribute #=> String
     #   resp.component.children[0].properties["String"].value #=> String
+    #   resp.component.children[0].source_id #=> String
     #   resp.component.collection_properties #=> Hash
     #   resp.component.collection_properties["String"].identifiers #=> Array
     #   resp.component.collection_properties["String"].identifiers[0] #=> String
@@ -2964,6 +2975,7 @@ module Aws::AmplifyUIBuilder
     #   resp.component.environment_name #=> String
     #   resp.component.events #=> Hash
     #   resp.component.events["String"].action #=> String
+    #   resp.component.events["String"].binding_event #=> String
     #   resp.component.events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.component.events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.component.events["String"].parameters.anchor.bindings #=> Hash
@@ -3398,7 +3410,7 @@ module Aws::AmplifyUIBuilder
     #   resp = client.refresh_token({
     #     provider: "figma", # required, accepts figma
     #     refresh_token_body: { # required
-    #       token: "SyntheticRefreshTokenRequestBodyString", # required
+    #       token: "SensitiveString", # required
     #     },
     #   })
     #
@@ -3484,6 +3496,7 @@ module Aws::AmplifyUIBuilder
     #           events: {
     #             "String" => {
     #               action: "String",
+    #               binding_event: "String",
     #               parameters: {
     #                 anchor: {
     #                   binding_properties: {
@@ -3894,6 +3907,7 @@ module Aws::AmplifyUIBuilder
     #               value: "String",
     #             },
     #           },
+    #           source_id: "String",
     #         },
     #       ],
     #       collection_properties: {
@@ -3927,6 +3941,7 @@ module Aws::AmplifyUIBuilder
     #       events: {
     #         "String" => {
     #           action: "String",
+    #           binding_event: "String",
     #           parameters: {
     #             anchor: {
     #               binding_properties: {
@@ -4383,6 +4398,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.children[0].component_type #=> String
     #   resp.entity.children[0].events #=> Hash
     #   resp.entity.children[0].events["String"].action #=> String
+    #   resp.entity.children[0].events["String"].binding_event #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entity.children[0].events["String"].parameters.anchor.bindings #=> Hash
@@ -4623,6 +4639,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.children[0].properties["String"].type #=> String
     #   resp.entity.children[0].properties["String"].user_attribute #=> String
     #   resp.entity.children[0].properties["String"].value #=> String
+    #   resp.entity.children[0].source_id #=> String
     #   resp.entity.collection_properties #=> Hash
     #   resp.entity.collection_properties["String"].identifiers #=> Array
     #   resp.entity.collection_properties["String"].identifiers[0] #=> String
@@ -4642,6 +4659,7 @@ module Aws::AmplifyUIBuilder
     #   resp.entity.environment_name #=> String
     #   resp.entity.events #=> Hash
     #   resp.entity.events["String"].action #=> String
+    #   resp.entity.events["String"].binding_event #=> String
     #   resp.entity.events["String"].parameters.anchor.binding_properties.field #=> String
     #   resp.entity.events["String"].parameters.anchor.binding_properties.property #=> String
     #   resp.entity.events["String"].parameters.anchor.bindings #=> Hash
@@ -5007,7 +5025,7 @@ module Aws::AmplifyUIBuilder
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-amplifyuibuilder'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-04-11)
+------------------
+
+* Feature - In this release, we have added the ability to bind events to component level actions.
+
 1.4.0 (2022-02-28)
 ------------------
 

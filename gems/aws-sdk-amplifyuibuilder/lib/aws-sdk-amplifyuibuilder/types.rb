@@ -697,6 +697,7 @@ module Aws::AmplifyUIBuilder
     #             events: {
     #               "String" => {
     #                 action: "String",
+    #                 binding_event: "String",
     #                 parameters: {
     #                   anchor: {
     #                     binding_properties: {
@@ -1107,12 +1108,14 @@ module Aws::AmplifyUIBuilder
     #                 value: "String",
     #               },
     #             },
+    #             source_id: "String",
     #           },
     #         ],
     #         component_type: "String", # required
     #         events: {
     #           "String" => {
     #             action: "String",
+    #             binding_event: "String",
     #             parameters: {
     #               anchor: {
     #                 binding_properties: {
@@ -1523,6 +1526,7 @@ module Aws::AmplifyUIBuilder
     #             value: "String",
     #           },
     #         },
+    #         source_id: "String",
     #       }
     #
     # @!attribute [rw] children
@@ -1548,6 +1552,11 @@ module Aws::AmplifyUIBuilder
     #   `tags` as a valid property for `properties`.
     #   @return [Hash<String,Types::ComponentProperty>]
     #
+    # @!attribute [rw] source_id
+    #   The unique ID of the child component in its original source system,
+    #   such as Figma.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amplifyuibuilder-2021-08-11/ComponentChild AWS API Documentation
     #
     class ComponentChild < Struct.new(
@@ -1555,7 +1564,8 @@ module Aws::AmplifyUIBuilder
       :component_type,
       :events,
       :name,
-      :properties)
+      :properties,
+      :source_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1778,6 +1788,7 @@ module Aws::AmplifyUIBuilder
     #
     #       {
     #         action: "String",
+    #         binding_event: "String",
     #         parameters: {
     #           anchor: {
     #             binding_properties: {
@@ -2145,6 +2156,11 @@ module Aws::AmplifyUIBuilder
     #   The action to perform when a specific event is raised.
     #   @return [String]
     #
+    # @!attribute [rw] binding_event
+    #   Binds an event to an action on a component. When you specify a
+    #   `bindingEvent`, the event is called when the action is performed.
+    #   @return [String]
+    #
     # @!attribute [rw] parameters
     #   Describes information about the action.
     #   @return [Types::ActionParameters]
@@ -2153,6 +2169,7 @@ module Aws::AmplifyUIBuilder
     #
     class ComponentEvent < Struct.new(
       :action,
+      :binding_event,
       :parameters)
       SENSITIVE = []
       include Aws::Structure
@@ -2545,6 +2562,7 @@ module Aws::AmplifyUIBuilder
     #             events: {
     #               "String" => {
     #                 action: "String",
+    #                 binding_event: "String",
     #                 parameters: {
     #                   anchor: {
     #                     binding_properties: {
@@ -2955,6 +2973,7 @@ module Aws::AmplifyUIBuilder
     #                 value: "String",
     #               },
     #             },
+    #             source_id: "String",
     #           },
     #         ],
     #         collection_properties: {
@@ -2988,6 +3007,7 @@ module Aws::AmplifyUIBuilder
     #         events: {
     #           "String" => {
     #             action: "String",
+    #             binding_event: "String",
     #             parameters: {
     #               anchor: {
     #                 binding_properties: {
@@ -3538,6 +3558,7 @@ module Aws::AmplifyUIBuilder
     #               events: {
     #                 "String" => {
     #                   action: "String",
+    #                   binding_event: "String",
     #                   parameters: {
     #                     anchor: {
     #                       binding_properties: {
@@ -3948,6 +3969,7 @@ module Aws::AmplifyUIBuilder
     #                   value: "String",
     #                 },
     #               },
+    #               source_id: "String",
     #             },
     #           ],
     #           collection_properties: {
@@ -3981,6 +4003,7 @@ module Aws::AmplifyUIBuilder
     #           events: {
     #             "String" => {
     #               action: "String",
+    #               binding_event: "String",
     #               parameters: {
     #                 anchor: {
     #                   binding_properties: {
@@ -4674,7 +4697,7 @@ module Aws::AmplifyUIBuilder
     #       {
     #         provider: "figma", # required, accepts figma
     #         request: { # required
-    #           code: "SyntheticExchangeCodeForTokenRequestBodyString", # required
+    #           code: "SensitiveString", # required
     #           redirect_uri: "String", # required
     #         },
     #       }
@@ -4704,7 +4727,7 @@ module Aws::AmplifyUIBuilder
     #   data as a hash:
     #
     #       {
-    #         code: "SyntheticExchangeCodeForTokenRequestBodyString", # required
+    #         code: "SensitiveString", # required
     #         redirect_uri: "String", # required
     #       }
     #
@@ -5248,7 +5271,7 @@ module Aws::AmplifyUIBuilder
     #       {
     #         provider: "figma", # required, accepts figma
     #         refresh_token_body: { # required
-    #           token: "SyntheticRefreshTokenRequestBodyString", # required
+    #           token: "SensitiveString", # required
     #         },
     #       }
     #
@@ -5276,7 +5299,7 @@ module Aws::AmplifyUIBuilder
     #   data as a hash:
     #
     #       {
-    #         token: "SyntheticRefreshTokenRequestBodyString", # required
+    #         token: "SensitiveString", # required
     #       }
     #
     # @!attribute [rw] token
@@ -5580,6 +5603,7 @@ module Aws::AmplifyUIBuilder
     #             events: {
     #               "String" => {
     #                 action: "String",
+    #                 binding_event: "String",
     #                 parameters: {
     #                   anchor: {
     #                     binding_properties: {
@@ -5990,6 +6014,7 @@ module Aws::AmplifyUIBuilder
     #                 value: "String",
     #               },
     #             },
+    #             source_id: "String",
     #           },
     #         ],
     #         collection_properties: {
@@ -6023,6 +6048,7 @@ module Aws::AmplifyUIBuilder
     #         events: {
     #           "String" => {
     #             action: "String",
+    #             binding_event: "String",
     #             parameters: {
     #               anchor: {
     #                 binding_properties: {
@@ -6573,6 +6599,7 @@ module Aws::AmplifyUIBuilder
     #               events: {
     #                 "String" => {
     #                   action: "String",
+    #                   binding_event: "String",
     #                   parameters: {
     #                     anchor: {
     #                       binding_properties: {
@@ -6983,6 +7010,7 @@ module Aws::AmplifyUIBuilder
     #                   value: "String",
     #                 },
     #               },
+    #               source_id: "String",
     #             },
     #           ],
     #           collection_properties: {
@@ -7016,6 +7044,7 @@ module Aws::AmplifyUIBuilder
     #           events: {
     #             "String" => {
     #               action: "String",
+    #               binding_event: "String",
     #               parameters: {
     #                 anchor: {
     #                   binding_properties: {

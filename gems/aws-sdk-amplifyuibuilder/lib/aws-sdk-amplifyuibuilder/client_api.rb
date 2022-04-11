@@ -79,15 +79,12 @@ module Aws::AmplifyUIBuilder
     RefreshTokenResponse = Shapes::StructureShape.new(name: 'RefreshTokenResponse')
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SortDirection = Shapes::StringShape.new(name: 'SortDirection')
     SortProperty = Shapes::StructureShape.new(name: 'SortProperty')
     SortPropertyList = Shapes::ListShape.new(name: 'SortPropertyList')
     String = Shapes::StringShape.new(name: 'String')
-    SyntheticExchangeCodeForTokenRequestBodyString = Shapes::StringShape.new(name: 'SyntheticExchangeCodeForTokenRequestBodyString')
-    SyntheticExchangeCodeForTokenResponseString = Shapes::StringShape.new(name: 'SyntheticExchangeCodeForTokenResponseString')
-    SyntheticRefreshTokenRequestBodyString = Shapes::StringShape.new(name: 'SyntheticRefreshTokenRequestBodyString')
-    SyntheticRefreshTokenResponseString = Shapes::StringShape.new(name: 'SyntheticRefreshTokenResponseString')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -161,6 +158,7 @@ module Aws::AmplifyUIBuilder
     ComponentChild.add_member(:events, Shapes::ShapeRef.new(shape: ComponentEvents, location_name: "events"))
     ComponentChild.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     ComponentChild.add_member(:properties, Shapes::ShapeRef.new(shape: ComponentProperties, required: true, location_name: "properties"))
+    ComponentChild.add_member(:source_id, Shapes::ShapeRef.new(shape: String, location_name: "sourceId"))
     ComponentChild.struct_class = Types::ComponentChild
 
     ComponentChildList.member = Shapes::ShapeRef.new(shape: ComponentChild)
@@ -184,6 +182,7 @@ module Aws::AmplifyUIBuilder
     ComponentDataConfiguration.struct_class = Types::ComponentDataConfiguration
 
     ComponentEvent.add_member(:action, Shapes::ShapeRef.new(shape: String, location_name: "action"))
+    ComponentEvent.add_member(:binding_event, Shapes::ShapeRef.new(shape: String, location_name: "bindingEvent"))
     ComponentEvent.add_member(:parameters, Shapes::ShapeRef.new(shape: ActionParameters, location_name: "parameters"))
     ComponentEvent.struct_class = Types::ComponentEvent
 
@@ -304,13 +303,13 @@ module Aws::AmplifyUIBuilder
     ExchangeCodeForTokenRequest[:payload] = :request
     ExchangeCodeForTokenRequest[:payload_member] = ExchangeCodeForTokenRequest.member(:request)
 
-    ExchangeCodeForTokenRequestBody.add_member(:code, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenRequestBodyString, required: true, location_name: "code"))
+    ExchangeCodeForTokenRequestBody.add_member(:code, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "code"))
     ExchangeCodeForTokenRequestBody.add_member(:redirect_uri, Shapes::ShapeRef.new(shape: String, required: true, location_name: "redirectUri"))
     ExchangeCodeForTokenRequestBody.struct_class = Types::ExchangeCodeForTokenRequestBody
 
-    ExchangeCodeForTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenResponseString, required: true, location_name: "accessToken"))
+    ExchangeCodeForTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
     ExchangeCodeForTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
-    ExchangeCodeForTokenResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SyntheticExchangeCodeForTokenResponseString, required: true, location_name: "refreshToken"))
+    ExchangeCodeForTokenResponse.add_member(:refresh_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "refreshToken"))
     ExchangeCodeForTokenResponse.struct_class = Types::ExchangeCodeForTokenResponse
 
     ExportComponentsRequest.add_member(:app_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "appId"))
@@ -406,10 +405,10 @@ module Aws::AmplifyUIBuilder
     RefreshTokenRequest[:payload] = :refresh_token_body
     RefreshTokenRequest[:payload_member] = RefreshTokenRequest.member(:refresh_token_body)
 
-    RefreshTokenRequestBody.add_member(:token, Shapes::ShapeRef.new(shape: SyntheticRefreshTokenRequestBodyString, required: true, location_name: "token"))
+    RefreshTokenRequestBody.add_member(:token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "token"))
     RefreshTokenRequestBody.struct_class = Types::RefreshTokenRequestBody
 
-    RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SyntheticRefreshTokenResponseString, required: true, location_name: "accessToken"))
+    RefreshTokenResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "accessToken"))
     RefreshTokenResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "expiresIn"))
     RefreshTokenResponse.struct_class = Types::RefreshTokenResponse
 

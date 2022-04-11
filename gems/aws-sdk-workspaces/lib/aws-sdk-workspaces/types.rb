@@ -218,7 +218,7 @@ module Aws::WorkSpaces
     #   data as a hash:
     #
     #       {
-    #         name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #         name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #       }
     #
     # @!attribute [rw] name
@@ -694,7 +694,7 @@ module Aws::WorkSpaces
     #         bundle_description: "WorkspaceBundleDescription", # required
     #         image_id: "WorkspaceImageId", # required
     #         compute_type: { # required
-    #           name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #           name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #         },
     #         user_storage: { # required
     #           capacity: "NonEmptyString",
@@ -787,7 +787,7 @@ module Aws::WorkSpaces
     #               running_mode_auto_stop_timeout_in_minutes: 1,
     #               root_volume_size_gib: 1,
     #               user_volume_size_gib: 1,
-    #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #               compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #             },
     #             tags: [
     #               {
@@ -2304,7 +2304,7 @@ module Aws::WorkSpaces
     #
     #       {
     #         ec2_image_id: "Ec2ImageId", # required
-    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
+    #         ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP
     #         image_name: "WorkspaceImageName", # required
     #         image_description: "WorkspaceImageDescription", # required
     #         tags: [
@@ -2327,9 +2327,14 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`,
-    #   depending on the protocol.
+    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
+    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR`
+    #   or `BYOL_REGULAR_WSP`, depending on the protocol.
+    #
+    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
+    #   GraphicsPro.g4dn.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] image_name
@@ -2350,8 +2355,12 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at
-    #   this time.
+    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
+    #     this time
+    #
+    #   * Microsoft Office 2016 application subscription through AWS is
+    #     currently not supported for Graphics.g4dn Bring Your Own License
+    #     (BYOL) images
     #
     #    </note>
     #
@@ -2936,7 +2945,7 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #         },
     #       }
     #
@@ -4491,7 +4500,7 @@ module Aws::WorkSpaces
     #         running_mode_auto_stop_timeout_in_minutes: 1,
     #         root_volume_size_gib: 1,
     #         user_volume_size_gib: 1,
-    #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #         compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #       }
     #
     # @!attribute [rw] running_mode
@@ -4566,7 +4575,7 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #         },
     #         tags: [
     #           {

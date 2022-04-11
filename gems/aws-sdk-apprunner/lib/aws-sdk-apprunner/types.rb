@@ -135,8 +135,8 @@ module Aws::AppRunner
     #
     # @!attribute [rw] latest
     #   It's set to `true` for the configuration with the highest
-    #   `Revision` among all configurations that share the same `Name`.
-    #   It's set to `false` otherwise.
+    #   `Revision` among all configurations that share the same
+    #   `AutoScalingConfigurationName`. It's set to `false` otherwise.
     #   @return [Boolean]
     #
     # @!attribute [rw] status
@@ -643,6 +643,74 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateObservabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         observability_configuration_name: "ObservabilityConfigurationName", # required
+    #         trace_configuration: {
+    #           vendor: "AWSXRAY", # required, accepts AWSXRAY
+    #         },
+    #         tags: [
+    #           {
+    #             key: "TagKey",
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] observability_configuration_name
+    #   A name for the observability configuration. When you use it for the
+    #   first time in an Amazon Web Services Region, App Runner creates
+    #   revision number `1` of this name. When you use the same name in
+    #   subsequent calls, App Runner creates incremental revisions of the
+    #   configuration.
+    #
+    #   <note markdown="1"> The name `DefaultConfiguration` is reserved. You can't use it to
+    #   create a new observability configuration, and you can't create a
+    #   revision of it.
+    #
+    #    When you want to use your own observability configuration for your
+    #   App Runner service, *create a configuration with a different name*,
+    #   and then provide it when you create or update your service.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_configuration
+    #   The configuration of the tracing feature within this observability
+    #   configuration. If you don't specify it, App Runner doesn't enable
+    #   tracing.
+    #   @return [Types::TraceConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   A list of metadata items that you can associate with your
+    #   observability configuration resource. A tag is a key-value pair.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateObservabilityConfigurationRequest AWS API Documentation
+    #
+    class CreateObservabilityConfigurationRequest < Struct.new(
+      :observability_configuration_name,
+      :trace_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] observability_configuration
+    #   A description of the App Runner observability configuration that's
+    #   created by this request.
+    #   @return [Types::ObservabilityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateObservabilityConfigurationResponse AWS API Documentation
+    #
+    class CreateObservabilityConfigurationResponse < Struct.new(
+      :observability_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateServiceRequest
     #   data as a hash:
     #
@@ -714,6 +782,10 @@ module Aws::AppRunner
     #             vpc_connector_arn: "AppRunnerResourceArn",
     #           },
     #         },
+    #         observability_configuration: {
+    #           observability_enabled: false, # required
+    #           observability_configuration_arn: "AppRunnerResourceArn",
+    #         },
     #       }
     #
     # @!attribute [rw] service_name
@@ -728,8 +800,8 @@ module Aws::AppRunner
     #   @return [Types::SourceConfiguration]
     #
     # @!attribute [rw] instance_configuration
-    #   The runtime configuration of instances (scaling units) of the App
-    #   Runner service.
+    #   The runtime configuration of instances (scaling units) of your
+    #   service.
     #   @return [Types::InstanceConfiguration]
     #
     # @!attribute [rw] tags
@@ -751,15 +823,26 @@ module Aws::AppRunner
     #
     # @!attribute [rw] auto_scaling_configuration_arn
     #   The Amazon Resource Name (ARN) of an App Runner automatic scaling
-    #   configuration resource that you want to associate with the App
-    #   Runner service. If not provided, App Runner associates the latest
-    #   revision of a default auto scaling configuration.
+    #   configuration resource that you want to associate with your service.
+    #   If not provided, App Runner associates the latest revision of a
+    #   default auto scaling configuration.
+    #
+    #   Specify an ARN with a name and a revision number to associate that
+    #   revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3`
+    #
+    #   Specify just the name to associate the latest revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability`
     #   @return [String]
     #
     # @!attribute [rw] network_configuration
     #   Configuration settings related to network traffic of the web
     #   application that the App Runner service runs.
     #   @return [Types::NetworkConfiguration]
+    #
+    # @!attribute [rw] observability_configuration
+    #   The observability configuration of your service.
+    #   @return [Types::ServiceObservabilityConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CreateServiceRequest AWS API Documentation
     #
@@ -771,7 +854,8 @@ module Aws::AppRunner
       :encryption_configuration,
       :health_check_configuration,
       :auto_scaling_configuration_arn,
-      :network_configuration)
+      :network_configuration,
+      :observability_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -967,6 +1051,43 @@ module Aws::AppRunner
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteObservabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         observability_configuration_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner observability
+    #   configuration that you want to delete.
+    #
+    #   The ARN can be a full observability configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteObservabilityConfigurationRequest AWS API Documentation
+    #
+    class DeleteObservabilityConfigurationRequest < Struct.new(
+      :observability_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] observability_configuration
+    #   A description of the App Runner observability configuration that
+    #   this request just deleted.
+    #   @return [Types::ObservabilityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DeleteObservabilityConfigurationResponse AWS API Documentation
+    #
+    class DeleteObservabilityConfigurationResponse < Struct.new(
+      :observability_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DeleteServiceRequest
     #   data as a hash:
     #
@@ -1149,6 +1270,43 @@ module Aws::AppRunner
       :service_arn,
       :custom_domains,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeObservabilityConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         observability_configuration_arn: "AppRunnerResourceArn", # required
+    #       }
+    #
+    # @!attribute [rw] observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of the App Runner observability
+    #   configuration that you want a description for.
+    #
+    #   The ARN can be a full observability configuration ARN, or a partial
+    #   ARN ending with either `.../name ` or `.../name/revision `. If a
+    #   revision isn't specified, the latest active revision is described.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeObservabilityConfigurationRequest AWS API Documentation
+    #
+    class DescribeObservabilityConfigurationRequest < Struct.new(
+      :observability_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] observability_configuration
+    #   A full description of the App Runner observability configuration
+    #   that you specified in this request.
+    #   @return [Types::ObservabilityConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/DescribeObservabilityConfigurationResponse AWS API Documentation
+    #
+    class DescribeObservabilityConfigurationResponse < Struct.new(
+      :observability_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1588,7 +1746,7 @@ module Aws::AppRunner
     # @!attribute [rw] auto_scaling_configuration_name
     #   The name of the App Runner auto scaling configuration that you want
     #   to list. If specified, App Runner lists revisions that share this
-    #   name. If not specified, App Runner returns revisions of all
+    #   name. If not specified, App Runner returns revisions of all active
     #   configurations.
     #   @return [String]
     #
@@ -1596,10 +1754,10 @@ module Aws::AppRunner
     #   Set to `true` to list only the latest revision for each requested
     #   configuration name.
     #
-    #   Keep as `false` to list all revisions for each requested
+    #   Set to `false` to list all revisions for each requested
     #   configuration name.
     #
-    #   Default: `false`
+    #   Default: `true`
     #   @return [Boolean]
     #
     # @!attribute [rw] max_results
@@ -1708,6 +1866,82 @@ module Aws::AppRunner
     #
     class ListConnectionsResponse < Struct.new(
       :connection_summary_list,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListObservabilityConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         observability_configuration_name: "ObservabilityConfigurationName",
+    #         latest_only: false,
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] observability_configuration_name
+    #   The name of the App Runner observability configuration that you want
+    #   to list. If specified, App Runner lists revisions that share this
+    #   name. If not specified, App Runner returns revisions of all active
+    #   configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_only
+    #   Set to `true` to list only the latest revision for each requested
+    #   configuration name.
+    #
+    #   Set to `false` to list all revisions for each requested
+    #   configuration name.
+    #
+    #   Default: `true`
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to include in each response (result
+    #   page). It's used for a paginated request.
+    #
+    #   If you don't specify `MaxResults`, the request retrieves all
+    #   available results in a single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token from a previous result page. It's used for a paginated
+    #   request. The request retrieves the next result page. All other
+    #   parameter values must be identical to the ones that are specified in
+    #   the initial request.
+    #
+    #   If you don't specify `NextToken`, the request retrieves the first
+    #   result page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListObservabilityConfigurationsRequest AWS API Documentation
+    #
+    class ListObservabilityConfigurationsRequest < Struct.new(
+      :observability_configuration_name,
+      :latest_only,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] observability_configuration_summary_list
+    #   A list of summary information records for observability
+    #   configurations. In a paginated request, the request returns up to
+    #   `MaxResults` records for each call.
+    #   @return [Array<Types::ObservabilityConfigurationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that you can pass in a subsequent request to get the next
+    #   result page. It's returned in a paginated request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ListObservabilityConfigurationsResponse AWS API Documentation
+    #
+    class ListObservabilityConfigurationsResponse < Struct.new(
+      :observability_configuration_summary_list,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -1942,6 +2176,112 @@ module Aws::AppRunner
     #
     class NetworkConfiguration < Struct.new(
       :egress_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes an App Runner observability configuration resource. Multiple
+    # revisions of a configuration have the same
+    # `ObservabilityConfigurationName` and different
+    # `ObservabilityConfigurationRevision` values.
+    #
+    # The resource is designed to configure multiple features (currently one
+    # feature, tracing). This type contains optional members that describe
+    # the configuration of these features (currently one member,
+    # `TraceConfiguration`). If a feature member isn't specified, the
+    # feature isn't enabled.
+    #
+    # @!attribute [rw] observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of this observability configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] observability_configuration_name
+    #   The customer-provided observability configuration name. It can be
+    #   used in multiple revisions of a configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_configuration
+    #   The configuration of the tracing feature within this observability
+    #   configuration. If not specified, tracing isn't enabled.
+    #   @return [Types::TraceConfiguration]
+    #
+    # @!attribute [rw] observability_configuration_revision
+    #   The revision of this observability configuration. It's unique among
+    #   all the active configurations (`"Status": "ACTIVE"`) that share the
+    #   same `ObservabilityConfigurationName`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] latest
+    #   It's set to `true` for the configuration with the highest
+    #   `Revision` among all configurations that share the same
+    #   `ObservabilityConfigurationName`. It's set to `false` otherwise.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] status
+    #   The current state of the observability configuration. If the status
+    #   of a configuration revision is `INACTIVE`, it was deleted and can't
+    #   be used. Inactive configuration revisions are permanently removed
+    #   some time after they are deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time when the observability configuration was created. It's in
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] deleted_at
+    #   The time when the observability configuration was deleted. It's in
+    #   Unix time stamp format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ObservabilityConfiguration AWS API Documentation
+    #
+    class ObservabilityConfiguration < Struct.new(
+      :observability_configuration_arn,
+      :observability_configuration_name,
+      :trace_configuration,
+      :observability_configuration_revision,
+      :latest,
+      :status,
+      :created_at,
+      :deleted_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides summary information about an App Runner observability
+    # configuration resource.
+    #
+    # This type contains limited information about an observability
+    # configuration. It includes only identification information, without
+    # configuration details. It's returned by the
+    # ListObservabilityConfigurations action. Complete configuration
+    # information is returned by the CreateObservabilityConfiguration,
+    # DescribeObservabilityConfiguration, and
+    # DeleteObservabilityConfiguration actions using the
+    # ObservabilityConfiguration type.
+    #
+    # @!attribute [rw] observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of this observability configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] observability_configuration_name
+    #   The customer-provided observability configuration name. It can be
+    #   used in multiple revisions of a configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] observability_configuration_revision
+    #   The revision of this observability configuration. It's unique among
+    #   all the active configurations (`"Status": "ACTIVE"`) that share the
+    #   same `ObservabilityConfigurationName`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ObservabilityConfigurationSummary AWS API Documentation
+    #
+    class ObservabilityConfigurationSummary < Struct.new(
+      :observability_configuration_arn,
+      :observability_configuration_name,
+      :observability_configuration_revision)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2190,6 +2530,10 @@ module Aws::AppRunner
     #   application that this service runs.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] observability_configuration
+    #   The observability configuration of this service.
+    #   @return [Types::ServiceObservabilityConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/Service AWS API Documentation
     #
     class Service < Struct.new(
@@ -2206,7 +2550,49 @@ module Aws::AppRunner
       :encryption_configuration,
       :health_check_configuration,
       :auto_scaling_configuration_summary,
-      :network_configuration)
+      :network_configuration,
+      :observability_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the observability configuration of an App Runner service.
+    # These are additional observability features, like tracing, that you
+    # choose to enable. They're configured in a separate resource that you
+    # associate with your service.
+    #
+    # @note When making an API call, you may pass ServiceObservabilityConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         observability_enabled: false, # required
+    #         observability_configuration_arn: "AppRunnerResourceArn",
+    #       }
+    #
+    # @!attribute [rw] observability_enabled
+    #   When `true`, an observability configuration resource is associated
+    #   with the service, and an `ObservabilityConfigurationArn` is
+    #   specified.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] observability_configuration_arn
+    #   The Amazon Resource Name (ARN) of the observability configuration
+    #   that is associated with the service. Specified only when
+    #   `ObservabilityEnabled` is `true`.
+    #
+    #   Specify an ARN with a name and a revision number to associate that
+    #   revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3`
+    #
+    #   Specify just the name to associate the latest revision. For example:
+    #   `arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/ServiceObservabilityConfiguration AWS API Documentation
+    #
+    class ServiceObservabilityConfiguration < Struct.new(
+      :observability_enabled,
+      :observability_configuration_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2530,6 +2916,28 @@ module Aws::AppRunner
     #
     class TagResourceResponse < Aws::EmptyStructure; end
 
+    # Describes the configuration of the tracing feature within an App
+    # Runner observability configuration.
+    #
+    # @note When making an API call, you may pass TraceConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         vendor: "AWSXRAY", # required, accepts AWSXRAY
+    #       }
+    #
+    # @!attribute [rw] vendor
+    #   The implementation provider chosen for tracing App Runner services.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/TraceConfiguration AWS API Documentation
+    #
+    class TraceConfiguration < Struct.new(
+      :vendor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -2624,6 +3032,10 @@ module Aws::AppRunner
     #             vpc_connector_arn: "AppRunnerResourceArn",
     #           },
     #         },
+    #         observability_configuration: {
+    #           observability_enabled: false, # required
+    #           observability_configuration_arn: "AppRunnerResourceArn",
+    #         },
     #       }
     #
     # @!attribute [rw] service_arn
@@ -2646,7 +3058,7 @@ module Aws::AppRunner
     #
     # @!attribute [rw] instance_configuration
     #   The runtime configuration to apply to instances (scaling units) of
-    #   the App Runner service.
+    #   your service.
     #   @return [Types::InstanceConfiguration]
     #
     # @!attribute [rw] auto_scaling_configuration_arn
@@ -2665,6 +3077,10 @@ module Aws::AppRunner
     #   application that the App Runner service runs.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] observability_configuration
+    #   The observability configuration of your service.
+    #   @return [Types::ServiceObservabilityConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/UpdateServiceRequest AWS API Documentation
     #
     class UpdateServiceRequest < Struct.new(
@@ -2673,7 +3089,8 @@ module Aws::AppRunner
       :instance_configuration,
       :auto_scaling_configuration_arn,
       :health_check_configuration,
-      :network_configuration)
+      :network_configuration,
+      :observability_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

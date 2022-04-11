@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-04-11)
+------------------
+
+* Feature - Added API support that allows customers to create GPU-enabled WorkSpaces using EC2 G4dn instances.
+
 1.66.0 (2022-03-31)
 ------------------
 

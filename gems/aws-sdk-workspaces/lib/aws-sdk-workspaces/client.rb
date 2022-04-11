@@ -843,7 +843,7 @@ module Aws::WorkSpaces
     #     bundle_description: "WorkspaceBundleDescription", # required
     #     image_id: "WorkspaceImageId", # required
     #     compute_type: { # required
-    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #       name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #     },
     #     user_storage: { # required
     #       capacity: "NonEmptyString",
@@ -868,7 +868,7 @@ module Aws::WorkSpaces
     #   resp.workspace_bundle.image_id #=> String
     #   resp.workspace_bundle.root_storage.capacity #=> String
     #   resp.workspace_bundle.user_storage.capacity #=> String
-    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.workspace_bundle.compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.workspace_bundle.last_updated_time #=> Time
     #   resp.workspace_bundle.creation_time #=> Time
     #
@@ -910,7 +910,7 @@ module Aws::WorkSpaces
     #           running_mode_auto_stop_timeout_in_minutes: 1,
     #           root_volume_size_gib: 1,
     #           user_volume_size_gib: 1,
-    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #           compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #         },
     #         tags: [
     #           {
@@ -935,7 +935,7 @@ module Aws::WorkSpaces
     #   resp.failed_requests[0].workspace_request.workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.root_volume_size_gib #=> Integer
     #   resp.failed_requests[0].workspace_request.workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.failed_requests[0].workspace_request.workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.failed_requests[0].workspace_request.tags #=> Array
     #   resp.failed_requests[0].workspace_request.tags[0].key #=> String
     #   resp.failed_requests[0].workspace_request.tags[0].value #=> String
@@ -959,7 +959,7 @@ module Aws::WorkSpaces
     #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.pending_requests[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.pending_requests[0].workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.pending_requests[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.pending_requests[0].modification_states #=> Array
     #   resp.pending_requests[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.pending_requests[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -1675,7 +1675,7 @@ module Aws::WorkSpaces
     #   resp.bundles[0].image_id #=> String
     #   resp.bundles[0].root_storage.capacity #=> String
     #   resp.bundles[0].user_storage.capacity #=> String
-    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.bundles[0].last_updated_time #=> Time
     #   resp.bundles[0].creation_time #=> Time
     #   resp.next_token #=> String
@@ -1971,7 +1971,7 @@ module Aws::WorkSpaces
     #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
     #   resp.workspaces[0].workspace_properties.root_volume_size_gib #=> Integer
     #   resp.workspaces[0].workspace_properties.user_volume_size_gib #=> Integer
-    #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO"
+    #   resp.workspaces[0].workspace_properties.compute_type_name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE", "POWER", "GRAPHICS", "POWERPRO", "GRAPHICSPRO", "GRAPHICS_G4DN", "GRAPHICSPRO_G4DN"
     #   resp.workspaces[0].modification_states #=> Array
     #   resp.workspaces[0].modification_states[0].resource #=> String, one of "ROOT_VOLUME", "USER_VOLUME", "COMPUTE_TYPE"
     #   resp.workspaces[0].modification_states[0].state #=> String, one of "UPDATE_INITIATED", "UPDATE_IN_PROGRESS"
@@ -2276,9 +2276,14 @@ module Aws::WorkSpaces
     #   specify a value that ends in `_WSP`. To use PCoIP, specify a value
     #   that does not end in `_WSP`.
     #
-    #   For non-GPU-enabled bundles (bundles other than Graphics or
-    #   GraphicsPro), specify `BYOL_REGULAR` or `BYOL_REGULAR_WSP`, depending
-    #   on the protocol.
+    #   For non-GPU-enabled images (bundles other than Graphics.g4dn,
+    #   GraphicsPro.g4dn, Graphics, or GraphicsPro), specify `BYOL_REGULAR` or
+    #   `BYOL_REGULAR_WSP`, depending on the protocol.
+    #
+    #   <note markdown="1"> Use `BYOL_GRAPHICS_G4DN` ingestion for both Graphics.g4dn and
+    #   GraphicsPro.g4dn.
+    #
+    #    </note>
     #
     # @option params [required, String] :image_name
     #   The name of the WorkSpace image.
@@ -2295,8 +2300,12 @@ module Aws::WorkSpaces
     #   subscribing to Office for BYOL images, see [ Bring Your Own Windows
     #   Desktop Licenses][1].
     #
-    #   <note markdown="1"> Although this parameter is an array, only one item is allowed at this
-    #   time.
+    #   <note markdown="1"> * Although this parameter is an array, only one item is allowed at
+    #     this time
+    #
+    #   * Microsoft Office 2016 application subscription through AWS is
+    #     currently not supported for Graphics.g4dn Bring Your Own License
+    #     (BYOL) images
     #
     #    </note>
     #
@@ -2312,7 +2321,7 @@ module Aws::WorkSpaces
     #
     #   resp = client.import_workspace_image({
     #     ec2_image_id: "Ec2ImageId", # required
-    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_REGULAR_WSP
+    #     ingestion_process: "BYOL_REGULAR", # required, accepts BYOL_REGULAR, BYOL_GRAPHICS, BYOL_GRAPHICSPRO, BYOL_GRAPHICS_G4DN, BYOL_REGULAR_WSP
     #     image_name: "WorkspaceImageName", # required
     #     image_description: "WorkspaceImageDescription", # required
     #     tags: [
@@ -2638,7 +2647,7 @@ module Aws::WorkSpaces
     #       running_mode_auto_stop_timeout_in_minutes: 1,
     #       root_volume_size_gib: 1,
     #       user_volume_size_gib: 1,
-    #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO
+    #       compute_type_name: "VALUE", # accepts VALUE, STANDARD, PERFORMANCE, POWER, GRAPHICS, POWERPRO, GRAPHICSPRO, GRAPHICS_G4DN, GRAPHICSPRO_G4DN
     #     },
     #   })
     #
@@ -3296,7 +3305,7 @@ module Aws::WorkSpaces
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-workspaces'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
