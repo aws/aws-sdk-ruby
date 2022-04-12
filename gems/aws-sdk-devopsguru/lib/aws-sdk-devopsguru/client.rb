@@ -358,8 +358,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -401,6 +408,29 @@ module Aws::DevOpsGuru
     # @param [Hash] params ({})
     def add_notification_channel(params = {}, options = {})
       req = build_request(:add_notification_channel, params)
+      req.send_request(options)
+    end
+
+    # Deletes the insight along with the associated anomalies, events and
+    # recommendations.
+    #
+    # @option params [required, String] :id
+    #   The ID of the insight.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_insight({
+    #     id: "InsightId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsight AWS API Documentation
+    #
+    # @overload delete_insight(params = {})
+    # @param [Hash] params ({})
+    def delete_insight(params = {}, options = {})
+      req = build_request(:delete_insight, params)
       req.send_request(options)
     end
 
@@ -631,8 +661,11 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
-    # This operation lists details about a DevOps Guru event source that is
-    # shared with your  account.
+    # Returns the integration status of services that are integrated with
+    # DevOps Guru as Consumer via EventBridge. The one service that can be
+    # integrated with DevOps Guru is Amazon CodeGuru Profiler, which can
+    # produce proactive recommendations which can be stored and viewed in
+    # DevOps Guru.
     #
     # @return [Types::DescribeEventSourcesConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2020,10 +2053,14 @@ module Aws::DevOpsGuru
       req.send_request(options)
     end
 
-    # Updates the event source configuration.
+    # Enables or disables integration with a service that can be integrated
+    # with DevOps Guru. The one service that can be integrated with DevOps
+    # Guru is Amazon CodeGuru Profiler, which can produce proactive
+    # recommendations which can be stored and viewed in DevOps Guru.
     #
     # @option params [Types::EventSourcesConfig] :event_sources
-    #   The name of the event source.
+    #   Configuration information about the integration of DevOps Guru as the
+    #   Consumer via EventBridge with another AWS Service.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2135,7 +2172,7 @@ module Aws::DevOpsGuru
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-devopsguru'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

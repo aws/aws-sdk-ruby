@@ -148,6 +148,7 @@ module Aws::EFS
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::ListShape.new(name: 'Tags')
+    ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     ThroughputLimitExceeded = Shapes::StructureShape.new(name: 'ThroughputLimitExceeded')
     ThroughputMode = Shapes::StringShape.new(name: 'ThroughputMode')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
@@ -557,6 +558,10 @@ module Aws::EFS
 
     Tags.member = Shapes::ShapeRef.new(shape: Tag)
 
+    ThrottlingException.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, location_name: "ErrorCode"))
+    ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    ThrottlingException.struct_class = Types::ThrottlingException
+
     ThroughputLimitExceeded.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "ErrorCode"))
     ThroughputLimitExceeded.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ThroughputLimitExceeded.struct_class = Types::ThroughputLimitExceeded
@@ -611,6 +616,7 @@ module Aws::EFS
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: FileSystemNotFound)
         o.errors << Shapes::ShapeRef.new(shape: AccessPointLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:create_file_system, Seahorse::Model::Operation.new.tap do |o|

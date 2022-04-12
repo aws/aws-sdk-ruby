@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.306.0 (2022-04-12)
+------------------
+
+* Feature - X2idn and X2iedn instances are powered by 3rd generation Intel Xeon Scalable processors with an all-core turbo frequency up to 3.5 GHzAmazon EC2. C6a instances are powered by 3rd generation AMD EPYC processors.
+
 1.305.0 (2022-03-30)
 ------------------
 

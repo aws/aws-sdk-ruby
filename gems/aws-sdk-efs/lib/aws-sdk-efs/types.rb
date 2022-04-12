@@ -10,8 +10,8 @@
 module Aws::EFS
   module Types
 
-    # Returned if the access point you are trying to create already exists,
-    # with the creation token you provided in the request.
+    # Returned if the access point that you are trying to create already
+    # exists, with the creation token you provided in the request.
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -109,7 +109,13 @@ module Aws::EFS
     end
 
     # Returned if the Amazon Web Services account has already created the
-    # maximum number of access points allowed per file system.
+    # maximum number of access points allowed per file system. For more
+    # informaton, see
+    # [https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -166,8 +172,8 @@ module Aws::EFS
 
     # Returned if the Availability Zone that was specified for a mount
     # target is different from the Availability Zone that was specified for
-    # One Zone storage classes. For more information, see [Regional and One
-    # Zone storage redundancy][1].
+    # One Zone storage. For more information, see [Regional and One Zone
+    # storage redundancy][1].
     #
     #
     #
@@ -223,7 +229,7 @@ module Aws::EFS
     #   * <b> <code>ENABLING</code> </b> - EFS is turning on automatic
     #     backups for the file system.
     #
-    #   * <b> <code>DISABLED</code> </b> - automatic back ups are turned off
+    #   * <b> <code>DISABLED</code> </b> - Automatic back ups are turned off
     #     for the file system.
     #
     #   * <b> <code>DISABLING</code> </b> - EFS is turning off automatic
@@ -240,7 +246,7 @@ module Aws::EFS
 
     # @!attribute [rw] backup_policy
     #   Describes the file system's backup policy, indicating whether
-    #   automatic backups are turned on or off..
+    #   automatic backups are turned on or off.
     #   @return [Types::BackupPolicy]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/BackupPolicyDescription AWS API Documentation
@@ -342,7 +348,7 @@ module Aws::EFS
     #   point can only access the root directory and below. If the
     #   `RootDirectory` &gt; `Path` specified does not exist, EFS creates it
     #   and applies the `CreationInfo` settings when a client connects to an
-    #   access point. When specifying a `RootDirectory`, you need to provide
+    #   access point. When specifying a `RootDirectory`, you must provide
     #   the `Path`, and the `CreationInfo`.
     #
     #   Amazon EFS creates a root directory only if you have provided the
@@ -418,7 +424,7 @@ module Aws::EFS
     #
     # @!attribute [rw] kms_key_id
     #   The ID of the KMS key that you want to use to protect the encrypted
-    #   file system. This parameter is only required if you want to use a
+    #   file system. This parameter is required only if you want to use a
     #   non-default KMS key. If this parameter is not specified, the default
     #   KMS key for Amazon EFS is used. You can specify a KMS key ID using
     #   the following formats:
@@ -1213,20 +1219,19 @@ module Aws::EFS
     #       }
     #
     # @!attribute [rw] file_system_id
-    #   You can retrieve replication configurations for a specific file
-    #   system by providing a file system ID.
+    #   You can retrieve the replication configuration for a specific file
+    #   system by providing its file system ID.
     #   @return [String]
     #
     # @!attribute [rw] next_token
     #   `NextToken` is present if the response is paginated. You can use
-    #   `NextMarker` in a subsequent request to fetch the next page of
+    #   `NextToken` in a subsequent request to fetch the next page of
     #   output.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   (Optional) You can optionally specify the `MaxItems` parameter to
-    #   limit the number of objects returned in a response. The default
-    #   value is 100.
+    #   (Optional) To limit the number of objects returned in a response,
+    #   you can specify the `MaxItems` parameter. The default value is 100.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/DescribeReplicationConfigurationsRequest AWS API Documentation
@@ -1240,7 +1245,7 @@ module Aws::EFS
     end
 
     # @!attribute [rw] replications
-    #   The collection of replication configurations returned.
+    #   The collection of replication configurations that is returned.
     #   @return [Array<Types::ReplicationConfigurationDescription>]
     #
     # @!attribute [rw] next_token
@@ -1324,7 +1329,11 @@ module Aws::EFS
     # configuration.
     #
     # @!attribute [rw] status
-    #   Describes the status of the destination Amazon EFS file system.
+    #   Describes the status of the destination Amazon EFS file system. If
+    #   the status is `ERROR`, the destination file system in the
+    #   replication configuration is in a failed state and is unrecoverable.
+    #   To access the file system data, restore a backup of the failed file
+    #   system to a new file system.
     #   @return [String]
     #
     # @!attribute [rw] file_system_id
@@ -1337,11 +1346,11 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] last_replicated_timestamp
-    #   The time when the most recent sync successfully completed on the
+    #   The time when the most recent sync was successfully completed on the
     #   destination file system. Any changes to data on the source file
-    #   system that occurred prior to this time were successfully replicated
-    #   to the destination file system. Any changes that occurred after this
-    #   time might not be fully replicated.
+    #   system that occurred before this time have been successfully
+    #   replicated to the destination file system. Any changes that occurred
+    #   after this time might not be fully replicated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/Destination AWS API Documentation
@@ -1368,33 +1377,34 @@ module Aws::EFS
     #       }
     #
     # @!attribute [rw] region
-    #   To create a file system that uses regional storage, specify the
+    #   To create a file system that uses Regional storage, specify the
     #   Amazon Web Services Region in which to create the destination file
     #   system.
     #   @return [String]
     #
     # @!attribute [rw] availability_zone_name
-    #   To create a file system that uses One Zone storage, specify the name
-    #   of the Availability Zone in which to create the destination file
-    #   system.
+    #   To create a file system that uses EFS One Zone storage, specify the
+    #   name of the Availability Zone in which to create the destination
+    #   file system.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   Specifies the KMS key you want to use to encrypt the destination
-    #   file system. If you do not specify a KMS key, EFS uses your default
-    #   KMS key for Amazon EFS, `/aws/elasticfilesystem`. This ID can be in
-    #   one of the following formats:
+    #   Specifies the Key Management Service (KMS) key that you want to use
+    #   to encrypt the destination file system. If you do not specify a KMS
+    #   key, Amazon EFS uses your default KMS key for Amazon EFS,
+    #   `/aws/elasticfilesystem`. This ID can be in one of the following
+    #   formats:
     #
-    #   * Key ID - A unique identifier of the key, for example
+    #   * Key ID - The unique identifier of the key, for example
     #     `1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
-    #   * ARN - An Amazon Resource Name (ARN) for the key, for example
+    #   * ARN - The Amazon Resource Name (ARN) for the key, for example
     #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`.
     #
     #   * Key alias - A previously created display name for a key, for
     #     example `alias/projectKey1`.
     #
-    #   * Key alias ARN - An ARN for a key alias, for example
+    #   * Key alias ARN - The ARN for a key alias, for example
     #     `arn:aws:kms:us-west-2:444455556666:alias/projectKey1`.
     #   @return [String]
     #
@@ -1775,8 +1785,8 @@ module Aws::EFS
     # throughput. This value might be returned when you try to create a file
     # system in provisioned throughput mode, when you attempt to increase
     # the provisioned throughput of an existing file system, or when you
-    # attempt to change an existing file system from bursting to provisioned
-    # throughput mode. Try again later.
+    # attempt to change an existing file system from Bursting Throughput to
+    # Provisioned Throughput mode. Try again later.
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -1830,8 +1840,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the `FileSystemPolicy` is is malformed or contains an
-    # error such as an invalid parameter value or a missing required
+    # Returned if the `FileSystemPolicy` is malformed or contains an error
+    # such as a parameter value that is not valid or a missing required
     # parameter. Returned in the case of a policy lockout safety check
     # error.
     #
@@ -1902,7 +1912,7 @@ module Aws::EFS
     end
 
     # Describes a policy used by EFS lifecycle management and EFS
-    # intelligent tiering that specifies when to transition files into and
+    # Intelligent-Tiering that specifies when to transition files into and
     # out of the file system's Infrequent Access (IA) storage class. For
     # more information, see [EFS Intelligent‐Tiering and EFS Lifecycle
     # Management][1].
@@ -1910,8 +1920,8 @@ module Aws::EFS
     # <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     # `PutLifecycleConfiguration` API action, Amazon EFS requires that each
     # `LifecyclePolicy` object have only a single transition. This means
-    # that in a request body, `LifecyclePolicies` needs to be structured as
-    # an array of `LifecyclePolicy` objects, one object for each transition,
+    # that in a request body, `LifecyclePolicies` must be structured as an
+    # array of `LifecyclePolicy` objects, one object for each transition,
     # `TransitionToIA`, `TransitionToPrimaryStorageClass`. For more
     # information, see the request examples in PutLifecycleConfiguration.
     #
@@ -2158,11 +2168,11 @@ module Aws::EFS
     end
 
     # The calling account has reached the limit for elastic network
-    # interfaces for the specific Amazon Web Services Region. The client
-    # should try to delete some elastic network interfaces or get the
-    # account limit raised. For more information, see [Amazon VPC Limits][1]
-    # in the <i>Amazon VPC User Guide </i> (see the Network interfaces per
-    # VPC entry in the table).
+    # interfaces for the specific Amazon Web Services Region. Either delete
+    # some network interfaces or request that the account quota be raised.
+    # For more information, see [Amazon VPC Quotas][1] in the *Amazon VPC
+    # User Guide* (see the **Network interfaces per Region** entry in the
+    # **Network interfaces** table).
     #
     #
     #
@@ -2302,7 +2312,7 @@ module Aws::EFS
     #
     #   <note markdown="1"> Starting in October, 2021, you will receive an error when setting
     #   the account preference to `SHORT_ID`. Contact Amazon Web Services
-    #   support if you receive an error and need to use short IDs for file
+    #   support if you receive an error and must use short IDs for file
     #   system and mount target resources.
     #
     #    </note>
@@ -2383,15 +2393,15 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
-    #   (Optional) A flag to indicate whether to bypass the
-    #   `FileSystemPolicy` lockout safety check. The policy lockout safety
-    #   check determines whether the policy in the request will prevent the
-    #   principal making the request will be locked out from making future
-    #   `PutFileSystemPolicy` requests on the file system. Set
+    #   (Optional) A boolean that specifies whether or not to bypass the
+    #   `FileSystemPolicy` lockout safety check. The lockout safety check
+    #   determines whether the policy in the request will lock out, or
+    #   prevent, the IAM principal that is making the request from making
+    #   future `PutFileSystemPolicy` requests on this file system. Set
     #   `BypassPolicyLockoutSafetyCheck` to `True` only when you intend to
-    #   prevent the principal that is making the request from making a
-    #   subsequent `PutFileSystemPolicy` request on the file system. The
-    #   default value is False.
+    #   prevent the IAM principal that is making the request from making
+    #   subsequent `PutFileSystemPolicy` requests on this file system. The
+    #   default value is `False`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/PutFileSystemPolicyRequest AWS API Documentation
@@ -2425,7 +2435,7 @@ module Aws::EFS
     # @!attribute [rw] lifecycle_policies
     #   An array of `LifecyclePolicy` objects that define the file system's
     #   `LifecycleConfiguration` object. A `LifecycleConfiguration` object
-    #   informs EFS lifecycle management and intelligent tiering of the
+    #   informs EFS lifecycle management and EFS Intelligent-Tiering of the
     #   following:
     #
     #   * When to move files in the file system from primary storage to the
@@ -2436,11 +2446,10 @@ module Aws::EFS
     #   <note markdown="1"> When using the `put-lifecycle-configuration` CLI command or the
     #   `PutLifecycleConfiguration` API action, Amazon EFS requires that
     #   each `LifecyclePolicy` object have only a single transition. This
-    #   means that in a request body, `LifecyclePolicies` needs to be
-    #   structured as an array of `LifecyclePolicy` objects, one object for
-    #   each transition, `TransitionToIA`,
-    #   `TransitionToPrimaryStorageClass`. See the example requests in the
-    #   following section for more information.
+    #   means that in a request body, `LifecyclePolicies` must be structured
+    #   as an array of `LifecyclePolicy` objects, one object for each
+    #   transition, `TransitionToIA`, `TransitionToPrimaryStorageClass`. See
+    #   the example requests in the following section for more information.
     #
     #    </note>
     #   @return [Array<Types::LifecyclePolicy>]
@@ -2465,8 +2474,8 @@ module Aws::EFS
     #   @return [String]
     #
     # @!attribute [rw] source_file_system_arn
-    #   The ARN of the current source file system in the replication
-    #   configuration.
+    #   The Amazon Resource Name (ARN) of the current source file system in
+    #   the replication configuration.
     #   @return [String]
     #
     # @!attribute [rw] original_source_file_system_arn
@@ -2479,7 +2488,7 @@ module Aws::EFS
     #   @return [Time]
     #
     # @!attribute [rw] destinations
-    #   Array of destination objects. Only one destination object is
+    #   An array of destination objects. Only one destination object is
     #   supported.
     #   @return [Array<Types::Destination>]
     #
@@ -2496,7 +2505,7 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if the specified file system did not have a replication
+    # Returned if the specified file system does not have a replication
     # configuration.
     #
     # @!attribute [rw] error_code
@@ -2623,7 +2632,7 @@ module Aws::EFS
     end
 
     # Returned if one of the specified security groups doesn't exist in the
-    # subnet's VPC.
+    # subnet's virtual private cloud (VPC).
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error
@@ -2739,6 +2748,35 @@ module Aws::EFS
       include Aws::Structure
     end
 
+    # Returned when the `CreateAccessPoint` API action is called too quickly
+    # and the number of Access Points in the account is nearing the limit of
+    # 120.
+    #
+    # @!attribute [rw] error_code
+    #   The error code is a string that uniquely identifies an error
+    #   condition. It is meant to be read and understood by programs that
+    #   detect and handle errors by type.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message contains a generic description of the error
+    #   condition in English. It is intended for a human audience. Simple
+    #   programs display the message directly to the end user if they
+    #   encounter an error condition they don't know how or don't care to
+    #   handle. Sophisticated programs with more exhaustive error handling
+    #   and proper internationalization are more likely to ignore the error
+    #   message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticfilesystem-2015-02-01/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :error_code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Returned if the throughput mode or amount of provisioned throughput
     # can't be changed because the throughput limit of 1024 MiB/s has been
     # reached.
@@ -2768,8 +2806,8 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    # Returned if you don’t wait at least 24 hours before changing the
-    # throughput mode, or decreasing the Provisioned Throughput value.
+    # Returned if you don’t wait at least 24 hours before either changing
+    # the throughput mode, or decreasing the Provisioned Throughput value.
     #
     # @!attribute [rw] error_code
     #   The error code is a string that uniquely identifies an error

@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.130.1 (2022-04-12)
+------------------
+
 * Issue - Don't call `refresh!` on non-refreshable `Credentials` when retrying errors (#2685).
 
 3.130.0 (2022-03-11)

@@ -379,7 +379,8 @@ module Aws::IoTTwinMaker
     #         },
     #         property_values: [
     #           {
-    #             timestamp: Time.now, # required
+    #             time: "Time",
+    #             timestamp: Time.now,
     #             value: { # required
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -419,6 +420,7 @@ module Aws::IoTTwinMaker
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.external_id_property["String"] #=> String
     #   resp.error_entries[0].errors[0].entry.entity_property_reference.property_name #=> String
     #   resp.error_entries[0].errors[0].entry.property_values #=> Array
+    #   resp.error_entries[0].errors[0].entry.property_values[0].time #=> String
     #   resp.error_entries[0].errors[0].entry.property_values[0].timestamp #=> Time
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.boolean_value #=> Boolean
     #   resp.error_entries[0].errors[0].entry.property_values[0].value.double_value #=> Float
@@ -443,8 +445,6 @@ module Aws::IoTTwinMaker
     end
 
     # Creates a component type.
-    #
-    # TwinMaker is in public preview and is subject to change.
     #
     # @option params [required, String] :component_type_id
     #   The ID of the component type.
@@ -688,7 +688,7 @@ module Aws::IoTTwinMaker
     #               is_stored_externally: false,
     #               is_time_series: false,
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -1234,8 +1234,11 @@ module Aws::IoTTwinMaker
     # @option params [String] :component_type_id
     #   The ID of the component type.
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :end_date_time
+    # @option params [Time,DateTime,Date,Integer,String] :end_date_time
     #   The date and time of the latest property value to return.
+    #
+    # @option params [String] :end_time
+    #   Timestamp represented in ISO 8601 format
     #
     # @option params [String] :entity_id
     #   The ID of the entity.
@@ -1259,8 +1262,11 @@ module Aws::IoTTwinMaker
     # @option params [required, Array<String>] :selected_properties
     #   A list of properties whose value histories the request retrieves.
     #
-    # @option params [required, Time,DateTime,Date,Integer,String] :start_date_time
+    # @option params [Time,DateTime,Date,Integer,String] :start_date_time
     #   The date and time of the earliest property value to return.
+    #
+    # @option params [String] :start_time
+    #   Timestamp represented in ISO 8601 format
     #
     # @option params [required, String] :workspace_id
     #   The ID of the workspace.
@@ -1277,7 +1283,8 @@ module Aws::IoTTwinMaker
     #   resp = client.get_property_value_history({
     #     component_name: "Name",
     #     component_type_id: "ComponentTypeId",
-    #     end_date_time: Time.now, # required
+    #     end_date_time: Time.now,
+    #     end_time: "Time",
     #     entity_id: "EntityId",
     #     interpolation: {
     #       interpolation_type: "LINEAR", # accepts LINEAR
@@ -1315,7 +1322,8 @@ module Aws::IoTTwinMaker
     #       },
     #     ],
     #     selected_properties: ["String"], # required
-    #     start_date_time: Time.now, # required
+    #     start_date_time: Time.now,
+    #     start_time: "Time",
     #     workspace_id: "Id", # required
     #   })
     #
@@ -1329,6 +1337,7 @@ module Aws::IoTTwinMaker
     #   resp.property_values[0].entity_property_reference.external_id_property["String"] #=> String
     #   resp.property_values[0].entity_property_reference.property_name #=> String
     #   resp.property_values[0].values #=> Array
+    #   resp.property_values[0].values[0].time #=> String
     #   resp.property_values[0].values[0].timestamp #=> Time
     #   resp.property_values[0].values[0].value.boolean_value #=> Boolean
     #   resp.property_values[0].values[0].value.double_value #=> Float
@@ -1520,6 +1529,7 @@ module Aws::IoTTwinMaker
     #     filters: [
     #       {
     #         component_type_id: "ComponentTypeId",
+    #         external_id: "String",
     #         parent_entity_id: "ParentEntityId",
     #       },
     #     ],
@@ -1957,7 +1967,7 @@ module Aws::IoTTwinMaker
     #               is_stored_externally: false,
     #               is_time_series: false,
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -2097,7 +2107,7 @@ module Aws::IoTTwinMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iottwinmaker'
-      context[:gem_version] = '1.3.0'
+      context[:gem_version] = '1.4.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

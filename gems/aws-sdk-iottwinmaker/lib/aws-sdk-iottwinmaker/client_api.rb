@@ -160,6 +160,7 @@ module Aws::IoTTwinMaker
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Time = Shapes::StringShape.new(name: 'Time')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
     TwinMakerArn = Shapes::StringShape.new(name: 'TwinMakerArn')
@@ -443,7 +444,8 @@ module Aws::IoTTwinMaker
 
     GetPropertyValueHistoryRequest.add_member(:component_name, Shapes::ShapeRef.new(shape: Name, location_name: "componentName"))
     GetPropertyValueHistoryRequest.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
-    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateTime"))
+    GetPropertyValueHistoryRequest.add_member(:end_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "endDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use endTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Time, location_name: "endTime"))
     GetPropertyValueHistoryRequest.add_member(:entity_id, Shapes::ShapeRef.new(shape: EntityId, location_name: "entityId"))
     GetPropertyValueHistoryRequest.add_member(:interpolation, Shapes::ShapeRef.new(shape: InterpolationParameters, location_name: "interpolation"))
     GetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
@@ -451,7 +453,8 @@ module Aws::IoTTwinMaker
     GetPropertyValueHistoryRequest.add_member(:order_by_time, Shapes::ShapeRef.new(shape: OrderByTime, location_name: "orderByTime"))
     GetPropertyValueHistoryRequest.add_member(:property_filters, Shapes::ShapeRef.new(shape: PropertyFilters, location_name: "propertyFilters"))
     GetPropertyValueHistoryRequest.add_member(:selected_properties, Shapes::ShapeRef.new(shape: SelectedPropertyList, required: true, location_name: "selectedProperties"))
-    GetPropertyValueHistoryRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateTime"))
+    GetPropertyValueHistoryRequest.add_member(:start_date_time, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "startDateTime", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use startTime instead."}))
+    GetPropertyValueHistoryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Time, location_name: "startTime"))
     GetPropertyValueHistoryRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "workspaceId"))
     GetPropertyValueHistoryRequest.struct_class = Types::GetPropertyValueHistoryRequest
 
@@ -530,9 +533,11 @@ module Aws::IoTTwinMaker
     ListComponentTypesResponse.struct_class = Types::ListComponentTypesResponse
 
     ListEntitiesFilter.add_member(:component_type_id, Shapes::ShapeRef.new(shape: ComponentTypeId, location_name: "componentTypeId"))
+    ListEntitiesFilter.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     ListEntitiesFilter.add_member(:parent_entity_id, Shapes::ShapeRef.new(shape: ParentEntityId, location_name: "parentEntityId"))
     ListEntitiesFilter.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ListEntitiesFilter.add_member_subclass(:component_type_id, Types::ListEntitiesFilter::ComponentTypeId)
+    ListEntitiesFilter.add_member_subclass(:external_id, Types::ListEntitiesFilter::ExternalId)
     ListEntitiesFilter.add_member_subclass(:parent_entity_id, Types::ListEntitiesFilter::ParentEntityId)
     ListEntitiesFilter.add_member_subclass(:unknown, Types::ListEntitiesFilter::Unknown)
     ListEntitiesFilter.struct_class = Types::ListEntitiesFilter
@@ -635,7 +640,8 @@ module Aws::IoTTwinMaker
     PropertyResponses.key = Shapes::ShapeRef.new(shape: Name)
     PropertyResponses.value = Shapes::ShapeRef.new(shape: PropertyResponse)
 
-    PropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "timestamp"))
+    PropertyValue.add_member(:time, Shapes::ShapeRef.new(shape: Time, location_name: "time"))
+    PropertyValue.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, deprecated: true, location_name: "timestamp", metadata: {"deprecatedMessage"=>"This field is deprecated and will throw an error in the future. Use time instead."}))
     PropertyValue.add_member(:value, Shapes::ShapeRef.new(shape: DataValue, required: true, location_name: "value"))
     PropertyValue.struct_class = Types::PropertyValue
 

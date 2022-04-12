@@ -74,7 +74,8 @@ module Aws::IoTTwinMaker
     #             },
     #             property_values: [
     #               {
-    #                 timestamp: Time.now, # required
+    #                 time: "Time",
+    #                 timestamp: Time.now,
     #                 value: { # required
     #                   boolean_value: false,
     #                   double_value: 1.0,
@@ -205,7 +206,7 @@ module Aws::IoTTwinMaker
     #               is_stored_externally: false,
     #               is_time_series: false,
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -405,7 +406,7 @@ module Aws::IoTTwinMaker
     #               is_stored_externally: false,
     #               is_time_series: false,
     #             },
-    #             update_type: "UPDATE", # accepts UPDATE, DELETE
+    #             update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #             value: {
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -728,7 +729,7 @@ module Aws::IoTTwinMaker
     #                   is_stored_externally: false,
     #                   is_time_series: false,
     #                 },
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE
+    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #                 value: {
     #                   boolean_value: false,
     #                   double_value: 1.0,
@@ -969,7 +970,7 @@ module Aws::IoTTwinMaker
     #
     # @!attribute [rw] is_native
     #   A Boolean value that specifies whether the data connector is native
-    #   to TwinMaker.
+    #   to IoT TwinMaker.
     #   @return [Boolean]
     #
     # @!attribute [rw] lambda
@@ -1675,7 +1676,8 @@ module Aws::IoTTwinMaker
     #       {
     #         component_name: "Name",
     #         component_type_id: "ComponentTypeId",
-    #         end_date_time: Time.now, # required
+    #         end_date_time: Time.now,
+    #         end_time: "Time",
     #         entity_id: "EntityId",
     #         interpolation: {
     #           interpolation_type: "LINEAR", # accepts LINEAR
@@ -1713,7 +1715,8 @@ module Aws::IoTTwinMaker
     #           },
     #         ],
     #         selected_properties: ["String"], # required
-    #         start_date_time: Time.now, # required
+    #         start_date_time: Time.now,
+    #         start_time: "Time",
     #         workspace_id: "Id", # required
     #       }
     #
@@ -1728,6 +1731,10 @@ module Aws::IoTTwinMaker
     # @!attribute [rw] end_date_time
     #   The date and time of the latest property value to return.
     #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   Timestamp represented in ISO 8601 format
+    #   @return [String]
     #
     # @!attribute [rw] entity_id
     #   The ID of the entity.
@@ -1762,6 +1769,10 @@ module Aws::IoTTwinMaker
     #   The date and time of the earliest property value to return.
     #   @return [Time]
     #
+    # @!attribute [rw] start_time
+    #   Timestamp represented in ISO 8601 format
+    #   @return [String]
+    #
     # @!attribute [rw] workspace_id
     #   The ID of the workspace.
     #   @return [String]
@@ -1770,6 +1781,7 @@ module Aws::IoTTwinMaker
       :component_name,
       :component_type_id,
       :end_date_time,
+      :end_time,
       :entity_id,
       :interpolation,
       :max_results,
@@ -1778,6 +1790,7 @@ module Aws::IoTTwinMaker
       :property_filters,
       :selected_properties,
       :start_date_time,
+      :start_time,
       :workspace_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2144,12 +2157,18 @@ module Aws::IoTTwinMaker
     #   The ID of the component type in the entities in the list.
     #   @return [String]
     #
+    # @!attribute [rw] external_id
+    #   The external-Id property of a component. The external-Id property is
+    #   the primary key of an external storage system.
+    #   @return [String]
+    #
     # @!attribute [rw] parent_entity_id
     #   The parent of the entities in the list.
     #   @return [String]
     #
     class ListEntitiesFilter < Struct.new(
       :component_type_id,
+      :external_id,
       :parent_entity_id,
       :unknown)
       SENSITIVE = []
@@ -2157,6 +2176,7 @@ module Aws::IoTTwinMaker
       include Aws::Structure::Union
 
       class ComponentTypeId < ListEntitiesFilter; end
+      class ExternalId < ListEntitiesFilter; end
       class ParentEntityId < ListEntitiesFilter; end
       class Unknown < ListEntitiesFilter; end
     end
@@ -2168,6 +2188,7 @@ module Aws::IoTTwinMaker
     #         filters: [
     #           {
     #             component_type_id: "ComponentTypeId",
+    #             external_id: "String",
     #             parent_entity_id: "ParentEntityId",
     #           },
     #         ],
@@ -2687,7 +2708,7 @@ module Aws::IoTTwinMaker
     #           is_stored_externally: false,
     #           is_time_series: false,
     #         },
-    #         update_type: "UPDATE", # accepts UPDATE, DELETE
+    #         update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #         value: {
     #           boolean_value: false,
     #           double_value: 1.0,
@@ -2756,7 +2777,8 @@ module Aws::IoTTwinMaker
     #   data as a hash:
     #
     #       {
-    #         timestamp: Time.now, # required
+    #         time: "Time",
+    #         timestamp: Time.now,
     #         value: { # required
     #           boolean_value: false,
     #           double_value: 1.0,
@@ -2781,6 +2803,10 @@ module Aws::IoTTwinMaker
     #         },
     #       }
     #
+    # @!attribute [rw] time
+    #   Timestamp represented in ISO 8601 format
+    #   @return [String]
+    #
     # @!attribute [rw] timestamp
     #   The timestamp of a value for a time series property.
     #   @return [Time]
@@ -2790,6 +2816,7 @@ module Aws::IoTTwinMaker
     #   @return [Types::DataValue]
     #
     class PropertyValue < Struct.new(
+      :time,
       :timestamp,
       :value)
       SENSITIVE = []
@@ -2813,7 +2840,8 @@ module Aws::IoTTwinMaker
     #         },
     #         property_values: [
     #           {
-    #             timestamp: Time.now, # required
+    #             time: "Time",
+    #             timestamp: Time.now,
     #             value: { # required
     #               boolean_value: false,
     #               double_value: 1.0,
@@ -3313,7 +3341,7 @@ module Aws::IoTTwinMaker
     #                   is_stored_externally: false,
     #                   is_time_series: false,
     #                 },
-    #                 update_type: "UPDATE", # accepts UPDATE, DELETE
+    #                 update_type: "UPDATE", # accepts UPDATE, DELETE, CREATE
     #                 value: {
     #                   boolean_value: false,
     #                   double_value: 1.0,

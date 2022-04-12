@@ -114,7 +114,8 @@ module Aws::DevOpsGuru
     end
 
     # Information about your account's integration with Amazon CodeGuru
-    # Profiler.
+    # Profiler. This returns whether DevOps Guru is configured to consume
+    # recommendations generated from Amazon CodeGuru Profiler.
     #
     # @note When making an API call, you may pass AmazonCodeGuruProfilerIntegration
     #   data as a hash:
@@ -124,7 +125,9 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] status
-    #   The status of the CodeGuru Profiler integration.
+    #   The status of the CodeGuru Profiler integration. Specifies if DevOps
+    #   Guru is enabled to consume recommendations that are generated from
+    #   Amazon CodeGuru Profiler.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/AmazonCodeGuruProfilerIntegration AWS API Documentation
@@ -204,8 +207,9 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Metadata about an anomaly. The anomaly is detected using analysis of
-    # the metric data  over a period of time
+    # Metadata about the detection source that generates proactive
+    # anomalies. The anomaly is detected using analysis of the metric data 
+    # over a period of time
     #
     # @!attribute [rw] source
     #   The source of the anomaly.
@@ -582,6 +586,29 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DeleteInsightRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "InsightId", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The ID of the insight.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsightRequest AWS API Documentation
+    #
+    class DeleteInsightRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DeleteInsightResponse AWS API Documentation
+    #
+    class DeleteInsightResponse < Aws::EmptyStructure; end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeAccountHealthRequest AWS API Documentation
@@ -725,7 +752,7 @@ module Aws::DevOpsGuru
     class DescribeEventSourcesConfigRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] event_sources
-    #   The name of the event source.
+    #   Lists the event sources in the configuration.
     #   @return [Types::EventSourcesConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/DescribeEventSourcesConfigResponse AWS API Documentation
@@ -1288,7 +1315,8 @@ module Aws::DevOpsGuru
       include Aws::Structure
     end
 
-    # Describes the event sources.
+    # Information about the integration of DevOps Guru as consumer with
+    # another AWS service, such as AWS CodeGuru Profiler via EventBridge.
     #
     # @note When making an API call, you may pass EventSourcesConfig
     #   data as a hash:
@@ -1300,6 +1328,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] amazon_code_guru_profiler
+    #   Information about whether DevOps Guru is configured to consume
+    #   recommendations which are generated from AWS CodeGuru Profiler.
     #   @return [Types::AmazonCodeGuruProfilerIntegration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/EventSourcesConfig AWS API Documentation
@@ -2180,8 +2210,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -2232,9 +2269,15 @@ module Aws::DevOpsGuru
     #   If you use an Amazon SNS topic in another account, you must attach a
     #   policy to it that grants DevOps Guru permission to it notifications.
     #   DevOps Guru adds the required policy on your behalf to send
+    #   notifications using Amazon SNS in your account. DevOps Guru only
+    #   supports standard SNS topics. For more information, see [Permissions
+    #   for cross account Amazon SNS topics][1].
+    #
+    #   If you use an Amazon SNS topic in another account, you must attach a
+    #   policy to it that grants DevOps Guru permission to it notifications.
+    #   DevOps Guru adds the required policy on your behalf to send
     #   notifications using Amazon SNS in your account. For more
-    #   information, see [Permissions for cross account Amazon SNS
-    #   topics][1].
+    #   information, see Permissions for cross account Amazon SNS topics.
     #
     #   If you use an Amazon SNS topic that is encrypted by an Amazon Web
     #   Services Key Management Service customer-managed key (CMK), then you
@@ -2863,7 +2906,7 @@ module Aws::DevOpsGuru
     #   @return [Float]
     #
     # @!attribute [rw] source_metadata
-    #   Returns the metadata of the source.
+    #   The metadata of the source which detects proactive anomalies.
     #   @return [Types::AnomalySourceMetadata]
     #
     # @!attribute [rw] anomaly_resources
@@ -4386,8 +4429,15 @@ module Aws::DevOpsGuru
     # If you use an Amazon SNS topic in another account, you must attach a
     # policy to it that grants DevOps Guru permission to it notifications.
     # DevOps Guru adds the required policy on your behalf to send
+    # notifications using Amazon SNS in your account. DevOps Guru only
+    # supports standard SNS topics. For more information, see [Permissions
+    # for cross account Amazon SNS topics][1].
+    #
+    # If you use an Amazon SNS topic in another account, you must attach a
+    # policy to it that grants DevOps Guru permission to it notifications.
+    # DevOps Guru adds the required policy on your behalf to send
     # notifications using Amazon SNS in your account. For more information,
-    # see [Permissions for cross account Amazon SNS topics][1].
+    # see Permissions for cross account Amazon SNS topics.
     #
     # If you use an Amazon SNS topic that is encrypted by an Amazon Web
     # Services Key Management Service customer-managed key (CMK), then you
@@ -4805,7 +4855,8 @@ module Aws::DevOpsGuru
     #       }
     #
     # @!attribute [rw] event_sources
-    #   The name of the event source.
+    #   Configuration information about the integration of DevOps Guru as
+    #   the Consumer via EventBridge with another AWS Service.
     #   @return [Types::EventSourcesConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-guru-2020-12-01/UpdateEventSourcesConfigRequest AWS API Documentation

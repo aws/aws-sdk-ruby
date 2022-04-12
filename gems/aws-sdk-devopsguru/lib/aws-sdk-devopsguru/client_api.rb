@@ -67,6 +67,8 @@ module Aws::DevOpsGuru
     CostEstimationStatus = Shapes::StringShape.new(name: 'CostEstimationStatus')
     CostEstimationTagValues = Shapes::ListShape.new(name: 'CostEstimationTagValues')
     CostEstimationTimeRange = Shapes::StructureShape.new(name: 'CostEstimationTimeRange')
+    DeleteInsightRequest = Shapes::StructureShape.new(name: 'DeleteInsightRequest')
+    DeleteInsightResponse = Shapes::StructureShape.new(name: 'DeleteInsightResponse')
     DescribeAccountHealthRequest = Shapes::StructureShape.new(name: 'DescribeAccountHealthRequest')
     DescribeAccountHealthResponse = Shapes::StructureShape.new(name: 'DescribeAccountHealthResponse')
     DescribeAccountOverviewRequest = Shapes::StructureShape.new(name: 'DescribeAccountOverviewRequest')
@@ -412,6 +414,11 @@ module Aws::DevOpsGuru
     CostEstimationTimeRange.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
     CostEstimationTimeRange.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
     CostEstimationTimeRange.struct_class = Types::CostEstimationTimeRange
+
+    DeleteInsightRequest.add_member(:id, Shapes::ShapeRef.new(shape: InsightId, required: true, location: "uri", location_name: "Id"))
+    DeleteInsightRequest.struct_class = Types::DeleteInsightRequest
+
+    DeleteInsightResponse.struct_class = Types::DeleteInsightResponse
 
     DescribeAccountHealthRequest.struct_class = Types::DescribeAccountHealthRequest
 
@@ -1137,6 +1144,20 @@ module Aws::DevOpsGuru
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:delete_insight, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteInsight"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/insights/{Id}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteInsightRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteInsightResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
