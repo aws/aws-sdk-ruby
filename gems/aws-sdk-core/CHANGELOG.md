@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
-* Issue - Fix for refresh! method is being called on Aws::SharedCredentials (#2685)
+
+* Issue - Don't call `refresh!` on non-refreshable `Credentials` when retrying errors (#2685).
 
 3.130.0 (2022-03-11)
 ------------------
