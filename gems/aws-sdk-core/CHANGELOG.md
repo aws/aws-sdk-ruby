@@ -1,5 +1,6 @@
 Unreleased Changes
 ------------------
+* Issue - Fix for refresh! method is being called on Aws::SharedCredentials (#2685)
 
 3.130.0 (2022-03-11)
 ------------------
