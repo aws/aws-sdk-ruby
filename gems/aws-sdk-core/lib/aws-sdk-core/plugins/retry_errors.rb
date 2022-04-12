@@ -313,10 +313,15 @@ a clock skew correction and retry requests with skewed client clocks.
 
         def retry_request(context, error)
           context.retries += 1
-          context.config.credentials.refresh! if error.expired_credentials?
+          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
+        end
+
+        def refresh_credentials?(context, error)
+          error.expired_credentials? &&
+            context.config.credentials.respond_to?(:refresh!)
         end
 
         def add_retry_headers(context)
@@ -383,7 +388,7 @@ a clock skew correction and retry requests with skewed client clocks.
         def retry_request(context, error)
           delay_retry(context)
           context.retries += 1
-          context.config.credentials.refresh! if error.expired_credentials?
+          context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
           call(context)
@@ -397,6 +402,11 @@ a clock skew correction and retry requests with skewed client clocks.
           error.retryable?(context) &&
             context.retries < retry_limit(context) &&
             response_truncatable?(context)
+        end
+
+        def refresh_credentials?(context, error)
+          error.expired_credentials? &&
+            context.config.credentials.respond_to?(:refresh!)
         end
 
         def retry_limit(context)
