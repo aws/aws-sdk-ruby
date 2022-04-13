@@ -193,6 +193,12 @@ module Aws::CloudWatch
     MetricStreamNames = Shapes::ListShape.new(name: 'MetricStreamNames')
     MetricStreamOutputFormat = Shapes::StringShape.new(name: 'MetricStreamOutputFormat')
     MetricStreamState = Shapes::StringShape.new(name: 'MetricStreamState')
+    MetricStreamStatistic = Shapes::StringShape.new(name: 'MetricStreamStatistic')
+    MetricStreamStatisticsAdditionalStatistics = Shapes::ListShape.new(name: 'MetricStreamStatisticsAdditionalStatistics')
+    MetricStreamStatisticsConfiguration = Shapes::StructureShape.new(name: 'MetricStreamStatisticsConfiguration')
+    MetricStreamStatisticsConfigurations = Shapes::ListShape.new(name: 'MetricStreamStatisticsConfigurations')
+    MetricStreamStatisticsIncludeMetrics = Shapes::ListShape.new(name: 'MetricStreamStatisticsIncludeMetrics')
+    MetricStreamStatisticsMetric = Shapes::StructureShape.new(name: 'MetricStreamStatisticsMetric')
     MetricWidget = Shapes::StringShape.new(name: 'MetricWidget')
     MetricWidgetImage = Shapes::BlobShape.new(name: 'MetricWidgetImage')
     Metrics = Shapes::ListShape.new(name: 'Metrics')
@@ -542,6 +548,7 @@ module Aws::CloudWatch
     GetMetricStreamOutput.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
     GetMetricStreamOutput.add_member(:last_update_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastUpdateDate"))
     GetMetricStreamOutput.add_member(:output_format, Shapes::ShapeRef.new(shape: MetricStreamOutputFormat, location_name: "OutputFormat"))
+    GetMetricStreamOutput.add_member(:statistics_configurations, Shapes::ShapeRef.new(shape: MetricStreamStatisticsConfigurations, location_name: "StatisticsConfigurations"))
     GetMetricStreamOutput.struct_class = Types::GetMetricStreamOutput
 
     GetMetricWidgetImageInput.add_member(:metric_widget, Shapes::ShapeRef.new(shape: MetricWidget, required: true, location_name: "MetricWidget"))
@@ -751,6 +758,20 @@ module Aws::CloudWatch
 
     MetricStreamNames.member = Shapes::ShapeRef.new(shape: MetricStreamName)
 
+    MetricStreamStatisticsAdditionalStatistics.member = Shapes::ShapeRef.new(shape: MetricStreamStatistic)
+
+    MetricStreamStatisticsConfiguration.add_member(:include_metrics, Shapes::ShapeRef.new(shape: MetricStreamStatisticsIncludeMetrics, required: true, location_name: "IncludeMetrics"))
+    MetricStreamStatisticsConfiguration.add_member(:additional_statistics, Shapes::ShapeRef.new(shape: MetricStreamStatisticsAdditionalStatistics, required: true, location_name: "AdditionalStatistics"))
+    MetricStreamStatisticsConfiguration.struct_class = Types::MetricStreamStatisticsConfiguration
+
+    MetricStreamStatisticsConfigurations.member = Shapes::ShapeRef.new(shape: MetricStreamStatisticsConfiguration)
+
+    MetricStreamStatisticsIncludeMetrics.member = Shapes::ShapeRef.new(shape: MetricStreamStatisticsMetric)
+
+    MetricStreamStatisticsMetric.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
+    MetricStreamStatisticsMetric.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
+    MetricStreamStatisticsMetric.struct_class = Types::MetricStreamStatisticsMetric
+
     Metrics.member = Shapes::ShapeRef.new(shape: Metric)
 
     MissingRequiredParameterException.add_member(:message, Shapes::ShapeRef.new(shape: AwsQueryErrorMessage, location_name: "message"))
@@ -833,6 +854,7 @@ module Aws::CloudWatch
     PutMetricStreamInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "RoleArn"))
     PutMetricStreamInput.add_member(:output_format, Shapes::ShapeRef.new(shape: MetricStreamOutputFormat, required: true, location_name: "OutputFormat"))
     PutMetricStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    PutMetricStreamInput.add_member(:statistics_configurations, Shapes::ShapeRef.new(shape: MetricStreamStatisticsConfigurations, location_name: "StatisticsConfigurations"))
     PutMetricStreamInput.struct_class = Types::PutMetricStreamInput
 
     PutMetricStreamOutput.add_member(:arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "Arn"))

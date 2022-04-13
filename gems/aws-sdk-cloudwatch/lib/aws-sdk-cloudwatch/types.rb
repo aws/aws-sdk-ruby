@@ -1031,10 +1031,13 @@ module Aws::CloudWatch
     end
 
     # A dimension is a name/value pair that is part of the identity of a
-    # metric. You can assign up to 10 dimensions to a metric. Because
-    # dimensions are part of the unique identifier for a metric, whenever
-    # you add a unique name/value pair to one of your metrics, you are
-    # creating a new variation of that metric.
+    # metric. Because dimensions are part of the unique identifier for a
+    # metric, whenever you add a unique name/value pair to one of your
+    # metrics, you are creating a new variation of that metric. For example,
+    # many Amazon EC2 metrics publish `InstanceId` as a dimension name, and
+    # the actual instance ID as the value for that dimension.
+    #
+    # You can assign up to 10 dimensions to a metric.
     #
     # @note When making an API call, you may pass Dimension
     #   data as a hash:
@@ -1046,7 +1049,8 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] name
     #   The name of the dimension. Dimension names must contain only ASCII
-    #   characters and must include at least one non-whitespace character.
+    #   characters, must include at least one non-whitespace character, and
+    #   cannot start with a colon (`:`).
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1429,8 +1433,8 @@ module Aws::CloudWatch
     # @!attribute [rw] metric_data_queries
     #   The metric queries to be returned. A single `GetMetricData` call can
     #   include as many as 500 `MetricDataQuery` structures. Each of these
-    #   structures can specify either a metric to retrieve, or a math
-    #   expression to perform on retrieved data.
+    #   structures can specify either a metric to retrieve, a Metrics
+    #   Insights query, or a math expression to perform on retrieved data.
     #   @return [Array<Types::MetricDataQuery>]
     #
     # @!attribute [rw] start_time
@@ -1784,7 +1788,25 @@ module Aws::CloudWatch
     #   @return [Time]
     #
     # @!attribute [rw] output_format
+    #   The output format for the stream. Valid values are `json` and
+    #   `opentelemetry0.7`. For more information about metric stream output
+    #   formats, see [ Metric streams output formats][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-formats.html
     #   @return [String]
+    #
+    # @!attribute [rw] statistics_configurations
+    #   Each entry in this array displays information about one or more
+    #   metrics that include extended statistics in the metric stream. For
+    #   more information about extended statistics, see [ CloudWatch
+    #   statistics definitions][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetMetricStreamOutput AWS API Documentation
     #
@@ -1798,7 +1820,8 @@ module Aws::CloudWatch
       :state,
       :creation_date,
       :last_update_date,
-      :output_format)
+      :output_format,
+      :statistics_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2592,8 +2615,17 @@ module Aws::CloudWatch
     #   @return [String]
     #
     # @!attribute [rw] treat_missing_data
-    #   Sets how this alarm is to handle missing data points. If this
-    #   parameter is omitted, the default behavior of `missing` is used.
+    #   Sets how this alarm is to handle missing data points. The valid
+    #   values are `breaching`, `notBreaching`, `ignore`, and `missing`. For
+    #   more information, see [Configuring how CloudWatch alarms treat
+    #   missing data][1].
+    #
+    #   If this parameter is omitted, the default behavior of `missing` is
+    #   used.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
     #   @return [String]
     #
     # @!attribute [rw] evaluate_low_sample_count_percentile
@@ -2658,9 +2690,9 @@ module Aws::CloudWatch
     #
     # When used in `GetMetricData`, it indicates the metric data to return,
     # and whether this call is just retrieving a batch set of data for one
-    # metric, or is performing a math expression on metric data. A single
-    # `GetMetricData` call can include up to 500 `MetricDataQuery`
-    # structures.
+    # metric, or is performing a Metrics Insights query or a math
+    # expression. A single `GetMetricData` call can include up to 500
+    # `MetricDataQuery` structures.
     #
     # When used in `PutMetricAlarm`, it enables you to create an alarm based
     # on a metric math expression. Each `MetricDataQuery` in the array
@@ -2733,20 +2765,25 @@ module Aws::CloudWatch
     #   @return [Types::MetricStat]
     #
     # @!attribute [rw] expression
-    #   The math expression to be performed on the returned data, if this
-    #   object is performing a math expression. This expression can use the
-    #   `Id` of the other metrics to refer to those metrics, and can also
-    #   use the `Id` of other expressions to use the result of those
-    #   expressions. For more information about metric math expressions, see
-    #   [Metric Math Syntax and Functions][1] in the *Amazon CloudWatch User
+    #   This field can contain either a Metrics Insights query, or a metric
+    #   math expression to be performed on the returned data. For more
+    #   information about Metrics Insights queries, see [Metrics Insights
+    #   query components and syntax][1] in the *Amazon CloudWatch User
     #   Guide*.
+    #
+    #   A math expression can use the `Id` of the other metrics or queries
+    #   to refer to those metrics, and can also use the `Id` of other
+    #   expressions to use the result of those expressions. For more
+    #   information about metric math expressions, see [Metric Math Syntax
+    #   and Functions][2] in the *Amazon CloudWatch User Guide*.
     #
     #   Within each MetricDataQuery object, you must specify either
     #   `Expression` or `MetricStat` but not both.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-metrics-insights-querylanguage
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax
     #   @return [String]
     #
     # @!attribute [rw] label
@@ -3184,6 +3221,96 @@ module Aws::CloudWatch
     #
     class MetricStreamFilter < Struct.new(
       :namespace)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
+    # `SAMPLECOUNT` statistics for each metric that is streamed. This
+    # structure contains information for one metric that includes extended
+    # statistics in the stream. For more information about extended
+    # statistics, see CloudWatch, listed in [ CloudWatch statistics
+    # definitions][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #
+    # @note When making an API call, you may pass MetricStreamStatisticsConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         include_metrics: [ # required
+    #           {
+    #             namespace: "Namespace", # required
+    #             metric_name: "MetricName", # required
+    #           },
+    #         ],
+    #         additional_statistics: ["MetricStreamStatistic"], # required
+    #       }
+    #
+    # @!attribute [rw] include_metrics
+    #   An array of metric name and namespace pairs that stream the extended
+    #   statistics listed in the value of the `AdditionalStatistics`
+    #   parameter. There can be as many as 100 pairs in the array.
+    #
+    #   All metrics that match the combination of metric name and namespace
+    #   will be streamed with the extended statistics, no matter their
+    #   dimensions.
+    #   @return [Array<Types::MetricStreamStatisticsMetric>]
+    #
+    # @!attribute [rw] additional_statistics
+    #   The list of extended statistics that are to be streamed for the
+    #   metrics listed in the `IncludeMetrics` array in this structure. This
+    #   list can include as many as 20 statistics.
+    #
+    #   If the `OutputFormat` for the stream is `opentelemetry0.7`, the only
+    #   valid values are `p?? ` percentile statistics such as `p90`, `p99`
+    #   and so on.
+    #
+    #   If the `OutputFormat` for the stream is `json`, the valid values are
+    #   include the abbreviations for all of the extended statistics listed
+    #   in [ CloudWatch statistics definitions][1]. For example, this
+    #   includes `tm98, ` `wm90`, `PR(:300)`, and so on.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamStatisticsConfiguration AWS API Documentation
+    #
+    class MetricStreamStatisticsConfiguration < Struct.new(
+      :include_metrics,
+      :additional_statistics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This object contains the information for one metric that is to
+    # streamed with extended statistics.
+    #
+    # @note When making an API call, you may pass MetricStreamStatisticsMetric
+    #   data as a hash:
+    #
+    #       {
+    #         namespace: "Namespace", # required
+    #         metric_name: "MetricName", # required
+    #       }
+    #
+    # @!attribute [rw] namespace
+    #   The metric namespace for the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricStreamStatisticsMetric AWS API Documentation
+    #
+    class MetricStreamStatisticsMetric < Struct.new(
+      :namespace,
+      :metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4109,6 +4236,17 @@ module Aws::CloudWatch
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         statistics_configurations: [
+    #           {
+    #             include_metrics: [ # required
+    #               {
+    #                 namespace: "Namespace", # required
+    #                 metric_name: "MetricName", # required
+    #               },
+    #             ],
+    #             additional_statistics: ["MetricStreamStatistic"], # required
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -4187,6 +4325,25 @@ module Aws::CloudWatch
     #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] statistics_configurations
+    #   By default, a metric stream always sends the `MAX`, `MIN`, `SUM`,
+    #   and `SAMPLECOUNT` statistics for each metric that is streamed. You
+    #   can use this parameter to have the metric stream also send extended
+    #   statistics in the stream. This array can have up to 100 members.
+    #
+    #   For each entry in this array, you specify one or more metrics and
+    #   the list of extended statistics to stream for those metrics. The
+    #   extended statistics that you can stream depend on the stream's
+    #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
+    #   extended statistic that is supported by CloudWatch, listed in [
+    #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
+    #   `opentelemetry0.7`, you can stream percentile statistics (p*??*).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html
+    #   @return [Array<Types::MetricStreamStatisticsConfiguration>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricStreamInput AWS API Documentation
     #
     class PutMetricStreamInput < Struct.new(
@@ -4196,7 +4353,8 @@ module Aws::CloudWatch
       :firehose_arn,
       :role_arn,
       :output_format,
-      :tags)
+      :tags,
+      :statistics_configurations)
       SENSITIVE = []
       include Aws::Structure
     end

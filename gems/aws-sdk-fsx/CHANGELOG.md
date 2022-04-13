@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-04-13)
+------------------
+
+* Feature - This release adds support for deploying FSx for ONTAP file systems in a single Availability Zone.
+
 1.54.0 (2022-04-05)
 ------------------
 

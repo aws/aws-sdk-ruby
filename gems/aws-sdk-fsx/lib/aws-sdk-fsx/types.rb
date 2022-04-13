@@ -1722,7 +1722,7 @@ module Aws::FSx
     #       {
     #         automatic_backup_retention_days: 1,
     #         daily_automatic_backup_start_time: "DailyTime",
-    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #         deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
     #         endpoint_ip_address_range: "IpAddressRange",
     #         fsx_admin_password: "AdminPassword",
     #         disk_iops_configuration: {
@@ -1749,14 +1749,28 @@ module Aws::FSx
     #
     # @!attribute [rw] deployment_type
     #   Specifies the FSx for ONTAP file system deployment type to use in
-    #   creating the file system. `MULTI_AZ_1` is the supported ONTAP
-    #   deployment type.
+    #   creating the file system.
+    #
+    #   * `MULTI_AZ_1` - (Default) A high availability file system
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability.
+    #
+    #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
+    #
+    #   For information about the use cases for Multi-AZ and Single-AZ
+    #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
+    #   deployment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   Specifies the IP address range in which the endpoints to access your
-    #   file system will be created. By default, Amazon FSx selects an
-    #   unused IP address range for you from the 198.19.* range.
+    #   (Multi-AZ only) Specifies the IP address range in which the
+    #   endpoints to access your file system will be created. By default,
+    #   Amazon FSx selects an unused IP address range for you from the
+    #   198.19.* range.
     #
     #   The Endpoint IP address range you select for your file system must
     #   exist outside the VPC's CIDR range and must be at least /30 or
@@ -1780,11 +1794,11 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   Specifies the virtual private cloud (VPC) route tables in which your
-    #   file system's endpoints will be created. You should specify all VPC
-    #   route tables associated with the subnets in which your clients are
-    #   located. By default, Amazon FSx selects your VPC's default route
-    #   table.
+    #   (Multi-AZ only) Specifies the virtual private cloud (VPC) route
+    #   tables in which your file system's endpoints will be created. You
+    #   should specify all VPC route tables associated with the subnets in
+    #   which your clients are located. By default, Amazon FSx selects your
+    #   VPC's default route table.
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
@@ -2027,7 +2041,7 @@ module Aws::FSx
     #         ontap_configuration: {
     #           automatic_backup_retention_days: 1,
     #           daily_automatic_backup_start_time: "DailyTime",
-    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1
+    #           deployment_type: "MULTI_AZ_1", # required, accepts MULTI_AZ_1, SINGLE_AZ_1
     #           endpoint_ip_address_range: "IpAddressRange",
     #           fsx_admin_password: "AdminPassword",
     #           disk_iops_configuration: {
@@ -5936,12 +5950,27 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] deployment_type
-    #   The ONTAP file system deployment type.
+    #   Specifies the FSx for ONTAP file system deployment type in use in
+    #   the file system.
+    #
+    #   * `MULTI_AZ_1` - (Default) A high availability file system
+    #     configured for Multi-AZ redundancy to tolerate temporary
+    #     Availability Zone (AZ) unavailability.
+    #
+    #   * `SINGLE_AZ_1` - A file system configured for Single-AZ redundancy.
+    #
+    #   For information about the use cases for Multi-AZ and Single-AZ
+    #   deployments, refer to [Choosing Multi-AZ or Single-AZ file system
+    #   deployment][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html
     #   @return [String]
     #
     # @!attribute [rw] endpoint_ip_address_range
-    #   The IP address range in which the endpoints to access your file
-    #   system are created.
+    #   (Multi-AZ only) The IP address range in which the endpoints to
+    #   access your file system are created.
     #
     #   The Endpoint IP address range you select for your file system must
     #   exist outside the VPC's CIDR range and must be at least /30 or
@@ -5971,8 +6000,8 @@ module Aws::FSx
     #   @return [String]
     #
     # @!attribute [rw] route_table_ids
-    #   The VPC route tables in which your file system's endpoints are
-    #   created.
+    #   (Multi-AZ only) The VPC route tables in which your file system's
+    #   endpoints are created.
     #   @return [Array<String>]
     #
     # @!attribute [rw] throughput_capacity
