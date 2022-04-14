@@ -4976,32 +4976,18 @@ module Aws::EC2
     # For devices that use Border Gateway Protocol (BGP), you can also
     # provide the device's BGP Autonomous System Number (ASN). You can use
     # an existing ASN assigned to your network. If you don't have an ASN
-    # already, you can use a private ASN (in the 64512 - 65534 range).
-    #
-    # <note markdown="1"> Amazon EC2 supports all 4-byte ASN numbers in the range of 1 -
-    # 2147483647, with the exception of the following:
-    #
-    #  * 7224 - reserved in the `us-east-1` Region
-    #
-    # * 9059 - reserved in the `eu-west-1` Region
-    #
-    # * 17943 - reserved in the `ap-southeast-1` Region
-    #
-    # * 10124 - reserved in the `ap-northeast-1` Region
-    #
-    #  </note>
-    #
-    # For more information, see [Amazon Web Services Site-to-Site VPN][1] in
+    # already, you can use a private ASN. For more information, see
+    # [Customer gateway options for your Site-to-Site VPN connection][1] in
     # the *Amazon Web Services Site-to-Site VPN User Guide*.
     #
     # To create more than one customer gateway with the same VPN type, IP
     # address, and BGP ASN, specify a unique device name for each customer
-    # gateway. Identical requests return information about the existing
-    # customer gateway and do not create new customer gateways.
+    # gateway. An identical request returns information about the existing
+    # customer gateway; it doesn't create a new customer gateway.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html
+    # [1]: https://docs.aws.amazon.com/vpn/latest/s2svpn/cgw-options.html
     #
     # @option params [required, Integer] :bgp_asn
     #   For devices that support BGP, the customer gateway's BGP ASN.
@@ -6121,12 +6107,17 @@ module Aws::EC2
     # Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance
     # that is either running or stopped.
     #
-    # By default, Amazon EC2 shuts down and reboots the instance before
-    # creating the AMI to ensure that everything on the instance is stopped
-    # and in a consistent state during the creation process. If you're
-    # confident that your instance is in a consistent state appropriate for
-    # AMI creation, use the **NoReboot** parameter to prevent Amazon EC2
-    # from shutting down and rebooting the instance.
+    # By default, when Amazon EC2 creates the new AMI, it reboots the
+    # instance so that it can take snapshots of the attached volumes while
+    # data is at rest, in order to ensure a consistent state. You can set
+    # the `NoReboot` parameter to `true` in the API request, or use the
+    # `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
+    # down and rebooting the instance.
+    #
+    # If you choose to bypass the shutdown and reboot process by setting the
+    # `NoReboot` parameter to `true` in the API request, or by using the
+    # `--no-reboot` option in the CLI, we can't guarantee the file system
+    # integrity of the created image.
     #
     # If you customized your instance with instance store volumes or Amazon
     # EBS volumes in addition to the root device volume, the new AMI
@@ -6166,13 +6157,19 @@ module Aws::EC2
     #   single quotes ('), at-signs (@), or underscores(\_)
     #
     # @option params [Boolean] :no_reboot
-    #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image. Without
-    #   a reboot, the AMI will be crash consistent (all the volumes are
-    #   snapshotted at the same time), but not application consistent (all the
-    #   operating system buffers are not flushed to disk before the snapshots
-    #   are created).
+    #   By default, when Amazon EC2 creates the new AMI, it reboots the
+    #   instance so that it can take snapshots of the attached volumes while
+    #   data is at rest, in order to ensure a consistent state. You can set
+    #   the `NoReboot` parameter to `true` in the API request, or use the
+    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
+    #   down and rebooting the instance.
+    #
+    #   If you choose to bypass the shutdown and reboot process by setting the
+    #   `NoReboot` parameter to `true` in the API request, or by using the
+    #   `--no-reboot` option in the CLI, we can't guarantee the file system
+    #   integrity of the created image.
+    #
+    #   Default: `false` (follow standard reboot process)
     #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
@@ -6578,7 +6575,7 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Create an IPAM. Amazon VCP IP Address Manager (IPAM) is a VPC feature
+    # Create an IPAM. Amazon VPC IP Address Manager (IPAM) is a VPC feature
     # that you can use to automate your IP address management workflows
     # including assigning, tracking, troubleshooting, and auditing IP
     # addresses across Amazon Web Services Regions and accounts throughout
@@ -6995,7 +6992,7 @@ module Aws::EC2
     #
     # @option params [String] :key_type
     #   The type of key pair. Note that ED25519 keys are not supported for
-    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #   Windows instances.
     #
     #   Default: `rsa`
     #
@@ -7057,16 +7054,24 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a launch template. A launch template contains the parameters
-    # to launch an instance. When you launch an instance using RunInstances,
-    # you can specify a launch template instead of providing the launch
-    # parameters in the request. For more information, see [Launching an
-    # instance from a launch template][1] in the *Amazon Elastic Compute
-    # Cloud User Guide*.
+    # Creates a launch template.
+    #
+    # A launch template contains the parameters to launch an instance. When
+    # you launch an instance using RunInstances, you can specify a launch
+    # template instead of providing the launch parameters in the request.
+    # For more information, see [Launching an instance from a launch
+    # template][1] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    # If you want to clone an existing launch template as the basis for
+    # creating a new launch template, you can use the Amazon EC2 console.
+    # The API, SDKs, and CLI do not support cloning a template. For more
+    # information, see [Create a launch template from an existing launch
+    # template][2] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template-from-existing-launch-template
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12398,29 +12403,12 @@ module Aws::EC2
     # you to create a private connection between your VPC and the service.
     # The service may be provided by Amazon Web Services, an Amazon Web
     # Services Marketplace Partner, or another Amazon Web Services account.
-    # For more information, see [VPC Endpoints][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
-    #
-    # A `gateway` endpoint serves as a target for a route in your route
-    # table for traffic destined for the Amazon Web Service. You can specify
-    # an endpoint policy to attach to the endpoint, which will control
-    # access to the service from your VPC. You can also specify the VPC
-    # route tables that use the endpoint.
-    #
-    # An `interface` endpoint is a network interface in your subnet that
-    # serves as an endpoint for communicating with the specified service.
-    # You can specify the subnets in which to create an endpoint, and the
-    # security groups to associate with the endpoint network interface.
-    #
-    # A `GatewayLoadBalancer` endpoint is a network interface in your subnet
-    # that serves an endpoint for communicating with a Gateway Load Balancer
-    # that you've configured as a VPC endpoint service.
-    #
-    # Use DescribeVpcEndpointServices to get a list of supported services.
+    # For more information, see the [Amazon Web Services PrivateLink
+    # Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12635,12 +12623,11 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates a VPC endpoint service configuration to which service
-    # consumers (Amazon Web Services accounts, IAM users, and IAM roles) can
-    # connect.
+    # Creates a VPC endpoint service to which service consumers (Amazon Web
+    # Services accounts, IAM users, and IAM roles) can connect.
     #
-    # To create an endpoint service configuration, you must first create one
-    # of the following for your service:
+    # Before you create an endpoint service, you must create one of the
+    # following for your service:
     #
     # * A [Network Load Balancer][1]. Service consumers connect to your
     #   service using an interface endpoint.
@@ -12648,20 +12635,17 @@ module Aws::EC2
     # * A [Gateway Load Balancer][2]. Service consumers connect to your
     #   service using a Gateway Load Balancer endpoint.
     #
-    # For more information, see [VPC Endpoint Services][3] in the *Amazon
-    # Virtual Private Cloud User Guide*.
-    #
     # If you set the private DNS name, you must prove that you own the
-    # private DNS domain name. For more information, see [VPC Endpoint
-    # Service Private DNS Name Verification][4] in the *Amazon Virtual
-    # Private Cloud User Guide*.
+    # private DNS domain name.
+    #
+    # For more information, see the [Amazon Web Services PrivateLink
+    # Guide][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html
-    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html
-    # [3]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
-    # [4]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html
+    # [1]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/
+    # [2]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/
+    # [3]: https://docs.aws.amazon.com/vpc/latest/privatelink/
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -12671,8 +12655,7 @@ module Aws::EC2
     #
     # @option params [Boolean] :acceptance_required
     #   Indicates whether requests from service consumers to create an
-    #   endpoint to your service must be accepted. To accept a request, use
-    #   AcceptVpcEndpointConnections.
+    #   endpoint to your service must be accepted manually.
     #
     # @option params [String] :private_dns_name
     #   (Interface endpoint configuration) The private DNS name to assign to
@@ -13703,21 +13686,9 @@ module Aws::EC2
     # Delete an IPAM. Deleting an IPAM removes all monitored data associated
     # with the IPAM including the historical data for CIDRs.
     #
-    # <note markdown="1"> You cannot delete an IPAM if there are CIDRs provisioned to pools or
-    # if there are allocations in the pools within the IPAM. To deprovision
-    # pool CIDRs, see [DeprovisionIpamPoolCidr][1]. To release allocations,
-    # see [ReleaseIpamPoolAllocation][2].
-    #
-    #  </note>
-    #
     # For more information, see [Delete an
     # IPAM](/vpc/latest/ipam/delete-ipam.html) in the *Amazon VPC IPAM User
     # Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeprovisionIpamPoolCidr.html
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html
     #
     # @option params [Boolean] :dry_run
     #   A check for whether you have the required permissions for the action
@@ -20271,6 +20242,11 @@ module Aws::EC2
     #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
     #     the Amazon EBS volume is encrypted.
     #
+    #   * `creation-date` - The time when the image was created, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+    #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
+    #     for example, `2021-09-29T*`, which matches an entire day.
+    #
     #   * `description` - The description of the image (provided during image
     #     creation).
     #
@@ -23560,9 +23536,6 @@ module Aws::EC2
     #
     #   * `local-gateway-virtual-interface-id` - The ID of the virtual
     #     interface.
-    #
-    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
-    #     interface group.
     #
     #   * `owner-id` - The ID of the Amazon Web Services account that owns the
     #     local gateway virtual interface.
@@ -41676,9 +41649,10 @@ module Aws::EC2
     # require detaching and reattaching the volume or stopping and
     # restarting the instance.
     #
-    # If you reach the maximum volume modification rate per volume limit,
-    # you must wait at least six hours before applying further modifications
-    # to the affected EBS volume.
+    # After modifying a volume, you must wait at least six hours and ensure
+    # that the volume is in the `in-use` or `available` state before you can
+    # modify the same volume. This is sometimes referred to as a cooldown
+    # period.
     #
     #
     #
@@ -41947,12 +41921,12 @@ module Aws::EC2
 
     # Modifies attributes of a specified VPC endpoint. The attributes that
     # you can modify depend on the type of VPC endpoint (interface, gateway,
-    # or Gateway Load Balancer). For more information, see [VPC
-    # Endpoints][1] in the *Amazon Virtual Private Cloud User Guide*.
+    # or Gateway Load Balancer). For more information, see the [Amazon Web
+    # Services PrivateLink Guide][1].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html
+    # [1]: https://docs.aws.amazon.com/vpc/latest/privatelink/
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42087,13 +42061,7 @@ module Aws::EC2
     # VPC endpoint.
     #
     # If you set or modify the private DNS name, you must prove that you own
-    # the private DNS domain name. For more information, see [VPC Endpoint
-    # Service Private DNS Name Verification][1] in the *Amazon Virtual
-    # Private Cloud User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html
+    # the private DNS domain name.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -42204,18 +42172,14 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Modifies the permissions for your [VPC endpoint service][1]. You can
-    # add or remove permissions for service consumers (IAM users, IAM roles,
-    # and Amazon Web Services accounts) to connect to your endpoint service.
+    # Modifies the permissions for your VPC endpoint service. You can add or
+    # remove permissions for service consumers (IAM users, IAM roles, and
+    # Amazon Web Services accounts) to connect to your endpoint service.
     #
     # If you grant permissions to all principals, the service is public. Any
     # users who know the name of a public service can send a request to
     # attach an endpoint. If the service does not require manual approval,
     # attachments are automatically approved.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -47027,12 +46991,12 @@ module Aws::EC2
     #   part of the network interface.
     #
     # @option params [String] :user_data
-    #   The user data to make available to the instance. For more information,
-    #   see [Run commands on your Linux instance at launch][1] and [Run
-    #   commands on your Windows instance at launch][2]. If you are using a
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide base64-encoded
-    #   text. User data is limited to 16 KB.
+    #   The user data script to make available to the instance. For more
+    #   information, see [Run commands on your Linux instance at launch][1]
+    #   and [Run commands on your Windows instance at launch][2]. If you are
+    #   using a command line tool, base64-encoding is performed for you, and
+    #   you can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
@@ -48712,12 +48676,7 @@ module Aws::EC2
     # the consumer can use the name to access the service.
     #
     # Before the service provider runs this command, they must add a record
-    # to the DNS server. For more information, see [Adding a TXT Record to
-    # Your Domain's DNS Server ][1] in the *Amazon VPC User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html#add-dns-txt-record
+    # to the DNS server.
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -49516,7 +49475,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.306.0'
+      context[:gem_version] = '1.307.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

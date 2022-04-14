@@ -472,6 +472,7 @@ module Aws::AppStream
     CreateFleetRequest.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
     CreateFleetRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     CreateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
+    CreateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     CreateFleetRequest.struct_class = Types::CreateFleetRequest
 
     CreateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))
@@ -856,6 +857,7 @@ module Aws::AppStream
     Fleet.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
     Fleet.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     Fleet.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
+    Fleet.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     Fleet.struct_class = Types::Fleet
 
     FleetAttributes.member = Shapes::ShapeRef.new(shape: FleetAttribute)
@@ -1176,6 +1178,7 @@ module Aws::AppStream
     UpdateFleetRequest.add_member(:platform, Shapes::ShapeRef.new(shape: PlatformType, location_name: "Platform"))
     UpdateFleetRequest.add_member(:max_concurrent_sessions, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxConcurrentSessions"))
     UpdateFleetRequest.add_member(:usb_device_filter_strings, Shapes::ShapeRef.new(shape: UsbDeviceFilterStrings, location_name: "UsbDeviceFilterStrings"))
+    UpdateFleetRequest.add_member(:session_script_s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "SessionScriptS3Location"))
     UpdateFleetRequest.struct_class = Types::UpdateFleetRequest
 
     UpdateFleetResult.add_member(:fleet, Shapes::ShapeRef.new(shape: Fleet, location_name: "Fleet"))

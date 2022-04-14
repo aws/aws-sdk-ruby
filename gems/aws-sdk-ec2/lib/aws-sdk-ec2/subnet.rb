@@ -606,12 +606,12 @@ module Aws::EC2
     #
     #   Default: Amazon EC2 uses the default security group.
     # @option options [String] :user_data
-    #   The user data to make available to the instance. For more information,
-    #   see [Run commands on your Linux instance at launch][1] and [Run
-    #   commands on your Windows instance at launch][2]. If you are using a
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide base64-encoded
-    #   text. User data is limited to 16 KB.
+    #   The user data script to make available to the instance. For more
+    #   information, see [Run commands on your Linux instance at launch][1]
+    #   and [Run commands on your Windows instance at launch][2]. If you are
+    #   using a command line tool, base64-encoding is performed for you, and
+    #   you can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #

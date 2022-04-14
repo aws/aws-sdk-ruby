@@ -1200,6 +1200,7 @@ module Aws::Glue
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflows[0].last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflows[0].last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -1266,6 +1267,7 @@ module Aws::Glue
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflows[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflows[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -5475,6 +5477,7 @@ module Aws::Glue
     #   resp.job_run.log_group_name #=> String
     #   resp.job_run.notification_property.notify_delay_after #=> Integer
     #   resp.job_run.glue_version #=> String
+    #   resp.job_run.dpu_seconds #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRun AWS API Documentation
     #
@@ -5539,6 +5542,7 @@ module Aws::Glue
     #   resp.job_runs[0].log_group_name #=> String
     #   resp.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.job_runs[0].glue_version #=> String
+    #   resp.job_runs[0].dpu_seconds #=> Float
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobRuns AWS API Documentation
@@ -8172,6 +8176,7 @@ module Aws::Glue
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflow.last_run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflow.last_run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8238,6 +8243,7 @@ module Aws::Glue
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.workflow.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.workflow.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.workflow.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.workflow.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8355,6 +8361,7 @@ module Aws::Glue
     #   resp.run.graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.run.graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.run.graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.run.graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.run.graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.run.graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -8512,6 +8519,7 @@ module Aws::Glue
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].log_group_name #=> String
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].notification_property.notify_delay_after #=> Integer
     #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].glue_version #=> String
+    #   resp.runs[0].graph.nodes[0].job_details.job_runs[0].dpu_seconds #=> Float
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls #=> Array
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].state #=> String, one of "RUNNING", "CANCELLING", "CANCELLED", "SUCCEEDED", "FAILED"
     #   resp.runs[0].graph.nodes[0].crawler_details.crawls[0].started_on #=> Time
@@ -11999,7 +12007,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.108.0'
+      context[:gem_version] = '1.109.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

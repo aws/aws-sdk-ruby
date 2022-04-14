@@ -997,6 +997,9 @@ module Aws::Appflow
     #             o_auth_2_properties: {
     #               token_url: "TokenUrl", # required
     #               o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #               token_url_custom_properties: {
+    #                 "CustomPropertyKey" => "CustomPropertyValue",
+    #               },
     #             },
     #           },
     #         },
@@ -1482,6 +1485,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       }
@@ -1752,6 +1758,9 @@ module Aws::Appflow
     #               o_auth_2_properties: {
     #                 token_url: "TokenUrl", # required
     #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                 token_url_custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },
@@ -2474,6 +2483,9 @@ module Aws::Appflow
     #         o_auth_2_properties: {
     #           token_url: "TokenUrl", # required
     #           o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #           token_url_custom_properties: {
+    #             "CustomPropertyKey" => "CustomPropertyValue",
+    #           },
     #         },
     #       }
     #
@@ -4630,6 +4642,55 @@ module Aws::Appflow
       include Aws::Structure
     end
 
+    # Custom parameter required for OAuth 2.0 authentication.
+    #
+    # @!attribute [rw] key
+    #   The key of the custom parameter required for OAuth 2.0
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_required
+    #   Indicates whether the custom parameter for OAuth 2.0 authentication
+    #   is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] label
+    #   The label of the custom parameter used for OAuth 2.0 authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description about the custom parameter used for OAuth 2.0
+    #   authentication.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_sensitive_field
+    #   Indicates whether this authentication custom parameter is a
+    #   sensitive field.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] connector_supplied_values
+    #   Contains default values for this authentication parameter that are
+    #   supplied by the connector.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] type
+    #   Indicates whether custom parameter is used with TokenUrl or AuthUrl.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2CustomParameter AWS API Documentation
+    #
+    class OAuth2CustomParameter < Struct.new(
+      :key,
+      :is_required,
+      :label,
+      :description,
+      :is_sensitive_field,
+      :connector_supplied_values,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the default values required for OAuth 2.0 authentication.
     #
     # @!attribute [rw] oauth_scopes
@@ -4648,13 +4709,18 @@ module Aws::Appflow
     #   OAuth 2.0 grant types supported by the connector.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] oauth2_custom_properties
+    #   List of custom parameters required for OAuth 2.0 authentication.
+    #   @return [Array<Types::OAuth2CustomParameter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Defaults AWS API Documentation
     #
     class OAuth2Defaults < Struct.new(
       :oauth_scopes,
       :token_urls,
       :auth_code_urls,
-      :oauth2_grant_types_supported)
+      :oauth2_grant_types_supported,
+      :oauth2_custom_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4667,6 +4733,9 @@ module Aws::Appflow
     #       {
     #         token_url: "TokenUrl", # required
     #         o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #         token_url_custom_properties: {
+    #           "CustomPropertyKey" => "CustomPropertyValue",
+    #         },
     #       }
     #
     # @!attribute [rw] token_url
@@ -4678,11 +4747,18 @@ module Aws::Appflow
     #   authentication.
     #   @return [String]
     #
+    # @!attribute [rw] token_url_custom_properties
+    #   Associates your token URL with a map of properties that you define.
+    #   Use this parameter to provide any additional details that the
+    #   connector requires to authenticate your request.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/OAuth2Properties AWS API Documentation
     #
     class OAuth2Properties < Struct.new(
       :token_url,
-      :o_auth_2_grant_type)
+      :o_auth_2_grant_type,
+      :token_url_custom_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6871,6 +6947,9 @@ module Aws::Appflow
     #               o_auth_2_properties: {
     #                 token_url: "TokenUrl", # required
     #                 o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                 token_url_custom_properties: {
+    #                   "CustomPropertyKey" => "CustomPropertyValue",
+    #                 },
     #               },
     #             },
     #           },

@@ -223,6 +223,9 @@ module Aws::Appflow
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OAuth2Credentials = Shapes::StructureShape.new(name: 'OAuth2Credentials')
+    OAuth2CustomParameter = Shapes::StructureShape.new(name: 'OAuth2CustomParameter')
+    OAuth2CustomPropType = Shapes::StringShape.new(name: 'OAuth2CustomPropType')
+    OAuth2CustomPropertiesList = Shapes::ListShape.new(name: 'OAuth2CustomPropertiesList')
     OAuth2Defaults = Shapes::StructureShape.new(name: 'OAuth2Defaults')
     OAuth2GrantType = Shapes::StringShape.new(name: 'OAuth2GrantType')
     OAuth2GrantTypeSupportedList = Shapes::ListShape.new(name: 'OAuth2GrantTypeSupportedList')
@@ -339,6 +342,7 @@ module Aws::Appflow
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     Timezone = Shapes::StringShape.new(name: 'Timezone')
     TokenUrl = Shapes::StringShape.new(name: 'TokenUrl')
+    TokenUrlCustomProperties = Shapes::MapShape.new(name: 'TokenUrlCustomProperties')
     TokenUrlList = Shapes::ListShape.new(name: 'TokenUrlList')
     TrendmicroConnectorOperator = Shapes::StringShape.new(name: 'TrendmicroConnectorOperator')
     TrendmicroConnectorProfileCredentials = Shapes::StructureShape.new(name: 'TrendmicroConnectorProfileCredentials')
@@ -1013,16 +1017,29 @@ module Aws::Appflow
     OAuth2Credentials.add_member(:o_auth_request, Shapes::ShapeRef.new(shape: ConnectorOAuthRequest, location_name: "oAuthRequest"))
     OAuth2Credentials.struct_class = Types::OAuth2Credentials
 
+    OAuth2CustomParameter.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "key"))
+    OAuth2CustomParameter.add_member(:is_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "isRequired"))
+    OAuth2CustomParameter.add_member(:label, Shapes::ShapeRef.new(shape: Label, location_name: "label"))
+    OAuth2CustomParameter.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    OAuth2CustomParameter.add_member(:is_sensitive_field, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSensitiveField"))
+    OAuth2CustomParameter.add_member(:connector_supplied_values, Shapes::ShapeRef.new(shape: ConnectorSuppliedValueList, location_name: "connectorSuppliedValues"))
+    OAuth2CustomParameter.add_member(:type, Shapes::ShapeRef.new(shape: OAuth2CustomPropType, location_name: "type"))
+    OAuth2CustomParameter.struct_class = Types::OAuth2CustomParameter
+
+    OAuth2CustomPropertiesList.member = Shapes::ShapeRef.new(shape: OAuth2CustomParameter)
+
     OAuth2Defaults.add_member(:oauth_scopes, Shapes::ShapeRef.new(shape: OAuthScopeList, location_name: "oauthScopes"))
     OAuth2Defaults.add_member(:token_urls, Shapes::ShapeRef.new(shape: TokenUrlList, location_name: "tokenUrls"))
     OAuth2Defaults.add_member(:auth_code_urls, Shapes::ShapeRef.new(shape: AuthCodeUrlList, location_name: "authCodeUrls"))
     OAuth2Defaults.add_member(:oauth2_grant_types_supported, Shapes::ShapeRef.new(shape: OAuth2GrantTypeSupportedList, location_name: "oauth2GrantTypesSupported"))
+    OAuth2Defaults.add_member(:oauth2_custom_properties, Shapes::ShapeRef.new(shape: OAuth2CustomPropertiesList, location_name: "oauth2CustomProperties"))
     OAuth2Defaults.struct_class = Types::OAuth2Defaults
 
     OAuth2GrantTypeSupportedList.member = Shapes::ShapeRef.new(shape: OAuth2GrantType)
 
     OAuth2Properties.add_member(:token_url, Shapes::ShapeRef.new(shape: TokenUrl, required: true, location_name: "tokenUrl"))
     OAuth2Properties.add_member(:o_auth_2_grant_type, Shapes::ShapeRef.new(shape: OAuth2GrantType, required: true, location_name: "oAuth2GrantType"))
+    OAuth2Properties.add_member(:token_url_custom_properties, Shapes::ShapeRef.new(shape: TokenUrlCustomProperties, location_name: "tokenUrlCustomProperties"))
     OAuth2Properties.struct_class = Types::OAuth2Properties
 
     OAuthCredentials.add_member(:client_id, Shapes::ShapeRef.new(shape: ClientId, required: true, location_name: "clientId"))
@@ -1316,6 +1333,9 @@ module Aws::Appflow
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    TokenUrlCustomProperties.key = Shapes::ShapeRef.new(shape: CustomPropertyKey)
+    TokenUrlCustomProperties.value = Shapes::ShapeRef.new(shape: CustomPropertyValue)
 
     TokenUrlList.member = Shapes::ShapeRef.new(shape: TokenUrl)
 

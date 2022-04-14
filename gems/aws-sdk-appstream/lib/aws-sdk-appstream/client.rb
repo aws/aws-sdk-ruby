@@ -1108,6 +1108,10 @@ module Aws::AppStream
     #   can redirect to the fleet streaming session, when using the Windows
     #   native client. This is allowed but not required for Elastic fleets.
     #
+    # @option params [Types::S3Location] :session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #
     # @return [Types::CreateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFleetResult#fleet #fleet} => Types::Fleet
@@ -1145,6 +1149,10 @@ module Aws::AppStream
     #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #     session_script_s3_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1182,6 +1190,8 @@ module Aws::AppStream
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
+    #   resp.fleet.session_script_s3_location.s3_bucket #=> String
+    #   resp.fleet.session_script_s3_location.s3_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleet AWS API Documentation
     #
@@ -2513,6 +2523,8 @@ module Aws::AppStream
     #   resp.fleets[0].max_concurrent_sessions #=> Integer
     #   resp.fleets[0].usb_device_filter_strings #=> Array
     #   resp.fleets[0].usb_device_filter_strings[0] #=> String
+    #   resp.fleets[0].session_script_s3_location.s3_bucket #=> String
+    #   resp.fleets[0].session_script_s3_location.s3_key #=> String
     #   resp.next_token #=> String
     #
     #
@@ -4014,6 +4026,10 @@ module Aws::AppStream
     #   can redirect to the fleet streaming session, when using the Windows
     #   native client. This is allowed but not required for Elastic fleets.
     #
+    # @option params [Types::S3Location] :session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #
     # @return [Types::UpdateFleetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFleetResult#fleet #fleet} => Types::Fleet
@@ -4043,12 +4059,16 @@ module Aws::AppStream
     #       organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #     },
     #     idle_disconnect_timeout_in_seconds: 1,
-    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS
+    #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
     #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #     session_script_s3_location: {
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key: "S3Key", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -4086,6 +4106,8 @@ module Aws::AppStream
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
+    #   resp.fleet.session_script_s3_location.s3_bucket #=> String
+    #   resp.fleet.session_script_s3_location.s3_key #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleet AWS API Documentation
     #
@@ -4270,7 +4292,7 @@ module Aws::AppStream
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

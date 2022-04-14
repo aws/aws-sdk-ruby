@@ -471,6 +471,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       },
@@ -1070,6 +1073,15 @@ module Aws::Appflow
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
     #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].label #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].description #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_sensitive_field #=> Boolean
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values #=> Array
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values[0] #=> String
+    #   resp.connector_configuration.authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].type #=> String, one of "TOKEN_URL", "AUTH_URL"
     #   resp.connector_configuration.authentication_config.custom_auth_configs #=> Array
     #   resp.connector_configuration.authentication_config.custom_auth_configs[0].custom_authentication_type #=> String
     #   resp.connector_configuration.authentication_config.custom_auth_configs[0].auth_parameters #=> Array
@@ -1272,6 +1284,8 @@ module Aws::Appflow
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.profile_properties["ProfilePropertyKey"] #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url #=> String
     #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.o_auth_2_grant_type #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties #=> Hash
+    #   resp.connector_profile_details[0].connector_profile_properties.custom_connector.o_auth_2_properties.token_url_custom_properties["CustomPropertyKey"] #=> String
     #   resp.connector_profile_details[0].created_at #=> Time
     #   resp.connector_profile_details[0].last_updated_at #=> Time
     #   resp.connector_profile_details[0].private_connection_provisioning_state.status #=> String, one of "FAILED", "PENDING", "CREATED"
@@ -1368,6 +1382,15 @@ module Aws::Appflow
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.auth_code_urls[0] #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_grant_types_supported[0] #=> String, one of "CLIENT_CREDENTIALS", "AUTHORIZATION_CODE"
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties #=> Array
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].key #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_required #=> Boolean
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].label #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].description #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].is_sensitive_field #=> Boolean
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values #=> Array
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].connector_supplied_values[0] #=> String
+    #   resp.connector_configurations["ConnectorType"].authentication_config.o_auth_2_defaults.oauth2_custom_properties[0].type #=> String, one of "TOKEN_URL", "AUTH_URL"
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs #=> Array
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs[0].custom_authentication_type #=> String
     #   resp.connector_configurations["ConnectorType"].authentication_config.custom_auth_configs[0].auth_parameters #=> Array
@@ -2157,6 +2180,9 @@ module Aws::Appflow
     #           o_auth_2_properties: {
     #             token_url: "TokenUrl", # required
     #             o_auth_2_grant_type: "CLIENT_CREDENTIALS", # required, accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #             token_url_custom_properties: {
+    #               "CustomPropertyKey" => "CustomPropertyValue",
+    #             },
     #           },
     #         },
     #       },
@@ -2622,7 +2648,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.25.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

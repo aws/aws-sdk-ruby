@@ -11587,6 +11587,18 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
+    # @!attribute [rw] dpu_seconds
+    #   This field populates only when an Auto Scaling job run completes,
+    #   and represents the total time each executor ran during the lifecycle
+    #   of a job run in seconds, multiplied by a DPU factor (1 for `G.1X`
+    #   and 2 for `G.2X` workers). This value may be different than the
+    #   `executionEngineRuntime` * `MaxCapacity` as in the case of Auto
+    #   Scaling jobs, as the number of executors running at a given time may
+    #   be less than the `MaxCapacity`. Therefore, it is possible that the
+    #   value of `DPUSeconds` is less than `executionEngineRuntime` *
+    #   `MaxCapacity`.
+    #   @return [Float]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobRun AWS API Documentation
     #
     class JobRun < Struct.new(
@@ -11611,7 +11623,8 @@ module Aws::Glue
       :security_configuration,
       :log_group_name,
       :notification_property,
-      :glue_version)
+      :glue_version,
+      :dpu_seconds)
       SENSITIVE = []
       include Aws::Structure
     end

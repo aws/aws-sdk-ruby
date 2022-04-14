@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-04-14)
+------------------
+
+* Feature - Updates documentation for additional statistics in CloudWatch Metric Streams.
+
 1.63.0 (2022-04-13)
 ------------------
 

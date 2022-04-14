@@ -877,6 +877,10 @@ module Aws::AppStream
     #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #         max_concurrent_sessions: 1,
     #         usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #         session_script_s3_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -1130,6 +1134,11 @@ module Aws::AppStream
     #   native client. This is allowed but not required for Elastic fleets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateFleetRequest AWS API Documentation
     #
     class CreateFleetRequest < Struct.new(
@@ -1152,7 +1161,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3497,6 +3507,11 @@ module Aws::AppStream
     #   The USB device filter strings associated with the fleet.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Fleet AWS API Documentation
     #
     class Fleet < Struct.new(
@@ -3522,7 +3537,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5025,12 +5041,16 @@ module Aws::AppStream
     #           organizational_unit_distinguished_name: "OrganizationalUnitDistinguishedName",
     #         },
     #         idle_disconnect_timeout_in_seconds: 1,
-    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS
+    #         attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION
     #         iam_role_arn: "Arn",
     #         stream_view: "APP", # accepts APP, DESKTOP
     #         platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, AMAZON_LINUX2
     #         max_concurrent_sessions: 1,
     #         usb_device_filter_strings: ["UsbDeviceFilterString"],
+    #         session_script_s3_location: {
+    #           s3_bucket: "S3Bucket", # required
+    #           s3_key: "S3Key", # required
+    #         },
     #       }
     #
     # @!attribute [rw] image_name
@@ -5253,6 +5273,11 @@ module Aws::AppStream
     #   native client. This is allowed but not required for Elastic fleets.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] session_script_s3_location
+    #   The S3 location of the session scripts configuration zip file. This
+    #   only applies to Elastic fleets.
+    #   @return [Types::S3Location]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateFleetRequest AWS API Documentation
     #
     class UpdateFleetRequest < Struct.new(
@@ -5275,7 +5300,8 @@ module Aws::AppStream
       :stream_view,
       :platform,
       :max_concurrent_sessions,
-      :usb_device_filter_strings)
+      :usb_device_filter_strings,
+      :session_script_s3_location)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1799,8 +1799,8 @@ module Aws::CloudWatch
     #
     # @!attribute [rw] statistics_configurations
     #   Each entry in this array displays information about one or more
-    #   metrics that include extended statistics in the metric stream. For
-    #   more information about extended statistics, see [ CloudWatch
+    #   metrics that include additional statistics in the metric stream. For
+    #   more information about the additional statistics, see [ CloudWatch
     #   statistics definitions][1].
     #
     #
@@ -3227,10 +3227,9 @@ module Aws::CloudWatch
 
     # By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
     # `SAMPLECOUNT` statistics for each metric that is streamed. This
-    # structure contains information for one metric that includes extended
-    # statistics in the stream. For more information about extended
-    # statistics, see CloudWatch, listed in [ CloudWatch statistics
-    # definitions][1].
+    # structure contains information for one metric that includes additional
+    # statistics in the stream. For more information about statistics, see
+    # CloudWatch, listed in [ CloudWatch statistics definitions][1].
     #
     #
     #
@@ -3250,17 +3249,18 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] include_metrics
-    #   An array of metric name and namespace pairs that stream the extended
-    #   statistics listed in the value of the `AdditionalStatistics`
-    #   parameter. There can be as many as 100 pairs in the array.
+    #   An array of metric name and namespace pairs that stream the
+    #   additional statistics listed in the value of the
+    #   `AdditionalStatistics` parameter. There can be as many as 100 pairs
+    #   in the array.
     #
     #   All metrics that match the combination of metric name and namespace
-    #   will be streamed with the extended statistics, no matter their
+    #   will be streamed with the additional statistics, no matter their
     #   dimensions.
     #   @return [Array<Types::MetricStreamStatisticsMetric>]
     #
     # @!attribute [rw] additional_statistics
-    #   The list of extended statistics that are to be streamed for the
+    #   The list of additional statistics that are to be streamed for the
     #   metrics listed in the `IncludeMetrics` array in this structure. This
     #   list can include as many as 20 statistics.
     #
@@ -3268,10 +3268,10 @@ module Aws::CloudWatch
     #   valid values are `p?? ` percentile statistics such as `p90`, `p99`
     #   and so on.
     #
-    #   If the `OutputFormat` for the stream is `json`, the valid values are
-    #   include the abbreviations for all of the extended statistics listed
-    #   in [ CloudWatch statistics definitions][1]. For example, this
-    #   includes `tm98, ` `wm90`, `PR(:300)`, and so on.
+    #   If the `OutputFormat` for the stream is `json`, the valid values
+    #   include the abbreviations for all of the statistics listed in [
+    #   CloudWatch statistics definitions][1]. For example, this includes
+    #   `tm98, ` `wm90`, `PR(:300)`, and so on.
     #
     #
     #
@@ -3287,8 +3287,8 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
-    # This object contains the information for one metric that is to
-    # streamed with extended statistics.
+    # This object contains the information for one metric that is to be
+    # streamed with additional statistics.
     #
     # @note When making an API call, you may pass MetricStreamStatisticsMetric
     #   data as a hash:
@@ -3299,7 +3299,7 @@ module Aws::CloudWatch
     #       }
     #
     # @!attribute [rw] namespace
-    #   The metric namespace for the metric.
+    #   The namespace of the metric.
     #   @return [String]
     #
     # @!attribute [rw] metric_name
@@ -4056,6 +4056,13 @@ module Aws::CloudWatch
     #
     #   Valid Values: `breaching | notBreaching | ignore | missing`
     #
+    #   <note markdown="1"> Alarms that evaluate metrics in the `AWS/DynamoDB` namespace always
+    #   `ignore` missing data even if you choose a different option for
+    #   `TreatMissingData`. When an `AWS/DynamoDB` metric has missing data,
+    #   alarms that evaluate that metric remain in their current state.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -4328,16 +4335,18 @@ module Aws::CloudWatch
     # @!attribute [rw] statistics_configurations
     #   By default, a metric stream always sends the `MAX`, `MIN`, `SUM`,
     #   and `SAMPLECOUNT` statistics for each metric that is streamed. You
-    #   can use this parameter to have the metric stream also send extended
-    #   statistics in the stream. This array can have up to 100 members.
+    #   can use this parameter to have the metric stream also send
+    #   additional statistics in the stream. This array can have up to 100
+    #   members.
     #
     #   For each entry in this array, you specify one or more metrics and
-    #   the list of extended statistics to stream for those metrics. The
-    #   extended statistics that you can stream depend on the stream's
+    #   the list of additional statistics to stream for those metrics. The
+    #   additional statistics that you can stream depend on the stream's
     #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
-    #   extended statistic that is supported by CloudWatch, listed in [
+    #   additional statistic that is supported by CloudWatch, listed in [
     #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
-    #   `opentelemetry0.7`, you can stream percentile statistics (p*??*).
+    #   `opentelemetry0.7`, you can stream percentile statistics such as
+    #   p95, p99.9 and so on.
     #
     #
     #

@@ -387,12 +387,12 @@ module Aws::EC2
     #   If you specify a network interface, you must specify any subnets as
     #   part of the network interface.
     # @option options [String] :user_data
-    #   The user data to make available to the instance. For more information,
-    #   see [Run commands on your Linux instance at launch][1] and [Run
-    #   commands on your Windows instance at launch][2]. If you are using a
-    #   command line tool, base64-encoding is performed for you, and you can
-    #   load the text from a file. Otherwise, you must provide base64-encoded
-    #   text. User data is limited to 16 KB.
+    #   The user data script to make available to the instance. For more
+    #   information, see [Run commands on your Linux instance at launch][1]
+    #   and [Run commands on your Windows instance at launch][2]. If you are
+    #   using a command line tool, base64-encoding is performed for you, and
+    #   you can load the text from a file. Otherwise, you must provide
+    #   base64-encoded text. User data is limited to 16 KB.
     #
     #
     #
@@ -644,7 +644,7 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     # @option options [String] :key_type
     #   The type of key pair. Note that ED25519 keys are not supported for
-    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #   Windows instances.
     #
     #   Default: `rsa`
     # @option options [Array<Types::TagSpecification>] :tag_specifications
@@ -1984,6 +1984,11 @@ module Aws::EC2
     #
     #   * `block-device-mapping.encrypted` - A Boolean that indicates whether
     #     the Amazon EBS volume is encrypted.
+    #
+    #   * `creation-date` - The time when the image was created, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+    #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
+    #     for example, `2021-09-29T*`, which matches an entire day.
     #
     #   * `description` - The description of the image (provided during image
     #     creation).

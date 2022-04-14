@@ -8332,13 +8332,19 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] no_reboot
-    #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image.
-    #   Without a reboot, the AMI will be crash consistent (all the volumes
-    #   are snapshotted at the same time), but not application consistent
-    #   (all the operating system buffers are not flushed to disk before the
-    #   snapshots are created).
+    #   By default, when Amazon EC2 creates the new AMI, it reboots the
+    #   instance so that it can take snapshots of the attached volumes while
+    #   data is at rest, in order to ensure a consistent state. You can set
+    #   the `NoReboot` parameter to `true` in the API request, or use the
+    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
+    #   down and rebooting the instance.
+    #
+    #   If you choose to bypass the shutdown and reboot process by setting
+    #   the `NoReboot` parameter to `true` in the API request, or by using
+    #   the `--no-reboot` option in the CLI, we can't guarantee the file
+    #   system integrity of the created image.
+    #
+    #   Default: `false` (follow standard reboot process)
     #   @return [Boolean]
     #
     # @!attribute [rw] tag_specifications
@@ -9008,7 +9014,7 @@ module Aws::EC2
     #
     # @!attribute [rw] key_type
     #   The type of key pair. Note that ED25519 keys are not supported for
-    #   Windows instances, EC2 Instance Connect, and EC2 Serial Console.
+    #   Windows instances.
     #
     #   Default: `rsa`
     #   @return [String]
@@ -13503,8 +13509,7 @@ module Aws::EC2
     #
     # @!attribute [rw] acceptance_required
     #   Indicates whether requests from service consumers to create an
-    #   endpoint to your service must be accepted. To accept a request, use
-    #   AcceptVpcEndpointConnections.
+    #   endpoint to your service must be accepted manually.
     #   @return [Boolean]
     #
     # @!attribute [rw] private_dns_name
@@ -20384,6 +20389,11 @@ module Aws::EC2
     #   * `block-device-mapping.encrypted` - A Boolean that indicates
     #     whether the Amazon EBS volume is encrypted.
     #
+    #   * `creation-date` - The time when the image was created, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for
+    #     example, `2021-09-29T11:04:43.305Z`. You can use a wildcard (`*`),
+    #     for example, `2021-09-29T*`, which matches an entire day.
+    #
     #   * `description` - The description of the image (provided during
     #     image creation).
     #
@@ -22803,9 +22813,6 @@ module Aws::EC2
     #
     #   * `local-gateway-virtual-interface-id` - The ID of the virtual
     #     interface.
-    #
-    #   * `local-gateway-virtual-interface-group-id` - The ID of the virtual
-    #     interface group.
     #
     #   * `owner-id` - The ID of the Amazon Web Services account that owns
     #     the local gateway virtual interface.
@@ -31164,6 +31171,13 @@ module Aws::EC2
     #
     # @!attribute [rw] outpost_arn
     #   The ARN of the Outpost on which the snapshot is stored.
+    #
+    #   This parameter is only supported on `BlockDeviceMapping` objects
+    #   called by [ CreateImage][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html
     #   @return [String]
     #
     # @!attribute [rw] encrypted
@@ -53439,14 +53453,7 @@ module Aws::EC2
       include Aws::Structure
     end
 
-    # Information about the private DNS name for the service endpoint. For
-    # more information about these parameters, see [VPC Endpoint Service
-    # Private DNS Name Verification][1] in the *Amazon Virtual Private Cloud
-    # User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/ndpoint-services-dns-validation.html
+    # Information about the private DNS name for the service endpoint.
     #
     # @!attribute [rw] state
     #   The verification state of the VPC endpoint service.
@@ -55833,6 +55840,10 @@ module Aws::EC2
     end
 
     # The information to include in the launch template.
+    #
+    # <note markdown="1"> You must specify at least one parameter for the launch template data.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass RequestLaunchTemplateData
     #   data as a hash:
@@ -59474,7 +59485,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] user_data
-    #   The user data to make available to the instance. For more
+    #   The user data script to make available to the instance. For more
     #   information, see [Run commands on your Linux instance at launch][1]
     #   and [Run commands on your Windows instance at launch][2]. If you are
     #   using a command line tool, base64-encoding is performed for you, and

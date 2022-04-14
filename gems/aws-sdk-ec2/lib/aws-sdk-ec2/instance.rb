@@ -745,13 +745,19 @@ module Aws::EC2
     #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
     #   single quotes ('), at-signs (@), or underscores(\_)
     # @option options [Boolean] :no_reboot
-    #   By default, Amazon EC2 attempts to shut down and reboot the instance
-    #   before creating the image. If the `No Reboot` option is set, Amazon
-    #   EC2 doesn't shut down the instance before creating the image. Without
-    #   a reboot, the AMI will be crash consistent (all the volumes are
-    #   snapshotted at the same time), but not application consistent (all the
-    #   operating system buffers are not flushed to disk before the snapshots
-    #   are created).
+    #   By default, when Amazon EC2 creates the new AMI, it reboots the
+    #   instance so that it can take snapshots of the attached volumes while
+    #   data is at rest, in order to ensure a consistent state. You can set
+    #   the `NoReboot` parameter to `true` in the API request, or use the
+    #   `--no-reboot` option in the CLI to prevent Amazon EC2 from shutting
+    #   down and rebooting the instance.
+    #
+    #   If you choose to bypass the shutdown and reboot process by setting the
+    #   `NoReboot` parameter to `true` in the API request, or by using the
+    #   `--no-reboot` option in the CLI, we can't guarantee the file system
+    #   integrity of the created image.
+    #
+    #   Default: `false` (follow standard reboot process)
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the AMI and snapshots on creation. You can tag
     #   the AMI, the snapshots, or both.

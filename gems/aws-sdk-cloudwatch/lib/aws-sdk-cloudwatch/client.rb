@@ -2970,6 +2970,13 @@ module Aws::CloudWatch
     #
     #   Valid Values: `breaching | notBreaching | ignore | missing`
     #
+    #   <note markdown="1"> Alarms that evaluate metrics in the `AWS/DynamoDB` namespace always
+    #   `ignore` missing data even if you choose a different option for
+    #   `TreatMissingData`. When an `AWS/DynamoDB` metric has missing data,
+    #   alarms that evaluate that metric remain in their current state.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html#alarms-and-missing-data
@@ -3244,7 +3251,7 @@ module Aws::CloudWatch
     # By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
     # `SAMPLECOUNT` statistics for each metric that is streamed. You can use
     # the `StatisticsConfigurations` parameter to have the metric stream
-    # also send extended statistics in the stream. Streaming extended
+    # also send additional statistics in the stream. Streaming additional
     # statistics incurs additional costs. For more information, see [Amazon
     # CloudWatch Pricing][2].
     #
@@ -3327,16 +3334,17 @@ module Aws::CloudWatch
     # @option params [Array<Types::MetricStreamStatisticsConfiguration>] :statistics_configurations
     #   By default, a metric stream always sends the `MAX`, `MIN`, `SUM`, and
     #   `SAMPLECOUNT` statistics for each metric that is streamed. You can use
-    #   this parameter to have the metric stream also send extended statistics
-    #   in the stream. This array can have up to 100 members.
+    #   this parameter to have the metric stream also send additional
+    #   statistics in the stream. This array can have up to 100 members.
     #
     #   For each entry in this array, you specify one or more metrics and the
-    #   list of extended statistics to stream for those metrics. The extended
-    #   statistics that you can stream depend on the stream's `OutputFormat`.
-    #   If the `OutputFormat` is `json`, you can stream any extended statistic
-    #   that is supported by CloudWatch, listed in [ CloudWatch statistics
-    #   definitions][1]. If the `OutputFormat` is `opentelemetry0.7`, you can
-    #   stream percentile statistics (p*??*).
+    #   list of additional statistics to stream for those metrics. The
+    #   additional statistics that you can stream depend on the stream's
+    #   `OutputFormat`. If the `OutputFormat` is `json`, you can stream any
+    #   additional statistic that is supported by CloudWatch, listed in [
+    #   CloudWatch statistics definitions][1]. If the `OutputFormat` is
+    #   `opentelemetry0.7`, you can stream percentile statistics such as p95,
+    #   p99.9 and so on.
     #
     #
     #
@@ -3625,7 +3633,7 @@ module Aws::CloudWatch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -749,7 +749,7 @@ module Aws::Batch
     # @option params [required, Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   The set of compute environments mapped to a job queue and their order
     #   relative to each other. The job scheduler uses this parameter to
-    #   determine which compute environment should run a specific job. Compute
+    #   determine which compute environment runs a specific job. Compute
     #   environments must be in the `VALID` state before you can associate
     #   them with a job queue. You can associate up to three compute
     #   environments with a job queue. All of the compute environments must be
@@ -1073,8 +1073,8 @@ module Aws::Batch
     #
     # If you're using an unmanaged compute environment, you can use the
     # `DescribeComputeEnvironment` operation to determine the
-    # `ecsClusterArn` that you should launch your Amazon ECS container
-    # instances into.
+    # `ecsClusterArn` that you launch your Amazon ECS container instances
+    # into.
     #
     # @option params [Array<String>] :compute_environments
     #   A list of up to 100 compute environment names or full Amazon Resource
@@ -1207,6 +1207,8 @@ module Aws::Batch
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_type #=> String
     #   resp.compute_environments[0].compute_resources.ec2_configuration[0].image_id_override #=> String
     #   resp.compute_environments[0].service_role #=> String
+    #   resp.compute_environments[0].update_policy.terminate_jobs_on_update #=> Boolean
+    #   resp.compute_environments[0].update_policy.job_execution_timeout_minutes #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/DescribeComputeEnvironments AWS API Documentation
@@ -2692,8 +2694,8 @@ module Aws::Batch
     # @option params [Types::ContainerOverrides] :container_overrides
     #   A list of container overrides in the JSON format that specify the name
     #   of a container in the specified job definition and the overrides it
-    #   should receive. You can override the default command for a container,
-    #   which is specified in the job definition or the Docker image, with a
+    #   receives. You can override the default command for a container, which
+    #   is specified in the job definition or the Docker image, with a
     #   `command` override. You can also override existing environment
     #   variables on a container or add new environment variables to it with
     #   an `environment` override.
@@ -3045,11 +3047,11 @@ module Aws::Batch
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
-    #   compute environment. This parameter should not be specified for a
-    #   managed compute environment. This parameter is only used for fair
-    #   share scheduling to reserve vCPU capacity for new share identifiers.
-    #   If this parameter is not provided for a fair share job queue, no vCPU
-    #   capacity will be reserved.
+    #   compute environment. Do not specify this parameter for a managed
+    #   compute environment. This parameter is only used for fair share
+    #   scheduling to reserve vCPU capacity for new share identifiers. If this
+    #   parameter is not provided for a fair share job queue, no vCPU capacity
+    #   will be reserved.
     #
     # @option params [Types::ComputeResourceUpdate] :compute_resources
     #   Details of the compute resources managed by the compute environment.
@@ -3069,11 +3071,15 @@ module Aws::Batch
     #   If the compute environment has a service-linked role, it can't be
     #   changed to use a regular IAM role. Likewise, if the compute
     #   environment has a regular IAM role, it can't be changed to use a
-    #   service-linked role.
+    #   service-linked role. To update the parameters for the compute
+    #   environment that require an infrastructure update to change, the
+    #   **AWSServiceRoleForBatch** service-linked role must be used. For more
+    #   information, see [Updating compute environments][2] in the *Batch User
+    #   Guide*.
     #
     #   If your specified role has a path other than `/`, then you must either
-    #   specify the full role ARN (this is recommended) or prefix the role
-    #   name with the path.
+    #   specify the full role ARN (recommended) or prefix the role name with
+    #   the path.
     #
     #   <note markdown="1"> Depending on how you created your Batch service role, its ARN might
     #   contain the `service-role` path prefix. When you only specify the name
@@ -3087,6 +3093,16 @@ module Aws::Batch
     #
     #
     #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
+    #
+    # @option params [Types::UpdatePolicy] :update_policy
+    #   Specifies the updated infrastructure update policy for the compute
+    #   environment. For more information about infrastructure updates, see
+    #   [Updating compute environments][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html
     #
     # @return [Types::UpdateComputeEnvironmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3121,8 +3137,35 @@ module Aws::Batch
     #       desiredv_cpus: 1,
     #       subnets: ["String"],
     #       security_group_ids: ["String"],
+    #       allocation_strategy: "BEST_FIT_PROGRESSIVE", # accepts BEST_FIT_PROGRESSIVE, SPOT_CAPACITY_OPTIMIZED
+    #       instance_types: ["String"],
+    #       ec2_key_pair: "String",
+    #       instance_role: "String",
+    #       tags: {
+    #         "String" => "String",
+    #       },
+    #       placement_group: "String",
+    #       bid_percentage: 1,
+    #       launch_template: {
+    #         launch_template_id: "String",
+    #         launch_template_name: "String",
+    #         version: "String",
+    #       },
+    #       ec2_configuration: [
+    #         {
+    #           image_type: "ImageType", # required
+    #           image_id_override: "ImageIdOverride",
+    #         },
+    #       ],
+    #       update_to_latest_image_version: false,
+    #       type: "EC2", # accepts EC2, SPOT, FARGATE, FARGATE_SPOT
+    #       image_id: "String",
     #     },
     #     service_role: "String",
+    #     update_policy: {
+    #       terminate_jobs_on_update: false,
+    #       job_execution_timeout_minutes: 1,
+    #     },
     #   })
     #
     # @example Response structure
@@ -3162,7 +3205,7 @@ module Aws::Batch
     #   The priority of the job queue. Job queues with a higher priority (or a
     #   higher integer value for the `priority` parameter) are evaluated first
     #   when associated with the same compute environment. Priority is
-    #   determined in descending order, for example, a job queue with a
+    #   determined in descending order. For example, a job queue with a
     #   priority value of `10` is given scheduling preference over a job queue
     #   with a priority value of `1`. All of the compute environments must be
     #   either EC2 (`EC2` or `SPOT`) or Fargate (`FARGATE` or `FARGATE_SPOT`).
@@ -3171,8 +3214,8 @@ module Aws::Batch
     # @option params [Array<Types::ComputeEnvironmentOrder>] :compute_environment_order
     #   Details the set of compute environments mapped to a job queue and
     #   their order relative to each other. This is one of the parameters used
-    #   by the job scheduler to determine which compute environment should run
-    #   a given job. Compute environments must be in the `VALID` state before
+    #   by the job scheduler to determine which compute environment runs a
+    #   given job. Compute environments must be in the `VALID` state before
     #   you can associate them with a job queue. All of the compute
     #   environments must be either EC2 (`EC2` or `SPOT`) or Fargate
     #   (`FARGATE` or `FARGATE_SPOT`). EC2 and Fargate compute environments
@@ -3282,7 +3325,7 @@ module Aws::Batch
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

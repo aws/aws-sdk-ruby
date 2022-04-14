@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.109.0 (2022-04-14)
+------------------
+
+* Feature - Auto Scaling for Glue version 3.0 and later jobs to dynamically scale compute resources. This SDK change provides customers with the auto-scaled DPU usage
+
 1.108.0 (2022-03-18)
 ------------------
 
