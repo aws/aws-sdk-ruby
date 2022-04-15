@@ -147,6 +147,7 @@ module Aws
 
           def get_region_and_retry(context)
             actual_region = context.http_response.headers['x-amz-bucket-region']
+            puts "get_region_and_retry: actual_region: #{actual_region}"
             actual_region ||= region_from_body(context.http_response.body_contents)
             update_bucket_cache(context, actual_region)
             log_warning(context, actual_region)
@@ -175,7 +176,7 @@ module Aws
           end
 
           def wrong_sigv4_region?(resp)
-            resp.context.http_response.status_code == 400 &&
+            [400, 301].include?(resp.context.http_response.status_code) &&
               (resp.context.http_response.headers['x-amz-bucket-region'] ||
                resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/))
           end
