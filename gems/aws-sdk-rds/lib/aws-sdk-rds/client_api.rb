@@ -66,8 +66,6 @@ module Aws::RDS
     CopyDBSnapshotResult = Shapes::StructureShape.new(name: 'CopyDBSnapshotResult')
     CopyOptionGroupMessage = Shapes::StructureShape.new(name: 'CopyOptionGroupMessage')
     CopyOptionGroupResult = Shapes::StructureShape.new(name: 'CopyOptionGroupResult')
-    CreateCustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'CreateCustomAvailabilityZoneMessage')
-    CreateCustomAvailabilityZoneResult = Shapes::StructureShape.new(name: 'CreateCustomAvailabilityZoneResult')
     CreateCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'CreateCustomDBEngineVersionMessage')
     CreateDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'CreateDBClusterEndpointMessage')
     CreateDBClusterMessage = Shapes::StructureShape.new(name: 'CreateDBClusterMessage')
@@ -98,12 +96,7 @@ module Aws::RDS
     CreateGlobalClusterResult = Shapes::StructureShape.new(name: 'CreateGlobalClusterResult')
     CreateOptionGroupMessage = Shapes::StructureShape.new(name: 'CreateOptionGroupMessage')
     CreateOptionGroupResult = Shapes::StructureShape.new(name: 'CreateOptionGroupResult')
-    CustomAvailabilityZone = Shapes::StructureShape.new(name: 'CustomAvailabilityZone')
-    CustomAvailabilityZoneAlreadyExistsFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneAlreadyExistsFault')
-    CustomAvailabilityZoneList = Shapes::ListShape.new(name: 'CustomAvailabilityZoneList')
-    CustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneMessage')
     CustomAvailabilityZoneNotFoundFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneNotFoundFault')
-    CustomAvailabilityZoneQuotaExceededFault = Shapes::StructureShape.new(name: 'CustomAvailabilityZoneQuotaExceededFault')
     CustomDBEngineVersionAlreadyExistsFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionAlreadyExistsFault')
     CustomDBEngineVersionManifest = Shapes::StringShape.new(name: 'CustomDBEngineVersionManifest')
     CustomDBEngineVersionNotFoundFault = Shapes::StructureShape.new(name: 'CustomDBEngineVersionNotFoundFault')
@@ -233,8 +226,6 @@ module Aws::RDS
     DBSubnetGroups = Shapes::ListShape.new(name: 'DBSubnetGroups')
     DBSubnetQuotaExceededFault = Shapes::StructureShape.new(name: 'DBSubnetQuotaExceededFault')
     DBUpgradeDependencyFailureFault = Shapes::StructureShape.new(name: 'DBUpgradeDependencyFailureFault')
-    DeleteCustomAvailabilityZoneMessage = Shapes::StructureShape.new(name: 'DeleteCustomAvailabilityZoneMessage')
-    DeleteCustomAvailabilityZoneResult = Shapes::StructureShape.new(name: 'DeleteCustomAvailabilityZoneResult')
     DeleteCustomDBEngineVersionMessage = Shapes::StructureShape.new(name: 'DeleteCustomDBEngineVersionMessage')
     DeleteDBClusterEndpointMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterEndpointMessage')
     DeleteDBClusterMessage = Shapes::StructureShape.new(name: 'DeleteDBClusterMessage')
@@ -259,13 +250,11 @@ module Aws::RDS
     DeleteEventSubscriptionResult = Shapes::StructureShape.new(name: 'DeleteEventSubscriptionResult')
     DeleteGlobalClusterMessage = Shapes::StructureShape.new(name: 'DeleteGlobalClusterMessage')
     DeleteGlobalClusterResult = Shapes::StructureShape.new(name: 'DeleteGlobalClusterResult')
-    DeleteInstallationMediaMessage = Shapes::StructureShape.new(name: 'DeleteInstallationMediaMessage')
     DeleteOptionGroupMessage = Shapes::StructureShape.new(name: 'DeleteOptionGroupMessage')
     DeregisterDBProxyTargetsRequest = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsRequest')
     DeregisterDBProxyTargetsResponse = Shapes::StructureShape.new(name: 'DeregisterDBProxyTargetsResponse')
     DescribeAccountAttributesMessage = Shapes::StructureShape.new(name: 'DescribeAccountAttributesMessage')
     DescribeCertificatesMessage = Shapes::StructureShape.new(name: 'DescribeCertificatesMessage')
-    DescribeCustomAvailabilityZonesMessage = Shapes::StructureShape.new(name: 'DescribeCustomAvailabilityZonesMessage')
     DescribeDBClusterBacktracksMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterBacktracksMessage')
     DescribeDBClusterEndpointsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterEndpointsMessage')
     DescribeDBClusterParameterGroupsMessage = Shapes::StructureShape.new(name: 'DescribeDBClusterParameterGroupsMessage')
@@ -305,7 +294,6 @@ module Aws::RDS
     DescribeEventsMessage = Shapes::StructureShape.new(name: 'DescribeEventsMessage')
     DescribeExportTasksMessage = Shapes::StructureShape.new(name: 'DescribeExportTasksMessage')
     DescribeGlobalClustersMessage = Shapes::StructureShape.new(name: 'DescribeGlobalClustersMessage')
-    DescribeInstallationMediaMessage = Shapes::StructureShape.new(name: 'DescribeInstallationMediaMessage')
     DescribeOptionGroupOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOptionGroupOptionsMessage')
     DescribeOptionGroupsMessage = Shapes::StructureShape.new(name: 'DescribeOptionGroupsMessage')
     DescribeOrderableDBInstanceOptionsMessage = Shapes::StructureShape.new(name: 'DescribeOrderableDBInstanceOptionsMessage')
@@ -371,13 +359,6 @@ module Aws::RDS
     IPRangeList = Shapes::ListShape.new(name: 'IPRangeList')
     IamRoleMissingPermissionsFault = Shapes::StructureShape.new(name: 'IamRoleMissingPermissionsFault')
     IamRoleNotFoundFault = Shapes::StructureShape.new(name: 'IamRoleNotFoundFault')
-    ImportInstallationMediaMessage = Shapes::StructureShape.new(name: 'ImportInstallationMediaMessage')
-    InstallationMedia = Shapes::StructureShape.new(name: 'InstallationMedia')
-    InstallationMediaAlreadyExistsFault = Shapes::StructureShape.new(name: 'InstallationMediaAlreadyExistsFault')
-    InstallationMediaFailureCause = Shapes::StructureShape.new(name: 'InstallationMediaFailureCause')
-    InstallationMediaList = Shapes::ListShape.new(name: 'InstallationMediaList')
-    InstallationMediaMessage = Shapes::StructureShape.new(name: 'InstallationMediaMessage')
-    InstallationMediaNotFoundFault = Shapes::StructureShape.new(name: 'InstallationMediaNotFoundFault')
     InstanceQuotaExceededFault = Shapes::StructureShape.new(name: 'InstanceQuotaExceededFault')
     InsufficientAvailableIPsInSubnetFault = Shapes::StructureShape.new(name: 'InsufficientAvailableIPsInSubnetFault')
     InsufficientDBClusterCapacityFault = Shapes::StructureShape.new(name: 'InsufficientDBClusterCapacityFault')
@@ -584,7 +565,6 @@ module Aws::RDS
     String = Shapes::StringShape.new(name: 'String')
     String255 = Shapes::StringShape.new(name: 'String255')
     StringList = Shapes::ListShape.new(name: 'StringList')
-    StringSensitive = Shapes::StringShape.new(name: 'StringSensitive')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAlreadyInUse = Shapes::StructureShape.new(name: 'SubnetAlreadyInUse')
     SubnetIdentifierList = Shapes::ListShape.new(name: 'SubnetIdentifierList')
@@ -618,7 +598,6 @@ module Aws::RDS
     VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
     VpcSecurityGroupMembership = Shapes::StructureShape.new(name: 'VpcSecurityGroupMembership')
     VpcSecurityGroupMembershipList = Shapes::ListShape.new(name: 'VpcSecurityGroupMembershipList')
-    VpnDetails = Shapes::StructureShape.new(name: 'VpnDetails')
     WriteForwardingStatus = Shapes::StringShape.new(name: 'WriteForwardingStatus')
 
     AccountAttributesMessage.add_member(:account_quotas, Shapes::ShapeRef.new(shape: AccountQuotaList, location_name: "AccountQuotas"))
@@ -804,15 +783,6 @@ module Aws::RDS
 
     CopyOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     CopyOptionGroupResult.struct_class = Types::CopyOptionGroupResult
-
-    CreateCustomAvailabilityZoneMessage.add_member(:custom_availability_zone_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomAvailabilityZoneName"))
-    CreateCustomAvailabilityZoneMessage.add_member(:existing_vpn_id, Shapes::ShapeRef.new(shape: String, location_name: "ExistingVpnId"))
-    CreateCustomAvailabilityZoneMessage.add_member(:new_vpn_tunnel_name, Shapes::ShapeRef.new(shape: String, location_name: "NewVpnTunnelName"))
-    CreateCustomAvailabilityZoneMessage.add_member(:vpn_tunnel_originator_ip, Shapes::ShapeRef.new(shape: String, location_name: "VpnTunnelOriginatorIP"))
-    CreateCustomAvailabilityZoneMessage.struct_class = Types::CreateCustomAvailabilityZoneMessage
-
-    CreateCustomAvailabilityZoneResult.add_member(:custom_availability_zone, Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone"))
-    CreateCustomAvailabilityZoneResult.struct_class = Types::CreateCustomAvailabilityZoneResult
 
     CreateCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     CreateCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
@@ -1087,23 +1057,7 @@ module Aws::RDS
     CreateOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     CreateOptionGroupResult.struct_class = Types::CreateOptionGroupResult
 
-    CustomAvailabilityZone.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomAvailabilityZoneId"))
-    CustomAvailabilityZone.add_member(:custom_availability_zone_name, Shapes::ShapeRef.new(shape: String, location_name: "CustomAvailabilityZoneName"))
-    CustomAvailabilityZone.add_member(:custom_availability_zone_status, Shapes::ShapeRef.new(shape: String, location_name: "CustomAvailabilityZoneStatus"))
-    CustomAvailabilityZone.add_member(:vpn_details, Shapes::ShapeRef.new(shape: VpnDetails, location_name: "VpnDetails"))
-    CustomAvailabilityZone.struct_class = Types::CustomAvailabilityZone
-
-    CustomAvailabilityZoneAlreadyExistsFault.struct_class = Types::CustomAvailabilityZoneAlreadyExistsFault
-
-    CustomAvailabilityZoneList.member = Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone")
-
-    CustomAvailabilityZoneMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    CustomAvailabilityZoneMessage.add_member(:custom_availability_zones, Shapes::ShapeRef.new(shape: CustomAvailabilityZoneList, location_name: "CustomAvailabilityZones"))
-    CustomAvailabilityZoneMessage.struct_class = Types::CustomAvailabilityZoneMessage
-
     CustomAvailabilityZoneNotFoundFault.struct_class = Types::CustomAvailabilityZoneNotFoundFault
-
-    CustomAvailabilityZoneQuotaExceededFault.struct_class = Types::CustomAvailabilityZoneQuotaExceededFault
 
     CustomDBEngineVersionAlreadyExistsFault.struct_class = Types::CustomDBEngineVersionAlreadyExistsFault
 
@@ -1733,12 +1687,6 @@ module Aws::RDS
 
     DBUpgradeDependencyFailureFault.struct_class = Types::DBUpgradeDependencyFailureFault
 
-    DeleteCustomAvailabilityZoneMessage.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomAvailabilityZoneId"))
-    DeleteCustomAvailabilityZoneMessage.struct_class = Types::DeleteCustomAvailabilityZoneMessage
-
-    DeleteCustomAvailabilityZoneResult.add_member(:custom_availability_zone, Shapes::ShapeRef.new(shape: CustomAvailabilityZone, location_name: "CustomAvailabilityZone"))
-    DeleteCustomAvailabilityZoneResult.struct_class = Types::DeleteCustomAvailabilityZoneResult
-
     DeleteCustomDBEngineVersionMessage.add_member(:engine, Shapes::ShapeRef.new(shape: CustomEngineName, required: true, location_name: "Engine"))
     DeleteCustomDBEngineVersionMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: CustomEngineVersion, required: true, location_name: "EngineVersion"))
     DeleteCustomDBEngineVersionMessage.struct_class = Types::DeleteCustomDBEngineVersionMessage
@@ -1818,9 +1766,6 @@ module Aws::RDS
     DeleteGlobalClusterResult.add_member(:global_cluster, Shapes::ShapeRef.new(shape: GlobalCluster, location_name: "GlobalCluster"))
     DeleteGlobalClusterResult.struct_class = Types::DeleteGlobalClusterResult
 
-    DeleteInstallationMediaMessage.add_member(:installation_media_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "InstallationMediaId"))
-    DeleteInstallationMediaMessage.struct_class = Types::DeleteInstallationMediaMessage
-
     DeleteOptionGroupMessage.add_member(:option_group_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OptionGroupName"))
     DeleteOptionGroupMessage.struct_class = Types::DeleteOptionGroupMessage
 
@@ -1839,12 +1784,6 @@ module Aws::RDS
     DescribeCertificatesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeCertificatesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeCertificatesMessage.struct_class = Types::DescribeCertificatesMessage
-
-    DescribeCustomAvailabilityZonesMessage.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomAvailabilityZoneId"))
-    DescribeCustomAvailabilityZonesMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    DescribeCustomAvailabilityZonesMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
-    DescribeCustomAvailabilityZonesMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    DescribeCustomAvailabilityZonesMessage.struct_class = Types::DescribeCustomAvailabilityZonesMessage
 
     DescribeDBClusterBacktracksMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
     DescribeDBClusterBacktracksMessage.add_member(:backtrack_identifier, Shapes::ShapeRef.new(shape: String, location_name: "BacktrackIdentifier"))
@@ -2078,12 +2017,6 @@ module Aws::RDS
     DescribeGlobalClustersMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
     DescribeGlobalClustersMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
     DescribeGlobalClustersMessage.struct_class = Types::DescribeGlobalClustersMessage
-
-    DescribeInstallationMediaMessage.add_member(:installation_media_id, Shapes::ShapeRef.new(shape: String, location_name: "InstallationMediaId"))
-    DescribeInstallationMediaMessage.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filters"))
-    DescribeInstallationMediaMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
-    DescribeInstallationMediaMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    DescribeInstallationMediaMessage.struct_class = Types::DescribeInstallationMediaMessage
 
     DescribeOptionGroupOptionsMessage.add_member(:engine_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineName"))
     DescribeOptionGroupOptionsMessage.add_member(:major_engine_version, Shapes::ShapeRef.new(shape: String, location_name: "MajorEngineVersion"))
@@ -2343,36 +2276,6 @@ module Aws::RDS
     IamRoleMissingPermissionsFault.struct_class = Types::IamRoleMissingPermissionsFault
 
     IamRoleNotFoundFault.struct_class = Types::IamRoleNotFoundFault
-
-    ImportInstallationMediaMessage.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CustomAvailabilityZoneId"))
-    ImportInstallationMediaMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Engine"))
-    ImportInstallationMediaMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineVersion"))
-    ImportInstallationMediaMessage.add_member(:engine_installation_media_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "EngineInstallationMediaPath"))
-    ImportInstallationMediaMessage.add_member(:os_installation_media_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OSInstallationMediaPath"))
-    ImportInstallationMediaMessage.struct_class = Types::ImportInstallationMediaMessage
-
-    InstallationMedia.add_member(:installation_media_id, Shapes::ShapeRef.new(shape: String, location_name: "InstallationMediaId"))
-    InstallationMedia.add_member(:custom_availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "CustomAvailabilityZoneId"))
-    InstallationMedia.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
-    InstallationMedia.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
-    InstallationMedia.add_member(:engine_installation_media_path, Shapes::ShapeRef.new(shape: String, location_name: "EngineInstallationMediaPath"))
-    InstallationMedia.add_member(:os_installation_media_path, Shapes::ShapeRef.new(shape: String, location_name: "OSInstallationMediaPath"))
-    InstallationMedia.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
-    InstallationMedia.add_member(:failure_cause, Shapes::ShapeRef.new(shape: InstallationMediaFailureCause, location_name: "FailureCause"))
-    InstallationMedia.struct_class = Types::InstallationMedia
-
-    InstallationMediaAlreadyExistsFault.struct_class = Types::InstallationMediaAlreadyExistsFault
-
-    InstallationMediaFailureCause.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
-    InstallationMediaFailureCause.struct_class = Types::InstallationMediaFailureCause
-
-    InstallationMediaList.member = Shapes::ShapeRef.new(shape: InstallationMedia, location_name: "InstallationMedia")
-
-    InstallationMediaMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
-    InstallationMediaMessage.add_member(:installation_media, Shapes::ShapeRef.new(shape: InstallationMediaList, location_name: "InstallationMedia"))
-    InstallationMediaMessage.struct_class = Types::InstallationMediaMessage
-
-    InstallationMediaNotFoundFault.struct_class = Types::InstallationMediaNotFoundFault
 
     InstanceQuotaExceededFault.struct_class = Types::InstanceQuotaExceededFault
 
@@ -3500,14 +3403,6 @@ module Aws::RDS
 
     VpcSecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: VpcSecurityGroupMembership, location_name: "VpcSecurityGroupMembership")
 
-    VpnDetails.add_member(:vpn_id, Shapes::ShapeRef.new(shape: String, location_name: "VpnId"))
-    VpnDetails.add_member(:vpn_tunnel_originator_ip, Shapes::ShapeRef.new(shape: String, location_name: "VpnTunnelOriginatorIP"))
-    VpnDetails.add_member(:vpn_gateway_ip, Shapes::ShapeRef.new(shape: String, location_name: "VpnGatewayIp"))
-    VpnDetails.add_member(:vpn_psk, Shapes::ShapeRef.new(shape: StringSensitive, location_name: "VpnPSK"))
-    VpnDetails.add_member(:vpn_name, Shapes::ShapeRef.new(shape: String, location_name: "VpnName"))
-    VpnDetails.add_member(:vpn_state, Shapes::ShapeRef.new(shape: String, location_name: "VpnState"))
-    VpnDetails.struct_class = Types::VpnDetails
-
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -3675,17 +3570,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupAlreadyExistsFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
-      end)
-
-      api.add_operation(:create_custom_availability_zone, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "CreateCustomAvailabilityZone"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: CreateCustomAvailabilityZoneMessage)
-        o.output = Shapes::ShapeRef.new(shape: CreateCustomAvailabilityZoneResult)
-        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneAlreadyExistsFault)
-        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneQuotaExceededFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
       end)
 
       api.add_operation(:create_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
@@ -3923,16 +3807,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: OptionGroupQuotaExceededFault)
       end)
 
-      api.add_operation(:delete_custom_availability_zone, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteCustomAvailabilityZone"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteCustomAvailabilityZoneMessage)
-        o.output = Shapes::ShapeRef.new(shape: DeleteCustomAvailabilityZoneResult)
-        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
-      end)
-
       api.add_operation(:delete_custom_db_engine_version, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCustomDBEngineVersion"
         o.http_method = "POST"
@@ -4092,15 +3966,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
       end)
 
-      api.add_operation(:delete_installation_media, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DeleteInstallationMedia"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DeleteInstallationMediaMessage)
-        o.output = Shapes::ShapeRef.new(shape: InstallationMedia)
-        o.errors << Shapes::ShapeRef.new(shape: InstallationMediaNotFoundFault)
-      end)
-
       api.add_operation(:delete_option_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteOptionGroup"
         o.http_method = "POST"
@@ -4138,21 +4003,6 @@ module Aws::RDS
         o.input = Shapes::ShapeRef.new(shape: DescribeCertificatesMessage)
         o.output = Shapes::ShapeRef.new(shape: CertificateMessage)
         o.errors << Shapes::ShapeRef.new(shape: CertificateNotFoundFault)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_records",
-          tokens: {
-            "marker" => "marker"
-          }
-        )
-      end)
-
-      api.add_operation(:describe_custom_availability_zones, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeCustomAvailabilityZones"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DescribeCustomAvailabilityZonesMessage)
-        o.output = Shapes::ShapeRef.new(shape: CustomAvailabilityZoneMessage)
-        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_records",
           tokens: {
@@ -4559,21 +4409,6 @@ module Aws::RDS
         )
       end)
 
-      api.add_operation(:describe_installation_media, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "DescribeInstallationMedia"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: DescribeInstallationMediaMessage)
-        o.output = Shapes::ShapeRef.new(shape: InstallationMediaMessage)
-        o.errors << Shapes::ShapeRef.new(shape: InstallationMediaNotFoundFault)
-        o[:pager] = Aws::Pager.new(
-          limit_key: "max_records",
-          tokens: {
-            "marker" => "marker"
-          }
-        )
-      end)
-
       api.add_operation(:describe_option_group_options, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeOptionGroupOptions"
         o.http_method = "POST"
@@ -4724,16 +4559,6 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: InvalidGlobalClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
-      end)
-
-      api.add_operation(:import_installation_media, Seahorse::Model::Operation.new.tap do |o|
-        o.name = "ImportInstallationMedia"
-        o.http_method = "POST"
-        o.http_request_uri = "/"
-        o.input = Shapes::ShapeRef.new(shape: ImportInstallationMediaMessage)
-        o.output = Shapes::ShapeRef.new(shape: InstallationMedia)
-        o.errors << Shapes::ShapeRef.new(shape: CustomAvailabilityZoneNotFoundFault)
-        o.errors << Shapes::ShapeRef.new(shape: InstallationMediaAlreadyExistsFault)
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

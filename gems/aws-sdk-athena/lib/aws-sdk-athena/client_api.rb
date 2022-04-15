@@ -196,6 +196,8 @@ module Aws::Athena
 
     AthenaError.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
     AthenaError.add_member(:error_type, Shapes::ShapeRef.new(shape: ErrorType, location_name: "ErrorType"))
+    AthenaError.add_member(:retryable, Shapes::ShapeRef.new(shape: Boolean, location_name: "Retryable"))
+    AthenaError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "ErrorMessage"))
     AthenaError.struct_class = Types::AthenaError
 
     BatchGetNamedQueryInput.add_member(:named_query_ids, Shapes::ShapeRef.new(shape: NamedQueryIdList, required: true, location_name: "NamedQueryIds"))

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2022-04-15)
+------------------
+
+* Feature - This release adds support to describe the synchronization status of the account-level block public access feature for your Amazon Lightsail buckets.
+
 1.63.0 (2022-02-24)
 ------------------
 

@@ -32,9 +32,7 @@ module Aws::RDS
   # * {AuthorizationQuotaExceededFault}
   # * {BackupPolicyNotFoundFault}
   # * {CertificateNotFoundFault}
-  # * {CustomAvailabilityZoneAlreadyExistsFault}
   # * {CustomAvailabilityZoneNotFoundFault}
-  # * {CustomAvailabilityZoneQuotaExceededFault}
   # * {CustomDBEngineVersionAlreadyExistsFault}
   # * {CustomDBEngineVersionNotFoundFault}
   # * {CustomDBEngineVersionQuotaExceededFault}
@@ -93,8 +91,6 @@ module Aws::RDS
   # * {GlobalClusterQuotaExceededFault}
   # * {IamRoleMissingPermissionsFault}
   # * {IamRoleNotFoundFault}
-  # * {InstallationMediaAlreadyExistsFault}
-  # * {InstallationMediaNotFoundFault}
   # * {InstanceQuotaExceededFault}
   # * {InsufficientAvailableIPsInSubnetFault}
   # * {InsufficientDBClusterCapacityFault}
@@ -205,31 +201,11 @@ module Aws::RDS
       end
     end
 
-    class CustomAvailabilityZoneAlreadyExistsFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::RDS::Types::CustomAvailabilityZoneAlreadyExistsFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
     class CustomAvailabilityZoneNotFoundFault < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::CustomAvailabilityZoneNotFoundFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class CustomAvailabilityZoneQuotaExceededFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::RDS::Types::CustomAvailabilityZoneQuotaExceededFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -810,26 +786,6 @@ module Aws::RDS
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::RDS::Types::IamRoleNotFoundFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class InstallationMediaAlreadyExistsFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::RDS::Types::InstallationMediaAlreadyExistsFault] data
-      def initialize(context, message, data = Aws::EmptyStructure.new)
-        super(context, message, data)
-      end
-    end
-
-    class InstallationMediaNotFoundFault < ServiceError
-
-      # @param [Seahorse::Client::RequestContext] context
-      # @param [String] message
-      # @param [Aws::RDS::Types::InstallationMediaNotFoundFault] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

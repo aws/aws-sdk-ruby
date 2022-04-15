@@ -450,6 +450,8 @@ module Aws::Athena
     #   resp.query_executions[0].status.completion_date_time #=> Time
     #   resp.query_executions[0].status.athena_error.error_category #=> Integer
     #   resp.query_executions[0].status.athena_error.error_type #=> Integer
+    #   resp.query_executions[0].status.athena_error.retryable #=> Boolean
+    #   resp.query_executions[0].status.athena_error.error_message #=> String
     #   resp.query_executions[0].statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_executions[0].statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_executions[0].statistics.data_manifest_location #=> String
@@ -1024,6 +1026,8 @@ module Aws::Athena
     #   resp.query_execution.status.completion_date_time #=> Time
     #   resp.query_execution.status.athena_error.error_category #=> Integer
     #   resp.query_execution.status.athena_error.error_type #=> Integer
+    #   resp.query_execution.status.athena_error.retryable #=> Boolean
+    #   resp.query_execution.status.athena_error.error_message #=> String
     #   resp.query_execution.statistics.engine_execution_time_in_millis #=> Integer
     #   resp.query_execution.statistics.data_scanned_in_bytes #=> Integer
     #   resp.query_execution.statistics.data_manifest_location #=> String
@@ -2059,7 +2063,7 @@ module Aws::Athena
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

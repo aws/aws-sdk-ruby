@@ -1612,70 +1612,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass CreateCustomAvailabilityZoneMessage
-    #   data as a hash:
-    #
-    #       {
-    #         custom_availability_zone_name: "String", # required
-    #         existing_vpn_id: "String",
-    #         new_vpn_tunnel_name: "String",
-    #         vpn_tunnel_originator_ip: "String",
-    #       }
-    #
-    # @!attribute [rw] custom_availability_zone_name
-    #   The name of the custom Availability Zone (AZ).
-    #   @return [String]
-    #
-    # @!attribute [rw] existing_vpn_id
-    #   The ID of an existing virtual private network (VPN) between the
-    #   Amazon RDS website and the VMware vSphere cluster.
-    #   @return [String]
-    #
-    # @!attribute [rw] new_vpn_tunnel_name
-    #   The name of a new VPN tunnel between the Amazon RDS website and the
-    #   VMware vSphere cluster.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_tunnel_originator_ip
-    #   The IP address of network traffic from your on-premises data center.
-    #   A custom AZ receives the network traffic.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZoneMessage AWS API Documentation
-    #
-    class CreateCustomAvailabilityZoneMessage < Struct.new(
-      :custom_availability_zone_name,
-      :existing_vpn_id,
-      :new_vpn_tunnel_name,
-      :vpn_tunnel_originator_ip)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] custom_availability_zone
-    #   A custom Availability Zone (AZ) is an on-premises AZ that is
-    #   integrated with a VMware vSphere cluster.
-    #
-    #   For more information about RDS on VMware, see the [ RDS on VMware
-    #   User Guide.][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #   @return [Types::CustomAvailabilityZone]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZoneResult AWS API Documentation
-    #
-    class CreateCustomAvailabilityZoneResult < Struct.new(
-      :custom_availability_zone)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass CreateCustomDBEngineVersionMessage
     #   data as a hash:
     #
@@ -3408,7 +3344,10 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #   Each Aurora DB cluster hosts copies of its storage in three separate
+    #   Availability Zones. Specify one of these Availability Zones. Aurora
+    #   automatically chooses an appropriate Availability Zone if you don't
+    #   specify one.
     #
     #   Default: A random, system-chosen Availability Zone in the
     #   endpoint's Amazon Web Services Region.
@@ -5660,87 +5599,12 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # A custom Availability Zone (AZ) is an on-premises AZ that is
-    # integrated with a VMware vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @!attribute [rw] custom_availability_zone_id
-    #   The identifier of the custom AZ.
-    #
-    #   Amazon RDS generates a unique identifier when a custom AZ is
-    #   created.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_availability_zone_name
-    #   The name of the custom AZ.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_availability_zone_status
-    #   The status of the custom AZ.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_details
-    #   Information about the virtual private network (VPN) between the
-    #   VMware vSphere cluster and the Amazon Web Services website.
-    #   @return [Types::VpnDetails]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZone AWS API Documentation
-    #
-    class CustomAvailabilityZone < Struct.new(
-      :custom_availability_zone_id,
-      :custom_availability_zone_name,
-      :custom_availability_zone_status,
-      :vpn_details)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # `CustomAvailabilityZoneName` is already used by an existing custom
-    # Availability Zone.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneAlreadyExistsFault AWS API Documentation
-    #
-    class CustomAvailabilityZoneAlreadyExistsFault < Aws::EmptyStructure; end
-
-    # @!attribute [rw] marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeCustomAvailabilityZones` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up
-    #   to the value specified by `MaxRecords`.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_availability_zones
-    #   The list of CustomAvailabilityZone objects for the Amazon Web
-    #   Services account.
-    #   @return [Array<Types::CustomAvailabilityZone>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneMessage AWS API Documentation
-    #
-    class CustomAvailabilityZoneMessage < Struct.new(
-      :marker,
-      :custom_availability_zones)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # `CustomAvailabilityZoneId` doesn't refer to an existing custom
     # Availability Zone identifier.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneNotFoundFault AWS API Documentation
     #
     class CustomAvailabilityZoneNotFoundFault < Aws::EmptyStructure; end
-
-    # You have exceeded the maximum number of custom Availability Zones.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CustomAvailabilityZoneQuotaExceededFault AWS API Documentation
-    #
-    class CustomAvailabilityZoneQuotaExceededFault < Aws::EmptyStructure; end
 
     # A CEV with the specified name already exists.
     #
@@ -9270,45 +9134,6 @@ module Aws::RDS
     #
     class DBUpgradeDependencyFailureFault < Aws::EmptyStructure; end
 
-    # @note When making an API call, you may pass DeleteCustomAvailabilityZoneMessage
-    #   data as a hash:
-    #
-    #       {
-    #         custom_availability_zone_id: "String", # required
-    #       }
-    #
-    # @!attribute [rw] custom_availability_zone_id
-    #   The custom AZ identifier.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZoneMessage AWS API Documentation
-    #
-    class DeleteCustomAvailabilityZoneMessage < Struct.new(
-      :custom_availability_zone_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] custom_availability_zone
-    #   A custom Availability Zone (AZ) is an on-premises AZ that is
-    #   integrated with a VMware vSphere cluster.
-    #
-    #   For more information about RDS on VMware, see the [ RDS on VMware
-    #   User Guide.][1]
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #   @return [Types::CustomAvailabilityZone]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZoneResult AWS API Documentation
-    #
-    class DeleteCustomAvailabilityZoneResult < Struct.new(
-      :custom_availability_zone)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass DeleteCustomDBEngineVersionMessage
     #   data as a hash:
     #
@@ -9927,25 +9752,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    # @note When making an API call, you may pass DeleteInstallationMediaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         installation_media_id: "String", # required
-    #       }
-    #
-    # @!attribute [rw] installation_media_id
-    #   The installation medium ID.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMediaMessage AWS API Documentation
-    #
-    class DeleteInstallationMediaMessage < Struct.new(
-      :installation_media_id)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
     # @note When making an API call, you may pass DeleteOptionGroupMessage
     #   data as a hash:
     #
@@ -10070,59 +9876,6 @@ module Aws::RDS
     #
     class DescribeCertificatesMessage < Struct.new(
       :certificate_identifier,
-      :filters,
-      :max_records,
-      :marker)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeCustomAvailabilityZonesMessage
-    #   data as a hash:
-    #
-    #       {
-    #         custom_availability_zone_id: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
-    # @!attribute [rw] custom_availability_zone_id
-    #   The custom AZ identifier. If this parameter is specified,
-    #   information from only the specific custom AZ is returned.
-    #   @return [String]
-    #
-    # @!attribute [rw] filters
-    #   A filter that specifies one or more custom AZs to describe.
-    #   @return [Array<Types::Filter>]
-    #
-    # @!attribute [rw] max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can
-    #   retrieve the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeCustomAvailabilityZones` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up
-    #   to the value specified by `MaxRecords`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZonesMessage AWS API Documentation
-    #
-    class DescribeCustomAvailabilityZonesMessage < Struct.new(
-      :custom_availability_zone_id,
       :filters,
       :max_records,
       :marker)
@@ -12005,6 +11758,86 @@ module Aws::RDS
     #
     # @!attribute [rw] db_parameter_group_family
     #   The name of the DB parameter group family.
+    #
+    #   Valid Values:
+    #
+    #   * `aurora5.6`
+    #
+    #   * `aurora-mysql5.7`
+    #
+    #   * `aurora-mysql8.0`
+    #
+    #   * `aurora-postgresql10`
+    #
+    #   * `aurora-postgresql11`
+    #
+    #   * `aurora-postgresql12`
+    #
+    #   * `aurora-postgresql13`
+    #
+    #   * `mariadb10.2`
+    #
+    #   * `mariadb10.3`
+    #
+    #   * `mariadb10.4`
+    #
+    #   * `mariadb10.5`
+    #
+    #   * `mariadb10.6`
+    #
+    #   * `mysql5.7`
+    #
+    #   * `mysql8.0`
+    #
+    #   * `postgres10`
+    #
+    #   * `postgres11`
+    #
+    #   * `postgres12`
+    #
+    #   * `postgres13`
+    #
+    #   * `postgres14`
+    #
+    #   * `sqlserver-ee-11.0`
+    #
+    #   * `sqlserver-ee-12.0`
+    #
+    #   * `sqlserver-ee-13.0`
+    #
+    #   * `sqlserver-ee-14.0`
+    #
+    #   * `sqlserver-ee-15.0`
+    #
+    #   * `sqlserver-ex-11.0`
+    #
+    #   * `sqlserver-ex-12.0`
+    #
+    #   * `sqlserver-ex-13.0`
+    #
+    #   * `sqlserver-ex-14.0`
+    #
+    #   * `sqlserver-ex-15.0`
+    #
+    #   * `sqlserver-se-11.0`
+    #
+    #   * `sqlserver-se-12.0`
+    #
+    #   * `sqlserver-se-13.0`
+    #
+    #   * `sqlserver-se-14.0`
+    #
+    #   * `sqlserver-se-15.0`
+    #
+    #   * `sqlserver-web-11.0`
+    #
+    #   * `sqlserver-web-12.0`
+    #
+    #   * `sqlserver-web-13.0`
+    #
+    #   * `sqlserver-web-14.0`
+    #
+    #   * `sqlserver-web-15.0`
     #   @return [String]
     #
     # @!attribute [rw] filters
@@ -12412,65 +12245,6 @@ module Aws::RDS
     #
     class DescribeGlobalClustersMessage < Struct.new(
       :global_cluster_identifier,
-      :filters,
-      :max_records,
-      :marker)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @note When making an API call, you may pass DescribeInstallationMediaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         installation_media_id: "String",
-    #         filters: [
-    #           {
-    #             name: "String", # required
-    #             values: ["String"], # required
-    #           },
-    #         ],
-    #         max_records: 1,
-    #         marker: "String",
-    #       }
-    #
-    # @!attribute [rw] installation_media_id
-    #   The installation medium ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] filters
-    #   A filter that specifies one or more installation media to describe.
-    #   Supported filters include the following:
-    #
-    #   * `custom-availability-zone-id` - Accepts custom Availability Zone
-    #     (AZ) identifiers. The results list includes information about only
-    #     the custom AZs identified by these identifiers.
-    #
-    #   * `engine` - Accepts database engines. The results list includes
-    #     information about only the database engines identified by these
-    #     identifiers.
-    #
-    #     For more information about the valid engines for installation
-    #     media, see ImportInstallationMedia.
-    #   @return [Array<Types::Filter>]
-    #
-    # @!attribute [rw] max_records
-    #   An optional pagination token provided by a previous
-    #   DescribeInstallationMedia request. If this parameter is specified,
-    #   the response includes only records beyond the marker, up to the
-    #   value specified by `MaxRecords`.
-    #   @return [Integer]
-    #
-    # @!attribute [rw] marker
-    #   An optional pagination token provided by a previous request. If this
-    #   parameter is specified, the response includes only records beyond
-    #   the marker, up to the value specified by `MaxRecords`.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMediaMessage AWS API Documentation
-    #
-    class DescribeInstallationMediaMessage < Struct.new(
-      :installation_media_id,
       :filters,
       :max_records,
       :marker)
@@ -14152,186 +13926,6 @@ module Aws::RDS
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/IamRoleNotFoundFault AWS API Documentation
     #
     class IamRoleNotFoundFault < Aws::EmptyStructure; end
-
-    # @note When making an API call, you may pass ImportInstallationMediaMessage
-    #   data as a hash:
-    #
-    #       {
-    #         custom_availability_zone_id: "String", # required
-    #         engine: "String", # required
-    #         engine_version: "String", # required
-    #         engine_installation_media_path: "String", # required
-    #         os_installation_media_path: "String", # required
-    #       }
-    #
-    # @!attribute [rw] custom_availability_zone_id
-    #   The identifier of the custom Availability Zone (AZ) to import the
-    #   installation media to.
-    #   @return [String]
-    #
-    # @!attribute [rw] engine
-    #   The name of the database engine to be used for this instance.
-    #
-    #   The list only includes supported DB engines that require an
-    #   on-premises customer provided license.
-    #
-    #   Valid Values:
-    #
-    #   * `sqlserver-ee`
-    #
-    #   * `sqlserver-se`
-    #
-    #   * `sqlserver-ex`
-    #
-    #   * `sqlserver-web`
-    #   @return [String]
-    #
-    # @!attribute [rw] engine_version
-    #   The version number of the database engine to use.
-    #
-    #   For a list of valid engine versions, call DescribeDBEngineVersions.
-    #
-    #   The following are the database engines and links to information
-    #   about the major and minor versions. The list only includes DB
-    #   engines that require an on-premises customer provided license.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   See [ Microsoft SQL Server Versions on Amazon RDS][1] in the *Amazon
-    #   RDS User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #   @return [String]
-    #
-    # @!attribute [rw] engine_installation_media_path
-    #   The path to the installation medium for the specified DB engine.
-    #
-    #   Example:
-    #   `SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso`
-    #   @return [String]
-    #
-    # @!attribute [rw] os_installation_media_path
-    #   The path to the installation medium for the operating system
-    #   associated with the specified DB engine.
-    #
-    #   Example: `WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso`
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMediaMessage AWS API Documentation
-    #
-    class ImportInstallationMediaMessage < Struct.new(
-      :custom_availability_zone_id,
-      :engine,
-      :engine_version,
-      :engine_installation_media_path,
-      :os_installation_media_path)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Contains the installation media for a DB engine that requires an
-    # on-premises customer provided license, such as Microsoft SQL Server.
-    #
-    # @!attribute [rw] installation_media_id
-    #   The installation medium ID.
-    #   @return [String]
-    #
-    # @!attribute [rw] custom_availability_zone_id
-    #   The custom Availability Zone (AZ) that contains the installation
-    #   media.
-    #   @return [String]
-    #
-    # @!attribute [rw] engine
-    #   The DB engine.
-    #   @return [String]
-    #
-    # @!attribute [rw] engine_version
-    #   The engine version of the DB engine.
-    #   @return [String]
-    #
-    # @!attribute [rw] engine_installation_media_path
-    #   The path to the installation medium for the DB engine.
-    #   @return [String]
-    #
-    # @!attribute [rw] os_installation_media_path
-    #   The path to the installation medium for the operating system
-    #   associated with the DB engine.
-    #   @return [String]
-    #
-    # @!attribute [rw] status
-    #   The status of the installation medium.
-    #   @return [String]
-    #
-    # @!attribute [rw] failure_cause
-    #   If an installation media failure occurred, the cause of the failure.
-    #   @return [Types::InstallationMediaFailureCause]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMedia AWS API Documentation
-    #
-    class InstallationMedia < Struct.new(
-      :installation_media_id,
-      :custom_availability_zone_id,
-      :engine,
-      :engine_version,
-      :engine_installation_media_path,
-      :os_installation_media_path,
-      :status,
-      :failure_cause)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # The specified installation medium has already been imported.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaAlreadyExistsFault AWS API Documentation
-    #
-    class InstallationMediaAlreadyExistsFault < Aws::EmptyStructure; end
-
-    # Contains the cause of an installation media failure. Installation
-    # media is used for a DB engine that requires an on-premises customer
-    # provided license, such as Microsoft SQL Server.
-    #
-    # @!attribute [rw] message
-    #   The reason that an installation media import failed.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaFailureCause AWS API Documentation
-    #
-    class InstallationMediaFailureCause < Struct.new(
-      :message)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # @!attribute [rw] marker
-    #   An optional pagination token provided by a previous
-    #   DescribeInstallationMedia request. If this parameter is specified,
-    #   the response includes only records beyond the marker, up to the
-    #   value specified by `MaxRecords`.
-    #   @return [String]
-    #
-    # @!attribute [rw] installation_media
-    #   The list of InstallationMedia objects for the Amazon Web Services
-    #   account.
-    #   @return [Array<Types::InstallationMedia>]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaMessage AWS API Documentation
-    #
-    class InstallationMediaMessage < Struct.new(
-      :marker,
-      :installation_media)
-      SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # `InstallationMediaID` doesn't refer to an existing installation
-    # medium.
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/InstallationMediaNotFoundFault AWS API Documentation
-    #
-    class InstallationMediaNotFoundFault < Aws::EmptyStructure; end
 
     # The request would result in the user exceeding the allowed number of
     # DB instances.
@@ -23904,55 +23498,6 @@ module Aws::RDS
       :vpc_security_group_id,
       :status)
       SENSITIVE = []
-      include Aws::Structure
-    end
-
-    # Information about the virtual private network (VPN) between the VMware
-    # vSphere cluster and the Amazon Web Services website.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @!attribute [rw] vpn_id
-    #   The ID of the VPN.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_tunnel_originator_ip
-    #   The IP address of network traffic from your on-premises data center.
-    #   A custom AZ receives the network traffic.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_gateway_ip
-    #   The IP address of network traffic from Amazon Web Services to your
-    #   on-premises data center.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_psk
-    #   The preshared key (PSK) for the VPN.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_name
-    #   The name of the VPN.
-    #   @return [String]
-    #
-    # @!attribute [rw] vpn_state
-    #   The state of the VPN.
-    #   @return [String]
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/VpnDetails AWS API Documentation
-    #
-    class VpnDetails < Struct.new(
-      :vpn_id,
-      :vpn_tunnel_originator_ip,
-      :vpn_gateway_ip,
-      :vpn_psk,
-      :vpn_name,
-      :vpn_state)
-      SENSITIVE = [:vpn_psk]
       include Aws::Structure
     end
 

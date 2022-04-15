@@ -1796,71 +1796,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Creates a custom Availability Zone (AZ).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [required, String] :custom_availability_zone_name
-    #   The name of the custom Availability Zone (AZ).
-    #
-    # @option params [String] :existing_vpn_id
-    #   The ID of an existing virtual private network (VPN) between the Amazon
-    #   RDS website and the VMware vSphere cluster.
-    #
-    # @option params [String] :new_vpn_tunnel_name
-    #   The name of a new VPN tunnel between the Amazon RDS website and the
-    #   VMware vSphere cluster.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #
-    # @option params [String] :vpn_tunnel_originator_ip
-    #   The IP address of network traffic from your on-premises data center. A
-    #   custom AZ receives the network traffic.
-    #
-    #   Specify this parameter only if `ExistingVpnId` isn't specified.
-    #
-    # @return [Types::CreateCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CreateCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.create_custom_availability_zone({
-    #     custom_availability_zone_name: "String", # required
-    #     existing_vpn_id: "String",
-    #     new_vpn_tunnel_name: "String",
-    #     vpn_tunnel_originator_ip: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateCustomAvailabilityZone AWS API Documentation
-    #
-    # @overload create_custom_availability_zone(params = {})
-    # @param [Hash] params ({})
-    def create_custom_availability_zone(params = {}, options = {})
-      req = build_request(:create_custom_availability_zone, params)
-      req.send_request(options)
-    end
-
     # Creates a custom DB engine version (CEV). A CEV is a binary volume
     # snapshot of a database engine and specific AMI. The supported engines
     # are the following:
@@ -3771,7 +3706,10 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #   Each Aurora DB cluster hosts copies of its storage in three separate
+    #   Availability Zones. Specify one of these Availability Zones. Aurora
+    #   automatically chooses an appropriate Availability Zone if you don't
+    #   specify one.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   Amazon Web Services Region.
@@ -6447,52 +6385,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes a custom Availability Zone (AZ).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [required, String] :custom_availability_zone_id
-    #   The custom AZ identifier.
-    #
-    # @return [Types::DeleteCustomAvailabilityZoneResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::DeleteCustomAvailabilityZoneResult#custom_availability_zone #custom_availability_zone} => Types::CustomAvailabilityZone
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_custom_availability_zone({
-    #     custom_availability_zone_id: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.custom_availability_zone.custom_availability_zone_id #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_name #=> String
-    #   resp.custom_availability_zone.custom_availability_zone_status #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zone.vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteCustomAvailabilityZone AWS API Documentation
-    #
-    # @overload delete_custom_availability_zone(params = {})
-    # @param [Hash] params ({})
-    def delete_custom_availability_zone(params = {}, options = {})
-      req = build_request(:delete_custom_availability_zone, params)
-      req.send_request(options)
-    end
-
     # Deletes a custom engine version. To run this command, make sure you
     # meet the following prerequisites:
     #
@@ -7771,49 +7663,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Deletes the installation medium for a DB engine that requires an
-    # on-premises customer provided license, such as Microsoft SQL Server.
-    #
-    # @option params [required, String] :installation_media_id
-    #   The installation medium ID.
-    #
-    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
-    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
-    #   * {Types::InstallationMedia#engine #engine} => String
-    #   * {Types::InstallationMedia#engine_version #engine_version} => String
-    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
-    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
-    #   * {Types::InstallationMedia#status #status} => String
-    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.delete_installation_media({
-    #     installation_media_id: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.installation_media_id #=> String
-    #   resp.custom_availability_zone_id #=> String
-    #   resp.engine #=> String
-    #   resp.engine_version #=> String
-    #   resp.engine_installation_media_path #=> String
-    #   resp.os_installation_media_path #=> String
-    #   resp.status #=> String
-    #   resp.failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteInstallationMedia AWS API Documentation
-    #
-    # @overload delete_installation_media(params = {})
-    # @param [Hash] params ({})
-    def delete_installation_media(params = {}, options = {})
-      req = build_request(:delete_installation_media, params)
-      req.send_request(options)
-    end
-
     # Deletes an existing option group.
     #
     # @option params [required, String] :option_group_name
@@ -8011,85 +7860,6 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_certificates(params = {}, options = {})
       req = build_request(:describe_certificates, params)
-      req.send_request(options)
-    end
-
-    # Returns information about custom Availability Zones (AZs).
-    #
-    # A custom AZ is an on-premises AZ that is integrated with a VMware
-    # vSphere cluster.
-    #
-    # For more information about RDS on VMware, see the [ RDS on VMware User
-    # Guide.][1]
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/RDSonVMwareUserGuide/rds-on-vmware.html
-    #
-    # @option params [String] :custom_availability_zone_id
-    #   The custom AZ identifier. If this parameter is specified, information
-    #   from only the specific custom AZ is returned.
-    #
-    # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more custom AZs to describe.
-    #
-    # @option params [Integer] :max_records
-    #   The maximum number of records to include in the response. If more
-    #   records exist than the specified `MaxRecords` value, a pagination
-    #   token called a marker is included in the response so you can retrieve
-    #   the remaining results.
-    #
-    #   Default: 100
-    #
-    #   Constraints: Minimum 20, maximum 100.
-    #
-    # @option params [String] :marker
-    #   An optional pagination token provided by a previous
-    #   `DescribeCustomAvailabilityZones` request. If this parameter is
-    #   specified, the response includes only records beyond the marker, up to
-    #   the value specified by `MaxRecords`.
-    #
-    # @return [Types::CustomAvailabilityZoneMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::CustomAvailabilityZoneMessage#marker #marker} => String
-    #   * {Types::CustomAvailabilityZoneMessage#custom_availability_zones #custom_availability_zones} => Array&lt;Types::CustomAvailabilityZone&gt;
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_custom_availability_zones({
-    #     custom_availability_zone_id: "String",
-    #     filters: [
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       },
-    #     ],
-    #     max_records: 1,
-    #     marker: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.marker #=> String
-    #   resp.custom_availability_zones #=> Array
-    #   resp.custom_availability_zones[0].custom_availability_zone_id #=> String
-    #   resp.custom_availability_zones[0].custom_availability_zone_name #=> String
-    #   resp.custom_availability_zones[0].custom_availability_zone_status #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_id #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_tunnel_originator_ip #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_gateway_ip #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_psk #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_name #=> String
-    #   resp.custom_availability_zones[0].vpn_details.vpn_state #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeCustomAvailabilityZones AWS API Documentation
-    #
-    # @overload describe_custom_availability_zones(params = {})
-    # @param [Hash] params ({})
-    def describe_custom_availability_zones(params = {}, options = {})
-      req = build_request(:describe_custom_availability_zones, params)
       req.send_request(options)
     end
 
@@ -10772,6 +10542,86 @@ module Aws::RDS
     # @option params [required, String] :db_parameter_group_family
     #   The name of the DB parameter group family.
     #
+    #   Valid Values:
+    #
+    #   * `aurora5.6`
+    #
+    #   * `aurora-mysql5.7`
+    #
+    #   * `aurora-mysql8.0`
+    #
+    #   * `aurora-postgresql10`
+    #
+    #   * `aurora-postgresql11`
+    #
+    #   * `aurora-postgresql12`
+    #
+    #   * `aurora-postgresql13`
+    #
+    #   * `mariadb10.2`
+    #
+    #   * `mariadb10.3`
+    #
+    #   * `mariadb10.4`
+    #
+    #   * `mariadb10.5`
+    #
+    #   * `mariadb10.6`
+    #
+    #   * `mysql5.7`
+    #
+    #   * `mysql8.0`
+    #
+    #   * `postgres10`
+    #
+    #   * `postgres11`
+    #
+    #   * `postgres12`
+    #
+    #   * `postgres13`
+    #
+    #   * `postgres14`
+    #
+    #   * `sqlserver-ee-11.0`
+    #
+    #   * `sqlserver-ee-12.0`
+    #
+    #   * `sqlserver-ee-13.0`
+    #
+    #   * `sqlserver-ee-14.0`
+    #
+    #   * `sqlserver-ee-15.0`
+    #
+    #   * `sqlserver-ex-11.0`
+    #
+    #   * `sqlserver-ex-12.0`
+    #
+    #   * `sqlserver-ex-13.0`
+    #
+    #   * `sqlserver-ex-14.0`
+    #
+    #   * `sqlserver-ex-15.0`
+    #
+    #   * `sqlserver-se-11.0`
+    #
+    #   * `sqlserver-se-12.0`
+    #
+    #   * `sqlserver-se-13.0`
+    #
+    #   * `sqlserver-se-14.0`
+    #
+    #   * `sqlserver-se-15.0`
+    #
+    #   * `sqlserver-web-11.0`
+    #
+    #   * `sqlserver-web-12.0`
+    #
+    #   * `sqlserver-web-13.0`
+    #
+    #   * `sqlserver-web-14.0`
+    #
+    #   * `sqlserver-web-15.0`
+    #
     # @option params [Array<Types::Filter>] :filters
     #   This parameter isn't currently supported.
     #
@@ -11374,82 +11224,6 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_global_clusters(params = {}, options = {})
       req = build_request(:describe_global_clusters, params)
-      req.send_request(options)
-    end
-
-    # Describes the available installation media for a DB engine that
-    # requires an on-premises customer provided license, such as Microsoft
-    # SQL Server.
-    #
-    # @option params [String] :installation_media_id
-    #   The installation medium ID.
-    #
-    # @option params [Array<Types::Filter>] :filters
-    #   A filter that specifies one or more installation media to describe.
-    #   Supported filters include the following:
-    #
-    #   * `custom-availability-zone-id` - Accepts custom Availability Zone
-    #     (AZ) identifiers. The results list includes information about only
-    #     the custom AZs identified by these identifiers.
-    #
-    #   * `engine` - Accepts database engines. The results list includes
-    #     information about only the database engines identified by these
-    #     identifiers.
-    #
-    #     For more information about the valid engines for installation media,
-    #     see ImportInstallationMedia.
-    #
-    # @option params [Integer] :max_records
-    #   An optional pagination token provided by a previous
-    #   DescribeInstallationMedia request. If this parameter is specified, the
-    #   response includes only records beyond the marker, up to the value
-    #   specified by `MaxRecords`.
-    #
-    # @option params [String] :marker
-    #   An optional pagination token provided by a previous request. If this
-    #   parameter is specified, the response includes only records beyond the
-    #   marker, up to the value specified by `MaxRecords`.
-    #
-    # @return [Types::InstallationMediaMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMediaMessage#marker #marker} => String
-    #   * {Types::InstallationMediaMessage#installation_media #installation_media} => Array&lt;Types::InstallationMedia&gt;
-    #
-    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.describe_installation_media({
-    #     installation_media_id: "String",
-    #     filters: [
-    #       {
-    #         name: "String", # required
-    #         values: ["String"], # required
-    #       },
-    #     ],
-    #     max_records: 1,
-    #     marker: "String",
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.marker #=> String
-    #   resp.installation_media #=> Array
-    #   resp.installation_media[0].installation_media_id #=> String
-    #   resp.installation_media[0].custom_availability_zone_id #=> String
-    #   resp.installation_media[0].engine #=> String
-    #   resp.installation_media[0].engine_version #=> String
-    #   resp.installation_media[0].engine_installation_media_path #=> String
-    #   resp.installation_media[0].os_installation_media_path #=> String
-    #   resp.installation_media[0].status #=> String
-    #   resp.installation_media[0].failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeInstallationMedia AWS API Documentation
-    #
-    # @overload describe_installation_media(params = {})
-    # @param [Hash] params ({})
-    def describe_installation_media(params = {}, options = {})
-      req = build_request(:describe_installation_media, params)
       req.send_request(options)
     end
 
@@ -12822,100 +12596,6 @@ module Aws::RDS
       req.send_request(options)
     end
 
-    # Imports the installation media for a DB engine that requires an
-    # on-premises customer provided license, such as SQL Server.
-    #
-    # @option params [required, String] :custom_availability_zone_id
-    #   The identifier of the custom Availability Zone (AZ) to import the
-    #   installation media to.
-    #
-    # @option params [required, String] :engine
-    #   The name of the database engine to be used for this instance.
-    #
-    #   The list only includes supported DB engines that require an
-    #   on-premises customer provided license.
-    #
-    #   Valid Values:
-    #
-    #   * `sqlserver-ee`
-    #
-    #   * `sqlserver-se`
-    #
-    #   * `sqlserver-ex`
-    #
-    #   * `sqlserver-web`
-    #
-    # @option params [required, String] :engine_version
-    #   The version number of the database engine to use.
-    #
-    #   For a list of valid engine versions, call DescribeDBEngineVersions.
-    #
-    #   The following are the database engines and links to information about
-    #   the major and minor versions. The list only includes DB engines that
-    #   require an on-premises customer provided license.
-    #
-    #   **Microsoft SQL Server**
-    #
-    #   See [ Microsoft SQL Server Versions on Amazon RDS][1] in the *Amazon
-    #   RDS User Guide*.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
-    #
-    # @option params [required, String] :engine_installation_media_path
-    #   The path to the installation medium for the specified DB engine.
-    #
-    #   Example:
-    #   `SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso`
-    #
-    # @option params [required, String] :os_installation_media_path
-    #   The path to the installation medium for the operating system
-    #   associated with the specified DB engine.
-    #
-    #   Example: `WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso`
-    #
-    # @return [Types::InstallationMedia] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-    #
-    #   * {Types::InstallationMedia#installation_media_id #installation_media_id} => String
-    #   * {Types::InstallationMedia#custom_availability_zone_id #custom_availability_zone_id} => String
-    #   * {Types::InstallationMedia#engine #engine} => String
-    #   * {Types::InstallationMedia#engine_version #engine_version} => String
-    #   * {Types::InstallationMedia#engine_installation_media_path #engine_installation_media_path} => String
-    #   * {Types::InstallationMedia#os_installation_media_path #os_installation_media_path} => String
-    #   * {Types::InstallationMedia#status #status} => String
-    #   * {Types::InstallationMedia#failure_cause #failure_cause} => Types::InstallationMediaFailureCause
-    #
-    # @example Request syntax with placeholder values
-    #
-    #   resp = client.import_installation_media({
-    #     custom_availability_zone_id: "String", # required
-    #     engine: "String", # required
-    #     engine_version: "String", # required
-    #     engine_installation_media_path: "String", # required
-    #     os_installation_media_path: "String", # required
-    #   })
-    #
-    # @example Response structure
-    #
-    #   resp.installation_media_id #=> String
-    #   resp.custom_availability_zone_id #=> String
-    #   resp.engine #=> String
-    #   resp.engine_version #=> String
-    #   resp.engine_installation_media_path #=> String
-    #   resp.os_installation_media_path #=> String
-    #   resp.status #=> String
-    #   resp.failure_cause.message #=> String
-    #
-    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ImportInstallationMedia AWS API Documentation
-    #
-    # @overload import_installation_media(params = {})
-    # @param [Hash] params ({})
-    def import_installation_media(params = {}, options = {})
-      req = build_request(:import_installation_media, params)
-      req.send_request(options)
-    end
-
     # Lists all tags on an Amazon RDS resource.
     #
     # For an overview on tagging an Amazon RDS resource, see [Tagging Amazon
@@ -12983,8 +12663,8 @@ module Aws::RDS
     end
 
     # Override the system-default Secure Sockets Layer/Transport Layer
-    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances
-    # temporarily, or remove the override.
+    # Security (SSL/TLS) certificate for Amazon RDS for new DB instances, or
+    # remove the override.
     #
     # By using this operation, you can specify an RDS-approved SSL/TLS
     # certificate for new DB instances that is different from the default
@@ -22442,7 +22122,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.143.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

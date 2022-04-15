@@ -21,6 +21,8 @@ module Aws::Lightsail
     AccessReceiverList = Shapes::ListShape.new(name: 'AccessReceiverList')
     AccessRules = Shapes::StructureShape.new(name: 'AccessRules')
     AccessType = Shapes::StringShape.new(name: 'AccessType')
+    AccountLevelBpaSync = Shapes::StructureShape.new(name: 'AccountLevelBpaSync')
+    AccountLevelBpaSyncStatus = Shapes::StringShape.new(name: 'AccountLevelBpaSyncStatus')
     AccountSetupInProgressException = Shapes::StructureShape.new(name: 'AccountSetupInProgressException')
     AddOn = Shapes::StructureShape.new(name: 'AddOn')
     AddOnList = Shapes::ListShape.new(name: 'AddOnList')
@@ -52,6 +54,7 @@ module Aws::Lightsail
     AutoSnapshotStatus = Shapes::StringShape.new(name: 'AutoSnapshotStatus')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZoneList = Shapes::ListShape.new(name: 'AvailabilityZoneList')
+    BPAStatusMessage = Shapes::StringShape.new(name: 'BPAStatusMessage')
     Base64 = Shapes::StringShape.new(name: 'Base64')
     BehaviorEnum = Shapes::StringShape.new(name: 'BehaviorEnum')
     Blueprint = Shapes::StructureShape.new(name: 'Blueprint')
@@ -636,6 +639,12 @@ module Aws::Lightsail
     AccessRules.add_member(:get_object, Shapes::ShapeRef.new(shape: AccessType, location_name: "getObject"))
     AccessRules.add_member(:allow_public_overrides, Shapes::ShapeRef.new(shape: boolean, location_name: "allowPublicOverrides"))
     AccessRules.struct_class = Types::AccessRules
+
+    AccountLevelBpaSync.add_member(:status, Shapes::ShapeRef.new(shape: AccountLevelBpaSyncStatus, location_name: "status"))
+    AccountLevelBpaSync.add_member(:last_synced_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "lastSyncedAt"))
+    AccountLevelBpaSync.add_member(:message, Shapes::ShapeRef.new(shape: BPAStatusMessage, location_name: "message"))
+    AccountLevelBpaSync.add_member(:bpa_impacts_lightsail, Shapes::ShapeRef.new(shape: boolean, location_name: "bpaImpactsLightsail"))
+    AccountLevelBpaSync.struct_class = Types::AccountLevelBpaSync
 
     AccountSetupInProgressException.add_member(:code, Shapes::ShapeRef.new(shape: string, location_name: "code"))
     AccountSetupInProgressException.add_member(:docs, Shapes::ShapeRef.new(shape: string, location_name: "docs"))
@@ -1655,6 +1664,7 @@ module Aws::Lightsail
 
     GetBucketsResult.add_member(:buckets, Shapes::ShapeRef.new(shape: BucketList, location_name: "buckets"))
     GetBucketsResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetBucketsResult.add_member(:account_level_bpa_sync, Shapes::ShapeRef.new(shape: AccountLevelBpaSync, location_name: "accountLevelBpaSync"))
     GetBucketsResult.struct_class = Types::GetBucketsResult
 
     GetBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))

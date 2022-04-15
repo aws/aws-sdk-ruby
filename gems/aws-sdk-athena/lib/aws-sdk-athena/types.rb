@@ -77,11 +77,21 @@ module Aws::Athena
     #   [1]: https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference
     #   @return [Integer]
     #
+    # @!attribute [rw] retryable
+    #   True if the query might succeed if resubmitted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] error_message
+    #   Contains a short description of the error that occurred.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/AthenaError AWS API Documentation
     #
     class AthenaError < Struct.new(
       :error_category,
-      :error_type)
+      :error_type,
+      :retryable,
+      :error_message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -778,7 +788,7 @@ module Aws::Athena
     class DeleteWorkGroupOutput < Aws::EmptyStructure; end
 
     # If query results are encrypted in Amazon S3, indicates the encryption
-    # option used (for example, `SSE-KMS` or `CSE-KMS`) and key information.
+    # option used (for example, `SSE_KMS` or `CSE_KMS`) and key information.
     #
     # @note When making an API call, you may pass EncryptionConfiguration
     #   data as a hash:
@@ -790,9 +800,9 @@ module Aws::Athena
     #
     # @!attribute [rw] encryption_option
     #   Indicates whether Amazon S3 server-side encryption with Amazon
-    #   S3-managed keys (`SSE-S3`), server-side encryption with KMS-managed
-    #   keys (`SSE-KMS`), or client-side encryption with KMS-managed keys
-    #   (CSE-KMS) is used.
+    #   S3-managed keys (`SSE_S3`), server-side encryption with KMS-managed
+    #   keys (`SSE_KMS`), or client-side encryption with KMS-managed keys
+    #   (`CSE_KMS`) is used.
     #
     #   If a query runs in a workgroup and the workgroup overrides
     #   client-side settings, then the workgroup's setting for encryption
@@ -801,7 +811,7 @@ module Aws::Athena
     #   @return [String]
     #
     # @!attribute [rw] kms_key
-    #   For `SSE-KMS` and `CSE-KMS`, this is the KMS key ARN or ID.
+    #   For `SSE_KMS` and `CSE_KMS`, this is the KMS key ARN or ID.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/EncryptionConfiguration AWS API Documentation
@@ -2039,7 +2049,7 @@ module Aws::Athena
     #
     # @!attribute [rw] encryption_configuration
     #   If query results are encrypted in Amazon S3, indicates the
-    #   encryption option used (for example, `SSE-KMS` or `CSE-KMS`) and key
+    #   encryption option used (for example, `SSE_KMS` or `CSE_KMS`) and key
     #   information. This is a client-side setting. If workgroup settings
     #   override client-side settings, then the query uses the encryption
     #   configuration that is specified for the workgroup, and also uses the

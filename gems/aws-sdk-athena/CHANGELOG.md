@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-04-15)
+------------------
+
+* Feature - This release adds subfields, ErrorMessage, Retryable, to the AthenaError response object in the GetQueryExecution API when a query fails.
+
 1.52.0 (2022-03-02)
 ------------------
 

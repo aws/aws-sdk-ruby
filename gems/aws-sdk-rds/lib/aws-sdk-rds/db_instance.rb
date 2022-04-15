@@ -1214,7 +1214,10 @@ module Aws::RDS
     #
     #   **Amazon Aurora**
     #
-    #   Not applicable. Availability Zones are managed by the DB cluster.
+    #   Each Aurora DB cluster hosts copies of its storage in three separate
+    #   Availability Zones. Specify one of these Availability Zones. Aurora
+    #   automatically chooses an appropriate Availability Zone if you don't
+    #   specify one.
     #
     #   Default: A random, system-chosen Availability Zone in the endpoint's
     #   Amazon Web Services Region.

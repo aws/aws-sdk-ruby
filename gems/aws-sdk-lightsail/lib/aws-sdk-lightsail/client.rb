@@ -1605,10 +1605,10 @@ module Aws::Lightsail
     # and the health check configuration.
     #
     # You can deploy containers to your container service using container
-    # images from a public registry like Docker Hub, or from your local
-    # machine. For more information, see [Creating container images for your
-    # Amazon Lightsail container services][1] in the *Amazon Lightsail
-    # Developer Guide*.
+    # images from a public registry such as Amazon ECR Public, or from your
+    # local machine. For more information, see [Creating container images
+    # for your Amazon Lightsail container services][1] in the *Amazon
+    # Lightsail Developer Guide*.
     #
     #
     #
@@ -5614,10 +5614,13 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns information about one or more Amazon Lightsail buckets.
+    # Returns information about one or more Amazon Lightsail buckets. The
+    # information returned includes the synchronization status of the Amazon
+    # Simple Storage Service (Amazon S3) account-level block public access
+    # feature for your Lightsail buckets.
     #
     # For more information about buckets, see [Buckets in Amazon
-    # Lightsail][1] in the *Amazon Lightsail Developer Guide*..
+    # Lightsail][1] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -5649,6 +5652,7 @@ module Aws::Lightsail
     #
     #   * {Types::GetBucketsResult#buckets #buckets} => Array&lt;Types::Bucket&gt;
     #   * {Types::GetBucketsResult#next_page_token #next_page_token} => String
+    #   * {Types::GetBucketsResult#account_level_bpa_sync #account_level_bpa_sync} => Types::AccountLevelBpaSync
     #
     # @example Request syntax with placeholder values
     #
@@ -5688,6 +5692,10 @@ module Aws::Lightsail
     #   resp.buckets[0].access_log_config.destination #=> String
     #   resp.buckets[0].access_log_config.prefix #=> String
     #   resp.next_page_token #=> String
+    #   resp.account_level_bpa_sync.status #=> String, one of "InSync", "Failed", "NeverSynced", "Defaulted"
+    #   resp.account_level_bpa_sync.last_synced_at #=> Time
+    #   resp.account_level_bpa_sync.message #=> String, one of "DEFAULTED_FOR_SLR_MISSING", "SYNC_ON_HOLD", "DEFAULTED_FOR_SLR_MISSING_ON_HOLD", "Unknown"
+    #   resp.account_level_bpa_sync.bpa_impacts_lightsail #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBuckets AWS API Documentation
     #
@@ -6647,7 +6655,7 @@ module Aws::Lightsail
     # content delivery network (CDN) distributions.
     #
     # A distribution bundle specifies the monthly network transfer quota and
-    # monthly cost of your dsitribution.
+    # monthly cost of your distribution.
     #
     # @return [Types::GetDistributionBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11128,7 +11136,7 @@ module Aws::Lightsail
     # (CDN) distribution.
     #
     # A distribution bundle specifies the monthly network transfer quota and
-    # monthly cost of your dsitribution.
+    # monthly cost of your distribution.
     #
     # Update your distribution's bundle if your distribution is going over
     # its monthly network transfer quota and is incurring an overage fee.
@@ -11550,7 +11558,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
