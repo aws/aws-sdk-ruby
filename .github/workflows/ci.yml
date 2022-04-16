@@ -24,6 +24,12 @@ jobs:
             env: KITCHEN_SINK
           - ruby: jruby-9.3
             env: KITCHEN_SINK
+          - ruby: 2.3
+            env: CRT
+          - ruby: 2.4
+            env: CRT
+          - ruby: jruby-9.1
+            env: CRT
 
     steps:
       - name: Setup Ruby
