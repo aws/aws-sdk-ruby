@@ -75,9 +75,9 @@ module Aws
             bucket: 'examplebucket',
             key: 'test.txt',
             expires_in: 86_400,
-            time: Time.utc(2022, 02, 02)
+            time: Time.utc(2022, 02, 22)
           )
-          expect(actual_url).to include('&X-Amz-Date=20220202T000000Z')
+          expect(actual_url).to include('&X-Amz-Date=20220222T000000Z')
         end
 
         it 'can sign with additional whitelisted headers' do
@@ -201,9 +201,9 @@ module Aws
             bucket: 'examplebucket',
             key: 'test.txt',
             expires_in: 86_400,
-            time: Time.utc(2020, 02, 02)
+            time: Time.utc(2022, 02, 22)
           )
-          expect(actual_url).to include('&X-Amz-Date=20200202T000000Z')
+          expect(actual_url).to include('&X-Amz-Date=20220222T000000Z')
         end
 
         it 'can sign with additional whitelisted headers' do
