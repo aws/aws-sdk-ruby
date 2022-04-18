@@ -175,7 +175,7 @@ module Aws
           end
 
           def wrong_sigv4_region?(resp)
-            [400, 301].include?(resp.context.http_response.status_code) &&
+            resp.context.http_response.status_code == 400 &&
               (resp.context.http_response.headers['x-amz-bucket-region'] ||
                resp.context.http_response.body_contents.match(/<Region>.+?<\/Region>/))
           end

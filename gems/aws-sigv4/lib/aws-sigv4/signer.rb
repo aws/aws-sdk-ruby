@@ -225,7 +225,7 @@ module Aws
       #
       def sign_request(request)
 
-        return sign_request_crt(request) if Signer.use_crt?
+        return crt_sign_request(request) if Signer.use_crt?
 
         creds = fetch_credentials
 
@@ -393,7 +393,7 @@ module Aws
       #
       def presign_url(options)
 
-        return presign_url_crt(options) if Signer.use_crt?
+        return crt_presign_url(options) if Signer.use_crt?
 
         creds = fetch_credentials
 
@@ -716,7 +716,7 @@ module Aws
 
       # the credentials used by CRT must be a
       # CRT StaticCredentialsProvider object
-      def fetch_credentials_crt
+      def crt_fetch_credentials
         creds = fetch_credentials
         Aws::Crt::Auth::StaticCredentialsProvider.new(
           creds.access_key_id,
@@ -725,8 +725,8 @@ module Aws
         )
       end
 
-      def sign_request_crt(request)
-        creds = fetch_credentials_crt
+      def crt_sign_request(request)
+        creds = crt_fetch_credentials
         http_method = extract_http_method(request)
         url = extract_url(request)
         headers = downcase_headers(request[:headers])
@@ -784,8 +784,8 @@ module Aws
         )
       end
 
-      def presign_url_crt(options)
-        creds = fetch_credentials_crt
+      def crt_presign_url(options)
+        creds = crt_fetch_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
