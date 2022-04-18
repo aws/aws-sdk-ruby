@@ -147,7 +147,6 @@ module Aws
 
           def get_region_and_retry(context)
             actual_region = context.http_response.headers['x-amz-bucket-region']
-            puts "get_region_and_retry: actual_region: #{actual_region}"
             actual_region ||= region_from_body(context.http_response.body_contents)
             update_bucket_cache(context, actual_region)
             log_warning(context, actual_region)

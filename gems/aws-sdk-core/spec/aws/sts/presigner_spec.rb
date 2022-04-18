@@ -11,9 +11,9 @@ module Aws
         allow(utc).to receive(:strftime).and_return(datetime)
       end
 
-      let(:now) { double('now') }
       let(:utc) { double('utc-time') }
       let(:datetime) { '20160101T112233Z' }
+      let(:now) { Time.parse(datetime) }
 
       describe '#presigned_url' do
         it 'can presign #get_caller_identity correctly' do
@@ -37,7 +37,9 @@ module Aws
             headers: { 'X-K8s-Aws-Id' => 'my-eks-cluster' }
           )
 
-          expect(actual_url).to eq(expected_url)
+
+
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
 
         it 'can presign with legacy sts endpoint' do
@@ -62,7 +64,7 @@ module Aws
             headers: { 'X-K8s-Aws-Id' => 'my-eks-cluster' }
           )
 
-          expect(actual_url).to eq(expected_url)
+          expect(CGI.parse(actual_url)).to eq(CGI.parse(expected_url))
         end
       end
     end

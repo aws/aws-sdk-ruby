@@ -70,13 +70,13 @@ module Aws
           now = Time.parse('20130524T000000Z')
           allow(Time).to receive(:now).and_return(now)
           url = obj.presigned_url(:get, expires_in: 86_400)
-          expect(url).to eq(
+          expect(CGI.parse(url)).to eq(CGI.parse(
             'https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm='\
             'AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F'\
             'us-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z&'\
             'X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature='\
             '5da845a038b194a3826362ecd698f78fb1e26cb44b25af49263f0a0983870f57'
-          )
+          ))
         end
 
         it 'can use the bucket name to create a virtual hosted url' do
@@ -159,14 +159,14 @@ module Aws
           allow(Time).to receive(:now).and_return(now)
           url, headers = obj.presigned_request(
             :get, expires_in: 86_400, request_payer: 'peccy')
-          expect(url).to eq(
+          expect(CGI.parse(url)).to eq(CGI.parse(
             'https://examplebucket.s3.amazonaws.com/test.txt?X-Amz-Algorithm='\
             'AWS4-HMAC-SHA256&X-Amz-Credential=ACCESS_KEY_ID%2F20130524%2F'\
             'us-east-1%2Fs3%2Faws4_request&X-Amz-Date=20130524T000000Z'\
             '&X-Amz-Expires=86400&X-Amz-SignedHeaders=host%3B'\
             'x-amz-request-payer&X-Amz-Signature='\
             '7adcfb1b638c3198eca2c9d4637394e2d90ffe2bcc717056ef8e5eb4d73946b2'
-          )
+          ))
           expect(headers).to eq({"x-amz-request-payer" => "peccy"})
         end
 

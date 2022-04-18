@@ -785,7 +785,6 @@ module Aws
       end
 
       def presign_url_crt(options)
-        puts "presign crt"
         creds = fetch_credentials_crt
 
         http_method = extract_http_method(options)
