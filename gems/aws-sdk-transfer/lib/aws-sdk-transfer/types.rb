@@ -161,7 +161,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -646,7 +646,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -864,13 +864,13 @@ module Aws::Transfer
     #   The `TYPE` specifies which of the following actions is being taken
     #   for this step.
     #
-    #   * *Copy*\: copy the file to another location
+    #   * *COPY*\: copy the file to another location
     #
-    #   * *Custom*\: custom step with a lambda target
+    #   * *CUSTOM*\: custom step with a lambda target
     #
-    #   * *Delete*\: delete the file
+    #   * *DELETE*\: delete the file
     #
-    #   * *Tag*\: add a tag to the file
+    #   * *TAG*\: add a tag to the file
     #
     #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
     #
@@ -2133,13 +2133,13 @@ module Aws::Transfer
     # @!attribute [rw] step_type
     #   One of the available step types.
     #
-    #   * *Copy*\: copy the file to another location
+    #   * *COPY*\: copy the file to another location
     #
-    #   * *Custom*\: custom step with a lambda target
+    #   * *CUSTOM*\: custom step with a lambda target
     #
-    #   * *Delete*\: delete the file
+    #   * *DELETE*\: delete the file
     #
-    #   * *Tag*\: add a tag to the file
+    #   * *TAG*\: add a tag to the file
     #   @return [String]
     #
     # @!attribute [rw] outputs
@@ -2187,7 +2187,7 @@ module Aws::Transfer
     #
     # The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    # `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    # `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @note When making an API call, you may pass HomeDirectoryMapEntry
     #   data as a hash:
@@ -3818,7 +3818,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -4257,7 +4257,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #   @return [Array<Types::HomeDirectoryMapEntry>]
     #
     # @!attribute [rw] policy
@@ -4499,13 +4499,13 @@ module Aws::Transfer
     # @!attribute [rw] type
     #   Currently, the following step types are supported.
     #
-    #   * *Copy*\: copy the file to another location
+    #   * *COPY*\: copy the file to another location
     #
-    #   * *Custom*\: custom step with a lambda target
+    #   * *CUSTOM*\: custom step with a lambda target
     #
-    #   * *Delete*\: delete the file
+    #   * *DELETE*\: delete the file
     #
-    #   * *Tag*\: add a tag to the file
+    #   * *TAG*\: add a tag to the file
     #   @return [String]
     #
     # @!attribute [rw] copy_step_details

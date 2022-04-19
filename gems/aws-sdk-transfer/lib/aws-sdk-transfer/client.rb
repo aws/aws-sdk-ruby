@@ -406,7 +406,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
@@ -836,7 +836,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
@@ -970,13 +970,13 @@ module Aws::Transfer
     #   The `TYPE` specifies which of the following actions is being taken for
     #   this step.
     #
-    #   * *Copy*\: copy the file to another location
+    #   * *COPY*\: copy the file to another location
     #
-    #   * *Custom*\: custom step with a lambda target
+    #   * *CUSTOM*\: custom step with a lambda target
     #
-    #   * *Delete*\: delete the file
+    #   * *DELETE*\: delete the file
     #
-    #   * *Tag*\: add a tag to the file
+    #   * *TAG*\: add a tag to the file
     #
     #   <note markdown="1"> Currently, copying and tagging are supported only on S3.
     #
@@ -2359,7 +2359,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
@@ -2753,7 +2753,7 @@ module Aws::Transfer
     #
     #   The following is an `Entry` and `Target` pair example for `chroot`.
     #
-    #   `[ \{ "Entry:": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
+    #   `[ \{ "Entry": "/", "Target": "/bucket_name/home/mydirectory" \} ]`
     #
     # @option params [String] :policy
     #   A session policy for your user so that you can use the same IAM role
@@ -2866,7 +2866,7 @@ module Aws::Transfer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

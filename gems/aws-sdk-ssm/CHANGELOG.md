@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2022-04-19)
+------------------
+
+* Feature - Added offset support for specifying the number of days to wait after the date and time specified by a CRON expression when creating SSM association.
+
 1.134.0 (2022-03-25)
 ------------------
 

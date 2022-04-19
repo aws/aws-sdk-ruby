@@ -476,6 +476,7 @@ module Aws::WorkLink
         o.name = "AssociateDomain"
         o.http_method = "POST"
         o.http_request_uri = "/associateDomain"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateDomainResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -490,6 +491,7 @@ module Aws::WorkLink
         o.name = "AssociateWebsiteAuthorizationProvider"
         o.http_method = "POST"
         o.http_request_uri = "/associateWebsiteAuthorizationProvider"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateWebsiteAuthorizationProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateWebsiteAuthorizationProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -504,6 +506,7 @@ module Aws::WorkLink
         o.name = "AssociateWebsiteCertificateAuthority"
         o.http_method = "POST"
         o.http_request_uri = "/associateWebsiteCertificateAuthority"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: AssociateWebsiteCertificateAuthorityRequest)
         o.output = Shapes::ShapeRef.new(shape: AssociateWebsiteCertificateAuthorityResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -518,6 +521,7 @@ module Aws::WorkLink
         o.name = "CreateFleet"
         o.http_method = "POST"
         o.http_request_uri = "/createFleet"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -532,6 +536,7 @@ module Aws::WorkLink
         o.name = "DeleteFleet"
         o.http_method = "POST"
         o.http_request_uri = "/deleteFleet"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteFleetRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteFleetResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -545,6 +550,7 @@ module Aws::WorkLink
         o.name = "DescribeAuditStreamConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/describeAuditStreamConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeAuditStreamConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeAuditStreamConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -558,6 +564,7 @@ module Aws::WorkLink
         o.name = "DescribeCompanyNetworkConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/describeCompanyNetworkConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeCompanyNetworkConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeCompanyNetworkConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -571,6 +578,7 @@ module Aws::WorkLink
         o.name = "DescribeDevice"
         o.http_method = "POST"
         o.http_request_uri = "/describeDevice"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDeviceRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDeviceResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -584,6 +592,7 @@ module Aws::WorkLink
         o.name = "DescribeDevicePolicyConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/describeDevicePolicyConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDevicePolicyConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDevicePolicyConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -597,6 +606,7 @@ module Aws::WorkLink
         o.name = "DescribeDomain"
         o.http_method = "POST"
         o.http_request_uri = "/describeDomain"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDomainResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -610,6 +620,7 @@ module Aws::WorkLink
         o.name = "DescribeFleetMetadata"
         o.http_method = "POST"
         o.http_request_uri = "/describeFleetMetadata"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeFleetMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeFleetMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -623,6 +634,7 @@ module Aws::WorkLink
         o.name = "DescribeIdentityProviderConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/describeIdentityProviderConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeIdentityProviderConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -636,6 +648,7 @@ module Aws::WorkLink
         o.name = "DescribeWebsiteCertificateAuthority"
         o.http_method = "POST"
         o.http_request_uri = "/describeWebsiteCertificateAuthority"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeWebsiteCertificateAuthorityRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeWebsiteCertificateAuthorityResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -649,6 +662,7 @@ module Aws::WorkLink
         o.name = "DisassociateDomain"
         o.http_method = "POST"
         o.http_request_uri = "/disassociateDomain"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateDomainRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateDomainResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -662,6 +676,7 @@ module Aws::WorkLink
         o.name = "DisassociateWebsiteAuthorizationProvider"
         o.http_method = "POST"
         o.http_request_uri = "/disassociateWebsiteAuthorizationProvider"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateWebsiteAuthorizationProviderRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateWebsiteAuthorizationProviderResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -676,6 +691,7 @@ module Aws::WorkLink
         o.name = "DisassociateWebsiteCertificateAuthority"
         o.http_method = "POST"
         o.http_request_uri = "/disassociateWebsiteCertificateAuthority"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DisassociateWebsiteCertificateAuthorityRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateWebsiteCertificateAuthorityResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -689,6 +705,7 @@ module Aws::WorkLink
         o.name = "ListDevices"
         o.http_method = "POST"
         o.http_request_uri = "/listDevices"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDevicesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDevicesResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -708,6 +725,7 @@ module Aws::WorkLink
         o.name = "ListDomains"
         o.http_method = "POST"
         o.http_request_uri = "/listDomains"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDomainsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDomainsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -727,6 +745,7 @@ module Aws::WorkLink
         o.name = "ListFleets"
         o.http_method = "POST"
         o.http_request_uri = "/listFleets"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListFleetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFleetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -745,6 +764,7 @@ module Aws::WorkLink
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags/{ResourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -754,6 +774,7 @@ module Aws::WorkLink
         o.name = "ListWebsiteAuthorizationProviders"
         o.http_method = "POST"
         o.http_request_uri = "/listWebsiteAuthorizationProviders"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListWebsiteAuthorizationProvidersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListWebsiteAuthorizationProvidersResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -773,6 +794,7 @@ module Aws::WorkLink
         o.name = "ListWebsiteCertificateAuthorities"
         o.http_method = "POST"
         o.http_request_uri = "/listWebsiteCertificateAuthorities"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListWebsiteCertificateAuthoritiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListWebsiteCertificateAuthoritiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -791,6 +813,7 @@ module Aws::WorkLink
         o.name = "RestoreDomainAccess"
         o.http_method = "POST"
         o.http_request_uri = "/restoreDomainAccess"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RestoreDomainAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: RestoreDomainAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -804,6 +827,7 @@ module Aws::WorkLink
         o.name = "RevokeDomainAccess"
         o.http_method = "POST"
         o.http_request_uri = "/revokeDomainAccess"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: RevokeDomainAccessRequest)
         o.output = Shapes::ShapeRef.new(shape: RevokeDomainAccessResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -817,6 +841,7 @@ module Aws::WorkLink
         o.name = "SignOutUser"
         o.http_method = "POST"
         o.http_request_uri = "/signOutUser"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: SignOutUserRequest)
         o.output = Shapes::ShapeRef.new(shape: SignOutUserResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -830,6 +855,7 @@ module Aws::WorkLink
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags/{ResourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -839,6 +865,7 @@ module Aws::WorkLink
         o.name = "UntagResource"
         o.http_method = "DELETE"
         o.http_request_uri = "/tags/{ResourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
@@ -848,6 +875,7 @@ module Aws::WorkLink
         o.name = "UpdateAuditStreamConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/updateAuditStreamConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateAuditStreamConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAuditStreamConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -861,6 +889,7 @@ module Aws::WorkLink
         o.name = "UpdateCompanyNetworkConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/updateCompanyNetworkConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateCompanyNetworkConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateCompanyNetworkConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -874,6 +903,7 @@ module Aws::WorkLink
         o.name = "UpdateDevicePolicyConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/updateDevicePolicyConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateDevicePolicyConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDevicePolicyConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -887,6 +917,7 @@ module Aws::WorkLink
         o.name = "UpdateDomainMetadata"
         o.http_method = "POST"
         o.http_request_uri = "/updateDomainMetadata"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateDomainMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateDomainMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -900,6 +931,7 @@ module Aws::WorkLink
         o.name = "UpdateFleetMetadata"
         o.http_method = "POST"
         o.http_request_uri = "/UpdateFleetMetadata"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateFleetMetadataRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateFleetMetadataResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
@@ -913,6 +945,7 @@ module Aws::WorkLink
         o.name = "UpdateIdentityProviderConfiguration"
         o.http_method = "POST"
         o.http_request_uri = "/updateIdentityProviderConfiguration"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateIdentityProviderConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateIdentityProviderConfigurationResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)

@@ -87,10 +87,9 @@ module Aws::AutoScaling
       data[:heartbeat_timeout]
     end
 
-    # The maximum time, in seconds, that an instance can remain in a
-    # `Pending:Wait` or `Terminating:Wait` state. The maximum is 172800
-    # seconds (48 hours) or 100 times `HeartbeatTimeout`, whichever is
-    # smaller.
+    # The maximum time, in seconds, that an instance can remain in a wait
+    # state. The maximum is 172800 seconds (48 hours) or 100 times
+    # `HeartbeatTimeout`, whichever is smaller.
     # @return [Integer]
     def global_timeout
       data[:global_timeout]

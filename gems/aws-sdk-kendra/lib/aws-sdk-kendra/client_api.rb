@@ -182,6 +182,7 @@ module Aws::Kendra
     DocumentStatus = Shapes::StringShape.new(name: 'DocumentStatus')
     DocumentStatusList = Shapes::ListShape.new(name: 'DocumentStatusList')
     DocumentsMetadataConfiguration = Shapes::StructureShape.new(name: 'DocumentsMetadataConfiguration')
+    Domain = Shapes::StringShape.new(name: 'Domain')
     Duration = Shapes::StringShape.new(name: 'Duration')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
@@ -225,6 +226,8 @@ module Aws::Kendra
     FaqSummaryItems = Shapes::ListShape.new(name: 'FaqSummaryItems')
     FeedbackToken = Shapes::StringShape.new(name: 'FeedbackToken')
     FileSystemId = Shapes::StringShape.new(name: 'FileSystemId')
+    FolderId = Shapes::StringShape.new(name: 'FolderId')
+    FolderIdList = Shapes::ListShape.new(name: 'FolderIdList')
     FsxConfiguration = Shapes::StructureShape.new(name: 'FsxConfiguration')
     FsxFileSystemType = Shapes::StringShape.new(name: 'FsxFileSystemType')
     GetQuerySuggestionsRequest = Shapes::StructureShape.new(name: 'GetQuerySuggestionsRequest')
@@ -358,6 +361,7 @@ module Aws::Kendra
     QuerySuggestionsId = Shapes::StringShape.new(name: 'QuerySuggestionsId')
     QuerySuggestionsStatus = Shapes::StringShape.new(name: 'QuerySuggestionsStatus')
     QueryText = Shapes::StringShape.new(name: 'QueryText')
+    QuipConfiguration = Shapes::StructureShape.new(name: 'QuipConfiguration')
     ReadAccessType = Shapes::StringShape.new(name: 'ReadAccessType')
     Relevance = Shapes::StructureShape.new(name: 'Relevance')
     RelevanceFeedback = Shapes::StructureShape.new(name: 'RelevanceFeedback')
@@ -825,6 +829,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:fsx_configuration, Shapes::ShapeRef.new(shape: FsxConfiguration, location_name: "FsxConfiguration"))
     DataSourceConfiguration.add_member(:slack_configuration, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "SlackConfiguration"))
     DataSourceConfiguration.add_member(:box_configuration, Shapes::ShapeRef.new(shape: BoxConfiguration, location_name: "BoxConfiguration"))
+    DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1233,6 +1238,8 @@ module Aws::Kendra
 
     FaqSummaryItems.member = Shapes::ShapeRef.new(shape: FaqSummary)
 
+    FolderIdList.member = Shapes::ShapeRef.new(shape: FolderId)
+
     FsxConfiguration.add_member(:file_system_id, Shapes::ShapeRef.new(shape: FileSystemId, required: true, location_name: "FileSystemId"))
     FsxConfiguration.add_member(:file_system_type, Shapes::ShapeRef.new(shape: FsxFileSystemType, required: true, location_name: "FileSystemType"))
     FsxConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, required: true, location_name: "VpcConfiguration"))
@@ -1559,6 +1566,20 @@ module Aws::Kendra
     QuerySuggestionsBlockListSummary.struct_class = Types::QuerySuggestionsBlockListSummary
 
     QuerySuggestionsBlockListSummaryItems.member = Shapes::ShapeRef.new(shape: QuerySuggestionsBlockListSummary)
+
+    QuipConfiguration.add_member(:domain, Shapes::ShapeRef.new(shape: Domain, required: true, location_name: "Domain"))
+    QuipConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    QuipConfiguration.add_member(:crawl_file_comments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlFileComments"))
+    QuipConfiguration.add_member(:crawl_chat_rooms, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlChatRooms"))
+    QuipConfiguration.add_member(:crawl_attachments, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlAttachments"))
+    QuipConfiguration.add_member(:folder_ids, Shapes::ShapeRef.new(shape: FolderIdList, location_name: "FolderIds"))
+    QuipConfiguration.add_member(:thread_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "ThreadFieldMappings"))
+    QuipConfiguration.add_member(:message_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "MessageFieldMappings"))
+    QuipConfiguration.add_member(:attachment_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "AttachmentFieldMappings"))
+    QuipConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    QuipConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    QuipConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    QuipConfiguration.struct_class = Types::QuipConfiguration
 
     Relevance.add_member(:freshness, Shapes::ShapeRef.new(shape: DocumentMetadataBoolean, location_name: "Freshness"))
     Relevance.add_member(:importance, Shapes::ShapeRef.new(shape: Importance, location_name: "Importance"))

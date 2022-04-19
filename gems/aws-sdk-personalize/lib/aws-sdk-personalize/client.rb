@@ -3575,6 +3575,65 @@ module Aws::Personalize
       req.send_request(options)
     end
 
+    # Starts a recommender that is INACTIVE. Starting a recommender does not
+    # create any new models, but resumes billing and automatic retraining
+    # for the recommender.
+    #
+    # @option params [required, String] :recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to start.
+    #
+    # @return [Types::StartRecommenderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartRecommenderResponse#recommender_arn #recommender_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_recommender({
+    #     recommender_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StartRecommender AWS API Documentation
+    #
+    # @overload start_recommender(params = {})
+    # @param [Hash] params ({})
+    def start_recommender(params = {}, options = {})
+      req = build_request(:start_recommender, params)
+      req.send_request(options)
+    end
+
+    # Stops a recommender that is ACTIVE. Stopping a recommender halts
+    # billing and automatic retraining for the recommender.
+    #
+    # @option params [required, String] :recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to stop.
+    #
+    # @return [Types::StopRecommenderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StopRecommenderResponse#recommender_arn #recommender_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_recommender({
+    #     recommender_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.recommender_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopRecommender AWS API Documentation
+    #
+    # @overload stop_recommender(params = {})
+    # @param [Hash] params ({})
+    def stop_recommender(params = {}, options = {})
+      req = build_request(:stop_recommender, params)
+      req.send_request(options)
+    end
+
     # Stops creating a solution version that is in a state of
     # CREATE\_PENDING or CREATE IN\_PROGRESS.
     #
@@ -3685,8 +3744,10 @@ module Aws::Personalize
     # FAILED. Check the campaign status using the [DescribeCampaign][1]
     # operation.
     #
-    # <note markdown="1"> You must wait until the `status` of the updated campaign is `ACTIVE`
-    # before asking the campaign for recommendations.
+    # <note markdown="1"> You can still get recommendations from a campaign while an update is
+    # in progress. The campaign will use the previous solution version and
+    # campaign configuration to generate recommendations until the latest
+    # campaign update status is `Active`.
     #
     #  </note>
     #
@@ -3790,7 +3851,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

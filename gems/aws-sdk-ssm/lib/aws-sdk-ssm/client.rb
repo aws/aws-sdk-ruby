@@ -362,13 +362,14 @@ module Aws::SSM
     # @!group API Operations
 
     # Adds or overwrites one or more tags for the specified resource. Tags
-    # are metadata that you can assign to your documents, managed nodes,
-    # maintenance windows, Parameter Store parameters, and patch baselines.
-    # Tags enable you to categorize your resources in different ways, for
-    # example, by purpose, owner, or environment. Each tag consists of a key
-    # and an optional value, both of which you define. For example, you
-    # could define a set of tags for your account's managed nodes that
-    # helps you track each node's owner and stack level. For example:
+    # are metadata that you can assign to your automations, documents,
+    # managed nodes, maintenance windows, Parameter Store parameters, and
+    # patch baselines. Tags enable you to categorize your resources in
+    # different ways, for example, by purpose, owner, or environment. Each
+    # tag consists of a key and an optional value, both of which you define.
+    # For example, you could define a set of tags for your account's
+    # managed nodes that helps you track each node's owner and stack level.
+    # For example:
     #
     # * `Key=Owner,Value=DbAdmin`
     #
@@ -382,7 +383,8 @@ module Aws::SSM
     #
     # * `Key=Stack,Value=Test`
     #
-    # Each resource can have a maximum of 50 tags.
+    # Most resources can have a maximum of 50 tags. Automations can have a
+    # maximum of 5 tags.
     #
     # We recommend that you devise a set of tag keys that meets your needs
     # for each resource type. Using a consistent set of tag keys makes it
@@ -415,6 +417,8 @@ module Aws::SSM
     #   `MaintenanceWindow`\: `mw-012345abcde`
     #
     #   `PatchBaseline`\: `pb-012345abcde`
+    #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
     #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically, `ResourceID`
@@ -871,6 +875,25 @@ module Aws::SSM
     #   action to create an association in multiple Regions and multiple
     #   accounts.
     #
+    # @option params [Integer] :schedule_offset
+    #   Number of days to wait after the scheduled day to run an association.
+    #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
+    #   *)`, you could specify an offset of 3 to run the association each
+    #   Sunday after the second Thursday of the month. For more information
+    #   about cron schedules for associations, see [Reference: Cron and rate
+    #   expressions for Systems Manager][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -915,6 +938,7 @@ module Aws::SSM
     #         execution_role_name: "ExecutionRoleName",
     #       },
     #     ],
+    #     schedule_offset: 1,
     #   })
     #
     # @example Response structure
@@ -964,6 +988,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1036,6 +1061,7 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         schedule_offset: 1,
     #       },
     #     ],
     #   })
@@ -1088,6 +1114,7 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.successful[0].target_locations[0].target_location_max_errors #=> String
     #   resp.successful[0].target_locations[0].execution_role_name #=> String
+    #   resp.successful[0].schedule_offset #=> Integer
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1120,6 +1147,7 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_max_concurrency #=> String
     #   resp.failed[0].entry.target_locations[0].target_location_max_errors #=> String
     #   resp.failed[0].entry.target_locations[0].execution_role_name #=> String
+    #   resp.failed[0].entry.schedule_offset #=> Integer
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -2612,6 +2640,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -6813,6 +6842,7 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_versions[0].target_locations[0].target_location_max_errors #=> String
     #   resp.association_versions[0].target_locations[0].execution_role_name #=> String
+    #   resp.association_versions[0].schedule_offset #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6889,6 +6919,7 @@ module Aws::SSM
     #   resp.associations[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
+    #   resp.associations[0].schedule_offset #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
@@ -8856,6 +8887,8 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   PatchBaseline: pb-012345abcde
     #
     #   OpsMetadata object: `ResourceID` for tagging is created from the
@@ -9396,7 +9429,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -9957,6 +9990,25 @@ module Aws::SSM
     #   action to update an association in multiple Regions and multiple
     #   accounts.
     #
+    # @option params [Integer] :schedule_offset
+    #   Number of days to wait after the scheduled day to run an association.
+    #   For example, if you specified a cron schedule of `cron(0 0 ? * THU#2
+    #   *)`, you could specify an offset of 3 to run the association each
+    #   Sunday after the second Thursday of the month. For more information
+    #   about cron schedules for associations, see [Reference: Cron and rate
+    #   expressions for Systems Manager][1] in the *Amazon Web Services
+    #   Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -10002,6 +10054,7 @@ module Aws::SSM
     #         execution_role_name: "ExecutionRoleName",
     #       },
     #     ],
+    #     schedule_offset: 1,
     #   })
     #
     # @example Response structure
@@ -10051,6 +10104,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -10142,6 +10196,7 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_concurrency #=> String
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
+    #   resp.association_description.schedule_offset #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -11506,7 +11561,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

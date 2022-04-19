@@ -159,6 +159,7 @@ module Aws::AutoScaling
     #     max_instance_lifetime: 1,
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
+    #     default_instance_warmup: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :auto_scaling_group_name
@@ -232,12 +233,14 @@ module Aws::AutoScaling
     #   specify a desired capacity, the default is the minimum size of the
     #   group.
     # @option options [Integer] :default_cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before another scaling activity can start. The default value is `300`.
-    #   This setting applies when using simple scaling policies, but not when
-    #   using other scaling policies or scheduled scaling. For more
+    #   *Only needed if you use simple scaling policies.*
+    #
+    #   The amount of time, in seconds, between one scaling activity ending
+    #   and another one starting due to simple scaling policies. For more
     #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Default: `300` seconds
     #
     #
     #
@@ -276,24 +279,31 @@ module Aws::AutoScaling
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
     # @option options [Integer] :health_check_grace_period
+    #   **
+    #
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed health check.
-    #   The default value is `0`. For more information, see [Health check
-    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #   into service and marking it unhealthy due to a failed Elastic Load
+    #   Balancing or custom health check. This is useful if your instances do
+    #   not immediately pass these health checks after they enter the
+    #   `InService` state. For more information, see [Health check grace
+    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
-    #   Required if you are adding an `ELB` health check.
+    #   Default: `0` seconds
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
     # @option options [String] :placement_group
     #   The name of an existing placement group into which to launch your
-    #   instances, if any. A placement group is a logical grouping of
-    #   instances within a single Availability Zone. You cannot specify
-    #   multiple Availability Zones and a placement group. For more
-    #   information, see [Placement Groups][1] in the *Amazon EC2 User Guide
-    #   for Linux Instances*.
+    #   instances. For more information, see [Placement groups][1] in the
+    #   *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances within
+    #   a single Availability Zone. You cannot specify multiple Availability
+    #   Zones and a cluster placement group.
+    #
+    #    </note>
     #
     #
     #
@@ -394,6 +404,31 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # @option options [Integer] :default_instance_warmup
+    #   The amount of time, in seconds, until a newly launched instance can
+    #   contribute to the Amazon CloudWatch metrics. This delay lets an
+    #   instance finish initializing before Amazon EC2 Auto Scaling aggregates
+    #   instance metrics, resulting in more reliable usage data. Set this
+    #   value equal to the amount of time that it takes for resource
+    #   consumption to become stable after an instance reaches the `InService`
+    #   state. For more information, see [Set the default instance warmup for
+    #   an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   To manage your warm-up settings at the group level, we recommend that
+    #   you set the default instance warmup, *even if its value is set to 0
+    #   seconds*. This also optimizes the performance of scaling policies that
+    #   scale continuously, such as target tracking and step scaling policies.
+    #
+    #    If you need to remove a value that you previously set, include the
+    #   property but specify `-1` for the value. However, we strongly
+    #   recommend keeping the default instance warmup enabled by specifying a
+    #   minimum value of `0`.
+    #
+    #   Default: None
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     # @return [AutoScalingGroup]
     def create_group(options = {})
       @client.create_auto_scaling_group(options)
@@ -485,24 +520,23 @@ module Aws::AutoScaling
     #   [1]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
     # @option options [String] :classic_link_vpc_id
+    #   *EC2-Classic retires on August 15, 2022. This parameter is not
+    #   supported after that date.*
+    #
     #   The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
     #   to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    #   Guide for Linux Instances* and [Linking EC2-Classic instances to a
-    #   VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #   This parameter can only be used if you are launching EC2-Classic
-    #   instances.
+    #   Guide for Linux Instances*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @option options [Array<String>] :classic_link_vpc_security_groups
+    #   *EC2-Classic retires on August 15, 2022. This parameter is not
+    #   supported after that date.*
+    #
     #   The IDs of one or more security groups for the specified
     #   ClassicLink-enabled VPC. For more information, see [ClassicLink][1] in
-    #   the *Amazon EC2 User Guide for Linux Instances* and [Linking
-    #   EC2-Classic instances to a VPC][2] in the *Amazon EC2 Auto Scaling
-    #   User Guide*.
+    #   the *Amazon EC2 User Guide for Linux Instances*.
     #
     #   If you specify the `ClassicLinkVPCId` parameter, you must specify this
     #   parameter.
@@ -510,7 +544,6 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    #   [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @option options [String] :user_data
     #   The user data to make available to the launched EC2 instances. For
     #   more information, see [Instance metadata and user data][1] (Linux) and

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.41.0 (2022-04-19)
+------------------
+
+* Feature - Adding StartRecommender and StopRecommender APIs for Personalize.
+
 1.40.0 (2022-04-07)
 ------------------
 

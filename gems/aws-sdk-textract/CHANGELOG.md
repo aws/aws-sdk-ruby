@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-19)
+------------------
+
+* Feature - This release adds support for specifying and extracting information from documents using the Queries feature within Analyze Document API
+
 1.37.0 (2022-02-24)
 ------------------
 

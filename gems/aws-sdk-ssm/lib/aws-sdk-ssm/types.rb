@@ -130,6 +130,8 @@ module Aws::SSM
     #
     #   `PatchBaseline`\: `pb-012345abcde`
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   `OpsMetadata` object: `ResourceID` for tagging is created from the
     #   Amazon Resource Name (ARN) for the object. Specifically,
     #   `ResourceID` is created from the strings that come after the word
@@ -311,6 +313,11 @@ module Aws::SSM
     #   The association name.
     #   @return [String]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Association AWS API Documentation
     #
     class Association < Struct.new(
@@ -323,7 +330,8 @@ module Aws::SSM
       :last_execution_date,
       :overview,
       :schedule_expression,
-      :association_name)
+      :association_name,
+      :schedule_offset)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -485,6 +493,11 @@ module Aws::SSM
     #   Services accounts where you want to run the association.
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -511,7 +524,8 @@ module Aws::SSM
       :sync_compliance,
       :apply_only_at_cron_interval,
       :calendar_names,
-      :target_locations)
+      :target_locations,
+      :schedule_offset)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -937,6 +951,11 @@ module Aws::SSM
     #   association version was created.
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -956,7 +975,8 @@ module Aws::SSM
       :sync_compliance,
       :apply_only_at_cron_interval,
       :calendar_names,
-      :target_locations)
+      :target_locations,
+      :schedule_offset)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2851,6 +2871,7 @@ module Aws::SSM
     #                 execution_role_name: "ExecutionRoleName",
     #               },
     #             ],
+    #             schedule_offset: 1,
     #           },
     #         ],
     #       }
@@ -2911,6 +2932,7 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         schedule_offset: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -3060,6 +3082,11 @@ module Aws::SSM
     #   multiple accounts.
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -3078,7 +3105,8 @@ module Aws::SSM
       :sync_compliance,
       :apply_only_at_cron_interval,
       :calendar_names,
-      :target_locations)
+      :target_locations,
+      :schedule_offset)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -3141,6 +3169,7 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         schedule_offset: 1,
     #       }
     #
     # @!attribute [rw] name
@@ -3312,6 +3341,26 @@ module Aws::SSM
     #   multiple accounts.
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association. For example, if you specified a cron schedule of
+    #   `cron(0 0 ? * THU#2 *)`, you could specify an offset of 3 to run the
+    #   association each Sunday after the second Thursday of the month. For
+    #   more information about cron schedules for associations, see
+    #   [Reference: Cron and rate expressions for Systems Manager][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -3330,7 +3379,8 @@ module Aws::SSM
       :sync_compliance,
       :apply_only_at_cron_interval,
       :calendar_names,
-      :target_locations)
+      :target_locations,
+      :schedule_offset)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -17190,6 +17240,8 @@ module Aws::SSM
     #
     #   MaintenanceWindow: mw-012345abcde
     #
+    #   `Automation`\: `example-c160-4567-8519-012345abcde`
+    #
     #   PatchBaseline: pb-012345abcde
     #
     #   OpsMetadata object: `ResourceID` for tagging is created from the
@@ -18827,7 +18879,7 @@ module Aws::SSM
     #
     #   * `Key=OS,Value=Windows`
     #
-    #   <note markdown="1"> To add tags to an existing patch baseline, use the AddTagsToResource
+    #   <note markdown="1"> To add tags to an existing automation, use the AddTagsToResource
     #   operation.
     #
     #    </note>
@@ -19823,6 +19875,7 @@ module Aws::SSM
     #             execution_role_name: "ExecutionRoleName",
     #           },
     #         ],
+    #         schedule_offset: 1,
     #       }
     #
     # @!attribute [rw] association_id
@@ -19999,6 +20052,26 @@ module Aws::SSM
     #   multiple accounts.
     #   @return [Array<Types::TargetLocation>]
     #
+    # @!attribute [rw] schedule_offset
+    #   Number of days to wait after the scheduled day to run an
+    #   association. For example, if you specified a cron schedule of
+    #   `cron(0 0 ? * THU#2 *)`, you could specify an offset of 3 to run the
+    #   association each Sunday after the second Thursday of the month. For
+    #   more information about cron schedules for associations, see
+    #   [Reference: Cron and rate expressions for Systems Manager][1] in the
+    #   *Amazon Web Services Systems Manager User Guide*.
+    #
+    #   <note markdown="1"> To use offsets, you must specify the `ApplyOnlyAtCronInterval`
+    #   parameter. This option tells the system not to run an association
+    #   immediately after you create it.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -20018,7 +20091,8 @@ module Aws::SSM
       :sync_compliance,
       :apply_only_at_cron_interval,
       :calendar_names,
-      :target_locations)
+      :target_locations,
+      :schedule_offset)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end

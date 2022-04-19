@@ -97,6 +97,12 @@ module Aws::Textract
     Point = Shapes::StructureShape.new(name: 'Point')
     Polygon = Shapes::ListShape.new(name: 'Polygon')
     ProvisionedThroughputExceededException = Shapes::StructureShape.new(name: 'ProvisionedThroughputExceededException')
+    Queries = Shapes::ListShape.new(name: 'Queries')
+    QueriesConfig = Shapes::StructureShape.new(name: 'QueriesConfig')
+    Query = Shapes::StructureShape.new(name: 'Query')
+    QueryInput = Shapes::StringShape.new(name: 'QueryInput')
+    QueryPage = Shapes::StringShape.new(name: 'QueryPage')
+    QueryPages = Shapes::ListShape.new(name: 'QueryPages')
     Relationship = Shapes::StructureShape.new(name: 'Relationship')
     RelationshipList = Shapes::ListShape.new(name: 'RelationshipList')
     RelationshipType = Shapes::StringShape.new(name: 'RelationshipType')
@@ -128,6 +134,7 @@ module Aws::Textract
     AnalyzeDocumentRequest.add_member(:document, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "Document"))
     AnalyzeDocumentRequest.add_member(:feature_types, Shapes::ShapeRef.new(shape: FeatureTypes, required: true, location_name: "FeatureTypes"))
     AnalyzeDocumentRequest.add_member(:human_loop_config, Shapes::ShapeRef.new(shape: HumanLoopConfig, location_name: "HumanLoopConfig"))
+    AnalyzeDocumentRequest.add_member(:queries_config, Shapes::ShapeRef.new(shape: QueriesConfig, location_name: "QueriesConfig"))
     AnalyzeDocumentRequest.struct_class = Types::AnalyzeDocumentRequest
 
     AnalyzeDocumentResponse.add_member(:document_metadata, Shapes::ShapeRef.new(shape: DocumentMetadata, location_name: "DocumentMetadata"))
@@ -172,6 +179,7 @@ module Aws::Textract
     Block.add_member(:entity_types, Shapes::ShapeRef.new(shape: EntityTypes, location_name: "EntityTypes"))
     Block.add_member(:selection_status, Shapes::ShapeRef.new(shape: SelectionStatus, location_name: "SelectionStatus"))
     Block.add_member(:page, Shapes::ShapeRef.new(shape: UInteger, location_name: "Page"))
+    Block.add_member(:query, Shapes::ShapeRef.new(shape: Query, location_name: "Query"))
     Block.struct_class = Types::Block
 
     BlockList.member = Shapes::ShapeRef.new(shape: Block)
@@ -361,6 +369,18 @@ module Aws::Textract
 
     ProvisionedThroughputExceededException.struct_class = Types::ProvisionedThroughputExceededException
 
+    Queries.member = Shapes::ShapeRef.new(shape: Query)
+
+    QueriesConfig.add_member(:queries, Shapes::ShapeRef.new(shape: Queries, required: true, location_name: "Queries"))
+    QueriesConfig.struct_class = Types::QueriesConfig
+
+    Query.add_member(:text, Shapes::ShapeRef.new(shape: QueryInput, required: true, location_name: "Text"))
+    Query.add_member(:alias, Shapes::ShapeRef.new(shape: QueryInput, location_name: "Alias"))
+    Query.add_member(:pages, Shapes::ShapeRef.new(shape: QueryPages, location_name: "Pages"))
+    Query.struct_class = Types::Query
+
+    QueryPages.member = Shapes::ShapeRef.new(shape: QueryPage)
+
     Relationship.add_member(:type, Shapes::ShapeRef.new(shape: RelationshipType, location_name: "Type"))
     Relationship.add_member(:ids, Shapes::ShapeRef.new(shape: IdList, location_name: "Ids"))
     Relationship.struct_class = Types::Relationship
@@ -379,6 +399,7 @@ module Aws::Textract
     StartDocumentAnalysisRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: NotificationChannel, location_name: "NotificationChannel"))
     StartDocumentAnalysisRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: OutputConfig, location_name: "OutputConfig"))
     StartDocumentAnalysisRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KMSKeyId, location_name: "KMSKeyId"))
+    StartDocumentAnalysisRequest.add_member(:queries_config, Shapes::ShapeRef.new(shape: QueriesConfig, location_name: "QueriesConfig"))
     StartDocumentAnalysisRequest.struct_class = Types::StartDocumentAnalysisRequest
 
     StartDocumentAnalysisResponse.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))

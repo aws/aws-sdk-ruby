@@ -1256,7 +1256,7 @@ module Aws::Kendra
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/endra/latest/dg/vpc-configuration.html
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/BoxConfiguration AWS API Documentation
@@ -2112,7 +2112,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2496,6 +2496,41 @@ module Aws::Kendra
     #               },
     #             ],
     #             web_link_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           quip_configuration: {
+    #             domain: "Domain", # required
+    #             secret_arn: "SecretArn", # required
+    #             crawl_file_comments: false,
+    #             crawl_chat_rooms: false,
+    #             crawl_attachments: false,
+    #             folder_ids: ["FolderId"],
+    #             thread_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             message_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             attachment_field_mappings: [
     #               {
     #                 data_source_field_name: "DataSourceFieldName", # required
     #                 date_field_format: "DataSourceDateFieldFormat",
@@ -3780,6 +3815,41 @@ module Aws::Kendra
     #             security_group_ids: ["VpcSecurityGroupId"], # required
     #           },
     #         },
+    #         quip_configuration: {
+    #           domain: "Domain", # required
+    #           secret_arn: "SecretArn", # required
+    #           crawl_file_comments: false,
+    #           crawl_chat_rooms: false,
+    #           crawl_attachments: false,
+    #           folder_ids: ["FolderId"],
+    #           thread_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           message_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -3847,6 +3917,11 @@ module Aws::Kendra
     #   data source.
     #   @return [Types::BoxConfiguration]
     #
+    # @!attribute [rw] quip_configuration
+    #   Provides the configuration information to connect to Quip as your
+    #   data source.
+    #   @return [Types::QuipConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -3862,7 +3937,8 @@ module Aws::Kendra
       :work_docs_configuration,
       :fsx_configuration,
       :slack_configuration,
-      :box_configuration)
+      :box_configuration,
+      :quip_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8674,6 +8750,142 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to Quip as your data
+    # source.
+    #
+    # @note When making an API call, you may pass QuipConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] domain
+    #   The configuration information to connect to your Quip data source
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs that are required to connect to your
+    #   Quip file system. Windows is currently the only supported type. The
+    #   secret must contain a JSON structure with the following keys:
+    #
+    #   * username—The Active Directory user name, along with the Domain
+    #     Name System (DNS) domain name. For example,
+    #     *user@corp.example.com*. The Active Directory user account must
+    #     have read and mounting access to the Quip file system for Windows.
+    #
+    #   * password—The password of the Active Directory user account with
+    #     read and mounting access to the Quip Windows file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] crawl_file_comments
+    #   Specify whether to crawl file comments in your Quip data source. You
+    #   can specify one or more of these options.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_chat_rooms
+    #   Specify whether to crawl chat rooms in your Quip data source. You
+    #   can specify one or more of these options.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_attachments
+    #   Specify whether to crawl attachments in your Quip data source. You
+    #   can specify one or more of these options.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] folder_ids
+    #   The identifier of the Quip folder IDs to index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] thread_field_mappings
+    #   A list of field mappings to apply when indexing Quip threads.
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] message_field_mappings
+    #   A list of field mappings to apply when indexing Quip messages.
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   A list of field mappings to apply when indexing Quip attachments.
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain files in
+    #   your Quip file system. Files that match the patterns are included in
+    #   the index. Files that don't match the patterns are excluded from
+    #   the index. If a file matches both an inclusion pattern and an
+    #   exclusion pattern, the exclusion pattern takes precedence, and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain files in
+    #   your Quip file system. Files that match the patterns are excluded
+    #   from the index. Files that don’t match the patterns are included in
+    #   the index. If a file matches both an inclusion pattern and an
+    #   exclusion pattern, the exclusion pattern takes precedence, and the
+    #   file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for connecting to an Amazon Virtual
+    #   Private Cloud (VPC) for your Quip. Your Quip instance must reside
+    #   inside your VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QuipConfiguration AWS API Documentation
+    #
+    class QuipConfiguration < Struct.new(
+      :domain,
+      :secret_arn,
+      :crawl_file_comments,
+      :crawl_chat_rooms,
+      :crawl_attachments,
+      :folder_ids,
+      :thread_field_mappings,
+      :message_field_mappings,
+      :attachment_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides information for manually tuning the relevance of a field in a
     # search. When a query includes terms that match the field, the results
     # are given a boost in the response based on these tuning parameters.
@@ -11205,6 +11417,41 @@ module Aws::Kendra
     #               },
     #             ],
     #             web_link_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           quip_configuration: {
+    #             domain: "Domain", # required
+    #             secret_arn: "SecretArn", # required
+    #             crawl_file_comments: false,
+    #             crawl_chat_rooms: false,
+    #             crawl_attachments: false,
+    #             folder_ids: ["FolderId"],
+    #             thread_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             message_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             attachment_field_mappings: [
     #               {
     #                 data_source_field_name: "DataSourceFieldName", # required
     #                 date_field_format: "DataSourceDateFieldFormat",

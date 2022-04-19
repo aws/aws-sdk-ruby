@@ -925,7 +925,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1309,6 +1309,41 @@ module Aws::Kendra
     #           },
     #         ],
     #         web_link_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       quip_configuration: {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
     #           {
     #             data_source_field_name: "DataSourceFieldName", # required
     #             date_field_format: "DataSourceDateFieldFormat",
@@ -2189,7 +2224,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2478,6 +2513,33 @@ module Aws::Kendra
     #   resp.configuration.box_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.box_configuration.vpc_configuration.security_group_ids #=> Array
     #   resp.configuration.box_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.quip_configuration.domain #=> String
+    #   resp.configuration.quip_configuration.secret_arn #=> String
+    #   resp.configuration.quip_configuration.crawl_file_comments #=> Boolean
+    #   resp.configuration.quip_configuration.crawl_chat_rooms #=> Boolean
+    #   resp.configuration.quip_configuration.crawl_attachments #=> Boolean
+    #   resp.configuration.quip_configuration.folder_ids #=> Array
+    #   resp.configuration.quip_configuration.folder_ids[0] #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.thread_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.message_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.message_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.quip_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.quip_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.quip_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.quip_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.quip_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.quip_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.quip_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3312,7 +3374,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -4852,6 +4914,41 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #       },
+    #       quip_configuration: {
+    #         domain: "Domain", # required
+    #         secret_arn: "SecretArn", # required
+    #         crawl_file_comments: false,
+    #         crawl_chat_rooms: false,
+    #         crawl_attachments: false,
+    #         folder_ids: ["FolderId"],
+    #         thread_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         message_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -5322,7 +5419,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

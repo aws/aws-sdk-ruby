@@ -6325,8 +6325,10 @@ module Aws::Redshift
     #
     #       {
     #         cluster_identifier: "String", # required
-    #         bucket_name: "String", # required
+    #         bucket_name: "String",
     #         s3_key_prefix: "String",
+    #         log_destination_type: "s3", # accepts s3, cloudwatch
+    #         log_exports: ["String"],
     #       }
     #
     # @!attribute [rw] cluster_identifier
@@ -6368,12 +6370,24 @@ module Aws::Redshift
     #     * x7f or larger
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   The log destination type. An enum with possible values of `s3` and
+    #   `cloudwatch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_exports
+    #   The collection of exported log types. Log types include the
+    #   connection log, user log and user activity log.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLoggingMessage AWS API Documentation
     #
     class EnableLoggingMessage < Struct.new(
       :cluster_identifier,
       :bucket_name,
-      :s3_key_prefix)
+      :s3_key_prefix,
+      :log_destination_type,
+      :log_exports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7690,6 +7704,16 @@ module Aws::Redshift
     #   The message indicating that logs failed to be delivered.
     #   @return [String]
     #
+    # @!attribute [rw] log_destination_type
+    #   The log destination type. An enum with possible values of `s3` and
+    #   `cloudwatch`.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_exports
+    #   The collection of exported log types. Log types include the
+    #   connection log, user log and user activity log.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/LoggingStatus AWS API Documentation
     #
     class LoggingStatus < Struct.new(
@@ -7698,7 +7722,9 @@ module Aws::Redshift
       :s3_key_prefix,
       :last_successful_delivery_time,
       :last_failure_time,
-      :last_failure_message)
+      :last_failure_message,
+      :log_destination_type,
+      :log_exports)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10276,9 +10302,9 @@ module Aws::Redshift
     #   @return [Integer]
     #
     # @!attribute [rw] kms_key_id
-    #   The Key Management Service (KMS) key ID of the encryption key to
-    #   encrypt data in the cluster restored from a shared snapshot. You can
-    #   also provide the key ID when you restore from an unencrypted
+    #   The Key Management Service (KMS) key ID of the encryption key that
+    #   encrypts data in the cluster restored from a shared snapshot. You
+    #   can also provide the key ID when you restore from an unencrypted
     #   snapshot to an encrypted cluster in the same account. Additionally,
     #   you can specify a new KMS key ID when you restore from an encrypted
     #   snapshot in the same account in order to change it. In that case,
@@ -10395,7 +10421,8 @@ module Aws::Redshift
     #
     # @!attribute [rw] encrypted
     #   Enables support for restoring an unencrypted snapshot to a cluster
-    #   encrypted with Key Management Service (KMS) and a CMK.
+    #   encrypted with Key Management Service (KMS) and a customer managed
+    #   key.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/RestoreFromClusterSnapshotMessage AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2022-04-19)
+------------------
+
+* Feature - Amazon Polly adds new Austrian German voice - Hannah. Hannah is available as Neural voice only.
+
 1.54.0 (2022-03-22)
 ------------------
 

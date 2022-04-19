@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2022-04-19)
+------------------
+
+* Feature - Adds support for KMS keys and APIs that generate and verify HMAC codes
+
 1.55.0 (2022-02-24)
 ------------------
 

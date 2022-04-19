@@ -5499,6 +5499,68 @@ module Aws::Personalize
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass StartRecommenderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recommender_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to start.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StartRecommenderRequest AWS API Documentation
+    #
+    class StartRecommenderRequest < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender you started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StartRecommenderResponse AWS API Documentation
+    #
+    class StartRecommenderResponse < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StopRecommenderRequest
+    #   data as a hash:
+    #
+    #       {
+    #         recommender_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopRecommenderRequest AWS API Documentation
+    #
+    class StopRecommenderRequest < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] recommender_arn
+    #   The Amazon Resource Name (ARN) of the recommender you stopped.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/StopRecommenderResponse AWS API Documentation
+    #
+    class StopRecommenderResponse < Struct.new(
+      :recommender_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass StopSolutionVersionCreationRequest
     #   data as a hash:
     #

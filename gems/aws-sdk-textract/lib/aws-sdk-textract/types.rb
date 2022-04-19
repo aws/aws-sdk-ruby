@@ -29,7 +29,7 @@ module Aws::Textract
     #             version: "S3ObjectVersion",
     #           },
     #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS
+    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
     #         human_loop_config: {
     #           human_loop_name: "HumanLoopName", # required
     #           flow_definition_arn: "FlowDefinitionArn", # required
@@ -37,13 +37,22 @@ module Aws::Textract
     #             content_classifiers: ["FreeOfPersonallyIdentifiableInformation"], # accepts FreeOfPersonallyIdentifiableInformation, FreeOfAdultContent
     #           },
     #         },
+    #         queries_config: {
+    #           queries: [ # required
+    #             {
+    #               text: "QueryInput", # required
+    #               alias: "QueryInput",
+    #               pages: ["QueryPage"],
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] document
     #   The input document as base64-encoded bytes or an Amazon S3 object.
     #   If you use the AWS CLI to call Amazon Textract operations, you
-    #   can't pass image bytes. The document must be an image in JPEG or
-    #   PNG format.
+    #   can't pass image bytes. The document must be an image in JPEG, PNG,
+    #   PDF, or TIFF format.
     #
     #   If you're using an AWS SDK to call Amazon Textract, you might not
     #   need to base64-encode image bytes that are passed using the `Bytes`
@@ -65,12 +74,18 @@ module Aws::Textract
     #   analyzing documents.
     #   @return [Types::HumanLoopConfig]
     #
+    # @!attribute [rw] queries_config
+    #   Contains Queries and the alias for those Queries, as determined by
+    #   the input.
+    #   @return [Types::QueriesConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/AnalyzeDocumentRequest AWS API Documentation
     #
     class AnalyzeDocumentRequest < Struct.new(
       :document,
       :feature_types,
-      :human_loop_config)
+      :human_loop_config,
+      :queries_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -315,6 +330,14 @@ module Aws::Textract
     #     button (radio button) or a check box that's detected on a
     #     document page. Use the value of `SelectionStatus` to determine the
     #     status of the selection element.
+    #
+    #   * *QUERY* - A question asked during the call of AnalyzeDocument.
+    #     Contains an alias and an ID that attachs it to its answer.
+    #
+    #   * *QUERY\_RESULT* - A response to a question asked during the call
+    #     of analyze document. Comes with an alias and ID for ease of
+    #     locating in a response. Also contains location and confidence
+    #     score.
     #   @return [String]
     #
     # @!attribute [rw] confidence
@@ -408,6 +431,9 @@ module Aws::Textract
     #   document.
     #   @return [Integer]
     #
+    # @!attribute [rw] query
+    #   @return [Types::Query]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Block AWS API Documentation
     #
     class Block < Struct.new(
@@ -424,7 +450,8 @@ module Aws::Textract
       :relationships,
       :entity_types,
       :selection_status,
-      :page)
+      :page,
+      :query)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1427,6 +1454,80 @@ module Aws::Textract
     #
     class ProvisionedThroughputExceededException < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass QueriesConfig
+    #   data as a hash:
+    #
+    #       {
+    #         queries: [ # required
+    #           {
+    #             text: "QueryInput", # required
+    #             alias: "QueryInput",
+    #             pages: ["QueryPage"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] queries
+    #   @return [Array<Types::Query>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/QueriesConfig AWS API Documentation
+    #
+    class QueriesConfig < Struct.new(
+      :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Each query contains the question you want to ask in the Text and the
+    # alias you want to associate.
+    #
+    # @note When making an API call, you may pass Query
+    #   data as a hash:
+    #
+    #       {
+    #         text: "QueryInput", # required
+    #         alias: "QueryInput",
+    #         pages: ["QueryPage"],
+    #       }
+    #
+    # @!attribute [rw] text
+    #   Question that Amazon Textract will apply to the document. An example
+    #   would be "What is the customer's SSN?"
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   Alias attached to the query, for ease of location.
+    #   @return [String]
+    #
+    # @!attribute [rw] pages
+    #   List of pages associated with the query. The following is a list of
+    #   rules for using this parameter.
+    #
+    #   * If a page is not specified, it is set to `["1"]` by default.
+    #
+    #   * The following characters are allowed in the parameter's string:
+    #     `0 1 2 3 4 5 6 7 8 9 - *`. No whitespace is allowed.
+    #
+    #   * When using `*` to indicate all pages, it must be the only element
+    #     in the string.
+    #
+    #   * You can use page intervals, such as `[“1-3”, “1-1”, “4-*”]`. Where
+    #     `*` indicates last page of document.
+    #
+    #   * Specified pages must be greater than 0 and less than or equal to
+    #     the number of pages in the document.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/Query AWS API Documentation
+    #
+    class Query < Struct.new(
+      :text,
+      :alias,
+      :pages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about how blocks are related to each other. A `Block`
     # object contains 0 or more `Relation` objects in a list,
     # `Relationships`. For more information, see Block.
@@ -1512,7 +1613,7 @@ module Aws::Textract
     #             version: "S3ObjectVersion",
     #           },
     #         },
-    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS
+    #         feature_types: ["TABLES"], # required, accepts TABLES, FORMS, QUERIES
     #         client_request_token: "ClientRequestToken",
     #         job_tag: "JobTag",
     #         notification_channel: {
@@ -1524,6 +1625,15 @@ module Aws::Textract
     #           s3_prefix: "S3ObjectName",
     #         },
     #         kms_key_id: "KMSKeyId",
+    #         queries_config: {
+    #           queries: [ # required
+    #             {
+    #               text: "QueryInput", # required
+    #               alias: "QueryInput",
+    #               pages: ["QueryPage"],
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] document_location
@@ -1579,6 +1689,9 @@ module Aws::Textract
     #   will be encrypted server side,using SSE-S3.
     #   @return [String]
     #
+    # @!attribute [rw] queries_config
+    #   @return [Types::QueriesConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/StartDocumentAnalysisRequest AWS API Documentation
     #
     class StartDocumentAnalysisRequest < Struct.new(
@@ -1588,7 +1701,8 @@ module Aws::Textract
       :job_tag,
       :notification_channel,
       :output_config,
-      :kms_key_id)
+      :kms_key_id,
+      :queries_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1804,8 +1918,7 @@ module Aws::Textract
     class ThrottlingException < Aws::EmptyStructure; end
 
     # The format of the input document isn't supported. Documents for
-    # synchronous operations can be in PNG or JPEG format only. Documents
-    # for asynchronous operations can be in PDF format.
+    # operations can be in PNG, JPEG, PDF, or TIFF format.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/textract-2018-06-27/UnsupportedDocumentException AWS API Documentation
     #

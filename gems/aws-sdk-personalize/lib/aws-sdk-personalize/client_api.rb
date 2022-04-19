@@ -242,7 +242,11 @@ module Aws::Personalize
     SolutionVersionSummary = Shapes::StructureShape.new(name: 'SolutionVersionSummary')
     SolutionVersions = Shapes::ListShape.new(name: 'SolutionVersions')
     Solutions = Shapes::ListShape.new(name: 'Solutions')
+    StartRecommenderRequest = Shapes::StructureShape.new(name: 'StartRecommenderRequest')
+    StartRecommenderResponse = Shapes::StructureShape.new(name: 'StartRecommenderResponse')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopRecommenderRequest = Shapes::StructureShape.new(name: 'StopRecommenderRequest')
+    StopRecommenderResponse = Shapes::StructureShape.new(name: 'StopRecommenderResponse')
     StopSolutionVersionCreationRequest = Shapes::StructureShape.new(name: 'StopSolutionVersionCreationRequest')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -1166,6 +1170,18 @@ module Aws::Personalize
 
     Solutions.member = Shapes::ShapeRef.new(shape: SolutionSummary)
 
+    StartRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
+    StartRecommenderRequest.struct_class = Types::StartRecommenderRequest
+
+    StartRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    StartRecommenderResponse.struct_class = Types::StartRecommenderResponse
+
+    StopRecommenderRequest.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "recommenderArn"))
+    StopRecommenderRequest.struct_class = Types::StopRecommenderRequest
+
+    StopRecommenderResponse.add_member(:recommender_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "recommenderArn"))
+    StopRecommenderResponse.struct_class = Types::StopRecommenderResponse
+
     StopSolutionVersionCreationRequest.add_member(:solution_version_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "solutionVersionArn"))
     StopSolutionVersionCreationRequest.struct_class = Types::StopSolutionVersionCreationRequest
 
@@ -1895,6 +1911,28 @@ module Aws::Personalize
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:start_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartRecommenderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+      end)
+
+      api.add_operation(:stop_recommender, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopRecommender"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopRecommenderRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopRecommenderResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)

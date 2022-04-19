@@ -5496,6 +5496,8 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5511,6 +5513,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DescribeLoggingStatus AWS API Documentation
     #
@@ -6646,6 +6651,8 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6661,6 +6668,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/DisableLogging AWS API Documentation
     #
@@ -6893,7 +6903,7 @@ module Aws::Redshift
     #
     #   Example: `examplecluster`
     #
-    # @option params [required, String] :bucket_name
+    # @option params [String] :bucket_name
     #   The name of an existing S3 bucket where the log files are to be
     #   stored.
     #
@@ -6924,6 +6934,14 @@ module Aws::Redshift
     #
     #     * x7f or larger
     #
+    # @option params [String] :log_destination_type
+    #   The log destination type. An enum with possible values of `s3` and
+    #   `cloudwatch`.
+    #
+    # @option params [Array<String>] :log_exports
+    #   The collection of exported log types. Log types include the connection
+    #   log, user log and user activity log.
+    #
     # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::LoggingStatus#logging_enabled #logging_enabled} => Boolean
@@ -6932,13 +6950,17 @@ module Aws::Redshift
     #   * {Types::LoggingStatus#last_successful_delivery_time #last_successful_delivery_time} => Time
     #   * {Types::LoggingStatus#last_failure_time #last_failure_time} => Time
     #   * {Types::LoggingStatus#last_failure_message #last_failure_message} => String
+    #   * {Types::LoggingStatus#log_destination_type #log_destination_type} => String
+    #   * {Types::LoggingStatus#log_exports #log_exports} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.enable_logging({
     #     cluster_identifier: "String", # required
-    #     bucket_name: "String", # required
+    #     bucket_name: "String",
     #     s3_key_prefix: "String",
+    #     log_destination_type: "s3", # accepts s3, cloudwatch
+    #     log_exports: ["String"],
     #   })
     #
     # @example Response structure
@@ -6949,6 +6971,9 @@ module Aws::Redshift
     #   resp.last_successful_delivery_time #=> Time
     #   resp.last_failure_time #=> Time
     #   resp.last_failure_message #=> String
+    #   resp.log_destination_type #=> String, one of "s3", "cloudwatch"
+    #   resp.log_exports #=> Array
+    #   resp.log_exports[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/EnableLogging AWS API Documentation
     #
@@ -10089,8 +10114,8 @@ module Aws::Redshift
     #   The value must be either -1 or an integer between 1 and 3,653.
     #
     # @option params [String] :kms_key_id
-    #   The Key Management Service (KMS) key ID of the encryption key to
-    #   encrypt data in the cluster restored from a shared snapshot. You can
+    #   The Key Management Service (KMS) key ID of the encryption key that
+    #   encrypts data in the cluster restored from a shared snapshot. You can
     #   also provide the key ID when you restore from an unencrypted snapshot
     #   to an encrypted cluster in the same account. Additionally, you can
     #   specify a new KMS key ID when you restore from an encrypted snapshot
@@ -10192,7 +10217,8 @@ module Aws::Redshift
     #
     # @option params [Boolean] :encrypted
     #   Enables support for restoring an unencrypted snapshot to a cluster
-    #   encrypted with Key Management Service (KMS) and a CMK.
+    #   encrypted with Key Management Service (KMS) and a customer managed
+    #   key.
     #
     # @return [Types::RestoreFromClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11042,7 +11068,7 @@ module Aws::Redshift
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-redshift'
-      context[:gem_version] = '1.80.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

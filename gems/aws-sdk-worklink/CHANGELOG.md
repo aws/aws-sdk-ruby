@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.33.0 (2022-04-19)
+------------------
+
+* Feature - Amazon WorkLink is no longer supported. This will be removed in a future version of the SDK.
+
 1.32.0 (2022-02-24)
 ------------------
 

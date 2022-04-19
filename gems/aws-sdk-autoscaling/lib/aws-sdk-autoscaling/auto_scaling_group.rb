@@ -118,9 +118,7 @@ module Aws::AutoScaling
       data[:health_check_type]
     end
 
-    # The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
-    # before checking the health status of an EC2 instance that has come
-    # into service and marking it unhealthy due to a failed health check.
+    # The duration of the health check grace period, in seconds.
     # @return [Integer]
     def health_check_grace_period
       data[:health_check_grace_period]
@@ -220,21 +218,16 @@ module Aws::AutoScaling
 
     # The unit of measurement for the value specified for desired capacity.
     # Amazon EC2 Auto Scaling supports `DesiredCapacityType` for
-    # attribute-based instance type selection only. For more information,
-    # see [Creating an Auto Scaling group using attribute-based instance
-    # type selection][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    # By default, Amazon EC2 Auto Scaling specifies `units`, which
-    # translates into number of instances.
-    #
-    # Valid values: `units` \| `vcpu` \| `memory-mib`
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # attribute-based instance type selection only.
     # @return [String]
     def desired_capacity_type
       data[:desired_capacity_type]
+    end
+
+    # The duration of the default instance warmup, in seconds.
+    # @return [Integer]
+    def default_instance_warmup
+      data[:default_instance_warmup]
     end
 
     # @!endgroup
@@ -815,13 +808,15 @@ module Aws::AutoScaling
     #   Required if the policy type is `SimpleScaling`. (Not used with any
     #   other policy type.)
     # @option options [Integer] :cooldown
-    #   The duration of the policy's cooldown period, in seconds. When a
-    #   cooldown period is specified here, it overrides the default cooldown
-    #   period defined for the Auto Scaling group.
+    #   A cooldown period, in seconds, that applies to a specific simple
+    #   scaling policy. When a cooldown period is specified here, it overrides
+    #   the default cooldown.
     #
     #   Valid only if the policy type is `SimpleScaling`. For more
     #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   Default: None
     #
     #
     #
@@ -839,13 +834,22 @@ module Aws::AutoScaling
     #   Required if the policy type is `StepScaling`. (Not used with any other
     #   policy type.)
     # @option options [Integer] :estimated_instance_warmup
+    #   *Not needed if the default instance warmup is defined for the group.*
+    #
     #   The estimated time, in seconds, until a newly launched instance can
-    #   contribute to the CloudWatch metrics. If not provided, the default is
-    #   to use the value from the default cooldown period for the Auto Scaling
-    #   group.
+    #   contribute to the CloudWatch metrics. This warm-up period applies to
+    #   instances launched due to a specific target tracking or step scaling
+    #   policy. When a warm-up period is specified here, it overrides the
+    #   default instance warmup.
     #
     #   Valid only if the policy type is `TargetTrackingScaling` or
     #   `StepScaling`.
+    #
+    #   <note markdown="1"> The default is to use the value for the default instance warmup
+    #   defined for the group. If default instance warmup is null, then
+    #   `EstimatedInstanceWarmup` falls back to the value of default cooldown.
+    #
+    #    </note>
     # @option options [Types::TargetTrackingConfiguration] :target_tracking_configuration
     #   A target tracking scaling policy. Provides support for predefined or
     #   custom metrics.
@@ -1177,6 +1181,7 @@ module Aws::AutoScaling
     #     capacity_rebalance: false,
     #     context: "Context",
     #     desired_capacity_type: "XmlStringMaxLen255",
+    #     default_instance_warmup: 1,
     #   })
     # @param [Hash] options ({})
     # @option options [String] :launch_configuration_name
@@ -1215,10 +1220,10 @@ module Aws::AutoScaling
     #   size of the group and less than or equal to the maximum size of the
     #   group.
     # @option options [Integer] :default_cooldown
-    #   The amount of time, in seconds, after a scaling activity completes
-    #   before another scaling activity can start. The default value is `300`.
-    #   This setting applies when using simple scaling policies, but not when
-    #   using other scaling policies or scheduled scaling. For more
+    #   *Only needed if you use simple scaling policies.*
+    #
+    #   The amount of time, in seconds, between one scaling activity ending
+    #   and another one starting due to simple scaling policies. For more
     #   information, see [Scaling cooldowns for Amazon EC2 Auto Scaling][1] in
     #   the *Amazon EC2 Auto Scaling User Guide*.
     #
@@ -1235,22 +1240,25 @@ module Aws::AutoScaling
     # @option options [Integer] :health_check_grace_period
     #   The amount of time, in seconds, that Amazon EC2 Auto Scaling waits
     #   before checking the health status of an EC2 instance that has come
-    #   into service and marking it unhealthy due to a failed health check.
-    #   The default value is `0`. For more information, see [Health check
-    #   grace period][1] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #   Required if you are adding an `ELB` health check.
+    #   into service and marking it unhealthy due to a failed Elastic Load
+    #   Balancing or custom health check. This is useful if your instances do
+    #   not immediately pass these health checks after they enter the
+    #   `InService` state. For more information, see [Health check grace
+    #   period][1] in the *Amazon EC2 Auto Scaling User Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html#health-check-grace-period
     # @option options [String] :placement_group
     #   The name of an existing placement group into which to launch your
-    #   instances, if any. A placement group is a logical grouping of
-    #   instances within a single Availability Zone. You cannot specify
-    #   multiple Availability Zones and a placement group. For more
-    #   information, see [Placement Groups][1] in the *Amazon EC2 User Guide
-    #   for Linux Instances*.
+    #   instances. For more information, see [Placement groups][1] in the
+    #   *Amazon EC2 User Guide for Linux Instances*.
+    #
+    #   <note markdown="1"> A *cluster* placement group is a logical grouping of instances within
+    #   a single Availability Zone. You cannot specify multiple Availability
+    #   Zones and a cluster placement group.
+    #
+    #    </note>
     #
     #
     #
@@ -1325,6 +1333,29 @@ module Aws::AutoScaling
     #
     #
     #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-asg-instance-type-requirements.html
+    # @option options [Integer] :default_instance_warmup
+    #   The amount of time, in seconds, until a newly launched instance can
+    #   contribute to the Amazon CloudWatch metrics. This delay lets an
+    #   instance finish initializing before Amazon EC2 Auto Scaling aggregates
+    #   instance metrics, resulting in more reliable usage data. Set this
+    #   value equal to the amount of time that it takes for resource
+    #   consumption to become stable after an instance reaches the `InService`
+    #   state. For more information, see [Set the default instance warmup for
+    #   an Auto Scaling group][1] in the *Amazon EC2 Auto Scaling User Guide*.
+    #
+    #   To manage your warm-up settings at the group level, we recommend that
+    #   you set the default instance warmup, *even if its value is set to 0
+    #   seconds*. This also optimizes the performance of scaling policies that
+    #   scale continuously, such as target tracking and step scaling policies.
+    #
+    #    If you need to remove a value that you previously set, include the
+    #   property but specify `-1` for the value. However, we strongly
+    #   recommend keeping the default instance warmup enabled by specifying a
+    #   minimum value of `0`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-default-instance-warmup.html
     # @return [AutoScalingGroup]
     def update(options = {})
       options = options.merge(auto_scaling_group_name: @name)

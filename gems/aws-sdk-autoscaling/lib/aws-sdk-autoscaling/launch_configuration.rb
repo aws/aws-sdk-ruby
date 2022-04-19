@@ -78,31 +78,21 @@ module Aws::AutoScaling
       data[:security_groups]
     end
 
+    # *EC2-Classic retires on August 15, 2022. This parameter is not
+    # supported after that date.*
+    #
     # The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances
-    # to. For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
-    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
+    # to.
     # @return [String]
     def classic_link_vpc_id
       data[:classic_link_vpc_id]
     end
 
+    # *EC2-Classic retires on August 15, 2022. This parameter is not
+    # supported after that date.*
+    #
     # The IDs of one or more security groups for the VPC specified in
     # `ClassicLinkVPCId`.
-    #
-    # For more information, see [ClassicLink][1] in the *Amazon EC2 User
-    # Guide for Linux Instances* and [Linking EC2-Classic instances to a
-    # VPC][2] in the *Amazon EC2 Auto Scaling User Guide*.
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
-    # [2]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-in-vpc.html#as-ClassicLink
     # @return [Array<String>]
     def classic_link_vpc_security_groups
       data[:classic_link_vpc_security_groups]
