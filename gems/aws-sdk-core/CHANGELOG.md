@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Moved functionality from `aws-sdk-ssoidc` into core.
+
 3.130.1 (2022-04-12)
 ------------------
 
