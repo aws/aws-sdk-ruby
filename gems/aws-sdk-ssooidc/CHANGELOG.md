@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-04-20)
+------------------
+* Feature - `aws-sdk-ssooidc` has been moved into `aws-sdk-core`.
+
 1.19.0 (2022-02-24)
 ------------------
 
