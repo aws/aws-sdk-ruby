@@ -41,6 +41,16 @@ module Aws
       expect(creds.client).to be(client)
     end
 
+    it 'excludes before_refresh from client construction' do
+      allow(STS::Client).to receive(:new).with({credentials: false}).and_return(client)
+      creds = AssumeRoleCredentials.new(
+        role_arn: 'arn',
+        role_session_name: 'session',
+        before_refresh: proc {}
+      )
+      expect(creds.client).to be(client)
+    end
+
     it 'accepts a client' do
       creds = AssumeRoleCredentials.new(
         client: client,

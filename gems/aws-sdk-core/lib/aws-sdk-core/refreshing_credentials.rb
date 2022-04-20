@@ -20,6 +20,8 @@ module Aws
     SYNC_EXPIRATION_LENGTH = 300 # 5 minutes
     ASYNC_EXPIRATION_LENGTH = 600 # 10 minutes
 
+    CLIENT_EXCLUDE_OPTIONS = Set.new([:before_refresh]).freeze
+
     def initialize(options = {})
       @mutex = Mutex.new
       @before_refresh = options.delete(:before_refresh) if Hash === options
