@@ -275,10 +275,8 @@ is an extension to Sigv4 that allows signatures that are valid in more than one 
 Sigv4a is required to use some services/operations such as
 [S3 Multi-Region Access Points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPoints.html)
 and Amazon EventBridge Global Endpoints.
-Currently sigv4a requires the [aws-crt](https://rubygems.org/gems/aws-crt/) gem and a version of the 
-[aws-sigv4](https://rubygems.org/gems/aws-sigv4/versions/1.4.1.crt) gem built on top of aws-crt - 
-these versions end with "-crt".  To install and use a CRT enabled version, we recommend pinning the
-specific version of `aws-sigv4` in your Gemfile (this will also install the `aws-crt` gem):
+Currently sigv4a requires the [aws-crt](https://rubygems.org/gems/aws-crt/) gem.  The `aws-sigv4` signers 
+will automatically use the CRT provided signers with support for `sigv4a` when the `aws-crt` gem is available.
 
 ```ruby
 gem 'aws-sdk-s3', '~> 1'

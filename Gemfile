@@ -6,6 +6,7 @@ gem 'rake', require: false
 
 gem 'http-2'
 gem 'jmespath'
+gem 'aws-crt' if ENV['CRT']
 
 # faster xml libraries
 unless ENV['PURE_RUBY']

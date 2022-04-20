@@ -81,7 +81,13 @@ module Aws
 
           expect(resp.context.params[:destination_region]).to eq(dest_region)
 
-          expect(resp.context.params[:presigned_url]).to match(/^https:\/\/ec2\.#{src_region}.amazonaws.com\?Action=CopySnapshot&DestinationRegion=#{dest_region}&SourceRegion=#{src_region}&SourceSnapshotId=#{snap_id}&Version=\d{4}-\d{2}-\d{2}&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=stubbed-akid%2F#{now.strftime('%Y%m%d')}%2F#{src_region}%2Fec2%2Faws4_request&X-Amz-Date=#{now.strftime('%Y%m%dT%H%M%SZ')}&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=.+$/)
+          presigned_query_params = CGI.parse(resp.context.params[:presigned_url])
+          expect(resp.context.params[:presigned_url]).to match(/^https:\/\/ec2\.#{src_region}.amazonaws.com/)
+          expect(presigned_query_params['DestinationRegion']).to eq([dest_region])
+          expect(presigned_query_params['SourceRegion']).to eq([src_region])
+          expect(presigned_query_params['SourceSnapshotId']).to eq([snap_id])
+
+
         end
 
       end
