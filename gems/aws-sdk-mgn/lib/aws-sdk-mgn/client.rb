@@ -724,7 +724,7 @@ module Aws::Mgn
     # which are APIs available only to *Support* and only used in response
     # to relevant support tickets.
     #
-    # @option params [required, Types::DescribeJobsRequestFilters] :filters
+    # @option params [Types::DescribeJobsRequestFilters] :filters
     #   Request to describe Job log filters.
     #
     # @option params [Integer] :max_results
@@ -743,7 +743,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_jobs({
-    #     filters: { # required
+    #     filters: {
     #       from_date: "ISO8601DatetimeString",
     #       job_i_ds: ["JobID"],
     #       to_date: "ISO8601DatetimeString",
@@ -787,7 +787,7 @@ module Aws::Mgn
     # @option params [String] :next_token
     #   Request to describe Replication Configuration template by next token.
     #
-    # @option params [required, Array<String>] :replication_configuration_template_i_ds
+    # @option params [Array<String>] :replication_configuration_template_i_ds
     #   Request to describe Replication Configuration template by template
     #   IDs.
     #
@@ -803,7 +803,7 @@ module Aws::Mgn
     #   resp = client.describe_replication_configuration_templates({
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #   })
     #
     # @example Response structure
@@ -840,7 +840,7 @@ module Aws::Mgn
 
     # Retrieves all SourceServers or multiple SourceServers by ID.
     #
-    # @option params [required, Types::DescribeSourceServersRequestFilters] :filters
+    # @option params [Types::DescribeSourceServersRequestFilters] :filters
     #   Request to filter Source Servers list.
     #
     # @option params [Integer] :max_results
@@ -859,7 +859,7 @@ module Aws::Mgn
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_source_servers({
-    #     filters: { # required
+    #     filters: {
     #       is_archived: false,
     #       life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
     #       replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
@@ -2294,7 +2294,7 @@ module Aws::Mgn
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.13.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

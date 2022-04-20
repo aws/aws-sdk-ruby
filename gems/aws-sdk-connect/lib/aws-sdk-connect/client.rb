@@ -600,6 +600,38 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Associates a contact flow with a phone number claimed to your Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :phone_number_id
+    #   A unique identifier for the phone number.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_phone_number_contact_flow({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     instance_id: "InstanceId", # required
+    #     contact_flow_id: "ContactFlowId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociatePhoneNumberContactFlow AWS API Documentation
+    #
+    # @overload associate_phone_number_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def associate_phone_number_contact_flow(params = {}, options = {})
+      req = build_request(:associate_phone_number_contact_flow, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -707,6 +739,60 @@ module Aws::Connect
     # @param [Hash] params ({})
     def associate_security_key(params = {}, options = {})
       req = build_request(:associate_security_key, params)
+      req.send_request(options)
+    end
+
+    # Claims an available phone number to your Amazon Connect instance.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [required, String] :phone_number
+    #   The phone number you want to claim. Phone numbers are formatted `[+]
+    #   [country code] [subscriber number including area code]`.
+    #
+    # @option params [String] :phone_number_description
+    #   The description of the phone number.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags used to organize, track, or control access for this resource.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ClaimPhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ClaimPhoneNumberResponse#phone_number_id #phone_number_id} => String
+    #   * {Types::ClaimPhoneNumberResponse#phone_number_arn #phone_number_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.claim_phone_number({
+    #     target_arn: "ARN", # required
+    #     phone_number: "PhoneNumber", # required
+    #     phone_number_description: "PhoneNumberDescription",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #   resp.phone_number_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimPhoneNumber AWS API Documentation
+    #
+    # @overload claim_phone_number(params = {})
+    # @param [Hash] params ({})
+    def claim_phone_number(params = {}, options = {})
+      req = build_request(:claim_phone_number, params)
       req.send_request(options)
     end
 
@@ -2318,6 +2404,45 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets details and status of a phone number that’s claimed to your
+    # Amazon Connect instance
+    #
+    # @option params [required, String] :phone_number_id
+    #   The identifier of the phone number.
+    #
+    # @return [Types::DescribePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribePhoneNumberResponse#claimed_phone_number_summary #claimed_phone_number_summary} => Types::ClaimedPhoneNumberSummary
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.claimed_phone_number_summary.phone_number_id #=> String
+    #   resp.claimed_phone_number_summary.phone_number_arn #=> String
+    #   resp.claimed_phone_number_summary.phone_number #=> String
+    #   resp.claimed_phone_number_summary.phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.claimed_phone_number_summary.phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.claimed_phone_number_summary.phone_number_description #=> String
+    #   resp.claimed_phone_number_summary.target_arn #=> String
+    #   resp.claimed_phone_number_summary.tags #=> Hash
+    #   resp.claimed_phone_number_summary.tags["TagKey"] #=> String
+    #   resp.claimed_phone_number_summary.phone_number_status.status #=> String, one of "CLAIMED", "IN_PROGRESS", "FAILED"
+    #   resp.claimed_phone_number_summary.phone_number_status.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumber AWS API Documentation
+    #
+    # @overload describe_phone_number(params = {})
+    # @param [Hash] params ({})
+    def describe_phone_number(params = {}, options = {})
+      req = build_request(:describe_phone_number, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -2855,6 +2980,34 @@ module Aws::Connect
     # @param [Hash] params ({})
     def disassociate_lex_bot(params = {}, options = {})
       req = build_request(:disassociate_lex_bot, params)
+      req.send_request(options)
+    end
+
+    # Removes the contact flow association from a phone number claimed to
+    # your Amazon Connect instance, if a contact flow association exists.
+    #
+    # @option params [required, String] :phone_number_id
+    #   The identifier of the phone number.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_phone_number_contact_flow({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     instance_id: "InstanceId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociatePhoneNumberContactFlow AWS API Documentation
+    #
+    # @overload disassociate_phone_number_contact_flow(params = {})
+    # @param [Hash] params ({})
+    def disassociate_phone_number_contact_flow(params = {}, options = {})
+      req = build_request(:disassociate_phone_number_contact_flow, params)
       req.send_request(options)
     end
 
@@ -4353,6 +4506,78 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists phone numbers claimed to your Amazon Connect instance.
+    #
+    # For more information about phone numbers, see [Set Up Phone Numbers
+    # for Your Contact Center][1] in the *Amazon Connect Administrator
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
+    #
+    # @option params [String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to. If `TargetArn` input is not provided, this API
+    #   lists numbers claimed to all the Amazon Connect instances belonging to
+    #   your account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Array<String>] :phone_number_country_codes
+    #   The ISO country code.
+    #
+    # @option params [Array<String>] :phone_number_types
+    #   The type of phone number.
+    #
+    # @option params [String] :phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #
+    # @return [Types::ListPhoneNumbersV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPhoneNumbersV2Response#next_token #next_token} => String
+    #   * {Types::ListPhoneNumbersV2Response#list_phone_numbers_summary_list #list_phone_numbers_summary_list} => Array&lt;Types::ListPhoneNumbersSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_phone_numbers_v2({
+    #     target_arn: "ARN",
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #     phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #     phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #     phone_number_prefix: "PhoneNumberPrefix",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.list_phone_numbers_summary_list #=> Array
+    #   resp.list_phone_numbers_summary_list[0].phone_number_id #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number_arn #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number #=> String
+    #   resp.list_phone_numbers_summary_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.list_phone_numbers_summary_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #   resp.list_phone_numbers_summary_list[0].target_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2 AWS API Documentation
+    #
+    # @overload list_phone_numbers_v2(params = {})
+    # @param [Hash] params ({})
+    def list_phone_numbers_v2(params = {}, options = {})
+      req = build_request(:list_phone_numbers_v2, params)
+      req.send_request(options)
+    end
+
     # Provides information about the prompts for the specified Amazon
     # Connect instance.
     #
@@ -5023,6 +5248,37 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Releases a phone number previously claimed to an Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :phone_number_id
+    #   The identifier of the phone number.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.release_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReleasePhoneNumber AWS API Documentation
+    #
+    # @overload release_phone_number(params = {})
+    # @param [Hash] params ({})
+    def release_phone_number(params = {}, options = {})
+      req = build_request(:release_phone_number, params)
+      req.send_request(options)
+    end
+
     # When a contact is being recorded, and the recording has been suspended
     # using SuspendContactRecording, this API resumes recording the call.
     #
@@ -5055,6 +5311,66 @@ module Aws::Connect
     # @param [Hash] params ({})
     def resume_contact_recording(params = {}, options = {})
       req = build_request(:resume_contact_recording, params)
+      req.send_request(options)
+    end
+
+    # Searches for available phone numbers that you can claim to your Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [required, String] :phone_number_country_code
+    #   The ISO country code.
+    #
+    # @option params [required, String] :phone_number_type
+    #   The type of phone number.
+    #
+    # @option params [String] :phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @return [Types::SearchAvailablePhoneNumbersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchAvailablePhoneNumbersResponse#next_token #next_token} => String
+    #   * {Types::SearchAvailablePhoneNumbersResponse#available_numbers_list #available_numbers_list} => Array&lt;Types::AvailableNumberSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_available_phone_numbers({
+    #     target_arn: "ARN", # required
+    #     phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #     phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID
+    #     phone_number_prefix: "PhoneNumberPrefix",
+    #     max_results: 1,
+    #     next_token: "LargeNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.available_numbers_list #=> Array
+    #   resp.available_numbers_list[0].phone_number #=> String
+    #   resp.available_numbers_list[0].phone_number_country_code #=> String, one of "AF", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BA", "BW", "BR", "IO", "VG", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CK", "CR", "HR", "CU", "CW", "CY", "CZ", "CD", "DK", "DJ", "DM", "DO", "TL", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "PF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "CI", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "AN", "NC", "NZ", "NI", "NE", "NG", "NU", "KP", "MP", "NO", "OM", "PK", "PW", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "CG", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "KR", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "VI", "UG", "UA", "AE", "GB", "US", "UY", "UZ", "VU", "VA", "VE", "VN", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.available_numbers_list[0].phone_number_type #=> String, one of "TOLL_FREE", "DID"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbers AWS API Documentation
+    #
+    # @overload search_available_phone_numbers(params = {})
+    # @param [Hash] params ({})
+    def search_available_phone_numbers(params = {}, options = {})
+      req = build_request(:search_available_phone_numbers, params)
       req.send_request(options)
     end
 
@@ -5733,7 +6049,8 @@ module Aws::Connect
     # Adds the specified tags to the specified resource.
     #
     # The supported resource types are users, routing profiles, queues,
-    # quick connects, contact flows, agent status, and hours of operation.
+    # quick connects, contact flows, agent status, hours of operation, and
+    # phone number.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -6355,6 +6672,50 @@ module Aws::Connect
     # @param [Hash] params ({})
     def update_instance_storage_config(params = {}, options = {})
       req = build_request(:update_instance_storage_config, params)
+      req.send_request(options)
+    end
+
+    # Updates your claimed phone number from its current Amazon Connect
+    # instance to another Amazon Connect instance in the same Region.
+    #
+    # @option params [required, String] :phone_number_id
+    #   The identifier of the phone number.
+    #
+    # @option params [required, String] :target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
+    #   numbers are claimed to.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdatePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePhoneNumberResponse#phone_number_id #phone_number_id} => String
+    #   * {Types::UpdatePhoneNumberResponse#phone_number_arn #phone_number_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_phone_number({
+    #     phone_number_id: "PhoneNumberId", # required
+    #     target_arn: "ARN", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.phone_number_id #=> String
+    #   resp.phone_number_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumber AWS API Documentation
+    #
+    # @overload update_phone_number(params = {})
+    # @param [Hash] params ({})
+    def update_phone_number(params = {}, options = {})
+      req = build_request(:update_phone_number, params)
       req.send_request(options)
     end
 
@@ -7073,7 +7434,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

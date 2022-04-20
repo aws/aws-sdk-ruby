@@ -1862,6 +1862,10 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         performance_insights_retention_period: 1,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #         source_region: "String",
     #       }
     #
@@ -2624,6 +2628,18 @@ module Aws::RDS
     #   Valid for: Multi-AZ DB clusters only
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2676,6 +2692,7 @@ module Aws::RDS
       :enable_performance_insights,
       :performance_insights_kms_key_id,
       :performance_insights_retention_period,
+      :serverless_v2_scaling_configuration,
       :source_region)
       SENSITIVE = []
       include Aws::Structure
@@ -6086,6 +6103,18 @@ module Aws::RDS
     #   This setting is only for non-Aurora Multi-AZ DB clusters.
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Shows the scaling configuration for an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfigurationInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DBCluster AWS API Documentation
     #
     class DBCluster < Struct.new(
@@ -6155,7 +6184,8 @@ module Aws::RDS
       :monitoring_role_arn,
       :performance_insights_enabled,
       :performance_insights_kms_key_id,
-      :performance_insights_retention_period)
+      :performance_insights_retention_period,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14453,6 +14483,10 @@ module Aws::RDS
     #         enable_performance_insights: false,
     #         performance_insights_kms_key_id: "String",
     #         performance_insights_retention_period: 1,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -14966,6 +15000,18 @@ module Aws::RDS
     #   Valid for: Multi-AZ DB clusters only
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBClusterMessage AWS API Documentation
     #
     class ModifyDBClusterMessage < Struct.new(
@@ -15002,7 +15048,8 @@ module Aws::RDS
       :monitoring_role_arn,
       :enable_performance_insights,
       :performance_insights_kms_key_id,
-      :performance_insights_retention_period)
+      :performance_insights_retention_period,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19088,6 +19135,10 @@ module Aws::RDS
     #         copy_tags_to_snapshot: false,
     #         domain: "String",
     #         domain_iam_role_name: "String",
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -19427,6 +19478,18 @@ module Aws::RDS
     #   the Directory Service.
     #   @return [String]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromS3Message AWS API Documentation
     #
     class RestoreDBClusterFromS3Message < Struct.new(
@@ -19460,7 +19523,8 @@ module Aws::RDS
       :deletion_protection,
       :copy_tags_to_snapshot,
       :domain,
-      :domain_iam_role_name)
+      :domain_iam_role_name,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19546,6 +19610,10 @@ module Aws::RDS
     #         storage_type: "String",
     #         iops: 1,
     #         publicly_accessible: false,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] availability_zones
@@ -19971,6 +20039,18 @@ module Aws::RDS
     #   Valid for: Aurora DB clusters and Multi-AZ DB clusters
     #   @return [Boolean]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterFromSnapshotMessage AWS API Documentation
     #
     class RestoreDBClusterFromSnapshotMessage < Struct.new(
@@ -19999,7 +20079,8 @@ module Aws::RDS
       :db_cluster_instance_class,
       :storage_type,
       :iops,
-      :publicly_accessible)
+      :publicly_accessible,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20084,6 +20165,10 @@ module Aws::RDS
     #         storage_type: "String",
     #         publicly_accessible: false,
     #         iops: 1,
+    #         serverless_v2_scaling_configuration: {
+    #           min_capacity: 1.0,
+    #           max_capacity: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] db_cluster_identifier
@@ -20472,6 +20557,18 @@ module Aws::RDS
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS
     #   @return [Integer]
     #
+    # @!attribute [rw] serverless_v2_scaling_configuration
+    #   Contains the scaling configuration of an Aurora Serverless v2 DB
+    #   cluster.
+    #
+    #   For more information, see [Using Amazon Aurora Serverless v2][1] in
+    #   the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #   @return [Types::ServerlessV2ScalingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBClusterToPointInTimeMessage AWS API Documentation
     #
     class RestoreDBClusterToPointInTimeMessage < Struct.new(
@@ -20499,7 +20596,8 @@ module Aws::RDS
       :db_cluster_instance_class,
       :storage_type,
       :publicly_accessible,
-      :iops)
+      :iops,
+      :serverless_v2_scaling_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22453,6 +22551,80 @@ module Aws::RDS
       :seconds_until_auto_pause,
       :timeout_action,
       :seconds_before_timeout)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the scaling configuration of an Aurora Serverless v2 DB
+    # cluster.
+    #
+    # For more information, see [Using Amazon Aurora Serverless v2][1] in
+    # the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
+    # @note When making an API call, you may pass ServerlessV2ScalingConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         min_capacity: 1.0,
+    #         max_capacity: 1.0,
+    #       }
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Aurora capacity units (ACUs) for a DB instance
+    #   in an Aurora Serverless v2 cluster. You can specify ACU values in
+    #   half-step increments, such as 8, 8.5, 9, and so on. The smallest
+    #   value that you can use is 0.5.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Aurora capacity units (ACUs) for a DB instance
+    #   in an Aurora Serverless v2 cluster. You can specify ACU values in
+    #   half-step increments, such as 40, 40.5, 41, and so on. The largest
+    #   value that you can use is 128.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2ScalingConfiguration AWS API Documentation
+    #
+    class ServerlessV2ScalingConfiguration < Struct.new(
+      :min_capacity,
+      :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Shows the scaling configuration for an Aurora Serverless v2 DB
+    # cluster.
+    #
+    # For more information, see [Using Amazon Aurora Serverless v2][1] in
+    # the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html
+    #
+    # @!attribute [rw] min_capacity
+    #   The minimum number of Aurora capacity units (ACUs) for a DB instance
+    #   in an Aurora Serverless v2 cluster. You can specify ACU values in
+    #   half-step increments, such as 8, 8.5, 9, and so on. The smallest
+    #   value that you can use is 0.5.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_capacity
+    #   The maximum number of Aurora capacity units (ACUs) for a DB instance
+    #   in an Aurora Serverless v2 cluster. You can specify ACU values in
+    #   half-step increments, such as 40, 40.5, 41, and so on. The largest
+    #   value that you can use is 128.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ServerlessV2ScalingConfigurationInfo AWS API Documentation
+    #
+    class ServerlessV2ScalingConfigurationInfo < Struct.new(
+      :min_capacity,
+      :max_capacity)
       SENSITIVE = []
       include Aws::Structure
     end

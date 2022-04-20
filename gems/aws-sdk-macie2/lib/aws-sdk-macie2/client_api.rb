@@ -212,6 +212,7 @@ module Aws::Macie2
     ObjectLevelStatistics = Shapes::StructureShape.new(name: 'ObjectLevelStatistics')
     Occurrences = Shapes::StructureShape.new(name: 'Occurrences')
     OrderBy = Shapes::StringShape.new(name: 'OrderBy')
+    OriginType = Shapes::StringShape.new(name: 'OriginType')
     Page = Shapes::StructureShape.new(name: 'Page')
     Pages = Shapes::ListShape.new(name: 'Pages')
     PolicyDetails = Shapes::StructureShape.new(name: 'PolicyDetails')
@@ -510,6 +511,7 @@ module Aws::Macie2
     ClassificationDetails.add_member(:detailed_results_location, Shapes::ShapeRef.new(shape: __string, location_name: "detailedResultsLocation"))
     ClassificationDetails.add_member(:job_arn, Shapes::ShapeRef.new(shape: __string, location_name: "jobArn"))
     ClassificationDetails.add_member(:job_id, Shapes::ShapeRef.new(shape: __string, location_name: "jobId"))
+    ClassificationDetails.add_member(:origin_type, Shapes::ShapeRef.new(shape: OriginType, location_name: "originType"))
     ClassificationDetails.add_member(:result, Shapes::ShapeRef.new(shape: ClassificationResult, location_name: "result"))
     ClassificationDetails.struct_class = Types::ClassificationDetails
 

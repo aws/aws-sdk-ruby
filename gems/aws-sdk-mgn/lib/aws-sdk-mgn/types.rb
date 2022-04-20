@@ -512,7 +512,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           from_date: "ISO8601DatetimeString",
     #           job_i_ds: ["JobID"],
     #           to_date: "ISO8601DatetimeString",
@@ -599,7 +599,7 @@ module Aws::Mgn
     #       {
     #         max_results: 1,
     #         next_token: "PaginationToken",
-    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #         replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #       }
     #
     # @!attribute [rw] max_results
@@ -649,7 +649,7 @@ module Aws::Mgn
     #   data as a hash:
     #
     #       {
-    #         filters: { # required
+    #         filters: {
     #           is_archived: false,
     #           life_cycle_states: ["STOPPED"], # accepts STOPPED, NOT_READY, READY_FOR_TEST, TESTING, READY_FOR_CUTOVER, CUTTING_OVER, CUTOVER, DISCONNECTED, DISCOVERED
     #           replication_types: ["AGENT_BASED"], # accepts AGENT_BASED, SNAPSHOT_SHIPPING
@@ -1706,6 +1706,10 @@ module Aws::Mgn
     #   Exceeded the service quota code.
     #   @return [String]
     #
+    # @!attribute [rw] quota_value
+    #   Exceeded the service quota value.
+    #   @return [Integer]
+    #
     # @!attribute [rw] resource_id
     #   Exceeded the service quota resource ID.
     #   @return [String]
@@ -1724,6 +1728,7 @@ module Aws::Mgn
       :code,
       :message,
       :quota_code,
+      :quota_value,
       :resource_id,
       :resource_type,
       :service_code)

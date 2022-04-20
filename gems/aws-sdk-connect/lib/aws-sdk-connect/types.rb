@@ -382,6 +382,38 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass AssociatePhoneNumberContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number_id: "PhoneNumberId", # required
+    #         instance_id: "InstanceId", # required
+    #         contact_flow_id: "ContactFlowId", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number_id
+    #   A unique identifier for the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociatePhoneNumberContactFlowRequest AWS API Documentation
+    #
+    class AssociatePhoneNumberContactFlowRequest < Struct.new(
+      :phone_number_id,
+      :instance_id,
+      :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateQueueQuickConnectsRequest
     #   data as a hash:
     #
@@ -538,6 +570,31 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about available phone numbers.
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number. Phone numbers are formatted `[+] [country code]
+    #   [subscriber number including area code]`.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_code
+    #   The ISO country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The type of phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AvailableNumberSummary AWS API Documentation
+    #
+    class AvailableNumberSummary < Struct.new(
+      :phone_number,
+      :phone_number_country_code,
+      :phone_number_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A chat message.
     #
     # @note When making an API call, you may pass ChatMessage
@@ -585,6 +642,133 @@ module Aws::Connect
     #
     class ChatStreamingConfiguration < Struct.new(
       :streaming_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ClaimPhoneNumberRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "ARN", # required
+    #         phone_number: "PhoneNumber", # required
+    #         phone_number_description: "PhoneNumberDescription",
+    #         tags: {
+    #           "TagKey" => "TagValue",
+    #         },
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number you want to claim. Phone numbers are formatted `[+]
+    #   [country code] [subscriber number including area code]`.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimPhoneNumberRequest AWS API Documentation
+    #
+    class ClaimPhoneNumberRequest < Struct.new(
+      :target_arn,
+      :phone_number,
+      :phone_number_description,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_arn
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimPhoneNumberResponse AWS API Documentation
+    #
+    class ClaimPhoneNumberResponse < Struct.new(
+      :phone_number_id,
+      :phone_number_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a phone number that has been claimed to your Amazon
+    # Connect instance.
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_arn
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number. Phone numbers are formatted `[+] [country code]
+    #   [subscriber number including area code]`.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_code
+    #   The ISO country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The type of phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_description
+    #   The description of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] phone_number_status
+    #   The status of the phone number.
+    #   @return [Types::PhoneNumberStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ClaimedPhoneNumberSummary AWS API Documentation
+    #
+    class ClaimedPhoneNumberSummary < Struct.new(
+      :phone_number_id,
+      :phone_number_arn,
+      :phone_number,
+      :phone_number_country_code,
+      :phone_number_type,
+      :phone_number_description,
+      :target_arn,
+      :tags,
+      :phone_number_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2736,6 +2920,38 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass DescribePhoneNumberRequest
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number_id: "PhoneNumberId", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumberRequest AWS API Documentation
+    #
+    class DescribePhoneNumberRequest < Struct.new(
+      :phone_number_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] claimed_phone_number_summary
+    #   Information about a phone number that's been claimed to your Amazon
+    #   Connect instance.
+    #   @return [Types::ClaimedPhoneNumberSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumberResponse AWS API Documentation
+    #
+    class DescribePhoneNumberResponse < Struct.new(
+      :claimed_phone_number_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeQueueRequest
     #   data as a hash:
     #
@@ -3221,6 +3437,32 @@ module Aws::Connect
       :instance_id,
       :bot_name,
       :lex_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociatePhoneNumberContactFlowRequest
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number_id: "PhoneNumberId", # required
+    #         instance_id: "InstanceId", # required
+    #       }
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociatePhoneNumberContactFlowRequest AWS API Documentation
+    #
+    class DisassociatePhoneNumberContactFlowRequest < Struct.new(
+      :phone_number_id,
+      :instance_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5771,6 +6013,122 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about phone numbers that have been claimed to your Amazon
+    # Connect instance.
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_arn
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number. Phone numbers are formatted `[+] [country code]
+    #   [subscriber number including area code]`.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_code
+    #   The ISO country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The type of phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersSummary AWS API Documentation
+    #
+    class ListPhoneNumbersSummary < Struct.new(
+      :phone_number_id,
+      :phone_number_arn,
+      :phone_number,
+      :phone_number_country_code,
+      :phone_number_type,
+      :target_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListPhoneNumbersV2Request
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "ARN",
+    #         max_results: 1,
+    #         next_token: "LargeNextToken",
+    #         phone_number_country_codes: ["AF"], # accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #         phone_number_types: ["TOLL_FREE"], # accepts TOLL_FREE, DID
+    #         phone_number_prefix: "PhoneNumberPrefix",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to. If `TargetArn` input is not provided,
+    #   this API lists numbers claimed to all the Amazon Connect instances
+    #   belonging to your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_codes
+    #   The ISO country code.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] phone_number_types
+    #   The type of phone number.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2Request AWS API Documentation
+    #
+    class ListPhoneNumbersV2Request < Struct.new(
+      :target_arn,
+      :max_results,
+      :next_token,
+      :phone_number_country_codes,
+      :phone_number_types,
+      :phone_number_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] list_phone_numbers_summary_list
+    #   Information about phone numbers that have been claimed to your
+    #   Amazon Connect instances.
+    #   @return [Array<Types::ListPhoneNumbersSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2Response AWS API Documentation
+    #
+    class ListPhoneNumbersV2Response < Struct.new(
+      :next_token,
+      :list_phone_numbers_summary_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPromptsRequest
     #   data as a hash:
     #
@@ -6592,6 +6950,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The status of the phone number.
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The status message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PhoneNumberStatus AWS API Documentation
+    #
+    class PhoneNumberStatus < Struct.new(
+      :status,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a phone number for a contact
     # center.
     #
@@ -7004,6 +7381,35 @@ module Aws::Connect
       class Unknown < ReferenceSummary; end
     end
 
+    # @note When making an API call, you may pass ReleasePhoneNumberRequest
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number_id: "PhoneNumberId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReleasePhoneNumberRequest AWS API Documentation
+    #
+    class ReleasePhoneNumberRequest < Struct.new(
+      :phone_number_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource already has that name.
     #
     # @!attribute [rw] message
@@ -7327,6 +7733,78 @@ module Aws::Connect
       :bucket_name,
       :bucket_prefix,
       :encryption_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchAvailablePhoneNumbersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         target_arn: "ARN", # required
+    #         phone_number_country_code: "AF", # required, accepts AF, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BA, BW, BR, IO, VG, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CK, CR, HR, CU, CW, CY, CZ, CD, DK, DJ, DM, DO, TL, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, PF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GU, GT, GG, GN, GW, GY, HT, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, CI, JM, JP, JE, JO, KZ, KE, KI, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, AN, NC, NZ, NI, NE, NG, NU, KP, MP, NO, OM, PK, PW, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, CG, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, KR, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TG, TK, TO, TT, TN, TR, TM, TC, TV, VI, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, WF, EH, YE, ZM, ZW
+    #         phone_number_type: "TOLL_FREE", # required, accepts TOLL_FREE, DID
+    #         phone_number_prefix: "PhoneNumberPrefix",
+    #         max_results: 1,
+    #         next_token: "LargeNextToken",
+    #       }
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_country_code
+    #   The ISO country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_type
+    #   The type of phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_prefix
+    #   The prefix of the phone number. If provided, it must contain `+` as
+    #   part of the country code.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbersRequest AWS API Documentation
+    #
+    class SearchAvailablePhoneNumbersRequest < Struct.new(
+      :target_arn,
+      :phone_number_country_code,
+      :phone_number_type,
+      :phone_number_prefix,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] available_numbers_list
+    #   A list of available phone numbers that you can claim for your Amazon
+    #   Connect instance.
+    #   @return [Array<Types::AvailableNumberSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbersResponse AWS API Documentation
+    #
+    class SearchAvailablePhoneNumbersResponse < Struct.new(
+      :next_token,
+      :available_numbers_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8751,6 +9229,59 @@ module Aws::Connect
       :association_id,
       :resource_type,
       :storage_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePhoneNumberRequest
+    #   data as a hash:
+    #
+    #       {
+    #         phone_number_id: "PhoneNumberId", # required
+    #         target_arn: "ARN", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) for Amazon Connect instances that
+    #   phone numbers are claimed to.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberRequest AWS API Documentation
+    #
+    class UpdatePhoneNumberRequest < Struct.new(
+      :phone_number_id,
+      :target_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] phone_number_id
+    #   The identifier of the phone number.
+    #   @return [String]
+    #
+    # @!attribute [rw] phone_number_arn
+    #   The Amazon Resource Name (ARN) of the phone number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePhoneNumberResponse AWS API Documentation
+    #
+    class UpdatePhoneNumberResponse < Struct.new(
+      :phone_number_id,
+      :phone_number_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2022-04-20)
+------------------
+
+* Feature - Added a new cluster-level attribute to set the capacity range for Aurora Serverless v2 instances.
+
 1.143.0 (2022-04-15)
 ------------------
 

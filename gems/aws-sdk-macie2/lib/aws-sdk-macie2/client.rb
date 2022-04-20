@@ -1630,6 +1630,7 @@ module Aws::Macie2
     #   resp.findings[0].classification_details.detailed_results_location #=> String
     #   resp.findings[0].classification_details.job_arn #=> String
     #   resp.findings[0].classification_details.job_id #=> String
+    #   resp.findings[0].classification_details.origin_type #=> String, one of "SENSITIVE_DATA_DISCOVERY_JOB"
     #   resp.findings[0].classification_details.result.additional_occurrences #=> Boolean
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections #=> Array
     #   resp.findings[0].classification_details.result.custom_data_identifiers.detections[0].arn #=> String
@@ -2991,7 +2992,7 @@ module Aws::Macie2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-macie2'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -832,8 +832,8 @@ module Aws::Macie2
       include Aws::Structure
     end
 
-    # Provides information about a sensitive data finding, including the
-    # classification job that produced the finding.
+    # Provides information about a sensitive data finding and the details of
+    # the finding.
     #
     # @!attribute [rw] detailed_results_location
     #   @return [String]
@@ -842,6 +842,11 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] job_id
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_type
+    #   Specifies how Amazon Macie found the sensitive data that produced a
+    #   finding. The only possible value is:
     #   @return [String]
     #
     # @!attribute [rw] result
@@ -856,6 +861,7 @@ module Aws::Macie2
       :detailed_results_location,
       :job_arn,
       :job_id,
+      :origin_type,
       :result)
       SENSITIVE = []
       include Aws::Structure
@@ -2352,8 +2358,8 @@ module Aws::Macie2
     #   @return [String]
     #
     # @!attribute [rw] classification_details
-    #   Provides information about a sensitive data finding, including the
-    #   classification job that produced the finding.
+    #   Provides information about a sensitive data finding and the details
+    #   of the finding.
     #   @return [Types::ClassificationDetails]
     #
     # @!attribute [rw] count
@@ -4117,7 +4123,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] comparator
-    #   The operator to use in a condition. Valid values are:
+    #   The operator to use in a condition. Depending on the type of
+    #   condition, possible values are:
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -4607,9 +4614,13 @@ module Aws::Macie2
     #   @return [Array<Types::Cell>]
     #
     # @!attribute [rw] line_ranges
+    #   Specifies the locations of occurrences of sensitive data in a
+    #   non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] offset_ranges
+    #   Specifies the locations of occurrences of sensitive data in a
+    #   non-binary text file.
     #   @return [Array<Types::Range>]
     #
     # @!attribute [rw] pages
@@ -4618,6 +4629,8 @@ module Aws::Macie2
     #   @return [Array<Types::Page>]
     #
     # @!attribute [rw] records
+    #   Specifies the locations of occurrences of sensitive data in an
+    #   Apache Avro object container or a structured data file.
     #   @return [Array<Types::Record>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/macie2-2020-01-01/Occurrences AWS API Documentation
@@ -5973,7 +5986,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] comparator
-    #   The operator to use in a condition. Valid values are:
+    #   The operator to use in a condition. Depending on the type of
+    #   condition, possible values are:
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -6008,7 +6022,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] comparator
-    #   The operator to use in a condition. Valid values are:
+    #   The operator to use in a condition. Depending on the type of
+    #   condition, possible values are:
     #   @return [String]
     #
     # @!attribute [rw] key
@@ -6089,7 +6104,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] comparator
-    #   The operator to use in a condition. Valid values are:
+    #   The operator to use in a condition. Depending on the type of
+    #   condition, possible values are:
     #   @return [String]
     #
     # @!attribute [rw] tag_values
@@ -6190,7 +6206,8 @@ module Aws::Macie2
     #       }
     #
     # @!attribute [rw] comparator
-    #   The operator to use in a condition. Valid values are:
+    #   The operator to use in a condition. Depending on the type of
+    #   condition, possible values are:
     #   @return [String]
     #
     # @!attribute [rw] key

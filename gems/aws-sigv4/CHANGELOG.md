@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.5.0 (2022-04-20)
+------------------
+
 * Feature - Use CRT based signers if `aws-crt` is available - provides support for `sigv4a`.
 
 1.4.0 (2021-09-02)

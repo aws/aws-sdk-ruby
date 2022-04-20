@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2022-04-20)
+------------------
+
+* Feature - Sensitive data findings in Amazon Macie now indicate how Macie found the sensitive data that produced a finding (originType).
+
 1.44.0 (2022-02-24)
 ------------------
 

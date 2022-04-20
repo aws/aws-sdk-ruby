@@ -167,6 +167,11 @@ module Aws::Mgn
       end
 
       # @return [String]
+      def quota_value
+        @data[:quota_value]
+      end
+
+      # @return [String]
       def resource_id
         @data[:resource_id]
       end
