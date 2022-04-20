@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't pass `:before_refresh` to Client constructors in `CognitoIdentityCredentials` (#2690).
+
 1.40.0 (2022-02-24)
 ------------------
 
