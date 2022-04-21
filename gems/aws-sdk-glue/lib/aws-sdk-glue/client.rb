@@ -815,6 +815,38 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # @option params [required, Array<String>] :names
+    #
+    # @return [Types::BatchGetCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
+    #   * {Types::BatchGetCustomEntityTypesResponse#custom_entity_types_not_found #custom_entity_types_not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_custom_entity_types({
+    #     names: ["NameString"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_entity_types #=> Array
+    #   resp.custom_entity_types[0].name #=> String
+    #   resp.custom_entity_types[0].regex_string #=> String
+    #   resp.custom_entity_types[0].context_words #=> Array
+    #   resp.custom_entity_types[0].context_words[0] #=> String
+    #   resp.custom_entity_types_not_found #=> Array
+    #   resp.custom_entity_types_not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypes AWS API Documentation
+    #
+    # @overload batch_get_custom_entity_types(params = {})
+    # @param [Hash] params ({})
+    def batch_get_custom_entity_types(params = {}, options = {})
+      req = build_request(:batch_get_custom_entity_types, params)
+      req.send_request(options)
+    end
+
     # Returns a list of resource metadata for a given list of development
     # endpoint names. After calling the `ListDevEndpoints` operation, you
     # can call this operation to access the data to which you have been
@@ -1858,6 +1890,37 @@ module Aws::Glue
     # @param [Hash] params ({})
     def create_crawler(params = {}, options = {})
       req = build_request(:create_crawler, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @option params [required, String] :regex_string
+    #
+    # @option params [Array<String>] :context_words
+    #
+    # @return [Types::CreateCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCustomEntityTypeResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_custom_entity_type({
+    #     name: "NameString", # required
+    #     regex_string: "NameString", # required
+    #     context_words: ["NameString"],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityType AWS API Documentation
+    #
+    # @overload create_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def create_custom_entity_type(params = {}, options = {})
+      req = build_request(:create_custom_entity_type, params)
       req.send_request(options)
     end
 
@@ -3603,6 +3666,31 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # @option params [required, String] :name
+    #
+    # @return [Types::DeleteCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteCustomEntityTypeResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_custom_entity_type({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityType AWS API Documentation
+    #
+    # @overload delete_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def delete_custom_entity_type(params = {}, options = {})
+      req = build_request(:delete_custom_entity_type, params)
+      req.send_request(options)
+    end
+
     # Removes a specified database from a Data Catalog.
     #
     # <note markdown="1"> After completing this operation, you no longer have access to the
@@ -5017,6 +5105,36 @@ module Aws::Glue
     # @param [Hash] params ({})
     def get_crawlers(params = {}, options = {})
       req = build_request(:get_crawlers, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :name
+    #
+    # @return [Types::GetCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCustomEntityTypeResponse#name #name} => String
+    #   * {Types::GetCustomEntityTypeResponse#regex_string #regex_string} => String
+    #   * {Types::GetCustomEntityTypeResponse#context_words #context_words} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_custom_entity_type({
+    #     name: "NameString", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.regex_string #=> String
+    #   resp.context_words #=> Array
+    #   resp.context_words[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityType AWS API Documentation
+    #
+    # @overload get_custom_entity_type(params = {})
+    # @param [Hash] params ({})
+    def get_custom_entity_type(params = {}, options = {})
+      req = build_request(:get_custom_entity_type, params)
       req.send_request(options)
     end
 
@@ -8660,6 +8778,42 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # @option params [String] :next_token
+    #
+    # @option params [Integer] :max_results
+    #
+    # @return [Types::ListCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCustomEntityTypesResponse#custom_entity_types #custom_entity_types} => Array&lt;Types::CustomEntityType&gt;
+    #   * {Types::ListCustomEntityTypesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_custom_entity_types({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.custom_entity_types #=> Array
+    #   resp.custom_entity_types[0].name #=> String
+    #   resp.custom_entity_types[0].regex_string #=> String
+    #   resp.custom_entity_types[0].context_words #=> Array
+    #   resp.custom_entity_types[0].context_words[0] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypes AWS API Documentation
+    #
+    # @overload list_custom_entity_types(params = {})
+    # @param [Hash] params ({})
+    def list_custom_entity_types(params = {}, options = {})
+      req = build_request(:list_custom_entity_types, params)
+      req.send_request(options)
+    end
+
     # Retrieves the names of all `DevEndpoint` resources in this Amazon Web
     # Services account, or the resources with the specified tag. This
     # operation allows you to see which resources are available in your
@@ -12007,7 +12161,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.109.0'
+      context[:gem_version] = '1.110.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

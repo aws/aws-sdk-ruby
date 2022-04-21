@@ -1256,6 +1256,771 @@ module Aws::IoTSiteWise
       include Aws::Structure
     end
 
+    # Contains information for an asset property aggregate entry that is
+    # associated with the [BatchGetAssetPropertyAggregates][1] API.
+    #
+    # To identify an asset property, you must specify one of the following:
+    #
+    # * The `assetId` and `propertyId` of an asset property.
+    #
+    # * A `propertyAlias`, which is a data stream alias (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). To define an asset
+    #   property's alias, see [UpdateAssetProperty][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+    #
+    # @note When making an API call, you may pass BatchGetAssetPropertyAggregatesEntry
+    #   data as a hash:
+    #
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
+    #         resolution: "Resolution", # required
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       }
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The alias that identifies the property, such as an OPC-UA server
+    #   data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregate_types
+    #   The data aggregating function.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] resolution
+    #   The time interval over which to aggregate data.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The exclusive start of the range from which to query historical
+    #   data, expressed in seconds in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The inclusive end of the range from which to query historical data,
+    #   expressed in seconds in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] qualities
+    #   The quality by which to filter asset data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] time_ordering
+    #   The chronological sorting order of the requested information.
+    #
+    #   Default: `ASCENDING`
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyAggregatesEntry < Struct.new(
+      :entry_id,
+      :asset_id,
+      :property_id,
+      :property_alias,
+      :aggregate_types,
+      :resolution,
+      :start_date,
+      :end_date,
+      :qualities,
+      :time_ordering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains error information for an asset property aggregate entry that
+    # is associated with the [BatchGetAssetPropertyAggregates][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The associated error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyAggregatesErrorEntry < Struct.new(
+      :error_code,
+      :error_message,
+      :entry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the error code and the timestamp for an asset property
+    # aggregate entry that is associated with the
+    # [BatchGetAssetPropertyAggregates][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_timestamp
+    #   The date the error occurred, in Unix epoch time.
+    #   @return [Time]
+    #
+    class BatchGetAssetPropertyAggregatesErrorInfo < Struct.new(
+      :error_code,
+      :error_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetAssetPropertyAggregatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [ # required
+    #           {
+    #             entry_id: "EntryId", # required
+    #             asset_id: "ID",
+    #             property_id: "ID",
+    #             property_alias: "AssetPropertyAlias",
+    #             aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
+    #             resolution: "Resolution", # required
+    #             start_date: Time.now, # required
+    #             end_date: Time.now, # required
+    #             qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #             time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of asset property aggregate entries for the batch get
+    #   request. You can specify up to 16 entries per request.
+    #   @return [Array<Types::BatchGetAssetPropertyAggregatesEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   A result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #   @return [Integer]
+    #
+    class BatchGetAssetPropertyAggregatesRequest < Struct.new(
+      :entries,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of the errors (if any) associated with the batch request.
+    #   Each error entry contains the `entryId` of the entry that failed.
+    #   @return [Array<Types::BatchGetAssetPropertyAggregatesErrorEntry>]
+    #
+    # @!attribute [rw] success_entries
+    #   A list of entries that were processed successfully by this batch
+    #   request. Each success entry contains the `entryId` of the entry that
+    #   succeeded and the latest query result.
+    #   @return [Array<Types::BatchGetAssetPropertyAggregatesSuccessEntry>]
+    #
+    # @!attribute [rw] skipped_entries
+    #   A list of entries that were not processed by this batch request.
+    #   because these entries had been completely processed by previous
+    #   paginated requests. Each skipped entry contains the `entryId` of the
+    #   entry that skipped.
+    #   @return [Array<Types::BatchGetAssetPropertyAggregatesSkippedEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyAggregatesResponse < Struct.new(
+      :error_entries,
+      :success_entries,
+      :skipped_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for an entry that has been processed by the
+    # previous [BatchGetAssetPropertyAggregates][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_status
+    #   The completion status of each entry that is associated with the
+    #   [BatchGetAssetPropertyAggregates][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   The error information, such as the error code and the timestamp.
+    #   @return [Types::BatchGetAssetPropertyAggregatesErrorInfo]
+    #
+    class BatchGetAssetPropertyAggregatesSkippedEntry < Struct.new(
+      :entry_id,
+      :completion_status,
+      :error_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains success information for an entry that is associated with the
+    # [BatchGetAssetPropertyAggregates][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyAggregates.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] aggregated_values
+    #   The requested aggregated asset property values (for example,
+    #   average, minimum, and maximum).
+    #   @return [Array<Types::AggregatedValue>]
+    #
+    class BatchGetAssetPropertyAggregatesSuccessEntry < Struct.new(
+      :entry_id,
+      :aggregated_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for an asset property value entry that is
+    # associated with the [BatchGetAssetPropertyValue][1] API.
+    #
+    # To identify an asset property, you must specify one of the following:
+    #
+    # * The `assetId` and `propertyId` of an asset property.
+    #
+    # * A `propertyAlias`, which is a data stream alias (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). To define an asset
+    #   property's alias, see [UpdateAssetProperty][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+    #
+    # @note When making an API call, you may pass BatchGetAssetPropertyValueEntry
+    #   data as a hash:
+    #
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #       }
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The alias that identifies the property, such as an OPC-UA server
+    #   data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueEntry < Struct.new(
+      :entry_id,
+      :asset_id,
+      :property_id,
+      :property_alias)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains error information for an asset property value entry that is
+    # associated with the [BatchGetAssetPropertyValue][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The associated error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueErrorEntry < Struct.new(
+      :error_code,
+      :error_message,
+      :entry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error information, such as the error code and the timestamp.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_timestamp
+    #   The date the error occurred, in Unix epoch time.
+    #   @return [Time]
+    #
+    class BatchGetAssetPropertyValueErrorInfo < Struct.new(
+      :error_code,
+      :error_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for an asset property historical value entry that
+    # is associated with the [BatchGetAssetPropertyValueHistory][1] API.
+    #
+    # To identify an asset property, you must specify one of the following:
+    #
+    # * The `assetId` and `propertyId` of an asset property.
+    #
+    # * A `propertyAlias`, which is a data stream alias (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). To define an asset
+    #   property's alias, see [UpdateAssetProperty][2].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    # [2]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+    #
+    # @note When making an API call, you may pass BatchGetAssetPropertyValueHistoryEntry
+    #   data as a hash:
+    #
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         start_date: Time.now,
+    #         end_date: Time.now,
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       }
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset in which the asset property was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_id
+    #   The ID of the asset property.
+    #   @return [String]
+    #
+    # @!attribute [rw] property_alias
+    #   The alias that identifies the property, such as an OPC-UA server
+    #   data stream path (for example,
+    #   `/company/windfarm/3/turbine/7/temperature`). For more information,
+    #   see [Mapping industrial data streams to asset properties][1] in the
+    #   *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
+    #   @return [String]
+    #
+    # @!attribute [rw] start_date
+    #   The exclusive start of the range from which to query historical
+    #   data, expressed in seconds in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date
+    #   The inclusive end of the range from which to query historical data,
+    #   expressed in seconds in Unix epoch time.
+    #   @return [Time]
+    #
+    # @!attribute [rw] qualities
+    #   The quality by which to filter asset data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] time_ordering
+    #   The chronological sorting order of the requested information.
+    #
+    #   Default: `ASCENDING`
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueHistoryEntry < Struct.new(
+      :entry_id,
+      :asset_id,
+      :property_id,
+      :property_alias,
+      :start_date,
+      :end_date,
+      :qualities,
+      :time_ordering)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A list of the errors (if any) associated with the batch request. Each
+    # error entry contains the `entryId` of the entry that failed.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The associated error message.
+    #   @return [String]
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueHistoryErrorEntry < Struct.new(
+      :error_code,
+      :error_message,
+      :entry_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error information, such as the error code and the timestamp.
+    #
+    # @!attribute [rw] error_code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_timestamp
+    #   The date the error occurred, in Unix epoch time.
+    #   @return [Time]
+    #
+    class BatchGetAssetPropertyValueHistoryErrorInfo < Struct.new(
+      :error_code,
+      :error_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetAssetPropertyValueHistoryRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [ # required
+    #           {
+    #             entry_id: "EntryId", # required
+    #             asset_id: "ID",
+    #             property_id: "ID",
+    #             property_alias: "AssetPropertyAlias",
+    #             start_date: Time.now,
+    #             end_date: Time.now,
+    #             qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #             time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of asset property historical value entries for the batch
+    #   get request. You can specify up to 16 entries per request.
+    #   @return [Array<Types::BatchGetAssetPropertyValueHistoryEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each paginated request.
+    #   A result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #   @return [Integer]
+    #
+    class BatchGetAssetPropertyValueHistoryRequest < Struct.new(
+      :entries,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of the errors (if any) associated with the batch request.
+    #   Each error entry contains the `entryId` of the entry that failed.
+    #   @return [Array<Types::BatchGetAssetPropertyValueHistoryErrorEntry>]
+    #
+    # @!attribute [rw] success_entries
+    #   A list of entries that were processed successfully by this batch
+    #   request. Each success entry contains the `entryId` of the entry that
+    #   succeeded and the latest query result.
+    #   @return [Array<Types::BatchGetAssetPropertyValueHistorySuccessEntry>]
+    #
+    # @!attribute [rw] skipped_entries
+    #   A list of entries that were not processed by this batch request.
+    #   because these entries had been completely processed by previous
+    #   paginated requests. Each skipped entry contains the `entryId` of the
+    #   entry that skipped.
+    #   @return [Array<Types::BatchGetAssetPropertyValueHistorySkippedEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueHistoryResponse < Struct.new(
+      :error_entries,
+      :success_entries,
+      :skipped_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for an entry that has been processed by the
+    # previous [BatchGetAssetPropertyValueHistory][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_status
+    #   The completion status of each entry that is associated with the
+    #   [BatchGetAssetPropertyValueHistory][1] API.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValueHistory.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   The error information, such as the error code and the timestamp.
+    #   @return [Types::BatchGetAssetPropertyValueHistoryErrorInfo]
+    #
+    class BatchGetAssetPropertyValueHistorySkippedEntry < Struct.new(
+      :entry_id,
+      :completion_status,
+      :error_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains success information for an entry that is associated with the
+    # [BatchGetAssetPropertyValueHistory][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_property_value_history
+    #   The requested historical values for the specified asset property.
+    #   @return [Array<Types::AssetPropertyValue>]
+    #
+    class BatchGetAssetPropertyValueHistorySuccessEntry < Struct.new(
+      :entry_id,
+      :asset_property_value_history)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass BatchGetAssetPropertyValueRequest
+    #   data as a hash:
+    #
+    #       {
+    #         entries: [ # required
+    #           {
+    #             entry_id: "EntryId", # required
+    #             asset_id: "ID",
+    #             property_id: "ID",
+    #             property_alias: "AssetPropertyAlias",
+    #           },
+    #         ],
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] entries
+    #   The list of asset property value entries for the batch get request.
+    #   You can specify up to 16 entries per request.
+    #   @return [Array<Types::BatchGetAssetPropertyValueEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to be used for the next set of paginated results.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueRequest < Struct.new(
+      :entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] error_entries
+    #   A list of the errors (if any) associated with the batch request.
+    #   Each error entry contains the `entryId` of the entry that failed.
+    #   @return [Array<Types::BatchGetAssetPropertyValueErrorEntry>]
+    #
+    # @!attribute [rw] success_entries
+    #   A list of entries that were processed successfully by this batch
+    #   request. Each success entry contains the `entryId` of the entry that
+    #   succeeded and the latest query result.
+    #   @return [Array<Types::BatchGetAssetPropertyValueSuccessEntry>]
+    #
+    # @!attribute [rw] skipped_entries
+    #   A list of entries that were not processed by this batch request.
+    #   because these entries had been completely processed by previous
+    #   paginated requests. Each skipped entry contains the `entryId` of the
+    #   entry that skipped.
+    #   @return [Array<Types::BatchGetAssetPropertyValueSkippedEntry>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results, or null if there are no
+    #   additional results.
+    #   @return [String]
+    #
+    class BatchGetAssetPropertyValueResponse < Struct.new(
+      :error_entries,
+      :success_entries,
+      :skipped_entries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information for an entry that has been processed by the
+    # previous [BatchGetAssetPropertyValue][1] request.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] completion_status
+    #   The completion status of each entry that is associated with the
+    #   [BatchGetAssetPropertyValue][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #   @return [String]
+    #
+    # @!attribute [rw] error_info
+    #   The error information, such as the error code and the timestamp.
+    #   @return [Types::BatchGetAssetPropertyValueErrorInfo]
+    #
+    class BatchGetAssetPropertyValueSkippedEntry < Struct.new(
+      :entry_id,
+      :completion_status,
+      :error_info)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains success information for an entry that is associated with the
+    # [BatchGetAssetPropertyValue][1] API.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_BatchGetAssetPropertyValue.html
+    #
+    # @!attribute [rw] entry_id
+    #   The ID of the entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_property_value
+    #   Contains asset property value information.
+    #   @return [Types::AssetPropertyValue]
+    #
+    class BatchGetAssetPropertyValueSuccessEntry < Struct.new(
+      :entry_id,
+      :asset_property_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains error information from updating a batch of asset property
     # values.
     #

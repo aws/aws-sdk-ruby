@@ -524,6 +524,240 @@ module Aws::IoTSiteWise
       req.send_request(options)
     end
 
+    # Gets aggregated values (for example, average, minimum, and maximum)
+    # for one or more asset properties. For more information, see [Querying
+    # aggregates][1] in the *IoT SiteWise User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyAggregatesEntry>] :entries
+    #   The list of asset property aggregate entries for the batch get
+    #   request. You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #
+    # @return [Types::BatchGetAssetPropertyAggregatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesSuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyAggregatesSkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyAggregatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_aggregates({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         aggregate_types: ["AVERAGE"], # required, accepts AVERAGE, COUNT, MAXIMUM, MINIMUM, SUM, STANDARD_DEVIATION
+    #         resolution: "Resolution", # required
+    #         start_date: Time.now, # required
+    #         end_date: Time.now, # required
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].aggregated_values #=> Array
+    #   resp.success_entries[0].aggregated_values[0].timestamp #=> Time
+    #   resp.success_entries[0].aggregated_values[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.success_entries[0].aggregated_values[0].value.average #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.count #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.maximum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.minimum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.sum #=> Float
+    #   resp.success_entries[0].aggregated_values[0].value.standard_deviation #=> Float
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_aggregates(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_aggregates(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_aggregates, params)
+      req.send_request(options)
+    end
+
+    # Gets the current value for one or more asset properties. For more
+    # information, see [Querying current values][1] in the *IoT SiteWise
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyValueEntry>] :entries
+    #   The list of asset property value entries for the batch get request.
+    #   You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @return [Types::BatchGetAssetPropertyValueResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyValueResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyValueErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyValueSuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyValueSkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_value({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].asset_property_value.value.string_value #=> String
+    #   resp.success_entries[0].asset_property_value.value.integer_value #=> Integer
+    #   resp.success_entries[0].asset_property_value.value.double_value #=> Float
+    #   resp.success_entries[0].asset_property_value.value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value.timestamp.time_in_seconds #=> Integer
+    #   resp.success_entries[0].asset_property_value.timestamp.offset_in_nanos #=> Integer
+    #   resp.success_entries[0].asset_property_value.quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_value(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_value(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_value, params)
+      req.send_request(options)
+    end
+
+    # Gets the historical values for one or more asset properties. For more
+    # information, see [Querying historical values][1] in the *IoT SiteWise
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values
+    #
+    # @option params [required, Array<Types::BatchGetAssetPropertyValueHistoryEntry>] :entries
+    #   The list of asset property historical value entries for the batch get
+    #   request. You can specify up to 16 entries per request.
+    #
+    # @option params [String] :next_token
+    #   The token to be used for the next set of paginated results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each paginated request. A
+    #   result set is returned in the two cases, whichever occurs first.
+    #
+    #   * The size of the result set is less than 1 MB.
+    #
+    #   * The number of data points in the result set is less than the value
+    #     of `maxResults`. The maximum value of `maxResults` is 4000.
+    #
+    # @return [Types::BatchGetAssetPropertyValueHistoryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#error_entries #error_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistoryErrorEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#success_entries #success_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistorySuccessEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#skipped_entries #skipped_entries} => Array&lt;Types::BatchGetAssetPropertyValueHistorySkippedEntry&gt;
+    #   * {Types::BatchGetAssetPropertyValueHistoryResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_asset_property_value_history({
+    #     entries: [ # required
+    #       {
+    #         entry_id: "EntryId", # required
+    #         asset_id: "ID",
+    #         property_id: "ID",
+    #         property_alias: "AssetPropertyAlias",
+    #         start_date: Time.now,
+    #         end_date: Time.now,
+    #         qualities: ["GOOD"], # accepts GOOD, BAD, UNCERTAIN
+    #         time_ordering: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.error_entries #=> Array
+    #   resp.error_entries[0].error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.error_entries[0].error_message #=> String
+    #   resp.error_entries[0].entry_id #=> String
+    #   resp.success_entries #=> Array
+    #   resp.success_entries[0].entry_id #=> String
+    #   resp.success_entries[0].asset_property_value_history #=> Array
+    #   resp.success_entries[0].asset_property_value_history[0].value.string_value #=> String
+    #   resp.success_entries[0].asset_property_value_history[0].value.integer_value #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].value.double_value #=> Float
+    #   resp.success_entries[0].asset_property_value_history[0].value.boolean_value #=> Boolean
+    #   resp.success_entries[0].asset_property_value_history[0].timestamp.time_in_seconds #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].timestamp.offset_in_nanos #=> Integer
+    #   resp.success_entries[0].asset_property_value_history[0].quality #=> String, one of "GOOD", "BAD", "UNCERTAIN"
+    #   resp.skipped_entries #=> Array
+    #   resp.skipped_entries[0].entry_id #=> String
+    #   resp.skipped_entries[0].completion_status #=> String, one of "SUCCESS", "ERROR"
+    #   resp.skipped_entries[0].error_info.error_code #=> String, one of "ResourceNotFoundException", "InvalidRequestException", "AccessDeniedException"
+    #   resp.skipped_entries[0].error_info.error_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @overload batch_get_asset_property_value_history(params = {})
+    # @param [Hash] params ({})
+    def batch_get_asset_property_value_history(params = {}, options = {})
+      req = build_request(:batch_get_asset_property_value_history, params)
+      req.send_request(options)
+    end
+
     # Sends a list of asset property values to IoT SiteWise. Each value is a
     # timestamp-quality-value (TQV) data point. For more information, see
     # [Ingesting data using the API][1] in the *IoT SiteWise User Guide*.
@@ -4429,7 +4663,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2022-04-21)
+------------------
+
+* Feature - Doc only update for ElastiCache
+
 1.76.0 (2022-03-23)
 ------------------
 

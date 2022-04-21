@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-04-21)
+------------------
+
+* Feature - This release adds support for minimum of 5 character length virtual tape barcodes.
+
 1.67.0 (2022-02-24)
 ------------------
 

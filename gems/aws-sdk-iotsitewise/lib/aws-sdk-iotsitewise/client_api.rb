@@ -74,6 +74,45 @@ module Aws::IoTSiteWise
     BatchDisassociateProjectAssetsErrors = Shapes::ListShape.new(name: 'BatchDisassociateProjectAssetsErrors')
     BatchDisassociateProjectAssetsRequest = Shapes::StructureShape.new(name: 'BatchDisassociateProjectAssetsRequest')
     BatchDisassociateProjectAssetsResponse = Shapes::StructureShape.new(name: 'BatchDisassociateProjectAssetsResponse')
+    BatchEntryCompletionStatus = Shapes::StringShape.new(name: 'BatchEntryCompletionStatus')
+    BatchGetAssetPropertyAggregatesEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyAggregatesEntries')
+    BatchGetAssetPropertyAggregatesEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesEntry')
+    BatchGetAssetPropertyAggregatesErrorCode = Shapes::StringShape.new(name: 'BatchGetAssetPropertyAggregatesErrorCode')
+    BatchGetAssetPropertyAggregatesErrorEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyAggregatesErrorEntries')
+    BatchGetAssetPropertyAggregatesErrorEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesErrorEntry')
+    BatchGetAssetPropertyAggregatesErrorInfo = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesErrorInfo')
+    BatchGetAssetPropertyAggregatesMaxResults = Shapes::IntegerShape.new(name: 'BatchGetAssetPropertyAggregatesMaxResults')
+    BatchGetAssetPropertyAggregatesRequest = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesRequest')
+    BatchGetAssetPropertyAggregatesResponse = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesResponse')
+    BatchGetAssetPropertyAggregatesSkippedEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyAggregatesSkippedEntries')
+    BatchGetAssetPropertyAggregatesSkippedEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesSkippedEntry')
+    BatchGetAssetPropertyAggregatesSuccessEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyAggregatesSuccessEntries')
+    BatchGetAssetPropertyAggregatesSuccessEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyAggregatesSuccessEntry')
+    BatchGetAssetPropertyValueEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueEntries')
+    BatchGetAssetPropertyValueEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueEntry')
+    BatchGetAssetPropertyValueErrorCode = Shapes::StringShape.new(name: 'BatchGetAssetPropertyValueErrorCode')
+    BatchGetAssetPropertyValueErrorEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueErrorEntries')
+    BatchGetAssetPropertyValueErrorEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueErrorEntry')
+    BatchGetAssetPropertyValueErrorInfo = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueErrorInfo')
+    BatchGetAssetPropertyValueHistoryEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueHistoryEntries')
+    BatchGetAssetPropertyValueHistoryEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistoryEntry')
+    BatchGetAssetPropertyValueHistoryErrorCode = Shapes::StringShape.new(name: 'BatchGetAssetPropertyValueHistoryErrorCode')
+    BatchGetAssetPropertyValueHistoryErrorEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueHistoryErrorEntries')
+    BatchGetAssetPropertyValueHistoryErrorEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistoryErrorEntry')
+    BatchGetAssetPropertyValueHistoryErrorInfo = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistoryErrorInfo')
+    BatchGetAssetPropertyValueHistoryMaxResults = Shapes::IntegerShape.new(name: 'BatchGetAssetPropertyValueHistoryMaxResults')
+    BatchGetAssetPropertyValueHistoryRequest = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistoryRequest')
+    BatchGetAssetPropertyValueHistoryResponse = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistoryResponse')
+    BatchGetAssetPropertyValueHistorySkippedEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueHistorySkippedEntries')
+    BatchGetAssetPropertyValueHistorySkippedEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistorySkippedEntry')
+    BatchGetAssetPropertyValueHistorySuccessEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueHistorySuccessEntries')
+    BatchGetAssetPropertyValueHistorySuccessEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueHistorySuccessEntry')
+    BatchGetAssetPropertyValueRequest = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueRequest')
+    BatchGetAssetPropertyValueResponse = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueResponse')
+    BatchGetAssetPropertyValueSkippedEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueSkippedEntries')
+    BatchGetAssetPropertyValueSkippedEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueSkippedEntry')
+    BatchGetAssetPropertyValueSuccessEntries = Shapes::ListShape.new(name: 'BatchGetAssetPropertyValueSuccessEntries')
+    BatchGetAssetPropertyValueSuccessEntry = Shapes::StructureShape.new(name: 'BatchGetAssetPropertyValueSuccessEntry')
     BatchPutAssetPropertyError = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyError')
     BatchPutAssetPropertyErrorEntries = Shapes::ListShape.new(name: 'BatchPutAssetPropertyErrorEntries')
     BatchPutAssetPropertyErrorEntry = Shapes::StructureShape.new(name: 'BatchPutAssetPropertyErrorEntry')
@@ -551,6 +590,144 @@ module Aws::IoTSiteWise
 
     BatchDisassociateProjectAssetsResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDisassociateProjectAssetsErrors, location_name: "errors"))
     BatchDisassociateProjectAssetsResponse.struct_class = Types::BatchDisassociateProjectAssetsResponse
+
+    BatchGetAssetPropertyAggregatesEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesEntry)
+
+    BatchGetAssetPropertyAggregatesEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location_name: "propertyId"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:aggregate_types, Shapes::ShapeRef.new(shape: AggregateTypes, required: true, location_name: "aggregateTypes"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:resolution, Shapes::ShapeRef.new(shape: Resolution, required: true, location_name: "resolution"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDate"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDate"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:qualities, Shapes::ShapeRef.new(shape: Qualities, location_name: "qualities"))
+    BatchGetAssetPropertyAggregatesEntry.add_member(:time_ordering, Shapes::ShapeRef.new(shape: TimeOrdering, location_name: "timeOrdering"))
+    BatchGetAssetPropertyAggregatesEntry.struct_class = Types::BatchGetAssetPropertyAggregatesEntry
+
+    BatchGetAssetPropertyAggregatesErrorEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesErrorEntry)
+
+    BatchGetAssetPropertyAggregatesErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyAggregatesErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
+    BatchGetAssetPropertyAggregatesErrorEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyAggregatesErrorEntry.struct_class = Types::BatchGetAssetPropertyAggregatesErrorEntry
+
+    BatchGetAssetPropertyAggregatesErrorInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyAggregatesErrorInfo.add_member(:error_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "errorTimestamp"))
+    BatchGetAssetPropertyAggregatesErrorInfo.struct_class = Types::BatchGetAssetPropertyAggregatesErrorInfo
+
+    BatchGetAssetPropertyAggregatesRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesEntries, required: true, location_name: "entries"))
+    BatchGetAssetPropertyAggregatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyAggregatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesMaxResults, location_name: "maxResults"))
+    BatchGetAssetPropertyAggregatesRequest.struct_class = Types::BatchGetAssetPropertyAggregatesRequest
+
+    BatchGetAssetPropertyAggregatesResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesErrorEntries, required: true, location_name: "errorEntries"))
+    BatchGetAssetPropertyAggregatesResponse.add_member(:success_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesSuccessEntries, required: true, location_name: "successEntries"))
+    BatchGetAssetPropertyAggregatesResponse.add_member(:skipped_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesSkippedEntries, required: true, location_name: "skippedEntries"))
+    BatchGetAssetPropertyAggregatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyAggregatesResponse.struct_class = Types::BatchGetAssetPropertyAggregatesResponse
+
+    BatchGetAssetPropertyAggregatesSkippedEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesSkippedEntry)
+
+    BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:completion_status, Shapes::ShapeRef.new(shape: BatchEntryCompletionStatus, required: true, location_name: "completionStatus"))
+    BatchGetAssetPropertyAggregatesSkippedEntry.add_member(:error_info, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesErrorInfo, location_name: "errorInfo"))
+    BatchGetAssetPropertyAggregatesSkippedEntry.struct_class = Types::BatchGetAssetPropertyAggregatesSkippedEntry
+
+    BatchGetAssetPropertyAggregatesSuccessEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesSuccessEntry)
+
+    BatchGetAssetPropertyAggregatesSuccessEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyAggregatesSuccessEntry.add_member(:aggregated_values, Shapes::ShapeRef.new(shape: AggregatedValues, required: true, location_name: "aggregatedValues"))
+    BatchGetAssetPropertyAggregatesSuccessEntry.struct_class = Types::BatchGetAssetPropertyAggregatesSuccessEntry
+
+    BatchGetAssetPropertyValueEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueEntry)
+
+    BatchGetAssetPropertyValueEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    BatchGetAssetPropertyValueEntry.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location_name: "propertyId"))
+    BatchGetAssetPropertyValueEntry.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
+    BatchGetAssetPropertyValueEntry.struct_class = Types::BatchGetAssetPropertyValueEntry
+
+    BatchGetAssetPropertyValueErrorEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueErrorEntry)
+
+    BatchGetAssetPropertyValueErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyValueErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
+    BatchGetAssetPropertyValueErrorEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueErrorEntry.struct_class = Types::BatchGetAssetPropertyValueErrorEntry
+
+    BatchGetAssetPropertyValueErrorInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyValueErrorInfo.add_member(:error_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "errorTimestamp"))
+    BatchGetAssetPropertyValueErrorInfo.struct_class = Types::BatchGetAssetPropertyValueErrorInfo
+
+    BatchGetAssetPropertyValueHistoryEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryEntry)
+
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:asset_id, Shapes::ShapeRef.new(shape: ID, location_name: "assetId"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:property_id, Shapes::ShapeRef.new(shape: ID, location_name: "propertyId"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:property_alias, Shapes::ShapeRef.new(shape: AssetPropertyAlias, location_name: "propertyAlias"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startDate"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endDate"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:qualities, Shapes::ShapeRef.new(shape: Qualities, location_name: "qualities"))
+    BatchGetAssetPropertyValueHistoryEntry.add_member(:time_ordering, Shapes::ShapeRef.new(shape: TimeOrdering, location_name: "timeOrdering"))
+    BatchGetAssetPropertyValueHistoryEntry.struct_class = Types::BatchGetAssetPropertyValueHistoryEntry
+
+    BatchGetAssetPropertyValueHistoryErrorEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryErrorEntry)
+
+    BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
+    BatchGetAssetPropertyValueHistoryErrorEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueHistoryErrorEntry.struct_class = Types::BatchGetAssetPropertyValueHistoryErrorEntry
+
+    BatchGetAssetPropertyValueHistoryErrorInfo.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryErrorCode, required: true, location_name: "errorCode"))
+    BatchGetAssetPropertyValueHistoryErrorInfo.add_member(:error_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "errorTimestamp"))
+    BatchGetAssetPropertyValueHistoryErrorInfo.struct_class = Types::BatchGetAssetPropertyValueHistoryErrorInfo
+
+    BatchGetAssetPropertyValueHistoryRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryEntries, required: true, location_name: "entries"))
+    BatchGetAssetPropertyValueHistoryRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyValueHistoryRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryMaxResults, location_name: "maxResults"))
+    BatchGetAssetPropertyValueHistoryRequest.struct_class = Types::BatchGetAssetPropertyValueHistoryRequest
+
+    BatchGetAssetPropertyValueHistoryResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryErrorEntries, required: true, location_name: "errorEntries"))
+    BatchGetAssetPropertyValueHistoryResponse.add_member(:success_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistorySuccessEntries, required: true, location_name: "successEntries"))
+    BatchGetAssetPropertyValueHistoryResponse.add_member(:skipped_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistorySkippedEntries, required: true, location_name: "skippedEntries"))
+    BatchGetAssetPropertyValueHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyValueHistoryResponse.struct_class = Types::BatchGetAssetPropertyValueHistoryResponse
+
+    BatchGetAssetPropertyValueHistorySkippedEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistorySkippedEntry)
+
+    BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:completion_status, Shapes::ShapeRef.new(shape: BatchEntryCompletionStatus, required: true, location_name: "completionStatus"))
+    BatchGetAssetPropertyValueHistorySkippedEntry.add_member(:error_info, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryErrorInfo, location_name: "errorInfo"))
+    BatchGetAssetPropertyValueHistorySkippedEntry.struct_class = Types::BatchGetAssetPropertyValueHistorySkippedEntry
+
+    BatchGetAssetPropertyValueHistorySuccessEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistorySuccessEntry)
+
+    BatchGetAssetPropertyValueHistorySuccessEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueHistorySuccessEntry.add_member(:asset_property_value_history, Shapes::ShapeRef.new(shape: AssetPropertyValueHistory, required: true, location_name: "assetPropertyValueHistory"))
+    BatchGetAssetPropertyValueHistorySuccessEntry.struct_class = Types::BatchGetAssetPropertyValueHistorySuccessEntry
+
+    BatchGetAssetPropertyValueRequest.add_member(:entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueEntries, required: true, location_name: "entries"))
+    BatchGetAssetPropertyValueRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyValueRequest.struct_class = Types::BatchGetAssetPropertyValueRequest
+
+    BatchGetAssetPropertyValueResponse.add_member(:error_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueErrorEntries, required: true, location_name: "errorEntries"))
+    BatchGetAssetPropertyValueResponse.add_member(:success_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueSuccessEntries, required: true, location_name: "successEntries"))
+    BatchGetAssetPropertyValueResponse.add_member(:skipped_entries, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueSkippedEntries, required: true, location_name: "skippedEntries"))
+    BatchGetAssetPropertyValueResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    BatchGetAssetPropertyValueResponse.struct_class = Types::BatchGetAssetPropertyValueResponse
+
+    BatchGetAssetPropertyValueSkippedEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueSkippedEntry)
+
+    BatchGetAssetPropertyValueSkippedEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueSkippedEntry.add_member(:completion_status, Shapes::ShapeRef.new(shape: BatchEntryCompletionStatus, required: true, location_name: "completionStatus"))
+    BatchGetAssetPropertyValueSkippedEntry.add_member(:error_info, Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueErrorInfo, location_name: "errorInfo"))
+    BatchGetAssetPropertyValueSkippedEntry.struct_class = Types::BatchGetAssetPropertyValueSkippedEntry
+
+    BatchGetAssetPropertyValueSuccessEntries.member = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueSuccessEntry)
+
+    BatchGetAssetPropertyValueSuccessEntry.add_member(:entry_id, Shapes::ShapeRef.new(shape: EntryId, required: true, location_name: "entryId"))
+    BatchGetAssetPropertyValueSuccessEntry.add_member(:asset_property_value, Shapes::ShapeRef.new(shape: AssetPropertyValue, location_name: "assetPropertyValue"))
+    BatchGetAssetPropertyValueSuccessEntry.struct_class = Types::BatchGetAssetPropertyValueSuccessEntry
 
     BatchPutAssetPropertyError.add_member(:error_code, Shapes::ShapeRef.new(shape: BatchPutAssetPropertyValueErrorCode, required: true, location_name: "errorCode"))
     BatchPutAssetPropertyError.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "errorMessage"))
@@ -1533,6 +1710,68 @@ module Aws::IoTSiteWise
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:batch_get_asset_property_aggregates, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAssetPropertyAggregates"
+        o.http_method = "POST"
+        o.http_request_uri = "/properties/batch/aggregates"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyAggregatesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:batch_get_asset_property_value, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAssetPropertyValue"
+        o.http_method = "POST"
+        o.http_request_uri = "/properties/batch/latest"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:batch_get_asset_property_value_history, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetAssetPropertyValueHistory"
+        o.http_method = "POST"
+        o.http_request_uri = "/properties/batch/history"
+        o.endpoint_pattern = {
+          "hostPrefix" => "data.",
+        }
+        o.input = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetAssetPropertyValueHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:batch_put_asset_property_value, Seahorse::Model::Operation.new.tap do |o|

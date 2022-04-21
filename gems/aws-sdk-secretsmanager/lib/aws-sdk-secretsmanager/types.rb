@@ -21,7 +21,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/CancelRotateSecretRequest AWS API Documentation
@@ -330,7 +334,11 @@ module Aws::SecretsManager
     #   policy for.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DeleteResourcePolicyRequest AWS API Documentation
@@ -373,7 +381,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to delete.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] recovery_window_in_days
@@ -449,7 +461,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/DescribeSecretRequest AWS API Documentation
@@ -775,7 +791,11 @@ module Aws::SecretsManager
     #   resource-based policy for.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/GetResourcePolicyRequest AWS API Documentation
@@ -830,7 +850,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to retrieve.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] version_id
@@ -1018,7 +1042,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret whose versions you want to list.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -1207,7 +1235,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to attach the resource-based policy.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] resource_policy
@@ -1268,9 +1300,13 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to add a new version to.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
     #
     #   If the secret doesn't already exist, use `CreateSecret` instead.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -1597,7 +1633,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to restore.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/RestoreSecretRequest AWS API Documentation
@@ -1644,7 +1684,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret to rotate.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -2060,7 +2104,11 @@ module Aws::SecretsManager
     #   secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -2098,7 +2146,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
@@ -2143,7 +2195,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -2264,7 +2320,11 @@ module Aws::SecretsManager
     #   labelsto modify.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than
-    #   a partial ARN.
+    #   a partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #   @return [String]
     #
     # @!attribute [rw] version_stage

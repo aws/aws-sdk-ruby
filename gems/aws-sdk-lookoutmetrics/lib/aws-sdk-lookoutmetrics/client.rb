@@ -963,6 +963,72 @@ module Aws::LookoutMetrics
       req.send_request(options)
     end
 
+    # Detects an Amazon S3 dataset's file format, interval, and offset.
+    #
+    # @option params [required, String] :anomaly_detector_arn
+    #   An anomaly detector ARN.
+    #
+    # @option params [required, Types::AutoDetectionMetricSource] :auto_detection_metric_source
+    #   A data source.
+    #
+    # @return [Types::DetectMetricSetConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DetectMetricSetConfigResponse#detected_metric_set_config #detected_metric_set_config} => Types::DetectedMetricSetConfig
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.detect_metric_set_config({
+    #     anomaly_detector_arn: "Arn", # required
+    #     auto_detection_metric_source: { # required
+    #       s3_source_config: {
+    #         templated_path_list: ["TemplatedPath"],
+    #         historical_data_path_list: ["HistoricalDataPath"],
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.detected_metric_set_config.offset.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.offset.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.offset.message #=> String
+    #   resp.detected_metric_set_config.metric_set_frequency.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_set_frequency.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_set_frequency.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.file_compression.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.file_compression.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.file_compression.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.charset.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.charset.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.charset.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.contains_header.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.contains_header.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.contains_header.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.delimiter.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.delimiter.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.delimiter.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.header_list.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.header_list.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.header_list.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.quote_symbol.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.quote_symbol.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.csv_format_descriptor.quote_symbol.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.file_compression.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.file_compression.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.file_compression.message #=> String
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.charset.value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.charset.confidence #=> String, one of "HIGH", "LOW", "NONE"
+    #   resp.detected_metric_set_config.metric_source.s3_source_config.file_format_descriptor.json_format_descriptor.charset.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectMetricSetConfig AWS API Documentation
+    #
+    # @overload detect_metric_set_config(params = {})
+    # @param [Hash] params ({})
+    def detect_metric_set_config(params = {}, options = {})
+      req = build_request(:detect_metric_set_config, params)
+      req.send_request(options)
+    end
+
     # Returns details about a group of anomalous metrics.
     #
     # @option params [required, String] :anomaly_group_id
@@ -1748,7 +1814,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

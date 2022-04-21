@@ -382,14 +382,18 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @return [Types::CancelRotateSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -435,8 +439,9 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Creates a new secret. A *secret* is a set of credentials, such as a
-    # user name and password, that you store in an encrypted form in Secrets
+    # Creates a new secret. A *secret* can be a password, a set of
+    # credentials such as a user name and password, an OAuth token, or other
+    # secret information that you store in an encrypted form in Secrets
     # Manager. The secret also includes the connection information to access
     # a database or other service, which Secrets Manager doesn't encrypt. A
     # secret in Secrets Manager consists of both the protected secret data
@@ -451,6 +456,11 @@ module Aws::SecretsManager
     # `SecretBinary` then Secrets Manager creates an initial secret version
     # and automatically attaches the staging label `AWSCURRENT` to it.
     #
+    # For database credentials you want to rotate, for Secrets Manager to be
+    # able to rotate the secret, you must make sure the JSON you store in
+    # the `SecretString` matches the [JSON structure of a database
+    # secret][2].
+    #
     # If you don't specify an KMS encryption key, Secrets Manager uses the
     # Amazon Web Services managed key `aws/secretsmanager`. If this key
     # doesn't already exist in your account, then Secrets Manager creates
@@ -464,15 +474,22 @@ module Aws::SecretsManager
     # to encrypt the secret, and you must create and use a customer managed
     # KMS key.
     #
-    # <b>Required permissions: </b> `secretsmanager:CreateSecret`. For more
-    # information, see [ IAM policy actions for Secrets Manager][2] and
-    # [Authentication and access control in Secrets Manager][3].
+    # <b>Required permissions: </b> `secretsmanager:CreateSecret`. If you
+    # include tags in the secret, you also need
+    # `secretsmanager:TagResource`. For more information, see [ IAM policy
+    # actions for Secrets Manager][3] and [Authentication and access control
+    # in Secrets Manager][4].
+    #
+    # To encrypt the secret with a KMS key other than `aws/secretsmanager`,
+    # you need `kms:GenerateDataKey` and `kms:Decrypt` permission to the
+    # key.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
-    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :name
     #   The name of the new secret.
@@ -712,7 +729,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -720,7 +737,11 @@ module Aws::SecretsManager
     #   policy for.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @return [Types::DeleteResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -791,14 +812,18 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to delete.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [Integer] :recovery_window_in_days
     #   The number of days from 7 to 30 that Secrets Manager waits before
@@ -883,14 +908,18 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @return [Types::DescribeSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1013,7 +1042,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Integer] :password_length
@@ -1111,7 +1140,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-policies.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -1119,7 +1148,11 @@ module Aws::SecretsManager
     #   policy for.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @return [Types::GetResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1182,14 +1215,18 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to retrieve.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [String] :version_id
     #   The unique identifier of the version of the secret to retrieve. If you
@@ -1286,14 +1323,18 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret whose versions you want to list.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [Integer] :max_results
     #   The number of results to include in the response.
@@ -1409,7 +1450,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_search-secret.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [Integer] :max_results
@@ -1538,13 +1579,17 @@ module Aws::SecretsManager
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html
-    # [3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to attach the resource-based policy.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [required, String] :resource_policy
     #   A JSON-formatted string for an Amazon Web Services resource-based
@@ -1641,16 +1686,20 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to add a new version to.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
     #
     #   If the secret doesn't already exist, use `CreateSecret` instead.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the new version of the secret.
@@ -1792,7 +1841,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -1842,7 +1891,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -1902,14 +1951,18 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to restore.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @return [Types::RestoreSecretResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1952,49 +2005,65 @@ module Aws::SecretsManager
     end
 
     # Configures and starts the asynchronous process of rotating the secret.
+    # For more information about rotation, see [Rotate secrets][1].
     #
     # If you include the configuration parameters, the operation sets the
     # values for the secret and then immediately starts a rotation. If you
     # don't include the configuration parameters, the operation starts a
-    # rotation with the values already stored in the secret. For more
-    # information about rotation, see [Rotate secrets][1].
+    # rotation with the values already stored in the secret.
     #
-    # To configure rotation, you include the ARN of an Amazon Web Services
+    # For database credentials you want to rotate, for Secrets Manager to be
+    # able to rotate the secret, you must make sure the secret value is in
+    # the [ JSON structure of a database secret][2]. In particular, if you
+    # want to use the [ alternating users strategy][3], your secret must
+    # contain the ARN of a superuser secret.
+    #
+    # To configure rotation, you also need the ARN of an Amazon Web Services
     # Lambda function and the schedule for the rotation. The Lambda rotation
     # function creates a new version of the secret and creates or updates
     # the credentials on the database or service to match. After testing the
     # new credentials, the function marks the new secret version with the
     # staging label `AWSCURRENT`. Then anyone who retrieves the secret gets
-    # the new version. For more information, see [How rotation works][2].
+    # the new version. For more information, see [How rotation works][4].
+    #
+    # You can create the Lambda rotation function based on the [rotation
+    # function templates][5] that Secrets Manager provides. Choose a
+    # template that matches your [Rotation strategy][6].
     #
     # When rotation is successful, the `AWSPENDING` staging label might be
     # attached to the same version as the `AWSCURRENT` version, or it might
-    # not be attached to any version.
-    #
-    # If the `AWSPENDING` staging label is present but not attached to the
-    # same version as `AWSCURRENT`, then any later invocation of
-    # `RotateSecret` assumes that a previous rotation request is still in
-    # progress and returns an error.
+    # not be attached to any version. If the `AWSPENDING` staging label is
+    # present but not attached to the same version as `AWSCURRENT`, then any
+    # later invocation of `RotateSecret` assumes that a previous rotation
+    # request is still in progress and returns an error.
     #
     # <b>Required permissions: </b> `secretsmanager:RotateSecret`. For more
-    # information, see [ IAM policy actions for Secrets Manager][3] and
-    # [Authentication and access control in Secrets Manager][4]. You also
+    # information, see [ IAM policy actions for Secrets Manager][7] and
+    # [Authentication and access control in Secrets Manager][8]. You also
     # need `lambda:InvokeFunction` permissions on the rotation function. For
-    # more information, see [ Permissions for rotation][5].
+    # more information, see [ Permissions for rotation][9].
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
-    # [3]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
-    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
-    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_secret_json_structure.html
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets_strategies.html#rotating-secrets-two-users
+    # [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    # [5]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_available-rotation-templates.html
+    # [6]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets_strategies.html
+    # [7]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [8]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [9]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets-required-permissions-function.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret to rotate.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the new version of the secret that helps
@@ -2094,7 +2163,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -2160,7 +2229,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -2169,7 +2238,11 @@ module Aws::SecretsManager
     #   secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [required, Array<Types::Tag>] :tags
     #   The tags to attach to the secret as a JSON text string argument. Each
@@ -2243,14 +2316,18 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [required, Array<String>] :tag_keys
     #   A list of tag key names to remove from the secret. You don't specify
@@ -2346,7 +2423,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/security-encryption.html
     #
@@ -2354,7 +2431,11 @@ module Aws::SecretsManager
     #   The ARN or name of the secret.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [String] :client_request_token
     #   If you include `SecretString` or `SecretBinary`, then Secrets Manager
@@ -2532,7 +2613,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
@@ -2540,7 +2621,11 @@ module Aws::SecretsManager
     #   labelsto modify.
     #
     #   For an ARN, we recommend that you specify a complete ARN rather than a
-    #   partial ARN.
+    #   partial ARN. See [Finding a secret from a partial ARN][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/troubleshoot.html#ARN_secretnamehyphen
     #
     # @option params [required, String] :version_stage
     #   The staging label to add to this version.
@@ -2665,7 +2750,7 @@ module Aws::SecretsManager
     #
     #
     # [1]: https://aws.amazon.com/blogs/security/protect-sensitive-data-in-the-cloud-with-automated-reasoning-zelkova/
-    # [2]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awssecretsmanager.html#awssecretsmanager-actions-as-permissions
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [String] :secret_id
@@ -2739,7 +2824,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

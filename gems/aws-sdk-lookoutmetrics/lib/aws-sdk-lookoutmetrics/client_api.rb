@@ -43,13 +43,19 @@ module Aws::LookoutMetrics
     AnomalyGroupTimeSeriesFeedback = Shapes::StructureShape.new(name: 'AnomalyGroupTimeSeriesFeedback')
     AppFlowConfig = Shapes::StructureShape.new(name: 'AppFlowConfig')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
+    AutoDetectionMetricSource = Shapes::StructureShape.new(name: 'AutoDetectionMetricSource')
+    AutoDetectionS3SourceConfig = Shapes::StructureShape.new(name: 'AutoDetectionS3SourceConfig')
     BackTestAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'BackTestAnomalyDetectorRequest')
     BackTestAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'BackTestAnomalyDetectorResponse')
+    BinaryAttributeValue = Shapes::StringShape.new(name: 'BinaryAttributeValue')
+    BinaryListAttributeValue = Shapes::ListShape.new(name: 'BinaryListAttributeValue')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CSVFileCompression = Shapes::StringShape.new(name: 'CSVFileCompression')
     Charset = Shapes::StringShape.new(name: 'Charset')
     CloudWatchConfig = Shapes::StructureShape.new(name: 'CloudWatchConfig')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    Confidence = Shapes::StringShape.new(name: 'Confidence')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContributionMatrix = Shapes::StructureShape.new(name: 'ContributionMatrix')
     CreateAlertRequest = Shapes::StructureShape.new(name: 'CreateAlertRequest')
@@ -78,6 +84,15 @@ module Aws::LookoutMetrics
     DescribeAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'DescribeAnomalyDetectorResponse')
     DescribeMetricSetRequest = Shapes::StructureShape.new(name: 'DescribeMetricSetRequest')
     DescribeMetricSetResponse = Shapes::StructureShape.new(name: 'DescribeMetricSetResponse')
+    DetectMetricSetConfigRequest = Shapes::StructureShape.new(name: 'DetectMetricSetConfigRequest')
+    DetectMetricSetConfigResponse = Shapes::StructureShape.new(name: 'DetectMetricSetConfigResponse')
+    DetectedCsvFormatDescriptor = Shapes::StructureShape.new(name: 'DetectedCsvFormatDescriptor')
+    DetectedField = Shapes::StructureShape.new(name: 'DetectedField')
+    DetectedFileFormatDescriptor = Shapes::StructureShape.new(name: 'DetectedFileFormatDescriptor')
+    DetectedJsonFormatDescriptor = Shapes::StructureShape.new(name: 'DetectedJsonFormatDescriptor')
+    DetectedMetricSetConfig = Shapes::StructureShape.new(name: 'DetectedMetricSetConfig')
+    DetectedMetricSource = Shapes::StructureShape.new(name: 'DetectedMetricSource')
+    DetectedS3SourceConfig = Shapes::StructureShape.new(name: 'DetectedS3SourceConfig')
     DimensionContribution = Shapes::StructureShape.new(name: 'DimensionContribution')
     DimensionContributionList = Shapes::ListShape.new(name: 'DimensionContributionList')
     DimensionList = Shapes::ListShape.new(name: 'DimensionList')
@@ -145,6 +160,8 @@ module Aws::LookoutMetrics
     MetricValueList = Shapes::ListShape.new(name: 'MetricValueList')
     Namespace = Shapes::StringShape.new(name: 'Namespace')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NumberAttributeValue = Shapes::StringShape.new(name: 'NumberAttributeValue')
+    NumberListAttributeValue = Shapes::ListShape.new(name: 'NumberListAttributeValue')
     Offset = Shapes::IntegerShape.new(name: 'Offset')
     PoirotSecretManagerArn = Shapes::StringShape.new(name: 'PoirotSecretManagerArn')
     PutFeedbackRequest = Shapes::StructureShape.new(name: 'PutFeedbackRequest')
@@ -172,6 +189,8 @@ module Aws::LookoutMetrics
     SensitivityThreshold = Shapes::IntegerShape.new(name: 'SensitivityThreshold')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StringAttributeValue = Shapes::StringShape.new(name: 'StringAttributeValue')
+    StringListAttributeValue = Shapes::ListShape.new(name: 'StringListAttributeValue')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
     TableName = Shapes::StringShape.new(name: 'TableName')
@@ -296,10 +315,27 @@ module Aws::LookoutMetrics
     AppFlowConfig.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, location_name: "FlowName"))
     AppFlowConfig.struct_class = Types::AppFlowConfig
 
+    AttributeValue.add_member(:s, Shapes::ShapeRef.new(shape: StringAttributeValue, location_name: "S"))
+    AttributeValue.add_member(:n, Shapes::ShapeRef.new(shape: NumberAttributeValue, location_name: "N"))
+    AttributeValue.add_member(:b, Shapes::ShapeRef.new(shape: BinaryAttributeValue, location_name: "B"))
+    AttributeValue.add_member(:ss, Shapes::ShapeRef.new(shape: StringListAttributeValue, location_name: "SS"))
+    AttributeValue.add_member(:ns, Shapes::ShapeRef.new(shape: NumberListAttributeValue, location_name: "NS"))
+    AttributeValue.add_member(:bs, Shapes::ShapeRef.new(shape: BinaryListAttributeValue, location_name: "BS"))
+    AttributeValue.struct_class = Types::AttributeValue
+
+    AutoDetectionMetricSource.add_member(:s3_source_config, Shapes::ShapeRef.new(shape: AutoDetectionS3SourceConfig, location_name: "S3SourceConfig"))
+    AutoDetectionMetricSource.struct_class = Types::AutoDetectionMetricSource
+
+    AutoDetectionS3SourceConfig.add_member(:templated_path_list, Shapes::ShapeRef.new(shape: TemplatedPathList, location_name: "TemplatedPathList"))
+    AutoDetectionS3SourceConfig.add_member(:historical_data_path_list, Shapes::ShapeRef.new(shape: HistoricalDataPathList, location_name: "HistoricalDataPathList"))
+    AutoDetectionS3SourceConfig.struct_class = Types::AutoDetectionS3SourceConfig
+
     BackTestAnomalyDetectorRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     BackTestAnomalyDetectorRequest.struct_class = Types::BackTestAnomalyDetectorRequest
 
     BackTestAnomalyDetectorResponse.struct_class = Types::BackTestAnomalyDetectorResponse
+
+    BinaryListAttributeValue.member = Shapes::ShapeRef.new(shape: BinaryAttributeValue)
 
     CloudWatchConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
     CloudWatchConfig.struct_class = Types::CloudWatchConfig
@@ -420,6 +456,45 @@ module Aws::LookoutMetrics
     DescribeMetricSetResponse.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone"))
     DescribeMetricSetResponse.add_member(:metric_source, Shapes::ShapeRef.new(shape: MetricSource, location_name: "MetricSource"))
     DescribeMetricSetResponse.struct_class = Types::DescribeMetricSetResponse
+
+    DetectMetricSetConfigRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
+    DetectMetricSetConfigRequest.add_member(:auto_detection_metric_source, Shapes::ShapeRef.new(shape: AutoDetectionMetricSource, required: true, location_name: "AutoDetectionMetricSource"))
+    DetectMetricSetConfigRequest.struct_class = Types::DetectMetricSetConfigRequest
+
+    DetectMetricSetConfigResponse.add_member(:detected_metric_set_config, Shapes::ShapeRef.new(shape: DetectedMetricSetConfig, location_name: "DetectedMetricSetConfig"))
+    DetectMetricSetConfigResponse.struct_class = Types::DetectMetricSetConfigResponse
+
+    DetectedCsvFormatDescriptor.add_member(:file_compression, Shapes::ShapeRef.new(shape: DetectedField, location_name: "FileCompression"))
+    DetectedCsvFormatDescriptor.add_member(:charset, Shapes::ShapeRef.new(shape: DetectedField, location_name: "Charset"))
+    DetectedCsvFormatDescriptor.add_member(:contains_header, Shapes::ShapeRef.new(shape: DetectedField, location_name: "ContainsHeader"))
+    DetectedCsvFormatDescriptor.add_member(:delimiter, Shapes::ShapeRef.new(shape: DetectedField, location_name: "Delimiter"))
+    DetectedCsvFormatDescriptor.add_member(:header_list, Shapes::ShapeRef.new(shape: DetectedField, location_name: "HeaderList"))
+    DetectedCsvFormatDescriptor.add_member(:quote_symbol, Shapes::ShapeRef.new(shape: DetectedField, location_name: "QuoteSymbol"))
+    DetectedCsvFormatDescriptor.struct_class = Types::DetectedCsvFormatDescriptor
+
+    DetectedField.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "Value"))
+    DetectedField.add_member(:confidence, Shapes::ShapeRef.new(shape: Confidence, location_name: "Confidence"))
+    DetectedField.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
+    DetectedField.struct_class = Types::DetectedField
+
+    DetectedFileFormatDescriptor.add_member(:csv_format_descriptor, Shapes::ShapeRef.new(shape: DetectedCsvFormatDescriptor, location_name: "CsvFormatDescriptor"))
+    DetectedFileFormatDescriptor.add_member(:json_format_descriptor, Shapes::ShapeRef.new(shape: DetectedJsonFormatDescriptor, location_name: "JsonFormatDescriptor"))
+    DetectedFileFormatDescriptor.struct_class = Types::DetectedFileFormatDescriptor
+
+    DetectedJsonFormatDescriptor.add_member(:file_compression, Shapes::ShapeRef.new(shape: DetectedField, location_name: "FileCompression"))
+    DetectedJsonFormatDescriptor.add_member(:charset, Shapes::ShapeRef.new(shape: DetectedField, location_name: "Charset"))
+    DetectedJsonFormatDescriptor.struct_class = Types::DetectedJsonFormatDescriptor
+
+    DetectedMetricSetConfig.add_member(:offset, Shapes::ShapeRef.new(shape: DetectedField, location_name: "Offset"))
+    DetectedMetricSetConfig.add_member(:metric_set_frequency, Shapes::ShapeRef.new(shape: DetectedField, location_name: "MetricSetFrequency"))
+    DetectedMetricSetConfig.add_member(:metric_source, Shapes::ShapeRef.new(shape: DetectedMetricSource, location_name: "MetricSource"))
+    DetectedMetricSetConfig.struct_class = Types::DetectedMetricSetConfig
+
+    DetectedMetricSource.add_member(:s3_source_config, Shapes::ShapeRef.new(shape: DetectedS3SourceConfig, location_name: "S3SourceConfig"))
+    DetectedMetricSource.struct_class = Types::DetectedMetricSource
+
+    DetectedS3SourceConfig.add_member(:file_format_descriptor, Shapes::ShapeRef.new(shape: DetectedFileFormatDescriptor, location_name: "FileFormatDescriptor"))
+    DetectedS3SourceConfig.struct_class = Types::DetectedS3SourceConfig
 
     DimensionContribution.add_member(:dimension_name, Shapes::ShapeRef.new(shape: ColumnName, location_name: "DimensionName"))
     DimensionContribution.add_member(:dimension_value_contribution_list, Shapes::ShapeRef.new(shape: DimensionValueContributionList, location_name: "DimensionValueContributionList"))
@@ -609,6 +684,8 @@ module Aws::LookoutMetrics
 
     MetricValueList.member = Shapes::ShapeRef.new(shape: MetricValue)
 
+    NumberListAttributeValue.member = Shapes::ShapeRef.new(shape: NumberAttributeValue)
+
     PutFeedbackRequest.add_member(:anomaly_detector_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "AnomalyDetectorArn"))
     PutFeedbackRequest.add_member(:anomaly_group_time_series_feedback, Shapes::ShapeRef.new(shape: AnomalyGroupTimeSeriesFeedback, required: true, location_name: "AnomalyGroupTimeSeriesFeedback"))
     PutFeedbackRequest.struct_class = Types::PutFeedbackRequest
@@ -668,6 +745,8 @@ module Aws::LookoutMetrics
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: QuotaCode, location_name: "QuotaCode"))
     ServiceQuotaExceededException.add_member(:service_code, Shapes::ShapeRef.new(shape: ServiceCode, location_name: "ServiceCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    StringListAttributeValue.member = Shapes::ShapeRef.new(shape: StringAttributeValue)
 
     SubnetIdList.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -937,6 +1016,19 @@ module Aws::LookoutMetrics
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:detect_metric_set_config, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DetectMetricSetConfig"
+        o.http_method = "POST"
+        o.http_request_uri = "/DetectMetricSetConfig"
+        o.input = Shapes::ShapeRef.new(shape: DetectMetricSetConfigRequest)
+        o.output = Shapes::ShapeRef.new(shape: DetectMetricSetConfigResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:get_anomaly_group, Seahorse::Model::Operation.new.tap do |o|

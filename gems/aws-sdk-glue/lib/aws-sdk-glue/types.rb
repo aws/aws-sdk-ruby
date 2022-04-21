@@ -597,6 +597,39 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchGetCustomEntityTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         names: ["NameString"], # required
+    #       }
+    #
+    # @!attribute [rw] names
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypesRequest AWS API Documentation
+    #
+    class BatchGetCustomEntityTypesRequest < Struct.new(
+      :names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_entity_types
+    #   @return [Array<Types::CustomEntityType>]
+    #
+    # @!attribute [rw] custom_entity_types_not_found
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypesResponse AWS API Documentation
+    #
+    class BatchGetCustomEntityTypesResponse < Struct.new(
+      :custom_entity_types,
+      :custom_entity_types_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BatchGetDevEndpointsRequest
     #   data as a hash:
     #
@@ -3301,6 +3334,45 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateCustomEntityTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #         regex_string: "NameString", # required
+    #         context_words: ["NameString"],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_string
+    #   @return [String]
+    #
+    # @!attribute [rw] context_words
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeRequest AWS API Documentation
+    #
+    class CreateCustomEntityTypeRequest < Struct.new(
+      :name,
+      :regex_string,
+      :context_words)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeResponse AWS API Documentation
+    #
+    class CreateCustomEntityTypeResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateDatabaseRequest
     #   data as a hash:
     #
@@ -5352,6 +5424,25 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_string
+    #   @return [String]
+    #
+    # @!attribute [rw] context_words
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CustomEntityType AWS API Documentation
+    #
+    class CustomEntityType < Struct.new(
+      :name,
+      :regex_string,
+      :context_words)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains configuration information for maintaining Data Catalog
     # security.
     #
@@ -5871,6 +5962,35 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCrawlerResponse AWS API Documentation
     #
     class DeleteCrawlerResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteCustomEntityTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityTypeRequest AWS API Documentation
+    #
+    class DeleteCustomEntityTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityTypeResponse AWS API Documentation
+    #
+    class DeleteCustomEntityTypeResponse < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass DeleteDatabaseRequest
     #   data as a hash:
@@ -7912,6 +8032,43 @@ module Aws::Glue
     class GetCrawlersResponse < Struct.new(
       :crawlers,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetCustomEntityTypeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NameString", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityTypeRequest AWS API Documentation
+    #
+    class GetCustomEntityTypeRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   @return [String]
+    #
+    # @!attribute [rw] regex_string
+    #   @return [String]
+    #
+    # @!attribute [rw] context_words
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityTypeResponse AWS API Documentation
+    #
+    class GetCustomEntityTypeResponse < Struct.new(
+      :name,
+      :regex_string,
+      :context_words)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12145,6 +12302,44 @@ module Aws::Glue
     #
     class ListCrawlersResponse < Struct.new(
       :crawler_names,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListCustomEntityTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "PaginationToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypesRequest AWS API Documentation
+    #
+    class ListCustomEntityTypesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] custom_entity_types
+    #   @return [Array<Types::CustomEntityType>]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypesResponse AWS API Documentation
+    #
+    class ListCustomEntityTypesResponse < Struct.new(
+      :custom_entity_types,
       :next_token)
       SENSITIVE = []
       include Aws::Structure

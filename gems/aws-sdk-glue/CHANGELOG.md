@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2022-04-21)
+------------------
+
+* Feature - This release adds APIs to create, read, delete, list, and batch read of Glue custom entity types
+
 1.109.0 (2022-04-14)
 ------------------
 

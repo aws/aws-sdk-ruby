@@ -465,6 +465,96 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # An attribute value.
+    #
+    # @!attribute [rw] s
+    #   A string.
+    #   @return [String]
+    #
+    # @!attribute [rw] n
+    #   A number.
+    #   @return [String]
+    #
+    # @!attribute [rw] b
+    #   A binary value.
+    #   @return [String]
+    #
+    # @!attribute [rw] ss
+    #   A list of strings.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ns
+    #   A list of numbers.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bs
+    #   A list of binary values.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AttributeValue AWS API Documentation
+    #
+    class AttributeValue < Struct.new(
+      :s,
+      :n,
+      :b,
+      :ss,
+      :ns,
+      :bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An auto detection metric source.
+    #
+    # @note When making an API call, you may pass AutoDetectionMetricSource
+    #   data as a hash:
+    #
+    #       {
+    #         s3_source_config: {
+    #           templated_path_list: ["TemplatedPath"],
+    #           historical_data_path_list: ["HistoricalDataPath"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] s3_source_config
+    #   The source's source config.
+    #   @return [Types::AutoDetectionS3SourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AutoDetectionMetricSource AWS API Documentation
+    #
+    class AutoDetectionMetricSource < Struct.new(
+      :s3_source_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An auto detection source config.
+    #
+    # @note When making an API call, you may pass AutoDetectionS3SourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         templated_path_list: ["TemplatedPath"],
+    #         historical_data_path_list: ["HistoricalDataPath"],
+    #       }
+    #
+    # @!attribute [rw] templated_path_list
+    #   The config's templated path list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] historical_data_path_list
+    #   The config's historical data path list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AutoDetectionS3SourceConfig AWS API Documentation
+    #
+    class AutoDetectionS3SourceConfig < Struct.new(
+      :templated_path_list,
+      :historical_data_path_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass BackTestAnomalyDetectorRequest
     #   data as a hash:
     #
@@ -1223,6 +1313,201 @@ module Aws::LookoutMetrics
       :metric_set_frequency,
       :timezone,
       :metric_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DetectMetricSetConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         anomaly_detector_arn: "Arn", # required
+    #         auto_detection_metric_source: { # required
+    #           s3_source_config: {
+    #             templated_path_list: ["TemplatedPath"],
+    #             historical_data_path_list: ["HistoricalDataPath"],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] anomaly_detector_arn
+    #   An anomaly detector ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_detection_metric_source
+    #   A data source.
+    #   @return [Types::AutoDetectionMetricSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectMetricSetConfigRequest AWS API Documentation
+    #
+    class DetectMetricSetConfigRequest < Struct.new(
+      :anomaly_detector_arn,
+      :auto_detection_metric_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] detected_metric_set_config
+    #   The inferred dataset configuration for the datasource.
+    #   @return [Types::DetectedMetricSetConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectMetricSetConfigResponse AWS API Documentation
+    #
+    class DetectMetricSetConfigResponse < Struct.new(
+      :detected_metric_set_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of an inferred CSV format.
+    #
+    # @!attribute [rw] file_compression
+    #   The format's file compression.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] charset
+    #   The format's charset.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] contains_header
+    #   Whether the format includes a header.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] delimiter
+    #   The format's delimiter.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] header_list
+    #   The format's header list.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] quote_symbol
+    #   The format's quote symbol.
+    #   @return [Types::DetectedField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedCsvFormatDescriptor AWS API Documentation
+    #
+    class DetectedCsvFormatDescriptor < Struct.new(
+      :file_compression,
+      :charset,
+      :contains_header,
+      :delimiter,
+      :header_list,
+      :quote_symbol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred field.
+    #
+    # @!attribute [rw] value
+    #   The field's value.
+    #   @return [Types::AttributeValue]
+    #
+    # @!attribute [rw] confidence
+    #   The field's confidence.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The field's message.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedField AWS API Documentation
+    #
+    class DetectedField < Struct.new(
+      :value,
+      :confidence,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Properties of an inferred data format.
+    #
+    # @!attribute [rw] csv_format_descriptor
+    #   Details about a CSV format.
+    #   @return [Types::DetectedCsvFormatDescriptor]
+    #
+    # @!attribute [rw] json_format_descriptor
+    #   Details about a JSON format.
+    #   @return [Types::DetectedJsonFormatDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedFileFormatDescriptor AWS API Documentation
+    #
+    class DetectedFileFormatDescriptor < Struct.new(
+      :csv_format_descriptor,
+      :json_format_descriptor)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A detected JSON format descriptor.
+    #
+    # @!attribute [rw] file_compression
+    #   The format's file compression.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] charset
+    #   The format's character set.
+    #   @return [Types::DetectedField]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedJsonFormatDescriptor AWS API Documentation
+    #
+    class DetectedJsonFormatDescriptor < Struct.new(
+      :file_compression,
+      :charset)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred dataset configuration.
+    #
+    # @!attribute [rw] offset
+    #   The dataset's offset.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] metric_set_frequency
+    #   The dataset's interval.
+    #   @return [Types::DetectedField]
+    #
+    # @!attribute [rw] metric_source
+    #   The dataset's data source.
+    #   @return [Types::DetectedMetricSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedMetricSetConfig AWS API Documentation
+    #
+    class DetectedMetricSetConfig < Struct.new(
+      :offset,
+      :metric_set_frequency,
+      :metric_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred data source.
+    #
+    # @!attribute [rw] s3_source_config
+    #   The data source's source configuration.
+    #   @return [Types::DetectedS3SourceConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedMetricSource AWS API Documentation
+    #
+    class DetectedMetricSource < Struct.new(
+      :s3_source_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An inferred source configuration.
+    #
+    # @!attribute [rw] file_format_descriptor
+    #   The source's file format descriptor.
+    #   @return [Types::DetectedFileFormatDescriptor]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DetectedS3SourceConfig AWS API Documentation
+    #
+    class DetectedS3SourceConfig < Struct.new(
+      :file_format_descriptor)
       SENSITIVE = []
       include Aws::Structure
     end

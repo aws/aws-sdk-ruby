@@ -45,6 +45,8 @@ module Aws::Glue
     BatchGetBlueprintsResponse = Shapes::StructureShape.new(name: 'BatchGetBlueprintsResponse')
     BatchGetCrawlersRequest = Shapes::StructureShape.new(name: 'BatchGetCrawlersRequest')
     BatchGetCrawlersResponse = Shapes::StructureShape.new(name: 'BatchGetCrawlersResponse')
+    BatchGetCustomEntityTypesRequest = Shapes::StructureShape.new(name: 'BatchGetCustomEntityTypesRequest')
+    BatchGetCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'BatchGetCustomEntityTypesResponse')
     BatchGetDevEndpointsRequest = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsRequest')
     BatchGetDevEndpointsResponse = Shapes::StructureShape.new(name: 'BatchGetDevEndpointsResponse')
     BatchGetJobsRequest = Shapes::StructureShape.new(name: 'BatchGetJobsRequest')
@@ -154,6 +156,7 @@ module Aws::Glue
     ConnectionPropertyKey = Shapes::StringShape.new(name: 'ConnectionPropertyKey')
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConnectionsList = Shapes::StructureShape.new(name: 'ConnectionsList')
+    ContextWords = Shapes::ListShape.new(name: 'ContextWords')
     Crawl = Shapes::StructureShape.new(name: 'Crawl')
     CrawlList = Shapes::ListShape.new(name: 'CrawlList')
     CrawlState = Shapes::StringShape.new(name: 'CrawlState')
@@ -180,6 +183,8 @@ module Aws::Glue
     CreateCrawlerRequest = Shapes::StructureShape.new(name: 'CreateCrawlerRequest')
     CreateCrawlerResponse = Shapes::StructureShape.new(name: 'CreateCrawlerResponse')
     CreateCsvClassifierRequest = Shapes::StructureShape.new(name: 'CreateCsvClassifierRequest')
+    CreateCustomEntityTypeRequest = Shapes::StructureShape.new(name: 'CreateCustomEntityTypeRequest')
+    CreateCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'CreateCustomEntityTypeResponse')
     CreateDatabaseRequest = Shapes::StructureShape.new(name: 'CreateDatabaseRequest')
     CreateDatabaseResponse = Shapes::StructureShape.new(name: 'CreateDatabaseResponse')
     CreateDevEndpointRequest = Shapes::StructureShape.new(name: 'CreateDevEndpointRequest')
@@ -220,6 +225,9 @@ module Aws::Glue
     CsvHeader = Shapes::ListShape.new(name: 'CsvHeader')
     CsvHeaderOption = Shapes::StringShape.new(name: 'CsvHeaderOption')
     CsvQuoteSymbol = Shapes::StringShape.new(name: 'CsvQuoteSymbol')
+    CustomEntityType = Shapes::StructureShape.new(name: 'CustomEntityType')
+    CustomEntityTypeNames = Shapes::ListShape.new(name: 'CustomEntityTypeNames')
+    CustomEntityTypes = Shapes::ListShape.new(name: 'CustomEntityTypes')
     CustomPatterns = Shapes::StringShape.new(name: 'CustomPatterns')
     DagEdges = Shapes::ListShape.new(name: 'DagEdges')
     DagNodes = Shapes::ListShape.new(name: 'DagNodes')
@@ -249,6 +257,8 @@ module Aws::Glue
     DeleteConnectionResponse = Shapes::StructureShape.new(name: 'DeleteConnectionResponse')
     DeleteCrawlerRequest = Shapes::StructureShape.new(name: 'DeleteCrawlerRequest')
     DeleteCrawlerResponse = Shapes::StructureShape.new(name: 'DeleteCrawlerResponse')
+    DeleteCustomEntityTypeRequest = Shapes::StructureShape.new(name: 'DeleteCustomEntityTypeRequest')
+    DeleteCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'DeleteCustomEntityTypeResponse')
     DeleteDatabaseRequest = Shapes::StructureShape.new(name: 'DeleteDatabaseRequest')
     DeleteDatabaseResponse = Shapes::StructureShape.new(name: 'DeleteDatabaseResponse')
     DeleteDevEndpointRequest = Shapes::StructureShape.new(name: 'DeleteDevEndpointRequest')
@@ -354,6 +364,8 @@ module Aws::Glue
     GetCrawlerResponse = Shapes::StructureShape.new(name: 'GetCrawlerResponse')
     GetCrawlersRequest = Shapes::StructureShape.new(name: 'GetCrawlersRequest')
     GetCrawlersResponse = Shapes::StructureShape.new(name: 'GetCrawlersResponse')
+    GetCustomEntityTypeRequest = Shapes::StructureShape.new(name: 'GetCustomEntityTypeRequest')
+    GetCustomEntityTypeResponse = Shapes::StructureShape.new(name: 'GetCustomEntityTypeResponse')
     GetDataCatalogEncryptionSettingsRequest = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsRequest')
     GetDataCatalogEncryptionSettingsResponse = Shapes::StructureShape.new(name: 'GetDataCatalogEncryptionSettingsResponse')
     GetDatabaseRequest = Shapes::StructureShape.new(name: 'GetDatabaseRequest')
@@ -510,6 +522,8 @@ module Aws::Glue
     ListBlueprintsResponse = Shapes::StructureShape.new(name: 'ListBlueprintsResponse')
     ListCrawlersRequest = Shapes::StructureShape.new(name: 'ListCrawlersRequest')
     ListCrawlersResponse = Shapes::StructureShape.new(name: 'ListCrawlersResponse')
+    ListCustomEntityTypesRequest = Shapes::StructureShape.new(name: 'ListCustomEntityTypesRequest')
+    ListCustomEntityTypesResponse = Shapes::StructureShape.new(name: 'ListCustomEntityTypesResponse')
     ListDevEndpointsRequest = Shapes::StructureShape.new(name: 'ListDevEndpointsRequest')
     ListDevEndpointsResponse = Shapes::StructureShape.new(name: 'ListDevEndpointsResponse')
     ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
@@ -984,6 +998,13 @@ module Aws::Glue
     BatchGetCrawlersResponse.add_member(:crawlers_not_found, Shapes::ShapeRef.new(shape: CrawlerNameList, location_name: "CrawlersNotFound"))
     BatchGetCrawlersResponse.struct_class = Types::BatchGetCrawlersResponse
 
+    BatchGetCustomEntityTypesRequest.add_member(:names, Shapes::ShapeRef.new(shape: CustomEntityTypeNames, required: true, location_name: "Names"))
+    BatchGetCustomEntityTypesRequest.struct_class = Types::BatchGetCustomEntityTypesRequest
+
+    BatchGetCustomEntityTypesResponse.add_member(:custom_entity_types, Shapes::ShapeRef.new(shape: CustomEntityTypes, location_name: "CustomEntityTypes"))
+    BatchGetCustomEntityTypesResponse.add_member(:custom_entity_types_not_found, Shapes::ShapeRef.new(shape: CustomEntityTypeNames, location_name: "CustomEntityTypesNotFound"))
+    BatchGetCustomEntityTypesResponse.struct_class = Types::BatchGetCustomEntityTypesResponse
+
     BatchGetDevEndpointsRequest.add_member(:dev_endpoint_names, Shapes::ShapeRef.new(shape: DevEndpointNames, required: true, location_name: "DevEndpointNames"))
     BatchGetDevEndpointsRequest.struct_class = Types::BatchGetDevEndpointsRequest
 
@@ -1301,6 +1322,8 @@ module Aws::Glue
     ConnectionsList.add_member(:connections, Shapes::ShapeRef.new(shape: OrchestrationStringList, location_name: "Connections"))
     ConnectionsList.struct_class = Types::ConnectionsList
 
+    ContextWords.member = Shapes::ShapeRef.new(shape: NameString)
+
     Crawl.add_member(:state, Shapes::ShapeRef.new(shape: CrawlState, location_name: "State"))
     Crawl.add_member(:started_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "StartedOn"))
     Crawl.add_member(:completed_on, Shapes::ShapeRef.new(shape: TimestampValue, location_name: "CompletedOn"))
@@ -1420,6 +1443,14 @@ module Aws::Glue
     CreateCsvClassifierRequest.add_member(:disable_value_trimming, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "DisableValueTrimming"))
     CreateCsvClassifierRequest.add_member(:allow_single_column, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "AllowSingleColumn"))
     CreateCsvClassifierRequest.struct_class = Types::CreateCsvClassifierRequest
+
+    CreateCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CreateCustomEntityTypeRequest.add_member(:regex_string, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "RegexString"))
+    CreateCustomEntityTypeRequest.add_member(:context_words, Shapes::ShapeRef.new(shape: ContextWords, location_name: "ContextWords"))
+    CreateCustomEntityTypeRequest.struct_class = Types::CreateCustomEntityTypeRequest
+
+    CreateCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    CreateCustomEntityTypeResponse.struct_class = Types::CreateCustomEntityTypeResponse
 
     CreateDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     CreateDatabaseRequest.add_member(:database_input, Shapes::ShapeRef.new(shape: DatabaseInput, required: true, location_name: "DatabaseInput"))
@@ -1666,6 +1697,15 @@ module Aws::Glue
 
     CsvHeader.member = Shapes::ShapeRef.new(shape: NameString)
 
+    CustomEntityType.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    CustomEntityType.add_member(:regex_string, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "RegexString"))
+    CustomEntityType.add_member(:context_words, Shapes::ShapeRef.new(shape: ContextWords, location_name: "ContextWords"))
+    CustomEntityType.struct_class = Types::CustomEntityType
+
+    CustomEntityTypeNames.member = Shapes::ShapeRef.new(shape: NameString)
+
+    CustomEntityTypes.member = Shapes::ShapeRef.new(shape: CustomEntityType)
+
     DagEdges.member = Shapes::ShapeRef.new(shape: CodeGenEdge)
 
     DagNodes.member = Shapes::ShapeRef.new(shape: CodeGenNode)
@@ -1757,6 +1797,12 @@ module Aws::Glue
     DeleteCrawlerRequest.struct_class = Types::DeleteCrawlerRequest
 
     DeleteCrawlerResponse.struct_class = Types::DeleteCrawlerResponse
+
+    DeleteCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    DeleteCustomEntityTypeRequest.struct_class = Types::DeleteCustomEntityTypeRequest
+
+    DeleteCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    DeleteCustomEntityTypeResponse.struct_class = Types::DeleteCustomEntityTypeResponse
 
     DeleteDatabaseRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     DeleteDatabaseRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
@@ -2107,6 +2153,14 @@ module Aws::Glue
     GetCrawlersResponse.add_member(:crawlers, Shapes::ShapeRef.new(shape: CrawlerList, location_name: "Crawlers"))
     GetCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     GetCrawlersResponse.struct_class = Types::GetCrawlersResponse
+
+    GetCustomEntityTypeRequest.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
+    GetCustomEntityTypeRequest.struct_class = Types::GetCustomEntityTypeRequest
+
+    GetCustomEntityTypeResponse.add_member(:name, Shapes::ShapeRef.new(shape: NameString, location_name: "Name"))
+    GetCustomEntityTypeResponse.add_member(:regex_string, Shapes::ShapeRef.new(shape: NameString, location_name: "RegexString"))
+    GetCustomEntityTypeResponse.add_member(:context_words, Shapes::ShapeRef.new(shape: ContextWords, location_name: "ContextWords"))
+    GetCustomEntityTypeResponse.struct_class = Types::GetCustomEntityTypeResponse
 
     GetDataCatalogEncryptionSettingsRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     GetDataCatalogEncryptionSettingsRequest.struct_class = Types::GetDataCatalogEncryptionSettingsRequest
@@ -2788,6 +2842,14 @@ module Aws::Glue
     ListCrawlersResponse.add_member(:crawler_names, Shapes::ShapeRef.new(shape: CrawlerNameList, location_name: "CrawlerNames"))
     ListCrawlersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
     ListCrawlersResponse.struct_class = Types::ListCrawlersResponse
+
+    ListCustomEntityTypesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCustomEntityTypesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
+    ListCustomEntityTypesRequest.struct_class = Types::ListCustomEntityTypesRequest
+
+    ListCustomEntityTypesResponse.add_member(:custom_entity_types, Shapes::ShapeRef.new(shape: CustomEntityTypes, location_name: "CustomEntityTypes"))
+    ListCustomEntityTypesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+    ListCustomEntityTypesResponse.struct_class = Types::ListCustomEntityTypesResponse
 
     ListDevEndpointsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     ListDevEndpointsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
@@ -4064,6 +4126,17 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
+      api.add_operation(:batch_get_custom_entity_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCustomEntityTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCustomEntityTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCustomEntityTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
       api.add_operation(:batch_get_dev_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetDevEndpoints"
         o.http_method = "POST"
@@ -4229,6 +4302,21 @@ module Aws::Glue
         o.output = Shapes::ShapeRef.new(shape: CreateCrawlerResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+      end)
+
+      api.add_operation(:create_custom_entity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCustomEntityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateCustomEntityTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateCustomEntityTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
       end)
@@ -4521,6 +4609,19 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: CrawlerRunningException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerTransitioningException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:delete_custom_entity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteCustomEntityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteCustomEntityTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteCustomEntityTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
@@ -4905,6 +5006,19 @@ module Aws::Glue
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_custom_entity_type, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCustomEntityType"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCustomEntityTypeRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCustomEntityTypeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
       end)
 
       api.add_operation(:get_data_catalog_encryption_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -5620,6 +5734,23 @@ module Aws::Glue
         o.input = Shapes::ShapeRef.new(shape: ListCrawlersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListCrawlersResponse)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_custom_entity_types, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCustomEntityTypes"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListCustomEntityTypesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCustomEntityTypesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
