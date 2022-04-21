@@ -49,7 +49,7 @@ module Aws
       options.each_pair do |key, value|
         if self.class.assume_role_options.include?(key)
           @assume_role_params[key] = value
-        else
+        elsif !CLIENT_EXCLUDE_OPTIONS.include?(key)
           client_opts[key] = value
         end
       end

@@ -83,9 +83,13 @@ module Aws
       # validate we can read the token file
       read_cached_token
 
-      options[:region] = @sso_region
-      options[:credentials] = nil
-      @client = options[:client] || Aws::SSO::Client.new(options)
+
+      client_opts = {}
+      options.each_pair { |k,v| client_opts[k] = v unless CLIENT_EXCLUDE_OPTIONS.include?(k) }
+      client_opts[:region] = @sso_region
+      client_opts[:credentials] = nil
+
+      @client = options[:client] || Aws::SSO::Client.new(client_opts)
       @async_refresh = true
       super
     end

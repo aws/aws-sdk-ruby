@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Don't pass `:before_refresh` to Client constructors in RefreshingCredential implementations (#2690).
+
 3.130.1 (2022-04-12)
 ------------------
 

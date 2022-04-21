@@ -50,11 +50,23 @@ module Aws
       allow(client).to receive(:assume_role_with_web_identity).and_return(resp)
     end
 
-    it 'contructs a default client when not given' do
+    it 'constructs a default client when not given' do
       creds = AssumeRoleWebIdentityCredentials.new(
         role_arn: 'arn',
         web_identity_token_file: token_file_path,
         role_session_name: "session-name"
+      )
+      expect(creds.client).to be(client)
+    end
+
+    it 'excludes before_refresh from client construction' do
+      expect(STS::Client).to receive(:new).with({credentials: false}).and_return(client)
+
+      creds = AssumeRoleWebIdentityCredentials.new(
+        role_arn: 'arn',
+        web_identity_token_file: token_file_path,
+        role_session_name: "session-name",
+        before_refresh: proc { }
       )
       expect(creds.client).to be(client)
     end

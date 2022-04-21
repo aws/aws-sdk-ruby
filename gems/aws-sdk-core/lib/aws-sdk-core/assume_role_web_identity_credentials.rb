@@ -52,7 +52,7 @@ module Aws
       options.each_pair do |key, value|
         if self.class.assume_role_web_identity_options.include?(key)
           @assume_role_web_identity_params[key] = value
-        else
+        elsif !CLIENT_EXCLUDE_OPTIONS.include?(key)
           client_opts[key] = value
         end
       end
@@ -100,11 +100,10 @@ module Aws
       # @api private
       def assume_role_web_identity_options
         @arwio ||= begin
-          input = STS::Client.api.operation(:assume_role_with_web_identity).input
+          input = Aws::STS::Client.api.operation(:assume_role_with_web_identity).input
           Set.new(input.shape.member_names)
         end
       end
-
     end
   end
 end
