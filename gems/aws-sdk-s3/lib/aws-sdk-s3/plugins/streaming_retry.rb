@@ -36,11 +36,15 @@ module Aws
         def rewind; end
       end
 
-      class NonRetryableStreamingError < RuntimeError
-        def initialize(*args)
-          msg = 'Unable to retry request - retry could result in processing duplicated chunks.'
-          super(msg)
+      class NonRetryableStreamingError < StandardError
+
+        def initialize(error)
+          super('Unable to retry request - retry could result in processing duplicated chunks.')
+          set_backtrace(error.backtrace)
+          @original_error = error
         end
+
+        attr_reader :original_error
       end
 
       # This handler works with the ResponseTarget plugin to provide smart
@@ -100,7 +104,7 @@ module Aws
                     # call rewind on the underlying file
                     context.http_response.body.instance_variable_get(:@file).rewind
                   else
-                    raise NonRetryableStreamingError
+                    raise NonRetryableStreamingError, error
                   end
                 end
               end
