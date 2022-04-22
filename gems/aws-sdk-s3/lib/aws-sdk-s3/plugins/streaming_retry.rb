@@ -95,6 +95,7 @@ module Aws
             end
 
             context.http_response.on_error do |error|
+              puts context.http_response.body
               if retryable_body?(context)
                 if truncated_body?(error)
                   context.http_request.headers[:range] = "bytes=#{context.http_response.body.size}-"
