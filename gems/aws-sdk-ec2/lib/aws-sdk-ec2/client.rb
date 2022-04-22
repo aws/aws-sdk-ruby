@@ -21668,6 +21668,9 @@ module Aws::EC2
     #
     #   * `block-device-mapping.volume-id` - The volume ID of the EBS volume.
     #
+    #   * `capacity-reservation-id` - The ID of the Capacity Reservation into
+    #     which the instance was launched.
+    #
     #   * `client-token` - The idempotency token you provided when you
     #     launched the instance.
     #
@@ -23983,6 +23986,7 @@ module Aws::EC2
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
     #
     #   * nat_gateway_available
+    #   * nat_gateway_deleted
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeNatGateways AWS API Documentation
     #
@@ -28433,7 +28437,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -41074,12 +41078,11 @@ module Aws::EC2
     #   destinations.
     #
     # @option params [String] :private_dns_hostname_type_on_launch
-    #   The type of hostnames to assign to instances in the subnet at launch.
-    #   For IPv4 only subnets, an instance DNS name must be based on the
-    #   instance IPv4 address. For IPv6 only subnets, an instance DNS name
-    #   must be based on the instance ID. For dual-stack subnets, you can
-    #   specify whether DNS names use the instance IPv4 address or the
-    #   instance ID.
+    #   The type of hostname to assign to instances in the subnet at launch.
+    #   For IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance DNS
+    #   name can be based on the instance IPv4 address (ip-name) or the
+    #   instance ID (resource-name). For IPv6 only subnets, an instance DNS
+    #   name must be based on the instance ID (resource-name).
     #
     # @option params [Types::AttributeBooleanValue] :enable_resource_name_dns_a_record_on_launch
     #   Indicates whether to respond to DNS queries for instance hostnames
@@ -44971,9 +44974,15 @@ module Aws::EC2
     # For more information, see [Spot Fleet requests][1] in the *Amazon EC2
     # User Guide for Linux Instances*.
     #
+    # We strongly discourage using the RequestSpotFleet API because it is a
+    # legacy API with no planned investment. For options for requesting Spot
+    # Instances, see [Which is the best Spot request method to use?][2] in
+    # the *Amazon EC2 User Guide for Linux Instances*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-requests.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use
     #
     # @option params [Boolean] :dry_run
     #   Checks whether you have the required permissions for the action,
@@ -45434,9 +45443,15 @@ module Aws::EC2
     # For more information, see [Spot Instance requests][1] in the *Amazon
     # EC2 User Guide for Linux Instances*.
     #
+    # We strongly discourage using the RequestSpotInstances API because it
+    # is a legacy API with no planned investment. For options for requesting
+    # Spot Instances, see [Which is the best Spot request method to use?][2]
+    # in the *Amazon EC2 User Guide for Linux Instances*.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-best-practices.html#which-spot-request-method-to-use
     #
     # @option params [String] :availability_zone_group
     #   The user-specified name for a logical grouping of requests.
@@ -47296,7 +47311,7 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     security_groups: ["SecurityGroupName"],
     #     subnet_id: "SubnetId",
-    #     user_data: "String",
+    #     user_data: "RunInstancesUserData",
     #     additional_info: "String",
     #     client_token: "String",
     #     disable_api_termination: false,
@@ -49475,7 +49490,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.307.0'
+      context[:gem_version] = '1.308.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -49560,6 +49575,7 @@ module Aws::EC2
     # | internet_gateway_exists         | {Client#describe_internet_gateways}       | 5        | 6             |
     # | key_pair_exists                 | {Client#describe_key_pairs}               | 5        | 6             |
     # | nat_gateway_available           | {Client#describe_nat_gateways}            | 15       | 40            |
+    # | nat_gateway_deleted             | {Client#describe_nat_gateways}            | 15       | 40            |
     # | network_interface_available     | {Client#describe_network_interfaces}      | 20       | 10            |
     # | password_data_available         | {Client#get_password_data}                | 15       | 40            |
     # | security_group_exists           | {Client#describe_security_groups}         | 5        | 6             |
@@ -49643,6 +49659,7 @@ module Aws::EC2
         internet_gateway_exists: Waiters::InternetGatewayExists,
         key_pair_exists: Waiters::KeyPairExists,
         nat_gateway_available: Waiters::NatGatewayAvailable,
+        nat_gateway_deleted: Waiters::NatGatewayDeleted,
         network_interface_available: Waiters::NetworkInterfaceAvailable,
         password_data_available: Waiters::PasswordDataAvailable,
         security_group_exists: Waiters::SecurityGroupExists,

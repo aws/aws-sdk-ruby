@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.308.0 (2022-04-22)
+------------------
+
+* Feature - Adds support for waiters that automatically poll for a deleted NAT Gateway until it reaches the deleted state.
+
 1.307.0 (2022-04-14)
 ------------------
 

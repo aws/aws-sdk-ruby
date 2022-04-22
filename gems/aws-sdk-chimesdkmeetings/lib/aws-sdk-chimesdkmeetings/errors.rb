@@ -31,7 +31,9 @@ module Aws::ChimeSDKMeetings
   # * {ForbiddenException}
   # * {LimitExceededException}
   # * {NotFoundException}
+  # * {ServiceFailureException}
   # * {ServiceUnavailableException}
+  # * {ThrottlingException}
   # * {UnauthorizedException}
   # * {UnprocessableEntityException}
   #
@@ -141,6 +143,31 @@ module Aws::ChimeSDKMeetings
       end
     end
 
+    class ServiceFailureException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKMeetings::Types::ServiceFailureException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+    end
+
     class ServiceUnavailableException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -168,6 +195,31 @@ module Aws::ChimeSDKMeetings
       # @return [String]
       def retry_after_seconds
         @data[:retry_after_seconds]
+      end
+    end
+
+    class ThrottlingException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ChimeSDKMeetings::Types::ThrottlingException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
       end
     end
 

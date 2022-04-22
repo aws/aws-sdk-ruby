@@ -127,7 +127,7 @@ module Aws::EC2
     #     security_group_ids: ["SecurityGroupId"],
     #     security_groups: ["SecurityGroupName"],
     #     subnet_id: "SubnetId",
-    #     user_data: "String",
+    #     user_data: "RunInstancesUserData",
     #     additional_info: "String",
     #     client_token: "String",
     #     disable_api_termination: false,
@@ -2146,6 +2146,9 @@ module Aws::EC2
     #     (`attaching` \| `attached` \| `detaching` \| `detached`).
     #
     #   * `block-device-mapping.volume-id` - The volume ID of the EBS volume.
+    #
+    #   * `capacity-reservation-id` - The ID of the Capacity Reservation into
+    #     which the instance was launched.
     #
     #   * `client-token` - The idempotency token you provided when you
     #     launched the instance.

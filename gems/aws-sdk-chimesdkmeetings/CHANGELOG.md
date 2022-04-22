@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.10.0 (2022-04-22)
+------------------
+
+* Feature - Include additional exceptions types.
+
 1.9.0 (2022-03-21)
 ------------------
 

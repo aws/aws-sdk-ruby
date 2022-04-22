@@ -35,7 +35,12 @@ module Aws::EC2
     end
     alias :key_name :name
 
-    # The SHA-1 digest of the DER encoded private key.
+    # * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
+    #   DER encoded private key.
+    #
+    # * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #   SHA-256 digest, which is the default for OpenSSH, starting with
+    #   OpenSSH 6.8.
     # @return [String]
     def key_fingerprint
       data[:key_fingerprint]

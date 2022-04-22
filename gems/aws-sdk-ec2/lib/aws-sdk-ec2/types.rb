@@ -21406,6 +21406,9 @@ module Aws::EC2
     #   * `block-device-mapping.volume-id` - The volume ID of the EBS
     #     volume.
     #
+    #   * `capacity-reservation-id` - The ID of the Capacity Reservation
+    #     into which the instance was launched.
+    #
     #   * `client-token` - The idempotency token you provided when you
     #     launched the instance.
     #
@@ -26275,7 +26278,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] dry_run
@@ -38874,8 +38877,16 @@ module Aws::EC2
     end
 
     # @!attribute [rw] key_fingerprint
-    #   The MD5 public key fingerprint as specified in section 4 of RFC
-    #   4716.
+    #   * For RSA key pairs, the key fingerprint is the MD5 public key
+    #     fingerprint as specified in section 4 of RFC 4716.
+    #
+    #   * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #     SHA-256 digest, which is the default for OpenSSH, starting with
+    #     [OpenSSH 6.8][1].
+    #
+    #
+    #
+    #   [1]: http://www.openssh.com/txt/release-6.8
     #   @return [String]
     #
     # @!attribute [rw] key_name
@@ -43341,7 +43352,12 @@ module Aws::EC2
     # Describes a key pair.
     #
     # @!attribute [rw] key_fingerprint
-    #   The SHA-1 digest of the DER encoded private key.
+    #   * For RSA key pairs, the key fingerprint is the SHA-1 digest of the
+    #     DER encoded private key.
+    #
+    #   * For ED25519 key pairs, the key fingerprint is the base64-encoded
+    #     SHA-256 digest, which is the default for OpenSSH, starting with
+    #     OpenSSH 6.8.
     #   @return [String]
     #
     # @!attribute [rw] key_material
@@ -43572,7 +43588,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type.
+    #   The instance type. Only one instance type can be specified.
     #   @return [String]
     #
     # @!attribute [rw] kernel_id
@@ -49177,12 +49193,11 @@ module Aws::EC2
     #   @return [Types::AttributeBooleanValue]
     #
     # @!attribute [rw] private_dns_hostname_type_on_launch
-    #   The type of hostnames to assign to instances in the subnet at
-    #   launch. For IPv4 only subnets, an instance DNS name must be based on
-    #   the instance IPv4 address. For IPv6 only subnets, an instance DNS
-    #   name must be based on the instance ID. For dual-stack subnets, you
-    #   can specify whether DNS names use the instance IPv4 address or the
-    #   instance ID.
+    #   The type of hostname to assign to instances in the subnet at launch.
+    #   For IPv4-only and dual-stack (IPv4 and IPv6) subnets, an instance
+    #   DNS name can be based on the instance IPv4 address (ip-name) or the
+    #   instance ID (resource-name). For IPv6 only subnets, an instance DNS
+    #   name must be based on the instance ID (resource-name).
     #   @return [String]
     #
     # @!attribute [rw] enable_resource_name_dns_a_record_on_launch
@@ -57050,7 +57065,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type.
+    #   The instance type. Only one instance type can be specified.
     #   @return [String]
     #
     # @!attribute [rw] kernel_id
@@ -59193,7 +59208,7 @@ module Aws::EC2
     #         security_group_ids: ["SecurityGroupId"],
     #         security_groups: ["SecurityGroupName"],
     #         subnet_id: "SubnetId",
-    #         user_data: "String",
+    #         user_data: "RunInstancesUserData",
     #         additional_info: "String",
     #         client_token: "String",
     #         disable_api_termination: false,
@@ -59759,7 +59774,7 @@ module Aws::EC2
       :enclave_options,
       :private_dns_name_options,
       :maintenance_options)
-      SENSITIVE = []
+      SENSITIVE = [:user_data]
       include Aws::Structure
     end
 
@@ -63244,13 +63259,14 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the Spot Instance request. Spot status information
-    #   helps track your Spot Instance requests. For more information, see
-    #   [Spot status][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The state of the Spot Instance request. Spot request status
+    #   information helps track your Spot Instance requests. For more
+    #   information, see [Spot request status][1] in the *Amazon EC2 User
+    #   Guide for Linux Instances*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -63338,12 +63354,12 @@ module Aws::EC2
     # Describes the status of a Spot Instance request.
     #
     # @!attribute [rw] code
-    #   The status code. For a list of status codes, see [Spot status
-    #   codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
+    #   The status code. For a list of status codes, see [Spot request
+    #   status codes][1] in the *Amazon EC2 User Guide for Linux Instances*.
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-bid-status.html#spot-instance-bid-status-understand
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-request-status.html#spot-instance-request-status-understand
     #   @return [String]
     #
     # @!attribute [rw] message

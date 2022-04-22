@@ -999,6 +999,27 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # The service encountered an unexpected error.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ServiceFailureException AWS API Documentation
+    #
+    class ServiceFailureException < Struct.new(
+      :code,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The service is currently unavailable.
     #
     # @!attribute [rw] code
@@ -1094,6 +1115,27 @@ module Aws::ChimeSDKMeetings
     #
     class StopMeetingTranscriptionRequest < Struct.new(
       :meeting_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of customer requests exceeds the request rate limit.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ThrottlingException AWS API Documentation
+    #
+    class ThrottlingException < Struct.new(
+      :code,
+      :message,
+      :request_id)
       SENSITIVE = []
       include Aws::Structure
     end

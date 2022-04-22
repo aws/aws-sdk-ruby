@@ -2290,7 +2290,7 @@ module Aws::STS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.130.1'
+      context[:gem_version] = '3.130.2'
       Seahorse::Client::Request.new(handlers, context)
     end
 
