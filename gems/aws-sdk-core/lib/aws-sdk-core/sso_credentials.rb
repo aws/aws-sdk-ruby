@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Aws
-  # A credential provider that assumes a role via
+  # An auto-refreshing credential provider that assumes a role via
   # {Aws::SSO::Client#get_role_credentials} using a cached access
   # token. This class does NOT implement the SSO login token flow - tokens
   # must generated and refreshed separately by running `aws login` from the

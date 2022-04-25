@@ -10,11 +10,6 @@ module Aws
   # Automatically handles refreshing credentials if an Expiration time is
   # provided in the credentials payload.
   #
-  # This credential provider also provides a `before_refresh` callback
-  # that can be used to help manage refreshing tokens. The `before_refresh`
-  # callback is called with `self` when AWS credentials are required and need
-  # to be refreshed.
-  #
   # @see https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes
   class ProcessCredentials
 
