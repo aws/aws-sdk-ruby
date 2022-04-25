@@ -20757,36 +20757,24 @@ module Aws::SecurityHub
     #   The name of the product that generated the finding.
     #
     #   Security Hub populates this attribute automatically for each
-    #   finding. You cannot update it using `BatchImportFindings` or
-    #   `BatchUpdateFindings`. The exception to this is when you use a
-    #   custom integration.
+    #   finding. You cannot update this attribute with `BatchImportFindings`
+    #   or `BatchUpdateFindings`. The exception to this is a custom
+    #   integration.
     #
-    #   When you use the Security Hub console to filter findings by product
-    #   name, you use this attribute.
-    #
-    #   When you use the Security Hub API to filter findings by product
-    #   name, you use the `aws/securityhub/ProductName` attribute under
-    #   `ProductFields`.
-    #
-    #   Security Hub does not synchronize those two attributes.
+    #   When you use the Security Hub console or API to filter findings by
+    #   product name, you use this attribute.
     #   @return [String]
     #
     # @!attribute [rw] company_name
     #   The name of the company for the product that generated the finding.
     #
     #   Security Hub populates this attribute automatically for each
-    #   finding. You cannot be updated using `BatchImportFindings` or
-    #   `BatchUpdateFindings`. The exception to this is when you use a
-    #   custom integration.
+    #   finding. You cannot update this attribute with `BatchImportFindings`
+    #   or `BatchUpdateFindings`. The exception to this is a custom
+    #   integration.
     #
-    #   When you use the Security Hub console to filter findings by company
-    #   name, you use this attribute.
-    #
-    #   When you use the Security Hub API to filter findings by company
-    #   name, you use the `aws/securityhub/CompanyName` attribute under
-    #   `ProductFields`.
-    #
-    #   Security Hub does not synchronize those two attributes.
+    #   When you use the Security Hub console or API to filter findings by
+    #   company name, you use this attribute.
     #   @return [String]
     #
     # @!attribute [rw] region
@@ -21805,19 +21793,11 @@ module Aws::SecurityHub
     #
     # @!attribute [rw] product_name
     #   The name of the solution (product) that generates findings.
-    #
-    #   Note that this is a filter against the `aws/securityhub/ProductName`
-    #   field in `ProductFields`. It is not a filter for the top-level
-    #   `ProductName` field.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] company_name
     #   The name of the findings provider (company) that owns the solution
     #   (product) that generates findings.
-    #
-    #   Note that this is a filter against the `aws/securityhub/CompanyName`
-    #   field in `ProductFields`. It is not a filter for the top-level
-    #   `CompanyName` field.
     #   @return [Array<Types::StringFilter>]
     #
     # @!attribute [rw] user_defined_fields
@@ -28296,11 +28276,28 @@ module Aws::SecurityHub
     #   associated with the Security Hub administrator account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_enable_standards
+    #   Whether to automatically enable Security Hub [default standards][1]
+    #   for new member accounts in the organization.
+    #
+    #   The default value of this parameter is equal to `DEFAULT`.
+    #
+    #   If equal to `DEFAULT`, then Security Hub default standards are
+    #   automatically enabled for new member accounts. If equal to `NONE`,
+    #   then default standards are not automatically enabled for new member
+    #   accounts.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfigurationResponse AWS API Documentation
     #
     class DescribeOrganizationConfigurationResponse < Struct.new(
       :auto_enable,
-      :member_account_limit_reached)
+      :member_account_limit_reached,
+      :auto_enable_standards)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -40801,6 +40798,7 @@ module Aws::SecurityHub
     #
     #       {
     #         auto_enable: false, # required
+    #         auto_enable_standards: "NONE", # accepts NONE, DEFAULT
     #       }
     #
     # @!attribute [rw] auto_enable
@@ -40814,10 +40812,27 @@ module Aws::SecurityHub
     #   `true`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] auto_enable_standards
+    #   Whether to automatically enable Security Hub [default standards][1]
+    #   for new member accounts in the organization.
+    #
+    #   By default, this parameter is equal to `DEFAULT`, and new member
+    #   accounts are automatically enabled with default Security Hub
+    #   standards.
+    #
+    #   To opt out of enabling default standards for new member accounts,
+    #   set this parameter equal to `NONE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfigurationRequest AWS API Documentation
     #
     class UpdateOrganizationConfigurationRequest < Struct.new(
-      :auto_enable)
+      :auto_enable,
+      :auto_enable_standards)
       SENSITIVE = []
       include Aws::Structure
     end

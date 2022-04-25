@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Fix an issue where `ExpiredToken` errors were retried as if the request was from another region.
 
+1.113.1 (2022-04-25)
+------------------
+
+* Issue - Rewind the underlying file on a streaming retry that is not a truncated body (#2692).
+
 1.113.0 (2022-02-24)
 ------------------
 

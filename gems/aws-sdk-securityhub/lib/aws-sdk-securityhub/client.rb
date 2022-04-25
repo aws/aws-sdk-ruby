@@ -3736,9 +3736,11 @@ module Aws::SecurityHub
     # aggregation Region.
     #
     # For more details about cross-Region replication, see [Configuring
-    # finding
-    # aggregation](securityhub/latest/userguide/finding-aggregation.html) in
-    # the *Security Hub User Guide*.
+    # finding aggregation][1] in the *Security Hub User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/finding-aggregation.html
     #
     # @option params [required, String] :region_linking_mode
     #   Indicates whether to aggregate findings from all of the available
@@ -4838,11 +4840,13 @@ module Aws::SecurityHub
     #
     #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable #auto_enable} => Boolean
     #   * {Types::DescribeOrganizationConfigurationResponse#member_account_limit_reached #member_account_limit_reached} => Boolean
+    #   * {Types::DescribeOrganizationConfigurationResponse#auto_enable_standards #auto_enable_standards} => String
     #
     # @example Response structure
     #
     #   resp.auto_enable #=> Boolean
     #   resp.member_account_limit_reached #=> Boolean
+    #   resp.auto_enable_standards #=> String, one of "NONE", "DEFAULT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DescribeOrganizationConfiguration AWS API Documentation
     #
@@ -10311,12 +10315,28 @@ module Aws::SecurityHub
     #   To automatically enable Security Hub for new accounts, set this to
     #   `true`.
     #
+    # @option params [String] :auto_enable_standards
+    #   Whether to automatically enable Security Hub [default standards][1]
+    #   for new member accounts in the organization.
+    #
+    #   By default, this parameter is equal to `DEFAULT`, and new member
+    #   accounts are automatically enabled with default Security Hub
+    #   standards.
+    #
+    #   To opt out of enabling default standards for new member accounts, set
+    #   this parameter equal to `NONE`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_organization_configuration({
     #     auto_enable: false, # required
+    #     auto_enable_standards: "NONE", # accepts NONE, DEFAULT
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UpdateOrganizationConfiguration AWS API Documentation
@@ -10400,7 +10420,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.63.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

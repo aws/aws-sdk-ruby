@@ -2408,7 +2408,7 @@ module Aws::Connect
     # Amazon Connect instance
     #
     # @option params [required, String] :phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #
     # @return [Types::DescribePhoneNumberResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2987,7 +2987,7 @@ module Aws::Connect
     # your Amazon Connect instance, if a contact flow association exists.
     #
     # @option params [required, String] :phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #
     # @option params [required, String] :instance_id
     #   The identifier of the Amazon Connect instance. You can find the
@@ -5252,7 +5252,7 @@ module Aws::Connect
     # instance.
     #
     # @option params [required, String] :phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -5371,6 +5371,116 @@ module Aws::Connect
     # @param [Hash] params ({})
     def search_available_phone_numbers(params = {}, options = {})
       req = build_request(:search_available_phone_numbers, params)
+      req.send_request(options)
+    end
+
+    # Searches users in an Amazon Connect instance, with optional filtering.
+    #
+    # @option params [String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @option params [Types::UserSearchFilter] :search_filter
+    #   Filters to be applied to search results.
+    #
+    # @option params [Types::UserSearchCriteria] :search_criteria
+    #   The search criteria to be used to return users.
+    #
+    # @return [Types::SearchUsersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SearchUsersResponse#users #users} => Array&lt;Types::UserSearchSummary&gt;
+    #   * {Types::SearchUsersResponse#next_token #next_token} => String
+    #   * {Types::SearchUsersResponse#approximate_total_count #approximate_total_count} => Integer
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.search_users({
+    #     instance_id: "InstanceId",
+    #     next_token: "NextToken2500",
+    #     max_results: 1,
+    #     search_filter: {
+    #       tag_filter: {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       },
+    #     },
+    #     search_criteria: {
+    #       or_conditions: [
+    #         {
+    #           # recursive UserSearchCriteria
+    #         },
+    #       ],
+    #       and_conditions: [
+    #         {
+    #           # recursive UserSearchCriteria
+    #         },
+    #       ],
+    #       string_condition: {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       },
+    #       hierarchy_group_condition: {
+    #         value: "String",
+    #         hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.users #=> Array
+    #   resp.users[0].arn #=> String
+    #   resp.users[0].directory_user_id #=> String
+    #   resp.users[0].hierarchy_group_id #=> String
+    #   resp.users[0].id #=> String
+    #   resp.users[0].identity_info.first_name #=> String
+    #   resp.users[0].identity_info.last_name #=> String
+    #   resp.users[0].phone_config.phone_type #=> String, one of "SOFT_PHONE", "DESK_PHONE"
+    #   resp.users[0].phone_config.auto_accept #=> Boolean
+    #   resp.users[0].phone_config.after_contact_work_time_limit #=> Integer
+    #   resp.users[0].phone_config.desk_phone_number #=> String
+    #   resp.users[0].routing_profile_id #=> String
+    #   resp.users[0].security_profile_ids #=> Array
+    #   resp.users[0].security_profile_ids[0] #=> String
+    #   resp.users[0].tags #=> Hash
+    #   resp.users[0].tags["TagKey"] #=> String
+    #   resp.users[0].username #=> String
+    #   resp.next_token #=> String
+    #   resp.approximate_total_count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUsers AWS API Documentation
+    #
+    # @overload search_users(params = {})
+    # @param [Hash] params ({})
+    def search_users(params = {}, options = {})
+      req = build_request(:search_users, params)
       req.send_request(options)
     end
 
@@ -6679,7 +6789,7 @@ module Aws::Connect
     # instance to another Amazon Connect instance in the same Region.
     #
     # @option params [required, String] :phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #
     # @option params [required, String] :target_arn
     #   The Amazon Resource Name (ARN) for Amazon Connect instances that phone
@@ -7434,7 +7544,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
