@@ -138,7 +138,8 @@ module Aws
           def handle_region_errors(response)
             if wrong_sigv4_region?(response) &&
                !fips_region?(response) &&
-               !custom_endpoint?(response)
+               !custom_endpoint?(response) &&
+               !expired_credentials?(response)
               get_region_and_retry(response.context)
             else
               response
@@ -160,6 +161,10 @@ module Aws
 
           def fips_region?(resp)
             resp.context.http_request.endpoint.host.include?('fips')
+          end
+
+          def expired_credentials?(resp)
+            resp.context.http_response.body_contents.match(/<Code>ExpiredToken<\/Code>/)
           end
 
           def custom_endpoint?(resp)

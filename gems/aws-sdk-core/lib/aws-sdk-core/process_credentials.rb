@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
 module Aws
-
   # A credential provider that executes a given process and attempts
-  # to read its stdout to recieve a JSON payload containing the credentials
+  # to read its stdout to recieve a JSON payload containing the credentials.
   #
-  # Automatically handles refreshing credentials if an Expiration time is
-  # provided in the credentials payload
-  #
-  #     credentials = Aws::ProcessCredentials.new('/usr/bin/credential_proc').credentials
-  #
+  #     credentials = Aws::ProcessCredentials.new('/usr/bin/credential_proc')
   #     ec2 = Aws::EC2::Client.new(credentials: credentials)
   #
-  # More documentation on process based credentials can be found here:
-  # https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes
+  # Automatically handles refreshing credentials if an Expiration time is
+  # provided in the credentials payload.
+  #
+  # @see https://docs.aws.amazon.com/cli/latest/topic/config-vars.html#sourcing-credentials-from-external-processes
   class ProcessCredentials
 
     include CredentialProvider

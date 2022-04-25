@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
 module Aws
-  # An auto-refreshing credential provider that works by assuming a
-  # role via {Aws::SSO::Client#get_role_credentials} using a cached access
-  # token.  This class does NOT implement the SSO login token flow - tokens
+  # An auto-refreshing credential provider that assumes a role via
+  # {Aws::SSO::Client#get_role_credentials} using a cached access
+  # token. This class does NOT implement the SSO login token flow - tokens
   # must generated and refreshed separately by running `aws login` from the
   # AWS CLI with the correct profile.
-  #
-  # For more background on AWS SSO see the official
-  # {https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html what is SSO Userguide}
-  #
-  # ## Refreshing Credentials from SSO
   #
   # The `SSOCredentials` will auto-refresh the AWS credentials from SSO. In
   # addition to AWS credentials expiring after a given amount of time, the
@@ -20,7 +15,6 @@ module Aws
   # the token value, but this can be done by running `aws login` with the
   # correct profile.
   #
-  #
   #     # You must first run aws sso login --profile your-sso-profile
   #     sso_credentials = Aws::SSOCredentials.new(
   #       sso_account_id: '123456789',
@@ -28,11 +22,13 @@ module Aws
   #       sso_region: "us-east-1",
   #       sso_start_url: 'https://your-start-url.awsapps.com/start'
   #     )
-  #
   #     ec2 = Aws::EC2::Client.new(credentials: sso_credentials)
   #
-  # If you omit `:client` option, a new {SSO::Client} object will be
-  # constructed.
+  # If you omit `:client` option, a new {Aws::SSO::Client} object will be
+  # constructed with additional options that were provided.
+  #
+  # @see Aws::SSO::Client#get_role_credentials
+  # @see https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html
   class SSOCredentials
 
     include CredentialProvider

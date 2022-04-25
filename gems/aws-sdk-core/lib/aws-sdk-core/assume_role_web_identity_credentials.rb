@@ -5,9 +5,8 @@ require 'securerandom'
 require 'base64'
 
 module Aws
-
-  # An auto-refreshing credential provider that works by assuming
-  # a role via {Aws::STS::Client#assume_role_with_web_identity}.
+  # An auto-refreshing credential provider that assumes a role via
+  # {Aws::STS::Client#assume_role_with_web_identity}.
   #
   #     role_credentials = Aws::AssumeRoleWebIdentityCredentials.new(
   #       client: Aws::STS::Client.new(...),
@@ -16,12 +15,12 @@ module Aws
   #       role_session_name: "session-name"
   #       ...
   #     )
-  #     For full list of parameters accepted
-  #     @see Aws::STS::Client#assume_role_with_web_identity
+  #     ec2 = Aws::EC2::Client.new(credentials: role_credentials)
   #
+  # If you omit `:client` option, a new {Aws::STS::Client} object will be
+  # constructed with additional options that were provided.
   #
-  # If you omit `:client` option, a new {STS::Client} object will be
-  # constructed.
+  # @see Aws::STS::Client#assume_role_with_web_identity
   class AssumeRoleWebIdentityCredentials
 
     include CredentialProvider
