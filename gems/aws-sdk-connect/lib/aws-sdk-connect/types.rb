@@ -699,7 +699,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_arn
@@ -719,7 +719,7 @@ module Aws::Connect
     # Connect instance.
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_arn
@@ -1060,6 +1060,64 @@ module Aws::Connect
     #
     class ContactNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that can be used to specify Tag conditions inside the
+    # `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    # where:
+    #
+    # * Top level list specifies conditions that need to be applied with
+    #   `OR` operator
+    #
+    # * Inner list specifies conditions that need to be applied with `AND`
+    #   operator.
+    #
+    # @note When making an API call, you may pass ControlPlaneTagFilter
+    #   data as a hash:
+    #
+    #       {
+    #         or_conditions: [
+    #           [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         ],
+    #         tag_condition: {
+    #           tag_key: "String",
+    #           tag_value: "String",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Array<Types::TagCondition>>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::TagCondition>]
+    #
+    # @!attribute [rw] tag_condition
+    #   A leaf node condition which can be used to specify a tag condition.
+    #   @return [Types::TagCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ControlPlaneTagFilter AWS API Documentation
+    #
+    class ControlPlaneTagFilter < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :tag_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2928,7 +2986,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumberRequest AWS API Documentation
@@ -3450,7 +3508,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
@@ -4252,6 +4310,34 @@ module Aws::Connect
       :level_id,
       :hierarchy_path,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A leaf node condition which can be used to specify a hierarchy group
+    # condition.
+    #
+    # @note When making an API call, you may pass HierarchyGroupCondition
+    #   data as a hash:
+    #
+    #       {
+    #         value: "String",
+    #         hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value in the hierarchy group condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_match_type
+    #   The type of hierarchy group match.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupCondition AWS API Documentation
+    #
+    class HierarchyGroupCondition < Struct.new(
+      :value,
+      :hierarchy_group_match_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6017,7 +6103,7 @@ module Aws::Connect
     # Connect instance.
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_arn
@@ -7390,7 +7476,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -7805,6 +7891,116 @@ module Aws::Connect
     class SearchAvailablePhoneNumbersResponse < Struct.new(
       :next_token,
       :available_numbers_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass SearchUsersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId",
+    #         next_token: "NextToken2500",
+    #         max_results: 1,
+    #         search_filter: {
+    #           tag_filter: {
+    #             or_conditions: [
+    #               [
+    #                 {
+    #                   tag_key: "String",
+    #                   tag_value: "String",
+    #                 },
+    #               ],
+    #             ],
+    #             and_conditions: [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #             tag_condition: {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           },
+    #         },
+    #         search_criteria: {
+    #           or_conditions: [
+    #             {
+    #               # recursive UserSearchCriteria
+    #             },
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               # recursive UserSearchCriteria
+    #             },
+    #           ],
+    #           string_condition: {
+    #             field_name: "String",
+    #             value: "String",
+    #             comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #           },
+    #           hierarchy_group_condition: {
+    #             value: "String",
+    #             hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] search_filter
+    #   Filters to be applied to search results.
+    #   @return [Types::UserSearchFilter]
+    #
+    # @!attribute [rw] search_criteria
+    #   The search criteria to be used to return users.
+    #   @return [Types::UserSearchCriteria]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUsersRequest AWS API Documentation
+    #
+    class SearchUsersRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :search_filter,
+      :search_criteria)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] users
+    #   Information about the users.
+    #   @return [Array<Types::UserSearchSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] approximate_total_count
+    #   The total number of users who matched your search query.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchUsersResponse AWS API Documentation
+    #
+    class SearchUsersResponse < Struct.new(
+      :users,
+      :next_token,
+      :approximate_total_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8543,6 +8739,41 @@ module Aws::Connect
     #
     class StopContactStreamingResponse < Aws::EmptyStructure; end
 
+    # A leaf node condition which can be used to specify a string condition,
+    # for example, `username = 'abc'`.
+    #
+    # @note When making an API call, you may pass StringCondition
+    #   data as a hash:
+    #
+    #       {
+    #         field_name: "String",
+    #         value: "String",
+    #         comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #       }
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field in the string condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the string.
+    #   @return [String]
+    #
+    # @!attribute [rw] comparison_type
+    #   The type of comparison to be made when evaluating the string
+    #   condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StringCondition AWS API Documentation
+    #
+    class StringCondition < Struct.new(
+      :field_name,
+      :value,
+      :comparison_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SuspendContactRecordingRequest
     #   data as a hash:
     #
@@ -8579,6 +8810,34 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SuspendContactRecordingResponse AWS API Documentation
     #
     class SuspendContactRecordingResponse < Aws::EmptyStructure; end
+
+    # A leaf node condition which can be used to specify a tag condition,
+    # for example, `HAVE BPO = 123`.
+    #
+    # @note When making an API call, you may pass TagCondition
+    #   data as a hash:
+    #
+    #       {
+    #         tag_key: "String",
+    #         tag_value: "String",
+    #       }
+    #
+    # @!attribute [rw] tag_key
+    #   The tag key in the tag condition.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_value
+    #   The tag value in the tag condition.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TagCondition AWS API Documentation
+    #
+    class TagCondition < Struct.new(
+      :tag_key,
+      :tag_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass TagResourceRequest
     #   data as a hash:
@@ -9243,7 +9502,7 @@ module Aws::Connect
     #       }
     #
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] target_arn
@@ -9270,7 +9529,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] phone_number_id
-    #   The identifier of the phone number.
+    #   A unique identifier for the phone number.
     #   @return [String]
     #
     # @!attribute [rw] phone_number_arn
@@ -10117,6 +10376,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The user's first name and last name.
+    #
+    # @!attribute [rw] first_name
+    #   The user's first name.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_name
+    #   The user's last name.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserIdentityInfoLite AWS API Documentation
+    #
+    class UserIdentityInfoLite < Struct.new(
+      :first_name,
+      :last_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # No user with the specified credentials was found in the Amazon Connect
     # instance.
     #
@@ -10195,6 +10473,201 @@ module Aws::Connect
     class UserQuickConnectConfig < Struct.new(
       :user_id,
       :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The search criteria to be used to return users.
+    #
+    # @note When making an API call, you may pass UserSearchCriteria
+    #   data as a hash:
+    #
+    #       {
+    #         or_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive UserSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive UserSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #             hierarchy_group_condition: {
+    #               value: "String",
+    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #             },
+    #           },
+    #         ],
+    #         and_conditions: [
+    #           {
+    #             or_conditions: {
+    #               # recursive UserSearchConditionList
+    #             },
+    #             and_conditions: {
+    #               # recursive UserSearchConditionList
+    #             },
+    #             string_condition: {
+    #               field_name: "String",
+    #               value: "String",
+    #               comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #             },
+    #             hierarchy_group_condition: {
+    #               value: "String",
+    #               hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #             },
+    #           },
+    #         ],
+    #         string_condition: {
+    #           field_name: "String",
+    #           value: "String",
+    #           comparison_type: "STARTS_WITH", # accepts STARTS_WITH, CONTAINS, EXACT
+    #         },
+    #         hierarchy_group_condition: {
+    #           value: "String",
+    #           hierarchy_group_match_type: "EXACT", # accepts EXACT, WITH_CHILD_GROUPS
+    #         },
+    #       }
+    #
+    # @!attribute [rw] or_conditions
+    #   A list of conditions which would be applied together with an `OR`
+    #   condition.
+    #   @return [Array<Types::UserSearchCriteria>]
+    #
+    # @!attribute [rw] and_conditions
+    #   A list of conditions which would be applied together with an `AND`
+    #   condition.
+    #   @return [Array<Types::UserSearchCriteria>]
+    #
+    # @!attribute [rw] string_condition
+    #   A leaf node condition which can be used to specify a string
+    #   condition.
+    #   @return [Types::StringCondition]
+    #
+    # @!attribute [rw] hierarchy_group_condition
+    #   A leaf node condition which can be used to specify a hierarchy group
+    #   condition.
+    #   @return [Types::HierarchyGroupCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSearchCriteria AWS API Documentation
+    #
+    class UserSearchCriteria < Struct.new(
+      :or_conditions,
+      :and_conditions,
+      :string_condition,
+      :hierarchy_group_condition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters to be applied to search results.
+    #
+    # @note When making an API call, you may pass UserSearchFilter
+    #   data as a hash:
+    #
+    #       {
+    #         tag_filter: {
+    #           or_conditions: [
+    #             [
+    #               {
+    #                 tag_key: "String",
+    #                 tag_value: "String",
+    #               },
+    #             ],
+    #           ],
+    #           and_conditions: [
+    #             {
+    #               tag_key: "String",
+    #               tag_value: "String",
+    #             },
+    #           ],
+    #           tag_condition: {
+    #             tag_key: "String",
+    #             tag_value: "String",
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tag_filter
+    #   An object that can be used to specify Tag conditions inside the
+    #   `SearchFilter`. This accepts an `OR` of `AND` (List of List) input
+    #   where:
+    #
+    #   * Top level list specifies conditions that need to be applied with
+    #     `OR` operator
+    #
+    #   * Inner list specifies conditions that need to be applied with `AND`
+    #     operator.
+    #   @return [Types::ControlPlaneTagFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSearchFilter AWS API Documentation
+    #
+    class UserSearchFilter < Struct.new(
+      :tag_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the returned users.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] directory_user_id
+    #   The directory identifier of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] hierarchy_group_id
+    #   The identifier of the user's hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the user's summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] identity_info
+    #   The user's first name and last name.
+    #   @return [Types::UserIdentityInfoLite]
+    #
+    # @!attribute [rw] phone_config
+    #   Contains information about the phone configuration settings for a
+    #   user.
+    #   @return [Types::UserPhoneConfig]
+    #
+    # @!attribute [rw] routing_profile_id
+    #   The identifier of the user's routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_profile_ids
+    #   The identifiers of the user's security profiles.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] username
+    #   The name of the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserSearchSummary AWS API Documentation
+    #
+    class UserSearchSummary < Struct.new(
+      :arn,
+      :directory_user_id,
+      :hierarchy_group_id,
+      :id,
+      :identity_info,
+      :phone_config,
+      :routing_profile_id,
+      :security_profile_ids,
+      :tags,
+      :username)
       SENSITIVE = []
       include Aws::Structure
     end

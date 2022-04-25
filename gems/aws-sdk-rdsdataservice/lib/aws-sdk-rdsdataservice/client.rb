@@ -641,8 +641,8 @@ module Aws::RDSDataService
     # `transactionID` parameter, changes that result from the call are
     # committed automatically.
     #
-    # The response size limit is 1 MB. If the call returns more than 1 MB of
-    # response data, the call is terminated.
+    # If the binary response data from the database is more than 1 MB, the
+    # call is terminated.
     #
     # @option params [Boolean] :continue_after_timeout
     #   A value that indicates whether to continue running the statement after
@@ -656,6 +656,20 @@ module Aws::RDSDataService
     #
     # @option params [String] :database
     #   The name of the database.
+    #
+    # @option params [String] :format_records_as
+    #   A value that indicates whether to format the result set as a single
+    #   JSON string. This parameter only applies to `SELECT` statements and is
+    #   ignored for other types of statements. Allowed values are `NONE` and
+    #   `JSON`. The default value is `NONE`. The result is returned in the
+    #   `formattedRecords` field.
+    #
+    #   For usage information about the JSON format for result sets, see
+    #   [Using the Data API][1] in the *Amazon Aurora User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
     #
     # @option params [Boolean] :include_result_metadata
     #   A value that indicates whether to include metadata in the results.
@@ -697,6 +711,7 @@ module Aws::RDSDataService
     # @return [Types::ExecuteStatementResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ExecuteStatementResponse#column_metadata #column_metadata} => Array&lt;Types::ColumnMetadata&gt;
+    #   * {Types::ExecuteStatementResponse#formatted_records #formatted_records} => String
     #   * {Types::ExecuteStatementResponse#generated_fields #generated_fields} => Array&lt;Types::Field&gt;
     #   * {Types::ExecuteStatementResponse#number_of_records_updated #number_of_records_updated} => Integer
     #   * {Types::ExecuteStatementResponse#records #records} => Array&lt;Array&lt;Types::Field&gt;&gt;
@@ -706,6 +721,7 @@ module Aws::RDSDataService
     #   resp = client.execute_statement({
     #     continue_after_timeout: false,
     #     database: "DbName",
+    #     format_records_as: "NONE", # accepts NONE, JSON
     #     include_result_metadata: false,
     #     parameters: [
     #       {
@@ -735,6 +751,7 @@ module Aws::RDSDataService
     #     resource_arn: "Arn", # required
     #     result_set_options: {
     #       decimal_return_type: "STRING", # accepts STRING, DOUBLE_OR_LONG
+    #       long_return_type: "STRING", # accepts STRING, LONG
     #     },
     #     schema: "DbName",
     #     secret_arn: "Arn", # required
@@ -759,6 +776,7 @@ module Aws::RDSDataService
     #   resp.column_metadata[0].table_name #=> String
     #   resp.column_metadata[0].type #=> Integer
     #   resp.column_metadata[0].type_name #=> String
+    #   resp.formatted_records #=> String
     #   resp.generated_fields #=> Array
     #   resp.generated_fields[0].array_value.array_values #=> Array
     #   resp.generated_fields[0].array_value.array_values[0] #=> Types::ArrayValue
@@ -855,7 +873,7 @@ module Aws::RDSDataService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rdsdataservice'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.70.0 (2022-04-25)
+------------------
+
+* Feature - This release adds SearchUsers API which can be used to search for users with a Connect Instance
+
 1.69.0 (2022-04-20)
 ------------------
 
