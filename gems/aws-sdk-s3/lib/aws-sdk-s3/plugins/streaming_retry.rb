@@ -36,6 +36,17 @@ module Aws
         def rewind; end
       end
 
+      class NonRetryableStreamingError < StandardError
+
+        def initialize(error)
+          super('Unable to retry request - retry could result in processing duplicated chunks.')
+          set_backtrace(error.backtrace)
+          @original_error = error
+        end
+
+        attr_reader :original_error
+      end
+
       # This handler works with the ResponseTarget plugin to provide smart
       # retries of S3 streaming operations that support the range parameter
       # (currently only: get_object).  When a 200 OK with a TruncatedBodyError
@@ -84,8 +95,19 @@ module Aws
             end
 
             context.http_response.on_error do |error|
-              if retryable_body?(context) && truncated_body?(error)
-                context.http_request.headers[:range] = "bytes=#{context.http_response.body.size}-"
+              puts context.http_response.body
+              if retryable_body?(context)
+                if truncated_body?(error)
+                  context.http_request.headers[:range] = "bytes=#{context.http_response.body.size}-"
+                else
+                  case context.http_response.body
+                  when RetryableManagedFile
+                    # call rewind on the underlying file
+                    context.http_response.body.instance_variable_get(:@file).rewind
+                  else
+                    raise NonRetryableStreamingError, error
+                  end
+                end
               end
             end
           end

@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Rewind the underlying file on a streaming retry that is not a truncated body (#2692).
+
 1.113.0 (2022-02-24)
 ------------------
 
