@@ -4,6 +4,18 @@ require 'time'
 require 'net/http'
 
 module Aws
+  # A credential provider that loads credentials from EC2 instances.
+  #
+  #     instance_credentials = Aws::InstanceProfileCredentials.new
+  #     ec2 = Aws::EC2::Client.new(credentials: instance_credentials)
+  #
+  # Automatically handles refreshing credentials if an Expiration time is
+  # provided in the credentials payload.
+  #
+  # This credential provider also provides a `before_refresh` callback
+  # that can be used to help manage refreshing tokens. The `before_refresh`
+  # callback is called with `self` when AWS credentials are required and need
+  # to be refreshed.
   class InstanceProfileCredentials
     include CredentialProvider
     include RefreshingCredentials
