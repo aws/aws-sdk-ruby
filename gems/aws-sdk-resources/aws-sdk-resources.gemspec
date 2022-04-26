@@ -170,6 +170,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-iotthingsgraph', '~> 1')
   spec.add_dependency('aws-sdk-iottwinmaker', '~> 1')
   spec.add_dependency('aws-sdk-iotwireless', '~> 1')
+  spec.add_dependency('aws-sdk-ivschat', '~> 1')
   spec.add_dependency('aws-sdk-kms', '~> 1')
   spec.add_dependency('aws-sdk-kafka', '~> 1')
   spec.add_dependency('aws-sdk-kafkaconnect', '~> 1')

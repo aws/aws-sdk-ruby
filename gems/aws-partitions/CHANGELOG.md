@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.580.0 (2022-04-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Ivschat`.
+
 1.579.0 (2022-04-20)
 ------------------
 

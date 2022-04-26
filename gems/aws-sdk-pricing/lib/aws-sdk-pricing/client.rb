@@ -451,7 +451,7 @@ module Aws::Pricing
       req.send_request(options)
     end
 
-    # Returns a list of attribute values. Attibutes are similar to the
+    # Returns a list of attribute values. Attributes are similar to the
     # details in a Price List API offer file. For a list of available
     # attributes, see [Offer File Definitions][1] in the [Amazon Web
     # Services Billing and Cost Management User Guide][2].
@@ -606,7 +606,7 @@ module Aws::Pricing
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-pricing'
-      context[:gem_version] = '1.37.0'
+      context[:gem_version] = '1.38.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

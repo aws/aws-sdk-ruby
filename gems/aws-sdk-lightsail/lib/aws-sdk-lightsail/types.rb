@@ -1114,7 +1114,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] location
-    #   Describes the resource location.
+    #   An object that describes the location of the bucket, such as the
+    #   Amazon Web Services Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] name
@@ -1155,8 +1156,8 @@ module Aws::Lightsail
     #   Indicates whether the bundle that is currently applied to a bucket
     #   can be changed to another bundle.
     #
-    #   You can update a bucket's bundle only one time within a monthly AWS
-    #   billing cycle.
+    #   You can update a bucket's bundle only one time within a monthly
+    #   Amazon Web Services billing cycle.
     #
     #   Use the [UpdateBucketBundle][1] action to change a bucket's bundle.
     #
@@ -1166,8 +1167,8 @@ module Aws::Lightsail
     #   @return [Boolean]
     #
     # @!attribute [rw] readonly_access_accounts
-    #   An array of strings that specify the AWS account IDs that have
-    #   read-only access to the bucket.
+    #   An array of strings that specify the Amazon Web Services account IDs
+    #   that have read-only access to the bucket.
     #   @return [Array<String>]
     #
     # @!attribute [rw] resources_receiving_access
@@ -1242,7 +1243,7 @@ module Aws::Lightsail
     # @!attribute [rw] destination
     #   The name of the bucket where the access logs are saved. The
     #   destination can be a Lightsail bucket in the same account, and in
-    #   the same AWS Region as the source bucket.
+    #   the same Amazon Web Services Region as the source bucket.
     #
     #   <note markdown="1"> This parameter is required when enabling the access log for a
     #   bucket, and should be omitted when disabling the access log.
@@ -1970,8 +1971,8 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   A list of objects describing the Availability Zone and AWS Region of
-    #   the CloudFormation stack record.
+    #   A list of objects describing the Availability Zone and Amazon Web
+    #   Services Region of the CloudFormation stack record.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
@@ -2079,7 +2080,8 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   Describes the resource location.
+    #   An object that describes the location of the contact method, such as
+    #   the Amazon Web Services Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
@@ -2209,7 +2211,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] location
     #   An object that describes the location of the container service, such
-    #   as the AWS Region and Availability Zone.
+    #   as the Amazon Web Services Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] resource_type
@@ -2301,9 +2303,9 @@ module Aws::Lightsail
     #   The principal ARN of the container service.
     #
     #   The principal ARN can be used to create a trust relationship between
-    #   your standard AWS account and your Lightsail container service. This
-    #   allows you to give your service permission to access resources in
-    #   your standard AWS account.
+    #   your standard Amazon Web Services account and your Lightsail
+    #   container service. This allows you to give your service permission
+    #   to access resources in your standard Amazon Web Services account.
     #   @return [String]
     #
     # @!attribute [rw] private_domain_name
@@ -2861,8 +2863,8 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] source_region
-    #   The AWS Region where the source manual or automatic snapshot is
-    #   located.
+    #   The Amazon Web Services Region where the source manual or automatic
+    #   snapshot is located.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CopySnapshotRequest AWS API Documentation
@@ -3157,7 +3159,8 @@ module Aws::Lightsail
     #   The protocol of the contact method, such as `Email` or `SMS` (text
     #   messaging).
     #
-    #   The `SMS` protocol is supported only in the following AWS Regions.
+    #   The `SMS` protocol is supported only in the following Amazon Web
+    #   Services Regions.
     #
     #   * US East (N. Virginia) (`us-east-1`)
     #
@@ -3172,9 +3175,9 @@ module Aws::Lightsail
     #   * Asia Pacific (Sydney) (`ap-southeast-2`)
     #
     #   For a list of countries/regions where SMS text messages can be sent,
-    #   and the latest AWS Regions where SMS text messaging is supported,
-    #   see [Supported Regions and Countries][1] in the *Amazon SNS
-    #   Developer Guide*.
+    #   and the latest Amazon Web Services Regions where SMS text messaging
+    #   is supported, see [Supported Regions and Countries][1] in the
+    #   *Amazon SNS Developer Guide*.
     #
     #   For more information about notifications in Amazon Lightsail, see
     #   [Notifications in Amazon Lightsail][2].
@@ -3371,7 +3374,8 @@ module Aws::Lightsail
     #
     #   The following are the requirements for container service names:
     #
-    #   * Must be unique within each AWS Region in your Lightsail account.
+    #   * Must be unique within each Amazon Web Services Region in your
+    #     Lightsail account.
     #
     #   * Must contain 1 to 63 characters.
     #
@@ -4524,6 +4528,7 @@ module Aws::Lightsail
     #           },
     #         ],
     #         ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #         tls_policy_name: "string",
     #       }
     #
     # @!attribute [rw] load_balancer_name
@@ -4581,6 +4586,22 @@ module Aws::Lightsail
     #   The default value is `dualstack`.
     #   @return [String]
     #
+    # @!attribute [rw] tls_policy_name
+    #   The name of the TLS policy to apply to the load balancer.
+    #
+    #   Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
+    #   policy names that you can specify.
+    #
+    #   For more information about load balancer TLS policies, see [Load
+    #   balancer TLS security policies][2] in the *Amazon Lightsail
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
+    #   [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateLoadBalancerRequest AWS API Documentation
     #
     class CreateLoadBalancerRequest < Struct.new(
@@ -4591,7 +4612,8 @@ module Aws::Lightsail
       :certificate_domain_name,
       :certificate_alternative_names,
       :tags,
-      :ip_address_type)
+      :ip_address_type,
+      :tls_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7367,8 +7389,8 @@ module Aws::Lightsail
     # @!attribute [rw] bucket_name
     #   The name of the bucket for which to return information.
     #
-    #   When omitted, the response includes all of your buckets in the AWS
-    #   Region where the request is made.
+    #   When omitted, the response includes all of your buckets in the
+    #   Amazon Web Services Region where the request is made.
     #   @return [String]
     #
     # @!attribute [rw] page_token
@@ -7511,8 +7533,8 @@ module Aws::Lightsail
     #   `ISSUED` status.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made, regardless of their current
-    #   status.
+    #   Amazon Web Services Region where the request is made, regardless of
+    #   their current status.
     #   @return [Array<String>]
     #
     # @!attribute [rw] include_certificate_details
@@ -7527,7 +7549,7 @@ module Aws::Lightsail
     #   The name for the certificate for which to return information.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetCertificatesRequest AWS API Documentation
@@ -7995,7 +8017,7 @@ module Aws::Lightsail
     #   The name of the container service for which to return information.
     #
     #   When omitted, the response includes all of your container services
-    #   in the AWS Region where the request is made.
+    #   in the Amazon Web Services Region where the request is made.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServicesRequest AWS API Documentation
@@ -8428,7 +8450,7 @@ module Aws::Lightsail
     #   The name of the distribution for which to return information.
     #
     #   When omitted, the response includes all of your distributions in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #   @return [String]
     #
     # @!attribute [rw] page_token
@@ -9436,6 +9458,55 @@ module Aws::Lightsail
     #
     class GetLoadBalancerTlsCertificatesResult < Struct.new(
       :tls_certificates)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetLoadBalancerTlsPoliciesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         page_token: "string",
+    #       }
+    #
+    # @!attribute [rw] page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetLoadBalancerTlsPolicies`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a
+    #   subsequent request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsPoliciesRequest AWS API Documentation
+    #
+    class GetLoadBalancerTlsPoliciesRequest < Struct.new(
+      :page_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tls_policies
+    #   An array of objects that describe the TLS security policies that are
+    #   available.
+    #   @return [Array<Types::LoadBalancerTlsPolicy>]
+    #
+    # @!attribute [rw] next_page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   A next page token is not returned if there are no more results to
+    #   display.
+    #
+    #   To get the next page of results, perform another
+    #   `GetLoadBalancerTlsPolicies` request and specify the next page token
+    #   using the `pageToken` parameter.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsPoliciesResult AWS API Documentation
+    #
+    class GetLoadBalancerTlsPoliciesResult < Struct.new(
+      :tls_policies,
+      :next_page_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11622,8 +11693,9 @@ module Aws::Lightsail
     # the validation rules of an input field.
     #
     # <note markdown="1"> Domain and distribution APIs are only available in the N. Virginia
-    # (`us-east-1`) AWS Region. Please set your AWS Region configuration to
-    # `us-east-1` to create, view, or edit these resources.
+    # (`us-east-1`) Amazon Web Services Region. Please set your Amazon Web
+    # Services Region configuration to `us-east-1` to create, view, or edit
+    # these resources.
     #
     #  </note>
     #
@@ -11753,11 +11825,12 @@ module Aws::Lightsail
     #
     # @!attribute [rw] location
     #   An object that describes the location of the distribution, such as
-    #   the AWS Region and Availability Zone.
+    #   the Amazon Web Services Region and Availability Zone.
     #
     #   <note markdown="1"> Lightsail distributions are global resources that can reference an
-    #   origin in any AWS Region, and distribute its content globally.
-    #   However, all distributions are located in the `us-east-1` Region.
+    #   origin in any Amazon Web Services Region, and distribute its content
+    #   globally. However, all distributions are located in the `us-east-1`
+    #   Region.
     #
     #    </note>
     #   @return [Types::ResourceLocation]
@@ -11966,6 +12039,21 @@ module Aws::Lightsail
     #   IPv4 and IPv6.
     #   @return [String]
     #
+    # @!attribute [rw] https_redirection_enabled
+    #   A Boolean value that indicates whether HTTPS redirection is enabled
+    #   for the load balancer.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] tls_policy_name
+    #   The name of the TLS security policy for the load balancer.
+    #
+    #   The following TLS security policy names are possible:
+    #
+    #   * `TLS-2016-08`
+    #
+    #   * `TLS-FS-Res-1-2-2019-08`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancer AWS API Documentation
     #
     class LoadBalancer < Struct.new(
@@ -11985,7 +12073,9 @@ module Aws::Lightsail
       :instance_health_summary,
       :tls_certificate_summaries,
       :configuration_options,
-      :ip_address_type)
+      :ip_address_type,
+      :https_redirection_enabled,
+      :tls_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12377,6 +12467,76 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the TLS security policies that are available for Lightsail
+    # load balancers.
+    #
+    # For more information about load balancer TLS security policies, see
+    # [Load balancer TLS security policies][1] in the *Amazon Lightsail
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #
+    # @!attribute [rw] name
+    #   The name of the TLS security policy.
+    #
+    #   The following TLS security policy names are possible:
+    #
+    #   * `TLS-2016-08`
+    #
+    #   * `TLS-FS-Res-1-2-2019-08`
+    #
+    #   You can specify either of these values for the
+    #   `tlsSecurityPolicyName` request parameter in the
+    #   [CreateLoadBalancer][1] action, and the `attributeValue` request
+    #   parameter in the [UpdateLoadBalancerAttribute][2] action.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateLoadBalancer.html
+    #   [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateLoadBalancerAttribute.html
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   A Boolean value that indicates whether the TLS security policy is
+    #   the default.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] description
+    #   The description of the TLS security policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] protocols
+    #   The protocols used in a given TLS security policy.
+    #
+    #   The following protocols are possible:
+    #
+    #   * `Protocol-TLSv1`
+    #
+    #   * `Protocol-TLSv1.1`
+    #
+    #   * `Protocol-TLSv1.2`
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] ciphers
+    #   The ciphers used by the TLS security policy.
+    #
+    #   The ciphers are listed in order of preference.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancerTlsPolicy AWS API Documentation
+    #
+    class LoadBalancerTlsPolicy < Struct.new(
+      :name,
+      :is_default,
+      :description,
+      :protocols,
+      :ciphers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a database log event.
     #
     # @!attribute [rw] created_at
@@ -12580,7 +12740,7 @@ module Aws::Lightsail
     #   @return [Time]
     #
     # @!attribute [rw] location
-    #   The AWS Region and Availability Zone.
+    #   The Amazon Web Services Region and Availability Zone.
     #   @return [Types::ResourceLocation]
     #
     # @!attribute [rw] is_terminal
@@ -13089,12 +13249,12 @@ module Aws::Lightsail
     #   triggered.
     #
     #   A notification is not sent if a contact protocol is not specified,
-    #   if the specified contact protocol is not configured in the AWS
-    #   Region, or if notifications are not enabled for the alarm using the
-    #   `notificationEnabled` paramater.
+    #   if the specified contact protocol is not configured in the Amazon
+    #   Web Services Region, or if notifications are not enabled for the
+    #   alarm using the `notificationEnabled` paramater.
     #
     #   Use the `CreateContactMethod` action to configure a contact protocol
-    #   in an AWS Region.
+    #   in an Amazon Web Services Region.
     #   @return [Array<String>]
     #
     # @!attribute [rw] notification_triggers
@@ -13421,8 +13581,8 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] container_image
-    #   Describes a container image that is registered to an Amazon
-    #   Lightsail container service.
+    #   An object that describes a container image that is registered to a
+    #   Lightsail container service
     #   @return [Types::ContainerImage]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/RegisterContainerImageResult AWS API Documentation
@@ -14207,8 +14367,9 @@ module Aws::Lightsail
     #   `LoadBalancer`.
     #
     #   <note markdown="1"> Distribution-related APIs are available only in the N. Virginia
-    #   (`us-east-1`) AWS Region. Set your AWS Region configuration to
-    #   `us-east-1` to create, view, or edit distributions.
+    #   (`us-east-1`) Amazon Web Services Region. Set your Amazon Web
+    #   Services Region configuration to `us-east-1` to create, view, or
+    #   edit distributions.
     #
     #    </note>
     #   @return [String]
@@ -14831,10 +14992,11 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] readonly_access_accounts
-    #   An array of strings to specify the AWS account IDs that can access
-    #   the bucket.
+    #   An array of strings to specify the Amazon Web Services account IDs
+    #   that can access the bucket.
     #
-    #   You can give a maximum of 10 AWS accounts access to a bucket.
+    #   You can give a maximum of 10 Amazon Web Services accounts access to
+    #   a bucket.
     #   @return [Array<String>]
     #
     # @!attribute [rw] access_log_config
@@ -14996,7 +15158,9 @@ module Aws::Lightsail
     end
 
     # @!attribute [rw] operation
-    #   Describes the API operation.
+    #   An object that describes the result of the action, such as the
+    #   status of the request, the timestamp of the request, and the
+    #   resources affected by the request.
     #   @return [Types::Operation]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionBundleResult AWS API Documentation
@@ -15168,7 +15332,7 @@ module Aws::Lightsail
     #
     #       {
     #         load_balancer_name: "ResourceName", # required
-    #         attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds
+    #         attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds, HttpsRedirectionEnabled, TlsPolicyName
     #         attribute_value: "StringMax256", # required
     #       }
     #
@@ -15178,12 +15342,36 @@ module Aws::Lightsail
     #   @return [String]
     #
     # @!attribute [rw] attribute_name
-    #   The name of the attribute you want to update. Valid values are
-    #   below.
+    #   The name of the attribute you want to update.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
     #   The value that you want to specify for the attribute name.
+    #
+    #   The following values are supported depending on what you specify for
+    #   the `attributeName` request parameter:
+    #
+    #   * If you specify `HealthCheckPath` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     path to ping on the target (for example,
+    #     `/weather/us/wa/seattle`).
+    #
+    #   * If you specify `SessionStickinessEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter
+    #     must be `true` or `false`.
+    #
+    #   * If you specify `SessionStickiness_LB_CookieDurationSeconds` for
+    #     the `attributeName` request parameter, then the `attributeValue`
+    #     request parameter must be an interger that represents the cookie
+    #     duration in seconds.
+    #
+    #   * If you specify `HttpsRedirectionEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter
+    #     must be `true` or `false`.
+    #
+    #   * If you specify `TlsPolicyName` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be
+    #     `TLS version 1.0, 1.1, and 1.2` or `TLS version 1.2`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateLoadBalancerAttributeRequest AWS API Documentation

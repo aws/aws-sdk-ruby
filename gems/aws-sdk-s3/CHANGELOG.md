@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+1.113.2 (2022-04-26)
+------------------
+
 * Issue - Fix an issue where `ExpiredToken` errors were retried as if the request was from another region.
 
 1.113.1 (2022-04-25)

@@ -511,6 +511,9 @@
   "IoTWireless": {
     "models": "iotwireless/2020-11-22"
   },
+  "Ivschat": {
+    "models": "ivschat/2020-07-14"
+  },
   "KMS": {
     "models": "kms/2014-11-01"
   },

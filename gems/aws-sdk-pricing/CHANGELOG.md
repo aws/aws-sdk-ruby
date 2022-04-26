@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.38.0 (2022-04-26)
+------------------
+
+* Feature - Documentation updates for Price List API
+
 1.37.0 (2022-02-24)
 ------------------
 

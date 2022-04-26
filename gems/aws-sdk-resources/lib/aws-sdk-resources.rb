@@ -160,6 +160,7 @@ module Aws
   autoload :IoTThingsGraph, 'aws-sdk-iotthingsgraph'
   autoload :IoTTwinMaker, 'aws-sdk-iottwinmaker'
   autoload :IoTWireless, 'aws-sdk-iotwireless'
+  autoload :Ivschat, 'aws-sdk-ivschat'
   autoload :KMS, 'aws-sdk-kms'
   autoload :Kafka, 'aws-sdk-kafka'
   autoload :KafkaConnect, 'aws-sdk-kafkaconnect'

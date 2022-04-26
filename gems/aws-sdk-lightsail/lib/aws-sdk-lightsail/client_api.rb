@@ -354,6 +354,8 @@ module Aws::Lightsail
     GetLoadBalancerResult = Shapes::StructureShape.new(name: 'GetLoadBalancerResult')
     GetLoadBalancerTlsCertificatesRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesRequest')
     GetLoadBalancerTlsCertificatesResult = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsCertificatesResult')
+    GetLoadBalancerTlsPoliciesRequest = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsPoliciesRequest')
+    GetLoadBalancerTlsPoliciesResult = Shapes::StructureShape.new(name: 'GetLoadBalancerTlsPoliciesResult')
     GetLoadBalancersRequest = Shapes::StructureShape.new(name: 'GetLoadBalancersRequest')
     GetLoadBalancersResult = Shapes::StructureShape.new(name: 'GetLoadBalancersResult')
     GetOperationRequest = Shapes::StructureShape.new(name: 'GetOperationRequest')
@@ -461,6 +463,8 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateStatus = Shapes::StringShape.new(name: 'LoadBalancerTlsCertificateStatus')
     LoadBalancerTlsCertificateSummary = Shapes::StructureShape.new(name: 'LoadBalancerTlsCertificateSummary')
     LoadBalancerTlsCertificateSummaryList = Shapes::ListShape.new(name: 'LoadBalancerTlsCertificateSummaryList')
+    LoadBalancerTlsPolicy = Shapes::StructureShape.new(name: 'LoadBalancerTlsPolicy')
+    LoadBalancerTlsPolicyList = Shapes::ListShape.new(name: 'LoadBalancerTlsPolicyList')
     LogEvent = Shapes::StructureShape.new(name: 'LogEvent')
     LogEventList = Shapes::ListShape.new(name: 'LogEventList')
     MetricDatapoint = Shapes::StructureShape.new(name: 'MetricDatapoint')
@@ -1224,6 +1228,7 @@ module Aws::Lightsail
     CreateLoadBalancerRequest.add_member(:certificate_alternative_names, Shapes::ShapeRef.new(shape: DomainNameList, location_name: "certificateAlternativeNames"))
     CreateLoadBalancerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateLoadBalancerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    CreateLoadBalancerRequest.add_member(:tls_policy_name, Shapes::ShapeRef.new(shape: string, location_name: "tlsPolicyName"))
     CreateLoadBalancerRequest.struct_class = Types::CreateLoadBalancerRequest
 
     CreateLoadBalancerResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))
@@ -1921,6 +1926,13 @@ module Aws::Lightsail
     GetLoadBalancerTlsCertificatesResult.add_member(:tls_certificates, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateList, location_name: "tlsCertificates"))
     GetLoadBalancerTlsCertificatesResult.struct_class = Types::GetLoadBalancerTlsCertificatesResult
 
+    GetLoadBalancerTlsPoliciesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetLoadBalancerTlsPoliciesRequest.struct_class = Types::GetLoadBalancerTlsPoliciesRequest
+
+    GetLoadBalancerTlsPoliciesResult.add_member(:tls_policies, Shapes::ShapeRef.new(shape: LoadBalancerTlsPolicyList, location_name: "tlsPolicies"))
+    GetLoadBalancerTlsPoliciesResult.add_member(:next_page_token, Shapes::ShapeRef.new(shape: string, location_name: "nextPageToken"))
+    GetLoadBalancerTlsPoliciesResult.struct_class = Types::GetLoadBalancerTlsPoliciesResult
+
     GetLoadBalancersRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
     GetLoadBalancersRequest.struct_class = Types::GetLoadBalancersRequest
 
@@ -2278,6 +2290,8 @@ module Aws::Lightsail
     LoadBalancer.add_member(:tls_certificate_summaries, Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummaryList, location_name: "tlsCertificateSummaries"))
     LoadBalancer.add_member(:configuration_options, Shapes::ShapeRef.new(shape: LoadBalancerConfigurationOptions, location_name: "configurationOptions"))
     LoadBalancer.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    LoadBalancer.add_member(:https_redirection_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "httpsRedirectionEnabled"))
+    LoadBalancer.add_member(:tls_policy_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "tlsPolicyName"))
     LoadBalancer.struct_class = Types::LoadBalancer
 
     LoadBalancerConfigurationOptions.key = Shapes::ShapeRef.new(shape: LoadBalancerAttributeName)
@@ -2338,6 +2352,15 @@ module Aws::Lightsail
     LoadBalancerTlsCertificateSummary.struct_class = Types::LoadBalancerTlsCertificateSummary
 
     LoadBalancerTlsCertificateSummaryList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsCertificateSummary)
+
+    LoadBalancerTlsPolicy.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
+    LoadBalancerTlsPolicy.add_member(:is_default, Shapes::ShapeRef.new(shape: boolean, location_name: "isDefault"))
+    LoadBalancerTlsPolicy.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "description"))
+    LoadBalancerTlsPolicy.add_member(:protocols, Shapes::ShapeRef.new(shape: StringList, location_name: "protocols"))
+    LoadBalancerTlsPolicy.add_member(:ciphers, Shapes::ShapeRef.new(shape: StringList, location_name: "ciphers"))
+    LoadBalancerTlsPolicy.struct_class = Types::LoadBalancerTlsPolicy
+
+    LoadBalancerTlsPolicyList.member = Shapes::ShapeRef.new(shape: LoadBalancerTlsPolicy)
 
     LogEvent.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     LogEvent.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
@@ -4330,6 +4353,19 @@ module Aws::Lightsail
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+      end)
+
+      api.add_operation(:get_load_balancer_tls_policies, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLoadBalancerTlsPolicies"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsPoliciesRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLoadBalancerTlsPoliciesResult)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccountSetupInProgressException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthenticatedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
       end)
 
       api.add_operation(:get_load_balancers, Seahorse::Model::Operation.new.tap do |o|

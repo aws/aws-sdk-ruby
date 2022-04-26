@@ -3266,6 +3266,10 @@ module Aws::SageMaker
     #   A set of conditions for stopping a recommendation job. If any of the
     #   conditions are met, the job is automatically stopped.
     #
+    # @option params [Types::RecommendationJobOutputConfig] :output_config
+    #   Provides information about the output artifacts and the KMS key to use
+    #   for Amazon S3 server-side encryption.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The metadata that you apply to Amazon Web Services resources to help
     #   you categorize and organize them. Each tag consists of a key and a
@@ -3318,6 +3322,7 @@ module Aws::SageMaker
     #           },
     #         },
     #       ],
+    #       volume_kms_key_id: "KmsKeyId",
     #     },
     #     job_description: "RecommendationJobDescription",
     #     stopping_conditions: {
@@ -3328,6 +3333,12 @@ module Aws::SageMaker
     #           value_in_milliseconds: 1,
     #         },
     #       ],
+    #     },
+    #     output_config: {
+    #       kms_key_id: "KmsKeyId",
+    #       compiled_output_config: {
+    #         s3_output_uri: "S3Uri",
+    #       },
     #     },
     #     tags: [
     #       {
@@ -9602,6 +9613,7 @@ module Aws::SageMaker
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].name #=> String
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value #=> Array
     #   resp.input_config.endpoint_configurations[0].environment_parameter_ranges.categorical_parameter_ranges[0].value[0] #=> String
+    #   resp.input_config.volume_kms_key_id #=> String
     #   resp.stopping_conditions.max_invocations #=> Integer
     #   resp.stopping_conditions.model_latency_thresholds #=> Array
     #   resp.stopping_conditions.model_latency_thresholds[0].percentile #=> String
@@ -19452,7 +19464,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.121.0'
+      context[:gem_version] = '1.122.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

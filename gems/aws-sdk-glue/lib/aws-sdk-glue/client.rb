@@ -815,7 +815,11 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the details for the custom patterns specified by a list of
+    # names.
+    #
     # @option params [required, Array<String>] :names
+    #   A list of names of the custom patterns that you want to retrieve.
     #
     # @return [Types::BatchGetCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1781,6 +1785,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #   Specifies AWS Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -1893,11 +1898,28 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Creates a custom pattern that is used to detect sensitive data across
+    # the columns and rows of your structured data.
+    #
+    # Each custom pattern you create specifies a regular expression and an
+    # optional list of context words. If no context words are passed only a
+    # regular expression is checked.
+    #
     # @option params [required, String] :name
+    #   A name for the custom pattern that allows it to be retrieved or
+    #   deleted later. This name must be unique per Amazon Web Services
+    #   account.
     #
     # @option params [required, String] :regex_string
+    #   A regular expression string that is used for detecting sensitive data
+    #   in a custom pattern.
     #
     # @option params [Array<String>] :context_words
+    #   A list of context words. If none of these context words are found
+    #   within the vicinity of the regular expression the data will not be
+    #   detected as sensitive data.
+    #
+    #   If no context words are passed only a regular expression is checked.
     #
     # @return [Types::CreateCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3666,7 +3688,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Deletes a custom pattern by specifying its name.
+    #
     # @option params [required, String] :name
+    #   The name of the custom pattern that you want to delete.
     #
     # @return [Types::DeleteCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5108,7 +5133,10 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the details of a custom pattern by specifying its name.
+    #
     # @option params [required, String] :name
+    #   The name of the custom pattern that you want to retrieve.
     #
     # @return [Types::GetCustomEntityTypeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8778,9 +8806,13 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Lists all the custom patterns that have been created.
+    #
     # @option params [String] :next_token
+    #   A paginated token to offset the results.
     #
     # @option params [Integer] :max_results
+    #   The maximum number of results to return.
     #
     # @return [Types::ListCustomEntityTypesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11183,6 +11215,7 @@ module Aws::Glue
     #   Specifies data lineage configuration settings for the crawler.
     #
     # @option params [Types::LakeFormationConfiguration] :lake_formation_configuration
+    #   Specifies AWS Lake Formation configuration settings for the crawler.
     #
     # @option params [String] :configuration
     #   Crawler configuration information. This versioned JSON string allows
@@ -12161,7 +12194,7 @@ module Aws::Glue
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.111.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

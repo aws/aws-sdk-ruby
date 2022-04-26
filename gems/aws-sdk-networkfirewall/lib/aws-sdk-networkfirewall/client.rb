@@ -437,8 +437,8 @@ module Aws::NetworkFirewall
     # You can specify one subnet for each of the Availability Zones that the
     # VPC spans.
     #
-    # This request creates an AWS Network Firewall firewall endpoint in each
-    # of the subnets. To enable the firewall's protections, you must also
+    # This request creates an Network Firewall firewall endpoint in each of
+    # the subnets. To enable the firewall's protections, you must also
     # modify the VPC's route tables for each subnet's Availability Zone,
     # to redirect the traffic that's coming into and going out of the zone
     # through the firewall endpoint.
@@ -513,14 +513,14 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates an AWS Network Firewall Firewall and accompanying
-    # FirewallStatus for a VPC.
+    # Creates an Network Firewall Firewall and accompanying FirewallStatus
+    # for a VPC.
     #
-    # The firewall defines the configuration settings for an AWS Network
+    # The firewall defines the configuration settings for an Network
     # Firewall firewall. The settings that you can define at creation
     # include the firewall policy, the subnets in your VPC to use for the
-    # firewall endpoints, and any tags that are attached to the firewall AWS
-    # resource.
+    # firewall endpoints, and any tags that are attached to the firewall
+    # Amazon Web Services resource.
     #
     # After you create a firewall, you can provide additional settings, like
     # the logging configuration.
@@ -530,8 +530,9 @@ module Aws::NetworkFirewall
     # UpdateLoggingConfiguration, AssociateSubnets, and
     # UpdateFirewallDeleteProtection.
     #
-    # To manage a firewall's tags, use the standard AWS resource tagging
-    # operations, ListTagsForResource, TagResource, and UntagResource.
+    # To manage a firewall's tags, use the standard Amazon Web Services
+    # resource tagging operations, ListTagsForResource, TagResource, and
+    # UntagResource.
     #
     # To retrieve information about firewalls, use ListFirewalls and
     # DescribeFirewall.
@@ -582,6 +583,10 @@ module Aws::NetworkFirewall
     # @option params [Array<Types::Tag>] :tags
     #   The key:value pairs to associate with the resource.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   resources.
+    #
     # @return [Types::CreateFirewallResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFirewallResponse#firewall #firewall} => Types::Firewall
@@ -608,6 +613,10 @@ module Aws::NetworkFirewall
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -626,6 +635,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags #=> Array
     #   resp.firewall.tags[0].key #=> String
     #   resp.firewall.tags[0].value #=> String
+    #   resp.firewall.encryption_configuration.key_id #=> String
+    #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
     #   resp.firewall_status.sync_states #=> Hash
@@ -648,7 +659,7 @@ module Aws::NetworkFirewall
     # Creates the firewall policy for the firewall according to the
     # specifications.
     #
-    # An AWS Network Firewall firewall policy defines the behavior of a
+    # An Network Firewall firewall policy defines the behavior of a
     # firewall, in a collection of stateless and stateful rule groups and
     # other settings. You can use one firewall policy for multiple
     # firewalls.
@@ -680,6 +691,10 @@ module Aws::NetworkFirewall
     #
     #   If set to `FALSE`, Network Firewall makes the requested changes to
     #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
     #
     # @return [Types::CreateFirewallPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -735,6 +750,10 @@ module Aws::NetworkFirewall
     #       },
     #     ],
     #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -751,6 +770,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
     #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
     #   resp.firewall_policy_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicy AWS API Documentation
     #
@@ -868,6 +889,10 @@ module Aws::NetworkFirewall
     #
     #   If set to `FALSE`, Network Firewall makes the requested changes to
     #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your rule
+    #   group resources.
     #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -988,6 +1013,10 @@ module Aws::NetworkFirewall
     #       },
     #     ],
     #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -1005,6 +1034,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags[0].value #=> String
     #   resp.rule_group_response.consumed_capacity #=> Integer
     #   resp.rule_group_response.number_of_associations #=> Integer
+    #   resp.rule_group_response.encryption_configuration.key_id #=> String
+    #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroup AWS API Documentation
     #
@@ -1070,6 +1101,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags #=> Array
     #   resp.firewall.tags[0].key #=> String
     #   resp.firewall.tags[0].value #=> String
+    #   resp.firewall.encryption_configuration.key_id #=> String
+    #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1126,6 +1159,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
     #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
     #   resp.firewall_policy_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicy AWS API Documentation
     #
@@ -1209,6 +1244,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags[0].value #=> String
     #   resp.rule_group_response.consumed_capacity #=> Integer
     #   resp.rule_group_response.number_of_associations #=> Integer
+    #   resp.rule_group_response.encryption_configuration.key_id #=> String
+    #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteRuleGroup AWS API Documentation
     #
@@ -1262,6 +1299,8 @@ module Aws::NetworkFirewall
     #   resp.firewall.tags #=> Array
     #   resp.firewall.tags[0].key #=> String
     #   resp.firewall.tags[0].value #=> String
+    #   resp.firewall.encryption_configuration.key_id #=> String
+    #   resp.firewall.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_status.status #=> String, one of "PROVISIONING", "DELETING", "READY"
     #   resp.firewall_status.configuration_sync_state_summary #=> String, one of "PENDING", "IN_SYNC"
     #   resp.firewall_status.sync_states #=> Hash
@@ -1321,6 +1360,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
     #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
     #   resp.firewall_policy_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #   resp.firewall_policy.stateless_rule_group_references #=> Array
     #   resp.firewall_policy.stateless_rule_group_references[0].resource_arn #=> String
     #   resp.firewall_policy.stateless_rule_group_references[0].priority #=> Integer
@@ -1524,6 +1565,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags[0].value #=> String
     #   resp.rule_group_response.consumed_capacity #=> Integer
     #   resp.rule_group_response.number_of_associations #=> Integer
+    #   resp.rule_group_response.encryption_configuration.key_id #=> String
+    #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroup AWS API Documentation
     #
@@ -1826,11 +1869,11 @@ module Aws::NetworkFirewall
     # key:value pairs that you can use to categorize and manage your
     # resources, for purposes like billing. For example, you might set the
     # tag key to "customer" and the value to the customer name or ID. You
-    # can specify one or more tags to add to each AWS resource, up to 50
-    # tags for a resource.
+    # can specify one or more tags to add to each Amazon Web Services
+    # resource, up to 50 tags for a resource.
     #
-    # You can tag the AWS resources that you manage through AWS Network
-    # Firewall: firewalls, firewall policies, and rule groups.
+    # You can tag the Amazon Web Services resources that you manage through
+    # Network Firewall: firewalls, firewall policies, and rule groups.
     #
     # @option params [String] :next_token
     #   When you request a list of objects with a `MaxResults` setting, if the
@@ -1879,11 +1922,11 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
-    # Creates or updates an AWS Identity and Access Management policy for
-    # your rule group or firewall policy. Use this to share rule groups and
-    # firewall policies between accounts. This operation works in
-    # conjunction with the AWS Resource Access Manager (RAM) service to
-    # manage resource sharing for Network Firewall.
+    # Creates or updates an IAM policy for your rule group or firewall
+    # policy. Use this to share rule groups and firewall policies between
+    # accounts. This operation works in conjunction with the Amazon Web
+    # Services Resource Access Manager (RAM) service to manage resource
+    # sharing for Network Firewall.
     #
     # Use this operation to create or update a resource policy for your rule
     # group or firewall policy. In the policy, you specify the accounts that
@@ -1900,8 +1943,8 @@ module Aws::NetworkFirewall
     # * [AcceptResourceShareInvitation][2] - Accepts the share invitation
     #   for a specified resource share.
     #
-    # For additional information about resource sharing using RAM, see [AWS
-    # Resource Access Manager User Guide][3].
+    # For additional information about resource sharing using RAM, see
+    # [Resource Access Manager User Guide][3].
     #
     #
     #
@@ -1914,10 +1957,9 @@ module Aws::NetworkFirewall
     #   rule groups and firewall policies with.
     #
     # @option params [required, String] :policy
-    #   The AWS Identity and Access Management policy statement that lists the
-    #   accounts that you want to share your rule group or firewall policy
-    #   with and the operations that you want the accounts to be able to
-    #   perform.
+    #   The IAM policy statement that lists the accounts that you want to
+    #   share your rule group or firewall policy with and the operations that
+    #   you want the accounts to be able to perform.
     #
     #   For a rule group resource, you can specify the following operations in
     #   the Actions section of the statement:
@@ -1965,11 +2007,11 @@ module Aws::NetworkFirewall
     # pairs that you can use to categorize and manage your resources, for
     # purposes like billing. For example, you might set the tag key to
     # "customer" and the value to the customer name or ID. You can specify
-    # one or more tags to add to each AWS resource, up to 50 tags for a
-    # resource.
+    # one or more tags to add to each Amazon Web Services resource, up to 50
+    # tags for a resource.
     #
-    # You can tag the AWS resources that you manage through AWS Network
-    # Firewall: firewalls, firewall policies, and rule groups.
+    # You can tag the Amazon Web Services resources that you manage through
+    # Network Firewall: firewalls, firewall policies, and rule groups.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2003,11 +2045,12 @@ module Aws::NetworkFirewall
     # Tags are key:value pairs that you can use to categorize and manage
     # your resources, for purposes like billing. For example, you might set
     # the tag key to "customer" and the value to the customer name or ID.
-    # You can specify one or more tags to add to each AWS resource, up to 50
-    # tags for a resource.
+    # You can specify one or more tags to add to each Amazon Web Services
+    # resource, up to 50 tags for a resource.
     #
-    # You can manage tags for the AWS resources that you manage through AWS
-    # Network Firewall: firewalls, firewall policies, and rule groups.
+    # You can manage tags for the Amazon Web Services resources that you
+    # manage through Network Firewall: firewalls, firewall policies, and
+    # rule groups.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource.
@@ -2176,6 +2219,86 @@ module Aws::NetworkFirewall
       req.send_request(options)
     end
 
+    # A complex type that contains settings for encryption of your firewall
+    # resources.
+    #
+    # @option params [String] :update_token
+    #   An optional token that you can use for optimistic locking. Network
+    #   Firewall returns a token to your requests that access the firewall.
+    #   The token marks the state of the firewall resource at the time of the
+    #   request.
+    #
+    #   To make an unconditional change to the firewall, omit the token in
+    #   your update request. Without the token, Network Firewall performs your
+    #   updates regardless of whether the firewall has changed since you last
+    #   retrieved it.
+    #
+    #   To make a conditional change to the firewall, provide the token in
+    #   your update request. Network Firewall uses the token to ensure that
+    #   the firewall hasn't changed since you last retrieved it. If it has
+    #   changed, the operation fails with an `InvalidTokenException`. If this
+    #   happens, retrieve the firewall again to get a current copy of it with
+    #   a new token. Reapply your changes as needed, then try the operation
+    #   again using the new token.
+    #
+    # @option params [String] :firewall_arn
+    #   The Amazon Resource Name (ARN) of the firewall.
+    #
+    # @option params [String] :firewall_name
+    #   The descriptive name of the firewall. You can't change the name of a
+    #   firewall after you create it.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains optional Amazon Web Services Key
+    #   Management Service (KMS) encryption settings for your Network Firewall
+    #   resources. Your data is encrypted by default with an Amazon Web
+    #   Services owned key that Amazon Web Services owns and manages for you.
+    #   You can use either the Amazon Web Services owned key, or provide your
+    #   own customer managed key. To learn more about KMS encryption of your
+    #   Network Firewall resources, see [Encryption at rest with Amazon Web
+    #   Services Key Managment Service][1] in the *Network Firewall Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-encryption-at-rest.html
+    #
+    # @return [Types::UpdateFirewallEncryptionConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFirewallEncryptionConfigurationResponse#firewall_arn #firewall_arn} => String
+    #   * {Types::UpdateFirewallEncryptionConfigurationResponse#firewall_name #firewall_name} => String
+    #   * {Types::UpdateFirewallEncryptionConfigurationResponse#update_token #update_token} => String
+    #   * {Types::UpdateFirewallEncryptionConfigurationResponse#encryption_configuration #encryption_configuration} => Types::EncryptionConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_firewall_encryption_configuration({
+    #     update_token: "UpdateToken",
+    #     firewall_arn: "ResourceArn",
+    #     firewall_name: "ResourceName",
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.firewall_arn #=> String
+    #   resp.firewall_name #=> String
+    #   resp.update_token #=> String
+    #   resp.encryption_configuration.key_id #=> String
+    #   resp.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallEncryptionConfiguration AWS API Documentation
+    #
+    # @overload update_firewall_encryption_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_firewall_encryption_configuration(params = {}, options = {})
+      req = build_request(:update_firewall_encryption_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the properties of the specified firewall policy.
     #
     # @option params [required, String] :update_token
@@ -2222,6 +2345,10 @@ module Aws::NetworkFirewall
     #
     #   If set to `FALSE`, Network Firewall makes the requested changes to
     #   your resources.
+    #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your firewall
+    #   policy resources.
     #
     # @return [Types::UpdateFirewallPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2273,6 +2400,10 @@ module Aws::NetworkFirewall
     #     },
     #     description: "Description",
     #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -2289,6 +2420,8 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.consumed_stateless_rule_capacity #=> Integer
     #   resp.firewall_policy_response.consumed_stateful_rule_capacity #=> Integer
     #   resp.firewall_policy_response.number_of_associations #=> Integer
+    #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
+    #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicy AWS API Documentation
     #
@@ -2539,6 +2672,10 @@ module Aws::NetworkFirewall
     #   If set to `FALSE`, Network Firewall makes the requested changes to
     #   your resources.
     #
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   A complex type that contains settings for encryption of your rule
+    #   group resources.
+    #
     # @return [Types::UpdateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRuleGroupResponse#update_token #update_token} => String
@@ -2653,6 +2790,10 @@ module Aws::NetworkFirewall
     #     type: "STATELESS", # accepts STATELESS, STATEFUL
     #     description: "Description",
     #     dry_run: false,
+    #     encryption_configuration: {
+    #       key_id: "KeyId",
+    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
     #   })
     #
     # @example Response structure
@@ -2670,6 +2811,8 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.tags[0].value #=> String
     #   resp.rule_group_response.consumed_capacity #=> Integer
     #   resp.rule_group_response.number_of_associations #=> Integer
+    #   resp.rule_group_response.encryption_configuration.key_id #=> String
+    #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroup AWS API Documentation
     #
@@ -2762,7 +2905,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.16.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

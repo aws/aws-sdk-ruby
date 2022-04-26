@@ -605,6 +605,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] names
+    #   A list of names of the custom patterns that you want to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypesRequest AWS API Documentation
@@ -616,9 +617,12 @@ module Aws::Glue
     end
 
     # @!attribute [rw] custom_entity_types
+    #   A list of `CustomEntityType` objects representing the custom
+    #   patterns that have been created.
     #   @return [Array<Types::CustomEntityType>]
     #
     # @!attribute [rw] custom_entity_types_not_found
+    #   A list of the names of custom patterns that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetCustomEntityTypesResponse AWS API Documentation
@@ -2695,6 +2699,8 @@ module Aws::Glue
     #   @return [String]
     #
     # @!attribute [rw] lake_formation_configuration
+    #   Specifies whether the crawler should use AWS Lake Formation
+    #   credentials for the crawler instead of the IAM role credentials.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
@@ -3221,6 +3227,7 @@ module Aws::Glue
     #   @return [Types::LineageConfiguration]
     #
     # @!attribute [rw] lake_formation_configuration
+    #   Specifies AWS Lake Formation configuration settings for the crawler.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @!attribute [rw] configuration
@@ -3344,12 +3351,22 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
+    #   A name for the custom pattern that allows it to be retrieved or
+    #   deleted later. This name must be unique per Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] regex_string
+    #   A regular expression string that is used for detecting sensitive
+    #   data in a custom pattern.
     #   @return [String]
     #
     # @!attribute [rw] context_words
+    #   A list of context words. If none of these context words are found
+    #   within the vicinity of the regular expression the data will not be
+    #   detected as sensitive data.
+    #
+    #   If no context words are passed only a regular expression is checked.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeRequest AWS API Documentation
@@ -3363,6 +3380,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
+    #   The name of the custom pattern you created.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCustomEntityTypeResponse AWS API Documentation
@@ -5424,13 +5442,26 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # An object representing a custom pattern for detecting sensitive data
+    # across the columns and rows of your structured data.
+    #
     # @!attribute [rw] name
+    #   A name for the custom pattern that allows it to be retrieved or
+    #   deleted later. This name must be unique per Amazon Web Services
+    #   account.
     #   @return [String]
     #
     # @!attribute [rw] regex_string
+    #   A regular expression string that is used for detecting sensitive
+    #   data in a custom pattern.
     #   @return [String]
     #
     # @!attribute [rw] context_words
+    #   A list of context words. If none of these context words are found
+    #   within the vicinity of the regular expression the data will not be
+    #   detected as sensitive data.
+    #
+    #   If no context words are passed only a regular expression is checked.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CustomEntityType AWS API Documentation
@@ -5971,6 +6002,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the custom pattern that you want to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityTypeRequest AWS API Documentation
@@ -5982,6 +6014,7 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
+    #   The name of the custom pattern you deleted.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteCustomEntityTypeResponse AWS API Documentation
@@ -8044,6 +8077,7 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] name
+    #   The name of the custom pattern that you want to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityTypeRequest AWS API Documentation
@@ -8055,12 +8089,19 @@ module Aws::Glue
     end
 
     # @!attribute [rw] name
+    #   The name of the custom pattern that you retrieved.
     #   @return [String]
     #
     # @!attribute [rw] regex_string
+    #   A regular expression string that is used for detecting sensitive
+    #   data in a custom pattern.
     #   @return [String]
     #
     # @!attribute [rw] context_words
+    #   A list of context words if specified when you created the custom
+    #   pattern. If none of these context words are found within the
+    #   vicinity of the regular expression the data will not be detected as
+    #   sensitive data.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCustomEntityTypeResponse AWS API Documentation
@@ -12079,6 +12120,8 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies AWS Lake Formation configuration settings for the crawler.
+    #
     # @note When making an API call, you may pass LakeFormationConfiguration
     #   data as a hash:
     #
@@ -12088,9 +12131,13 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] use_lake_formation_credentials
+    #   Specifies whether to use AWS Lake Formation credentials for the
+    #   crawler instead of the IAM role credentials.
     #   @return [Boolean]
     #
     # @!attribute [rw] account_id
+    #   Required for cross account crawls. For same account crawls as the
+    #   target data, this can be left as null.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/LakeFormationConfiguration AWS API Documentation
@@ -12316,9 +12363,11 @@ module Aws::Glue
     #       }
     #
     # @!attribute [rw] next_token
+    #   A paginated token to offset the results.
     #   @return [String]
     #
     # @!attribute [rw] max_results
+    #   The maximum number of results to return.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypesRequest AWS API Documentation
@@ -12331,9 +12380,11 @@ module Aws::Glue
     end
 
     # @!attribute [rw] custom_entity_types
+    #   A list of `CustomEntityType` objects representing custom patterns.
     #   @return [Array<Types::CustomEntityType>]
     #
     # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListCustomEntityTypesResponse AWS API Documentation
@@ -17955,6 +18006,7 @@ module Aws::Glue
     #   @return [Types::LineageConfiguration]
     #
     # @!attribute [rw] lake_formation_configuration
+    #   Specifies AWS Lake Formation configuration settings for the crawler.
     #   @return [Types::LakeFormationConfiguration]
     #
     # @!attribute [rw] configuration

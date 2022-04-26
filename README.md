@@ -526,6 +526,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Import/Export Snowball                         | Aws::Snowball                            | aws-sdk-snowball                            | 2016-06-30  |
 | Amazon Inspector                                      | Aws::Inspector                           | aws-sdk-inspector                           | 2016-02-16  |
 | Amazon Interactive Video Service                      | Aws::IVS                                 | aws-sdk-ivs                                 | 2020-07-14  |
+| Amazon Interactive Video Service Chat                 | Aws::Ivschat                             | aws-sdk-ivschat                             | 2020-07-14  |
 | Amazon Keyspaces                                      | Aws::Keyspaces                           | aws-sdk-keyspaces                           | 2022-02-10  |
 | Amazon Kinesis                                        | Aws::Kinesis                             | aws-sdk-kinesis                             | 2013-12-02  |
 | Amazon Kinesis Analytics                              | Aws::KinesisAnalytics                    | aws-sdk-kinesisanalytics                    | 2015-08-14  |

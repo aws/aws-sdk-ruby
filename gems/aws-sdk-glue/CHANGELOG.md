@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.111.0 (2022-04-26)
+------------------
+
+* Feature - This release adds documentation for the APIs to create, read, delete, list, and batch read of AWS Glue custom patterns, and for Lake Formation configuration settings in the AWS Glue crawler.
+
 1.110.0 (2022-04-21)
 ------------------
 

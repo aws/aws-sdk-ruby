@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.129.0 (2022-04-26)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-ivschat` gem.
+
 3.128.0 (2022-03-31)
 ------------------
 

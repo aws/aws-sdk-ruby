@@ -412,11 +412,11 @@ module Aws::Lightsail
     # Use the `CreateCertificate` action to create a certificate that you
     # can attach to your distribution.
     #
-    # Only certificates created in the `us-east-1` AWS Region can be
-    # attached to Lightsail distributions. Lightsail distributions are
-    # global resources that can reference an origin in any AWS Region, and
-    # distribute its content globally. However, all distributions are
-    # located in the `us-east-1` Region.
+    # Only certificates created in the `us-east-1` Amazon Web Services
+    # Region can be attached to Lightsail distributions. Lightsail
+    # distributions are global resources that can reference an origin in any
+    # Amazon Web Services Region, and distribute its content globally.
+    # However, all distributions are located in the `us-east-1` Region.
     #
     # @option params [required, String] :distribution_name
     #   The name of the distribution that the certificate will be attached to.
@@ -773,8 +773,8 @@ module Aws::Lightsail
     # Copies a manual snapshot of an instance or disk as another manual
     # snapshot, or copies an automatic snapshot of an instance or disk as a
     # manual snapshot. This operation can also be used to copy a manual or
-    # automatic snapshot of an instance or a disk from one AWS Region to
-    # another in Amazon Lightsail.
+    # automatic snapshot of an instance or a disk from one Amazon Web
+    # Services Region to another in Amazon Lightsail.
     #
     # When copying a *manual snapshot*, be sure to define the `source
     # region`, `source snapshot name`, and `target snapshot name`
@@ -854,8 +854,8 @@ module Aws::Lightsail
     #   The name of the new manual snapshot to be created as a copy.
     #
     # @option params [required, String] :source_region
-    #   The AWS Region where the source manual or automatic snapshot is
-    #   located.
+    #   The Amazon Web Services Region where the source manual or automatic
+    #   snapshot is located.
     #
     # @return [Types::CopySnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1107,11 +1107,11 @@ module Aws::Lightsail
     # `UpdateContainerService` action to use the certificate and its domains
     # with your container service.
     #
-    # Only certificates created in the `us-east-1` AWS Region can be
-    # attached to Lightsail distributions. Lightsail distributions are
-    # global resources that can reference an origin in any AWS Region, and
-    # distribute its content globally. However, all distributions are
-    # located in the `us-east-1` Region.
+    # Only certificates created in the `us-east-1` Amazon Web Services
+    # Region can be attached to Lightsail distributions. Lightsail
+    # distributions are global resources that can reference an origin in any
+    # Amazon Web Services Region, and distribute its content globally.
+    # However, all distributions are located in the `us-east-1` Region.
     #
     # @option params [required, String] :certificate_name
     #   The name for the certificate.
@@ -1285,10 +1285,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -1298,7 +1299,8 @@ module Aws::Lightsail
     #   The protocol of the contact method, such as `Email` or `SMS` (text
     #   messaging).
     #
-    #   The `SMS` protocol is supported only in the following AWS Regions.
+    #   The `SMS` protocol is supported only in the following Amazon Web
+    #   Services Regions.
     #
     #   * US East (N. Virginia) (`us-east-1`)
     #
@@ -1313,9 +1315,9 @@ module Aws::Lightsail
     #   * Asia Pacific (Sydney) (`ap-southeast-2`)
     #
     #   For a list of countries/regions where SMS text messages can be sent,
-    #   and the latest AWS Regions where SMS text messaging is supported, see
-    #   [Supported Regions and Countries][1] in the *Amazon SNS Developer
-    #   Guide*.
+    #   and the latest Amazon Web Services Regions where SMS text messaging is
+    #   supported, see [Supported Regions and Countries][1] in the *Amazon SNS
+    #   Developer Guide*.
     #
     #   For more information about notifications in Amazon Lightsail, see
     #   [Notifications in Amazon Lightsail][2].
@@ -1402,7 +1404,8 @@ module Aws::Lightsail
     #
     #   The following are the requirements for container service names:
     #
-    #   * Must be unique within each AWS Region in your Lightsail account.
+    #   * Must be unique within each Amazon Web Services Region in your
+    #     Lightsail account.
     #
     #   * Must contain 1 to 63 characters.
     #
@@ -3010,6 +3013,21 @@ module Aws::Lightsail
     #
     #   The default value is `dualstack`.
     #
+    # @option params [String] :tls_policy_name
+    #   The name of the TLS policy to apply to the load balancer.
+    #
+    #   Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
+    #   policy names that you can specify.
+    #
+    #   For more information about load balancer TLS policies, see [Load
+    #   balancer TLS security policies][2] in the *Amazon Lightsail Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
+    #   [2]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #
     # @return [Types::CreateLoadBalancerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateLoadBalancerResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -3030,6 +3048,7 @@ module Aws::Lightsail
     #       },
     #     ],
     #     ip_address_type: "dualstack", # accepts dualstack, ipv4
+    #     tls_policy_name: "string",
     #   })
     #
     # @example Response structure
@@ -3723,7 +3742,8 @@ module Aws::Lightsail
     # Deletes a Amazon Lightsail bucket.
     #
     # <note markdown="1"> When you delete your bucket, the bucket name is released and can be
-    # reused for a new bucket in your account or another AWS account.
+    # reused for a new bucket in your account or another Amazon Web Services
+    # account.
     #
     #  </note>
     #
@@ -3913,10 +3933,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -5629,8 +5650,8 @@ module Aws::Lightsail
     # @option params [String] :bucket_name
     #   The name of the bucket for which to return information.
     #
-    #   When omitted, the response includes all of your buckets in the AWS
-    #   Region where the request is made.
+    #   When omitted, the response includes all of your buckets in the Amazon
+    #   Web Services Region where the request is made.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -5774,8 +5795,8 @@ module Aws::Lightsail
     #   `ISSUED` status.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made, regardless of their current
-    #   status.
+    #   Amazon Web Services Region where the request is made, regardless of
+    #   their current status.
     #
     # @option params [Boolean] :include_certificate_details
     #   Indicates whether to include detailed information about the
@@ -5788,7 +5809,7 @@ module Aws::Lightsail
     #   The name for the certificate for which to return information.
     #
     #   When omitted, the response includes all of your certificates in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #
     # @return [Types::GetCertificatesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5914,10 +5935,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     #
     #
@@ -6358,7 +6380,7 @@ module Aws::Lightsail
     #   The name of the container service for which to return information.
     #
     #   When omitted, the response includes all of your container services in
-    #   the AWS Region where the request is made.
+    #   the Amazon Web Services Region where the request is made.
     #
     # @return [Types::ContainerServicesListResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -6908,7 +6930,7 @@ module Aws::Lightsail
     #   The name of the distribution for which to return information.
     #
     #   When omitted, the response includes all of your distributions in the
-    #   AWS Region where the request is made.
+    #   Amazon Web Services Region where the request is made.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -7961,6 +7983,8 @@ module Aws::Lightsail
     #   resp.load_balancer.configuration_options #=> Hash
     #   resp.load_balancer.configuration_options["LoadBalancerAttributeName"] #=> String
     #   resp.load_balancer.ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancer.https_redirection_enabled #=> Boolean
+    #   resp.load_balancer.tls_policy_name #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancer AWS API Documentation
     #
@@ -8251,6 +8275,57 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
+    # Returns a list of TLS security policies that you can apply to
+    # Lightsail load balancers.
+    #
+    # For more information about load balancer TLS security policies, see
+    # [Load balancer TLS security policies][1] in the *Amazon Lightsail
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
+    #
+    # @option params [String] :page_token
+    #   The token to advance to the next page of results from your request.
+    #
+    #   To get a page token, perform an initial `GetLoadBalancerTlsPolicies`
+    #   request. If your results are paginated, the response will return a
+    #   next page token that you can specify as the page token in a subsequent
+    #   request.
+    #
+    # @return [Types::GetLoadBalancerTlsPoliciesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLoadBalancerTlsPoliciesResult#tls_policies #tls_policies} => Array&lt;Types::LoadBalancerTlsPolicy&gt;
+    #   * {Types::GetLoadBalancerTlsPoliciesResult#next_page_token #next_page_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_load_balancer_tls_policies({
+    #     page_token: "string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tls_policies #=> Array
+    #   resp.tls_policies[0].name #=> String
+    #   resp.tls_policies[0].is_default #=> Boolean
+    #   resp.tls_policies[0].description #=> String
+    #   resp.tls_policies[0].protocols #=> Array
+    #   resp.tls_policies[0].protocols[0] #=> String
+    #   resp.tls_policies[0].ciphers #=> Array
+    #   resp.tls_policies[0].ciphers[0] #=> String
+    #   resp.next_page_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancerTlsPolicies AWS API Documentation
+    #
+    # @overload get_load_balancer_tls_policies(params = {})
+    # @param [Hash] params ({})
+    def get_load_balancer_tls_policies(params = {}, options = {})
+      req = build_request(:get_load_balancer_tls_policies, params)
+      req.send_request(options)
+    end
+
     # Returns information about all load balancers in an account.
     #
     # @option params [String] :page_token
@@ -8301,6 +8376,8 @@ module Aws::Lightsail
     #   resp.load_balancers[0].configuration_options #=> Hash
     #   resp.load_balancers[0].configuration_options["LoadBalancerAttributeName"] #=> String
     #   resp.load_balancers[0].ip_address_type #=> String, one of "dualstack", "ipv4"
+    #   resp.load_balancers[0].https_redirection_enabled #=> Boolean
+    #   resp.load_balancers[0].tls_policy_name #=> String
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetLoadBalancers AWS API Documentation
@@ -9634,12 +9711,12 @@ module Aws::Lightsail
     #   triggered.
     #
     #   A notification is not sent if a contact protocol is not specified, if
-    #   the specified contact protocol is not configured in the AWS Region, or
-    #   if notifications are not enabled for the alarm using the
-    #   `notificationEnabled` paramater.
+    #   the specified contact protocol is not configured in the Amazon Web
+    #   Services Region, or if notifications are not enabled for the alarm
+    #   using the `notificationEnabled` paramater.
     #
     #   Use the `CreateContactMethod` action to configure a contact protocol
-    #   in an AWS Region.
+    #   in an Amazon Web Services Region.
     #
     # @option params [Array<String>] :notification_triggers
     #   The alarm states that trigger a notification.
@@ -10064,10 +10141,11 @@ module Aws::Lightsail
     #
     # A contact method is used to send you notifications about your Amazon
     # Lightsail resources. You can add one email address and one mobile
-    # phone number contact method in each AWS Region. However, SMS text
-    # messaging is not supported in some AWS Regions, and SMS text messages
-    # cannot be sent to some countries/regions. For more information, see
-    # [Notifications in Amazon Lightsail][1].
+    # phone number contact method in each Amazon Web Services Region.
+    # However, SMS text messaging is not supported in some Amazon Web
+    # Services Regions, and SMS text messages cannot be sent to some
+    # countries/regions. For more information, see [Notifications in Amazon
+    # Lightsail][1].
     #
     # A verification request is sent to the contact method when you
     # initially create it. Use this action to send another verification
@@ -10133,8 +10211,9 @@ module Aws::Lightsail
     #   `LoadBalancer`.
     #
     #   <note markdown="1"> Distribution-related APIs are available only in the N. Virginia
-    #   (`us-east-1`) AWS Region. Set your AWS Region configuration to
-    #   `us-east-1` to create, view, or edit distributions.
+    #   (`us-east-1`) Amazon Web Services Region. Set your Amazon Web Services
+    #   Region configuration to `us-east-1` to create, view, or edit
+    #   distributions.
     #
     #    </note>
     #
@@ -10189,7 +10268,7 @@ module Aws::Lightsail
     # Lightsail bucket.
     #
     # Lightsail buckets currently support setting access for Lightsail
-    # instances in the same AWS Region.
+    # instances in the same Amazon Web Services Region.
     #
     # @option params [required, String] :resource_name
     #   The name of the Lightsail instance for which to set bucket access. The
@@ -10709,8 +10788,8 @@ module Aws::Lightsail
     # Updates an existing Amazon Lightsail bucket.
     #
     # Use this action to update the configuration of an existing bucket,
-    # such as versioning, public accessibility, and the AWS accounts that
-    # can access the bucket.
+    # such as versioning, public accessibility, and the Amazon Web Services
+    # accounts that can access the bucket.
     #
     # @option params [required, String] :bucket_name
     #   The name of the bucket to update.
@@ -10731,10 +10810,11 @@ module Aws::Lightsail
     #     bucket. Existing object versions are retained.
     #
     # @option params [Array<String>] :readonly_access_accounts
-    #   An array of strings to specify the AWS account IDs that can access the
-    #   bucket.
+    #   An array of strings to specify the Amazon Web Services account IDs
+    #   that can access the bucket.
     #
-    #   You can give a maximum of 10 AWS accounts access to a bucket.
+    #   You can give a maximum of 10 Amazon Web Services accounts access to a
+    #   bucket.
     #
     # @option params [Types::BucketAccessLogConfig] :access_log_config
     #   An object that describes the access log configuration for the bucket.
@@ -11275,10 +11355,34 @@ module Aws::Lightsail
     #   `my-load-balancer`.
     #
     # @option params [required, String] :attribute_name
-    #   The name of the attribute you want to update. Valid values are below.
+    #   The name of the attribute you want to update.
     #
     # @option params [required, String] :attribute_value
     #   The value that you want to specify for the attribute name.
+    #
+    #   The following values are supported depending on what you specify for
+    #   the `attributeName` request parameter:
+    #
+    #   * If you specify `HealthCheckPath` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     path to ping on the target (for example, `/weather/us/wa/seattle`).
+    #
+    #   * If you specify `SessionStickinessEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter must
+    #     be `true` or `false`.
+    #
+    #   * If you specify `SessionStickiness_LB_CookieDurationSeconds` for the
+    #     `attributeName` request parameter, then the `attributeValue` request
+    #     parameter must be an interger that represents the cookie duration in
+    #     seconds.
+    #
+    #   * If you specify `HttpsRedirectionEnabled` for the `attributeName`
+    #     request parameter, then the `attributeValue` request parameter must
+    #     be `true` or `false`.
+    #
+    #   * If you specify `TlsPolicyName` for the `attributeName` request
+    #     parameter, then the `attributeValue` request parameter must be `TLS
+    #     version 1.0, 1.1, and 1.2` or `TLS version 1.2`.
     #
     # @return [Types::UpdateLoadBalancerAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11288,7 +11392,7 @@ module Aws::Lightsail
     #
     #   resp = client.update_load_balancer_attribute({
     #     load_balancer_name: "ResourceName", # required
-    #     attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds
+    #     attribute_name: "HealthCheckPath", # required, accepts HealthCheckPath, SessionStickinessEnabled, SessionStickiness_LB_CookieDurationSeconds, HttpsRedirectionEnabled, TlsPolicyName
     #     attribute_value: "StringMax256", # required
     #   })
     #
@@ -11558,7 +11662,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

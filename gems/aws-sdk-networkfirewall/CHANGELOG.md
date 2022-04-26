@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-04-26)
+------------------
+
+* Feature - AWS Network Firewall now enables customers to use a customer managed AWS KMS key for the encryption of their firewall resources.
+
 1.15.0 (2022-02-24)
 ------------------
 

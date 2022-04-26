@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.122.0 (2022-04-26)
+------------------
+
+* Feature - SageMaker Inference Recommender now accepts customer KMS key ID for encryption of endpoints and compilation outputs created during inference recommendation.
+
 1.121.0 (2022-04-07)
 ------------------
 

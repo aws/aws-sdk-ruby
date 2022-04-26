@@ -6442,6 +6442,7 @@ module Aws::SageMaker
     #               },
     #             },
     #           ],
+    #           volume_kms_key_id: "KmsKeyId",
     #         },
     #         job_description: "RecommendationJobDescription",
     #         stopping_conditions: {
@@ -6452,6 +6453,12 @@ module Aws::SageMaker
     #               value_in_milliseconds: 1,
     #             },
     #           ],
+    #         },
+    #         output_config: {
+    #           kms_key_id: "KmsKeyId",
+    #           compiled_output_config: {
+    #             s3_output_uri: "S3Uri",
+    #           },
     #         },
     #         tags: [
     #           {
@@ -6494,6 +6501,11 @@ module Aws::SageMaker
     #   conditions are met, the job is automatically stopped.
     #   @return [Types::RecommendationJobStoppingConditions]
     #
+    # @!attribute [rw] output_config
+    #   Provides information about the output artifacts and the KMS key to
+    #   use for Amazon S3 server-side encryption.
+    #   @return [Types::RecommendationJobOutputConfig]
+    #
     # @!attribute [rw] tags
     #   The metadata that you apply to Amazon Web Services resources to help
     #   you categorize and organize them. Each tag consists of a key and a
@@ -6515,6 +6527,7 @@ module Aws::SageMaker
       :input_config,
       :job_description,
       :stopping_conditions,
+      :output_config,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -33594,6 +33607,29 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Provides information about the output configuration for the compiled
+    # model.
+    #
+    # @note When making an API call, you may pass RecommendationJobCompiledOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         s3_output_uri: "S3Uri",
+    #       }
+    #
+    # @!attribute [rw] s3_output_uri
+    #   Identifies the Amazon S3 bucket where you want SageMaker to store
+    #   the compiled model artifacts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobCompiledOutputConfig AWS API Documentation
+    #
+    class RecommendationJobCompiledOutputConfig < Struct.new(
+      :s3_output_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The input configuration of the recommendation job.
     #
     # @note When making an API call, you may pass RecommendationJobInputConfig
@@ -33630,6 +33666,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
+    #         volume_kms_key_id: "KmsKeyId",
     #       }
     #
     # @!attribute [rw] model_package_version_arn
@@ -33652,6 +33689,46 @@ module Aws::SageMaker
     #   Specifies the endpoint configuration to use for a job.
     #   @return [Array<Types::EndpointInputConfiguration>]
     #
+    # @!attribute [rw] volume_kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key that Amazon
+    #   SageMaker uses to encrypt data on the storage volume attached to the
+    #   ML compute instance that hosts the endpoint. This key will be passed
+    #   to SageMaker Hosting for endpoint creation.
+    #
+    #   The SageMaker execution role must have `kms:CreateGrant` permission
+    #   in order to encrypt data on the storage volume of the endpoints
+    #   created for inference recommendation. The inference recommendation
+    #   job will fail asynchronously during endpoint configuration creation
+    #   if the role passed does not have `kms:CreateGrant` permission.
+    #
+    #   The `KmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"`
+    #
+    #   For more information about key identifiers, see [Key identifiers
+    #   (KeyID)][1] in the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobInputConfig AWS API Documentation
     #
     class RecommendationJobInputConfig < Struct.new(
@@ -33659,7 +33736,69 @@ module Aws::SageMaker
       :job_duration_in_seconds,
       :traffic_pattern,
       :resource_limit,
-      :endpoint_configurations)
+      :endpoint_configurations,
+      :volume_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the output configuration for the compiled
+    # model.
+    #
+    # @note When making an API call, you may pass RecommendationJobOutputConfig
+    #   data as a hash:
+    #
+    #       {
+    #         kms_key_id: "KmsKeyId",
+    #         compiled_output_config: {
+    #           s3_output_uri: "S3Uri",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key that Amazon
+    #   SageMaker uses to encrypt your output artifacts with Amazon S3
+    #   server-side encryption. The SageMaker execution role must have
+    #   `kms:GenerateDataKey` permission.
+    #
+    #   The `KmsKeyId` can be any of the following formats:
+    #
+    #   * // KMS Key ID
+    #
+    #     `"1234abcd-12ab-34cd-56ef-1234567890ab"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key
+    #
+    #     `"arn:aws:kms:<region>:<account>:key/<key-id-12ab-34cd-56ef-1234567890ab>"`
+    #
+    #   * // KMS Key Alias
+    #
+    #     `"alias/ExampleAlias"`
+    #
+    #   * // Amazon Resource Name (ARN) of a KMS Key Alias
+    #
+    #     `"arn:aws:kms:<region>:<account>:alias/<ExampleAlias>"`
+    #
+    #   For more information about key identifiers, see [Key identifiers
+    #   (KeyID)][1] in the Amazon Web Services Key Management Service
+    #   (Amazon Web Services KMS) documentation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
+    #   @return [String]
+    #
+    # @!attribute [rw] compiled_output_config
+    #   Provides information about the output configuration for the compiled
+    #   model.
+    #   @return [Types::RecommendationJobCompiledOutputConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RecommendationJobOutputConfig AWS API Documentation
+    #
+    class RecommendationJobOutputConfig < Struct.new(
+      :kms_key_id,
+      :compiled_output_config)
       SENSITIVE = []
       include Aws::Structure
     end

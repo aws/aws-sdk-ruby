@@ -377,6 +377,7 @@ module Aws
             'IoTThingsGraph' => 'iotthingsgraph',
             'IoTTwinMaker' => 'iottwinmaker',
             'IoTWireless' => 'api.iotwireless',
+            'Ivschat' => 'ivschat',
             'KMS' => 'kms',
             'Kafka' => 'kafka',
             'KafkaConnect' => 'kafkaconnect',

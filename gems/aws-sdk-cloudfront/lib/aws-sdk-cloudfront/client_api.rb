@@ -426,6 +426,7 @@ module Aws::CloudFront
     ResponseHeadersPolicyList = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyList')
     ResponseHeadersPolicyReferrerPolicy = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyReferrerPolicy')
     ResponseHeadersPolicySecurityHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicySecurityHeadersConfig')
+    ResponseHeadersPolicyServerTimingHeadersConfig = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyServerTimingHeadersConfig')
     ResponseHeadersPolicyStrictTransportSecurity = Shapes::StructureShape.new(name: 'ResponseHeadersPolicyStrictTransportSecurity')
     ResponseHeadersPolicySummary = Shapes::StructureShape.new(name: 'ResponseHeadersPolicySummary')
     ResponseHeadersPolicySummaryList = Shapes::ListShape.new(name: 'ResponseHeadersPolicySummaryList')
@@ -435,6 +436,7 @@ module Aws::CloudFront
     S3Origin = Shapes::StructureShape.new(name: 'S3Origin')
     S3OriginConfig = Shapes::StructureShape.new(name: 'S3OriginConfig')
     SSLSupportMethod = Shapes::StringShape.new(name: 'SSLSupportMethod')
+    SamplingRate = Shapes::FloatShape.new(name: 'SamplingRate')
     Signer = Shapes::StructureShape.new(name: 'Signer')
     SignerList = Shapes::ListShape.new(name: 'SignerList')
     SslProtocol = Shapes::StringShape.new(name: 'SslProtocol')
@@ -2158,6 +2160,7 @@ module Aws::CloudFront
     ResponseHeadersPolicyConfig.add_member(:cors_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCorsConfig, location_name: "CorsConfig"))
     ResponseHeadersPolicyConfig.add_member(:security_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicySecurityHeadersConfig, location_name: "SecurityHeadersConfig"))
     ResponseHeadersPolicyConfig.add_member(:custom_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyCustomHeadersConfig, location_name: "CustomHeadersConfig"))
+    ResponseHeadersPolicyConfig.add_member(:server_timing_headers_config, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyServerTimingHeadersConfig, location_name: "ServerTimingHeadersConfig"))
     ResponseHeadersPolicyConfig.struct_class = Types::ResponseHeadersPolicyConfig
 
     ResponseHeadersPolicyContentSecurityPolicy.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
@@ -2211,6 +2214,10 @@ module Aws::CloudFront
     ResponseHeadersPolicySecurityHeadersConfig.add_member(:content_type_options, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyContentTypeOptions, location_name: "ContentTypeOptions"))
     ResponseHeadersPolicySecurityHeadersConfig.add_member(:strict_transport_security, Shapes::ShapeRef.new(shape: ResponseHeadersPolicyStrictTransportSecurity, location_name: "StrictTransportSecurity"))
     ResponseHeadersPolicySecurityHeadersConfig.struct_class = Types::ResponseHeadersPolicySecurityHeadersConfig
+
+    ResponseHeadersPolicyServerTimingHeadersConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Enabled"))
+    ResponseHeadersPolicyServerTimingHeadersConfig.add_member(:sampling_rate, Shapes::ShapeRef.new(shape: SamplingRate, location_name: "SamplingRate"))
+    ResponseHeadersPolicyServerTimingHeadersConfig.struct_class = Types::ResponseHeadersPolicyServerTimingHeadersConfig
 
     ResponseHeadersPolicyStrictTransportSecurity.add_member(:override, Shapes::ShapeRef.new(shape: boolean, required: true, location_name: "Override"))
     ResponseHeadersPolicyStrictTransportSecurity.add_member(:include_subdomains, Shapes::ShapeRef.new(shape: boolean, location_name: "IncludeSubdomains"))

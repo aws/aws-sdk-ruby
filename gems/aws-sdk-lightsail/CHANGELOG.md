@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-04-26)
+------------------
+
+* Feature - This release adds support for Lightsail load balancer HTTP to HTTPS redirect and TLS policy configuration.
+
 1.64.0 (2022-04-15)
 ------------------
 
