@@ -160,11 +160,11 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # Identifies the bounding box around the label, face, text or personal
-    # protective equipment. The `left` (x-coordinate) and `top`
-    # (y-coordinate) are coordinates representing the top and left sides of
-    # the bounding box. Note that the upper-left corner of the image is the
-    # origin (0,0).
+    # Identifies the bounding box around the label, face, text, object of
+    # interest, or personal protective equipment. The `left` (x-coordinate)
+    # and `top` (y-coordinate) are coordinates representing the top and left
+    # sides of the bounding box. Note that the upper-left corner of the
+    # image is the origin (0,0).
     #
     # The `top` and `left` values returned are ratios of the overall image
     # size. For example, if the input image is 700x200 pixels, and the
@@ -558,6 +558,72 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # Label detection settings to use on a streaming video. Defining the
+    # settings is required in the request parameter for
+    # CreateStreamProcessor. Including this setting in the
+    # `CreateStreamProcessor` request enables you to use the stream
+    # processor for label detection. You can then select what you want the
+    # stream processor to detect, such as people or pets. When the stream
+    # processor has started, one notification is sent for each object class
+    # specified. For example, if packages and pets are selected, one SNS
+    # notification is published the first time a package is detected and one
+    # SNS notification is published the first time a pet is detected, as
+    # well as an end-of-session summary.
+    #
+    # @note When making an API call, you may pass ConnectedHomeSettings
+    #   data as a hash:
+    #
+    #       {
+    #         labels: ["ConnectedHomeLabel"], # required
+    #         min_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] labels
+    #   Specifies what you want to detect in the video, such as people,
+    #   packages, or pets. The current valid labels you can include in this
+    #   list are: "PERSON", "PET", "PACKAGE", and "ALL".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_confidence
+    #   The minimum confidence required to label an object in the video.
+    #   @return [Float]
+    #
+    class ConnectedHomeSettings < Struct.new(
+      :labels,
+      :min_confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The label detection settings you want to use in your stream processor.
+    # This includes the labels you want the stream processor to detect and
+    # the minimum confidence level allowed to label objects.
+    #
+    # @note When making an API call, you may pass ConnectedHomeSettingsForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         labels: ["ConnectedHomeLabel"],
+    #         min_confidence: 1.0,
+    #       }
+    #
+    # @!attribute [rw] labels
+    #   Specifies what you want to detect in the video, such as people,
+    #   packages, or pets. The current valid labels you can include in this
+    #   list are: "PERSON", "PET", "PACKAGE", and "ALL".
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_confidence
+    #   The minimum confidence required to label an object in the video.
+    #   @return [Float]
+    #
+    class ConnectedHomeSettingsForUpdate < Struct.new(
+      :labels,
+      :min_confidence)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an inappropriate, unwanted, or offensive content
     # label detection in a stored video.
     #
@@ -632,12 +698,8 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Latest face model being used with the collection. For more
-    #   information, see [Model versioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   Version number of the face detection model associated with the
+    #   collection you are creating.
     #   @return [String]
     #
     class CreateCollectionResponse < Struct.new(
@@ -867,6 +929,10 @@ module Aws::Rekognition
     #           kinesis_data_stream: {
     #             arn: "KinesisDataArn",
     #           },
+    #           s3_destination: {
+    #             bucket: "S3Bucket",
+    #             key_prefix: "S3KeyPrefix",
+    #           },
     #         },
     #         name: "StreamProcessorName", # required
     #         settings: { # required
@@ -874,40 +940,77 @@ module Aws::Rekognition
     #             collection_id: "CollectionId",
     #             face_match_threshold: 1.0,
     #           },
+    #           connected_home: {
+    #             labels: ["ConnectedHomeLabel"], # required
+    #             min_confidence: 1.0,
+    #           },
     #         },
     #         role_arn: "RoleArn", # required
     #         tags: {
     #           "TagKey" => "TagValue",
+    #         },
+    #         notification_channel: {
+    #           sns_topic_arn: "SNSTopicArn", # required
+    #         },
+    #         kms_key_id: "KmsKeyId",
+    #         regions_of_interest: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #             polygon: [
+    #               {
+    #                 x: 1.0,
+    #                 y: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         data_sharing_preference: {
+    #           opt_in: false, # required
     #         },
     #       }
     #
     # @!attribute [rw] input
     #   Kinesis video stream stream that provides the source streaming
     #   video. If you are using the AWS CLI, the parameter name is
-    #   `StreamProcessorInput`.
+    #   `StreamProcessorInput`. This is required for both face search and
+    #   label detection stream processors.
     #   @return [Types::StreamProcessorInput]
     #
     # @!attribute [rw] output
-    #   Kinesis data stream stream to which Amazon Rekognition Video puts
-    #   the analysis results. If you are using the AWS CLI, the parameter
-    #   name is `StreamProcessorOutput`.
+    #   Kinesis data stream stream or Amazon S3 bucket location to which
+    #   Amazon Rekognition Video puts the analysis results. If you are using
+    #   the AWS CLI, the parameter name is `StreamProcessorOutput`. This
+    #   must be a S3Destination of an Amazon S3 bucket that you own for a
+    #   label detection stream processor or a Kinesis data stream ARN for a
+    #   face search stream processor.
     #   @return [Types::StreamProcessorOutput]
     #
     # @!attribute [rw] name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
     #   status of the stream processor by calling DescribeStreamProcessor.
-    #   `Name` is idempotent.
+    #   `Name` is idempotent. This is required for both face search and
+    #   label detection stream processors.
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Face recognition input parameters to be used by the stream
-    #   processor. Includes the collection to use for face recognition and
-    #   the face attributes to detect.
+    #   Input parameters used in a streaming video analyzed by a stream
+    #   processor. You can use `FaceSearch` to recognize faces in a
+    #   streaming video, or you can use `ConnectedHome` to detect labels.
     #   @return [Types::StreamProcessorSettings]
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role that allows access to the stream processor.
+    #   The Amazon Resource Number (ARN) of the IAM role that allows access
+    #   to the stream processor. The IAM role provides Rekognition read
+    #   permissions for a Kinesis stream. It also provides write permissions
+    #   to an Amazon S3 bucket and Amazon Simple Notification Service topic
+    #   for a label detection stream processor. This is required for both
+    #   face search and label detection stream processors.
     #   @return [String]
     #
     # @!attribute [rw] tags
@@ -915,19 +1018,64 @@ module Aws::Rekognition
     #   stream processor.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the object detection results and completion
+    #   status of a video analysis operation.
+    #
+    #   Amazon Rekognition publishes a notification the first time an object
+    #   of interest or a person is detected in the video stream. For
+    #   example, if Amazon Rekognition detects a person at second 2, a pet
+    #   at second 4, and a person again at second 5, Amazon Rekognition
+    #   sends 2 object class detected notifications, one for a person at
+    #   second 2 and one for a pet at second 4.
+    #
+    #   Amazon Rekognition also publishes an an end-of-session notification
+    #   with a summary when the stream processing session is complete.
+    #   @return [Types::StreamProcessorNotificationChannel]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). This is an optional parameter for label detection stream
+    #   processors and should not be used to create a face search stream
+    #   processor. You can supply the Amazon Resource Name (ARN) of your KMS
+    #   key, the ID of your KMS key, an alias for your KMS key, or an alias
+    #   ARN. The key is used to encrypt results and data published to your
+    #   Amazon S3 bucket, which includes image frames and hero images. Your
+    #   source images are unaffected.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   Specifies locations in the frames where Amazon Rekognition checks
+    #   for objects or people. You can specify up to 10 regions of interest.
+    #   This is an optional parameter for label detection stream processors
+    #   and should not be used to create a face search stream processor.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    # @!attribute [rw] data_sharing_preference
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
+    #   @return [Types::StreamProcessorDataSharingPreference]
+    #
     class CreateStreamProcessorRequest < Struct.new(
       :input,
       :output,
       :name,
       :settings,
       :role_arn,
-      :tags)
+      :tags,
+      :notification_channel,
+      :kms_key_id,
+      :regions_of_interest,
+      :data_sharing_preference)
       SENSITIVE = []
       include Aws::Structure
     end
 
     # @!attribute [rw] stream_processor_arn
-    #   ARN for the newly create stream processor.
+    #   Amazon Resource Number for the newly created stream processor.
     #   @return [String]
     #
     class CreateStreamProcessorResponse < Struct.new(
@@ -1373,7 +1521,7 @@ module Aws::Rekognition
     #   The version of the face model that's used by the collection for
     #   face detection.
     #
-    #   For more information, see Model Versioning in the Amazon Rekognition
+    #   For more information, see Model versioning in the Amazon Rekognition
     #   Developer Guide.
     #   @return [String]
     #
@@ -1604,10 +1752,45 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] settings
-    #   Face recognition input parameters that are being used by the stream
-    #   processor. Includes the collection to use for face recognition and
-    #   the face attributes to detect.
+    #   Input parameters used in a streaming video analyzed by a stream
+    #   processor. You can use `FaceSearch` to recognize faces in a
+    #   streaming video, or you can use `ConnectedHome` to detect labels.
     #   @return [Types::StreamProcessorSettings]
+    #
+    # @!attribute [rw] notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the object detection results and completion
+    #   status of a video analysis operation.
+    #
+    #   Amazon Rekognition publishes a notification the first time an object
+    #   of interest or a person is detected in the video stream. For
+    #   example, if Amazon Rekognition detects a person at second 2, a pet
+    #   at second 4, and a person again at second 5, Amazon Rekognition
+    #   sends 2 object class detected notifications, one for a person at
+    #   second 2 and one for a pet at second 4.
+    #
+    #   Amazon Rekognition also publishes an an end-of-session notification
+    #   with a summary when the stream processing session is complete.
+    #   @return [Types::StreamProcessorNotificationChannel]
+    #
+    # @!attribute [rw] kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS
+    #   key). This is an optional parameter for label detection stream
+    #   processors.
+    #   @return [String]
+    #
+    # @!attribute [rw] regions_of_interest
+    #   Specifies locations in the frames where Amazon Rekognition checks
+    #   for objects or people. This is an optional parameter for label
+    #   detection stream processors.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    # @!attribute [rw] data_sharing_preference
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
+    #   @return [Types::StreamProcessorDataSharingPreference]
     #
     class DescribeStreamProcessorResponse < Struct.new(
       :name,
@@ -1619,7 +1802,11 @@ module Aws::Rekognition
       :input,
       :output,
       :role_arn,
-      :settings)
+      :settings,
+      :notification_channel,
+      :kms_key_id,
+      :regions_of_interest,
+      :data_sharing_preference)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1671,8 +1858,9 @@ module Aws::Rekognition
     #   operation using the S3Object property.
     #
     #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   Resource Based Policies in the Amazon Rekognition Developer Guide.
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
     #   @return [Types::Image]
     #
     # @!attribute [rw] max_results
@@ -2027,6 +2215,12 @@ module Aws::Rekognition
     #               left: 1.0,
     #               top: 1.0,
     #             },
+    #             polygon: [
+    #               {
+    #                 x: 1.0,
+    #                 y: 1.0,
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -2074,6 +2268,12 @@ module Aws::Rekognition
     #                 left: 1.0,
     #                 top: 1.0,
     #               },
+    #               polygon: [
+    #                 {
+    #                   x: 1.0,
+    #                   y: 1.0,
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -2132,8 +2332,7 @@ module Aws::Rekognition
     # @!attribute [rw] min_confidence
     #   Sets the confidence of word detection. Words with detection
     #   confidence below this will be excluded from the result. Values
-    #   should be between 50 and 100 as Text in Video will not return any
-    #   result below 50.
+    #   should be between 0 and 100. The default MinConfidence is 80.
     #   @return [Float]
     #
     # @!attribute [rw] min_bounding_box_height
@@ -2534,8 +2733,9 @@ module Aws::Rekognition
     end
 
     # Input face recognition parameters for an Amazon Rekognition stream
-    # processor. `FaceRecognitionSettings` is a request parameter for
-    # CreateStreamProcessor.
+    # processor. Includes the collection to use for face recognition and the
+    # face attributes to detect. Defining the settings is required in the
+    # request parameter for CreateStreamProcessor.
     #
     # @note When making an API call, you may pass FaceSearchSettings
     #   data as a hash:
@@ -2580,7 +2780,7 @@ module Aws::Rekognition
     # media platform.
     #
     # We don't recommend using gender binary predictions to make decisions
-    # that impact  an individual's rights, privacy, or access to services.
+    # that impact an individual's rights, privacy, or access to services.
     #
     # @!attribute [rw] value
     #   The predicted gender of the face.
@@ -3348,8 +3548,9 @@ module Aws::Rekognition
     #   region you use for Amazon Rekognition operations.
     #
     #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
     #   @return [Types::S3Object]
     #
     class GroundTruthManifest < Struct.new(
@@ -3499,8 +3700,9 @@ module Aws::Rekognition
     # using the S3Object property.
     #
     # For Amazon Rekognition to process an S3 object, the user must have
-    # permission to access the S3 object. For more information, see Resource
-    # Based Policies in the Amazon Rekognition Developer Guide.
+    # permission to access the S3 object. For more information, see How
+    # Amazon Rekognition works with IAM in the Amazon Rekognition Developer
+    # Guide.
     #
     # @note When making an API call, you may pass Image
     #   data as a hash:
@@ -3552,8 +3754,8 @@ module Aws::Rekognition
 
     # The input image size exceeds the allowed limit. If you are calling
     # DetectProtectiveEquipment, the image size or resolution exceeds the
-    # allowed limit. For more information, see Limits in Amazon Rekognition
-    # in the Amazon Rekognition Developer Guide.
+    # allowed limit. For more information, see Guidelines and quotas in
+    # Amazon Rekognition in the Amazon Rekognition Developer Guide.
     #
     class ImageTooLargeException < Aws::EmptyStructure; end
 
@@ -3694,12 +3896,8 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Latest face model being used with the collection. For more
-    #   information, see [Model versioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   The version number of the face detection model that's associated
+    #   with the input collection (`CollectionId`).
     #   @return [String]
     #
     # @!attribute [rw] unindexed_faces
@@ -3800,6 +3998,38 @@ module Aws::Rekognition
     #
     class KinesisVideoStream < Struct.new(
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the starting point in a Kinesis stream to start processing.
+    # You can use the producer timestamp or the fragment number. For more
+    # information, see [Fragment][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html
+    #
+    # @note When making an API call, you may pass KinesisVideoStreamStartSelector
+    #   data as a hash:
+    #
+    #       {
+    #         producer_timestamp: 1,
+    #         fragment_number: "KinesisVideoStreamFragmentNumber",
+    #       }
+    #
+    # @!attribute [rw] producer_timestamp
+    #   The timestamp from the producer corresponding to the fragment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] fragment_number
+    #   The unique identifier of the fragment. This value monotonically
+    #   increases based on the ingestion order.
+    #   @return [String]
+    #
+    class KinesisVideoStreamStartSelector < Struct.new(
+      :producer_timestamp,
+      :fragment_number)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3940,15 +4170,10 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_versions
-    #   Latest face models being used with the corresponding collections in
-    #   the array. For more information, see [Model versioning][1]. For
-    #   example, the value of `FaceModelVersions[2]` is the version number
-    #   for the face detection model used by the collection in
-    #   `CollectionId[2]`.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   Version numbers of the face detection models associated with the
+    #   collections in the array `CollectionIds`. For example, the value of
+    #   `FaceModelVersions[2]` is the version number for the face detection
+    #   model used by the collection in `CollectionId[2]`.
     #   @return [Array<String>]
     #
     class ListCollectionsResponse < Struct.new(
@@ -4144,12 +4369,8 @@ module Aws::Rekognition
     #   @return [String]
     #
     # @!attribute [rw] face_model_version
-    #   Latest face model being used with the collection. For more
-    #   information, see [Model versioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
     #   @return [String]
     #
     class ListFacesResponse < Struct.new(
@@ -4303,15 +4524,17 @@ module Aws::Rekognition
 
     # The Amazon Simple Notification Service topic to which Amazon
     # Rekognition publishes the completion status of a video analysis
-    # operation. For more information, see api-video. Note that the Amazon
-    # SNS topic must have a topic name that begins with *AmazonRekognition*
-    # if you are using the AmazonRekognitionServiceRole permissions policy
-    # to access the topic. For more information, see [Giving access to
-    # multiple Amazon SNS topics][1].
+    # operation. For more information, see [Calling Amazon Rekognition Video
+    # operations][1]. Note that the Amazon SNS topic must have a topic name
+    # that begins with *AmazonRekognition* if you are using the
+    # AmazonRekognitionServiceRole permissions policy to access the topic.
+    # For more information, see [Giving access to multiple Amazon SNS
+    # topics][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
+    # [2]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
     # @note When making an API call, you may pass NotificationChannel
     #   data as a hash:
@@ -4322,7 +4545,7 @@ module Aws::Rekognition
     #       }
     #
     # @!attribute [rw] sns_topic_arn
-    #   The Amazon SNS topic to which Amazon Rekognition to posts the
+    #   The Amazon SNS topic to which Amazon Rekognition posts the
     #   completion status.
     #   @return [String]
     #
@@ -4452,15 +4675,24 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
-    # The X and Y coordinates of a point on an image. The X and Y values
-    # returned are ratios of the overall image size. For example, if the
-    # input image is 700x200 and the operation returns X=0.5 and Y=0.25,
-    # then the point is at the (350,50) pixel coordinate on the image.
+    # The X and Y coordinates of a point on an image or video frame. The X
+    # and Y values are ratios of the overall image size or video resolution.
+    # For example, if an input image is 700x200 and the values are X=0.5 and
+    # Y=0.25, then the point is at the (350,50) pixel coordinate on the
+    # image.
     #
-    # An array of `Point` objects, `Polygon`, is returned by DetectText and
-    # by DetectCustomLabels. `Polygon` represents a fine-grained polygon
-    # around a detected item. For more information, see Geometry in the
-    # Amazon Rekognition Developer Guide.
+    # An array of `Point` objects makes up a `Polygon`. A `Polygon` is
+    # returned by DetectText and by DetectCustomLabels `Polygon` represents
+    # a fine-grained polygon around a detected item. For more information,
+    # see Geometry in the Amazon Rekognition Developer Guide.
+    #
+    # @note When making an API call, you may pass Point
+    #   data as a hash:
+    #
+    #       {
+    #         x: 1.0,
+    #         y: 1.0,
+    #       }
     #
     # @!attribute [rw] x
     #   The value of the X coordinate for a point on a `Polygon`.
@@ -4842,12 +5074,13 @@ module Aws::Rekognition
     end
 
     # Specifies a location within the frame that Rekognition checks for
-    # text. Uses a `BoundingBox` object to set a region of the screen.
+    # objects of interest such as text, labels, or faces. It uses a
+    # `BoundingBox` or object or `Polygon` to set a region of the screen.
     #
-    # A word is included in the region if the word is more than half in that
-    # region. If there is more than one region, the word will be compared
-    # with all regions of the screen. Any word more than half in a region is
-    # kept in the results.
+    # A word, face, or label is included in the region if it is more than
+    # half in that region. If there is more than one region, the word, face,
+    # or label is compared with all regions of the screen. Any object of
+    # interest that is more than half in a region is kept in the results.
     #
     # @note When making an API call, you may pass RegionOfInterest
     #   data as a hash:
@@ -4859,14 +5092,26 @@ module Aws::Rekognition
     #           left: 1.0,
     #           top: 1.0,
     #         },
+    #         polygon: [
+    #           {
+    #             x: 1.0,
+    #             y: 1.0,
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] bounding_box
     #   The box representing a region of interest on screen.
     #   @return [Types::BoundingBox]
     #
+    # @!attribute [rw] polygon
+    #   Specifies a shape made up of up to 10 `Point` objects to define a
+    #   region of interest.
+    #   @return [Array<Types::Point>]
+    #
     class RegionOfInterest < Struct.new(
-      :bounding_box)
+      :bounding_box,
+      :polygon)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4889,14 +5134,52 @@ module Aws::Rekognition
     #
     class ResourceNotReadyException < Aws::EmptyStructure; end
 
+    # The Amazon S3 bucket location to which Amazon Rekognition publishes
+    # the detailed inference results of a video analysis operation. These
+    # results include the name of the stream processor resource, the session
+    # ID of the stream processing session, and labeled timestamps and
+    # bounding boxes for detected labels.
+    #
+    # @note When making an API call, you may pass S3Destination
+    #   data as a hash:
+    #
+    #       {
+    #         bucket: "S3Bucket",
+    #         key_prefix: "S3KeyPrefix",
+    #       }
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon S3 bucket you want to associate with the
+    #   streaming video project. You must be the owner of the Amazon S3
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   The prefix value of the location within the bucket that you want the
+    #   information to be published to. For more information, see [Using
+    #   prefixes][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
+    #   @return [String]
+    #
+    class S3Destination < Struct.new(
+      :bucket,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the S3 bucket name and object name.
     #
     # The region for the S3 bucket containing the S3 object must match the
     # region you use for Amazon Rekognition operations.
     #
     # For Amazon Rekognition to process an S3 object, the user must have
-    # permission to access the S3 object. For more information, see
-    # Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    # permission to access the S3 object. For more information, see How
+    # Amazon Rekognition works with IAM in the Amazon Rekognition Developer
+    # Guide.
     #
     # @note When making an API call, you may pass S3Object
     #   data as a hash:
@@ -5014,12 +5297,8 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceMatch>]
     #
     # @!attribute [rw] face_model_version
-    #   Latest face model being used with the collection. For more
-    #   information, see [Model versioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
     #   @return [String]
     #
     class SearchFacesByImageResponse < Struct.new(
@@ -5079,12 +5358,8 @@ module Aws::Rekognition
     #   @return [Array<Types::FaceMatch>]
     #
     # @!attribute [rw] face_model_version
-    #   Latest face model being used with the collection. For more
-    #   information, see [Model versioning][1].
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/face-detection-model.html
+    #   Version number of the face detection model associated with the input
+    #   collection (`CollectionId`).
     #   @return [String]
     #
     class SearchFacesResponse < Struct.new(
@@ -5198,8 +5473,8 @@ module Aws::Rekognition
     end
 
     # The size of the collection exceeds the allowed limit. For more
-    # information, see Limits in Amazon Rekognition in the Amazon
-    # Rekognition Developer Guide.
+    # information, see Guidelines and quotas in Amazon Rekognition in the
+    # Amazon Rekognition Developer Guide.
     #
     class ServiceQuotaExceededException < Aws::EmptyStructure; end
 
@@ -5888,19 +6163,59 @@ module Aws::Rekognition
     #
     #       {
     #         name: "StreamProcessorName", # required
+    #         start_selector: {
+    #           kvs_stream_start_selector: {
+    #             producer_timestamp: 1,
+    #             fragment_number: "KinesisVideoStreamFragmentNumber",
+    #           },
+    #         },
+    #         stop_selector: {
+    #           max_duration_in_seconds: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] name
     #   The name of the stream processor to start processing.
     #   @return [String]
     #
+    # @!attribute [rw] start_selector
+    #   Specifies the starting point in the Kinesis stream to start
+    #   processing. You can use the producer timestamp or the fragment
+    #   number. For more information, see [Fragment][1].
+    #
+    #   This is a required parameter for label detection stream processors
+    #   and should not be used to start a face search stream processor.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html
+    #   @return [Types::StreamProcessingStartSelector]
+    #
+    # @!attribute [rw] stop_selector
+    #   Specifies when to stop processing the stream. You can specify a
+    #   maximum amount of time to process the video.
+    #
+    #   This is a required parameter for label detection stream processors
+    #   and should not be used to start a face search stream processor.
+    #   @return [Types::StreamProcessingStopSelector]
+    #
     class StartStreamProcessorRequest < Struct.new(
-      :name)
+      :name,
+      :start_selector,
+      :stop_selector)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    class StartStreamProcessorResponse < Aws::EmptyStructure; end
+    # @!attribute [rw] session_id
+    #   A unique identifier for the stream processing session.
+    #   @return [String]
+    #
+    class StartStreamProcessorResponse < Struct.new(
+      :session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Filters for the technical segments returned by GetSegmentDetection.
     # For more information, see StartSegmentDetectionFilters.
@@ -5966,6 +6281,12 @@ module Aws::Rekognition
     #               left: 1.0,
     #               top: 1.0,
     #             },
+    #             polygon: [
+    #               {
+    #                 x: 1.0,
+    #                 y: 1.0,
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -6018,6 +6339,12 @@ module Aws::Rekognition
     #                 left: 1.0,
     #                 top: 1.0,
     #               },
+    #               polygon: [
+    #                 {
+    #                   x: 1.0,
+    #                   y: 1.0,
+    #                 },
+    #               ],
     #             },
     #           ],
     #         },
@@ -6040,16 +6367,17 @@ module Aws::Rekognition
     # @!attribute [rw] notification_channel
     #   The Amazon Simple Notification Service topic to which Amazon
     #   Rekognition publishes the completion status of a video analysis
-    #   operation. For more information, see api-video. Note that the Amazon
-    #   SNS topic must have a topic name that begins with
-    #   *AmazonRekognition* if you are using the
+    #   operation. For more information, see [Calling Amazon Rekognition
+    #   Video operations][1]. Note that the Amazon SNS topic must have a
+    #   topic name that begins with *AmazonRekognition* if you are using the
     #   AmazonRekognitionServiceRole permissions policy to access the topic.
     #   For more information, see [Giving access to multiple Amazon SNS
-    #   topics][1].
+    #   topics][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
+    #   [2]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #   @return [Types::NotificationChannel]
     #
     # @!attribute [rw] job_tag
@@ -6135,8 +6463,52 @@ module Aws::Rekognition
 
     class StopStreamProcessorResponse < Aws::EmptyStructure; end
 
-    # An object that recognizes faces in a streaming video. An Amazon
-    # Rekognition stream processor is created by a call to
+    # @note When making an API call, you may pass StreamProcessingStartSelector
+    #   data as a hash:
+    #
+    #       {
+    #         kvs_stream_start_selector: {
+    #           producer_timestamp: 1,
+    #           fragment_number: "KinesisVideoStreamFragmentNumber",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] kvs_stream_start_selector
+    #   Specifies the starting point in the stream to start processing. This
+    #   can be done with a timestamp or a fragment number in a Kinesis
+    #   stream.
+    #   @return [Types::KinesisVideoStreamStartSelector]
+    #
+    class StreamProcessingStartSelector < Struct.new(
+      :kvs_stream_start_selector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies when to stop processing the stream. You can specify a
+    # maximum amount of time to process the video.
+    #
+    # @note When making an API call, you may pass StreamProcessingStopSelector
+    #   data as a hash:
+    #
+    #       {
+    #         max_duration_in_seconds: 1,
+    #       }
+    #
+    # @!attribute [rw] max_duration_in_seconds
+    #   Specifies the maximum amount of time in seconds that you want the
+    #   stream to be processed. The largest amount of time is 2 minutes. The
+    #   default is 10 seconds.
+    #   @return [Integer]
+    #
+    class StreamProcessingStopSelector < Struct.new(
+      :max_duration_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that recognizes faces or labels in a streaming video. An
+    # Amazon Rekognition stream processor is created by a call to
     # CreateStreamProcessor. The request parameters for
     # `CreateStreamProcessor` describe the Kinesis video stream source for
     # the streaming video, face recognition parameters, and where to stream
@@ -6153,6 +6525,29 @@ module Aws::Rekognition
     class StreamProcessor < Struct.new(
       :name,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to opt in or opt out to share data with Rekognition to
+    # improve model performance. You can choose this option at the account
+    # level or on a per-stream basis. Note that if you opt out at the
+    # account level this setting is ignored on individual streams.
+    #
+    # @note When making an API call, you may pass StreamProcessorDataSharingPreference
+    #   data as a hash:
+    #
+    #       {
+    #         opt_in: false, # required
+    #       }
+    #
+    # @!attribute [rw] opt_in
+    #   If this option is set to true, you choose to share data with
+    #   Rekognition to improve model performance.
+    #   @return [Boolean]
+    #
+    class StreamProcessorDataSharingPreference < Struct.new(
+      :opt_in)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6179,6 +6574,39 @@ module Aws::Rekognition
       include Aws::Structure
     end
 
+    # The Amazon Simple Notification Service topic to which Amazon
+    # Rekognition publishes the object detection results and completion
+    # status of a video analysis operation.
+    #
+    # Amazon Rekognition publishes a notification the first time an object
+    # of interest or a person is detected in the video stream. For example,
+    # if Amazon Rekognition detects a person at second 2, a pet at second 4,
+    # and a person again at second 5, Amazon Rekognition sends 2 object
+    # class detected notifications, one for a person at second 2 and one for
+    # a pet at second 4.
+    #
+    # Amazon Rekognition also publishes an an end-of-session notification
+    # with a summary when the stream processing session is complete.
+    #
+    # @note When making an API call, you may pass StreamProcessorNotificationChannel
+    #   data as a hash:
+    #
+    #       {
+    #         sns_topic_arn: "SNSTopicArn", # required
+    #       }
+    #
+    # @!attribute [rw] sns_topic_arn
+    #   The Amazon Resource Number (ARN) of the Amazon Amazon Simple
+    #   Notification Service topic to which Amazon Rekognition posts the
+    #   completion status.
+    #   @return [String]
+    #
+    class StreamProcessorNotificationChannel < Struct.new(
+      :sns_topic_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the Amazon Kinesis Data Streams stream to which a
     # Amazon Rekognition Video stream processor streams the results of a
     # video analysis. For more information, see CreateStreamProcessor in the
@@ -6191,6 +6619,10 @@ module Aws::Rekognition
     #         kinesis_data_stream: {
     #           arn: "KinesisDataArn",
     #         },
+    #         s3_destination: {
+    #           bucket: "S3Bucket",
+    #           key_prefix: "S3KeyPrefix",
+    #         },
     #       }
     #
     # @!attribute [rw] kinesis_data_stream
@@ -6198,14 +6630,22 @@ module Aws::Rekognition
     #   Rekognition stream processor streams the analysis results.
     #   @return [Types::KinesisDataStream]
     #
+    # @!attribute [rw] s3_destination
+    #   The Amazon S3 bucket location to which Amazon Rekognition publishes
+    #   the detailed inference results of a video analysis operation.
+    #   @return [Types::S3Destination]
+    #
     class StreamProcessorOutput < Struct.new(
-      :kinesis_data_stream)
+      :kinesis_data_stream,
+      :s3_destination)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Input parameters used to recognize faces in a streaming video analyzed
-    # by a Amazon Rekognition stream processor.
+    # Input parameters used in a streaming video analyzed by a Amazon
+    # Rekognition stream processor. You can use `FaceSearch` to recognize
+    # faces in a streaming video, or you can use `ConnectedHome` to detect
+    # labels.
     #
     # @note When making an API call, you may pass StreamProcessorSettings
     #   data as a hash:
@@ -6215,14 +6655,58 @@ module Aws::Rekognition
     #           collection_id: "CollectionId",
     #           face_match_threshold: 1.0,
     #         },
+    #         connected_home: {
+    #           labels: ["ConnectedHomeLabel"], # required
+    #           min_confidence: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] face_search
     #   Face search settings to use on a streaming video.
     #   @return [Types::FaceSearchSettings]
     #
+    # @!attribute [rw] connected_home
+    #   Label detection settings to use on a streaming video. Defining the
+    #   settings is required in the request parameter for
+    #   CreateStreamProcessor. Including this setting in the
+    #   `CreateStreamProcessor` request enables you to use the stream
+    #   processor for label detection. You can then select what you want the
+    #   stream processor to detect, such as people or pets. When the stream
+    #   processor has started, one notification is sent for each object
+    #   class specified. For example, if packages and pets are selected, one
+    #   SNS notification is published the first time a package is detected
+    #   and one SNS notification is published the first time a pet is
+    #   detected, as well as an end-of-session summary.
+    #   @return [Types::ConnectedHomeSettings]
+    #
     class StreamProcessorSettings < Struct.new(
-      :face_search)
+      :face_search,
+      :connected_home)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The stream processor settings that you want to update. `ConnectedHome`
+    # settings can be updated to detect different labels with a different
+    # minimum confidence.
+    #
+    # @note When making an API call, you may pass StreamProcessorSettingsForUpdate
+    #   data as a hash:
+    #
+    #       {
+    #         connected_home_for_update: {
+    #           labels: ["ConnectedHomeLabel"],
+    #           min_confidence: 1.0,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] connected_home_for_update
+    #   The label detection settings you want to use for your stream
+    #   processor.
+    #   @return [Types::ConnectedHomeSettingsForUpdate]
+    #
+    class StreamProcessorSettingsForUpdate < Struct.new(
+      :connected_home_for_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6241,8 +6725,9 @@ module Aws::Rekognition
     #   region you use for Amazon Rekognition operations.
     #
     #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see
-    #   Resource-Based Policies in the Amazon Rekognition Developer Guide.
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition
+    #   Developer Guide.
     #   @return [Types::S3Object]
     #
     class Summary < Struct.new(
@@ -6393,7 +6878,7 @@ module Aws::Rekognition
     # of text in which the word appears. The word `Id` is also an index for
     # the word within a line of words.
     #
-    # For more information, see Detecting Text in the Amazon Rekognition
+    # For more information, see Detecting text in the Amazon Rekognition
     # Developer Guide.
     #
     # @!attribute [rw] detected_text
@@ -6606,6 +7091,78 @@ module Aws::Rekognition
     end
 
     class UpdateDatasetEntriesResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateStreamProcessorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "StreamProcessorName", # required
+    #         settings_for_update: {
+    #           connected_home_for_update: {
+    #             labels: ["ConnectedHomeLabel"],
+    #             min_confidence: 1.0,
+    #           },
+    #         },
+    #         regions_of_interest_for_update: [
+    #           {
+    #             bounding_box: {
+    #               width: 1.0,
+    #               height: 1.0,
+    #               left: 1.0,
+    #               top: 1.0,
+    #             },
+    #             polygon: [
+    #               {
+    #                 x: 1.0,
+    #                 y: 1.0,
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #         data_sharing_preference_for_update: {
+    #           opt_in: false, # required
+    #         },
+    #         parameters_to_delete: ["ConnectedHomeMinConfidence"], # accepts ConnectedHomeMinConfidence, RegionsOfInterest
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the stream processor that you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] settings_for_update
+    #   The stream processor settings that you want to update. Label
+    #   detection settings can be updated to detect different labels with a
+    #   different minimum confidence.
+    #   @return [Types::StreamProcessorSettingsForUpdate]
+    #
+    # @!attribute [rw] regions_of_interest_for_update
+    #   Specifies locations in the frames where Amazon Rekognition checks
+    #   for objects or people. This is an optional parameter for label
+    #   detection stream processors.
+    #   @return [Array<Types::RegionOfInterest>]
+    #
+    # @!attribute [rw] data_sharing_preference_for_update
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
+    #   @return [Types::StreamProcessorDataSharingPreference]
+    #
+    # @!attribute [rw] parameters_to_delete
+    #   A list of parameters you want to delete from the stream processor.
+    #   @return [Array<String>]
+    #
+    class UpdateStreamProcessorRequest < Struct.new(
+      :name,
+      :settings_for_update,
+      :regions_of_interest_for_update,
+      :data_sharing_preference_for_update,
+      :parameters_to_delete)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateStreamProcessorResponse < Aws::EmptyStructure; end
 
     # Contains the Amazon S3 bucket location of the validation data for a
     # model training job.

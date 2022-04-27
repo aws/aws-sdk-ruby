@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-04-27)
+------------------
+
+* Feature - This release adds the following new features: 1) Introduces an option for automatic schema creation 2) Now allows for Ingestion of data containing most common errors and allows automatic data cleaning 3) Introduces new API ListSensorStatistics that gives further information about the ingested data
+
 1.10.0 (2022-02-24)
 ------------------
 

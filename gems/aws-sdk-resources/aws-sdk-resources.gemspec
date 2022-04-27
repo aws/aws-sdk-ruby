@@ -52,6 +52,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-budgets', '~> 1')
   spec.add_dependency('aws-sdk-chime', '~> 1')
   spec.add_dependency('aws-sdk-chimesdkidentity', '~> 1')
+  spec.add_dependency('aws-sdk-chimesdkmediapipelines', '~> 1')
   spec.add_dependency('aws-sdk-chimesdkmeetings', '~> 1')
   spec.add_dependency('aws-sdk-chimesdkmessaging', '~> 1')
   spec.add_dependency('aws-sdk-cloud9', '~> 1')

@@ -46,6 +46,10 @@ module Aws::Rekognition
     ComparedFace = Shapes::StructureShape.new(name: 'ComparedFace')
     ComparedFaceList = Shapes::ListShape.new(name: 'ComparedFaceList')
     ComparedSourceImageFace = Shapes::StructureShape.new(name: 'ComparedSourceImageFace')
+    ConnectedHomeLabel = Shapes::StringShape.new(name: 'ConnectedHomeLabel')
+    ConnectedHomeLabels = Shapes::ListShape.new(name: 'ConnectedHomeLabels')
+    ConnectedHomeSettings = Shapes::StructureShape.new(name: 'ConnectedHomeSettings')
+    ConnectedHomeSettingsForUpdate = Shapes::StructureShape.new(name: 'ConnectedHomeSettingsForUpdate')
     ContentClassifier = Shapes::StringShape.new(name: 'ContentClassifier')
     ContentClassifiers = Shapes::ListShape.new(name: 'ContentClassifiers')
     ContentModerationDetection = Shapes::StructureShape.new(name: 'ContentModerationDetection')
@@ -208,6 +212,8 @@ module Aws::Rekognition
     KinesisDataStream = Shapes::StructureShape.new(name: 'KinesisDataStream')
     KinesisVideoArn = Shapes::StringShape.new(name: 'KinesisVideoArn')
     KinesisVideoStream = Shapes::StructureShape.new(name: 'KinesisVideoStream')
+    KinesisVideoStreamFragmentNumber = Shapes::StringShape.new(name: 'KinesisVideoStreamFragmentNumber')
+    KinesisVideoStreamStartSelector = Shapes::StructureShape.new(name: 'KinesisVideoStreamStartSelector')
     KmsKeyId = Shapes::StringShape.new(name: 'KmsKeyId')
     KnownGender = Shapes::StructureShape.new(name: 'KnownGender')
     KnownGenderType = Shapes::StringShape.new(name: 'KnownGenderType')
@@ -234,6 +240,7 @@ module Aws::Rekognition
     ListStreamProcessorsResponse = Shapes::StructureShape.new(name: 'ListStreamProcessorsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MaxDurationInSecondsULong = Shapes::IntegerShape.new(name: 'MaxDurationInSecondsULong')
     MaxFaces = Shapes::IntegerShape.new(name: 'MaxFaces')
     MaxFacesToIndex = Shapes::IntegerShape.new(name: 'MaxFacesToIndex')
     MaxPixelThreshold = Shapes::FloatShape.new(name: 'MaxPixelThreshold')
@@ -298,6 +305,7 @@ module Aws::Rekognition
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3KeyPrefix = Shapes::StringShape.new(name: 'S3KeyPrefix')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3ObjectName = Shapes::StringShape.new(name: 'S3ObjectName')
@@ -337,6 +345,7 @@ module Aws::Rekognition
     StartShotDetectionFilter = Shapes::StructureShape.new(name: 'StartShotDetectionFilter')
     StartStreamProcessorRequest = Shapes::StructureShape.new(name: 'StartStreamProcessorRequest')
     StartStreamProcessorResponse = Shapes::StructureShape.new(name: 'StartStreamProcessorResponse')
+    StartStreamProcessorSessionId = Shapes::StringShape.new(name: 'StartStreamProcessorSessionId')
     StartTechnicalCueDetectionFilter = Shapes::StructureShape.new(name: 'StartTechnicalCueDetectionFilter')
     StartTextDetectionFilters = Shapes::StructureShape.new(name: 'StartTextDetectionFilters')
     StartTextDetectionRequest = Shapes::StructureShape.new(name: 'StartTextDetectionRequest')
@@ -346,13 +355,20 @@ module Aws::Rekognition
     StopProjectVersionResponse = Shapes::StructureShape.new(name: 'StopProjectVersionResponse')
     StopStreamProcessorRequest = Shapes::StructureShape.new(name: 'StopStreamProcessorRequest')
     StopStreamProcessorResponse = Shapes::StructureShape.new(name: 'StopStreamProcessorResponse')
+    StreamProcessingStartSelector = Shapes::StructureShape.new(name: 'StreamProcessingStartSelector')
+    StreamProcessingStopSelector = Shapes::StructureShape.new(name: 'StreamProcessingStopSelector')
     StreamProcessor = Shapes::StructureShape.new(name: 'StreamProcessor')
     StreamProcessorArn = Shapes::StringShape.new(name: 'StreamProcessorArn')
+    StreamProcessorDataSharingPreference = Shapes::StructureShape.new(name: 'StreamProcessorDataSharingPreference')
     StreamProcessorInput = Shapes::StructureShape.new(name: 'StreamProcessorInput')
     StreamProcessorList = Shapes::ListShape.new(name: 'StreamProcessorList')
     StreamProcessorName = Shapes::StringShape.new(name: 'StreamProcessorName')
+    StreamProcessorNotificationChannel = Shapes::StructureShape.new(name: 'StreamProcessorNotificationChannel')
     StreamProcessorOutput = Shapes::StructureShape.new(name: 'StreamProcessorOutput')
+    StreamProcessorParameterToDelete = Shapes::StringShape.new(name: 'StreamProcessorParameterToDelete')
+    StreamProcessorParametersToDelete = Shapes::ListShape.new(name: 'StreamProcessorParametersToDelete')
     StreamProcessorSettings = Shapes::StructureShape.new(name: 'StreamProcessorSettings')
+    StreamProcessorSettingsForUpdate = Shapes::StructureShape.new(name: 'StreamProcessorSettingsForUpdate')
     StreamProcessorStatus = Shapes::StringShape.new(name: 'StreamProcessorStatus')
     String = Shapes::StringShape.new(name: 'String')
     Summary = Shapes::StructureShape.new(name: 'Summary')
@@ -385,6 +401,8 @@ module Aws::Rekognition
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDatasetEntriesRequest = Shapes::StructureShape.new(name: 'UpdateDatasetEntriesRequest')
     UpdateDatasetEntriesResponse = Shapes::StructureShape.new(name: 'UpdateDatasetEntriesResponse')
+    UpdateStreamProcessorRequest = Shapes::StructureShape.new(name: 'UpdateStreamProcessorRequest')
+    UpdateStreamProcessorResponse = Shapes::StructureShape.new(name: 'UpdateStreamProcessorResponse')
     Url = Shapes::StringShape.new(name: 'Url')
     Urls = Shapes::ListShape.new(name: 'Urls')
     ValidationData = Shapes::StructureShape.new(name: 'ValidationData')
@@ -497,6 +515,16 @@ module Aws::Rekognition
     ComparedSourceImageFace.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     ComparedSourceImageFace.struct_class = Types::ComparedSourceImageFace
 
+    ConnectedHomeLabels.member = Shapes::ShapeRef.new(shape: ConnectedHomeLabel)
+
+    ConnectedHomeSettings.add_member(:labels, Shapes::ShapeRef.new(shape: ConnectedHomeLabels, required: true, location_name: "Labels"))
+    ConnectedHomeSettings.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    ConnectedHomeSettings.struct_class = Types::ConnectedHomeSettings
+
+    ConnectedHomeSettingsForUpdate.add_member(:labels, Shapes::ShapeRef.new(shape: ConnectedHomeLabels, location_name: "Labels"))
+    ConnectedHomeSettingsForUpdate.add_member(:min_confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "MinConfidence"))
+    ConnectedHomeSettingsForUpdate.struct_class = Types::ConnectedHomeSettingsForUpdate
+
     ContentClassifiers.member = Shapes::ShapeRef.new(shape: ContentClassifier)
 
     ContentModerationDetection.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "Timestamp"))
@@ -550,6 +578,10 @@ module Aws::Rekognition
     CreateStreamProcessorRequest.add_member(:settings, Shapes::ShapeRef.new(shape: StreamProcessorSettings, required: true, location_name: "Settings"))
     CreateStreamProcessorRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreateStreamProcessorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    CreateStreamProcessorRequest.add_member(:notification_channel, Shapes::ShapeRef.new(shape: StreamProcessorNotificationChannel, location_name: "NotificationChannel"))
+    CreateStreamProcessorRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    CreateStreamProcessorRequest.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
+    CreateStreamProcessorRequest.add_member(:data_sharing_preference, Shapes::ShapeRef.new(shape: StreamProcessorDataSharingPreference, location_name: "DataSharingPreference"))
     CreateStreamProcessorRequest.struct_class = Types::CreateStreamProcessorRequest
 
     CreateStreamProcessorResponse.add_member(:stream_processor_arn, Shapes::ShapeRef.new(shape: StreamProcessorArn, location_name: "StreamProcessorArn"))
@@ -689,6 +721,10 @@ module Aws::Rekognition
     DescribeStreamProcessorResponse.add_member(:output, Shapes::ShapeRef.new(shape: StreamProcessorOutput, location_name: "Output"))
     DescribeStreamProcessorResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribeStreamProcessorResponse.add_member(:settings, Shapes::ShapeRef.new(shape: StreamProcessorSettings, location_name: "Settings"))
+    DescribeStreamProcessorResponse.add_member(:notification_channel, Shapes::ShapeRef.new(shape: StreamProcessorNotificationChannel, location_name: "NotificationChannel"))
+    DescribeStreamProcessorResponse.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
+    DescribeStreamProcessorResponse.add_member(:regions_of_interest, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterest"))
+    DescribeStreamProcessorResponse.add_member(:data_sharing_preference, Shapes::ShapeRef.new(shape: StreamProcessorDataSharingPreference, location_name: "DataSharingPreference"))
     DescribeStreamProcessorResponse.struct_class = Types::DescribeStreamProcessorResponse
 
     DetectCustomLabelsRequest.add_member(:project_version_arn, Shapes::ShapeRef.new(shape: ProjectVersionArn, required: true, location_name: "ProjectVersionArn"))
@@ -1038,6 +1074,10 @@ module Aws::Rekognition
     KinesisVideoStream.add_member(:arn, Shapes::ShapeRef.new(shape: KinesisVideoArn, location_name: "Arn"))
     KinesisVideoStream.struct_class = Types::KinesisVideoStream
 
+    KinesisVideoStreamStartSelector.add_member(:producer_timestamp, Shapes::ShapeRef.new(shape: ULong, location_name: "ProducerTimestamp"))
+    KinesisVideoStreamStartSelector.add_member(:fragment_number, Shapes::ShapeRef.new(shape: KinesisVideoStreamFragmentNumber, location_name: "FragmentNumber"))
+    KinesisVideoStreamStartSelector.struct_class = Types::KinesisVideoStreamStartSelector
+
     KnownGender.add_member(:type, Shapes::ShapeRef.new(shape: KnownGenderType, location_name: "Type"))
     KnownGender.struct_class = Types::KnownGender
 
@@ -1242,6 +1282,7 @@ module Aws::Rekognition
     RecognizeCelebritiesResponse.struct_class = Types::RecognizeCelebritiesResponse
 
     RegionOfInterest.add_member(:bounding_box, Shapes::ShapeRef.new(shape: BoundingBox, location_name: "BoundingBox"))
+    RegionOfInterest.add_member(:polygon, Shapes::ShapeRef.new(shape: Polygon, location_name: "Polygon"))
     RegionOfInterest.struct_class = Types::RegionOfInterest
 
     RegionsOfInterest.member = Shapes::ShapeRef.new(shape: RegionOfInterest)
@@ -1253,6 +1294,10 @@ module Aws::Rekognition
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    S3Destination.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
+    S3Destination.add_member(:key_prefix, Shapes::ShapeRef.new(shape: S3KeyPrefix, location_name: "KeyPrefix"))
+    S3Destination.struct_class = Types::S3Destination
 
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "Bucket"))
     S3Object.add_member(:name, Shapes::ShapeRef.new(shape: S3ObjectName, location_name: "Name"))
@@ -1402,8 +1447,11 @@ module Aws::Rekognition
     StartShotDetectionFilter.struct_class = Types::StartShotDetectionFilter
 
     StartStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
+    StartStreamProcessorRequest.add_member(:start_selector, Shapes::ShapeRef.new(shape: StreamProcessingStartSelector, location_name: "StartSelector"))
+    StartStreamProcessorRequest.add_member(:stop_selector, Shapes::ShapeRef.new(shape: StreamProcessingStopSelector, location_name: "StopSelector"))
     StartStreamProcessorRequest.struct_class = Types::StartStreamProcessorRequest
 
+    StartStreamProcessorResponse.add_member(:session_id, Shapes::ShapeRef.new(shape: StartStreamProcessorSessionId, location_name: "SessionId"))
     StartStreamProcessorResponse.struct_class = Types::StartStreamProcessorResponse
 
     StartTechnicalCueDetectionFilter.add_member(:min_segment_confidence, Shapes::ShapeRef.new(shape: SegmentConfidence, location_name: "MinSegmentConfidence"))
@@ -1435,20 +1483,39 @@ module Aws::Rekognition
 
     StopStreamProcessorResponse.struct_class = Types::StopStreamProcessorResponse
 
+    StreamProcessingStartSelector.add_member(:kvs_stream_start_selector, Shapes::ShapeRef.new(shape: KinesisVideoStreamStartSelector, location_name: "KVSStreamStartSelector"))
+    StreamProcessingStartSelector.struct_class = Types::StreamProcessingStartSelector
+
+    StreamProcessingStopSelector.add_member(:max_duration_in_seconds, Shapes::ShapeRef.new(shape: MaxDurationInSecondsULong, location_name: "MaxDurationInSeconds"))
+    StreamProcessingStopSelector.struct_class = Types::StreamProcessingStopSelector
+
     StreamProcessor.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, location_name: "Name"))
     StreamProcessor.add_member(:status, Shapes::ShapeRef.new(shape: StreamProcessorStatus, location_name: "Status"))
     StreamProcessor.struct_class = Types::StreamProcessor
+
+    StreamProcessorDataSharingPreference.add_member(:opt_in, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "OptIn"))
+    StreamProcessorDataSharingPreference.struct_class = Types::StreamProcessorDataSharingPreference
 
     StreamProcessorInput.add_member(:kinesis_video_stream, Shapes::ShapeRef.new(shape: KinesisVideoStream, location_name: "KinesisVideoStream"))
     StreamProcessorInput.struct_class = Types::StreamProcessorInput
 
     StreamProcessorList.member = Shapes::ShapeRef.new(shape: StreamProcessor)
 
+    StreamProcessorNotificationChannel.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: SNSTopicArn, required: true, location_name: "SNSTopicArn"))
+    StreamProcessorNotificationChannel.struct_class = Types::StreamProcessorNotificationChannel
+
     StreamProcessorOutput.add_member(:kinesis_data_stream, Shapes::ShapeRef.new(shape: KinesisDataStream, location_name: "KinesisDataStream"))
+    StreamProcessorOutput.add_member(:s3_destination, Shapes::ShapeRef.new(shape: S3Destination, location_name: "S3Destination"))
     StreamProcessorOutput.struct_class = Types::StreamProcessorOutput
 
+    StreamProcessorParametersToDelete.member = Shapes::ShapeRef.new(shape: StreamProcessorParameterToDelete)
+
     StreamProcessorSettings.add_member(:face_search, Shapes::ShapeRef.new(shape: FaceSearchSettings, location_name: "FaceSearch"))
+    StreamProcessorSettings.add_member(:connected_home, Shapes::ShapeRef.new(shape: ConnectedHomeSettings, location_name: "ConnectedHome"))
     StreamProcessorSettings.struct_class = Types::StreamProcessorSettings
+
+    StreamProcessorSettingsForUpdate.add_member(:connected_home_for_update, Shapes::ShapeRef.new(shape: ConnectedHomeSettingsForUpdate, location_name: "ConnectedHomeForUpdate"))
+    StreamProcessorSettingsForUpdate.struct_class = Types::StreamProcessorSettingsForUpdate
 
     Summary.add_member(:s3_object, Shapes::ShapeRef.new(shape: S3Object, location_name: "S3Object"))
     Summary.struct_class = Types::Summary
@@ -1524,6 +1591,15 @@ module Aws::Rekognition
     UpdateDatasetEntriesRequest.struct_class = Types::UpdateDatasetEntriesRequest
 
     UpdateDatasetEntriesResponse.struct_class = Types::UpdateDatasetEntriesResponse
+
+    UpdateStreamProcessorRequest.add_member(:name, Shapes::ShapeRef.new(shape: StreamProcessorName, required: true, location_name: "Name"))
+    UpdateStreamProcessorRequest.add_member(:settings_for_update, Shapes::ShapeRef.new(shape: StreamProcessorSettingsForUpdate, location_name: "SettingsForUpdate"))
+    UpdateStreamProcessorRequest.add_member(:regions_of_interest_for_update, Shapes::ShapeRef.new(shape: RegionsOfInterest, location_name: "RegionsOfInterestForUpdate"))
+    UpdateStreamProcessorRequest.add_member(:data_sharing_preference_for_update, Shapes::ShapeRef.new(shape: StreamProcessorDataSharingPreference, location_name: "DataSharingPreferenceForUpdate"))
+    UpdateStreamProcessorRequest.add_member(:parameters_to_delete, Shapes::ShapeRef.new(shape: StreamProcessorParametersToDelete, location_name: "ParametersToDelete"))
+    UpdateStreamProcessorRequest.struct_class = Types::UpdateStreamProcessorRequest
+
+    UpdateStreamProcessorResponse.struct_class = Types::UpdateStreamProcessorResponse
 
     Urls.member = Shapes::ShapeRef.new(shape: Url)
 
@@ -2560,6 +2636,20 @@ module Aws::Rekognition
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_stream_processor, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateStreamProcessor"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateStreamProcessorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateStreamProcessorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ProvisionedThroughputExceededException)
       end)
     end
 

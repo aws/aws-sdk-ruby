@@ -361,18 +361,19 @@ module Aws::CloudTrail
 
     # @!group API Operations
 
-    # Adds one or more tags to a trail, up to a limit of 50. Overwrites an
-    # existing tag's value when a new value is specified for an existing
-    # tag key. Tag key names must be unique for a trail; you cannot have two
-    # keys with the same name but different values. If you specify a key
-    # without a value, the tag will be created with the specified key and a
-    # value of null. You can tag a trail that applies to all Amazon Web
-    # Services Regions only from the Region in which the trail was created
-    # (also known as its home region).
+    # Adds one or more tags to a trail or event data store, up to a limit of
+    # 50. Overwrites an existing tag's value when a new value is specified
+    # for an existing tag key. Tag key names must be unique for a trail; you
+    # cannot have two keys with the same name but different values. If you
+    # specify a key without a value, the tag will be created with the
+    # specified key and a value of null. You can tag a trail or event data
+    # store that applies to all Amazon Web Services Regions only from the
+    # Region in which the trail or event data store was created (also known
+    # as its home region).
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail to which one or more tags will be
-    #   added. The format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store to which one or
+    #   more tags will be added. The format of a trail ARN is:
     #
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
     #
@@ -1492,13 +1493,12 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Lists the tags for the trail in the current region.
+    # Lists the tags for the trail or event data store in the current
+    # region.
     #
     # @option params [required, Array<String>] :resource_id_list
-    #   Specifies a list of trail ARNs whose tags will be listed. The list has
-    #   a limit of 20 ARNs. The following is the format of a trail ARN.
-    #
-    #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #   Specifies a list of trail and event data store ARNs whose tags will be
+    #   listed. The list has a limit of 20 ARNs.
     #
     # @option params [String] :next_token
     #   Reserved for future use.
@@ -1911,13 +1911,17 @@ module Aws::CloudTrail
       req.send_request(options)
     end
 
-    # Removes the specified tags from a trail.
+    # Removes the specified tags from a trail or event data store.
     #
     # @option params [required, String] :resource_id
-    #   Specifies the ARN of the trail from which tags should be removed. The
-    #   format of a trail ARN is:
+    #   Specifies the ARN of the trail or event data store from which tags
+    #   should be removed.
     #
+    #   Example trail ARN format:
     #   `arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail`
+    #
+    #   Example event data store ARN format:
+    #   `arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE`
     #
     # @option params [required, Array<Types::Tag>] :tags_list
     #   Specifies a list of tags to be removed.
@@ -2414,7 +2418,7 @@ module Aws::CloudTrail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudtrail'
-      context[:gem_version] = '1.48.0'
+      context[:gem_version] = '1.49.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

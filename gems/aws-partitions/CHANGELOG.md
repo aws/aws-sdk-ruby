@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.581.0 (2022-04-27)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::ChimeSDKMediaPipelines`.
+
 1.580.0 (2022-04-26)
 ------------------
 

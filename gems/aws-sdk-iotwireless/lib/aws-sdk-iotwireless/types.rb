@@ -21,6 +21,7 @@ module Aws::IoTWireless
     #           nwk_s_key: "NwkSKey",
     #           app_s_key: "AppSKey",
     #         },
+    #         f_cnt_start: 1,
     #       }
     #
     # @!attribute [rw] dev_addr
@@ -31,9 +32,14 @@ module Aws::IoTWireless
     #   Session keys for ABP v1.0.x
     #   @return [Types::SessionKeysAbpV1_0_x]
     #
+    # @!attribute [rw] f_cnt_start
+    #   The FCnt init value.
+    #   @return [Integer]
+    #
     class AbpV1_0_x < Struct.new(
       :dev_addr,
-      :session_keys)
+      :session_keys,
+      :f_cnt_start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51,6 +57,7 @@ module Aws::IoTWireless
     #           nwk_s_enc_key: "NwkSEncKey",
     #           app_s_key: "AppSKey",
     #         },
+    #         f_cnt_start: 1,
     #       }
     #
     # @!attribute [rw] dev_addr
@@ -61,9 +68,14 @@ module Aws::IoTWireless
     #   Session keys for ABP v1.1
     #   @return [Types::SessionKeysAbpV1_1]
     #
+    # @!attribute [rw] f_cnt_start
+    #   The FCnt init value.
+    #   @return [Integer]
+    #
     class AbpV1_1 < Struct.new(
       :dev_addr,
-      :session_keys)
+      :session_keys,
+      :f_cnt_start)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -350,6 +362,59 @@ module Aws::IoTWireless
       :message,
       :resource_id,
       :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Connection status event configuration object for enabling or disabling
+    # topic.
+    #
+    # @note When making an API call, you may pass ConnectionStatusEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lo_ra_wan: {
+    #           gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   Connection status event configuration object for enabling or
+    #   disabling LoRaWAN related event topics.
+    #   @return [Types::LoRaWANConnectionStatusEventNotificationConfigurations]
+    #
+    # @!attribute [rw] wireless_gateway_id_event_topic
+    #   Enum to denote whether the wireless gateway id connection status
+    #   event topic is enabled or disabled .
+    #   @return [String]
+    #
+    class ConnectionStatusEventConfiguration < Struct.new(
+      :lo_ra_wan,
+      :wireless_gateway_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Connection status resource type event configuration object for
+    # enabling or disabling topic.
+    #
+    # @note When making an API call, you may pass ConnectionStatusResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lo_ra_wan: {
+    #           wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   Connection status resource type event configuration object for
+    #   enabling or disabling LoRaWAN related event topics.
+    #   @return [Types::LoRaWANConnectionStatusResourceTypeEventConfiguration]
+    #
+    class ConnectionStatusResourceTypeEventConfiguration < Struct.new(
+      :lo_ra_wan)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -670,6 +735,94 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateNetworkAnalyzerConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NetworkAnalyzerConfigurationName", # required
+    #         trace_content: {
+    #           wireless_device_frame_info: "ENABLED", # accepts ENABLED, DISABLED
+    #           log_level: "INFO", # accepts INFO, ERROR, DISABLED
+    #         },
+    #         wireless_devices: ["WirelessDeviceId"],
+    #         wireless_gateways: ["WirelessGatewayId"],
+    #         description: "Description",
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #         client_request_token: "ClientRequestToken",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   Name of the network analyzer configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] trace_content
+    #   Trace content for your wireless gateway and wireless device
+    #   resources.
+    #   @return [Types::TraceContent]
+    #
+    # @!attribute [rw] wireless_devices
+    #   Wireless device resources to add to the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resource to add
+    #   in the input array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wireless_gateways
+    #   Wireless gateway resources to add to the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resource to
+    #   add in the input array.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag to attach to the specified resource. Tags are metadata that
+    #   you can use to manage a resource.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_request_token
+    #   Each resource must have a unique client request token. If you try to
+    #   create a new resource with the same token as a resource that already
+    #   exists, an exception occurs. If you omit this value, AWS SDKs will
+    #   automatically generate a unique client request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    class CreateNetworkAnalyzerConfigurationRequest < Struct.new(
+      :name,
+      :trace_content,
+      :wireless_devices,
+      :wireless_gateways,
+      :description,
+      :tags,
+      :client_request_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the network analyzer configuration.
+    #   @return [String]
+    #
+    class CreateNetworkAnalyzerConfigurationResponse < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateServiceProfileRequest
     #   data as a hash:
     #
@@ -766,6 +919,7 @@ module Aws::IoTWireless
     #               nwk_s_enc_key: "NwkSEncKey",
     #               app_s_key: "AppSKey",
     #             },
+    #             f_cnt_start: 1,
     #           },
     #           abp_v1_0_x: {
     #             dev_addr: "DevAddr",
@@ -773,6 +927,7 @@ module Aws::IoTWireless
     #               nwk_s_key: "NwkSKey",
     #               app_s_key: "AppSKey",
     #             },
+    #             f_cnt_start: 1,
     #           },
     #           f_ports: {
     #             fuota: 1,
@@ -1129,6 +1284,25 @@ module Aws::IoTWireless
 
     class DeleteMulticastGroupResponse < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DeleteNetworkAnalyzerConfigurationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         configuration_name: "NetworkAnalyzerConfigurationName", # required
+    #       }
+    #
+    # @!attribute [rw] configuration_name
+    #   Name of the network analyzer configuration.
+    #   @return [String]
+    #
+    class DeleteNetworkAnalyzerConfigurationRequest < Struct.new(
+      :configuration_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class DeleteNetworkAnalyzerConfigurationResponse < Aws::EmptyStructure; end
+
     # @note When making an API call, you may pass DeleteQueuedMessagesRequest
     #   data as a hash:
     #
@@ -1139,17 +1313,18 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] id
-    #   Id of a given wireless device which messages will be deleted
+    #   The ID of a given wireless device for which downlink messages will
+    #   be deleted.
     #   @return [String]
     #
     # @!attribute [rw] message_id
-    #   if messageID=="*", the queue for a particular wireless deviceId
-    #   will be purged, otherwise, the specific message with messageId will
-    #   be deleted
+    #   If message ID is `"*"`, it cleares the entire downlink queue for a
+    #   given device, specified by the wireless device ID. Otherwise, the
+    #   downlink message with the specified message ID will be deleted.
     #   @return [String]
     #
     # @!attribute [rw] wireless_device_type
-    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   The wireless device type, which can be either Sidewalk or LoRaWAN.
     #   @return [String]
     #
     class DeleteQueuedMessagesRequest < Struct.new(
@@ -1326,6 +1501,7 @@ module Aws::IoTWireless
     #         sidewalk: {
     #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #         },
+    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] sidewalk
@@ -1333,7 +1509,36 @@ module Aws::IoTWireless
     #   disabling Sidewalk related event topics.
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
+    # @!attribute [rw] wireless_device_id_event_topic
+    #   Enum to denote whether the wireless device id device registration
+    #   state event topic is enabled or disabled.
+    #   @return [String]
+    #
     class DeviceRegistrationStateEventConfiguration < Struct.new(
+      :sidewalk,
+      :wireless_device_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Device registration state resource type event configuration object for
+    # enabling or disabling topic.
+    #
+    # @note When making an API call, you may pass DeviceRegistrationStateResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   Device registration resource type state event configuration object
+    #   for enabling or disabling Sidewalk related event topics.
+    #   @return [Types::SidewalkResourceTypeEventConfiguration]
+    #
+    class DeviceRegistrationStateResourceTypeEventConfiguration < Struct.new(
       :sidewalk)
       SENSITIVE = []
       include Aws::Structure
@@ -1496,20 +1701,21 @@ module Aws::IoTWireless
 
     class DisassociateWirelessGatewayFromThingResponse < Aws::EmptyStructure; end
 
-    # The message in downlink queue.
+    # The message in the downlink queue.
     #
     # @!attribute [rw] message_id
-    #   The messageId allocated by IoT Wireless for tracing purpose
+    #   The message ID assigned by IoT Wireless to each downlink message,
+    #   which helps identify the message.
     #   @return [String]
     #
     # @!attribute [rw] transmit_mode
-    #   The transmit mode to use to send data to the wireless device. Can
-    #   be: `0` for UM (unacknowledge mode) or `1` for AM (acknowledge
-    #   mode).
+    #   The transmit mode to use for sending data to the wireless device.
+    #   This can be `0` for UM (unacknowledge mode) or `1` for AM
+    #   (acknowledge mode).
     #   @return [Integer]
     #
     # @!attribute [rw] received_at
-    #   The timestamp that Iot Wireless received the message.
+    #   The time at which Iot Wireless received the downlink message.
     #   @return [String]
     #
     # @!attribute [rw] lo_ra_wan
@@ -1521,6 +1727,65 @@ module Aws::IoTWireless
       :transmit_mode,
       :received_at,
       :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Event configuration object for a single resource.
+    #
+    # @!attribute [rw] identifier
+    #   Resource identifier opted in for event messaging.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier_type
+    #   Identifier type of the particular resource identifier for event
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] partner_type
+    #   Partner type of the resource if the identifier type is
+    #   PartnerAccountId.
+    #   @return [String]
+    #
+    # @!attribute [rw] events
+    #   Object of all event configurations and the status of the event
+    #   topics.
+    #   @return [Types::EventNotificationItemConfigurations]
+    #
+    class EventConfigurationItem < Struct.new(
+      :identifier,
+      :identifier_type,
+      :partner_type,
+      :events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object of all event configurations and the status of the event topics.
+    #
+    # @!attribute [rw] device_registration_state
+    #   Device registration state event configuration for an event
+    #   configuration item.
+    #   @return [Types::DeviceRegistrationStateEventConfiguration]
+    #
+    # @!attribute [rw] proximity
+    #   Proximity event configuration for an event configuration item.
+    #   @return [Types::ProximityEventConfiguration]
+    #
+    # @!attribute [rw] join
+    #   Join event configuration for an event configuration item.
+    #   @return [Types::JoinEventConfiguration]
+    #
+    # @!attribute [rw] connection_status
+    #   Connection status event configuration for an event configuration
+    #   item.
+    #   @return [Types::ConnectionStatusEventConfiguration]
+    #
+    class EventNotificationItemConfigurations < Struct.new(
+      :device_registration_state,
+      :proximity,
+      :join,
+      :connection_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1673,6 +1938,36 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @api private
+    #
+    class GetEventConfigurationByResourceTypesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] device_registration_state
+    #   Resource type event configuration for the device registration state
+    #   event
+    #   @return [Types::DeviceRegistrationStateResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] proximity
+    #   Resource type event configuration for the proximity event
+    #   @return [Types::ProximityResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] join
+    #   Resource type event configuration for the join event
+    #   @return [Types::JoinResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] connection_status
+    #   Resource type event configuration for the connection status event
+    #   @return [Types::ConnectionStatusResourceTypeEventConfiguration]
+    #
+    class GetEventConfigurationByResourceTypesResponse < Struct.new(
+      :device_registration_state,
+      :proximity,
+      :join,
+      :connection_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetFuotaTaskRequest
     #   data as a hash:
     #
@@ -1746,7 +2041,9 @@ module Aws::IoTWireless
     class GetLogLevelsByResourceTypesRequest < Aws::EmptyStructure; end
 
     # @!attribute [rw] default_log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     # @!attribute [rw] wireless_gateway_log_options
@@ -1858,7 +2155,7 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] configuration_name
-    #   NetworkAnalyzer configuration name.
+    #   Name of the network analyzer configuration.
     #   @return [String]
     #
     class GetNetworkAnalyzerConfigurationRequest < Struct.new(
@@ -1868,21 +2165,39 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] trace_content
-    #   Trace Content for resources.
+    #   Trace content for your wireless gateway and wireless device
+    #   resources.
     #   @return [Types::TraceContent]
     #
     # @!attribute [rw] wireless_devices
-    #   List of WirelessDevices in the NetworkAnalyzerConfiguration.
+    #   List of wireless gateway resources that have been added to the
+    #   network analyzer configuration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wireless_gateways
-    #   List of WirelessGateways in the NetworkAnalyzerConfiguration.
+    #   List of wireless gateway resources that have been added to the
+    #   network analyzer configuration.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the network analyzer configuration.
+    #   @return [String]
     #
     class GetNetworkAnalyzerConfigurationResponse < Struct.new(
       :trace_content,
       :wireless_devices,
-      :wireless_gateways)
+      :wireless_gateways,
+      :description,
+      :arn,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1930,7 +2245,7 @@ module Aws::IoTWireless
     #
     #       {
     #         identifier: "Identifier", # required
-    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #         partner_type: "Sidewalk", # accepts Sidewalk
     #       }
     #
@@ -1964,9 +2279,19 @@ module Aws::IoTWireless
     #   Event configuration for the Proximity event
     #   @return [Types::ProximityEventConfiguration]
     #
+    # @!attribute [rw] join
+    #   Event configuration for the join event.
+    #   @return [Types::JoinEventConfiguration]
+    #
+    # @!attribute [rw] connection_status
+    #   Event configuration for the connection status event.
+    #   @return [Types::ConnectionStatusEventConfiguration]
+    #
     class GetResourceEventConfigurationResponse < Struct.new(
       :device_registration_state,
-      :proximity)
+      :proximity,
+      :join,
+      :connection_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1998,7 +2323,9 @@ module Aws::IoTWireless
     end
 
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     class GetResourceLogLevelResponse < Struct.new(
@@ -2017,7 +2344,8 @@ module Aws::IoTWireless
     # @!attribute [rw] service_type
     #   The service type for which to get endpoint information about. Can be
     #   `CUPS` for the Configuration and Update Server endpoint, or `LNS`
-    #   for the LoRaWAN Network Server endpoint.
+    #   for the LoRaWAN Network Server endpoint or `CLAIM` for the global
+    #   endpoint.
     #   @return [String]
     #
     class GetServiceEndpointRequest < Struct.new(
@@ -2472,6 +2800,58 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Join event configuration object for enabling or disabling topic.
+    #
+    # @note When making an API call, you may pass JoinEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lo_ra_wan: {
+    #           dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   Join event configuration object for enabling or disabling LoRaWAN
+    #   related event topics.
+    #   @return [Types::LoRaWANJoinEventNotificationConfigurations]
+    #
+    # @!attribute [rw] wireless_device_id_event_topic
+    #   Enum to denote whether the wireless device id join event topic is
+    #   enabled or disabled.
+    #   @return [String]
+    #
+    class JoinEventConfiguration < Struct.new(
+      :lo_ra_wan,
+      :wireless_device_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Join resource type event configuration object for enabling or
+    # disabling topic.
+    #
+    # @note When making an API call, you may pass JoinResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         lo_ra_wan: {
+    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] lo_ra_wan
+    #   Join resource type event configuration object for enabling or
+    #   disabling LoRaWAN related event topics.
+    #   @return [Types::LoRaWANJoinResourceTypeEventConfiguration]
+    #
+    class JoinResourceTypeEventConfiguration < Struct.new(
+      :lo_ra_wan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListDestinationsRequest
     #   data as a hash:
     #
@@ -2550,6 +2930,54 @@ module Aws::IoTWireless
     class ListDeviceProfilesResponse < Struct.new(
       :next_token,
       :device_profile_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListEventConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_type: "SidewalkAccount", # required, accepts SidewalkAccount, WirelessDevice, WirelessGateway
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] resource_type
+    #   Resource type to filter event configurations.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    class ListEventConfigurationsRequest < Struct.new(
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_configurations_list
+    #   Event configurations of all events for a single resource.
+    #   @return [Array<Types::EventConfigurationItem>]
+    #
+    class ListEventConfigurationsResponse < Struct.new(
+      :next_token,
+      :event_configurations_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2686,6 +3114,47 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListNetworkAnalyzerConfigurationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in this operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   To retrieve the next set of results, the `nextToken` value from a
+    #   previous response; otherwise **null** to receive the first set of
+    #   results.
+    #   @return [String]
+    #
+    class ListNetworkAnalyzerConfigurationsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The token to use to get the next set of results, or **null** if
+    #   there are no additional results.
+    #   @return [String]
+    #
+    # @!attribute [rw] network_analyzer_configuration_list
+    #   The list of network analyzer configurations.
+    #   @return [Array<Types::NetworkAnalyzerConfigurations>]
+    #
+    class ListNetworkAnalyzerConfigurationsResponse < Struct.new(
+      :next_token,
+      :network_analyzer_configuration_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPartnerAccountsRequest
     #   data as a hash:
     #
@@ -2738,8 +3207,8 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] id
-    #   Id of a given wireless device which the downlink packets are
-    #   targeted
+    #   The ID of a given wireless device which the downlink message packets
+    #   are being sent.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -2753,7 +3222,7 @@ module Aws::IoTWireless
     #   @return [Integer]
     #
     # @!attribute [rw] wireless_device_type
-    #   The wireless device type, it is either Sidewalk or LoRaWAN.
+    #   The wireless device type, whic can be either Sidewalk or LoRaWAN.
     #   @return [String]
     #
     class ListQueuedMessagesRequest < Struct.new(
@@ -2772,7 +3241,7 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] downlink_queue_messages_list
-    #   The messages in downlink queue.
+    #   The messages in the downlink queue.
     #   @return [Array<Types::DownlinkQueueMessage>]
     #
     class ListQueuedMessagesResponse < Struct.new(
@@ -3021,6 +3490,48 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Object for LoRaWAN connection status resource type event
+    # configuration.
+    #
+    # @note When making an API call, you may pass LoRaWANConnectionStatusEventNotificationConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] gateway_eui_event_topic
+    #   Enum to denote whether the gateway eui connection status event topic
+    #   is enabled or disabled.
+    #   @return [String]
+    #
+    class LoRaWANConnectionStatusEventNotificationConfigurations < Struct.new(
+      :gateway_eui_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object for LoRaWAN connection status resource type event
+    # configuration.
+    #
+    # @note When making an API call, you may pass LoRaWANConnectionStatusResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] wireless_gateway_event_topic
+    #   Enum to denote whether the wireless gateway connection status event
+    #   topic is enabled or disabled.
+    #   @return [String]
+    #
+    class LoRaWANConnectionStatusResourceTypeEventConfiguration < Struct.new(
+      :wireless_gateway_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # LoRaWAN object for create functions.
     #
     # @note When making an API call, you may pass LoRaWANDevice
@@ -3048,6 +3559,7 @@ module Aws::IoTWireless
     #             nwk_s_enc_key: "NwkSEncKey",
     #             app_s_key: "AppSKey",
     #           },
+    #           f_cnt_start: 1,
     #         },
     #         abp_v1_0_x: {
     #           dev_addr: "DevAddr",
@@ -3055,6 +3567,7 @@ module Aws::IoTWireless
     #             nwk_s_key: "NwkSKey",
     #             app_s_key: "AppSKey",
     #           },
+    #           f_cnt_start: 1,
     #         },
     #         f_ports: {
     #           fuota: 1,
@@ -3527,6 +4040,46 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Object for LoRaWAN join resource type event configuration.
+    #
+    # @note When making an API call, you may pass LoRaWANJoinEventNotificationConfigurations
+    #   data as a hash:
+    #
+    #       {
+    #         dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] dev_eui_event_topic
+    #   Enum to denote whether the dev eui join event topic is enabled or
+    #   disabled.
+    #   @return [String]
+    #
+    class LoRaWANJoinEventNotificationConfigurations < Struct.new(
+      :dev_eui_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Object for LoRaWAN join resource type event configuration.
+    #
+    # @note When making an API call, you may pass LoRaWANJoinResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] wireless_device_event_topic
+    #   Enum to denote whether the wireless device join event topic is
+    #   enabled or disabled.
+    #   @return [String]
+    #
+    class LoRaWANJoinResourceTypeEventConfiguration < Struct.new(
+      :wireless_device_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # LoRaWAN object for list functions.
     #
     # @!attribute [rw] dev_eui
@@ -3714,6 +4267,12 @@ module Aws::IoTWireless
     #       {
     #         device_profile_id: "DeviceProfileId",
     #         service_profile_id: "ServiceProfileId",
+    #         abp_v1_1: {
+    #           f_cnt_start: 1,
+    #         },
+    #         abp_v1_0_x: {
+    #           f_cnt_start: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] device_profile_id
@@ -3724,9 +4283,19 @@ module Aws::IoTWireless
     #   The ID of the service profile.
     #   @return [String]
     #
+    # @!attribute [rw] abp_v1_1
+    #   ABP device object for update APIs for v1.1
+    #   @return [Types::UpdateAbpV1_1]
+    #
+    # @!attribute [rw] abp_v1_0_x
+    #   ABP device object for update APIs for v1.0.x
+    #   @return [Types::UpdateAbpV1_0_x]
+    #
     class LoRaWANUpdateDevice < Struct.new(
       :device_profile_id,
-      :service_profile_id)
+      :service_profile_id,
+      :abp_v1_1,
+      :abp_v1_0_x)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3848,6 +4417,23 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Network analyzer configurations.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name of the new resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Name of the network analyzer configuration.
+    #   @return [String]
+    #
+    class NetworkAnalyzerConfigurations < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # OTAA device object for v1.0.x
     #
     # @note When making an API call, you may pass OtaaV1_0_x
@@ -3920,6 +4506,7 @@ module Aws::IoTWireless
     #         sidewalk: {
     #           amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #         },
+    #         wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #       }
     #
     # @!attribute [rw] sidewalk
@@ -3927,7 +4514,36 @@ module Aws::IoTWireless
     #   Sidewalk related event topics.
     #   @return [Types::SidewalkEventNotificationConfigurations]
     #
+    # @!attribute [rw] wireless_device_id_event_topic
+    #   Enum to denote whether the wireless device id proximity event topic
+    #   is enabled or disabled.
+    #   @return [String]
+    #
     class ProximityEventConfiguration < Struct.new(
+      :sidewalk,
+      :wireless_device_id_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Proximity resource type event configuration object for enabling or
+    # disabling topic.
+    #
+    # @note When making an API call, you may pass ProximityResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         sidewalk: {
+    #           wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #       }
+    #
+    # @!attribute [rw] sidewalk
+    #   Proximity resource type event configuration object for enabling and
+    #   disabling wireless device topic.
+    #   @return [Types::SidewalkResourceTypeEventConfiguration]
+    #
+    class ProximityResourceTypeEventConfiguration < Struct.new(
       :sidewalk)
       SENSITIVE = []
       include Aws::Structure
@@ -3954,7 +4570,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     class PutResourceLogLevelRequest < Struct.new(
@@ -4352,6 +4970,27 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
+    # Sidewalk resource type event configuration object for enabling or
+    # disabling topic.
+    #
+    # @note When making an API call, you may pass SidewalkResourceTypeEventConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #       }
+    #
+    # @!attribute [rw] wireless_device_event_topic
+    #   Enum to denote whether the wireless device join event topic is
+    #   enabled or disabled.
+    #   @return [String]
+    #
+    class SidewalkResourceTypeEventConfiguration < Struct.new(
+      :wireless_device_event_topic)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a Sidewalk router.
     #
     # @note When making an API call, you may pass SidewalkSendDataToDevice
@@ -4641,7 +5280,7 @@ module Aws::IoTWireless
       include Aws::Structure
     end
 
-    # Trace Content for resources.
+    # Trace content for your wireless gateway and wireless device resources.
     #
     # @note When making an API call, you may pass TraceContent
     #   data as a hash:
@@ -4652,11 +5291,15 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] wireless_device_frame_info
-    #   WirelessDevice FrameInfo for trace content.
+    #   FrameInfo of your wireless device resources for the trace content.
+    #   Use FrameInfo to debug the communication between your LoRaWAN end
+    #   devices and the network server.
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     class TraceContent < Struct.new(
@@ -4690,6 +5333,44 @@ module Aws::IoTWireless
     end
 
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # ABP device object for LoRaWAN specification v1.0.x
+    #
+    # @note When making an API call, you may pass UpdateAbpV1_0_x
+    #   data as a hash:
+    #
+    #       {
+    #         f_cnt_start: 1,
+    #       }
+    #
+    # @!attribute [rw] f_cnt_start
+    #   The FCnt init value.
+    #   @return [Integer]
+    #
+    class UpdateAbpV1_0_x < Struct.new(
+      :f_cnt_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # ABP device object for LoRaWAN specification v1.1
+    #
+    # @note When making an API call, you may pass UpdateAbpV1_1
+    #   data as a hash:
+    #
+    #       {
+    #         f_cnt_start: 1,
+    #       }
+    #
+    # @!attribute [rw] f_cnt_start
+    #   The FCnt init value.
+    #   @return [Integer]
+    #
+    class UpdateAbpV1_1 < Struct.new(
+      :f_cnt_start)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @note When making an API call, you may pass UpdateDestinationRequest
     #   data as a hash:
@@ -4733,6 +5414,63 @@ module Aws::IoTWireless
     end
 
     class UpdateDestinationResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateEventConfigurationByResourceTypesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         device_registration_state: {
+    #           sidewalk: {
+    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #         proximity: {
+    #           sidewalk: {
+    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #         join: {
+    #           lo_ra_wan: {
+    #             wireless_device_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #         connection_status: {
+    #           lo_ra_wan: {
+    #             wireless_gateway_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] device_registration_state
+    #   Device registration state resource type event configuration object
+    #   for enabling and disabling wireless gateway topic.
+    #   @return [Types::DeviceRegistrationStateResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] proximity
+    #   Proximity resource type event configuration object for enabling and
+    #   disabling wireless gateway topic.
+    #   @return [Types::ProximityResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] join
+    #   Join resource type event configuration object for enabling and
+    #   disabling wireless device topic.
+    #   @return [Types::JoinResourceTypeEventConfiguration]
+    #
+    # @!attribute [rw] connection_status
+    #   Connection status resource type event configuration object for
+    #   enabling and disabling wireless gateway topic.
+    #   @return [Types::ConnectionStatusResourceTypeEventConfiguration]
+    #
+    class UpdateEventConfigurationByResourceTypesRequest < Struct.new(
+      :device_registration_state,
+      :proximity,
+      :join,
+      :connection_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    class UpdateEventConfigurationByResourceTypesResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateFuotaTaskRequest
     #   data as a hash:
@@ -4818,7 +5556,9 @@ module Aws::IoTWireless
     #       }
     #
     # @!attribute [rw] default_log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     # @!attribute [rw] wireless_device_log_options
@@ -4892,31 +5632,45 @@ module Aws::IoTWireless
     #         wireless_devices_to_remove: ["WirelessDeviceId"],
     #         wireless_gateways_to_add: ["WirelessGatewayId"],
     #         wireless_gateways_to_remove: ["WirelessGatewayId"],
+    #         description: "Description",
     #       }
     #
     # @!attribute [rw] configuration_name
-    #   NetworkAnalyzer configuration name.
+    #   Name of the network analyzer configuration.
     #   @return [String]
     #
     # @!attribute [rw] trace_content
-    #   Trace Content for resources.
+    #   Trace content for your wireless gateway and wireless device
+    #   resources.
     #   @return [Types::TraceContent]
     #
     # @!attribute [rw] wireless_devices_to_add
-    #   WirelessDevices to add into NetworkAnalyzerConfiguration.
+    #   Wireless device resources to add to the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resource to add
+    #   in the input array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wireless_devices_to_remove
-    #   WirelessDevices to remove from NetworkAnalyzerConfiguration.
+    #   Wireless device resources to remove from the network analyzer
+    #   configuration. Provide the `WirelessDeviceId` of the resources to
+    #   remove in the input array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wireless_gateways_to_add
-    #   WirelessGateways to add into NetworkAnalyzerConfiguration.
+    #   Wireless gateway resources to add to the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resource to
+    #   add in the input array.
     #   @return [Array<String>]
     #
     # @!attribute [rw] wireless_gateways_to_remove
-    #   WirelessGateways to remove from NetworkAnalyzerConfiguration.
+    #   Wireless gateway resources to remove from the network analyzer
+    #   configuration. Provide the `WirelessGatewayId` of the resources to
+    #   remove in the input array.
     #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   The description of the new resource.
+    #   @return [String]
     #
     class UpdateNetworkAnalyzerConfigurationRequest < Struct.new(
       :configuration_name,
@@ -4924,7 +5678,8 @@ module Aws::IoTWireless
       :wireless_devices_to_add,
       :wireless_devices_to_remove,
       :wireless_gateways_to_add,
-      :wireless_gateways_to_remove)
+      :wireless_gateways_to_remove,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4969,17 +5724,31 @@ module Aws::IoTWireless
     #
     #       {
     #         identifier: "Identifier", # required
-    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId
+    #         identifier_type: "PartnerAccountId", # required, accepts PartnerAccountId, DevEui, GatewayEui, WirelessDeviceId, WirelessGatewayId
     #         partner_type: "Sidewalk", # accepts Sidewalk
     #         device_registration_state: {
     #           sidewalk: {
     #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #           },
+    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #         },
     #         proximity: {
     #           sidewalk: {
     #             amazon_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #           },
+    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         join: {
+    #           lo_ra_wan: {
+    #             dev_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #           wireless_device_id_event_topic: "Enabled", # accepts Enabled, Disabled
+    #         },
+    #         connection_status: {
+    #           lo_ra_wan: {
+    #             gateway_eui_event_topic: "Enabled", # accepts Enabled, Disabled
+    #           },
+    #           wireless_gateway_id_event_topic: "Enabled", # accepts Enabled, Disabled
     #         },
     #       }
     #
@@ -5005,12 +5774,22 @@ module Aws::IoTWireless
     #   Event configuration for the Proximity event
     #   @return [Types::ProximityEventConfiguration]
     #
+    # @!attribute [rw] join
+    #   Event configuration for the join event
+    #   @return [Types::JoinEventConfiguration]
+    #
+    # @!attribute [rw] connection_status
+    #   Event configuration for the connection status event
+    #   @return [Types::ConnectionStatusEventConfiguration]
+    #
     class UpdateResourceEventConfigurationRequest < Struct.new(
       :identifier,
       :identifier_type,
       :partner_type,
       :device_registration_state,
-      :proximity)
+      :proximity,
+      :join,
+      :connection_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5028,6 +5807,12 @@ module Aws::IoTWireless
     #         lo_ra_wan: {
     #           device_profile_id: "DeviceProfileId",
     #           service_profile_id: "ServiceProfileId",
+    #           abp_v1_1: {
+    #             f_cnt_start: 1,
+    #           },
+    #           abp_v1_0_x: {
+    #             f_cnt_start: 1,
+    #           },
     #         },
     #       }
     #
@@ -5208,7 +5993,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     class WirelessDeviceEventLogOption < Struct.new(
@@ -5240,7 +6027,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     # @!attribute [rw] events
@@ -5337,7 +6126,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     class WirelessGatewayEventLogOption < Struct.new(
@@ -5369,7 +6160,9 @@ module Aws::IoTWireless
     #   @return [String]
     #
     # @!attribute [rw] log_level
-    #   The log level for a log message.
+    #   The log level for a log message. The log levels can be disabled, or
+    #   set to `ERROR` to display less verbose logs containing only error
+    #   information, or to `INFO` for more detailed logs.
     #   @return [String]
     #
     # @!attribute [rw] events

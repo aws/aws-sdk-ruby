@@ -42,6 +42,7 @@ module Aws
   autoload :Budgets, 'aws-sdk-budgets'
   autoload :Chime, 'aws-sdk-chime'
   autoload :ChimeSDKIdentity, 'aws-sdk-chimesdkidentity'
+  autoload :ChimeSDKMediaPipelines, 'aws-sdk-chimesdkmediapipelines'
   autoload :ChimeSDKMeetings, 'aws-sdk-chimesdkmeetings'
   autoload :ChimeSDKMessaging, 'aws-sdk-chimesdkmessaging'
   autoload :Cloud9, 'aws-sdk-cloud9'

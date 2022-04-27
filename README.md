@@ -470,6 +470,7 @@ RubyGems.org page under "LINKS" section.
 | Amazon Augmented AI Runtime                           | Aws::AugmentedAIRuntime                  | aws-sdk-augmentedairuntime                  | 2019-11-07  |
 | Amazon Chime                                          | Aws::Chime                               | aws-sdk-chime                               | 2018-05-01  |
 | Amazon Chime SDK Identity                             | Aws::ChimeSDKIdentity                    | aws-sdk-chimesdkidentity                    | 2021-04-20  |
+| Amazon Chime SDK Media Pipelines                      | Aws::ChimeSDKMediaPipelines              | aws-sdk-chimesdkmediapipelines              | 2021-07-15  |
 | Amazon Chime SDK Meetings                             | Aws::ChimeSDKMeetings                    | aws-sdk-chimesdkmeetings                    | 2021-07-15  |
 | Amazon Chime SDK Messaging                            | Aws::ChimeSDKMessaging                   | aws-sdk-chimesdkmessaging                   | 2021-05-15  |
 | Amazon CloudDirectory                                 | Aws::CloudDirectory                      | aws-sdk-clouddirectory                      | 2017-01-11  |

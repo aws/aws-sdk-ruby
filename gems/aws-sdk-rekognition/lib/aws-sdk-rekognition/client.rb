@@ -930,23 +930,36 @@ module Aws::Rekognition
     end
 
     # Creates an Amazon Rekognition stream processor that you can use to
-    # detect and recognize faces in a streaming video.
+    # detect and recognize faces or to detect labels in a streaming video.
     #
     # Amazon Rekognition Video is a consumer of live video from Amazon
-    # Kinesis Video Streams. Amazon Rekognition Video sends analysis results
-    # to Amazon Kinesis Data Streams.
+    # Kinesis Video Streams. There are two different settings for stream
+    # processors in Amazon Rekognition: detecting faces and detecting
+    # labels.
     #
-    # You provide as input a Kinesis video stream (`Input`) and a Kinesis
-    # data stream (`Output`) stream. You also specify the face recognition
-    # criteria in `Settings`. For example, the collection containing faces
-    # that you want to recognize. Use `Name` to assign an identifier for the
-    # stream processor. You use `Name` to manage the stream processor. For
-    # example, you can start processing the source video by calling
-    # StartStreamProcessor with the `Name` field.
+    # * If you are creating a stream processor for detecting faces, you
+    #   provide as input a Kinesis video stream (`Input`) and a Kinesis data
+    #   stream (`Output`) stream. You also specify the face recognition
+    #   criteria in `Settings`. For example, the collection containing faces
+    #   that you want to recognize. After you have finished analyzing a
+    #   streaming video, use StopStreamProcessor to stop processing.
     #
-    # After you have finished analyzing a streaming video, use
-    # StopStreamProcessor to stop processing. You can delete the stream
-    # processor by calling DeleteStreamProcessor.
+    # * If you are creating a stream processor to detect labels, you provide
+    #   as input a Kinesis video stream (`Input`), Amazon S3 bucket
+    #   information (`Output`), and an Amazon SNS topic ARN
+    #   (`NotificationChannel`). You can also provide a KMS key ID to
+    #   encrypt the data sent to your Amazon S3 bucket. You specify what you
+    #   want to detect in `ConnectedHomeSettings`, such as people, packages
+    #   and people, or pets, people, and packages. You can also specify
+    #   where in the frame you want Amazon Rekognition to monitor with
+    #   `RegionsOfInterest`. When you run the StartStreamProcessor operation
+    #   on a label detection stream processor, you input start and stop
+    #   information to determine the length of the processing time.
+    #
+    # Use `Name` to assign an identifier for the stream processor. You use
+    # `Name` to manage the stream processor. For example, you can start
+    # processing the source video by calling StartStreamProcessor with the
+    # `Name` field.
     #
     # This operation requires permissions to perform the
     # `rekognition:CreateStreamProcessor` action. If you want to tag your
@@ -956,30 +969,77 @@ module Aws::Rekognition
     # @option params [required, Types::StreamProcessorInput] :input
     #   Kinesis video stream stream that provides the source streaming video.
     #   If you are using the AWS CLI, the parameter name is
-    #   `StreamProcessorInput`.
+    #   `StreamProcessorInput`. This is required for both face search and
+    #   label detection stream processors.
     #
     # @option params [required, Types::StreamProcessorOutput] :output
-    #   Kinesis data stream stream to which Amazon Rekognition Video puts the
-    #   analysis results. If you are using the AWS CLI, the parameter name is
-    #   `StreamProcessorOutput`.
+    #   Kinesis data stream stream or Amazon S3 bucket location to which
+    #   Amazon Rekognition Video puts the analysis results. If you are using
+    #   the AWS CLI, the parameter name is `StreamProcessorOutput`. This must
+    #   be a S3Destination of an Amazon S3 bucket that you own for a label
+    #   detection stream processor or a Kinesis data stream ARN for a face
+    #   search stream processor.
     #
     # @option params [required, String] :name
     #   An identifier you assign to the stream processor. You can use `Name`
     #   to manage the stream processor. For example, you can get the current
     #   status of the stream processor by calling DescribeStreamProcessor.
-    #   `Name` is idempotent.
+    #   `Name` is idempotent. This is required for both face search and label
+    #   detection stream processors.
     #
     # @option params [required, Types::StreamProcessorSettings] :settings
-    #   Face recognition input parameters to be used by the stream processor.
-    #   Includes the collection to use for face recognition and the face
-    #   attributes to detect.
+    #   Input parameters used in a streaming video analyzed by a stream
+    #   processor. You can use `FaceSearch` to recognize faces in a streaming
+    #   video, or you can use `ConnectedHome` to detect labels.
     #
     # @option params [required, String] :role_arn
-    #   ARN of the IAM role that allows access to the stream processor.
+    #   The Amazon Resource Number (ARN) of the IAM role that allows access to
+    #   the stream processor. The IAM role provides Rekognition read
+    #   permissions for a Kinesis stream. It also provides write permissions
+    #   to an Amazon S3 bucket and Amazon Simple Notification Service topic
+    #   for a label detection stream processor. This is required for both face
+    #   search and label detection stream processors.
     #
     # @option params [Hash<String,String>] :tags
     #   A set of tags (key-value pairs) that you want to attach to the stream
     #   processor.
+    #
+    # @option params [Types::StreamProcessorNotificationChannel] :notification_channel
+    #   The Amazon Simple Notification Service topic to which Amazon
+    #   Rekognition publishes the object detection results and completion
+    #   status of a video analysis operation.
+    #
+    #   Amazon Rekognition publishes a notification the first time an object
+    #   of interest or a person is detected in the video stream. For example,
+    #   if Amazon Rekognition detects a person at second 2, a pet at second 4,
+    #   and a person again at second 5, Amazon Rekognition sends 2 object
+    #   class detected notifications, one for a person at second 2 and one for
+    #   a pet at second 4.
+    #
+    #   Amazon Rekognition also publishes an an end-of-session notification
+    #   with a summary when the stream processing session is complete.
+    #
+    # @option params [String] :kms_key_id
+    #   The identifier for your AWS Key Management Service key (AWS KMS key).
+    #   This is an optional parameter for label detection stream processors
+    #   and should not be used to create a face search stream processor. You
+    #   can supply the Amazon Resource Name (ARN) of your KMS key, the ID of
+    #   your KMS key, an alias for your KMS key, or an alias ARN. The key is
+    #   used to encrypt results and data published to your Amazon S3 bucket,
+    #   which includes image frames and hero images. Your source images are
+    #   unaffected.
+    #
+    # @option params [Array<Types::RegionOfInterest>] :regions_of_interest
+    #   Specifies locations in the frames where Amazon Rekognition checks for
+    #   objects or people. You can specify up to 10 regions of interest. This
+    #   is an optional parameter for label detection stream processors and
+    #   should not be used to create a face search stream processor.
+    #
+    # @option params [Types::StreamProcessorDataSharingPreference] :data_sharing_preference
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
     #
     # @return [Types::CreateStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -997,6 +1057,10 @@ module Aws::Rekognition
     #       kinesis_data_stream: {
     #         arn: "KinesisDataArn",
     #       },
+    #       s3_destination: {
+    #         bucket: "S3Bucket",
+    #         key_prefix: "S3KeyPrefix",
+    #       },
     #     },
     #     name: "StreamProcessorName", # required
     #     settings: { # required
@@ -1004,10 +1068,37 @@ module Aws::Rekognition
     #         collection_id: "CollectionId",
     #         face_match_threshold: 1.0,
     #       },
+    #       connected_home: {
+    #         labels: ["ConnectedHomeLabel"], # required
+    #         min_confidence: 1.0,
+    #       },
     #     },
     #     role_arn: "RoleArn", # required
     #     tags: {
     #       "TagKey" => "TagValue",
+    #     },
+    #     notification_channel: {
+    #       sns_topic_arn: "SNSTopicArn", # required
+    #     },
+    #     kms_key_id: "KmsKeyId",
+    #     regions_of_interest: [
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #         polygon: [
+    #           {
+    #             x: 1.0,
+    #             y: 1.0,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     data_sharing_preference: {
+    #       opt_in: false, # required
     #     },
     #   })
     #
@@ -1023,11 +1114,15 @@ module Aws::Rekognition
     end
 
     # Deletes the specified collection. Note that this operation removes all
-    # faces in the collection. For an example, see
-    # delete-collection-procedure.
+    # faces in the collection. For an example, see [Deleting a
+    # collection][1].
     #
     # This operation requires permissions to perform the
     # `rekognition:DeleteCollection` action.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/delete-collection-procedure.html
     #
     # @option params [required, String] :collection_id
     #   ID of the collection to delete.
@@ -1514,6 +1609,10 @@ module Aws::Rekognition
     #   * {Types::DescribeStreamProcessorResponse#output #output} => Types::StreamProcessorOutput
     #   * {Types::DescribeStreamProcessorResponse#role_arn #role_arn} => String
     #   * {Types::DescribeStreamProcessorResponse#settings #settings} => Types::StreamProcessorSettings
+    #   * {Types::DescribeStreamProcessorResponse#notification_channel #notification_channel} => Types::StreamProcessorNotificationChannel
+    #   * {Types::DescribeStreamProcessorResponse#kms_key_id #kms_key_id} => String
+    #   * {Types::DescribeStreamProcessorResponse#regions_of_interest #regions_of_interest} => Array&lt;Types::RegionOfInterest&gt;
+    #   * {Types::DescribeStreamProcessorResponse#data_sharing_preference #data_sharing_preference} => Types::StreamProcessorDataSharingPreference
     #
     # @example Request syntax with placeholder values
     #
@@ -1525,15 +1624,31 @@ module Aws::Rekognition
     #
     #   resp.name #=> String
     #   resp.stream_processor_arn #=> String
-    #   resp.status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #   resp.status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING", "UPDATING"
     #   resp.status_message #=> String
     #   resp.creation_timestamp #=> Time
     #   resp.last_update_timestamp #=> Time
     #   resp.input.kinesis_video_stream.arn #=> String
     #   resp.output.kinesis_data_stream.arn #=> String
+    #   resp.output.s3_destination.bucket #=> String
+    #   resp.output.s3_destination.key_prefix #=> String
     #   resp.role_arn #=> String
     #   resp.settings.face_search.collection_id #=> String
     #   resp.settings.face_search.face_match_threshold #=> Float
+    #   resp.settings.connected_home.labels #=> Array
+    #   resp.settings.connected_home.labels[0] #=> String
+    #   resp.settings.connected_home.min_confidence #=> Float
+    #   resp.notification_channel.sns_topic_arn #=> String
+    #   resp.kms_key_id #=> String
+    #   resp.regions_of_interest #=> Array
+    #   resp.regions_of_interest[0].bounding_box.width #=> Float
+    #   resp.regions_of_interest[0].bounding_box.height #=> Float
+    #   resp.regions_of_interest[0].bounding_box.left #=> Float
+    #   resp.regions_of_interest[0].bounding_box.top #=> Float
+    #   resp.regions_of_interest[0].polygon #=> Array
+    #   resp.regions_of_interest[0].polygon[0].x #=> Float
+    #   resp.regions_of_interest[0].polygon[0].y #=> Float
+    #   resp.data_sharing_preference.opt_in #=> Boolean
     #
     # @overload describe_stream_processor(params = {})
     # @param [Hash] params ({})
@@ -1616,8 +1731,9 @@ module Aws::Rekognition
     #   using the S3Object property.
     #
     #   For Amazon Rekognition to process an S3 object, the user must have
-    #   permission to access the S3 object. For more information, see Resource
-    #   Based Policies in the Amazon Rekognition Developer Guide.
+    #   permission to access the S3 object. For more information, see How
+    #   Amazon Rekognition works with IAM in the Amazon Rekognition Developer
+    #   Guide.
     #
     # @option params [Integer] :max_results
     #   Maximum number of results you want the service to return in the
@@ -1859,7 +1975,7 @@ module Aws::Rekognition
     # events like wedding, graduation, and birthday party; and concepts like
     # landscape, evening, and nature.
     #
-    # For an example, see Analyzing Images Stored in an Amazon S3 Bucket in
+    # For an example, see Analyzing images stored in an Amazon S3 bucket in
     # the Amazon Rekognition Developer Guide.
     #
     # <note markdown="1"> `DetectLabels` does not support the detection of activities. However,
@@ -2256,7 +2372,7 @@ module Aws::Rekognition
     # To be detected, text must be within +/- 90 degrees orientation of the
     # horizontal axis.
     #
-    # For more information, see DetectText in the Amazon Rekognition
+    # For more information, see Detecting text in the Amazon Rekognition
     # Developer Guide.
     #
     # @option params [required, Types::Image] :image
@@ -2303,6 +2419,12 @@ module Aws::Rekognition
     #             left: 1.0,
     #             top: 1.0,
     #           },
+    #           polygon: [
+    #             {
+    #               x: 1.0,
+    #               y: 1.0,
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -2381,7 +2503,7 @@ module Aws::Rekognition
     # an array of URLs. If there is no additional information about the
     # celebrity, this list is empty.
     #
-    # For more information, see Recognizing Celebrities in an Image in the
+    # For more information, see Getting information about a celebrity in the
     # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -2617,7 +2739,7 @@ module Aws::Rekognition
     # and populate the `NextToken` request parameter with the value of
     # `NextToken` returned from the previous call to `GetContentModeration`.
     #
-    # For more information, see Content moderation in the Amazon Rekognition
+    # For more information, see moderating content in the Amazon Rekognition
     # Developer Guide.
     #
     #
@@ -3244,7 +3366,7 @@ module Aws::Rekognition
     # the `NextToken` request parameter with the token value returned from
     # the previous call to `GetSegmentDetection`.
     #
-    # For more information, see Detecting Video Segments in Stored Video in
+    # For more information, see Detecting video segments in stored video in
     # the Amazon Rekognition Developer Guide.
     #
     # @option params [required, String] :job_id
@@ -3436,7 +3558,7 @@ module Aws::Rekognition
     # search operations using the SearchFaces and SearchFacesByImage
     # operations.
     #
-    # For more information, see Adding Faces to a Collection in the Amazon
+    # For more information, see Adding faces to a collection in the Amazon
     # Rekognition Developer Guide.
     #
     # To get the number of faces in a collection, call DescribeCollection.
@@ -3517,9 +3639,9 @@ module Aws::Rekognition
     # `detectionAttributes` parameter), Amazon Rekognition returns detailed
     # facial attributes, such as facial landmarks (for example, location of
     # eye and mouth) and other facial attributes. If you provide the same
-    # image, specify the same collection, use the same external ID, and use
-    # the same model version in the `IndexFaces` operation, Amazon
-    # Rekognition doesn't save duplicate face metadata.
+    # image, specify the same collection, and use the same external ID in
+    # the `IndexFaces` operation, Amazon Rekognition doesn't save duplicate
+    # face metadata.
     #
     #
     #
@@ -3860,7 +3982,7 @@ module Aws::Rekognition
     # truncated, the response also provides a `NextToken` that you can use
     # in the subsequent request to fetch the next set of collection IDs.
     #
-    # For an example, see Listing Collections in the Amazon Rekognition
+    # For an example, see Listing collections in the Amazon Rekognition
     # Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4294,7 +4416,7 @@ module Aws::Rekognition
     #   resp.next_token #=> String
     #   resp.stream_processors #=> Array
     #   resp.stream_processors[0].name #=> String
-    #   resp.stream_processors[0].status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING"
+    #   resp.stream_processors[0].status #=> String, one of "STOPPED", "STARTING", "RUNNING", "FAILED", "STOPPING", "UPDATING"
     #
     # @overload list_stream_processors(params = {})
     # @param [Hash] params ({})
@@ -4336,7 +4458,7 @@ module Aws::Rekognition
     end
 
     # Returns an array of celebrities recognized in the input image. For
-    # more information, see Recognizing Celebrities in the Amazon
+    # more information, see Recognizing celebrities in the Amazon
     # Rekognition Developer Guide.
     #
     # `RecognizeCelebrities` returns the 64 largest faces in the image. It
@@ -4364,7 +4486,7 @@ module Aws::Rekognition
     # to call Amazon Rekognition operations, passing image bytes is not
     # supported. The image must be either a PNG or JPEG formatted file.
     #
-    # For an example, see Recognizing Celebrities in an Image in the Amazon
+    # For an example, see Recognizing celebrities in an image in the Amazon
     # Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4474,7 +4596,7 @@ module Aws::Rekognition
     # `confidence` value for each face match, indicating the confidence that
     # the specific face matches the input face.
     #
-    # For an example, see Searching for a Face Using Its Face ID in the
+    # For an example, see Searching for a face using its face ID in the
     # Amazon Rekognition Developer Guide.
     #
     # This operation requires permissions to perform the
@@ -4792,7 +4914,7 @@ module Aws::Rekognition
     # identifier (`JobId`) from the initial call to
     # `StartCelebrityRecognition`.
     #
-    # For more information, see Recognizing Celebrities in the Amazon
+    # For more information, see Recognizing celebrities in the Amazon
     # Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -4868,7 +4990,7 @@ module Aws::Rekognition
     # call GetContentModeration and pass the job identifier (`JobId`) from
     # the initial call to `StartContentModeration`.
     #
-    # For more information, see Content moderation in the Amazon Rekognition
+    # For more information, see Moderating content in the Amazon Rekognition
     # Developer Guide.
     #
     #
@@ -4956,7 +5078,7 @@ module Aws::Rekognition
     # pass the job identifier (`JobId`) from the initial call to
     # `StartFaceDetection`.
     #
-    # For more information, see Detecting Faces in a Stored Video in the
+    # For more information, see Detecting faces in a stored video in the
     # Amazon Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -5037,7 +5159,11 @@ module Aws::Rekognition
     # status value published to the Amazon SNS topic is `SUCCEEDED`. If so,
     # call GetFaceSearch and pass the job identifier (`JobId`) from the
     # initial call to `StartFaceSearch`. For more information, see
-    # procedure-person-search-videos.
+    # [Searching stored videos for faces][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/rekognition/latest/dg/procedure-person-search-videos.html
     #
     # @option params [required, Types::Video] :video
     #   The video you want to search. The video must be stored in an Amazon S3
@@ -5333,7 +5459,7 @@ module Aws::Rekognition
     # `SUCCEEDED`. if so, call GetSegmentDetection and pass the job
     # identifier (`JobId`) from the initial call to `StartSegmentDetection`.
     #
-    # For more information, see Detecting Video Segments in Stored Video in
+    # For more information, see Detecting video segments in stored video in
     # the Amazon Rekognition Developer Guide.
     #
     # @option params [required, Types::Video] :video
@@ -5419,16 +5545,54 @@ module Aws::Rekognition
     # stream processor to start, use the value of the `Name` field specified
     # in the call to `CreateStreamProcessor`.
     #
+    # If you are using a label detection stream processor to detect labels,
+    # you need to provide a `Start selector` and a `Stop selector` to
+    # determine the length of the stream processing time.
+    #
     # @option params [required, String] :name
     #   The name of the stream processor to start processing.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Types::StreamProcessingStartSelector] :start_selector
+    #   Specifies the starting point in the Kinesis stream to start
+    #   processing. You can use the producer timestamp or the fragment number.
+    #   For more information, see [Fragment][1].
+    #
+    #   This is a required parameter for label detection stream processors and
+    #   should not be used to start a face search stream processor.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kinesisvideostreams/latest/dg/API_reader_Fragment.html
+    #
+    # @option params [Types::StreamProcessingStopSelector] :stop_selector
+    #   Specifies when to stop processing the stream. You can specify a
+    #   maximum amount of time to process the video.
+    #
+    #   This is a required parameter for label detection stream processors and
+    #   should not be used to start a face search stream processor.
+    #
+    # @return [Types::StartStreamProcessorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartStreamProcessorResponse#session_id #session_id} => String
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.start_stream_processor({
     #     name: "StreamProcessorName", # required
+    #     start_selector: {
+    #       kvs_stream_start_selector: {
+    #         producer_timestamp: 1,
+    #         fragment_number: "KinesisVideoStreamFragmentNumber",
+    #       },
+    #     },
+    #     stop_selector: {
+    #       max_duration_in_seconds: 1,
+    #     },
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.session_id #=> String
     #
     # @overload start_stream_processor(params = {})
     # @param [Hash] params ({})
@@ -5467,15 +5631,17 @@ module Aws::Rekognition
     # @option params [Types::NotificationChannel] :notification_channel
     #   The Amazon Simple Notification Service topic to which Amazon
     #   Rekognition publishes the completion status of a video analysis
-    #   operation. For more information, see api-video. Note that the Amazon
-    #   SNS topic must have a topic name that begins with *AmazonRekognition*
-    #   if you are using the AmazonRekognitionServiceRole permissions policy
-    #   to access the topic. For more information, see [Giving access to
-    #   multiple Amazon SNS topics][1].
+    #   operation. For more information, see [Calling Amazon Rekognition Video
+    #   operations][1]. Note that the Amazon SNS topic must have a topic name
+    #   that begins with *AmazonRekognition* if you are using the
+    #   AmazonRekognitionServiceRole permissions policy to access the topic.
+    #   For more information, see [Giving access to multiple Amazon SNS
+    #   topics][2].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
+    #   [1]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
+    #   [2]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
     #
     # @option params [String] :job_tag
     #   An identifier returned in the completion status published by your
@@ -5521,6 +5687,12 @@ module Aws::Rekognition
     #             left: 1.0,
     #             top: 1.0,
     #           },
+    #           polygon: [
+    #             {
+    #               x: 1.0,
+    #               y: 1.0,
+    #             },
+    #           ],
     #         },
     #       ],
     #     },
@@ -5709,6 +5881,72 @@ module Aws::Rekognition
       req.send_request(options)
     end
 
+    # Allows you to update a stream processor. You can change some settings
+    # and regions of interest and delete certain parameters.
+    #
+    # @option params [required, String] :name
+    #   Name of the stream processor that you want to update.
+    #
+    # @option params [Types::StreamProcessorSettingsForUpdate] :settings_for_update
+    #   The stream processor settings that you want to update. Label detection
+    #   settings can be updated to detect different labels with a different
+    #   minimum confidence.
+    #
+    # @option params [Array<Types::RegionOfInterest>] :regions_of_interest_for_update
+    #   Specifies locations in the frames where Amazon Rekognition checks for
+    #   objects or people. This is an optional parameter for label detection
+    #   stream processors.
+    #
+    # @option params [Types::StreamProcessorDataSharingPreference] :data_sharing_preference_for_update
+    #   Shows whether you are sharing data with Rekognition to improve model
+    #   performance. You can choose this option at the account level or on a
+    #   per-stream basis. Note that if you opt out at the account level this
+    #   setting is ignored on individual streams.
+    #
+    # @option params [Array<String>] :parameters_to_delete
+    #   A list of parameters you want to delete from the stream processor.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_stream_processor({
+    #     name: "StreamProcessorName", # required
+    #     settings_for_update: {
+    #       connected_home_for_update: {
+    #         labels: ["ConnectedHomeLabel"],
+    #         min_confidence: 1.0,
+    #       },
+    #     },
+    #     regions_of_interest_for_update: [
+    #       {
+    #         bounding_box: {
+    #           width: 1.0,
+    #           height: 1.0,
+    #           left: 1.0,
+    #           top: 1.0,
+    #         },
+    #         polygon: [
+    #           {
+    #             x: 1.0,
+    #             y: 1.0,
+    #           },
+    #         ],
+    #       },
+    #     ],
+    #     data_sharing_preference_for_update: {
+    #       opt_in: false, # required
+    #     },
+    #     parameters_to_delete: ["ConnectedHomeMinConfidence"], # accepts ConnectedHomeMinConfidence, RegionsOfInterest
+    #   })
+    #
+    # @overload update_stream_processor(params = {})
+    # @param [Hash] params ({})
+    def update_stream_processor(params = {}, options = {})
+      req = build_request(:update_stream_processor, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -5722,7 +5960,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

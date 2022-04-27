@@ -192,7 +192,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] tags
-    #   A list of tags associated with the Amazon SageMaker resource.
+    #   A list of tags associated with the SageMaker resource.
     #   @return [Array<Types::Tag>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AddTagsOutput AWS API Documentation
@@ -328,9 +328,9 @@ module Aws::SageMaker
     # Specifies the training algorithm to use in a CreateTrainingJob
     # request.
     #
-    # For more information about algorithms provided by Amazon SageMaker,
-    # see [Algorithms][1]. For information about using your own algorithms,
-    # see [Using Your Own Algorithms with Amazon SageMaker][2].
+    # For more information about algorithms provided by SageMaker, see
+    # [Algorithms][1]. For information about using your own algorithms, see
+    # [Using Your Own Algorithms with Amazon SageMaker][2].
     #
     #
     #
@@ -357,10 +357,10 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1]. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][2].
+    #   Parameters][1]. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][2].
     #
     #
     #
@@ -424,7 +424,7 @@ module Aws::SageMaker
     # @!attribute [rw] metric_definitions
     #   A list of metric definition objects. Each object specifies the
     #   metric name and regular expressions used to parse algorithm logs.
-    #   Amazon SageMaker publishes each metric to Amazon CloudWatch.
+    #   SageMaker publishes each metric to Amazon CloudWatch.
     #   @return [Array<Types::MetricDefinition>]
     #
     # @!attribute [rw] enable_sage_maker_metrics_time_series
@@ -432,9 +432,9 @@ module Aws::SageMaker
     #   `true`. The default is `false` and time-series metrics aren't
     #   generated except in the following cases:
     #
-    #   * You use one of the Amazon SageMaker built-in algorithms
+    #   * You use one of the SageMaker built-in algorithms
     #
-    #   * You use one of the following [Prebuilt Amazon SageMaker Docker
+    #   * You use one of the following [Prebuilt SageMaker Docker
     #     Images][1]\:
     #
     #     * Tensorflow (version &gt;= 1.15)
@@ -540,8 +540,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Defines a training job and a batch transform job that Amazon SageMaker
-    # runs to validate your algorithm.
+    # Defines a training job and a batch transform job that SageMaker runs
+    # to validate your algorithm.
     #
     # The data provided in the validation profile is made available to your
     # buyers on Amazon Web Services Marketplace.
@@ -636,12 +636,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] training_job_definition
     #   The `TrainingJobDefinition` object that describes the training job
-    #   that Amazon SageMaker runs to validate your algorithm.
+    #   that SageMaker runs to validate your algorithm.
     #   @return [Types::TrainingJobDefinition]
     #
     # @!attribute [rw] transform_job_definition
     #   The `TransformJobDefinition` object that describes the transform job
-    #   that Amazon SageMaker runs to validate your algorithm.
+    #   that SageMaker runs to validate your algorithm.
     #   @return [Types::TransformJobDefinition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationProfile AWS API Documentation
@@ -654,8 +654,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies configurations for one or more training jobs that Amazon
-    # SageMaker runs to test the algorithm.
+    # Specifies configurations for one or more training jobs that SageMaker
+    # runs to test the algorithm.
     #
     # @note When making an API call, you may pass AlgorithmValidationSpecification
     #   data as a hash:
@@ -746,13 +746,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] validation_role
-    #   The IAM roles that Amazon SageMaker uses to run the training jobs.
+    #   The IAM roles that SageMaker uses to run the training jobs.
     #   @return [String]
     #
     # @!attribute [rw] validation_profiles
     #   An array of `AlgorithmValidationProfile` objects, each of which
-    #   specifies a training job and batch transform job that Amazon
-    #   SageMaker runs to validate your algorithm.
+    #   specifies a training job and batch transform job that SageMaker runs
+    #   to validate your algorithm.
     #   @return [Array<Types::AlgorithmValidationProfile>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AlgorithmValidationSpecification AWS API Documentation
@@ -1742,8 +1742,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Configures the behavior of the client used by Amazon SageMaker to
-    # interact with the model container during asynchronous inference.
+    # Configures the behavior of the client used by SageMaker to interact
+    # with the model container during asynchronous inference.
     #
     # @note When making an API call, you may pass AsyncInferenceClientConfig
     #   data as a hash:
@@ -1754,8 +1754,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_concurrent_invocations_per_instance
     #   The maximum number of concurrent requests sent by the SageMaker
-    #   client to the model container. If no value is provided, Amazon
-    #   SageMaker will choose an optimal value for you.
+    #   client to the model container. If no value is provided, SageMaker
+    #   chooses an optimal value.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AsyncInferenceClientConfig AWS API Documentation
@@ -1787,8 +1787,8 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] client_config
-    #   Configures the behavior of the client used by Amazon SageMaker to
-    #   interact with the model container during asynchronous inference.
+    #   Configures the behavior of the client used by SageMaker to interact
+    #   with the model container during asynchronous inference.
     #   @return [Types::AsyncInferenceClientConfig]
     #
     # @!attribute [rw] output_config
@@ -1853,8 +1853,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the asynchronous
-    #   inference output in Amazon S3.
+    #   KMS) key that SageMaker uses to encrypt the asynchronous inference
+    #   output in Amazon S3.
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
@@ -2034,7 +2034,14 @@ module Aws::SageMaker
     end
 
     # A channel is a named input source that training algorithms can
-    # consume. For more information, see .
+    # consume. The validation dataset size is limited to less than 2 GB. The
+    # training dataset size must be less than 100 GB. For more information,
+    # see .
+    #
+    # <note markdown="1"> A validation dataset must contain the same headers as the training
+    # dataset.
+    #
+    #  </note>
     #
     # @note When making an API call, you may pass AutoMLChannel
     #   data as a hash:
@@ -2049,6 +2056,7 @@ module Aws::SageMaker
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
     #         content_type: "ContentType",
+    #         channel_type: "training", # accepts training, validation
     #       }
     #
     # @!attribute [rw] data_source
@@ -2070,13 +2078,20 @@ module Aws::SageMaker
     #   default value is `text/csv;header=present`.
     #   @return [String]
     #
+    # @!attribute [rw] channel_type
+    #   The channel type (optional) is an enum string. The default value is
+    #   `training`. Channels for training and validation must share the same
+    #   `ContentType` and `TargetAttributeName`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
     #
     class AutoMLChannel < Struct.new(
       :data_source,
       :compression_type,
       :target_attribute_name,
-      :content_type)
+      :content_type,
+      :channel_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2132,6 +2147,32 @@ module Aws::SageMaker
     #
     class AutoMLDataSource < Struct.new(
       :s3_data_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # This structure specifies how to split the data into train and test
+    # datasets. The validation and training datasets must contain the same
+    # headers. The validation dataset must be less than 2 GB in size.
+    #
+    # @note When making an API call, you may pass AutoMLDataSplitConfig
+    #   data as a hash:
+    #
+    #       {
+    #         validation_fraction: 1.0,
+    #       }
+    #
+    # @!attribute [rw] validation_fraction
+    #   The validation fraction (optional) is a float that specifies the
+    #   portion of the training dataset to be used for validation. The
+    #   default value is 0.2, and values can range from 0 to 1. We recommend
+    #   setting this value to be less than 0.5.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSplitConfig AWS API Documentation
+    #
+    class AutoMLDataSplitConfig < Struct.new(
+      :validation_fraction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2217,6 +2258,9 @@ module Aws::SageMaker
     #             subnets: ["SubnetId"], # required
     #           },
     #         },
+    #         data_split_config: {
+    #           validation_fraction: 1.0,
+    #         },
     #       }
     #
     # @!attribute [rw] completion_criteria
@@ -2229,11 +2273,18 @@ module Aws::SageMaker
     #   settings.
     #   @return [Types::AutoMLSecurityConfig]
     #
+    # @!attribute [rw] data_split_config
+    #   The configuration for splitting the input training dataset.
+    #
+    #   Type: AutoMLDataSplitConfig
+    #   @return [Types::AutoMLDataSplitConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
     #
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
-      :security_config)
+      :security_config,
+      :data_split_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3005,10 +3056,10 @@ module Aws::SageMaker
     # @!attribute [rw] record_wrapper_type
     #   Specify RecordIO as the value when input data is in raw format but
     #   the training algorithm requires the RecordIO format. In this case,
-    #   Amazon SageMaker wraps each individual S3 object in a RecordIO
-    #   record. If the input data is already in RecordIO format, you don't
-    #   need to set this attribute. For more information, see [Create a
-    #   Dataset Using RecordIO][1].
+    #   SageMaker wraps each individual S3 object in a RecordIO record. If
+    #   the input data is already in RecordIO format, you don't need to set
+    #   this attribute. For more information, see [Create a Dataset Using
+    #   RecordIO][1].
     #
     #   In File mode, leave this field unset or set it to None.
     #
@@ -3019,15 +3070,15 @@ module Aws::SageMaker
     #
     # @!attribute [rw] input_mode
     #   (Optional) The input mode to use for the data channel in a training
-    #   job. If you don't set a value for `InputMode`, Amazon SageMaker
-    #   uses the value set for `TrainingInputMode`. Use this parameter to
-    #   override the `TrainingInputMode` setting in a AlgorithmSpecification
-    #   request when you have a channel that needs a different input mode
-    #   from the training job's general setting. To download the data from
-    #   Amazon Simple Storage Service (Amazon S3) to the provisioned ML
-    #   storage volume, and mount the directory to a Docker volume, use
-    #   `File` input mode. To stream data directly from Amazon S3 to the
-    #   container, choose `Pipe` input mode.
+    #   job. If you don't set a value for `InputMode`, SageMaker uses the
+    #   value set for `TrainingInputMode`. Use this parameter to override
+    #   the `TrainingInputMode` setting in a AlgorithmSpecification request
+    #   when you have a channel that needs a different input mode from the
+    #   training job's general setting. To download the data from Amazon
+    #   Simple Storage Service (Amazon S3) to the provisioned ML storage
+    #   volume, and mount the directory to a Docker volume, use `File` input
+    #   mode. To stream data directly from Amazon S3 to the container,
+    #   choose `Pipe` input mode.
     #
     #   To use a model for incremental training, choose `File` input model.
     #   @return [String]
@@ -3137,7 +3188,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] s3_uri
-    #   Identifies the S3 path where you want Amazon SageMaker to store
+    #   Identifies the S3 path where you want SageMaker to store
     #   checkpoints. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
@@ -3514,11 +3565,11 @@ module Aws::SageMaker
     #   Amazon EC2 Container Registry or in a Docker registry that is
     #   accessible from the same VPC that you configure for your endpoint.
     #   If you are using your own custom algorithm instead of an algorithm
-    #   provided by Amazon SageMaker, the inference code must meet Amazon
-    #   SageMaker requirements. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][1]
+    #   provided by SageMaker, the inference code must meet SageMaker
+    #   requirements. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][1]
     #
     #
     #
@@ -3545,7 +3596,7 @@ module Aws::SageMaker
     #   The S3 path where the model artifacts, which result from model
     #   training, are stored. This path must point to a single gzip
     #   compressed tar archive (.tar.gz suffix). The S3 path is required for
-    #   Amazon SageMaker built-in algorithms, but not if you use your own
+    #   SageMaker built-in algorithms, but not if you use your own
     #   algorithms. For more information on built-in algorithms, see [Common
     #   Parameters][1].
     #
@@ -3554,17 +3605,17 @@ module Aws::SageMaker
     #
     #    </note>
     #
-    #   If you provide a value for this parameter, Amazon SageMaker uses
-    #   Amazon Web Services Security Token Service to download model
-    #   artifacts from the S3 path you provide. Amazon Web Services STS is
-    #   activated in your IAM user account by default. If you previously
-    #   deactivated Amazon Web Services STS for a region, you need to
-    #   reactivate Amazon Web Services STS for that region. For more
-    #   information, see [Activating and Deactivating Amazon Web Services
-    #   STS in an Amazon Web Services Region][2] in the *Amazon Web Services
-    #   Identity and Access Management User Guide*.
+    #   If you provide a value for this parameter, SageMaker uses Amazon Web
+    #   Services Security Token Service to download model artifacts from the
+    #   S3 path you provide. Amazon Web Services STS is activated in your
+    #   IAM user account by default. If you previously deactivated Amazon
+    #   Web Services STS for a region, you need to reactivate Amazon Web
+    #   Services STS for that region. For more information, see [Activating
+    #   and Deactivating Amazon Web Services STS in an Amazon Web Services
+    #   Region][2] in the *Amazon Web Services Identity and Access
+    #   Management User Guide*.
     #
-    #   If you use a built-in algorithm to create a model, Amazon SageMaker
+    #   If you use a built-in algorithm to create a model, SageMaker
     #   requires that you provide a S3 path to the model artifacts in
     #   `ModelDataUrl`.
     #
@@ -3717,8 +3768,8 @@ module Aws::SageMaker
     #
     #   Auto
     #
-    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
-    #     the hyperparameter.
+    #   : SageMaker hyperparameter tuning chooses the best scale for the
+    #     hyperparameter.
     #
     #   Linear
     #
@@ -4096,9 +4147,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_specification
     #   Specifies configurations for one or more training jobs and that
-    #   Amazon SageMaker runs to test the algorithm's training code and,
-    #   optionally, one or more batch transform jobs that Amazon SageMaker
-    #   runs to test the algorithm's inference code.
+    #   SageMaker runs to test the algorithm's training code and,
+    #   optionally, one or more batch transform jobs that SageMaker runs to
+    #   test the algorithm's inference code.
     #   @return [Types::AlgorithmValidationSpecification]
     #
     # @!attribute [rw] certify_for_marketplace
@@ -4376,6 +4427,7 @@ module Aws::SageMaker
     #             compression_type: "None", # accepts None, Gzip
     #             target_attribute_name: "TargetAttributeName", # required
     #             content_type: "ContentType",
+    #             channel_type: "training", # accepts training, validation
     #           },
     #         ],
     #         output_data_config: { # required
@@ -4399,6 +4451,9 @@ module Aws::SageMaker
     #               security_group_ids: ["SecurityGroupId"], # required
     #               subnets: ["SubnetId"], # required
     #             },
+    #           },
+    #           data_split_config: {
+    #             validation_fraction: 1.0,
     #           },
     #         },
     #         role_arn: "RoleArn", # required
@@ -5361,9 +5416,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that Amazon SageMaker uses to encrypt data on
-    #   the storage volume attached to the ML compute instance that hosts
-    #   the endpoint.
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance that hosts the
+    #   endpoint.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -6277,8 +6332,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] hyper_parameter_tuning_job_arn
-    #   The Amazon Resource Name (ARN) of the tuning job. Amazon SageMaker
-    #   assigns an ARN to a hyperparameter tuning job when you create it.
+    #   The Amazon Resource Name (ARN) of the tuning job. SageMaker assigns
+    #   an ARN to a hyperparameter tuning job when you create it.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateHyperParameterTuningJobResponse AWS API Documentation
@@ -6362,8 +6417,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] base_image
     #   The registry path of the container image to use as the starting
-    #   point for this version. The path is an Amazon Container Registry
-    #   (ECR) URI in the following format:
+    #   point for this version. The path is an Amazon Elastic Container
+    #   Registry (ECR) URI in the following format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -7216,14 +7271,14 @@ module Aws::SageMaker
     #   @return [Types::InferenceExecutionConfig]
     #
     # @!attribute [rw] execution_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances or for batch transform jobs. Deploying on ML
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access model artifacts and docker image for deployment on
+    #   ML compute instances or for batch transform jobs. Deploying on ML
     #   compute instances is part of model hosting. For more information,
-    #   see [Amazon SageMaker Roles][1].
+    #   see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -7278,7 +7333,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_arn
-    #   The ARN of the model created in Amazon SageMaker.
+    #   The ARN of the model created in SageMaker.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelOutput AWS API Documentation
@@ -7611,7 +7666,7 @@ module Aws::SageMaker
     #   @return [Types::InferenceSpecification]
     #
     # @!attribute [rw] validation_specification
-    #   Specifies configurations for one or more transform jobs that Amazon
+    #   Specifies configurations for one or more transform jobs that
     #   SageMaker runs to test the model package.
     #   @return [Types::ModelPackageValidationSpecification]
     #
@@ -8073,15 +8128,14 @@ module Aws::SageMaker
     #
     # @!attribute [rw] role_arn
     #   When you send any requests to Amazon Web Services resources from the
-    #   notebook instance, Amazon SageMaker assumes this role to perform
-    #   tasks on your behalf. You must grant this role necessary permissions
-    #   so Amazon SageMaker can perform these tasks. The policy must allow
-    #   the Amazon SageMaker service principal (sagemaker.amazonaws.com)
-    #   permissions to assume this role. For more information, see [Amazon
-    #   SageMaker Roles][1].
+    #   notebook instance, SageMaker assumes this role to perform tasks on
+    #   your behalf. You must grant this role necessary permissions so
+    #   SageMaker can perform these tasks. The policy must allow the
+    #   SageMaker service principal (sagemaker.amazonaws.com) permissions to
+    #   assume this role. For more information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -8092,9 +8146,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
-    #   Management Service key that Amazon SageMaker uses to encrypt data on
-    #   the storage volume attached to your notebook instance. The KMS key
-    #   you provide must be enabled. For information, see [Enabling and
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to your notebook instance. The KMS key you
+    #   provide must be enabled. For information, see [Enabling and
     #   Disabling Keys][1] in the *Amazon Web Services Key Management
     #   Service Developer Guide*.
     #
@@ -8125,11 +8179,11 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
-    #   Sets whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If you set this to `Disabled` this notebook
-    #   instance is able to access resources only in your VPC, and is not be
-    #   able to connect to Amazon SageMaker training and endpoint services
-    #   unless you configure a NAT Gateway in your VPC.
+    #   Sets whether SageMaker provides internet access to the notebook
+    #   instance. If you set this to `Disabled` this notebook instance is
+    #   able to access resources only in your VPC, and is not be able to
+    #   connect to SageMaker training and endpoint services unless you
+    #   configure a NAT Gateway in your VPC.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1]. You can set the value of this parameter to
@@ -8163,8 +8217,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -8179,7 +8232,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -8974,7 +9027,7 @@ module Aws::SageMaker
     #   Algorithm-specific parameters that influence the quality of the
     #   model. You set hyperparameters before you start the learning
     #   process. For a list of hyperparameters for each training algorithm
-    #   provided by Amazon SageMaker, see [Algorithms][1].
+    #   provided by SageMaker, see [Algorithms][1].
     #
     #   You can specify a maximum of 100 hyperparameters. Each
     #   hyperparameter is a key-value pair. Each key and value is limited to
@@ -8988,8 +9041,8 @@ module Aws::SageMaker
     # @!attribute [rw] algorithm_specification
     #   The registry path of the Docker image that contains the training
     #   algorithm and algorithm-specific metadata, including the input mode.
-    #   For more information about algorithms provided by Amazon SageMaker,
-    #   see [Algorithms][1]. For information about providing your own
+    #   For more information about algorithms provided by SageMaker, see
+    #   [Algorithms][1]. For information about providing your own
     #   algorithms, see [Using Your Own Algorithms with Amazon
     #   SageMaker][2].
     #
@@ -9000,18 +9053,18 @@ module Aws::SageMaker
     #   @return [Types::AlgorithmSpecification]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   can assume to perform tasks on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that SageMaker can
+    #   assume to perform tasks on your behalf.
     #
-    #   During model training, Amazon SageMaker needs your permission to
-    #   read input data from an S3 bucket, download a Docker image that
-    #   contains training code, write model artifacts to an S3 bucket, write
-    #   logs to Amazon CloudWatch Logs, and publish metrics to Amazon
-    #   CloudWatch. You grant permissions for all of these tasks to an IAM
-    #   role. For more information, see [Amazon SageMaker Roles][1].
+    #   During model training, SageMaker needs your permission to read input
+    #   data from an S3 bucket, download a Docker image that contains
+    #   training code, write model artifacts to an S3 bucket, write logs to
+    #   Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch.
+    #   You grant permissions for all of these tasks to an IAM role. For
+    #   more information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -9032,17 +9085,17 @@ module Aws::SageMaker
     #   MIME type, compression method, and whether the data is wrapped in
     #   RecordIO format.
     #
-    #   Depending on the input mode that the algorithm supports, Amazon
-    #   SageMaker either copies input data files from an S3 bucket to a
-    #   local directory in the Docker container, or makes it available as
-    #   input streams. For example, if you specify an EFS location, input
-    #   data files will be made available as input streams. They do not need
-    #   to be downloaded.
+    #   Depending on the input mode that the algorithm supports, SageMaker
+    #   either copies input data files from an S3 bucket to a local
+    #   directory in the Docker container, or makes it available as input
+    #   streams. For example, if you specify an EFS location, input data
+    #   files are available as input streams. They do not need to be
+    #   downloaded.
     #   @return [Array<Types::Channel>]
     #
     # @!attribute [rw] output_data_config
     #   Specifies the path to the S3 location where you want to store model
-    #   artifacts. Amazon SageMaker creates subfolders for the artifacts.
+    #   artifacts. SageMaker creates subfolders for the artifacts.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] resource_config
@@ -9051,9 +9104,9 @@ module Aws::SageMaker
     #
     #   ML storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use ML storage volumes for scratch
-    #   space. If you want Amazon SageMaker to use the ML storage volume to
-    #   store the training data, choose `File` as the `TrainingInputMode` in
-    #   the algorithm specification. For distributed training algorithms,
+    #   space. If you want SageMaker to use the ML storage volume to store
+    #   the training data, choose `File` as the `TrainingInputMode` in the
+    #   algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
     #   @return [Types::ResourceConfig]
     #
@@ -9071,13 +9124,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] tags
@@ -9095,7 +9148,7 @@ module Aws::SageMaker
     #   Isolates the training container. No inbound or outbound network
     #   calls can be made, except for calls between peers within a training
     #   cluster for distributed training. If you enable network isolation
-    #   for training jobs that are configured to use a VPC, Amazon SageMaker
+    #   for training jobs that are configured to use a VPC, SageMaker
     #   downloads and uploads customer data and model artifacts through the
     #   specified VPC, but the training container does not have network
     #   access.
@@ -9324,6 +9377,11 @@ module Aws::SageMaker
     #   size of your dataset by the number of records. To ensure that the
     #   records fit within the maximum payload size, we recommend using a
     #   slightly larger value. The default value is `6` MB.
+    #
+    #   The value of `MaxPayloadInMB` cannot be greater than 100 MB. If you
+    #   specify the `MaxConcurrentTransforms` parameter, the value of
+    #   `(MaxConcurrentTransforms * MaxPayloadInMB)` also cannot exceed 100
+    #   MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
@@ -10140,8 +10198,8 @@ module Aws::SageMaker
     #   A [JSONPath][1] expression used to select a portion of the input
     #   data to pass to the algorithm. Use the `InputFilter` parameter to
     #   exclude fields, such as an ID column, from the input. If you want
-    #   Amazon SageMaker to pass the entire input dataset to the algorithm,
-    #   accept the default value `$`.
+    #   SageMaker to pass the entire input dataset to the algorithm, accept
+    #   the default value `$`.
     #
     #   Examples: `"$"`, `"$[1:]"`, `"$.features"`
     #
@@ -10153,10 +10211,9 @@ module Aws::SageMaker
     # @!attribute [rw] output_filter
     #   A [JSONPath][1] expression used to select a portion of the joined
     #   dataset to save in the output file for a batch transform job. If you
-    #   want Amazon SageMaker to store the entire input dataset in the
-    #   output file, leave the default value, `$`. If you specify indexes
-    #   that aren't within the dimension size of the joined dataset, you
-    #   get an error.
+    #   want SageMaker to store the entire input dataset in the output file,
+    #   leave the default value, `$`. If you specify indexes that aren't
+    #   within the dimension size of the joined dataset, you get an error.
     #
     #   Examples: `"$"`, `"$[0,5:]"`, `"$['id','SageMakerOutput']"`
     #
@@ -11285,7 +11342,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] notebook_instance_name
-    #   The name of the Amazon SageMaker notebook instance to delete.
+    #   The name of the SageMaker notebook instance to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DeleteNotebookInstanceInput AWS API Documentation
@@ -11826,7 +11883,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_specification
     #   Details about configurations for one or more training jobs that
-    #   Amazon SageMaker runs to test the algorithm.
+    #   SageMaker runs to test the algorithm.
     #   @return [Types::AlgorithmValidationSpecification]
     #
     # @!attribute [rw] algorithm_status
@@ -13037,7 +13094,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] endpoint_config_name
-    #   Name of the Amazon SageMaker endpoint configuration.
+    #   Name of the SageMaker endpoint configuration.
     #   @return [String]
     #
     # @!attribute [rw] endpoint_config_arn
@@ -13979,8 +14036,8 @@ module Aws::SageMaker
     #   @return [Types::LabelingJobOutputConfig]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) that Amazon SageMaker assumes to
-    #   perform tasks on your behalf during data labeling.
+    #   The Amazon Resource Name (ARN) that SageMaker assumes to perform
+    #   tasks on your behalf during data labeling.
     #   @return [String]
     #
     # @!attribute [rw] label_category_config_s3_uri
@@ -14346,7 +14403,7 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] model_name
-    #   Name of the Amazon SageMaker model.
+    #   Name of the SageMaker model.
     #   @return [String]
     #
     # @!attribute [rw] primary_container
@@ -14416,7 +14473,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] model_package_group_name
-    #   The name of the model group to describe.
+    #   The name of gthe model group to describe.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageGroupInput AWS API Documentation
@@ -14560,7 +14617,7 @@ module Aws::SageMaker
     #   @return [Types::ModelMetrics]
     #
     # @!attribute [rw] last_modified_time
-    #   The last time the model package was modified.
+    #   The last time that the model package was modified.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_by
@@ -14904,7 +14961,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_name
-    #   The name of the Amazon SageMaker notebook instance.
+    #   The name of the SageMaker notebook instance.
     #   @return [String]
     #
     # @!attribute [rw] notebook_instance_status
@@ -14938,14 +14995,13 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The Amazon Web Services KMS key ID Amazon SageMaker uses to encrypt
-    #   data when storing it on the ML storage volume attached to the
-    #   instance.
+    #   The Amazon Web Services KMS key ID SageMaker uses to encrypt data
+    #   when storing it on the ML storage volume attached to the instance.
     #   @return [String]
     #
     # @!attribute [rw] network_interface_id
-    #   The network interface IDs that Amazon SageMaker created at the time
-    #   of creating the instance.
+    #   The network interface IDs that SageMaker created at the time of
+    #   creating the instance.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -14970,10 +15026,10 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] direct_internet_access
-    #   Describes whether Amazon SageMaker provides internet access to the
-    #   notebook instance. If this value is set to *Disabled*, the notebook
-    #   instance does not have internet access, and cannot connect to Amazon
-    #   SageMaker training and endpoint services.
+    #   Describes whether SageMaker provides internet access to the notebook
+    #   instance. If this value is set to *Disabled*, the notebook instance
+    #   does not have internet access, and cannot connect to SageMaker
+    #   training and endpoint services.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled
     #   by Default][1].
@@ -15006,8 +15062,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -15022,7 +15077,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -15644,7 +15699,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] labeling_job_arn
-    #   The Amazon Resource Name (ARN) of the Amazon SageMaker Ground Truth
+    #   The Amazon Resource Name (ARN) of the SageMaker Ground Truth
     #   labeling job that created the transform or training job.
     #   @return [String]
     #
@@ -15660,7 +15715,7 @@ module Aws::SageMaker
     # @!attribute [rw] training_job_status
     #   The status of the training job.
     #
-    #   Amazon SageMaker provides the following training job statuses:
+    #   SageMaker provides the following training job statuses:
     #
     #   * `InProgress` - The training is in progress.
     #
@@ -15682,8 +15737,8 @@ module Aws::SageMaker
     #   For detailed information on the secondary status of the training
     #   job, see `StatusMessage` under SecondaryStatusTransition.
     #
-    #   Amazon SageMaker provides primary statuses and secondary statuses
-    #   that apply to each of them:
+    #   SageMaker provides primary statuses and secondary statuses that
+    #   apply to each of them:
     #
     #   InProgress
     #   : * `Starting` - Starting the training job.
@@ -15762,7 +15817,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   The S3 path where model artifacts that you configured when creating
-    #   the job are stored. Amazon SageMaker creates subfolders for model
+    #   the job are stored. SageMaker creates subfolders for model
     #   artifacts.
     #   @return [Types::OutputDataConfig]
     #
@@ -15784,13 +15839,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -15811,8 +15866,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -15835,10 +15889,9 @@ module Aws::SageMaker
     #   If you want to allow inbound or outbound network calls, except for
     #   calls between peers within a training cluster for distributed
     #   training, choose `True`. If you enable network isolation for
-    #   training jobs that are configured to use a VPC, Amazon SageMaker
-    #   downloads and uploads customer data and model artifacts through the
-    #   specified VPC, but the training container does not have network
-    #   access.
+    #   training jobs that are configured to use a VPC, SageMaker downloads
+    #   and uploads customer data and model artifacts through the specified
+    #   VPC, but the training container does not have network access.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -15870,7 +15923,7 @@ module Aws::SageMaker
     #
     #   Multiply `BillableTimeInSeconds` by the number of instances
     #   (`InstanceCount`) in your training cluster to get the total compute
-    #   time SageMaker will bill you if you run distributed training. The
+    #   time SageMaker bills you if you run distributed training. The
     #   formula is as follows: `BillableTimeInSeconds * InstanceCount` .
     #
     #   You can calculate the savings from using managed spot training using
@@ -20078,10 +20131,10 @@ module Aws::SageMaker
     #   The registry path of the Docker image that contains the training
     #   algorithm. For information about Docker registry paths for built-in
     #   algorithms, see [Algorithms Provided by Amazon SageMaker: Common
-    #   Parameters][1]. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][2].
+    #   Parameters][1]. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][2].
     #
     #
     #
@@ -20406,27 +20459,26 @@ module Aws::SageMaker
     #
     #   Storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use storage volumes for scratch
-    #   space. If you want Amazon SageMaker to use the storage volume to
-    #   store the training data, choose `File` as the `TrainingInputMode` in
-    #   the algorithm specification. For distributed training algorithms,
+    #   space. If you want SageMaker to use the storage volume to store the
+    #   training data, choose `File` as the `TrainingInputMode` in the
+    #   algorithm specification. For distributed training algorithms,
     #   specify an instance count greater than 1.
     #   @return [Types::ResourceConfig]
     #
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model hyperparameter training job
     #   can run. It also specifies how long a managed spot training job has
-    #   to complete. When the job reaches the time limit, Amazon SageMaker
-    #   ends the training job. Use this API to cap model training costs.
+    #   to complete. When the job reaches the time limit, SageMaker ends the
+    #   training job. Use this API to cap model training costs.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] enable_network_isolation
     #   Isolates the training container. No inbound or outbound network
     #   calls can be made, except for calls between peers within a training
     #   cluster for distributed training. If network isolation is used for
-    #   training jobs that are configured to use a VPC, Amazon SageMaker
-    #   downloads and uploads customer data and model artifacts through the
-    #   specified VPC, but the training container does not have network
-    #   access.
+    #   training jobs that are configured to use a VPC, SageMaker downloads
+    #   and uploads customer data and model artifacts through the specified
+    #   VPC, but the training container does not have network access.
     #   @return [Boolean]
     #
     # @!attribute [rw] enable_inter_container_traffic_encryption
@@ -20476,7 +20528,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies summary information about a training job.
+    # The container for the summary information about a training job.
     #
     # @!attribute [rw] training_job_definition_name
     #   The training job definition name.
@@ -20507,8 +20559,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] training_job_status
@@ -20657,9 +20708,9 @@ module Aws::SageMaker
     #
     #   AUTO
     #
-    #   : Amazon SageMaker stops training jobs launched by the
-    #     hyperparameter tuning job when they are unlikely to perform better
-    #     than previously completed training jobs. For more information, see
+    #   : SageMaker stops training jobs launched by the hyperparameter
+    #     tuning job when they are unlikely to perform better than
+    #     previously completed training jobs. For more information, see
     #     [Stop Training Jobs Early][1].
     #
     #
@@ -21460,8 +21511,8 @@ module Aws::SageMaker
     #
     #   Auto
     #
-    #   : Amazon SageMaker hyperparameter tuning chooses the best scale for
-    #     the hyperparameter.
+    #   : SageMaker hyperparameter tuning chooses the best scale for the
+    #     hyperparameter.
     #
     #   Linear
     #
@@ -21536,12 +21587,20 @@ module Aws::SageMaker
     #
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
-    #   default SageMaker image used by the JupyterServer app.
+    #   default SageMaker image used by the JupyterServer app. If you use
+    #   the `LifecycleConfigArns` parameter, then this parameter is also
+    #   required.
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
-    #   attached to the JupyterServerApp.
+    #   attached to the JupyterServerApp. If you use this parameter, the
+    #   `DefaultResourceSpec` parameter is also required.
+    #
+    #   <note markdown="1"> To remove a Lifecycle Config, you must set `LifecycleConfigArns` to
+    #   an empty list.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/JupyterServerAppSettings AWS API Documentation
@@ -21578,6 +21637,14 @@ module Aws::SageMaker
     # @!attribute [rw] default_resource_spec
     #   The default instance type and the Amazon Resource Name (ARN) of the
     #   default SageMaker image used by the KernelGateway app.
+    #
+    #   <note markdown="1"> The Amazon SageMaker Studio UI does not use the default instance
+    #   type value set here. The default instance type set here is used when
+    #   Apps are created using the Amazon Web Services Command Line
+    #   Interface or Amazon Web Services CloudFormation and the instance
+    #   type parameter value is not passed.
+    #
+    #    </note>
     #   @return [Types::ResourceSpec]
     #
     # @!attribute [rw] custom_images
@@ -21588,6 +21655,11 @@ module Aws::SageMaker
     # @!attribute [rw] lifecycle_config_arns
     #   The Amazon Resource Name (ARN) of the Lifecycle Configurations
     #   attached to the the user profile or domain.
+    #
+    #   <note markdown="1"> To remove a Lifecycle Config, you must set `LifecycleConfigArns` to
+    #   an empty list.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/KernelGatewayAppSettings AWS API Documentation
@@ -21795,8 +21867,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] content_classifiers
     #   Declares that your content is free of personally identifiable
-    #   information or adult content. Amazon SageMaker may restrict the
-    #   Amazon Mechanical Turk workers that can view your task based on this
+    #   information or adult content. SageMaker may restrict the Amazon
+    #   Mechanical Turk workers that can view your task based on this
     #   information.
     #   @return [Array<String>]
     #
@@ -21940,8 +22012,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] final_active_learning_model_arn
-    #   The Amazon Resource Name (ARN) for the most recent Amazon SageMaker
-    #   model trained as part of automated data labeling.
+    #   The Amazon Resource Name (ARN) for the most recent SageMaker model
+    #   trained as part of automated data labeling.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/LabelingJobOutput AWS API Documentation
@@ -22451,8 +22523,8 @@ module Aws::SageMaker
     #   @return [Array<Types::AlgorithmSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of algorithms, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of algorithms, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -23726,8 +23798,8 @@ module Aws::SageMaker
     #   @return [Array<Types::EndpointConfigSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of endpoint configurations, use it in the
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of endpoint configurations, use it in the
     #   subsequent request
     #   @return [String]
     #
@@ -23826,8 +23898,8 @@ module Aws::SageMaker
     #   @return [Array<Types::EndpointSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of training jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of training jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -24592,8 +24664,8 @@ module Aws::SageMaker
     #   @return [Array<Types::LabelingJobForWorkteamSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of labeling jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -24693,8 +24765,8 @@ module Aws::SageMaker
     #   @return [Array<Types::LabelingJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of labeling jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of labeling jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -25191,8 +25263,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ModelPackageSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of model packages, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of model packages, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -25359,9 +25431,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ModelSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of models, use it in the subsequent
-    #   request.
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of models, use it in the subsequent request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ListModelsOutput AWS API Documentation
@@ -25700,8 +25771,8 @@ module Aws::SageMaker
     end
 
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To get the next set of lifecycle configurations, use it in the next
+    #   If the response is truncated, SageMaker returns this token. To get
+    #   the next set of lifecycle configurations, use it in the next
     #   request.
     #   @return [String]
     #
@@ -25834,8 +25905,8 @@ module Aws::SageMaker
 
     # @!attribute [rw] next_token
     #   If the response to the previous `ListNotebookInstances` request was
-    #   truncated, Amazon SageMaker returns this token. To retrieve the next
-    #   set of notebook instances, use the token in the next request.
+    #   truncated, SageMaker returns this token. To retrieve the next set of
+    #   notebook instances, use the token in the next request.
     #   @return [String]
     #
     # @!attribute [rw] notebook_instances
@@ -26483,8 +26554,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] next_token
     #   If the response to the previous `ListTags` request is truncated,
-    #   Amazon SageMaker returns this token. To retrieve the next set of
-    #   tags, use it in the subsequent request.
+    #   SageMaker returns this token. To retrieve the next set of tags, use
+    #   it in the subsequent request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -26506,7 +26577,7 @@ module Aws::SageMaker
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] next_token
-    #   If response is truncated, Amazon SageMaker includes a token in the
+    #   If response is truncated, SageMaker includes a token in the
     #   response. You can use this token in your subsequent request to fetch
     #   next set of tokens.
     #   @return [String]
@@ -26685,8 +26756,8 @@ module Aws::SageMaker
     #   @return [Array<Types::TrainingJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   If the response is truncated, Amazon SageMaker returns this token.
-    #   To retrieve the next set of training jobs, use it in the subsequent
+    #   If the response is truncated, SageMaker returns this token. To
+    #   retrieve the next set of training jobs, use it in the subsequent
     #   request.
     #   @return [String]
     #
@@ -27303,9 +27374,9 @@ module Aws::SageMaker
     end
 
     # Specifies a metric that the training algorithm writes to `stderr` or
-    # `stdout`. Amazon SageMakerhyperparameter tuning captures all defined
-    # metrics. You specify one metric that a hyperparameter tuning job uses
-    # as its objective metric to choose the best training job.
+    # `stdout`. SageMakerhyperparameter tuning captures all defined metrics.
+    # You specify one metric that a hyperparameter tuning job uses as its
+    # objective metric to choose the best training job.
     #
     # @note When making an API call, you may pass MetricDefinition
     #   data as a hash:
@@ -27509,11 +27580,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] invocations_timeout_in_seconds
-    #   The timeout value in seconds for an invocation request.
+    #   The timeout value in seconds for an invocation request. The default
+    #   value is 600.
     #   @return [Integer]
     #
     # @!attribute [rw] invocations_max_retries
     #   The maximum number of retries when invocation requests are failing.
+    #   The default value is 3.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelClientConfig AWS API Documentation
@@ -28017,8 +28090,8 @@ module Aws::SageMaker
     #   @return [Types::SourceAlgorithmSpecification]
     #
     # @!attribute [rw] validation_specification
-    #   Specifies batch transform jobs that Amazon SageMaker runs to
-    #   validate your model package.
+    #   Specifies batch transform jobs that SageMaker runs to validate your
+    #   model package.
     #   @return [Types::ModelPackageValidationSpecification]
     #
     # @!attribute [rw] model_package_status
@@ -28197,11 +28270,11 @@ module Aws::SageMaker
     #   code is stored.
     #
     #   If you are using your own custom algorithm instead of an algorithm
-    #   provided by Amazon SageMaker, the inference code must meet Amazon
-    #   SageMaker requirements. Amazon SageMaker supports both
-    #   `registry/repository[:tag]` and `registry/repository[@digest]` image
-    #   path formats. For more information, see [Using Your Own Algorithms
-    #   with Amazon SageMaker][1].
+    #   provided by SageMaker, the inference code must meet SageMaker
+    #   requirements. SageMaker supports both `registry/repository[:tag]`
+    #   and `registry/repository[@digest]` image path formats. For more
+    #   information, see [Using Your Own Algorithms with Amazon
+    #   SageMaker][1].
     #
     #
     #
@@ -28533,8 +28606,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Specifies batch transform jobs that Amazon SageMaker runs to validate
-    # your model package.
+    # Specifies batch transform jobs that SageMaker runs to validate your
+    # model package.
     #
     # @note When making an API call, you may pass ModelPackageValidationSpecification
     #   data as a hash:
@@ -28584,8 +28657,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] validation_profiles
     #   An array of `ModelPackageValidationProfile` objects, each of which
-    #   specifies a batch transform job that Amazon SageMaker runs to
-    #   validate your model package.
+    #   specifies a batch transform job that SageMaker runs to validate your
+    #   model package.
     #   @return [Array<Types::ModelPackageValidationProfile>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageValidationSpecification AWS API Documentation
@@ -29958,8 +30031,7 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Provides summary information for an Amazon SageMaker notebook
-    # instance.
+    # Provides summary information for an SageMaker notebook instance.
     #
     # @!attribute [rw] notebook_instance_name
     #   The name of the notebook instance that you want a summary for.
@@ -29974,7 +30046,7 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] url
-    #   The URL that you use to connect to the Jupyter instance running in
+    #   The URL that you use to connect to the Jupyter notebook running in
     #   your notebook instance.
     #   @return [String]
     #
@@ -30010,8 +30082,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -30026,7 +30097,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #
@@ -30652,9 +30723,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the model artifacts
-    #   at rest using Amazon S3 server-side encryption. The `KmsKeyId` can
-    #   be any of the following formats:
+    #   KMS) key that SageMaker uses to encrypt the model artifacts at rest
+    #   using Amazon S3 server-side encryption. The `KmsKeyId` can be any of
+    #   the following formats:
     #
     #   * // KMS Key ID
     #
@@ -30672,14 +30743,13 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `OutputDataConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
+    #   If you use a KMS key ID or an alias of your KMS key, the SageMaker
+    #   execution role must include permissions to call `kms:Encrypt`. If
+    #   you don't provide a KMS key ID, SageMaker uses the default KMS key
+    #   for Amazon S3 for your role's account. SageMaker uses server-side
+    #   encryption with KMS-managed keys for `OutputDataConfig`. If you use
+    #   a bucket policy with an `s3:PutObject` permission that only allows
+    #   objects with server-side encryption, set the condition key of
     #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
     #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
     #   Simple Storage Service Developer Guide.*
@@ -30697,8 +30767,8 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] s3_output_path
-    #   Identifies the S3 path where you want Amazon SageMaker to store the
-    #   model artifacts. For example, `s3://bucket-name/key-name-prefix`.
+    #   Identifies the S3 path where you want SageMaker to store the model
+    #   artifacts. For example, `s3://bucket-name/key-name-prefix`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/OutputDataConfig AWS API Documentation
@@ -31027,23 +31097,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] current_serverless_config
     #   The serverless configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @!attribute [rw] desired_serverless_config
     #   The serverless configuration requested for this deployment, as
     #   specified in the endpoint configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/PendingProductionVariantSummary AWS API Documentation
@@ -32245,8 +32303,8 @@ module Aws::SageMaker
 
     # Identifies a model that you want to host and the resources chosen to
     # deploy for hosting it. If you are deploying multiple models, tell
-    # Amazon SageMaker how to distribute traffic among the models by
-    # specifying variant weights.
+    # SageMaker how to distribute traffic among the models by specifying
+    # variant weights.
     #
     # @note When making an API call, you may pass ProductionVariant
     #   data as a hash:
@@ -32313,12 +32371,6 @@ module Aws::SageMaker
     #   The serverless configuration for an endpoint. Specifies a serverless
     #   endpoint configuration instead of an instance-based endpoint
     #   configuration.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariant AWS API Documentation
@@ -32353,9 +32405,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] kms_key_id
     #   The Amazon Web Services Key Management Service (Amazon Web Services
-    #   KMS) key that Amazon SageMaker uses to encrypt the core dump data at
-    #   rest using Amazon S3 server-side encryption. The `KmsKeyId` can be
-    #   any of the following formats:
+    #   KMS) key that SageMaker uses to encrypt the core dump data at rest
+    #   using Amazon S3 server-side encryption. The `KmsKeyId` can be any of
+    #   the following formats:
     #
     #   * // KMS Key ID
     #
@@ -32373,14 +32425,13 @@ module Aws::SageMaker
     #
     #     `"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"`
     #
-    #   If you use a KMS key ID or an alias of your KMS key, the Amazon
-    #   SageMaker execution role must include permissions to call
-    #   `kms:Encrypt`. If you don't provide a KMS key ID, Amazon SageMaker
-    #   uses the default KMS key for Amazon S3 for your role's account.
-    #   Amazon SageMaker uses server-side encryption with KMS-managed keys
-    #   for `OutputDataConfig`. If you use a bucket policy with an
-    #   `s3:PutObject` permission that only allows objects with server-side
-    #   encryption, set the condition key of
+    #   If you use a KMS key ID or an alias of your KMS key, the SageMaker
+    #   execution role must include permissions to call `kms:Encrypt`. If
+    #   you don't provide a KMS key ID, SageMaker uses the default KMS key
+    #   for Amazon S3 for your role's account. SageMaker uses server-side
+    #   encryption with KMS-managed keys for `OutputDataConfig`. If you use
+    #   a bucket policy with an `s3:PutObject` permission that only allows
+    #   objects with server-side encryption, set the condition key of
     #   `s3:x-amz-server-side-encryption` to `"aws:kms"`. For more
     #   information, see [KMS-Managed Encryption Keys][1] in the *Amazon
     #   Simple Storage Service Developer Guide.*
@@ -32406,10 +32457,6 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # Serverless Inference is in preview release for Amazon SageMaker and is
-    # subject to change. We do not recommend using this feature in
-    # production environments.
-    #
     # Specifies the serverless configuration for an endpoint variant.
     #
     # @note When making an API call, you may pass ProductionVariantServerlessConfig
@@ -32519,22 +32566,10 @@ module Aws::SageMaker
     #
     # @!attribute [rw] current_serverless_config
     #   The serverless configuration for the endpoint.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @!attribute [rw] desired_serverless_config
     #   The serverless configuration requested for the endpoint update.
-    #
-    #   <note markdown="1"> Serverless Inference is in preview release for Amazon SageMaker and
-    #   is subject to change. We do not recommend using this feature in
-    #   production environments.
-    #
-    #    </note>
     #   @return [Types::ProductionVariantServerlessConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ProductionVariantSummary AWS API Documentation
@@ -33351,8 +33386,8 @@ module Aws::SageMaker
     # @!attribute [rw] properties
     #   Filter the lineage entities connected to the `StartArn`(s) by a set
     #   if property key value pairs. If multiple pairs are provided, an
-    #   entity will be included in the results if it matches any of the
-    #   provided pairs.
+    #   entity is included in the results if it matches any of the provided
+    #   pairs.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/QueryFilters AWS API Documentation
@@ -33398,12 +33433,13 @@ module Aws::SageMaker
     #   @return [Array<String>]
     #
     # @!attribute [rw] direction
-    #   Associations between lineage entities are directed. This parameter
-    #   determines the direction from the StartArn(s) the query will look.
+    #   Associations between lineage entities have a direction. This
+    #   parameter determines the direction from the StartArn(s) that the
+    #   query traverses.
     #   @return [String]
     #
     # @!attribute [rw] include_edges
-    #   Setting this value to `True` will retrieve not only the entities of
+    #   Setting this value to `True` retrieves not only the entities of
     #   interest but also the [Associations][1] and lineage entities on the
     #   path. Set to `False` to only return lineage entities that match your
     #   query.
@@ -33432,8 +33468,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] max_depth
     #   The maximum depth in lineage relationships from the `StartArns` that
-    #   will be traversed. Depth is a measure of the number of
-    #   `Associations` from the `StartArn` entity to the matched results.
+    #   are traversed. Depth is a measure of the number of `Associations`
+    #   from the `StartArn` entity to the matched results.
     #   @return [Integer]
     #
     # @!attribute [rw] max_results
@@ -34232,15 +34268,15 @@ module Aws::SageMaker
     #
     #   You must specify sufficient ML storage for your scenario.
     #
-    #   <note markdown="1"> Amazon SageMaker supports only the General Purpose SSD (gp2) ML
-    #   storage volume type.
+    #   <note markdown="1"> SageMaker supports only the General Purpose SSD (gp2) ML storage
+    #   volume type.
     #
     #    </note>
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage with a fixed
     #   total size, dependent on the instance type. When using these
-    #   instances for training, Amazon SageMaker mounts the local instance
-    #   storage instead of Amazon EBS gp2 storage. You can't request a
+    #   instances for training, SageMaker mounts the local instance storage
+    #   instead of Amazon EBS gp2 storage. You can't request a
     #   `VolumeSizeInGB` greater than the total size of the local instance
     #   storage.
     #
@@ -34256,9 +34292,9 @@ module Aws::SageMaker
     #   @return [Integer]
     #
     # @!attribute [rw] volume_kms_key_id
-    #   The Amazon Web Services KMS key that Amazon SageMaker uses to
-    #   encrypt data on the storage volume attached to the ML compute
-    #   instance(s) that run the training job.
+    #   The Amazon Web Services KMS key that SageMaker uses to encrypt data
+    #   on the storage volume attached to the ML compute instance(s) that
+    #   run the training job.
     #
     #   <note markdown="1"> Certain Nitro-based instances include local storage, dependent on
     #   the instance type. Local storage volumes are encrypted using a
@@ -34313,8 +34349,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
-    # You have exceeded an Amazon SageMaker resource limit. For example, you
-    # might have too many training jobs created.
+    # You have exceeded an SageMaker resource limit. For example, you might
+    # have too many training jobs created.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -34393,6 +34429,12 @@ module Aws::SageMaker
     #
     # @!attribute [rw] instance_type
     #   The instance type that the image version runs on.
+    #
+    #   <note markdown="1"> JupyterServer Apps only support the `system` value. KernelGateway
+    #   Apps do not support the `system` value, but support all other values
+    #   for available instance types.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] lifecycle_config_arn
@@ -34527,11 +34569,11 @@ module Aws::SageMaker
     #
     # @!attribute [rw] s3_data_type
     #   If you choose `S3Prefix`, `S3Uri` identifies a key name prefix.
-    #   Amazon SageMaker uses all objects that match the specified key name
-    #   prefix for model training.
+    #   SageMaker uses all objects that match the specified key name prefix
+    #   for model training.
     #
     #   If you choose `ManifestFile`, `S3Uri` identifies an object that is a
-    #   manifest file containing a list of object keys that you want Amazon
+    #   manifest file containing a list of object keys that you want
     #   SageMaker to use for model training.
     #
     #   If you choose `AugmentedManifestFile`, S3Uri identifies an object
@@ -34585,17 +34627,17 @@ module Aws::SageMaker
     #
     #     The complete set of `S3Uri` in this manifest is the input data for
     #     the channel for this data source. The object that each `S3Uri`
-    #     points to must be readable by the IAM role that Amazon SageMaker
-    #     uses to perform tasks on your behalf.
+    #     points to must be readable by the IAM role that SageMaker uses to
+    #     perform tasks on your behalf.
     #   @return [String]
     #
     # @!attribute [rw] s3_data_distribution_type
-    #   If you want Amazon SageMaker to replicate the entire dataset on each
-    #   ML compute instance that is launched for model training, specify
+    #   If you want SageMaker to replicate the entire dataset on each ML
+    #   compute instance that is launched for model training, specify
     #   `FullyReplicated`.
     #
-    #   If you want Amazon SageMaker to replicate a subset of data on each
-    #   ML compute instance that is launched for model training, specify
+    #   If you want SageMaker to replicate a subset of data on each ML
+    #   compute instance that is launched for model training, specify
     #   `ShardedByS3Key`. If there are *n* ML compute instances launched for
     #   a training job, each instance gets approximately 1/*n* of the number
     #   of S3 objects. In this case, model training on each machine uses
@@ -35019,9 +35061,9 @@ module Aws::SageMaker
     # transitioned through. A training job can be in one of several states,
     # for example, starting, downloading, training, or uploading. Within
     # each state, there are a number of intermediate states. For example,
-    # within the starting state, Amazon SageMaker could be starting the
-    # training job or launching the ML instances. These transitional states
-    # are referred to as the job's secondary status.
+    # within the starting state, SageMaker could be starting the training
+    # job or launching the ML instances. These transitional states are
+    # referred to as the job's secondary status.
     #
     # @!attribute [rw] status
     #   Contains a secondary status information from a training job.
@@ -35086,8 +35128,8 @@ module Aws::SageMaker
     # @!attribute [rw] status_message
     #   A detailed description of the progress within a secondary status.
     #
-    #   Amazon SageMaker provides secondary statuses and status messages
-    #   that apply to each of them:
+    #   SageMaker provides secondary statuses and status messages that apply
+    #   to each of them:
     #
     #   Starting
     #   : * Starting the training job.
@@ -35452,9 +35494,9 @@ module Aws::SageMaker
     end
 
     # Specifies an algorithm that was used to create the model package. The
-    # algorithm must be either an algorithm resource in your Amazon
-    # SageMaker account or an algorithm in Amazon Web Services Marketplace
-    # that you are subscribed to.
+    # algorithm must be either an algorithm resource in your SageMaker
+    # account or an algorithm in Amazon Web Services Marketplace that you
+    # are subscribed to.
     #
     # @note When making an API call, you may pass SourceAlgorithm
     #   data as a hash:
@@ -35477,9 +35519,9 @@ module Aws::SageMaker
     #
     # @!attribute [rw] algorithm_name
     #   The name of an algorithm that was used to create the model package.
-    #   The algorithm must be either an algorithm resource in your Amazon
-    #   SageMaker account or an algorithm in Amazon Web Services Marketplace
-    #   that you are subscribed to.
+    #   The algorithm must be either an algorithm resource in your SageMaker
+    #   account or an algorithm in Amazon Web Services Marketplace that you
+    #   are subscribed to.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/SourceAlgorithm AWS API Documentation
@@ -35923,21 +35965,21 @@ module Aws::SageMaker
     # Specifies a limit to how long a model training job or model
     # compilation job can run. It also specifies how long a managed spot
     # training job has to complete. When the job reaches the time limit,
-    # Amazon SageMaker ends the training or compilation job. Use this API to
-    # cap model training costs.
+    # SageMaker ends the training or compilation job. Use this API to cap
+    # model training costs.
     #
-    # To stop a training job, Amazon SageMaker sends the algorithm the
-    # `SIGTERM` signal, which delays job termination for 120 seconds.
-    # Algorithms can use this 120-second window to save the model artifacts,
-    # so the results of training are not lost.
+    # To stop a training job, SageMaker sends the algorithm the `SIGTERM`
+    # signal, which delays job termination for 120 seconds. Algorithms can
+    # use this 120-second window to save the model artifacts, so the results
+    # of training are not lost.
     #
-    # The training algorithms provided by Amazon SageMaker automatically
-    # save the intermediate results of a model training job when possible.
-    # This attempt to save artifacts is only a best effort case as model
-    # might not be in a state from which it can be saved. For example, if
-    # training has just started, the model might not be ready to save. When
-    # saved, this intermediate data is a valid model artifact. You can use
-    # it to create a model with `CreateModel`.
+    # The training algorithms provided by SageMaker automatically save the
+    # intermediate results of a model training job when possible. This
+    # attempt to save artifacts is only a best effort case as model might
+    # not be in a state from which it can be saved. For example, if training
+    # has just started, the model might not be ready to save. When saved,
+    # this intermediate data is a valid model artifact. You can use it to
+    # create a model with `CreateModel`.
     #
     # <note markdown="1"> The Neural Topic Model (NTM) currently does not support saving
     # intermediate model artifacts. When training NTMs, make sure that the
@@ -35958,14 +36000,14 @@ module Aws::SageMaker
     #   compilation job can run.
     #
     #   For compilation jobs, if the job does not complete during this time,
-    #   you will receive a `TimeOut` error. We recommend starting with 900
-    #   seconds and increase as necessary based on your model.
+    #   a `TimeOut` error is generated. We recommend starting with 900
+    #   seconds and increasing as necessary based on your model.
     #
     #   For all other jobs, if the job does not complete during this time,
-    #   Amazon SageMaker ends the job. When `RetryStrategy` is specified in
-    #   the job request, `MaxRuntimeInSeconds` specifies the maximum time
-    #   for all of the attempts in total, not each individual attempt. The
-    #   default value is 1 day. The maximum value is 28 days.
+    #   SageMaker ends the job. When `RetryStrategy` is specified in the job
+    #   request, `MaxRuntimeInSeconds` specifies the maximum time for all of
+    #   the attempts in total, not each individual attempt. The default
+    #   value is 1 day. The maximum value is 28 days.
     #   @return [Integer]
     #
     # @!attribute [rw] max_wait_time_in_seconds
@@ -35973,7 +36015,7 @@ module Aws::SageMaker
     #   job has to complete. It is the amount of time spent waiting for Spot
     #   capacity plus the amount of time the job can run. It must be equal
     #   to or greater than `MaxRuntimeInSeconds`. If the job does not
-    #   complete during this time, Amazon SageMaker ends the job.
+    #   complete during this time, SageMaker ends the job.
     #
     #   When `RetryStrategy` is specified in the job request,
     #   `MaxWaitTimeInSeconds` specifies the maximum time for all of the
@@ -36393,8 +36435,8 @@ module Aws::SageMaker
     #   For detailed information about the secondary status of the training
     #   job, see `StatusMessage` under SecondaryStatusTransition.
     #
-    #   Amazon SageMaker provides primary statuses and secondary statuses
-    #   that apply to each of them:
+    #   SageMaker provides primary statuses and secondary statuses that
+    #   apply to each of them:
     #
     #   InProgress
     #   : * `Starting` - Starting the training job.
@@ -36467,7 +36509,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   The S3 path where model artifacts that you configured when creating
-    #   the job are stored. Amazon SageMaker creates subfolders for model
+    #   the job are stored. SageMaker creates subfolders for model
     #   artifacts.
     #   @return [Types::OutputDataConfig]
     #
@@ -36489,13 +36531,13 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the
-    #   results of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts, so the results
+    #   of training are not lost.
     #   @return [Types::StoppingCondition]
     #
     # @!attribute [rw] creation_time
@@ -36516,8 +36558,7 @@ module Aws::SageMaker
     #   You are billed for the time interval between the value of
     #   `TrainingStartTime` and this time. For successful jobs and stopped
     #   jobs, this is the time after model artifacts are uploaded. For
-    #   failed jobs, this is the time when Amazon SageMaker detects a job
-    #   failure.
+    #   failed jobs, this is the time when SageMaker detects a job failure.
     #   @return [Time]
     #
     # @!attribute [rw] last_modified_time
@@ -36784,7 +36825,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] output_data_config
     #   the path to the S3 bucket where you want to store model artifacts.
-    #   Amazon SageMaker creates subfolders for the artifacts.
+    #   SageMaker creates subfolders for the artifacts.
     #   @return [Types::OutputDataConfig]
     #
     # @!attribute [rw] resource_config
@@ -36795,12 +36836,12 @@ module Aws::SageMaker
     # @!attribute [rw] stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts.
+    #   To stop a job, SageMaker sends the algorithm the SIGTERM signal,
+    #   which delays job termination for 120 seconds. Algorithms can use
+    #   this 120-second window to save the model artifacts.
     #   @return [Types::StoppingCondition]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TrainingJobDefinition AWS API Documentation
@@ -39042,7 +39083,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] endpoint_name
-    #   The name of an existing Amazon SageMaker endpoint.
+    #   The name of an existing SageMaker endpoint.
     #   @return [String]
     #
     # @!attribute [rw] desired_weights_and_capacities
@@ -39411,12 +39452,12 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access the notebook instance. For more information,
-    #   see [Amazon SageMaker Roles][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access the notebook instance. For more information, see
+    #   [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API
+    #   must have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -39446,12 +39487,12 @@ module Aws::SageMaker
     # @!attribute [rw] volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
     #   instance. The default value is 5 GB. ML storage volumes are
-    #   encrypted, so Amazon SageMaker can't determine the amount of
-    #   available free space on the volume. Because of this, you can
-    #   increase the volume size when you update a notebook instance, but
-    #   you can't decrease the volume size. If you want to decrease the
-    #   size of the ML storage volume in use, create a new notebook instance
-    #   with the desired size.
+    #   encrypted, so SageMaker can't determine the amount of available
+    #   free space on the volume. Because of this, you can increase the
+    #   volume size when you update a notebook instance, but you can't
+    #   decrease the volume size. If you want to decrease the size of the ML
+    #   storage volume in use, create a new notebook instance with the
+    #   desired size.
     #   @return [Integer]
     #
     # @!attribute [rw] default_code_repository
@@ -39461,8 +39502,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other
     #   Git repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -39477,7 +39517,7 @@ module Aws::SageMaker
     #   in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. These repositories are cloned at the same level as the
     #   default repository of your notebook instance. For more information,
-    #   see [Associating Git Repositories with Amazon SageMaker Notebook
+    #   see [Associating Git Repositories with SageMaker Notebook
     #   Instances][2].
     #
     #

@@ -15,9 +15,13 @@ module Aws::LookoutEquipment
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AmazonResourceArn = Shapes::StringShape.new(name: 'AmazonResourceArn')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedLengthString = Shapes::StringShape.new(name: 'BoundedLengthString')
+    CategoricalValues = Shapes::StructureShape.new(name: 'CategoricalValues')
+    ComponentName = Shapes::StringShape.new(name: 'ComponentName')
     ComponentTimestampDelimiter = Shapes::StringShape.new(name: 'ComponentTimestampDelimiter')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CountPercent = Shapes::StructureShape.new(name: 'CountPercent')
     CreateDatasetRequest = Shapes::StructureShape.new(name: 'CreateDatasetRequest')
     CreateDatasetResponse = Shapes::StructureShape.new(name: 'CreateDatasetResponse')
     CreateInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'CreateInferenceSchedulerRequest')
@@ -28,6 +32,8 @@ module Aws::LookoutEquipment
     DataIngestionJobSummaries = Shapes::ListShape.new(name: 'DataIngestionJobSummaries')
     DataIngestionJobSummary = Shapes::StructureShape.new(name: 'DataIngestionJobSummary')
     DataPreProcessingConfiguration = Shapes::StructureShape.new(name: 'DataPreProcessingConfiguration')
+    DataQualitySummary = Shapes::StructureShape.new(name: 'DataQualitySummary')
+    DataSizeInBytes = Shapes::IntegerShape.new(name: 'DataSizeInBytes')
     DataUploadFrequency = Shapes::StringShape.new(name: 'DataUploadFrequency')
     DatasetArn = Shapes::StringShape.new(name: 'DatasetArn')
     DatasetIdentifier = Shapes::StringShape.new(name: 'DatasetIdentifier')
@@ -47,7 +53,9 @@ module Aws::LookoutEquipment
     DescribeInferenceSchedulerResponse = Shapes::StructureShape.new(name: 'DescribeInferenceSchedulerResponse')
     DescribeModelRequest = Shapes::StructureShape.new(name: 'DescribeModelRequest')
     DescribeModelResponse = Shapes::StructureShape.new(name: 'DescribeModelResponse')
+    DuplicateTimestamps = Shapes::StructureShape.new(name: 'DuplicateTimestamps')
     FileNameTimestampFormat = Shapes::StringShape.new(name: 'FileNameTimestampFormat')
+    Float = Shapes::FloatShape.new(name: 'Float')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdempotenceToken = Shapes::StringShape.new(name: 'IdempotenceToken')
     InferenceExecutionStatus = Shapes::StringShape.new(name: 'InferenceExecutionStatus')
@@ -64,15 +72,21 @@ module Aws::LookoutEquipment
     InferenceSchedulerStatus = Shapes::StringShape.new(name: 'InferenceSchedulerStatus')
     InferenceSchedulerSummaries = Shapes::ListShape.new(name: 'InferenceSchedulerSummaries')
     InferenceSchedulerSummary = Shapes::StructureShape.new(name: 'InferenceSchedulerSummary')
+    IngestedFilesSummary = Shapes::StructureShape.new(name: 'IngestedFilesSummary')
     IngestionInputConfiguration = Shapes::StructureShape.new(name: 'IngestionInputConfiguration')
     IngestionJobId = Shapes::StringShape.new(name: 'IngestionJobId')
     IngestionJobStatus = Shapes::StringShape.new(name: 'IngestionJobStatus')
     IngestionS3InputConfiguration = Shapes::StructureShape.new(name: 'IngestionS3InputConfiguration')
     InlineDataSchema = Shapes::StringShape.new(name: 'InlineDataSchema')
+    InsufficientSensorData = Shapes::StructureShape.new(name: 'InsufficientSensorData')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    InvalidSensorData = Shapes::StructureShape.new(name: 'InvalidSensorData')
+    KeyPattern = Shapes::StringShape.new(name: 'KeyPattern')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LabelsInputConfiguration = Shapes::StructureShape.new(name: 'LabelsInputConfiguration')
     LabelsS3InputConfiguration = Shapes::StructureShape.new(name: 'LabelsS3InputConfiguration')
+    LargeTimestampGaps = Shapes::StructureShape.new(name: 'LargeTimestampGaps')
     ListDataIngestionJobsRequest = Shapes::StructureShape.new(name: 'ListDataIngestionJobsRequest')
     ListDataIngestionJobsResponse = Shapes::StructureShape.new(name: 'ListDataIngestionJobsResponse')
     ListDatasetsRequest = Shapes::StructureShape.new(name: 'ListDatasetsRequest')
@@ -83,15 +97,23 @@ module Aws::LookoutEquipment
     ListInferenceSchedulersResponse = Shapes::StructureShape.new(name: 'ListInferenceSchedulersResponse')
     ListModelsRequest = Shapes::StructureShape.new(name: 'ListModelsRequest')
     ListModelsResponse = Shapes::StructureShape.new(name: 'ListModelsResponse')
+    ListOfDiscardedFiles = Shapes::ListShape.new(name: 'ListOfDiscardedFiles')
+    ListSensorStatisticsRequest = Shapes::StructureShape.new(name: 'ListSensorStatisticsRequest')
+    ListSensorStatisticsResponse = Shapes::StructureShape.new(name: 'ListSensorStatisticsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    MissingCompleteSensorData = Shapes::StructureShape.new(name: 'MissingCompleteSensorData')
+    MissingSensorData = Shapes::StructureShape.new(name: 'MissingSensorData')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelMetrics = Shapes::StringShape.new(name: 'ModelMetrics')
     ModelName = Shapes::StringShape.new(name: 'ModelName')
     ModelStatus = Shapes::StringShape.new(name: 'ModelStatus')
     ModelSummaries = Shapes::ListShape.new(name: 'ModelSummaries')
     ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
+    MonotonicValues = Shapes::StructureShape.new(name: 'MonotonicValues')
+    Monotonicity = Shapes::StringShape.new(name: 'Monotonicity')
+    MultipleOperatingModes = Shapes::StructureShape.new(name: 'MultipleOperatingModes')
     NameOrArn = Shapes::StringShape.new(name: 'NameOrArn')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OffCondition = Shapes::StringShape.new(name: 'OffCondition')
@@ -100,11 +122,16 @@ module Aws::LookoutEquipment
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3Prefix = Shapes::StringShape.new(name: 'S3Prefix')
+    SensorName = Shapes::StringShape.new(name: 'SensorName')
+    SensorStatisticsSummaries = Shapes::ListShape.new(name: 'SensorStatisticsSummaries')
+    SensorStatisticsSummary = Shapes::StructureShape.new(name: 'SensorStatisticsSummary')
+    SensorsWithShortDateRange = Shapes::StructureShape.new(name: 'SensorsWithShortDateRange')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StartDataIngestionJobRequest = Shapes::StructureShape.new(name: 'StartDataIngestionJobRequest')
     StartDataIngestionJobResponse = Shapes::StructureShape.new(name: 'StartDataIngestionJobResponse')
     StartInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'StartInferenceSchedulerRequest')
     StartInferenceSchedulerResponse = Shapes::StructureShape.new(name: 'StartInferenceSchedulerResponse')
+    StatisticalIssueStatus = Shapes::StringShape.new(name: 'StatisticalIssueStatus')
     StopInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'StopInferenceSchedulerRequest')
     StopInferenceSchedulerResponse = Shapes::StructureShape.new(name: 'StopInferenceSchedulerResponse')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -118,6 +145,7 @@ module Aws::LookoutEquipment
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeZoneOffset = Shapes::StringShape.new(name: 'TimeZoneOffset')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+    UnsupportedTimestamps = Shapes::StructureShape.new(name: 'UnsupportedTimestamps')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateInferenceSchedulerRequest = Shapes::StructureShape.new(name: 'UpdateInferenceSchedulerRequest')
@@ -126,11 +154,19 @@ module Aws::LookoutEquipment
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    CategoricalValues.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
+    CategoricalValues.add_member(:number_of_category, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfCategory"))
+    CategoricalValues.struct_class = Types::CategoricalValues
+
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ConflictException.struct_class = Types::ConflictException
 
+    CountPercent.add_member(:count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Count"))
+    CountPercent.add_member(:percentage, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "Percentage"))
+    CountPercent.struct_class = Types::CountPercent
+
     CreateDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "DatasetName"))
-    CreateDatasetRequest.add_member(:dataset_schema, Shapes::ShapeRef.new(shape: DatasetSchema, required: true, location_name: "DatasetSchema"))
+    CreateDatasetRequest.add_member(:dataset_schema, Shapes::ShapeRef.new(shape: DatasetSchema, location_name: "DatasetSchema"))
     CreateDatasetRequest.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: NameOrArn, location_name: "ServerSideKmsKeyId"))
     CreateDatasetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotenceToken, required: true, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
     CreateDatasetRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
@@ -190,6 +226,13 @@ module Aws::LookoutEquipment
     DataPreProcessingConfiguration.add_member(:target_sampling_rate, Shapes::ShapeRef.new(shape: TargetSamplingRate, location_name: "TargetSamplingRate"))
     DataPreProcessingConfiguration.struct_class = Types::DataPreProcessingConfiguration
 
+    DataQualitySummary.add_member(:insufficient_sensor_data, Shapes::ShapeRef.new(shape: InsufficientSensorData, required: true, location_name: "InsufficientSensorData"))
+    DataQualitySummary.add_member(:missing_sensor_data, Shapes::ShapeRef.new(shape: MissingSensorData, required: true, location_name: "MissingSensorData"))
+    DataQualitySummary.add_member(:invalid_sensor_data, Shapes::ShapeRef.new(shape: InvalidSensorData, required: true, location_name: "InvalidSensorData"))
+    DataQualitySummary.add_member(:unsupported_timestamps, Shapes::ShapeRef.new(shape: UnsupportedTimestamps, required: true, location_name: "UnsupportedTimestamps"))
+    DataQualitySummary.add_member(:duplicate_timestamps, Shapes::ShapeRef.new(shape: DuplicateTimestamps, required: true, location_name: "DuplicateTimestamps"))
+    DataQualitySummary.struct_class = Types::DataQualitySummary
+
     DatasetSchema.add_member(:inline_data_schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "InlineDataSchema", metadata: {"jsonvalue"=>true}))
     DatasetSchema.struct_class = Types::DatasetSchema
 
@@ -220,6 +263,12 @@ module Aws::LookoutEquipment
     DescribeDataIngestionJobResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     DescribeDataIngestionJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: IngestionJobStatus, location_name: "Status"))
     DescribeDataIngestionJobResponse.add_member(:failed_reason, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "FailedReason"))
+    DescribeDataIngestionJobResponse.add_member(:data_quality_summary, Shapes::ShapeRef.new(shape: DataQualitySummary, location_name: "DataQualitySummary"))
+    DescribeDataIngestionJobResponse.add_member(:ingested_files_summary, Shapes::ShapeRef.new(shape: IngestedFilesSummary, location_name: "IngestedFilesSummary"))
+    DescribeDataIngestionJobResponse.add_member(:status_detail, Shapes::ShapeRef.new(shape: BoundedLengthString, location_name: "StatusDetail"))
+    DescribeDataIngestionJobResponse.add_member(:ingested_data_size, Shapes::ShapeRef.new(shape: DataSizeInBytes, location_name: "IngestedDataSize"))
+    DescribeDataIngestionJobResponse.add_member(:data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataStartTime"))
+    DescribeDataIngestionJobResponse.add_member(:data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataEndTime"))
     DescribeDataIngestionJobResponse.struct_class = Types::DescribeDataIngestionJobResponse
 
     DescribeDatasetRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetIdentifier, required: true, location_name: "DatasetName"))
@@ -233,6 +282,11 @@ module Aws::LookoutEquipment
     DescribeDatasetResponse.add_member(:schema, Shapes::ShapeRef.new(shape: InlineDataSchema, location_name: "Schema", metadata: {"jsonvalue"=>true}))
     DescribeDatasetResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
     DescribeDatasetResponse.add_member(:ingestion_input_configuration, Shapes::ShapeRef.new(shape: IngestionInputConfiguration, location_name: "IngestionInputConfiguration"))
+    DescribeDatasetResponse.add_member(:data_quality_summary, Shapes::ShapeRef.new(shape: DataQualitySummary, location_name: "DataQualitySummary"))
+    DescribeDatasetResponse.add_member(:ingested_files_summary, Shapes::ShapeRef.new(shape: IngestedFilesSummary, location_name: "IngestedFilesSummary"))
+    DescribeDatasetResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "RoleArn"))
+    DescribeDatasetResponse.add_member(:data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataStartTime"))
+    DescribeDatasetResponse.add_member(:data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataEndTime"))
     DescribeDatasetResponse.struct_class = Types::DescribeDatasetResponse
 
     DescribeInferenceSchedulerRequest.add_member(:inference_scheduler_name, Shapes::ShapeRef.new(shape: InferenceSchedulerIdentifier, required: true, location_name: "InferenceSchedulerName"))
@@ -278,6 +332,9 @@ module Aws::LookoutEquipment
     DescribeModelResponse.add_member(:server_side_kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "ServerSideKmsKeyId"))
     DescribeModelResponse.add_member(:off_condition, Shapes::ShapeRef.new(shape: OffCondition, location_name: "OffCondition"))
     DescribeModelResponse.struct_class = Types::DescribeModelResponse
+
+    DuplicateTimestamps.add_member(:total_number_of_duplicate_timestamps, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfDuplicateTimestamps"))
+    DuplicateTimestamps.struct_class = Types::DuplicateTimestamps
 
     InferenceExecutionSummaries.member = Shapes::ShapeRef.new(shape: InferenceExecutionSummary)
 
@@ -327,15 +384,29 @@ module Aws::LookoutEquipment
     InferenceSchedulerSummary.add_member(:data_upload_frequency, Shapes::ShapeRef.new(shape: DataUploadFrequency, location_name: "DataUploadFrequency"))
     InferenceSchedulerSummary.struct_class = Types::InferenceSchedulerSummary
 
+    IngestedFilesSummary.add_member(:total_number_of_files, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfFiles"))
+    IngestedFilesSummary.add_member(:ingested_number_of_files, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "IngestedNumberOfFiles"))
+    IngestedFilesSummary.add_member(:discarded_files, Shapes::ShapeRef.new(shape: ListOfDiscardedFiles, location_name: "DiscardedFiles"))
+    IngestedFilesSummary.struct_class = Types::IngestedFilesSummary
+
     IngestionInputConfiguration.add_member(:s3_input_configuration, Shapes::ShapeRef.new(shape: IngestionS3InputConfiguration, required: true, location_name: "S3InputConfiguration"))
     IngestionInputConfiguration.struct_class = Types::IngestionInputConfiguration
 
     IngestionS3InputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     IngestionS3InputConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "Prefix"))
+    IngestionS3InputConfiguration.add_member(:key_pattern, Shapes::ShapeRef.new(shape: KeyPattern, location_name: "KeyPattern"))
     IngestionS3InputConfiguration.struct_class = Types::IngestionS3InputConfiguration
+
+    InsufficientSensorData.add_member(:missing_complete_sensor_data, Shapes::ShapeRef.new(shape: MissingCompleteSensorData, required: true, location_name: "MissingCompleteSensorData"))
+    InsufficientSensorData.add_member(:sensors_with_short_date_range, Shapes::ShapeRef.new(shape: SensorsWithShortDateRange, required: true, location_name: "SensorsWithShortDateRange"))
+    InsufficientSensorData.struct_class = Types::InsufficientSensorData
 
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    InvalidSensorData.add_member(:affected_sensor_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "AffectedSensorCount"))
+    InvalidSensorData.add_member(:total_number_of_invalid_values, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfInvalidValues"))
+    InvalidSensorData.struct_class = Types::InvalidSensorData
 
     LabelsInputConfiguration.add_member(:s3_input_configuration, Shapes::ShapeRef.new(shape: LabelsS3InputConfiguration, required: true, location_name: "S3InputConfiguration"))
     LabelsInputConfiguration.struct_class = Types::LabelsInputConfiguration
@@ -343,6 +414,11 @@ module Aws::LookoutEquipment
     LabelsS3InputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     LabelsS3InputConfiguration.add_member(:prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "Prefix"))
     LabelsS3InputConfiguration.struct_class = Types::LabelsS3InputConfiguration
+
+    LargeTimestampGaps.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
+    LargeTimestampGaps.add_member(:number_of_large_timestamp_gaps, Shapes::ShapeRef.new(shape: Integer, location_name: "NumberOfLargeTimestampGaps"))
+    LargeTimestampGaps.add_member(:max_timestamp_gap_in_days, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxTimestampGapInDays"))
+    LargeTimestampGaps.struct_class = Types::LargeTimestampGaps
 
     ListDataIngestionJobsRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, location_name: "DatasetName"))
     ListDataIngestionJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -396,11 +472,30 @@ module Aws::LookoutEquipment
     ListModelsResponse.add_member(:model_summaries, Shapes::ShapeRef.new(shape: ModelSummaries, location_name: "ModelSummaries"))
     ListModelsResponse.struct_class = Types::ListModelsResponse
 
+    ListOfDiscardedFiles.member = Shapes::ShapeRef.new(shape: S3Object)
+
+    ListSensorStatisticsRequest.add_member(:dataset_name, Shapes::ShapeRef.new(shape: DatasetName, required: true, location_name: "DatasetName"))
+    ListSensorStatisticsRequest.add_member(:ingestion_job_id, Shapes::ShapeRef.new(shape: IngestionJobId, location_name: "IngestionJobId"))
+    ListSensorStatisticsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListSensorStatisticsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSensorStatisticsRequest.struct_class = Types::ListSensorStatisticsRequest
+
+    ListSensorStatisticsResponse.add_member(:sensor_statistics_summaries, Shapes::ShapeRef.new(shape: SensorStatisticsSummaries, location_name: "SensorStatisticsSummaries"))
+    ListSensorStatisticsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListSensorStatisticsResponse.struct_class = Types::ListSensorStatisticsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceArn, required: true, location_name: "ResourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MissingCompleteSensorData.add_member(:affected_sensor_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "AffectedSensorCount"))
+    MissingCompleteSensorData.struct_class = Types::MissingCompleteSensorData
+
+    MissingSensorData.add_member(:affected_sensor_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "AffectedSensorCount"))
+    MissingSensorData.add_member(:total_number_of_missing_values, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfMissingValues"))
+    MissingSensorData.struct_class = Types::MissingSensorData
 
     ModelSummaries.member = Shapes::ShapeRef.new(shape: ModelSummary)
 
@@ -412,12 +507,39 @@ module Aws::LookoutEquipment
     ModelSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     ModelSummary.struct_class = Types::ModelSummary
 
+    MonotonicValues.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
+    MonotonicValues.add_member(:monotonicity, Shapes::ShapeRef.new(shape: Monotonicity, location_name: "Monotonicity"))
+    MonotonicValues.struct_class = Types::MonotonicValues
+
+    MultipleOperatingModes.add_member(:status, Shapes::ShapeRef.new(shape: StatisticalIssueStatus, required: true, location_name: "Status"))
+    MultipleOperatingModes.struct_class = Types::MultipleOperatingModes
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3Object.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "Bucket"))
     S3Object.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, required: true, location_name: "Key"))
     S3Object.struct_class = Types::S3Object
+
+    SensorStatisticsSummaries.member = Shapes::ShapeRef.new(shape: SensorStatisticsSummary)
+
+    SensorStatisticsSummary.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentName, location_name: "ComponentName"))
+    SensorStatisticsSummary.add_member(:sensor_name, Shapes::ShapeRef.new(shape: SensorName, location_name: "SensorName"))
+    SensorStatisticsSummary.add_member(:data_exists, Shapes::ShapeRef.new(shape: Boolean, location_name: "DataExists"))
+    SensorStatisticsSummary.add_member(:missing_values, Shapes::ShapeRef.new(shape: CountPercent, location_name: "MissingValues"))
+    SensorStatisticsSummary.add_member(:invalid_values, Shapes::ShapeRef.new(shape: CountPercent, location_name: "InvalidValues"))
+    SensorStatisticsSummary.add_member(:invalid_date_entries, Shapes::ShapeRef.new(shape: CountPercent, location_name: "InvalidDateEntries"))
+    SensorStatisticsSummary.add_member(:duplicate_timestamps, Shapes::ShapeRef.new(shape: CountPercent, location_name: "DuplicateTimestamps"))
+    SensorStatisticsSummary.add_member(:categorical_values, Shapes::ShapeRef.new(shape: CategoricalValues, location_name: "CategoricalValues"))
+    SensorStatisticsSummary.add_member(:multiple_operating_modes, Shapes::ShapeRef.new(shape: MultipleOperatingModes, location_name: "MultipleOperatingModes"))
+    SensorStatisticsSummary.add_member(:large_timestamp_gaps, Shapes::ShapeRef.new(shape: LargeTimestampGaps, location_name: "LargeTimestampGaps"))
+    SensorStatisticsSummary.add_member(:monotonic_values, Shapes::ShapeRef.new(shape: MonotonicValues, location_name: "MonotonicValues"))
+    SensorStatisticsSummary.add_member(:data_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataStartTime"))
+    SensorStatisticsSummary.add_member(:data_end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DataEndTime"))
+    SensorStatisticsSummary.struct_class = Types::SensorStatisticsSummary
+
+    SensorsWithShortDateRange.add_member(:affected_sensor_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "AffectedSensorCount"))
+    SensorsWithShortDateRange.struct_class = Types::SensorsWithShortDateRange
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -468,6 +590,9 @@ module Aws::LookoutEquipment
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: BoundedLengthString, required: true, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
+
+    UnsupportedTimestamps.add_member(:total_number_of_unsupported_timestamps, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalNumberOfUnsupportedTimestamps"))
+    UnsupportedTimestamps.struct_class = Types::UnsupportedTimestamps
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceArn, required: true, location_name: "ResourceArn"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
@@ -721,6 +846,25 @@ module Aws::LookoutEquipment
         o.input = Shapes::ShapeRef.new(shape: ListModelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListModelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_sensor_statistics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSensorStatistics"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSensorStatisticsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListSensorStatisticsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

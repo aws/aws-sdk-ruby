@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.49.0 (2022-04-27)
+------------------
+
+* Feature - Increases the retention period maximum to 2557 days. Deprecates unused fields of the ListEventDataStores API response. Updates documentation.
+
 1.48.0 (2022-03-02)
 ------------------
 

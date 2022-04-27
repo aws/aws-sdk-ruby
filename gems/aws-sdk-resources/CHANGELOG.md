@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.130.0 (2022-04-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-chimesdkmediapipelines` gem.
+
 3.129.0 (2022-04-26)
 ------------------
 

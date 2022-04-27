@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.123.0 (2022-04-27)
+------------------
+
+* Feature - Amazon SageMaker Autopilot adds support for custom validation dataset and validation ratio through the CreateAutoMLJob and DescribeAutoMLJob APIs.
+
 1.122.0 (2022-04-26)
 ------------------
 

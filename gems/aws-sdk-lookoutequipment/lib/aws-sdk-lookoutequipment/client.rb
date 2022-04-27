@@ -371,7 +371,7 @@ module Aws::LookoutEquipment
     # @option params [required, String] :dataset_name
     #   The name of the dataset being created.
     #
-    # @option params [required, Types::DatasetSchema] :dataset_schema
+    # @option params [Types::DatasetSchema] :dataset_schema
     #   A JSON description of the data that is in each time series dataset,
     #   including names, column names, and data types.
     #
@@ -399,7 +399,7 @@ module Aws::LookoutEquipment
     #
     #   resp = client.create_dataset({
     #     dataset_name: "DatasetName", # required
-    #     dataset_schema: { # required
+    #     dataset_schema: {
     #       inline_data_schema: "InlineDataSchema",
     #     },
     #     server_side_kms_key_id: "NameOrArn",
@@ -751,7 +751,7 @@ module Aws::LookoutEquipment
     end
 
     # Provides information on a specific data ingestion job such as creation
-    # time, dataset ARN, status, and so on.
+    # time, dataset ARN, and status.
     #
     # @option params [required, String] :job_id
     #   The job ID of the data ingestion job.
@@ -765,6 +765,12 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeDataIngestionJobResponse#created_at #created_at} => Time
     #   * {Types::DescribeDataIngestionJobResponse#status #status} => String
     #   * {Types::DescribeDataIngestionJobResponse#failed_reason #failed_reason} => String
+    #   * {Types::DescribeDataIngestionJobResponse#data_quality_summary #data_quality_summary} => Types::DataQualitySummary
+    #   * {Types::DescribeDataIngestionJobResponse#ingested_files_summary #ingested_files_summary} => Types::IngestedFilesSummary
+    #   * {Types::DescribeDataIngestionJobResponse#status_detail #status_detail} => String
+    #   * {Types::DescribeDataIngestionJobResponse#ingested_data_size #ingested_data_size} => Integer
+    #   * {Types::DescribeDataIngestionJobResponse#data_start_time #data_start_time} => Time
+    #   * {Types::DescribeDataIngestionJobResponse#data_end_time #data_end_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -778,10 +784,28 @@ module Aws::LookoutEquipment
     #   resp.dataset_arn #=> String
     #   resp.ingestion_input_configuration.s3_input_configuration.bucket #=> String
     #   resp.ingestion_input_configuration.s3_input_configuration.prefix #=> String
+    #   resp.ingestion_input_configuration.s3_input_configuration.key_pattern #=> String
     #   resp.role_arn #=> String
     #   resp.created_at #=> Time
     #   resp.status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #   resp.failed_reason #=> String
+    #   resp.data_quality_summary.insufficient_sensor_data.missing_complete_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.insufficient_sensor_data.sensors_with_short_date_range.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.missing_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.missing_sensor_data.total_number_of_missing_values #=> Integer
+    #   resp.data_quality_summary.invalid_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.invalid_sensor_data.total_number_of_invalid_values #=> Integer
+    #   resp.data_quality_summary.unsupported_timestamps.total_number_of_unsupported_timestamps #=> Integer
+    #   resp.data_quality_summary.duplicate_timestamps.total_number_of_duplicate_timestamps #=> Integer
+    #   resp.ingested_files_summary.total_number_of_files #=> Integer
+    #   resp.ingested_files_summary.ingested_number_of_files #=> Integer
+    #   resp.ingested_files_summary.discarded_files #=> Array
+    #   resp.ingested_files_summary.discarded_files[0].bucket #=> String
+    #   resp.ingested_files_summary.discarded_files[0].key #=> String
+    #   resp.status_detail #=> String
+    #   resp.ingested_data_size #=> Integer
+    #   resp.data_start_time #=> Time
+    #   resp.data_end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeDataIngestionJob AWS API Documentation
     #
@@ -792,8 +816,8 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
-    # Provides a JSON description of the data that is in each time series
-    # dataset, including names, column names, and data types.
+    # Provides a JSON description of the data in each time series dataset,
+    # including names, column names, and data types.
     #
     # @option params [required, String] :dataset_name
     #   The name of the dataset to be described.
@@ -808,6 +832,11 @@ module Aws::LookoutEquipment
     #   * {Types::DescribeDatasetResponse#schema #schema} => String
     #   * {Types::DescribeDatasetResponse#server_side_kms_key_id #server_side_kms_key_id} => String
     #   * {Types::DescribeDatasetResponse#ingestion_input_configuration #ingestion_input_configuration} => Types::IngestionInputConfiguration
+    #   * {Types::DescribeDatasetResponse#data_quality_summary #data_quality_summary} => Types::DataQualitySummary
+    #   * {Types::DescribeDatasetResponse#ingested_files_summary #ingested_files_summary} => Types::IngestedFilesSummary
+    #   * {Types::DescribeDatasetResponse#role_arn #role_arn} => String
+    #   * {Types::DescribeDatasetResponse#data_start_time #data_start_time} => Time
+    #   * {Types::DescribeDatasetResponse#data_end_time #data_end_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -826,6 +855,23 @@ module Aws::LookoutEquipment
     #   resp.server_side_kms_key_id #=> String
     #   resp.ingestion_input_configuration.s3_input_configuration.bucket #=> String
     #   resp.ingestion_input_configuration.s3_input_configuration.prefix #=> String
+    #   resp.ingestion_input_configuration.s3_input_configuration.key_pattern #=> String
+    #   resp.data_quality_summary.insufficient_sensor_data.missing_complete_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.insufficient_sensor_data.sensors_with_short_date_range.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.missing_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.missing_sensor_data.total_number_of_missing_values #=> Integer
+    #   resp.data_quality_summary.invalid_sensor_data.affected_sensor_count #=> Integer
+    #   resp.data_quality_summary.invalid_sensor_data.total_number_of_invalid_values #=> Integer
+    #   resp.data_quality_summary.unsupported_timestamps.total_number_of_unsupported_timestamps #=> Integer
+    #   resp.data_quality_summary.duplicate_timestamps.total_number_of_duplicate_timestamps #=> Integer
+    #   resp.ingested_files_summary.total_number_of_files #=> Integer
+    #   resp.ingested_files_summary.ingested_number_of_files #=> Integer
+    #   resp.ingested_files_summary.discarded_files #=> Array
+    #   resp.ingested_files_summary.discarded_files[0].bucket #=> String
+    #   resp.ingested_files_summary.discarded_files[0].key #=> String
+    #   resp.role_arn #=> String
+    #   resp.data_start_time #=> Time
+    #   resp.data_end_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/DescribeDataset AWS API Documentation
     #
@@ -1007,6 +1053,7 @@ module Aws::LookoutEquipment
     #   resp.data_ingestion_job_summaries[0].dataset_arn #=> String
     #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.bucket #=> String
     #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.prefix #=> String
+    #   resp.data_ingestion_job_summaries[0].ingestion_input_configuration.s3_input_configuration.key_pattern #=> String
     #   resp.data_ingestion_job_summaries[0].status #=> String, one of "IN_PROGRESS", "SUCCESS", "FAILED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListDataIngestionJobs AWS API Documentation
@@ -1250,6 +1297,77 @@ module Aws::LookoutEquipment
       req.send_request(options)
     end
 
+    # Lists statistics about the data collected for each of the sensors that
+    # have been successfully ingested in the particular dataset. Can also be
+    # used to retreive Sensor Statistics for a previous ingestion job.
+    #
+    # @option params [required, String] :dataset_name
+    #   The name of the dataset associated with the list of Sensor Statistics.
+    #
+    # @option params [String] :ingestion_job_id
+    #   The ingestion job id associated with the list of Sensor Statistics. To
+    #   get sensor statistics for a particular ingestion job id, both dataset
+    #   name and ingestion job id must be submitted as inputs.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of sensors for which to retrieve
+    #   statistics.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token indicating where to continue the listing of
+    #   sensor statistics.
+    #
+    # @return [Types::ListSensorStatisticsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSensorStatisticsResponse#sensor_statistics_summaries #sensor_statistics_summaries} => Array&lt;Types::SensorStatisticsSummary&gt;
+    #   * {Types::ListSensorStatisticsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_sensor_statistics({
+    #     dataset_name: "DatasetName", # required
+    #     ingestion_job_id: "IngestionJobId",
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.sensor_statistics_summaries #=> Array
+    #   resp.sensor_statistics_summaries[0].component_name #=> String
+    #   resp.sensor_statistics_summaries[0].sensor_name #=> String
+    #   resp.sensor_statistics_summaries[0].data_exists #=> Boolean
+    #   resp.sensor_statistics_summaries[0].missing_values.count #=> Integer
+    #   resp.sensor_statistics_summaries[0].missing_values.percentage #=> Float
+    #   resp.sensor_statistics_summaries[0].invalid_values.count #=> Integer
+    #   resp.sensor_statistics_summaries[0].invalid_values.percentage #=> Float
+    #   resp.sensor_statistics_summaries[0].invalid_date_entries.count #=> Integer
+    #   resp.sensor_statistics_summaries[0].invalid_date_entries.percentage #=> Float
+    #   resp.sensor_statistics_summaries[0].duplicate_timestamps.count #=> Integer
+    #   resp.sensor_statistics_summaries[0].duplicate_timestamps.percentage #=> Float
+    #   resp.sensor_statistics_summaries[0].categorical_values.status #=> String, one of "POTENTIAL_ISSUE_DETECTED", "NO_ISSUE_DETECTED"
+    #   resp.sensor_statistics_summaries[0].categorical_values.number_of_category #=> Integer
+    #   resp.sensor_statistics_summaries[0].multiple_operating_modes.status #=> String, one of "POTENTIAL_ISSUE_DETECTED", "NO_ISSUE_DETECTED"
+    #   resp.sensor_statistics_summaries[0].large_timestamp_gaps.status #=> String, one of "POTENTIAL_ISSUE_DETECTED", "NO_ISSUE_DETECTED"
+    #   resp.sensor_statistics_summaries[0].large_timestamp_gaps.number_of_large_timestamp_gaps #=> Integer
+    #   resp.sensor_statistics_summaries[0].large_timestamp_gaps.max_timestamp_gap_in_days #=> Integer
+    #   resp.sensor_statistics_summaries[0].monotonic_values.status #=> String, one of "POTENTIAL_ISSUE_DETECTED", "NO_ISSUE_DETECTED"
+    #   resp.sensor_statistics_summaries[0].monotonic_values.monotonicity #=> String, one of "DECREASING", "INCREASING", "STATIC"
+    #   resp.sensor_statistics_summaries[0].data_start_time #=> Time
+    #   resp.sensor_statistics_summaries[0].data_end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutequipment-2020-12-15/ListSensorStatistics AWS API Documentation
+    #
+    # @overload list_sensor_statistics(params = {})
+    # @param [Hash] params ({})
+    def list_sensor_statistics(params = {}, options = {})
+      req = build_request(:list_sensor_statistics, params)
+      req.send_request(options)
+    end
+
     # Lists all the tags for a specified resource, including key and value.
     #
     # @option params [required, String] :resource_arn
@@ -1315,6 +1433,7 @@ module Aws::LookoutEquipment
     #       s3_input_configuration: { # required
     #         bucket: "S3Bucket", # required
     #         prefix: "S3Prefix",
+    #         key_pattern: "KeyPattern",
     #       },
     #     },
     #     role_arn: "IamRoleArn", # required
@@ -1561,7 +1680,7 @@ module Aws::LookoutEquipment
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutequipment'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

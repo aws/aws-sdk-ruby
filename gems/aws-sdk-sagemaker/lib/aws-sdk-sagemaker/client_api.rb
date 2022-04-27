@@ -99,9 +99,11 @@ module Aws::SageMaker
     AutoMLCandidateStep = Shapes::StructureShape.new(name: 'AutoMLCandidateStep')
     AutoMLCandidates = Shapes::ListShape.new(name: 'AutoMLCandidates')
     AutoMLChannel = Shapes::StructureShape.new(name: 'AutoMLChannel')
+    AutoMLChannelType = Shapes::StringShape.new(name: 'AutoMLChannelType')
     AutoMLContainerDefinition = Shapes::StructureShape.new(name: 'AutoMLContainerDefinition')
     AutoMLContainerDefinitions = Shapes::ListShape.new(name: 'AutoMLContainerDefinitions')
     AutoMLDataSource = Shapes::StructureShape.new(name: 'AutoMLDataSource')
+    AutoMLDataSplitConfig = Shapes::StructureShape.new(name: 'AutoMLDataSplitConfig')
     AutoMLFailureReason = Shapes::StringShape.new(name: 'AutoMLFailureReason')
     AutoMLInputDataConfig = Shapes::ListShape.new(name: 'AutoMLInputDataConfig')
     AutoMLJobArn = Shapes::StringShape.new(name: 'AutoMLJobArn')
@@ -1594,6 +1596,7 @@ module Aws::SageMaker
     UserProfileSortKey = Shapes::StringShape.new(name: 'UserProfileSortKey')
     UserProfileStatus = Shapes::StringShape.new(name: 'UserProfileStatus')
     UserSettings = Shapes::StructureShape.new(name: 'UserSettings')
+    ValidationFraction = Shapes::FloatShape.new(name: 'ValidationFraction')
     VariantName = Shapes::StringShape.new(name: 'VariantName')
     VariantProperty = Shapes::StructureShape.new(name: 'VariantProperty')
     VariantPropertyList = Shapes::ListShape.new(name: 'VariantPropertyList')
@@ -1833,6 +1836,7 @@ module Aws::SageMaker
     AutoMLChannel.add_member(:compression_type, Shapes::ShapeRef.new(shape: CompressionType, location_name: "CompressionType"))
     AutoMLChannel.add_member(:target_attribute_name, Shapes::ShapeRef.new(shape: TargetAttributeName, required: true, location_name: "TargetAttributeName"))
     AutoMLChannel.add_member(:content_type, Shapes::ShapeRef.new(shape: ContentType, location_name: "ContentType"))
+    AutoMLChannel.add_member(:channel_type, Shapes::ShapeRef.new(shape: AutoMLChannelType, location_name: "ChannelType"))
     AutoMLChannel.struct_class = Types::AutoMLChannel
 
     AutoMLContainerDefinition.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, required: true, location_name: "Image"))
@@ -1844,6 +1848,9 @@ module Aws::SageMaker
 
     AutoMLDataSource.add_member(:s3_data_source, Shapes::ShapeRef.new(shape: AutoMLS3DataSource, required: true, location_name: "S3DataSource"))
     AutoMLDataSource.struct_class = Types::AutoMLDataSource
+
+    AutoMLDataSplitConfig.add_member(:validation_fraction, Shapes::ShapeRef.new(shape: ValidationFraction, location_name: "ValidationFraction"))
+    AutoMLDataSplitConfig.struct_class = Types::AutoMLDataSplitConfig
 
     AutoMLInputDataConfig.member = Shapes::ShapeRef.new(shape: AutoMLChannel)
 
@@ -1858,6 +1865,7 @@ module Aws::SageMaker
 
     AutoMLJobConfig.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
     AutoMLJobConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: AutoMLSecurityConfig, location_name: "SecurityConfig"))
+    AutoMLJobConfig.add_member(:data_split_config, Shapes::ShapeRef.new(shape: AutoMLDataSplitConfig, location_name: "DataSplitConfig"))
     AutoMLJobConfig.struct_class = Types::AutoMLJobConfig
 
     AutoMLJobObjective.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, required: true, location_name: "MetricName"))

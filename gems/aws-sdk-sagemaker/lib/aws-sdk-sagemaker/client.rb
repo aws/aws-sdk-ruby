@@ -422,7 +422,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Adds or overwrites one or more tags for the specified Amazon SageMaker
+    # Adds or overwrites one or more tags for the specified SageMaker
     # resource. You can add tags to notebook instances, training jobs,
     # hyperparameter tuning jobs, batch transform jobs, models, labeling
     # jobs, work teams, endpoint configurations, and endpoints.
@@ -678,8 +678,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Create a machine learning algorithm that you can use in Amazon
-    # SageMaker and list in the Amazon Web Services Marketplace.
+    # Create a machine learning algorithm that you can use in SageMaker and
+    # list in the Amazon Web Services Marketplace.
     #
     # @option params [required, String] :algorithm_name
     #   The name of the algorithm.
@@ -723,10 +723,10 @@ module Aws::SageMaker
     #     inference.
     #
     # @option params [Types::AlgorithmValidationSpecification] :validation_specification
-    #   Specifies configurations for one or more training jobs and that Amazon
+    #   Specifies configurations for one or more training jobs and that
     #   SageMaker runs to test the algorithm's training code and, optionally,
-    #   one or more batch transform jobs that Amazon SageMaker runs to test
-    #   the algorithm's inference code.
+    #   one or more batch transform jobs that SageMaker runs to test the
+    #   algorithm's inference code.
     #
     # @option params [Boolean] :certify_for_marketplace
     #   Whether to certify the algorithm so that it can be listed in Amazon
@@ -1210,6 +1210,7 @@ module Aws::SageMaker
     #         compression_type: "None", # accepts None, Gzip
     #         target_attribute_name: "TargetAttributeName", # required
     #         content_type: "ContentType",
+    #         channel_type: "training", # accepts training, validation
     #       },
     #     ],
     #     output_data_config: { # required
@@ -1233,6 +1234,9 @@ module Aws::SageMaker
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnets: ["SubnetId"], # required
     #         },
+    #       },
+    #       data_split_config: {
+    #         validation_fraction: 1.0,
     #       },
     #     },
     #     role_arn: "RoleArn", # required
@@ -1262,13 +1266,13 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a Git repository as a resource in your Amazon SageMaker
-    # account. You can associate the repository with notebook instances so
-    # that you can use Git source control for the notebooks you create. The
-    # Git repository is a resource in your Amazon SageMaker account, so it
-    # can be associated with more than one notebook instance, and it
-    # persists independently from the lifecycle of any notebook instances it
-    # is associated with.
+    # Creates a Git repository as a resource in your SageMaker account. You
+    # can associate the repository with notebook instances so that you can
+    # use Git source control for the notebooks you create. The Git
+    # repository is a resource in your SageMaker account, so it can be
+    # associated with more than one notebook instance, and it persists
+    # independently from the lifecycle of any notebook instances it is
+    # associated with.
     #
     # The repository can be hosted either in [Amazon Web Services
     # CodeCommit][1] or in any other Git repository.
@@ -2032,13 +2036,13 @@ module Aws::SageMaker
     end
 
     # Creates an endpoint using the endpoint configuration specified in the
-    # request. Amazon SageMaker uses the endpoint to provision resources and
-    # deploy models. You create the endpoint configuration with the
+    # request. SageMaker uses the endpoint to provision resources and deploy
+    # models. You create the endpoint configuration with the
     # CreateEndpointConfig API.
     #
-    # Use this API to deploy models using Amazon SageMaker hosting services.
+    # Use this API to deploy models using SageMaker hosting services.
     #
-    # For an example that calls this method when deploying a model to Amazon
+    # For an example that calls this method when deploying a model to
     # SageMaker hosting services, see the [Create Endpoint example
     # notebook.][1]
     #
@@ -2052,9 +2056,9 @@ module Aws::SageMaker
     # The endpoint name must be unique within an Amazon Web Services Region
     # in your Amazon Web Services account.
     #
-    # When it receives the request, Amazon SageMaker creates the endpoint,
-    # launches the resources (ML compute instances), and deploys the
-    # model(s) on them.
+    # When it receives the request, SageMaker creates the endpoint, launches
+    # the resources (ML compute instances), and deploys the model(s) on
+    # them.
     #
     # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
@@ -2070,21 +2074,21 @@ module Aws::SageMaker
     #
     #  </note>
     #
-    # When Amazon SageMaker receives the request, it sets the endpoint
-    # status to `Creating`. After it creates the endpoint, it sets the
-    # status to `InService`. Amazon SageMaker can then process incoming
-    # requests for inferences. To check the status of an endpoint, use the
+    # When SageMaker receives the request, it sets the endpoint status to
+    # `Creating`. After it creates the endpoint, it sets the status to
+    # `InService`. SageMaker can then process incoming requests for
+    # inferences. To check the status of an endpoint, use the
     # DescribeEndpoint API.
     #
     # If any of the models hosted at this endpoint get model data from an
-    # Amazon S3 location, Amazon SageMaker uses Amazon Web Services Security
-    # Token Service to download model artifacts from the S3 path you
-    # provided. Amazon Web Services STS is activated in your IAM user
-    # account by default. If you previously deactivated Amazon Web Services
-    # STS for a region, you need to reactivate Amazon Web Services STS for
-    # that region. For more information, see [Activating and Deactivating
-    # Amazon Web Services STS in an Amazon Web Services Region][3] in the
-    # *Amazon Web Services Identity and Access Management User Guide*.
+    # Amazon S3 location, SageMaker uses Amazon Web Services Security Token
+    # Service to download model artifacts from the S3 path you provided.
+    # Amazon Web Services STS is activated in your IAM user account by
+    # default. If you previously deactivated Amazon Web Services STS for a
+    # region, you need to reactivate Amazon Web Services STS for that
+    # region. For more information, see [Activating and Deactivating Amazon
+    # Web Services STS in an Amazon Web Services Region][3] in the *Amazon
+    # Web Services Identity and Access Management User Guide*.
     #
     # <note markdown="1"> To add the IAM role policies for using this API operation, go to the
     # [IAM console][4], and choose Roles in the left navigation pane. Search
@@ -2202,28 +2206,28 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an endpoint configuration that Amazon SageMaker hosting
-    # services uses to deploy models. In the configuration, you identify one
-    # or more models, created using the `CreateModel` API, to deploy and the
-    # resources that you want Amazon SageMaker to provision. Then you call
-    # the CreateEndpoint API.
+    # Creates an endpoint configuration that SageMaker hosting services uses
+    # to deploy models. In the configuration, you identify one or more
+    # models, created using the `CreateModel` API, to deploy and the
+    # resources that you want SageMaker to provision. Then you call the
+    # CreateEndpoint API.
     #
-    # <note markdown="1"> Use this API if you want to use Amazon SageMaker hosting services to
-    # deploy models into production.
+    # <note markdown="1"> Use this API if you want to use SageMaker hosting services to deploy
+    # models into production.
     #
     #  </note>
     #
     # In the request, you define a `ProductionVariant`, for each model that
     # you want to deploy. Each `ProductionVariant` parameter also describes
-    # the resources that you want Amazon SageMaker to provision. This
-    # includes the number and type of ML compute instances to deploy.
+    # the resources that you want SageMaker to provision. This includes the
+    # number and type of ML compute instances to deploy.
     #
     # If you are hosting multiple models, you also assign a `VariantWeight`
     # to specify how much traffic you want to allocate to each model. For
     # example, suppose that you want to host two models, A and B, and you
-    # assign traffic weight 2 for model A and 1 for model B. Amazon
-    # SageMaker distributes two-thirds of the traffic to Model A, and
-    # one-third to model B.
+    # assign traffic weight 2 for model A and 1 for model B. SageMaker
+    # distributes two-thirds of the traffic to Model A, and one-third to
+    # model B.
     #
     # <note markdown="1"> When you call CreateEndpoint, a load call is made to DynamoDB to
     # verify that your endpoint configuration exists. When you read data
@@ -2265,8 +2269,8 @@ module Aws::SageMaker
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
-    #   Service key that Amazon SageMaker uses to encrypt data on the storage
-    #   volume attached to the ML compute instance that hosts the endpoint.
+    #   Service key that SageMaker uses to encrypt data on the storage volume
+    #   attached to the ML compute instance that hosts the endpoint.
     #
     #   The KmsKeyId can be any of the following formats:
     #
@@ -3133,8 +3137,8 @@ module Aws::SageMaker
 
     # Creates a custom SageMaker image. A SageMaker image is a set of image
     # versions. Each image version represents a container image stored in
-    # Amazon Container Registry (ECR). For more information, see [Bring your
-    # own SageMaker image][1].
+    # Amazon Elastic Container Registry (ECR). For more information, see
+    # [Bring your own SageMaker image][1].
     #
     #
     #
@@ -3190,13 +3194,13 @@ module Aws::SageMaker
     end
 
     # Creates a version of the SageMaker image specified by `ImageName`. The
-    # version represents the Amazon Container Registry (ECR) container image
-    # specified by `BaseImage`.
+    # version represents the Amazon Elastic Container Registry (ECR)
+    # container image specified by `BaseImage`.
     #
     # @option params [required, String] :base_image
     #   The registry path of the container image to use as the starting point
-    #   for this version. The path is an Amazon Container Registry (ECR) URI
-    #   in the following format:
+    #   for this version. The path is an Amazon Elastic Container Registry
+    #   (ECR) URI in the following format:
     #
     #   `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or
     #   [@digest]>`
@@ -3666,34 +3670,30 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a model in Amazon SageMaker. In the request, you name the
-    # model and describe a primary container. For the primary container, you
-    # specify the Docker image that contains inference code, artifacts (from
-    # prior training), and a custom environment map that the inference code
-    # uses when you deploy the model for predictions.
+    # Creates a model in SageMaker. In the request, you name the model and
+    # describe a primary container. For the primary container, you specify
+    # the Docker image that contains inference code, artifacts (from prior
+    # training), and a custom environment map that the inference code uses
+    # when you deploy the model for predictions.
     #
-    # Use this API to create a model if you want to use Amazon SageMaker
-    # hosting services or run a batch transform job.
+    # Use this API to create a model if you want to use SageMaker hosting
+    # services or run a batch transform job.
     #
     # To host your model, you create an endpoint configuration with the
     # `CreateEndpointConfig` API, and then create an endpoint with the
-    # `CreateEndpoint` API. Amazon SageMaker then deploys all of the
-    # containers that you defined for the model in the hosting environment.
+    # `CreateEndpoint` API. SageMaker then deploys all of the containers
+    # that you defined for the model in the hosting environment.
     #
-    # For an example that calls this method when deploying a model to Amazon
+    # For an example that calls this method when deploying a model to
     # SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
     # Hosting Services (Amazon Web Services SDK for Python (Boto 3)).][1]
     #
     # To run a batch transform using your model, you start a job with the
-    # `CreateTransformJob` API. Amazon SageMaker uses your model and your
-    # dataset to get inferences which are then saved to a specified S3
-    # location.
+    # `CreateTransformJob` API. SageMaker uses your model and your dataset
+    # to get inferences which are then saved to a specified S3 location.
     #
-    # In the `CreateModel` request, you must define a container with the
-    # `PrimaryContainer` parameter.
-    #
-    # In the request, you also provide an IAM role that Amazon SageMaker can
-    # assume to access model artifacts and docker image for deployment on ML
+    # In the request, you also provide an IAM role that SageMaker can assume
+    # to access model artifacts and docker image for deployment on ML
     # compute hosting instances or for batch transform jobs. In addition,
     # you also use the IAM role to manage permissions the inference code
     # needs. For example, if the inference code access any other Amazon Web
@@ -3719,14 +3719,14 @@ module Aws::SageMaker
     #   called.
     #
     # @option params [required, String] :execution_role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access model artifacts and docker image for deployment
-    #   on ML compute instances or for batch transform jobs. Deploying on ML
-    #   compute instances is part of model hosting. For more information, see
-    #   [Amazon SageMaker Roles][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access model artifacts and docker image for deployment on ML
+    #   compute instances or for batch transform jobs. Deploying on ML compute
+    #   instances is part of model hosting. For more information, see
+    #   [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API must
+    #   have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -4105,11 +4105,10 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates a model package that you can use to create Amazon SageMaker
-    # models or list on Amazon Web Services Marketplace, or a versioned
-    # model that is part of a model group. Buyers can subscribe to model
-    # packages listed on Amazon Web Services Marketplace to create models in
-    # Amazon SageMaker.
+    # Creates a model package that you can use to create SageMaker models or
+    # list on Amazon Web Services Marketplace, or a versioned model that is
+    # part of a model group. Buyers can subscribe to model packages listed
+    # on Amazon Web Services Marketplace to create models in SageMaker.
     #
     # To create a model package by specifying a Docker container that
     # contains your inference code and the Amazon S3 location of your model
@@ -4158,8 +4157,8 @@ module Aws::SageMaker
     #     for inference.
     #
     # @option params [Types::ModelPackageValidationSpecification] :validation_specification
-    #   Specifies configurations for one or more transform jobs that Amazon
-    #   SageMaker runs to test the model package.
+    #   Specifies configurations for one or more transform jobs that SageMaker
+    #   runs to test the model package.
     #
     # @option params [Types::SourceAlgorithmSpecification] :source_algorithm_specification
     #   Details about the algorithm that was used to create the model package.
@@ -4797,46 +4796,45 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Creates an Amazon SageMaker notebook instance. A notebook instance is
-    # a machine learning (ML) compute instance running on a Jupyter
-    # notebook.
+    # Creates an SageMaker notebook instance. A notebook instance is a
+    # machine learning (ML) compute instance running on a Jupyter notebook.
     #
     # In a `CreateNotebookInstance` request, specify the type of ML compute
-    # instance that you want to run. Amazon SageMaker launches the instance,
+    # instance that you want to run. SageMaker launches the instance,
     # installs common libraries that you can use to explore datasets for
     # model training, and attaches an ML storage volume to the notebook
     # instance.
     #
-    # Amazon SageMaker also provides a set of example notebooks. Each
-    # notebook demonstrates how to use Amazon SageMaker with a specific
-    # algorithm or with a machine learning framework.
+    # SageMaker also provides a set of example notebooks. Each notebook
+    # demonstrates how to use SageMaker with a specific algorithm or with a
+    # machine learning framework.
     #
-    # After receiving the request, Amazon SageMaker does the following:
+    # After receiving the request, SageMaker does the following:
     #
-    # 1.  Creates a network interface in the Amazon SageMaker VPC.
+    # 1.  Creates a network interface in the SageMaker VPC.
     #
-    # 2.  (Option) If you specified `SubnetId`, Amazon SageMaker creates a
-    #     network interface in your own VPC, which is inferred from the
-    #     subnet ID that you provide in the input. When creating this
-    #     network interface, Amazon SageMaker attaches the security group
-    #     that you specified in the request to the network interface that it
-    #     creates in your VPC.
+    # 2.  (Option) If you specified `SubnetId`, SageMaker creates a network
+    #     interface in your own VPC, which is inferred from the subnet ID
+    #     that you provide in the input. When creating this network
+    #     interface, SageMaker attaches the security group that you
+    #     specified in the request to the network interface that it creates
+    #     in your VPC.
     #
     # 3.  Launches an EC2 instance of the type specified in the request in
-    #     the Amazon SageMaker VPC. If you specified `SubnetId` of your VPC,
-    #     Amazon SageMaker specifies both network interfaces when launching
-    #     this instance. This enables inbound traffic from your own VPC to
-    #     the notebook instance, assuming that the security groups allow it.
+    #     the SageMaker VPC. If you specified `SubnetId` of your VPC,
+    #     SageMaker specifies both network interfaces when launching this
+    #     instance. This enables inbound traffic from your own VPC to the
+    #     notebook instance, assuming that the security groups allow it.
     #
-    # After creating the notebook instance, Amazon SageMaker returns its
-    # Amazon Resource Name (ARN). You can't change the name of a notebook
-    # instance after you create it.
+    # After creating the notebook instance, SageMaker returns its Amazon
+    # Resource Name (ARN). You can't change the name of a notebook instance
+    # after you create it.
     #
-    # After Amazon SageMaker creates the notebook instance, you can connect
-    # to the Jupyter server and work in Jupyter notebooks. For example, you
-    # can write code to explore a dataset that you can use for model
-    # training, train a model, host models by creating Amazon SageMaker
-    # endpoints, and validate hosted models.
+    # After SageMaker creates the notebook instance, you can connect to the
+    # Jupyter server and work in Jupyter notebooks. For example, you can
+    # write code to explore a dataset that you can use for model training,
+    # train a model, host models by creating SageMaker endpoints, and
+    # validate hosted models.
     #
     # For more information, see [How It Works][1].
     #
@@ -4860,15 +4858,14 @@ module Aws::SageMaker
     #
     # @option params [required, String] :role_arn
     #   When you send any requests to Amazon Web Services resources from the
-    #   notebook instance, Amazon SageMaker assumes this role to perform tasks
-    #   on your behalf. You must grant this role necessary permissions so
-    #   Amazon SageMaker can perform these tasks. The policy must allow the
-    #   Amazon SageMaker service principal (sagemaker.amazonaws.com)
-    #   permissions to assume this role. For more information, see [Amazon
-    #   SageMaker Roles][1].
+    #   notebook instance, SageMaker assumes this role to perform tasks on
+    #   your behalf. You must grant this role necessary permissions so
+    #   SageMaker can perform these tasks. The policy must allow the SageMaker
+    #   service principal (sagemaker.amazonaws.com) permissions to assume this
+    #   role. For more information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API must
+    #   have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -4878,10 +4875,10 @@ module Aws::SageMaker
     #
     # @option params [String] :kms_key_id
     #   The Amazon Resource Name (ARN) of a Amazon Web Services Key Management
-    #   Service key that Amazon SageMaker uses to encrypt data on the storage
-    #   volume attached to your notebook instance. The KMS key you provide
-    #   must be enabled. For information, see [Enabling and Disabling Keys][1]
-    #   in the *Amazon Web Services Key Management Service Developer Guide*.
+    #   Service key that SageMaker uses to encrypt data on the storage volume
+    #   attached to your notebook instance. The KMS key you provide must be
+    #   enabled. For information, see [Enabling and Disabling Keys][1] in the
+    #   *Amazon Web Services Key Management Service Developer Guide*.
     #
     #
     #
@@ -4907,11 +4904,11 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
     #
     # @option params [String] :direct_internet_access
-    #   Sets whether Amazon SageMaker provides internet access to the notebook
+    #   Sets whether SageMaker provides internet access to the notebook
     #   instance. If you set this to `Disabled` this notebook instance is able
     #   to access resources only in your VPC, and is not be able to connect to
-    #   Amazon SageMaker training and endpoint services unless you configure a
-    #   NAT Gateway in your VPC.
+    #   SageMaker training and endpoint services unless you configure a NAT
+    #   Gateway in your VPC.
     #
     #   For more information, see [Notebook Instances Are Internet-Enabled by
     #   Default][1]. You can set the value of this parameter to `Disabled`
@@ -4942,8 +4939,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -4957,8 +4953,7 @@ module Aws::SageMaker
     #   [Amazon Web Services CodeCommit][1] or in any other Git repository.
     #   These repositories are cloned at the same level as the default
     #   repository of your notebook instance. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -5242,10 +5237,10 @@ module Aws::SageMaker
     end
 
     # Returns a URL that you can use to connect to the Jupyter server from a
-    # notebook instance. In the Amazon SageMaker console, when you choose
-    # `Open` next to a notebook instance, Amazon SageMaker opens a new tab
-    # showing the Jupyter server home page from the notebook instance. The
-    # console uses this API to get the URL and show the page.
+    # notebook instance. In the SageMaker console, when you choose `Open`
+    # next to a notebook instance, SageMaker opens a new tab showing the
+    # Jupyter server home page from the notebook instance. The console uses
+    # this API to get the URL and show the page.
     #
     # The IAM role or user used to call this API defines the permissions to
     # access the notebook instance. Once the presigned URL is created, no
@@ -5601,15 +5596,14 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Starts a model training job. After training completes, Amazon
-    # SageMaker saves the resulting model artifacts to an Amazon S3 location
-    # that you specify.
+    # Starts a model training job. After training completes, SageMaker saves
+    # the resulting model artifacts to an Amazon S3 location that you
+    # specify.
     #
-    # If you choose to host your model using Amazon SageMaker hosting
-    # services, you can use the resulting model artifacts as part of the
-    # model. You can also use the artifacts in a machine learning service
-    # other than Amazon SageMaker, provided that you know how to use them
-    # for inference.
+    # If you choose to host your model using SageMaker hosting services, you
+    # can use the resulting model artifacts as part of the model. You can
+    # also use the artifacts in a machine learning service other than
+    # SageMaker, provided that you know how to use them for inference.
     #
     # In the request body, you provide the following:
     #
@@ -5619,13 +5613,13 @@ module Aws::SageMaker
     #   enable the estimation of model parameters during training.
     #   Hyperparameters can be tuned to optimize this learning process. For
     #   a list of hyperparameters for each training algorithm provided by
-    #   Amazon SageMaker, see [Algorithms][1].
+    #   SageMaker, see [Algorithms][1].
     #
     # * `InputDataConfig` - Describes the training dataset and the Amazon
     #   S3, EFS, or FSx location where it is stored.
     #
     # * `OutputDataConfig` - Identifies the Amazon S3 bucket where you want
-    #   Amazon SageMaker to save the results of model training.
+    #   SageMaker to save the results of model training.
     #
     # * `ResourceConfig` - Identifies the resources, ML compute instances,
     #   and ML storage volumes to deploy for model training. In distributed
@@ -5635,10 +5629,10 @@ module Aws::SageMaker
     #   learning models by up to 80% by using Amazon EC2 Spot instances. For
     #   more information, see [Managed Spot Training][2].
     #
-    # * `RoleArn` - The Amazon Resource Name (ARN) that Amazon SageMaker
-    #   assumes to perform tasks on your behalf during model training. You
-    #   must grant this role the necessary permissions so that Amazon
-    #   SageMaker can successfully complete model training.
+    # * `RoleArn` - The Amazon Resource Name (ARN) that SageMaker assumes to
+    #   perform tasks on your behalf during model training. You must grant
+    #   this role the necessary permissions so that SageMaker can
+    #   successfully complete model training.
     #
     # * `StoppingCondition` - To help cap training costs, use
     #   `MaxRuntimeInSeconds` to set a time limit for training. Use
@@ -5651,7 +5645,7 @@ module Aws::SageMaker
     # * `RetryStrategy` - The number of times to retry the job when the job
     #   fails due to an `InternalServerError`.
     #
-    # For more information about Amazon SageMaker, see [How It Works][3].
+    # For more information about SageMaker, see [How It Works][3].
     #
     #
     #
@@ -5666,7 +5660,7 @@ module Aws::SageMaker
     # @option params [Hash<String,String>] :hyper_parameters
     #   Algorithm-specific parameters that influence the quality of the model.
     #   You set hyperparameters before you start the learning process. For a
-    #   list of hyperparameters for each training algorithm provided by Amazon
+    #   list of hyperparameters for each training algorithm provided by
     #   SageMaker, see [Algorithms][1].
     #
     #   You can specify a maximum of 100 hyperparameters. Each hyperparameter
@@ -5680,9 +5674,9 @@ module Aws::SageMaker
     # @option params [required, Types::AlgorithmSpecification] :algorithm_specification
     #   The registry path of the Docker image that contains the training
     #   algorithm and algorithm-specific metadata, including the input mode.
-    #   For more information about algorithms provided by Amazon SageMaker,
-    #   see [Algorithms][1]. For information about providing your own
-    #   algorithms, see [Using Your Own Algorithms with Amazon SageMaker][2].
+    #   For more information about algorithms provided by SageMaker, see
+    #   [Algorithms][1]. For information about providing your own algorithms,
+    #   see [Using Your Own Algorithms with Amazon SageMaker][2].
     #
     #
     #
@@ -5690,18 +5684,18 @@ module Aws::SageMaker
     #   [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms.html
     #
     # @option params [required, String] :role_arn
-    #   The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker
-    #   can assume to perform tasks on your behalf.
+    #   The Amazon Resource Name (ARN) of an IAM role that SageMaker can
+    #   assume to perform tasks on your behalf.
     #
-    #   During model training, Amazon SageMaker needs your permission to read
-    #   input data from an S3 bucket, download a Docker image that contains
-    #   training code, write model artifacts to an S3 bucket, write logs to
-    #   Amazon CloudWatch Logs, and publish metrics to Amazon CloudWatch. You
-    #   grant permissions for all of these tasks to an IAM role. For more
-    #   information, see [Amazon SageMaker Roles][1].
+    #   During model training, SageMaker needs your permission to read input
+    #   data from an S3 bucket, download a Docker image that contains training
+    #   code, write model artifacts to an S3 bucket, write logs to Amazon
+    #   CloudWatch Logs, and publish metrics to Amazon CloudWatch. You grant
+    #   permissions for all of these tasks to an IAM role. For more
+    #   information, see [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API must
+    #   have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -5721,16 +5715,15 @@ module Aws::SageMaker
     #   type, compression method, and whether the data is wrapped in RecordIO
     #   format.
     #
-    #   Depending on the input mode that the algorithm supports, Amazon
-    #   SageMaker either copies input data files from an S3 bucket to a local
-    #   directory in the Docker container, or makes it available as input
-    #   streams. For example, if you specify an EFS location, input data files
-    #   will be made available as input streams. They do not need to be
-    #   downloaded.
+    #   Depending on the input mode that the algorithm supports, SageMaker
+    #   either copies input data files from an S3 bucket to a local directory
+    #   in the Docker container, or makes it available as input streams. For
+    #   example, if you specify an EFS location, input data files are
+    #   available as input streams. They do not need to be downloaded.
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
     #   Specifies the path to the S3 location where you want to store model
-    #   artifacts. Amazon SageMaker creates subfolders for the artifacts.
+    #   artifacts. SageMaker creates subfolders for the artifacts.
     #
     # @option params [required, Types::ResourceConfig] :resource_config
     #   The resources, including the ML compute instances and ML storage
@@ -5738,10 +5731,10 @@ module Aws::SageMaker
     #
     #   ML storage volumes store model artifacts and incremental states.
     #   Training algorithms might also use ML storage volumes for scratch
-    #   space. If you want Amazon SageMaker to use the ML storage volume to
-    #   store the training data, choose `File` as the `TrainingInputMode` in
-    #   the algorithm specification. For distributed training algorithms,
-    #   specify an instance count greater than 1.
+    #   space. If you want SageMaker to use the ML storage volume to store the
+    #   training data, choose `File` as the `TrainingInputMode` in the
+    #   algorithm specification. For distributed training algorithms, specify
+    #   an instance count greater than 1.
     #
     # @option params [Types::VpcConfig] :vpc_config
     #   A VpcConfig object that specifies the VPC that you want your training
@@ -5756,13 +5749,13 @@ module Aws::SageMaker
     # @option params [required, Types::StoppingCondition] :stopping_condition
     #   Specifies a limit to how long a model training job can run. It also
     #   specifies how long a managed Spot training job has to complete. When
-    #   the job reaches the time limit, Amazon SageMaker ends the training
-    #   job. Use this API to cap model training costs.
+    #   the job reaches the time limit, SageMaker ends the training job. Use
+    #   this API to cap model training costs.
     #
-    #   To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-    #   signal, which delays job termination for 120 seconds. Algorithms can
-    #   use this 120-second window to save the model artifacts, so the results
-    #   of training are not lost.
+    #   To stop a job, SageMaker sends the algorithm the `SIGTERM` signal,
+    #   which delays job termination for 120 seconds. Algorithms can use this
+    #   120-second window to save the model artifacts, so the results of
+    #   training are not lost.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your
@@ -5778,9 +5771,9 @@ module Aws::SageMaker
     #   Isolates the training container. No inbound or outbound network calls
     #   can be made, except for calls between peers within a training cluster
     #   for distributed training. If you enable network isolation for training
-    #   jobs that are configured to use a VPC, Amazon SageMaker downloads and
-    #   uploads customer data and model artifacts through the specified VPC,
-    #   but the training container does not have network access.
+    #   jobs that are configured to use a VPC, SageMaker downloads and uploads
+    #   customer data and model artifacts through the specified VPC, but the
+    #   training container does not have network access.
     #
     # @option params [Boolean] :enable_inter_container_traffic_encryption
     #   To encrypt all communications between ML compute instances in
@@ -6086,6 +6079,11 @@ module Aws::SageMaker
     #   of your dataset by the number of records. To ensure that the records
     #   fit within the maximum payload size, we recommend using a slightly
     #   larger value. The default value is `6` MB.
+    #
+    #   The value of `MaxPayloadInMB` cannot be greater than 100 MB. If you
+    #   specify the `MaxConcurrentTransforms` parameter, the value of
+    #   `(MaxConcurrentTransforms * MaxPayloadInMB)` also cannot exceed 100
+    #   MB.
     #
     #   For cases where the payload might be arbitrarily large and is
     #   transmitted using HTTP chunked encoding, set the value to `0`. This
@@ -7052,12 +7050,18 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes an endpoint. Amazon SageMaker frees up all of the resources
-    # that were deployed when the endpoint was created.
+    # Deletes an endpoint. SageMaker frees up all of the resources that were
+    # deployed when the endpoint was created.
     #
-    # Amazon SageMaker retires any custom KMS key grants associated with the
+    # SageMaker retires any custom KMS key grants associated with the
     # endpoint, meaning you don't need to use the [RevokeGrant][1] API
     # call.
+    #
+    # When you delete your endpoint, SageMaker asynchronously deletes
+    # associated endpoint resources such as KMS key grants. You might still
+    # see these resources in your account for a few minutes after deleting
+    # your endpoint. Do not delete or revoke the permissions for your `
+    # ExecutionRoleArn `, otherwise SageMaker cannot delete these resources.
     #
     #
     #
@@ -7275,9 +7279,9 @@ module Aws::SageMaker
     end
 
     # Deletes a model. The `DeleteModel` API deletes only the model entry
-    # that was created in Amazon SageMaker when you called the `CreateModel`
-    # API. It does not delete model artifacts, inference code, or the IAM
-    # role that you specified when creating the model.
+    # that was created in SageMaker when you called the `CreateModel` API.
+    # It does not delete model artifacts, inference code, or the IAM role
+    # that you specified when creating the model.
     #
     # @option params [required, String] :model_name
     #   The name of the model to delete.
@@ -7345,10 +7349,10 @@ module Aws::SageMaker
 
     # Deletes a model package.
     #
-    # A model package is used to create Amazon SageMaker models or list on
-    # Amazon Web Services Marketplace. Buyers can subscribe to model
-    # packages listed on Amazon Web Services Marketplace to create models in
-    # Amazon SageMaker.
+    # A model package is used to create SageMaker models or list on Amazon
+    # Web Services Marketplace. Buyers can subscribe to model packages
+    # listed on Amazon Web Services Marketplace to create models in
+    # SageMaker.
     #
     # @option params [required, String] :model_package_name
     #   The name or Amazon Resource Name (ARN) of the model package to delete.
@@ -7463,16 +7467,16 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes an Amazon SageMaker notebook instance. Before you can delete a
+    # Deletes an SageMaker notebook instance. Before you can delete a
     # notebook instance, you must call the `StopNotebookInstance` API.
     #
-    # When you delete a notebook instance, you lose all of your data. Amazon
+    # When you delete a notebook instance, you lose all of your data.
     # SageMaker removes the ML compute instance, and deletes the ML storage
     # volume and the network interface associated with the notebook
     # instance.
     #
     # @option params [required, String] :notebook_instance_name
-    #   The name of the Amazon SageMaker notebook instance to delete.
+    #   The name of the SageMaker notebook instance to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -7600,7 +7604,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Deletes the specified tags from an Amazon SageMaker resource.
+    # Deletes the specified tags from an SageMaker resource.
     #
     # To list a resource's tags, use the `ListTags` API.
     #
@@ -8241,6 +8245,7 @@ module Aws::SageMaker
     #   resp.input_data_config[0].compression_type #=> String, one of "None", "Gzip"
     #   resp.input_data_config[0].target_attribute_name #=> String
     #   resp.input_data_config[0].content_type #=> String
+    #   resp.input_data_config[0].channel_type #=> String, one of "training", "validation"
     #   resp.output_data_config.kms_key_id #=> String
     #   resp.output_data_config.s3_output_path #=> String
     #   resp.role_arn #=> String
@@ -8255,6 +8260,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_config.security_config.vpc_config.security_group_ids[0] #=> String
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets #=> Array
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets[0] #=> String
+    #   resp.auto_ml_job_config.data_split_config.validation_fraction #=> Float
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -10219,7 +10225,7 @@ module Aws::SageMaker
     # Gets a description for the specified model group.
     #
     # @option params [required, String] :model_package_group_name
-    #   The name of the model group to describe.
+    #   The name of gthe model group to describe.
     #
     # @return [Types::DescribeModelPackageGroupOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -14751,8 +14757,8 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns a list of the Amazon SageMaker notebook instances in the
-    # requester's account in an Amazon Web Services Region.
+    # Returns a list of the SageMaker notebook instances in the requester's
+    # account in an Amazon Web Services Region.
     #
     # @option params [String] :next_token
     #   If the previous call to the `ListNotebookInstances` is truncated, the
@@ -15423,7 +15429,7 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Returns the tags for the specified Amazon SageMaker resource.
+    # Returns the tags for the specified SageMaker resource.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the resource whose tags you want to
@@ -15431,8 +15437,8 @@ module Aws::SageMaker
     #
     # @option params [String] :next_token
     #   If the response to the previous `ListTags` request is truncated,
-    #   Amazon SageMaker returns this token. To retrieve the next set of tags,
-    #   use it in the subsequent request.
+    #   SageMaker returns this token. To retrieve the next set of tags, use it
+    #   in the subsequent request.
     #
     # @option params [Integer] :max_results
     #   Maximum number of tags to return.
@@ -16157,11 +16163,12 @@ module Aws::SageMaker
     #   starting point for your lineage query.
     #
     # @option params [String] :direction
-    #   Associations between lineage entities are directed. This parameter
-    #   determines the direction from the StartArn(s) the query will look.
+    #   Associations between lineage entities have a direction. This parameter
+    #   determines the direction from the StartArn(s) that the query
+    #   traverses.
     #
     # @option params [Boolean] :include_edges
-    #   Setting this value to `True` will retrieve not only the entities of
+    #   Setting this value to `True` retrieves not only the entities of
     #   interest but also the [Associations][1] and lineage entities on the
     #   path. Set to `False` to only return lineage entities that match your
     #   query.
@@ -16188,8 +16195,8 @@ module Aws::SageMaker
     #
     # @option params [Integer] :max_depth
     #   The maximum depth in lineage relationships from the `StartArns` that
-    #   will be traversed. Depth is a measure of the number of `Associations`
-    #   from the `StartArn` entity to the matched results.
+    #   are traversed. Depth is a measure of the number of `Associations` from
+    #   the `StartArn` entity to the matched results.
     #
     # @option params [Integer] :max_results
     #   Limits the number of vertices in the results. Use the `NextToken` in a
@@ -17365,9 +17372,9 @@ module Aws::SageMaker
 
     # Launches an ML compute instance with the latest version of the
     # libraries and attaches your ML storage volume. After configuring the
-    # notebook instance, Amazon SageMaker sets the notebook instance status
-    # to `InService`. A notebook instance's status must be `InService`
-    # before you can connect to your Jupyter notebook.
+    # notebook instance, SageMaker sets the notebook instance status to
+    # `InService`. A notebook instance's status must be `InService` before
+    # you can connect to your Jupyter notebook.
     #
     # @option params [required, String] :notebook_instance_name
     #   The name of the notebook instance to start.
@@ -17623,10 +17630,9 @@ module Aws::SageMaker
     end
 
     # Terminates the ML compute instance. Before terminating the instance,
-    # Amazon SageMaker disconnects the ML storage volume from it. Amazon
-    # SageMaker preserves the ML storage volume. Amazon SageMaker stops
-    # charging you for the ML compute instance when you call
-    # `StopNotebookInstance`.
+    # SageMaker disconnects the ML storage volume from it. SageMaker
+    # preserves the ML storage volume. SageMaker stops charging you for the
+    # ML compute instance when you call `StopNotebookInstance`.
     #
     # To access data on the ML storage volume for a notebook instance that
     # has been terminated, call the `StartNotebookInstance` API.
@@ -17740,14 +17746,14 @@ module Aws::SageMaker
       req.send_request(options)
     end
 
-    # Stops a training job. To stop a job, Amazon SageMaker sends the
-    # algorithm the `SIGTERM` signal, which delays job termination for 120
-    # seconds. Algorithms might use this 120-second window to save the model
+    # Stops a training job. To stop a job, SageMaker sends the algorithm the
+    # `SIGTERM` signal, which delays job termination for 120 seconds.
+    # Algorithms might use this 120-second window to save the model
     # artifacts, so the results of the training is not lost.
     #
-    # When it receives a `StopTrainingJob` request, Amazon SageMaker changes
-    # the status of the job to `Stopping`. After Amazon SageMaker stops the
-    # job, it sets the status to `Stopped`.
+    # When it receives a `StopTrainingJob` request, SageMaker changes the
+    # status of the job to `Stopping`. After SageMaker stops the job, it
+    # sets the status to `Stopped`.
     #
     # @option params [required, String] :training_job_name
     #   The name of the training job to stop.
@@ -18189,9 +18195,9 @@ module Aws::SageMaker
     # for the endpoint using the previous `EndpointConfig` (there is no
     # availability loss).
     #
-    # When Amazon SageMaker receives the request, it sets the endpoint
-    # status to `Updating`. After updating the endpoint, it sets the status
-    # to `InService`. To check the status of an endpoint, use the
+    # When SageMaker receives the request, it sets the endpoint status to
+    # `Updating`. After updating the endpoint, it sets the status to
+    # `InService`. To check the status of an endpoint, use the
     # DescribeEndpoint API.
     #
     # <note markdown="1"> You must not delete an `EndpointConfig` in use by an endpoint that is
@@ -18299,13 +18305,13 @@ module Aws::SageMaker
 
     # Updates variant weight of one or more variants associated with an
     # existing endpoint, or capacity of one variant associated with an
-    # existing endpoint. When it receives the request, Amazon SageMaker sets
-    # the endpoint status to `Updating`. After updating the endpoint, it
-    # sets the status to `InService`. To check the status of an endpoint,
-    # use the DescribeEndpoint API.
+    # existing endpoint. When it receives the request, SageMaker sets the
+    # endpoint status to `Updating`. After updating the endpoint, it sets
+    # the status to `InService`. To check the status of an endpoint, use the
+    # DescribeEndpoint API.
     #
     # @option params [required, String] :endpoint_name
-    #   The name of an existing Amazon SageMaker endpoint.
+    #   The name of an existing SageMaker endpoint.
     #
     # @option params [required, Array<Types::DesiredWeightAndCapacity>] :desired_weights_and_capacities
     #   An object that provides new capacity and weight values for a variant.
@@ -18630,12 +18636,12 @@ module Aws::SageMaker
     #   The Amazon ML compute instance type.
     #
     # @option params [String] :role_arn
-    #   The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker
-    #   can assume to access the notebook instance. For more information, see
-    #   [Amazon SageMaker Roles][1].
+    #   The Amazon Resource Name (ARN) of the IAM role that SageMaker can
+    #   assume to access the notebook instance. For more information, see
+    #   [SageMaker Roles][1].
     #
-    #   <note markdown="1"> To be able to pass this role to Amazon SageMaker, the caller of this
-    #   API must have the `iam:PassRole` permission.
+    #   <note markdown="1"> To be able to pass this role to SageMaker, the caller of this API must
+    #   have the `iam:PassRole` permission.
     #
     #    </note>
     #
@@ -18662,11 +18668,11 @@ module Aws::SageMaker
     # @option params [Integer] :volume_size_in_gb
     #   The size, in GB, of the ML storage volume to attach to the notebook
     #   instance. The default value is 5 GB. ML storage volumes are encrypted,
-    #   so Amazon SageMaker can't determine the amount of available free
-    #   space on the volume. Because of this, you can increase the volume size
-    #   when you update a notebook instance, but you can't decrease the
-    #   volume size. If you want to decrease the size of the ML storage volume
-    #   in use, create a new notebook instance with the desired size.
+    #   so SageMaker can't determine the amount of available free space on
+    #   the volume. Because of this, you can increase the volume size when you
+    #   update a notebook instance, but you can't decrease the volume size.
+    #   If you want to decrease the size of the ML storage volume in use,
+    #   create a new notebook instance with the desired size.
     #
     # @option params [String] :default_code_repository
     #   The Git repository to associate with the notebook instance as its
@@ -18675,8 +18681,7 @@ module Aws::SageMaker
     #   repository in [Amazon Web Services CodeCommit][1] or in any other Git
     #   repository. When you open a notebook instance, it opens in the
     #   directory that contains this repository. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -18690,8 +18695,7 @@ module Aws::SageMaker
     #   [Amazon Web Services CodeCommit][1] or in any other Git repository.
     #   These repositories are cloned at the same level as the default
     #   repository of your notebook instance. For more information, see
-    #   [Associating Git Repositories with Amazon SageMaker Notebook
-    #   Instances][2].
+    #   [Associating Git Repositories with SageMaker Notebook Instances][2].
     #
     #
     #
@@ -19464,7 +19468,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.122.0'
+      context[:gem_version] = '1.123.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
