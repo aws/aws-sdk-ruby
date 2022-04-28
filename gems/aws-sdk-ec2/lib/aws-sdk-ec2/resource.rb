@@ -631,6 +631,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     key_format: "pem", # accepts pem, ppk
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :key_name
@@ -649,6 +650,10 @@ module Aws::EC2
     #   Default: `rsa`
     # @option options [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new key pair.
+    # @option options [String] :key_format
+    #   The format of the key pair.
+    #
+    #   Default: `pem`
     # @return [KeyPair]
     def create_key_pair(options = {})
       resp = @client.create_key_pair(options)
@@ -2528,6 +2533,7 @@ module Aws::EC2
     #     key_names: ["KeyPairName"],
     #     key_pair_ids: ["KeyPairId"],
     #     dry_run: false,
+    #     include_public_key: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::Filter>] :filters
@@ -2559,6 +2565,10 @@ module Aws::EC2
     #   without actually making the request, and provides an error response.
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    # @option options [Boolean] :include_public_key
+    #   If `true`, the public key material is included in the response.
+    #
+    #   Default: `false`
     # @return [KeyPairInfo::Collection]
     def key_pairs(options = {})
       batches = Enumerator.new do |y|

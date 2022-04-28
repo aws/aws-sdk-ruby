@@ -253,6 +253,7 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] user_agent
+    #   The agent through which the API request was made.
     #   @return [String]
     #
     # @!attribute [rw] remote_ip_details
@@ -773,6 +774,8 @@ module Aws::GuardDuty
     #   * service.action.awsApiCallAction.callerType
     #
     #   * service.action.awsApiCallAction.errorCode
+    #
+    #   * service.action.awsApiCallAction.userAgent
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #

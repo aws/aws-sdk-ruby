@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-04-28)
+------------------
+
+* Feature - This release enables Braket Hybrid Jobs with Embedded Simulators to have multiple instances.
+
 1.18.0 (2022-02-24)
 ------------------
 

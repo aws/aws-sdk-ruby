@@ -381,7 +381,7 @@ module Aws::NetworkFirewall
     #         dry_run: false,
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #         },
     #       }
     #
@@ -489,7 +489,7 @@ module Aws::NetworkFirewall
     #         ],
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #         },
     #       }
     #
@@ -708,7 +708,11 @@ module Aws::NetworkFirewall
     #         dry_run: false,
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #         },
+    #         source_metadata: {
+    #           source_arn: "ResourceArn",
+    #           source_update_token: "UpdateToken",
     #         },
     #       }
     #
@@ -828,6 +832,12 @@ module Aws::NetworkFirewall
     #   group resources.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] source_metadata
+    #   A complex type that contains metadata about the rule group that your
+    #   own rule group is copied from. You can use the metadata to keep
+    #   track of updates made to the originating rule group.
+    #   @return [Types::SourceMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroupRequest AWS API Documentation
     #
     class CreateRuleGroupRequest < Struct.new(
@@ -839,7 +849,8 @@ module Aws::NetworkFirewall
       :capacity,
       :tags,
       :dry_run,
-      :encryption_configuration)
+      :encryption_configuration,
+      :source_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1414,6 +1425,10 @@ module Aws::NetworkFirewall
     #   group. You can only use these for stateful rule groups.
     #   @return [Types::StatefulRuleOptions]
     #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the rule group was changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadataResponse AWS API Documentation
     #
     class DescribeRuleGroupMetadataResponse < Struct.new(
@@ -1422,7 +1437,8 @@ module Aws::NetworkFirewall
       :description,
       :type,
       :capacity,
-      :stateful_rule_options)
+      :stateful_rule_options,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1674,7 +1690,7 @@ module Aws::NetworkFirewall
     #
     #       {
     #         key_id: "KeyId",
-    #         type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #         type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #       }
     #
     # @!attribute [rw] key_id
@@ -2044,6 +2060,10 @@ module Aws::NetworkFirewall
     #   configuration settings for your firewall policy.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the firewall policy was changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/FirewallPolicyResponse AWS API Documentation
     #
     class FirewallPolicyResponse < Struct.new(
@@ -2056,7 +2076,8 @@ module Aws::NetworkFirewall
       :consumed_stateless_rule_capacity,
       :consumed_stateful_rule_capacity,
       :number_of_associations,
-      :encryption_configuration)
+      :encryption_configuration,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2463,6 +2484,8 @@ module Aws::NetworkFirewall
     #         next_token: "PaginationToken",
     #         max_results: 1,
     #         scope: "MANAGED", # accepts MANAGED, ACCOUNT
+    #         managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS
+    #         type: "STATELESS", # accepts STATELESS, STATEFUL
     #       }
     #
     # @!attribute [rw] next_token
@@ -2486,12 +2509,25 @@ module Aws::NetworkFirewall
     #   setting of `MANAGED` returns all available managed rule groups.
     #   @return [String]
     #
+    # @!attribute [rw] managed_type
+    #   Indicates the general category of the Amazon Web Services managed
+    #   rule group.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates whether the rule group is stateless or stateful. If the
+    #   rule group is stateless, it contains stateless rules. If it is
+    #   stateful, it contains stateful rules.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/ListRuleGroupsRequest AWS API Documentation
     #
     class ListRuleGroupsRequest < Struct.new(
       :next_token,
       :max_results,
-      :scope)
+      :scope,
+      :managed_type,
+      :type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3302,6 +3338,29 @@ module Aws::NetworkFirewall
     #   configuration settings for your rule group.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] source_metadata
+    #   A complex type that contains metadata about the rule group that your
+    #   own rule group is copied from. You can use the metadata to track the
+    #   version updates made to the originating rule group.
+    #   @return [Types::SourceMetadata]
+    #
+    # @!attribute [rw] sns_topic
+    #   The Amazon resource name (ARN) of the Amazon Simple Notification
+    #   Service SNS topic that's used to record changes to the managed rule
+    #   group. You can subscribe to the SNS topic to receive notifications
+    #   when the managed rule group is modified, such as for new versions
+    #   and for version expiration. For more information, see the [Amazon
+    #   Simple Notification Service Developer Guide.][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The last time that the rule group was changed.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/RuleGroupResponse AWS API Documentation
     #
     class RuleGroupResponse < Struct.new(
@@ -3315,7 +3374,10 @@ module Aws::NetworkFirewall
       :tags,
       :consumed_capacity,
       :number_of_associations,
-      :encryption_configuration)
+      :encryption_configuration,
+      :source_metadata,
+      :sns_topic,
+      :last_modified_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3569,6 +3631,47 @@ module Aws::NetworkFirewall
       :targets,
       :target_types,
       :generated_rules_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # High-level information about the managed rule group that your own rule
+    # group is copied from. You can use the the metadata to track version
+    # updates made to the originating rule group. You can retrieve all
+    # objects for a rule group by calling [DescribeRuleGroup][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html
+    #
+    # @note When making an API call, you may pass SourceMetadata
+    #   data as a hash:
+    #
+    #       {
+    #         source_arn: "ResourceArn",
+    #         source_update_token: "UpdateToken",
+    #       }
+    #
+    # @!attribute [rw] source_arn
+    #   The Amazon Resource Name (ARN) of the rule group that your own rule
+    #   group is copied from.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_update_token
+    #   The update token of the Amazon Web Services managed rule group that
+    #   your own rule group is copied from. To determine the update token
+    #   for the managed rule group, call [DescribeRuleGroup][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/network-firewall/latest/APIReference/API_DescribeRuleGroup.html#networkfirewall-DescribeRuleGroup-response-UpdateToken
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/SourceMetadata AWS API Documentation
+    #
+    class SourceMetadata < Struct.new(
+      :source_arn,
+      :source_update_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4429,7 +4532,7 @@ module Aws::NetworkFirewall
     #         firewall_name: "ResourceName",
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #         },
     #       }
     #
@@ -4703,7 +4806,7 @@ module Aws::NetworkFirewall
     #         dry_run: false,
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #         },
     #       }
     #
@@ -4989,7 +5092,11 @@ module Aws::NetworkFirewall
     #         dry_run: false,
     #         encryption_configuration: {
     #           key_id: "KeyId",
-    #           type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #           type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #         },
+    #         source_metadata: {
+    #           source_arn: "ResourceArn",
+    #           source_update_token: "UpdateToken",
     #         },
     #       }
     #
@@ -5081,6 +5188,12 @@ module Aws::NetworkFirewall
     #   group resources.
     #   @return [Types::EncryptionConfiguration]
     #
+    # @!attribute [rw] source_metadata
+    #   A complex type that contains metadata about the rule group that your
+    #   own rule group is copied from. You can use the metadata to keep
+    #   track of updates made to the originating rule group.
+    #   @return [Types::SourceMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroupRequest AWS API Documentation
     #
     class UpdateRuleGroupRequest < Struct.new(
@@ -5092,7 +5205,8 @@ module Aws::NetworkFirewall
       :type,
       :description,
       :dry_run,
-      :encryption_configuration)
+      :encryption_configuration,
+      :source_metadata)
       SENSITIVE = []
       include Aws::Structure
     end

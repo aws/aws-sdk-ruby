@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.309.0 (2022-04-28)
+------------------
+
+* Feature - This release adds support to query the public key and creation date of EC2 Key Pairs. Additionally, the format (pem or ppk) of a key pair can be specified when creating a new key pair.
+
 1.308.0 (2022-04-22)
 ------------------
 

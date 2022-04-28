@@ -7128,6 +7128,42 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass PutUserStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         user_id: "UserId", # required
+    #         instance_id: "InstanceId", # required
+    #         agent_status_id: "AgentStatusId", # required
+    #       }
+    #
+    # @!attribute [rw] user_id
+    #   The identifier of the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_status_id
+    #   The identifier of the agent status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PutUserStatusRequest AWS API Documentation
+    #
+    class PutUserStatusRequest < Struct.new(
+      :user_id,
+      :instance_id,
+      :agent_status_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PutUserStatusResponse AWS API Documentation
+    #
+    class PutUserStatusResponse < Aws::EmptyStructure; end
+
     # Contains information about a queue.
     #
     # @!attribute [rw] name

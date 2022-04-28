@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.71.0 (2022-04-28)
+------------------
+
+* Feature - This release introduces an API for changing the current agent status of a user in Connect.
+
 1.70.0 (2022-04-25)
 ------------------
 

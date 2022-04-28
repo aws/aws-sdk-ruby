@@ -562,6 +562,8 @@ module Aws::GuardDuty
     #
     #   * service.action.awsApiCallAction.errorCode
     #
+    #   * service.action.awsApiCallAction.userAgent
+    #
     #   * service.action.awsApiCallAction.remoteIpDetails.city.cityName
     #
     #   * service.action.awsApiCallAction.remoteIpDetails.country.countryName
@@ -1313,7 +1315,13 @@ module Aws::GuardDuty
     end
 
     # Disassociates GuardDuty member accounts (to the current GuardDuty
-    # administrator account) specified by the account IDs.
+    # administrator account) specified by the account IDs. Member accounts
+    # added through [Invitation][1] get deleted from the current GuardDuty
+    # administrator account after 30 days of disassociation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_invitations.html
     #
     # @option params [required, String] :detector_id
     #   The unique ID of the detector of the GuardDuty account whose members
@@ -3246,7 +3254,7 @@ module Aws::GuardDuty
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-guardduty'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

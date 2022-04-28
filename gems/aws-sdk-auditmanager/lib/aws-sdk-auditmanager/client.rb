@@ -1063,7 +1063,35 @@ module Aws::AuditManager
       req.send_request(options)
     end
 
-    # Deletes an assessment report from an assessment in Audit Manager.
+    # Deletes an assessment report in Audit Manager.
+    #
+    # When you run the `DeleteAssessmentReport` operation, Audit Manager
+    # attempts to delete the following data:
+    #
+    # 1.  The specified assessment report that’s stored in your S3 bucket
+    #
+    # 2.  The associated metadata that’s stored in Audit Manager
+    #
+    # If Audit Manager can’t access the assessment report in your S3 bucket,
+    # the report isn’t deleted. In this event, the `DeleteAssessmentReport`
+    # operation doesn’t fail. Instead, it proceeds to delete the associated
+    # metadata only. You must then delete the assessment report from the S3
+    # bucket yourself.
+    #
+    # This scenario happens when Audit Manager receives a `403 (Forbidden)`
+    # or `404 (Not Found)` error from Amazon S3. To avoid this, make sure
+    # that your S3 bucket is available, and that you configured the correct
+    # permissions for Audit Manager to delete resources in your S3 bucket.
+    # For an example permissions policy that you can use, see [Assessment
+    # report destination permissions][1] in the *Audit Manager User Guide*.
+    # For information about the issues that could cause a `403 (Forbidden)`
+    # or `404 (Not Found`) error from Amazon S3, see [List of Error
+    # Codes][2] in the *Amazon Simple Storage Service API Reference*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/audit-manager/latest/userguide/security_iam_id-based-policy-examples.html#full-administrator-access-assessment-report-destination
+    # [2]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
     #
     # @option params [required, String] :assessment_id
     #   The unique identifier for the assessment.
@@ -3623,7 +3651,7 @@ module Aws::AuditManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-auditmanager'
-      context[:gem_version] = '1.23.0'
+      context[:gem_version] = '1.24.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

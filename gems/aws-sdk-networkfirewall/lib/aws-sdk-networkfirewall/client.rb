@@ -615,7 +615,7 @@ module Aws::NetworkFirewall
     #     ],
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #   })
     #
@@ -752,7 +752,7 @@ module Aws::NetworkFirewall
     #     dry_run: false,
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #   })
     #
@@ -772,6 +772,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateFirewallPolicy AWS API Documentation
     #
@@ -894,6 +895,11 @@ module Aws::NetworkFirewall
     #   A complex type that contains settings for encryption of your rule
     #   group resources.
     #
+    # @option params [Types::SourceMetadata] :source_metadata
+    #   A complex type that contains metadata about the rule group that your
+    #   own rule group is copied from. You can use the metadata to keep track
+    #   of updates made to the originating rule group.
+    #
     # @return [Types::CreateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateRuleGroupResponse#update_token #update_token} => String
@@ -1015,7 +1021,11 @@ module Aws::NetworkFirewall
     #     dry_run: false,
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #     source_metadata: {
+    #       source_arn: "ResourceArn",
+    #       source_update_token: "UpdateToken",
     #     },
     #   })
     #
@@ -1036,6 +1046,10 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.number_of_associations #=> Integer
     #   resp.rule_group_response.encryption_configuration.key_id #=> String
     #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.rule_group_response.source_metadata.source_arn #=> String
+    #   resp.rule_group_response.source_metadata.source_update_token #=> String
+    #   resp.rule_group_response.sns_topic #=> String
+    #   resp.rule_group_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/CreateRuleGroup AWS API Documentation
     #
@@ -1161,6 +1175,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteFirewallPolicy AWS API Documentation
     #
@@ -1246,6 +1261,10 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.number_of_associations #=> Integer
     #   resp.rule_group_response.encryption_configuration.key_id #=> String
     #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.rule_group_response.source_metadata.source_arn #=> String
+    #   resp.rule_group_response.source_metadata.source_update_token #=> String
+    #   resp.rule_group_response.sns_topic #=> String
+    #   resp.rule_group_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DeleteRuleGroup AWS API Documentation
     #
@@ -1362,6 +1381,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.last_modified_time #=> Time
     #   resp.firewall_policy.stateless_rule_group_references #=> Array
     #   resp.firewall_policy.stateless_rule_group_references[0].resource_arn #=> String
     #   resp.firewall_policy.stateless_rule_group_references[0].priority #=> Integer
@@ -1567,6 +1587,10 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.number_of_associations #=> Integer
     #   resp.rule_group_response.encryption_configuration.key_id #=> String
     #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.rule_group_response.source_metadata.source_arn #=> String
+    #   resp.rule_group_response.source_metadata.source_update_token #=> String
+    #   resp.rule_group_response.sns_topic #=> String
+    #   resp.rule_group_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroup AWS API Documentation
     #
@@ -1612,6 +1636,7 @@ module Aws::NetworkFirewall
     #   * {Types::DescribeRuleGroupMetadataResponse#type #type} => String
     #   * {Types::DescribeRuleGroupMetadataResponse#capacity #capacity} => Integer
     #   * {Types::DescribeRuleGroupMetadataResponse#stateful_rule_options #stateful_rule_options} => Types::StatefulRuleOptions
+    #   * {Types::DescribeRuleGroupMetadataResponse#last_modified_time #last_modified_time} => Time
     #
     # @example Request syntax with placeholder values
     #
@@ -1629,6 +1654,7 @@ module Aws::NetworkFirewall
     #   resp.type #=> String, one of "STATELESS", "STATEFUL"
     #   resp.capacity #=> Integer
     #   resp.stateful_rule_options.rule_order #=> String, one of "DEFAULT_ACTION_ORDER", "STRICT_ORDER"
+    #   resp.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/DescribeRuleGroupMetadata AWS API Documentation
     #
@@ -1834,6 +1860,15 @@ module Aws::NetworkFirewall
     #   setting of `NULL` returns all of the rule groups in your account. A
     #   setting of `MANAGED` returns all available managed rule groups.
     #
+    # @option params [String] :managed_type
+    #   Indicates the general category of the Amazon Web Services managed rule
+    #   group.
+    #
+    # @option params [String] :type
+    #   Indicates whether the rule group is stateless or stateful. If the rule
+    #   group is stateless, it contains stateless rules. If it is stateful, it
+    #   contains stateful rules.
+    #
     # @return [Types::ListRuleGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRuleGroupsResponse#next_token #next_token} => String
@@ -1847,6 +1882,8 @@ module Aws::NetworkFirewall
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #     scope: "MANAGED", # accepts MANAGED, ACCOUNT
+    #     managed_type: "AWS_MANAGED_THREAT_SIGNATURES", # accepts AWS_MANAGED_THREAT_SIGNATURES, AWS_MANAGED_DOMAIN_LISTS
+    #     type: "STATELESS", # accepts STATELESS, STATEFUL
     #   })
     #
     # @example Response structure
@@ -2278,7 +2315,7 @@ module Aws::NetworkFirewall
     #     firewall_name: "ResourceName",
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #   })
     #
@@ -2402,7 +2439,7 @@ module Aws::NetworkFirewall
     #     dry_run: false,
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
     #     },
     #   })
     #
@@ -2422,6 +2459,7 @@ module Aws::NetworkFirewall
     #   resp.firewall_policy_response.number_of_associations #=> Integer
     #   resp.firewall_policy_response.encryption_configuration.key_id #=> String
     #   resp.firewall_policy_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.firewall_policy_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateFirewallPolicy AWS API Documentation
     #
@@ -2676,6 +2714,11 @@ module Aws::NetworkFirewall
     #   A complex type that contains settings for encryption of your rule
     #   group resources.
     #
+    # @option params [Types::SourceMetadata] :source_metadata
+    #   A complex type that contains metadata about the rule group that your
+    #   own rule group is copied from. You can use the metadata to keep track
+    #   of updates made to the originating rule group.
+    #
     # @return [Types::UpdateRuleGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateRuleGroupResponse#update_token #update_token} => String
@@ -2792,7 +2835,11 @@ module Aws::NetworkFirewall
     #     dry_run: false,
     #     encryption_configuration: {
     #       key_id: "KeyId",
-    #       type: "CUSTOMER_KMS", # accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #       type: "CUSTOMER_KMS", # required, accepts CUSTOMER_KMS, AWS_OWNED_KMS_KEY
+    #     },
+    #     source_metadata: {
+    #       source_arn: "ResourceArn",
+    #       source_update_token: "UpdateToken",
     #     },
     #   })
     #
@@ -2813,6 +2860,10 @@ module Aws::NetworkFirewall
     #   resp.rule_group_response.number_of_associations #=> Integer
     #   resp.rule_group_response.encryption_configuration.key_id #=> String
     #   resp.rule_group_response.encryption_configuration.type #=> String, one of "CUSTOMER_KMS", "AWS_OWNED_KMS_KEY"
+    #   resp.rule_group_response.source_metadata.source_arn #=> String
+    #   resp.rule_group_response.source_metadata.source_update_token #=> String
+    #   resp.rule_group_response.sns_topic #=> String
+    #   resp.rule_group_response.last_modified_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/network-firewall-2020-11-12/UpdateRuleGroup AWS API Documentation
     #
@@ -2905,7 +2956,7 @@ module Aws::NetworkFirewall
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkfirewall'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

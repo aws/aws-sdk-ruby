@@ -6959,11 +6959,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Creates an ED25519 or 2048-bit RSA key pair with the specified name.
-    # Amazon EC2 stores the public key and displays the private key for you
-    # to save to a file. The private key is returned as an unencrypted PEM
-    # encoded PKCS#1 private key. If a key with the specified name already
-    # exists, Amazon EC2 returns an error.
+    # Creates an ED25519 or 2048-bit RSA key pair with the specified name
+    # and in the specified PEM or PPK format. Amazon EC2 stores the public
+    # key and displays the private key for you to save to a file. The
+    # private key is returned as an unencrypted PEM encoded PKCS#1 private
+    # key or an unencrypted PPK formatted private key for use with PuTTY. If
+    # a key with the specified name already exists, Amazon EC2 returns an
+    # error.
     #
     # The key pair returned to you is available only in the Amazon Web
     # Services Region in which you create it. If you prefer, you can create
@@ -6999,6 +7001,11 @@ module Aws::EC2
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   The tags to apply to the new key pair.
     #
+    # @option params [String] :key_format
+    #   The format of the key pair.
+    #
+    #   Default: `pem`
+    #
     # @return [Types::KeyPair] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::KeyPair#key_fingerprint #key_fingerprint} => String
@@ -7033,6 +7040,7 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
+    #     key_format: "pem", # accepts pem, ppk
     #   })
     #
     # @example Response structure
@@ -22679,6 +22687,11 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Boolean] :include_public_key
+    #   If `true`, the public key material is included in the response.
+    #
+    #   Default: `false`
+    #
     # @return [Types::DescribeKeyPairsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeKeyPairsResult#key_pairs #key_pairs} => Array&lt;Types::KeyPairInfo&gt;
@@ -22716,6 +22729,7 @@ module Aws::EC2
     #     key_names: ["KeyPairName"],
     #     key_pair_ids: ["KeyPairId"],
     #     dry_run: false,
+    #     include_public_key: false,
     #   })
     #
     # @example Response structure
@@ -22728,6 +22742,8 @@ module Aws::EC2
     #   resp.key_pairs[0].tags #=> Array
     #   resp.key_pairs[0].tags[0].key #=> String
     #   resp.key_pairs[0].tags[0].value #=> String
+    #   resp.key_pairs[0].public_key #=> String
+    #   resp.key_pairs[0].create_time #=> Time
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -49490,7 +49506,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.308.0'
+      context[:gem_version] = '1.309.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

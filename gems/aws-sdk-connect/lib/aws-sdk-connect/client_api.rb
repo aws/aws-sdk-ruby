@@ -399,6 +399,8 @@ module Aws::Connect
     PromptName = Shapes::StringShape.new(name: 'PromptName')
     PromptSummary = Shapes::StructureShape.new(name: 'PromptSummary')
     PromptSummaryList = Shapes::ListShape.new(name: 'PromptSummaryList')
+    PutUserStatusRequest = Shapes::StructureShape.new(name: 'PutUserStatusRequest')
+    PutUserStatusResponse = Shapes::StructureShape.new(name: 'PutUserStatusResponse')
     Queue = Shapes::StructureShape.new(name: 'Queue')
     QueueDescription = Shapes::StringShape.new(name: 'QueueDescription')
     QueueId = Shapes::StringShape.new(name: 'QueueId')
@@ -1800,6 +1802,13 @@ module Aws::Connect
     PromptSummary.struct_class = Types::PromptSummary
 
     PromptSummaryList.member = Shapes::ShapeRef.new(shape: PromptSummary)
+
+    PutUserStatusRequest.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location: "uri", location_name: "UserId"))
+    PutUserStatusRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    PutUserStatusRequest.add_member(:agent_status_id, Shapes::ShapeRef.new(shape: AgentStatusId, required: true, location_name: "AgentStatusId"))
+    PutUserStatusRequest.struct_class = Types::PutUserStatusRequest
+
+    PutUserStatusResponse.struct_class = Types::PutUserStatusResponse
 
     Queue.add_member(:name, Shapes::ShapeRef.new(shape: CommonNameLength127, location_name: "Name"))
     Queue.add_member(:queue_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "QueueArn"))
@@ -3889,6 +3898,20 @@ module Aws::Connect
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:put_user_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutUserStatus"
+        o.http_method = "PUT"
+        o.http_request_uri = "/users/{InstanceId}/{UserId}/status"
+        o.input = Shapes::ShapeRef.new(shape: PutUserStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutUserStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:release_phone_number, Seahorse::Model::Operation.new.tap do |o|

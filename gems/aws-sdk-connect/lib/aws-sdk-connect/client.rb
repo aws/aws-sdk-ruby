@@ -5248,6 +5248,47 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Changes the current status of a user or agent in Amazon Connect. If
+    # the agent is currently handling a contact, this sets the agent's next
+    # status.
+    #
+    # For more information, see [Agent status][1] and [Set your next
+    # status][2] in the *Amazon Connect Administrator Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-agent-status.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/adminguide/set-next-status.html
+    #
+    # @option params [required, String] :user_id
+    #   The identifier of the user.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :agent_status_id
+    #   The identifier of the agent status.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_user_status({
+    #     user_id: "UserId", # required
+    #     instance_id: "InstanceId", # required
+    #     agent_status_id: "AgentStatusId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PutUserStatus AWS API Documentation
+    #
+    # @overload put_user_status(params = {})
+    # @param [Hash] params ({})
+    def put_user_status(params = {}, options = {})
+      req = build_request(:put_user_status, params)
+      req.send_request(options)
+    end
+
     # Releases a phone number previously claimed to an Amazon Connect
     # instance.
     #
@@ -7544,7 +7585,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.70.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

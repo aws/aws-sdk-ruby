@@ -8997,6 +8997,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
+    #         key_format: "pem", # accepts pem, ppk
     #       }
     #
     # @!attribute [rw] key_name
@@ -9023,13 +9024,20 @@ module Aws::EC2
     #   The tags to apply to the new key pair.
     #   @return [Array<Types::TagSpecification>]
     #
+    # @!attribute [rw] key_format
+    #   The format of the key pair.
+    #
+    #   Default: `pem`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateKeyPairRequest AWS API Documentation
     #
     class CreateKeyPairRequest < Struct.new(
       :key_name,
       :dry_run,
       :key_type,
-      :tag_specifications)
+      :tag_specifications,
+      :key_format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22135,6 +22143,7 @@ module Aws::EC2
     #         key_names: ["KeyPairName"],
     #         key_pair_ids: ["KeyPairId"],
     #         dry_run: false,
+    #         include_public_key: false,
     #       }
     #
     # @!attribute [rw] filters
@@ -22174,13 +22183,20 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_public_key
+    #   If `true`, the public key material is included in the response.
+    #
+    #   Default: `false`
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeKeyPairsRequest AWS API Documentation
     #
     class DescribeKeyPairsRequest < Struct.new(
       :filters,
       :key_names,
       :key_pair_ids,
-      :dry_run)
+      :dry_run,
+      :include_public_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -43431,6 +43447,24 @@ module Aws::EC2
     #   Any tags applied to the key pair.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] public_key
+    #   The public key material.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   If you used Amazon EC2 to create the key pair, this is the date and
+    #   time when the key was created, in [ISO 8601 date-time format][1], in
+    #   the UTC time zone.
+    #
+    #   If you imported an existing key pair to Amazon EC2, this is the date
+    #   and time the key was imported, in [ISO 8601 date-time format][1], in
+    #   the UTC time zone.
+    #
+    #
+    #
+    #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/KeyPairInfo AWS API Documentation
     #
     class KeyPairInfo < Struct.new(
@@ -43438,7 +43472,9 @@ module Aws::EC2
       :key_fingerprint,
       :key_name,
       :key_type,
-      :tags)
+      :tags,
+      :public_key,
+      :create_time)
       SENSITIVE = []
       include Aws::Structure
     end

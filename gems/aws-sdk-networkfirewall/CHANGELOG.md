@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-04-28)
+------------------
+
+* Feature - AWS Network Firewall adds support for stateful threat signature AWS managed rule groups.
+
 1.16.0 (2022-04-26)
 ------------------
 

@@ -4321,13 +4321,61 @@ module Aws::AuditManager
     #       }
     #
     # @!attribute [rw] keyword_input_type
-    #   The method of input for the keyword.
+    #   The input method for the keyword.
     #   @return [String]
     #
     # @!attribute [rw] keyword_value
-    #   The value of the keyword that's used to search CloudTrail logs,
-    #   Config rules, Security Hub checks, and Amazon Web Services API names
-    #   when mapping a control data source.
+    #   The value of the keyword that's used when mapping a control data
+    #   source. For example, this can be a CloudTrail event name, a rule
+    #   name for Config, a Security Hub control, or the name of an Amazon
+    #   Web Services API call.
+    #
+    #   If you’re mapping a data source to a rule in Config, the
+    #   `keywordValue` that you specify depends on the type of rule:
+    #
+    #   * For [managed rules][1], you can use the rule identifier as the
+    #     `keywordValue`. You can find the rule identifier from the [list of
+    #     Config managed rules][2].
+    #
+    #     * Managed rule name: [s3-bucket-acl-prohibited][3]
+    #
+    #       `keywordValue`\: `S3_BUCKET_ACL_PROHIBITED`
+    #
+    #   * For [custom rules][4], you form the `keywordValue` by adding the
+    #     `Custom_` prefix to the rule name. This prefix distinguishes the
+    #     rule from a managed rule.
+    #
+    #     * Custom rule name: my-custom-config-rule
+    #
+    #       `keywordValue`\: `Custom_my-custom-config-rule`
+    #
+    #   * For [service-linked rules][5], you form the `keywordValue` by
+    #     adding the `Custom_` prefix to the rule name. In addition, you
+    #     remove the suffix ID that appears at the end of the rule name.
+    #
+    #     * Service-linked rule name:
+    #       CustomRuleForAccount-conformance-pack-szsm1uv0w
+    #
+    #       `keywordValue`\: `Custom_CustomRuleForAccount-conformance-pack`
+    #
+    #     * Service-linked rule name:
+    #       securityhub-api-gw-cache-encrypted-101104e1
+    #
+    #       `keywordValue`\: `Custom_securityhub-api-gw-cache-encrypted`
+    #
+    #     * Service-linked rule name:
+    #       OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba
+    #
+    #       `keywordValue`\:
+    #       `Custom_OrgConfigRule-s3-bucket-versioning-enabled`
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
+    #   [2]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
+    #   [3]: https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html
+    #   [4]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html
+    #   [5]: https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/auditmanager-2017-07-25/SourceKeyword AWS API Documentation

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-04-28)
+------------------
+
+* Feature - Documentation update for API description.
+
 1.56.0 (2022-02-24)
 ------------------
 
