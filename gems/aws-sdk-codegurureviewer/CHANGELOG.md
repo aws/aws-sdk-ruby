@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2022-04-29)
+------------------
+
+* Feature - Amazon CodeGuru Reviewer now supports suppressing recommendations from being generated on specific files and directories.
+
 1.30.0 (2022-02-24)
 ------------------
 

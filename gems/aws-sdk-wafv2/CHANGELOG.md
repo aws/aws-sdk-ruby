@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.39.0 (2022-04-29)
+------------------
+
+* Feature - You can now inspect all request headers and all cookies. You can now specify how to handle oversize body contents in your rules that inspect the body.
+
 1.38.0 (2022-04-08)
 ------------------
 

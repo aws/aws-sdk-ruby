@@ -653,6 +653,9 @@ module Aws::MediaConvert
     #           supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #           timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #           timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #           video_generator: {
+    #             duration: 1,
+    #           },
     #           video_selector: {
     #             alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #             color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -672,6 +675,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -1673,7 +1677,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -1889,6 +1894,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -1905,6 +1911,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -2660,7 +2667,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -2955,6 +2963,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -3956,7 +3965,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -4158,6 +4168,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -4913,7 +4924,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -5666,7 +5678,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -6269,7 +6282,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -6689,6 +6703,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.job.settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.job.settings.inputs[0].timecode_start #=> String
+    #   resp.job.settings.inputs[0].video_generator.duration #=> Integer
     #   resp.job.settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.job.settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.job.settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -6705,6 +6720,7 @@ module Aws::MediaConvert
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -7460,7 +7476,8 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -7653,6 +7670,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -8408,7 +8426,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -9036,7 +9055,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -9288,6 +9308,7 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_templates[0].settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_templates[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_templates[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -10043,7 +10064,8 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -10270,6 +10292,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].supplemental_imps[0] #=> String
     #   resp.jobs[0].settings.inputs[0].timecode_source #=> String, one of "EMBEDDED", "ZEROBASED", "SPECIFIEDSTART"
     #   resp.jobs[0].settings.inputs[0].timecode_start #=> String
+    #   resp.jobs[0].settings.inputs[0].video_generator.duration #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.alpha_behavior #=> String, one of "DISCARD", "REMAP_TO_LUMA"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space #=> String, one of "FOLLOW", "REC_601", "REC_709", "HDR10", "HLG_2020"
     #   resp.jobs[0].settings.inputs[0].video_selector.color_space_usage #=> String, one of "FORCE", "FALLBACK"
@@ -10286,6 +10309,7 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.jobs[0].settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.jobs[0].settings.inputs[0].video_selector.pid #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.jobs[0].settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -11041,7 +11065,8 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.jobs[0].settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -11686,7 +11711,8 @@ module Aws::MediaConvert
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.presets[0].settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.presets[0].settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -12155,6 +12181,7 @@ module Aws::MediaConvert
     #               white_point_x: 1,
     #               white_point_y: 1,
     #             },
+    #             pad_video: "DISABLED", # accepts DISABLED, BLACK
     #             pid: 1,
     #             program_number: 1,
     #             rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -13156,7 +13183,8 @@ module Aws::MediaConvert
     #                       max_fall: 1,
     #                     },
     #                     l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                     profile: "PROFILE_5", # accepts PROFILE_5
+    #                     mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                     profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                   },
     #                   hdr_10_plus: {
     #                     mastering_monitor_nits: 1,
@@ -13355,6 +13383,7 @@ module Aws::MediaConvert
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.red_primary_y #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_x #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.hdr_10_metadata.white_point_y #=> Integer
+    #   resp.job_template.settings.inputs[0].video_selector.pad_video #=> String, one of "DISABLED", "BLACK"
     #   resp.job_template.settings.inputs[0].video_selector.pid #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.program_number #=> Integer
     #   resp.job_template.settings.inputs[0].video_selector.rotate #=> String, one of "DEGREE_0", "DEGREES_90", "DEGREES_180", "DEGREES_270", "AUTO"
@@ -14110,7 +14139,8 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.job_template.settings.output_groups[0].outputs[0].video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -14857,7 +14887,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -15457,7 +15488,8 @@ module Aws::MediaConvert
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_cll #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_metadata.max_fall #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.l6_mode #=> String, one of "PASSTHROUGH", "RECALCULATE", "SPECIFY"
-    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.mapping #=> String, one of "HDR10_NOMAP", "HDR10_1000"
+    #   resp.preset.settings.video_description.video_preprocessors.dolby_vision.profile #=> String, one of "PROFILE_5", "PROFILE_8_1"
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.mastering_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.hdr_10_plus.target_monitor_nits #=> Integer
     #   resp.preset.settings.video_description.video_preprocessors.image_inserter.insertable_images #=> Array
@@ -15581,7 +15613,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

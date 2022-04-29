@@ -432,6 +432,7 @@ module Aws::RDS
     ModifyGlobalClusterResult = Shapes::StructureShape.new(name: 'ModifyGlobalClusterResult')
     ModifyOptionGroupMessage = Shapes::StructureShape.new(name: 'ModifyOptionGroupMessage')
     ModifyOptionGroupResult = Shapes::StructureShape.new(name: 'ModifyOptionGroupResult')
+    NetworkTypeNotSupported = Shapes::StructureShape.new(name: 'NetworkTypeNotSupported')
     Option = Shapes::StructureShape.new(name: 'Option')
     OptionConfiguration = Shapes::StructureShape.new(name: 'OptionConfiguration')
     OptionConfigurationList = Shapes::ListShape.new(name: 'OptionConfigurationList')
@@ -922,6 +923,7 @@ module Aws::RDS
     CreateDBInstanceMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     CreateDBInstanceMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     CreateDBInstanceMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
+    CreateDBInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
     CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -957,6 +959,7 @@ module Aws::RDS
     CreateDBInstanceReadReplicaMessage.add_member(:replica_mode, Shapes::ShapeRef.new(shape: ReplicaMode, location_name: "ReplicaMode"))
     CreateDBInstanceReadReplicaMessage.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
     CreateDBInstanceReadReplicaMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
+    CreateDBInstanceReadReplicaMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     CreateDBInstanceReadReplicaMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CreateDBInstanceReadReplicaMessage.struct_class = Types::CreateDBInstanceReadReplicaMessage
 
@@ -1397,6 +1400,7 @@ module Aws::RDS
     DBInstance.add_member(:resume_full_automation_mode_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ResumeFullAutomationModeTime"))
     DBInstance.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     DBInstance.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
+    DBInstance.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     DBInstance.struct_class = Types::DBInstance
 
     DBInstanceAlreadyExistsFault.struct_class = Types::DBInstanceAlreadyExistsFault
@@ -1669,6 +1673,7 @@ module Aws::RDS
     DBSubnetGroup.add_member(:subnet_group_status, Shapes::ShapeRef.new(shape: String, location_name: "SubnetGroupStatus"))
     DBSubnetGroup.add_member(:subnets, Shapes::ShapeRef.new(shape: SubnetList, location_name: "Subnets"))
     DBSubnetGroup.add_member(:db_subnet_group_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBSubnetGroupArn"))
+    DBSubnetGroup.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
     DBSubnetGroup.struct_class = Types::DBSubnetGroup
 
     DBSubnetGroupAlreadyExistsFault.struct_class = Types::DBSubnetGroupAlreadyExistsFault
@@ -2482,6 +2487,7 @@ module Aws::RDS
     ModifyDBInstanceMessage.add_member(:aws_backup_recovery_point_arn, Shapes::ShapeRef.new(shape: AwsBackupRecoveryPointArn, location_name: "AwsBackupRecoveryPointArn"))
     ModifyDBInstanceMessage.add_member(:automation_mode, Shapes::ShapeRef.new(shape: AutomationMode, location_name: "AutomationMode"))
     ModifyDBInstanceMessage.add_member(:resume_full_automation_mode_minutes, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ResumeFullAutomationModeMinutes"))
+    ModifyDBInstanceMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     ModifyDBInstanceMessage.struct_class = Types::ModifyDBInstanceMessage
 
     ModifyDBInstanceResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -2574,6 +2580,8 @@ module Aws::RDS
 
     ModifyOptionGroupResult.add_member(:option_group, Shapes::ShapeRef.new(shape: OptionGroup, location_name: "OptionGroup"))
     ModifyOptionGroupResult.struct_class = Types::ModifyOptionGroupResult
+
+    NetworkTypeNotSupported.struct_class = Types::NetworkTypeNotSupported
 
     Option.add_member(:option_name, Shapes::ShapeRef.new(shape: String, location_name: "OptionName"))
     Option.add_member(:option_description, Shapes::ShapeRef.new(shape: String, location_name: "OptionDescription"))
@@ -2718,6 +2726,7 @@ module Aws::RDS
     OrderableDBInstanceOption.add_member(:supported_activity_stream_modes, Shapes::ShapeRef.new(shape: ActivityStreamModeList, location_name: "SupportedActivityStreamModes"))
     OrderableDBInstanceOption.add_member(:supports_global_databases, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsGlobalDatabases"))
     OrderableDBInstanceOption.add_member(:supports_clusters, Shapes::ShapeRef.new(shape: Boolean, location_name: "SupportsClusters"))
+    OrderableDBInstanceOption.add_member(:supported_network_types, Shapes::ShapeRef.new(shape: StringList, location_name: "SupportedNetworkTypes"))
     OrderableDBInstanceOption.struct_class = Types::OrderableDBInstanceOption
 
     OrderableDBInstanceOptionsList.member = Shapes::ShapeRef.new(shape: OrderableDBInstanceOption, location_name: "OrderableDBInstanceOption")
@@ -3085,6 +3094,7 @@ module Aws::RDS
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceFromDBSnapshotMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
+    RestoreDBInstanceFromDBSnapshotMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceFromDBSnapshotMessage.struct_class = Types::RestoreDBInstanceFromDBSnapshotMessage
 
     RestoreDBInstanceFromDBSnapshotResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3134,6 +3144,7 @@ module Aws::RDS
     RestoreDBInstanceFromS3Message.add_member(:use_default_processor_features, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "UseDefaultProcessorFeatures"))
     RestoreDBInstanceFromS3Message.add_member(:deletion_protection, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "DeletionProtection"))
     RestoreDBInstanceFromS3Message.add_member(:max_allocated_storage, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxAllocatedStorage"))
+    RestoreDBInstanceFromS3Message.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceFromS3Message.struct_class = Types::RestoreDBInstanceFromS3Message
 
     RestoreDBInstanceFromS3Result.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3175,6 +3186,7 @@ module Aws::RDS
     RestoreDBInstanceToPointInTimeMessage.add_member(:enable_customer_owned_ip, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "EnableCustomerOwnedIp"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:custom_iam_instance_profile, Shapes::ShapeRef.new(shape: String, location_name: "CustomIamInstanceProfile"))
     RestoreDBInstanceToPointInTimeMessage.add_member(:backup_target, Shapes::ShapeRef.new(shape: String, location_name: "BackupTarget"))
+    RestoreDBInstanceToPointInTimeMessage.add_member(:network_type, Shapes::ShapeRef.new(shape: String, location_name: "NetworkType"))
     RestoreDBInstanceToPointInTimeMessage.struct_class = Types::RestoreDBInstanceToPointInTimeMessage
 
     RestoreDBInstanceToPointInTimeResult.add_member(:db_instance, Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance"))
@@ -3687,6 +3699,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:create_db_instance_read_replica, Seahorse::Model::Operation.new.tap do |o|
@@ -3714,6 +3727,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: StorageTypeNotSupportedFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:create_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -4699,6 +4713,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:modify_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -5060,6 +5075,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: DomainNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:restore_db_instance_from_s3, Seahorse::Model::Operation.new.tap do |o|
@@ -5085,6 +5101,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: AuthorizationNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:restore_db_instance_to_point_in_time, Seahorse::Model::Operation.new.tap do |o|
@@ -5115,6 +5132,7 @@ module Aws::RDS
         o.errors << Shapes::ShapeRef.new(shape: BackupPolicyNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
         o.errors << Shapes::ShapeRef.new(shape: DBInstanceAutomatedBackupNotFoundFault)
+        o.errors << Shapes::ShapeRef.new(shape: NetworkTypeNotSupported)
       end)
 
       api.add_operation(:revoke_db_security_group_ingress, Seahorse::Model::Operation.new.tap do |o|

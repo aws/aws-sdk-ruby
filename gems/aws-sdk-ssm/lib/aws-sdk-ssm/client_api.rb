@@ -4064,6 +4064,7 @@ module Aws::SSM
     Runbook.add_member(:parameters, Shapes::ShapeRef.new(shape: AutomationParameterMap, location_name: "Parameters"))
     Runbook.add_member(:target_parameter_name, Shapes::ShapeRef.new(shape: AutomationParameterKey, location_name: "TargetParameterName"))
     Runbook.add_member(:targets, Shapes::ShapeRef.new(shape: Targets, location_name: "Targets"))
+    Runbook.add_member(:target_maps, Shapes::ShapeRef.new(shape: TargetMaps, location_name: "TargetMaps"))
     Runbook.add_member(:max_concurrency, Shapes::ShapeRef.new(shape: MaxConcurrency, location_name: "MaxConcurrency"))
     Runbook.add_member(:max_errors, Shapes::ShapeRef.new(shape: MaxErrors, location_name: "MaxErrors"))
     Runbook.add_member(:target_locations, Shapes::ShapeRef.new(shape: TargetLocations, location_name: "TargetLocations", metadata: {"box"=>true}))

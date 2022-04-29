@@ -28,6 +28,7 @@ module Aws::WAFV2
   #
   # ## Error Classes
   # * {WAFAssociatedItemException}
+  # * {WAFConfigurationWarningException}
   # * {WAFDuplicateItemException}
   # * {WAFExpiredManagedRuleGroupVersionException}
   # * {WAFInternalErrorException}
@@ -56,6 +57,21 @@ module Aws::WAFV2
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::WAFV2::Types::WAFAssociatedItemException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class WAFConfigurationWarningException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WAFV2::Types::WAFConfigurationWarningException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

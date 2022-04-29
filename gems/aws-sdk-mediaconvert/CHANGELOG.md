@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2022-04-29)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK nows supports creation of Dolby Vision profile 8.1, the ability to generate black frames of video, and introduces audio-only DASH and CMAF support.
+
 1.88.0 (2022-04-08)
 ------------------
 

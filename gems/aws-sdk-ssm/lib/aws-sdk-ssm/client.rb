@@ -2878,6 +2878,10 @@ module Aws::SSM
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].key #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution_metadata_list[0].runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution_metadata_list[0].runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_concurrency #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].max_errors #=> String
     #   resp.automation_execution_metadata_list[0].runbooks[0].target_locations #=> Array
@@ -5136,6 +5140,10 @@ module Aws::SSM
     #   resp.automation_execution.runbooks[0].targets[0].key #=> String
     #   resp.automation_execution.runbooks[0].targets[0].values #=> Array
     #   resp.automation_execution.runbooks[0].targets[0].values[0] #=> String
+    #   resp.automation_execution.runbooks[0].target_maps #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0] #=> Hash
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.automation_execution.runbooks[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.automation_execution.runbooks[0].max_concurrency #=> String
     #   resp.automation_execution.runbooks[0].max_errors #=> String
     #   resp.automation_execution.runbooks[0].target_locations #=> Array
@@ -5242,20 +5250,18 @@ module Aws::SSM
     #   Manager.
     #
     # @option params [String] :plugin_name
-    #   The name of the plugin for which you want detailed results. If the
-    #   document contains only one plugin, you can omit the name and details
-    #   for that plugin. If the document contains more than one plugin, you
-    #   must specify the name of the plugin for which you want to view
-    #   details.
-    #
-    #   Plugin names are also referred to as *step names* in Systems Manager
-    #   documents (SSM documents). For example, `aws:RunShellScript` is a
-    #   plugin.
+    #   The name of the step for which you want detailed results. If the
+    #   document contains only one step, you can omit the name and details for
+    #   that step. If the document contains more than one step, you must
+    #   specify the name of the step for which you want to view details. Be
+    #   sure to specify the name of the step, not the name of a plugin like
+    #   `aws:RunShellScript`.
     #
     #   To find the `PluginName`, check the document content and find the name
-    #   of the plugin. Alternatively, use ListCommandInvocations with the
-    #   `CommandId` and `Details` parameters. The `PluginName` is the `Name`
-    #   attribute of the `CommandPlugin` object in the `CommandPlugins` list.
+    #   of the step you want details for. Alternatively, use
+    #   ListCommandInvocations with the `CommandId` and `Details` parameters.
+    #   The `PluginName` is the `Name` attribute of the `CommandPlugin` object
+    #   in the `CommandPlugins` list.
     #
     # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -9604,6 +9610,11 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
     #         target_locations: [
@@ -11561,7 +11572,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.136.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

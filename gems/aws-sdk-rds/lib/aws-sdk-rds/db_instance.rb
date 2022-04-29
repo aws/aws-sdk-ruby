@@ -678,6 +678,31 @@ module Aws::RDS
       data[:backup_target]
     end
 
+    # The network type of the DB instance.
+    #
+    # Valid values:
+    #
+    # * `IPV4`
+    #
+    # * `DUAL`
+    #
+    # The network type is determined by the `DBSubnetGroup` specified for
+    # the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    # or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    # For more information, see [ Working with a DB instance in a VPC][1] in
+    # the *Amazon RDS User Guide* and [ Working with a DB instance in a
+    # VPC][2] in the *Amazon Aurora User Guide.*
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # [2]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    # @return [String]
+    def network_type
+      data[:network_type]
+    end
+
     # @!endgroup
 
     # @return [Client]
@@ -874,6 +899,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1435,7 +1461,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
@@ -1834,6 +1860,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def create(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -1890,6 +1935,7 @@ module Aws::RDS
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     # @param [Hash] options ({})
@@ -2309,6 +2355,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @option options [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -2490,6 +2555,7 @@ module Aws::RDS
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [Integer] :allocated_storage
@@ -3216,6 +3282,25 @@ module Aws::RDS
     #   The number of minutes to pause the automation. When the time period
     #   ends, RDS Custom resumes full automation. The minimum value is `60`
     #   (default). The maximum value is `1,440`.
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def modify(options = {})
       options = options.merge(db_instance_identifier: @id)
@@ -3351,6 +3436,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :target_db_instance_identifier
@@ -3705,6 +3791,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(source_db_instance_identifier: @id)

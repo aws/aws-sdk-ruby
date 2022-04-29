@@ -946,6 +946,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :db_name
@@ -1520,7 +1521,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
@@ -1919,6 +1920,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def create_db_instance(options = {})
       resp = @client.create_db_instance(options)

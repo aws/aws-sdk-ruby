@@ -631,6 +631,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     # @param [Hash] options ({})
     # @option options [required, String] :db_instance_identifier
@@ -968,6 +969,25 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
+    # @option options [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
     # @return [DBInstance]
     def restore(options = {})
       options = options.merge(db_snapshot_identifier: @snapshot_id)

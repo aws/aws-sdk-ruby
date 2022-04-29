@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2022-04-29)
+------------------
+
+* Feature - Feature - Adds support for Internet Protocol Version 6 (IPv6) on RDS database instances.
+
 1.144.0 (2022-04-20)
 ------------------
 

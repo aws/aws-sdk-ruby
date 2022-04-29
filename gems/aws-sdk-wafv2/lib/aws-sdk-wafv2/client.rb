@@ -372,6 +372,20 @@ module Aws::WAFV2
     # Resource Name (ARN) of the web ACL. For information, see
     # [UpdateDistribution][1].
     #
+    # When you make changes to web ACLs or web ACL components, like rules
+    # and rule groups, WAF propagates the changes everywhere that the web
+    # ACL and its components are stored and used. Your changes are applied
+    # within seconds, but there might be a brief period of inconsistency
+    # when the changes have arrived in some places and not in others. So,
+    # for example, if you change a rule action setting, the action might be
+    # the old action in one area and the new action in another area. Or if
+    # you add an IP address to an IP set used in a blocking rule, the new
+    # address might briefly be blocked in one area while still allowed in
+    # another. This temporary inconsistency can occur when you first
+    # associate a web ACL with an Amazon Web Services resource and when you
+    # change a web ACL that is already associated with a resource.
+    # Generally, any inconsistencies of this type last only a few seconds.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
@@ -473,6 +487,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -484,6 +499,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -509,6 +545,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -520,6 +557,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -544,6 +602,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -555,6 +614,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -579,6 +659,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -590,6 +671,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -602,7 +704,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -640,6 +742,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -651,6 +754,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -735,6 +859,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -746,6 +871,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1138,6 +1284,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1149,6 +1296,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1174,6 +1342,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1185,6 +1354,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1209,6 +1399,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1220,6 +1411,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1244,6 +1456,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1255,6 +1468,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1267,7 +1501,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -1305,6 +1539,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1316,6 +1551,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1400,6 +1656,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1411,6 +1668,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1663,6 +1941,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1674,6 +1953,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1699,6 +1999,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1710,6 +2011,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1734,6 +2056,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1745,6 +2068,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1769,6 +2113,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1780,6 +2125,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -1792,7 +2158,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -1830,6 +2196,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1841,6 +2208,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -1925,6 +2313,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -1936,6 +2325,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -2325,6 +2735,32 @@ module Aws::WAFV2
     # You can only use this if `ManagedByFirewallManager` is false in the
     # specified WebACL.
     #
+    # <note markdown="1"> Before deleting any web ACL, first disassociate it from all resources.
+    #
+    #  * To retrieve a list of the resources that are associated with a web
+    #   ACL, use the following calls:
+    #
+    #   * For regional resources, call ListResourcesForWebACL.
+    #
+    #   * For Amazon CloudFront distributions, use the CloudFront call
+    #     `ListDistributionsByWebACLId`. For information, see
+    #     [ListDistributionsByWebACLId][1].
+    #
+    # * To disassociate a resource from a web ACL, use the following calls:
+    #
+    #   * For regional resources, call DisassociateWebACL.
+    #
+    #   * For Amazon CloudFront distributions, provide an empty web ACL ID
+    #     in the CloudFront call `UpdateDistribution`. For information, see
+    #     [UpdateDistribution][2].
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
+    # [2]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
+    #
     # @option params [required, String] :name
     #   The name of the web ACL. You cannot change the name of a web ACL after
     #   you create it.
@@ -2463,9 +2899,11 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Disassociates a web ACL from a regional application resource. A
-    # regional application can be an Application Load Balancer (ALB), an
-    # Amazon API Gateway REST API, or an AppSync GraphQL API.
+    # Disassociates the specified regional application resource from any
+    # existing web ACL association. A resource can have at most one web ACL
+    # association. A regional application can be an Application Load
+    # Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL
+    # API.
     #
     # For Amazon CloudFront, don't use this call. Instead, use your
     # CloudFront distribution configuration. To disassociate a web ACL,
@@ -2635,10 +3073,24 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.redacted_fields[0].body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].json_body.match_pattern.included_paths #=> Array
     #   resp.logging_configuration.redacted_fields[0].json_body.match_pattern.included_paths[0] #=> String
     #   resp.logging_configuration.redacted_fields[0].json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.logging_configuration.redacted_fields[0].json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.included_headers #=> Array
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.included_headers[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.excluded_headers #=> Array
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configuration.redacted_fields[0].headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.included_cookies #=> Array
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -3013,45 +3465,101 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.byte_match_statement.search_string #=> String
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.rule_group.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes #=> Array
-    #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.rule_group.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.rule_group.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.rule_group_reference_statement.arn #=> String
@@ -3064,10 +3572,24 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3097,10 +3619,24 @@ module Aws::WAFV2
     #   resp.rule_group.rules[0].statement.regex_match_statement.regex_string #=> String
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.rule_group.rules[0].statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.rule_group.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3315,45 +3851,101 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
@@ -3366,10 +3958,24 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3399,10 +4005,24 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3444,45 +4064,101 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
@@ -3495,10 +4171,24 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3518,10 +4208,24 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3550,45 +4254,101 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
@@ -3601,10 +4361,24 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3624,10 +4398,24 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3698,45 +4486,101 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.rules[0].statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.rules[0].statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.rules[0].statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.rule_group_reference_statement.arn #=> String
@@ -3749,10 +4593,24 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3782,10 +4640,24 @@ module Aws::WAFV2
     #   resp.web_acl.rules[0].statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.rules[0].statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.rules[0].statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3827,45 +4699,101 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
@@ -3878,10 +4806,24 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3901,10 +4843,24 @@ module Aws::WAFV2
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.pre_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -3933,45 +4889,101 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.search_string #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.byte_match_statement.positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.sqli_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.xss_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.size #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.size_constraint_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes #=> Array
-    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.country_codes[0] #=> String, one of "AF", "AX", "AL", "DZ", "AS", "AD", "AO", "AI", "AQ", "AG", "AR", "AM", "AW", "AU", "AT", "AZ", "BS", "BH", "BD", "BB", "BY", "BE", "BZ", "BJ", "BM", "BT", "BO", "BQ", "BA", "BW", "BV", "BR", "IO", "BN", "BG", "BF", "BI", "KH", "CM", "CA", "CV", "KY", "CF", "TD", "CL", "CN", "CX", "CC", "CO", "KM", "CG", "CD", "CK", "CR", "CI", "HR", "CU", "CW", "CY", "CZ", "DK", "DJ", "DM", "DO", "EC", "EG", "SV", "GQ", "ER", "EE", "ET", "FK", "FO", "FJ", "FI", "FR", "GF", "PF", "TF", "GA", "GM", "GE", "DE", "GH", "GI", "GR", "GL", "GD", "GP", "GU", "GT", "GG", "GN", "GW", "GY", "HT", "HM", "VA", "HN", "HK", "HU", "IS", "IN", "ID", "IR", "IQ", "IE", "IM", "IL", "IT", "JM", "JP", "JE", "JO", "KZ", "KE", "KI", "KP", "KR", "KW", "KG", "LA", "LV", "LB", "LS", "LR", "LY", "LI", "LT", "LU", "MO", "MK", "MG", "MW", "MY", "MV", "ML", "MT", "MH", "MQ", "MR", "MU", "YT", "MX", "FM", "MD", "MC", "MN", "ME", "MS", "MA", "MZ", "MM", "NA", "NR", "NP", "NL", "NC", "NZ", "NI", "NE", "NG", "NU", "NF", "MP", "NO", "OM", "PK", "PW", "PS", "PA", "PG", "PY", "PE", "PH", "PN", "PL", "PT", "PR", "QA", "RE", "RO", "RU", "RW", "BL", "SH", "KN", "LC", "MF", "PM", "VC", "WS", "SM", "ST", "SA", "SN", "RS", "SC", "SL", "SG", "SX", "SK", "SI", "SB", "SO", "ZA", "GS", "SS", "ES", "LK", "SD", "SR", "SJ", "SZ", "SE", "CH", "SY", "TW", "TJ", "TZ", "TH", "TL", "TG", "TK", "TO", "TT", "TN", "TR", "TM", "TC", "TV", "UG", "UA", "AE", "GB", "US", "UM", "UY", "UZ", "VU", "VE", "VN", "VG", "VI", "WF", "EH", "YE", "ZM", "ZW", "XK"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.header_name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.geo_match_statement.forwarded_ip_config.fallback_behavior #=> String, one of "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.rule_group_reference_statement.arn #=> String
@@ -3984,10 +4996,24 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.arn #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_pattern_set_reference_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4007,10 +5033,24 @@ module Aws::WAFV2
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.regex_string #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_header.name #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.single_query_argument.name #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_pattern.included_paths[0] #=> String
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.included_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.field_to_match.cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations #=> Array
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].priority #=> Integer
     #   resp.web_acl.post_process_firewall_manager_rule_groups[0].firewall_manager_statement.managed_rule_group_statement.scope_down_statement.regex_match_statement.text_transformations[0].type #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE", "BASE64_DECODE", "HEX_DECODE", "MD5", "REPLACE_COMMENTS", "ESCAPE_SEQ_DECODE", "SQL_HEX_DECODE", "CSS_DECODE", "JS_DECODE", "NORMALIZE_PATH", "NORMALIZE_PATH_WIN", "REMOVE_NULLS", "REPLACE_NULLS", "BASE64_DECODE_EXT", "URL_DECODE_UNI", "UTF8_TO_UNICODE"
@@ -4291,10 +5331,24 @@ module Aws::WAFV2
     #   resp.logging_configurations[0].redacted_fields #=> Array
     #   resp.logging_configurations[0].redacted_fields[0].single_header.name #=> String
     #   resp.logging_configurations[0].redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configurations[0].redacted_fields[0].body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].redacted_fields[0].json_body.match_pattern.included_paths #=> Array
     #   resp.logging_configurations[0].redacted_fields[0].json_body.match_pattern.included_paths[0] #=> String
     #   resp.logging_configurations[0].redacted_fields[0].json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configurations[0].redacted_fields[0].json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.logging_configurations[0].redacted_fields[0].json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configurations[0].redacted_fields[0].headers.match_pattern.included_headers #=> Array
+    #   resp.logging_configurations[0].redacted_fields[0].headers.match_pattern.included_headers[0] #=> String
+    #   resp.logging_configurations[0].redacted_fields[0].headers.match_pattern.excluded_headers #=> Array
+    #   resp.logging_configurations[0].redacted_fields[0].headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.logging_configurations[0].redacted_fields[0].headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configurations[0].redacted_fields[0].headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.match_pattern.included_cookies #=> Array
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configurations[0].redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configurations[0].managed_by_firewall_manager #=> Boolean
     #   resp.logging_configurations[0].logging_filter.filters #=> Array
     #   resp.logging_configurations[0].logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -4796,6 +5850,7 @@ module Aws::WAFV2
     #           query_string: {
     #           },
     #           body: {
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #           method: {
     #           },
@@ -4807,6 +5862,27 @@ module Aws::WAFV2
     #             },
     #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #             invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #             oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           headers: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_headers: ["FieldToMatchData"],
+    #               excluded_headers: ["FieldToMatchData"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #           },
+    #           cookies: {
+    #             match_pattern: { # required
+    #               all: {
+    #               },
+    #               included_cookies: ["SingleCookieName"],
+    #               excluded_cookies: ["SingleCookieName"],
+    #             },
+    #             match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #             oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #           },
     #         },
     #       ],
@@ -4841,10 +5917,24 @@ module Aws::WAFV2
     #   resp.logging_configuration.redacted_fields #=> Array
     #   resp.logging_configuration.redacted_fields[0].single_header.name #=> String
     #   resp.logging_configuration.redacted_fields[0].single_query_argument.name #=> String
+    #   resp.logging_configuration.redacted_fields[0].body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.redacted_fields[0].json_body.match_pattern.included_paths #=> Array
     #   resp.logging_configuration.redacted_fields[0].json_body.match_pattern.included_paths[0] #=> String
     #   resp.logging_configuration.redacted_fields[0].json_body.match_scope #=> String, one of "ALL", "KEY", "VALUE"
     #   resp.logging_configuration.redacted_fields[0].json_body.invalid_fallback_behavior #=> String, one of "MATCH", "NO_MATCH", "EVALUATE_AS_STRING"
+    #   resp.logging_configuration.redacted_fields[0].json_body.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.included_headers #=> Array
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.included_headers[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.excluded_headers #=> Array
+    #   resp.logging_configuration.redacted_fields[0].headers.match_pattern.excluded_headers[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].headers.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configuration.redacted_fields[0].headers.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.included_cookies #=> Array
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.included_cookies[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.excluded_cookies #=> Array
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_pattern.excluded_cookies[0] #=> String
+    #   resp.logging_configuration.redacted_fields[0].cookies.match_scope #=> String, one of "ALL", "KEY", "VALUE"
+    #   resp.logging_configuration.redacted_fields[0].cookies.oversize_handling #=> String, one of "CONTINUE", "MATCH", "NO_MATCH"
     #   resp.logging_configuration.managed_by_firewall_manager #=> Boolean
     #   resp.logging_configuration.logging_filter.filters #=> Array
     #   resp.logging_configuration.logging_filter.filters[0].behavior #=> String, one of "KEEP", "DROP"
@@ -5112,6 +6202,20 @@ module Aws::WAFV2
     #
     #  </note>
     #
+    # When you make changes to web ACLs or web ACL components, like rules
+    # and rule groups, WAF propagates the changes everywhere that the web
+    # ACL and its components are stored and used. Your changes are applied
+    # within seconds, but there might be a brief period of inconsistency
+    # when the changes have arrived in some places and not in others. So,
+    # for example, if you change a rule action setting, the action might be
+    # the old action in one area and the new action in another area. Or if
+    # you add an IP address to an IP set used in a blocking rule, the new
+    # address might briefly be blocked in one area while still allowed in
+    # another. This temporary inconsistency can occur when you first
+    # associate a web ACL with an Amazon Web Services resource and when you
+    # change a web ACL that is already associated with a resource.
+    # Generally, any inconsistencies of this type last only a few seconds.
+    #
     # @option params [required, String] :name
     #   The name of the IP set. You cannot change the name of an `IPSet` after
     #   you create it.
@@ -5322,6 +6426,20 @@ module Aws::WAFV2
     #
     #  </note>
     #
+    # When you make changes to web ACLs or web ACL components, like rules
+    # and rule groups, WAF propagates the changes everywhere that the web
+    # ACL and its components are stored and used. Your changes are applied
+    # within seconds, but there might be a brief period of inconsistency
+    # when the changes have arrived in some places and not in others. So,
+    # for example, if you change a rule action setting, the action might be
+    # the old action in one area and the new action in another area. Or if
+    # you add an IP address to an IP set used in a blocking rule, the new
+    # address might briefly be blocked in one area while still allowed in
+    # another. This temporary inconsistency can occur when you first
+    # associate a web ACL with an Amazon Web Services resource and when you
+    # change a web ACL that is already associated with a resource.
+    # Generally, any inconsistencies of this type last only a few seconds.
+    #
     # @option params [required, String] :name
     #   The name of the set. You cannot change the name after you create the
     #   set.
@@ -5401,6 +6519,20 @@ module Aws::WAFV2
     # group specification to this call.
     #
     #  </note>
+    #
+    # When you make changes to web ACLs or web ACL components, like rules
+    # and rule groups, WAF propagates the changes everywhere that the web
+    # ACL and its components are stored and used. Your changes are applied
+    # within seconds, but there might be a brief period of inconsistency
+    # when the changes have arrived in some places and not in others. So,
+    # for example, if you change a rule action setting, the action might be
+    # the old action in one area and the new action in another area. Or if
+    # you add an IP address to an IP set used in a blocking rule, the new
+    # address might briefly be blocked in one area while still allowed in
+    # another. This temporary inconsistency can occur when you first
+    # associate a web ACL with an Amazon Web Services resource and when you
+    # change a web ACL that is already associated with a resource.
+    # Generally, any inconsistencies of this type last only a few seconds.
     #
     # A rule group defines a collection of rules to inspect and control web
     # requests that you can use in a WebACL. When you create a rule group,
@@ -5506,6 +6638,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5517,6 +6650,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5542,6 +6696,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5553,6 +6708,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5577,6 +6753,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5588,6 +6765,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5612,6 +6810,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5623,6 +6822,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -5635,7 +6855,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -5673,6 +6893,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5684,6 +6905,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5768,6 +7010,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -5779,6 +7022,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -5891,7 +7155,23 @@ module Aws::WAFV2
       req.send_request(options)
     end
 
-    # Updates the specified WebACL.
+    # Updates the specified WebACL. While updating a web ACL, WAF provides
+    # continous coverage to the resources that you have associated with the
+    # web ACL.
+    #
+    # When you make changes to web ACLs or web ACL components, like rules
+    # and rule groups, WAF propagates the changes everywhere that the web
+    # ACL and its components are stored and used. Your changes are applied
+    # within seconds, but there might be a brief period of inconsistency
+    # when the changes have arrived in some places and not in others. So,
+    # for example, if you change a rule action setting, the action might be
+    # the old action in one area and the new action in another area. Or if
+    # you add an IP address to an IP set used in a blocking rule, the new
+    # address might briefly be blocked in one area while still allowed in
+    # another. This temporary inconsistency can occur when you first
+    # associate a web ACL with an Amazon Web Services resource and when you
+    # change a web ACL that is already associated with a resource.
+    # Generally, any inconsistencies of this type last only a few seconds.
     #
     # <note markdown="1"> This operation completely replaces the mutable specifications that you
     # already have for the web ACL with the ones that you provide to this
@@ -6043,6 +7323,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6054,6 +7335,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6079,6 +7381,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6090,6 +7393,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6114,6 +7438,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6125,6 +7450,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6149,6 +7495,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6160,6 +7507,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             comparison_operator: "EQ", # required, accepts EQ, NE, LE, LT, GE, GT
@@ -6172,7 +7540,7 @@ module Aws::WAFV2
     #             ],
     #           },
     #           geo_match_statement: {
-    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW
+    #             country_codes: ["AF"], # accepts AF, AX, AL, DZ, AS, AD, AO, AI, AQ, AG, AR, AM, AW, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BM, BT, BO, BQ, BA, BW, BV, BR, IO, BN, BG, BF, BI, KH, CM, CA, CV, KY, CF, TD, CL, CN, CX, CC, CO, KM, CG, CD, CK, CR, CI, HR, CU, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FK, FO, FJ, FI, FR, GF, PF, TF, GA, GM, GE, DE, GH, GI, GR, GL, GD, GP, GU, GT, GG, GN, GW, GY, HT, HM, VA, HN, HK, HU, IS, IN, ID, IR, IQ, IE, IM, IL, IT, JM, JP, JE, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MO, MK, MG, MW, MY, MV, ML, MT, MH, MQ, MR, MU, YT, MX, FM, MD, MC, MN, ME, MS, MA, MZ, MM, NA, NR, NP, NL, NC, NZ, NI, NE, NG, NU, NF, MP, NO, OM, PK, PW, PS, PA, PG, PY, PE, PH, PN, PL, PT, PR, QA, RE, RO, RU, RW, BL, SH, KN, LC, MF, PM, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SX, SK, SI, SB, SO, ZA, GS, SS, ES, LK, SD, SR, SJ, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TK, TO, TT, TN, TR, TM, TC, TV, UG, UA, AE, GB, US, UM, UY, UZ, VU, VE, VN, VG, VI, WF, EH, YE, ZM, ZW, XK
     #             forwarded_ip_config: {
     #               header_name: "ForwardedIPHeaderName", # required
     #               fallback_behavior: "MATCH", # required, accepts MATCH, NO_MATCH
@@ -6210,6 +7578,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6221,6 +7590,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6305,6 +7695,7 @@ module Aws::WAFV2
     #               query_string: {
     #               },
     #               body: {
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #               method: {
     #               },
@@ -6316,6 +7707,27 @@ module Aws::WAFV2
     #                 },
     #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
     #                 invalid_fallback_behavior: "MATCH", # accepts MATCH, NO_MATCH, EVALUATE_AS_STRING
+    #                 oversize_handling: "CONTINUE", # accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               headers: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_headers: ["FieldToMatchData"],
+    #                   excluded_headers: ["FieldToMatchData"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
+    #               },
+    #               cookies: {
+    #                 match_pattern: { # required
+    #                   all: {
+    #                   },
+    #                   included_cookies: ["SingleCookieName"],
+    #                   excluded_cookies: ["SingleCookieName"],
+    #                 },
+    #                 match_scope: "ALL", # required, accepts ALL, KEY, VALUE
+    #                 oversize_handling: "CONTINUE", # required, accepts CONTINUE, MATCH, NO_MATCH
     #               },
     #             },
     #             text_transformations: [ # required
@@ -6446,7 +7858,7 @@ module Aws::WAFV2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.38.0'
+      context[:gem_version] = '1.39.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

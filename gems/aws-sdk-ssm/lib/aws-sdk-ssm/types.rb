@@ -8159,21 +8159,18 @@ module Aws::SSM
     #   @return [String]
     #
     # @!attribute [rw] plugin_name
-    #   The name of the plugin for which you want detailed results. If the
-    #   document contains only one plugin, you can omit the name and details
-    #   for that plugin. If the document contains more than one plugin, you
-    #   must specify the name of the plugin for which you want to view
-    #   details.
-    #
-    #   Plugin names are also referred to as *step names* in Systems Manager
-    #   documents (SSM documents). For example, `aws:RunShellScript` is a
-    #   plugin.
+    #   The name of the step for which you want detailed results. If the
+    #   document contains only one step, you can omit the name and details
+    #   for that step. If the document contains more than one step, you must
+    #   specify the name of the step for which you want to view details. Be
+    #   sure to specify the name of the step, not the name of a plugin like
+    #   `aws:RunShellScript`.
     #
     #   To find the `PluginName`, check the document content and find the
-    #   name of the plugin. Alternatively, use ListCommandInvocations with
-    #   the `CommandId` and `Details` parameters. The `PluginName` is the
-    #   `Name` attribute of the `CommandPlugin` object in the
-    #   `CommandPlugins` list.
+    #   name of the step you want details for. Alternatively, use
+    #   ListCommandInvocations with the `CommandId` and `Details`
+    #   parameters. The `PluginName` is the `Name` attribute of the
+    #   `CommandPlugin` object in the `CommandPlugins` list.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/GetCommandInvocationRequest AWS API Documentation
@@ -17997,6 +17994,11 @@ module Aws::SSM
     #             values: ["TargetValue"],
     #           },
     #         ],
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #         max_concurrency: "MaxConcurrency",
     #         max_errors: "MaxErrors",
     #         target_locations: [
@@ -18033,6 +18035,11 @@ module Aws::SSM
     #   performs tasks on. Required if you specify `TargetParameterName`.
     #   @return [Array<Types::Target>]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of runbook parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @!attribute [rw] max_concurrency
     #   The `MaxConcurrency` value specified by the user when the operation
     #   started, indicating the maximum number of resources that the runbook
@@ -18058,6 +18065,7 @@ module Aws::SSM
       :parameters,
       :target_parameter_name,
       :targets,
+      :target_maps,
       :max_concurrency,
       :max_errors,
       :target_locations)
@@ -18941,6 +18949,11 @@ module Aws::SSM
     #               {
     #                 key: "TargetKey",
     #                 values: ["TargetValue"],
+    #               },
+    #             ],
+    #             target_maps: [
+    #               {
+    #                 "TargetMapKey" => ["TargetMapValue"],
     #               },
     #             ],
     #             max_concurrency: "MaxConcurrency",

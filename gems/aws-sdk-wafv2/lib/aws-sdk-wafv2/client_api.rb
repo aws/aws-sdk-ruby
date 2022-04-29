@@ -37,6 +37,9 @@ module Aws::WAFV2
     Condition = Shapes::StructureShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
     ConsumedCapacity = Shapes::IntegerShape.new(name: 'ConsumedCapacity')
+    CookieMatchPattern = Shapes::StructureShape.new(name: 'CookieMatchPattern')
+    CookieNames = Shapes::ListShape.new(name: 'CookieNames')
+    Cookies = Shapes::StructureShape.new(name: 'Cookies')
     CountAction = Shapes::StructureShape.new(name: 'CountAction')
     Country = Shapes::StringShape.new(name: 'Country')
     CountryCode = Shapes::StringShape.new(name: 'CountryCode')
@@ -129,8 +132,11 @@ module Aws::WAFV2
     HTTPMethod = Shapes::StringShape.new(name: 'HTTPMethod')
     HTTPRequest = Shapes::StructureShape.new(name: 'HTTPRequest')
     HTTPVersion = Shapes::StringShape.new(name: 'HTTPVersion')
+    HeaderMatchPattern = Shapes::StructureShape.new(name: 'HeaderMatchPattern')
     HeaderName = Shapes::StringShape.new(name: 'HeaderName')
+    HeaderNames = Shapes::ListShape.new(name: 'HeaderNames')
     HeaderValue = Shapes::StringShape.new(name: 'HeaderValue')
+    Headers = Shapes::StructureShape.new(name: 'Headers')
     IPAddress = Shapes::StringShape.new(name: 'IPAddress')
     IPAddressVersion = Shapes::StringShape.new(name: 'IPAddressVersion')
     IPAddresses = Shapes::ListShape.new(name: 'IPAddresses')
@@ -195,6 +201,7 @@ module Aws::WAFV2
     ManagedRuleSetSummaries = Shapes::ListShape.new(name: 'ManagedRuleSetSummaries')
     ManagedRuleSetSummary = Shapes::StructureShape.new(name: 'ManagedRuleSetSummary')
     ManagedRuleSetVersion = Shapes::StructureShape.new(name: 'ManagedRuleSetVersion')
+    MapMatchScope = Shapes::StringShape.new(name: 'MapMatchScope')
     Method = Shapes::StructureShape.new(name: 'Method')
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     MobileSdkRelease = Shapes::StructureShape.new(name: 'MobileSdkRelease')
@@ -204,6 +211,7 @@ module Aws::WAFV2
     OrStatement = Shapes::StructureShape.new(name: 'OrStatement')
     OutputUrl = Shapes::StringShape.new(name: 'OutputUrl')
     OverrideAction = Shapes::StructureShape.new(name: 'OverrideAction')
+    OversizeHandling = Shapes::StringShape.new(name: 'OversizeHandling')
     PaginationLimit = Shapes::IntegerShape.new(name: 'PaginationLimit')
     ParameterExceptionField = Shapes::StringShape.new(name: 'ParameterExceptionField')
     ParameterExceptionParameter = Shapes::StringShape.new(name: 'ParameterExceptionParameter')
@@ -259,6 +267,7 @@ module Aws::WAFV2
     SampledHTTPRequests = Shapes::ListShape.new(name: 'SampledHTTPRequests')
     Scope = Shapes::StringShape.new(name: 'Scope')
     SearchString = Shapes::BlobShape.new(name: 'SearchString')
+    SingleCookieName = Shapes::StringShape.new(name: 'SingleCookieName')
     SingleHeader = Shapes::StructureShape.new(name: 'SingleHeader')
     SingleQueryArgument = Shapes::StructureShape.new(name: 'SingleQueryArgument')
     Size = Shapes::IntegerShape.new(name: 'Size')
@@ -304,6 +313,7 @@ module Aws::WAFV2
     VersionsToPublish = Shapes::MapShape.new(name: 'VersionsToPublish')
     VisibilityConfig = Shapes::StructureShape.new(name: 'VisibilityConfig')
     WAFAssociatedItemException = Shapes::StructureShape.new(name: 'WAFAssociatedItemException')
+    WAFConfigurationWarningException = Shapes::StructureShape.new(name: 'WAFConfigurationWarningException')
     WAFDuplicateItemException = Shapes::StructureShape.new(name: 'WAFDuplicateItemException')
     WAFExpiredManagedRuleGroupVersionException = Shapes::StructureShape.new(name: 'WAFExpiredManagedRuleGroupVersionException')
     WAFInternalErrorException = Shapes::StructureShape.new(name: 'WAFInternalErrorException')
@@ -347,6 +357,7 @@ module Aws::WAFV2
     BlockAction.add_member(:custom_response, Shapes::ShapeRef.new(shape: CustomResponse, location_name: "CustomResponse"))
     BlockAction.struct_class = Types::BlockAction
 
+    Body.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, location_name: "OversizeHandling"))
     Body.struct_class = Types::Body
 
     ByteMatchStatement.add_member(:search_string, Shapes::ShapeRef.new(shape: SearchString, required: true, location_name: "SearchString"))
@@ -378,6 +389,18 @@ module Aws::WAFV2
     Condition.struct_class = Types::Condition
 
     Conditions.member = Shapes::ShapeRef.new(shape: Condition)
+
+    CookieMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
+    CookieMatchPattern.add_member(:included_cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "IncludedCookies"))
+    CookieMatchPattern.add_member(:excluded_cookies, Shapes::ShapeRef.new(shape: CookieNames, location_name: "ExcludedCookies"))
+    CookieMatchPattern.struct_class = Types::CookieMatchPattern
+
+    CookieNames.member = Shapes::ShapeRef.new(shape: SingleCookieName)
+
+    Cookies.add_member(:match_pattern, Shapes::ShapeRef.new(shape: CookieMatchPattern, required: true, location_name: "MatchPattern"))
+    Cookies.add_member(:match_scope, Shapes::ShapeRef.new(shape: MapMatchScope, required: true, location_name: "MatchScope"))
+    Cookies.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, required: true, location_name: "OversizeHandling"))
+    Cookies.struct_class = Types::Cookies
 
     CountAction.add_member(:custom_request_handling, Shapes::ShapeRef.new(shape: CustomRequestHandling, location_name: "CustomRequestHandling"))
     CountAction.struct_class = Types::CountAction
@@ -539,6 +562,8 @@ module Aws::WAFV2
     FieldToMatch.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body"))
     FieldToMatch.add_member(:method, Shapes::ShapeRef.new(shape: Method, location_name: "Method"))
     FieldToMatch.add_member(:json_body, Shapes::ShapeRef.new(shape: JsonBody, location_name: "JsonBody"))
+    FieldToMatch.add_member(:headers, Shapes::ShapeRef.new(shape: Headers, location_name: "Headers"))
+    FieldToMatch.add_member(:cookies, Shapes::ShapeRef.new(shape: Cookies, location_name: "Cookies"))
     FieldToMatch.struct_class = Types::FieldToMatch
 
     Filter.add_member(:behavior, Shapes::ShapeRef.new(shape: FilterBehavior, required: true, location_name: "Behavior"))
@@ -685,6 +710,18 @@ module Aws::WAFV2
     HTTPRequest.add_member(:headers, Shapes::ShapeRef.new(shape: HTTPHeaders, location_name: "Headers"))
     HTTPRequest.struct_class = Types::HTTPRequest
 
+    HeaderMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
+    HeaderMatchPattern.add_member(:included_headers, Shapes::ShapeRef.new(shape: HeaderNames, location_name: "IncludedHeaders"))
+    HeaderMatchPattern.add_member(:excluded_headers, Shapes::ShapeRef.new(shape: HeaderNames, location_name: "ExcludedHeaders"))
+    HeaderMatchPattern.struct_class = Types::HeaderMatchPattern
+
+    HeaderNames.member = Shapes::ShapeRef.new(shape: FieldToMatchData)
+
+    Headers.add_member(:match_pattern, Shapes::ShapeRef.new(shape: HeaderMatchPattern, required: true, location_name: "MatchPattern"))
+    Headers.add_member(:match_scope, Shapes::ShapeRef.new(shape: MapMatchScope, required: true, location_name: "MatchScope"))
+    Headers.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, required: true, location_name: "OversizeHandling"))
+    Headers.struct_class = Types::Headers
+
     IPAddresses.member = Shapes::ShapeRef.new(shape: IPAddress)
 
     IPSet.add_member(:name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "Name"))
@@ -719,6 +756,7 @@ module Aws::WAFV2
     JsonBody.add_member(:match_pattern, Shapes::ShapeRef.new(shape: JsonMatchPattern, required: true, location_name: "MatchPattern"))
     JsonBody.add_member(:match_scope, Shapes::ShapeRef.new(shape: JsonMatchScope, required: true, location_name: "MatchScope"))
     JsonBody.add_member(:invalid_fallback_behavior, Shapes::ShapeRef.new(shape: BodyParsingFallbackBehavior, location_name: "InvalidFallbackBehavior"))
+    JsonBody.add_member(:oversize_handling, Shapes::ShapeRef.new(shape: OversizeHandling, location_name: "OversizeHandling"))
     JsonBody.struct_class = Types::JsonBody
 
     JsonMatchPattern.add_member(:all, Shapes::ShapeRef.new(shape: All, location_name: "All"))
@@ -1233,6 +1271,9 @@ module Aws::WAFV2
     WAFAssociatedItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFAssociatedItemException.struct_class = Types::WAFAssociatedItemException
 
+    WAFConfigurationWarningException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
+    WAFConfigurationWarningException.struct_class = Types::WAFConfigurationWarningException
+
     WAFDuplicateItemException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     WAFDuplicateItemException.struct_class = Types::WAFDuplicateItemException
 
@@ -1430,6 +1471,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFTagOperationInternalErrorException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
 
       api.add_operation(:delete_firewall_manager_rule_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -1956,6 +1998,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFUnavailableEntityException)
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
 
       api.add_operation(:update_web_acl, Seahorse::Model::Operation.new.tap do |o|
@@ -1975,6 +2018,7 @@ module Aws::WAFV2
         o.errors << Shapes::ShapeRef.new(shape: WAFSubscriptionNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: WAFInvalidOperationException)
         o.errors << Shapes::ShapeRef.new(shape: WAFExpiredManagedRuleGroupVersionException)
+        o.errors << Shapes::ShapeRef.new(shape: WAFConfigurationWarningException)
       end)
     end
 

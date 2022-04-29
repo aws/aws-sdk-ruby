@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.136.0 (2022-04-29)
+------------------
+
+* Feature - Update the StartChangeRequestExecution, adding TargetMaps to the Runbook parameter
+
 1.135.0 (2022-04-19)
 ------------------
 

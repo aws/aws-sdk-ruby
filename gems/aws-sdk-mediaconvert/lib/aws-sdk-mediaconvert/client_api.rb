@@ -186,6 +186,7 @@ module Aws::MediaConvert
     DolbyVision = Shapes::StructureShape.new(name: 'DolbyVision')
     DolbyVisionLevel6Metadata = Shapes::StructureShape.new(name: 'DolbyVisionLevel6Metadata')
     DolbyVisionLevel6Mode = Shapes::StringShape.new(name: 'DolbyVisionLevel6Mode')
+    DolbyVisionMapping = Shapes::StringShape.new(name: 'DolbyVisionMapping')
     DolbyVisionProfile = Shapes::StringShape.new(name: 'DolbyVisionProfile')
     DropFrameTimecode = Shapes::StringShape.new(name: 'DropFrameTimecode')
     DvbNitSettings = Shapes::StructureShape.new(name: 'DvbNitSettings')
@@ -367,6 +368,7 @@ module Aws::MediaConvert
     InputScanType = Shapes::StringShape.new(name: 'InputScanType')
     InputTemplate = Shapes::StructureShape.new(name: 'InputTemplate')
     InputTimecodeSource = Shapes::StringShape.new(name: 'InputTimecodeSource')
+    InputVideoGenerator = Shapes::StructureShape.new(name: 'InputVideoGenerator')
     InsertableImage = Shapes::StructureShape.new(name: 'InsertableImage')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
     Job = Shapes::StructureShape.new(name: 'Job')
@@ -494,6 +496,7 @@ module Aws::MediaConvert
     OutputGroupType = Shapes::StringShape.new(name: 'OutputGroupType')
     OutputSdt = Shapes::StringShape.new(name: 'OutputSdt')
     OutputSettings = Shapes::StructureShape.new(name: 'OutputSettings')
+    PadVideo = Shapes::StringShape.new(name: 'PadVideo')
     PartnerWatermarking = Shapes::StructureShape.new(name: 'PartnerWatermarking')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     Preset = Shapes::StructureShape.new(name: 'Preset')
@@ -713,6 +716,7 @@ module Aws::MediaConvert
     __integerMin3Max15 = Shapes::IntegerShape.new(name: '__integerMin3Max15')
     __integerMin48000Max48000 = Shapes::IntegerShape.new(name: '__integerMin48000Max48000')
     __integerMin4Max12 = Shapes::IntegerShape.new(name: '__integerMin4Max12')
+    __integerMin50Max86400000 = Shapes::IntegerShape.new(name: '__integerMin50Max86400000')
     __integerMin6000Max1024000 = Shapes::IntegerShape.new(name: '__integerMin6000Max1024000')
     __integerMin64000Max640000 = Shapes::IntegerShape.new(name: '__integerMin64000Max640000')
     __integerMin8000Max192000 = Shapes::IntegerShape.new(name: '__integerMin8000Max192000')
@@ -1250,6 +1254,7 @@ module Aws::MediaConvert
 
     DolbyVision.add_member(:l6_metadata, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Metadata, location_name: "l6Metadata"))
     DolbyVision.add_member(:l6_mode, Shapes::ShapeRef.new(shape: DolbyVisionLevel6Mode, location_name: "l6Mode"))
+    DolbyVision.add_member(:mapping, Shapes::ShapeRef.new(shape: DolbyVisionMapping, location_name: "mapping"))
     DolbyVision.add_member(:profile, Shapes::ShapeRef.new(shape: DolbyVisionProfile, location_name: "profile"))
     DolbyVision.struct_class = Types::DolbyVision
 
@@ -1650,6 +1655,7 @@ module Aws::MediaConvert
     Input.add_member(:supplemental_imps, Shapes::ShapeRef.new(shape: __listOf__stringPatternS3ASSETMAPXml, location_name: "supplementalImps"))
     Input.add_member(:timecode_source, Shapes::ShapeRef.new(shape: InputTimecodeSource, location_name: "timecodeSource"))
     Input.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
+    Input.add_member(:video_generator, Shapes::ShapeRef.new(shape: InputVideoGenerator, location_name: "videoGenerator"))
     Input.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     Input.struct_class = Types::Input
 
@@ -1682,6 +1688,9 @@ module Aws::MediaConvert
     InputTemplate.add_member(:timecode_start, Shapes::ShapeRef.new(shape: __stringMin11Max11Pattern01D20305D205D, location_name: "timecodeStart"))
     InputTemplate.add_member(:video_selector, Shapes::ShapeRef.new(shape: VideoSelector, location_name: "videoSelector"))
     InputTemplate.struct_class = Types::InputTemplate
+
+    InputVideoGenerator.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin50Max86400000, location_name: "duration"))
+    InputVideoGenerator.struct_class = Types::InputVideoGenerator
 
     InsertableImage.add_member(:duration, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "duration"))
     InsertableImage.add_member(:fade_in, Shapes::ShapeRef.new(shape: __integerMin0Max2147483647, location_name: "fadeIn"))
@@ -2373,6 +2382,7 @@ module Aws::MediaConvert
     VideoSelector.add_member(:color_space_usage, Shapes::ShapeRef.new(shape: ColorSpaceUsage, location_name: "colorSpaceUsage"))
     VideoSelector.add_member(:embedded_timecode_override, Shapes::ShapeRef.new(shape: EmbeddedTimecodeOverride, location_name: "embeddedTimecodeOverride"))
     VideoSelector.add_member(:hdr_10_metadata, Shapes::ShapeRef.new(shape: Hdr10Metadata, location_name: "hdr10Metadata"))
+    VideoSelector.add_member(:pad_video, Shapes::ShapeRef.new(shape: PadVideo, location_name: "padVideo"))
     VideoSelector.add_member(:pid, Shapes::ShapeRef.new(shape: __integerMin1Max2147483647, location_name: "pid"))
     VideoSelector.add_member(:program_number, Shapes::ShapeRef.new(shape: __integerMinNegative2147483648Max2147483647, location_name: "programNumber"))
     VideoSelector.add_member(:rotate, Shapes::ShapeRef.new(shape: InputRotate, location_name: "rotate"))

@@ -607,9 +607,11 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.source_code_type.request_metadata.vendor_name #=> String, one of "GitHub", "GitLab", "NativeS3"
     #   resp.code_review.association_arn #=> String
     #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
+    #   resp.code_review.metrics.suppressed_lines_of_code_count #=> Integer
     #   resp.code_review.metrics.findings_count #=> Integer
     #   resp.code_review.analysis_types #=> Array
     #   resp.code_review.analysis_types[0] #=> String, one of "Security", "CodeQuality"
+    #   resp.code_review.config_file_state #=> String, one of "Present", "Absent", "PresentWithErrors"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeguru-reviewer-2019-09-19/CreateCodeReview AWS API Documentation
     #
@@ -670,9 +672,11 @@ module Aws::CodeGuruReviewer
     #   resp.code_review.source_code_type.request_metadata.vendor_name #=> String, one of "GitHub", "GitLab", "NativeS3"
     #   resp.code_review.association_arn #=> String
     #   resp.code_review.metrics.metered_lines_of_code_count #=> Integer
+    #   resp.code_review.metrics.suppressed_lines_of_code_count #=> Integer
     #   resp.code_review.metrics.findings_count #=> Integer
     #   resp.code_review.analysis_types #=> Array
     #   resp.code_review.analysis_types[0] #=> String, one of "Security", "CodeQuality"
+    #   resp.code_review.config_file_state #=> String, one of "Present", "Absent", "PresentWithErrors"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -933,6 +937,7 @@ module Aws::CodeGuruReviewer
     #   resp.code_review_summaries[0].type #=> String, one of "PullRequest", "RepositoryAnalysis"
     #   resp.code_review_summaries[0].pull_request_id #=> String
     #   resp.code_review_summaries[0].metrics_summary.metered_lines_of_code_count #=> Integer
+    #   resp.code_review_summaries[0].metrics_summary.suppressed_lines_of_code_count #=> Integer
     #   resp.code_review_summaries[0].metrics_summary.findings_count #=> Integer
     #   resp.code_review_summaries[0].source_code_type.commit_diff.source_commit #=> String
     #   resp.code_review_summaries[0].source_code_type.commit_diff.destination_commit #=> String
@@ -1390,7 +1395,7 @@ module Aws::CodeGuruReviewer
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-codegurureviewer'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

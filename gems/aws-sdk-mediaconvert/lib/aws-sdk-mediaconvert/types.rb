@@ -3772,6 +3772,9 @@ module Aws::MediaConvert
     #               supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #               timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #               timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #               video_generator: {
+    #                 duration: 1,
+    #               },
     #               video_selector: {
     #                 alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #                 color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -3791,6 +3794,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -4792,7 +4796,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -5190,6 +5195,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -6191,7 +6197,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -7045,7 +7052,8 @@ module Aws::MediaConvert
     #                   max_fall: 1,
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #                 mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                 profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #               },
     #               hdr_10_plus: {
     #                 mastering_monitor_nits: 1,
@@ -7921,7 +7929,8 @@ module Aws::MediaConvert
     #           max_fall: 1,
     #         },
     #         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #         profile: "PROFILE_5", # accepts PROFILE_5
+    #         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #       }
     #
     # @!attribute [rw] l6_metadata
@@ -7935,10 +7944,27 @@ module Aws::MediaConvert
     #   Vision MaxCLL and MaxFALL properies.
     #   @return [String]
     #
+    # @!attribute [rw] mapping
+    #   Required when you set Dolby Vision Profile (Profile) to Profile 8.1
+    #   (PROFILE\_8\_1). When you set Content mapping (Mapping) to None
+    #   (HDR10\_NOMAP), content mapping is not applied to the
+    #   HDR10-compatible signal. Depending on the source peak nit level,
+    #   clipping might occur on HDR devices without Dolby Vision. When you
+    #   set Content mapping to Static (HDR10\_1000), the transcoder creates
+    #   a 1,000 nits peak HDR10-compatible signal by applying static content
+    #   mapping to the source. This mode is speed-optimized for PQ10 sources
+    #   with metadata that is created from analysis. For graded Dolby Vision
+    #   content, be aware that creative intent might not be guaranteed with
+    #   extreme 1,000 nits trims.
+    #   @return [String]
+    #
     # @!attribute [rw] profile
-    #   In the current MediaConvert implementation, the Dolby Vision profile
-    #   is always 5 (PROFILE\_5). Therefore, all of your inputs must contain
-    #   Dolby Vision frame interleaved data.
+    #   Required when you use Dolby Vision (DolbyVision) processing. Set
+    #   Profile (DolbyVisionProfile) to Profile 5 (Profile\_5) to only
+    #   include frame-interleaved Dolby Vision metadata in your output. Set
+    #   Profile to Profile 8.1 (Profile\_8\_1) to include both
+    #   frame-interleaved Dolby Vision metadata and HDR10 metadata in your
+    #   output.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/DolbyVision AWS API Documentation
@@ -7946,6 +7972,7 @@ module Aws::MediaConvert
     class DolbyVision < Struct.new(
       :l6_metadata,
       :l6_mode,
+      :mapping,
       :profile)
       SENSITIVE = []
       include Aws::Structure
@@ -11865,6 +11892,9 @@ module Aws::MediaConvert
     #         supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #         timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #         timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #         video_generator: {
+    #           duration: 1,
+    #         },
     #         video_selector: {
     #           alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #           color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -11884,6 +11914,7 @@ module Aws::MediaConvert
     #             white_point_x: 1,
     #             white_point_y: 1,
     #           },
+    #           pad_video: "DISABLED", # accepts DISABLED, BLACK
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -12067,6 +12098,15 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/timecode.
     #   @return [String]
     #
+    # @!attribute [rw] video_generator
+    #   Use this setting if you do not have a video input or if you want to
+    #   add black video frames before, or after, other inputs. When you
+    #   include Video generator, MediaConvert creates a video input with
+    #   black frames and without an audio track. You can specify a value for
+    #   Video generator, or you can specify an Input file, but you cannot
+    #   specify both.
+    #   @return [Types::InputVideoGenerator]
+    #
     # @!attribute [rw] video_selector
     #   Input video selectors contain the video settings for the input. Each
     #   of your inputs can have up to one video selector.
@@ -12095,6 +12135,7 @@ module Aws::MediaConvert
       :supplemental_imps,
       :timecode_source,
       :timecode_start,
+      :video_generator,
       :video_selector)
       SENSITIVE = []
       include Aws::Structure
@@ -12350,6 +12391,7 @@ module Aws::MediaConvert
     #             white_point_x: 1,
     #             white_point_y: 1,
     #           },
+    #           pad_video: "DISABLED", # accepts DISABLED, BLACK
     #           pid: 1,
     #           program_number: 1,
     #           rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -12531,6 +12573,34 @@ module Aws::MediaConvert
       :timecode_source,
       :timecode_start,
       :video_selector)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Use this setting if you do not have a video input or if you want to
+    # add black video frames before, or after, other inputs. When you
+    # include Video generator, MediaConvert creates a video input with black
+    # frames and without an audio track. You can specify a value for Video
+    # generator, or you can specify an Input file, but you cannot specify
+    # both.
+    #
+    # @note When making an API call, you may pass InputVideoGenerator
+    #   data as a hash:
+    #
+    #       {
+    #         duration: 1,
+    #       }
+    #
+    # @!attribute [rw] duration
+    #   Specify an integer value for Black video duration from 50 to
+    #   86400000 to generate a black video input for that many milliseconds.
+    #   Required when you include Video generator.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/InputVideoGenerator AWS API Documentation
+    #
+    class InputVideoGenerator < Struct.new(
+      :duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13015,6 +13085,9 @@ module Aws::MediaConvert
     #             supplemental_imps: ["__stringPatternS3ASSETMAPXml"],
     #             timecode_source: "EMBEDDED", # accepts EMBEDDED, ZEROBASED, SPECIFIEDSTART
     #             timecode_start: "__stringMin11Max11Pattern01D20305D205D",
+    #             video_generator: {
+    #               duration: 1,
+    #             },
     #             video_selector: {
     #               alpha_behavior: "DISCARD", # accepts DISCARD, REMAP_TO_LUMA
     #               color_space: "FOLLOW", # accepts FOLLOW, REC_601, REC_709, HDR10, HLG_2020
@@ -13034,6 +13107,7 @@ module Aws::MediaConvert
     #                 white_point_x: 1,
     #                 white_point_y: 1,
     #               },
+    #               pad_video: "DISABLED", # accepts DISABLED, BLACK
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -14035,7 +14109,8 @@ module Aws::MediaConvert
     #                         max_fall: 1,
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                       mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                       profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                     },
     #                     hdr_10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -14483,6 +14558,7 @@ module Aws::MediaConvert
     #                 white_point_x: 1,
     #                 white_point_y: 1,
     #               },
+    #               pad_video: "DISABLED", # accepts DISABLED, BLACK
     #               pid: 1,
     #               program_number: 1,
     #               rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -15484,7 +15560,8 @@ module Aws::MediaConvert
     #                         max_fall: 1,
     #                       },
     #                       l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                       profile: "PROFILE_5", # accepts PROFILE_5
+    #                       mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                       profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                     },
     #                     hdr_10_plus: {
     #                       mastering_monitor_nits: 1,
@@ -19045,7 +19122,8 @@ module Aws::MediaConvert
     #                 max_fall: 1,
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #               profile: "PROFILE_5", # accepts PROFILE_5
+    #               mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #               profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #             },
     #             hdr_10_plus: {
     #               mastering_monitor_nits: 1,
@@ -20176,7 +20254,8 @@ module Aws::MediaConvert
     #                     max_fall: 1,
     #                   },
     #                   l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                   profile: "PROFILE_5", # accepts PROFILE_5
+    #                   mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                   profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                 },
     #                 hdr_10_plus: {
     #                   mastering_monitor_nits: 1,
@@ -21432,7 +21511,8 @@ module Aws::MediaConvert
     #                 max_fall: 1,
     #               },
     #               l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #               profile: "PROFILE_5", # accepts PROFILE_5
+    #               mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #               profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #             },
     #             hdr_10_plus: {
     #               mastering_monitor_nits: 1,
@@ -23015,6 +23095,7 @@ module Aws::MediaConvert
     #                   white_point_x: 1,
     #                   white_point_y: 1,
     #                 },
+    #                 pad_video: "DISABLED", # accepts DISABLED, BLACK
     #                 pid: 1,
     #                 program_number: 1,
     #                 rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -24016,7 +24097,8 @@ module Aws::MediaConvert
     #                           max_fall: 1,
     #                         },
     #                         l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                         profile: "PROFILE_5", # accepts PROFILE_5
+    #                         mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                         profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #                       },
     #                       hdr_10_plus: {
     #                         mastering_monitor_nits: 1,
@@ -24857,7 +24939,8 @@ module Aws::MediaConvert
     #                   max_fall: 1,
     #                 },
     #                 l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #                 profile: "PROFILE_5", # accepts PROFILE_5
+    #                 mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #                 profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #               },
     #               hdr_10_plus: {
     #                 mastering_monitor_nits: 1,
@@ -25864,7 +25947,8 @@ module Aws::MediaConvert
     #               max_fall: 1,
     #             },
     #             l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #             profile: "PROFILE_5", # accepts PROFILE_5
+    #             mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #             profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #           },
     #           hdr_10_plus: {
     #             mastering_monitor_nits: 1,
@@ -26131,7 +26215,8 @@ module Aws::MediaConvert
     #             max_fall: 1,
     #           },
     #           l6_mode: "PASSTHROUGH", # accepts PASSTHROUGH, RECALCULATE, SPECIFY
-    #           profile: "PROFILE_5", # accepts PROFILE_5
+    #           mapping: "HDR10_NOMAP", # accepts HDR10_NOMAP, HDR10_1000
+    #           profile: "PROFILE_5", # accepts PROFILE_5, PROFILE_8_1
     #         },
     #         hdr_10_plus: {
     #           mastering_monitor_nits: 1,
@@ -26273,6 +26358,7 @@ module Aws::MediaConvert
     #           white_point_x: 1,
     #           white_point_y: 1,
     #         },
+    #         pad_video: "DISABLED", # accepts DISABLED, BLACK
     #         pid: 1,
     #         program_number: 1,
     #         rotate: "DEGREE_0", # accepts DEGREE_0, DEGREES_90, DEGREES_180, DEGREES_270, AUTO
@@ -26343,6 +26429,18 @@ module Aws::MediaConvert
     #   https://docs.aws.amazon.com/console/mediaconvert/hdr.
     #   @return [Types::Hdr10Metadata]
     #
+    # @!attribute [rw] pad_video
+    #   Use this setting if your input has video and audio durations that
+    #   don't align, and your output or player has strict alignment
+    #   requirements. Examples: Input audio track has a delayed start. Input
+    #   video track ends before audio ends. When you set Pad video
+    #   (padVideo) to Black (BLACK), MediaConvert generates black video
+    #   frames so that output video and audio durations match. Black video
+    #   frames are added at the beginning or end, depending on your input.
+    #   To keep the default behavior and not generate black video, set Pad
+    #   video to Disabled (DISABLED) or leave blank.
+    #   @return [String]
+    #
     # @!attribute [rw] pid
     #   Use PID (Pid) to select specific video data from an input file.
     #   Specify this value as an integer; the system automatically converts
@@ -26391,6 +26489,7 @@ module Aws::MediaConvert
       :color_space_usage,
       :embedded_timecode_override,
       :hdr_10_metadata,
+      :pad_video,
       :pid,
       :program_number,
       :rotate,

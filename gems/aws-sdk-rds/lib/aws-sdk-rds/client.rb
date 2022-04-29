@@ -3952,7 +3952,7 @@ module Aws::RDS
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create
-    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.reqsMS
+    #   [2]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html
     #   [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt
     #   [4]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport
     #   [5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt
@@ -4384,6 +4384,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::CreateDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -4471,6 +4491,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -4509,6 +4530,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -4611,6 +4634,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -5131,6 +5155,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-setup-orcl.html#custom-setup-orcl.iam-vpc
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   read replica. A `DBSubnetGroup` can support only the IPv4 protocol or
+    #   the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -5212,6 +5256,7 @@ module Aws::RDS
     #     replica_mode: "open-read-only", # accepts open-read-only, mounted
     #     max_allocated_storage: 1,
     #     custom_iam_instance_profile: "String",
+    #     network_type: "String",
     #     source_region: "String",
     #   })
     #
@@ -5251,6 +5296,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -5353,6 +5400,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -5996,6 +6044,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBSubnetGroup AWS API Documentation
     #
@@ -7085,6 +7135,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -7187,6 +7239,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -9295,6 +9348,8 @@ module Aws::RDS
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instances[0].db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instances[0].db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instances[0].db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instances[0].db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instances[0].preferred_maintenance_window #=> String
     #   resp.db_instances[0].pending_modified_values.db_instance_class #=> String
     #   resp.db_instances[0].pending_modified_values.allocated_storage #=> Integer
@@ -9397,6 +9452,7 @@ module Aws::RDS
     #   resp.db_instances[0].resume_full_automation_mode_time #=> Time
     #   resp.db_instances[0].custom_iam_instance_profile #=> String
     #   resp.db_instances[0].backup_target #=> String
+    #   resp.db_instances[0].network_type #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -10454,6 +10510,8 @@ module Aws::RDS
     #   resp.db_subnet_groups[0].subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
     #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+    #   resp.db_subnet_groups[0].supported_network_types #=> Array
+    #   resp.db_subnet_groups[0].supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBSubnetGroups AWS API Documentation
     #
@@ -11688,6 +11746,8 @@ module Aws::RDS
     #   resp.orderable_db_instance_options[0].supported_activity_stream_modes[0] #=> String
     #   resp.orderable_db_instance_options[0].supports_global_databases #=> Boolean
     #   resp.orderable_db_instance_options[0].supports_clusters #=> Boolean
+    #   resp.orderable_db_instance_options[0].supported_network_types #=> Array
+    #   resp.orderable_db_instance_options[0].supported_network_types[0] #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOrderableDBInstanceOptions AWS API Documentation
@@ -14802,6 +14862,26 @@ module Aws::RDS
     #   ends, RDS Custom resumes full automation. The minimum value is `60`
     #   (default). The maximum value is `1,440`.
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::ModifyDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -14886,6 +14966,7 @@ module Aws::RDS
     #     aws_backup_recovery_point_arn: "AwsBackupRecoveryPointArn",
     #     automation_mode: "full", # accepts full, all-paused
     #     resume_full_automation_mode_minutes: 1,
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -14924,6 +15005,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -15026,6 +15109,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -15656,6 +15740,8 @@ module Aws::RDS
     #   resp.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_subnet_group.supported_network_types[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBSubnetGroup AWS API Documentation
     #
@@ -16148,6 +16234,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -16250,6 +16338,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -16738,6 +16827,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -16840,6 +16931,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -19451,6 +19543,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBInstanceFromDBSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromDBSnapshotResult#db_instance #db_instance} => Types::DBInstance
@@ -19594,6 +19706,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -19632,6 +19745,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -19734,6 +19849,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -20137,6 +20253,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBInstanceFromS3Result] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceFromS3Result#db_instance #db_instance} => Types::DBInstance
@@ -20198,6 +20334,7 @@ module Aws::RDS
     #     use_default_processor_features: false,
     #     deletion_protection: false,
     #     max_allocated_storage: 1,
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -20236,6 +20373,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -20338,6 +20477,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -20763,6 +20903,26 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html
     #
+    # @option params [String] :network_type
+    #   The network type of the DB instance.
+    #
+    #   Valid values:
+    #
+    #   * `IPV4`
+    #
+    #   * `DUAL`
+    #
+    #   The network type is determined by the `DBSubnetGroup` specified for
+    #   the DB instance. A `DBSubnetGroup` can support only the IPv4 protocol
+    #   or the IPv4 and the IPv6 protocols (`DUAL`).
+    #
+    #   For more information, see [ Working with a DB instance in a VPC][1] in
+    #   the *Amazon RDS User Guide.*
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html
+    #
     # @return [Types::RestoreDBInstanceToPointInTimeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RestoreDBInstanceToPointInTimeResult#db_instance #db_instance} => Types::DBInstance
@@ -20912,6 +21072,7 @@ module Aws::RDS
     #     enable_customer_owned_ip: false,
     #     custom_iam_instance_profile: "String",
     #     backup_target: "String",
+    #     network_type: "String",
     #   })
     #
     # @example Response structure
@@ -20950,6 +21111,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -21052,6 +21215,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -21430,6 +21594,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -21532,6 +21698,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -22029,6 +22196,8 @@ module Aws::RDS
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_outpost.arn #=> String
     #   resp.db_instance.db_subnet_group.subnets[0].subnet_status #=> String
     #   resp.db_instance.db_subnet_group.db_subnet_group_arn #=> String
+    #   resp.db_instance.db_subnet_group.supported_network_types #=> Array
+    #   resp.db_instance.db_subnet_group.supported_network_types[0] #=> String
     #   resp.db_instance.preferred_maintenance_window #=> String
     #   resp.db_instance.pending_modified_values.db_instance_class #=> String
     #   resp.db_instance.pending_modified_values.allocated_storage #=> Integer
@@ -22131,6 +22300,7 @@ module Aws::RDS
     #   resp.db_instance.resume_full_automation_mode_time #=> Time
     #   resp.db_instance.custom_iam_instance_profile #=> String
     #   resp.db_instance.backup_target #=> String
+    #   resp.db_instance.network_type #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -22221,7 +22391,7 @@ module Aws::RDS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
