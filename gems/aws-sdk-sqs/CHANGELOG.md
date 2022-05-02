@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Parse the region from the `queue_url` param only if the component is exactly `sqs`.
+
 1.51.0 (2022-02-24)
 ------------------
 
