@@ -776,7 +776,7 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Lists the instance types for the specified Outpost.
+    # Gets the instance types for the specified Outpost.
     #
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
@@ -793,6 +793,8 @@ module Aws::Outposts
     #   * {Types::GetOutpostInstanceTypesOutput#next_token #next_token} => String
     #   * {Types::GetOutpostInstanceTypesOutput#outpost_id #outpost_id} => String
     #   * {Types::GetOutpostInstanceTypesOutput#outpost_arn #outpost_arn} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -912,9 +914,64 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Use to create a list of every item in the catalog. Add filters to your
-    # request to return a more specific list of results. Use filters to
-    # match an item class, storage option, or EC2 family.
+    # Lists the hardware assets in an Outpost. If you are using Dedicated
+    # Hosts on Amazon Web Services Outposts, you can filter your request by
+    # host ID to return a list of hardware assets that allocate resources
+    # for Dedicated Hosts.
+    #
+    # @option params [required, String] :outpost_identifier
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    # @option params [Array<String>] :host_id_filter
+    #   A filter for the host ID of Dedicated Hosts on the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for a
+    #   filter, the values are joined with an `OR`, and the request returns
+    #   all results that match any of the specified values.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum page size.
+    #
+    # @option params [String] :next_token
+    #   The pagination token.
+    #
+    # @return [Types::ListAssetsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAssetsOutput#assets #assets} => Array&lt;Types::AssetInfo&gt;
+    #   * {Types::ListAssetsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_assets({
+    #     outpost_identifier: "OutpostIdentifier", # required
+    #     host_id_filter: ["HostId"],
+    #     max_results: 1,
+    #     next_token: "Token",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assets #=> Array
+    #   resp.assets[0].asset_id #=> String
+    #   resp.assets[0].rack_id #=> String
+    #   resp.assets[0].asset_type #=> String, one of "COMPUTE"
+    #   resp.assets[0].compute_attributes.host_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssets AWS API Documentation
+    #
+    # @overload list_assets(params = {})
+    # @param [Hash] params ({})
+    def list_assets(params = {}, options = {})
+      req = build_request(:list_assets, params)
+      req.send_request(options)
+    end
+
+    # Lists the items in the catalog. Add filters to your request to return
+    # a more specific list of results. Use filters to match an item class,
+    # storage option, or EC2 family.
     #
     # If you specify multiple filters, the filters are joined with an `AND`,
     # and the request returns only results that match all of the specified
@@ -990,9 +1047,9 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Create a list of the Outpost orders for your Amazon Web Services
-    # account. You can filter your request by Outpost to return a more
-    # specific list of results.
+    # Lists the Outpost orders for your Amazon Web Services account. You can
+    # filter your request by Outpost to return a more specific list of
+    # results.
     #
     # @option params [String] :outpost_identifier_filter
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
@@ -1040,9 +1097,9 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Create a list of the Outposts for your Amazon Web Services account.
-    # Add filters to your request to return a more specific list of results.
-    # Use filters to match an Outpost lifecycle status, Availability Zone
+    # Lists the Outposts for your Amazon Web Services account. Add filters
+    # to your request to return a more specific list of results. Use filters
+    # to match an Outpost lifecycle status, Availability Zone
     # (`us-east-1a`), and AZ ID (`use1-az1`).
     #
     # If you specify multiple filters, the filters are joined with an `AND`,
@@ -1120,10 +1177,10 @@ module Aws::Outposts
       req.send_request(options)
     end
 
-    # Create a list of the Outpost sites for your Amazon Web Services
-    # account. Add operating address filters to your request to return a
-    # more specific list of results. Use filters to match site city, country
-    # code, or state/region of the operating address.
+    # Lists the Outpost sites for your Amazon Web Services account. Add
+    # operating address filters to your request to return a more specific
+    # list of results. Use filters to match site city, country code, or
+    # state/region of the operating address.
     #
     # If you specify multiple filters, the filters are joined with an `AND`,
     # and the request returns only results that match all of the specified
@@ -1641,7 +1698,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

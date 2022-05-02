@@ -533,7 +533,7 @@ module Aws::Synthetics
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canary.status.state_reason #=> String
-    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canary.timeline.created #=> Time
     #   resp.canary.timeline.last_modified #=> Time
     #   resp.canary.timeline.last_started #=> Time
@@ -567,12 +567,12 @@ module Aws::Synthetics
 
     # Permanently deletes the specified canary.
     #
-    # When you delete a canary, resources used and created by the canary are
-    # not automatically deleted. After you delete a canary that you do not
-    # intend to use again, you should also delete the following:
+    # If you specify `DeleteLambda` to `true`, CloudWatch Synthetics also
+    # deletes the Lambda functions and layers that are used by the canary.
     #
-    # * The Lambda functions and layers used by this canary. These have the
-    #   prefix `cwsyn-MyCanaryName `.
+    # Other esources used and created by the canary are not automatically
+    # deleted. After you delete a canary that you do not intend to use
+    # again, you should also delete the following:
     #
     # * The CloudWatch alarms created for this canary. These alarms have a
     #   name of `Synthetics-SharpDrop-Alarm-MyCanaryName `.
@@ -600,12 +600,19 @@ module Aws::Synthetics
     #
     #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #
+    # @option params [Boolean] :delete_lambda
+    #   Specifies whether to also delete the Lambda functions and layers used
+    #   by this canary. The default is false.
+    #
+    #   Type: Boolean
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_canary({
     #     name: "CanaryName", # required
+    #     delete_lambda: false,
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteCanary AWS API Documentation
@@ -696,7 +703,7 @@ module Aws::Synthetics
     #   resp.canaries[0].failure_retention_period_in_days #=> Integer
     #   resp.canaries[0].status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canaries[0].status.state_reason #=> String
-    #   resp.canaries[0].status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canaries[0].status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canaries[0].timeline.created #=> Time
     #   resp.canaries[0].timeline.last_modified #=> Time
     #   resp.canaries[0].timeline.last_started #=> Time
@@ -900,7 +907,7 @@ module Aws::Synthetics
     #   resp.canary.failure_retention_period_in_days #=> Integer
     #   resp.canary.status.state #=> String, one of "CREATING", "READY", "STARTING", "RUNNING", "UPDATING", "STOPPING", "STOPPED", "ERROR", "DELETING"
     #   resp.canary.status.state_reason #=> String
-    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS"
+    #   resp.canary.status.state_reason_code #=> String, one of "INVALID_PERMISSIONS", "CREATE_PENDING", "CREATE_IN_PROGRESS", "CREATE_FAILED", "UPDATE_PENDING", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE", "ROLLBACK_COMPLETE", "ROLLBACK_FAILED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "SYNC_DELETE_IN_PROGRESS"
     #   resp.canary.timeline.created #=> Time
     #   resp.canary.timeline.last_modified #=> Time
     #   resp.canary.timeline.last_started #=> Time
@@ -1335,7 +1342,7 @@ module Aws::Synthetics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-synthetics'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

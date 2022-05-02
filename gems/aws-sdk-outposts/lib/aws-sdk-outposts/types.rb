@@ -104,6 +104,35 @@ module Aws::Outposts
       include Aws::Structure
     end
 
+    # Information about hardware assets.
+    #
+    # @!attribute [rw] asset_id
+    #   The ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] rack_id
+    #   The rack ID of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] asset_type
+    #   The type of the asset.
+    #   @return [String]
+    #
+    # @!attribute [rw] compute_attributes
+    #   Information about compute hardware assets.
+    #   @return [Types::ComputeAttributes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/AssetInfo AWS API Documentation
+    #
+    class AssetInfo < Struct.new(
+      :asset_id,
+      :rack_id,
+      :asset_type,
+      :compute_attributes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CancelOrderInput
     #   data as a hash:
     #
@@ -168,6 +197,20 @@ module Aws::Outposts
       :weight_lbs,
       :supported_uplink_gbps,
       :supported_storage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about compute hardware assets.
+    #
+    # @!attribute [rw] host_id
+    #   The host ID of any Dedicated Hosts on the asset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ComputeAttributes AWS API Documentation
+    #
+    class ComputeAttributes < Struct.new(
+      :host_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -811,6 +854,64 @@ module Aws::Outposts
     class LineItemRequest < Struct.new(
       :catalog_item_id,
       :quantity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListAssetsInput
+    #   data as a hash:
+    #
+    #       {
+    #         outpost_identifier: "OutpostIdentifier", # required
+    #         host_id_filter: ["HostId"],
+    #         max_results: 1,
+    #         next_token: "Token",
+    #       }
+    #
+    # @!attribute [rw] outpost_identifier
+    #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_id_filter
+    #   A filter for the host ID of Dedicated Hosts on the Outpost.
+    #
+    #   Filter values are case sensitive. If you specify multiple values for
+    #   a filter, the values are joined with an `OR`, and the request
+    #   returns all results that match any of the specified values.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum page size.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsInput AWS API Documentation
+    #
+    class ListAssetsInput < Struct.new(
+      :outpost_identifier,
+      :host_id_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assets
+    #   Information about hardware assets.
+    #   @return [Array<Types::AssetInfo>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/ListAssetsOutput AWS API Documentation
+    #
+    class ListAssetsOutput < Struct.new(
+      :assets,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end

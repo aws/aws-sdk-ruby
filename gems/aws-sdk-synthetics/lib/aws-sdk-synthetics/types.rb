@@ -860,6 +860,7 @@ module Aws::Synthetics
     #
     #       {
     #         name: "CanaryName", # required
+    #         delete_lambda: false,
     #       }
     #
     # @!attribute [rw] name
@@ -871,10 +872,18 @@ module Aws::Synthetics
     #   [1]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
     #   @return [String]
     #
+    # @!attribute [rw] delete_lambda
+    #   Specifies whether to also delete the Lambda functions and layers
+    #   used by this canary. The default is false.
+    #
+    #   Type: Boolean
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/synthetics-2017-10-11/DeleteCanaryRequest AWS API Documentation
     #
     class DeleteCanaryRequest < Struct.new(
-      :name)
+      :name,
+      :delete_lambda)
       SENSITIVE = []
       include Aws::Structure
     end

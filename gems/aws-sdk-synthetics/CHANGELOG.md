@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2022-05-02)
+------------------
+
+* Feature - CloudWatch Synthetics has introduced a new feature to provide customers with an option to delete the underlying resources that Synthetics canary creates when the user chooses to delete the canary.
+
 1.26.0 (2022-03-04)
 ------------------
 

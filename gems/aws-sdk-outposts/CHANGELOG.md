@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.31.0 (2022-05-02)
+------------------
+
+* Feature - This release adds a new API called ListAssets to the Outposts SDK, which lists the hardware assets in an Outpost.
+
 1.30.0 (2022-03-11)
 ------------------
 

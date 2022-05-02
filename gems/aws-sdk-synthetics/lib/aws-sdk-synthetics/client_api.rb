@@ -111,6 +111,7 @@ module Aws::Synthetics
     VpcConfigInput = Shapes::StructureShape.new(name: 'VpcConfigInput')
     VpcConfigOutput = Shapes::StructureShape.new(name: 'VpcConfigOutput')
     VpcId = Shapes::StringShape.new(name: 'VpcId')
+    boolean = Shapes::BooleanShape.new(name: 'boolean')
 
     ArtifactConfigInput.add_member(:s3_encryption, Shapes::ShapeRef.new(shape: S3EncryptionConfig, location_name: "S3Encryption"))
     ArtifactConfigInput.struct_class = Types::ArtifactConfigInput
@@ -233,6 +234,7 @@ module Aws::Synthetics
     CreateCanaryResponse.struct_class = Types::CreateCanaryResponse
 
     DeleteCanaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: CanaryName, required: true, location: "uri", location_name: "name"))
+    DeleteCanaryRequest.add_member(:delete_lambda, Shapes::ShapeRef.new(shape: boolean, location: "querystring", location_name: "deleteLambda"))
     DeleteCanaryRequest.struct_class = Types::DeleteCanaryRequest
 
     DeleteCanaryResponse.struct_class = Types::DeleteCanaryResponse
