@@ -961,6 +961,10 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #
+    # @option params [String] :outpost_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
+    #   which to allocate the Dedicated Host.
+    #
     # @return [Types::AllocateHostsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::AllocateHostsResult#host_ids #host_ids} => Array&lt;String&gt;
@@ -986,6 +990,7 @@ module Aws::EC2
     #       },
     #     ],
     #     host_recovery: "on", # accepts on, off
+    #     outpost_arn: "String",
     #   })
     #
     # @example Response structure
@@ -19859,6 +19864,7 @@ module Aws::EC2
     #   resp.hosts[0].owner_id #=> String
     #   resp.hosts[0].availability_zone_id #=> String
     #   resp.hosts[0].member_of_service_linked_resource_group #=> Boolean
+    #   resp.hosts[0].outpost_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeHosts AWS API Documentation
@@ -48742,12 +48748,13 @@ module Aws::EC2
       req.send_request(options)
     end
 
-    # Stops an Amazon EBS-backed instance.
+    # Stops an Amazon EBS-backed instance. For more information, see [Stop
+    # and start your instance][1] in the *Amazon EC2 User Guide*.
     #
     # You can use the Stop action to hibernate an instance if the instance
-    # is [enabled for hibernation][1] and it meets the [hibernation
-    # prerequisites][2]. For more information, see [Hibernate your
-    # instance][3] in the *Amazon EC2 User Guide*.
+    # is [enabled for hibernation][2] and it meets the [hibernation
+    # prerequisites][3]. For more information, see [Hibernate your
+    # instance][4] in the *Amazon EC2 User Guide*.
     #
     # We don't charge usage for a stopped instance, or data transfer fees;
     # however, your root partition Amazon EBS volume remains and continues
@@ -48760,7 +48767,7 @@ module Aws::EC2
     # can't use the Stop action to hibernate Spot Instances, but you can
     # specify that Amazon EC2 should hibernate Spot Instances when they are
     # interrupted. For more information, see [Hibernating interrupted Spot
-    # Instances][4] in the *Amazon EC2 User Guide*.
+    # Instances][5] in the *Amazon EC2 User Guide*.
     #
     # When you stop or hibernate an instance, we shut it down. You can
     # restart your instance at any time. Before stopping or hibernating an
@@ -48776,22 +48783,23 @@ module Aws::EC2
     # devices attached during the instance launch are automatically deleted.
     # For more information about the differences between rebooting,
     # stopping, hibernating, and terminating instances, see [Instance
-    # lifecycle][5] in the *Amazon EC2 User Guide*.
+    # lifecycle][6] in the *Amazon EC2 User Guide*.
     #
     # When you stop an instance, we attempt to shut it down forcibly after a
     # short while. If your instance appears stuck in the stopping state
     # after a period of time, there may be an issue with the underlying host
     # computer. For more information, see [Troubleshoot stopping your
-    # instance][6] in the *Amazon EC2 User Guide*.
+    # instance][7] in the *Amazon EC2 User Guide*.
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation
-    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
-    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
-    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances
-    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
-    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html
+    # [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#enabling-hibernation
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+    # [5]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html#hibernate-spot-instances
+    # [6]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html
+    # [7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesStopping.html
     #
     # @option params [required, Array<String>] :instance_ids
     #   The IDs of the instances.
@@ -49506,7 +49514,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.309.0'
+      context[:gem_version] = '1.310.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

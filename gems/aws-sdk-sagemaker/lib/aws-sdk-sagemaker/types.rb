@@ -5119,6 +5119,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         subnet_ids: ["SubnetId"], # required
@@ -9750,6 +9763,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -27363,12 +27389,17 @@ module Aws::SageMaker
     #   The dataset split from which the AutoML job produced the metric.
     #   @return [String]
     #
+    # @!attribute [rw] standard_metric_name
+    #   The name of the standard metric.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDatum AWS API Documentation
     #
     class MetricDatum < Struct.new(
       :metric_name,
       :value,
-      :set)
+      :set,
+      :standard_metric_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33522,11 +33553,43 @@ module Aws::SageMaker
 
     # A collection of settings that apply to an `RSessionGateway` app.
     #
-    # @api private
+    # @note When making an API call, you may pass RSessionAppSettings
+    #   data as a hash:
+    #
+    #       {
+    #         default_resource_spec: {
+    #           sage_maker_image_arn: "ImageArn",
+    #           sage_maker_image_version_arn: "ImageVersionArn",
+    #           instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #           lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #         },
+    #         custom_images: [
+    #           {
+    #             image_name: "ImageName", # required
+    #             image_version_number: 1,
+    #             app_image_config_name: "AppImageConfigName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] default_resource_spec
+    #   Specifies the ARN's of a SageMaker image and SageMaker image
+    #   version, and the instance type that the version runs on.
+    #   @return [Types::ResourceSpec]
+    #
+    # @!attribute [rw] custom_images
+    #   A list of custom SageMaker images that are configured to run as a
+    #   RSession app.
+    #   @return [Array<Types::CustomImage>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/RSessionAppSettings AWS API Documentation
     #
-    class RSessionAppSettings < Aws::EmptyStructure; end
+    class RSessionAppSettings < Struct.new(
+      :default_resource_spec,
+      :custom_images)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # A collection of settings that configure user interaction with the
     # `RStudioServerPro` app. `RStudioServerProAppSettings` cannot be
@@ -38913,6 +38976,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         domain_settings_for_update: {
@@ -40113,6 +40189,19 @@ module Aws::SageMaker
     #             user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #           },
     #           r_session_app_settings: {
+    #             default_resource_spec: {
+    #               sage_maker_image_arn: "ImageArn",
+    #               sage_maker_image_version_arn: "ImageVersionArn",
+    #               instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #               lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #             },
+    #             custom_images: [
+    #               {
+    #                 image_name: "ImageName", # required
+    #                 image_version_number: 1,
+    #                 app_image_config_name: "AppImageConfigName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #       }
@@ -40431,6 +40520,19 @@ module Aws::SageMaker
     #           user_group: "R_STUDIO_ADMIN", # accepts R_STUDIO_ADMIN, R_STUDIO_USER
     #         },
     #         r_session_app_settings: {
+    #           default_resource_spec: {
+    #             sage_maker_image_arn: "ImageArn",
+    #             sage_maker_image_version_arn: "ImageVersionArn",
+    #             instance_type: "system", # accepts system, ml.t3.micro, ml.t3.small, ml.t3.medium, ml.t3.large, ml.t3.xlarge, ml.t3.2xlarge, ml.m5.large, ml.m5.xlarge, ml.m5.2xlarge, ml.m5.4xlarge, ml.m5.8xlarge, ml.m5.12xlarge, ml.m5.16xlarge, ml.m5.24xlarge, ml.m5d.large, ml.m5d.xlarge, ml.m5d.2xlarge, ml.m5d.4xlarge, ml.m5d.8xlarge, ml.m5d.12xlarge, ml.m5d.16xlarge, ml.m5d.24xlarge, ml.c5.large, ml.c5.xlarge, ml.c5.2xlarge, ml.c5.4xlarge, ml.c5.9xlarge, ml.c5.12xlarge, ml.c5.18xlarge, ml.c5.24xlarge, ml.p3.2xlarge, ml.p3.8xlarge, ml.p3.16xlarge, ml.p3dn.24xlarge, ml.g4dn.xlarge, ml.g4dn.2xlarge, ml.g4dn.4xlarge, ml.g4dn.8xlarge, ml.g4dn.12xlarge, ml.g4dn.16xlarge, ml.r5.large, ml.r5.xlarge, ml.r5.2xlarge, ml.r5.4xlarge, ml.r5.8xlarge, ml.r5.12xlarge, ml.r5.16xlarge, ml.r5.24xlarge
+    #             lifecycle_config_arn: "StudioLifecycleConfigArn",
+    #           },
+    #           custom_images: [
+    #             {
+    #               image_name: "ImageName", # required
+    #               image_version_number: 1,
+    #               app_image_config_name: "AppImageConfigName", # required
+    #             },
+    #           ],
     #         },
     #       }
     #

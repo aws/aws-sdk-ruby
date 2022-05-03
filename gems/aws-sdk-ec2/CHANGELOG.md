@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.310.0 (2022-05-03)
+------------------
+
+* Feature - Adds support for allocating Dedicated Hosts on AWS  Outposts. The AllocateHosts API now accepts an OutpostArn request  parameter, and the DescribeHosts API now includes an OutpostArn response parameter.
+
 1.309.0 (2022-04-28)
 ------------------
 

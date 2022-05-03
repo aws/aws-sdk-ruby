@@ -119,6 +119,7 @@ module Aws::SageMaker
     AutoMLJobSummary = Shapes::StructureShape.new(name: 'AutoMLJobSummary')
     AutoMLMaxResults = Shapes::IntegerShape.new(name: 'AutoMLMaxResults')
     AutoMLMetricEnum = Shapes::StringShape.new(name: 'AutoMLMetricEnum')
+    AutoMLMetricExtendedEnum = Shapes::StringShape.new(name: 'AutoMLMetricExtendedEnum')
     AutoMLNameContains = Shapes::StringShape.new(name: 'AutoMLNameContains')
     AutoMLOutputDataConfig = Shapes::StructureShape.new(name: 'AutoMLOutputDataConfig')
     AutoMLPartialFailureReason = Shapes::StructureShape.new(name: 'AutoMLPartialFailureReason')
@@ -5320,6 +5321,7 @@ module Aws::SageMaker
     MetricDatum.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, location_name: "MetricName"))
     MetricDatum.add_member(:value, Shapes::ShapeRef.new(shape: Float, location_name: "Value"))
     MetricDatum.add_member(:set, Shapes::ShapeRef.new(shape: MetricSetSource, location_name: "Set"))
+    MetricDatum.add_member(:standard_metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricExtendedEnum, location_name: "StandardMetricName"))
     MetricDatum.struct_class = Types::MetricDatum
 
     MetricDefinition.add_member(:name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "Name"))
@@ -6194,6 +6196,8 @@ module Aws::SageMaker
 
     QueryTypes.member = Shapes::ShapeRef.new(shape: String40)
 
+    RSessionAppSettings.add_member(:default_resource_spec, Shapes::ShapeRef.new(shape: ResourceSpec, location_name: "DefaultResourceSpec"))
+    RSessionAppSettings.add_member(:custom_images, Shapes::ShapeRef.new(shape: CustomImages, location_name: "CustomImages"))
     RSessionAppSettings.struct_class = Types::RSessionAppSettings
 
     RStudioServerProAppSettings.add_member(:access_status, Shapes::ShapeRef.new(shape: RStudioServerProAccessStatus, location_name: "AccessStatus"))

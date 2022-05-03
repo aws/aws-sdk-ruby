@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.114.0 (2022-05-03)
+------------------
+
+* Feature - Documentation only update for doc bug fixes for the S3 API docs.
+
 1.113.2 (2022-04-26)
 ------------------
 

@@ -995,6 +995,7 @@ module Aws::EC2
     #           },
     #         ],
     #         host_recovery: "on", # accepts on, off
+    #         outpost_arn: "String",
     #       }
     #
     # @!attribute [rw] auto_placement
@@ -1068,6 +1069,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
     #   @return [String]
     #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
+    #   which to allocate the Dedicated Host.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateHostsRequest AWS API Documentation
     #
     class AllocateHostsRequest < Struct.new(
@@ -1078,7 +1084,8 @@ module Aws::EC2
       :instance_family,
       :quantity,
       :tag_specifications,
-      :host_recovery)
+      :host_recovery,
+      :outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -37345,6 +37352,11 @@ module Aws::EC2
     #   host resource group; otherwise, it is not.
     #   @return [Boolean]
     #
+    # @!attribute [rw] outpost_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on
+    #   which the Dedicated Host is allocated.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/Host AWS API Documentation
     #
     class Host < Struct.new(
@@ -37364,7 +37376,8 @@ module Aws::EC2
       :allows_multiple_instance_types,
       :owner_id,
       :availability_zone_id,
-      :member_of_service_linked_resource_group)
+      :member_of_service_linked_resource_group,
+      :outpost_arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -24,7 +24,7 @@ module Aws::KinesisVideo
     end
 
     # You have reached the maximum limit of active signaling channels for
-    # this AWS account in this region.
+    # this Amazon Web Services account in this region.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -147,7 +147,7 @@ module Aws::KinesisVideo
     #
     #       {
     #         channel_name: "ChannelName", # required
-    #         channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER
+    #         channel_type: "SINGLE_MASTER", # accepts SINGLE_MASTER, FULL_MESH
     #         single_master_configuration: {
     #           message_ttl_seconds: 1,
     #         },
@@ -161,7 +161,8 @@ module Aws::KinesisVideo
     #
     # @!attribute [rw] channel_name
     #   A name for the signaling channel that you are creating. It must be
-    #   unique for each AWS account and AWS Region.
+    #   unique for each Amazon Web Services account and Amazon Web Services
+    #   Region.
     #   @return [String]
     #
     # @!attribute [rw] channel_type
@@ -251,8 +252,8 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key that you want
-    #   Kinesis Video Streams to use to encrypt stream data.
+    #   The ID of the Key Management Service (KMS) key that you want Kinesis
+    #   Video Streams to use to encrypt stream data.
     #
     #   If no key ID is specified, the default, Kinesis Video-managed key
     #   (`aws/kinesisvideo`) is used.
@@ -379,6 +380,92 @@ module Aws::KinesisVideo
     #
     class DeleteStreamOutput < Aws::EmptyStructure; end
 
+    # @note When making an API call, you may pass DescribeImageGenerationConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to retrieve the image generation
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from
+    #   which to retrieve the image generation configuration. You must
+    #   specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeImageGenerationConfigurationInput AWS API Documentation
+    #
+    class DescribeImageGenerationConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_generation_configuration
+    #   The structure that contains the information required for the Kinesis
+    #   video stream (KVS) images delivery. If this structure is null, the
+    #   configuration will be deleted from the stream.
+    #   @return [Types::ImageGenerationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeImageGenerationConfigurationOutput AWS API Documentation
+    #
+    class DescribeImageGenerationConfigurationOutput < Struct.new(
+      :image_generation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeNotificationConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to retrieve the notification
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from
+    #   where you want to retrieve the notification configuration. You must
+    #   specify either the `StreamName` or the StreamARN.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeNotificationConfigurationInput AWS API Documentation
+    #
+    class DescribeNotificationConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notification_configuration
+    #   The structure that contains the information required for
+    #   notifications. If the structure is null, the configuration will be
+    #   deleted from the stream.
+    #   @return [Types::NotificationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/DescribeNotificationConfigurationOutput AWS API Documentation
+    #
+    class DescribeNotificationConfigurationOutput < Struct.new(
+      :notification_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DescribeSignalingChannelInput
     #   data as a hash:
     #
@@ -473,7 +560,7 @@ module Aws::KinesisVideo
     #       {
     #         stream_name: "StreamName",
     #         stream_arn: "ResourceARN",
-    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP
+    #         api_name: "PUT_MEDIA", # required, accepts PUT_MEDIA, GET_MEDIA, LIST_FRAGMENTS, GET_MEDIA_FOR_FRAGMENT_LIST, GET_HLS_STREAMING_SESSION_URL, GET_DASH_STREAMING_SESSION_URL, GET_CLIP, GET_IMAGES
     #       }
     #
     # @!attribute [rw] stream_name
@@ -552,6 +639,135 @@ module Aws::KinesisVideo
     #
     class GetSignalingChannelEndpointOutput < Struct.new(
       :resource_endpoint_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains the information required for the KVS
+    # images delivery. If null, the configuration will be deleted from the
+    # stream.
+    #
+    # @note When making an API call, you may pass ImageGenerationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         image_selector_type: "SERVER_TIMESTAMP", # required, accepts SERVER_TIMESTAMP, PRODUCER_TIMESTAMP
+    #         destination_config: { # required
+    #           uri: "DestinationUri", # required
+    #           destination_region: "DestinationRegion", # required
+    #         },
+    #         sampling_interval: 1, # required
+    #         format: "JPEG", # required, accepts JPEG, PNG
+    #         format_config: {
+    #           "JPEGQuality" => "FormatConfigValue",
+    #         },
+    #         width_pixels: 1,
+    #         height_pixels: 1,
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Indicates whether the `ContinuousImageGenerationConfigurations` API
+    #   is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_selector_type
+    #   The origin of the Server or Producer timestamps to use to generate
+    #   the images.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_config
+    #   The structure that contains the information required to deliver
+    #   images to a customer.
+    #   @return [Types::ImageGenerationDestinationConfig]
+    #
+    # @!attribute [rw] sampling_interval
+    #   The time interval in milliseconds (ms) at which the images need to
+    #   be generated from the stream. The minimum value that can be provided
+    #   is 33 ms, because a camera that generates content at 30 FPS would
+    #   create a frame every 33.3 ms. If the timestamp range is less than
+    #   the sampling interval, the Image from the `StartTimestamp` will be
+    #   returned if available.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] format
+    #   The accepted image format.
+    #   @return [String]
+    #
+    # @!attribute [rw] format_config
+    #   The list of a key-value pair structure that contains extra
+    #   parameters that can be applied when the image is generated. The
+    #   `FormatConfig` key is the `JPEGQuality`, which indicates the JPEG
+    #   quality key to be used to generate the image. The `FormatConfig`
+    #   value accepts ints from 1 to 100. If the value is 1, the image will
+    #   be generated with less quality and the best compression. If the
+    #   value is 100, the image will be generated with the best quality and
+    #   less compression. If no value is provided, the default value of the
+    #   `JPEGQuality` key will be set to 80.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] width_pixels
+    #   The width of the output image that is used in conjunction with the
+    #   `HeightPixels` parameter. When both `WidthPixels` and `HeightPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `WidthPixels` parameter is
+    #   provided, its original aspect ratio will be used to calculate the
+    #   `HeightPixels` ratio. If neither parameter is provided, the original
+    #   image size will be returned.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] height_pixels
+    #   The height of the output image that is used in conjunction with the
+    #   `WidthPixels` parameter. When both `HeightPixels` and `WidthPixels`
+    #   parameters are provided, the image will be stretched to fit the
+    #   specified aspect ratio. If only the `HeightPixels` parameter is
+    #   provided, its original aspect ratio will be used to calculate the
+    #   `WidthPixels` ratio. If neither parameter is provided, the original
+    #   image size will be returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ImageGenerationConfiguration AWS API Documentation
+    #
+    class ImageGenerationConfiguration < Struct.new(
+      :status,
+      :image_selector_type,
+      :destination_config,
+      :sampling_interval,
+      :format,
+      :format_config,
+      :width_pixels,
+      :height_pixels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains the information required to deliver images
+    # to a customer.
+    #
+    # @note When making an API call, you may pass ImageGenerationDestinationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "DestinationUri", # required
+    #         destination_region: "DestinationRegion", # required
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The Uniform Resource Idenifier (URI) that identifies where the
+    #   images will be delivered.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_region
+    #   The AWS Region of the S3 bucket where images will be delivered. This
+    #   `DestinationRegion` must match the Region where the stream is
+    #   located.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/ImageGenerationDestinationConfig AWS API Documentation
+    #
+    class ImageGenerationDestinationConfig < Struct.new(
+      :uri,
+      :destination_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -816,6 +1032,19 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
+    # The Stream data retention in hours is equal to zero.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/NoDataRetentionException AWS API Documentation
+    #
+    class NoDataRetentionException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The caller is not authorized to perform this operation.
     #
     # @!attribute [rw] message
@@ -825,6 +1054,61 @@ module Aws::KinesisVideo
     #
     class NotAuthorizedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains the notification information for the KVS
+    # images delivery. If this parameter is null, the configuration will be
+    # deleted from the stream.
+    #
+    # @note When making an API call, you may pass NotificationConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         destination_config: { # required
+    #           uri: "DestinationUri", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] status
+    #   Indicates if a notification configuration is enabled or disabled.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_config
+    #   The destination information required to deliver a notification to a
+    #   customer.
+    #   @return [Types::NotificationDestinationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/NotificationConfiguration AWS API Documentation
+    #
+    class NotificationConfiguration < Struct.new(
+      :status,
+      :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The structure that contains the information required to deliver a
+    # notification to a customer.
+    #
+    # @note When making an API call, you may pass NotificationDestinationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         uri: "DestinationUri", # required
+    #       }
+    #
+    # @!attribute [rw] uri
+    #   The Uniform Resource Idenifier (URI) that identifies where the
+    #   images will be delivered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/NotificationDestinationConfig AWS API Documentation
+    #
+    class NotificationDestinationConfig < Struct.new(
+      :uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -851,7 +1135,15 @@ module Aws::KinesisVideo
       include Aws::Structure
     end
 
-    # The signaling channel is currently not available for this operation.
+    # The resource is currently not available for this operation. New
+    # resources cannot be created with the same name as existing resources.
+    # Also, resources cannot be updated or deleted unless they are in an
+    # `ACTIVE` state.
+    #
+    # If this exception is returned, do not use it to determine whether the
+    # requested resource already exists. Instead, it is recommended you use
+    # the resource-specific describe API, for example, `DescribeStream` for
+    # video streams.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -926,7 +1218,7 @@ module Aws::KinesisVideo
     #       }
     #
     # @!attribute [rw] message_ttl_seconds
-    #   The period of time a signaling channel retains underlivered messages
+    #   The period of time a signaling channel retains undelivered messages
     #   before they are discarded.
     #   @return [Integer]
     #
@@ -957,8 +1249,8 @@ module Aws::KinesisVideo
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   The ID of the AWS Key Management Service (AWS KMS) key that Kinesis
-    #   Video Streams uses to encrypt data on the stream.
+    #   The ID of the Key Management Service (KMS) key that Kinesis Video
+    #   Streams uses to encrypt data on the stream.
     #   @return [String]
     #
     # @!attribute [rw] version
@@ -1132,7 +1424,7 @@ module Aws::KinesisVideo
     class TagStreamOutput < Aws::EmptyStructure; end
 
     # You have exceeded the limit of tags that you can associate with the
-    # resource. Kinesis video streams support up to 50 tags.
+    # resource. A Kinesis video stream can support up to 50 tags.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1263,6 +1555,107 @@ module Aws::KinesisVideo
     # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateDataRetentionOutput AWS API Documentation
     #
     class UpdateDataRetentionOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateImageGenerationConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #         image_generation_configuration: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           image_selector_type: "SERVER_TIMESTAMP", # required, accepts SERVER_TIMESTAMP, PRODUCER_TIMESTAMP
+    #           destination_config: { # required
+    #             uri: "DestinationUri", # required
+    #             destination_region: "DestinationRegion", # required
+    #           },
+    #           sampling_interval: 1, # required
+    #           format: "JPEG", # required, accepts JPEG, PNG
+    #           format_config: {
+    #             "JPEGQuality" => "FormatConfigValue",
+    #           },
+    #           width_pixels: 1,
+    #           height_pixels: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to update the image generation
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from
+    #   where you want to update the image generation configuration. You
+    #   must specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_generation_configuration
+    #   The structure that contains the information required for the KVS
+    #   images delivery. If the structure is null, the configuration will be
+    #   deleted from the stream.
+    #   @return [Types::ImageGenerationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateImageGenerationConfigurationInput AWS API Documentation
+    #
+    class UpdateImageGenerationConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :image_generation_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateImageGenerationConfigurationOutput AWS API Documentation
+    #
+    class UpdateImageGenerationConfigurationOutput < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass UpdateNotificationConfigurationInput
+    #   data as a hash:
+    #
+    #       {
+    #         stream_name: "StreamName",
+    #         stream_arn: "ResourceARN",
+    #         notification_configuration: {
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           destination_config: { # required
+    #             uri: "DestinationUri", # required
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the stream from which to update the notification
+    #   configuration. You must specify either the `StreamName` or the
+    #   `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis video stream from
+    #   where you want to update the notification configuration. You must
+    #   specify either the `StreamName` or the `StreamARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] notification_configuration
+    #   The structure containing the information required for notifications.
+    #   If the structure is null, the configuration will be deleted from the
+    #   stream.
+    #   @return [Types::NotificationConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateNotificationConfigurationInput AWS API Documentation
+    #
+    class UpdateNotificationConfigurationInput < Struct.new(
+      :stream_name,
+      :stream_arn,
+      :notification_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kinesisvideo-2017-09-30/UpdateNotificationConfigurationOutput AWS API Documentation
+    #
+    class UpdateNotificationConfigurationOutput < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateSignalingChannelInput
     #   data as a hash:
