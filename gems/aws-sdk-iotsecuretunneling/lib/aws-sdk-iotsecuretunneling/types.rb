@@ -23,7 +23,7 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] delete
-    #   When set to true, AWS IoT Secure Tunneling deletes the tunnel data
+    #   When set to true, IoT Secure Tunneling deletes the tunnel data
     #   immediately.
     #   @return [Boolean]
     #
@@ -96,11 +96,11 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] services
-    #   A list of service names that identity the target application. The
-    #   AWS IoT client running on the destination device reads this value
-    #   and uses it to look up a port or an IP address and a port. The AWS
-    #   IoT client instantiates the local proxy which uses this information
-    #   to connect to the destination application.
+    #   A list of service names that identify the target application. The
+    #   IoT client running on the destination device reads this value and
+    #   uses it to look up a port or an IP address and a port. The IoT
+    #   client instantiates the local proxy, which uses this information to
+    #   connect to the destination application.
     #   @return [Array<String>]
     #
     class DestinationConfig < Struct.new(
@@ -166,7 +166,9 @@ module Aws::IoTSecureTunneling
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next set of results.
+    #   To retrieve the next set of results, the nextToken value from a
+    #   previous response; otherwise null to receive the first set of
+    #   results.
     #   @return [String]
     #
     class ListTunnelsRequest < Struct.new(
@@ -178,11 +180,13 @@ module Aws::IoTSecureTunneling
     end
 
     # @!attribute [rw] tunnel_summaries
-    #   A short description of the tunnels in an AWS account.
+    #   A short description of the tunnels in an Amazon Web Services
+    #   account.
     #   @return [Array<Types::TunnelSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to used to retrieve the next set of results.
+    #   The token to use to get the next set of results, or null if there
+    #   are no additional results.
     #   @return [String]
     #
     class ListTunnelsResponse < Struct.new(
@@ -242,18 +246,17 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] tunnel_arn
-    #   The Amazon Resource Name for the tunnel. The tunnel ARN format is
-    #   `arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>`
+    #   The Amazon Resource Name for the tunnel.
     #   @return [String]
     #
     # @!attribute [rw] source_access_token
-    #   The access token the source local proxy uses to connect to AWS IoT
+    #   The access token the source local proxy uses to connect to IoT
     #   Secure Tunneling.
     #   @return [String]
     #
     # @!attribute [rw] destination_access_token
-    #   The access token the destination local proxy uses to connect to AWS
-    #   IoT Secure Tunneling.
+    #   The access token the destination local proxy uses to connect to IoT
+    #   Secure Tunneling.
     #   @return [String]
     #
     class OpenTunnelResponse < Struct.new(
@@ -274,6 +277,61 @@ module Aws::IoTSecureTunneling
     class ResourceNotFoundException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RotateTunnelAccessTokenRequest
+    #   data as a hash:
+    #
+    #       {
+    #         tunnel_id: "TunnelId", # required
+    #         client_mode: "SOURCE", # required, accepts SOURCE, DESTINATION, ALL
+    #         destination_config: {
+    #           thing_name: "ThingName",
+    #           services: ["Service"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] tunnel_id
+    #   The tunnel for which you want to rotate the access tokens.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_mode
+    #   The mode of the client that will use the client token, which can be
+    #   either the source or destination, or both source and destination.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_config
+    #   The destination configuration.
+    #   @return [Types::DestinationConfig]
+    #
+    class RotateTunnelAccessTokenRequest < Struct.new(
+      :tunnel_id,
+      :client_mode,
+      :destination_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tunnel_arn
+    #   The Amazon Resource Name for the tunnel.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_access_token
+    #   The client access token that the source local proxy uses to connect
+    #   to IoT Secure Tunneling.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_access_token
+    #   The client access token that the destination local proxy uses to
+    #   connect to IoT Secure Tunneling.
+    #   @return [String]
+    #
+    class RotateTunnelAccessTokenResponse < Struct.new(
+      :tunnel_arn,
+      :source_access_token,
+      :destination_access_token)
+      SENSITIVE = [:source_access_token, :destination_access_token]
       include Aws::Structure
     end
 
@@ -361,8 +419,7 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] tunnel_arn
-    #   The Amazon Resource Name (ARN) of a tunnel. The tunnel ARN format is
-    #   `arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>`
+    #   The Amazon Resource Name (ARN) of a tunnel.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -426,8 +483,7 @@ module Aws::IoTSecureTunneling
     #   @return [String]
     #
     # @!attribute [rw] tunnel_arn
-    #   The Amazon Resource Name of the tunnel. The tunnel ARN format is
-    #   `arn:aws:tunnel:<region>:<account-id>:tunnel/<tunnel-id>`
+    #   The Amazon Resource Name of the tunnel.
     #   @return [String]
     #
     # @!attribute [rw] status

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.137.0 (2022-05-04)
+------------------
+
+* Feature - This release adds the TargetMaps parameter in SSM State Manager API.
+
 1.136.0 (2022-04-29)
 ------------------
 

@@ -4592,9 +4592,9 @@ module Aws::Lightsail
     #   Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
     #   policy names that you can specify.
     #
-    #   For more information about load balancer TLS policies, see [Load
-    #   balancer TLS security policies][2] in the *Amazon Lightsail
-    #   Developer Guide*.
+    #   For more information about load balancer TLS policies, see
+    #   [Configuring TLS security policies on your Amazon Lightsail load
+    #   balancers][2] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -12046,12 +12046,6 @@ module Aws::Lightsail
     #
     # @!attribute [rw] tls_policy_name
     #   The name of the TLS security policy for the load balancer.
-    #
-    #   The following TLS security policy names are possible:
-    #
-    #   * `TLS-2016-08`
-    #
-    #   * `TLS-FS-Res-1-2-2019-08`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LoadBalancer AWS API Documentation
@@ -12471,8 +12465,8 @@ module Aws::Lightsail
     # load balancers.
     #
     # For more information about load balancer TLS security policies, see
-    # [Load balancer TLS security policies][1] in the *Amazon Lightsail
-    # Developer Guide*.
+    # [Configuring TLS security policies on your Amazon Lightsail load
+    # balancers][1] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -12480,22 +12474,6 @@ module Aws::Lightsail
     #
     # @!attribute [rw] name
     #   The name of the TLS security policy.
-    #
-    #   The following TLS security policy names are possible:
-    #
-    #   * `TLS-2016-08`
-    #
-    #   * `TLS-FS-Res-1-2-2019-08`
-    #
-    #   You can specify either of these values for the
-    #   `tlsSecurityPolicyName` request parameter in the
-    #   [CreateLoadBalancer][1] action, and the `attributeValue` request
-    #   parameter in the [UpdateLoadBalancerAttribute][2] action.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateLoadBalancer.html
-    #   [2]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_UpdateLoadBalancerAttribute.html
     #   @return [String]
     #
     # @!attribute [rw] is_default
@@ -12509,14 +12487,6 @@ module Aws::Lightsail
     #
     # @!attribute [rw] protocols
     #   The protocols used in a given TLS security policy.
-    #
-    #   The following protocols are possible:
-    #
-    #   * `Protocol-TLSv1`
-    #
-    #   * `Protocol-TLSv1.1`
-    #
-    #   * `Protocol-TLSv1.2`
     #   @return [Array<String>]
     #
     # @!attribute [rw] ciphers
@@ -15358,7 +15328,8 @@ module Aws::Lightsail
     #
     #   * If you specify `SessionStickinessEnabled` for the `attributeName`
     #     request parameter, then the `attributeValue` request parameter
-    #     must be `true` or `false`.
+    #     must be `true` to activate session stickiness or `false` to
+    #     deactivate session stickiness.
     #
     #   * If you specify `SessionStickiness_LB_CookieDurationSeconds` for
     #     the `attributeName` request parameter, then the `attributeValue`
@@ -15367,11 +15338,19 @@ module Aws::Lightsail
     #
     #   * If you specify `HttpsRedirectionEnabled` for the `attributeName`
     #     request parameter, then the `attributeValue` request parameter
-    #     must be `true` or `false`.
+    #     must be `true` to activate HTTP to HTTPS redirection or `false` to
+    #     deactivate HTTP to HTTPS redirection.
     #
     #   * If you specify `TlsPolicyName` for the `attributeName` request
-    #     parameter, then the `attributeValue` request parameter must be
-    #     `TLS version 1.0, 1.1, and 1.2` or `TLS version 1.2`.
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     name of the TLS policy.
+    #
+    #     Use the [GetLoadBalancerTlsPolicies][1] action to get a list of
+    #     TLS policy names that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateLoadBalancerAttributeRequest AWS API Documentation

@@ -318,6 +318,11 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/Association AWS API Documentation
     #
     class Association < Struct.new(
@@ -331,7 +336,8 @@ module Aws::SSM
       :overview,
       :schedule_expression,
       :association_name,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -498,6 +504,11 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationDescription AWS API Documentation
     #
     class AssociationDescription < Struct.new(
@@ -525,7 +536,8 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -956,6 +968,11 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/AssociationVersionInfo AWS API Documentation
     #
     class AssociationVersionInfo < Struct.new(
@@ -976,7 +993,8 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -2872,6 +2890,11 @@ module Aws::SSM
     #               },
     #             ],
     #             schedule_offset: 1,
+    #             target_maps: [
+    #               {
+    #                 "TargetMapKey" => ["TargetMapValue"],
+    #               },
+    #             ],
     #           },
     #         ],
     #       }
@@ -2933,6 +2956,11 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3087,6 +3115,11 @@ module Aws::SSM
     #   association.
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationBatchRequestEntry AWS API Documentation
     #
     class CreateAssociationBatchRequestEntry < Struct.new(
@@ -3106,7 +3139,8 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -3170,6 +3204,11 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] name
@@ -3361,6 +3400,11 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociationRequest AWS API Documentation
     #
     class CreateAssociationRequest < Struct.new(
@@ -3380,7 +3424,8 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end
@@ -11372,6 +11417,19 @@ module Aws::SSM
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidTarget AWS API Documentation
     #
     class InvalidTarget < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # TargetMap parameter isn't valid.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/InvalidTargetMaps AWS API Documentation
+    #
+    class InvalidTargetMaps < Struct.new(
       :message)
       SENSITIVE = []
       include Aws::Structure
@@ -19889,6 +19947,11 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       }
     #
     # @!attribute [rw] association_id
@@ -20085,6 +20148,11 @@ module Aws::SSM
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #   @return [Integer]
     #
+    # @!attribute [rw] target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #   @return [Array<Hash<String,Array<String>>>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationRequest AWS API Documentation
     #
     class UpdateAssociationRequest < Struct.new(
@@ -20105,7 +20173,8 @@ module Aws::SSM
       :apply_only_at_cron_interval,
       :calendar_names,
       :target_locations,
-      :schedule_offset)
+      :schedule_offset,
+      :target_maps)
       SENSITIVE = [:parameters]
       include Aws::Structure
     end

@@ -894,6 +894,10 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #
     # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -939,6 +943,11 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -989,6 +998,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/CreateAssociation AWS API Documentation
     #
@@ -1062,6 +1075,11 @@ module Aws::SSM
     #           },
     #         ],
     #         schedule_offset: 1,
+    #         target_maps: [
+    #           {
+    #             "TargetMapKey" => ["TargetMapValue"],
+    #           },
+    #         ],
     #       },
     #     ],
     #   })
@@ -1115,6 +1133,10 @@ module Aws::SSM
     #   resp.successful[0].target_locations[0].target_location_max_errors #=> String
     #   resp.successful[0].target_locations[0].execution_role_name #=> String
     #   resp.successful[0].schedule_offset #=> Integer
+    #   resp.successful[0].target_maps #=> Array
+    #   resp.successful[0].target_maps[0] #=> Hash
+    #   resp.successful[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.successful[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed #=> Array
     #   resp.failed[0].entry.name #=> String
     #   resp.failed[0].entry.instance_id #=> String
@@ -1148,6 +1170,10 @@ module Aws::SSM
     #   resp.failed[0].entry.target_locations[0].target_location_max_errors #=> String
     #   resp.failed[0].entry.target_locations[0].execution_role_name #=> String
     #   resp.failed[0].entry.schedule_offset #=> Integer
+    #   resp.failed[0].entry.target_maps #=> Array
+    #   resp.failed[0].entry.target_maps[0] #=> Hash
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.failed[0].entry.target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.failed[0].message #=> String
     #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
     #
@@ -2641,6 +2667,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DescribeAssociation AWS API Documentation
     #
@@ -6849,6 +6879,10 @@ module Aws::SSM
     #   resp.association_versions[0].target_locations[0].target_location_max_errors #=> String
     #   resp.association_versions[0].target_locations[0].execution_role_name #=> String
     #   resp.association_versions[0].schedule_offset #=> Integer
+    #   resp.association_versions[0].target_maps #=> Array
+    #   resp.association_versions[0].target_maps[0] #=> Hash
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_versions[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociationVersions AWS API Documentation
@@ -6926,6 +6960,10 @@ module Aws::SSM
     #   resp.associations[0].schedule_expression #=> String
     #   resp.associations[0].association_name #=> String
     #   resp.associations[0].schedule_offset #=> Integer
+    #   resp.associations[0].target_maps #=> Array
+    #   resp.associations[0].target_maps[0] #=> Hash
+    #   resp.associations[0].target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.associations[0].target_maps[0]["TargetMapKey"][0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/ListAssociations AWS API Documentation
@@ -10020,6 +10058,10 @@ module Aws::SSM
     #
     #   [1]: https://docs.aws.amazon.com/systems-manager/latest/userguide/reference-cron-and-rate-expressions.html
     #
+    # @option params [Array<Hash>] :target_maps
+    #   A key-value mapping of document parameters to target resources. Both
+    #   Targets and TargetMaps can't be specified together.
+    #
     # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssociationResult#association_description #association_description} => Types::AssociationDescription
@@ -10066,6 +10108,11 @@ module Aws::SSM
     #       },
     #     ],
     #     schedule_offset: 1,
+    #     target_maps: [
+    #       {
+    #         "TargetMapKey" => ["TargetMapValue"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -10116,6 +10163,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociation AWS API Documentation
     #
@@ -10208,6 +10259,10 @@ module Aws::SSM
     #   resp.association_description.target_locations[0].target_location_max_errors #=> String
     #   resp.association_description.target_locations[0].execution_role_name #=> String
     #   resp.association_description.schedule_offset #=> Integer
+    #   resp.association_description.target_maps #=> Array
+    #   resp.association_description.target_maps[0] #=> Hash
+    #   resp.association_description.target_maps[0]["TargetMapKey"] #=> Array
+    #   resp.association_description.target_maps[0]["TargetMapKey"][0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/UpdateAssociationStatus AWS API Documentation
     #
@@ -11572,7 +11627,7 @@ module Aws::SSM
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssm'
-      context[:gem_version] = '1.136.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

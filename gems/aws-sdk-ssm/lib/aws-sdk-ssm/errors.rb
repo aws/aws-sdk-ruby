@@ -101,6 +101,7 @@ module Aws::SSM
   # * {InvalidRole}
   # * {InvalidSchedule}
   # * {InvalidTarget}
+  # * {InvalidTargetMaps}
   # * {InvalidTypeNameException}
   # * {InvalidUpdate}
   # * {InvocationDoesNotExist}
@@ -1206,6 +1207,21 @@ module Aws::SSM
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::SSM::Types::InvalidTarget] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidTargetMaps < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::SSM::Types::InvalidTargetMaps] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

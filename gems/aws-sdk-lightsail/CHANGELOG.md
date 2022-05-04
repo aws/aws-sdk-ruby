@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-05-04)
+------------------
+
+* Feature - Documentation updates for Lightsail
+
 1.65.0 (2022-04-26)
 ------------------
 

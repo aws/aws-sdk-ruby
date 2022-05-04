@@ -3019,9 +3019,9 @@ module Aws::Lightsail
     #   Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
     #   policy names that you can specify.
     #
-    #   For more information about load balancer TLS policies, see [Load
-    #   balancer TLS security policies][2] in the *Amazon Lightsail Developer
-    #   Guide*.
+    #   For more information about load balancer TLS policies, see
+    #   [Configuring TLS security policies on your Amazon Lightsail load
+    #   balancers][2] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -8279,8 +8279,8 @@ module Aws::Lightsail
     # Lightsail load balancers.
     #
     # For more information about load balancer TLS security policies, see
-    # [Load balancer TLS security policies][1] in the *Amazon Lightsail
-    # Developer Guide*.
+    # [Configuring TLS security policies on your Amazon Lightsail load
+    # balancers][1] in the *Amazon Lightsail Developer Guide*.
     #
     #
     #
@@ -11369,7 +11369,8 @@ module Aws::Lightsail
     #
     #   * If you specify `SessionStickinessEnabled` for the `attributeName`
     #     request parameter, then the `attributeValue` request parameter must
-    #     be `true` or `false`.
+    #     be `true` to activate session stickiness or `false` to deactivate
+    #     session stickiness.
     #
     #   * If you specify `SessionStickiness_LB_CookieDurationSeconds` for the
     #     `attributeName` request parameter, then the `attributeValue` request
@@ -11378,11 +11379,19 @@ module Aws::Lightsail
     #
     #   * If you specify `HttpsRedirectionEnabled` for the `attributeName`
     #     request parameter, then the `attributeValue` request parameter must
-    #     be `true` or `false`.
+    #     be `true` to activate HTTP to HTTPS redirection or `false` to
+    #     deactivate HTTP to HTTPS redirection.
     #
     #   * If you specify `TlsPolicyName` for the `attributeName` request
-    #     parameter, then the `attributeValue` request parameter must be `TLS
-    #     version 1.0, 1.1, and 1.2` or `TLS version 1.2`.
+    #     parameter, then the `attributeValue` request parameter must be the
+    #     name of the TLS policy.
+    #
+    #     Use the [GetLoadBalancerTlsPolicies][1] action to get a list of TLS
+    #     policy names that you can specify.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
     #
     # @return [Types::UpdateLoadBalancerAttributeResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -11662,7 +11671,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.66.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2046,6 +2046,14 @@ module Aws::Backup
     #   If used from an Organizations management account, passing `*` returns
     #   all jobs across the organization.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only backup jobs completed after a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only backup jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListBackupJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListBackupJobsOutput#backup_jobs #backup_jobs} => Array&lt;Types::BackupJob&gt;
@@ -2065,6 +2073,8 @@ module Aws::Backup
     #     by_created_after: Time.now,
     #     by_resource_type: "ResourceType",
     #     by_account_id: "AccountId",
+    #     by_complete_after: Time.now,
+    #     by_complete_before: Time.now,
     #   })
     #
     # @example Response structure
@@ -2423,6 +2433,14 @@ module Aws::Backup
     #   The account ID to list the jobs from. Returns only copy jobs
     #   associated with the specified account ID.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListCopyJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCopyJobsOutput#copy_jobs #copy_jobs} => Array&lt;Types::CopyJob&gt;
@@ -2442,6 +2460,8 @@ module Aws::Backup
     #     by_resource_type: "ResourceType",
     #     by_destination_vault_arn: "string",
     #     by_account_id: "AccountId",
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -2879,6 +2899,14 @@ module Aws::Backup
     # @option params [String] :by_status
     #   Returns only restore jobs associated with the specified job status.
     #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_before
+    #   Returns only copy jobs completed before a date expressed in Unix
+    #   format and Coordinated Universal Time (UTC).
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :by_complete_after
+    #   Returns only copy jobs completed after a date expressed in Unix format
+    #   and Coordinated Universal Time (UTC).
+    #
     # @return [Types::ListRestoreJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRestoreJobsOutput#restore_jobs #restore_jobs} => Array&lt;Types::RestoreJobsListMember&gt;
@@ -2895,6 +2923,8 @@ module Aws::Backup
     #     by_created_before: Time.now,
     #     by_created_after: Time.now,
     #     by_status: "PENDING", # accepts PENDING, RUNNING, COMPLETED, ABORTED, FAILED
+    #     by_complete_before: Time.now,
+    #     by_complete_after: Time.now,
     #   })
     #
     # @example Response structure
@@ -4000,7 +4030,7 @@ module Aws::Backup
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-backup'
-      context[:gem_version] = '1.43.0'
+      context[:gem_version] = '1.44.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2022-05-04)
+------------------
+
+* Feature - Adds support to 2 new filters about job complete time for 3 list jobs APIs in AWS Backup
+
 1.43.0 (2022-02-24)
 ------------------
 
