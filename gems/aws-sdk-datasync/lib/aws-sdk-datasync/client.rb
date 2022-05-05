@@ -1404,6 +1404,7 @@ module Aws::DataSync
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     excludes: [
     #       {
@@ -1996,6 +1997,7 @@ module Aws::DataSync
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
+    #   resp.options.object_tags #=> String, one of "PRESERVE", "NONE"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -2060,6 +2062,7 @@ module Aws::DataSync
     #   resp.options.log_level #=> String, one of "OFF", "BASIC", "TRANSFER"
     #   resp.options.transfer_mode #=> String, one of "CHANGED", "ALL"
     #   resp.options.security_descriptor_copy_flags #=> String, one of "NONE", "OWNER_DACL", "OWNER_DACL_SACL"
+    #   resp.options.object_tags #=> String, one of "PRESERVE", "NONE"
     #   resp.excludes #=> Array
     #   resp.excludes[0].filter_type #=> String, one of "SIMPLE_PATTERN"
     #   resp.excludes[0].value #=> String
@@ -2403,6 +2406,7 @@ module Aws::DataSync
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     includes: [
     #       {
@@ -2906,6 +2910,7 @@ module Aws::DataSync
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #     excludes: [
     #       {
@@ -2991,6 +2996,7 @@ module Aws::DataSync
     #       log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #       transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #       security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #       object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #     },
     #   })
     #
@@ -3016,7 +3022,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

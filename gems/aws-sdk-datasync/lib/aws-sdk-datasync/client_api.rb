@@ -148,6 +148,7 @@ module Aws::DataSync
     ObjectStorageSecretKey = Shapes::StringShape.new(name: 'ObjectStorageSecretKey')
     ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
     ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
+    ObjectTags = Shapes::StringShape.new(name: 'ObjectTags')
     OnPremConfig = Shapes::StructureShape.new(name: 'OnPremConfig')
     Operator = Shapes::StringShape.new(name: 'Operator')
     Options = Shapes::StructureShape.new(name: 'Options')
@@ -569,6 +570,7 @@ module Aws::DataSync
 
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "message"))
     InvalidRequestException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, location_name: "errorCode"))
+    InvalidRequestException.add_member(:datasync_error_code, Shapes::ShapeRef.new(shape: string, location_name: "datasyncErrorCode"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
     ListAgentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
@@ -648,6 +650,7 @@ module Aws::DataSync
     Options.add_member(:log_level, Shapes::ShapeRef.new(shape: LogLevel, location_name: "LogLevel"))
     Options.add_member(:transfer_mode, Shapes::ShapeRef.new(shape: TransferMode, location_name: "TransferMode"))
     Options.add_member(:security_descriptor_copy_flags, Shapes::ShapeRef.new(shape: SmbSecurityDescriptorCopyFlags, location_name: "SecurityDescriptorCopyFlags"))
+    Options.add_member(:object_tags, Shapes::ShapeRef.new(shape: ObjectTags, location_name: "ObjectTags"))
     Options.struct_class = Types::Options
 
     OutputTagList.member = Shapes::ShapeRef.new(shape: TagListEntry)

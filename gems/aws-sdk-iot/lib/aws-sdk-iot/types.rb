@@ -10189,6 +10189,9 @@ module Aws::IoT
     #   creating a job.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] is_concurrent
+    #   @return [Boolean]
+    #
     class Job < Struct.new(
       :job_arn,
       :job_id,
@@ -10210,7 +10213,8 @@ module Aws::IoT
       :namespace_id,
       :job_template_arn,
       :job_executions_retry_config,
-      :document_parameters)
+      :document_parameters,
+      :is_concurrent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10539,6 +10543,9 @@ module Aws::IoT
     #   The time, in seconds since the epoch, when the job completed.
     #   @return [Time]
     #
+    # @!attribute [rw] is_concurrent
+    #   @return [Boolean]
+    #
     class JobSummary < Struct.new(
       :job_arn,
       :job_id,
@@ -10547,7 +10554,8 @@ module Aws::IoT
       :status,
       :created_at,
       :last_updated_at,
-      :completed_at)
+      :completed_at,
+      :is_concurrent)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -162,6 +162,7 @@ module Aws::IoT
     BillingGroupProperties = Shapes::StructureShape.new(name: 'BillingGroupProperties')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanKey = Shapes::BooleanShape.new(name: 'BooleanKey')
+    BooleanWrapperObject = Shapes::BooleanShape.new(name: 'BooleanWrapperObject')
     Bucket = Shapes::StructureShape.new(name: 'Bucket')
     BucketKeyValue = Shapes::StringShape.new(name: 'BucketKeyValue')
     BucketName = Shapes::StringShape.new(name: 'BucketName')
@@ -3022,6 +3023,7 @@ module Aws::IoT
     Job.add_member(:job_template_arn, Shapes::ShapeRef.new(shape: JobTemplateArn, location_name: "jobTemplateArn"))
     Job.add_member(:job_executions_retry_config, Shapes::ShapeRef.new(shape: JobExecutionsRetryConfig, location_name: "jobExecutionsRetryConfig"))
     Job.add_member(:document_parameters, Shapes::ShapeRef.new(shape: ParameterMap, location_name: "documentParameters"))
+    Job.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
     Job.struct_class = Types::Job
 
     JobExecution.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "jobId"))
@@ -3086,6 +3088,7 @@ module Aws::IoT
     JobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateType, location_name: "createdAt"))
     JobSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateType, location_name: "lastUpdatedAt"))
     JobSummary.add_member(:completed_at, Shapes::ShapeRef.new(shape: DateType, location_name: "completedAt"))
+    JobSummary.add_member(:is_concurrent, Shapes::ShapeRef.new(shape: BooleanWrapperObject, location_name: "isConcurrent"))
     JobSummary.struct_class = Types::JobSummary
 
     JobSummaryList.member = Shapes::ShapeRef.new(shape: JobSummary)
@@ -5017,6 +5020,7 @@ module Aws::IoT
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
       api.add_operation(:cancel_job_execution, Seahorse::Model::Operation.new.tap do |o|

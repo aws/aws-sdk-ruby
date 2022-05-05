@@ -5526,6 +5526,7 @@ module Aws::IoT
     #   resp.job.job_executions_retry_config.criteria_list[0].number_of_retries #=> Integer
     #   resp.job.document_parameters #=> Hash
     #   resp.job.document_parameters["ParameterKey"] #=> String
+    #   resp.job.is_concurrent #=> Boolean
     #
     # @overload describe_job(params = {})
     # @param [Hash] params ({})
@@ -8826,6 +8827,7 @@ module Aws::IoT
     #   resp.jobs[0].created_at #=> Time
     #   resp.jobs[0].last_updated_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
+    #   resp.jobs[0].is_concurrent #=> Boolean
     #   resp.next_token #=> String
     #
     # @overload list_jobs(params = {})
@@ -13672,7 +13674,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

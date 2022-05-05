@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2022-05-05)
+------------------
+
+* Feature - AWS DataSync now supports a new ObjectTags Task API option that can be used to control whether Object Tags are transferred.
+
 1.45.0 (2022-04-05)
 ------------------
 

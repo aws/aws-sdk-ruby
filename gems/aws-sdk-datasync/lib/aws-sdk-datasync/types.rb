@@ -1143,6 +1143,7 @@ module Aws::DataSync
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #         },
     #         excludes: [
     #           {
@@ -2471,11 +2472,15 @@ module Aws::DataSync
     # @!attribute [rw] error_code
     #   @return [String]
     #
+    # @!attribute [rw] datasync_error_code
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/InvalidRequestException AWS API Documentation
     #
     class InvalidRequestException < Struct.new(
       :message,
-      :error_code)
+      :error_code,
+      :datasync_error_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2955,6 +2960,7 @@ module Aws::DataSync
     #         log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #         transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #         security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #         object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #       }
     #
     # @!attribute [rw] verify_mode
@@ -2971,8 +2977,8 @@ module Aws::DataSync
     #   POINT\_IN\_TIME\_CONSISTENT: Scan the entire source and entire
     #   destination at the end of the transfer to verify that source and
     #   destination are fully synchronized. This option isn't supported
-    #   when transferring to S3 Glacier or S3 Glacier Deep Archive storage
-    #   classes.
+    #   when transferring to S3 Glacier Flexible Retrieval or S3 Glacier
+    #   Deep Archive storage classes.
     #
     #   NONE: No additional verification is done at the end of the transfer,
     #   but all data transmissions are integrity-checked with checksum
@@ -3030,7 +3036,7 @@ module Aws::DataSync
     #   is required for cases when you need to run the same task more than
     #   one time.
     #
-    #   Default value: PRESERVE.
+    #   Default Value: `PRESERVE`
     #
     #   PRESERVE: Preserve original `Mtime` (recommended)
     #
@@ -3242,6 +3248,14 @@ module Aws::DataSync
     #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html
     #   @return [String]
     #
+    # @!attribute [rw] object_tags
+    #   Specifies whether object tags are maintained when transferring
+    #   between object storage systems. If you want your DataSync task to
+    #   ignore object tags, specify the `NONE` value.
+    #
+    #   Default Value: `PRESERVE`
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Options AWS API Documentation
     #
     class Options < Struct.new(
@@ -3258,7 +3272,8 @@ module Aws::DataSync
       :task_queueing,
       :log_level,
       :transfer_mode,
-      :security_descriptor_copy_flags)
+      :security_descriptor_copy_flags,
+      :object_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3410,6 +3425,7 @@ module Aws::DataSync
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #         },
     #         includes: [
     #           {
@@ -4191,6 +4207,7 @@ module Aws::DataSync
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #         },
     #       }
     #
@@ -4252,6 +4269,7 @@ module Aws::DataSync
     #           log_level: "OFF", # accepts OFF, BASIC, TRANSFER
     #           transfer_mode: "CHANGED", # accepts CHANGED, ALL
     #           security_descriptor_copy_flags: "NONE", # accepts NONE, OWNER_DACL, OWNER_DACL_SACL
+    #           object_tags: "PRESERVE", # accepts PRESERVE, NONE
     #         },
     #         excludes: [
     #           {

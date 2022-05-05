@@ -5583,10 +5583,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # A custom attribute value assigned to a document.
-    #
-    # For more information on how to create custom document attributes, see
-    # [Custom Attributes][1].
+    # A document attribute or metadata field. To create custom document
+    # attributes, see [Custom attributes][1].
     #
     #
     #
@@ -5760,8 +5758,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # The value of a custom document attribute. You can only provide one
-    # value for a custom attribute.
+    # The value of a document attribute. You can only provide one value for
+    # a document attribute.
     #
     # @note When making an API call, you may pass DocumentAttributeValue
     #   data as a hash:
@@ -5809,7 +5807,7 @@ module Aws::Kendra
     # doing a faceted search.
     #
     # @!attribute [rw] document_attribute_value
-    #   The value of the attribute. For example, "HR."
+    #   The value of the attribute. For example, "HR".
     #   @return [Types::DocumentAttributeValue]
     #
     # @!attribute [rw] count
@@ -5817,11 +5815,27 @@ module Aws::Kendra
     #   value for the key.
     #   @return [Integer]
     #
+    # @!attribute [rw] facet_results
+    #   Contains the results of a document attribute that is a nested facet.
+    #   A `FacetResult` contains the counts for each facet nested within a
+    #   facet.
+    #
+    #   For example, the document attribute or facet "Department" includes
+    #   a value called "Engineering". In addition, the document attribute
+    #   or facet "SubDepartment" includes the values "Frontend" and
+    #   "Backend" for documents assigned to "Engineering". You can
+    #   display nested facets in the search results so that documents can be
+    #   searched not only by department but also by a sub department within
+    #   a department. The counts for documents that belong to "Frontend"
+    #   and "Backend" within "Engineering" are returned for a query.
+    #   @return [Array<Types::FacetResult>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DocumentAttributeValueCountPair AWS API Documentation
     #
     class DocumentAttributeValueCountPair < Struct.new(
       :document_attribute_value,
-      :count)
+      :count,
+      :facet_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6240,23 +6254,78 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Information about a document attribute
+    # Information about a document attribute. You can use document
+    # attributes as facets.
+    #
+    # For example, the document attribute or facet "Department" includes
+    # the values "HR", "Engineering", and "Accounting". You can
+    # display these values in the search results so that documents can be
+    # searched by department.
+    #
+    # You can display up to 10 facet values per facet for a query. If you
+    # want to increase this limit, contact [Support][1].
+    #
+    #
+    #
+    # [1]: http://aws.amazon.com/contact-us/
     #
     # @note When making an API call, you may pass Facet
     #   data as a hash:
     #
     #       {
     #         document_attribute_key: "DocumentAttributeKey",
+    #         facets: [
+    #           {
+    #             document_attribute_key: "DocumentAttributeKey",
+    #             facets: {
+    #               # recursive FacetList
+    #             },
+    #             max_results: 1,
+    #           },
+    #         ],
+    #         max_results: 1,
     #       }
     #
     # @!attribute [rw] document_attribute_key
     #   The unique key for the document attribute.
     #   @return [String]
     #
+    # @!attribute [rw] facets
+    #   An array of document attributes that are nested facets within a
+    #   facet.
+    #
+    #   For example, the document attribute or facet "Department" includes
+    #   a value called "Engineering". In addition, the document attribute
+    #   or facet "SubDepartment" includes the values "Frontend" and
+    #   "Backend" for documents assigned to "Engineering". You can
+    #   display nested facets in the search results so that documents can be
+    #   searched not only by department but also by a sub department within
+    #   a department. This helps your users further narrow their search.
+    #
+    #   You can only have one nested facet within a facet. If you want to
+    #   increase this limit, contact [Support][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/contact-us/
+    #   @return [Array<Types::Facet>]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of facet values per facet. The default is 10. You can
+    #   use this to limit the number of facet values to less than 10. If you
+    #   want to increase the default, contact [Support][1].
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/contact-us/
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/Facet AWS API Documentation
     #
     class Facet < Struct.new(
-      :document_attribute_key)
+      :document_attribute_key,
+      :facets,
+      :max_results)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8409,6 +8478,10 @@ module Aws::Kendra
     #         facets: [
     #           {
     #             document_attribute_key: "DocumentAttributeKey",
+    #             facets: {
+    #               # recursive FacetList
+    #             },
+    #             max_results: 1,
     #           },
     #         ],
     #         requested_document_attributes: ["DocumentAttributeKey"],
@@ -8472,14 +8545,14 @@ module Aws::Kendra
     #
     # @!attribute [rw] facets
     #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. You can use this information to help
-    #   narrow the search for your user.
+    #   each attribute key specified. This helps your users narrow their
+    #   search.
     #   @return [Array<Types::Facet>]
     #
     # @!attribute [rw] requested_document_attributes
-    #   An array of document attributes to include in the response. No other
-    #   document attributes are included in the response. By default all
-    #   document attributes are included in the response.
+    #   An array of document attributes to include in the response. You can
+    #   limit the response to include certain document attributes. By
+    #   default all document attributes are included in the response.
     #   @return [Array<String>]
     #
     # @!attribute [rw] query_result_type_filter
@@ -8655,9 +8728,9 @@ module Aws::Kendra
     #   @return [String]
     #
     # @!attribute [rw] document_attributes
-    #   An array of document attributes for the document that the query
-    #   result maps to. For example, the document author (Author) or the
-    #   source URI (SourceUri) of the document.
+    #   An array of document attributes assigned to a document in the search
+    #   results. For example, the document author (`_author`) or the source
+    #   URI (`_source_uri`) of the document.
     #   @return [Array<Types::DocumentAttribute>]
     #
     # @!attribute [rw] score_attributes
@@ -8793,38 +8866,38 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] domain
-    #   The configuration information to connect to your Quip data source
-    #   domain.
+    #   The Quip site domain.
     #   @return [String]
     #
     # @!attribute [rw] secret_arn
     #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
     #   contains the key-value pairs that are required to connect to your
-    #   Quip file system. Windows is currently the only supported type. The
-    #   secret must contain a JSON structure with the following keys:
+    #   Quip. The secret must contain a JSON structure with the following
+    #   keys:
     #
-    #   * username—The Active Directory user name, along with the Domain
-    #     Name System (DNS) domain name. For example,
-    #     *user@corp.example.com*. The Active Directory user account must
-    #     have read and mounting access to the Quip file system for Windows.
+    #   * accessToken—The token created in Quip. For more information, see
+    #     [Authentication for a Quip data source][1].
     #
-    #   * password—The password of the Active Directory user account with
-    #     read and mounting access to the Quip Windows file system.
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#quip-authentication
     #   @return [String]
     #
     # @!attribute [rw] crawl_file_comments
-    #   Specify whether to crawl file comments in your Quip data source. You
-    #   can specify one or more of these options.
+    #   Specify whether to crawl file comments in Quip. You can specify one
+    #   or more of these options.
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_chat_rooms
-    #   Specify whether to crawl chat rooms in your Quip data source. You
-    #   can specify one or more of these options.
+    #   Specify whether to crawl chat rooms in Quip. You can specify one or
+    #   more of these options.
     #   @return [Boolean]
     #
     # @!attribute [rw] crawl_attachments
-    #   Specify whether to crawl attachments in your Quip data source. You
-    #   can specify one or more of these options.
+    #   Specify whether to crawl attachments in Quip. You can specify one or
+    #   more of these options.
     #   @return [Boolean]
     #
     # @!attribute [rw] folder_ids
@@ -8832,15 +8905,42 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] thread_field_mappings
-    #   A list of field mappings to apply when indexing Quip threads.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip threads to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] message_field_mappings
-    #   A list of field mappings to apply when indexing Quip messages.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip messages to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] attachment_field_mappings
-    #   A list of field mappings to apply when indexing Quip attachments.
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of Quip attachments to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to Quip fields. For more information, see [Mapping
+    #   data source fields][1]. The Quip field names must exist in your Quip
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
     #   @return [Array<Types::DataSourceToIndexFieldMapping>]
     #
     # @!attribute [rw] inclusion_patterns
@@ -8862,9 +8962,13 @@ module Aws::Kendra
     #   @return [Array<String>]
     #
     # @!attribute [rw] vpc_configuration
-    #   Configuration information for connecting to an Amazon Virtual
-    #   Private Cloud (VPC) for your Quip. Your Quip instance must reside
-    #   inside your VPC.
+    #   Configuration information for an Amazon Virtual Private Cloud (VPC)
+    #   to connect to your Quip. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
     #   @return [Types::DataSourceVpcConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/QuipConfiguration AWS API Documentation

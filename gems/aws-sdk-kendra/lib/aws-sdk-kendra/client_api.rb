@@ -469,6 +469,7 @@ module Aws::Kendra
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     Title = Shapes::StringShape.new(name: 'Title')
     Token = Shapes::StringShape.new(name: 'Token')
+    TopDocumentAttributeValueCountPairsSize = Shapes::IntegerShape.new(name: 'TopDocumentAttributeValueCountPairsSize')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
@@ -1120,6 +1121,7 @@ module Aws::Kendra
 
     DocumentAttributeValueCountPair.add_member(:document_attribute_value, Shapes::ShapeRef.new(shape: DocumentAttributeValue, location_name: "DocumentAttributeValue"))
     DocumentAttributeValueCountPair.add_member(:count, Shapes::ShapeRef.new(shape: Integer, location_name: "Count"))
+    DocumentAttributeValueCountPair.add_member(:facet_results, Shapes::ShapeRef.new(shape: FacetResultList, location_name: "FacetResults"))
     DocumentAttributeValueCountPair.struct_class = Types::DocumentAttributeValueCountPair
 
     DocumentAttributeValueCountPairList.member = Shapes::ShapeRef.new(shape: DocumentAttributeValueCountPair)
@@ -1205,6 +1207,8 @@ module Aws::Kendra
     ExperiencesSummaryList.member = Shapes::ShapeRef.new(shape: ExperiencesSummary)
 
     Facet.add_member(:document_attribute_key, Shapes::ShapeRef.new(shape: DocumentAttributeKey, location_name: "DocumentAttributeKey"))
+    Facet.add_member(:facets, Shapes::ShapeRef.new(shape: FacetList, location_name: "Facets"))
+    Facet.add_member(:max_results, Shapes::ShapeRef.new(shape: TopDocumentAttributeValueCountPairsSize, location_name: "MaxResults"))
     Facet.struct_class = Types::Facet
 
     FacetList.member = Shapes::ShapeRef.new(shape: Facet)
@@ -2536,6 +2540,12 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_groups_older_than_ordering_id, Seahorse::Model::Operation.new.tap do |o|
@@ -2550,6 +2560,12 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_indices, Seahorse::Model::Operation.new.tap do |o|
@@ -2581,6 +2597,12 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2607,6 +2629,12 @@ module Aws::Kendra
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:put_principal_mapping, Seahorse::Model::Operation.new.tap do |o|

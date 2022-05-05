@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.311.0 (2022-05-05)
+------------------
+
+* Feature - Amazon EC2 I4i instances are powered by 3rd generation Intel Xeon Scalable processors and feature up to 30 TB of local AWS Nitro SSD storage
+
 1.310.0 (2022-05-03)
 ------------------
 

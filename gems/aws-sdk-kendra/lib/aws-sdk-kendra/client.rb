@@ -3577,6 +3577,8 @@ module Aws::Kendra
     #   * {Types::ListFaqsResponse#next_token #next_token} => String
     #   * {Types::ListFaqsResponse#faq_summary_items #faq_summary_items} => Array&lt;Types::FaqSummary&gt;
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_faqs({
@@ -3639,6 +3641,8 @@ module Aws::Kendra
     #
     #   * {Types::ListGroupsOlderThanOrderingIdResponse#groups_summaries #groups_summaries} => Array&lt;Types::GroupSummary&gt;
     #   * {Types::ListGroupsOlderThanOrderingIdResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3748,6 +3752,8 @@ module Aws::Kendra
     #   * {Types::ListQuerySuggestionsBlockListsResponse#block_list_summary_items #block_list_summary_items} => Array&lt;Types::QuerySuggestionsBlockListSummary&gt;
     #   * {Types::ListQuerySuggestionsBlockListsResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_query_suggestions_block_lists({
@@ -3826,6 +3832,8 @@ module Aws::Kendra
     #
     #   * {Types::ListThesauriResponse#next_token #next_token} => String
     #   * {Types::ListThesauriResponse#thesaurus_summary_items #thesaurus_summary_items} => Array&lt;Types::ThesaurusSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -4018,13 +4026,13 @@ module Aws::Kendra
     #
     # @option params [Array<Types::Facet>] :facets
     #   An array of documents attributes. Amazon Kendra returns a count for
-    #   each attribute key specified. You can use this information to help
-    #   narrow the search for your user.
+    #   each attribute key specified. This helps your users narrow their
+    #   search.
     #
     # @option params [Array<String>] :requested_document_attributes
-    #   An array of document attributes to include in the response. No other
-    #   document attributes are included in the response. By default all
-    #   document attributes are included in the response.
+    #   An array of document attributes to include in the response. You can
+    #   limit the response to include certain document attributes. By default
+    #   all document attributes are included in the response.
     #
     # @option params [String] :query_result_type_filter
     #   Sets the type of query. Only results for the specified query type are
@@ -4174,6 +4182,10 @@ module Aws::Kendra
     #     facets: [
     #       {
     #         document_attribute_key: "DocumentAttributeKey",
+    #         facets: {
+    #           # recursive FacetList
+    #         },
+    #         max_results: 1,
     #       },
     #     ],
     #     requested_document_attributes: ["DocumentAttributeKey"],
@@ -4263,6 +4275,7 @@ module Aws::Kendra
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.long_value #=> Integer
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].document_attribute_value.date_value #=> Time
     #   resp.facet_results[0].document_attribute_value_count_pairs[0].count #=> Integer
+    #   resp.facet_results[0].document_attribute_value_count_pairs[0].facet_results #=> Types::FacetResultList
     #   resp.total_number_of_results #=> Integer
     #   resp.warnings #=> Array
     #   resp.warnings[0].message #=> String
@@ -5419,7 +5432,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.50.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
