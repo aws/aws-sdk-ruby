@@ -623,7 +623,7 @@ module Aws::MediaPackage
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
-    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
+    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST, DVB_DASH_2014
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {
@@ -632,7 +632,7 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #           suggested_presentation_delay_seconds: 1,
-    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO, HTTP-XSDATE
     #           utc_timing_uri: "__string",
     #         },
     #         description: "__string",
@@ -918,7 +918,7 @@ module Aws::MediaPackage
     #         min_buffer_time_seconds: 1,
     #         min_update_period_seconds: 1,
     #         period_triggers: ["ADS"], # accepts ADS
-    #         profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
+    #         profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST, DVB_DASH_2014
     #         segment_duration_seconds: 1,
     #         segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #         stream_selection: {
@@ -927,7 +927,7 @@ module Aws::MediaPackage
     #           stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #         },
     #         suggested_presentation_delay_seconds: 1,
-    #         utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #         utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO, HTTP-XSDATE
     #         utc_timing_uri: "__string",
     #       }
     #
@@ -990,7 +990,9 @@ module Aws::MediaPackage
     #
     # @!attribute [rw] profile
     #   The Dynamic Adaptive Streaming over HTTP (DASH) profile type. When
-    #   set to "HBBTV\_1\_5", HbbTV 1.5 compliant output is enabled.
+    #   set to "HBBTV\_1\_5", HbbTV 1.5 compliant output is enabled. When
+    #   set to "DVB-DASH\_2014", DVB-DASH 2014 compliant output is
+    #   enabled.
     #   @return [String]
     #
     # @!attribute [rw] segment_duration_seconds
@@ -1023,7 +1025,7 @@ module Aws::MediaPackage
     #
     # @!attribute [rw] utc_timing_uri
     #   Specifies the value attribute of the UTCTiming field when utcTiming
-    #   is set to HTTP-ISO or HTTP-HEAD
+    #   is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackage-2017-10-12/DashPackage AWS API Documentation
@@ -2960,7 +2962,7 @@ module Aws::MediaPackage
     #           min_buffer_time_seconds: 1,
     #           min_update_period_seconds: 1,
     #           period_triggers: ["ADS"], # accepts ADS
-    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST
+    #           profile: "NONE", # accepts NONE, HBBTV_1_5, HYBRIDCAST, DVB_DASH_2014
     #           segment_duration_seconds: 1,
     #           segment_template_format: "NUMBER_WITH_TIMELINE", # accepts NUMBER_WITH_TIMELINE, TIME_WITH_TIMELINE, NUMBER_WITH_DURATION
     #           stream_selection: {
@@ -2969,7 +2971,7 @@ module Aws::MediaPackage
     #             stream_order: "ORIGINAL", # accepts ORIGINAL, VIDEO_BITRATE_ASCENDING, VIDEO_BITRATE_DESCENDING
     #           },
     #           suggested_presentation_delay_seconds: 1,
-    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO
+    #           utc_timing: "NONE", # accepts NONE, HTTP-HEAD, HTTP-ISO, HTTP-XSDATE
     #           utc_timing_uri: "__string",
     #         },
     #         description: "__string",

@@ -500,6 +500,11 @@ module Aws::LocationService
     #
     #  </note>
     #
+    # <note markdown="1"> The `DeviceID` is used as a string to represent the device. You do not
+    # need to have a `Tracker` associated with the `DeviceID`.
+    #
+    #  </note>
+    #
     # @option params [required, String] :collection_name
     #   The geofence collection used in evaluating the position of devices
     #   against its geofences.
@@ -777,8 +782,8 @@ module Aws::LocationService
     #   Valid Values: `false` \| `true`
     #
     # @option params [required, Array<Float>] :departure_position
-    #   The start position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The start position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-123.115, 49.285]`
     #
@@ -795,7 +800,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #
     # @option params [Time,DateTime,Date,Integer,String] :departure_time
@@ -818,8 +823,8 @@ module Aws::LocationService
     #   [1]: https://www.iso.org/iso-8601-date-and-time-format.html
     #
     # @option params [required, Array<Float>] :destination_position
-    #   The finish position for the route. Defined in [WGS 84][1] format:
-    #   `[longitude, latitude]`.
+    #   The finish position for the route. Defined in [World Geodetic System
+    #   (WGS 84)][1] format: `[longitude, latitude]`.
     #
     #   * For example, `[-122.339, 47.615]`
     #
@@ -834,7 +839,7 @@ module Aws::LocationService
     #
     #
     #
-    #   [1]: https://earth-info.nga.mil/GandG/wgs84/index.html
+    #   [1]: https://earth-info.nga.mil/index.php?dir=wgs84&amp;action=wgs84
     #   [2]: https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html
     #
     # @option params [String] :distance_unit
@@ -2668,6 +2673,12 @@ module Aws::LocationService
     # @option params [required, String] :collection_name
     #   The name of the geofence collection storing the list of geofences.
     #
+    # @option params [Integer] :max_results
+    #   An optional limit for the number of geofences returned in a single
+    #   call.
+    #
+    #   Default value: `100`
+    #
     # @option params [String] :next_token
     #   The pagination token specifying which page of results to return in the
     #   response. If no token is provided, the default page is the first page.
@@ -2685,6 +2696,7 @@ module Aws::LocationService
     #
     #   resp = client.list_geofences({
     #     collection_name: "ResourceName", # required
+    #     max_results: 1,
     #     next_token: "Token",
     #   })
     #
@@ -3053,10 +3065,21 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported for
+    #   a particular result, the partner automatically chooses a language for
+    #   the result.
+    #
+    #   For an example, we'll use the Greek language. You search for a
+    #   location around Athens, Greece, with the `language` parameter set to
+    #   `en`. The `city` in the results will most likely be returned as
+    #   `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   `city` in the results will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result will
+    #   be in a language that the provider does support.
     #
     #
     #
@@ -3197,12 +3220,19 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results. If no language
+    #   is specified, or not supported for a particular result, the partner
+    #   automatically chooses a language for the result.
     #
-    #   Used only when the partner selected is Here.
+    #   For an example, we'll use the Greek language. You search for `Athens,
+    #   Gr` to get suggestions with the `language` parameter set to `en`. The
+    #   results found will most likely be returned as `Athens, Greece`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα, Ελλάδα`.
+    #
+    #   If the data provider does not have a value for Greek, the result will
+    #   be in a language that the provider does support.
     #
     #
     #
@@ -3232,7 +3262,7 @@ module Aws::LocationService
     #     index_name: "ResourceName", # required
     #     language: "LanguageTag",
     #     max_results: 1,
-    #     text: "SyntheticSearchPlaceIndexForSuggestionsRequestString", # required
+    #     text: "SearchPlaceIndexForSuggestionsRequestTextString", # required
     #   })
     #
     # @example Response structure
@@ -3331,10 +3361,20 @@ module Aws::LocationService
     #   The preferred language used to return results. The value must be a
     #   valid [BCP 47][1] language tag, for example, `en` for English.
     #
-    #   This setting affects the languages used in the results. It does not
-    #   change which results are returned. If the language is not specified,
-    #   or not supported for a particular result, the partner automatically
-    #   chooses a language for the result.
+    #   This setting affects the languages used in the results, but not the
+    #   results themselves. If no language is specified, or not supported for
+    #   a particular result, the partner automatically chooses a language for
+    #   the result.
+    #
+    #   For an example, we'll use the Greek language. You search for `Athens,
+    #   Greece`, with the `language` parameter set to `en`. The result found
+    #   will most likely be returned as `Athens`.
+    #
+    #   If you set the `language` parameter to `el`, for Greek, then the
+    #   result found will more likely be returned as `Αθήνα`.
+    #
+    #   If the data provider does not have a value for Greek, the result will
+    #   be in a language that the provider does support.
     #
     #
     #
@@ -3364,7 +3404,7 @@ module Aws::LocationService
     #     index_name: "ResourceName", # required
     #     language: "LanguageTag",
     #     max_results: 1,
-    #     text: "SyntheticSearchPlaceIndexForTextRequestString", # required
+    #     text: "SearchPlaceIndexForTextRequestTextString", # required
     #   })
     #
     # @example Response structure
@@ -3759,7 +3799,7 @@ module Aws::LocationService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-locationservice'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

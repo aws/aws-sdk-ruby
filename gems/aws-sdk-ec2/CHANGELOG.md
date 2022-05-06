@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.312.0 (2022-05-06)
+------------------
+
+* Feature - Add new state values for IPAMs, IPAM Scopes, and IPAM Pools.
+
 1.311.0 (2022-05-05)
 ------------------
 

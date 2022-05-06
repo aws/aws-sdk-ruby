@@ -6668,7 +6668,7 @@ module Aws::EC2
     #   resp.ipam.description #=> String
     #   resp.ipam.operating_regions #=> Array
     #   resp.ipam.operating_regions[0].region_name #=> String
-    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam.tags #=> Array
     #   resp.ipam.tags[0].key #=> String
     #   resp.ipam.tags[0].value #=> String
@@ -6846,7 +6846,7 @@ module Aws::EC2
     #   resp.ipam_pool.ipam_region #=> String
     #   resp.ipam_pool.locale #=> String
     #   resp.ipam_pool.pool_depth #=> Integer
-    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_pool.state_message #=> String
     #   resp.ipam_pool.description #=> String
     #   resp.ipam_pool.auto_import #=> Boolean
@@ -6950,7 +6950,7 @@ module Aws::EC2
     #   resp.ipam_scope.is_default #=> Boolean
     #   resp.ipam_scope.description #=> String
     #   resp.ipam_scope.pool_count #=> Integer
-    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_scope.tags #=> Array
     #   resp.ipam_scope.tags[0].key #=> String
     #   resp.ipam_scope.tags[0].value #=> String
@@ -13760,7 +13760,7 @@ module Aws::EC2
     #   resp.ipam.description #=> String
     #   resp.ipam.operating_regions #=> Array
     #   resp.ipam.operating_regions[0].region_name #=> String
-    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam.tags #=> Array
     #   resp.ipam.tags[0].key #=> String
     #   resp.ipam.tags[0].value #=> String
@@ -13824,7 +13824,7 @@ module Aws::EC2
     #   resp.ipam_pool.ipam_region #=> String
     #   resp.ipam_pool.locale #=> String
     #   resp.ipam_pool.pool_depth #=> Integer
-    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_pool.state_message #=> String
     #   resp.ipam_pool.description #=> String
     #   resp.ipam_pool.auto_import #=> Boolean
@@ -13887,7 +13887,7 @@ module Aws::EC2
     #   resp.ipam_scope.is_default #=> Boolean
     #   resp.ipam_scope.description #=> String
     #   resp.ipam_scope.pool_count #=> Integer
-    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_scope.tags #=> Array
     #   resp.ipam_scope.tags[0].key #=> String
     #   resp.ipam_scope.tags[0].value #=> String
@@ -22397,7 +22397,7 @@ module Aws::EC2
     #   resp.ipam_pools[0].ipam_region #=> String
     #   resp.ipam_pools[0].locale #=> String
     #   resp.ipam_pools[0].pool_depth #=> Integer
-    #   resp.ipam_pools[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_pools[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_pools[0].state_message #=> String
     #   resp.ipam_pools[0].description #=> String
     #   resp.ipam_pools[0].auto_import #=> Boolean
@@ -22483,7 +22483,7 @@ module Aws::EC2
     #   resp.ipam_scopes[0].is_default #=> Boolean
     #   resp.ipam_scopes[0].description #=> String
     #   resp.ipam_scopes[0].pool_count #=> Integer
-    #   resp.ipam_scopes[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_scopes[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_scopes[0].tags #=> Array
     #   resp.ipam_scopes[0].tags[0].key #=> String
     #   resp.ipam_scopes[0].tags[0].value #=> String
@@ -22562,7 +22562,7 @@ module Aws::EC2
     #   resp.ipams[0].description #=> String
     #   resp.ipams[0].operating_regions #=> Array
     #   resp.ipams[0].operating_regions[0].region_name #=> String
-    #   resp.ipams[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipams[0].state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipams[0].tags #=> Array
     #   resp.ipams[0].tags[0].key #=> String
     #   resp.ipams[0].tags[0].value #=> String
@@ -39958,7 +39958,7 @@ module Aws::EC2
     #   resp.ipam.description #=> String
     #   resp.ipam.operating_regions #=> Array
     #   resp.ipam.operating_regions[0].region_name #=> String
-    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam.tags #=> Array
     #   resp.ipam.tags[0].key #=> String
     #   resp.ipam.tags[0].value #=> String
@@ -40075,7 +40075,7 @@ module Aws::EC2
     #   resp.ipam_pool.ipam_region #=> String
     #   resp.ipam_pool.locale #=> String
     #   resp.ipam_pool.pool_depth #=> Integer
-    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_pool.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_pool.state_message #=> String
     #   resp.ipam_pool.description #=> String
     #   resp.ipam_pool.auto_import #=> Boolean
@@ -40221,7 +40221,7 @@ module Aws::EC2
     #   resp.ipam_scope.is_default #=> Boolean
     #   resp.ipam_scope.description #=> String
     #   resp.ipam_scope.pool_count #=> Integer
-    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed"
+    #   resp.ipam_scope.state #=> String, one of "create-in-progress", "create-complete", "create-failed", "modify-in-progress", "modify-complete", "modify-failed", "delete-in-progress", "delete-complete", "delete-failed", "isolate-in-progress", "isolate-complete", "restore-in-progress"
     #   resp.ipam_scope.tags #=> Array
     #   resp.ipam_scope.tags[0].key #=> String
     #   resp.ipam_scope.tags[0].value #=> String
@@ -49514,7 +49514,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.311.0'
+      context[:gem_version] = '1.312.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

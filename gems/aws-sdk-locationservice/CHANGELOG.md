@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2022-05-06)
+------------------
+
+* Feature - Amazon Location Service now includes a MaxResults parameter for ListGeofences requests.
+
 1.21.0 (2022-03-22)
 ------------------
 

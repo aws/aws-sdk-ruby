@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.82.0 (2022-05-06)
+------------------
+
+* Feature - Introduces new field 'LoadSampleData' in CreateCluster operation. Customers can now specify 'LoadSampleData' option during creation of a cluster, which results in loading of sample data in the cluster that is created.
+
 1.81.0 (2022-04-19)
 ------------------
 

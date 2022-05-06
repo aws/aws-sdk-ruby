@@ -531,12 +531,17 @@ module Aws::SecurityHub
     #
     # `BatchImportFindings` must be called by one of the following:
     #
-    # * The account that is associated with the findings. The identifier of
-    #   the associated account is the value of the `AwsAccountId` attribute
-    #   for the finding.
+    # * The Amazon Web Services account that is associated with a finding if
+    #   you are using the [default product ARN][1] or are a partner sending
+    #   findings from within a customer's Amazon Web Services account. In
+    #   these cases, the identifier of the account that you are calling
+    #   `BatchImportFindings` from needs to be the same as the
+    #   `AwsAccountId` attribute for the finding.
     #
-    # * An account that is allow-listed for an official Security Hub partner
-    #   integration.
+    # * An Amazon Web Services account that Security Hub has allow-listed
+    #   for an official partner integration. In this case, you can call
+    #   `BatchImportFindings` from the allow-listed account and send
+    #   findings from different customer accounts in the same batch.
     #
     # The maximum allowed size for a finding is 240 Kb. An error is returned
     # for any finding larger than 240 Kb.
@@ -568,6 +573,10 @@ module Aws::SecurityHub
     #
     # Instead, finding providers use `FindingProviderFields` to provide
     # values for these attributes.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-custom-providers.html#securityhub-custom-providers-bfi-reqs
     #
     # @option params [required, Array<Types::AwsSecurityFinding>] :findings
     #   A list of findings to import. To successfully import a finding, it
@@ -10420,7 +10429,7 @@ module Aws::SecurityHub
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

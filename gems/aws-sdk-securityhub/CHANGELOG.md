@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-05-06)
+------------------
+
+* Feature - Documentation updates for Security Hub API reference
+
 1.64.0 (2022-04-25)
 ------------------
 

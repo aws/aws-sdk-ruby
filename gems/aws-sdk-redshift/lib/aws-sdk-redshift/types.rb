@@ -1001,7 +1001,7 @@ module Aws::Redshift
     #   A database user name that is authorized to log on to the database
     #   `DbName` using the password `DbPassword`. If the specified DbUser
     #   exists in the database, the new user name has the same database
-    #   privileges as the the user named in DbUser. By default, the user is
+    #   permissions as the the user named in DbUser. By default, the user is
     #   added to PUBLIC. If the `DbGroups` parameter is specifed, `DbUser`
     #   is added to the listed groups for any sessions created using these
     #   credentials.
@@ -1880,6 +1880,7 @@ module Aws::Redshift
     #         availability_zone_relocation: false,
     #         aqua_configuration_status: "enabled", # accepts enabled, disabled, auto
     #         default_iam_role_arn: "String",
+    #         load_sample_data: "String",
     #       }
     #
     # @!attribute [rw] db_name
@@ -2265,6 +2266,11 @@ module Aws::Redshift
     #   default for the cluster when the cluster was created.
     #   @return [String]
     #
+    # @!attribute [rw] load_sample_data
+    #   A flag that specifies whether to load sample data once the cluster
+    #   is created.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/redshift-2012-12-01/CreateClusterMessage AWS API Documentation
     #
     class CreateClusterMessage < Struct.new(
@@ -2300,7 +2306,8 @@ module Aws::Redshift
       :snapshot_schedule_identifier,
       :availability_zone_relocation,
       :aqua_configuration_status,
-      :default_iam_role_arn)
+      :default_iam_role_arn,
+      :load_sample_data)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3252,7 +3259,7 @@ module Aws::Redshift
     #
     # @!attribute [rw] data_share_associations
     #   A value that specifies when the datashare has an association between
-    #   a producer and data consumers.
+    #   producer and data consumers.
     #   @return [Array<Types::DataShareAssociation>]
     #
     # @!attribute [rw] managed_by
