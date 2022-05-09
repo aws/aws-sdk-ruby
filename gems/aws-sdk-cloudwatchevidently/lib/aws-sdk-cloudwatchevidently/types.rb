@@ -1351,6 +1351,7 @@ module Aws::CloudWatchEvidently
     #
     # @!attribute [rw] end_time
     #   The date and time that the experiment ended, if it is completed.
+    #   This must be no longer than 30 days after the experiment start time.
     #   @return [Time]
     #
     # @!attribute [rw] experiment
@@ -1429,6 +1430,13 @@ module Aws::CloudWatchEvidently
       include Aws::Structure
     end
 
+    # @!attribute [rw] details
+    #   If the experiment doesn't yet have enough events to provide valid
+    #   results, this field is returned with the message `Not enough events
+    #   to generate results`. If there are enough events to provide valid
+    #   results, this field is not returned.
+    #   @return [String]
+    #
     # @!attribute [rw] reports
     #   An array of structures that include the reports that you requested.
     #   @return [Array<Types::ExperimentReport>]
@@ -1445,6 +1453,7 @@ module Aws::CloudWatchEvidently
     # @see http://docs.aws.amazon.com/goto/WebAPI/evidently-2021-02-01/GetExperimentResultsResponse AWS API Documentation
     #
     class GetExperimentResultsResponse < Struct.new(
+      :details,
       :reports,
       :results_data,
       :timestamps)
@@ -2785,7 +2794,8 @@ module Aws::CloudWatchEvidently
     #       }
     #
     # @!attribute [rw] analysis_complete_time
-    #   The date and time to end the experiment.
+    #   The date and time to end the experiment. This must be no more than
+    #   30 days after the experiment starts.
     #   @return [Time]
     #
     # @!attribute [rw] experiment

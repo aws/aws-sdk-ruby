@@ -824,7 +824,7 @@ module Aws::SSMContacts
     #     public_content: "Testing engagements", 
     #     public_subject: "test", 
     #     sender: "tester", 
-    #     start_time: Time.parse("$2021-05-18T18:25:41.151000+00:00"), 
+    #     start_time: Time.parse("2021-05-18T18:25:41.151000+00:00"), 
     #     subject: "test", 
     #   }
     #
@@ -1713,7 +1713,15 @@ module Aws::SSMContacts
       req.send_request(options)
     end
 
-    # Adds a resource to the specified contact or escalation plan.
+    # Adds a resource policy to the specified contact or escalation plan.
+    # The resource policy is used to share the contact or escalation plan
+    # using Resource Access Manager (RAM). For more information about
+    # cross-account sharing, see [Setting up cross-account
+    # functionality][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/incident-manager/latest/userguide/xa.html
     #
     # @option params [required, String] :contact_arn
     #   The Amazon Resource Name (ARN) of the contact or escalation plan.
@@ -2197,7 +2205,7 @@ module Aws::SSMContacts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ssmcontacts'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

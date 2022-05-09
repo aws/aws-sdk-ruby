@@ -1201,7 +1201,13 @@ module Aws::CloudWatchEvidently
       req.send_request(options)
     end
 
-    # Retrieves the results of a running or completed experiment.
+    # Retrieves the results of a running or completed experiment. No results
+    # are available until there have been 100 events for each variation and
+    # at least 10 minutes have passed since the start of the experiment.
+    #
+    # Experiment results are available up to 63 days after the start of the
+    # experiment. They are not available after that because of CloudWatch
+    # data retention policies.
     #
     # @option params [String] :base_stat
     #   The statistic used to calculate experiment results. Currently the only
@@ -1209,7 +1215,8 @@ module Aws::CloudWatchEvidently
     #   the statistic.
     #
     # @option params [Time,DateTime,Date,Integer,String] :end_time
-    #   The date and time that the experiment ended, if it is completed.
+    #   The date and time that the experiment ended, if it is completed. This
+    #   must be no longer than 30 days after the experiment start time.
     #
     # @option params [required, String] :experiment
     #   The name of the experiment to retrieve the results of.
@@ -1262,6 +1269,7 @@ module Aws::CloudWatchEvidently
     #
     # @return [Types::GetExperimentResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
+    #   * {Types::GetExperimentResultsResponse#details #details} => String
     #   * {Types::GetExperimentResultsResponse#reports #reports} => Array&lt;Types::ExperimentReport&gt;
     #   * {Types::GetExperimentResultsResponse#results_data #results_data} => Array&lt;Types::ExperimentResultsData&gt;
     #   * {Types::GetExperimentResultsResponse#timestamps #timestamps} => Array&lt;Time&gt;
@@ -1283,6 +1291,7 @@ module Aws::CloudWatchEvidently
     #
     # @example Response structure
     #
+    #   resp.details #=> String
     #   resp.reports #=> Array
     #   resp.reports[0].content #=> String
     #   resp.reports[0].metric_name #=> String
@@ -1823,7 +1832,8 @@ module Aws::CloudWatchEvidently
     # [1]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateExperiment.html
     #
     # @option params [required, Time,DateTime,Date,Integer,String] :analysis_complete_time
-    #   The date and time to end the experiment.
+    #   The date and time to end the experiment. This must be no more than 30
+    #   days after the experiment starts.
     #
     # @option params [required, String] :experiment
     #   The name of the experiment to start.
@@ -2597,7 +2607,7 @@ module Aws::CloudWatchEvidently
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudwatchevidently'
-      context[:gem_version] = '1.5.0'
+      context[:gem_version] = '1.6.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

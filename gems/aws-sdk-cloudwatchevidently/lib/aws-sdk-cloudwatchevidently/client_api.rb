@@ -469,6 +469,7 @@ module Aws::CloudWatchEvidently
     GetExperimentResultsRequest.add_member(:treatment_names, Shapes::ShapeRef.new(shape: TreatmentNameList, required: true, location_name: "treatmentNames"))
     GetExperimentResultsRequest.struct_class = Types::GetExperimentResultsRequest
 
+    GetExperimentResultsResponse.add_member(:details, Shapes::ShapeRef.new(shape: String, location_name: "details"))
     GetExperimentResultsResponse.add_member(:reports, Shapes::ShapeRef.new(shape: ExperimentReportList, location_name: "reports"))
     GetExperimentResultsResponse.add_member(:results_data, Shapes::ShapeRef.new(shape: ExperimentResultsDataList, location_name: "resultsData"))
     GetExperimentResultsResponse.add_member(:timestamps, Shapes::ShapeRef.new(shape: TimestampList, location_name: "timestamps"))
