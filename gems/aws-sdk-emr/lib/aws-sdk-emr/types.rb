@@ -1050,6 +1050,12 @@ module Aws::EMR
     #   Placement group configured for an Amazon EMR cluster.
     #   @return [Array<Types::PlacementGroupConfig>]
     #
+    # @!attribute [rw] os_release_label
+    #   The Amazon Linux release specified in a cluster launch RunJobFlow
+    #   request. If no Amazon Linux release was specified, the default
+    #   Amazon Linux release is shown in the response.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/Cluster AWS API Documentation
     #
     class Cluster < Struct.new(
@@ -1082,7 +1088,8 @@ module Aws::EMR
       :cluster_arn,
       :outpost_arn,
       :step_concurrency_level,
-      :placement_groups)
+      :placement_groups,
+      :os_release_label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1870,12 +1877,25 @@ module Aws::EMR
     #   null.
     #   @return [String]
     #
+    # @!attribute [rw] available_os_releases
+    #   The list of available Amazon Linux release versions for an Amazon
+    #   EMR release. Contains a Label field that is formatted as shown in [
+    #   *Amazon Linux 2 Release Notes* ][1]. For example,
+    #   [2.0.20220218.1][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-al2.html
+    #   [2]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html
+    #   @return [Array<Types::OSRelease>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabelOutput AWS API Documentation
     #
     class DescribeReleaseLabelOutput < Struct.new(
       :release_label,
       :applications,
-      :next_token)
+      :next_token,
+      :available_os_releases)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3452,6 +3472,7 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #         configurations: [
     #           {
     #             classification: "String",
@@ -3482,6 +3503,11 @@ module Aws::EMR
     #   Policy for customizing shrink operations.
     #   @return [Types::ShrinkPolicy]
     #
+    # @!attribute [rw] reconfiguration_type
+    #   Type of reconfiguration requested. Valid values are MERGE and
+    #   OVERWRITE.
+    #   @return [String]
+    #
     # @!attribute [rw] configurations
     #   A list of new or modified configurations to apply for an instance
     #   group.
@@ -3494,6 +3520,7 @@ module Aws::EMR
       :instance_count,
       :ec2_instance_ids_to_terminate,
       :shrink_policy,
+      :reconfiguration_type,
       :configurations)
       SENSITIVE = []
       include Aws::Structure
@@ -5313,6 +5340,7 @@ module Aws::EMR
     #                 instance_termination_timeout: 1,
     #               },
     #             },
+    #             reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #             configurations: [
     #               {
     #                 classification: "String",
@@ -5529,6 +5557,27 @@ module Aws::EMR
       :status,
       :start_time,
       :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Linux release specified for a cluster in the RunJobFlow
+    # request.
+    #
+    # @!attribute [rw] label
+    #   The Amazon Linux release specified for a cluster in the RunJobFlow
+    #   request. The format is as shown in [ *Amazon Linux 2 Release Notes*
+    #   ][1]. For example, 2.0.20220218.1.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AL2/latest/relnotes/relnotes-20220218.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/OSRelease AWS API Documentation
+    #
+    class OSRelease < Struct.new(
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6355,6 +6404,7 @@ module Aws::EMR
     #         auto_termination_policy: {
     #           idle_timeout: 1,
     #         },
+    #         os_release_label: "XmlStringMaxLen256",
     #       }
     #
     # @!attribute [rw] name
@@ -6626,6 +6676,13 @@ module Aws::EMR
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #   @return [Types::AutoTerminationPolicy]
     #
+    # @!attribute [rw] os_release_label
+    #   Specifies a particular Amazon Linux release for all nodes in a
+    #   cluster launch RunJobFlow request. If a release is not specified,
+    #   Amazon EMR uses the latest validated Amazon Linux release for
+    #   cluster launch.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/RunJobFlowInput AWS API Documentation
     #
     class RunJobFlowInput < Struct.new(
@@ -6656,7 +6713,8 @@ module Aws::EMR
       :step_concurrency_level,
       :managed_scaling_policy,
       :placement_group_configs,
-      :auto_termination_policy)
+      :auto_termination_policy,
+      :os_release_label)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1145,6 +1145,7 @@ module Aws::EMR
     #   resp.cluster.placement_groups #=> Array
     #   resp.cluster.placement_groups[0].instance_role #=> String, one of "MASTER", "CORE", "TASK"
     #   resp.cluster.placement_groups[0].placement_strategy #=> String, one of "SPREAD", "PARTITION", "CLUSTER", "NONE"
+    #   resp.cluster.os_release_label #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -1352,6 +1353,7 @@ module Aws::EMR
     #   * {Types::DescribeReleaseLabelOutput#release_label #release_label} => String
     #   * {Types::DescribeReleaseLabelOutput#applications #applications} => Array&lt;Types::SimplifiedApplication&gt;
     #   * {Types::DescribeReleaseLabelOutput#next_token #next_token} => String
+    #   * {Types::DescribeReleaseLabelOutput#available_os_releases #available_os_releases} => Array&lt;Types::OSRelease&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -1368,6 +1370,8 @@ module Aws::EMR
     #   resp.applications[0].name #=> String
     #   resp.applications[0].version #=> String
     #   resp.next_token #=> String
+    #   resp.available_os_releases #=> Array
+    #   resp.available_os_releases[0].label #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticmapreduce-2009-03-31/DescribeReleaseLabel AWS API Documentation
     #
@@ -2484,6 +2488,7 @@ module Aws::EMR
     #             instance_termination_timeout: 1,
     #           },
     #         },
+    #         reconfiguration_type: "OVERWRITE", # accepts OVERWRITE, MERGE
     #         configurations: [
     #           {
     #             classification: "String",
@@ -3139,6 +3144,11 @@ module Aws::EMR
     #
     #   [1]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
     #
+    # @option params [String] :os_release_label
+    #   Specifies a particular Amazon Linux release for all nodes in a cluster
+    #   launch RunJobFlow request. If a release is not specified, Amazon EMR
+    #   uses the latest validated Amazon Linux release for cluster launch.
+    #
     # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RunJobFlowOutput#job_flow_id #job_flow_id} => String
@@ -3398,6 +3408,7 @@ module Aws::EMR
     #     auto_termination_policy: {
     #       idle_timeout: 1,
     #     },
+    #     os_release_label: "XmlStringMaxLen256",
     #   })
     #
     # @example Response structure
@@ -3766,7 +3777,7 @@ module Aws::EMR
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-emr'
-      context[:gem_version] = '1.59.0'
+      context[:gem_version] = '1.60.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

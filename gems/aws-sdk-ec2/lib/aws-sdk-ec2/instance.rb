@@ -389,6 +389,18 @@ module Aws::EC2
       data[:ipv_6_address]
     end
 
+    # If the instance is configured for NitroTPM support, the value is
+    # `v2.0`. For more information, see [NitroTPM][1] in the *Amazon EC2
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    # @return [String]
+    def tpm_support
+      data[:tpm_support]
+    end
+
     # Provides information on the recovery and maintenance options of your
     # instance.
     # @return [Types::InstanceMaintenanceOptions]

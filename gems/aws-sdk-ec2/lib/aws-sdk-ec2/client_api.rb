@@ -1240,6 +1240,8 @@ module Aws::EC2
     GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
     GetInstanceTypesFromInstanceRequirementsRequest = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsRequest')
     GetInstanceTypesFromInstanceRequirementsResult = Shapes::StructureShape.new(name: 'GetInstanceTypesFromInstanceRequirementsResult')
+    GetInstanceUefiDataRequest = Shapes::StructureShape.new(name: 'GetInstanceUefiDataRequest')
+    GetInstanceUefiDataResult = Shapes::StructureShape.new(name: 'GetInstanceUefiDataResult')
     GetIpamAddressHistoryRequest = Shapes::StructureShape.new(name: 'GetIpamAddressHistoryRequest')
     GetIpamAddressHistoryResult = Shapes::StructureShape.new(name: 'GetIpamAddressHistoryResult')
     GetIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'GetIpamPoolAllocationsMaxResults')
@@ -2370,6 +2372,7 @@ module Aws::EC2
     StoreImageTaskResultSet = Shapes::ListShape.new(name: 'StoreImageTaskResultSet')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
+    StringType = Shapes::StringShape.new(name: 'StringType')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAssociation = Shapes::StructureShape.new(name: 'SubnetAssociation')
     SubnetAssociationList = Shapes::ListShape.new(name: 'SubnetAssociationList')
@@ -2429,6 +2432,7 @@ module Aws::EC2
     TieringOperationStatus = Shapes::StringShape.new(name: 'TieringOperationStatus')
     TotalLocalStorageGB = Shapes::StructureShape.new(name: 'TotalLocalStorageGB')
     TotalLocalStorageGBRequest = Shapes::StructureShape.new(name: 'TotalLocalStorageGBRequest')
+    TpmSupportValues = Shapes::StringShape.new(name: 'TpmSupportValues')
     TrafficDirection = Shapes::StringShape.new(name: 'TrafficDirection')
     TrafficMirrorFilter = Shapes::StructureShape.new(name: 'TrafficMirrorFilter')
     TrafficMirrorFilterId = Shapes::StringShape.new(name: 'TrafficMirrorFilterId')
@@ -7634,6 +7638,14 @@ module Aws::EC2
     GetInstanceTypesFromInstanceRequirementsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetInstanceTypesFromInstanceRequirementsResult.struct_class = Types::GetInstanceTypesFromInstanceRequirementsResult
 
+    GetInstanceUefiDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+    GetInstanceUefiDataRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetInstanceUefiDataRequest.struct_class = Types::GetInstanceUefiDataRequest
+
+    GetInstanceUefiDataResult.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "instanceId"))
+    GetInstanceUefiDataResult.add_member(:uefi_data, Shapes::ShapeRef.new(shape: String, location_name: "uefiData"))
+    GetInstanceUefiDataResult.struct_class = Types::GetInstanceUefiDataResult
+
     GetIpamAddressHistoryRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetIpamAddressHistoryRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     GetIpamAddressHistoryRequest.add_member(:ipam_scope_id, Shapes::ShapeRef.new(shape: IpamScopeId, required: true, location_name: "IpamScopeId"))
@@ -8046,6 +8058,7 @@ module Aws::EC2
     Image.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     Image.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: VirtualizationType, location_name: "virtualizationType"))
     Image.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "bootMode"))
+    Image.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "tpmSupport"))
     Image.add_member(:deprecation_time, Shapes::ShapeRef.new(shape: String, location_name: "deprecationTime"))
     Image.struct_class = Types::Image
 
@@ -8058,6 +8071,8 @@ module Aws::EC2
     ImageAttribute.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "ramdisk"))
     ImageAttribute.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "sriovNetSupport"))
     ImageAttribute.add_member(:boot_mode, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "bootMode"))
+    ImageAttribute.add_member(:tpm_support, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "tpmSupport"))
+    ImageAttribute.add_member(:uefi_data, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "uefiData"))
     ImageAttribute.add_member(:last_launched_time, Shapes::ShapeRef.new(shape: AttributeValue, location_name: "lastLaunchedTime"))
     ImageAttribute.struct_class = Types::ImageAttribute
 
@@ -8325,6 +8340,7 @@ module Aws::EC2
     Instance.add_member(:usage_operation_update_time, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "usageOperationUpdateTime"))
     Instance.add_member(:private_dns_name_options, Shapes::ShapeRef.new(shape: PrivateDnsNameOptionsResponse, location_name: "privateDnsNameOptions"))
     Instance.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+    Instance.add_member(:tpm_support, Shapes::ShapeRef.new(shape: String, location_name: "tpmSupport"))
     Instance.add_member(:maintenance_options, Shapes::ShapeRef.new(shape: InstanceMaintenanceOptions, location_name: "maintenanceOptions"))
     Instance.struct_class = Types::Instance
 
@@ -10832,6 +10848,8 @@ module Aws::EC2
     RegisterImageRequest.add_member(:sriov_net_support, Shapes::ShapeRef.new(shape: String, location_name: "sriovNetSupport"))
     RegisterImageRequest.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: String, location_name: "virtualizationType"))
     RegisterImageRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "BootMode"))
+    RegisterImageRequest.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "TpmSupport"))
+    RegisterImageRequest.add_member(:uefi_data, Shapes::ShapeRef.new(shape: StringType, location_name: "UefiData"))
     RegisterImageRequest.struct_class = Types::RegisterImageRequest
 
     RegisterImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
@@ -16820,6 +16838,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_instance_uefi_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetInstanceUefiData"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetInstanceUefiDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetInstanceUefiDataResult)
       end)
 
       api.add_operation(:get_ipam_address_history, Seahorse::Model::Operation.new.tap do |o|

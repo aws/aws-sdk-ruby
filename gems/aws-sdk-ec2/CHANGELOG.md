@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.313.0 (2022-05-10)
+------------------
+
+* Feature - Added support for using NitroTPM and UEFI Secure Boot on EC2 instances.
+
 1.312.0 (2022-05-06)
 ------------------
 

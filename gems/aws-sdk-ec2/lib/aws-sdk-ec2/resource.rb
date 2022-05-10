@@ -1677,6 +1677,8 @@ module Aws::EC2
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #     tpm_support: "v2.0", # accepts v2.0
+    #     uefi_data: "StringType",
     #   })
     # @param [Hash] options ({})
     # @option options [String] :image_location
@@ -1758,6 +1760,26 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
+    # @option options [String] :tpm_support
+    #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
+    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    # @option options [String] :uefi_data
+    #   Base64 representation of the non-volatile UEFI variable store. To
+    #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command. You
+    #   can inspect and modify the UEFI data by using the [python-uefivars
+    #   tool][2] on GitHub. For more information, see [UEFI Secure Boot][3] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData
+    #   [2]: https://github.com/awslabs/python-uefivars
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
     # @return [Image]
     def register_image(options = {})
       resp = @client.register_image(options)

@@ -225,6 +225,18 @@ module Aws::EC2
       data[:boot_mode]
     end
 
+    # If the image is configured for NitroTPM support, the value is `v2.0`.
+    # For more information, see [NitroTPM][1] in the *Amazon Elastic Compute
+    # Cloud User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    # @return [String]
+    def tpm_support
+      data[:tpm_support]
+    end
+
     # The date and time to deprecate the AMI, in UTC, in the following
     # format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specified a value
     # for seconds, Amazon EC2 rounds the seconds to the nearest minute.
@@ -502,7 +514,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   image.describe_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, lastLaunchedTime
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
     #     dry_run: false,
     #   })
     # @param [Hash] options ({})

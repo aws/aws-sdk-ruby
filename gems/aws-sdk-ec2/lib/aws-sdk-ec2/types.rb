@@ -20307,7 +20307,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, lastLaunchedTime
+    #         attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
     #         image_id: "ImageId", # required
     #         dry_run: false,
     #       }
@@ -35443,6 +35443,51 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetInstanceUefiDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         dry_run: false,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The ID of the instance from which to retrieve the UEFI data.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceUefiDataRequest AWS API Documentation
+    #
+    class GetInstanceUefiDataRequest < Struct.new(
+      :instance_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The ID of the instance from which to retrieve the UEFI data.
+    #   @return [String]
+    #
+    # @!attribute [rw] uefi_data
+    #   Base64 representation of the non-volatile UEFI variable store.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceUefiDataResult AWS API Documentation
+    #
+    class GetInstanceUefiDataResult < Struct.new(
+      :instance_id,
+      :uefi_data)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetIpamAddressHistoryRequest
     #   data as a hash:
     #
@@ -37891,6 +37936,16 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] tpm_support
+    #   If the image is configured for NitroTPM support, the value is
+    #   `v2.0`. For more information, see [NitroTPM][1] in the *Amazon
+    #   Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    #   @return [String]
+    #
     # @!attribute [rw] deprecation_time
     #   The date and time to deprecate the AMI, in UTC, in the following
     #   format: *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z. If you specified a value
@@ -37927,6 +37982,7 @@ module Aws::EC2
       :tags,
       :virtualization_type,
       :boot_mode,
+      :tpm_support,
       :deprecation_time)
       SENSITIVE = []
       include Aws::Structure
@@ -37971,6 +38027,25 @@ module Aws::EC2
     #   The boot mode.
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] tpm_support
+    #   If the image is configured for NitroTPM support, the value is
+    #   `v2.0`.
+    #   @return [Types::AttributeValue]
+    #
+    # @!attribute [rw] uefi_data
+    #   Base64 representation of the non-volatile UEFI variable store. To
+    #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
+    #   You can inspect and modify the UEFI data by using the
+    #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
+    #   Secure Boot][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData
+    #   [2]: https://github.com/awslabs/python-uefivars
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+    #   @return [Types::AttributeValue]
+    #
     # @!attribute [rw] last_launched_time
     #   The date and time, in [ISO 8601 date-time format][1], when the AMI
     #   was last used to launch an EC2 instance. When the AMI is used, there
@@ -37997,6 +38072,8 @@ module Aws::EC2
       :ramdisk_id,
       :sriov_net_support,
       :boot_mode,
+      :tpm_support,
+      :uefi_data,
       :last_launched_time)
       SENSITIVE = []
       include Aws::Structure
@@ -39536,6 +39613,16 @@ module Aws::EC2
     #   The IPv6 address assigned to the instance.
     #   @return [String]
     #
+    # @!attribute [rw] tpm_support
+    #   If the instance is configured for NitroTPM support, the value is
+    #   `v2.0`. For more information, see [NitroTPM][1] in the *Amazon EC2
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    #   @return [String]
+    #
     # @!attribute [rw] maintenance_options
     #   Provides information on the recovery and maintenance options of your
     #   instance.
@@ -39598,6 +39685,7 @@ module Aws::EC2
       :usage_operation_update_time,
       :private_dns_name_options,
       :ipv_6_address,
+      :tpm_support,
       :maintenance_options)
       SENSITIVE = []
       include Aws::Structure
@@ -54578,6 +54666,8 @@ module Aws::EC2
     #         sriov_net_support: "String",
     #         virtualization_type: "String",
     #         boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #         tpm_support: "v2.0", # accepts v2.0
+    #         uefi_data: "StringType",
     #       }
     #
     # @!attribute [rw] image_location
@@ -54689,6 +54779,30 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #   @return [String]
     #
+    # @!attribute [rw] tpm_support
+    #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
+    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    #   @return [String]
+    #
+    # @!attribute [rw] uefi_data
+    #   Base64 representation of the non-volatile UEFI variable store. To
+    #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command.
+    #   You can inspect and modify the UEFI data by using the
+    #   [python-uefivars tool][2] on GitHub. For more information, see [UEFI
+    #   Secure Boot][3] in the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData
+    #   [2]: https://github.com/awslabs/python-uefivars
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RegisterImageRequest AWS API Documentation
     #
     class RegisterImageRequest < Struct.new(
@@ -54705,7 +54819,9 @@ module Aws::EC2
       :root_device_name,
       :sriov_net_support,
       :virtualization_type,
-      :boot_mode)
+      :boot_mode,
+      :tpm_support,
+      :uefi_data)
       SENSITIVE = []
       include Aws::Structure
     end

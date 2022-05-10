@@ -20130,6 +20130,8 @@ module Aws::EC2
     #   * {Types::ImageAttribute#ramdisk_id #ramdisk_id} => Types::AttributeValue
     #   * {Types::ImageAttribute#sriov_net_support #sriov_net_support} => Types::AttributeValue
     #   * {Types::ImageAttribute#boot_mode #boot_mode} => Types::AttributeValue
+    #   * {Types::ImageAttribute#tpm_support #tpm_support} => Types::AttributeValue
+    #   * {Types::ImageAttribute#uefi_data #uefi_data} => Types::AttributeValue
     #   * {Types::ImageAttribute#last_launched_time #last_launched_time} => Types::AttributeValue
     #
     #
@@ -20155,7 +20157,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_image_attribute({
-    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, lastLaunchedTime
+    #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport, bootMode, tpmSupport, uefiData, lastLaunchedTime
     #     image_id: "ImageId", # required
     #     dry_run: false,
     #   })
@@ -20189,6 +20191,8 @@ module Aws::EC2
     #   resp.ramdisk_id #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.sriov_net_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.boot_mode #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.tpm_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.uefi_data #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.last_launched_time #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeImageAttribute AWS API Documentation
@@ -20469,6 +20473,7 @@ module Aws::EC2
     #   resp.images[0].tags[0].value #=> String
     #   resp.images[0].virtualization_type #=> String, one of "hvm", "paravirtual"
     #   resp.images[0].boot_mode #=> String, one of "legacy-bios", "uefi"
+    #   resp.images[0].tpm_support #=> String, one of "v2.0"
     #   resp.images[0].deprecation_time #=> String
     #
     #
@@ -22186,6 +22191,7 @@ module Aws::EC2
     #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.reservations[0].instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.reservations[0].instances[0].ipv_6_address #=> String
+    #   resp.reservations[0].instances[0].tpm_support #=> String
     #   resp.reservations[0].instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.reservations[0].owner_id #=> String
     #   resp.reservations[0].requester_id #=> String
@@ -35266,6 +35272,62 @@ module Aws::EC2
       req.send_request(options)
     end
 
+    # A binary representation of the UEFI variable store. Only non-volatile
+    # variables are stored. This is a base64 encoded and zlib compressed
+    # binary value that must be properly encoded.
+    #
+    # When you use [register-image][1] to create an AMI, you can create an
+    # exact copy of your variable store by passing the UEFI data in the
+    # `UefiData` parameter. You can modify the UEFI data by using the
+    # [python-uefivars tool][2] on GitHub. You can use the tool to convert
+    # the UEFI data into a human-readable format (JSON), which you can
+    # inspect and modify, and then convert back into the binary format to
+    # use with register-image.
+    #
+    # For more information, see [UEFI Secure Boot][3] in the *Amazon EC2
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cli/latest/reference/ec2/register-image.html
+    # [2]: https://github.com/awslabs/python-uefivars
+    # [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+    #
+    # @option params [required, String] :instance_id
+    #   The ID of the instance from which to retrieve the UEFI data.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetInstanceUefiDataResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetInstanceUefiDataResult#instance_id #instance_id} => String
+    #   * {Types::GetInstanceUefiDataResult#uefi_data #uefi_data} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_instance_uefi_data({
+    #     instance_id: "InstanceId", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.uefi_data #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetInstanceUefiData AWS API Documentation
+    #
+    # @overload get_instance_uefi_data(params = {})
+    # @param [Hash] params ({})
+    def get_instance_uefi_data(params = {}, options = {})
+      req = build_request(:get_instance_uefi_data, params)
+      req.send_request(options)
+    end
+
     # Retrieve historical information about a CIDR within an IPAM scope. For
     # more information, see [View the history of IP
     # addresses](/vpc/latest/ipam/view-history-cidr-ipam.html) in the
@@ -43789,6 +43851,28 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
     #
+    # @option params [String] :tpm_support
+    #   Set to `v2.0` to enable Trusted Platform Module (TPM) support. For
+    #   more information, see [NitroTPM][1] in the *Amazon Elastic Compute
+    #   Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html
+    #
+    # @option params [String] :uefi_data
+    #   Base64 representation of the non-volatile UEFI variable store. To
+    #   retrieve the UEFI data, use the [GetInstanceUefiData][1] command. You
+    #   can inspect and modify the UEFI data by using the [python-uefivars
+    #   tool][2] on GitHub. For more information, see [UEFI Secure Boot][3] in
+    #   the *Amazon Elastic Compute Cloud User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData
+    #   [2]: https://github.com/awslabs/python-uefivars
+    #   [3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+    #
     # @return [Types::RegisterImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterImageResult#image_id #image_id} => String
@@ -43827,6 +43911,8 @@ module Aws::EC2
     #     sriov_net_support: "String",
     #     virtualization_type: "String",
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi
+    #     tpm_support: "v2.0", # accepts v2.0
+    #     uefi_data: "StringType",
     #   })
     #
     # @example Response structure
@@ -47604,6 +47690,7 @@ module Aws::EC2
     #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.instances[0].private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.instances[0].ipv_6_address #=> String
+    #   resp.instances[0].tpm_support #=> String
     #   resp.instances[0].maintenance_options.auto_recovery #=> String, one of "disabled", "default"
     #   resp.owner_id #=> String
     #   resp.requester_id #=> String
@@ -49514,7 +49601,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.312.0'
+      context[:gem_version] = '1.313.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

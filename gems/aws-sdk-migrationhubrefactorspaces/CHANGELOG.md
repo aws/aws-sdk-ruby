@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.6.0 (2022-05-10)
+------------------
+
+* Feature - AWS Migration Hub Refactor Spaces documentation only update to fix a formatting issue.
+
 1.5.0 (2022-03-07)
 ------------------
 
