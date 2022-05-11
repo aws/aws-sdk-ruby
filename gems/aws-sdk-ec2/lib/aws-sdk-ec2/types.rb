@@ -11574,6 +11574,11 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
+    #         subnet_id: "SubnetId", # required
+    #         cidr: "String", # required
+    #         reservation_type: "prefix", # required, accepts prefix, explicit
+    #         description: "String",
+    #         dry_run: false,
     #         tag_specifications: [
     #           {
     #             resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -11585,16 +11590,7 @@ module Aws::EC2
     #             ],
     #           },
     #         ],
-    #         subnet_id: "SubnetId", # required
-    #         cidr: "String", # required
-    #         reservation_type: "prefix", # required, accepts prefix, explicit
-    #         description: "String",
-    #         dry_run: false,
     #       }
-    #
-    # @!attribute [rw] tag_specifications
-    #   The tags to assign to the subnet CIDR reservation.
-    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] subnet_id
     #   The ID of the subnet.
@@ -11634,15 +11630,19 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] tag_specifications
+    #   The tags to assign to the subnet CIDR reservation.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateSubnetCidrReservationRequest AWS API Documentation
     #
     class CreateSubnetCidrReservationRequest < Struct.new(
-      :tag_specifications,
       :subnet_id,
       :cidr,
       :reservation_type,
       :description,
-      :dry_run)
+      :dry_run,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13363,6 +13363,10 @@ module Aws::EC2
     #         route_table_ids: ["RouteTableId"],
     #         subnet_ids: ["SubnetId"],
     #         security_group_ids: ["SecurityGroupId"],
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
+    #         dns_options: {
+    #           dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #         },
     #         client_token: "String",
     #         private_dns_enabled: false,
     #         tag_specifications: [
@@ -13423,6 +13427,14 @@ module Aws::EC2
     #   associate with the endpoint network interface.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_options
+    #   The DNS options for the endpoint.
+    #   @return [Types::DnsOptionsSpecification]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -13465,6 +13477,8 @@ module Aws::EC2
       :route_table_ids,
       :subnet_ids,
       :security_group_ids,
+      :ip_address_type,
+      :dns_options,
       :client_token,
       :private_dns_enabled,
       :tag_specifications)
@@ -13501,6 +13515,7 @@ module Aws::EC2
     #         private_dns_name: "String",
     #         network_load_balancer_arns: ["String"],
     #         gateway_load_balancer_arns: ["String"],
+    #         supported_ip_address_types: ["String"],
     #         client_token: "String",
     #         tag_specifications: [
     #           {
@@ -13542,6 +13557,11 @@ module Aws::EC2
     #   Balancers.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_ip_address_types
+    #   The supported IP address types. The possible values are `ipv4` and
+    #   `ipv6`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -13564,6 +13584,7 @@ module Aws::EC2
       :private_dns_name,
       :network_load_balancer_arns,
       :gateway_load_balancer_arns,
+      :supported_ip_address_types,
       :client_token,
       :tag_specifications)
       SENSITIVE = []
@@ -28570,6 +28591,8 @@ module Aws::EC2
     # @!attribute [rw] filters
     #   One or more filters.
     #
+    #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
+    #
     #   * `service-id` - The ID of the service.
     #
     #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account
@@ -28659,6 +28682,9 @@ module Aws::EC2
     #
     #   * `service-state` - The state of the service (`Pending` \|
     #     `Available` \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
+    #     `ipv6`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
@@ -28827,6 +28853,9 @@ module Aws::EC2
     #
     #   * `service-type` - The type of service (`Interface` \| `Gateway`).
     #
+    #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
+    #     `ipv6`).
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned
     #     to the resource. Use the tag key in the filter name and the tag
     #     value as the filter value. For example, to find all resources that
@@ -28920,6 +28949,8 @@ module Aws::EC2
     #
     # @!attribute [rw] filters
     #   One or more filters.
+    #
+    #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
     #   * `service-name` - The name of the service.
     #
@@ -31051,6 +31082,41 @@ module Aws::EC2
     class DnsEntry < Struct.new(
       :dns_name,
       :hosted_zone_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the DNS options for an endpoint.
+    #
+    # @!attribute [rw] dns_record_ip_type
+    #   The DNS records created for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsOptions AWS API Documentation
+    #
+    class DnsOptions < Struct.new(
+      :dns_record_ip_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the DNS options for an endpoint.
+    #
+    # @note When making an API call, you may pass DnsOptionsSpecification
+    #   data as a hash:
+    #
+    #       {
+    #         dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #       }
+    #
+    # @!attribute [rw] dns_record_ip_type
+    #   The DNS records created for the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DnsOptionsSpecification AWS API Documentation
+    #
+    class DnsOptionsSpecification < Struct.new(
+      :dns_record_ip_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -50209,6 +50275,10 @@ module Aws::EC2
     #         remove_subnet_ids: ["SubnetId"],
     #         add_security_group_ids: ["SecurityGroupId"],
     #         remove_security_group_ids: ["SecurityGroupId"],
+    #         ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
+    #         dns_options: {
+    #           dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #         },
     #         private_dns_enabled: false,
     #       }
     #
@@ -50266,6 +50336,14 @@ module Aws::EC2
     #   from the network interface.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_options
+    #   The DNS options for the endpoint.
+    #   @return [Types::DnsOptionsSpecification]
+    #
     # @!attribute [rw] private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
@@ -50284,6 +50362,8 @@ module Aws::EC2
       :remove_subnet_ids,
       :add_security_group_ids,
       :remove_security_group_ids,
+      :ip_address_type,
+      :dns_options,
       :private_dns_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -50315,6 +50395,8 @@ module Aws::EC2
     #         remove_network_load_balancer_arns: ["String"],
     #         add_gateway_load_balancer_arns: ["String"],
     #         remove_gateway_load_balancer_arns: ["String"],
+    #         add_supported_ip_address_types: ["String"],
+    #         remove_supported_ip_address_types: ["String"],
     #       }
     #
     # @!attribute [rw] dry_run
@@ -50363,6 +50445,14 @@ module Aws::EC2
     #   from your service configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] add_supported_ip_address_types
+    #   The IP address types to add to your service configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] remove_supported_ip_address_types
+    #   The IP address types to remove from your service configuration.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVpcEndpointServiceConfigurationRequest AWS API Documentation
     #
     class ModifyVpcEndpointServiceConfigurationRequest < Struct.new(
@@ -50374,7 +50464,9 @@ module Aws::EC2
       :add_network_load_balancer_arns,
       :remove_network_load_balancer_arns,
       :add_gateway_load_balancer_arns,
-      :remove_gateway_load_balancer_arns)
+      :remove_gateway_load_balancer_arns,
+      :add_supported_ip_address_types,
+      :remove_supported_ip_address_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -61627,6 +61719,10 @@ module Aws::EC2
     #   the service.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] supported_ip_address_types
+    #   The supported IP address types.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] base_endpoint_dns_names
     #   The DNS names for the service.
     #   @return [Array<String>]
@@ -61660,6 +61756,7 @@ module Aws::EC2
       :manages_vpc_endpoints,
       :network_load_balancer_arns,
       :gateway_load_balancer_arns,
+      :supported_ip_address_types,
       :base_endpoint_dns_names,
       :private_dns_name,
       :private_dns_name_configuration,
@@ -61733,6 +61830,10 @@ module Aws::EC2
     #   the state is not `verified`.
     #   @return [String]
     #
+    # @!attribute [rw] supported_ip_address_types
+    #   The supported IP address types.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ServiceDetail AWS API Documentation
     #
     class ServiceDetail < Struct.new(
@@ -61749,7 +61850,8 @@ module Aws::EC2
       :manages_vpc_endpoints,
       :payer_responsibility,
       :tags,
-      :private_dns_name_verification_state)
+      :private_dns_name_verification_state,
+      :supported_ip_address_types)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -68415,7 +68517,7 @@ module Aws::EC2
     # Describes a VPC endpoint.
     #
     # @!attribute [rw] vpc_endpoint_id
-    #   The ID of the VPC endpoint.
+    #   The ID of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] vpc_endpoint_type
@@ -68431,7 +68533,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   The state of the VPC endpoint.
+    #   The state of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] policy_document
@@ -68444,8 +68546,7 @@ module Aws::EC2
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_ids
-    #   (Interface endpoint) One or more subnets in which the endpoint is
-    #   located.
+    #   (Interface endpoint) The subnets for the endpoint.
     #   @return [Array<String>]
     #
     # @!attribute [rw] groups
@@ -68453,13 +68554,21 @@ module Aws::EC2
     #   associated with the network interface.
     #   @return [Array<Types::SecurityGroupIdentifier>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] dns_options
+    #   The DNS options for the endpoint.
+    #   @return [Types::DnsOptions]
+    #
     # @!attribute [rw] private_dns_enabled
     #   (Interface endpoint) Indicates whether the VPC is associated with a
     #   private hosted zone.
     #   @return [Boolean]
     #
     # @!attribute [rw] requester_managed
-    #   Indicates whether the VPC endpoint is being managed by its service.
+    #   Indicates whether the endpoint is being managed by its service.
     #   @return [Boolean]
     #
     # @!attribute [rw] network_interface_ids
@@ -68472,20 +68581,19 @@ module Aws::EC2
     #   @return [Array<Types::DnsEntry>]
     #
     # @!attribute [rw] creation_timestamp
-    #   The date and time that the VPC endpoint was created.
+    #   The date and time that the endpoint was created.
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   Any tags assigned to the VPC endpoint.
+    #   Any tags assigned to the endpoint.
     #   @return [Array<Types::Tag>]
     #
     # @!attribute [rw] owner_id
-    #   The ID of the Amazon Web Services account that owns the VPC
-    #   endpoint.
+    #   The ID of the Amazon Web Services account that owns the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] last_error
-    #   The last error that occurred for VPC endpoint.
+    #   The last error that occurred for endpoint.
     #   @return [Types::LastError]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpoint AWS API Documentation
@@ -68500,6 +68608,8 @@ module Aws::EC2
       :route_table_ids,
       :subnet_ids,
       :groups,
+      :ip_address_type,
+      :dns_options,
       :private_dns_enabled,
       :requester_managed,
       :network_interface_ids,
@@ -68549,6 +68659,10 @@ module Aws::EC2
     #   the service.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type for the endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VpcEndpointConnection AWS API Documentation
     #
     class VpcEndpointConnection < Struct.new(
@@ -68559,7 +68673,8 @@ module Aws::EC2
       :creation_timestamp,
       :dns_entries,
       :network_load_balancer_arns,
-      :gateway_load_balancer_arns)
+      :gateway_load_balancer_arns,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -10595,9 +10595,6 @@ module Aws::EC2
     #
     # [1]: https://docs.aws.amazon.com/vpc/latest/userguide/subnet-cidr-reservation.html
     #
-    # @option params [Array<Types::TagSpecification>] :tag_specifications
-    #   The tags to assign to the subnet CIDR reservation.
-    #
     # @option params [required, String] :subnet_id
     #   The ID of the subnet.
     #
@@ -10631,6 +10628,9 @@ module Aws::EC2
     #   If you have the required permissions, the error response is
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   The tags to assign to the subnet CIDR reservation.
+    #
     # @return [Types::CreateSubnetCidrReservationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateSubnetCidrReservationResult#subnet_cidr_reservation #subnet_cidr_reservation} => Types::SubnetCidrReservation
@@ -10638,6 +10638,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_subnet_cidr_reservation({
+    #     subnet_id: "SubnetId", # required
+    #     cidr: "String", # required
+    #     reservation_type: "prefix", # required, accepts prefix, explicit
+    #     description: "String",
+    #     dry_run: false,
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-route-table, volume, vpc, vpc-endpoint, vpc-endpoint-service, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log
@@ -10649,11 +10654,6 @@ module Aws::EC2
     #         ],
     #       },
     #     ],
-    #     subnet_id: "SubnetId", # required
-    #     cidr: "String", # required
-    #     reservation_type: "prefix", # required, accepts prefix, explicit
-    #     description: "String",
-    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -12460,6 +12460,12 @@ module Aws::EC2
     #   (Interface endpoint) The ID of one or more security groups to
     #   associate with the endpoint network interface.
     #
+    # @option params [String] :ip_address_type
+    #   The IP address type for the endpoint.
+    #
+    # @option params [Types::DnsOptionsSpecification] :dns_options
+    #   The DNS options for the endpoint.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -12504,6 +12510,10 @@ module Aws::EC2
     #     route_table_ids: ["RouteTableId"],
     #     subnet_ids: ["SubnetId"],
     #     security_group_ids: ["SecurityGroupId"],
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
+    #     dns_options: {
+    #       dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #     },
     #     client_token: "String",
     #     private_dns_enabled: false,
     #     tag_specifications: [
@@ -12534,6 +12544,8 @@ module Aws::EC2
     #   resp.vpc_endpoint.groups #=> Array
     #   resp.vpc_endpoint.groups[0].group_id #=> String
     #   resp.vpc_endpoint.groups[0].group_name #=> String
+    #   resp.vpc_endpoint.ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
+    #   resp.vpc_endpoint.dns_options.dns_record_ip_type #=> String, one of "ipv4", "dualstack", "ipv6", "service-defined"
     #   resp.vpc_endpoint.private_dns_enabled #=> Boolean
     #   resp.vpc_endpoint.requester_managed #=> Boolean
     #   resp.vpc_endpoint.network_interface_ids #=> Array
@@ -12682,6 +12694,10 @@ module Aws::EC2
     #   The Amazon Resource Names (ARNs) of one or more Gateway Load
     #   Balancers.
     #
+    # @option params [Array<String>] :supported_ip_address_types
+    #   The supported IP address types. The possible values are `ipv4` and
+    #   `ipv6`.
+    #
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier that you provide to ensure the
     #   idempotency of the request. For more information, see [How to ensure
@@ -12707,6 +12723,7 @@ module Aws::EC2
     #     private_dns_name: "String",
     #     network_load_balancer_arns: ["String"],
     #     gateway_load_balancer_arns: ["String"],
+    #     supported_ip_address_types: ["String"],
     #     client_token: "String",
     #     tag_specifications: [
     #       {
@@ -12736,6 +12753,8 @@ module Aws::EC2
     #   resp.service_configuration.network_load_balancer_arns[0] #=> String
     #   resp.service_configuration.gateway_load_balancer_arns #=> Array
     #   resp.service_configuration.gateway_load_balancer_arns[0] #=> String
+    #   resp.service_configuration.supported_ip_address_types #=> Array
+    #   resp.service_configuration.supported_ip_address_types[0] #=> String, one of "ipv4", "ipv6"
     #   resp.service_configuration.base_endpoint_dns_names #=> Array
     #   resp.service_configuration.base_endpoint_dns_names[0] #=> String
     #   resp.service_configuration.private_dns_name #=> String
@@ -31324,6 +31343,8 @@ module Aws::EC2
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
     #
+    #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
+    #
     #   * `service-id` - The ID of the service.
     #
     #   * `vpc-endpoint-owner` - The ID of the Amazon Web Services account ID
@@ -31381,6 +31402,7 @@ module Aws::EC2
     #   resp.vpc_endpoint_connections[0].network_load_balancer_arns[0] #=> String
     #   resp.vpc_endpoint_connections[0].gateway_load_balancer_arns #=> Array
     #   resp.vpc_endpoint_connections[0].gateway_load_balancer_arns[0] #=> String
+    #   resp.vpc_endpoint_connections[0].ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointConnections AWS API Documentation
@@ -31413,6 +31435,9 @@ module Aws::EC2
     #
     #   * `service-state` - The state of the service (`Pending` \| `Available`
     #     \| `Deleting` \| `Deleted` \| `Failed`).
+    #
+    #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
+    #     `ipv6`).
     #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
@@ -31472,6 +31497,8 @@ module Aws::EC2
     #   resp.service_configurations[0].network_load_balancer_arns[0] #=> String
     #   resp.service_configurations[0].gateway_load_balancer_arns #=> Array
     #   resp.service_configurations[0].gateway_load_balancer_arns[0] #=> String
+    #   resp.service_configurations[0].supported_ip_address_types #=> Array
+    #   resp.service_configurations[0].supported_ip_address_types[0] #=> String, one of "ipv4", "ipv6"
     #   resp.service_configurations[0].base_endpoint_dns_names #=> Array
     #   resp.service_configurations[0].base_endpoint_dns_names[0] #=> String
     #   resp.service_configurations[0].private_dns_name #=> String
@@ -31588,6 +31615,9 @@ module Aws::EC2
     #
     #   * `service-type` - The type of service (`Interface` \| `Gateway`).
     #
+    #   * `supported-ip-address-types` - The IP address type (`ipv4` \|
+    #     `ipv6`).
+    #
     #   * `tag`\:&lt;key&gt; - The key/value combination of a tag assigned to
     #     the resource. Use the tag key in the filter name and the tag value
     #     as the filter value. For example, to find all resources that have a
@@ -31656,6 +31686,8 @@ module Aws::EC2
     #   resp.service_details[0].tags[0].key #=> String
     #   resp.service_details[0].tags[0].value #=> String
     #   resp.service_details[0].private_dns_name_verification_state #=> String, one of "pendingVerification", "verified", "failed"
+    #   resp.service_details[0].supported_ip_address_types #=> Array
+    #   resp.service_details[0].supported_ip_address_types[0] #=> String, one of "ipv4", "ipv6"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVpcEndpointServices AWS API Documentation
@@ -31680,6 +31712,8 @@ module Aws::EC2
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters.
+    #
+    #   * `ip-address-type` - The IP address type (`ipv4` \| `ipv6`).
     #
     #   * `service-name` - The name of the service.
     #
@@ -31754,6 +31788,8 @@ module Aws::EC2
     #   resp.vpc_endpoints[0].groups #=> Array
     #   resp.vpc_endpoints[0].groups[0].group_id #=> String
     #   resp.vpc_endpoints[0].groups[0].group_name #=> String
+    #   resp.vpc_endpoints[0].ip_address_type #=> String, one of "ipv4", "dualstack", "ipv6"
+    #   resp.vpc_endpoints[0].dns_options.dns_record_ip_type #=> String, one of "ipv4", "dualstack", "ipv6", "service-defined"
     #   resp.vpc_endpoints[0].private_dns_enabled #=> Boolean
     #   resp.vpc_endpoints[0].requester_managed #=> Boolean
     #   resp.vpc_endpoints[0].network_interface_ids #=> Array
@@ -42058,6 +42094,12 @@ module Aws::EC2
     #   (Interface endpoint) One or more security group IDs to disassociate
     #   from the network interface.
     #
+    # @option params [String] :ip_address_type
+    #   The IP address type for the endpoint.
+    #
+    # @option params [Types::DnsOptionsSpecification] :dns_options
+    #   The DNS options for the endpoint.
+    #
     # @option params [Boolean] :private_dns_enabled
     #   (Interface endpoint) Indicates whether a private hosted zone is
     #   associated with the VPC.
@@ -42079,6 +42121,10 @@ module Aws::EC2
     #     remove_subnet_ids: ["SubnetId"],
     #     add_security_group_ids: ["SecurityGroupId"],
     #     remove_security_group_ids: ["SecurityGroupId"],
+    #     ip_address_type: "ipv4", # accepts ipv4, dualstack, ipv6
+    #     dns_options: {
+    #       dns_record_ip_type: "ipv4", # accepts ipv4, dualstack, ipv6, service-defined
+    #     },
     #     private_dns_enabled: false,
     #   })
     #
@@ -42187,6 +42233,12 @@ module Aws::EC2
     #   The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove
     #   from your service configuration.
     #
+    # @option params [Array<String>] :add_supported_ip_address_types
+    #   The IP address types to add to your service configuration.
+    #
+    # @option params [Array<String>] :remove_supported_ip_address_types
+    #   The IP address types to remove from your service configuration.
+    #
     # @return [Types::ModifyVpcEndpointServiceConfigurationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ModifyVpcEndpointServiceConfigurationResult#return #return} => Boolean
@@ -42203,6 +42255,8 @@ module Aws::EC2
     #     remove_network_load_balancer_arns: ["String"],
     #     add_gateway_load_balancer_arns: ["String"],
     #     remove_gateway_load_balancer_arns: ["String"],
+    #     add_supported_ip_address_types: ["String"],
+    #     remove_supported_ip_address_types: ["String"],
     #   })
     #
     # @example Response structure
@@ -49601,7 +49655,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.313.0'
+      context[:gem_version] = '1.314.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

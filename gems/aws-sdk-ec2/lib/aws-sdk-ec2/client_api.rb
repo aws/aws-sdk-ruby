@@ -1032,6 +1032,9 @@ module Aws::EC2
     DnsEntry = Shapes::StructureShape.new(name: 'DnsEntry')
     DnsEntrySet = Shapes::ListShape.new(name: 'DnsEntrySet')
     DnsNameState = Shapes::StringShape.new(name: 'DnsNameState')
+    DnsOptions = Shapes::StructureShape.new(name: 'DnsOptions')
+    DnsOptionsSpecification = Shapes::StructureShape.new(name: 'DnsOptionsSpecification')
+    DnsRecordIpType = Shapes::StringShape.new(name: 'DnsRecordIpType')
     DnsServersOptionsModifyStructure = Shapes::StructureShape.new(name: 'DnsServersOptionsModifyStructure')
     DnsSupportValue = Shapes::StringShape.new(name: 'DnsSupportValue')
     DomainType = Shapes::StringShape.new(name: 'DomainType')
@@ -1506,6 +1509,7 @@ module Aws::EC2
     InternetGatewayList = Shapes::ListShape.new(name: 'InternetGatewayList')
     IpAddress = Shapes::StringShape.new(name: 'IpAddress')
     IpAddressList = Shapes::ListShape.new(name: 'IpAddressList')
+    IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
     IpPermission = Shapes::StructureShape.new(name: 'IpPermission')
     IpPermissionList = Shapes::ListShape.new(name: 'IpPermissionList')
     IpPrefixList = Shapes::ListShape.new(name: 'IpPrefixList')
@@ -2289,6 +2293,7 @@ module Aws::EC2
     SensitiveUserData = Shapes::StringShape.new(name: 'SensitiveUserData')
     ServiceConfiguration = Shapes::StructureShape.new(name: 'ServiceConfiguration')
     ServiceConfigurationSet = Shapes::ListShape.new(name: 'ServiceConfigurationSet')
+    ServiceConnectivityType = Shapes::StringShape.new(name: 'ServiceConnectivityType')
     ServiceDetail = Shapes::StructureShape.new(name: 'ServiceDetail')
     ServiceDetailSet = Shapes::ListShape.new(name: 'ServiceDetailSet')
     ServiceState = Shapes::StringShape.new(name: 'ServiceState')
@@ -2394,6 +2399,7 @@ module Aws::EC2
     SuccessfulQueuedPurchaseDeletion = Shapes::StructureShape.new(name: 'SuccessfulQueuedPurchaseDeletion')
     SuccessfulQueuedPurchaseDeletionSet = Shapes::ListShape.new(name: 'SuccessfulQueuedPurchaseDeletionSet')
     SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
+    SupportedIpAddressTypes = Shapes::ListShape.new(name: 'SupportedIpAddressTypes')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagDescription = Shapes::StructureShape.new(name: 'TagDescription')
     TagDescriptionList = Shapes::ListShape.new(name: 'TagDescriptionList')
@@ -4349,12 +4355,12 @@ module Aws::EC2
     CreateStoreImageTaskResult.add_member(:object_key, Shapes::ShapeRef.new(shape: String, location_name: "objectKey"))
     CreateStoreImageTaskResult.struct_class = Types::CreateStoreImageTaskResult
 
-    CreateSubnetCidrReservationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetCidrReservationRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: SubnetId, required: true, location_name: "SubnetId"))
     CreateSubnetCidrReservationRequest.add_member(:cidr, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Cidr"))
     CreateSubnetCidrReservationRequest.add_member(:reservation_type, Shapes::ShapeRef.new(shape: SubnetCidrReservationType, required: true, location_name: "ReservationType"))
     CreateSubnetCidrReservationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
     CreateSubnetCidrReservationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    CreateSubnetCidrReservationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateSubnetCidrReservationRequest.struct_class = Types::CreateSubnetCidrReservationRequest
 
     CreateSubnetCidrReservationResult.add_member(:subnet_cidr_reservation, Shapes::ShapeRef.new(shape: SubnetCidrReservation, location_name: "subnetCidrReservation"))
@@ -4582,6 +4588,8 @@ module Aws::EC2
     CreateVpcEndpointRequest.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: VpcEndpointRouteTableIdList, location_name: "RouteTableId"))
     CreateVpcEndpointRequest.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: VpcEndpointSubnetIdList, location_name: "SubnetId"))
     CreateVpcEndpointRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: VpcEndpointSecurityGroupIdList, location_name: "SecurityGroupId"))
+    CreateVpcEndpointRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    CreateVpcEndpointRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptionsSpecification, location_name: "DnsOptions"))
     CreateVpcEndpointRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     CreateVpcEndpointRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
@@ -4596,6 +4604,7 @@ module Aws::EC2
     CreateVpcEndpointServiceConfigurationRequest.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "PrivateDnsName"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "NetworkLoadBalancerArn"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "GatewayLoadBalancerArn"))
+    CreateVpcEndpointServiceConfigurationRequest.add_member(:supported_ip_address_types, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "SupportedIpAddressType"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
     CreateVpcEndpointServiceConfigurationRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateVpcEndpointServiceConfigurationRequest.struct_class = Types::CreateVpcEndpointServiceConfigurationRequest
@@ -6916,6 +6925,12 @@ module Aws::EC2
     DnsEntry.struct_class = Types::DnsEntry
 
     DnsEntrySet.member = Shapes::ShapeRef.new(shape: DnsEntry, location_name: "item")
+
+    DnsOptions.add_member(:dns_record_ip_type, Shapes::ShapeRef.new(shape: DnsRecordIpType, location_name: "dnsRecordIpType"))
+    DnsOptions.struct_class = Types::DnsOptions
+
+    DnsOptionsSpecification.add_member(:dns_record_ip_type, Shapes::ShapeRef.new(shape: DnsRecordIpType, location_name: "DnsRecordIpType"))
+    DnsOptionsSpecification.struct_class = Types::DnsOptionsSpecification
 
     DnsServersOptionsModifyStructure.add_member(:custom_dns_servers, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "CustomDnsServers"))
     DnsServersOptionsModifyStructure.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "Enabled"))
@@ -9980,6 +9995,8 @@ module Aws::EC2
     ModifyVpcEndpointRequest.add_member(:remove_subnet_ids, Shapes::ShapeRef.new(shape: VpcEndpointSubnetIdList, location_name: "RemoveSubnetId"))
     ModifyVpcEndpointRequest.add_member(:add_security_group_ids, Shapes::ShapeRef.new(shape: VpcEndpointSecurityGroupIdList, location_name: "AddSecurityGroupId"))
     ModifyVpcEndpointRequest.add_member(:remove_security_group_ids, Shapes::ShapeRef.new(shape: VpcEndpointSecurityGroupIdList, location_name: "RemoveSecurityGroupId"))
+    ModifyVpcEndpointRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    ModifyVpcEndpointRequest.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptionsSpecification, location_name: "DnsOptions"))
     ModifyVpcEndpointRequest.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PrivateDnsEnabled"))
     ModifyVpcEndpointRequest.struct_class = Types::ModifyVpcEndpointRequest
 
@@ -9995,6 +10012,8 @@ module Aws::EC2
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveNetworkLoadBalancerArn"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:add_gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddGatewayLoadBalancerArn"))
     ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveGatewayLoadBalancerArn"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:add_supported_ip_address_types, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "AddSupportedIpAddressType"))
+    ModifyVpcEndpointServiceConfigurationRequest.add_member(:remove_supported_ip_address_types, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "RemoveSupportedIpAddressType"))
     ModifyVpcEndpointServiceConfigurationRequest.struct_class = Types::ModifyVpcEndpointServiceConfigurationRequest
 
     ModifyVpcEndpointServiceConfigurationResult.add_member(:return, Shapes::ShapeRef.new(shape: Boolean, location_name: "return"))
@@ -11804,6 +11823,7 @@ module Aws::EC2
     ServiceConfiguration.add_member(:manages_vpc_endpoints, Shapes::ShapeRef.new(shape: Boolean, location_name: "managesVpcEndpoints"))
     ServiceConfiguration.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     ServiceConfiguration.add_member(:gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "gatewayLoadBalancerArnSet"))
+    ServiceConfiguration.add_member(:supported_ip_address_types, Shapes::ShapeRef.new(shape: SupportedIpAddressTypes, location_name: "supportedIpAddressTypeSet"))
     ServiceConfiguration.add_member(:base_endpoint_dns_names, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "baseEndpointDnsNameSet"))
     ServiceConfiguration.add_member(:private_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "privateDnsName"))
     ServiceConfiguration.add_member(:private_dns_name_configuration, Shapes::ShapeRef.new(shape: PrivateDnsNameConfiguration, location_name: "privateDnsNameConfiguration"))
@@ -11827,6 +11847,7 @@ module Aws::EC2
     ServiceDetail.add_member(:payer_responsibility, Shapes::ShapeRef.new(shape: PayerResponsibility, location_name: "payerResponsibility"))
     ServiceDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     ServiceDetail.add_member(:private_dns_name_verification_state, Shapes::ShapeRef.new(shape: DnsNameState, location_name: "privateDnsNameVerificationState"))
+    ServiceDetail.add_member(:supported_ip_address_types, Shapes::ShapeRef.new(shape: SupportedIpAddressTypes, location_name: "supportedIpAddressTypeSet"))
     ServiceDetail.struct_class = Types::ServiceDetail
 
     ServiceDetailSet.member = Shapes::ShapeRef.new(shape: ServiceDetail, location_name: "item")
@@ -12255,6 +12276,8 @@ module Aws::EC2
     SuccessfulQueuedPurchaseDeletion.struct_class = Types::SuccessfulQueuedPurchaseDeletion
 
     SuccessfulQueuedPurchaseDeletionSet.member = Shapes::ShapeRef.new(shape: SuccessfulQueuedPurchaseDeletion, location_name: "item")
+
+    SupportedIpAddressTypes.member = Shapes::ShapeRef.new(shape: ServiceConnectivityType, location_name: "item")
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
@@ -13052,6 +13075,8 @@ module Aws::EC2
     VpcEndpoint.add_member(:route_table_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "routeTableIdSet"))
     VpcEndpoint.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "subnetIdSet"))
     VpcEndpoint.add_member(:groups, Shapes::ShapeRef.new(shape: GroupIdentifierSet, location_name: "groupSet"))
+    VpcEndpoint.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
+    VpcEndpoint.add_member(:dns_options, Shapes::ShapeRef.new(shape: DnsOptions, location_name: "dnsOptions"))
     VpcEndpoint.add_member(:private_dns_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "privateDnsEnabled"))
     VpcEndpoint.add_member(:requester_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "requesterManaged"))
     VpcEndpoint.add_member(:network_interface_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkInterfaceIdSet"))
@@ -13070,6 +13095,7 @@ module Aws::EC2
     VpcEndpointConnection.add_member(:dns_entries, Shapes::ShapeRef.new(shape: DnsEntrySet, location_name: "dnsEntrySet"))
     VpcEndpointConnection.add_member(:network_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "networkLoadBalancerArnSet"))
     VpcEndpointConnection.add_member(:gateway_load_balancer_arns, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "gatewayLoadBalancerArnSet"))
+    VpcEndpointConnection.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "ipAddressType"))
     VpcEndpointConnection.struct_class = Types::VpcEndpointConnection
 
     VpcEndpointConnectionSet.member = Shapes::ShapeRef.new(shape: VpcEndpointConnection, location_name: "item")

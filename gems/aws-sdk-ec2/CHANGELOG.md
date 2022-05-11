@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.314.0 (2022-05-11)
+------------------
+
+* Feature - This release updates AWS PrivateLink APIs to support IPv6 for PrivateLink Services and Endpoints of type 'Interface'.
+
 1.313.0 (2022-05-10)
 ------------------
 

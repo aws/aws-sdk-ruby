@@ -364,26 +364,27 @@ module Aws::SecretsManager
     # Turns off automatic rotation, and if a rotation is currently in
     # progress, cancels the rotation.
     #
+    # If you cancel a rotation in progress, it can leave the `VersionStage`
+    # labels in an unexpected state. You might need to remove the staging
+    # label `AWSPENDING` from the partially created version. You also need
+    # to determine whether to roll back to the previous version of the
+    # secret by moving the staging label `AWSCURRENT` to the version that
+    # has `AWSPENDING`. To determine which version has a specific staging
+    # label, call ListSecretVersionIds. Then use UpdateSecretVersionStage to
+    # change staging labels. For more information, see [How rotation
+    # works][1].
+    #
     # To turn on automatic rotation again, call RotateSecret.
     #
-    # <note markdown="1"> If you cancel a rotation in progress, it can leave the `VersionStage`
-    # labels in an unexpected state. Depending on the step of the rotation
-    # in progress, you might need to remove the staging label `AWSPENDING`
-    # from the partially created version, specified by the `VersionId`
-    # response value. We recommend you also evaluate the partially rotated
-    # new version to see if it should be deleted. You can delete a version
-    # by removing all staging labels from it.
-    #
-    #  </note>
-    #
     # <b>Required permissions: </b> `secretsmanager:CancelRotateSecret`. For
-    # more information, see [ IAM policy actions for Secrets Manager][1] and
-    # [Authentication and access control in Secrets Manager][2].
+    # more information, see [ IAM policy actions for Secrets Manager][2] and
+    # [Authentication and access control in Secrets Manager][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotate-secrets_how.html
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret.
@@ -790,8 +791,20 @@ module Aws::SecretsManager
     # the end of the recovery window. At the end of the recovery window,
     # Secrets Manager deletes the secret permanently.
     #
-    # For information about deleting a secret in the console, see
-    # [https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage\_delete-secret.html][1].
+    # You can't delete a primary secret that is replicated to other
+    # Regions. You must first delete the replicas using
+    # RemoveRegionsFromReplication, and then delete the primary secret. When
+    # you delete a replica, it is deleted immediately.
+    #
+    # You can't directly delete a version of a secret. Instead, you remove
+    # all staging labels from the version using UpdateSecretVersionStage.
+    # This marks the version as deprecated, and then Secrets Manager can
+    # automatically delete the version in the background.
+    #
+    # To determine whether an application still uses a secret, you can
+    # create an Amazon CloudWatch alarm to alert you to any attempts to
+    # access a secret during the recovery window. For more information, see
+    # [ Monitor secrets scheduled for deletion][1].
     #
     # Secrets Manager performs the permanent secret deletion at the end of
     # the waiting period as a background task with low priority. There is no
@@ -801,9 +814,9 @@ module Aws::SecretsManager
     # At any time before recovery window ends, you can use RestoreSecret to
     # remove the `DeletionDate` and cancel the deletion of the secret.
     #
-    # In a secret scheduled for deletion, you cannot access the encrypted
-    # secret value. To access that information, first cancel the deletion
-    # with RestoreSecret and then retrieve the information.
+    # When a secret is scheduled for deletion, you cannot retrieve the
+    # secret value. You must first cancel the deletion with RestoreSecret
+    # and then you can retrieve the secret.
     #
     # <b>Required permissions: </b> `secretsmanager:DeleteSecret`. For more
     # information, see [ IAM policy actions for Secrets Manager][2] and
@@ -811,7 +824,7 @@ module Aws::SecretsManager
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_delete-secret.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/monitoring_cloudwatch_deleted-secrets.html
     # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
     # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
@@ -1310,21 +1323,21 @@ module Aws::SecretsManager
       req.send_request(options)
     end
 
-    # Lists the versions for a secret.
+    # Lists the versions of a secret. Secrets Manager uses staging labels to
+    # indicate the different versions of a secret. For more information, see
+    # [ Secrets Manager concepts: Versions][1].
     #
     # To list the secrets in the account, use ListSecrets.
     #
-    # To get the secret value from `SecretString` or `SecretBinary`, call
-    # GetSecretValue.
-    #
     # <b>Required permissions: </b> `secretsmanager:ListSecretVersionIds`.
-    # For more information, see [ IAM policy actions for Secrets Manager][1]
-    # and [Authentication and access control in Secrets Manager][2].
+    # For more information, see [ IAM policy actions for Secrets Manager][2]
+    # and [Authentication and access control in Secrets Manager][3].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
-    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
+    # [1]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/getting-started.html#term_version
+    # [2]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#reference_iam-permissions_actions
+    # [3]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html
     #
     # @option params [required, String] :secret_id
     #   The ARN or name of the secret whose versions you want to list.
@@ -1440,8 +1453,8 @@ module Aws::SecretsManager
     # To get the secret value from `SecretString` or `SecretBinary`, call
     # GetSecretValue.
     #
-    # For information about finding secrets in the console, see [Enhanced
-    # search capabilities for secrets in Secrets Manager][1].
+    # For information about finding secrets in the console, see [Find
+    # secrets in Secrets Manager][1].
     #
     # <b>Required permissions: </b> `secretsmanager:ListSecrets`. For more
     # information, see [ IAM policy actions for Secrets Manager][2] and
@@ -2120,6 +2133,45 @@ module Aws::SecretsManager
     #   * {Types::RotateSecretResponse#arn #arn} => String
     #   * {Types::RotateSecretResponse#name #name} => String
     #   * {Types::RotateSecretResponse#version_id #version_id} => String
+    #
+    #
+    # @example Example: To configure rotation for a secret
+    #
+    #   # The following example configures rotation for a secret using a cron expression. The first rotation happens immediately
+    #   # after the changes are stored in the secret. The rotation schedule is the first and 15th day of every month. The rotation
+    #   # window begins at 4:00 PM UTC and ends at 6:00 PM.
+    #
+    #   resp = client.rotate_secret({
+    #     rotation_lambda_arn: "arn:aws:lambda:us-west-2:123456789012:function:MyTestDatabaseRotationLambda", 
+    #     rotation_rules: {
+    #       duration: "2h", 
+    #       schedule_expression: "cron(0 16 1,15 * ? *)", 
+    #     }, 
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     version_id: "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2", 
+    #   }
+    #
+    # @example Example: To request an immediate rotation for a secret
+    #
+    #   # The following example requests an immediate invocation of the secret's Lambda rotation function. It assumes that the
+    #   # specified secret already has rotation configured. The rotation function runs asynchronously in the background.
+    #
+    #   resp = client.rotate_secret({
+    #     secret_id: "MyTestDatabaseSecret", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     arn: "arn:aws:secretsmanager:us-west-2:123456789012:secret:MyTestDatabaseSecret-a1b2c3", 
+    #     name: "MyTestDatabaseSecret", 
+    #     version_id: "EXAMPLE2-90ab-cdef-fedc-ba987SECRET2", 
+    #   }
     #
     # @example Request syntax with placeholder values
     #
@@ -2824,7 +2876,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
