@@ -317,6 +317,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] availability_zone
@@ -485,6 +493,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteOutpostInput AWS API Documentation
@@ -508,6 +524,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/DeleteSiteInput AWS API Documentation
@@ -617,6 +641,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetOutpostInput AWS API Documentation
@@ -638,6 +670,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -668,6 +708,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] outpost_arn
@@ -707,6 +755,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -753,6 +809,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/outposts-2019-12-03/GetSiteInput AWS API Documentation
@@ -1650,6 +1714,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1710,6 +1782,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] address_type
@@ -1759,6 +1839,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1814,6 +1902,14 @@ module Aws::Outposts
     #
     # @!attribute [rw] site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon
+    #   Resource Name (ARN) or an ID for Outposts and sites throughout the
+    #   Outposts Query API. To address backwards compatibility, the
+    #   parameter names `OutpostID` or `SiteID` remain in use. Despite the
+    #   parameter name, you can make the request with an ARN.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] power_draw_kva

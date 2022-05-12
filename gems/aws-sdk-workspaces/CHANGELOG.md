@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-05-12)
+------------------
+
+* Feature - Increased the character limit of the login message from 600 to 850 characters.
+
 1.67.0 (2022-04-11)
 ------------------
 

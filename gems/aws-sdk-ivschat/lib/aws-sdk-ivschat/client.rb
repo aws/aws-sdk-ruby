@@ -422,8 +422,8 @@ module Aws::Ivschat
     #   rune/code-point count, not number of bytes. Default: 500.
     #
     # @option params [Integer] :maximum_message_rate_per_second
-    #   Maximum number of messages per second that a client can send to the
-    #   room. Default: 10.
+    #   Maximum number of messages per second that can be sent to the room (by
+    #   all clients). Default: 10.
     #
     # @option params [Types::MessageReviewHandler] :message_review_handler
     #   Configuration information for optional review of messages.
@@ -834,8 +834,8 @@ module Aws::Ivschat
     #   rune/code-point count, not number of bytes. Default: 500.
     #
     # @option params [Integer] :maximum_message_rate_per_second
-    #   The maximum number of messages per second that a client can send to
-    #   the room. Default: 10.
+    #   Maximum number of messages per second that can be sent to the room (by
+    #   all clients). Default: 10.
     #
     # @option params [Types::MessageReviewHandler] :message_review_handler
     #   Configuration information for optional review of messages. Specify an
@@ -906,7 +906,7 @@ module Aws::Ivschat
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ivschat'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

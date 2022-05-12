@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2022-05-12)
+------------------
+
+* Feature - This release adds support to include inactive database bundles in the response of the GetRelationalDatabaseBundles request.
+
 1.66.0 (2022-05-04)
 ------------------
 

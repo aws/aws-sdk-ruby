@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.84.0 (2022-05-12)
+------------------
+
+* Feature - Lambda releases NodeJs 16 managed runtime to be available in all commercial regions.
+
 1.83.0 (2022-04-06)
 ------------------
 

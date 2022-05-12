@@ -925,7 +925,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1344,6 +1344,56 @@ module Aws::Kendra
     #           },
     #         ],
     #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
+    #       jira_configuration: {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
     #           {
     #             data_source_field_name: "DataSourceFieldName", # required
     #             date_field_format: "DataSourceDateFieldFormat",
@@ -2224,7 +2274,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2540,6 +2590,45 @@ module Aws::Kendra
     #   resp.configuration.quip_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids #=> Array
     #   resp.configuration.quip_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.jira_configuration.jira_account_url #=> String
+    #   resp.configuration.jira_configuration.secret_arn #=> String
+    #   resp.configuration.jira_configuration.use_change_log #=> Boolean
+    #   resp.configuration.jira_configuration.project #=> Array
+    #   resp.configuration.jira_configuration.project[0] #=> String
+    #   resp.configuration.jira_configuration.issue_type #=> Array
+    #   resp.configuration.jira_configuration.issue_type[0] #=> String
+    #   resp.configuration.jira_configuration.status #=> Array
+    #   resp.configuration.jira_configuration.status[0] #=> String
+    #   resp.configuration.jira_configuration.issue_sub_entity_filter #=> Array
+    #   resp.configuration.jira_configuration.issue_sub_entity_filter[0] #=> String, one of "COMMENTS", "ATTACHMENTS", "WORKLOGS"
+    #   resp.configuration.jira_configuration.attachment_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.attachment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.comment_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.issue_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.project_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.project_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings #=> Array
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.jira_configuration.work_log_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.jira_configuration.inclusion_patterns #=> Array
+    #   resp.configuration.jira_configuration.inclusion_patterns[0] #=> String
+    #   resp.configuration.jira_configuration.exclusion_patterns #=> Array
+    #   resp.configuration.jira_configuration.exclusion_patterns[0] #=> String
+    #   resp.configuration.jira_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.jira_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids[0] #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3374,7 +3463,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -4962,6 +5051,56 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #       },
+    #       jira_configuration: {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -5432,7 +5571,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.51.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

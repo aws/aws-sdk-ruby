@@ -335,6 +335,7 @@ module Aws::Ivschat
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
@@ -431,6 +432,7 @@ module Aws::Ivschat
         o.output = Shapes::ShapeRef.new(shape: UpdateRoomResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
     end

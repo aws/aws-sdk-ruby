@@ -12195,6 +12195,7 @@ module Aws::EC2
     #         ],
     #         dry_run: false,
     #         client_token: "String",
+    #         gateway_load_balancer_endpoint_id: "VpcEndpointId",
     #       }
     #
     # @!attribute [rw] network_interface_id
@@ -12234,6 +12235,10 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #   @return [String]
     #
+    # @!attribute [rw] gateway_load_balancer_endpoint_id
+    #   The ID of the Gateway Load Balancer endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTargetRequest AWS API Documentation
     #
     class CreateTrafficMirrorTargetRequest < Struct.new(
@@ -12242,7 +12247,8 @@ module Aws::EC2
       :description,
       :tag_specifications,
       :dry_run,
-      :client_token)
+      :client_token,
+      :gateway_load_balancer_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65758,6 +65764,10 @@ module Aws::EC2
     #   The tags assigned to the Traffic Mirror target.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] gateway_load_balancer_endpoint_id
+    #   The ID of the Gateway Load Balancer endpoint.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TrafficMirrorTarget AWS API Documentation
     #
     class TrafficMirrorTarget < Struct.new(
@@ -65767,7 +65777,8 @@ module Aws::EC2
       :type,
       :description,
       :owner_id,
-      :tags)
+      :tags,
+      :gateway_load_balancer_endpoint_id)
       SENSITIVE = []
       include Aws::Structure
     end

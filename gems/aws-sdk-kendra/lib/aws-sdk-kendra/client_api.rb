@@ -268,7 +268,13 @@ module Aws::Kendra
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     Interval = Shapes::StringShape.new(name: 'Interval')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
+    IssueSubEntity = Shapes::StringShape.new(name: 'IssueSubEntity')
+    IssueSubEntityFilter = Shapes::ListShape.new(name: 'IssueSubEntityFilter')
+    IssueType = Shapes::ListShape.new(name: 'IssueType')
     Issuer = Shapes::StringShape.new(name: 'Issuer')
+    JiraAccountUrl = Shapes::StringShape.new(name: 'JiraAccountUrl')
+    JiraConfiguration = Shapes::StructureShape.new(name: 'JiraConfiguration')
+    JiraStatus = Shapes::ListShape.new(name: 'JiraStatus')
     JsonTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JsonTokenTypeConfiguration')
     JwtTokenTypeConfiguration = Shapes::StructureShape.new(name: 'JwtTokenTypeConfiguration')
     KeyLocation = Shapes::StringShape.new(name: 'KeyLocation')
@@ -342,6 +348,7 @@ module Aws::Kendra
     PrincipalOrderingId = Shapes::IntegerShape.new(name: 'PrincipalOrderingId')
     PrincipalType = Shapes::StringShape.new(name: 'PrincipalType')
     PrivateChannelFilter = Shapes::ListShape.new(name: 'PrivateChannelFilter')
+    Project = Shapes::ListShape.new(name: 'Project')
     ProxyConfiguration = Shapes::StructureShape.new(name: 'ProxyConfiguration')
     PublicChannelFilter = Shapes::ListShape.new(name: 'PublicChannelFilter')
     PutPrincipalMappingRequest = Shapes::StructureShape.new(name: 'PutPrincipalMappingRequest')
@@ -831,6 +838,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:slack_configuration, Shapes::ShapeRef.new(shape: SlackConfiguration, location_name: "SlackConfiguration"))
     DataSourceConfiguration.add_member(:box_configuration, Shapes::ShapeRef.new(shape: BoxConfiguration, location_name: "BoxConfiguration"))
     DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
+    DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1349,6 +1357,29 @@ module Aws::Kendra
     InvalidRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     InvalidRequestException.struct_class = Types::InvalidRequestException
 
+    IssueSubEntityFilter.member = Shapes::ShapeRef.new(shape: IssueSubEntity)
+
+    IssueType.member = Shapes::ShapeRef.new(shape: String)
+
+    JiraConfiguration.add_member(:jira_account_url, Shapes::ShapeRef.new(shape: JiraAccountUrl, required: true, location_name: "JiraAccountUrl"))
+    JiraConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    JiraConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    JiraConfiguration.add_member(:project, Shapes::ShapeRef.new(shape: Project, location_name: "Project"))
+    JiraConfiguration.add_member(:issue_type, Shapes::ShapeRef.new(shape: IssueType, location_name: "IssueType"))
+    JiraConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: JiraStatus, location_name: "Status"))
+    JiraConfiguration.add_member(:issue_sub_entity_filter, Shapes::ShapeRef.new(shape: IssueSubEntityFilter, location_name: "IssueSubEntityFilter"))
+    JiraConfiguration.add_member(:attachment_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "AttachmentFieldMappings"))
+    JiraConfiguration.add_member(:comment_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "CommentFieldMappings"))
+    JiraConfiguration.add_member(:issue_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "IssueFieldMappings"))
+    JiraConfiguration.add_member(:project_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "ProjectFieldMappings"))
+    JiraConfiguration.add_member(:work_log_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "WorkLogFieldMappings"))
+    JiraConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
+    JiraConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
+    JiraConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    JiraConfiguration.struct_class = Types::JiraConfiguration
+
+    JiraStatus.member = Shapes::ShapeRef.new(shape: String)
+
     JsonTokenTypeConfiguration.add_member(:user_name_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserNameAttributeField"))
     JsonTokenTypeConfiguration.add_member(:group_attribute_field, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GroupAttributeField"))
     JsonTokenTypeConfiguration.struct_class = Types::JsonTokenTypeConfiguration
@@ -1508,6 +1539,8 @@ module Aws::Kendra
     PrincipalList.member = Shapes::ShapeRef.new(shape: Principal)
 
     PrivateChannelFilter.member = Shapes::ShapeRef.new(shape: String)
+
+    Project.member = Shapes::ShapeRef.new(shape: String)
 
     ProxyConfiguration.add_member(:host, Shapes::ShapeRef.new(shape: Host, required: true, location_name: "Host"))
     ProxyConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "Port"))

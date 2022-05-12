@@ -45,6 +45,9 @@ module Aws::SSMIncidents
     DeleteResponsePlanOutput = Shapes::StructureShape.new(name: 'DeleteResponsePlanOutput')
     DeleteTimelineEventInput = Shapes::StructureShape.new(name: 'DeleteTimelineEventInput')
     DeleteTimelineEventOutput = Shapes::StructureShape.new(name: 'DeleteTimelineEventOutput')
+    DynamicSsmParameterValue = Shapes::UnionShape.new(name: 'DynamicSsmParameterValue')
+    DynamicSsmParameters = Shapes::MapShape.new(name: 'DynamicSsmParameters')
+    DynamicSsmParametersKeyString = Shapes::StringShape.new(name: 'DynamicSsmParametersKeyString')
     EmptyChatChannel = Shapes::StructureShape.new(name: 'EmptyChatChannel')
     EngagementSet = Shapes::ListShape.new(name: 'EngagementSet')
     EventData = Shapes::StringShape.new(name: 'EventData')
@@ -175,6 +178,7 @@ module Aws::SSMIncidents
     UpdateTimelineEventOutput = Shapes::StructureShape.new(name: 'UpdateTimelineEventOutput')
     Url = Shapes::StringShape.new(name: 'Url')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    VariableType = Shapes::StringShape.new(name: 'VariableType')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
@@ -293,6 +297,15 @@ module Aws::SSMIncidents
     DeleteTimelineEventInput.struct_class = Types::DeleteTimelineEventInput
 
     DeleteTimelineEventOutput.struct_class = Types::DeleteTimelineEventOutput
+
+    DynamicSsmParameterValue.add_member(:variable, Shapes::ShapeRef.new(shape: VariableType, location_name: "variable"))
+    DynamicSsmParameterValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DynamicSsmParameterValue.add_member_subclass(:variable, Types::DynamicSsmParameterValue::Variable)
+    DynamicSsmParameterValue.add_member_subclass(:unknown, Types::DynamicSsmParameterValue::Unknown)
+    DynamicSsmParameterValue.struct_class = Types::DynamicSsmParameterValue
+
+    DynamicSsmParameters.key = Shapes::ShapeRef.new(shape: DynamicSsmParametersKeyString)
+    DynamicSsmParameters.value = Shapes::ShapeRef.new(shape: DynamicSsmParameterValue)
 
     EmptyChatChannel.struct_class = Types::EmptyChatChannel
 
@@ -548,6 +561,7 @@ module Aws::SSMIncidents
 
     SsmAutomation.add_member(:document_name, Shapes::ShapeRef.new(shape: SsmAutomationDocumentNameString, required: true, location_name: "documentName"))
     SsmAutomation.add_member(:document_version, Shapes::ShapeRef.new(shape: SsmAutomationDocumentVersionString, location_name: "documentVersion"))
+    SsmAutomation.add_member(:dynamic_parameters, Shapes::ShapeRef.new(shape: DynamicSsmParameters, location_name: "dynamicParameters"))
     SsmAutomation.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmParameters, location_name: "parameters"))
     SsmAutomation.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
     SsmAutomation.add_member(:target_account, Shapes::ShapeRef.new(shape: SsmTargetAccount, location_name: "targetAccount"))
@@ -1082,6 +1096,7 @@ module Aws::SSMIncidents
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

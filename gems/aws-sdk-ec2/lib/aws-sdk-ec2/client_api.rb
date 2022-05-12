@@ -4435,6 +4435,7 @@ module Aws::EC2
     CreateTrafficMirrorTargetRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateTrafficMirrorTargetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateTrafficMirrorTargetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken"=>true}))
+    CreateTrafficMirrorTargetRequest.add_member(:gateway_load_balancer_endpoint_id, Shapes::ShapeRef.new(shape: VpcEndpointId, location_name: "GatewayLoadBalancerEndpointId"))
     CreateTrafficMirrorTargetRequest.struct_class = Types::CreateTrafficMirrorTargetRequest
 
     CreateTrafficMirrorTargetResult.add_member(:traffic_mirror_target, Shapes::ShapeRef.new(shape: TrafficMirrorTarget, location_name: "trafficMirrorTarget"))
@@ -12456,6 +12457,7 @@ module Aws::EC2
     TrafficMirrorTarget.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     TrafficMirrorTarget.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
     TrafficMirrorTarget.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TrafficMirrorTarget.add_member(:gateway_load_balancer_endpoint_id, Shapes::ShapeRef.new(shape: String, location_name: "gatewayLoadBalancerEndpointId"))
     TrafficMirrorTarget.struct_class = Types::TrafficMirrorTarget
 
     TrafficMirrorTargetIdList.member = Shapes::ShapeRef.new(shape: TrafficMirrorTargetId, location_name: "item")

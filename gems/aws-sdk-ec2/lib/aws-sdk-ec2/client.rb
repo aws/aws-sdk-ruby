@@ -11123,8 +11123,8 @@ module Aws::EC2
     # appliances) can be in the same VPC, or in different VPCs connected via
     # VPC peering or a transit gateway.
     #
-    # A Traffic Mirror target can be a network interface, or a Network Load
-    # Balancer.
+    # A Traffic Mirror target can be a network interface, a Network Load
+    # Balancer, or a Gateway Load Balancer endpoint.
     #
     # To use the target in a Traffic Mirror session, use
     # [CreateTrafficMirrorSession][1].
@@ -11164,6 +11164,9 @@ module Aws::EC2
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
+    # @option params [String] :gateway_load_balancer_endpoint_id
+    #   The ID of the Gateway Load Balancer endpoint.
+    #
     # @return [Types::CreateTrafficMirrorTargetResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTrafficMirrorTargetResult#traffic_mirror_target #traffic_mirror_target} => Types::TrafficMirrorTarget
@@ -11188,6 +11191,7 @@ module Aws::EC2
     #     ],
     #     dry_run: false,
     #     client_token: "String",
+    #     gateway_load_balancer_endpoint_id: "VpcEndpointId",
     #   })
     #
     # @example Response structure
@@ -11195,12 +11199,13 @@ module Aws::EC2
     #   resp.traffic_mirror_target.traffic_mirror_target_id #=> String
     #   resp.traffic_mirror_target.network_interface_id #=> String
     #   resp.traffic_mirror_target.network_load_balancer_arn #=> String
-    #   resp.traffic_mirror_target.type #=> String, one of "network-interface", "network-load-balancer"
+    #   resp.traffic_mirror_target.type #=> String, one of "network-interface", "network-load-balancer", "gateway-load-balancer-endpoint"
     #   resp.traffic_mirror_target.description #=> String
     #   resp.traffic_mirror_target.owner_id #=> String
     #   resp.traffic_mirror_target.tags #=> Array
     #   resp.traffic_mirror_target.tags[0].key #=> String
     #   resp.traffic_mirror_target.tags[0].value #=> String
+    #   resp.traffic_mirror_target.gateway_load_balancer_endpoint_id #=> String
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CreateTrafficMirrorTarget AWS API Documentation
@@ -29573,12 +29578,13 @@ module Aws::EC2
     #   resp.traffic_mirror_targets[0].traffic_mirror_target_id #=> String
     #   resp.traffic_mirror_targets[0].network_interface_id #=> String
     #   resp.traffic_mirror_targets[0].network_load_balancer_arn #=> String
-    #   resp.traffic_mirror_targets[0].type #=> String, one of "network-interface", "network-load-balancer"
+    #   resp.traffic_mirror_targets[0].type #=> String, one of "network-interface", "network-load-balancer", "gateway-load-balancer-endpoint"
     #   resp.traffic_mirror_targets[0].description #=> String
     #   resp.traffic_mirror_targets[0].owner_id #=> String
     #   resp.traffic_mirror_targets[0].tags #=> Array
     #   resp.traffic_mirror_targets[0].tags[0].key #=> String
     #   resp.traffic_mirror_targets[0].tags[0].value #=> String
+    #   resp.traffic_mirror_targets[0].gateway_load_balancer_endpoint_id #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeTrafficMirrorTargets AWS API Documentation
@@ -49655,7 +49661,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.314.0'
+      context[:gem_version] = '1.315.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

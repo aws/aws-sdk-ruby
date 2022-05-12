@@ -1977,6 +1977,7 @@ module Aws::Lightsail
     GetRelationalDatabaseBlueprintsResult.struct_class = Types::GetRelationalDatabaseBlueprintsResult
 
     GetRelationalDatabaseBundlesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetRelationalDatabaseBundlesRequest.add_member(:include_inactive, Shapes::ShapeRef.new(shape: boolean, location_name: "includeInactive"))
     GetRelationalDatabaseBundlesRequest.struct_class = Types::GetRelationalDatabaseBundlesRequest
 
     GetRelationalDatabaseBundlesResult.add_member(:bundles, Shapes::ShapeRef.new(shape: RelationalDatabaseBundleList, location_name: "bundles"))

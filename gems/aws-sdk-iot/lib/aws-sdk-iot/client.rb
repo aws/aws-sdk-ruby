@@ -1716,6 +1716,13 @@ module Aws::IoT
     #   a thing when the thing is added to a target group, even after the job
     #   was completed by all things originally in the group.
     #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs for
+    #   dynamic thing group targets. By using continuous jobs, devices that
+    #   join the group receive the job execution even after the job has been
+    #   created.
+    #
+    #    </note>
+    #
     # @option params [Types::JobExecutionsRolloutConfig] :job_executions_rollout_config
     #   Allows you to create a staged rollout of the job.
     #
@@ -1752,8 +1759,14 @@ module Aws::IoT
     #   Allows you to create the criteria to retry a job.
     #
     # @option params [Hash<String,String>] :document_parameters
-    #   Parameters of a managed template that you can specify to create the
-    #   job document.
+    #   Parameters of an Amazon Web Services managed template that you can
+    #   specify to create the job document.
+    #
+    #   <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    #   Web Services managed templates. This parameter can't be used with
+    #   custom job templates or to create jobs from them.
+    #
+    #    </note>
     #
     # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8770,6 +8783,13 @@ module Aws::IoT
     #   a thing when the thing is added to a target group, even after the job
     #   was completed by all things originally in the group.
     #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs for
+    #   dynamic thing group targets. By using continuous jobs, devices that
+    #   join the group receive the job execution even after the job has been
+    #   created.
+    #
+    #    </note>
+    #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per request.
     #
@@ -13674,7 +13694,7 @@ module Aws::IoT
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.54.0 (2022-05-12)
+------------------
+
+* Feature - AWS Transfer Family now accepts ECDSA keys for server host keys
+
 1.53.0 (2022-04-19)
 ------------------
 

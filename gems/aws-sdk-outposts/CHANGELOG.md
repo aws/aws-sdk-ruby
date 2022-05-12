@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2022-05-12)
+------------------
+
+* Feature - Documentation updates for AWS Outposts.
+
 1.31.0 (2022-05-02)
 ------------------
 

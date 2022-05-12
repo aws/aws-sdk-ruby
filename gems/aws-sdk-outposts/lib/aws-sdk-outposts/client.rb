@@ -441,6 +441,14 @@ module Aws::Outposts
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
     #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
+    #
     # @option params [String] :availability_zone
     #   The Availability Zone.
     #
@@ -620,6 +628,14 @@ module Aws::Outposts
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     # @example Request syntax with placeholder values
@@ -641,6 +657,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -741,6 +765,14 @@ module Aws::Outposts
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
+    #
     # @return [Types::GetOutpostOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetOutpostOutput#outpost #outpost} => Types::Outpost
@@ -780,6 +812,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @option params [String] :next_token
     #   The pagination token.
@@ -825,6 +865,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @return [Types::GetSiteOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -872,6 +920,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @option params [required, String] :address_type
     #   The type of the address you request.
@@ -1352,6 +1408,14 @@ module Aws::Outposts
     # @option params [required, String] :outpost_id
     #   The ID or the Amazon Resource Name (ARN) of the Outpost.
     #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
+    #
     # @option params [String] :name
     #   The name of the Outpost.
     #
@@ -1403,6 +1467,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @option params [String] :name
     #   The name of the site.
@@ -1469,6 +1541,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @option params [required, String] :address_type
     #   The type of the address.
@@ -1539,6 +1619,14 @@ module Aws::Outposts
     #
     # @option params [required, String] :site_id
     #   The ID or the Amazon Resource Name (ARN) of the site.
+    #
+    #   <note markdown="1"> In requests, Amazon Web Services Outposts accepts the Amazon Resource
+    #   Name (ARN) or an ID for Outposts and sites throughout the Outposts
+    #   Query API. To address backwards compatibility, the parameter names
+    #   `OutpostID` or `SiteID` remain in use. Despite the parameter name, you
+    #   can make the request with an ARN.
+    #
+    #    </note>
     #
     # @option params [String] :power_draw_kva
     #   Specify in kVA the power draw available at the hardware placement
@@ -1698,7 +1786,7 @@ module Aws::Outposts
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-outposts'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

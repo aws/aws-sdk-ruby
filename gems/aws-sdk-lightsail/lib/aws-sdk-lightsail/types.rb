@@ -7134,8 +7134,8 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] include_inactive
-    #   A Boolean value indicating whether to include inactive results in
-    #   your request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) blueprints in the response of your request.
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
@@ -7221,7 +7221,7 @@ module Aws::Lightsail
     #
     # @!attribute [rw] include_inactive
     #   A Boolean value that indicates whether to include inactive
-    #   (unavailable) bundles in the response.
+    #   (unavailable) bundles in the response of your request.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetBucketBundlesRequest AWS API Documentation
@@ -7470,8 +7470,8 @@ module Aws::Lightsail
     #       }
     #
     # @!attribute [rw] include_inactive
-    #   A Boolean value that indicates whether to include inactive bundle
-    #   results in your request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
     #   @return [Boolean]
     #
     # @!attribute [rw] page_token
@@ -9805,6 +9805,7 @@ module Aws::Lightsail
     #
     #       {
     #         page_token: "string",
+    #         include_inactive: false,
     #       }
     #
     # @!attribute [rw] page_token
@@ -9816,10 +9817,16 @@ module Aws::Lightsail
     #   specify as the page token in a subsequent request.
     #   @return [String]
     #
+    # @!attribute [rw] include_inactive
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetRelationalDatabaseBundlesRequest AWS API Documentation
     #
     class GetRelationalDatabaseBundlesRequest < Struct.new(
-      :page_token)
+      :page_token,
+      :include_inactive)
       SENSITIVE = []
       include Aws::Structure
     end

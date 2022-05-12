@@ -140,8 +140,8 @@ module Aws::Ivschat
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_message_rate_per_second
-    #   Maximum number of messages per second that a client can send to the
-    #   room. Default: 10.
+    #   Maximum number of messages per second that can be sent to the room
+    #   (by all clients). Default: 10.
     #   @return [Integer]
     #
     # @!attribute [rw] message_review_handler
@@ -188,8 +188,8 @@ module Aws::Ivschat
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_message_rate_per_second
-    #   Maximum number of messages per second that a client can send to the
-    #   room, from the request.
+    #   Maximum number of messages per second that can be sent to the room
+    #   (by all clients), from the request.
     #   @return [Integer]
     #
     # @!attribute [rw] message_review_handler
@@ -371,8 +371,8 @@ module Aws::Ivschat
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_message_rate_per_second
-    #   Maximum number of messages per second that a client can send to the
-    #   room. Default: 10.
+    #   Maximum number of messages per second that can be sent to the room
+    #   (by all clients). Default: 10.
     #   @return [Integer]
     #
     # @!attribute [rw] message_review_handler
@@ -798,8 +798,8 @@ module Aws::Ivschat
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_message_rate_per_second
-    #   The maximum number of messages per second that a client can send to
-    #   the room. Default: 10.
+    #   Maximum number of messages per second that can be sent to the room
+    #   (by all clients). Default: 10.
     #   @return [Integer]
     #
     # @!attribute [rw] message_review_handler
@@ -843,8 +843,8 @@ module Aws::Ivschat
     #   @return [Integer]
     #
     # @!attribute [rw] maximum_message_rate_per_second
-    #   Maximum number of messages per second that a client can send to the
-    #   room, from the request.
+    #   Maximum number of messages per second that can be sent to the room
+    #   (by all clients), from the request.
     #   @return [Integer]
     #
     # @!attribute [rw] message_review_handler

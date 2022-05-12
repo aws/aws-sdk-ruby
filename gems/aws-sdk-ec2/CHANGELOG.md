@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.315.0 (2022-05-12)
+------------------
+
+* Feature - This release introduces a target type Gateway Load Balancer Endpoint for mirrored traffic. Customers can now specify GatewayLoadBalancerEndpoint option during the creation of a traffic mirror target.
+
 1.314.0 (2022-05-11)
 ------------------
 

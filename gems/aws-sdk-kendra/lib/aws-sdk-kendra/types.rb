@@ -2112,7 +2112,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2531,6 +2531,56 @@ module Aws::Kendra
     #               },
     #             ],
     #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           jira_configuration: {
+    #             jira_account_url: "JiraAccountUrl", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             project: ["String"],
+    #             issue_type: ["String"],
+    #             status: ["String"],
+    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             issue_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             project_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             work_log_field_mappings: [
     #               {
     #                 data_source_field_name: "DataSourceFieldName", # required
     #                 date_field_format: "DataSourceDateFieldFormat",
@@ -3850,6 +3900,56 @@ module Aws::Kendra
     #             security_group_ids: ["VpcSecurityGroupId"], # required
     #           },
     #         },
+    #         jira_configuration: {
+    #           jira_account_url: "JiraAccountUrl", # required
+    #           secret_arn: "SecretArn", # required
+    #           use_change_log: false,
+    #           project: ["String"],
+    #           issue_type: ["String"],
+    #           status: ["String"],
+    #           issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #           attachment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           comment_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           issue_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           project_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           work_log_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -3922,6 +4022,11 @@ module Aws::Kendra
     #   data source.
     #   @return [Types::QuipConfiguration]
     #
+    # @!attribute [rw] jira_configuration
+    #   Provides the configuration information to connect to Jira as your
+    #   data source.
+    #   @return [Types::JiraConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -3938,7 +4043,8 @@ module Aws::Kendra
       :fsx_configuration,
       :slack_configuration,
       :box_configuration,
-      :quip_configuration)
+      :quip_configuration,
+      :jira_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7245,6 +7351,212 @@ module Aws::Kendra
     #
     class InvalidRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass JiraConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         jira_account_url: "JiraAccountUrl", # required
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         project: ["String"],
+    #         issue_type: ["String"],
+    #         status: ["String"],
+    #         issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #         attachment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         comment_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         issue_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         project_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         work_log_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] jira_account_url
+    #   The URL of the Jira account. For example, company.attlassian.net or
+    #   https://jira.company.com. You can find your Jira account URL in the
+    #   URL of your profile page for Jira desktop.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your Jira data
+    #   source. The secret must contain a JSON structure with the following
+    #   keys:
+    #
+    #   * jira-id—The Active Directory user name, along with the Domain Name
+    #     System (DNS) domain name. For example, *user@corp.example.com*.
+    #
+    #   * jiraCredentials—The password of the Jira account user.
+    #   @return [String]
+    #
+    # @!attribute [rw] use_change_log
+    #   Specify to use the change log option to update your index.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] project
+    #   Specify which projects to crawl in your Jira data source. You can
+    #   specify one or more Jira project IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issue_type
+    #   Specify which issue types to crawl in your Jira data source. You can
+    #   specify one or more of these options to crawl.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] status
+    #   Specify which statuses to crawl in your Jira data source. You can
+    #   specify one or more of these options to crawl.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] issue_sub_entity_filter
+    #   Specify whether to crawl comments, attachments, and work logs. You
+    #   can specify one or more of these options.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] attachment_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira attachments to Amazon Kendra index field
+    #   names. To create custom fields, use the UpdateIndex API before you
+    #   map to Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] comment_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira comments to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] issue_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira issues to Amazon Kendra index field names. To
+    #   create custom fields, use the UpdateIndex API before you map to Jira
+    #   fields. For more information, see [ Mapping data source fields][1].
+    #   The Jira data source field names must exist in your Jira custom
+    #   metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] project_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira projects to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] work_log_field_mappings
+    #   A list of DataSourceToIndexFieldMapping objects that map attributes
+    #   or field names of Jira work logs to Amazon Kendra index field names.
+    #   To create custom fields, use the UpdateIndex API before you map to
+    #   Jira fields. For more information, see [ Mapping data source
+    #   fields][1]. The Jira data source field names must exist in your Jira
+    #   custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] inclusion_patterns
+    #   A list of regular expression patterns to include certain file paths,
+    #   file names, and file types in your Jira data source. Files that
+    #   match the patterns are included in the index. Files that don't
+    #   match the patterns are excluded from the index. If a file matches
+    #   both an inclusion pattern and an exclusion pattern, the exclusion
+    #   pattern takes precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_patterns
+    #   A list of regular expression patterns to exclude certain file paths,
+    #   file names, and file types in your Jira data source. Files that
+    #   match the patterns are excluded from the index. Files that don’t
+    #   match the patterns are included in the index. If a file matches both
+    #   an inclusion pattern and an exclusion pattern, the exclusion pattern
+    #   takes precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information for an Amazon Virtual Private Cloud to
+    #   connect to your Jira. Your Jira account must reside inside your VPC.
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/JiraConfiguration AWS API Documentation
+    #
+    class JiraConfiguration < Struct.new(
+      :jira_account_url,
+      :secret_arn,
+      :use_change_log,
+      :project,
+      :issue_type,
+      :status,
+      :issue_sub_entity_filter,
+      :attachment_field_mappings,
+      :comment_field_mappings,
+      :issue_field_mappings,
+      :project_field_mappings,
+      :work_log_field_mappings,
+      :inclusion_patterns,
+      :exclusion_patterns,
+      :vpc_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11556,6 +11868,56 @@ module Aws::Kendra
     #               },
     #             ],
     #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             inclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             exclusion_patterns: ["DataSourceInclusionsExclusionsStringsMember"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #           },
+    #           jira_configuration: {
+    #             jira_account_url: "JiraAccountUrl", # required
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             project: ["String"],
+    #             issue_type: ["String"],
+    #             status: ["String"],
+    #             issue_sub_entity_filter: ["COMMENTS"], # accepts COMMENTS, ATTACHMENTS, WORKLOGS
+    #             attachment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             comment_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             issue_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             project_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             work_log_field_mappings: [
     #               {
     #                 data_source_field_name: "DataSourceFieldName", # required
     #                 date_field_format: "DataSourceDateFieldFormat",

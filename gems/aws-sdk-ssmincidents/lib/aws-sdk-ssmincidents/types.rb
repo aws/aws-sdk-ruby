@@ -278,6 +278,11 @@ module Aws::SSMIncidents
     #             ssm_automation: {
     #               document_name: "SsmAutomationDocumentNameString", # required
     #               document_version: "SsmAutomationDocumentVersionString",
+    #               dynamic_parameters: {
+    #                 "DynamicSsmParametersKeyString" => {
+    #                   variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
+    #                 },
+    #               },
     #               parameters: {
     #                 "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
     #               },
@@ -397,8 +402,7 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] event_data
-    #   A short description of the event as a valid JSON string. There is no
-    #   other schema imposed.
+    #   A short description of the event.
     #   @return [String]
     #
     # @!attribute [rw] event_time
@@ -598,6 +602,30 @@ module Aws::SSMIncidents
     # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DeleteTimelineEventOutput AWS API Documentation
     #
     class DeleteTimelineEventOutput < Aws::EmptyStructure; end
+
+    # The dynamic SSM parameter value.
+    #
+    # @note DynamicSsmParameterValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DynamicSsmParameterValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DynamicSsmParameterValue corresponding to the set member.
+    #
+    # @!attribute [rw] variable
+    #   Variable dynamic parameters. A parameter value is determined when an
+    #   incident is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-incidents-2018-05-10/DynamicSsmParameterValue AWS API Documentation
+    #
+    class DynamicSsmParameterValue < Struct.new(
+      :variable,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Variable < DynamicSsmParameterValue; end
+      class Unknown < DynamicSsmParameterValue; end
+    end
 
     # Used to remove the chat channel from an incident record or response
     # plan.
@@ -986,7 +1014,9 @@ module Aws::SSMIncidents
     #   @return [String]
     #
     # @!attribute [rw] invoked_by
-    #   The principal the assumed the role specified of the `createdBy`.
+    #   The service principal that assumed the role specified in
+    #   `createdBy`. If no service principal assumed the role this will be
+    #   left blank.
     #   @return [String]
     #
     # @!attribute [rw] resource_arn
@@ -1128,7 +1158,7 @@ module Aws::SSMIncidents
     #   data as a hash:
     #
     #       {
-    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #         type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #         value: { # required
     #           arn: "Arn",
     #           metric_definition: "MetricDefinition",
@@ -1137,20 +1167,7 @@ module Aws::SSMIncidents
     #       }
     #
     # @!attribute [rw] type
-    #   The type of related item. Incident Manager supports the following
-    #   types:
-    #
-    #   * `ANALYSIS`
-    #
-    #   * `INCIDENT`
-    #
-    #   * `METRIC`
-    #
-    #   * `PARENT`
-    #
-    #   * `ATTACHMENT`
-    #
-    #   * `OTHER`
+    #   The type of related item.
     #   @return [String]
     #
     # @!attribute [rw] value
@@ -1667,7 +1684,7 @@ module Aws::SSMIncidents
     #
     #       {
     #         identifier: { # required
-    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #           type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #           value: { # required
     #             arn: "Arn",
     #             metric_definition: "MetricDefinition",
@@ -1891,6 +1908,11 @@ module Aws::SSMIncidents
     #       {
     #         document_name: "SsmAutomationDocumentNameString", # required
     #         document_version: "SsmAutomationDocumentVersionString",
+    #         dynamic_parameters: {
+    #           "DynamicSsmParametersKeyString" => {
+    #             variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
+    #           },
+    #         },
     #         parameters: {
     #           "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
     #         },
@@ -1905,6 +1927,11 @@ module Aws::SSMIncidents
     # @!attribute [rw] document_version
     #   The automation document's version to use when running.
     #   @return [String]
+    #
+    # @!attribute [rw] dynamic_parameters
+    #   The key-value pair to resolve dynamic parameter values when
+    #   processing a Systems Manager Automation runbook.
+    #   @return [Hash<String,Types::DynamicSsmParameterValue>]
     #
     # @!attribute [rw] parameters
     #   The key-value pair parameters to use when running the automation
@@ -1926,6 +1953,7 @@ module Aws::SSMIncidents
     class SsmAutomation < Struct.new(
       :document_name,
       :document_version,
+      :dynamic_parameters,
       :parameters,
       :role_arn,
       :target_account)
@@ -1942,7 +1970,7 @@ module Aws::SSMIncidents
     #         related_items: [
     #           {
     #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
@@ -2360,7 +2388,7 @@ module Aws::SSMIncidents
     #         related_items_update: { # required
     #           item_to_add: {
     #             identifier: { # required
-    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #               type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #               value: { # required
     #                 arn: "Arn",
     #                 metric_definition: "MetricDefinition",
@@ -2370,7 +2398,7 @@ module Aws::SSMIncidents
     #             title: "RelatedItemTitleString",
     #           },
     #           item_to_remove: {
-    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION
+    #             type: "ANALYSIS", # required, accepts ANALYSIS, INCIDENT, METRIC, PARENT, ATTACHMENT, OTHER, AUTOMATION, INVOLVED_RESOURCE
     #             value: { # required
     #               arn: "Arn",
     #               metric_definition: "MetricDefinition",
@@ -2499,6 +2527,11 @@ module Aws::SSMIncidents
     #             ssm_automation: {
     #               document_name: "SsmAutomationDocumentNameString", # required
     #               document_version: "SsmAutomationDocumentVersionString",
+    #               dynamic_parameters: {
+    #                 "DynamicSsmParametersKeyString" => {
+    #                   variable: "INCIDENT_RECORD_ARN", # accepts INCIDENT_RECORD_ARN, INVOLVED_RESOURCES
+    #                 },
+    #               },
     #               parameters: {
     #                 "SsmParametersKeyString" => ["SsmParameterValuesMemberString"],
     #               },

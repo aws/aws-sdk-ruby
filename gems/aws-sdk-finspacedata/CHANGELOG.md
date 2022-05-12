@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2022-05-12)
+------------------
+
+* Feature - We've now deprecated CreateSnapshot permission for creating a data view, instead use CreateDataView permission.
+
 1.14.0 (2022-02-28)
 ------------------
 

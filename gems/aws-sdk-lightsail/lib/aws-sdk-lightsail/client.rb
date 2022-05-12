@@ -5372,8 +5372,8 @@ module Aws::Lightsail
     #  </note>
     #
     # @option params [Boolean] :include_inactive
-    #   A Boolean value indicating whether to include inactive results in your
-    #   request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) blueprints in the response of your request.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -5479,7 +5479,7 @@ module Aws::Lightsail
     #
     # @option params [Boolean] :include_inactive
     #   A Boolean value that indicates whether to include inactive
-    #   (unavailable) bundles in the response.
+    #   (unavailable) bundles in the response of your request.
     #
     # @return [Types::GetBucketBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5727,12 +5727,20 @@ module Aws::Lightsail
       req.send_request(options)
     end
 
-    # Returns the list of bundles that are available for purchase. A bundle
-    # describes the specs for your virtual private server (or *instance*).
+    # Returns the bundles that you can apply to an Amazon Lightsail instance
+    # when you create it.
+    #
+    # A bundle describes the specifications of an instance, such as the
+    # monthly cost, amount of memory, the number of vCPUs, amount of storage
+    # space, and monthly network data transfer quota.
+    #
+    # <note markdown="1"> Bundles are referred to as *instance plans* in the Lightsail console.
+    #
+    #  </note>
     #
     # @option params [Boolean] :include_inactive
-    #   A Boolean value that indicates whether to include inactive bundle
-    #   results in your request.
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
     #
     # @option params [String] :page_token
     #   The token to advance to the next page of results from your request.
@@ -8709,6 +8717,10 @@ module Aws::Lightsail
     #   next page token that you can specify as the page token in a subsequent
     #   request.
     #
+    # @option params [Boolean] :include_inactive
+    #   A Boolean value that indicates whether to include inactive
+    #   (unavailable) bundles in the response of your request.
+    #
     # @return [Types::GetRelationalDatabaseBundlesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetRelationalDatabaseBundlesResult#bundles #bundles} => Array&lt;Types::RelationalDatabaseBundle&gt;
@@ -8718,6 +8730,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_relational_database_bundles({
     #     page_token: "string",
+    #     include_inactive: false,
     #   })
     #
     # @example Response structure
@@ -11671,7 +11684,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

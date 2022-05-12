@@ -2191,7 +2191,7 @@ module Aws::FinSpaceData
     #
     # * `AddDatasetData`
     #
-    # * `CreateSnapshot`
+    # * `CreateDataView`
     #
     # * `EditDatasetMetadata`
     #

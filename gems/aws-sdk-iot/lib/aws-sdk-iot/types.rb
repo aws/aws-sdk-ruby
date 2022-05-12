@@ -3588,6 +3588,13 @@ module Aws::IoT
     #   on a thing when a change is detected in a target. For example, a job
     #   will run on a thing when the thing is added to a target group, even
     #   after the job was completed by all things originally in the group.
+    #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs
+    #   for dynamic thing group targets. By using continuous jobs, devices
+    #   that join the group receive the job execution even after the job has
+    #   been created.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] job_executions_rollout_config
@@ -3633,8 +3640,14 @@ module Aws::IoT
     #   @return [Types::JobExecutionsRetryConfig]
     #
     # @!attribute [rw] document_parameters
-    #   Parameters of a managed template that you can specify to create the
-    #   job document.
+    #   Parameters of an Amazon Web Services managed template that you can
+    #   specify to create the job document.
+    #
+    #   <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    #   Web Services managed templates. This parameter can't be used with
+    #   custom job templates or to create jobs from them.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     class CreateJobRequest < Struct.new(
@@ -5517,11 +5530,21 @@ module Aws::IoT
     #   @return [Types::CodeSigningCertificateChain]
     #
     # @!attribute [rw] hash_algorithm
-    #   The hash algorithm used to code sign the file.
+    #   The hash algorithm used to code sign the file. You can use a string
+    #   as the algorithm name if the target over-the-air (OTA) update
+    #   devices are able to verify the signature that was generated using
+    #   the same signature algorithm. For example, FreeRTOS uses `SHA256` or
+    #   `SHA1`, so you can pass either of them based on which was used for
+    #   generating the signature.
     #   @return [String]
     #
     # @!attribute [rw] signature_algorithm
-    #   The signature algorithm used to code sign the file.
+    #   The signature algorithm used to code sign the file. You can use a
+    #   string as the algorithm name if the target over-the-air (OTA) update
+    #   devices are able to verify the signature that was generated using
+    #   the same signature algorithm. For example, FreeRTOS uses `ECDSA` or
+    #   `RSA`, so you can pass either of them based on which was used for
+    #   generating the signature.
     #   @return [String]
     #
     class CustomCodeSigning < Struct.new(
@@ -7429,6 +7452,12 @@ module Aws::IoT
     # @!attribute [rw] document_parameters
     #   A map of key-value pairs that you can use as guidance to specify the
     #   inputs for creating a job from a managed template.
+    #
+    #   <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    #   Web Services managed templates. This parameter can't be used with
+    #   custom job templates or to create jobs from them.
+    #
+    #    </note>
     #   @return [Array<Types::DocumentParameter>]
     #
     # @!attribute [rw] document
@@ -8445,6 +8474,12 @@ module Aws::IoT
     # replaced in a managed template job document schema. You can use the
     # description of each key as a guidance to specify the inputs during
     # runtime when creating a job.
+    #
+    # <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    # Web Services managed templates. This parameter can't be used with
+    # custom job templates or to create jobs from them.
+    #
+    #  </note>
     #
     # @!attribute [rw] key
     #   Key of the map field containing the patterns that need to be
@@ -10095,6 +10130,13 @@ module Aws::IoT
     #   will run on a device when the thing representing the device is added
     #   to a target group, even after the job was completed by all things
     #   originally in the group.
+    #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs
+    #   for dynamic thing group targets. By using continuous jobs, devices
+    #   that join the group receive the job execution even after the job has
+    #   been created.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -10187,6 +10229,12 @@ module Aws::IoT
     #   a managed template job document schema. You can use the description
     #   of each key as a guidance to specify the inputs during runtime when
     #   creating a job.
+    #
+    #   <note markdown="1"> `documentParameters` can only be used when creating jobs from Amazon
+    #   Web Services managed templates. This parameter can't be used with
+    #   custom job templates or to create jobs from them.
+    #
+    #    </note>
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] is_concurrent
@@ -10525,6 +10573,13 @@ module Aws::IoT
     #   on a thing when a change is detected in a target. For example, a job
     #   will run on a thing when the thing is added to a target group, even
     #   after the job was completed by all things originally in the group.
+    #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs
+    #   for dynamic thing group targets. By using continuous jobs, devices
+    #   that join the group receive the job execution even after the job has
+    #   been created.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -11998,6 +12053,13 @@ module Aws::IoT
     #   on a thing when a change is detected in a target. For example, a job
     #   will run on a thing when the thing is added to a target group, even
     #   after the job was completed by all things originally in the group.
+    #
+    #   <note markdown="1"> We recommend that you use continuous jobs instead of snapshot jobs
+    #   for dynamic thing group targets. By using continuous jobs, devices
+    #   that join the group receive the job execution even after the job has
+    #   been created.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] max_results
