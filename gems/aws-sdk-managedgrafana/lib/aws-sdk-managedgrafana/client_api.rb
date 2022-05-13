@@ -17,6 +17,8 @@ module Aws::ManagedGrafana
     AccountAccessType = Shapes::StringShape.new(name: 'AccountAccessType')
     AllowedOrganization = Shapes::StringShape.new(name: 'AllowedOrganization')
     AllowedOrganizations = Shapes::ListShape.new(name: 'AllowedOrganizations')
+    ApiKeyName = Shapes::StringShape.new(name: 'ApiKeyName')
+    ApiKeyToken = Shapes::StringShape.new(name: 'ApiKeyToken')
     AssertionAttribute = Shapes::StringShape.new(name: 'AssertionAttribute')
     AssertionAttributes = Shapes::StructureShape.new(name: 'AssertionAttributes')
     AssociateLicenseRequest = Shapes::StructureShape.new(name: 'AssociateLicenseRequest')
@@ -29,10 +31,15 @@ module Aws::ManagedGrafana
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    CreateWorkspaceApiKeyRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceApiKeyRequest')
+    CreateWorkspaceApiKeyRequestSecondsToLiveInteger = Shapes::IntegerShape.new(name: 'CreateWorkspaceApiKeyRequestSecondsToLiveInteger')
+    CreateWorkspaceApiKeyResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceApiKeyResponse')
     CreateWorkspaceRequest = Shapes::StructureShape.new(name: 'CreateWorkspaceRequest')
     CreateWorkspaceResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceResponse')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSourceTypesList = Shapes::ListShape.new(name: 'DataSourceTypesList')
+    DeleteWorkspaceApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyRequest')
+    DeleteWorkspaceApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyResponse')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
     DeleteWorkspaceResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceResponse')
     DescribeWorkspaceAuthenticationRequest = Shapes::StructureShape.new(name: 'DescribeWorkspaceAuthenticationRequest')
@@ -156,6 +163,17 @@ module Aws::ManagedGrafana
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    CreateWorkspaceApiKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ApiKeyName, required: true, location_name: "keyName"))
+    CreateWorkspaceApiKeyRequest.add_member(:key_role, Shapes::ShapeRef.new(shape: String, required: true, location_name: "keyRole"))
+    CreateWorkspaceApiKeyRequest.add_member(:seconds_to_live, Shapes::ShapeRef.new(shape: CreateWorkspaceApiKeyRequestSecondsToLiveInteger, required: true, location_name: "secondsToLive"))
+    CreateWorkspaceApiKeyRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    CreateWorkspaceApiKeyRequest.struct_class = Types::CreateWorkspaceApiKeyRequest
+
+    CreateWorkspaceApiKeyResponse.add_member(:key, Shapes::ShapeRef.new(shape: ApiKeyToken, required: true, location_name: "key"))
+    CreateWorkspaceApiKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: ApiKeyName, required: true, location_name: "keyName"))
+    CreateWorkspaceApiKeyResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    CreateWorkspaceApiKeyResponse.struct_class = Types::CreateWorkspaceApiKeyResponse
+
     CreateWorkspaceRequest.add_member(:account_access_type, Shapes::ShapeRef.new(shape: AccountAccessType, required: true, location_name: "accountAccessType"))
     CreateWorkspaceRequest.add_member(:authentication_providers, Shapes::ShapeRef.new(shape: AuthenticationProviders, required: true, location_name: "authenticationProviders"))
     CreateWorkspaceRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken"=>true}))
@@ -175,6 +193,14 @@ module Aws::ManagedGrafana
     CreateWorkspaceResponse.struct_class = Types::CreateWorkspaceResponse
 
     DataSourceTypesList.member = Shapes::ShapeRef.new(shape: DataSourceType)
+
+    DeleteWorkspaceApiKeyRequest.add_member(:key_name, Shapes::ShapeRef.new(shape: ApiKeyName, required: true, location: "uri", location_name: "keyName"))
+    DeleteWorkspaceApiKeyRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
+    DeleteWorkspaceApiKeyRequest.struct_class = Types::DeleteWorkspaceApiKeyRequest
+
+    DeleteWorkspaceApiKeyResponse.add_member(:key_name, Shapes::ShapeRef.new(shape: ApiKeyName, required: true, location_name: "keyName"))
+    DeleteWorkspaceApiKeyResponse.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location_name: "workspaceId"))
+    DeleteWorkspaceApiKeyResponse.struct_class = Types::DeleteWorkspaceApiKeyResponse
 
     DeleteWorkspaceRequest.add_member(:workspace_id, Shapes::ShapeRef.new(shape: WorkspaceId, required: true, location: "uri", location_name: "workspaceId"))
     DeleteWorkspaceRequest.struct_class = Types::DeleteWorkspaceRequest
@@ -447,12 +473,41 @@ module Aws::ManagedGrafana
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_workspace_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateWorkspaceApiKey"
+        o.http_method = "POST"
+        o.http_request_uri = "/workspaces/{workspaceId}/apikeys"
+        o.input = Shapes::ShapeRef.new(shape: CreateWorkspaceApiKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateWorkspaceApiKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_workspace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteWorkspace"
         o.http_method = "DELETE"
         o.http_request_uri = "/workspaces/{workspaceId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_workspace_api_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteWorkspaceApiKey"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/workspaces/{workspaceId}/apikeys/{keyName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteWorkspaceApiKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteWorkspaceApiKeyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

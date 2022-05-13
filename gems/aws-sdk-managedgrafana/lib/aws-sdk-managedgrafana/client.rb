@@ -588,6 +588,58 @@ module Aws::ManagedGrafana
       req.send_request(options)
     end
 
+    # Creates an API key for the workspace. This key can be used to
+    # authenticate requests sent to the workspace's HTTP API. See [
+    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html](
+    # https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
+    # for available APIs and example requests.
+    #
+    # @option params [required, String] :key_name
+    #   Specifies the name of the key to create. Key names must be unique to
+    #   the workspace.
+    #
+    # @option params [required, String] :key_role
+    #   Specifies the permission level of the key.
+    #
+    #   Valid Values: `VIEWER` \| `EDITOR` \| `ADMIN`
+    #
+    # @option params [required, Integer] :seconds_to_live
+    #   Specifies the time in seconds until the key expires. Keys can be valid
+    #   for up to 30 days.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace in which to create an API key.
+    #
+    # @return [Types::CreateWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateWorkspaceApiKeyResponse#key #key} => String
+    #   * {Types::CreateWorkspaceApiKeyResponse#key_name #key_name} => String
+    #   * {Types::CreateWorkspaceApiKeyResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_workspace_api_key({
+    #     key_name: "ApiKeyName", # required
+    #     key_role: "String", # required
+    #     seconds_to_live: 1, # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key #=> String
+    #   resp.key_name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspaceApiKey AWS API Documentation
+    #
+    # @overload create_workspace_api_key(params = {})
+    # @param [Hash] params ({})
+    def create_workspace_api_key(params = {}, options = {})
+      req = build_request(:create_workspace_api_key, params)
+      req.send_request(options)
+    end
+
     # Deletes an Amazon Managed Grafana workspace.
     #
     # @option params [required, String] :workspace_id
@@ -640,6 +692,40 @@ module Aws::ManagedGrafana
     # @param [Hash] params ({})
     def delete_workspace(params = {}, options = {})
       req = build_request(:delete_workspace, params)
+      req.send_request(options)
+    end
+
+    # Deletes an API key for a workspace.
+    #
+    # @option params [required, String] :key_name
+    #   The name of the API key to delete.
+    #
+    # @option params [required, String] :workspace_id
+    #   The ID of the workspace to delete.
+    #
+    # @return [Types::DeleteWorkspaceApiKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteWorkspaceApiKeyResponse#key_name #key_name} => String
+    #   * {Types::DeleteWorkspaceApiKeyResponse#workspace_id #workspace_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_workspace_api_key({
+    #     key_name: "ApiKeyName", # required
+    #     workspace_id: "WorkspaceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_name #=> String
+    #   resp.workspace_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspaceApiKey AWS API Documentation
+    #
+    # @overload delete_workspace_api_key(params = {})
+    # @param [Hash] params ({})
+    def delete_workspace_api_key(params = {}, options = {})
+      req = build_request(:delete_workspace_api_key, params)
       req.send_request(options)
     end
 
@@ -856,7 +942,7 @@ module Aws::ManagedGrafana
     #
     #   resp.next_token #=> String
     #   resp.permissions #=> Array
-    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR"
+    #   resp.permissions[0].role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.permissions[0].user.id #=> String
     #   resp.permissions[0].user.type #=> String, one of "SSO_USER", "SSO_GROUP"
     #
@@ -1042,7 +1128,7 @@ module Aws::ManagedGrafana
     #     update_instruction_batch: [ # required
     #       {
     #         action: "ADD", # required, accepts ADD, REVOKE
-    #         role: "ADMIN", # required, accepts ADMIN, EDITOR
+    #         role: "ADMIN", # required, accepts ADMIN, EDITOR, VIEWER
     #         users: [ # required
     #           {
     #             id: "SsoId", # required
@@ -1058,7 +1144,7 @@ module Aws::ManagedGrafana
     #
     #   resp.errors #=> Array
     #   resp.errors[0].caused_by.action #=> String, one of "ADD", "REVOKE"
-    #   resp.errors[0].caused_by.role #=> String, one of "ADMIN", "EDITOR"
+    #   resp.errors[0].caused_by.role #=> String, one of "ADMIN", "EDITOR", "VIEWER"
     #   resp.errors[0].caused_by.users #=> Array
     #   resp.errors[0].caused_by.users[0].id #=> String
     #   resp.errors[0].caused_by.users[0].type #=> String, one of "SSO_USER", "SSO_GROUP"
@@ -1327,7 +1413,7 @@ module Aws::ManagedGrafana
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
