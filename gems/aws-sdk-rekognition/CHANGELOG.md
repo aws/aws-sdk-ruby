@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2022-05-16)
+------------------
+
+* Feature - Documentation updates for Amazon Rekognition.
+
 1.67.0 (2022-04-27)
 ------------------
 

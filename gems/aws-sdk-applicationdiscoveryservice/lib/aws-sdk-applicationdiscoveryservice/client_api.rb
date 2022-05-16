@@ -22,8 +22,10 @@ module Aws::ApplicationDiscoveryService
     AgentNetworkInfoList = Shapes::ListShape.new(name: 'AgentNetworkInfoList')
     AgentStatus = Shapes::StringShape.new(name: 'AgentStatus')
     AgentsInfo = Shapes::ListShape.new(name: 'AgentsInfo')
+    ApplicationDescription = Shapes::StringShape.new(name: 'ApplicationDescription')
     ApplicationId = Shapes::StringShape.new(name: 'ApplicationId')
     ApplicationIdsList = Shapes::ListShape.new(name: 'ApplicationIdsList')
+    ApplicationName = Shapes::StringShape.new(name: 'ApplicationName')
     AssociateConfigurationItemsToApplicationRequest = Shapes::StructureShape.new(name: 'AssociateConfigurationItemsToApplicationRequest')
     AssociateConfigurationItemsToApplicationResponse = Shapes::StructureShape.new(name: 'AssociateConfigurationItemsToApplicationResponse')
     AuthorizationErrorException = Shapes::StructureShape.new(name: 'AuthorizationErrorException')
@@ -57,6 +59,7 @@ module Aws::ApplicationDiscoveryService
     CreateTagsResponse = Shapes::StructureShape.new(name: 'CreateTagsResponse')
     CustomerAgentInfo = Shapes::StructureShape.new(name: 'CustomerAgentInfo')
     CustomerConnectorInfo = Shapes::StructureShape.new(name: 'CustomerConnectorInfo')
+    CustomerMeCollectorInfo = Shapes::StructureShape.new(name: 'CustomerMeCollectorInfo')
     DataSource = Shapes::StringShape.new(name: 'DataSource')
     DatabaseName = Shapes::StringShape.new(name: 'DatabaseName')
     DeleteApplicationsRequest = Shapes::StructureShape.new(name: 'DeleteApplicationsRequest')
@@ -127,6 +130,7 @@ module Aws::ApplicationDiscoveryService
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     OrderByElement = Shapes::StructureShape.new(name: 'OrderByElement')
+    OrderByElementFieldName = Shapes::StringShape.new(name: 'OrderByElementFieldName')
     OrderByList = Shapes::ListShape.new(name: 'OrderByList')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -246,8 +250,8 @@ module Aws::ApplicationDiscoveryService
 
     ContinuousExportIds.member = Shapes::ShapeRef.new(shape: ConfigurationsExportId)
 
-    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "name"))
+    CreateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "description"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:configuration_id, Shapes::ShapeRef.new(shape: String, location_name: "configurationId"))
@@ -276,6 +280,15 @@ module Aws::ApplicationDiscoveryService
     CustomerConnectorInfo.add_member(:total_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalConnectors"))
     CustomerConnectorInfo.add_member(:unknown_connectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownConnectors"))
     CustomerConnectorInfo.struct_class = Types::CustomerConnectorInfo
+
+    CustomerMeCollectorInfo.add_member(:active_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "activeMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:healthy_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "healthyMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:deny_listed_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "denyListedMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:shutdown_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "shutdownMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:unhealthy_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unhealthyMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:total_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalMeCollectors"))
+    CustomerMeCollectorInfo.add_member(:unknown_me_collectors, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "unknownMeCollectors"))
+    CustomerMeCollectorInfo.struct_class = Types::CustomerMeCollectorInfo
 
     DeleteApplicationsRequest.add_member(:configuration_ids, Shapes::ShapeRef.new(shape: ApplicationIdsList, required: true, location_name: "configurationIds"))
     DeleteApplicationsRequest.struct_class = Types::DeleteApplicationsRequest
@@ -406,6 +419,7 @@ module Aws::ApplicationDiscoveryService
     GetDiscoverySummaryResponse.add_member(:servers_mappedto_tags, Shapes::ShapeRef.new(shape: Long, location_name: "serversMappedtoTags"))
     GetDiscoverySummaryResponse.add_member(:agent_summary, Shapes::ShapeRef.new(shape: CustomerAgentInfo, location_name: "agentSummary"))
     GetDiscoverySummaryResponse.add_member(:connector_summary, Shapes::ShapeRef.new(shape: CustomerConnectorInfo, location_name: "connectorSummary"))
+    GetDiscoverySummaryResponse.add_member(:me_collector_summary, Shapes::ShapeRef.new(shape: CustomerMeCollectorInfo, location_name: "meCollectorSummary"))
     GetDiscoverySummaryResponse.struct_class = Types::GetDiscoverySummaryResponse
 
     HomeRegionNotSetException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
@@ -475,7 +489,7 @@ module Aws::ApplicationDiscoveryService
     OperationNotPermittedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "message"))
     OperationNotPermittedException.struct_class = Types::OperationNotPermittedException
 
-    OrderByElement.add_member(:field_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fieldName"))
+    OrderByElement.add_member(:field_name, Shapes::ShapeRef.new(shape: OrderByElementFieldName, required: true, location_name: "fieldName"))
     OrderByElement.add_member(:sort_order, Shapes::ShapeRef.new(shape: orderString, location_name: "sortOrder"))
     OrderByElement.struct_class = Types::OrderByElement
 
@@ -553,8 +567,8 @@ module Aws::ApplicationDiscoveryService
     ToDeleteIdentifierList.member = Shapes::ShapeRef.new(shape: ImportTaskIdentifier)
 
     UpdateApplicationRequest.add_member(:configuration_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "configurationId"))
-    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
-    UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    UpdateApplicationRequest.add_member(:name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "name"))
+    UpdateApplicationRequest.add_member(:description, Shapes::ShapeRef.new(shape: ApplicationDescription, location_name: "description"))
     UpdateApplicationRequest.struct_class = Types::UpdateApplicationRequest
 
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse

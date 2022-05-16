@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-05-16)
+------------------
+
+* Feature - Amazon WorkSpaces Web now supports Administrator timeout control
+
 1.3.0 (2022-02-24)
 ------------------
 

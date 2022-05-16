@@ -13350,6 +13350,27 @@ module Aws::CloudFront
       include Aws::Structure
     end
 
+    # The length of the `Content-Security-Policy` header value in the
+    # response headers policy exceeds the maximum.
+    #
+    # For more information, see [Quotas][1] (formerly known as limits) in
+    # the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TooLongCSPInResponseHeadersPolicy AWS API Documentation
+    #
+    class TooLongCSPInResponseHeadersPolicy < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # You cannot create more cache behaviors for the distribution.
     #
     # @!attribute [rw] message

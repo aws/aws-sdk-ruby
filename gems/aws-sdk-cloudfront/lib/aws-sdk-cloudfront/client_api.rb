@@ -464,6 +464,7 @@ module Aws::CloudFront
     TestFunctionRequest = Shapes::StructureShape.new(name: 'TestFunctionRequest')
     TestFunctionResult = Shapes::StructureShape.new(name: 'TestFunctionResult')
     TestResult = Shapes::StructureShape.new(name: 'TestResult')
+    TooLongCSPInResponseHeadersPolicy = Shapes::StructureShape.new(name: 'TooLongCSPInResponseHeadersPolicy')
     TooManyCacheBehaviors = Shapes::StructureShape.new(name: 'TooManyCacheBehaviors')
     TooManyCachePolicies = Shapes::StructureShape.new(name: 'TooManyCachePolicies')
     TooManyCertificates = Shapes::StructureShape.new(name: 'TooManyCertificates')
@@ -2359,6 +2360,9 @@ module Aws::CloudFront
     TestResult.add_member(:function_output, Shapes::ShapeRef.new(shape: sensitiveStringType, location_name: "FunctionOutput"))
     TestResult.struct_class = Types::TestResult
 
+    TooLongCSPInResponseHeadersPolicy.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
+    TooLongCSPInResponseHeadersPolicy.struct_class = Types::TooLongCSPInResponseHeadersPolicy
+
     TooManyCacheBehaviors.add_member(:message, Shapes::ShapeRef.new(shape: string, location_name: "Message"))
     TooManyCacheBehaviors.struct_class = Types::TooManyCacheBehaviors
 
@@ -3027,6 +3031,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyResponseHeadersPolicies)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
       end)
 
       api.add_operation(:create_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|
@@ -4038,6 +4043,7 @@ module Aws::CloudFront
         o.errors << Shapes::ShapeRef.new(shape: PreconditionFailed)
         o.errors << Shapes::ShapeRef.new(shape: ResponseHeadersPolicyAlreadyExists)
         o.errors << Shapes::ShapeRef.new(shape: TooManyCustomHeadersInResponseHeadersPolicy)
+        o.errors << Shapes::ShapeRef.new(shape: TooLongCSPInResponseHeadersPolicy)
       end)
 
       api.add_operation(:update_streaming_distribution, Seahorse::Model::Operation.new.tap do |o|

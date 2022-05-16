@@ -791,7 +791,7 @@ module Aws::Rekognition
     # project. For more information, see Creating training and test dataset
     # in the *Amazon Rekognition Custom Labels Developer Guide*.
     #
-    # <note markdown="1"> You can train a modelin a project that doesn't have associated
+    # <note markdown="1"> You can train a model in a project that doesn't have associated
     # datasets by specifying manifest files in the `TrainingData` and
     # `TestingData` fields.
     #
@@ -5960,7 +5960,7 @@ module Aws::Rekognition
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-rekognition'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
