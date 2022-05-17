@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.57.0 (2022-05-17)
+------------------
+
+* Feature - Add HMAC best practice tip, annual rotation of AWS managed keys.
+
 1.56.0 (2022-04-19)
 ------------------
 

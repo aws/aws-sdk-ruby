@@ -1102,11 +1102,11 @@ module Aws::KMS
     #
     #   Asymmetric KMS keys contain an RSA key pair or an Elliptic Curve
     #   (ECC) key pair. The private key in an asymmetric KMS key never
-    #   leaves AWS KMS unencrypted. However, you can use the GetPublicKey
+    #   leaves KMS unencrypted. However, you can use the GetPublicKey
     #   operation to download the public key so it can be used outside of
-    #   AWS KMS. KMS keys with RSA key pairs can be used to encrypt or
-    #   decrypt data or sign and verify messages (but not both). KMS keys
-    #   with ECC key pairs can be used only to sign and verify messages. For
+    #   KMS. KMS keys with RSA key pairs can be used to encrypt or decrypt
+    #   data or sign and verify messages (but not both). KMS keys with ECC
+    #   key pairs can be used only to sign and verify messages. For
     #   information about asymmetric KMS keys, see [Asymmetric KMS keys][2]
     #   in the *Key Management Service Developer Guide*.
     #
@@ -1230,16 +1230,19 @@ module Aws::KMS
     # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policy-example-create-key
     #
     # @option params [String] :policy
-    #   The key policy to attach to the KMS key.
+    #   The key policy to attach to the KMS key. If you do not specify a key
+    #   policy, KMS attaches a default key policy to the KMS key. For more
+    #   information, see [Default key policy][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #   If you provide a key policy, it must meet the following criteria:
     #
-    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the key
-    #     policy must allow the principal that is making the `CreateKey`
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to `True`, the
+    #     key policy must allow the principal that is making the `CreateKey`
     #     request to make a subsequent PutKeyPolicy request on the KMS key.
     #     This reduces the risk that the KMS key becomes unmanageable. For
     #     more information, refer to the scenario in the [Default Key
-    #     Policy][1] section of the <i> <i>Key Management Service Developer
+    #     Policy][2] section of the <i> <i>Key Management Service Developer
     #     Guide</i> </i>.
     #
     #   * Each statement in the key policy must contain one or more
@@ -1249,14 +1252,23 @@ module Aws::KMS
     #     delay before including the new principal in a key policy because the
     #     new principal might not be immediately visible to KMS. For more
     #     information, see [Changes that I make are not always immediately
-    #     visible][2] in the *Amazon Web Services Identity and Access
+    #     visible][3] in the *Amazon Web Services Identity and Access
     #     Management User Guide*.
     #
-    #   If you do not provide a key policy, KMS attaches a default key policy
-    #   to the KMS key. For more information, see [Default Key Policy][3] in
-    #   the *Key Management Service Developer Guide*.
+    #   A key policy document must conform to the following rules.
     #
-    #   The key policy size quota is 32 kilobytes (32768 bytes).
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #   For help writing and formatting a JSON policy document, see the [IAM
     #   JSON Policy Reference][4] in the <i> <i>Identity and Access Management
@@ -1264,9 +1276,9 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
     #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #
     # @option params [String] :description
@@ -1319,13 +1331,13 @@ module Aws::KMS
     #   Service Developer Guide</i> </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric key
-    #   or an asymmetric key pair. It also determines the algorithms that the
-    #   KMS key supports. You can't change the `KeySpec` after the KMS key is
-    #   created. To further restrict the algorithms that can be used with the
-    #   KMS key, use a condition key in its key policy or IAM policy. For more
-    #   information, see [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3]
-    #   or [kms:Signing Algorithm][4] in the <i> <i>Key Management Service
-    #   Developer Guide</i> </i>.
+    #   or an asymmetric key pair. It also determines the cryptographic
+    #   algorithms that the KMS key supports. You can't change the `KeySpec`
+    #   after the KMS key is created. To further restrict the algorithms that
+    #   can be used with the KMS key, use a condition key in its key policy or
+    #   IAM policy. For more information, see [kms:EncryptionAlgorithm][2],
+    #   [kms:MacAlgorithm][3] or [kms:Signing Algorithm][4] in the <i> <i>Key
+    #   Management Service Developer Guide</i> </i>.
     #
     #   [Amazon Web Services services that are integrated with KMS][5] use
     #   symmetric encryption KMS keys to protect your data. These services do
@@ -1501,9 +1513,10 @@ module Aws::KMS
     #   This value creates a *primary key*, not a replica. To create a
     #   *replica key*, use the ReplicateKey operation.
     #
-    #   You can create a symmetric or asymmetric multi-Region key, and you can
-    #   create a multi-Region key with imported key material. However, you
-    #   cannot create a multi-Region key in a custom key store.
+    #   You can create a multi-Region version of a symmetric encryption KMS
+    #   key, an HMAC KMS key, an asymmetric KMS key, or a KMS key with
+    #   imported key material. However, you cannot create a multi-Region key
+    #   in a custom key store.
     #
     #
     #
@@ -1833,10 +1846,10 @@ module Aws::KMS
     #
     # The `Decrypt` operation also decrypts ciphertext that was encrypted
     # outside of KMS by the public key in an KMS asymmetric KMS key.
-    # However, it cannot decrypt symmetric ciphertext produced by other
-    # libraries, such as the [Amazon Web Services Encryption SDK][2] or
-    # [Amazon S3 client-side encryption][3]. These libraries return a
-    # ciphertext format that is incompatible with KMS.
+    # However, it cannot decrypt ciphertext produced by other libraries,
+    # such as the [Amazon Web Services Encryption SDK][2] or [Amazon S3
+    # client-side encryption][3]. These libraries return a ciphertext format
+    # that is incompatible with KMS.
     #
     # If the ciphertext was encrypted under a symmetric encryption KMS key,
     # the `KeyId` parameter is optional. KMS can get this information from
@@ -2802,23 +2815,37 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Disables [automatic rotation of the key material][1] for the specified
+    # Disables [automatic rotation of the key material][1] of the specified
     # symmetric encryption KMS key.
     #
-    # You cannot enable automatic rotation of [asymmetric KMS keys][2],
-    # [HMAC KMS keys][3], KMS keys with [imported key material][4], or KMS
-    # keys in a [custom key store][5]. To enable or disable automatic
-    # rotation of a set of related [multi-Region keys][6], set the property
-    # on the primary key.
+    # Automatic key rotation is supported only on symmetric encryption KMS
+    # keys. You cannot enable or disable automatic rotation of [asymmetric
+    # KMS keys][2], [HMAC KMS keys][3], KMS keys with [imported key
+    # material][4], or KMS keys in a [custom key store][5]. The key rotation
+    # status of these KMS keys is always `false`. To enable or disable
+    # automatic rotation of a set of related [multi-Region keys][6], set the
+    # property on the primary key.
+    #
+    # You can enable (EnableKeyRotation) and disable automatic rotation of
+    # the key material in [customer managed KMS keys][7]. Key material
+    # rotation of [Amazon Web Services managed KMS keys][8] is not
+    # configurable. KMS always rotates the key material for every year.
+    # Rotation of [Amazon Web Services owned KMS keys][9] varies.
+    #
+    # <note markdown="1"> In May 2022, KMS changed the rotation schedule for Amazon Web Services
+    # managed keys from every three years to every year. For details, see
+    # EnableKeyRotation.
+    #
+    #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][7] in the *Key
+    # key state. For details, see [Key states of KMS keys][10] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:DisableKeyRotation][8] (key policy)
+    # **Required permissions**\: [kms:DisableKeyRotation][11] (key policy)
     #
     # **Related operations:**
     #
@@ -2834,8 +2861,11 @@ module Aws::KMS
     # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
     # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
     # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Identifies a symmetric encryption KMS key. You cannot enable or
@@ -3035,23 +3065,49 @@ module Aws::KMS
       req.send_request(options)
     end
 
-    # Enables [automatic rotation of the key material][1] for the specified
+    # Enables [automatic rotation of the key material][1] of the specified
     # symmetric encryption KMS key.
     #
-    # You cannot enable automatic rotation of [asymmetric KMS keys][2],
-    # [HMAC KMS keys][3], KMS keys with [imported key material][4], or KMS
-    # keys in a [custom key store][5]. To enable or disable automatic
-    # rotation of a set of related [multi-Region keys][6], set the property
-    # on the primary key.
+    # When you enable automatic rotation of a[customer managed KMS key][2],
+    # KMS rotates the key material of the KMS key one year (approximately
+    # 365 days) from the enable date and every year thereafter. You can
+    # monitor rotation of the key material for your KMS keys in CloudTrail
+    # and Amazon CloudWatch. To disable rotation of the key material in a
+    # customer managed KMS key, use the DisableKeyRotation operation.
+    #
+    # Automatic key rotation is supported only on [symmetric encryption KMS
+    # keys][3]. You cannot enable or disable automatic rotation of
+    # [asymmetric KMS keys][4], [HMAC KMS keys][5], KMS keys with [imported
+    # key material][6], or KMS keys in a [custom key store][7]. The key
+    # rotation status of these KMS keys is always `false`. To enable or
+    # disable automatic rotation of a set of related [multi-Region keys][8],
+    # set the property on the primary key.
+    #
+    # You cannot enable or disable automatic rotation [Amazon Web Services
+    # managed KMS keys][9]. KMS always rotates the key material of Amazon
+    # Web Services managed keys every year. Rotation of [Amazon Web Services
+    # owned KMS keys][10] varies.
+    #
+    # <note markdown="1"> In May 2022, KMS changed the rotation schedule for Amazon Web Services
+    # managed keys from every three years (approximately 1,095 days) to
+    # every year (approximately 365 days).
+    #
+    #  New Amazon Web Services managed keys are automatically rotated one
+    # year after they are created, and approximately every year thereafter.
+    #
+    #  Existing Amazon Web Services managed keys are automatically rotated
+    # one year after their most recent rotation, and every year thereafter.
+    #
+    #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][7] in the *Key
+    # key state. For details, see [Key states of KMS keys][11] in the *Key
     # Management Service Developer Guide*.
     #
     # **Cross-account use**\: No. You cannot perform this operation on a KMS
     # key in a different Amazon Web Services account.
     #
-    # **Required permissions**\: [kms:EnableKeyRotation][8] (key policy)
+    # **Required permissions**\: [kms:EnableKeyRotation][12] (key policy)
     #
     # **Related operations:**
     #
@@ -3062,20 +3118,25 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-cmk
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [12]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
-    #   Identifies a symmetric encryption KMS key. You cannot enable automatic
-    #   rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2], KMS keys
-    #   with [imported key material][3], or KMS keys in a [custom key
-    #   store][4]. To enable or disable automatic rotation of a set of related
-    #   [multi-Region keys][5], set the property on the primary key.
+    #   Identifies a symmetric encryption KMS key. You cannot enable or
+    #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
+    #   keys][2], KMS keys with [imported key material][3], or KMS keys in a
+    #   [custom key store][4]. The key rotation status of these KMS keys is
+    #   always `false`. To enable or disable automatic rotation of a set of
+    #   related [multi-Region keys][5], set the property on the primary key.
     #
     #   Specify the key ID or key ARN of the KMS key.
     #
@@ -3948,16 +4009,17 @@ module Aws::KMS
     #
     # This operation is useful for systems that need to encrypt data at some
     # point, but not immediately. When you need to encrypt the data, you
-    # call the Decrypt operation on the encrypted copy of the key. It's
-    # also useful in distributed systems with different levels of trust. For
-    # example, you might store encrypted data in containers. One component
-    # of your system creates new containers and stores an encrypted data key
-    # with each container. Then, a different component puts the data into
-    # the containers. That component first decrypts the data key, uses the
-    # plaintext data key to encrypt data, puts the encrypted data into the
-    # container, and then destroys the plaintext data key. In this system,
-    # the component that creates the containers never sees the plaintext
-    # data key.
+    # call the Decrypt operation on the encrypted copy of the key.
+    #
+    # It's also useful in distributed systems with different levels of
+    # trust. For example, you might store encrypted data in containers. One
+    # component of your system creates new containers and stores an
+    # encrypted data key with each container. Then, a different component
+    # puts the data into the containers. That component first decrypts the
+    # data key, uses the plaintext data key to encrypt data, puts the
+    # encrypted data into the container, and then destroys the plaintext
+    # data key. In this system, the component that creates the containers
+    # never sees the plaintext data key.
     #
     # To request an asymmetric data key pair, use the GenerateDataKeyPair or
     # GenerateDataKeyPairWithoutPlaintext operations.
@@ -4134,6 +4196,15 @@ module Aws::KMS
     # This operation is part of KMS support for HMAC KMS keys. For details,
     # see [HMAC keys in KMS][2] in the <i> <i>Key Management Service
     # Developer Guide</i> </i>.
+    #
+    # <note markdown="1"> Best practices recommend that you limit the time during which any
+    # signing mechanism, including an HMAC, is effective. This deters an
+    # attack where the actor uses a signed message to establish validity
+    # repeatedly or long after the message is superseded. HMAC tags do not
+    # include a timestamp, but you can include a timestamp in the token or
+    # message to help you detect when its time to refresh the HMAC.
+    #
+    #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
     # key state. For details, see [Key states of KMS keys][3] in the *Key
@@ -4391,31 +4462,56 @@ module Aws::KMS
     # Gets a Boolean value that indicates whether [automatic rotation of the
     # key material][1] is enabled for the specified KMS key.
     #
-    # You cannot enable automatic rotation of [asymmetric KMS keys][2],
-    # [HMAC KMS keys][3], KMS keys with [imported key material][4], or KMS
-    # keys in a [custom key store][5]. To enable or disable automatic
-    # rotation of a set of related [multi-Region keys][6], set the property
-    # on the primary key. The key rotation status for these KMS keys is
-    # always `false`.
+    # When you enable automatic rotation for [customer managed KMS keys][2],
+    # KMS rotates the key material of the KMS key one year (approximately
+    # 365 days) from the enable date and every year thereafter. You can
+    # monitor rotation of the key material for your KMS keys in CloudTrail
+    # and Amazon CloudWatch.
+    #
+    # Automatic key rotation is supported only on [symmetric encryption KMS
+    # keys][3]. You cannot enable or disable automatic rotation of
+    # [asymmetric KMS keys][4], [HMAC KMS keys][5], KMS keys with [imported
+    # key material][6], or KMS keys in a [custom key store][7]. The key
+    # rotation status of these KMS keys is always `false`. To enable or
+    # disable automatic rotation of a set of related [multi-Region keys][8],
+    # set the property on the primary key..
+    #
+    # You can enable (EnableKeyRotation) and disable automatic rotation
+    # (DisableKeyRotation) of the key material in customer managed KMS keys.
+    # Key material rotation of [Amazon Web Services managed KMS keys][9] is
+    # not configurable. KMS always rotates the key material in Amazon Web
+    # Services managed KMS keys every year. The key rotation status for
+    # Amazon Web Services managed KMS keys is always `true`.
+    #
+    # <note markdown="1"> In May 2022, KMS changed the rotation schedule for Amazon Web Services
+    # managed keys from every three years to every year. For details, see
+    # EnableKeyRotation.
+    #
+    #  </note>
     #
     # The KMS key that you use for this operation must be in a compatible
-    # key state. For details, see [Key states of KMS keys][7] in the *Key
+    # key state. For details, see [Key states of KMS keys][10] in the *Key
     # Management Service Developer Guide*.
     #
     # * Disabled: The key rotation status does not change when you disable a
     #   KMS key. However, while the KMS key is disabled, KMS does not rotate
-    #   the key material.
+    #   the key material. When you re-enable the KMS key, rotation resumes.
+    #   If the key material in the re-enabled KMS key hasn't been rotated
+    #   in one year, KMS rotates it immediately, and every year thereafter.
+    #   If it's been less than a year since the key material in the
+    #   re-enabled KMS key was rotated, the KMS key resumes its prior
+    #   rotation schedule.
     #
     # * Pending deletion: While a KMS key is pending deletion, its key
     #   rotation status is `false` and KMS does not rotate the key material.
-    #   If you cancel the deletion, the original key rotation status is
-    #   restored.
+    #   If you cancel the deletion, the original key rotation status returns
+    #   to `true`.
     #
     # **Cross-account use**\: Yes. To perform this operation on a KMS key in
     # a different Amazon Web Services account, specify the key ARN in the
     # value of the `KeyId` parameter.
     #
-    # **Required permissions**\: [kms:GetKeyRotationStatus][8] (key policy)
+    # **Required permissions**\: [kms:GetKeyRotationStatus][11] (key policy)
     #
     # **Related operations:**
     #
@@ -4426,13 +4522,16 @@ module Aws::KMS
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
-    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
-    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
-    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
-    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
-    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html
+    # [6]: https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
+    # [7]: https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html
+    # [8]: https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate
+    # [9]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
+    # [10]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [11]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
     #
     # @option params [required, String] :key_id
     #   Gets the rotation status for the specified KMS key.
@@ -5811,15 +5910,25 @@ module Aws::KMS
     #     visible][2] in the *Amazon Web Services Identity and Access
     #     Management User Guide*.
     #
-    #   The key policy cannot exceed 32 kilobytes (32768 bytes). For more
-    #   information, see [Resource Quotas][3] in the *Key Management Service
-    #   Developer Guide*.
+    #   A key policy document must conform to the following rules.
+    #
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
     #
     # @option params [Boolean] :bypass_policy_lockout_safety_check
     #   A flag to indicate whether to bypass the key policy lockout safety
@@ -6357,7 +6466,20 @@ module Aws::KMS
     #     visible][3] in the <i> <i>Identity and Access Management User
     #     Guide</i> </i>.
     #
-    #   * The key policy size quota is 32 kilobytes (32768 bytes).
+    #   A key policy document must conform to the following rules.
+    #
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #
     #
@@ -6814,7 +6936,7 @@ module Aws::KMS
     #   The waiting period, specified in number of days. After the waiting
     #   period ends, KMS deletes the KMS key.
     #
-    #   If the KMS key is a multi-Region primary key with replicas, the
+    #   If the KMS key is a multi-Region primary key with replica keys, the
     #   waiting period begins when the last of its replica keys is deleted.
     #   Otherwise, the waiting period begins immediately.
     #
@@ -6899,6 +7021,15 @@ module Aws::KMS
     #
     # When signing a message, be sure to record the KMS key and the signing
     # algorithm. This information is required to verify the signature.
+    #
+    # <note markdown="1"> Best practices recommend that you limit the time during which any
+    # signature is effective. This deters an attack where the actor uses a
+    # signed message to establish validity repeatedly or long after the
+    # message is superseded. Signatures do not include a timestamp, but you
+    # can include a timestamp in the signed message to help you detect when
+    # its time to refresh the signature.
+    #
+    #  </note>
     #
     # To verify the signature that this operation generates, use the Verify
     # operation. Or use the GetPublicKey operation to download the public
@@ -8033,7 +8164,7 @@ module Aws::KMS
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.56.0'
+      context[:gem_version] = '1.57.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

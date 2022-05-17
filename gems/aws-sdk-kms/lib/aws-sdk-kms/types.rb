@@ -642,16 +642,19 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] policy
-    #   The key policy to attach to the KMS key.
+    #   The key policy to attach to the KMS key. If you do not specify a key
+    #   policy, KMS attaches a default key policy to the KMS key. For more
+    #   information, see [Default key policy][1] in the *Key Management
+    #   Service Developer Guide*.
     #
     #   If you provide a key policy, it must meet the following criteria:
     #
-    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to true, the
+    #   * If you don't set `BypassPolicyLockoutSafetyCheck` to `True`, the
     #     key policy must allow the principal that is making the `CreateKey`
     #     request to make a subsequent PutKeyPolicy request on the KMS key.
     #     This reduces the risk that the KMS key becomes unmanageable. For
     #     more information, refer to the scenario in the [Default Key
-    #     Policy][1] section of the <i> <i>Key Management Service Developer
+    #     Policy][2] section of the <i> <i>Key Management Service Developer
     #     Guide</i> </i>.
     #
     #   * Each statement in the key policy must contain one or more
@@ -661,14 +664,23 @@ module Aws::KMS
     #     enforce a delay before including the new principal in a key policy
     #     because the new principal might not be immediately visible to KMS.
     #     For more information, see [Changes that I make are not always
-    #     immediately visible][2] in the *Amazon Web Services Identity and
+    #     immediately visible][3] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   If you do not provide a key policy, KMS attaches a default key
-    #   policy to the KMS key. For more information, see [Default Key
-    #   Policy][3] in the *Key Management Service Developer Guide*.
+    #   A key policy document must conform to the following rules.
     #
-    #   The key policy size quota is 32 kilobytes (32768 bytes).
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #   For help writing and formatting a JSON policy document, see the [IAM
     #   JSON Policy Reference][4] in the <i> <i>Identity and Access
@@ -676,9 +688,9 @@ module Aws::KMS
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
-    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
+    #   [3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
     #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
     #   @return [String]
     #
@@ -735,13 +747,14 @@ module Aws::KMS
     #   Management Service Developer Guide</i> </i>.
     #
     #   The `KeySpec` determines whether the KMS key contains a symmetric
-    #   key or an asymmetric key pair. It also determines the algorithms
-    #   that the KMS key supports. You can't change the `KeySpec` after the
-    #   KMS key is created. To further restrict the algorithms that can be
-    #   used with the KMS key, use a condition key in its key policy or IAM
-    #   policy. For more information, see [kms:EncryptionAlgorithm][2],
-    #   [kms:MacAlgorithm][3] or [kms:Signing Algorithm][4] in the <i>
-    #   <i>Key Management Service Developer Guide</i> </i>.
+    #   key or an asymmetric key pair. It also determines the cryptographic
+    #   algorithms that the KMS key supports. You can't change the
+    #   `KeySpec` after the KMS key is created. To further restrict the
+    #   algorithms that can be used with the KMS key, use a condition key in
+    #   its key policy or IAM policy. For more information, see
+    #   [kms:EncryptionAlgorithm][2], [kms:MacAlgorithm][3] or [kms:Signing
+    #   Algorithm][4] in the <i> <i>Key Management Service Developer
+    #   Guide</i> </i>.
     #
     #   [Amazon Web Services services that are integrated with KMS][5] use
     #   symmetric encryption KMS keys to protect your data. These services
@@ -924,9 +937,10 @@ module Aws::KMS
     #   This value creates a *primary key*, not a replica. To create a
     #   *replica key*, use the ReplicateKey operation.
     #
-    #   You can create a symmetric or asymmetric multi-Region key, and you
-    #   can create a multi-Region key with imported key material. However,
-    #   you cannot create a multi-Region key in a custom key store.
+    #   You can create a multi-Region version of a symmetric encryption KMS
+    #   key, an HMAC KMS key, an asymmetric KMS key, or a KMS key with
+    #   imported key material. However, you cannot create a multi-Region key
+    #   in a custom key store.
     #
     #
     #
@@ -1709,10 +1723,11 @@ module Aws::KMS
     #       }
     #
     # @!attribute [rw] key_id
-    #   Identifies a symmetric encryption KMS key. You cannot enable
-    #   automatic rotation of [asymmetric KMS keys][1], [HMAC KMS keys][2],
-    #   KMS keys with [imported key material][3], or KMS keys in a [custom
-    #   key store][4]. To enable or disable automatic rotation of a set of
+    #   Identifies a symmetric encryption KMS key. You cannot enable or
+    #   disable automatic rotation of [asymmetric KMS keys][1], [HMAC KMS
+    #   keys][2], KMS keys with [imported key material][3], or KMS keys in a
+    #   [custom key store][4]. The key rotation status of these KMS keys is
+    #   always `false`. To enable or disable automatic rotation of a set of
     #   related [multi-Region keys][5], set the property on the primary key.
     #
     #   Specify the key ID or key ARN of the KMS key.
@@ -3091,8 +3106,8 @@ module Aws::KMS
     class ImportKeyMaterialResponse < Aws::EmptyStructure; end
 
     # The request was rejected because the specified KMS key cannot decrypt
-    # the data. The `KeyId` in a `Decrypt` request and the `SourceKeyId` in
-    # a `ReEncrypt` request must identify the same KMS key that was used to
+    # the data. The `KeyId` in a Decrypt request and the `SourceKeyId` in a
+    # ReEncrypt request must identify the same KMS key that was used to
     # encrypt the ciphertext.
     #
     # @!attribute [rw] message
@@ -4226,15 +4241,25 @@ module Aws::KMS
     #     immediately visible][2] in the *Amazon Web Services Identity and
     #     Access Management User Guide*.
     #
-    #   The key policy cannot exceed 32 kilobytes (32768 bytes). For more
-    #   information, see [Resource Quotas][3] in the *Key Management Service
-    #   Developer Guide*.
+    #   A key policy document must conform to the following rules.
+    #
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html
     #   @return [String]
     #
     # @!attribute [rw] bypass_policy_lockout_safety_check
@@ -4596,7 +4621,20 @@ module Aws::KMS
     #     immediately visible][3] in the <i> <i>Identity and Access
     #     Management User Guide</i> </i>.
     #
-    #   * The key policy size quota is 32 kilobytes (32768 bytes).
+    #   A key policy document must conform to the following rules.
+    #
+    #   * Up to 32 kilobytes (32768 bytes)
+    #
+    #   * Must be UTF-8 encoded
+    #
+    #   * The only Unicode characters that are permitted in a key policy
+    #     document are the horizontal tab (U+0009), linefeed (U+000A),
+    #     carriage return (U+000D), and characters in the range U+0020 to
+    #     U+00FF.
+    #
+    #   * The `Sid` element in a key policy statement can include spaces.
+    #     (Spaces are prohibited in the `Sid` element of an IAM policy
+    #     document.)
     #
     #
     #
@@ -4840,7 +4878,7 @@ module Aws::KMS
     #   The waiting period, specified in number of days. After the waiting
     #   period ends, KMS deletes the KMS key.
     #
-    #   If the KMS key is a multi-Region primary key with replicas, the
+    #   If the KMS key is a multi-Region primary key with replica keys, the
     #   waiting period begins when the last of its replica keys is deleted.
     #   Otherwise, the waiting period begins immediately.
     #

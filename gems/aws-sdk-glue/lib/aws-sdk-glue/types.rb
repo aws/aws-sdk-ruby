@@ -100,6 +100,88 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a transform that groups rows by chosen fields and computes
+    # the aggregated value by specified function.
+    #
+    # @note When making an API call, you may pass Aggregate
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         groups: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #         aggs: [ # required
+    #           {
+    #             column: ["EnclosedInStringProperty"], # required
+    #             agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   Specifies the fields and rows to use as inputs for the aggregate
+    #   transform.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] groups
+    #   Specifies the fields to group by.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] aggs
+    #   Specifies the aggregate functions to be performed on specified
+    #   fields.
+    #   @return [Array<Types::AggregateOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Aggregate AWS API Documentation
+    #
+    class Aggregate < Struct.new(
+      :name,
+      :inputs,
+      :groups,
+      :aggs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the set of parameters needed to perform aggregation in the
+    # aggregate transform.
+    #
+    # @note When making an API call, you may pass AggregateOperation
+    #   data as a hash:
+    #
+    #       {
+    #         column: ["EnclosedInStringProperty"], # required
+    #         agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #       }
+    #
+    # @!attribute [rw] column
+    #   Specifies the column on the data set on which the aggregation
+    #   function will be applied.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agg_func
+    #   Specifies the aggregation function to apply.
+    #
+    #   Possible aggregation functions include: avg countDistinct, count,
+    #   first, last, kurtosis, max, min, skewness, stddev\_samp,
+    #   stddev\_pop, sum, sumDistinct, var\_samp, var\_pop
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AggregateOperation AWS API Documentation
+    #
+    class AggregateOperation < Struct.new(
+      :column,
+      :agg_func)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource to be created or added already exists.
     #
     # @!attribute [rw] message
@@ -110,6 +192,123 @@ module Aws::Glue
     #
     class AlreadyExistsException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that maps data property keys in the data source
+    # to data property keys in the data target. You can rename keys, modify
+    # the data types for keys, and choose which keys to drop from the
+    # dataset.
+    #
+    # @note When making an API call, you may pass ApplyMapping
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         mapping: [ # required
+    #           {
+    #             to_key: "EnclosedInStringProperty",
+    #             from_path: ["EnclosedInStringProperty"],
+    #             from_type: "EnclosedInStringProperty",
+    #             to_type: "EnclosedInStringProperty",
+    #             dropped: false,
+    #             children: {
+    #               # recursive Mappings
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] mapping
+    #   Specifies the mapping of data property keys in the data source to
+    #   data property keys in the data target.
+    #   @return [Array<Types::Mapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ApplyMapping AWS API Documentation
+    #
+    class ApplyMapping < Struct.new(
+      :name,
+      :inputs,
+      :mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a connector to an Amazon Athena data source.
+    #
+    # @note When making an API call, you may pass AthenaConnectorSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         connection_name: "EnclosedInStringProperty", # required
+    #         connector_name: "EnclosedInStringProperty", # required
+    #         connection_type: "EnclosedInStringProperty", # required
+    #         connection_table: "EnclosedInStringPropertyWithQuote",
+    #         schema_name: "EnclosedInStringProperty", # required
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection that is associated with the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of a connector that assists with accessing the data store
+    #   in Glue Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection, such as marketplace.athena or custom.athena,
+    #   designating a connection to an Amazon Athena data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_table
+    #   The name of the table in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_name
+    #   The name of the Cloudwatch log group to read from. For example,
+    #   `/aws-glue/jobs/output`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the custom Athena source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AthenaConnectorSource AWS API Documentation
+    #
+    class AthenaConnectorSource < Struct.new(
+      :name,
+      :connection_name,
+      :connector_name,
+      :connection_type,
+      :connection_table,
+      :schema_name,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -182,6 +381,47 @@ module Aws::Glue
     class BackfillError < Struct.new(
       :code,
       :partitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses a Glue Data Catalog table.
+    #
+    # @note When making an API call, you may pass BasicCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of your data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The database that contains the table you want to use as the target.
+    #   This database must already exist in the Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The table that defines the schema of your output data. This table
+    #   must already exist in the Data Catalog.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BasicCatalogTarget AWS API Documentation
+    #
+    class BasicCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1530,6 +1770,225 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Apache Kafka data store in the Data Catalog.
+    #
+    # @note When making an API call, you may pass CatalogKafkaSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         window_size: 1,
+    #         detect_schema: false,
+    #         table: "EnclosedInStringProperty", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         streaming_options: {
+    #           bootstrap_servers: "EnclosedInStringProperty",
+    #           security_protocol: "EnclosedInStringProperty",
+    #           connection_name: "EnclosedInStringProperty",
+    #           topic_name: "EnclosedInStringProperty",
+    #           assign: "EnclosedInStringProperty",
+    #           subscribe_pattern: "EnclosedInStringProperty",
+    #           classification: "EnclosedInStringProperty",
+    #           delimiter: "EnclosedInStringProperty",
+    #           starting_offsets: "EnclosedInStringProperty",
+    #           ending_offsets: "EnclosedInStringProperty",
+    #           poll_timeout_ms: 1,
+    #           num_retries: 1,
+    #           retry_interval_ms: 1,
+    #           max_offsets_per_trigger: 1,
+    #           min_partitions: 1,
+    #         },
+    #         data_preview_options: {
+    #           polling_time: 1,
+    #           record_polling_limit: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_size
+    #   The amount of time to spend processing each micro batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] detect_schema
+    #   Whether to automatically determine the schema from the incoming
+    #   data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_options
+    #   Specifies the streaming options.
+    #   @return [Types::KafkaStreamingSourceOptions]
+    #
+    # @!attribute [rw] data_preview_options
+    #   Specifies options related to data preview for viewing a sample of
+    #   your data.
+    #   @return [Types::StreamingDataPreviewOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogKafkaSource AWS API Documentation
+    #
+    class CatalogKafkaSource < Struct.new(
+      :name,
+      :window_size,
+      :detect_schema,
+      :table,
+      :database,
+      :streaming_options,
+      :data_preview_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a Kinesis data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass CatalogKinesisSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         window_size: 1,
+    #         detect_schema: false,
+    #         table: "EnclosedInStringProperty", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         streaming_options: {
+    #           endpoint_url: "EnclosedInStringProperty",
+    #           stream_name: "EnclosedInStringProperty",
+    #           classification: "EnclosedInStringProperty",
+    #           delimiter: "EnclosedInStringProperty",
+    #           starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #           max_fetch_time_in_ms: 1,
+    #           max_fetch_records_per_shard: 1,
+    #           max_record_per_read: 1,
+    #           add_idle_time_between_reads: false,
+    #           idle_time_between_reads_in_ms: 1,
+    #           describe_shard_interval: 1,
+    #           num_retries: 1,
+    #           retry_interval_ms: 1,
+    #           max_retry_interval_ms: 1,
+    #           avoid_empty_batches: false,
+    #           stream_arn: "EnclosedInStringProperty",
+    #           role_arn: "EnclosedInStringProperty",
+    #           role_session_name: "EnclosedInStringProperty",
+    #         },
+    #         data_preview_options: {
+    #           polling_time: 1,
+    #           record_polling_limit: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_size
+    #   The amount of time to spend processing each micro batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] detect_schema
+    #   Whether to automatically determine the schema from the incoming
+    #   data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_options
+    #   Additional options for the Kinesis streaming data source.
+    #   @return [Types::KinesisStreamingSourceOptions]
+    #
+    # @!attribute [rw] data_preview_options
+    #   Additional options for data preview.
+    #   @return [Types::StreamingDataPreviewOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogKinesisSource AWS API Documentation
+    #
+    class CatalogKinesisSource < Struct.new(
+      :name,
+      :window_size,
+      :detect_schema,
+      :table,
+      :database,
+      :streaming_options,
+      :data_preview_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A policy that specifies update behavior for the crawler.
+    #
+    # @note When making an API call, you may pass CatalogSchemaChangePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         enable_update_catalog: false,
+    #         update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #       }
+    #
+    # @!attribute [rw] enable_update_catalog
+    #   Whether to use the specified update behavior when the crawler finds
+    #   a changed schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_behavior
+    #   The update behavior when the crawler finds a changed schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogSchemaChangePolicy AWS API Documentation
+    #
+    class CatalogSchemaChangePolicy < Struct.new(
+      :enable_update_catalog,
+      :update_behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data store in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass CatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CatalogSource AWS API Documentation
+    #
+    class CatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Glue Data Catalog target.
     #
     # @note When making an API call, you may pass CatalogTarget
@@ -1671,6 +2130,972 @@ module Aws::Glue
     class CloudWatchEncryption < Struct.new(
       :cloud_watch_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # `CodeGenConfigurationNode` enumerates all valid Node types. One and
+    # only one of its member variables can be populated.
+    #
+    # @note When making an API call, you may pass CodeGenConfigurationNode
+    #   data as a hash:
+    #
+    #       {
+    #         athena_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           connection_table: "EnclosedInStringPropertyWithQuote",
+    #           schema_name: "EnclosedInStringProperty", # required
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         jdbc_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             filter_predicate: "EnclosedInStringProperty",
+    #             partition_column: "EnclosedInStringProperty",
+    #             lower_bound: 1,
+    #             upper_bound: 1,
+    #             num_partitions: 1,
+    #             job_bookmark_keys: ["EnclosedInStringProperty"],
+    #             job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #             data_type_mapping: {
+    #               "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #             },
+    #           },
+    #           connection_table: "EnclosedInStringPropertyWithQuote",
+    #           query: "SqlQuery",
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_connector_source: {
+    #           name: "NodeName", # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         redshift_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           redshift_tmp_dir: "EnclosedInStringProperty",
+    #           tmp_dir_iam_role: "EnclosedInStringProperty",
+    #         },
+    #         s3_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           partition_predicate: "EnclosedInStringProperty",
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #           },
+    #         },
+    #         s3_csv_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "gzip", # accepts gzip, bzip2
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #           escaper: "EnclosedInStringPropertyWithQuote",
+    #           quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #           multiline: false,
+    #           with_header: false,
+    #           write_header: false,
+    #           skip_first: false,
+    #           optimize_performance: false,
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_json_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "gzip", # accepts gzip, bzip2
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           json_path: "EnclosedInStringProperty",
+    #           multiline: false,
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         s3_parquet_source: {
+    #           name: "NodeName", # required
+    #           paths: ["EnclosedInStringProperty"], # required
+    #           compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #           exclusions: ["EnclosedInStringProperty"],
+    #           group_size: "EnclosedInStringProperty",
+    #           group_files: "EnclosedInStringProperty",
+    #           recurse: false,
+    #           max_band: 1,
+    #           max_files_in_band: 1,
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #             enable_sample_path: false,
+    #             sample_path: "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         relational_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         dynamo_db_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         jdbc_connector_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_connector_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           connection_name: "EnclosedInStringProperty", # required
+    #           connector_name: "EnclosedInStringProperty", # required
+    #           connection_type: "EnclosedInStringProperty", # required
+    #           additional_options: {
+    #             "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #           },
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         redshift_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           redshift_tmp_dir: "EnclosedInStringProperty",
+    #           tmp_dir_iam_role: "EnclosedInStringProperty",
+    #           upsert_redshift_options: {
+    #             table_location: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             upsert_keys: ["EnclosedInStringProperty"],
+    #           },
+    #         },
+    #         s3_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         s3_glue_parquet_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
+    #           },
+    #         },
+    #         s3_direct_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           path: "EnclosedInStringProperty", # required
+    #           compression: "EnclosedInStringProperty",
+    #           format: "json", # required, accepts json, csv, avro, orc, parquet
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #             table: "EnclosedInStringProperty",
+    #             database: "EnclosedInStringProperty",
+    #           },
+    #         },
+    #         apply_mapping: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           mapping: [ # required
+    #             {
+    #               to_key: "EnclosedInStringProperty",
+    #               from_path: ["EnclosedInStringProperty"],
+    #               from_type: "EnclosedInStringProperty",
+    #               to_type: "EnclosedInStringProperty",
+    #               dropped: false,
+    #               children: {
+    #                 # recursive Mappings
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         select_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         drop_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         rename_field: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           source_path: ["EnclosedInStringProperty"], # required
+    #           target_path: ["EnclosedInStringProperty"], # required
+    #         },
+    #         spigot: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           path: "EnclosedInStringProperty", # required
+    #           topk: 1,
+    #           prob: 1.0,
+    #         },
+    #         join: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #           columns: [ # required
+    #             {
+    #               from: "EnclosedInStringProperty", # required
+    #               keys: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         split_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           paths: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         select_from_collection: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           index: 1, # required
+    #         },
+    #         fill_missing_values: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           imputed_path: "EnclosedInStringProperty", # required
+    #           filled_path: "EnclosedInStringProperty",
+    #         },
+    #         filter: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           logical_operator: "AND", # required, accepts AND, OR
+    #           filters: [ # required
+    #             {
+    #               operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #               negated: false,
+    #               values: [ # required
+    #                 {
+    #                   type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                   value: ["EnclosedInStringProperty"], # required
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         custom_code: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           code: "ExtendedString", # required
+    #           class_name: "EnclosedInStringProperty", # required
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         spark_sql: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           sql_query: "SqlQuery", # required
+    #           sql_aliases: [ # required
+    #             {
+    #               from: "NodeId", # required
+    #               alias: "EnclosedInStringPropertyWithQuote", # required
+    #             },
+    #           ],
+    #           output_schemas: [
+    #             {
+    #               columns: [
+    #                 {
+    #                   name: "GlueStudioColumnNameString", # required
+    #                   type: "ColumnTypeString",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #         direct_kinesis_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           streaming_options: {
+    #             endpoint_url: "EnclosedInStringProperty",
+    #             stream_name: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #             max_fetch_time_in_ms: 1,
+    #             max_fetch_records_per_shard: 1,
+    #             max_record_per_read: 1,
+    #             add_idle_time_between_reads: false,
+    #             idle_time_between_reads_in_ms: 1,
+    #             describe_shard_interval: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_retry_interval_ms: 1,
+    #             avoid_empty_batches: false,
+    #             stream_arn: "EnclosedInStringProperty",
+    #             role_arn: "EnclosedInStringProperty",
+    #             role_session_name: "EnclosedInStringProperty",
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         direct_kafka_source: {
+    #           name: "NodeName", # required
+    #           streaming_options: {
+    #             bootstrap_servers: "EnclosedInStringProperty",
+    #             security_protocol: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             topic_name: "EnclosedInStringProperty",
+    #             assign: "EnclosedInStringProperty",
+    #             subscribe_pattern: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_offsets: "EnclosedInStringProperty",
+    #             ending_offsets: "EnclosedInStringProperty",
+    #             poll_timeout_ms: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_offsets_per_trigger: 1,
+    #             min_partitions: 1,
+    #           },
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         catalog_kinesis_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           streaming_options: {
+    #             endpoint_url: "EnclosedInStringProperty",
+    #             stream_name: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #             max_fetch_time_in_ms: 1,
+    #             max_fetch_records_per_shard: 1,
+    #             max_record_per_read: 1,
+    #             add_idle_time_between_reads: false,
+    #             idle_time_between_reads_in_ms: 1,
+    #             describe_shard_interval: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_retry_interval_ms: 1,
+    #             avoid_empty_batches: false,
+    #             stream_arn: "EnclosedInStringProperty",
+    #             role_arn: "EnclosedInStringProperty",
+    #             role_session_name: "EnclosedInStringProperty",
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         catalog_kafka_source: {
+    #           name: "NodeName", # required
+    #           window_size: 1,
+    #           detect_schema: false,
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           streaming_options: {
+    #             bootstrap_servers: "EnclosedInStringProperty",
+    #             security_protocol: "EnclosedInStringProperty",
+    #             connection_name: "EnclosedInStringProperty",
+    #             topic_name: "EnclosedInStringProperty",
+    #             assign: "EnclosedInStringProperty",
+    #             subscribe_pattern: "EnclosedInStringProperty",
+    #             classification: "EnclosedInStringProperty",
+    #             delimiter: "EnclosedInStringProperty",
+    #             starting_offsets: "EnclosedInStringProperty",
+    #             ending_offsets: "EnclosedInStringProperty",
+    #             poll_timeout_ms: 1,
+    #             num_retries: 1,
+    #             retry_interval_ms: 1,
+    #             max_offsets_per_trigger: 1,
+    #             min_partitions: 1,
+    #           },
+    #           data_preview_options: {
+    #             polling_time: 1,
+    #             record_polling_limit: 1,
+    #           },
+    #         },
+    #         drop_null_fields: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           null_check_box_list: {
+    #             is_empty: false,
+    #             is_null_string: false,
+    #             is_neg_one: false,
+    #           },
+    #           null_text_list: [
+    #             {
+    #               value: "EnclosedInStringProperty", # required
+    #               datatype: { # required
+    #                 id: "GenericLimitedString", # required
+    #                 label: "GenericLimitedString", # required
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         merge: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           source: "NodeId", # required
+    #           primary_keys: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #         },
+    #         union: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           union_type: "ALL", # required, accepts ALL, DISTINCT
+    #         },
+    #         pii_detection: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #           entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #           output_column_name: "EnclosedInStringProperty",
+    #           sample_fraction: 1.0,
+    #           threshold_fraction: 1.0,
+    #           mask_value: "MaskValue",
+    #         },
+    #         aggregate: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           groups: [ # required
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           aggs: [ # required
+    #             {
+    #               column: ["EnclosedInStringProperty"], # required
+    #               agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #             },
+    #           ],
+    #         },
+    #         drop_duplicates: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           columns: [
+    #             ["GenericLimitedString"],
+    #           ],
+    #         },
+    #         governed_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           partition_keys: [
+    #             ["EnclosedInStringProperty"],
+    #           ],
+    #           table: "EnclosedInStringProperty", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           schema_change_policy: {
+    #             enable_update_catalog: false,
+    #             update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           },
+    #         },
+    #         governed_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #           partition_predicate: "EnclosedInStringProperty",
+    #           additional_options: {
+    #             bounded_size: 1,
+    #             bounded_files: 1,
+    #           },
+    #         },
+    #         microsoft_sql_server_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         my_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         oracle_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         postgre_sql_catalog_source: {
+    #           name: "NodeName", # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         microsoft_sql_server_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         my_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         oracle_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #         postgre_sql_catalog_target: {
+    #           name: "NodeName", # required
+    #           inputs: ["NodeId"], # required
+    #           database: "EnclosedInStringProperty", # required
+    #           table: "EnclosedInStringProperty", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] athena_connector_source
+    #   Specifies a connector to an Amazon Athena data source.
+    #   @return [Types::AthenaConnectorSource]
+    #
+    # @!attribute [rw] jdbc_connector_source
+    #   Specifies a connector to a JDBC data source.
+    #   @return [Types::JDBCConnectorSource]
+    #
+    # @!attribute [rw] spark_connector_source
+    #   Specifies a connector to an Apache Spark data source.
+    #   @return [Types::SparkConnectorSource]
+    #
+    # @!attribute [rw] catalog_source
+    #   Specifies a data store in the Glue Data Catalog.
+    #   @return [Types::CatalogSource]
+    #
+    # @!attribute [rw] redshift_source
+    #   Specifies an Amazon Redshift data store.
+    #   @return [Types::RedshiftSource]
+    #
+    # @!attribute [rw] s3_catalog_source
+    #   Specifies an Amazon S3 data store in the Glue Data Catalog.
+    #   @return [Types::S3CatalogSource]
+    #
+    # @!attribute [rw] s3_csv_source
+    #   Specifies a command-separated value (CSV) data store stored in
+    #   Amazon S3.
+    #   @return [Types::S3CsvSource]
+    #
+    # @!attribute [rw] s3_json_source
+    #   Specifies a JSON data store stored in Amazon S3.
+    #   @return [Types::S3JsonSource]
+    #
+    # @!attribute [rw] s3_parquet_source
+    #   Specifies an Apache Parquet data store stored in Amazon S3.
+    #   @return [Types::S3ParquetSource]
+    #
+    # @!attribute [rw] relational_catalog_source
+    #   Specifies a Relational database data source in the Glue Data
+    #   Catalog.
+    #   @return [Types::RelationalCatalogSource]
+    #
+    # @!attribute [rw] dynamo_db_catalog_source
+    #   Specifies a DynamoDB data source in the Glue Data Catalog.
+    #   @return [Types::DynamoDBCatalogSource]
+    #
+    # @!attribute [rw] jdbc_connector_target
+    #   Specifies a data target that writes to Amazon S3 in Apache Parquet
+    #   columnar storage.
+    #   @return [Types::JDBCConnectorTarget]
+    #
+    # @!attribute [rw] spark_connector_target
+    #   Specifies a target that uses an Apache Spark connector.
+    #   @return [Types::SparkConnectorTarget]
+    #
+    # @!attribute [rw] catalog_target
+    #   Specifies a target that uses a Glue Data Catalog table.
+    #   @return [Types::BasicCatalogTarget]
+    #
+    # @!attribute [rw] redshift_target
+    #   Specifies a target that uses Amazon Redshift.
+    #   @return [Types::RedshiftTarget]
+    #
+    # @!attribute [rw] s3_catalog_target
+    #   Specifies a data target that writes to Amazon S3 using the Glue Data
+    #   Catalog.
+    #   @return [Types::S3CatalogTarget]
+    #
+    # @!attribute [rw] s3_glue_parquet_target
+    #   Specifies a data target that writes to Amazon S3 in Apache Parquet
+    #   columnar storage.
+    #   @return [Types::S3GlueParquetTarget]
+    #
+    # @!attribute [rw] s3_direct_target
+    #   Specifies a data target that writes to Amazon S3.
+    #   @return [Types::S3DirectTarget]
+    #
+    # @!attribute [rw] apply_mapping
+    #   Specifies a transform that maps data property keys in the data
+    #   source to data property keys in the data target. You can rename
+    #   keys, modify the data types for keys, and choose which keys to drop
+    #   from the dataset.
+    #   @return [Types::ApplyMapping]
+    #
+    # @!attribute [rw] select_fields
+    #   Specifies a transform that chooses the data property keys that you
+    #   want to keep.
+    #   @return [Types::SelectFields]
+    #
+    # @!attribute [rw] drop_fields
+    #   Specifies a transform that chooses the data property keys that you
+    #   want to drop.
+    #   @return [Types::DropFields]
+    #
+    # @!attribute [rw] rename_field
+    #   Specifies a transform that renames a single data property key.
+    #   @return [Types::RenameField]
+    #
+    # @!attribute [rw] spigot
+    #   Specifies a transform that writes samples of the data to an Amazon
+    #   S3 bucket.
+    #   @return [Types::Spigot]
+    #
+    # @!attribute [rw] join
+    #   Specifies a transform that joins two datasets into one dataset using
+    #   a comparison phrase on the specified data property keys. You can use
+    #   inner, outer, left, right, left semi, and left anti joins.
+    #   @return [Types::Join]
+    #
+    # @!attribute [rw] split_fields
+    #   Specifies a transform that splits data property keys into two
+    #   `DynamicFrames`. The output is a collection of `DynamicFrames`\: one
+    #   with selected data property keys, and one with the remaining data
+    #   property keys.
+    #   @return [Types::SplitFields]
+    #
+    # @!attribute [rw] select_from_collection
+    #   Specifies a transform that chooses one `DynamicFrame` from a
+    #   collection of `DynamicFrames`. The output is the selected
+    #   `DynamicFrame`
+    #   @return [Types::SelectFromCollection]
+    #
+    # @!attribute [rw] fill_missing_values
+    #   Specifies a transform that locates records in the dataset that have
+    #   missing values and adds a new field with a value determined by
+    #   imputation. The input data set is used to train the machine learning
+    #   model that determines what the missing value should be.
+    #   @return [Types::FillMissingValues]
+    #
+    # @!attribute [rw] filter
+    #   Specifies a transform that splits a dataset into two, based on a
+    #   filter condition.
+    #   @return [Types::Filter]
+    #
+    # @!attribute [rw] custom_code
+    #   Specifies a transform that uses custom code you provide to perform
+    #   the data transformation. The output is a collection of
+    #   DynamicFrames.
+    #   @return [Types::CustomCode]
+    #
+    # @!attribute [rw] spark_sql
+    #   Specifies a transform where you enter a SQL query using Spark SQL
+    #   syntax to transform the data. The output is a single `DynamicFrame`.
+    #   @return [Types::SparkSQL]
+    #
+    # @!attribute [rw] direct_kinesis_source
+    #   Specifies a direct Amazon Kinesis data source.
+    #   @return [Types::DirectKinesisSource]
+    #
+    # @!attribute [rw] direct_kafka_source
+    #   Specifies an Apache Kafka data store.
+    #   @return [Types::DirectKafkaSource]
+    #
+    # @!attribute [rw] catalog_kinesis_source
+    #   Specifies a Kinesis data source in the Glue Data Catalog.
+    #   @return [Types::CatalogKinesisSource]
+    #
+    # @!attribute [rw] catalog_kafka_source
+    #   Specifies an Apache Kafka data store in the Data Catalog.
+    #   @return [Types::CatalogKafkaSource]
+    #
+    # @!attribute [rw] drop_null_fields
+    #   Specifies a transform that removes columns from the dataset if all
+    #   values in the column are 'null'. By default, Glue Studio will
+    #   recognize null objects, but some values such as empty strings,
+    #   strings that are "null", -1 integers or other placeholders such as
+    #   zeros, are not automatically recognized as nulls.
+    #   @return [Types::DropNullFields]
+    #
+    # @!attribute [rw] merge
+    #   Specifies a transform that merges a `DynamicFrame` with a staging
+    #   `DynamicFrame` based on the specified primary keys to identify
+    #   records. Duplicate records (records with the same primary keys) are
+    #   not de-duplicated.
+    #   @return [Types::Merge]
+    #
+    # @!attribute [rw] union
+    #   Specifies a transform that combines the rows from two or more
+    #   datasets into a single result.
+    #   @return [Types::Union]
+    #
+    # @!attribute [rw] pii_detection
+    #   Specifies a transform that identifies, removes or masks PII data.
+    #   @return [Types::PIIDetection]
+    #
+    # @!attribute [rw] aggregate
+    #   Specifies a transform that groups rows by chosen fields and computes
+    #   the aggregated value by specified function.
+    #   @return [Types::Aggregate]
+    #
+    # @!attribute [rw] drop_duplicates
+    #   Specifies a transform that removes rows of repeating data from a
+    #   data set.
+    #   @return [Types::DropDuplicates]
+    #
+    # @!attribute [rw] governed_catalog_target
+    #   Specifies a data target that writes to a goverened catalog.
+    #   @return [Types::GovernedCatalogTarget]
+    #
+    # @!attribute [rw] governed_catalog_source
+    #   Specifies a data source in a goverened Data Catalog.
+    #   @return [Types::GovernedCatalogSource]
+    #
+    # @!attribute [rw] microsoft_sql_server_catalog_source
+    #   Specifies a Microsoft SQL server data source in the Glue Data
+    #   Catalog.
+    #   @return [Types::MicrosoftSQLServerCatalogSource]
+    #
+    # @!attribute [rw] my_sql_catalog_source
+    #   Specifies a MySQL data source in the Glue Data Catalog.
+    #   @return [Types::MySQLCatalogSource]
+    #
+    # @!attribute [rw] oracle_sql_catalog_source
+    #   Specifies an Oracle data source in the Glue Data Catalog.
+    #   @return [Types::OracleSQLCatalogSource]
+    #
+    # @!attribute [rw] postgre_sql_catalog_source
+    #   Specifies a PostgresSQL data source in the Glue Data Catalog.
+    #   @return [Types::PostgreSQLCatalogSource]
+    #
+    # @!attribute [rw] microsoft_sql_server_catalog_target
+    #   Specifies a target that uses Microsoft SQL.
+    #   @return [Types::MicrosoftSQLServerCatalogTarget]
+    #
+    # @!attribute [rw] my_sql_catalog_target
+    #   Specifies a target that uses MySQL.
+    #   @return [Types::MySQLCatalogTarget]
+    #
+    # @!attribute [rw] oracle_sql_catalog_target
+    #   Specifies a target that uses Oracle SQL.
+    #   @return [Types::OracleSQLCatalogTarget]
+    #
+    # @!attribute [rw] postgre_sql_catalog_target
+    #   Specifies a target that uses Postgres SQL.
+    #   @return [Types::PostgreSQLCatalogTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CodeGenConfigurationNode AWS API Documentation
+    #
+    class CodeGenConfigurationNode < Struct.new(
+      :athena_connector_source,
+      :jdbc_connector_source,
+      :spark_connector_source,
+      :catalog_source,
+      :redshift_source,
+      :s3_catalog_source,
+      :s3_csv_source,
+      :s3_json_source,
+      :s3_parquet_source,
+      :relational_catalog_source,
+      :dynamo_db_catalog_source,
+      :jdbc_connector_target,
+      :spark_connector_target,
+      :catalog_target,
+      :redshift_target,
+      :s3_catalog_target,
+      :s3_glue_parquet_target,
+      :s3_direct_target,
+      :apply_mapping,
+      :select_fields,
+      :drop_fields,
+      :rename_field,
+      :spigot,
+      :join,
+      :split_fields,
+      :select_from_collection,
+      :fill_missing_values,
+      :filter,
+      :custom_code,
+      :spark_sql,
+      :direct_kinesis_source,
+      :direct_kafka_source,
+      :catalog_kinesis_source,
+      :catalog_kafka_source,
+      :drop_null_fields,
+      :merge,
+      :union,
+      :pii_detection,
+      :aggregate,
+      :drop_duplicates,
+      :governed_catalog_target,
+      :governed_catalog_source,
+      :microsoft_sql_server_catalog_source,
+      :my_sql_catalog_source,
+      :oracle_sql_catalog_source,
+      :postgre_sql_catalog_source,
+      :microsoft_sql_server_catalog_target,
+      :my_sql_catalog_target,
+      :oracle_sql_catalog_target,
+      :postgre_sql_catalog_target)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3830,6 +5255,674 @@ module Aws::Glue
     #         glue_version: "GlueVersionString",
     #         number_of_workers: 1,
     #         worker_type: "Standard", # accepts Standard, G.1X, G.2X
+    #         code_gen_configuration_nodes: {
+    #           "NodeId" => {
+    #             athena_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               connection_table: "EnclosedInStringPropertyWithQuote",
+    #               schema_name: "EnclosedInStringProperty", # required
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             jdbc_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 filter_predicate: "EnclosedInStringProperty",
+    #                 partition_column: "EnclosedInStringProperty",
+    #                 lower_bound: 1,
+    #                 upper_bound: 1,
+    #                 num_partitions: 1,
+    #                 job_bookmark_keys: ["EnclosedInStringProperty"],
+    #                 job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #                 data_type_mapping: {
+    #                   "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #                 },
+    #               },
+    #               connection_table: "EnclosedInStringPropertyWithQuote",
+    #               query: "SqlQuery",
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             redshift_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               redshift_tmp_dir: "EnclosedInStringProperty",
+    #               tmp_dir_iam_role: "EnclosedInStringProperty",
+    #             },
+    #             s3_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               partition_predicate: "EnclosedInStringProperty",
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #               },
+    #             },
+    #             s3_csv_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "gzip", # accepts gzip, bzip2
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #               escaper: "EnclosedInStringPropertyWithQuote",
+    #               quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #               multiline: false,
+    #               with_header: false,
+    #               write_header: false,
+    #               skip_first: false,
+    #               optimize_performance: false,
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             s3_json_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "gzip", # accepts gzip, bzip2
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               json_path: "EnclosedInStringProperty",
+    #               multiline: false,
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             s3_parquet_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             relational_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             dynamo_db_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             jdbc_connector_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_connector_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             redshift_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               redshift_tmp_dir: "EnclosedInStringProperty",
+    #               tmp_dir_iam_role: "EnclosedInStringProperty",
+    #               upsert_redshift_options: {
+    #                 table_location: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 upsert_keys: ["EnclosedInStringProperty"],
+    #               },
+    #             },
+    #             s3_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               },
+    #             },
+    #             s3_glue_parquet_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               path: "EnclosedInStringProperty", # required
+    #               compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 table: "EnclosedInStringProperty",
+    #                 database: "EnclosedInStringProperty",
+    #               },
+    #             },
+    #             s3_direct_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               path: "EnclosedInStringProperty", # required
+    #               compression: "EnclosedInStringProperty",
+    #               format: "json", # required, accepts json, csv, avro, orc, parquet
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 table: "EnclosedInStringProperty",
+    #                 database: "EnclosedInStringProperty",
+    #               },
+    #             },
+    #             apply_mapping: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               mapping: [ # required
+    #                 {
+    #                   to_key: "EnclosedInStringProperty",
+    #                   from_path: ["EnclosedInStringProperty"],
+    #                   from_type: "EnclosedInStringProperty",
+    #                   to_type: "EnclosedInStringProperty",
+    #                   dropped: false,
+    #                   children: {
+    #                     # recursive Mappings
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             select_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             drop_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             rename_field: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               source_path: ["EnclosedInStringProperty"], # required
+    #               target_path: ["EnclosedInStringProperty"], # required
+    #             },
+    #             spigot: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               path: "EnclosedInStringProperty", # required
+    #               topk: 1,
+    #               prob: 1.0,
+    #             },
+    #             join: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #               columns: [ # required
+    #                 {
+    #                   from: "EnclosedInStringProperty", # required
+    #                   keys: [ # required
+    #                     ["EnclosedInStringProperty"],
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             split_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             select_from_collection: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               index: 1, # required
+    #             },
+    #             fill_missing_values: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               imputed_path: "EnclosedInStringProperty", # required
+    #               filled_path: "EnclosedInStringProperty",
+    #             },
+    #             filter: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               logical_operator: "AND", # required, accepts AND, OR
+    #               filters: [ # required
+    #                 {
+    #                   operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #                   negated: false,
+    #                   values: [ # required
+    #                     {
+    #                       type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                       value: ["EnclosedInStringProperty"], # required
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             custom_code: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               code: "ExtendedString", # required
+    #               class_name: "EnclosedInStringProperty", # required
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_sql: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               sql_query: "SqlQuery", # required
+    #               sql_aliases: [ # required
+    #                 {
+    #                   from: "NodeId", # required
+    #                   alias: "EnclosedInStringPropertyWithQuote", # required
+    #                 },
+    #               ],
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             direct_kinesis_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               streaming_options: {
+    #                 endpoint_url: "EnclosedInStringProperty",
+    #                 stream_name: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                 max_fetch_time_in_ms: 1,
+    #                 max_fetch_records_per_shard: 1,
+    #                 max_record_per_read: 1,
+    #                 add_idle_time_between_reads: false,
+    #                 idle_time_between_reads_in_ms: 1,
+    #                 describe_shard_interval: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_retry_interval_ms: 1,
+    #                 avoid_empty_batches: false,
+    #                 stream_arn: "EnclosedInStringProperty",
+    #                 role_arn: "EnclosedInStringProperty",
+    #                 role_session_name: "EnclosedInStringProperty",
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             direct_kafka_source: {
+    #               name: "NodeName", # required
+    #               streaming_options: {
+    #                 bootstrap_servers: "EnclosedInStringProperty",
+    #                 security_protocol: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 topic_name: "EnclosedInStringProperty",
+    #                 assign: "EnclosedInStringProperty",
+    #                 subscribe_pattern: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_offsets: "EnclosedInStringProperty",
+    #                 ending_offsets: "EnclosedInStringProperty",
+    #                 poll_timeout_ms: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_offsets_per_trigger: 1,
+    #                 min_partitions: 1,
+    #               },
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             catalog_kinesis_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               streaming_options: {
+    #                 endpoint_url: "EnclosedInStringProperty",
+    #                 stream_name: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                 max_fetch_time_in_ms: 1,
+    #                 max_fetch_records_per_shard: 1,
+    #                 max_record_per_read: 1,
+    #                 add_idle_time_between_reads: false,
+    #                 idle_time_between_reads_in_ms: 1,
+    #                 describe_shard_interval: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_retry_interval_ms: 1,
+    #                 avoid_empty_batches: false,
+    #                 stream_arn: "EnclosedInStringProperty",
+    #                 role_arn: "EnclosedInStringProperty",
+    #                 role_session_name: "EnclosedInStringProperty",
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             catalog_kafka_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               streaming_options: {
+    #                 bootstrap_servers: "EnclosedInStringProperty",
+    #                 security_protocol: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 topic_name: "EnclosedInStringProperty",
+    #                 assign: "EnclosedInStringProperty",
+    #                 subscribe_pattern: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_offsets: "EnclosedInStringProperty",
+    #                 ending_offsets: "EnclosedInStringProperty",
+    #                 poll_timeout_ms: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_offsets_per_trigger: 1,
+    #                 min_partitions: 1,
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             drop_null_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               null_check_box_list: {
+    #                 is_empty: false,
+    #                 is_null_string: false,
+    #                 is_neg_one: false,
+    #               },
+    #               null_text_list: [
+    #                 {
+    #                   value: "EnclosedInStringProperty", # required
+    #                   datatype: { # required
+    #                     id: "GenericLimitedString", # required
+    #                     label: "GenericLimitedString", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             merge: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               source: "NodeId", # required
+    #               primary_keys: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             union: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               union_type: "ALL", # required, accepts ALL, DISTINCT
+    #             },
+    #             pii_detection: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #               entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #               output_column_name: "EnclosedInStringProperty",
+    #               sample_fraction: 1.0,
+    #               threshold_fraction: 1.0,
+    #               mask_value: "MaskValue",
+    #             },
+    #             aggregate: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               groups: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               aggs: [ # required
+    #                 {
+    #                   column: ["EnclosedInStringProperty"], # required
+    #                   agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #                 },
+    #               ],
+    #             },
+    #             drop_duplicates: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               columns: [
+    #                 ["GenericLimitedString"],
+    #               ],
+    #             },
+    #             governed_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               },
+    #             },
+    #             governed_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               partition_predicate: "EnclosedInStringProperty",
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #               },
+    #             },
+    #             microsoft_sql_server_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             my_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             oracle_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             postgre_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             microsoft_sql_server_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             my_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             oracle_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             postgre_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] name
@@ -4004,6 +6097,12 @@ module Aws::Glue
     #     recommend this worker type for memory-intensive jobs.
     #   @return [String]
     #
+    # @!attribute [rw] code_gen_configuration_nodes
+    #   The representation of a directed acyclic graph on which both the
+    #   Glue Studio visual component and Glue Studio code generation is
+    #   based.
+    #   @return [Hash<String,Types::CodeGenConfigurationNode>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateJobRequest AWS API Documentation
     #
     class CreateJobRequest < Struct.new(
@@ -4025,8 +6124,9 @@ module Aws::Glue
       :notification_property,
       :glue_version,
       :number_of_workers,
-      :worker_type)
-      SENSITIVE = []
+      :worker_type,
+      :code_gen_configuration_nodes)
+      SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
 
@@ -5442,6 +7542,61 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a transform that uses custom code you provide to perform the
+    # data transformation. The output is a collection of DynamicFrames.
+    #
+    # @note When making an API call, you may pass CustomCode
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         code: "ExtendedString", # required
+    #         class_name: "EnclosedInStringProperty", # required
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] code
+    #   The custom code that is used to perform the data transformation.
+    #   @return [String]
+    #
+    # @!attribute [rw] class_name
+    #   The name defined for the custom code node class.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the custom code transform.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CustomCode AWS API Documentation
+    #
+    class CustomCode < Struct.new(
+      :name,
+      :inputs,
+      :code,
+      :class_name,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a custom pattern for detecting sensitive data
     # across the columns and rows of your structured data.
     #
@@ -5678,6 +7833,33 @@ module Aws::Glue
       :parameters,
       :create_table_default_permissions,
       :target_database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure representing the datatype of the value.
+    #
+    # @note When making an API call, you may pass Datatype
+    #   data as a hash:
+    #
+    #       {
+    #         id: "GenericLimitedString", # required
+    #         label: "GenericLimitedString", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The datatype of the value.
+    #   @return [String]
+    #
+    # @!attribute [rw] label
+    #   A label assigned to the datatype.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Datatype AWS API Documentation
+    #
+    class Datatype < Struct.new(
+      :id,
+      :label)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6946,6 +9128,181 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Apache Kafka data store.
+    #
+    # @note When making an API call, you may pass DirectKafkaSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         streaming_options: {
+    #           bootstrap_servers: "EnclosedInStringProperty",
+    #           security_protocol: "EnclosedInStringProperty",
+    #           connection_name: "EnclosedInStringProperty",
+    #           topic_name: "EnclosedInStringProperty",
+    #           assign: "EnclosedInStringProperty",
+    #           subscribe_pattern: "EnclosedInStringProperty",
+    #           classification: "EnclosedInStringProperty",
+    #           delimiter: "EnclosedInStringProperty",
+    #           starting_offsets: "EnclosedInStringProperty",
+    #           ending_offsets: "EnclosedInStringProperty",
+    #           poll_timeout_ms: 1,
+    #           num_retries: 1,
+    #           retry_interval_ms: 1,
+    #           max_offsets_per_trigger: 1,
+    #           min_partitions: 1,
+    #         },
+    #         window_size: 1,
+    #         detect_schema: false,
+    #         data_preview_options: {
+    #           polling_time: 1,
+    #           record_polling_limit: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] streaming_options
+    #   Specifies the streaming options.
+    #   @return [Types::KafkaStreamingSourceOptions]
+    #
+    # @!attribute [rw] window_size
+    #   The amount of time to spend processing each micro batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] detect_schema
+    #   Whether to automatically determine the schema from the incoming
+    #   data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] data_preview_options
+    #   Specifies options related to data preview for viewing a sample of
+    #   your data.
+    #   @return [Types::StreamingDataPreviewOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DirectKafkaSource AWS API Documentation
+    #
+    class DirectKafkaSource < Struct.new(
+      :name,
+      :streaming_options,
+      :window_size,
+      :detect_schema,
+      :data_preview_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a direct Amazon Kinesis data source.
+    #
+    # @note When making an API call, you may pass DirectKinesisSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         window_size: 1,
+    #         detect_schema: false,
+    #         streaming_options: {
+    #           endpoint_url: "EnclosedInStringProperty",
+    #           stream_name: "EnclosedInStringProperty",
+    #           classification: "EnclosedInStringProperty",
+    #           delimiter: "EnclosedInStringProperty",
+    #           starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #           max_fetch_time_in_ms: 1,
+    #           max_fetch_records_per_shard: 1,
+    #           max_record_per_read: 1,
+    #           add_idle_time_between_reads: false,
+    #           idle_time_between_reads_in_ms: 1,
+    #           describe_shard_interval: 1,
+    #           num_retries: 1,
+    #           retry_interval_ms: 1,
+    #           max_retry_interval_ms: 1,
+    #           avoid_empty_batches: false,
+    #           stream_arn: "EnclosedInStringProperty",
+    #           role_arn: "EnclosedInStringProperty",
+    #           role_session_name: "EnclosedInStringProperty",
+    #         },
+    #         data_preview_options: {
+    #           polling_time: 1,
+    #           record_polling_limit: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_size
+    #   The amount of time to spend processing each micro batch.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] detect_schema
+    #   Whether to automatically determine the schema from the incoming
+    #   data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] streaming_options
+    #   Additional options for the Kinesis streaming data source.
+    #   @return [Types::KinesisStreamingSourceOptions]
+    #
+    # @!attribute [rw] data_preview_options
+    #   Additional options for data preview.
+    #   @return [Types::StreamingDataPreviewOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DirectKinesisSource AWS API Documentation
+    #
+    class DirectKinesisSource < Struct.new(
+      :name,
+      :window_size,
+      :detect_schema,
+      :streaming_options,
+      :data_preview_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A policy that specifies update behavior for the crawler.
+    #
+    # @note When making an API call, you may pass DirectSchemaChangePolicy
+    #   data as a hash:
+    #
+    #       {
+    #         enable_update_catalog: false,
+    #         update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #         table: "EnclosedInStringProperty",
+    #         database: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] enable_update_catalog
+    #   Whether to use the specified update behavior when the crawler finds
+    #   a changed schema.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] update_behavior
+    #   The update behavior when the crawler finds a changed schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   Specifies the table in the database that the schema change policy
+    #   applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   Specifies the database that the schema change policy applies to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DirectSchemaChangePolicy AWS API Documentation
+    #
+    class DirectSchemaChangePolicy < Struct.new(
+      :enable_update_catalog,
+      :update_behavior,
+      :table,
+      :database)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines column statistics supported for floating-point number data
     # columns.
     #
@@ -6982,6 +9339,173 @@ module Aws::Glue
       :maximum_value,
       :number_of_nulls,
       :number_of_distinct_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that removes rows of repeating data from a data
+    # set.
+    #
+    # @note When making an API call, you may pass DropDuplicates
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         columns: [
+    #           ["GenericLimitedString"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] columns
+    #   The name of the columns to be merged or removed if repeating.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DropDuplicates AWS API Documentation
+    #
+    class DropDuplicates < Struct.new(
+      :name,
+      :inputs,
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that chooses the data property keys that you
+    # want to drop.
+    #
+    # @note When making an API call, you may pass DropFields
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         paths: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] paths
+    #   A JSON path to a variable in the data structure.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DropFields AWS API Documentation
+    #
+    class DropFields < Struct.new(
+      :name,
+      :inputs,
+      :paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that removes columns from the dataset if all
+    # values in the column are 'null'. By default, Glue Studio will
+    # recognize null objects, but some values such as empty strings, strings
+    # that are "null", -1 integers or other placeholders such as zeros,
+    # are not automatically recognized as nulls.
+    #
+    # @note When making an API call, you may pass DropNullFields
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         null_check_box_list: {
+    #           is_empty: false,
+    #           is_null_string: false,
+    #           is_neg_one: false,
+    #         },
+    #         null_text_list: [
+    #           {
+    #             value: "EnclosedInStringProperty", # required
+    #             datatype: { # required
+    #               id: "GenericLimitedString", # required
+    #               label: "GenericLimitedString", # required
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] null_check_box_list
+    #   A structure that represents whether certain values are recognized as
+    #   null values for removal.
+    #   @return [Types::NullCheckBoxList]
+    #
+    # @!attribute [rw] null_text_list
+    #   A structure that specifies a list of NullValueField structures that
+    #   represent a custom null value such as zero or other value being used
+    #   as a null placeholder unique to the dataset.
+    #
+    #   The `DropNullFields` transform removes custom null values only if
+    #   both the value of the null placeholder and the datatype match the
+    #   data.
+    #   @return [Array<Types::NullValueField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DropNullFields AWS API Documentation
+    #
+    class DropNullFields < Struct.new(
+      :name,
+      :inputs,
+      :null_check_box_list,
+      :null_text_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a DynamoDB data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass DynamoDBCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DynamoDBCatalogSource AWS API Documentation
+    #
+    class DynamoDBCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7262,6 +9786,168 @@ module Aws::Glue
     #
     class ExportLabelsTaskRunProperties < Struct.new(
       :output_s3_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that locates records in the dataset that have
+    # missing values and adds a new field with a value determined by
+    # imputation. The input data set is used to train the machine learning
+    # model that determines what the missing value should be.
+    #
+    # @note When making an API call, you may pass FillMissingValues
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         imputed_path: "EnclosedInStringProperty", # required
+    #         filled_path: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] imputed_path
+    #   A JSON path to a variable in the data structure for the dataset that
+    #   is imputed.
+    #   @return [String]
+    #
+    # @!attribute [rw] filled_path
+    #   A JSON path to a variable in the data structure for the dataset that
+    #   is filled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FillMissingValues AWS API Documentation
+    #
+    class FillMissingValues < Struct.new(
+      :name,
+      :inputs,
+      :imputed_path,
+      :filled_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that splits a dataset into two, based on a
+    # filter condition.
+    #
+    # @note When making an API call, you may pass Filter
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         logical_operator: "AND", # required, accepts AND, OR
+    #         filters: [ # required
+    #           {
+    #             operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #             negated: false,
+    #             values: [ # required
+    #               {
+    #                 type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                 value: ["EnclosedInStringProperty"], # required
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] logical_operator
+    #   The operator used to filter rows by comparing the key value to a
+    #   specified value.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Specifies a filter expression.
+    #   @return [Array<Types::FilterExpression>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Filter AWS API Documentation
+    #
+    class Filter < Struct.new(
+      :name,
+      :inputs,
+      :logical_operator,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a filter expression.
+    #
+    # @note When making an API call, you may pass FilterExpression
+    #   data as a hash:
+    #
+    #       {
+    #         operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #         negated: false,
+    #         values: [ # required
+    #           {
+    #             type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #             value: ["EnclosedInStringProperty"], # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] operation
+    #   The type of operation to perform in the expression.
+    #   @return [String]
+    #
+    # @!attribute [rw] negated
+    #   Whether the expression is to be negated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] values
+    #   A list of filter values.
+    #   @return [Array<Types::FilterValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FilterExpression AWS API Documentation
+    #
+    class FilterExpression < Struct.new(
+      :operation,
+      :negated,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single entry in the list of values for a
+    # `FilterExpression`.
+    #
+    # @note When making an API call, you may pass FilterValue
+    #   data as a hash:
+    #
+    #       {
+    #         type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #         value: ["EnclosedInStringProperty"], # required
+    #       }
+    #
+    # @!attribute [rw] type
+    #   The type of filter value.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value to be associated.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/FilterValue AWS API Documentation
+    #
+    class FilterValue < Struct.new(
+      :type,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11005,6 +13691,60 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a user-defined schema when a schema cannot be determined by
+    # AWS Glue.
+    #
+    # @note When making an API call, you may pass GlueSchema
+    #   data as a hash:
+    #
+    #       {
+    #         columns: [
+    #           {
+    #             name: "GlueStudioColumnNameString", # required
+    #             type: "ColumnTypeString",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] columns
+    #   Specifies the column definitions that make up a Glue schema.
+    #   @return [Array<Types::GlueStudioSchemaColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueSchema AWS API Documentation
+    #
+    class GlueSchema < Struct.new(
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a single column in a Glue schema definition.
+    #
+    # @note When making an API call, you may pass GlueStudioSchemaColumn
+    #   data as a hash:
+    #
+    #       {
+    #         name: "GlueStudioColumnNameString", # required
+    #         type: "ColumnTypeString",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the column in the Glue Studio schema.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The hive type for this column in the Glue Studio schema.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GlueStudioSchemaColumn AWS API Documentation
+    #
+    class GlueStudioSchemaColumn < Struct.new(
+      :name,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The database and table in the Glue Data Catalog that is used for input
     # or output data.
     #
@@ -11041,6 +13781,113 @@ module Aws::Glue
       :table_name,
       :catalog_id,
       :connection_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the data store in the governed Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass GovernedCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #         partition_predicate: "EnclosedInStringProperty",
+    #         additional_options: {
+    #           bounded_size: 1,
+    #           bounded_files: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The database table to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_predicate
+    #   Partitions satisfying this predicate are deleted. Files within the
+    #   retention period in these partitions are not deleted. Set to `""` –
+    #   empty by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options.
+    #   @return [Types::S3SourceAdditionalOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GovernedCatalogSource AWS API Documentation
+    #
+    class GovernedCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :partition_predicate,
+      :additional_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data target that writes to Amazon S3 using the Glue Data
+    # Catalog.
+    #
+    # @note When making an API call, you may pass GovernedCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         partition_keys: [
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #         table: "EnclosedInStringProperty", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         schema_change_policy: {
+    #           enable_update_catalog: false,
+    #           update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the governed catalog.
+    #   @return [Types::CatalogSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GovernedCatalogTarget AWS API Documentation
+    #
+    class GovernedCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :table,
+      :database,
+      :schema_change_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11236,6 +14083,254 @@ module Aws::Glue
     #
     class InvalidStateException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional connection options for the connector.
+    #
+    # @note When making an API call, you may pass JDBCConnectorOptions
+    #   data as a hash:
+    #
+    #       {
+    #         filter_predicate: "EnclosedInStringProperty",
+    #         partition_column: "EnclosedInStringProperty",
+    #         lower_bound: 1,
+    #         upper_bound: 1,
+    #         num_partitions: 1,
+    #         job_bookmark_keys: ["EnclosedInStringProperty"],
+    #         job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #         data_type_mapping: {
+    #           "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] filter_predicate
+    #   Extra condition clause to filter data from source. For example:
+    #
+    #   `BillingCity='Mountain View'`
+    #
+    #   When using a query instead of a table name, you should validate that
+    #   the query works with the specified `filterPredicate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_column
+    #   The name of an integer column that is used for partitioning. This
+    #   option works only when it's included with `lowerBound`,
+    #   `upperBound`, and `numPartitions`. This option works the same way as
+    #   in the Spark SQL JDBC reader.
+    #   @return [String]
+    #
+    # @!attribute [rw] lower_bound
+    #   The minimum value of `partitionColumn` that is used to decide
+    #   partition stride.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] upper_bound
+    #   The maximum value of `partitionColumn` that is used to decide
+    #   partition stride.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_partitions
+    #   The number of partitions. This value, along with `lowerBound`
+    #   (inclusive) and `upperBound` (exclusive), form partition strides for
+    #   generated `WHERE` clause expressions that are used to split the
+    #   `partitionColumn`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] job_bookmark_keys
+    #   The name of the job bookmark keys on which to sort.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] job_bookmark_keys_sort_order
+    #   Specifies an ascending or descending sort order.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type_mapping
+    #   Custom data type mapping that builds a mapping from a JDBC data type
+    #   to an Glue data type. For example, the option
+    #   `"dataTypeMapping":\{"FLOAT":"STRING"\}` maps data fields of JDBC
+    #   type `FLOAT` into the Java `String` type by calling the
+    #   `ResultSet.getString()` method of the driver, and uses it to build
+    #   the Glue record. The `ResultSet` object is implemented by each
+    #   driver, so the behavior is specific to the driver you use. Refer to
+    #   the documentation for your JDBC driver to understand how the driver
+    #   performs the conversions.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JDBCConnectorOptions AWS API Documentation
+    #
+    class JDBCConnectorOptions < Struct.new(
+      :filter_predicate,
+      :partition_column,
+      :lower_bound,
+      :upper_bound,
+      :num_partitions,
+      :job_bookmark_keys,
+      :job_bookmark_keys_sort_order,
+      :data_type_mapping)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a connector to a JDBC data source.
+    #
+    # @note When making an API call, you may pass JDBCConnectorSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         connection_name: "EnclosedInStringProperty", # required
+    #         connector_name: "EnclosedInStringProperty", # required
+    #         connection_type: "EnclosedInStringProperty", # required
+    #         additional_options: {
+    #           filter_predicate: "EnclosedInStringProperty",
+    #           partition_column: "EnclosedInStringProperty",
+    #           lower_bound: 1,
+    #           upper_bound: 1,
+    #           num_partitions: 1,
+    #           job_bookmark_keys: ["EnclosedInStringProperty"],
+    #           job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #           data_type_mapping: {
+    #             "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #           },
+    #         },
+    #         connection_table: "EnclosedInStringPropertyWithQuote",
+    #         query: "SqlQuery",
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection that is associated with the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of a connector that assists with accessing the data store
+    #   in Glue Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection, such as marketplace.jdbc or custom.jdbc,
+    #   designating a connection to a JDBC data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional connection options for the connector.
+    #   @return [Types::JDBCConnectorOptions]
+    #
+    # @!attribute [rw] connection_table
+    #   The name of the table in the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] query
+    #   The table or SQL query to get the data from. You can specify either
+    #   `ConnectionTable` or `query`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the custom JDBC source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JDBCConnectorSource AWS API Documentation
+    #
+    class JDBCConnectorSource < Struct.new(
+      :name,
+      :connection_name,
+      :connector_name,
+      :connection_type,
+      :additional_options,
+      :connection_table,
+      :query,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data target that writes to Amazon S3 in Apache Parquet
+    # columnar storage.
+    #
+    # @note When making an API call, you may pass JDBCConnectorTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         connection_name: "EnclosedInStringProperty", # required
+    #         connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #         connector_name: "EnclosedInStringProperty", # required
+    #         connection_type: "EnclosedInStringProperty", # required
+    #         additional_options: {
+    #           "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #         },
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection that is associated with the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_table
+    #   The name of the table in the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of a connector that will be used.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection, such as marketplace.jdbc or custom.jdbc,
+    #   designating a connection to a JDBC data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the JDBC target.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JDBCConnectorTarget AWS API Documentation
+    #
+    class JDBCConnectorTarget < Struct.new(
+      :name,
+      :inputs,
+      :connection_name,
+      :connection_table,
+      :connector_name,
+      :connection_type,
+      :additional_options,
+      :output_schemas)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11452,6 +14547,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
+    # @!attribute [rw] code_gen_configuration_nodes
+    #   The representation of a directed acyclic graph on which both the
+    #   Glue Studio visual component and Glue Studio code generation is
+    #   based.
+    #   @return [Hash<String,Types::CodeGenConfigurationNode>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -11474,8 +14575,9 @@ module Aws::Glue
       :number_of_workers,
       :security_configuration,
       :notification_property,
-      :glue_version)
-      SENSITIVE = []
+      :glue_version,
+      :code_gen_configuration_nodes)
+      SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
 
@@ -11865,6 +14967,674 @@ module Aws::Glue
     #           notify_delay_after: 1,
     #         },
     #         glue_version: "GlueVersionString",
+    #         code_gen_configuration_nodes: {
+    #           "NodeId" => {
+    #             athena_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               connection_table: "EnclosedInStringPropertyWithQuote",
+    #               schema_name: "EnclosedInStringProperty", # required
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             jdbc_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 filter_predicate: "EnclosedInStringProperty",
+    #                 partition_column: "EnclosedInStringProperty",
+    #                 lower_bound: 1,
+    #                 upper_bound: 1,
+    #                 num_partitions: 1,
+    #                 job_bookmark_keys: ["EnclosedInStringProperty"],
+    #                 job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #                 data_type_mapping: {
+    #                   "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #                 },
+    #               },
+    #               connection_table: "EnclosedInStringPropertyWithQuote",
+    #               query: "SqlQuery",
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_connector_source: {
+    #               name: "NodeName", # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             redshift_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               redshift_tmp_dir: "EnclosedInStringProperty",
+    #               tmp_dir_iam_role: "EnclosedInStringProperty",
+    #             },
+    #             s3_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               partition_predicate: "EnclosedInStringProperty",
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #               },
+    #             },
+    #             s3_csv_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "gzip", # accepts gzip, bzip2
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #               escaper: "EnclosedInStringPropertyWithQuote",
+    #               quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #               multiline: false,
+    #               with_header: false,
+    #               write_header: false,
+    #               skip_first: false,
+    #               optimize_performance: false,
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             s3_json_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "gzip", # accepts gzip, bzip2
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               json_path: "EnclosedInStringProperty",
+    #               multiline: false,
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             s3_parquet_source: {
+    #               name: "NodeName", # required
+    #               paths: ["EnclosedInStringProperty"], # required
+    #               compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #               exclusions: ["EnclosedInStringProperty"],
+    #               group_size: "EnclosedInStringProperty",
+    #               group_files: "EnclosedInStringProperty",
+    #               recurse: false,
+    #               max_band: 1,
+    #               max_files_in_band: 1,
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #                 enable_sample_path: false,
+    #                 sample_path: "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             relational_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             dynamo_db_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             jdbc_connector_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_connector_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               connection_name: "EnclosedInStringProperty", # required
+    #               connector_name: "EnclosedInStringProperty", # required
+    #               connection_type: "EnclosedInStringProperty", # required
+    #               additional_options: {
+    #                 "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #               },
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             redshift_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               redshift_tmp_dir: "EnclosedInStringProperty",
+    #               tmp_dir_iam_role: "EnclosedInStringProperty",
+    #               upsert_redshift_options: {
+    #                 table_location: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 upsert_keys: ["EnclosedInStringProperty"],
+    #               },
+    #             },
+    #             s3_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               },
+    #             },
+    #             s3_glue_parquet_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               path: "EnclosedInStringProperty", # required
+    #               compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 table: "EnclosedInStringProperty",
+    #                 database: "EnclosedInStringProperty",
+    #               },
+    #             },
+    #             s3_direct_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               path: "EnclosedInStringProperty", # required
+    #               compression: "EnclosedInStringProperty",
+    #               format: "json", # required, accepts json, csv, avro, orc, parquet
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 table: "EnclosedInStringProperty",
+    #                 database: "EnclosedInStringProperty",
+    #               },
+    #             },
+    #             apply_mapping: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               mapping: [ # required
+    #                 {
+    #                   to_key: "EnclosedInStringProperty",
+    #                   from_path: ["EnclosedInStringProperty"],
+    #                   from_type: "EnclosedInStringProperty",
+    #                   to_type: "EnclosedInStringProperty",
+    #                   dropped: false,
+    #                   children: {
+    #                     # recursive Mappings
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             select_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             drop_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             rename_field: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               source_path: ["EnclosedInStringProperty"], # required
+    #               target_path: ["EnclosedInStringProperty"], # required
+    #             },
+    #             spigot: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               path: "EnclosedInStringProperty", # required
+    #               topk: 1,
+    #               prob: 1.0,
+    #             },
+    #             join: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #               columns: [ # required
+    #                 {
+    #                   from: "EnclosedInStringProperty", # required
+    #                   keys: [ # required
+    #                     ["EnclosedInStringProperty"],
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             split_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               paths: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             select_from_collection: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               index: 1, # required
+    #             },
+    #             fill_missing_values: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               imputed_path: "EnclosedInStringProperty", # required
+    #               filled_path: "EnclosedInStringProperty",
+    #             },
+    #             filter: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               logical_operator: "AND", # required, accepts AND, OR
+    #               filters: [ # required
+    #                 {
+    #                   operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #                   negated: false,
+    #                   values: [ # required
+    #                     {
+    #                       type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                       value: ["EnclosedInStringProperty"], # required
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             custom_code: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               code: "ExtendedString", # required
+    #               class_name: "EnclosedInStringProperty", # required
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             spark_sql: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               sql_query: "SqlQuery", # required
+    #               sql_aliases: [ # required
+    #                 {
+    #                   from: "NodeId", # required
+    #                   alias: "EnclosedInStringPropertyWithQuote", # required
+    #                 },
+    #               ],
+    #               output_schemas: [
+    #                 {
+    #                   columns: [
+    #                     {
+    #                       name: "GlueStudioColumnNameString", # required
+    #                       type: "ColumnTypeString",
+    #                     },
+    #                   ],
+    #                 },
+    #               ],
+    #             },
+    #             direct_kinesis_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               streaming_options: {
+    #                 endpoint_url: "EnclosedInStringProperty",
+    #                 stream_name: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                 max_fetch_time_in_ms: 1,
+    #                 max_fetch_records_per_shard: 1,
+    #                 max_record_per_read: 1,
+    #                 add_idle_time_between_reads: false,
+    #                 idle_time_between_reads_in_ms: 1,
+    #                 describe_shard_interval: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_retry_interval_ms: 1,
+    #                 avoid_empty_batches: false,
+    #                 stream_arn: "EnclosedInStringProperty",
+    #                 role_arn: "EnclosedInStringProperty",
+    #                 role_session_name: "EnclosedInStringProperty",
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             direct_kafka_source: {
+    #               name: "NodeName", # required
+    #               streaming_options: {
+    #                 bootstrap_servers: "EnclosedInStringProperty",
+    #                 security_protocol: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 topic_name: "EnclosedInStringProperty",
+    #                 assign: "EnclosedInStringProperty",
+    #                 subscribe_pattern: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_offsets: "EnclosedInStringProperty",
+    #                 ending_offsets: "EnclosedInStringProperty",
+    #                 poll_timeout_ms: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_offsets_per_trigger: 1,
+    #                 min_partitions: 1,
+    #               },
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             catalog_kinesis_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               streaming_options: {
+    #                 endpoint_url: "EnclosedInStringProperty",
+    #                 stream_name: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                 max_fetch_time_in_ms: 1,
+    #                 max_fetch_records_per_shard: 1,
+    #                 max_record_per_read: 1,
+    #                 add_idle_time_between_reads: false,
+    #                 idle_time_between_reads_in_ms: 1,
+    #                 describe_shard_interval: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_retry_interval_ms: 1,
+    #                 avoid_empty_batches: false,
+    #                 stream_arn: "EnclosedInStringProperty",
+    #                 role_arn: "EnclosedInStringProperty",
+    #                 role_session_name: "EnclosedInStringProperty",
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             catalog_kafka_source: {
+    #               name: "NodeName", # required
+    #               window_size: 1,
+    #               detect_schema: false,
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               streaming_options: {
+    #                 bootstrap_servers: "EnclosedInStringProperty",
+    #                 security_protocol: "EnclosedInStringProperty",
+    #                 connection_name: "EnclosedInStringProperty",
+    #                 topic_name: "EnclosedInStringProperty",
+    #                 assign: "EnclosedInStringProperty",
+    #                 subscribe_pattern: "EnclosedInStringProperty",
+    #                 classification: "EnclosedInStringProperty",
+    #                 delimiter: "EnclosedInStringProperty",
+    #                 starting_offsets: "EnclosedInStringProperty",
+    #                 ending_offsets: "EnclosedInStringProperty",
+    #                 poll_timeout_ms: 1,
+    #                 num_retries: 1,
+    #                 retry_interval_ms: 1,
+    #                 max_offsets_per_trigger: 1,
+    #                 min_partitions: 1,
+    #               },
+    #               data_preview_options: {
+    #                 polling_time: 1,
+    #                 record_polling_limit: 1,
+    #               },
+    #             },
+    #             drop_null_fields: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               null_check_box_list: {
+    #                 is_empty: false,
+    #                 is_null_string: false,
+    #                 is_neg_one: false,
+    #               },
+    #               null_text_list: [
+    #                 {
+    #                   value: "EnclosedInStringProperty", # required
+    #                   datatype: { # required
+    #                     id: "GenericLimitedString", # required
+    #                     label: "GenericLimitedString", # required
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             merge: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               source: "NodeId", # required
+    #               primary_keys: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #             },
+    #             union: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               union_type: "ALL", # required, accepts ALL, DISTINCT
+    #             },
+    #             pii_detection: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #               entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #               output_column_name: "EnclosedInStringProperty",
+    #               sample_fraction: 1.0,
+    #               threshold_fraction: 1.0,
+    #               mask_value: "MaskValue",
+    #             },
+    #             aggregate: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               groups: [ # required
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               aggs: [ # required
+    #                 {
+    #                   column: ["EnclosedInStringProperty"], # required
+    #                   agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #                 },
+    #               ],
+    #             },
+    #             drop_duplicates: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               columns: [
+    #                 ["GenericLimitedString"],
+    #               ],
+    #             },
+    #             governed_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               partition_keys: [
+    #                 ["EnclosedInStringProperty"],
+    #               ],
+    #               table: "EnclosedInStringProperty", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               schema_change_policy: {
+    #                 enable_update_catalog: false,
+    #                 update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #               },
+    #             },
+    #             governed_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #               partition_predicate: "EnclosedInStringProperty",
+    #               additional_options: {
+    #                 bounded_size: 1,
+    #                 bounded_files: 1,
+    #               },
+    #             },
+    #             microsoft_sql_server_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             my_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             oracle_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             postgre_sql_catalog_source: {
+    #               name: "NodeName", # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             microsoft_sql_server_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             my_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             oracle_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #             postgre_sql_catalog_target: {
+    #               name: "NodeName", # required
+    #               inputs: ["NodeId"], # required
+    #               database: "EnclosedInStringProperty", # required
+    #               table: "EnclosedInStringProperty", # required
+    #             },
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] description
@@ -12021,6 +15791,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
+    # @!attribute [rw] code_gen_configuration_nodes
+    #   The representation of a directed acyclic graph on which both the
+    #   Glue Studio visual component and Glue Studio code generation is
+    #   based.
+    #   @return [Hash<String,Types::CodeGenConfigurationNode>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JobUpdate AWS API Documentation
     #
     class JobUpdate < Struct.new(
@@ -12040,7 +15816,85 @@ module Aws::Glue
       :number_of_workers,
       :security_configuration,
       :notification_property,
-      :glue_version)
+      :glue_version,
+      :code_gen_configuration_nodes)
+      SENSITIVE = [:code_gen_configuration_nodes]
+      include Aws::Structure
+    end
+
+    # Specifies a transform that joins two datasets into one dataset using a
+    # comparison phrase on the specified data property keys. You can use
+    # inner, outer, left, right, left semi, and left anti joins.
+    #
+    # @note When making an API call, you may pass Join
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #         columns: [ # required
+    #           {
+    #             from: "EnclosedInStringProperty", # required
+    #             keys: [ # required
+    #               ["EnclosedInStringProperty"],
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] join_type
+    #   Specifies the type of join to be performed on the datasets.
+    #   @return [String]
+    #
+    # @!attribute [rw] columns
+    #   A list of the two columns to be joined.
+    #   @return [Array<Types::JoinColumn>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Join AWS API Documentation
+    #
+    class Join < Struct.new(
+      :name,
+      :inputs,
+      :join_type,
+      :columns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a column to be joined.
+    #
+    # @note When making an API call, you may pass JoinColumn
+    #   data as a hash:
+    #
+    #       {
+    #         from: "EnclosedInStringProperty", # required
+    #         keys: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] from
+    #   The column to be joined.
+    #   @return [String]
+    #
+    # @!attribute [rw] keys
+    #   The key of the column to be joined.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/JoinColumn AWS API Documentation
+    #
+    class JoinColumn < Struct.new(
+      :from,
+      :keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12085,6 +15939,132 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Additional options for streaming.
+    #
+    # @note When making an API call, you may pass KafkaStreamingSourceOptions
+    #   data as a hash:
+    #
+    #       {
+    #         bootstrap_servers: "EnclosedInStringProperty",
+    #         security_protocol: "EnclosedInStringProperty",
+    #         connection_name: "EnclosedInStringProperty",
+    #         topic_name: "EnclosedInStringProperty",
+    #         assign: "EnclosedInStringProperty",
+    #         subscribe_pattern: "EnclosedInStringProperty",
+    #         classification: "EnclosedInStringProperty",
+    #         delimiter: "EnclosedInStringProperty",
+    #         starting_offsets: "EnclosedInStringProperty",
+    #         ending_offsets: "EnclosedInStringProperty",
+    #         poll_timeout_ms: 1,
+    #         num_retries: 1,
+    #         retry_interval_ms: 1,
+    #         max_offsets_per_trigger: 1,
+    #         min_partitions: 1,
+    #       }
+    #
+    # @!attribute [rw] bootstrap_servers
+    #   A list of bootstrap server URLs, for example, as
+    #   `b-1.vpc-test-2.o4q88o.c6.kafka.us-east-1.amazonaws.com:9094`. This
+    #   option must be specified in the API call or defined in the table
+    #   metadata in the Data Catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_protocol
+    #   The protocol used to communicate with brokers. The possible values
+    #   are `"SSL"` or `"PLAINTEXT"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_name
+    #   The topic name as specified in Apache Kafka. You must specify at
+    #   least one of `"topicName"`, `"assign"` or `"subscribePattern"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] assign
+    #   The specific `TopicPartitions` to consume. You must specify at least
+    #   one of `"topicName"`, `"assign"` or `"subscribePattern"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] subscribe_pattern
+    #   A Java regex string that identifies the topic list to subscribe to.
+    #   You must specify at least one of `"topicName"`, `"assign"` or
+    #   `"subscribePattern"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   An optional classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] delimiter
+    #   Specifies the delimiter character.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_offsets
+    #   The starting position in the Kafka topic to read data from. The
+    #   possible values are `"earliest"` or `"latest"`. The default value is
+    #   `"latest"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] ending_offsets
+    #   The end point when a batch query is ended. Possible values are
+    #   either `"latest"` or a JSON string that specifies an ending offset
+    #   for each `TopicPartition`.
+    #   @return [String]
+    #
+    # @!attribute [rw] poll_timeout_ms
+    #   The timeout in milliseconds to poll data from Kafka in Spark job
+    #   executors. The default value is `512`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_retries
+    #   The number of times to retry before failing to fetch Kafka offsets.
+    #   The default value is `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_interval_ms
+    #   The time in milliseconds to wait before retrying to fetch Kafka
+    #   offsets. The default value is `10`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_offsets_per_trigger
+    #   The rate limit on the maximum number of offsets that are processed
+    #   per trigger interval. The specified total number of offsets is
+    #   proportionally split across `topicPartitions` of different volumes.
+    #   The default value is null, which means that the consumer reads all
+    #   offsets until the known latest offset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] min_partitions
+    #   The desired minimum number of partitions to read from Kafka. The
+    #   default value is null, which means that the number of spark
+    #   partitions is equal to the number of Kafka partitions.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KafkaStreamingSourceOptions AWS API Documentation
+    #
+    class KafkaStreamingSourceOptions < Struct.new(
+      :bootstrap_servers,
+      :security_protocol,
+      :connection_name,
+      :topic_name,
+      :assign,
+      :subscribe_pattern,
+      :classification,
+      :delimiter,
+      :starting_offsets,
+      :ending_offsets,
+      :poll_timeout_ms,
+      :num_retries,
+      :retry_interval_ms,
+      :max_offsets_per_trigger,
+      :min_partitions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A partition key pair consisting of a name and a type.
     #
     # @!attribute [rw] name
@@ -12100,6 +16080,152 @@ module Aws::Glue
     class KeySchemaElement < Struct.new(
       :name,
       :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Additional options for the Amazon Kinesis streaming data source.
+    #
+    # @note When making an API call, you may pass KinesisStreamingSourceOptions
+    #   data as a hash:
+    #
+    #       {
+    #         endpoint_url: "EnclosedInStringProperty",
+    #         stream_name: "EnclosedInStringProperty",
+    #         classification: "EnclosedInStringProperty",
+    #         delimiter: "EnclosedInStringProperty",
+    #         starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #         max_fetch_time_in_ms: 1,
+    #         max_fetch_records_per_shard: 1,
+    #         max_record_per_read: 1,
+    #         add_idle_time_between_reads: false,
+    #         idle_time_between_reads_in_ms: 1,
+    #         describe_shard_interval: 1,
+    #         num_retries: 1,
+    #         retry_interval_ms: 1,
+    #         max_retry_interval_ms: 1,
+    #         avoid_empty_batches: false,
+    #         stream_arn: "EnclosedInStringProperty",
+    #         role_arn: "EnclosedInStringProperty",
+    #         role_session_name: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] endpoint_url
+    #   The URL of the Kinesis endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] classification
+    #   An optional classification.
+    #   @return [String]
+    #
+    # @!attribute [rw] delimiter
+    #   Specifies the delimiter character.
+    #   @return [String]
+    #
+    # @!attribute [rw] starting_position
+    #   The starting position in the Kinesis data stream to read data from.
+    #   The possible values are `"latest"`, `"trim_horizon"`, or
+    #   `"earliest"`. The default value is `"latest"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_fetch_time_in_ms
+    #   The maximum time spent in the job executor to fetch a record from
+    #   the Kinesis data stream per shard, specified in milliseconds (ms).
+    #   The default value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_fetch_records_per_shard
+    #   The maximum number of records to fetch per shard in the Kinesis data
+    #   stream. The default value is `100000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_record_per_read
+    #   The maximum number of records to fetch from the Kinesis data stream
+    #   in each getRecords operation. The default value is `10000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] add_idle_time_between_reads
+    #   Adds a time delay between two consecutive getRecords operations. The
+    #   default value is `"False"`. This option is only configurable for
+    #   Glue version 2.0 and above.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] idle_time_between_reads_in_ms
+    #   The minimum time delay between two consecutive getRecords
+    #   operations, specified in ms. The default value is `1000`. This
+    #   option is only configurable for Glue version 2.0 and above.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] describe_shard_interval
+    #   The minimum time interval between two ListShards API calls for your
+    #   script to consider resharding. The default value is `1s`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] num_retries
+    #   The maximum number of retries for Kinesis Data Streams API requests.
+    #   The default value is `3`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retry_interval_ms
+    #   The cool-off time period (specified in ms) before retrying the
+    #   Kinesis Data Streams API call. The default value is `1000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_retry_interval_ms
+    #   The maximum cool-off time period (specified in ms) between two
+    #   retries of a Kinesis Data Streams API call. The default value is
+    #   `10000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] avoid_empty_batches
+    #   Avoids creating an empty microbatch job by checking for unread data
+    #   in the Kinesis data stream before the batch is started. The default
+    #   value is `"False"`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] stream_arn
+    #   The Amazon Resource Name (ARN) of the Kinesis data stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the role to assume using AWS
+    #   Security Token Service (AWS STS). This role must have permissions
+    #   for describe or read record operations for the Kinesis data stream.
+    #   You must use this parameter when accessing a data stream in a
+    #   different account. Used in conjunction with `"awsSTSSessionName"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_session_name
+    #   An identifier for the session assuming the role using AWS STS. You
+    #   must use this parameter when accessing a data stream in a different
+    #   account. Used in conjunction with `"awsSTSRoleARN"`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/KinesisStreamingSourceOptions AWS API Documentation
+    #
+    class KinesisStreamingSourceOptions < Struct.new(
+      :endpoint_url,
+      :stream_name,
+      :classification,
+      :delimiter,
+      :starting_position,
+      :max_fetch_time_in_ms,
+      :max_fetch_records_per_shard,
+      :max_record_per_read,
+      :add_idle_time_between_reads,
+      :idle_time_between_reads_in_ms,
+      :describe_shard_interval,
+      :num_retries,
+      :retry_interval_ms,
+      :max_retry_interval_ms,
+      :avoid_empty_batches,
+      :stream_arn,
+      :role_arn,
+      :role_session_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13292,6 +17418,86 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies the mapping of data property keys.
+    #
+    # @note When making an API call, you may pass Mapping
+    #   data as a hash:
+    #
+    #       {
+    #         to_key: "EnclosedInStringProperty",
+    #         from_path: ["EnclosedInStringProperty"],
+    #         from_type: "EnclosedInStringProperty",
+    #         to_type: "EnclosedInStringProperty",
+    #         dropped: false,
+    #         children: [
+    #           {
+    #             to_key: "EnclosedInStringProperty",
+    #             from_path: ["EnclosedInStringProperty"],
+    #             from_type: "EnclosedInStringProperty",
+    #             to_type: "EnclosedInStringProperty",
+    #             dropped: false,
+    #             children: {
+    #               # recursive Mappings
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] to_key
+    #   After the apply mapping, what the name of the column should be. Can
+    #   be the same as `FromPath`.
+    #   @return [String]
+    #
+    # @!attribute [rw] from_path
+    #   The table or column to be modified.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] from_type
+    #   The type of the data to be modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] to_type
+    #   The data type that the data is to be modified to.
+    #   @return [String]
+    #
+    # @!attribute [rw] dropped
+    #   If true, then the column is removed.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] children
+    #   Only applicable to nested data structures. If you want to change the
+    #   parent structure, but also one of its children, you can fill out
+    #   this data strucutre. It is also `Mapping`, but its `FromPath` will
+    #   be the parent's `FromPath` plus the `FromPath` from this structure.
+    #
+    #   For the children part, suppose you have the structure:
+    #
+    #   `\{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
+    #   "ToType": "Struct", "Dropped": false, "Chidlren": [\{ "FromPath":
+    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, \}]
+    #   \}`
+    #
+    #   You can specify a `Mapping` that looks like:
+    #
+    #   `\{ "FromPath": "OuterStructure", "ToKey": "OuterStructure",
+    #   "ToType": "Struct", "Dropped": false, "Chidlren": [\{ "FromPath":
+    #   "inner", "ToKey": "inner", "ToType": "Double", "Dropped": false, \}]
+    #   \}`
+    #   @return [Array<Types::Mapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Mapping AWS API Documentation
+    #
+    class Mapping < Struct.new(
+      :to_key,
+      :from_path,
+      :from_type,
+      :to_type,
+      :dropped,
+      :children)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a mapping.
     #
     # @note When making an API call, you may pass MappingEntry
@@ -13339,6 +17545,52 @@ module Aws::Glue
       :target_table,
       :target_path,
       :target_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that merges a `DynamicFrame` with a staging
+    # `DynamicFrame` based on the specified primary keys to identify
+    # records. Duplicate records (records with the same primary keys) are
+    # not de-duplicated.
+    #
+    # @note When making an API call, you may pass Merge
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         source: "NodeId", # required
+    #         primary_keys: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source
+    #   The source `DynamicFrame` that will be merged with a staging
+    #   `DynamicFrame`.
+    #   @return [String]
+    #
+    # @!attribute [rw] primary_keys
+    #   The list of primary key fields to match records from the source and
+    #   staging dynamic frames.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Merge AWS API Documentation
+    #
+    class Merge < Struct.new(
+      :name,
+      :inputs,
+      :source,
+      :primary_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13394,6 +17646,78 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a Microsoft SQL server data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass MicrosoftSQLServerCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MicrosoftSQLServerCatalogSource AWS API Documentation
+    #
+    class MicrosoftSQLServerCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses Microsoft SQL.
+    #
+    # @note When making an API call, you may pass MicrosoftSQLServerCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MicrosoftSQLServerCatalogTarget AWS API Documentation
+    #
+    class MicrosoftSQLServerCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies an Amazon DocumentDB or MongoDB data store to crawl.
     #
     # @note When making an API call, you may pass MongoDBTarget
@@ -13431,6 +17755,78 @@ module Aws::Glue
       :connection_name,
       :path,
       :scan_all)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a MySQL data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass MySQLCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MySQLCatalogSource AWS API Documentation
+    #
+    class MySQLCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses MySQL.
+    #
+    # @note When making an API call, you may pass MySQLCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/MySQLCatalogTarget AWS API Documentation
+    #
+    class MySQLCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13511,6 +17907,72 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Represents whether certain values are recognized as null values for
+    # removal.
+    #
+    # @note When making an API call, you may pass NullCheckBoxList
+    #   data as a hash:
+    #
+    #       {
+    #         is_empty: false,
+    #         is_null_string: false,
+    #         is_neg_one: false,
+    #       }
+    #
+    # @!attribute [rw] is_empty
+    #   Specifies that an empty string is considered as a null value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_null_string
+    #   Specifies that a value spelling out the word 'null' is considered
+    #   as a null value.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_neg_one
+    #   Specifies that an integer value of -1 is considered as a null value.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NullCheckBoxList AWS API Documentation
+    #
+    class NullCheckBoxList < Struct.new(
+      :is_empty,
+      :is_null_string,
+      :is_neg_one)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a custom null value such as a zeros or other value being
+    # used as a null placeholder unique to the dataset.
+    #
+    # @note When making an API call, you may pass NullValueField
+    #   data as a hash:
+    #
+    #       {
+    #         value: "EnclosedInStringProperty", # required
+    #         datatype: { # required
+    #           id: "GenericLimitedString", # required
+    #           label: "GenericLimitedString", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] value
+    #   The value of the null placeholder.
+    #   @return [String]
+    #
+    # @!attribute [rw] datatype
+    #   The datatype of the value.
+    #   @return [Types::Datatype]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/NullValueField AWS API Documentation
+    #
+    class NullValueField < Struct.new(
+      :value,
+      :datatype)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The operation timed out.
     #
     # @!attribute [rw] message
@@ -13521,6 +17983,78 @@ module Aws::Glue
     #
     class OperationTimeoutException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Oracle data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass OracleSQLCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OracleSQLCatalogSource AWS API Documentation
+    #
+    class OracleSQLCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses Oracle SQL.
+    #
+    # @note When making an API call, you may pass OracleSQLCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/OracleSQLCatalogTarget AWS API Documentation
+    #
+    class OracleSQLCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13570,6 +18104,79 @@ module Aws::Glue
     class OtherMetadataValueListItem < Struct.new(
       :metadata_value,
       :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that identifies, removes or masks PII data.
+    #
+    # @note When making an API call, you may pass PIIDetection
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #         entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #         output_column_name: "EnclosedInStringProperty",
+    #         sample_fraction: 1.0,
+    #         threshold_fraction: 1.0,
+    #         mask_value: "MaskValue",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The node ID inputs to the transform.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] pii_type
+    #   Indicates the type of PIIDetection transform.
+    #   @return [String]
+    #
+    # @!attribute [rw] entity_types_to_detect
+    #   Indicates the types of entities the PIIDetection transform will
+    #   identify as PII data.
+    #
+    #   PII type entities include: PERSON\_NAME, DATE, USA\_SNN, EMAIL,
+    #   USA\_ITIN, USA\_PASSPORT\_NUMBER, PHONE\_NUMBER, BANK\_ACCOUNT,
+    #   IP\_ADDRESS, MAC\_ADDRESS, USA\_CPT\_CODE, USA\_HCPCS\_CODE,
+    #   USA\_NATIONAL\_DRUG\_CODE, USA\_MEDICARE\_BENEFICIARY\_IDENTIFIER,
+    #   USA\_HEALTH\_INSURANCE\_CLAIM\_NUMBER,CREDIT\_CARD,USA\_NATIONAL\_PROVIDER\_IDENTIFIER,USA\_DEA\_NUMBER,USA\_DRIVING\_LICENSE
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] output_column_name
+    #   Indicates the output column name that will contain any entity type
+    #   detected in that row.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_fraction
+    #   Indicates the fraction of the data to sample when scanning for PII
+    #   entities.
+    #   @return [Float]
+    #
+    # @!attribute [rw] threshold_fraction
+    #   Indicates the fraction of the data that must be met in order for a
+    #   column to be identified as PII data.
+    #   @return [Float]
+    #
+    # @!attribute [rw] mask_value
+    #   Indicates the value that will replace the detected entity.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PIIDetection AWS API Documentation
+    #
+    class PIIDetection < Struct.new(
+      :name,
+      :inputs,
+      :pii_type,
+      :entity_types_to_detect,
+      :output_column_name,
+      :sample_fraction,
+      :threshold_fraction,
+      :mask_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13888,6 +18495,78 @@ module Aws::Glue
       :subnet_id,
       :security_group_id_list,
       :availability_zone)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a PostgresSQL data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass PostgreSQLCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PostgreSQLCatalogSource AWS API Documentation
+    #
+    class PostgreSQLCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses Postgres SQL.
+    #
+    # @note When making an API call, you may pass PostgreSQLCatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PostgreSQLCatalogTarget AWS API Documentation
+    #
+    class PostgreSQLCatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14380,6 +19059,115 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Amazon Redshift data store.
+    #
+    # @note When making an API call, you may pass RedshiftSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #         redshift_tmp_dir: "EnclosedInStringProperty",
+    #         tmp_dir_iam_role: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the Amazon Redshift data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The database table to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_tmp_dir
+    #   The Amazon S3 path where temporary data can be staged when copying
+    #   out of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tmp_dir_iam_role
+    #   The IAM role with permissions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RedshiftSource AWS API Documentation
+    #
+    class RedshiftSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :redshift_tmp_dir,
+      :tmp_dir_iam_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses Amazon Redshift.
+    #
+    # @note When making an API call, you may pass RedshiftTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #         redshift_tmp_dir: "EnclosedInStringProperty",
+    #         tmp_dir_iam_role: "EnclosedInStringProperty",
+    #         upsert_redshift_options: {
+    #           table_location: "EnclosedInStringProperty",
+    #           connection_name: "EnclosedInStringProperty",
+    #           upsert_keys: ["EnclosedInStringProperty"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] redshift_tmp_dir
+    #   The Amazon S3 path where temporary data can be staged when copying
+    #   out of the database.
+    #   @return [String]
+    #
+    # @!attribute [rw] tmp_dir_iam_role
+    #   The IAM role with permissions.
+    #   @return [String]
+    #
+    # @!attribute [rw] upsert_redshift_options
+    #   The set of options to configure an upsert operation when writing to
+    #   a Redshift target.
+    #   @return [Types::UpsertRedshiftTargetOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RedshiftTarget AWS API Documentation
+    #
+    class RedshiftTarget < Struct.new(
+      :name,
+      :inputs,
+      :database,
+      :table,
+      :redshift_tmp_dir,
+      :tmp_dir_iam_role,
+      :upsert_redshift_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RegisterSchemaVersionInput
     #   data as a hash:
     #
@@ -14510,6 +19298,39 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a Relational database data source in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass RelationalCatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to read from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RelationalCatalogSource AWS API Documentation
+    #
+    class RelationalCatalogSource < Struct.new(
+      :name,
+      :database,
+      :table)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass RemoveSchemaVersionMetadataInput
     #   data as a hash:
     #
@@ -14601,6 +19422,45 @@ module Aws::Glue
       :schema_version_id,
       :metadata_key,
       :metadata_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that renames a single data property key.
+    #
+    # @note When making an API call, you may pass RenameField
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         source_path: ["EnclosedInStringProperty"], # required
+    #         target_path: ["EnclosedInStringProperty"], # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_path
+    #   A JSON path to a variable in the data structure for the source data.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] target_path
+    #   A JSON path to a variable in the data structure for the target data.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RenameField AWS API Documentation
+    #
+    class RenameField < Struct.new(
+      :name,
+      :inputs,
+      :source_path,
+      :target_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14791,6 +19651,396 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies an Amazon S3 data store in the Glue Data Catalog.
+    #
+    # @note When making an API call, you may pass S3CatalogSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         table: "EnclosedInStringProperty", # required
+    #         partition_predicate: "EnclosedInStringProperty",
+    #         additional_options: {
+    #           bounded_size: 1,
+    #           bounded_files: 1,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The database to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] table
+    #   The database table to read from.
+    #   @return [String]
+    #
+    # @!attribute [rw] partition_predicate
+    #   Partitions satisfying this predicate are deleted. Files within the
+    #   retention period in these partitions are not deleted. Set to `""` –
+    #   empty by default.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options.
+    #   @return [Types::S3SourceAdditionalOptions]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogSource AWS API Documentation
+    #
+    class S3CatalogSource < Struct.new(
+      :name,
+      :database,
+      :table,
+      :partition_predicate,
+      :additional_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data target that writes to Amazon S3 using the Glue Data
+    # Catalog.
+    #
+    # @note When making an API call, you may pass S3CatalogTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         partition_keys: [
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #         table: "EnclosedInStringProperty", # required
+    #         database: "EnclosedInStringProperty", # required
+    #         schema_change_policy: {
+    #           enable_update_catalog: false,
+    #           update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] table
+    #   The name of the table in the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] database
+    #   The name of the database to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::CatalogSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CatalogTarget AWS API Documentation
+    #
+    class S3CatalogTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :table,
+      :database,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a command-separated value (CSV) data store stored in Amazon
+    # S3.
+    #
+    # @note When making an API call, you may pass S3CsvSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         paths: ["EnclosedInStringProperty"], # required
+    #         compression_type: "gzip", # accepts gzip, bzip2
+    #         exclusions: ["EnclosedInStringProperty"],
+    #         group_size: "EnclosedInStringProperty",
+    #         group_files: "EnclosedInStringProperty",
+    #         recurse: false,
+    #         max_band: 1,
+    #         max_files_in_band: 1,
+    #         additional_options: {
+    #           bounded_size: 1,
+    #           bounded_files: 1,
+    #           enable_sample_path: false,
+    #           sample_path: "EnclosedInStringProperty",
+    #         },
+    #         separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #         escaper: "EnclosedInStringPropertyWithQuote",
+    #         quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #         multiline: false,
+    #         with_header: false,
+    #         write_header: false,
+    #         skip_first: false,
+    #         optimize_performance: false,
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   A list of the Amazon S3 paths to read from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compression_type
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   A string containing a JSON list of Unix-style glob patterns to
+    #   exclude. For example, "\[\\"**.pdf\\"\]" excludes all PDF
+    #   files.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_size
+    #   The target group size in bytes. The default is computed based on the
+    #   input data size and the size of your cluster. When there are fewer
+    #   than 50,000 input files, `"groupFiles"` must be set to
+    #   `"inPartition"` for this to take effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_files
+    #   Grouping files is turned on by default when the input contains more
+    #   than 50,000 files. To turn on grouping with fewer than 50,000 files,
+    #   set this parameter to "inPartition". To disable grouping when
+    #   there are more than 50,000 files, set this parameter to `"none"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurse
+    #   If set to true, recursively reads files in all subdirectories under
+    #   the specified paths.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_band
+    #   This option controls the duration in milliseconds after which the s3
+    #   listing is likely to be consistent. Files with modification
+    #   timestamps falling within the last maxBand milliseconds are tracked
+    #   specially when using JobBookmarks to account for Amazon S3 eventual
+    #   consistency. Most users don't need to set this option. The default
+    #   is 900000 milliseconds, or 15 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_files_in_band
+    #   This option specifies the maximum number of files to save from the
+    #   last maxBand seconds. If this number is exceeded, extra files are
+    #   skipped and only processed in the next job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] separator
+    #   Specifies the delimiter character. The default is a comma: ",",
+    #   but any other character can be specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] escaper
+    #   Specifies a character to use for escaping. This option is used only
+    #   when reading CSV files. The default value is `none`. If enabled, the
+    #   character which immediately follows is used as-is, except for a
+    #   small set of well-known escapes (`\n`, `\r`, `\t`, and `\0`).
+    #   @return [String]
+    #
+    # @!attribute [rw] quote_char
+    #   Specifies the character to use for quoting. The default is a double
+    #   quote: `'"'`. Set this to `-1` to turn off quoting entirely.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiline
+    #   A Boolean value that specifies whether a single record can span
+    #   multiple lines. This can occur when a field contains a quoted
+    #   new-line character. You must set this option to True if any record
+    #   spans multiple lines. The default value is `False`, which allows for
+    #   more aggressive file-splitting during parsing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] with_header
+    #   A Boolean value that specifies whether to treat the first line as a
+    #   header. The default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] write_header
+    #   A Boolean value that specifies whether to write the header to
+    #   output. The default value is `True`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] skip_first
+    #   A Boolean value that specifies whether to skip the first data line.
+    #   The default value is `False`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] optimize_performance
+    #   A Boolean value that specifies whether to use the advanced SIMD CSV
+    #   reader along with Apache Arrow based columnar memory formats. Only
+    #   available in Glue version 3.0.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 CSV source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3CsvSource AWS API Documentation
+    #
+    class S3CsvSource < Struct.new(
+      :name,
+      :paths,
+      :compression_type,
+      :exclusions,
+      :group_size,
+      :group_files,
+      :recurse,
+      :max_band,
+      :max_files_in_band,
+      :additional_options,
+      :separator,
+      :escaper,
+      :quote_char,
+      :multiline,
+      :with_header,
+      :write_header,
+      :skip_first,
+      :optimize_performance,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies additional connection options for the Amazon S3 data store.
+    #
+    # @note When making an API call, you may pass S3DirectSourceAdditionalOptions
+    #   data as a hash:
+    #
+    #       {
+    #         bounded_size: 1,
+    #         bounded_files: 1,
+    #         enable_sample_path: false,
+    #         sample_path: "EnclosedInStringProperty",
+    #       }
+    #
+    # @!attribute [rw] bounded_size
+    #   Sets the upper limit for the target size of the dataset in bytes
+    #   that will be processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bounded_files
+    #   Sets the upper limit for the target number of files that will be
+    #   processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] enable_sample_path
+    #   Sets option to enable a sample path.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] sample_path
+    #   If enabled, specifies the sample path.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DirectSourceAdditionalOptions AWS API Documentation
+    #
+    class S3DirectSourceAdditionalOptions < Struct.new(
+      :bounded_size,
+      :bounded_files,
+      :enable_sample_path,
+      :sample_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data target that writes to Amazon S3.
+    #
+    # @note When making an API call, you may pass S3DirectTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         partition_keys: [
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #         path: "EnclosedInStringProperty", # required
+    #         compression: "EnclosedInStringProperty",
+    #         format: "json", # required, accepts json, csv, avro, orc, parquet
+    #         schema_change_policy: {
+    #           enable_update_catalog: false,
+    #           update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           table: "EnclosedInStringProperty",
+    #           database: "EnclosedInStringProperty",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   A single Amazon S3 path to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   Specifies the data output format for the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3DirectTarget AWS API Documentation
+    #
+    class S3DirectTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :compression,
+      :format,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Amazon Simple Storage Service (Amazon S3) data should be
     # encrypted.
     #
@@ -14816,6 +20066,338 @@ module Aws::Glue
     class S3Encryption < Struct.new(
       :s3_encryption_mode,
       :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a data target that writes to Amazon S3 in Apache Parquet
+    # columnar storage.
+    #
+    # @note When making an API call, you may pass S3GlueParquetTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         partition_keys: [
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #         path: "EnclosedInStringProperty", # required
+    #         compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #         schema_change_policy: {
+    #           enable_update_catalog: false,
+    #           update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #           table: "EnclosedInStringProperty",
+    #           database: "EnclosedInStringProperty",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] partition_keys
+    #   Specifies native partitioning using a sequence of keys.
+    #   @return [Array<Array<String>>]
+    #
+    # @!attribute [rw] path
+    #   A single Amazon S3 path to write to.
+    #   @return [String]
+    #
+    # @!attribute [rw] compression
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] schema_change_policy
+    #   A policy that specifies update behavior for the crawler.
+    #   @return [Types::DirectSchemaChangePolicy]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3GlueParquetTarget AWS API Documentation
+    #
+    class S3GlueParquetTarget < Struct.new(
+      :name,
+      :inputs,
+      :partition_keys,
+      :path,
+      :compression,
+      :schema_change_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a JSON data store stored in Amazon S3.
+    #
+    # @note When making an API call, you may pass S3JsonSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         paths: ["EnclosedInStringProperty"], # required
+    #         compression_type: "gzip", # accepts gzip, bzip2
+    #         exclusions: ["EnclosedInStringProperty"],
+    #         group_size: "EnclosedInStringProperty",
+    #         group_files: "EnclosedInStringProperty",
+    #         recurse: false,
+    #         max_band: 1,
+    #         max_files_in_band: 1,
+    #         additional_options: {
+    #           bounded_size: 1,
+    #           bounded_files: 1,
+    #           enable_sample_path: false,
+    #           sample_path: "EnclosedInStringProperty",
+    #         },
+    #         json_path: "EnclosedInStringProperty",
+    #         multiline: false,
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   A list of the Amazon S3 paths to read from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compression_type
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   A string containing a JSON list of Unix-style glob patterns to
+    #   exclude. For example, "\[\\"**.pdf\\"\]" excludes all PDF
+    #   files.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_size
+    #   The target group size in bytes. The default is computed based on the
+    #   input data size and the size of your cluster. When there are fewer
+    #   than 50,000 input files, `"groupFiles"` must be set to
+    #   `"inPartition"` for this to take effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_files
+    #   Grouping files is turned on by default when the input contains more
+    #   than 50,000 files. To turn on grouping with fewer than 50,000 files,
+    #   set this parameter to "inPartition". To disable grouping when
+    #   there are more than 50,000 files, set this parameter to `"none"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurse
+    #   If set to true, recursively reads files in all subdirectories under
+    #   the specified paths.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_band
+    #   This option controls the duration in milliseconds after which the s3
+    #   listing is likely to be consistent. Files with modification
+    #   timestamps falling within the last maxBand milliseconds are tracked
+    #   specially when using JobBookmarks to account for Amazon S3 eventual
+    #   consistency. Most users don't need to set this option. The default
+    #   is 900000 milliseconds, or 15 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_files_in_band
+    #   This option specifies the maximum number of files to save from the
+    #   last maxBand seconds. If this number is exceeded, extra files are
+    #   skipped and only processed in the next job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] json_path
+    #   A JsonPath string defining the JSON data.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiline
+    #   A Boolean value that specifies whether a single record can span
+    #   multiple lines. This can occur when a field contains a quoted
+    #   new-line character. You must set this option to True if any record
+    #   spans multiple lines. The default value is `False`, which allows for
+    #   more aggressive file-splitting during parsing.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 JSON source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3JsonSource AWS API Documentation
+    #
+    class S3JsonSource < Struct.new(
+      :name,
+      :paths,
+      :compression_type,
+      :exclusions,
+      :group_size,
+      :group_files,
+      :recurse,
+      :max_band,
+      :max_files_in_band,
+      :additional_options,
+      :json_path,
+      :multiline,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies an Apache Parquet data store stored in Amazon S3.
+    #
+    # @note When making an API call, you may pass S3ParquetSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         paths: ["EnclosedInStringProperty"], # required
+    #         compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #         exclusions: ["EnclosedInStringProperty"],
+    #         group_size: "EnclosedInStringProperty",
+    #         group_files: "EnclosedInStringProperty",
+    #         recurse: false,
+    #         max_band: 1,
+    #         max_files_in_band: 1,
+    #         additional_options: {
+    #           bounded_size: 1,
+    #           bounded_files: 1,
+    #           enable_sample_path: false,
+    #           sample_path: "EnclosedInStringProperty",
+    #         },
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   A list of the Amazon S3 paths to read from.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] compression_type
+    #   Specifies how the data is compressed. This is generally not
+    #   necessary if the data has a standard file extension. Possible values
+    #   are `"gzip"` and `"bzip"`).
+    #   @return [String]
+    #
+    # @!attribute [rw] exclusions
+    #   A string containing a JSON list of Unix-style glob patterns to
+    #   exclude. For example, "\[\\"**.pdf\\"\]" excludes all PDF
+    #   files.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] group_size
+    #   The target group size in bytes. The default is computed based on the
+    #   input data size and the size of your cluster. When there are fewer
+    #   than 50,000 input files, `"groupFiles"` must be set to
+    #   `"inPartition"` for this to take effect.
+    #   @return [String]
+    #
+    # @!attribute [rw] group_files
+    #   Grouping files is turned on by default when the input contains more
+    #   than 50,000 files. To turn on grouping with fewer than 50,000 files,
+    #   set this parameter to "inPartition". To disable grouping when
+    #   there are more than 50,000 files, set this parameter to `"none"`.
+    #   @return [String]
+    #
+    # @!attribute [rw] recurse
+    #   If set to true, recursively reads files in all subdirectories under
+    #   the specified paths.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_band
+    #   This option controls the duration in milliseconds after which the s3
+    #   listing is likely to be consistent. Files with modification
+    #   timestamps falling within the last maxBand milliseconds are tracked
+    #   specially when using JobBookmarks to account for Amazon S3 eventual
+    #   consistency. Most users don't need to set this option. The default
+    #   is 900000 milliseconds, or 15 minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_files_in_band
+    #   This option specifies the maximum number of files to save from the
+    #   last maxBand seconds. If this number is exceeded, extra files are
+    #   skipped and only processed in the next job run.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] additional_options
+    #   Specifies additional connection options.
+    #   @return [Types::S3DirectSourceAdditionalOptions]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the S3 Parquet source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3ParquetSource AWS API Documentation
+    #
+    class S3ParquetSource < Struct.new(
+      :name,
+      :paths,
+      :compression_type,
+      :exclusions,
+      :group_size,
+      :group_files,
+      :recurse,
+      :max_band,
+      :max_files_in_band,
+      :additional_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies additional connection options for the Amazon S3 data store.
+    #
+    # @note When making an API call, you may pass S3SourceAdditionalOptions
+    #   data as a hash:
+    #
+    #       {
+    #         bounded_size: 1,
+    #         bounded_files: 1,
+    #       }
+    #
+    # @!attribute [rw] bounded_size
+    #   Sets the upper limit for the target size of the dataset in bytes
+    #   that will be processed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bounded_files
+    #   Sets the upper limit for the target number of files that will be
+    #   processed.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/S3SourceAdditionalOptions AWS API Documentation
+    #
+    class S3SourceAdditionalOptions < Struct.new(
+      :bounded_size,
+      :bounded_files)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15367,6 +20949,77 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a transform that chooses the data property keys that you
+    # want to keep.
+    #
+    # @note When making an API call, you may pass SelectFields
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         paths: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] paths
+    #   A JSON path to a variable in the data structure.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SelectFields AWS API Documentation
+    #
+    class SelectFields < Struct.new(
+      :name,
+      :inputs,
+      :paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that chooses one `DynamicFrame` from a
+    # collection of `DynamicFrames`. The output is the selected
+    # `DynamicFrame`
+    #
+    # @note When making an API call, you may pass SelectFromCollection
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         index: 1, # required
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] index
+    #   The index for the DynamicFrame to be selected.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SelectFromCollection AWS API Documentation
+    #
+    class SelectFromCollection < Struct.new(
+      :name,
+      :inputs,
+      :index)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a serialization/deserialization program (SerDe) that
     # serves as an extractor and loader.
     #
@@ -15574,6 +21227,324 @@ module Aws::Glue
     class SortCriterion < Struct.new(
       :field_name,
       :sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a connector to an Apache Spark data source.
+    #
+    # @note When making an API call, you may pass SparkConnectorSource
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         connection_name: "EnclosedInStringProperty", # required
+    #         connector_name: "EnclosedInStringProperty", # required
+    #         connection_type: "EnclosedInStringProperty", # required
+    #         additional_options: {
+    #           "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #         },
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data source.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection that is associated with the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of a connector that assists with accessing the data store
+    #   in Glue Studio.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection, such as marketplace.spark or custom.spark,
+    #   designating a connection to an Apache Spark data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies data schema for the custom spark source.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SparkConnectorSource AWS API Documentation
+    #
+    class SparkConnectorSource < Struct.new(
+      :name,
+      :connection_name,
+      :connector_name,
+      :connection_type,
+      :additional_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target that uses an Apache Spark connector.
+    #
+    # @note When making an API call, you may pass SparkConnectorTarget
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         connection_name: "EnclosedInStringProperty", # required
+    #         connector_name: "EnclosedInStringProperty", # required
+    #         connection_type: "EnclosedInStringProperty", # required
+    #         additional_options: {
+    #           "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #         },
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the data target.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The nodes that are inputs to the data target.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of a connection for an Apache Spark connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_name
+    #   The name of an Apache Spark connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   The type of connection, such as marketplace.spark or custom.spark,
+    #   designating a connection to an Apache Spark data store.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_options
+    #   Additional connection options for the connector.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the custom spark target.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SparkConnectorTarget AWS API Documentation
+    #
+    class SparkConnectorTarget < Struct.new(
+      :name,
+      :inputs,
+      :connection_name,
+      :connector_name,
+      :connection_type,
+      :additional_options,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform where you enter a SQL query using Spark SQL
+    # syntax to transform the data. The output is a single `DynamicFrame`.
+    #
+    # @note When making an API call, you may pass SparkSQL
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         sql_query: "SqlQuery", # required
+    #         sql_aliases: [ # required
+    #           {
+    #             from: "NodeId", # required
+    #             alias: "EnclosedInStringPropertyWithQuote", # required
+    #           },
+    #         ],
+    #         output_schemas: [
+    #           {
+    #             columns: [
+    #               {
+    #                 name: "GlueStudioColumnNameString", # required
+    #                 type: "ColumnTypeString",
+    #               },
+    #             ],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names. You can associate a
+    #   table name with each input node to use in the SQL query. The name
+    #   you choose must meet the Spark SQL naming restrictions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] sql_query
+    #   A SQL query that must use Spark SQL syntax and return a single data
+    #   set.
+    #   @return [String]
+    #
+    # @!attribute [rw] sql_aliases
+    #   A list of aliases. An alias allows you to specify what name to use
+    #   in the SQL for a given input. For example, you have a datasource
+    #   named "MyDataSource". If you specify `From` as MyDataSource, and
+    #   `Alias` as SqlName, then in your SQL you can do:
+    #
+    #   `select * from SqlName`
+    #
+    #   and that gets data from MyDataSource.
+    #   @return [Array<Types::SqlAlias>]
+    #
+    # @!attribute [rw] output_schemas
+    #   Specifies the data schema for the SparkSQL transform.
+    #   @return [Array<Types::GlueSchema>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SparkSQL AWS API Documentation
+    #
+    class SparkSQL < Struct.new(
+      :name,
+      :inputs,
+      :sql_query,
+      :sql_aliases,
+      :output_schemas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that writes samples of the data to an Amazon S3
+    # bucket.
+    #
+    # @note When making an API call, you may pass Spigot
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         path: "EnclosedInStringProperty", # required
+    #         topk: 1,
+    #         prob: 1.0,
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] path
+    #   A path in Amazon S3 where the transform will write a subset of
+    #   records from the dataset to a JSON file in an Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] topk
+    #   Specifies a number of records to write starting from the beginning
+    #   of the dataset.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] prob
+    #   The probability (a decimal value with a maximum value of 1) of
+    #   picking any given record. A value of 1 indicates that each row read
+    #   from the dataset should be included in the sample output.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Spigot AWS API Documentation
+    #
+    class Spigot < Struct.new(
+      :name,
+      :inputs,
+      :path,
+      :topk,
+      :prob)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a transform that splits data property keys into two
+    # `DynamicFrames`. The output is a collection of `DynamicFrames`\: one
+    # with selected data property keys, and one with the remaining data
+    # property keys.
+    #
+    # @note When making an API call, you may pass SplitFields
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         paths: [ # required
+    #           ["EnclosedInStringProperty"],
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The data inputs identified by their node names.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] paths
+    #   A JSON path to a variable in the data structure.
+    #   @return [Array<Array<String>>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SplitFields AWS API Documentation
+    #
+    class SplitFields < Struct.new(
+      :name,
+      :inputs,
+      :paths)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single entry in the list of values for `SqlAliases`.
+    #
+    # @note When making an API call, you may pass SqlAlias
+    #   data as a hash:
+    #
+    #       {
+    #         from: "NodeId", # required
+    #         alias: "EnclosedInStringPropertyWithQuote", # required
+    #       }
+    #
+    # @!attribute [rw] from
+    #   A table, or a column in a table.
+    #   @return [String]
+    #
+    # @!attribute [rw] alias
+    #   A temporary name given to a table, or a column in a table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/SqlAlias AWS API Documentation
+    #
+    class SqlAlias < Struct.new(
+      :from,
+      :alias)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16447,6 +22418,34 @@ module Aws::Glue
       :skewed_info,
       :stored_as_sub_directories,
       :schema_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies options related to data preview for viewing a sample of your
+    # data.
+    #
+    # @note When making an API call, you may pass StreamingDataPreviewOptions
+    #   data as a hash:
+    #
+    #       {
+    #         polling_time: 1,
+    #         record_polling_limit: 1,
+    #       }
+    #
+    # @!attribute [rw] polling_time
+    #   The polling time in milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] record_polling_limit
+    #   The limit to the number of records polled.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StreamingDataPreviewOptions AWS API Documentation
+    #
+    class StreamingDataPreviewOptions < Struct.new(
+      :polling_time,
+      :record_polling_limit)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17471,6 +23470,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # Specifies a transform that combines the rows from two or more datasets
+    # into a single result.
+    #
+    # @note When making an API call, you may pass Union
+    #   data as a hash:
+    #
+    #       {
+    #         name: "NodeName", # required
+    #         inputs: ["NodeId"], # required
+    #         union_type: "ALL", # required, accepts ALL, DISTINCT
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the transform node.
+    #   @return [String]
+    #
+    # @!attribute [rw] inputs
+    #   The node ID inputs to the transform.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] union_type
+    #   Indicates the type of Union transform.
+    #
+    #   Specify `ALL` to join all rows from data sources to the resulting
+    #   DynamicFrame. The resulting union does not remove duplicate rows.
+    #
+    #   Specify `DISTINCT` to remove duplicate rows in the resulting
+    #   DynamicFrame.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Union AWS API Documentation
+    #
+    class Union < Struct.new(
+      :name,
+      :inputs,
+      :union_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass UntagResourceRequest
     #   data as a hash:
     #
@@ -18365,6 +24404,674 @@ module Aws::Glue
     #             notify_delay_after: 1,
     #           },
     #           glue_version: "GlueVersionString",
+    #           code_gen_configuration_nodes: {
+    #             "NodeId" => {
+    #               athena_connector_source: {
+    #                 name: "NodeName", # required
+    #                 connection_name: "EnclosedInStringProperty", # required
+    #                 connector_name: "EnclosedInStringProperty", # required
+    #                 connection_type: "EnclosedInStringProperty", # required
+    #                 connection_table: "EnclosedInStringPropertyWithQuote",
+    #                 schema_name: "EnclosedInStringProperty", # required
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               jdbc_connector_source: {
+    #                 name: "NodeName", # required
+    #                 connection_name: "EnclosedInStringProperty", # required
+    #                 connector_name: "EnclosedInStringProperty", # required
+    #                 connection_type: "EnclosedInStringProperty", # required
+    #                 additional_options: {
+    #                   filter_predicate: "EnclosedInStringProperty",
+    #                   partition_column: "EnclosedInStringProperty",
+    #                   lower_bound: 1,
+    #                   upper_bound: 1,
+    #                   num_partitions: 1,
+    #                   job_bookmark_keys: ["EnclosedInStringProperty"],
+    #                   job_bookmark_keys_sort_order: "EnclosedInStringProperty",
+    #                   data_type_mapping: {
+    #                     "ARRAY" => "DATE", # accepts DATE, STRING, TIMESTAMP, INT, FLOAT, LONG, BIGDECIMAL, BYTE, SHORT, DOUBLE
+    #                   },
+    #                 },
+    #                 connection_table: "EnclosedInStringPropertyWithQuote",
+    #                 query: "SqlQuery",
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               spark_connector_source: {
+    #                 name: "NodeName", # required
+    #                 connection_name: "EnclosedInStringProperty", # required
+    #                 connector_name: "EnclosedInStringProperty", # required
+    #                 connection_type: "EnclosedInStringProperty", # required
+    #                 additional_options: {
+    #                   "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #                 },
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               redshift_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #                 redshift_tmp_dir: "EnclosedInStringProperty",
+    #                 tmp_dir_iam_role: "EnclosedInStringProperty",
+    #               },
+    #               s3_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #                 partition_predicate: "EnclosedInStringProperty",
+    #                 additional_options: {
+    #                   bounded_size: 1,
+    #                   bounded_files: 1,
+    #                 },
+    #               },
+    #               s3_csv_source: {
+    #                 name: "NodeName", # required
+    #                 paths: ["EnclosedInStringProperty"], # required
+    #                 compression_type: "gzip", # accepts gzip, bzip2
+    #                 exclusions: ["EnclosedInStringProperty"],
+    #                 group_size: "EnclosedInStringProperty",
+    #                 group_files: "EnclosedInStringProperty",
+    #                 recurse: false,
+    #                 max_band: 1,
+    #                 max_files_in_band: 1,
+    #                 additional_options: {
+    #                   bounded_size: 1,
+    #                   bounded_files: 1,
+    #                   enable_sample_path: false,
+    #                   sample_path: "EnclosedInStringProperty",
+    #                 },
+    #                 separator: "comma", # required, accepts comma, ctrla, pipe, semicolon, tab
+    #                 escaper: "EnclosedInStringPropertyWithQuote",
+    #                 quote_char: "quote", # required, accepts quote, quillemet, single_quote, disabled
+    #                 multiline: false,
+    #                 with_header: false,
+    #                 write_header: false,
+    #                 skip_first: false,
+    #                 optimize_performance: false,
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               s3_json_source: {
+    #                 name: "NodeName", # required
+    #                 paths: ["EnclosedInStringProperty"], # required
+    #                 compression_type: "gzip", # accepts gzip, bzip2
+    #                 exclusions: ["EnclosedInStringProperty"],
+    #                 group_size: "EnclosedInStringProperty",
+    #                 group_files: "EnclosedInStringProperty",
+    #                 recurse: false,
+    #                 max_band: 1,
+    #                 max_files_in_band: 1,
+    #                 additional_options: {
+    #                   bounded_size: 1,
+    #                   bounded_files: 1,
+    #                   enable_sample_path: false,
+    #                   sample_path: "EnclosedInStringProperty",
+    #                 },
+    #                 json_path: "EnclosedInStringProperty",
+    #                 multiline: false,
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               s3_parquet_source: {
+    #                 name: "NodeName", # required
+    #                 paths: ["EnclosedInStringProperty"], # required
+    #                 compression_type: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #                 exclusions: ["EnclosedInStringProperty"],
+    #                 group_size: "EnclosedInStringProperty",
+    #                 group_files: "EnclosedInStringProperty",
+    #                 recurse: false,
+    #                 max_band: 1,
+    #                 max_files_in_band: 1,
+    #                 additional_options: {
+    #                   bounded_size: 1,
+    #                   bounded_files: 1,
+    #                   enable_sample_path: false,
+    #                   sample_path: "EnclosedInStringProperty",
+    #                 },
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               relational_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               dynamo_db_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               jdbc_connector_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 connection_name: "EnclosedInStringProperty", # required
+    #                 connection_table: "EnclosedInStringPropertyWithQuote", # required
+    #                 connector_name: "EnclosedInStringProperty", # required
+    #                 connection_type: "EnclosedInStringProperty", # required
+    #                 additional_options: {
+    #                   "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #                 },
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               spark_connector_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 connection_name: "EnclosedInStringProperty", # required
+    #                 connector_name: "EnclosedInStringProperty", # required
+    #                 connection_type: "EnclosedInStringProperty", # required
+    #                 additional_options: {
+    #                   "EnclosedInStringProperty" => "EnclosedInStringProperty",
+    #                 },
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               redshift_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #                 redshift_tmp_dir: "EnclosedInStringProperty",
+    #                 tmp_dir_iam_role: "EnclosedInStringProperty",
+    #                 upsert_redshift_options: {
+    #                   table_location: "EnclosedInStringProperty",
+    #                   connection_name: "EnclosedInStringProperty",
+    #                   upsert_keys: ["EnclosedInStringProperty"],
+    #                 },
+    #               },
+    #               s3_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 partition_keys: [
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #                 table: "EnclosedInStringProperty", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 schema_change_policy: {
+    #                   enable_update_catalog: false,
+    #                   update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 },
+    #               },
+    #               s3_glue_parquet_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 partition_keys: [
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #                 path: "EnclosedInStringProperty", # required
+    #                 compression: "snappy", # accepts snappy, lzo, gzip, uncompressed, none
+    #                 schema_change_policy: {
+    #                   enable_update_catalog: false,
+    #                   update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                   table: "EnclosedInStringProperty",
+    #                   database: "EnclosedInStringProperty",
+    #                 },
+    #               },
+    #               s3_direct_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 partition_keys: [
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #                 path: "EnclosedInStringProperty", # required
+    #                 compression: "EnclosedInStringProperty",
+    #                 format: "json", # required, accepts json, csv, avro, orc, parquet
+    #                 schema_change_policy: {
+    #                   enable_update_catalog: false,
+    #                   update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                   table: "EnclosedInStringProperty",
+    #                   database: "EnclosedInStringProperty",
+    #                 },
+    #               },
+    #               apply_mapping: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 mapping: [ # required
+    #                   {
+    #                     to_key: "EnclosedInStringProperty",
+    #                     from_path: ["EnclosedInStringProperty"],
+    #                     from_type: "EnclosedInStringProperty",
+    #                     to_type: "EnclosedInStringProperty",
+    #                     dropped: false,
+    #                     children: {
+    #                       # recursive Mappings
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               select_fields: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 paths: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #               },
+    #               drop_fields: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 paths: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #               },
+    #               rename_field: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 source_path: ["EnclosedInStringProperty"], # required
+    #                 target_path: ["EnclosedInStringProperty"], # required
+    #               },
+    #               spigot: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 path: "EnclosedInStringProperty", # required
+    #                 topk: 1,
+    #                 prob: 1.0,
+    #               },
+    #               join: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 join_type: "equijoin", # required, accepts equijoin, left, right, outer, leftsemi, leftanti
+    #                 columns: [ # required
+    #                   {
+    #                     from: "EnclosedInStringProperty", # required
+    #                     keys: [ # required
+    #                       ["EnclosedInStringProperty"],
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               split_fields: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 paths: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #               },
+    #               select_from_collection: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 index: 1, # required
+    #               },
+    #               fill_missing_values: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 imputed_path: "EnclosedInStringProperty", # required
+    #                 filled_path: "EnclosedInStringProperty",
+    #               },
+    #               filter: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 logical_operator: "AND", # required, accepts AND, OR
+    #                 filters: [ # required
+    #                   {
+    #                     operation: "EQ", # required, accepts EQ, LT, GT, LTE, GTE, REGEX, ISNULL
+    #                     negated: false,
+    #                     values: [ # required
+    #                       {
+    #                         type: "COLUMNEXTRACTED", # required, accepts COLUMNEXTRACTED, CONSTANT
+    #                         value: ["EnclosedInStringProperty"], # required
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               custom_code: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 code: "ExtendedString", # required
+    #                 class_name: "EnclosedInStringProperty", # required
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               spark_sql: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 sql_query: "SqlQuery", # required
+    #                 sql_aliases: [ # required
+    #                   {
+    #                     from: "NodeId", # required
+    #                     alias: "EnclosedInStringPropertyWithQuote", # required
+    #                   },
+    #                 ],
+    #                 output_schemas: [
+    #                   {
+    #                     columns: [
+    #                       {
+    #                         name: "GlueStudioColumnNameString", # required
+    #                         type: "ColumnTypeString",
+    #                       },
+    #                     ],
+    #                   },
+    #                 ],
+    #               },
+    #               direct_kinesis_source: {
+    #                 name: "NodeName", # required
+    #                 window_size: 1,
+    #                 detect_schema: false,
+    #                 streaming_options: {
+    #                   endpoint_url: "EnclosedInStringProperty",
+    #                   stream_name: "EnclosedInStringProperty",
+    #                   classification: "EnclosedInStringProperty",
+    #                   delimiter: "EnclosedInStringProperty",
+    #                   starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                   max_fetch_time_in_ms: 1,
+    #                   max_fetch_records_per_shard: 1,
+    #                   max_record_per_read: 1,
+    #                   add_idle_time_between_reads: false,
+    #                   idle_time_between_reads_in_ms: 1,
+    #                   describe_shard_interval: 1,
+    #                   num_retries: 1,
+    #                   retry_interval_ms: 1,
+    #                   max_retry_interval_ms: 1,
+    #                   avoid_empty_batches: false,
+    #                   stream_arn: "EnclosedInStringProperty",
+    #                   role_arn: "EnclosedInStringProperty",
+    #                   role_session_name: "EnclosedInStringProperty",
+    #                 },
+    #                 data_preview_options: {
+    #                   polling_time: 1,
+    #                   record_polling_limit: 1,
+    #                 },
+    #               },
+    #               direct_kafka_source: {
+    #                 name: "NodeName", # required
+    #                 streaming_options: {
+    #                   bootstrap_servers: "EnclosedInStringProperty",
+    #                   security_protocol: "EnclosedInStringProperty",
+    #                   connection_name: "EnclosedInStringProperty",
+    #                   topic_name: "EnclosedInStringProperty",
+    #                   assign: "EnclosedInStringProperty",
+    #                   subscribe_pattern: "EnclosedInStringProperty",
+    #                   classification: "EnclosedInStringProperty",
+    #                   delimiter: "EnclosedInStringProperty",
+    #                   starting_offsets: "EnclosedInStringProperty",
+    #                   ending_offsets: "EnclosedInStringProperty",
+    #                   poll_timeout_ms: 1,
+    #                   num_retries: 1,
+    #                   retry_interval_ms: 1,
+    #                   max_offsets_per_trigger: 1,
+    #                   min_partitions: 1,
+    #                 },
+    #                 window_size: 1,
+    #                 detect_schema: false,
+    #                 data_preview_options: {
+    #                   polling_time: 1,
+    #                   record_polling_limit: 1,
+    #                 },
+    #               },
+    #               catalog_kinesis_source: {
+    #                 name: "NodeName", # required
+    #                 window_size: 1,
+    #                 detect_schema: false,
+    #                 table: "EnclosedInStringProperty", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 streaming_options: {
+    #                   endpoint_url: "EnclosedInStringProperty",
+    #                   stream_name: "EnclosedInStringProperty",
+    #                   classification: "EnclosedInStringProperty",
+    #                   delimiter: "EnclosedInStringProperty",
+    #                   starting_position: "latest", # accepts latest, trim_horizon, earliest
+    #                   max_fetch_time_in_ms: 1,
+    #                   max_fetch_records_per_shard: 1,
+    #                   max_record_per_read: 1,
+    #                   add_idle_time_between_reads: false,
+    #                   idle_time_between_reads_in_ms: 1,
+    #                   describe_shard_interval: 1,
+    #                   num_retries: 1,
+    #                   retry_interval_ms: 1,
+    #                   max_retry_interval_ms: 1,
+    #                   avoid_empty_batches: false,
+    #                   stream_arn: "EnclosedInStringProperty",
+    #                   role_arn: "EnclosedInStringProperty",
+    #                   role_session_name: "EnclosedInStringProperty",
+    #                 },
+    #                 data_preview_options: {
+    #                   polling_time: 1,
+    #                   record_polling_limit: 1,
+    #                 },
+    #               },
+    #               catalog_kafka_source: {
+    #                 name: "NodeName", # required
+    #                 window_size: 1,
+    #                 detect_schema: false,
+    #                 table: "EnclosedInStringProperty", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 streaming_options: {
+    #                   bootstrap_servers: "EnclosedInStringProperty",
+    #                   security_protocol: "EnclosedInStringProperty",
+    #                   connection_name: "EnclosedInStringProperty",
+    #                   topic_name: "EnclosedInStringProperty",
+    #                   assign: "EnclosedInStringProperty",
+    #                   subscribe_pattern: "EnclosedInStringProperty",
+    #                   classification: "EnclosedInStringProperty",
+    #                   delimiter: "EnclosedInStringProperty",
+    #                   starting_offsets: "EnclosedInStringProperty",
+    #                   ending_offsets: "EnclosedInStringProperty",
+    #                   poll_timeout_ms: 1,
+    #                   num_retries: 1,
+    #                   retry_interval_ms: 1,
+    #                   max_offsets_per_trigger: 1,
+    #                   min_partitions: 1,
+    #                 },
+    #                 data_preview_options: {
+    #                   polling_time: 1,
+    #                   record_polling_limit: 1,
+    #                 },
+    #               },
+    #               drop_null_fields: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 null_check_box_list: {
+    #                   is_empty: false,
+    #                   is_null_string: false,
+    #                   is_neg_one: false,
+    #                 },
+    #                 null_text_list: [
+    #                   {
+    #                     value: "EnclosedInStringProperty", # required
+    #                     datatype: { # required
+    #                       id: "GenericLimitedString", # required
+    #                       label: "GenericLimitedString", # required
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #               merge: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 source: "NodeId", # required
+    #                 primary_keys: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #               },
+    #               union: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 union_type: "ALL", # required, accepts ALL, DISTINCT
+    #               },
+    #               pii_detection: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 pii_type: "RowAudit", # required, accepts RowAudit, RowMasking, ColumnAudit, ColumnMasking
+    #                 entity_types_to_detect: ["EnclosedInStringProperty"], # required
+    #                 output_column_name: "EnclosedInStringProperty",
+    #                 sample_fraction: 1.0,
+    #                 threshold_fraction: 1.0,
+    #                 mask_value: "MaskValue",
+    #               },
+    #               aggregate: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 groups: [ # required
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #                 aggs: [ # required
+    #                   {
+    #                     column: ["EnclosedInStringProperty"], # required
+    #                     agg_func: "avg", # required, accepts avg, countDistinct, count, first, last, kurtosis, max, min, skewness, stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop
+    #                   },
+    #                 ],
+    #               },
+    #               drop_duplicates: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 columns: [
+    #                   ["GenericLimitedString"],
+    #                 ],
+    #               },
+    #               governed_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 partition_keys: [
+    #                   ["EnclosedInStringProperty"],
+    #                 ],
+    #                 table: "EnclosedInStringProperty", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 schema_change_policy: {
+    #                   enable_update_catalog: false,
+    #                   update_behavior: "UPDATE_IN_DATABASE", # accepts UPDATE_IN_DATABASE, LOG
+    #                 },
+    #               },
+    #               governed_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #                 partition_predicate: "EnclosedInStringProperty",
+    #                 additional_options: {
+    #                   bounded_size: 1,
+    #                   bounded_files: 1,
+    #                 },
+    #               },
+    #               microsoft_sql_server_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               my_sql_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               oracle_sql_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               postgre_sql_catalog_source: {
+    #                 name: "NodeName", # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               microsoft_sql_server_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               my_sql_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               oracle_sql_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #               postgre_sql_catalog_target: {
+    #                 name: "NodeName", # required
+    #                 inputs: ["NodeId"], # required
+    #                 database: "EnclosedInStringProperty", # required
+    #                 table: "EnclosedInStringProperty", # required
+    #               },
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -19155,6 +25862,40 @@ module Aws::Glue
       :name,
       :classification,
       :row_tag)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The options to configure an upsert operation when writing to a
+    # Redshift target .
+    #
+    # @note When making an API call, you may pass UpsertRedshiftTargetOptions
+    #   data as a hash:
+    #
+    #       {
+    #         table_location: "EnclosedInStringProperty",
+    #         connection_name: "EnclosedInStringProperty",
+    #         upsert_keys: ["EnclosedInStringProperty"],
+    #       }
+    #
+    # @!attribute [rw] table_location
+    #   The physical location of the Redshift table.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_name
+    #   The name of the connection to use to write to Redshift.
+    #   @return [String]
+    #
+    # @!attribute [rw] upsert_keys
+    #   The keys used to determine whether to perform an update or insert.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpsertRedshiftTargetOptions AWS API Documentation
+    #
+    class UpsertRedshiftTargetOptions < Struct.new(
+      :table_location,
+      :connection_name,
+      :upsert_keys)
       SENSITIVE = []
       include Aws::Structure
     end

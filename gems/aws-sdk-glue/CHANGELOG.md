@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.112.0 (2022-05-17)
+------------------
+
+* Feature - This release adds a new optional parameter called codeGenNodeConfiguration to CRUD job APIs that allows users to manage visual jobs via APIs. The updated CreateJob and UpdateJob will create jobs that can be viewed in Glue Studio as a visual graph. GetJob can be used to get codeGenNodeConfiguration.
+
 1.111.0 (2022-04-26)
 ------------------
 
