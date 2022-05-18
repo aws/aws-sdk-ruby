@@ -165,6 +165,7 @@ module Aws::Transfer
     ServiceMetadata = Shapes::StructureShape.new(name: 'ServiceMetadata')
     ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SessionId = Shapes::StringShape.new(name: 'SessionId')
+    SetStatOption = Shapes::StringShape.new(name: 'SetStatOption')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SshPublicKey = Shapes::StructureShape.new(name: 'SshPublicKey')
@@ -612,6 +613,7 @@ module Aws::Transfer
 
     ProtocolDetails.add_member(:passive_ip, Shapes::ShapeRef.new(shape: PassiveIp, location_name: "PassiveIp"))
     ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
+    ProtocolDetails.add_member(:set_stat_option, Shapes::ShapeRef.new(shape: SetStatOption, location_name: "SetStatOption"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
 
     Protocols.member = Shapes::ShapeRef.new(shape: Protocol)

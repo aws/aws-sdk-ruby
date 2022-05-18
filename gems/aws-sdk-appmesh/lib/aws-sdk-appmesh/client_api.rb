@@ -148,6 +148,7 @@ module Aws::AppMesh
     HttpScheme = Shapes::StringShape.new(name: 'HttpScheme')
     HttpTimeout = Shapes::StructureShape.new(name: 'HttpTimeout')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
+    IpPreference = Shapes::StringShape.new(name: 'IpPreference')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListGatewayRoutesInput = Shapes::StructureShape.new(name: 'ListGatewayRoutesInput')
     ListGatewayRoutesLimit = Shapes::IntegerShape.new(name: 'ListGatewayRoutesLimit')
@@ -193,6 +194,7 @@ module Aws::AppMesh
     MeshData = Shapes::StructureShape.new(name: 'MeshData')
     MeshList = Shapes::ListShape.new(name: 'MeshList')
     MeshRef = Shapes::StructureShape.new(name: 'MeshRef')
+    MeshServiceDiscovery = Shapes::StructureShape.new(name: 'MeshServiceDiscovery')
     MeshSpec = Shapes::StructureShape.new(name: 'MeshSpec')
     MeshStatus = Shapes::StructureShape.new(name: 'MeshStatus')
     MeshStatusCode = Shapes::StringShape.new(name: 'MeshStatusCode')
@@ -350,6 +352,7 @@ module Aws::AppMesh
     AwsCloudMapInstanceAttributes.member = Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttribute)
 
     AwsCloudMapServiceDiscovery.add_member(:attributes, Shapes::ShapeRef.new(shape: AwsCloudMapInstanceAttributes, location_name: "attributes"))
+    AwsCloudMapServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
     AwsCloudMapServiceDiscovery.add_member(:namespace_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "namespaceName"))
     AwsCloudMapServiceDiscovery.add_member(:service_name, Shapes::ShapeRef.new(shape: AwsCloudMapName, required: true, location_name: "serviceName"))
     AwsCloudMapServiceDiscovery.struct_class = Types::AwsCloudMapServiceDiscovery
@@ -623,6 +626,7 @@ module Aws::AppMesh
     DescribeVirtualServiceOutput[:payload_member] = DescribeVirtualServiceOutput.member(:virtual_service)
 
     DnsServiceDiscovery.add_member(:hostname, Shapes::ShapeRef.new(shape: Hostname, required: true, location_name: "hostname"))
+    DnsServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
     DnsServiceDiscovery.add_member(:response_type, Shapes::ShapeRef.new(shape: DnsResponseType, location_name: "responseType"))
     DnsServiceDiscovery.struct_class = Types::DnsServiceDiscovery
 
@@ -1039,7 +1043,11 @@ module Aws::AppMesh
     MeshRef.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
     MeshRef.struct_class = Types::MeshRef
 
+    MeshServiceDiscovery.add_member(:ip_preference, Shapes::ShapeRef.new(shape: IpPreference, location_name: "ipPreference"))
+    MeshServiceDiscovery.struct_class = Types::MeshServiceDiscovery
+
     MeshSpec.add_member(:egress_filter, Shapes::ShapeRef.new(shape: EgressFilter, location_name: "egressFilter"))
+    MeshSpec.add_member(:service_discovery, Shapes::ShapeRef.new(shape: MeshServiceDiscovery, location_name: "serviceDiscovery"))
     MeshSpec.struct_class = Types::MeshSpec
 
     MeshStatus.add_member(:status, Shapes::ShapeRef.new(shape: MeshStatusCode, location_name: "status"))

@@ -589,6 +589,8 @@ module Aws::QuickSight
     UpdateIpRestrictionRequest = Shapes::StructureShape.new(name: 'UpdateIpRestrictionRequest')
     UpdateIpRestrictionResponse = Shapes::StructureShape.new(name: 'UpdateIpRestrictionResponse')
     UpdateLinkPermissionList = Shapes::ListShape.new(name: 'UpdateLinkPermissionList')
+    UpdatePublicSharingSettingsRequest = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsRequest')
+    UpdatePublicSharingSettingsResponse = Shapes::StructureShape.new(name: 'UpdatePublicSharingSettingsResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
     UpdateTemplateAliasRequest = Shapes::StructureShape.new(name: 'UpdateTemplateAliasRequest')
     UpdateTemplateAliasResponse = Shapes::StructureShape.new(name: 'UpdateTemplateAliasResponse')
@@ -629,6 +631,7 @@ module Aws::QuickSight
     AccountSettings.add_member(:edition, Shapes::ShapeRef.new(shape: Edition, location_name: "Edition"))
     AccountSettings.add_member(:default_namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "DefaultNamespace"))
     AccountSettings.add_member(:notification_email, Shapes::ShapeRef.new(shape: String, location_name: "NotificationEmail"))
+    AccountSettings.add_member(:public_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PublicSharingEnabled"))
     AccountSettings.struct_class = Types::AccountSettings
 
     ActionList.member = Shapes::ShapeRef.new(shape: String)
@@ -2924,6 +2927,14 @@ module Aws::QuickSight
 
     UpdateLinkPermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
+    UpdatePublicSharingSettingsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdatePublicSharingSettingsRequest.add_member(:public_sharing_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "PublicSharingEnabled"))
+    UpdatePublicSharingSettingsRequest.struct_class = Types::UpdatePublicSharingSettingsRequest
+
+    UpdatePublicSharingSettingsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdatePublicSharingSettingsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdatePublicSharingSettingsResponse.struct_class = Types::UpdatePublicSharingSettingsResponse
+
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
     UpdateTemplateAliasRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -4760,6 +4771,20 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_public_sharing_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePublicSharingSettings"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/public-sharing-settings"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePublicSharingSettingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePublicSharingSettingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedPricingPlanException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

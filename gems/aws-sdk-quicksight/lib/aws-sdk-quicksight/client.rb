@@ -3015,6 +3015,7 @@ module Aws::QuickSight
     #   resp.account_settings.edition #=> String, one of "STANDARD", "ENTERPRISE"
     #   resp.account_settings.default_namespace #=> String
     #   resp.account_settings.notification_email #=> String
+    #   resp.account_settings.public_sharing_enabled #=> Boolean
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -4428,8 +4429,8 @@ module Aws::QuickSight
     #   session lifetime that can be customized using the `
     #   SessionLifetimeInMinutes ` parameter.
     #
-    #   The resulting user session is valid for 15 minutes (default) to 10
-    #   hours (maximum).
+    #   The resulting user session is valid for 15 minutes (minimum) to 10
+    #   hours (maximum). The default session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
     #   with Amazon QuickSight.
@@ -4478,7 +4479,8 @@ module Aws::QuickSight
     #   user is authorized to access during the lifetime of the session. If
     #   you choose `Dashboard` embedding experience, pass the list of
     #   dashboard ARNs in the account that you want the user to be able to
-    #   view.
+    #   view. Currently, you can pass up to 25 dashboard ARNs in each API
+    #   call.
     #
     # @option params [required, Types::AnonymousUserEmbeddingExperienceConfiguration] :experience_configuration
     #   The configuration of the experience you are embedding.
@@ -4540,8 +4542,8 @@ module Aws::QuickSight
     #   session lifetime that can be customized using the `
     #   SessionLifetimeInMinutes ` parameter.
     #
-    #   The resulting user session is valid for 15 minutes (default) to 10
-    #   hours (maximum).
+    #   The resulting user session is valid for 15 minutes (minimum) to 10
+    #   hours (maximum). The default session duration is 10 hours.
     #
     # * You are charged only when the URL is used or there is interaction
     #   with Amazon QuickSight.
@@ -8159,6 +8161,55 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Use the UpdatePublicSharingSettings operation to enable or disable the
+    # public sharing settings of an Amazon QuickSight dashboard.
+    #
+    # To use this operation, enable session capacity pricing on your Amazon
+    # QuickSight account.
+    #
+    # Before you can enable public sharing on your account, you need to
+    # allow public sharing permissions to an administrative user in the IAM
+    # console. For more information on using IAM with Amazon QuickSight, see
+    # [Using Amazon QuickSight with IAM][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
+    #
+    # @option params [required, String] :aws_account_id
+    #   The Amazon Web Services account ID associated with your Amazon
+    #   QuickSight subscription.
+    #
+    # @option params [Boolean] :public_sharing_enabled
+    #   A boolean that indicates whether or not public sharing is enabled on a
+    #   Amazon QuickSight account.
+    #
+    # @return [Types::UpdatePublicSharingSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePublicSharingSettingsResponse#request_id #request_id} => String
+    #   * {Types::UpdatePublicSharingSettingsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_public_sharing_settings({
+    #     aws_account_id: "AwsAccountId", # required
+    #     public_sharing_enabled: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettings AWS API Documentation
+    #
+    # @overload update_public_sharing_settings(params = {})
+    # @param [Hash] params ({})
+    def update_public_sharing_settings(params = {}, options = {})
+      req = build_request(:update_public_sharing_settings, params)
+      req.send_request(options)
+    end
+
     # Updates a template from an existing Amazon QuickSight analysis or
     # another template.
     #
@@ -8762,7 +8813,7 @@ module Aws::QuickSight
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.64.0'
+      context[:gem_version] = '1.65.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

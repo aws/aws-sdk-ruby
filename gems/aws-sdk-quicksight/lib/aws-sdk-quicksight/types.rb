@@ -85,13 +85,24 @@ module Aws::QuickSight
     #   The main notification email for your Amazon QuickSight subscription.
     #   @return [String]
     #
+    # @!attribute [rw] public_sharing_enabled
+    #   A boolean that indicates whether or not public sharing is enabled on
+    #   an Amazon QuickSight account. For more information about enabling
+    #   public sharing, see [UpdatePublicSharingSettings][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AccountSettings AWS API Documentation
     #
     class AccountSettings < Struct.new(
       :account_name,
       :edition,
       :default_namespace,
-      :notification_email)
+      :notification_email,
+      :public_sharing_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7128,7 +7139,8 @@ module Aws::QuickSight
     #   the user is authorized to access during the lifetime of the session.
     #   If you choose `Dashboard` embedding experience, pass the list of
     #   dashboard ARNs in the account that you want the user to be able to
-    #   view.
+    #   view. Currently, you can pass up to 25 dashboard ARNs in each API
+    #   call.
     #   @return [Array<String>]
     #
     # @!attribute [rw] experience_configuration
@@ -14620,6 +14632,50 @@ module Aws::QuickSight
     #
     class UpdateIpRestrictionResponse < Struct.new(
       :aws_account_id,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdatePublicSharingSettingsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         aws_account_id: "AwsAccountId", # required
+    #         public_sharing_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] aws_account_id
+    #   The Amazon Web Services account ID associated with your Amazon
+    #   QuickSight subscription.
+    #   @return [String]
+    #
+    # @!attribute [rw] public_sharing_enabled
+    #   A boolean that indicates whether or not public sharing is enabled on
+    #   a Amazon QuickSight account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsRequest AWS API Documentation
+    #
+    class UpdatePublicSharingSettingsRequest < Struct.new(
+      :aws_account_id,
+      :public_sharing_enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdatePublicSharingSettingsResponse AWS API Documentation
+    #
+    class UpdatePublicSharingSettingsResponse < Struct.new(
       :request_id,
       :status)
       SENSITIVE = []

@@ -72,6 +72,7 @@ module Aws::GreengrassV2
     DefaultMaxResults = Shapes::IntegerShape.new(name: 'DefaultMaxResults')
     DeleteComponentRequest = Shapes::StructureShape.new(name: 'DeleteComponentRequest')
     DeleteCoreDeviceRequest = Shapes::StructureShape.new(name: 'DeleteCoreDeviceRequest')
+    DeleteDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteDeploymentRequest')
     Deployment = Shapes::StructureShape.new(name: 'Deployment')
     DeploymentComponentUpdatePolicy = Shapes::StructureShape.new(name: 'DeploymentComponentUpdatePolicy')
     DeploymentComponentUpdatePolicyAction = Shapes::StringShape.new(name: 'DeploymentComponentUpdatePolicyAction')
@@ -214,6 +215,7 @@ module Aws::GreengrassV2
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VendorGuidance = Shapes::StringShape.new(name: 'VendorGuidance')
     connectivityInfoList = Shapes::ListShape.new(name: 'connectivityInfoList')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -266,6 +268,8 @@ module Aws::GreengrassV2
     CloudComponentStatus.add_member(:component_state, Shapes::ShapeRef.new(shape: CloudComponentState, location_name: "componentState"))
     CloudComponentStatus.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "message"))
     CloudComponentStatus.add_member(:errors, Shapes::ShapeRef.new(shape: StringMap, location_name: "errors"))
+    CloudComponentStatus.add_member(:vendor_guidance, Shapes::ShapeRef.new(shape: VendorGuidance, location_name: "vendorGuidance"))
+    CloudComponentStatus.add_member(:vendor_guidance_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "vendorGuidanceMessage"))
     CloudComponentStatus.struct_class = Types::CloudComponentStatus
 
     Component.add_member(:arn, Shapes::ShapeRef.new(shape: ComponentARN, location_name: "arn"))
@@ -382,6 +386,9 @@ module Aws::GreengrassV2
 
     DeleteCoreDeviceRequest.add_member(:core_device_thing_name, Shapes::ShapeRef.new(shape: CoreDeviceThingName, required: true, location: "uri", location_name: "coreDeviceThingName"))
     DeleteCoreDeviceRequest.struct_class = Types::DeleteCoreDeviceRequest
+
+    DeleteDeploymentRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "deploymentId"))
+    DeleteDeploymentRequest.struct_class = Types::DeleteDeploymentRequest
 
     Deployment.add_member(:target_arn, Shapes::ShapeRef.new(shape: TargetARN, location_name: "targetArn"))
     Deployment.add_member(:revision_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "revisionId"))
@@ -689,8 +696,8 @@ module Aws::GreengrassV2
     RequestAlreadyInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     RequestAlreadyInProgressException.struct_class = Types::RequestAlreadyInProgressException
 
-    ResolveComponentCandidatesRequest.add_member(:platform, Shapes::ShapeRef.new(shape: ComponentPlatform, required: true, location_name: "platform"))
-    ResolveComponentCandidatesRequest.add_member(:component_candidates, Shapes::ShapeRef.new(shape: ComponentCandidateList, required: true, location_name: "componentCandidates"))
+    ResolveComponentCandidatesRequest.add_member(:platform, Shapes::ShapeRef.new(shape: ComponentPlatform, location_name: "platform"))
+    ResolveComponentCandidatesRequest.add_member(:component_candidates, Shapes::ShapeRef.new(shape: ComponentCandidateList, location_name: "componentCandidates"))
     ResolveComponentCandidatesRequest.struct_class = Types::ResolveComponentCandidatesRequest
 
     ResolveComponentCandidatesResponse.add_member(:resolved_component_versions, Shapes::ShapeRef.new(shape: ResolvedComponentVersionsList, location_name: "resolvedComponentVersions"))
@@ -700,6 +707,8 @@ module Aws::GreengrassV2
     ResolvedComponentVersion.add_member(:component_name, Shapes::ShapeRef.new(shape: ComponentNameString, location_name: "componentName"))
     ResolvedComponentVersion.add_member(:component_version, Shapes::ShapeRef.new(shape: ComponentVersionString, location_name: "componentVersion"))
     ResolvedComponentVersion.add_member(:recipe, Shapes::ShapeRef.new(shape: RecipeBlob, location_name: "recipe"))
+    ResolvedComponentVersion.add_member(:vendor_guidance, Shapes::ShapeRef.new(shape: VendorGuidance, location_name: "vendorGuidance"))
+    ResolvedComponentVersion.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "message"))
     ResolvedComponentVersion.struct_class = Types::ResolvedComponentVersion
 
     ResolvedComponentVersionsList.member = Shapes::ShapeRef.new(shape: ResolvedComponentVersion)
@@ -860,6 +869,7 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: RequestAlreadyInProgressException)
       end)
 
@@ -889,6 +899,20 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteDeployment"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/greengrass/v2/deployments/{deploymentId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:describe_component, Seahorse::Model::Operation.new.tap do |o|
@@ -1030,6 +1054,7 @@ module Aws::GreengrassV2
         o.output = Shapes::ShapeRef.new(shape: ListComponentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
@@ -1134,9 +1159,9 @@ module Aws::GreengrassV2
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

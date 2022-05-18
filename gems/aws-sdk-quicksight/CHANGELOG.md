@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.65.0 (2022-05-18)
+------------------
+
+* Feature - API UpdatePublicSharingSettings enables IAM admins to enable/disable account level setting for public access of dashboards. When enabled, owners/co-owners for dashboards can enable public access on their dashboards. These dashboards can only be accessed through share link or embedding.
+
 1.64.0 (2022-03-21)
 ------------------
 
