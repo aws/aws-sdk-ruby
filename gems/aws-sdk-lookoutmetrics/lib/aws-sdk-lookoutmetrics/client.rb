@@ -434,6 +434,7 @@ module Aws::LookoutMetrics
     #       sns_configuration: {
     #         role_arn: "Arn", # required
     #         sns_topic_arn: "Arn", # required
+    #         sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #       },
     #       lambda_configuration: {
     #         role_arn: "Arn", # required
@@ -742,6 +743,7 @@ module Aws::LookoutMetrics
     #
     #   resp.alert.action.sns_configuration.role_arn #=> String
     #   resp.alert.action.sns_configuration.sns_topic_arn #=> String
+    #   resp.alert.action.sns_configuration.sns_format #=> String, one of "LONG_TEXT", "SHORT_TEXT", "JSON"
     #   resp.alert.action.lambda_configuration.role_arn #=> String
     #   resp.alert.action.lambda_configuration.lambda_arn #=> String
     #   resp.alert.alert_description #=> String
@@ -1814,7 +1816,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.16.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

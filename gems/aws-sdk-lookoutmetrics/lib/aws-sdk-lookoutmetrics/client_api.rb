@@ -189,6 +189,7 @@ module Aws::LookoutMetrics
     SensitivityThreshold = Shapes::IntegerShape.new(name: 'SensitivityThreshold')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SnsFormat = Shapes::StringShape.new(name: 'SnsFormat')
     StringAttributeValue = Shapes::StringShape.new(name: 'StringAttributeValue')
     StringListAttributeValue = Shapes::ListShape.new(name: 'StringListAttributeValue')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -725,6 +726,7 @@ module Aws::LookoutMetrics
 
     SNSConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))
     SNSConfiguration.add_member(:sns_topic_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "SnsTopicArn"))
+    SNSConfiguration.add_member(:sns_format, Shapes::ShapeRef.new(shape: SnsFormat, location_name: "SnsFormat"))
     SNSConfiguration.struct_class = Types::SNSConfiguration
 
     SampleDataS3SourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "RoleArn"))

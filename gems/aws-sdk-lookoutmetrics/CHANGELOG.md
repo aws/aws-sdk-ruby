@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.17.0 (2022-05-19)
+------------------
+
+* Feature - In this release we added SnsFormat to SNSConfiguration to support human readable alert.
+
 1.16.0 (2022-04-21)
 ------------------
 

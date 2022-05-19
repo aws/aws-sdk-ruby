@@ -33,6 +33,7 @@ module Aws::LookoutMetrics
     #         sns_configuration: {
     #           role_arn: "Arn", # required
     #           sns_topic_arn: "Arn", # required
+    #           sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #         },
     #         lambda_configuration: {
     #           role_arn: "Arn", # required
@@ -649,6 +650,7 @@ module Aws::LookoutMetrics
     #           sns_configuration: {
     #             role_arn: "Arn", # required
     #             sns_topic_arn: "Arn", # required
+    #             sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #           },
     #           lambda_configuration: {
     #             role_arn: "Arn", # required
@@ -2742,6 +2744,7 @@ module Aws::LookoutMetrics
     #       {
     #         role_arn: "Arn", # required
     #         sns_topic_arn: "Arn", # required
+    #         sns_format: "LONG_TEXT", # accepts LONG_TEXT, SHORT_TEXT, JSON
     #       }
     #
     # @!attribute [rw] role_arn
@@ -2752,11 +2755,16 @@ module Aws::LookoutMetrics
     #   The ARN of the target SNS topic.
     #   @return [String]
     #
+    # @!attribute [rw] sns_format
+    #   The text format for alerts.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/SNSConfiguration AWS API Documentation
     #
     class SNSConfiguration < Struct.new(
       :role_arn,
-      :sns_topic_arn)
+      :sns_topic_arn,
+      :sns_format)
       SENSITIVE = []
       include Aws::Structure
     end

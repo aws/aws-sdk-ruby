@@ -262,6 +262,25 @@ module Aws::GameSparks
     #
     class DeleteStageResult < Aws::EmptyStructure; end
 
+    # The result of the deployment.
+    #
+    # @!attribute [rw] message
+    #   Details about the deployment result.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_code
+    #   The type of deployment result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/gamesparks-2021-08-17/DeploymentResult AWS API Documentation
+    #
+    class DeploymentResult < Struct.new(
+      :message,
+      :result_code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass DisconnectPlayerRequest
     #   data as a hash:
     #
@@ -1649,6 +1668,10 @@ module Aws::GameSparks
     #   The identifier of the deployment.
     #   @return [String]
     #
+    # @!attribute [rw] deployment_result
+    #   The result of the deployment.
+    #   @return [Types::DeploymentResult]
+    #
     # @!attribute [rw] deployment_state
     #   The state of the deployment.
     #   @return [String]
@@ -1667,6 +1690,7 @@ module Aws::GameSparks
       :created,
       :deployment_action,
       :deployment_id,
+      :deployment_result,
       :deployment_state,
       :last_updated,
       :snapshot_id)
@@ -1683,6 +1707,10 @@ module Aws::GameSparks
     # @!attribute [rw] deployment_id
     #   The identifier of the deployment.
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_result
+    #   The result of the deployment.
+    #   @return [Types::DeploymentResult]
     #
     # @!attribute [rw] deployment_state
     #   The state of the deployment.
@@ -1701,6 +1729,7 @@ module Aws::GameSparks
     class StageDeploymentSummary < Struct.new(
       :deployment_action,
       :deployment_id,
+      :deployment_result,
       :deployment_state,
       :last_updated,
       :snapshot_id)
