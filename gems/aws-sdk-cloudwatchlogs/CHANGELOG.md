@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2022-05-20)
+------------------
+
+* Feature - Doc-only update to publish the new valid values for log retention
+
 1.52.0 (2022-02-24)
 ------------------
 

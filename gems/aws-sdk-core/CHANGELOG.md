@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.131.1 (2022-05-20)
+------------------
+
 * Issue - Bump the minimum version of `jmespath` dependency.
 
 3.131.0 (2022-05-16)

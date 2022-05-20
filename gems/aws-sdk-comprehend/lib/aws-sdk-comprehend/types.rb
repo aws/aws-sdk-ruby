@@ -268,7 +268,7 @@ module Aws::Comprehend
     # @!attribute [rw] text_list
     #   A list containing the text of the input documents. The list can
     #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   than 5,000 bytes of UTF-8 encoded characters.
     #   @return [Array<String>]
     #
     # @!attribute [rw] language_code
@@ -626,7 +626,12 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] endpoint_arn
-    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   The Amazon Resource Number (ARN) of the endpoint. For information
+    #   about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ClassifyDocumentRequest AWS API Documentation
@@ -693,7 +698,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntitiesRequest AWS API Documentation
@@ -1789,6 +1795,12 @@ module Aws::Comprehend
     #   If you specify an endpoint, Amazon Comprehend uses the language of
     #   your custom model, and it ignores any language code that you provide
     #   in your request.
+    #
+    #   For information about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectEntitiesRequest AWS API Documentation
@@ -1879,7 +1891,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DetectPiiEntitiesRequest AWS API Documentation
@@ -2147,7 +2160,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   [1]: https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/DocumentClassificationJobProperties AWS API Documentation
@@ -2220,7 +2233,7 @@ module Aws::Comprehend
     # The input properties for training a document classifier.
     #
     # For more information on how the input file is formatted, see
-    # how-document-classification-training-data.
+    # prep-classifier-data.
     #
     # @note When making an API call, you may pass DocumentClassifierInputDataConfig
     #   data as a hash:
@@ -2449,7 +2462,7 @@ module Aws::Comprehend
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
+    #   [1]: https://docs.aws.amazon.com/vppc/latest/userguide/what-is-amazon-vpc.html
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] mode
@@ -2826,7 +2839,12 @@ module Aws::Comprehend
       include Aws::Structure
     end
 
-    # Specifies information about the specified endpoint.
+    # Specifies information about the specified endpoint. For information
+    # about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint.
@@ -5359,7 +5377,7 @@ module Aws::Comprehend
     #   data as a hash:
     #
     #       {
-    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #         pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, IN_PERMANENT_ACCOUNT_NUMBER, IN_NREGA, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, CA_HEALTH_NUMBER, IN_AADHAAR, IN_VOTER_NUMBER
     #         mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
     #         mask_character: "MaskCharacter",
     #       }
@@ -6405,7 +6423,7 @@ module Aws::Comprehend
     #         },
     #         mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
     #         redaction_config: {
-    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #           pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, IN_PERMANENT_ACCOUNT_NUMBER, IN_NREGA, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, CA_HEALTH_NUMBER, IN_AADHAAR, IN_VOTER_NUMBER
     #           mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
     #           mask_character: "MaskCharacter",
     #         },
@@ -6454,7 +6472,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token
@@ -6736,9 +6755,8 @@ module Aws::Comprehend
     #   @return [String]
     #
     # @!attribute [rw] language_code
-    #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend. All documents must
-    #   be in the same language.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #   @return [String]
     #
     # @!attribute [rw] client_request_token

@@ -462,7 +462,7 @@ module Aws::Comprehend
     # @option params [required, Array<String>] :text_list
     #   A list containing the text of the input documents. The list can
     #   contain a maximum of 25 documents. Each document must contain fewer
-    #   that 5,000 bytes of UTF-8 encoded characters.
+    #   than 5,000 bytes of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
     #   The language of the input documents. You can specify any of the
@@ -613,7 +613,12 @@ module Aws::Comprehend
     #   The document text to be analyzed.
     #
     # @option params [required, String] :endpoint_arn
-    #   The Amazon Resource Number (ARN) of the endpoint.
+    #   The Amazon Resource Number (ARN) of the endpoint. For information
+    #   about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @return [Types::ClassifyDocumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -655,7 +660,8 @@ module Aws::Comprehend
     #   (PII) entity labels.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #
     # @return [Types::ContainsPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -671,7 +677,7 @@ module Aws::Comprehend
     # @example Response structure
     #
     #   resp.labels #=> Array
-    #   resp.labels[0].name #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.labels[0].name #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "IN_PERMANENT_ACCOUNT_NUMBER", "IN_NREGA", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "CA_HEALTH_NUMBER", "IN_AADHAAR", "IN_VOTER_NUMBER"
     #   resp.labels[0].score #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/comprehend-2017-11-27/ContainsPiiEntities AWS API Documentation
@@ -849,7 +855,12 @@ module Aws::Comprehend
     end
 
     # Creates a model-specific endpoint for synchronous inference for a
-    # previously trained custom model
+    # previously trained custom model For information about endpoints, see
+    # [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @option params [required, String] :endpoint_name
     #   This is the descriptive suffix that becomes part of the `EndpointArn`
@@ -1115,7 +1126,11 @@ module Aws::Comprehend
 
     # Deletes a model-specific endpoint for a previously-trained custom
     # model. All endpoints must be deleted in order for the model to be
-    # deleted.
+    # deleted. For information about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being deleted.
@@ -1368,7 +1383,12 @@ module Aws::Comprehend
     end
 
     # Gets the properties associated with a specific endpoint. Use this
-    # operation to get the status of an endpoint.
+    # operation to get the status of an endpoint. For information about
+    # endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being described.
@@ -1664,7 +1684,7 @@ module Aws::Comprehend
     #   resp.pii_entities_detection_job_properties.output_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties.output_data_config.kms_key_id #=> String
     #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types #=> Array
-    #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.pii_entities_detection_job_properties.redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "IN_PERMANENT_ACCOUNT_NUMBER", "IN_NREGA", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "CA_HEALTH_NUMBER", "IN_AADHAAR", "IN_VOTER_NUMBER"
     #   resp.pii_entities_detection_job_properties.redaction_config.mask_mode #=> String, one of "MASK", "REPLACE_WITH_PII_ENTITY_TYPE"
     #   resp.pii_entities_detection_job_properties.redaction_config.mask_character #=> String
     #   resp.pii_entities_detection_job_properties.language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -1930,6 +1950,12 @@ module Aws::Comprehend
     #   your custom model, and it ignores any language code that you provide
     #   in your request.
     #
+    #   For information about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
+    #
     # @return [Types::DetectEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DetectEntitiesResponse#entities #entities} => Array&lt;Types::Entity&gt;
@@ -2007,7 +2033,8 @@ module Aws::Comprehend
     #   of UTF-8 encoded characters.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #
     # @return [Types::DetectPiiEntitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2024,7 +2051,7 @@ module Aws::Comprehend
     #
     #   resp.entities #=> Array
     #   resp.entities[0].score #=> Float
-    #   resp.entities[0].type #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.entities[0].type #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "IN_PERMANENT_ACCOUNT_NUMBER", "IN_NREGA", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "CA_HEALTH_NUMBER", "IN_AADHAAR", "IN_VOTER_NUMBER"
     #   resp.entities[0].begin_offset #=> Integer
     #   resp.entities[0].end_offset #=> Integer
     #
@@ -2476,7 +2503,12 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Gets a list of all existing endpoints that you've created.
+    # Gets a list of all existing endpoints that you've created. For
+    # information about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @option params [Types::EndpointFilter] :filter
     #   Filters the endpoints that are returned. You can filter endpoints on
@@ -2933,7 +2965,7 @@ module Aws::Comprehend
     #   resp.pii_entities_detection_job_properties_list[0].output_data_config.s3_uri #=> String
     #   resp.pii_entities_detection_job_properties_list[0].output_data_config.kms_key_id #=> String
     #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types #=> Array
-    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL"
+    #   resp.pii_entities_detection_job_properties_list[0].redaction_config.pii_entity_types[0] #=> String, one of "BANK_ACCOUNT_NUMBER", "BANK_ROUTING", "CREDIT_DEBIT_NUMBER", "CREDIT_DEBIT_CVV", "CREDIT_DEBIT_EXPIRY", "PIN", "EMAIL", "ADDRESS", "NAME", "PHONE", "SSN", "DATE_TIME", "PASSPORT_NUMBER", "DRIVER_ID", "URL", "AGE", "USERNAME", "PASSWORD", "AWS_ACCESS_KEY", "AWS_SECRET_KEY", "IP_ADDRESS", "MAC_ADDRESS", "ALL", "LICENSE_PLATE", "VEHICLE_IDENTIFICATION_NUMBER", "UK_NATIONAL_INSURANCE_NUMBER", "CA_SOCIAL_INSURANCE_NUMBER", "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", "IN_PERMANENT_ACCOUNT_NUMBER", "IN_NREGA", "INTERNATIONAL_BANK_ACCOUNT_NUMBER", "SWIFT_CODE", "UK_NATIONAL_HEALTH_SERVICE_NUMBER", "CA_HEALTH_NUMBER", "IN_AADHAAR", "IN_VOTER_NUMBER"
     #   resp.pii_entities_detection_job_properties_list[0].redaction_config.mask_mode #=> String, one of "MASK", "REPLACE_WITH_PII_ENTITY_TYPE"
     #   resp.pii_entities_detection_job_properties_list[0].redaction_config.mask_character #=> String
     #   resp.pii_entities_detection_job_properties_list[0].language_code #=> String, one of "en", "es", "fr", "de", "it", "pt", "ar", "hi", "ja", "ko", "zh", "zh-TW"
@@ -3821,7 +3853,8 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -3860,7 +3893,7 @@ module Aws::Comprehend
     #     },
     #     mode: "ONLY_REDACTION", # required, accepts ONLY_REDACTION, ONLY_OFFSETS
     #     redaction_config: {
-    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL
+    #       pii_entity_types: ["BANK_ACCOUNT_NUMBER"], # accepts BANK_ACCOUNT_NUMBER, BANK_ROUTING, CREDIT_DEBIT_NUMBER, CREDIT_DEBIT_CVV, CREDIT_DEBIT_EXPIRY, PIN, EMAIL, ADDRESS, NAME, PHONE, SSN, DATE_TIME, PASSPORT_NUMBER, DRIVER_ID, URL, AGE, USERNAME, PASSWORD, AWS_ACCESS_KEY, AWS_SECRET_KEY, IP_ADDRESS, MAC_ADDRESS, ALL, LICENSE_PLATE, VEHICLE_IDENTIFICATION_NUMBER, UK_NATIONAL_INSURANCE_NUMBER, CA_SOCIAL_INSURANCE_NUMBER, US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER, UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER, IN_PERMANENT_ACCOUNT_NUMBER, IN_NREGA, INTERNATIONAL_BANK_ACCOUNT_NUMBER, SWIFT_CODE, UK_NATIONAL_HEALTH_SERVICE_NUMBER, CA_HEALTH_NUMBER, IN_AADHAAR, IN_VOTER_NUMBER
     #       mask_mode: "MASK", # accepts MASK, REPLACE_WITH_PII_ENTITY_TYPE
     #       mask_character: "MaskCharacter",
     #     },
@@ -4029,9 +4062,8 @@ module Aws::Comprehend
     #   The identifier of the job.
     #
     # @option params [required, String] :language_code
-    #   The language of the input documents. You can specify any of the
-    #   primary languages supported by Amazon Comprehend. All documents must
-    #   be in the same language.
+    #   The language of the input documents. Currently, English is the only
+    #   valid language.
     #
     # @option params [String] :client_request_token
     #   A unique identifier for the request. If you don't set the client
@@ -4423,7 +4455,7 @@ module Aws::Comprehend
 
     # Stops a sentiment detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # If the job state is `IN_PROGRESS`, the job is marked for termination
     # and put into the `STOP_REQUESTED` state. If the job completes before
     # it can be stopped, it is put into the `COMPLETED` state; otherwise the
     # job is be stopped and put into the `STOPPED` state.
@@ -4465,7 +4497,7 @@ module Aws::Comprehend
 
     # Stops a targeted sentiment detection job in progress.
     #
-    # If the job state is `IN_PROGRESS` the job is marked for termination
+    # If the job state is `IN_PROGRESS`, the job is marked for termination
     # and put into the `STOP_REQUESTED` state. If the job completes before
     # it can be stopped, it is put into the `COMPLETED` state; otherwise the
     # job is be stopped and put into the `STOPPED` state.
@@ -4633,7 +4665,12 @@ module Aws::Comprehend
       req.send_request(options)
     end
 
-    # Updates information about the specified endpoint.
+    # Updates information about the specified endpoint. For information
+    # about endpoints, see [Managing endpoints][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
     #
     # @option params [required, String] :endpoint_arn
     #   The Amazon Resource Number (ARN) of the endpoint being updated.
@@ -4683,7 +4720,7 @@ module Aws::Comprehend
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-comprehend'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.61.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
