@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Bump the minimum version of `jmespath` dependency.
+
 3.131.0 (2022-05-16)
 ------------------
 
@@ -55,7 +57,7 @@ Unreleased Changes
 3.126.2 (2022-02-16)
 ------------------
 
-* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529). 
+* Issue - Add a before_refresh callback to AssumeRoleCredentials (#2529).
 * Issue - Raise a `NoSuchProfileError` when config and credentials files don't exist.
 
 3.126.1 (2022-02-14)
