@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-05-23)
+------------------
+
+* Feature - Adding modelMetrics as part of DescribeRecommender API response for Personalize.
+
 1.41.0 (2022-04-19)
 ------------------
 

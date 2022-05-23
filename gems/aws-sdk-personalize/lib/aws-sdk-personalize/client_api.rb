@@ -1069,6 +1069,7 @@ module Aws::Personalize
     Recommender.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     Recommender.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "failureReason"))
     Recommender.add_member(:latest_recommender_update, Shapes::ShapeRef.new(shape: RecommenderUpdateSummary, location_name: "latestRecommenderUpdate"))
+    Recommender.add_member(:model_metrics, Shapes::ShapeRef.new(shape: Metrics, location_name: "modelMetrics"))
     Recommender.struct_class = Types::Recommender
 
     RecommenderConfig.add_member(:item_exploration_config, Shapes::ShapeRef.new(shape: HyperParameters, location_name: "itemExplorationConfig"))
@@ -1382,6 +1383,7 @@ module Aws::Personalize
         o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 

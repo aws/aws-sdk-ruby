@@ -654,6 +654,7 @@ module Aws::ElastiCache
     CreateCacheClusterMessage.add_member(:preferred_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "PreferredOutpostArn"))
     CreateCacheClusterMessage.add_member(:preferred_outpost_arns, Shapes::ShapeRef.new(shape: PreferredOutpostArnList, location_name: "PreferredOutpostArns"))
     CreateCacheClusterMessage.add_member(:log_delivery_configurations, Shapes::ShapeRef.new(shape: LogDeliveryConfigurationRequestList, location_name: "LogDeliveryConfigurations"))
+    CreateCacheClusterMessage.add_member(:transit_encryption_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "TransitEncryptionEnabled"))
     CreateCacheClusterMessage.struct_class = Types::CreateCacheClusterMessage
 
     CreateCacheClusterResult.add_member(:cache_cluster, Shapes::ShapeRef.new(shape: CacheCluster, location_name: "CacheCluster"))

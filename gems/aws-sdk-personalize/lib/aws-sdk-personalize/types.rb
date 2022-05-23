@@ -3644,7 +3644,12 @@ module Aws::Personalize
     #   @return [String]
     #
     # @!attribute [rw] metrics
-    #   The metrics for the solution version.
+    #   The metrics for the solution version. For more information, see [
+    #   Evaluating a solution version with metrics ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html
     #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/GetSolutionMetricsResponse AWS API Documentation
@@ -4844,6 +4849,9 @@ module Aws::Personalize
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
     #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]
     #
@@ -4854,6 +4862,16 @@ module Aws::Personalize
     # @!attribute [rw] latest_recommender_update
     #   Provides a summary of the latest updates to the recommender.
     #   @return [Types::RecommenderUpdateSummary]
+    #
+    # @!attribute [rw] model_metrics
+    #   Provides evaluation metrics that help you determine the performance
+    #   of a recommender. For more information, see [ Evaluating a
+    #   recommender][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/personalize/latest/dg/evaluating-recommenders.html
+    #   @return [Hash<String,Float>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/Recommender AWS API Documentation
     #
@@ -4867,7 +4885,8 @@ module Aws::Personalize
       :last_updated_date_time,
       :status,
       :failure_reason,
-      :latest_recommender_update)
+      :latest_recommender_update,
+      :model_metrics)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4938,6 +4957,9 @@ module Aws::Personalize
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
     #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]
     #
@@ -4993,6 +5015,9 @@ module Aws::Personalize
     #
     #   * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #     FAILED
+    #
+    #   * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START
+    #     PENDING &gt; START IN\_PROGRESS &gt; ACTIVE
     #
     #   * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #   @return [String]

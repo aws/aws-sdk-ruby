@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2022-05-23)
+------------------
+
+* Feature - New APIs for Monitor that help you understand how your predictors perform over time.
+
 1.33.0 (2022-02-24)
 ------------------
 

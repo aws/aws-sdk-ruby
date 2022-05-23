@@ -380,7 +380,8 @@ module Aws::ForecastService
     # * `ForecastFrequency` - The granularity of your forecasts (hourly,
     #   daily, weekly, etc).
     #
-    # * `ForecastHorizon` - The number of time steps being forecasted.
+    # * `ForecastHorizon` - The number of time-steps that the model
+    #   predicts. The forecast horizon is also called the prediction length.
     #
     # When creating a new predictor, do not specify a value for
     # `ReferencePredictorArn`.
@@ -404,6 +405,17 @@ module Aws::ForecastService
     # @option params [Integer] :forecast_horizon
     #   The number of time-steps that the model predicts. The forecast horizon
     #   is also called the prediction length.
+    #
+    #   The maximum forecast horizon is the lesser of 500 time-steps or 1/4 of
+    #   the TARGET\_TIME\_SERIES dataset length. If you are retraining an
+    #   existing AutoPredictor, then the maximum forecast horizon is the
+    #   lesser of 500 time-steps or 1/3 of the TARGET\_TIME\_SERIES dataset
+    #   length.
+    #
+    #   If you are upgrading to an AutoPredictor or retraining an existing
+    #   AutoPredictor, you cannot update the forecast horizon parameter. You
+    #   can meet this requirement by providing longer time-series in the
+    #   dataset.
     #
     # @option params [Array<String>] :forecast_types
     #   The forecast types used to train a predictor. You can specify up to
@@ -487,6 +499,18 @@ module Aws::ForecastService
     #     only the key prefix of `aws` do not count against your tags per
     #     resource limit. You cannot edit or delete tag keys with this prefix.
     #
+    # @option params [Types::MonitorConfig] :monitor_config
+    #   The configuration details for predictor monitoring. Provide a name for
+    #   the monitor resource to enable predictor monitoring.
+    #
+    #   Predictor monitoring allows you to see how your predictor's
+    #   performance changes over time. For more information, see [Predictor
+    #   Monitoring][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
+    #
     # @return [Types::CreateAutoPredictorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAutoPredictorResponse#predictor_arn #predictor_arn} => String
@@ -531,6 +555,9 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     monitor_config: {
+    #       monitor_name: "Name", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -565,22 +592,26 @@ module Aws::ForecastService
     #
     # After creating a dataset, you import your training data into it and
     # add the dataset to a dataset group. You use the dataset group to
-    # create a predictor. For more information, see
-    # howitworks-datasets-groups.
+    # create a predictor. For more information, see [Importing datasets][1].
     #
-    # To get a list of all your datasets, use the ListDatasets operation.
+    # To get a list of all your datasets, use the [ListDatasets][2]
+    # operation.
     #
     # For example Forecast datasets, see the [Amazon Forecast Sample GitHub
-    # repository][1].
+    # repository][3].
     #
     # <note markdown="1"> The `Status` of a dataset must be `ACTIVE` before you can import
-    # training data. Use the DescribeDataset operation to get the status.
+    # training data. Use the [DescribeDataset][4] operation to get the
+    # status.
     #
     #  </note>
     #
     #
     #
-    # [1]: https://github.com/aws-samples/amazon-forecast-samples
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasets.html
+    # [3]: https://github.com/aws-samples/amazon-forecast-samples
+    # [4]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
     #
     # @option params [required, String] :dataset_name
     #   A name for the dataset.
@@ -588,14 +619,19 @@ module Aws::ForecastService
     # @option params [required, String] :domain
     #   The domain associated with the dataset. When you add a dataset to a
     #   dataset group, this value and the value specified for the `Domain`
-    #   parameter of the CreateDatasetGroup operation must match.
+    #   parameter of the [CreateDatasetGroup][1] operation must match.
     #
     #   The `Domain` and `DatasetType` that you choose determine the fields
     #   that must be present in the training data that you import to the
     #   dataset. For example, if you choose the `RETAIL` domain and
     #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
     #   `item_id`, `timestamp`, and `demand` fields to be present in your
-    #   data. For more information, see howitworks-datasets-groups.
+    #   data. For more information, see [Importing datasets][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
     #
     # @option params [required, String] :dataset_type
     #   The dataset type. Valid values depend on the chosen `Domain`.
@@ -614,7 +650,11 @@ module Aws::ForecastService
     #   match the fields in your data. The dataset `Domain` and `DatasetType`
     #   that you choose determine the minimum required fields in your training
     #   data. For information about the required fields for a specific dataset
-    #   domain and type, see howitworks-domains-ds-types.
+    #   domain and type, see [Dataset Domains and Dataset Types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-domains-ds-types.html
     #
     # @option params [Types::EncryptionConfig] :encryption_config
     #   An AWS Key Management Service (KMS) key and the AWS Identity and
@@ -699,20 +739,27 @@ module Aws::ForecastService
 
     # Creates a dataset group, which holds a collection of related datasets.
     # You can add datasets to the dataset group when you create the dataset
-    # group, or later by using the UpdateDatasetGroup operation.
+    # group, or later by using the [UpdateDatasetGroup][1] operation.
     #
     # After creating a dataset group and adding datasets, you use the
     # dataset group when you create a predictor. For more information, see
-    # howitworks-datasets-groups.
+    # [Dataset groups][2].
     #
-    # To get a list of all your datasets groups, use the ListDatasetGroups
-    # operation.
+    # To get a list of all your datasets groups, use the
+    # [ListDatasetGroups][3] operation.
     #
     # <note markdown="1"> The `Status` of a dataset group must be `ACTIVE` before you can use
     # the dataset group to create a predictor. To get the status, use the
-    # DescribeDatasetGroup operation.
+    # [DescribeDatasetGroup][4] operation.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html
+    # [4]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
     #
     # @option params [required, String] :dataset_group_name
     #   A name for the dataset group.
@@ -720,14 +767,19 @@ module Aws::ForecastService
     # @option params [required, String] :domain
     #   The domain associated with the dataset group. When you add a dataset
     #   to a dataset group, this value and the value specified for the
-    #   `Domain` parameter of the CreateDataset operation must match.
+    #   `Domain` parameter of the [CreateDataset][1] operation must match.
     #
     #   The `Domain` and `DatasetType` that you choose determine the fields
     #   that must be present in training data that you import to a dataset.
     #   For example, if you choose the `RETAIL` domain and
     #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
     #   that `item_id`, `timestamp`, and `demand` fields are present in your
-    #   data. For more information, see howitworks-datasets-groups.
+    #   data. For more information, see [Dataset groups][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
     #
     # @option params [Array<String>] :dataset_arns
     #   An array of Amazon Resource Names (ARNs) of the datasets that you want
@@ -801,11 +853,11 @@ module Aws::ForecastService
     # (Amazon S3) bucket and the Amazon Resource Name (ARN) of the dataset
     # that you want to import the data to.
     #
-    # You must specify a DataSource object that includes an AWS Identity and
-    # Access Management (IAM) role that Amazon Forecast can assume to access
-    # the data, as Amazon Forecast makes a copy of your data and processes
-    # it in an internal AWS system. For more information, see
-    # aws-forecast-iam-roles.
+    # You must specify a [DataSource][1] object that includes an AWS
+    # Identity and Access Management (IAM) role that Amazon Forecast can
+    # assume to access the data, as Amazon Forecast makes a copy of your
+    # data and processes it in an internal AWS system. For more information,
+    # see [Set up permissions][2].
     #
     # The training data must be in CSV format. The delimiter must be a comma
     # (,).
@@ -821,7 +873,13 @@ module Aws::ForecastService
     # collected since the previous import.
     #
     # To get a list of all your dataset import jobs, filtered by specified
-    # criteria, use the ListDatasetImportJobs operation.
+    # criteria, use the [ListDatasetImportJobs][3] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_DataSource.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/aws-forecast-iam-roles.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetImportJobs.html
     #
     # @option params [required, String] :dataset_import_job_name
     #   The name for the dataset import job. We recommend including the
@@ -842,7 +900,11 @@ module Aws::ForecastService
     #   Service (KMS) key and the IAM role must allow Amazon Forecast
     #   permission to access the key. The KMS key and IAM role must match
     #   those specified in the `EncryptionConfig` parameter of the
-    #   CreateDataset operation.
+    #   [CreateDataset][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
     #
     # @option params [String] :timestamp_format
     #   The format of timestamps in the dataset. The format that you specify
@@ -1065,7 +1127,7 @@ module Aws::ForecastService
     #   Defines the fields of a dataset.
     #
     # @option params [Boolean] :enable_visualization
-    #   Create an Expainability visualization that is viewable within the AWS
+    #   Create an Explainability visualization that is viewable within the AWS
     #   console.
     #
     # @option params [String] :start_date_time
@@ -1293,7 +1355,11 @@ module Aws::ForecastService
     #   values include `0.01 to 0.99` (increments of .01 only) and `mean`. The
     #   mean forecast is different from the median (0.50) when the
     #   distribution is not symmetric (for example, Beta and Negative
-    #   Binomial). The default value is `["0.1", "0.5", "0.9"]`.
+    #   Binomial).
+    #
+    #   The default quantiles are the quantiles you specified during predictor
+    #   creation. If you didn't specify quantiles, the default values are
+    #   `["0.1", "0.5", "0.9"]`.
     #
     # @option params [Array<Types::Tag>] :tags
     #   The optional metadata that you apply to the forecast to help you
@@ -1466,6 +1532,58 @@ module Aws::ForecastService
     # @param [Hash] params ({})
     def create_forecast_export_job(params = {}, options = {})
       req = build_request(:create_forecast_export_job, params)
+      req.send_request(options)
+    end
+
+    # Creates a predictor monitor resource for an existing auto predictor.
+    # Predictor monitoring allows you to see how your predictor's
+    # performance changes over time. For more information, see [Predictor
+    # Monitoring][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
+    #
+    # @option params [required, String] :monitor_name
+    #   The name of the monitor resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the predictor to monitor.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of [tags][1] to apply to the monitor resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
+    #
+    # @return [Types::CreateMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateMonitorResponse#monitor_arn #monitor_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_monitor({
+    #     monitor_name: "Name", # required
+    #     resource_arn: "Arn", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateMonitor AWS API Documentation
+    #
+    # @overload create_monitor(params = {})
+    # @param [Hash] params ({})
+    def create_monitor(params = {}, options = {})
+      req = build_request(:create_monitor, params)
       req.send_request(options)
     end
 
@@ -1886,15 +2004,22 @@ module Aws::ForecastService
     end
 
     # Deletes an Amazon Forecast dataset that was created using the
-    # CreateDataset operation. You can only delete datasets that have a
+    # [CreateDataset][1] operation. You can only delete datasets that have a
     # status of `ACTIVE` or `CREATE_FAILED`. To get the status use the
-    # DescribeDataset operation.
+    # [DescribeDataset][2] operation.
     #
     # <note markdown="1"> Forecast does not automatically update any dataset groups that contain
     # the deleted dataset. In order to update the dataset group, use the
-    # operation, omitting the deleted dataset's ARN.
+    # [UpdateDatasetGroup][3] operation, omitting the deleted dataset's
+    # ARN.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
     #
     # @option params [required, String] :dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset to delete.
@@ -1916,13 +2041,18 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes a dataset group created using the CreateDatasetGroup
+    # Deletes a dataset group created using the [CreateDatasetGroup][1]
     # operation. You can only delete dataset groups that have a status of
     # `ACTIVE`, `CREATE_FAILED`, or `UPDATE_FAILED`. To get the status, use
-    # the DescribeDatasetGroup operation.
+    # the [DescribeDatasetGroup][2] operation.
     #
     # This operation deletes only the dataset group, not the datasets in the
     # group.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
     #
     # @option params [required, String] :dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group to delete.
@@ -1944,10 +2074,15 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Deletes a dataset import job created using the CreateDatasetImportJob
-    # operation. You can delete only dataset import jobs that have a status
-    # of `ACTIVE` or `CREATE_FAILED`. To get the status, use the
-    # DescribeDatasetImportJob operation.
+    # Deletes a dataset import job created using the
+    # [CreateDatasetImportJob][1] operation. You can delete only dataset
+    # import jobs that have a status of `ACTIVE` or `CREATE_FAILED`. To get
+    # the status, use the [DescribeDatasetImportJob][2] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html
     #
     # @option params [required, String] :dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job to delete.
@@ -2071,6 +2206,30 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Deletes a monitor resource. You can only delete a monitor resource
+    # with a status of `ACTIVE`, `ACTIVE_STOPPED`, `CREATE_FAILED`, or
+    # `CREATE_STOPPED`.
+    #
+    # @option params [required, String] :monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_monitor({
+    #     monitor_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteMonitor AWS API Documentation
+    #
+    # @overload delete_monitor(params = {})
+    # @param [Hash] params ({})
+    def delete_monitor(params = {}, options = {})
+      req = build_request(:delete_monitor, params)
+      req.send_request(options)
+    end
+
     # Deletes a predictor created using the DescribePredictor or
     # CreatePredictor operations. You can delete only predictor that have a
     # status of `ACTIVE` or `CREATE_FAILED`. To get the status, use the
@@ -2190,6 +2349,7 @@ module Aws::ForecastService
     #   * {Types::DescribeAutoPredictorResponse#last_modification_time #last_modification_time} => Time
     #   * {Types::DescribeAutoPredictorResponse#optimization_metric #optimization_metric} => String
     #   * {Types::DescribeAutoPredictorResponse#explainability_info #explainability_info} => Types::ExplainabilityInfo
+    #   * {Types::DescribeAutoPredictorResponse#monitor_info #monitor_info} => Types::MonitorInfo
     #
     # @example Request syntax with placeholder values
     #
@@ -2231,6 +2391,8 @@ module Aws::ForecastService
     #   resp.optimization_metric #=> String, one of "WAPE", "RMSE", "AverageWeightedQuantileLoss", "MASE", "MAPE"
     #   resp.explainability_info.explainability_arn #=> String
     #   resp.explainability_info.status #=> String
+    #   resp.monitor_info.monitor_arn #=> String
+    #   resp.monitor_info.status #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictor AWS API Documentation
     #
@@ -2241,8 +2403,8 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Describes an Amazon Forecast dataset created using the CreateDataset
-    # operation.
+    # Describes an Amazon Forecast dataset created using the
+    # [CreateDataset][1] operation.
     #
     # In addition to listing the parameters specified in the `CreateDataset`
     # request, this operation includes the following dataset properties:
@@ -2252,6 +2414,10 @@ module Aws::ForecastService
     # * `LastModificationTime`
     #
     # * `Status`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
     #
     # @option params [required, String] :dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset.
@@ -2300,7 +2466,7 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Describes a dataset group created using the CreateDatasetGroup
+    # Describes a dataset group created using the [CreateDatasetGroup][1]
     # operation.
     #
     # In addition to listing the parameters provided in the
@@ -2314,6 +2480,10 @@ module Aws::ForecastService
     # * `LastModificationTime`
     #
     # * `Status`
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
     #
     # @option params [required, String] :dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group.
@@ -2355,7 +2525,7 @@ module Aws::ForecastService
     end
 
     # Describes a dataset import job created using the
-    # CreateDatasetImportJob operation.
+    # [CreateDatasetImportJob][1] operation.
     #
     # In addition to listing the parameters provided in the
     # `CreateDatasetImportJob` request, this operation includes the
@@ -2372,6 +2542,10 @@ module Aws::ForecastService
     # * `Status`
     #
     # * `Message` - If an error occurred, information about the error.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
     #
     # @option params [required, String] :dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job.
@@ -2664,6 +2838,72 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Describes a monitor resource. In addition to listing the properties
+    # provided in the CreateMonitor request, this operation lists the
+    # following properties:
+    #
+    # * `Baseline`
+    #
+    # * `CreationTime`
+    #
+    # * `LastEvaluationTime`
+    #
+    # * `LastEvaluationState`
+    #
+    # * `LastModificationTime`
+    #
+    # * `Message`
+    #
+    # * `Status`
+    #
+    # @option params [required, String] :monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to describe.
+    #
+    # @return [Types::DescribeMonitorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeMonitorResponse#monitor_name #monitor_name} => String
+    #   * {Types::DescribeMonitorResponse#monitor_arn #monitor_arn} => String
+    #   * {Types::DescribeMonitorResponse#resource_arn #resource_arn} => String
+    #   * {Types::DescribeMonitorResponse#status #status} => String
+    #   * {Types::DescribeMonitorResponse#last_evaluation_time #last_evaluation_time} => Time
+    #   * {Types::DescribeMonitorResponse#last_evaluation_state #last_evaluation_state} => String
+    #   * {Types::DescribeMonitorResponse#baseline #baseline} => Types::Baseline
+    #   * {Types::DescribeMonitorResponse#message #message} => String
+    #   * {Types::DescribeMonitorResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeMonitorResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeMonitorResponse#estimated_evaluation_time_remaining_in_minutes #estimated_evaluation_time_remaining_in_minutes} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_monitor({
+    #     monitor_arn: "Arn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitor_name #=> String
+    #   resp.monitor_arn #=> String
+    #   resp.resource_arn #=> String
+    #   resp.status #=> String
+    #   resp.last_evaluation_time #=> Time
+    #   resp.last_evaluation_state #=> String
+    #   resp.baseline.predictor_baseline.baseline_metrics #=> Array
+    #   resp.baseline.predictor_baseline.baseline_metrics[0].name #=> String
+    #   resp.baseline.predictor_baseline.baseline_metrics[0].value #=> Float
+    #   resp.message #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modification_time #=> Time
+    #   resp.estimated_evaluation_time_remaining_in_minutes #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeMonitor AWS API Documentation
+    #
+    # @overload describe_monitor(params = {})
+    # @param [Hash] params ({})
+    def describe_monitor(params = {}, options = {})
+      req = build_request(:describe_monitor, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> This operation is only valid for legacy predictors created with
     # CreatePredictor. If you are not using a legacy predictor, use
     # DescribeAutoPredictor.
@@ -2933,11 +3173,17 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Returns a list of dataset groups created using the CreateDatasetGroup
-    # operation. For each dataset group, this operation returns a summary of
-    # its properties, including its Amazon Resource Name (ARN). You can
-    # retrieve the complete set of properties by using the dataset group ARN
-    # with the DescribeDatasetGroup operation.
+    # Returns a list of dataset groups created using the
+    # [CreateDatasetGroup][1] operation. For each dataset group, this
+    # operation returns a summary of its properties, including its Amazon
+    # Resource Name (ARN). You can retrieve the complete set of properties
+    # by using the dataset group ARN with the [DescribeDatasetGroup][2]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -2980,11 +3226,17 @@ module Aws::ForecastService
     end
 
     # Returns a list of dataset import jobs created using the
-    # CreateDatasetImportJob operation. For each import job, this operation
-    # returns a summary of its properties, including its Amazon Resource
-    # Name (ARN). You can retrieve the complete set of properties by using
-    # the ARN with the DescribeDatasetImportJob operation. You can filter
-    # the list by providing an array of Filter objects.
+    # [CreateDatasetImportJob][1] operation. For each import job, this
+    # operation returns a summary of its properties, including its Amazon
+    # Resource Name (ARN). You can retrieve the complete set of properties
+    # by using the ARN with the [DescribeDatasetImportJob][2] operation. You
+    # can filter the list by providing an array of [Filter][3] objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -3062,10 +3314,16 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
-    # Returns a list of datasets created using the CreateDataset operation.
-    # For each dataset, a summary of its properties, including its Amazon
-    # Resource Name (ARN), is returned. To retrieve the complete set of
-    # properties, use the ARN with the DescribeDataset operation.
+    # Returns a list of datasets created using the [CreateDataset][1]
+    # operation. For each dataset, a summary of its properties, including
+    # its Amazon Resource Name (ARN), is returned. To retrieve the complete
+    # set of properties, use the ARN with the [DescribeDataset][2]
+    # operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
     #
     # @option params [String] :next_token
     #   If the result of the previous request was truncated, the response
@@ -3147,6 +3405,8 @@ module Aws::ForecastService
     #   * {Types::ListExplainabilitiesResponse#explainabilities #explainabilities} => Array&lt;Types::ExplainabilitySummary&gt;
     #   * {Types::ListExplainabilitiesResponse#next_token #next_token} => String
     #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_explainabilities({
@@ -3221,6 +3481,8 @@ module Aws::ForecastService
     #
     #   * {Types::ListExplainabilityExportsResponse#explainability_exports #explainability_exports} => Array&lt;Types::ExplainabilityExportSummary&gt;
     #   * {Types::ListExplainabilityExportsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3426,6 +3688,183 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Returns a list of the monitoring evaluation results and predictor
+    # events collected by the monitor resource during different windows of
+    # time.
+    #
+    # For information about monitoring see [Viewing Monitoring Results][1].
+    # For more information about retrieving monitoring results see [Viewing
+    # Monitoring Results][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of monitoring results to return.
+    #
+    # @option params [required, String] :monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to get results
+    #   from.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of filters. For each filter, provide a condition and a match
+    #   statement. The condition is either `IS` or `IS_NOT`, which specifies
+    #   whether to include or exclude the resources that match the statement
+    #   from the list. The match statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. The only valid value
+    #     is `EvaluationState`.
+    #
+    #   * `Value` - The value to match. Valid values are only `SUCCESS` or
+    #     `FAILURE`.
+    #
+    #   For example, to list only successful monitor evaluations, you would
+    #   specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "EvaluationState", "Value":
+    #   "SUCCESS" \} ]`
+    #
+    # @return [Types::ListMonitorEvaluationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitorEvaluationsResponse#next_token #next_token} => String
+    #   * {Types::ListMonitorEvaluationsResponse#predictor_monitor_evaluations #predictor_monitor_evaluations} => Array&lt;Types::PredictorMonitorEvaluation&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitor_evaluations({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     monitor_arn: "Arn", # required
+    #     filters: [
+    #       {
+    #         key: "String", # required
+    #         value: "Arn", # required
+    #         condition: "IS", # required, accepts IS, IS_NOT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.predictor_monitor_evaluations #=> Array
+    #   resp.predictor_monitor_evaluations[0].resource_arn #=> String
+    #   resp.predictor_monitor_evaluations[0].monitor_arn #=> String
+    #   resp.predictor_monitor_evaluations[0].evaluation_time #=> Time
+    #   resp.predictor_monitor_evaluations[0].evaluation_state #=> String
+    #   resp.predictor_monitor_evaluations[0].window_start_datetime #=> Time
+    #   resp.predictor_monitor_evaluations[0].window_end_datetime #=> Time
+    #   resp.predictor_monitor_evaluations[0].predictor_event.detail #=> String
+    #   resp.predictor_monitor_evaluations[0].predictor_event.datetime #=> Time
+    #   resp.predictor_monitor_evaluations[0].monitor_data_source.dataset_import_job_arn #=> String
+    #   resp.predictor_monitor_evaluations[0].monitor_data_source.forecast_arn #=> String
+    #   resp.predictor_monitor_evaluations[0].monitor_data_source.predictor_arn #=> String
+    #   resp.predictor_monitor_evaluations[0].metric_results #=> Array
+    #   resp.predictor_monitor_evaluations[0].metric_results[0].metric_name #=> String
+    #   resp.predictor_monitor_evaluations[0].metric_results[0].metric_value #=> Float
+    #   resp.predictor_monitor_evaluations[0].num_items_evaluated #=> Integer
+    #   resp.predictor_monitor_evaluations[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorEvaluations AWS API Documentation
+    #
+    # @overload list_monitor_evaluations(params = {})
+    # @param [Hash] params ({})
+    def list_monitor_evaluations(params = {}, options = {})
+      req = build_request(:list_monitor_evaluations, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of monitors created with the CreateMonitor operation
+    # and CreateAutoPredictor operation. For each monitor resource, this
+    # operation returns of a summary of its properties, including its Amazon
+    # Resource Name (ARN). You can retrieve a complete set of properties of
+    # a monitor resource by specify the monitor's ARN in the
+    # DescribeMonitor operation.
+    #
+    # @option params [String] :next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of monitors to include in the response.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   An array of filters. For each filter, provide a condition and a match
+    #   statement. The condition is either `IS` or `IS_NOT`, which specifies
+    #   whether to include or exclude the resources that match the statement
+    #   from the list. The match statement consists of a key and a value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. The only valid value
+    #     is `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all monitors who's status is ACTIVE, you would
+    #   specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value": "ACTIVE"
+    #   \} ]`
+    #
+    # @return [Types::ListMonitorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListMonitorsResponse#monitors #monitors} => Array&lt;Types::MonitorSummary&gt;
+    #   * {Types::ListMonitorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_monitors({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     filters: [
+    #       {
+    #         key: "String", # required
+    #         value: "Arn", # required
+    #         condition: "IS", # required, accepts IS, IS_NOT
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.monitors #=> Array
+    #   resp.monitors[0].monitor_arn #=> String
+    #   resp.monitors[0].monitor_name #=> String
+    #   resp.monitors[0].resource_arn #=> String
+    #   resp.monitors[0].status #=> String
+    #   resp.monitors[0].creation_time #=> Time
+    #   resp.monitors[0].last_modification_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitors AWS API Documentation
+    #
+    # @overload list_monitors(params = {})
+    # @param [Hash] params ({})
+    def list_monitors(params = {}, options = {})
+      req = build_request(:list_monitors, params)
+      req.send_request(options)
+    end
+
     # Returns a list of predictor backtest export jobs created using the
     # CreatePredictorBacktestExportJob operation. This operation returns a
     # summary for each backtest export job. You can filter the list using an
@@ -3622,6 +4061,28 @@ module Aws::ForecastService
       req.send_request(options)
     end
 
+    # Resumes a stopped monitor resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to resume.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.resume_resource({
+    #     resource_arn: "Arn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ResumeResource AWS API Documentation
+    #
+    # @overload resume_resource(params = {})
+    # @param [Hash] params ({})
+    def resume_resource(params = {}, options = {})
+      req = build_request(:resume_resource, params)
+      req.send_request(options)
+    end
+
     # Stops a resource.
     #
     # The resource undergoes the following states: `CREATE_STOPPING` and
@@ -3761,10 +4222,14 @@ module Aws::ForecastService
     # Replaces the datasets in a dataset group with the specified datasets.
     #
     # <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before you can use
-    # the dataset group to create a predictor. Use the DescribeDatasetGroup
-    # operation to get the status.
+    # the dataset group to create a predictor. Use the
+    # [DescribeDatasetGroup][1] operation to get the status.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
     #
     # @option params [required, String] :dataset_group_arn
     #   The ARN of the dataset group.
@@ -3804,7 +4269,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

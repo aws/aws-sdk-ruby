@@ -59,6 +59,8 @@ module Aws::ForecastService
     #
     #   **Holidays**
     #
+    #   **Holidays**
+    #
     #   To enable Holidays, set `CountryCode` to one of the following
     #   two-letter country codes:
     #
@@ -278,6 +280,47 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # Metrics you can use as a baseline for comparison purposes. Use these
+    # metrics when you interpret monitoring results for an auto predictor.
+    #
+    # @!attribute [rw] predictor_baseline
+    #   The initial [accuracy metrics][1] for the predictor you are
+    #   monitoring. Use these metrics as a baseline for comparison purposes
+    #   as you use your predictor and the metrics change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
+    #   @return [Types::PredictorBaseline]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/Baseline AWS API Documentation
+    #
+    class Baseline < Struct.new(
+      :predictor_baseline)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An individual metric that you can use for comparison as you evaluate
+    # your monitoring results.
+    #
+    # @!attribute [rw] name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value for the metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/BaselineMetric AWS API Documentation
+    #
+    class BaselineMetric < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies a categorical hyperparameter and it's range of tunable
     # values. This object is part of the ParameterRanges object.
     #
@@ -421,6 +464,9 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         monitor_config: {
+    #           monitor_name: "Name", # required
+    #         },
     #       }
     #
     # @!attribute [rw] predictor_name
@@ -430,6 +476,17 @@ module Aws::ForecastService
     # @!attribute [rw] forecast_horizon
     #   The number of time-steps that the model predicts. The forecast
     #   horizon is also called the prediction length.
+    #
+    #   The maximum forecast horizon is the lesser of 500 time-steps or 1/4
+    #   of the TARGET\_TIME\_SERIES dataset length. If you are retraining an
+    #   existing AutoPredictor, then the maximum forecast horizon is the
+    #   lesser of 500 time-steps or 1/3 of the TARGET\_TIME\_SERIES dataset
+    #   length.
+    #
+    #   If you are upgrading to an AutoPredictor or retraining an existing
+    #   AutoPredictor, you cannot update the forecast horizon parameter. You
+    #   can meet this requirement by providing longer time-series in the
+    #   dataset.
     #   @return [Integer]
     #
     # @!attribute [rw] forecast_types
@@ -524,6 +581,19 @@ module Aws::ForecastService
     #     prefix.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] monitor_config
+    #   The configuration details for predictor monitoring. Provide a name
+    #   for the monitor resource to enable predictor monitoring.
+    #
+    #   Predictor monitoring allows you to see how your predictor's
+    #   performance changes over time. For more information, see [Predictor
+    #   Monitoring][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
+    #   @return [Types::MonitorConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateAutoPredictorRequest AWS API Documentation
     #
     class CreateAutoPredictorRequest < Struct.new(
@@ -537,7 +607,8 @@ module Aws::ForecastService
       :reference_predictor_arn,
       :optimization_metric,
       :explain_predictor,
-      :tags)
+      :tags,
+      :monitor_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -576,14 +647,19 @@ module Aws::ForecastService
     # @!attribute [rw] domain
     #   The domain associated with the dataset group. When you add a dataset
     #   to a dataset group, this value and the value specified for the
-    #   `Domain` parameter of the CreateDataset operation must match.
+    #   `Domain` parameter of the [CreateDataset][1] operation must match.
     #
     #   The `Domain` and `DatasetType` that you choose determine the fields
     #   that must be present in training data that you import to a dataset.
     #   For example, if you choose the `RETAIL` domain and
     #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
     #   that `item_id`, `timestamp`, and `demand` fields are present in your
-    #   data. For more information, see howitworks-datasets-groups.
+    #   data. For more information, see [Dataset groups][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
     #   @return [String]
     #
     # @!attribute [rw] dataset_arns
@@ -694,7 +770,11 @@ module Aws::ForecastService
     #   Management Service (KMS) key and the IAM role must allow Amazon
     #   Forecast permission to access the key. The KMS key and IAM role must
     #   match those specified in the `EncryptionConfig` parameter of the
-    #   CreateDataset operation.
+    #   [CreateDataset][1] operation.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
     #   @return [Types::DataSource]
     #
     # @!attribute [rw] timestamp_format
@@ -841,14 +921,19 @@ module Aws::ForecastService
     # @!attribute [rw] domain
     #   The domain associated with the dataset. When you add a dataset to a
     #   dataset group, this value and the value specified for the `Domain`
-    #   parameter of the CreateDatasetGroup operation must match.
+    #   parameter of the [CreateDatasetGroup][1] operation must match.
     #
     #   The `Domain` and `DatasetType` that you choose determine the fields
     #   that must be present in the training data that you import to the
     #   dataset. For example, if you choose the `RETAIL` domain and
     #   `TARGET_TIME_SERIES` as the `DatasetType`, Amazon Forecast requires
     #   `item_id`, `timestamp`, and `demand` fields to be present in your
-    #   data. For more information, see howitworks-datasets-groups.
+    #   data. For more information, see [Importing datasets][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
     #   @return [String]
     #
     # @!attribute [rw] dataset_type
@@ -870,7 +955,12 @@ module Aws::ForecastService
     #   must match the fields in your data. The dataset `Domain` and
     #   `DatasetType` that you choose determine the minimum required fields
     #   in your training data. For information about the required fields for
-    #   a specific dataset domain and type, see howitworks-domains-ds-types.
+    #   a specific dataset domain and type, see [Dataset Domains and Dataset
+    #   Types][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-domains-ds-types.html
     #   @return [Types::Schema]
     #
     # @!attribute [rw] encryption_config
@@ -1088,7 +1178,7 @@ module Aws::ForecastService
     #   @return [Types::Schema]
     #
     # @!attribute [rw] enable_visualization
-    #   Create an Expainability visualization that is viewable within the
+    #   Create an Explainability visualization that is viewable within the
     #   AWS console.
     #   @return [Boolean]
     #
@@ -1293,7 +1383,11 @@ module Aws::ForecastService
     #   values include `0.01 to 0.99` (increments of .01 only) and `mean`.
     #   The mean forecast is different from the median (0.50) when the
     #   distribution is not symmetric (for example, Beta and Negative
-    #   Binomial). The default value is `["0.1", "0.5", "0.9"]`.
+    #   Binomial).
+    #
+    #   The default quantiles are the quantiles you specified during
+    #   predictor creation. If you didn't specify quantiles, the default
+    #   values are `["0.1", "0.5", "0.9"]`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] tags
@@ -1348,6 +1442,58 @@ module Aws::ForecastService
     #
     class CreateForecastResponse < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_name: "Name", # required
+    #         resource_arn: "Arn", # required
+    #         tags: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the predictor to monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A list of [tags][1] to apply to the monitor resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateMonitorRequest AWS API Documentation
+    #
+    class CreateMonitorRequest < Struct.new(
+      :monitor_name,
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateMonitorResponse AWS API Documentation
+    #
+    class CreateMonitorResponse < Struct.new(
+      :monitor_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1839,9 +1985,14 @@ module Aws::ForecastService
     end
 
     # Provides a summary of the dataset group properties used in the
-    # ListDatasetGroups operation. To get the complete set of properties,
-    # call the DescribeDatasetGroup operation, and provide the
-    # `DatasetGroupArn`.
+    # [ListDatasetGroups][1] operation. To get the complete set of
+    # properties, call the [DescribeDatasetGroup][2] operation, and provide
+    # the `DatasetGroupArn`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
     #
     # @!attribute [rw] dataset_group_arn
     #   The Amazon Resource Name (ARN) of the dataset group.
@@ -1857,9 +2008,13 @@ module Aws::ForecastService
     #
     # @!attribute [rw] last_modification_time
     #   When the dataset group was created or last updated from a call to
-    #   the UpdateDatasetGroup operation. While the dataset group is being
-    #   updated, `LastModificationTime` is the current time of the
+    #   the [UpdateDatasetGroup][1] operation. While the dataset group is
+    #   being updated, `LastModificationTime` is the current time of the
     #   `ListDatasetGroups` call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetGroupSummary AWS API Documentation
@@ -1874,9 +2029,14 @@ module Aws::ForecastService
     end
 
     # Provides a summary of the dataset import job properties used in the
-    # ListDatasetImportJobs operation. To get the complete set of
-    # properties, call the DescribeDatasetImportJob operation, and provide
-    # the `DatasetImportJobArn`.
+    # [ListDatasetImportJobs][1] operation. To get the complete set of
+    # properties, call the [DescribeDatasetImportJob][2] operation, and
+    # provide the `DatasetImportJobArn`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetImportJobs.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html
     #
     # @!attribute [rw] dataset_import_job_arn
     #   The Amazon Resource Name (ARN) of the dataset import job.
@@ -1945,9 +2105,14 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
-    # Provides a summary of the dataset properties used in the ListDatasets
-    # operation. To get the complete set of properties, call the
-    # DescribeDataset operation, and provide the `DatasetArn`.
+    # Provides a summary of the dataset properties used in the
+    # [ListDatasets][1] operation. To get the complete set of properties,
+    # call the [DescribeDataset][2] operation, and provide the `DatasetArn`.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasets.html
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
     #
     # @!attribute [rw] dataset_arn
     #   The Amazon Resource Name (ARN) of the dataset.
@@ -1973,8 +2138,12 @@ module Aws::ForecastService
     #   When you create a dataset, `LastModificationTime` is the same as
     #   `CreationTime`. While data is being imported to the dataset,
     #   `LastModificationTime` is the current time of the `ListDatasets`
-    #   call. After a CreateDatasetImportJob operation has finished,
+    #   call. After a [CreateDatasetImportJob][1] operation has finished,
     #   `LastModificationTime` is when the import job completed or failed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DatasetSummary AWS API Documentation
@@ -2121,6 +2290,25 @@ module Aws::ForecastService
     #
     class DeleteForecastRequest < Struct.new(
       :forecast_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DeleteMonitorRequest AWS API Documentation
+    #
+    class DeleteMonitorRequest < Struct.new(
+      :monitor_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2306,6 +2494,11 @@ module Aws::ForecastService
     #   Provides the status and ARN of the Predictor Explainability.
     #   @return [Types::ExplainabilityInfo]
     #
+    # @!attribute [rw] monitor_info
+    #   A object with the Amazon Resource Name (ARN) and status of the
+    #   monitor resource.
+    #   @return [Types::MonitorInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictorResponse AWS API Documentation
     #
     class DescribeAutoPredictorResponse < Struct.new(
@@ -2325,7 +2518,8 @@ module Aws::ForecastService
       :creation_time,
       :last_modification_time,
       :optimization_metric,
-      :explainability_info)
+      :explainability_info,
+      :monitor_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2377,13 +2571,17 @@ module Aws::ForecastService
     #
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
-    #   The `UPDATE` states apply when you call the UpdateDatasetGroup
+    #   The `UPDATE` states apply when you call the [UpdateDatasetGroup][1]
     #   operation.
     #
     #   <note markdown="1"> The `Status` of the dataset group must be `ACTIVE` before you can
     #   use the dataset group to create a predictor.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2392,9 +2590,13 @@ module Aws::ForecastService
     #
     # @!attribute [rw] last_modification_time
     #   When the dataset group was created or last updated from a call to
-    #   the UpdateDatasetGroup operation. While the dataset group is being
-    #   updated, `LastModificationTime` is the current time of the
+    #   the [UpdateDatasetGroup][1] operation. While the dataset group is
+    #   being updated, `LastModificationTime` is the current time of the
     #   `DescribeDatasetGroup` call.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetGroupResponse AWS API Documentation
@@ -2620,7 +2822,7 @@ module Aws::ForecastService
     #   * `UPDATE_PENDING`, `UPDATE_IN_PROGRESS`, `UPDATE_FAILED`
     #
     #   The `UPDATE` states apply while data is imported to the dataset from
-    #   a call to the CreateDatasetImportJob operation and reflect the
+    #   a call to the [CreateDatasetImportJob][1] operation and reflect the
     #   status of the dataset import job. For example, when the import job
     #   status is `CREATE_IN_PROGRESS`, the status of the dataset is
     #   `UPDATE_IN_PROGRESS`.
@@ -2629,6 +2831,10 @@ module Aws::ForecastService
     #   training data.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
     #   @return [String]
     #
     # @!attribute [rw] creation_time
@@ -2639,8 +2845,12 @@ module Aws::ForecastService
     #   When you create a dataset, `LastModificationTime` is the same as
     #   `CreationTime`. While data is being imported to the dataset,
     #   `LastModificationTime` is the current time of the `DescribeDataset`
-    #   call. After a CreateDatasetImportJob operation has finished,
+    #   call. After a [CreateDatasetImportJob][1] operation has finished,
     #   `LastModificationTime` is when the import job completed or failed.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetResponse AWS API Documentation
@@ -3060,6 +3270,90 @@ module Aws::ForecastService
       :message,
       :creation_time,
       :last_modification_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeMonitorRequest
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeMonitorRequest AWS API Documentation
+    #
+    class DescribeMonitorRequest < Struct.new(
+      :monitor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource described.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the auto predictor being
+    #   monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the monitor resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_evaluation_time
+    #   The timestamp of the latest evaluation completed by the monitor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_evaluation_state
+    #   The state of the monitor's latest evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] baseline
+    #   Metrics you can use as a baseline for comparison purposes. Use these
+    #   values you interpret monitoring results for an auto predictor.
+    #   @return [Types::Baseline]
+    #
+    # @!attribute [rw] message
+    #   An error message, if any, for the monitor.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp for when the monitor resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The timestamp of the latest modification to the monitor.
+    #   @return [Time]
+    #
+    # @!attribute [rw] estimated_evaluation_time_remaining_in_minutes
+    #   The estimated number of minutes remaining before the monitor
+    #   resource finishes its current evaluation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeMonitorResponse AWS API Documentation
+    #
+    class DescribeMonitorResponse < Struct.new(
+      :monitor_name,
+      :monitor_arn,
+      :resource_arn,
+      :status,
+      :last_evaluation_time,
+      :last_evaluation_state,
+      :baseline,
+      :message,
+      :creation_time,
+      :last_modification_time,
+      :estimated_evaluation_time_remaining_in_minutes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4858,6 +5152,178 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListMonitorEvaluationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         monitor_arn: "Arn", # required
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of monitoring results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to get
+    #   results from.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the resources that match the
+    #   statement from the list. The match statement consists of a key and a
+    #   value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. The only valid
+    #     value is `EvaluationState`.
+    #
+    #   * `Value` - The value to match. Valid values are only `SUCCESS` or
+    #     `FAILURE`.
+    #
+    #   For example, to list only successful monitor evaluations, you would
+    #   specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "EvaluationState",
+    #   "Value": "SUCCESS" \} ]`
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorEvaluationsRequest AWS API Documentation
+    #
+    class ListMonitorEvaluationsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :monitor_arn,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Forecast returns this token. To
+    #   retrieve the next set of results, use the token in the next request.
+    #   Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_monitor_evaluations
+    #   The monitoring results and predictor events collected by the monitor
+    #   resource during different windows of time.
+    #
+    #   For information about monitoring see [Viewing Monitoring
+    #   Results][1]. For more information about retrieving monitoring
+    #   results see [Viewing Monitoring Results][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring-results.html
+    #   @return [Array<Types::PredictorMonitorEvaluation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorEvaluationsResponse AWS API Documentation
+    #
+    class ListMonitorEvaluationsResponse < Struct.new(
+      :next_token,
+      :predictor_monitor_evaluations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass ListMonitorsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         filters: [
+    #           {
+    #             key: "String", # required
+    #             value: "Arn", # required
+    #             condition: "IS", # required, accepts IS, IS_NOT
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] next_token
+    #   If the result of the previous request was truncated, the response
+    #   includes a `NextToken`. To retrieve the next set of results, use the
+    #   token in the next request. Tokens expire after 24 hours.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of monitors to include in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] filters
+    #   An array of filters. For each filter, provide a condition and a
+    #   match statement. The condition is either `IS` or `IS_NOT`, which
+    #   specifies whether to include or exclude the resources that match the
+    #   statement from the list. The match statement consists of a key and a
+    #   value.
+    #
+    #   **Filter properties**
+    #
+    #   * `Condition` - The condition to apply. Valid values are `IS` and
+    #     `IS_NOT`.
+    #
+    #   * `Key` - The name of the parameter to filter on. The only valid
+    #     value is `Status`.
+    #
+    #   * `Value` - The value to match.
+    #
+    #   For example, to list all monitors who's status is ACTIVE, you would
+    #   specify:
+    #
+    #   `"Filters": [ \{ "Condition": "IS", "Key": "Status", "Value":
+    #   "ACTIVE" \} ]`
+    #   @return [Array<Types::Filter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorsRequest AWS API Documentation
+    #
+    class ListMonitorsRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] monitors
+    #   An array of objects that summarize each monitor's properties.
+    #   @return [Array<Types::MonitorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the response is truncated, Amazon Forecast returns this token. To
+    #   retrieve the next set of results, use the token in the next request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ListMonitorsResponse AWS API Documentation
+    #
+    class ListMonitorsResponse < Struct.new(
+      :monitors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListPredictorBacktestExportJobsRequest
     #   data as a hash:
     #
@@ -5042,6 +5508,35 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # An individual metric Forecast calculated when monitoring predictor
+    # usage. You can compare the value for this metric to the metric's
+    # value in the Baseline to see how your predictor's performance is
+    # changing.
+    #
+    # For more information about metrics generated by Forecast see
+    # [Evaluating Predictor Accuracy][1]
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
+    #
+    # @!attribute [rw] metric_name
+    #   The name of the metric.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_value
+    #   The value for the metric.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/MetricResult AWS API Documentation
+    #
+    class MetricResult < Struct.new(
+      :metric_name,
+      :metric_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides metrics that are used to evaluate the performance of a
     # predictor. This object is part of the WindowSummary object.
     #
@@ -5073,6 +5568,144 @@ module Aws::ForecastService
       :weighted_quantile_losses,
       :error_metrics,
       :average_weighted_quantile_loss)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration details for the predictor monitor.
+    #
+    # @note When making an API call, you may pass MonitorConfig
+    #   data as a hash:
+    #
+    #       {
+    #         monitor_name: "Name", # required
+    #       }
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/MonitorConfig AWS API Documentation
+    #
+    class MonitorConfig < Struct.new(
+      :monitor_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of the data the monitor used during the evaluation.
+    #
+    # @!attribute [rw] dataset_import_job_arn
+    #   The Amazon Resource Name (ARN) of the dataset import job used to
+    #   import the data that initiated the monitor evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] forecast_arn
+    #   The Amazon Resource Name (ARN) of the forecast the monitor used
+    #   during the evaluation.
+    #   @return [String]
+    #
+    # @!attribute [rw] predictor_arn
+    #   The Amazon Resource Name (ARN) of the predictor resource you are
+    #   monitoring.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/MonitorDataSource AWS API Documentation
+    #
+    class MonitorDataSource < Struct.new(
+      :dataset_import_job_arn,
+      :forecast_arn,
+      :predictor_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about the monitor resource.
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the monitor. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `ACTIVE_STOPPING`, `ACTIVE_STOPPED`
+    #
+    #   * `UPDATE_IN_PROGRESS`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/MonitorInfo AWS API Documentation
+    #
+    class MonitorInfo < Struct.new(
+      :monitor_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the monitor properties used in the ListMonitors
+    # operation. To get a complete set of properties, call the
+    # DescribeMonitor operation, and provide the listed `MonitorArn`.
+    #
+    # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_name
+    #   The name of the monitor resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the predictor being monitored.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the monitor. States include:
+    #
+    #   * `ACTIVE`
+    #
+    #   * `ACTIVE_STOPPING`, `ACTIVE_STOPPED`
+    #
+    #   * `UPDATE_IN_PROGRESS`
+    #
+    #   * `CREATE_PENDING`, `CREATE_IN_PROGRESS`, `CREATE_FAILED`
+    #
+    #   * `DELETE_PENDING`, `DELETE_IN_PROGRESS`, `DELETE_FAILED`
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   When the monitor resource was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modification_time
+    #   The last time the monitor resource was modified. The timestamp
+    #   depends on the status of the job:
+    #
+    #   * `CREATE_PENDING` - The `CreationTime`.
+    #
+    #   * `CREATE_IN_PROGRESS` - The current timestamp.
+    #
+    #   * `STOPPED` - When the resource stopped.
+    #
+    #   * `ACTIVE` or `CREATE_FAILED` - When the monitor creation finished
+    #     or failed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/MonitorSummary AWS API Documentation
+    #
+    class MonitorSummary < Struct.new(
+      :monitor_arn,
+      :monitor_name,
+      :resource_arn,
+      :status,
+      :creation_time,
+      :last_modification_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5204,6 +5837,49 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # Metrics you can use as a baseline for comparison purposes. Use these
+    # metrics when you interpret monitoring results for an auto predictor.
+    #
+    # @!attribute [rw] baseline_metrics
+    #   The initial [accuracy metrics][1] for the predictor. Use these
+    #   metrics as a baseline for comparison purposes as you use your
+    #   predictor and the metrics change.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
+    #   @return [Array<Types::BaselineMetric>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorBaseline AWS API Documentation
+    #
+    class PredictorBaseline < Struct.new(
+      :baseline_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about a predictor event, such as a retraining.
+    #
+    # @!attribute [rw] detail
+    #   The type of event. For example, `Retrain`. A retraining event
+    #   denotes the timepoint when a predictor was retrained. Any monitor
+    #   results from before the `Datetime` are from the previous predictor.
+    #   Any new metrics are for the newly retrained predictor.
+    #   @return [String]
+    #
+    # @!attribute [rw] datetime
+    #   The timestamp for when the event occurred.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorEvent AWS API Documentation
+    #
+    class PredictorEvent < Struct.new(
+      :detail,
+      :datetime)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The algorithm used to perform a backtest and the status of those
     # tests.
     #
@@ -5242,6 +5918,77 @@ module Aws::ForecastService
     #
     class PredictorExecutionDetails < Struct.new(
       :predictor_executions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the results of a monitor evaluation.
+    #
+    # @!attribute [rw] resource_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] monitor_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_time
+    #   The timestamp that indicates when the monitor evaluation was
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] evaluation_state
+    #   The status of the monitor evaluation. The state can be `SUCCESS` or
+    #   `FAILURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] window_start_datetime
+    #   The timestamp that indicates the start of the window that is used
+    #   for monitor evaluation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] window_end_datetime
+    #   The timestamp that indicates the end of the window that is used for
+    #   monitor evaluation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] predictor_event
+    #   Provides details about a predictor event, such as a retraining.
+    #   @return [Types::PredictorEvent]
+    #
+    # @!attribute [rw] monitor_data_source
+    #   The source of the data the monitor resource used during the
+    #   evaluation.
+    #   @return [Types::MonitorDataSource]
+    #
+    # @!attribute [rw] metric_results
+    #   A list of metrics Forecast calculated when monitoring a predictor.
+    #   You can compare the value for each metric in the list to the
+    #   metric's value in the Baseline to see how your predictor's
+    #   performance is changing.
+    #   @return [Array<Types::MetricResult>]
+    #
+    # @!attribute [rw] num_items_evaluated
+    #   The number of items considered during the evaluation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] message
+    #   Information about any errors that may have occurred during the
+    #   monitor evaluation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/PredictorMonitorEvaluation AWS API Documentation
+    #
+    class PredictorMonitorEvaluation < Struct.new(
+      :resource_arn,
+      :monitor_arn,
+      :evaluation_time,
+      :evaluation_state,
+      :window_start_datetime,
+      :window_end_datetime,
+      :predictor_event,
+      :monitor_data_source,
+      :metric_results,
+      :num_items_evaluated,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5390,6 +6137,25 @@ module Aws::ForecastService
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ResumeResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource_arn: "Arn", # required
+    #       }
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource to resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/ResumeResourceRequest AWS API Documentation
+    #
+    class ResumeResourceRequest < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The path to the file(s) in an Amazon Simple Storage Service (Amazon
     # S3) bucket, and an AWS Identity and Access Management (IAM) role that
     # Amazon Forecast can assume to access the file(s). Optionally, includes
@@ -5465,8 +6231,12 @@ module Aws::ForecastService
     end
 
     # An attribute of a schema, which defines a dataset field. A schema
-    # attribute is required for every field in a dataset. The Schema object
-    # contains an array of `SchemaAttribute` objects.
+    # attribute is required for every field in a dataset. The [Schema][1]
+    # object contains an array of `SchemaAttribute` objects.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_Schema.html
     #
     # @note When making an API call, you may pass SchemaAttribute
     #   data as a hash:
@@ -5482,6 +6252,10 @@ module Aws::ForecastService
     #
     # @!attribute [rw] attribute_type
     #   The data type of the field.
+    #
+    #   For a related time series dataset, other than date, item\_id, and
+    #   forecast dimensions attributes, all attributes should be of
+    #   numerical type (integer/float).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/SchemaAttribute AWS API Documentation
@@ -5494,7 +6268,11 @@ module Aws::ForecastService
     end
 
     # Provides statistics for each data field imported into to an Amazon
-    # Forecast dataset with the CreateDatasetImportJob operation.
+    # Forecast dataset with the [CreateDatasetImportJob][1] operation.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
     #
     # @!attribute [rw] count
     #   The number of values in the field. If the response value is -1,

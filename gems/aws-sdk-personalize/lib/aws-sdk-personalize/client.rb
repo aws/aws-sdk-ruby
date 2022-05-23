@@ -1282,6 +1282,9 @@ module Aws::Personalize
     # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #   FAILED
     #
+    # * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START PENDING
+    #   &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
     # To get the recommender status, call [DescribeRecommender][2].
@@ -2515,10 +2518,16 @@ module Aws::Personalize
     # * CREATE PENDING &gt; CREATE IN\_PROGRESS &gt; ACTIVE -or- CREATE
     #   FAILED
     #
+    # * STOP PENDING &gt; STOP IN\_PROGRESS &gt; INACTIVE &gt; START PENDING
+    #   &gt; START IN\_PROGRESS &gt; ACTIVE
+    #
     # * DELETE PENDING &gt; DELETE IN\_PROGRESS
     #
     # When the `status` is `CREATE FAILED`, the response includes the
     # `failureReason` key, which describes why.
+    #
+    # The `modelMetrics` key is null when the recommender is being created
+    # or deleted.
     #
     # For more information on recommenders, see [CreateRecommender][1].
     #
@@ -2559,6 +2568,8 @@ module Aws::Personalize
     #   resp.recommender.latest_recommender_update.last_updated_date_time #=> Time
     #   resp.recommender.latest_recommender_update.status #=> String
     #   resp.recommender.latest_recommender_update.failure_reason #=> String
+    #   resp.recommender.model_metrics #=> Hash
+    #   resp.recommender.model_metrics["MetricName"] #=> Float
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/personalize-2018-05-22/DescribeRecommender AWS API Documentation
     #
@@ -3851,7 +3862,7 @@ module Aws::Personalize
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-personalize'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
