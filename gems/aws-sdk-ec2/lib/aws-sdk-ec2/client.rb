@@ -7072,7 +7072,7 @@ module Aws::EC2
     # A launch template contains the parameters to launch an instance. When
     # you launch an instance using RunInstances, you can specify a launch
     # template instead of providing the launch parameters in the request.
-    # For more information, see [Launching an instance from a launch
+    # For more information, see [Launch an instance from a launch
     # template][1] in the *Amazon Elastic Compute Cloud User Guide*.
     #
     # If you want to clone an existing launch template as the basis for
@@ -7095,7 +7095,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -7378,6 +7378,7 @@ module Aws::EC2
     #       maintenance_options: {
     #         auto_recovery: "default", # accepts default, disabled
     #       },
+    #       disable_api_stop: false,
     #     },
     #     tag_specifications: [
     #       {
@@ -7424,8 +7425,13 @@ module Aws::EC2
     # created. You cannot specify, change, or replace the numbering of
     # launch template versions.
     #
-    # For more information, see [Managing launch template versions][1]in the
-    # *Amazon Elastic Compute Cloud User Guide*.
+    # Launch templates are immutable; after you create a launch template,
+    # you can't modify it. Instead, you can create a new version of the
+    # launch template that includes any changes you require.
+    #
+    # For more information, see [Modify a launch template (manage launch
+    # template versions)][1]in the *Amazon Elastic Compute Cloud User
+    # Guide*.
     #
     #
     #
@@ -7440,7 +7446,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -7733,6 +7739,7 @@ module Aws::EC2
     #       maintenance_options: {
     #         auto_recovery: "default", # accepts default, disabled
     #       },
+    #       disable_api_stop: false,
     #     },
     #   })
     #
@@ -7879,6 +7886,7 @@ module Aws::EC2
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_version.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
+    #   resp.launch_template_version.launch_template_data.disable_api_stop #=> Boolean
     #   resp.warning.errors #=> Array
     #   resp.warning.errors[0].code #=> String
     #   resp.warning.errors[0].message #=> String
@@ -20718,6 +20726,7 @@ module Aws::EC2
     #   * {Types::InstanceAttribute#source_dest_check #source_dest_check} => Types::AttributeBooleanValue
     #   * {Types::InstanceAttribute#sriov_net_support #sriov_net_support} => Types::AttributeValue
     #   * {Types::InstanceAttribute#user_data #user_data} => Types::AttributeValue
+    #   * {Types::InstanceAttribute#disable_api_stop #disable_api_stop} => Types::AttributeBooleanValue
     #
     #
     # @example Example: To describe the instance type
@@ -20791,7 +20800,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #   })
@@ -20823,6 +20832,7 @@ module Aws::EC2
     #   resp.source_dest_check.value #=> Boolean
     #   resp.sriov_net_support #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
     #   resp.user_data #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+    #   resp.disable_api_stop.value #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceAttribute AWS API Documentation
     #
@@ -23117,6 +23127,7 @@ module Aws::EC2
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_versions[0].launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
+    #   resp.launch_template_versions[0].launch_template_data.disable_api_stop #=> Boolean
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeLaunchTemplateVersions AWS API Documentation
@@ -35919,6 +35930,7 @@ module Aws::EC2
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_a_record #=> Boolean
     #   resp.launch_template_data.private_dns_name_options.enable_resource_name_dns_aaaa_record #=> Boolean
     #   resp.launch_template_data.maintenance_options.auto_recovery #=> String, one of "default", "disabled"
+    #   resp.launch_template_data.disable_api_stop #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetLaunchTemplateData AWS API Documentation
     #
@@ -39393,6 +39405,16 @@ module Aws::EC2
     #   `userData`, `disableApiTermination`, or
     #   `instanceInitiatedShutdownBehavior` attribute.
     #
+    # @option params [Types::AttributeBooleanValue] :disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For more
+    #   information, see [Stop Protection][1].
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
     #
@@ -39432,7 +39454,7 @@ module Aws::EC2
     #     source_dest_check: {
     #       value: false,
     #     },
-    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     block_device_mappings: [
     #       {
     #         device_name: "String",
@@ -39465,6 +39487,9 @@ module Aws::EC2
     #       value: "data",
     #     },
     #     value: "String",
+    #     disable_api_stop: {
+    #       value: false,
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttribute AWS API Documentation
@@ -40353,7 +40378,7 @@ module Aws::EC2
     # @option params [String] :client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -46210,7 +46235,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.reset_instance_attribute({
-    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
     #   })
@@ -47380,6 +47405,14 @@ module Aws::EC2
     # @option params [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
     #   The maintenance and recovery options for the instance.
     #
+    # @option params [Boolean] :disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For more
+    #   information, see [Stop Protection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #
     # @return [Types::Reservation] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::Reservation#groups #groups} => Array&lt;Types::GroupIdentifier&gt;
@@ -47608,6 +47641,7 @@ module Aws::EC2
     #     maintenance_options: {
     #       auto_recovery: "disabled", # accepts disabled, default
     #     },
+    #     disable_api_stop: false,
     #   })
     #
     # @example Response structure
@@ -49661,7 +49695,7 @@ module Aws::EC2
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.315.0'
+      context[:gem_version] = '1.316.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

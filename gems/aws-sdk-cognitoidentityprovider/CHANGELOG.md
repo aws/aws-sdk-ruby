@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.66.0 (2022-05-24)
+------------------
+
+* Feature - Amazon Cognito now supports requiring attribute verification (ex. email and phone number) before update.
+
 1.65.0 (2022-03-15)
 ------------------
 

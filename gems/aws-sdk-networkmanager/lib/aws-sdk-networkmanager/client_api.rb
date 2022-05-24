@@ -18,6 +18,10 @@ module Aws::NetworkManager
     AcceptAttachmentRequest = Shapes::StructureShape.new(name: 'AcceptAttachmentRequest')
     AcceptAttachmentResponse = Shapes::StructureShape.new(name: 'AcceptAttachmentResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountStatus = Shapes::StructureShape.new(name: 'AccountStatus')
+    AccountStatusList = Shapes::ListShape.new(name: 'AccountStatusList')
+    Action = Shapes::StringShape.new(name: 'Action')
     AssociateConnectPeerRequest = Shapes::StructureShape.new(name: 'AssociateConnectPeerRequest')
     AssociateConnectPeerResponse = Shapes::StructureShape.new(name: 'AssociateConnectPeerResponse')
     AssociateCustomerGatewayRequest = Shapes::StructureShape.new(name: 'AssociateCustomerGatewayRequest')
@@ -233,6 +237,8 @@ module Aws::NetworkManager
     ListCoreNetworkPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListCoreNetworkPolicyVersionsResponse')
     ListCoreNetworksRequest = Shapes::StructureShape.new(name: 'ListCoreNetworksRequest')
     ListCoreNetworksResponse = Shapes::StructureShape.new(name: 'ListCoreNetworksResponse')
+    ListOrganizationServiceAccessStatusRequest = Shapes::StructureShape.new(name: 'ListOrganizationServiceAccessStatusRequest')
+    ListOrganizationServiceAccessStatusResponse = Shapes::StructureShape.new(name: 'ListOrganizationServiceAccessStatusResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Location = Shapes::StructureShape.new(name: 'Location')
@@ -251,6 +257,9 @@ module Aws::NetworkManager
     NetworkTelemetry = Shapes::StructureShape.new(name: 'NetworkTelemetry')
     NetworkTelemetryList = Shapes::ListShape.new(name: 'NetworkTelemetryList')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    OrganizationAwsServiceAccessStatus = Shapes::StringShape.new(name: 'OrganizationAwsServiceAccessStatus')
+    OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    OrganizationStatus = Shapes::StructureShape.new(name: 'OrganizationStatus')
     PathComponent = Shapes::StructureShape.new(name: 'PathComponent')
     PathComponentList = Shapes::ListShape.new(name: 'PathComponentList')
     ProposedSegmentChange = Shapes::StructureShape.new(name: 'ProposedSegmentChange')
@@ -287,6 +296,7 @@ module Aws::NetworkManager
     RouteTableType = Shapes::StringShape.new(name: 'RouteTableType')
     RouteType = Shapes::StringShape.new(name: 'RouteType')
     RouteTypeList = Shapes::ListShape.new(name: 'RouteTypeList')
+    SLRDeploymentStatus = Shapes::StringShape.new(name: 'SLRDeploymentStatus')
     ServerSideString = Shapes::StringShape.new(name: 'ServerSideString')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     Site = Shapes::StructureShape.new(name: 'Site')
@@ -296,6 +306,8 @@ module Aws::NetworkManager
     SiteList = Shapes::ListShape.new(name: 'SiteList')
     SiteState = Shapes::StringShape.new(name: 'SiteState')
     SiteToSiteVpnAttachment = Shapes::StructureShape.new(name: 'SiteToSiteVpnAttachment')
+    StartOrganizationServiceAccessUpdateRequest = Shapes::StructureShape.new(name: 'StartOrganizationServiceAccessUpdateRequest')
+    StartOrganizationServiceAccessUpdateResponse = Shapes::StructureShape.new(name: 'StartOrganizationServiceAccessUpdateResponse')
     StartRouteAnalysisRequest = Shapes::StructureShape.new(name: 'StartRouteAnalysisRequest')
     StartRouteAnalysisResponse = Shapes::StructureShape.new(name: 'StartRouteAnalysisResponse')
     SubnetArn = Shapes::StringShape.new(name: 'SubnetArn')
@@ -362,6 +374,12 @@ module Aws::NetworkManager
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ServerSideString, required: true, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    AccountStatus.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+    AccountStatus.add_member(:slr_deployment_status, Shapes::ShapeRef.new(shape: SLRDeploymentStatus, location_name: "SLRDeploymentStatus"))
+    AccountStatus.struct_class = Types::AccountStatus
+
+    AccountStatusList.member = Shapes::ShapeRef.new(shape: AccountStatus)
 
     AssociateConnectPeerRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     AssociateConnectPeerRequest.add_member(:connect_peer_id, Shapes::ShapeRef.new(shape: ConnectPeerId, required: true, location_name: "ConnectPeerId"))
@@ -1172,6 +1190,14 @@ module Aws::NetworkManager
     ListCoreNetworksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListCoreNetworksResponse.struct_class = Types::ListCoreNetworksResponse
 
+    ListOrganizationServiceAccessStatusRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListOrganizationServiceAccessStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListOrganizationServiceAccessStatusRequest.struct_class = Types::ListOrganizationServiceAccessStatusRequest
+
+    ListOrganizationServiceAccessStatusResponse.add_member(:organization_status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "OrganizationStatus"))
+    ListOrganizationServiceAccessStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListOrganizationServiceAccessStatusResponse.struct_class = Types::ListOrganizationServiceAccessStatusResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1246,6 +1272,12 @@ module Aws::NetworkManager
     NetworkTelemetry.struct_class = Types::NetworkTelemetry
 
     NetworkTelemetryList.member = Shapes::ShapeRef.new(shape: NetworkTelemetry)
+
+    OrganizationStatus.add_member(:organization_id, Shapes::ShapeRef.new(shape: OrganizationId, location_name: "OrganizationId"))
+    OrganizationStatus.add_member(:organization_aws_service_access_status, Shapes::ShapeRef.new(shape: OrganizationAwsServiceAccessStatus, location_name: "OrganizationAwsServiceAccessStatus"))
+    OrganizationStatus.add_member(:slr_deployment_status, Shapes::ShapeRef.new(shape: SLRDeploymentStatus, location_name: "SLRDeploymentStatus"))
+    OrganizationStatus.add_member(:account_status_list, Shapes::ShapeRef.new(shape: AccountStatusList, location_name: "AccountStatusList"))
+    OrganizationStatus.struct_class = Types::OrganizationStatus
 
     PathComponent.add_member(:sequence, Shapes::ShapeRef.new(shape: Integer, location_name: "Sequence"))
     PathComponent.add_member(:resource, Shapes::ShapeRef.new(shape: NetworkResourceSummary, location_name: "Resource"))
@@ -1373,6 +1405,12 @@ module Aws::NetworkManager
     SiteToSiteVpnAttachment.add_member(:attachment, Shapes::ShapeRef.new(shape: Attachment, location_name: "Attachment"))
     SiteToSiteVpnAttachment.add_member(:vpn_connection_arn, Shapes::ShapeRef.new(shape: VpnConnectionArn, location_name: "VpnConnectionArn"))
     SiteToSiteVpnAttachment.struct_class = Types::SiteToSiteVpnAttachment
+
+    StartOrganizationServiceAccessUpdateRequest.add_member(:action, Shapes::ShapeRef.new(shape: Action, required: true, location_name: "Action"))
+    StartOrganizationServiceAccessUpdateRequest.struct_class = Types::StartOrganizationServiceAccessUpdateRequest
+
+    StartOrganizationServiceAccessUpdateResponse.add_member(:organization_status, Shapes::ShapeRef.new(shape: OrganizationStatus, location_name: "OrganizationStatus"))
+    StartOrganizationServiceAccessUpdateResponse.struct_class = Types::StartOrganizationServiceAccessUpdateResponse
 
     StartRouteAnalysisRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     StartRouteAnalysisRequest.add_member(:source, Shapes::ShapeRef.new(shape: RouteAnalysisEndpointOptionsSpecification, required: true, location_name: "Source"))
@@ -2466,6 +2504,14 @@ module Aws::NetworkManager
         )
       end)
 
+      api.add_operation(:list_organization_service_access_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOrganizationServiceAccessStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/organizations/service-access"
+        o.input = Shapes::ShapeRef.new(shape: ListOrganizationServiceAccessStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOrganizationServiceAccessStatusResponse)
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -2548,6 +2594,20 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:start_organization_service_access_update, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOrganizationServiceAccessUpdate"
+        o.http_method = "POST"
+        o.http_request_uri = "/organizations/service-access"
+        o.input = Shapes::ShapeRef.new(shape: StartOrganizationServiceAccessUpdateRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartOrganizationServiceAccessUpdateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:start_route_analysis, Seahorse::Model::Operation.new.tap do |o|

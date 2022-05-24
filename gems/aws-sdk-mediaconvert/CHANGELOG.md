@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2022-05-24)
+------------------
+
+* Feature - AWS Elemental MediaConvert SDK has added support for rules that constrain Automatic-ABR rendition selection when generating ABR package ladders.
+
 1.89.0 (2022-04-29)
 ------------------
 

@@ -83,6 +83,21 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @!attribute [rw] account_id
+    #   @return [String]
+    #
+    # @!attribute [rw] slr_deployment_status
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AccountStatus AWS API Documentation
+    #
+    class AccountStatus < Struct.new(
+      :account_id,
+      :slr_deployment_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass AssociateConnectPeerRequest
     #   data as a hash:
     #
@@ -3984,7 +3999,7 @@ module Aws::NetworkManager
 
     # Describes a global network. This is a single private network acting as
     # a high-level container for your network objects, including an Amazon
-    # Web Services-manged Core Network.
+    # Web Services-managed Core Network.
     #
     # @!attribute [rw] global_network_id
     #   The ID of the global network.
@@ -4344,6 +4359,44 @@ module Aws::NetworkManager
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListOrganizationServiceAccessStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         max_results: 1,
+    #         next_token: "NextToken",
+    #       }
+    #
+    # @!attribute [rw] max_results
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListOrganizationServiceAccessStatusRequest AWS API Documentation
+    #
+    class ListOrganizationServiceAccessStatusRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_status
+    #   @return [Types::OrganizationStatus]
+    #
+    # @!attribute [rw] next_token
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListOrganizationServiceAccessStatusResponse AWS API Documentation
+    #
+    class ListOrganizationServiceAccessStatusResponse < Struct.new(
+      :organization_status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass ListTagsForResourceRequest
     #   data as a hash:
     #
@@ -4689,6 +4742,29 @@ module Aws::NetworkManager
       :resource_arn,
       :address,
       :health)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_id
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_aws_service_access_status
+    #   @return [String]
+    #
+    # @!attribute [rw] slr_deployment_status
+    #   @return [String]
+    #
+    # @!attribute [rw] account_status_list
+    #   @return [Array<Types::AccountStatus>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/OrganizationStatus AWS API Documentation
+    #
+    class OrganizationStatus < Struct.new(
+      :organization_id,
+      :organization_aws_service_access_status,
+      :slr_deployment_status,
+      :account_status_list)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5298,6 +5374,35 @@ module Aws::NetworkManager
     class SiteToSiteVpnAttachment < Struct.new(
       :attachment,
       :vpn_connection_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartOrganizationServiceAccessUpdateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         action: "Action", # required
+    #       }
+    #
+    # @!attribute [rw] action
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartOrganizationServiceAccessUpdateRequest AWS API Documentation
+    #
+    class StartOrganizationServiceAccessUpdateRequest < Struct.new(
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] organization_status
+    #   @return [Types::OrganizationStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartOrganizationServiceAccessUpdateResponse AWS API Documentation
+    #
+    class StartOrganizationServiceAccessUpdateResponse < Struct.new(
+      :organization_status)
       SENSITIVE = []
       include Aws::Structure
     end

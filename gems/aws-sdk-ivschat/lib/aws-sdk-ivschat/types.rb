@@ -522,9 +522,14 @@ module Aws::Ivschat
     # @!attribute [rw] fallback_result
     #   Specifies the fallback behavior (whether the message is allowed or
     #   denied) if the handler does not return a valid response, encounters
-    #   an error or times out. If allowed, the message is delivered with
-    #   returned content to all users connected to the room. If denied, the
-    #   message is not delivered to any user. Default: `ALLOW`.
+    #   an error, or times out. (For the timeout period, see [ Service
+    #   Quotas][1].) If allowed, the message is delivered with returned
+    #   content to all users connected to the room. If denied, the message
+    #   is not delivered to any user. Default: `ALLOW`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ivs/latest/userguide/service-quotas.html
     #   @return [String]
     #
     # @!attribute [rw] uri

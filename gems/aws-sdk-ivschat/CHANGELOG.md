@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.2.0 (2022-05-24)
+------------------
+
+* Feature - Doc-only update. For MessageReviewHandler structure, added timeout period in the description of the fallbackResult field
+
 1.1.0 (2022-05-12)
 ------------------
 

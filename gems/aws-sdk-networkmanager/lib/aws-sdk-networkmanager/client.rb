@@ -455,10 +455,10 @@ module Aws::NetworkManager
     # device.
     #
     # You can only associate customer gateways that are connected to a VPN
-    # attachment on a transit gateway. The transit gateway must be
-    # registered in your global network. When you register a transit
-    # gateway, customer gateways that are connected to the transit gateway
-    # are automatically included in the global network. To list customer
+    # attachment on a transit gateway or core network registered in your
+    # global network. When you register a transit gateway or core network,
+    # customer gateways that are connected to the transit gateway are
+    # automatically included in the global network. To list customer
     # gateways that are connected to a transit gateway, use the
     # [DescribeVpnConnections][1] EC2 API and filter by
     # `transit-gateway-id`.
@@ -691,7 +691,7 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
-    # Creates a core network connect peer for a specified core network
+    # Creates a core network Connect peer for a specified core network
     # connect attachment between a core network and an appliance. The peer
     # address and transit gateway address must be the same IP address family
     # (IPv4 or IPv6).
@@ -1222,8 +1222,8 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
-    # Creates a site-to-site VPN attachment on an edge location of a core
-    # network.
+    # Creates an Amazon Web Services site-to-site VPN attachment on an edge
+    # location of a core network.
     #
     # @option params [required, String] :core_network_id
     #   The ID of a core network where you're creating a site-to-site VPN
@@ -1652,8 +1652,8 @@ module Aws::NetworkManager
     end
 
     # Deletes an existing global network. You must first delete all global
-    # network objects (devices, links, and sites) and deregister all transit
-    # gateways.
+    # network objects (devices, links, and sites), deregister all transit
+    # gateways, and delete any core networks.
     #
     # @option params [required, String] :global_network_id
     #   The ID of the global network.
@@ -2271,8 +2271,7 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
-    # Returns information about a core network. By default it returns the
-    # LIVE policy.
+    # Returns information about the LIVE policy for a core network.
     #
     # @option params [required, String] :core_network_id
     #   The ID of a core network.
@@ -3764,6 +3763,41 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # @option params [Integer] :max_results
+    #
+    # @option params [String] :next_token
+    #
+    # @return [Types::ListOrganizationServiceAccessStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOrganizationServiceAccessStatusResponse#organization_status #organization_status} => Types::OrganizationStatus
+    #   * {Types::ListOrganizationServiceAccessStatusResponse#next_token #next_token} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_organization_service_access_status({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_status.organization_id #=> String
+    #   resp.organization_status.organization_aws_service_access_status #=> String
+    #   resp.organization_status.slr_deployment_status #=> String
+    #   resp.organization_status.account_status_list #=> Array
+    #   resp.organization_status.account_status_list[0].account_id #=> String
+    #   resp.organization_status.account_status_list[0].slr_deployment_status #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListOrganizationServiceAccessStatus AWS API Documentation
+    #
+    # @overload list_organization_service_access_status(params = {})
+    # @param [Hash] params ({})
+    def list_organization_service_access_status(params = {}, options = {})
+      req = build_request(:list_organization_service_access_status, params)
+      req.send_request(options)
+    end
+
     # Lists the tags for a specified resource.
     #
     # @option params [required, String] :resource_arn
@@ -4013,6 +4047,36 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def restore_core_network_policy_version(params = {}, options = {})
       req = build_request(:restore_core_network_policy_version, params)
+      req.send_request(options)
+    end
+
+    # @option params [required, String] :action
+    #
+    # @return [Types::StartOrganizationServiceAccessUpdateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOrganizationServiceAccessUpdateResponse#organization_status #organization_status} => Types::OrganizationStatus
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_organization_service_access_update({
+    #     action: "Action", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.organization_status.organization_id #=> String
+    #   resp.organization_status.organization_aws_service_access_status #=> String
+    #   resp.organization_status.slr_deployment_status #=> String
+    #   resp.organization_status.account_status_list #=> Array
+    #   resp.organization_status.account_status_list[0].account_id #=> String
+    #   resp.organization_status.account_status_list[0].slr_deployment_status #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/StartOrganizationServiceAccessUpdate AWS API Documentation
+    #
+    # @overload start_organization_service_access_update(params = {})
+    # @param [Hash] params ({})
+    def start_organization_service_access_update(params = {}, options = {})
+      req = build_request(:start_organization_service_access_update, params)
       req.send_request(options)
     end
 
@@ -4671,7 +4735,7 @@ module Aws::NetworkManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

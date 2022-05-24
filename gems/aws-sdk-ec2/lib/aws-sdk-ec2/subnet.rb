@@ -480,6 +480,7 @@ module Aws::EC2
     #     maintenance_options: {
     #       auto_recovery: "disabled", # accepts disabled, default
     #     },
+    #     disable_api_stop: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
@@ -785,6 +786,13 @@ module Aws::EC2
     #   inherited from the subnet.
     # @option options [Types::InstanceMaintenanceOptionsRequest] :maintenance_options
     #   The maintenance and recovery options for the instance.
+    # @option options [Boolean] :disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For more
+    #   information, see [Stop Protection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
     # @return [Instance::Collection]
     def create_instances(options = {})
       batch = []

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.316.0 (2022-05-24)
+------------------
+
+* Feature - Stop Protection feature enables customers to protect their instances from accidental stop actions.
+
 1.315.0 (2022-05-12)
 ------------------
 

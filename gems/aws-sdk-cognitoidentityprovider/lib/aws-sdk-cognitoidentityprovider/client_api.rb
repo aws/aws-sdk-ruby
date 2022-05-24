@@ -90,6 +90,7 @@ module Aws::CognitoIdentityProvider
     AttributeNameType = Shapes::StringShape.new(name: 'AttributeNameType')
     AttributeType = Shapes::StructureShape.new(name: 'AttributeType')
     AttributeValueType = Shapes::StringShape.new(name: 'AttributeValueType')
+    AttributesRequireVerificationBeforeUpdateType = Shapes::ListShape.new(name: 'AttributesRequireVerificationBeforeUpdateType')
     AuthEventType = Shapes::StructureShape.new(name: 'AuthEventType')
     AuthEventsType = Shapes::ListShape.new(name: 'AuthEventsType')
     AuthFlowType = Shapes::StringShape.new(name: 'AuthFlowType')
@@ -430,6 +431,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolDomainResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolDomainResponse')
     UpdateUserPoolRequest = Shapes::StructureShape.new(name: 'UpdateUserPoolRequest')
     UpdateUserPoolResponse = Shapes::StructureShape.new(name: 'UpdateUserPoolResponse')
+    UserAttributeUpdateSettingsType = Shapes::StructureShape.new(name: 'UserAttributeUpdateSettingsType')
     UserContextDataType = Shapes::StructureShape.new(name: 'UserContextDataType')
     UserFilterType = Shapes::StringShape.new(name: 'UserFilterType')
     UserImportInProgressException = Shapes::StructureShape.new(name: 'UserImportInProgressException')
@@ -752,6 +754,8 @@ module Aws::CognitoIdentityProvider
     AttributeType.add_member(:value, Shapes::ShapeRef.new(shape: AttributeValueType, location_name: "Value"))
     AttributeType.struct_class = Types::AttributeType
 
+    AttributesRequireVerificationBeforeUpdateType.member = Shapes::ShapeRef.new(shape: VerifiedAttributeType)
+
     AuthEventType.add_member(:event_id, Shapes::ShapeRef.new(shape: StringType, location_name: "EventId"))
     AuthEventType.add_member(:event_type, Shapes::ShapeRef.new(shape: EventType, location_name: "EventType"))
     AuthEventType.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateType, location_name: "CreationDate"))
@@ -949,6 +953,7 @@ module Aws::CognitoIdentityProvider
     CreateUserPoolRequest.add_member(:verification_message_template, Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
     CreateUserPoolRequest.add_member(:sms_authentication_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
     CreateUserPoolRequest.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
+    CreateUserPoolRequest.add_member(:user_attribute_update_settings, Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
     CreateUserPoolRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
     CreateUserPoolRequest.add_member(:email_configuration, Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
     CreateUserPoolRequest.add_member(:sms_configuration, Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
@@ -1799,6 +1804,7 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.add_member(:email_verification_subject, Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
     UpdateUserPoolRequest.add_member(:verification_message_template, Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
     UpdateUserPoolRequest.add_member(:sms_authentication_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    UpdateUserPoolRequest.add_member(:user_attribute_update_settings, Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
     UpdateUserPoolRequest.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
     UpdateUserPoolRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
     UpdateUserPoolRequest.add_member(:email_configuration, Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
@@ -1810,6 +1816,9 @@ module Aws::CognitoIdentityProvider
     UpdateUserPoolRequest.struct_class = Types::UpdateUserPoolRequest
 
     UpdateUserPoolResponse.struct_class = Types::UpdateUserPoolResponse
+
+    UserAttributeUpdateSettingsType.add_member(:attributes_require_verification_before_update, Shapes::ShapeRef.new(shape: AttributesRequireVerificationBeforeUpdateType, location_name: "AttributesRequireVerificationBeforeUpdate"))
+    UserAttributeUpdateSettingsType.struct_class = Types::UserAttributeUpdateSettingsType
 
     UserContextDataType.add_member(:encoded_data, Shapes::ShapeRef.new(shape: StringType, location_name: "EncodedData"))
     UserContextDataType.struct_class = Types::UserContextDataType
@@ -1920,6 +1929,7 @@ module Aws::CognitoIdentityProvider
     UserPoolType.add_member(:email_verification_subject, Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailVerificationSubject"))
     UserPoolType.add_member(:verification_message_template, Shapes::ShapeRef.new(shape: VerificationMessageTemplateType, location_name: "VerificationMessageTemplate"))
     UserPoolType.add_member(:sms_authentication_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SmsAuthenticationMessage"))
+    UserPoolType.add_member(:user_attribute_update_settings, Shapes::ShapeRef.new(shape: UserAttributeUpdateSettingsType, location_name: "UserAttributeUpdateSettings"))
     UserPoolType.add_member(:mfa_configuration, Shapes::ShapeRef.new(shape: UserPoolMfaType, location_name: "MfaConfiguration"))
     UserPoolType.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
     UserPoolType.add_member(:estimated_number_of_users, Shapes::ShapeRef.new(shape: IntegerType, location_name: "EstimatedNumberOfUsers"))
@@ -3653,6 +3663,7 @@ module Aws::CognitoIdentityProvider
         o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AliasExistsException)
       end)
     end
 

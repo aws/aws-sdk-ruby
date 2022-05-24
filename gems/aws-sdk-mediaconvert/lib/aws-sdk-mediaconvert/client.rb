@@ -736,6 +736,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -1954,6 +1980,19 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -3024,6 +3063,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -4211,6 +4276,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -6763,6 +6841,19 @@ module Aws::MediaConvert
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job.settings.output_groups[0].custom_name #=> String
     #   resp.job.settings.output_groups[0].name #=> String
     #   resp.job.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -7713,6 +7804,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -9351,6 +9455,19 @@ module Aws::MediaConvert
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_templates[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_templates[0].settings.output_groups[0].custom_name #=> String
     #   resp.job_templates[0].settings.output_groups[0].name #=> String
     #   resp.job_templates[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -10352,6 +10469,19 @@ module Aws::MediaConvert
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.jobs[0].settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.jobs[0].settings.output_groups[0].custom_name #=> String
     #   resp.jobs[0].settings.output_groups[0].name #=> String
     #   resp.jobs[0].settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -12242,6 +12372,32 @@ module Aws::MediaConvert
     #               max_abr_bitrate: 1,
     #               max_renditions: 1,
     #               min_abr_bitrate: 1,
+    #               rules: [
+    #                 {
+    #                   allowed_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       required: "ENABLED", # accepts ENABLED, DISABLED
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   force_include_renditions: [
+    #                     {
+    #                       height: 1,
+    #                       width: 1,
+    #                     },
+    #                   ],
+    #                   min_bottom_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   min_top_rendition_size: {
+    #                     height: 1,
+    #                     width: 1,
+    #                   },
+    #                   type: "MIN_TOP_RENDITION_SIZE", # accepts MIN_TOP_RENDITION_SIZE, MIN_BOTTOM_RENDITION_SIZE, FORCE_INCLUDE_RENDITIONS, ALLOWED_RENDITIONS
+    #                 },
+    #               ],
     #             },
     #           },
     #           custom_name: "__string",
@@ -13426,6 +13582,19 @@ module Aws::MediaConvert
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_abr_bitrate #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.max_renditions #=> Integer
     #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.min_abr_bitrate #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].required #=> String, one of "ENABLED", "DISABLED"
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].allowed_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions #=> Array
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].force_include_renditions[0].width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_bottom_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.height #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].min_top_rendition_size.width #=> Integer
+    #   resp.job_template.settings.output_groups[0].automated_encoding_settings.abr_settings.rules[0].type #=> String, one of "MIN_TOP_RENDITION_SIZE", "MIN_BOTTOM_RENDITION_SIZE", "FORCE_INCLUDE_RENDITIONS", "ALLOWED_RENDITIONS"
     #   resp.job_template.settings.output_groups[0].custom_name #=> String
     #   resp.job_template.settings.output_groups[0].name #=> String
     #   resp.job_template.settings.output_groups[0].output_group_settings.cmaf_group_settings.additional_manifests #=> Array
@@ -15613,7 +15782,7 @@ module Aws::MediaConvert
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

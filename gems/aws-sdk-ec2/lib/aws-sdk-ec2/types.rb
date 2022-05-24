@@ -9262,6 +9262,7 @@ module Aws::EC2
     #           maintenance_options: {
     #             auto_recovery: "default", # accepts default, disabled
     #           },
+    #           disable_api_stop: false,
     #         },
     #         tag_specifications: [
     #           {
@@ -9286,7 +9287,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -9558,6 +9559,7 @@ module Aws::EC2
     #           maintenance_options: {
     #             auto_recovery: "default", # accepts default, disabled
     #           },
+    #           disable_api_stop: false,
     #         },
     #       }
     #
@@ -9571,7 +9573,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -20713,7 +20715,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #         dry_run: false,
     #         instance_id: "InstanceId", # required
     #       }
@@ -39840,6 +39842,11 @@ module Aws::EC2
     #   The user data.
     #   @return [Types::AttributeValue]
     #
+    # @!attribute [rw] disable_api_stop
+    #   To enable the instance for Amazon Web Services Stop Protection, set
+    #   this parameter to `true`; otherwise, set it to `false`.
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceAttribute AWS API Documentation
     #
     class InstanceAttribute < Struct.new(
@@ -39858,7 +39865,8 @@ module Aws::EC2
       :root_device_name,
       :source_dest_check,
       :sriov_net_support,
-      :user_data)
+      :user_data,
+      :disable_api_stop)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44443,9 +44451,9 @@ module Aws::EC2
     end
 
     # Indicates whether the instance is enabled for Amazon Web Services
-    # Nitro Enclaves. For more information, see [ What is Amazon Web
-    # Services Nitro Enclaves?][1] in the *Amazon Web Services Nitro
-    # Enclaves User Guide*.
+    # Nitro Enclaves. For more information, see [What is Amazon Web Services
+    # Nitro Enclaves?][1] in the *Amazon Web Services Nitro Enclaves User
+    # Guide*.
     #
     #
     #
@@ -44492,7 +44500,7 @@ module Aws::EC2
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
     #
     # @note When making an API call, you may pass LaunchTemplateHibernationOptionsRequest
     #   data as a hash:
@@ -47651,7 +47659,7 @@ module Aws::EC2
     #         source_dest_check: {
     #           value: false,
     #         },
-    #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #         attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #         block_device_mappings: [
     #           {
     #             device_name: "String",
@@ -47684,6 +47692,9 @@ module Aws::EC2
     #           value: "data",
     #         },
     #         value: "String",
+    #         disable_api_stop: {
+    #           value: false,
+    #         },
     #       }
     #
     # @!attribute [rw] source_dest_check
@@ -47817,6 +47828,17 @@ module Aws::EC2
     #   `instanceInitiatedShutdownBehavior` attribute.
     #   @return [String]
     #
+    # @!attribute [rw] disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For
+    #   more information, see [Stop Protection][1].
+    #
+    #
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   @return [Types::AttributeBooleanValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyInstanceAttributeRequest AWS API Documentation
     #
     class ModifyInstanceAttributeRequest < Struct.new(
@@ -47835,7 +47857,8 @@ module Aws::EC2
       :ramdisk,
       :sriov_net_support,
       :user_data,
-      :value)
+      :value,
+      :disable_api_stop)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48677,7 +48700,7 @@ module Aws::EC2
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier you provide to ensure the
     #   idempotency of the request. For more information, see [Ensuring
-    #   Idempotency][1].
+    #   idempotency][1].
     #
     #   Constraint: Maximum 128 ASCII characters.
     #
@@ -56331,13 +56354,14 @@ module Aws::EC2
     #         maintenance_options: {
     #           auto_recovery: "default", # accepts default, disabled
     #         },
+    #         disable_api_stop: false,
     #       }
     #
     # @!attribute [rw] kernel_id
     #   The ID of the kernel.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [User Provided Kernels][1] in the *Amazon
+    #   For more information, see [User provided kernels][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
     #
@@ -56373,7 +56397,7 @@ module Aws::EC2
     #   @return [String]
     #
     # @!attribute [rw] instance_type
-    #   The instance type. For more information, see [Instance Types][1] in
+    #   The instance type. For more information, see [Instance types][1] in
     #   the *Amazon Elastic Compute Cloud User Guide*.
     #
     #   If you specify `InstanceTypes`, you can't specify
@@ -56410,7 +56434,7 @@ module Aws::EC2
     #   The ID of the RAM disk.
     #
     #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
-    #   For more information, see [User Provided Kernels][1] in the *Amazon
+    #   For more information, see [User provided kernels][1] in the *Amazon
     #   Elastic Compute Cloud User Guide*.
     #
     #
@@ -56443,8 +56467,9 @@ module Aws::EC2
     # @!attribute [rw] user_data
     #   The user data to make available to the instance. You must provide
     #   base64-encoded text. User data is limited to 16 KB. For more
-    #   information, see [Running Commands on Your Linux Instance at
-    #   Launch][1] (Linux) or [Adding User Data][2] (Windows).
+    #   information, see [Run commands on your Linux instance at launch][1]
+    #   (Linux) or [Work with instance user data][2] (Windows) in the
+    #   *Amazon Elastic Compute Cloud User Guide*.
     #
     #   If you are creating the launch template for use with Batch, the user
     #   data must be provided in the [ MIME multi-part archive format][3].
@@ -56454,7 +56479,7 @@ module Aws::EC2
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html
-    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data
+    #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instancedata-add-user-data.html
     #   [3]: https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive
     #   [4]: https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html
     #   @return [String]
@@ -56534,7 +56559,7 @@ module Aws::EC2
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html
     #   [2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
     #   @return [Types::LaunchTemplateHibernationOptionsRequest]
     #
@@ -56580,6 +56605,15 @@ module Aws::EC2
     #   The maintenance options for the instance.
     #   @return [Types::LaunchTemplateInstanceMaintenanceOptionsRequest]
     #
+    # @!attribute [rw] disable_api_stop
+    #   Indicates whether to enable the instance for stop protection. For
+    #   more information, see [Stop Protection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RequestLaunchTemplateData AWS API Documentation
     #
     class RequestLaunchTemplateData < Struct.new(
@@ -56612,7 +56646,8 @@ module Aws::EC2
       :enclave_options,
       :instance_requirements,
       :private_dns_name_options,
-      :maintenance_options)
+      :maintenance_options,
+      :disable_api_stop)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -58169,7 +58204,7 @@ module Aws::EC2
     #   data as a hash:
     #
     #       {
-    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions
+    #         attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport, enclaveOptions, disableApiStop
     #         dry_run: false,
     #         instance_id: "InstanceId", # required
     #       }
@@ -58489,6 +58524,15 @@ module Aws::EC2
     #   The maintenance options for your instance.
     #   @return [Types::LaunchTemplateInstanceMaintenanceOptions]
     #
+    # @!attribute [rw] disable_api_stop
+    #   Indicates whether the instance is enabled for stop protection. For
+    #   more information, see [Stop Protection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ResponseLaunchTemplateData AWS API Documentation
     #
     class ResponseLaunchTemplateData < Struct.new(
@@ -58521,7 +58565,8 @@ module Aws::EC2
       :enclave_options,
       :instance_requirements,
       :private_dns_name_options,
-      :maintenance_options)
+      :maintenance_options,
+      :disable_api_stop)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -59600,6 +59645,7 @@ module Aws::EC2
     #         maintenance_options: {
     #           auto_recovery: "disabled", # accepts disabled, default
     #         },
+    #         disable_api_stop: false,
     #       }
     #
     # @!attribute [rw] block_device_mappings
@@ -59995,6 +60041,15 @@ module Aws::EC2
     #   The maintenance and recovery options for the instance.
     #   @return [Types::InstanceMaintenanceOptionsRequest]
     #
+    # @!attribute [rw] disable_api_stop
+    #   Indicates whether an instance is enabled for stop protection. For
+    #   more information, see [Stop Protection][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/RunInstancesRequest AWS API Documentation
     #
     class RunInstancesRequest < Struct.new(
@@ -60036,7 +60091,8 @@ module Aws::EC2
       :metadata_options,
       :enclave_options,
       :private_dns_name_options,
-      :maintenance_options)
+      :maintenance_options,
+      :disable_api_stop)
       SENSITIVE = [:user_data]
       include Aws::Structure
     end
@@ -67879,21 +67935,21 @@ module Aws::EC2
     # @!attribute [rw] code
     #   The error code that indicates why the parameter or parameter
     #   combination is not valid. For more information about error codes,
-    #   see [Error Codes][1].
+    #   see [Error codes][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @!attribute [rw] message
     #   The error message that describes why the parameter or parameter
     #   combination is not valid. For more information about error messages,
-    #   see [Error Codes][1].
+    #   see [Error codes][1].
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html.html
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ValidationError AWS API Documentation
