@@ -2007,6 +2007,38 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Stores the config information for how a candidate is generated
+    # (optional).
+    #
+    # @note When making an API call, you may pass AutoMLCandidateGenerationConfig
+    #   data as a hash:
+    #
+    #       {
+    #         feature_specification_s3_uri: "S3Uri",
+    #       }
+    #
+    # @!attribute [rw] feature_specification_s3_uri
+    #   A URL to the Amazon S3 data source containing selected features from
+    #   the input data source to run an Autopilot job (optional). This file
+    #   should be in json format as shown below:
+    #
+    #   `\{ "FeatureAttributeNames":["col1", "col2", ...] \}`.
+    #
+    #   The key name `FeatureAttributeNames` is fixed. The values listed in
+    #   `["col1", "col2", ...]` is case sensitive and should be a list of
+    #   strings containing unique values that are a subset of the column
+    #   names in the input data. The list of columns provided must not
+    #   include the target column.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLCandidateGenerationConfig AWS API Documentation
+    #
+    class AutoMLCandidateGenerationConfig < Struct.new(
+      :feature_specification_s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the steps for a candidate and what step it is
     # working on.
     #
@@ -2079,9 +2111,15 @@ module Aws::SageMaker
     #   @return [String]
     #
     # @!attribute [rw] channel_type
-    #   The channel type (optional) is an enum string. The default value is
-    #   `training`. Channels for training and validation must share the same
-    #   `ContentType` and `TargetAttributeName`.
+    #   The channel type (optional) is an `enum` string. The default value
+    #   is `training`. Channels for training and validation must share the
+    #   same `ContentType` and `TargetAttributeName`. For information on
+    #   specifying training and validation channel types, see [ `How to
+    #   specify training and validation datasets` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-data-sources-training-or-validation
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLChannel AWS API Documentation
@@ -2165,8 +2203,8 @@ module Aws::SageMaker
     # @!attribute [rw] validation_fraction
     #   The validation fraction (optional) is a float that specifies the
     #   portion of the training dataset to be used for validation. The
-    #   default value is 0.2, and values can range from 0 to 1. We recommend
-    #   setting this value to be less than 0.5.
+    #   default value is 0.2, and values must be greater than 0 and less
+    #   than 1. We recommend setting this value to be less than 0.5.
     #   @return [Float]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLDataSplitConfig AWS API Documentation
@@ -2261,6 +2299,9 @@ module Aws::SageMaker
     #         data_split_config: {
     #           validation_fraction: 1.0,
     #         },
+    #         candidate_generation_config: {
+    #           feature_specification_s3_uri: "S3Uri",
+    #         },
     #       }
     #
     # @!attribute [rw] completion_criteria
@@ -2279,12 +2320,18 @@ module Aws::SageMaker
     #   Type: AutoMLDataSplitConfig
     #   @return [Types::AutoMLDataSplitConfig]
     #
+    # @!attribute [rw] candidate_generation_config
+    #   The configuration for generating a candidate for an AutoML job
+    #   (optional).
+    #   @return [Types::AutoMLCandidateGenerationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/AutoMLJobConfig AWS API Documentation
     #
     class AutoMLJobConfig < Struct.new(
       :completion_criteria,
       :security_config,
-      :data_split_config)
+      :data_split_config,
+      :candidate_generation_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2888,6 +2935,10 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration specifying how to treat different headers. If no headers
+    # are specified SageMaker will by default base64 encode when capturing
+    # the data.
+    #
     # @note When making an API call, you may pass CaptureContentTypeHeader
     #   data as a hash:
     #
@@ -2897,9 +2948,13 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] csv_content_types
+    #   The list of all content type headers that SageMaker will treat as
+    #   CSV and capture accordingly.
     #   @return [Array<String>]
     #
     # @!attribute [rw] json_content_types
+    #   The list of all content type headers that SageMaker will treat as
+    #   JSON and capture accordingly.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CaptureContentTypeHeader AWS API Documentation
@@ -2911,6 +2966,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Specifies data Model Monitor will capture.
+    #
     # @note When making an API call, you may pass CaptureOption
     #   data as a hash:
     #
@@ -2919,6 +2976,7 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] capture_mode
+    #   Specify the boundary of data to capture.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CaptureOption AWS API Documentation
@@ -4455,6 +4513,9 @@ module Aws::SageMaker
     #           data_split_config: {
     #             validation_fraction: 1.0,
     #           },
+    #           candidate_generation_config: {
+    #             feature_specification_s3_uri: "S3Uri",
+    #           },
     #         },
     #         role_arn: "RoleArn", # required
     #         generate_candidate_definitions_only: false,
@@ -4478,8 +4539,9 @@ module Aws::SageMaker
     # @!attribute [rw] input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by . Format(s) supported: CSV. Minimum
-    #   of 500 rows.
+    #   `InputDataConfig` supported by . Format(s) supported: CSV, Parquet.
+    #   A minimum of 500 rows is required for the training dataset. There is
+    #   not a minimum number of rows required for the validation dataset.
     #   @return [Array<Types::AutoMLChannel>]
     #
     # @!attribute [rw] output_data_config
@@ -4490,10 +4552,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] problem_type
     #   Defines the type of supervised learning available for the
-    #   candidates. Options include: `BinaryClassification`,
-    #   `MulticlassClassification`, and `Regression`. For more information,
-    #   see [ Amazon SageMaker Autopilot problem types and algorithm
-    #   support][1].
+    #   candidates. For more information, see [ Amazon SageMaker Autopilot
+    #   problem types and algorithm support][1].
     #
     #
     #
@@ -4507,8 +4567,7 @@ module Aws::SageMaker
     #   @return [Types::AutoMLJobObjective]
     #
     # @!attribute [rw] auto_ml_job_config
-    #   Contains `CompletionCriteria` and `SecurityConfig` settings for the
-    #   AutoML job.
+    #   A collection of settings used to configure an AutoML job.
     #   @return [Types::AutoMLJobConfig]
     #
     # @!attribute [rw] role_arn
@@ -5414,6 +5473,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariant>]
     #
     # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] tags
@@ -7757,7 +7817,12 @@ module Aws::SageMaker
     # @!attribute [rw] task
     #   The machine learning task your model package accomplishes. Common
     #   machine learning tasks include object detection and image
-    #   classification.
+    #   classification. The following tasks are supported by Inference
+    #   Recommender: `"IMAGE_CLASSIFICATION"` \| `"OBJECT_DETECTION"` \|
+    #   `"TEXT_GENERATION"` \|`"IMAGE_SEGMENTATION"` \| `"FILL_MASK"` \|
+    #   `"CLASSIFICATION"` \| `"REGRESSION"` \| `"OTHER"`.
+    #
+    #   Specify "OTHER" if none of the tasks listed fit your use case.
     #   @return [String]
     #
     # @!attribute [rw] sample_payload_url
@@ -10087,6 +10152,8 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # Configuration to control how SageMaker captures inference data.
+    #
     # @note When making an API call, you may pass DataCaptureConfig
     #   data as a hash:
     #
@@ -10107,21 +10174,47 @@ module Aws::SageMaker
     #       }
     #
     # @!attribute [rw] enable_capture
+    #   Whether data capture should be enabled or disabled (defaults to
+    #   enabled).
     #   @return [Boolean]
     #
     # @!attribute [rw] initial_sampling_percentage
+    #   The percentage of requests SageMaker will capture. A lower value is
+    #   recommended for Endpoints with high traffic.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 location used to capture the data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
+    #   The Amazon Resource Name (ARN) of a Amazon Web Services Key
+    #   Management Service key that SageMaker uses to encrypt data on the
+    #   storage volume attached to the ML compute instance that hosts the
+    #   endpoint.
+    #
+    #   The KmsKeyId can be any of the following formats:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias name ARN:
+    #     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
     #   @return [String]
     #
     # @!attribute [rw] capture_options
+    #   Specifies data Model Monitor will capture. You can configure whether
+    #   to collect only input, only output, or both
     #   @return [Array<Types::CaptureOption>]
     #
     # @!attribute [rw] capture_content_type_header
+    #   Configuration specifying how to treat different headers. If no
+    #   headers are specified SageMaker will by default base64 encode when
+    #   capturing the data.
     #   @return [Types::CaptureContentTypeHeader]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataCaptureConfig AWS API Documentation
@@ -10137,19 +10230,26 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The currently active data capture configuration used by your Endpoint.
+    #
     # @!attribute [rw] enable_capture
+    #   Whether data capture is enabled or disabled.
     #   @return [Boolean]
     #
     # @!attribute [rw] capture_status
+    #   Whether data capture is currently functional.
     #   @return [String]
     #
     # @!attribute [rw] current_sampling_percentage
+    #   The percentage of requests being captured by your Endpoint.
     #   @return [Integer]
     #
     # @!attribute [rw] destination_s3_uri
+    #   The Amazon S3 location being used to capture the data.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
+    #   The KMS key being used to encrypt the data in Amazon S3.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DataCaptureConfigSummary AWS API Documentation
@@ -13133,6 +13233,7 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariant>]
     #
     # @!attribute [rw] data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
     #   @return [Types::DataCaptureConfig]
     #
     # @!attribute [rw] kms_key_id
@@ -13205,6 +13306,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @!attribute [rw] data_capture_config
+    #   The currently active data capture configuration used by your
+    #   Endpoint.
     #   @return [Types::DataCaptureConfigSummary]
     #
     # @!attribute [rw] endpoint_status
@@ -17514,6 +17617,8 @@ module Aws::SageMaker
     #   @return [Array<Types::ProductionVariantSummary>]
     #
     # @!attribute [rw] data_capture_config
+    #   The currently active data capture configuration used by your
+    #   Endpoint.
     #   @return [Types::DataCaptureConfigSummary]
     #
     # @!attribute [rw] endpoint_status
@@ -27391,6 +27496,15 @@ module Aws::SageMaker
     #
     # @!attribute [rw] standard_metric_name
     #   The name of the standard metric.
+    #
+    #   <note markdown="1"> For definitions of the standard metrics, see [ `Autopilot candidate
+    #   metrics` ][1].
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-metrics
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/MetricDatum AWS API Documentation
@@ -37649,14 +37763,15 @@ module Aws::SageMaker
     #   Simple Storage Service Developer Guide.*
     #
     #   The KMS key policy must grant permission to the IAM role that you
-    #   specify in your CreateModel request. For more information, see
-    #   [Using Key Policies in Amazon Web Services KMS][2] in the *Amazon
+    #   specify in your [CreateModel][2] request. For more information, see
+    #   [Using Key Policies in Amazon Web Services KMS][3] in the *Amazon
     #   Web Services Key Management Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
-    #   [2]: http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+    #   [2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html
+    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/TransformOutput AWS API Documentation

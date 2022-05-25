@@ -392,6 +392,7 @@ module Aws::CloudFormation
     StackSetOperationResultSummaries = Shapes::ListShape.new(name: 'StackSetOperationResultSummaries')
     StackSetOperationResultSummary = Shapes::StructureShape.new(name: 'StackSetOperationResultSummary')
     StackSetOperationStatus = Shapes::StringShape.new(name: 'StackSetOperationStatus')
+    StackSetOperationStatusReason = Shapes::StringShape.new(name: 'StackSetOperationStatusReason')
     StackSetOperationSummaries = Shapes::ListShape.new(name: 'StackSetOperationSummaries')
     StackSetOperationSummary = Shapes::StructureShape.new(name: 'StackSetOperationSummary')
     StackSetStatus = Shapes::StringShape.new(name: 'StackSetStatus')
@@ -1540,6 +1541,7 @@ module Aws::CloudFormation
     StackSetOperation.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
     StackSetOperation.add_member(:deployment_targets, Shapes::ShapeRef.new(shape: DeploymentTargets, location_name: "DeploymentTargets"))
     StackSetOperation.add_member(:stack_set_drift_detection_details, Shapes::ShapeRef.new(shape: StackSetDriftDetectionDetails, location_name: "StackSetDriftDetectionDetails"))
+    StackSetOperation.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperation.struct_class = Types::StackSetOperation
 
     StackSetOperationPreferences.add_member(:region_concurrency_type, Shapes::ShapeRef.new(shape: RegionConcurrencyType, location_name: "RegionConcurrencyType"))
@@ -1567,6 +1569,7 @@ module Aws::CloudFormation
     StackSetOperationSummary.add_member(:status, Shapes::ShapeRef.new(shape: StackSetOperationStatus, location_name: "Status"))
     StackSetOperationSummary.add_member(:creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimestamp"))
     StackSetOperationSummary.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTimestamp"))
+    StackSetOperationSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StackSetOperationStatusReason, location_name: "StatusReason"))
     StackSetOperationSummary.struct_class = Types::StackSetOperationSummary
 
     StackSetSummaries.member = Shapes::ShapeRef.new(shape: StackSetSummary)

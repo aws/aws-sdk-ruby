@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2022-05-25)
+------------------
+
+* Feature - Adding AthenaSourceConfig for MetricSet APIs to support Athena as a data source.
+
 1.17.0 (2022-05-19)
 ------------------
 

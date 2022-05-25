@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2022-05-25)
+------------------
+
+* Feature - Amazon SageMaker Autopilot adds support for manually selecting features from the input dataset using the CreateAutoMLJob API.
+
 1.124.0 (2022-05-03)
 ------------------
 

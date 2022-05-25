@@ -387,6 +387,7 @@ module Aws::VoiceID
     Speaker.add_member(:customer_speaker_id, Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
     Speaker.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     Speaker.add_member(:generated_speaker_id, Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    Speaker.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
     Speaker.add_member(:status, Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
     Speaker.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     Speaker.struct_class = Types::Speaker
@@ -423,6 +424,7 @@ module Aws::VoiceID
     SpeakerSummary.add_member(:customer_speaker_id, Shapes::ShapeRef.new(shape: CustomerSpeakerId, location_name: "CustomerSpeakerId"))
     SpeakerSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "DomainId"))
     SpeakerSummary.add_member(:generated_speaker_id, Shapes::ShapeRef.new(shape: GeneratedSpeakerId, location_name: "GeneratedSpeakerId"))
+    SpeakerSummary.add_member(:last_accessed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessedAt"))
     SpeakerSummary.add_member(:status, Shapes::ShapeRef.new(shape: SpeakerStatus, location_name: "Status"))
     SpeakerSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     SpeakerSummary.struct_class = Types::SpeakerSummary

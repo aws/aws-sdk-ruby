@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2022-05-25)
+------------------
+
+* Feature - Add a new parameter statusReason to DescribeStackSetOperation output for additional details
+
 1.68.0 (2022-02-24)
 ------------------
 

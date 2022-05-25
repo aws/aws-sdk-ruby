@@ -217,6 +217,10 @@ module Aws::FSx
     LustreFileSystemMountName = Shapes::StringShape.new(name: 'LustreFileSystemMountName')
     LustreLogConfiguration = Shapes::StructureShape.new(name: 'LustreLogConfiguration')
     LustreLogCreateConfiguration = Shapes::StructureShape.new(name: 'LustreLogCreateConfiguration')
+    LustreNoSquashNid = Shapes::StringShape.new(name: 'LustreNoSquashNid')
+    LustreNoSquashNids = Shapes::ListShape.new(name: 'LustreNoSquashNids')
+    LustreRootSquash = Shapes::StringShape.new(name: 'LustreRootSquash')
+    LustreRootSquashConfiguration = Shapes::StructureShape.new(name: 'LustreRootSquashConfiguration')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     Megabytes = Shapes::IntegerShape.new(name: 'Megabytes')
     MegabytesPerSecond = Shapes::IntegerShape.new(name: 'MegabytesPerSecond')
@@ -549,6 +553,7 @@ module Aws::FSx
     CreateFileSystemLustreConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     CreateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     CreateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
+    CreateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     CreateFileSystemLustreConfiguration.struct_class = Types::CreateFileSystemLustreConfiguration
 
     CreateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))
@@ -1057,6 +1062,7 @@ module Aws::FSx
     LustreFileSystemConfiguration.add_member(:drive_cache_type, Shapes::ShapeRef.new(shape: DriveCacheType, location_name: "DriveCacheType"))
     LustreFileSystemConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     LustreFileSystemConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogConfiguration, location_name: "LogConfiguration"))
+    LustreFileSystemConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     LustreFileSystemConfiguration.struct_class = Types::LustreFileSystemConfiguration
 
     LustreLogConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
@@ -1066,6 +1072,12 @@ module Aws::FSx
     LustreLogCreateConfiguration.add_member(:level, Shapes::ShapeRef.new(shape: LustreAccessAuditLogLevel, required: true, location_name: "Level"))
     LustreLogCreateConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: GeneralARN, location_name: "Destination"))
     LustreLogCreateConfiguration.struct_class = Types::LustreLogCreateConfiguration
+
+    LustreNoSquashNids.member = Shapes::ShapeRef.new(shape: LustreNoSquashNid)
+
+    LustreRootSquashConfiguration.add_member(:root_squash, Shapes::ShapeRef.new(shape: LustreRootSquash, location_name: "RootSquash"))
+    LustreRootSquashConfiguration.add_member(:no_squash_nids, Shapes::ShapeRef.new(shape: LustreNoSquashNids, location_name: "NoSquashNids"))
+    LustreRootSquashConfiguration.struct_class = Types::LustreRootSquashConfiguration
 
     MissingFileSystemConfiguration.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     MissingFileSystemConfiguration.struct_class = Types::MissingFileSystemConfiguration
@@ -1340,6 +1352,7 @@ module Aws::FSx
     UpdateFileSystemLustreConfiguration.add_member(:auto_import_policy, Shapes::ShapeRef.new(shape: AutoImportPolicyType, location_name: "AutoImportPolicy"))
     UpdateFileSystemLustreConfiguration.add_member(:data_compression_type, Shapes::ShapeRef.new(shape: DataCompressionType, location_name: "DataCompressionType"))
     UpdateFileSystemLustreConfiguration.add_member(:log_configuration, Shapes::ShapeRef.new(shape: LustreLogCreateConfiguration, location_name: "LogConfiguration"))
+    UpdateFileSystemLustreConfiguration.add_member(:root_squash_configuration, Shapes::ShapeRef.new(shape: LustreRootSquashConfiguration, location_name: "RootSquashConfiguration"))
     UpdateFileSystemLustreConfiguration.struct_class = Types::UpdateFileSystemLustreConfiguration
 
     UpdateFileSystemOntapConfiguration.add_member(:automatic_backup_retention_days, Shapes::ShapeRef.new(shape: AutomaticBackupRetentionDays, location_name: "AutomaticBackupRetentionDays"))

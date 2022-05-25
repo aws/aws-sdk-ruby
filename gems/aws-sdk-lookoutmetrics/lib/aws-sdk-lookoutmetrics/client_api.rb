@@ -43,11 +43,18 @@ module Aws::LookoutMetrics
     AnomalyGroupTimeSeriesFeedback = Shapes::StructureShape.new(name: 'AnomalyGroupTimeSeriesFeedback')
     AppFlowConfig = Shapes::StructureShape.new(name: 'AppFlowConfig')
     Arn = Shapes::StringShape.new(name: 'Arn')
+    AthenaDataCatalog = Shapes::StringShape.new(name: 'AthenaDataCatalog')
+    AthenaDatabaseName = Shapes::StringShape.new(name: 'AthenaDatabaseName')
+    AthenaS3ResultsPath = Shapes::StringShape.new(name: 'AthenaS3ResultsPath')
+    AthenaSourceConfig = Shapes::StructureShape.new(name: 'AthenaSourceConfig')
+    AthenaTableName = Shapes::StringShape.new(name: 'AthenaTableName')
+    AthenaWorkGroupName = Shapes::StringShape.new(name: 'AthenaWorkGroupName')
     AttributeValue = Shapes::StructureShape.new(name: 'AttributeValue')
     AutoDetectionMetricSource = Shapes::StructureShape.new(name: 'AutoDetectionMetricSource')
     AutoDetectionS3SourceConfig = Shapes::StructureShape.new(name: 'AutoDetectionS3SourceConfig')
     BackTestAnomalyDetectorRequest = Shapes::StructureShape.new(name: 'BackTestAnomalyDetectorRequest')
     BackTestAnomalyDetectorResponse = Shapes::StructureShape.new(name: 'BackTestAnomalyDetectorResponse')
+    BackTestConfiguration = Shapes::StructureShape.new(name: 'BackTestConfiguration')
     BinaryAttributeValue = Shapes::StringShape.new(name: 'BinaryAttributeValue')
     BinaryListAttributeValue = Shapes::ListShape.new(name: 'BinaryListAttributeValue')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
@@ -316,6 +323,15 @@ module Aws::LookoutMetrics
     AppFlowConfig.add_member(:flow_name, Shapes::ShapeRef.new(shape: FlowName, location_name: "FlowName"))
     AppFlowConfig.struct_class = Types::AppFlowConfig
 
+    AthenaSourceConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
+    AthenaSourceConfig.add_member(:database_name, Shapes::ShapeRef.new(shape: AthenaDatabaseName, location_name: "DatabaseName"))
+    AthenaSourceConfig.add_member(:data_catalog, Shapes::ShapeRef.new(shape: AthenaDataCatalog, location_name: "DataCatalog"))
+    AthenaSourceConfig.add_member(:table_name, Shapes::ShapeRef.new(shape: AthenaTableName, location_name: "TableName"))
+    AthenaSourceConfig.add_member(:work_group_name, Shapes::ShapeRef.new(shape: AthenaWorkGroupName, location_name: "WorkGroupName"))
+    AthenaSourceConfig.add_member(:s3_results_path, Shapes::ShapeRef.new(shape: AthenaS3ResultsPath, location_name: "S3ResultsPath"))
+    AthenaSourceConfig.add_member(:back_test_configuration, Shapes::ShapeRef.new(shape: BackTestConfiguration, location_name: "BackTestConfiguration"))
+    AthenaSourceConfig.struct_class = Types::AthenaSourceConfig
+
     AttributeValue.add_member(:s, Shapes::ShapeRef.new(shape: StringAttributeValue, location_name: "S"))
     AttributeValue.add_member(:n, Shapes::ShapeRef.new(shape: NumberAttributeValue, location_name: "N"))
     AttributeValue.add_member(:b, Shapes::ShapeRef.new(shape: BinaryAttributeValue, location_name: "B"))
@@ -335,6 +351,9 @@ module Aws::LookoutMetrics
     BackTestAnomalyDetectorRequest.struct_class = Types::BackTestAnomalyDetectorRequest
 
     BackTestAnomalyDetectorResponse.struct_class = Types::BackTestAnomalyDetectorResponse
+
+    BackTestConfiguration.add_member(:run_back_test_mode, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "RunBackTestMode"))
+    BackTestConfiguration.struct_class = Types::BackTestConfiguration
 
     BinaryListAttributeValue.member = Shapes::ShapeRef.new(shape: BinaryAttributeValue)
 
@@ -681,6 +700,7 @@ module Aws::LookoutMetrics
     MetricSource.add_member(:cloud_watch_config, Shapes::ShapeRef.new(shape: CloudWatchConfig, location_name: "CloudWatchConfig"))
     MetricSource.add_member(:rds_source_config, Shapes::ShapeRef.new(shape: RDSSourceConfig, location_name: "RDSSourceConfig"))
     MetricSource.add_member(:redshift_source_config, Shapes::ShapeRef.new(shape: RedshiftSourceConfig, location_name: "RedshiftSourceConfig"))
+    MetricSource.add_member(:athena_source_config, Shapes::ShapeRef.new(shape: AthenaSourceConfig, location_name: "AthenaSourceConfig"))
     MetricSource.struct_class = Types::MetricSource
 
     MetricValueList.member = Shapes::ShapeRef.new(shape: MetricValue)

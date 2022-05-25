@@ -1614,8 +1614,7 @@ module Aws::SecretsManager
     #
     # @option params [Boolean] :block_public_policy
     #   Specifies whether to block resource-based policies that allow broad
-    #   access to the secret. By default, Secrets Manager blocks policies that
-    #   allow broad access, for example those that use a wildcard for the
+    #   access to the secret, for example those that use a wildcard for the
     #   principal.
     #
     # @return [Types::PutResourcePolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2876,7 +2875,7 @@ module Aws::SecretsManager
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-secretsmanager'
-      context[:gem_version] = '1.61.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

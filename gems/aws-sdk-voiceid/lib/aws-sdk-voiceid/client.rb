@@ -647,6 +647,7 @@ module Aws::VoiceID
     #   resp.speaker.customer_speaker_id #=> String
     #   resp.speaker.domain_id #=> String
     #   resp.speaker.generated_speaker_id #=> String
+    #   resp.speaker.last_accessed_at #=> Time
     #   resp.speaker.status #=> String, one of "ENROLLED", "EXPIRED", "OPTED_OUT", "PENDING"
     #   resp.speaker.updated_at #=> Time
     #
@@ -739,7 +740,7 @@ module Aws::VoiceID
     #   resp.authentication_result.authentication_result_id #=> String
     #   resp.authentication_result.configuration.acceptance_threshold #=> Integer
     #   resp.authentication_result.customer_speaker_id #=> String
-    #   resp.authentication_result.decision #=> String, one of "ACCEPT", "REJECT", "NOT_ENOUGH_SPEECH", "SPEAKER_NOT_ENROLLED", "SPEAKER_OPTED_OUT", "SPEAKER_ID_NOT_PROVIDED"
+    #   resp.authentication_result.decision #=> String, one of "ACCEPT", "REJECT", "NOT_ENOUGH_SPEECH", "SPEAKER_NOT_ENROLLED", "SPEAKER_OPTED_OUT", "SPEAKER_ID_NOT_PROVIDED", "SPEAKER_EXPIRED"
     #   resp.authentication_result.generated_speaker_id #=> String
     #   resp.authentication_result.score #=> Integer
     #   resp.domain_id #=> String
@@ -978,6 +979,7 @@ module Aws::VoiceID
     #   resp.speaker_summaries[0].customer_speaker_id #=> String
     #   resp.speaker_summaries[0].domain_id #=> String
     #   resp.speaker_summaries[0].generated_speaker_id #=> String
+    #   resp.speaker_summaries[0].last_accessed_at #=> Time
     #   resp.speaker_summaries[0].status #=> String, one of "ENROLLED", "EXPIRED", "OPTED_OUT", "PENDING"
     #   resp.speaker_summaries[0].updated_at #=> Time
     #
@@ -1052,6 +1054,7 @@ module Aws::VoiceID
     #   resp.speaker.customer_speaker_id #=> String
     #   resp.speaker.domain_id #=> String
     #   resp.speaker.generated_speaker_id #=> String
+    #   resp.speaker.last_accessed_at #=> Time
     #   resp.speaker.status #=> String, one of "ENROLLED", "EXPIRED", "OPTED_OUT", "PENDING"
     #   resp.speaker.updated_at #=> Time
     #
@@ -1381,7 +1384,7 @@ module Aws::VoiceID
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-voiceid'
-      context[:gem_version] = '1.6.0'
+      context[:gem_version] = '1.7.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

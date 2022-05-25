@@ -1148,8 +1148,9 @@ module Aws::SageMaker
     # @option params [required, Array<Types::AutoMLChannel>] :input_data_config
     #   An array of channel objects that describes the input data and its
     #   location. Each channel is a named input source. Similar to
-    #   `InputDataConfig` supported by . Format(s) supported: CSV. Minimum of
-    #   500 rows.
+    #   `InputDataConfig` supported by . Format(s) supported: CSV, Parquet. A
+    #   minimum of 500 rows is required for the training dataset. There is not
+    #   a minimum number of rows required for the validation dataset.
     #
     # @option params [required, Types::AutoMLOutputDataConfig] :output_data_config
     #   Provides information about encryption and the Amazon S3 output path
@@ -1158,9 +1159,8 @@ module Aws::SageMaker
     #
     # @option params [String] :problem_type
     #   Defines the type of supervised learning available for the candidates.
-    #   Options include: `BinaryClassification`, `MulticlassClassification`,
-    #   and `Regression`. For more information, see [ Amazon SageMaker
-    #   Autopilot problem types and algorithm support][1].
+    #   For more information, see [ Amazon SageMaker Autopilot problem types
+    #   and algorithm support][1].
     #
     #
     #
@@ -1172,8 +1172,7 @@ module Aws::SageMaker
     #   Autopilot infers whether to minimize or maximize it.
     #
     # @option params [Types::AutoMLJobConfig] :auto_ml_job_config
-    #   Contains `CompletionCriteria` and `SecurityConfig` settings for the
-    #   AutoML job.
+    #   A collection of settings used to configure an AutoML job.
     #
     # @option params [required, String] :role_arn
     #   The ARN of the role that is used to access the data.
@@ -1237,6 +1236,9 @@ module Aws::SageMaker
     #       },
     #       data_split_config: {
     #         validation_fraction: 1.0,
+    #       },
+    #       candidate_generation_config: {
+    #         feature_specification_s3_uri: "S3Uri",
     #       },
     #     },
     #     role_arn: "RoleArn", # required
@@ -2269,6 +2271,7 @@ module Aws::SageMaker
     #   want to host at this endpoint.
     #
     # @option params [Types::DataCaptureConfig] :data_capture_config
+    #   Configuration to control how SageMaker captures inference data.
     #
     # @option params [Array<Types::Tag>] :tags
     #   An array of key-value pairs. You can use tags to categorize your
@@ -4235,7 +4238,12 @@ module Aws::SageMaker
     # @option params [String] :task
     #   The machine learning task your model package accomplishes. Common
     #   machine learning tasks include object detection and image
-    #   classification.
+    #   classification. The following tasks are supported by Inference
+    #   Recommender: `"IMAGE_CLASSIFICATION"` \| `"OBJECT_DETECTION"` \|
+    #   `"TEXT_GENERATION"` \|`"IMAGE_SEGMENTATION"` \| `"FILL_MASK"` \|
+    #   `"CLASSIFICATION"` \| `"REGRESSION"` \| `"OTHER"`.
+    #
+    #   Specify "OTHER" if none of the tasks listed fit your use case.
     #
     # @option params [String] :sample_payload_url
     #   The Amazon Simple Storage Service (Amazon S3) path where the sample
@@ -6038,7 +6046,7 @@ module Aws::SageMaker
     # * `ModelName` - Identifies the model to use. `ModelName` must be the
     #   name of an existing Amazon SageMaker model in the same Amazon Web
     #   Services Region and Amazon Web Services account. For information on
-    #   creating a model, see CreateModel.
+    #   creating a model, see [CreateModel][1].
     #
     # * `TransformInput` - Describes the dataset to be transformed and the
     #   Amazon S3 location where it is stored.
@@ -6050,11 +6058,12 @@ module Aws::SageMaker
     #   transform job.
     #
     # For more information about how batch transformation works, see [Batch
-    # Transform][1].
+    # Transform][2].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
+    # [1]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html
+    # [2]: https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html
     #
     # @option params [required, String] :transform_job_name
     #   The name of the transform job. The name must be unique within an
@@ -8287,6 +8296,7 @@ module Aws::SageMaker
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets #=> Array
     #   resp.auto_ml_job_config.security_config.vpc_config.subnets[0] #=> String
     #   resp.auto_ml_job_config.data_split_config.validation_fraction #=> Float
+    #   resp.auto_ml_job_config.candidate_generation_config.feature_specification_s3_uri #=> String
     #   resp.creation_time #=> Time
     #   resp.end_time #=> Time
     #   resp.last_modified_time #=> Time
@@ -19538,7 +19548,7 @@ module Aws::SageMaker
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.124.0'
+      context[:gem_version] = '1.125.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1512,6 +1512,12 @@ module Aws::VoiceID
     #   The service-generated identifier for the speaker.
     #   @return [String]
     #
+    # @!attribute [rw] last_accessed_at
+    #   The timestamp when the speaker was last accessed for enrollment,
+    #   re-enrollment or a successful authentication. This timestamp is
+    #   accurate to one hour.
+    #   @return [Time]
+    #
     # @!attribute [rw] status
     #   The current status of the speaker.
     #   @return [String]
@@ -1527,6 +1533,7 @@ module Aws::VoiceID
       :customer_speaker_id,
       :domain_id,
       :generated_speaker_id,
+      :last_accessed_at,
       :status,
       :updated_at)
       SENSITIVE = [:customer_speaker_id]
@@ -1689,6 +1696,12 @@ module Aws::VoiceID
     #   The service-generated identifier for the speaker.
     #   @return [String]
     #
+    # @!attribute [rw] last_accessed_at
+    #   The timestamp when the speaker was last accessed for enrollment,
+    #   re-enrollment or a successful authentication. This timestamp is
+    #   accurate to one hour.
+    #   @return [Time]
+    #
     # @!attribute [rw] status
     #   The current status of the speaker.
     #   @return [String]
@@ -1704,6 +1717,7 @@ module Aws::VoiceID
       :customer_speaker_id,
       :domain_id,
       :generated_speaker_id,
+      :last_accessed_at,
       :status,
       :updated_at)
       SENSITIVE = [:customer_speaker_id]

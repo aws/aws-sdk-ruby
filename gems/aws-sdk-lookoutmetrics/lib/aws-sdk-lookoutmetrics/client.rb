@@ -631,6 +631,17 @@ module Aws::LookoutMetrics
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
     #       },
+    #       athena_source_config: {
+    #         role_arn: "Arn",
+    #         database_name: "AthenaDatabaseName",
+    #         data_catalog: "AthenaDataCatalog",
+    #         table_name: "AthenaTableName",
+    #         work_group_name: "AthenaWorkGroupName",
+    #         s3_results_path: "AthenaS3ResultsPath",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
+    #       },
     #     },
     #     timezone: "Timezone",
     #     tags: {
@@ -955,6 +966,13 @@ module Aws::LookoutMetrics
     #   resp.metric_source.redshift_source_config.vpc_configuration.subnet_id_list[0] #=> String
     #   resp.metric_source.redshift_source_config.vpc_configuration.security_group_id_list #=> Array
     #   resp.metric_source.redshift_source_config.vpc_configuration.security_group_id_list[0] #=> String
+    #   resp.metric_source.athena_source_config.role_arn #=> String
+    #   resp.metric_source.athena_source_config.database_name #=> String
+    #   resp.metric_source.athena_source_config.data_catalog #=> String
+    #   resp.metric_source.athena_source_config.table_name #=> String
+    #   resp.metric_source.athena_source_config.work_group_name #=> String
+    #   resp.metric_source.athena_source_config.s3_results_path #=> String
+    #   resp.metric_source.athena_source_config.back_test_configuration.run_back_test_mode #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/DescribeMetricSet AWS API Documentation
     #
@@ -1709,7 +1727,7 @@ module Aws::LookoutMetrics
     #   The dataset's interval.
     #
     # @option params [Types::MetricSource] :metric_source
-    #   Contains information about source data used to generate a metric.
+    #   Contains information about source data used to generate metrics.
     #
     # @return [Types::UpdateMetricSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1787,6 +1805,17 @@ module Aws::LookoutMetrics
     #           security_group_id_list: ["SecurityGroupId"], # required
     #         },
     #       },
+    #       athena_source_config: {
+    #         role_arn: "Arn",
+    #         database_name: "AthenaDatabaseName",
+    #         data_catalog: "AthenaDataCatalog",
+    #         table_name: "AthenaTableName",
+    #         work_group_name: "AthenaWorkGroupName",
+    #         s3_results_path: "AthenaS3ResultsPath",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
+    #       },
     #     },
     #   })
     #
@@ -1816,7 +1845,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

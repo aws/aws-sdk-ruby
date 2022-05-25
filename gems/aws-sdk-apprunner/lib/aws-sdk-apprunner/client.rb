@@ -887,6 +887,10 @@ module Aws::AppRunner
     #   single Amazon VPC. App Runner determines the Amazon VPC from the
     #   subnets you specify.
     #
+    #   <note markdown="1"> App Runner currently only provides support for IPv4.
+    #
+    #    </note>
+    #
     # @option params [Array<String>] :security_groups
     #   A list of IDs of security groups that App Runner should use for access
     #   to Amazon Web Services resources under the specified subnets. If not
@@ -2362,7 +2366,7 @@ module Aws::AppRunner
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-apprunner'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.14.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

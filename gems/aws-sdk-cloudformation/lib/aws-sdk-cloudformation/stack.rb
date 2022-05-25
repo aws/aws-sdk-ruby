@@ -151,7 +151,7 @@ module Aws::CloudFormation
     # Whether termination protection is enabled for the stack.
     #
     # For [nested stacks][1], termination protection is set on the root
-    # stack and cannot be changed directly on the nested stack. For more
+    # stack and can't be changed directly on the nested stack. For more
     # information, see [Protecting a Stack From Being Deleted][2] in the
     # *CloudFormation User Guide*.
     #
@@ -194,10 +194,10 @@ module Aws::CloudFormation
       data[:root_id]
     end
 
-    # Information on whether a stack's actual configuration differs, or has
-    # *drifted*, from it's expected configuration, as defined in the stack
-    # template and any values specified as template parameters. For more
-    # information, see [Detecting Unregulated Configuration Changes to
+    # Information about whether a stack's actual configuration differs, or
+    # has *drifted*, from it's expected configuration, as defined in the
+    # stack template and any values specified as template parameters. For
+    # more information, see [Detecting Unregulated Configuration Changes to
     # Stacks and Resources][1].
     #
     #
@@ -801,7 +801,7 @@ module Aws::CloudFormation
     #   `StackPolicyDuringUpdateURL` parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
-    #   overriding stack policy during this update. If you do not specify a
+    #   overriding stack policy during this update. If you don't specify a
     #   stack policy, the current policy that is associated with the stack
     #   will be used.
     # @option options [String] :stack_policy_during_update_url
@@ -812,7 +812,7 @@ module Aws::CloudFormation
     #   parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
-    #   overriding stack policy during this update. If you do not specify a
+    #   overriding stack policy during this update. If you don't specify a
     #   stack policy, the current policy that is associated with the stack
     #   will be used.
     # @option options [Array<Types::Parameter>] :parameters
@@ -846,8 +846,8 @@ module Aws::CloudFormation
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
     #
-    #     If your stack template contains these resources, we recommend that
-    #     you review all permissions associated with them and edit their
+    #     If your stack template contains these resources, we suggest that you
+    #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
     #     * [ AWS::IAM::AccessKey][1]

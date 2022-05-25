@@ -711,6 +711,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backup.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -893,6 +896,9 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -1181,6 +1187,9 @@ module Aws::FSx
     #   resp.backup.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backup.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backup.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.file_system.administrative_actions #=> Array
     #   resp.backup.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backup.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -1363,6 +1372,9 @@ module Aws::FSx
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backup.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backup.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -2053,6 +2065,10 @@ module Aws::FSx
     #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #         destination: "GeneralARN",
     #       },
+    #       root_squash_configuration: {
+    #         root_squash: "LustreRootSquash",
+    #         no_squash_nids: ["LustreNoSquashNid"],
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -2170,6 +2186,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2540,6 +2559,10 @@ module Aws::FSx
     #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #         destination: "GeneralARN",
     #       },
+    #       root_squash_configuration: {
+    #         root_squash: "LustreRootSquash",
+    #         no_squash_nids: ["LustreNoSquashNid"],
+    #       },
     #     },
     #     storage_type: "SSD", # accepts SSD, HDD
     #     kms_key_id: "KmsKeyId",
@@ -2644,6 +2667,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -2887,6 +2913,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -3267,6 +3296,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -3481,6 +3513,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -4142,6 +4177,9 @@ module Aws::FSx
     #   resp.backups[0].file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backups[0].file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backups[0].file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backups[0].file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backups[0].file_system.administrative_actions #=> Array
     #   resp.backups[0].file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.backups[0].file_system.administrative_actions[0].progress_percent #=> Integer
@@ -4324,6 +4362,9 @@ module Aws::FSx
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.backups[0].volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -4809,6 +4850,9 @@ module Aws::FSx
     #   resp.file_systems[0].lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_systems[0].lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.file_systems[0].lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_systems[0].lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.file_systems[0].lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_systems[0].administrative_actions #=> Array
     #   resp.file_systems[0].administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_systems[0].administrative_actions[0].progress_percent #=> Integer
@@ -5053,6 +5097,9 @@ module Aws::FSx
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.snapshots[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshots[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -5354,6 +5401,9 @@ module Aws::FSx
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.volumes[0].administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volumes[0].administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -5661,6 +5711,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -6022,6 +6075,8 @@ module Aws::FSx
     #
     # * `DataCompressionType`
     #
+    # * `LustreRootSquashConfiguration`
+    #
     # * `StorageCapacity`
     #
     # * `WeeklyMaintenanceStartTime`
@@ -6212,6 +6267,10 @@ module Aws::FSx
     #         level: "DISABLED", # required, accepts DISABLED, WARN_ONLY, ERROR_ONLY, WARN_ERROR
     #         destination: "GeneralARN",
     #       },
+    #       root_squash_configuration: {
+    #         root_squash: "LustreRootSquash",
+    #         no_squash_nids: ["LustreNoSquashNid"],
+    #       },
     #     },
     #     ontap_configuration: {
     #       automatic_backup_retention_days: 1,
@@ -6300,6 +6359,9 @@ module Aws::FSx
     #   resp.file_system.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.file_system.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.file_system.lustre_configuration.log_configuration.destination #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.file_system.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.file_system.administrative_actions #=> Array
     #   resp.file_system.administrative_actions[0].administrative_action_type #=> String, one of "FILE_SYSTEM_UPDATE", "STORAGE_OPTIMIZATION", "FILE_SYSTEM_ALIAS_ASSOCIATION", "FILE_SYSTEM_ALIAS_DISASSOCIATION", "VOLUME_UPDATE", "SNAPSHOT_UPDATE", "RELEASE_NFS_V3_LOCKS"
     #   resp.file_system.administrative_actions[0].progress_percent #=> Integer
@@ -6505,6 +6567,9 @@ module Aws::FSx
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.snapshot.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.snapshot.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.snapshot.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -6836,6 +6901,9 @@ module Aws::FSx
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.data_compression_type #=> String, one of "NONE", "LZ4"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.level #=> String, one of "DISABLED", "WARN_ONLY", "ERROR_ONLY", "WARN_ERROR"
     #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.log_configuration.destination #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.root_squash #=> String
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids #=> Array
+    #   resp.volume.administrative_actions[0].target_file_system_values.lustre_configuration.root_squash_configuration.no_squash_nids[0] #=> String
     #   resp.volume.administrative_actions[0].target_file_system_values.administrative_actions #=> Types::AdministrativeActions
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.automatic_backup_retention_days #=> Integer
     #   resp.volume.administrative_actions[0].target_file_system_values.ontap_configuration.daily_automatic_backup_start_time #=> String
@@ -6920,7 +6988,7 @@ module Aws::FSx
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-fsx'
-      context[:gem_version] = '1.55.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

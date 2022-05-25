@@ -96,6 +96,7 @@ module Aws::SageMaker
     AuthMode = Shapes::StringShape.new(name: 'AuthMode')
     AutoGenerateEndpointName = Shapes::BooleanShape.new(name: 'AutoGenerateEndpointName')
     AutoMLCandidate = Shapes::StructureShape.new(name: 'AutoMLCandidate')
+    AutoMLCandidateGenerationConfig = Shapes::StructureShape.new(name: 'AutoMLCandidateGenerationConfig')
     AutoMLCandidateStep = Shapes::StructureShape.new(name: 'AutoMLCandidateStep')
     AutoMLCandidates = Shapes::ListShape.new(name: 'AutoMLCandidates')
     AutoMLChannel = Shapes::StructureShape.new(name: 'AutoMLChannel')
@@ -1826,6 +1827,9 @@ module Aws::SageMaker
     AutoMLCandidate.add_member(:candidate_properties, Shapes::ShapeRef.new(shape: CandidateProperties, location_name: "CandidateProperties"))
     AutoMLCandidate.struct_class = Types::AutoMLCandidate
 
+    AutoMLCandidateGenerationConfig.add_member(:feature_specification_s3_uri, Shapes::ShapeRef.new(shape: S3Uri, location_name: "FeatureSpecificationS3Uri"))
+    AutoMLCandidateGenerationConfig.struct_class = Types::AutoMLCandidateGenerationConfig
+
     AutoMLCandidateStep.add_member(:candidate_step_type, Shapes::ShapeRef.new(shape: CandidateStepType, required: true, location_name: "CandidateStepType"))
     AutoMLCandidateStep.add_member(:candidate_step_arn, Shapes::ShapeRef.new(shape: CandidateStepArn, required: true, location_name: "CandidateStepArn"))
     AutoMLCandidateStep.add_member(:candidate_step_name, Shapes::ShapeRef.new(shape: CandidateStepName, required: true, location_name: "CandidateStepName"))
@@ -1867,6 +1871,7 @@ module Aws::SageMaker
     AutoMLJobConfig.add_member(:completion_criteria, Shapes::ShapeRef.new(shape: AutoMLJobCompletionCriteria, location_name: "CompletionCriteria"))
     AutoMLJobConfig.add_member(:security_config, Shapes::ShapeRef.new(shape: AutoMLSecurityConfig, location_name: "SecurityConfig"))
     AutoMLJobConfig.add_member(:data_split_config, Shapes::ShapeRef.new(shape: AutoMLDataSplitConfig, location_name: "DataSplitConfig"))
+    AutoMLJobConfig.add_member(:candidate_generation_config, Shapes::ShapeRef.new(shape: AutoMLCandidateGenerationConfig, location_name: "CandidateGenerationConfig"))
     AutoMLJobConfig.struct_class = Types::AutoMLJobConfig
 
     AutoMLJobObjective.add_member(:metric_name, Shapes::ShapeRef.new(shape: AutoMLMetricEnum, required: true, location_name: "MetricName"))

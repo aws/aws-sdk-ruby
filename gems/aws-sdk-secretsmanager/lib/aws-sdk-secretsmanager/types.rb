@@ -1253,9 +1253,8 @@ module Aws::SecretsManager
     #
     # @!attribute [rw] block_public_policy
     #   Specifies whether to block resource-based policies that allow broad
-    #   access to the secret. By default, Secrets Manager blocks policies
-    #   that allow broad access, for example those that use a wildcard for
-    #   the principal.
+    #   access to the secret, for example those that use a wildcard for the
+    #   principal.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/secretsmanager-2017-10-17/PutResourcePolicyRequest AWS API Documentation

@@ -374,7 +374,7 @@ module Aws::CloudFormation
     #   and `PublisherId`.
     #
     # @option params [String] :public_type_arn
-    #   The Amazon Resource Number (ARN) of the public extension.
+    #   The Amazon Resource Name (ARN) of the public extension.
     #
     #   Conditional: You must specify `PublicTypeArn`, or `TypeName`, `Type`,
     #   and `PublisherId`.
@@ -773,8 +773,8 @@ module Aws::CloudFormation
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
     #
-    #     If your stack template contains these resources, we recommend that
-    #     you review all permissions associated with them and edit their
+    #     If your stack template contains these resources, we suggest that you
+    #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
     #     * [ AWS::IAM::AccessKey][1]
@@ -819,8 +819,8 @@ module Aws::CloudFormation
     #
     #      </note>
     #
-    #     For more information on macros, see [Using CloudFormation macros to
-    #     perform custom processing on templates][11].
+    #     For more information about macros, see [Using CloudFormation macros
+    #     to perform custom processing on templates][11].
     #
     #
     #
@@ -1512,7 +1512,7 @@ module Aws::CloudFormation
     #
     # @option params [String] :stack_id
     #   The stack ID you are importing into a new stack set. Specify the
-    #   Amazon Resource Number (ARN) of the stack.
+    #   Amazon Resource Name (ARN) of the stack.
     #
     # @option params [Array<Types::Parameter>] :parameters
     #   The input parameters for the stack set template.
@@ -1606,7 +1606,7 @@ module Aws::CloudFormation
     #   fails with an `access denied` error, and the stack set is not created.
     #
     # @option params [String] :administration_role_arn
-    #   The Amazon Resource Number (ARN) of the IAM role to use to create this
+    #   The Amazon Resource Name (ARN) of the IAM role to use to create this
     #   stack set.
     #
     #   Specify an IAM role only if you are using customized administrator
@@ -2018,9 +2018,9 @@ module Aws::CloudFormation
       req.send_request(options)
     end
 
-    # Deletes a stack set. Before you can delete a stack set, all of its
-    # member stack instances must be deleted. For more information about how
-    # to do this, see DeleteStackInstances.
+    # Deletes a stack set. Before you can delete a stack set, all its member
+    # stack instances must be deleted. For more information about how to
+    # complete this, see DeleteStackInstances.
     #
     # @option params [required, String] :stack_set_name
     #   The name or unique ID of the stack set that you're deleting. You can
@@ -2361,7 +2361,7 @@ module Aws::CloudFormation
     # extension publisher, `DescribePublisher` returns information about
     # your own publisher account.
     #
-    # For more information on registering as a publisher, see:
+    # For more information about registering as a publisher, see:
     #
     # * [RegisterPublisher][1]
     #
@@ -2415,7 +2415,7 @@ module Aws::CloudFormation
     # configuration, as defined in the stack template and any values
     # specified as template parameters. A stack is considered to have
     # drifted if one or more of its resources have drifted. For more
-    # information on stack and resource drift, see [Detecting Unregulated
+    # information about stack and resource drift, see [Detecting Unregulated
     # Configuration Changes to Stacks and Resources][1].
     #
     # Use DetectStackDrift to initiate a stack drift detection operation.
@@ -3034,6 +3034,7 @@ module Aws::CloudFormation
     #   resp.stack_set_operation.stack_set_drift_detection_details.in_sync_stack_instances_count #=> Integer
     #   resp.stack_set_operation.stack_set_drift_detection_details.in_progress_stack_instances_count #=> Integer
     #   resp.stack_set_operation.stack_set_drift_detection_details.failed_stack_instances_count #=> Integer
+    #   resp.stack_set_operation.status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/DescribeStackSetOperation AWS API Documentation
     #
@@ -3176,7 +3177,8 @@ module Aws::CloudFormation
     # @option params [String] :publisher_id
     #   The publisher ID of the extension publisher.
     #
-    #   Extensions provided by Amazon are not assigned a publisher ID.
+    #   Extensions provided by Amazon Web Services are not assigned a
+    #   publisher ID.
     #
     # @option params [String] :public_version_number
     #   The version number of a public third-party extension.
@@ -3481,7 +3483,7 @@ module Aws::CloudFormation
     #   specific stack instance, including its drift status and last drift
     #   time checked.
     #
-    # For more information on performing a drift detection operation on a
+    # For more information about performing a drift detection operation on a
     # stack set, see [Detecting unmanaged changes in stack sets][1].
     #
     # You can only run a single drift detection operation on a given stack
@@ -3502,7 +3504,7 @@ module Aws::CloudFormation
     #   The user-specified preferences for how CloudFormation performs a stack
     #   set operation.
     #
-    #   For more information on maximum concurrent accounts and failure
+    #   For more information about maximum concurrent accounts and failure
     #   tolerance, see [Stack set operation options][1].
     #
     #
@@ -3954,7 +3956,7 @@ module Aws::CloudFormation
     #   The user-specified preferences for how CloudFormation performs a stack
     #   set operation.
     #
-    #   For more information on maximum concurrent accounts and failure
+    #   For more information about maximum concurrent accounts and failure
     #   tolerance, see [Stack set operation options][1].
     #
     #
@@ -4170,12 +4172,12 @@ module Aws::CloudFormation
     #   instances for.
     #
     # @option params [String] :next_token
-    #   If the previous request didn't return all of the remaining results,
-    #   the response's `NextToken` parameter value is set to a token. To
-    #   retrieve the next set of results, call `ListStackInstances` again and
-    #   assign that token to the request object's `NextToken` parameter. If
-    #   there are no remaining results, the previous response object's
-    #   `NextToken` parameter is set to `null`.
+    #   If the previous request didn't return all the remaining results, the
+    #   response's `NextToken` parameter value is set to a token. To retrieve
+    #   the next set of results, call `ListStackInstances` again and assign
+    #   that token to the request object's `NextToken` parameter. If there
+    #   are no remaining results, the previous response object's `NextToken`
+    #   parameter is set to `null`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -4332,13 +4334,12 @@ module Aws::CloudFormation
     #   The ID of the stack set operation.
     #
     # @option params [String] :next_token
-    #   If the previous request didn't return all of the remaining results,
-    #   the response object's `NextToken` parameter value is set to a token.
-    #   To retrieve the next set of results, call
-    #   `ListStackSetOperationResults` again and assign that token to the
-    #   request object's `NextToken` parameter. If there are no remaining
-    #   results, the previous response object's `NextToken` parameter is set
-    #   to `null`.
+    #   If the previous request didn't return all the remaining results, the
+    #   response object's `NextToken` parameter value is set to a token. To
+    #   retrieve the next set of results, call `ListStackSetOperationResults`
+    #   again and assign that token to the request object's `NextToken`
+    #   parameter. If there are no remaining results, the previous response
+    #   object's `NextToken` parameter is set to `null`.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to be returned with a single call. If
@@ -4473,6 +4474,7 @@ module Aws::CloudFormation
     #   resp.summaries[0].status #=> String, one of "RUNNING", "SUCCEEDED", "FAILED", "STOPPING", "STOPPED", "QUEUED"
     #   resp.summaries[0].creation_timestamp #=> Time
     #   resp.summaries[0].end_timestamp #=> Time
+    #   resp.summaries[0].status_reason #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/ListStackSetOperations AWS API Documentation
@@ -4819,8 +4821,9 @@ module Aws::CloudFormation
     #       region.
     #
     #   * `PUBLIC`\: Extensions that are publicly visible and available to be
-    #     activated within any Amazon account. This includes extensions from
-    #     Amazon, as well as third-party publishers.
+    #     activated within any Amazon Web Services account. This includes
+    #     extensions from Amazon Web Services, in addition to third-party
+    #     publishers.
     #
     #   The default is `PRIVATE`.
     #
@@ -4875,7 +4878,7 @@ module Aws::CloudFormation
     #   request parameter to get the next set of results.
     #
     # @option params [String] :next_token
-    #   If the previous paginated request didn't return all of the remaining
+    #   If the previous paginated request didn't return all the remaining
     #   results, the response object's `NextToken` parameter value is set to
     #   a token. To retrieve the next set of results, call this action again
     #   and assign that token to the request object's `NextToken` parameter.
@@ -4934,7 +4937,7 @@ module Aws::CloudFormation
 
     # Publishes the specified extension to the CloudFormation registry as a
     # public extension in this region. Public extensions are available for
-    # use by all CloudFormation users. For more information on publishing
+    # use by all CloudFormation users. For more information about publishing
     # extensions, see [Publishing extensions to make them available for
     # public use][1] in the *CloudFormation CLI User Guide*.
     #
@@ -4952,7 +4955,7 @@ module Aws::CloudFormation
     #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
     #
     # @option params [String] :arn
-    #   The Amazon Resource Number (ARN) of the extension.
+    #   The Amazon Resource Name (ARN) of the extension.
     #
     #   Conditional: You must specify `Arn`, or `TypeName` and `Type`.
     #
@@ -5094,9 +5097,9 @@ module Aws::CloudFormation
     # all CloudFormation users. This publisher ID applies to your account in
     # all Amazon Web Services Regions.
     #
-    # For information on requirements for registering as a public extension
-    # publisher, see [Registering your account to publish CloudFormation
-    # extensions][1] in the *CloudFormation CLI User Guide*.
+    # For information about requirements for registering as a public
+    # extension publisher, see [Registering your account to publish
+    # CloudFormation extensions][1] in the *CloudFormation CLI User Guide*.
     #
     #
     #
@@ -5163,8 +5166,8 @@ module Aws::CloudFormation
     #
     # * Making the extension available for use in your account.
     #
-    # For more information on how to develop extensions and ready them for
-    # registration, see [Creating Resource Providers][1] in the
+    # For more information about how to develop extensions and ready them
+    # for registration, see [Creating Resource Providers][1] in the
     # *CloudFormation CLI User Guide*.
     #
     # You can have a maximum of 50 resource extension versions registered at
@@ -5194,13 +5197,15 @@ module Aws::CloudFormation
     # @option params [required, String] :type_name
     #   The name of the extension being registered.
     #
-    #   We recommend that extension names adhere to the following patterns:
+    #   We suggest that extension names adhere to the following patterns:
     #
     #   * For resource types,
     #     *company\_or\_organization*\::*service*\::*type*.
     #
     #   * For modules,
     #     *company\_or\_organization*\::*service*\::*type*\::MODULE.
+    #
+    #   * For hooks, *MyCompany*\::*Testing*\::*MyTestHook*.
     #
     #   <note markdown="1"> The following organization namespaces are reserved and can't be used
     #   in your extension names:
@@ -5223,7 +5228,7 @@ module Aws::CloudFormation
     #   A URL to the S3 bucket containing the extension project package that
     #   contains the necessary files for the extension you want to register.
     #
-    #   For information on generating a schema handler package for the
+    #   For information about generating a schema handler package for the
     #   extension you want to register, see [submit][1] in the *CloudFormation
     #   CLI User Guide*.
     #
@@ -5251,7 +5256,8 @@ module Aws::CloudFormation
     #   For CloudFormation to assume the specified execution role, the role
     #   must contain a trust relationship with the CloudFormation service
     #   principle (`resources.cloudformation.amazonaws.com`). For more
-    #   information on adding trust relationships, see [Modifying a role trust
+    #   information about adding trust relationships, see [Modifying a role
+    #   trust
     #   policy](IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
     #   in the *Identity and Access Management User Guide*.
     #
@@ -5807,7 +5813,7 @@ module Aws::CloudFormation
     #   `StackPolicyDuringUpdateURL` parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
-    #   overriding stack policy during this update. If you do not specify a
+    #   overriding stack policy during this update. If you don't specify a
     #   stack policy, the current policy that is associated with the stack
     #   will be used.
     #
@@ -5819,7 +5825,7 @@ module Aws::CloudFormation
     #   parameter, but not both.
     #
     #   If you want to update protected resources, specify a temporary
-    #   overriding stack policy during this update. If you do not specify a
+    #   overriding stack policy during this update. If you don't specify a
     #   stack policy, the current policy that is associated with the stack
     #   will be used.
     #
@@ -5855,8 +5861,8 @@ module Aws::CloudFormation
     #     * If you don't specify either of these capabilities, CloudFormation
     #       returns an `InsufficientCapabilities` error.
     #
-    #     If your stack template contains these resources, we recommend that
-    #     you review all permissions associated with them and edit their
+    #     If your stack template contains these resources, we suggest that you
+    #     review all permissions associated with them and edit their
     #     permissions if necessary.
     #
     #     * [ AWS::IAM::AccessKey][1]
@@ -6421,7 +6427,7 @@ module Aws::CloudFormation
     #   Preferences for how CloudFormation performs this stack set operation.
     #
     # @option params [String] :administration_role_arn
-    #   The Amazon Resource Number (ARN) of the IAM role to use to update this
+    #   The Amazon Resource Name (ARN) of the IAM role to use to update this
     #   stack set.
     #
     #   Specify an IAM role only if you are using customized administrator
@@ -6774,7 +6780,7 @@ module Aws::CloudFormation
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cloudformation'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

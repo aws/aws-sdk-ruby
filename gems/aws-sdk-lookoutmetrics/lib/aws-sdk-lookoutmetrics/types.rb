@@ -466,6 +466,66 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
+    # Details about an Amazon Athena datasource.
+    #
+    # @note When making an API call, you may pass AthenaSourceConfig
+    #   data as a hash:
+    #
+    #       {
+    #         role_arn: "Arn",
+    #         database_name: "AthenaDatabaseName",
+    #         data_catalog: "AthenaDataCatalog",
+    #         table_name: "AthenaTableName",
+    #         work_group_name: "AthenaWorkGroupName",
+    #         s3_results_path: "AthenaS3ResultsPath",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] role_arn
+    #   An IAM role that gives Amazon Lookout for Metrics permission to
+    #   access the data.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The database's name.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_catalog
+    #   The database's data catalog.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The database's table name.
+    #   @return [String]
+    #
+    # @!attribute [rw] work_group_name
+    #   The database's work group name.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_results_path
+    #   The database's results path.
+    #   @return [String]
+    #
+    # @!attribute [rw] back_test_configuration
+    #   Settings for backtest mode.
+    #   @return [Types::BackTestConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/AthenaSourceConfig AWS API Documentation
+    #
+    class AthenaSourceConfig < Struct.new(
+      :role_arn,
+      :database_name,
+      :data_catalog,
+      :table_name,
+      :work_group_name,
+      :s3_results_path,
+      :back_test_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An attribute value.
     #
     # @!attribute [rw] s
@@ -578,6 +638,27 @@ module Aws::LookoutMetrics
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/BackTestAnomalyDetectorResponse AWS API Documentation
     #
     class BackTestAnomalyDetectorResponse < Aws::EmptyStructure; end
+
+    # Settings for backtest mode.
+    #
+    # @note When making an API call, you may pass BackTestConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         run_back_test_mode: false, # required
+    #       }
+    #
+    # @!attribute [rw] run_back_test_mode
+    #   Run a backtest instead of monitoring new data.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/BackTestConfiguration AWS API Documentation
+    #
+    class BackTestConfiguration < Struct.new(
+      :run_back_test_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Details about an Amazon CloudWatch datasource.
     #
@@ -851,6 +932,17 @@ module Aws::LookoutMetrics
     #             vpc_configuration: {
     #               subnet_id_list: ["SubnetId"], # required
     #               security_group_id_list: ["SecurityGroupId"], # required
+    #             },
+    #           },
+    #           athena_source_config: {
+    #             role_arn: "Arn",
+    #             database_name: "AthenaDatabaseName",
+    #             data_catalog: "AthenaDataCatalog",
+    #             table_name: "AthenaTableName",
+    #             work_group_name: "AthenaWorkGroupName",
+    #             s3_results_path: "AthenaS3ResultsPath",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
     #             },
     #           },
     #         },
@@ -2392,7 +2484,7 @@ module Aws::LookoutMetrics
       include Aws::Structure
     end
 
-    # Contains information about source data used to generate a metric.
+    # Contains information about source data used to generate metrics.
     #
     # @note When making an API call, you may pass MetricSource
     #   data as a hash:
@@ -2450,6 +2542,17 @@ module Aws::LookoutMetrics
     #             security_group_id_list: ["SecurityGroupId"], # required
     #           },
     #         },
+    #         athena_source_config: {
+    #           role_arn: "Arn",
+    #           database_name: "AthenaDatabaseName",
+    #           data_catalog: "AthenaDataCatalog",
+    #           table_name: "AthenaTableName",
+    #           work_group_name: "AthenaWorkGroupName",
+    #           s3_results_path: "AthenaS3ResultsPath",
+    #           back_test_configuration: {
+    #             run_back_test_mode: false, # required
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] s3_source_config
@@ -2458,23 +2561,25 @@ module Aws::LookoutMetrics
     #   @return [Types::S3SourceConfig]
     #
     # @!attribute [rw] app_flow_config
-    #   An object containing information about the AppFlow configuration.
+    #   Details about an AppFlow datasource.
     #   @return [Types::AppFlowConfig]
     #
     # @!attribute [rw] cloud_watch_config
-    #   An object containing information about the Amazon CloudWatch
-    #   monitoring configuration.
+    #   Details about an Amazon CloudWatch monitoring datasource.
     #   @return [Types::CloudWatchConfig]
     #
     # @!attribute [rw] rds_source_config
-    #   An object containing information about the Amazon Relational
-    #   Database Service (RDS) configuration.
+    #   Details about an Amazon Relational Database Service (RDS)
+    #   datasource.
     #   @return [Types::RDSSourceConfig]
     #
     # @!attribute [rw] redshift_source_config
-    #   An object containing information about the Amazon Redshift database
-    #   configuration.
+    #   Details about an Amazon Redshift database datasource.
     #   @return [Types::RedshiftSourceConfig]
+    #
+    # @!attribute [rw] athena_source_config
+    #   Details about an Amazon Athena datasource.
+    #   @return [Types::AthenaSourceConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/MetricSource AWS API Documentation
     #
@@ -2483,7 +2588,8 @@ module Aws::LookoutMetrics
       :app_flow_config,
       :cloud_watch_config,
       :rds_source_config,
-      :redshift_source_config)
+      :redshift_source_config,
+      :athena_source_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2756,7 +2862,7 @@ module Aws::LookoutMetrics
     #   @return [String]
     #
     # @!attribute [rw] sns_format
-    #   The text format for alerts.
+    #   The format of the SNS topic.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/SNSConfiguration AWS API Documentation
@@ -3128,6 +3234,17 @@ module Aws::LookoutMetrics
     #               security_group_id_list: ["SecurityGroupId"], # required
     #             },
     #           },
+    #           athena_source_config: {
+    #             role_arn: "Arn",
+    #             database_name: "AthenaDatabaseName",
+    #             data_catalog: "AthenaDataCatalog",
+    #             table_name: "AthenaTableName",
+    #             work_group_name: "AthenaWorkGroupName",
+    #             s3_results_path: "AthenaS3ResultsPath",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
+    #             },
+    #           },
     #         },
     #       }
     #
@@ -3162,7 +3279,7 @@ module Aws::LookoutMetrics
     #   @return [String]
     #
     # @!attribute [rw] metric_source
-    #   Contains information about source data used to generate a metric.
+    #   Contains information about source data used to generate metrics.
     #   @return [Types::MetricSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/UpdateMetricSetRequest AWS API Documentation

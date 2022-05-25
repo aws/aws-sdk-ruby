@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2022-05-25)
+------------------
+
+* Feature - Documentation updates for Secrets Manager
+
 1.61.0 (2022-05-11)
 ------------------
 

@@ -409,6 +409,10 @@ module Aws::AppRunner
     # @!attribute [rw] code_configuration
     #   Configuration for building and running the service from a source
     #   code repository.
+    #
+    #   <note markdown="1"> `CodeConfiguration` is required only for `CreateService` request.
+    #
+    #    </note>
     #   @return [Types::CodeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/apprunner-2020-05-15/CodeRepository AWS API Documentation
@@ -908,6 +912,10 @@ module Aws::AppRunner
     #   associates your service with a custom Amazon VPC. Specify IDs of
     #   subnets of a single Amazon VPC. App Runner determines the Amazon VPC
     #   from the subnets you specify.
+    #
+    #   <note markdown="1"> App Runner currently only provides support for IPv4.
+    #
+    #    </note>
     #   @return [Array<String>]
     #
     # @!attribute [rw] security_groups
