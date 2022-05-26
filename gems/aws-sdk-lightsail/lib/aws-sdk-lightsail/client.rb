@@ -1479,6 +1479,19 @@ module Aws::Lightsail
     #   deployment and its settings, such as the HTTP or HTTPS port to use,
     #   and the health check configuration.
     #
+    # @option params [Types::PrivateRegistryAccessRequest] :private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR private
+    #   repository for an Amazon Lightsail container service][1] in the
+    #   *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
     # @return [Types::CreateContainerServiceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateContainerServiceResult#container_service #container_service} => Types::ContainerService
@@ -1522,6 +1535,11 @@ module Aws::Lightsail
     #           path: "string",
     #           success_codes: "string",
     #         },
+    #       },
+    #     },
+    #     private_registry_access: {
+    #       ecr_image_puller_role: {
+    #         is_active: false,
     #       },
     #     },
     #   })
@@ -1588,6 +1606,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerService AWS API Documentation
     #
@@ -1724,6 +1744,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceDeployment AWS API Documentation
     #
@@ -6463,6 +6485,8 @@ module Aws::Lightsail
     #   resp.container_services[0].public_domain_names["string"] #=> Array
     #   resp.container_services[0].public_domain_names["string"][0] #=> String
     #   resp.container_services[0].url #=> String
+    #   resp.container_services[0].private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_services[0].private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetContainerServices AWS API Documentation
     #
@@ -11029,6 +11053,19 @@ module Aws::Lightsail
     #   You can specify public domain names using a string to array map as
     #   shown in the example later on this page.
     #
+    # @option params [Types::PrivateRegistryAccessRequest] :private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR private
+    #   repository for an Amazon Lightsail container service][1] in the
+    #   *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
     # @return [Types::UpdateContainerServiceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateContainerServiceResult#container_service #container_service} => Types::ContainerService
@@ -11042,6 +11079,11 @@ module Aws::Lightsail
     #     is_disabled: false,
     #     public_domain_names: {
     #       "string" => ["string"],
+    #     },
+    #     private_registry_access: {
+    #       ecr_image_puller_role: {
+    #         is_active: false,
+    #       },
     #     },
     #   })
     #
@@ -11107,6 +11149,8 @@ module Aws::Lightsail
     #   resp.container_service.public_domain_names["string"] #=> Array
     #   resp.container_service.public_domain_names["string"][0] #=> String
     #   resp.container_service.url #=> String
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.is_active #=> Boolean
+    #   resp.container_service.private_registry_access.ecr_image_puller_role.principal_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateContainerService AWS API Documentation
     #
@@ -11684,7 +11728,7 @@ module Aws::Lightsail
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

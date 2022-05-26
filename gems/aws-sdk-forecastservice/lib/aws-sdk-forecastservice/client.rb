@@ -511,6 +511,19 @@ module Aws::ForecastService
     #
     #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
     #
+    # @option params [Types::TimeAlignmentBoundary] :time_alignment_boundary
+    #   The time boundary Forecast uses to align and aggregate any data that
+    #   doesn't align with your forecast frequency. Provide the unit of time
+    #   and the time boundary as a key value pair. For more information on
+    #   specifying a time boundary, see [Specifying a Time Boundary][1]. If
+    #   you don't provide a time boundary, Forecast uses a set of [Default
+    #   Time Boundaries][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries
+    #
     # @return [Types::CreateAutoPredictorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAutoPredictorResponse#predictor_arn #predictor_arn} => String
@@ -557,6 +570,12 @@ module Aws::ForecastService
     #     ],
     #     monitor_config: {
     #       monitor_name: "Name", # required
+    #     },
+    #     time_alignment_boundary: {
+    #       month: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    #       day_of_month: 1,
+    #       day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #       hour: 1,
     #     },
     #   })
     #
@@ -2350,6 +2369,7 @@ module Aws::ForecastService
     #   * {Types::DescribeAutoPredictorResponse#optimization_metric #optimization_metric} => String
     #   * {Types::DescribeAutoPredictorResponse#explainability_info #explainability_info} => Types::ExplainabilityInfo
     #   * {Types::DescribeAutoPredictorResponse#monitor_info #monitor_info} => Types::MonitorInfo
+    #   * {Types::DescribeAutoPredictorResponse#time_alignment_boundary #time_alignment_boundary} => Types::TimeAlignmentBoundary
     #
     # @example Request syntax with placeholder values
     #
@@ -2393,6 +2413,10 @@ module Aws::ForecastService
     #   resp.explainability_info.status #=> String
     #   resp.monitor_info.monitor_arn #=> String
     #   resp.monitor_info.status #=> String
+    #   resp.time_alignment_boundary.month #=> String, one of "JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"
+    #   resp.time_alignment_boundary.day_of_month #=> Integer
+    #   resp.time_alignment_boundary.day_of_week #=> String, one of "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"
+    #   resp.time_alignment_boundary.hour #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictor AWS API Documentation
     #
@@ -3692,8 +3716,8 @@ module Aws::ForecastService
     # events collected by the monitor resource during different windows of
     # time.
     #
-    # For information about monitoring see [Viewing Monitoring Results][1].
-    # For more information about retrieving monitoring results see [Viewing
+    # For information about monitoring see predictor-monitoring. For more
+    # information about retrieving monitoring results see [Viewing
     # Monitoring Results][1].
     #
     #
@@ -4269,7 +4293,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -343,6 +343,9 @@
   "EMRContainers": {
     "models": "emr-containers/2020-10-01"
   },
+  "EMRServerlessWebService": {
+    "models": "emr-serverless/2021-07-13"
+  },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
   },

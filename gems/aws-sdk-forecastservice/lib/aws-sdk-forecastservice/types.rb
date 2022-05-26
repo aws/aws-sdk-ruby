@@ -467,6 +467,12 @@ module Aws::ForecastService
     #         monitor_config: {
     #           monitor_name: "Name", # required
     #         },
+    #         time_alignment_boundary: {
+    #           month: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    #           day_of_month: 1,
+    #           day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #           hour: 1,
+    #         },
     #       }
     #
     # @!attribute [rw] predictor_name
@@ -594,6 +600,20 @@ module Aws::ForecastService
     #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
     #   @return [Types::MonitorConfig]
     #
+    # @!attribute [rw] time_alignment_boundary
+    #   The time boundary Forecast uses to align and aggregate any data that
+    #   doesn't align with your forecast frequency. Provide the unit of
+    #   time and the time boundary as a key value pair. For more information
+    #   on specifying a time boundary, see [Specifying a Time Boundary][1].
+    #   If you don't provide a time boundary, Forecast uses a set of
+    #   [Default Time Boundaries][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary
+    #   [2]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries
+    #   @return [Types::TimeAlignmentBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateAutoPredictorRequest AWS API Documentation
     #
     class CreateAutoPredictorRequest < Struct.new(
@@ -608,7 +628,8 @@ module Aws::ForecastService
       :optimization_metric,
       :explain_predictor,
       :tags,
-      :monitor_config)
+      :monitor_config,
+      :time_alignment_boundary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2499,6 +2520,10 @@ module Aws::ForecastService
     #   monitor resource.
     #   @return [Types::MonitorInfo]
     #
+    # @!attribute [rw] time_alignment_boundary
+    #   The time boundary Forecast uses when aggregating data.
+    #   @return [Types::TimeAlignmentBoundary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeAutoPredictorResponse AWS API Documentation
     #
     class DescribeAutoPredictorResponse < Struct.new(
@@ -2519,7 +2544,8 @@ module Aws::ForecastService
       :last_modification_time,
       :optimization_metric,
       :explainability_info,
-      :monitor_info)
+      :monitor_info,
+      :time_alignment_boundary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5925,9 +5951,11 @@ module Aws::ForecastService
     # Describes the results of a monitor evaluation.
     #
     # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to monitor.
     #   @return [String]
     #
     # @!attribute [rw] monitor_arn
+    #   The Amazon Resource Name (ARN) of the monitor resource.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_time
@@ -6723,6 +6751,60 @@ module Aws::ForecastService
       :test_window_end,
       :status,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The time boundary Forecast uses to align and aggregate your data to
+    # match your forecast frequency. Provide the unit of time and the time
+    # boundary as a key value pair. If you don't provide a time boundary,
+    # Forecast uses a set of [Default Time Boundaries][1].
+    #
+    # For more information about aggregation, see [Data Aggregation for
+    # Different Forecast Frequencies][2]. For more information setting a
+    # custom time boundary, see [Specifying a Time Boundary][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#default-time-boundaries
+    # [2]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html
+    # [3]: https://docs.aws.amazon.com/forecast/latest/dg/data-aggregation.html#specifying-time-boundary
+    #
+    # @note When making an API call, you may pass TimeAlignmentBoundary
+    #   data as a hash:
+    #
+    #       {
+    #         month: "JANUARY", # accepts JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
+    #         day_of_month: 1,
+    #         day_of_week: "MONDAY", # accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+    #         hour: 1,
+    #       }
+    #
+    # @!attribute [rw] month
+    #   The month to use for time alignment during aggregation. The month
+    #   must be in uppercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] day_of_month
+    #   The day of the month to use for time alignment during aggregation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] day_of_week
+    #   The day of week to use for time alignment during aggregation. The
+    #   day must be in uppercase.
+    #   @return [String]
+    #
+    # @!attribute [rw] hour
+    #   The hour of day to use for time alignment during aggregation.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeAlignmentBoundary AWS API Documentation
+    #
+    class TimeAlignmentBoundary < Struct.new(
+      :month,
+      :day_of_month,
+      :day_of_week,
+      :hour)
       SENSITIVE = []
       include Aws::Structure
     end

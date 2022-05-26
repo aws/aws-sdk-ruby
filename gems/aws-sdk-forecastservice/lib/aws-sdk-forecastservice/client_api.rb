@@ -62,6 +62,8 @@ module Aws::ForecastService
     DatasetSummary = Shapes::StructureShape.new(name: 'DatasetSummary')
     DatasetType = Shapes::StringShape.new(name: 'DatasetType')
     Datasets = Shapes::ListShape.new(name: 'Datasets')
+    DayOfMonth = Shapes::IntegerShape.new(name: 'DayOfMonth')
+    DayOfWeek = Shapes::StringShape.new(name: 'DayOfWeek')
     DeleteDatasetGroupRequest = Shapes::StructureShape.new(name: 'DeleteDatasetGroupRequest')
     DeleteDatasetImportJobRequest = Shapes::StructureShape.new(name: 'DeleteDatasetImportJobRequest')
     DeleteDatasetRequest = Shapes::StructureShape.new(name: 'DeleteDatasetRequest')
@@ -134,6 +136,7 @@ module Aws::ForecastService
     GeolocationFormat = Shapes::StringShape.new(name: 'GeolocationFormat')
     GetAccuracyMetricsRequest = Shapes::StructureShape.new(name: 'GetAccuracyMetricsRequest')
     GetAccuracyMetricsResponse = Shapes::StructureShape.new(name: 'GetAccuracyMetricsResponse')
+    Hour = Shapes::IntegerShape.new(name: 'Hour')
     HyperParameterTuningJobConfig = Shapes::StructureShape.new(name: 'HyperParameterTuningJobConfig')
     InputDataConfig = Shapes::StructureShape.new(name: 'InputDataConfig')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
@@ -180,6 +183,7 @@ module Aws::ForecastService
     MonitorInfo = Shapes::StructureShape.new(name: 'MonitorInfo')
     MonitorSummary = Shapes::StructureShape.new(name: 'MonitorSummary')
     Monitors = Shapes::ListShape.new(name: 'Monitors')
+    Month = Shapes::StringShape.new(name: 'Month')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     OptimizationMetric = Shapes::StringShape.new(name: 'OptimizationMetric')
@@ -226,6 +230,7 @@ module Aws::ForecastService
     TestWindowDetails = Shapes::ListShape.new(name: 'TestWindowDetails')
     TestWindowSummary = Shapes::StructureShape.new(name: 'TestWindowSummary')
     TestWindows = Shapes::ListShape.new(name: 'TestWindows')
+    TimeAlignmentBoundary = Shapes::StructureShape.new(name: 'TimeAlignmentBoundary')
     TimePointGranularity = Shapes::StringShape.new(name: 'TimePointGranularity')
     TimeSeriesGranularity = Shapes::StringShape.new(name: 'TimeSeriesGranularity')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
@@ -296,6 +301,7 @@ module Aws::ForecastService
     CreateAutoPredictorRequest.add_member(:explain_predictor, Shapes::ShapeRef.new(shape: Boolean, location_name: "ExplainPredictor"))
     CreateAutoPredictorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateAutoPredictorRequest.add_member(:monitor_config, Shapes::ShapeRef.new(shape: MonitorConfig, location_name: "MonitorConfig"))
+    CreateAutoPredictorRequest.add_member(:time_alignment_boundary, Shapes::ShapeRef.new(shape: TimeAlignmentBoundary, location_name: "TimeAlignmentBoundary"))
     CreateAutoPredictorRequest.struct_class = Types::CreateAutoPredictorRequest
 
     CreateAutoPredictorResponse.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorArn"))
@@ -507,6 +513,7 @@ module Aws::ForecastService
     DescribeAutoPredictorResponse.add_member(:optimization_metric, Shapes::ShapeRef.new(shape: OptimizationMetric, location_name: "OptimizationMetric"))
     DescribeAutoPredictorResponse.add_member(:explainability_info, Shapes::ShapeRef.new(shape: ExplainabilityInfo, location_name: "ExplainabilityInfo"))
     DescribeAutoPredictorResponse.add_member(:monitor_info, Shapes::ShapeRef.new(shape: MonitorInfo, location_name: "MonitorInfo"))
+    DescribeAutoPredictorResponse.add_member(:time_alignment_boundary, Shapes::ShapeRef.new(shape: TimeAlignmentBoundary, location_name: "TimeAlignmentBoundary"))
     DescribeAutoPredictorResponse.struct_class = Types::DescribeAutoPredictorResponse
 
     DescribeDatasetGroupRequest.add_member(:dataset_group_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetGroupArn"))
@@ -1093,6 +1100,12 @@ module Aws::ForecastService
     TestWindowSummary.struct_class = Types::TestWindowSummary
 
     TestWindows.member = Shapes::ShapeRef.new(shape: WindowSummary)
+
+    TimeAlignmentBoundary.add_member(:month, Shapes::ShapeRef.new(shape: Month, location_name: "Month"))
+    TimeAlignmentBoundary.add_member(:day_of_month, Shapes::ShapeRef.new(shape: DayOfMonth, location_name: "DayOfMonth"))
+    TimeAlignmentBoundary.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
+    TimeAlignmentBoundary.add_member(:hour, Shapes::ShapeRef.new(shape: Hour, location_name: "Hour"))
+    TimeAlignmentBoundary.struct_class = Types::TimeAlignmentBoundary
 
     TrainingParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
     TrainingParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)

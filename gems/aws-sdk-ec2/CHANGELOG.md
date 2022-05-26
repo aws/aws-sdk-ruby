@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.317.0 (2022-05-26)
+------------------
+
+* Feature - C7g instances, powered by the latest generation AWS Graviton3 processors, provide the best price performance in Amazon EC2 for compute-intensive workloads.
+
 1.316.0 (2022-05-24)
 ------------------
 

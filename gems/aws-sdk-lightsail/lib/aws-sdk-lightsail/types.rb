@@ -2344,6 +2344,20 @@ module Aws::Lightsail
     #   URL returns a 404 response.
     #   @return [String]
     #
+    # @!attribute [rw] private_registry_access
+    #   An object that describes the configuration for the container service
+    #   to access private container image repositories, such as Amazon
+    #   Elastic Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR
+    #   private repository for an Amazon Lightsail container service][1] in
+    #   the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #   @return [Types::PrivateRegistryAccess]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerService AWS API Documentation
     #
     class ContainerService < Struct.new(
@@ -2364,7 +2378,8 @@ module Aws::Lightsail
       :principal_arn,
       :private_domain_name,
       :public_domain_names,
-      :url)
+      :url,
+      :private_registry_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2473,6 +2488,78 @@ module Aws::Lightsail
     class ContainerServiceDeploymentRequest < Struct.new(
       :containers,
       :public_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the activation status of the role that you can use to grant
+    # an Amazon Lightsail container service access to Amazon Elastic
+    # Container Registry (Amazon ECR) private repositories.
+    #
+    # When activated, Lightsail creates an Identity and Access Management
+    # (IAM) role for the specified Lightsail container service. You can use
+    # the ARN of the role to create a trust relationship between your
+    # Lightsail container service and an Amazon ECR private repository in
+    # your Amazon Web Services account. This allows your container service
+    # to pull images from Amazon ECR private repositories. For more
+    # information, see [Configuring access to an Amazon ECR private
+    # repository for an Amazon Lightsail container service][1] in the
+    # *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
+    # @!attribute [rw] is_active
+    #   A Boolean value that indicates whether the role is activated.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] principal_arn
+    #   The Amazon Resource Name (ARN) of the role, if it is activated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceECRImagePullerRole AWS API Documentation
+    #
+    class ContainerServiceECRImagePullerRole < Struct.new(
+      :is_active,
+      :principal_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a request to activate or deactivate the role that you can
+    # use to grant an Amazon Lightsail container service access to Amazon
+    # Elastic Container Registry (Amazon ECR) private repositories.
+    #
+    # When activated, Lightsail creates an Identity and Access Management
+    # (IAM) role for the specified Lightsail container service. You can use
+    # the ARN of the role to create a trust relationship between your
+    # Lightsail container service and an Amazon ECR private repository in
+    # your Amazon Web Services account. This allows your container service
+    # to pull images from Amazon ECR private repositories. For more
+    # information, see [Configuring access to an Amazon ECR private
+    # repository for an Amazon Lightsail container service][1] in the
+    # *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
+    # @note When making an API call, you may pass ContainerServiceECRImagePullerRoleRequest
+    #   data as a hash:
+    #
+    #       {
+    #         is_active: false,
+    #       }
+    #
+    # @!attribute [rw] is_active
+    #   A Boolean value that indicates whether to activate the role.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/ContainerServiceECRImagePullerRoleRequest AWS API Documentation
+    #
+    class ContainerServiceECRImagePullerRoleRequest < Struct.new(
+      :is_active)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3357,6 +3444,11 @@ module Aws::Lightsail
     #             },
     #           },
     #         },
+    #         private_registry_access: {
+    #           ecr_image_puller_role: {
+    #             is_active: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] service_name
@@ -3456,6 +3548,20 @@ module Aws::Lightsail
     #   to use, and the health check configuration.
     #   @return [Types::ContainerServiceDeploymentRequest]
     #
+    # @!attribute [rw] private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR
+    #   private repository for an Amazon Lightsail container service][1] in
+    #   the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #   @return [Types::PrivateRegistryAccessRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateContainerServiceRequest AWS API Documentation
     #
     class CreateContainerServiceRequest < Struct.new(
@@ -3464,7 +3570,8 @@ module Aws::Lightsail
       :scale,
       :tags,
       :public_domain_names,
-      :deployment)
+      :deployment,
+      :private_registry_access)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13102,6 +13209,69 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the configuration for an Amazon Lightsail container service
+    # to access private container image repositories, such as Amazon Elastic
+    # Container Registry (Amazon ECR) private repositories.
+    #
+    # For more information, see [Configuring access to an Amazon ECR private
+    # repository for an Amazon Lightsail container service][1] in the
+    # *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
+    # @!attribute [rw] ecr_image_puller_role
+    #   An object that describes the activation status of the role that you
+    #   can use to grant a Lightsail container service access to Amazon ECR
+    #   private repositories. If the role is activated, the Amazon Resource
+    #   Name (ARN) of the role is also listed.
+    #   @return [Types::ContainerServiceECRImagePullerRole]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PrivateRegistryAccess AWS API Documentation
+    #
+    class PrivateRegistryAccess < Struct.new(
+      :ecr_image_puller_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a request to configure an Amazon Lightsail container service
+    # to access private container image repositories, such as Amazon Elastic
+    # Container Registry (Amazon ECR) private repositories.
+    #
+    # For more information, see [Configuring access to an Amazon ECR private
+    # repository for an Amazon Lightsail container service][1] in the
+    # *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #
+    # @note When making an API call, you may pass PrivateRegistryAccessRequest
+    #   data as a hash:
+    #
+    #       {
+    #         ecr_image_puller_role: {
+    #           is_active: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] ecr_image_puller_role
+    #   An object to describe a request to activate or deactivate the role
+    #   that you can use to grant an Amazon Lightsail container service
+    #   access to Amazon Elastic Container Registry (Amazon ECR) private
+    #   repositories.
+    #   @return [Types::ContainerServiceECRImagePullerRoleRequest]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/PrivateRegistryAccessRequest AWS API Documentation
+    #
+    class PrivateRegistryAccessRequest < Struct.new(
+      :ecr_image_puller_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass PutAlarmRequest
     #   data as a hash:
     #
@@ -15023,6 +15193,11 @@ module Aws::Lightsail
     #         public_domain_names: {
     #           "string" => ["string"],
     #         },
+    #         private_registry_access: {
+    #           ecr_image_puller_role: {
+    #             is_active: false,
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] service_name
@@ -15079,6 +15254,20 @@ module Aws::Lightsail
     #   shown in the example later on this page.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] private_registry_access
+    #   An object to describe the configuration for the container service to
+    #   access private container image repositories, such as Amazon Elastic
+    #   Container Registry (Amazon ECR) private repositories.
+    #
+    #   For more information, see [Configuring access to an Amazon ECR
+    #   private repository for an Amazon Lightsail container service][1] in
+    #   the *Amazon Lightsail Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-container-service-ecr-private-repo-access
+    #   @return [Types::PrivateRegistryAccessRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateContainerServiceRequest AWS API Documentation
     #
     class UpdateContainerServiceRequest < Struct.new(
@@ -15086,7 +15275,8 @@ module Aws::Lightsail
       :power,
       :scale,
       :is_disabled,
-      :public_domain_names)
+      :public_domain_names,
+      :private_registry_access)
       SENSITIVE = []
       include Aws::Structure
     end

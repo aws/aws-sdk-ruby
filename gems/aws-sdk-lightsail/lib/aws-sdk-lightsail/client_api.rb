@@ -106,6 +106,8 @@ module Aws::Lightsail
     ContainerServiceDeploymentList = Shapes::ListShape.new(name: 'ContainerServiceDeploymentList')
     ContainerServiceDeploymentRequest = Shapes::StructureShape.new(name: 'ContainerServiceDeploymentRequest')
     ContainerServiceDeploymentState = Shapes::StringShape.new(name: 'ContainerServiceDeploymentState')
+    ContainerServiceECRImagePullerRole = Shapes::StructureShape.new(name: 'ContainerServiceECRImagePullerRole')
+    ContainerServiceECRImagePullerRoleRequest = Shapes::StructureShape.new(name: 'ContainerServiceECRImagePullerRoleRequest')
     ContainerServiceEndpoint = Shapes::StructureShape.new(name: 'ContainerServiceEndpoint')
     ContainerServiceHealthCheckConfig = Shapes::StructureShape.new(name: 'ContainerServiceHealthCheckConfig')
     ContainerServiceList = Shapes::ListShape.new(name: 'ContainerServiceList')
@@ -504,6 +506,8 @@ module Aws::Lightsail
     PortList = Shapes::ListShape.new(name: 'PortList')
     PortMap = Shapes::MapShape.new(name: 'PortMap')
     PortState = Shapes::StringShape.new(name: 'PortState')
+    PrivateRegistryAccess = Shapes::StructureShape.new(name: 'PrivateRegistryAccess')
+    PrivateRegistryAccessRequest = Shapes::StructureShape.new(name: 'PrivateRegistryAccessRequest')
     PutAlarmRequest = Shapes::StructureShape.new(name: 'PutAlarmRequest')
     PutAlarmResult = Shapes::StructureShape.new(name: 'PutAlarmResult')
     PutInstancePublicPortsRequest = Shapes::StructureShape.new(name: 'PutInstancePublicPortsRequest')
@@ -960,6 +964,7 @@ module Aws::Lightsail
     ContainerService.add_member(:private_domain_name, Shapes::ShapeRef.new(shape: string, location_name: "privateDomainName"))
     ContainerService.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
     ContainerService.add_member(:url, Shapes::ShapeRef.new(shape: string, location_name: "url"))
+    ContainerService.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccess, location_name: "privateRegistryAccess"))
     ContainerService.struct_class = Types::ContainerService
 
     ContainerServiceDeployment.add_member(:version, Shapes::ShapeRef.new(shape: integer, location_name: "version"))
@@ -974,6 +979,13 @@ module Aws::Lightsail
     ContainerServiceDeploymentRequest.add_member(:containers, Shapes::ShapeRef.new(shape: ContainerMap, location_name: "containers"))
     ContainerServiceDeploymentRequest.add_member(:public_endpoint, Shapes::ShapeRef.new(shape: EndpointRequest, location_name: "publicEndpoint"))
     ContainerServiceDeploymentRequest.struct_class = Types::ContainerServiceDeploymentRequest
+
+    ContainerServiceECRImagePullerRole.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    ContainerServiceECRImagePullerRole.add_member(:principal_arn, Shapes::ShapeRef.new(shape: string, location_name: "principalArn"))
+    ContainerServiceECRImagePullerRole.struct_class = Types::ContainerServiceECRImagePullerRole
+
+    ContainerServiceECRImagePullerRoleRequest.add_member(:is_active, Shapes::ShapeRef.new(shape: boolean, location_name: "isActive"))
+    ContainerServiceECRImagePullerRoleRequest.struct_class = Types::ContainerServiceECRImagePullerRoleRequest
 
     ContainerServiceEndpoint.add_member(:container_name, Shapes::ShapeRef.new(shape: string, location_name: "containerName"))
     ContainerServiceEndpoint.add_member(:container_port, Shapes::ShapeRef.new(shape: integer, location_name: "containerPort"))
@@ -1103,6 +1115,7 @@ module Aws::Lightsail
     CreateContainerServiceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
     CreateContainerServiceRequest.add_member(:deployment, Shapes::ShapeRef.new(shape: ContainerServiceDeploymentRequest, location_name: "deployment"))
+    CreateContainerServiceRequest.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccessRequest, location_name: "privateRegistryAccess"))
     CreateContainerServiceRequest.struct_class = Types::CreateContainerServiceRequest
 
     CreateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))
@@ -2471,6 +2484,12 @@ module Aws::Lightsail
     PortMap.key = Shapes::ShapeRef.new(shape: string)
     PortMap.value = Shapes::ShapeRef.new(shape: ContainerServiceProtocol)
 
+    PrivateRegistryAccess.add_member(:ecr_image_puller_role, Shapes::ShapeRef.new(shape: ContainerServiceECRImagePullerRole, location_name: "ecrImagePullerRole"))
+    PrivateRegistryAccess.struct_class = Types::PrivateRegistryAccess
+
+    PrivateRegistryAccessRequest.add_member(:ecr_image_puller_role, Shapes::ShapeRef.new(shape: ContainerServiceECRImagePullerRoleRequest, location_name: "ecrImagePullerRole"))
+    PrivateRegistryAccessRequest.struct_class = Types::PrivateRegistryAccessRequest
+
     PutAlarmRequest.add_member(:alarm_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "alarmName"))
     PutAlarmRequest.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "metricName"))
     PutAlarmRequest.add_member(:monitored_resource_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "monitoredResourceName"))
@@ -2800,6 +2819,7 @@ module Aws::Lightsail
     UpdateContainerServiceRequest.add_member(:scale, Shapes::ShapeRef.new(shape: ContainerServiceScale, location_name: "scale"))
     UpdateContainerServiceRequest.add_member(:is_disabled, Shapes::ShapeRef.new(shape: boolean, location_name: "isDisabled"))
     UpdateContainerServiceRequest.add_member(:public_domain_names, Shapes::ShapeRef.new(shape: ContainerServicePublicDomains, location_name: "publicDomainNames"))
+    UpdateContainerServiceRequest.add_member(:private_registry_access, Shapes::ShapeRef.new(shape: PrivateRegistryAccessRequest, location_name: "privateRegistryAccess"))
     UpdateContainerServiceRequest.struct_class = Types::UpdateContainerServiceRequest
 
     UpdateContainerServiceResult.add_member(:container_service, Shapes::ShapeRef.new(shape: ContainerService, location_name: "containerService"))

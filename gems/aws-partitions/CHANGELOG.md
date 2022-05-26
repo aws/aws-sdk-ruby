@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.593.0 (2022-05-26)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::EMRServerlessWebService`.
+
 1.592.0 (2022-05-25)
 ------------------
 
