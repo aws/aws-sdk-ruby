@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2022-05-27)
+------------------
+
+* Feature - AWS DataSync now supports TLS encryption in transit, file system policies and access points for EFS locations.
+
 1.46.0 (2022-05-05)
 ------------------
 

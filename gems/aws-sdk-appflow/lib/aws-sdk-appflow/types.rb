@@ -1982,6 +1982,7 @@ module Aws::Appflow
     #               timezone: "Timezone",
     #               schedule_offset: 1,
     #               first_execution_from: Time.now,
+    #               flow_error_deactivation_threshold: 1,
     #             },
     #           },
     #         },
@@ -2084,6 +2085,7 @@ module Aws::Appflow
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
     #                   },
+    #                   preserve_source_data_typing: false,
     #                 },
     #               },
     #               salesforce: {
@@ -3129,6 +3131,7 @@ module Aws::Appflow
     #             aggregation_config: {
     #               aggregation_type: "None", # accepts None, SingleFile
     #             },
+    #             preserve_source_data_typing: false,
     #           },
     #         },
     #         salesforce: {
@@ -3386,6 +3389,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -5135,6 +5139,7 @@ module Aws::Appflow
     #           aggregation_config: {
     #             aggregation_type: "None", # accepts None, SingleFile
     #           },
+    #           preserve_source_data_typing: false,
     #         },
     #       }
     #
@@ -5206,6 +5211,7 @@ module Aws::Appflow
     #         aggregation_config: {
     #           aggregation_type: "None", # accepts None, SingleFile
     #         },
+    #         preserve_source_data_typing: false,
     #       }
     #
     # @!attribute [rw] file_type
@@ -5224,12 +5230,27 @@ module Aws::Appflow
     #   format of your flow data.
     #   @return [Types::AggregationConfig]
     #
+    # @!attribute [rw] preserve_source_data_typing
+    #   If your file output format is Parquet, use this parameter to set
+    #   whether Amazon AppFlow preserves the data types in your source data
+    #   when it writes the output to Amazon S3.
+    #
+    #   * `true`\: Amazon AppFlow preserves the data types when it writes to
+    #     Amazon S3. For example, an integer or `1` in your source data is
+    #     still an integer in your output.
+    #
+    #   * `false`\: Amazon AppFlow converts all of the source data into
+    #     strings when it writes to Amazon S3. For example, an integer of
+    #     `1` in your source data becomes the string `"1"` in the output.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/S3OutputFormatConfig AWS API Documentation
     #
     class S3OutputFormatConfig < Struct.new(
       :file_type,
       :prefix_config,
-      :aggregation_config)
+      :aggregation_config,
+      :preserve_source_data_typing)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5659,6 +5680,7 @@ module Aws::Appflow
     #         timezone: "Timezone",
     #         schedule_offset: 1,
     #         first_execution_from: Time.now,
+    #         flow_error_deactivation_threshold: 1,
     #       }
     #
     # @!attribute [rw] schedule_expression
@@ -5672,16 +5694,27 @@ module Aws::Appflow
     #   @return [String]
     #
     # @!attribute [rw] schedule_start_time
-    #   Specifies the scheduled start time for a schedule-triggered flow.
+    #   The time at which the scheduled flow starts. The time is formatted
+    #   as a timestamp that follows the ISO 8601 standard, such as
+    #   `2022-04-26T13:00:00-07:00`.
     #   @return [Time]
     #
     # @!attribute [rw] schedule_end_time
-    #   Specifies the scheduled end time for a schedule-triggered flow.
+    #   The time at which the scheduled flow ends. The time is formatted as
+    #   a timestamp that follows the ISO 8601 standard, such as
+    #   `2022-04-27T13:00:00-07:00`.
     #   @return [Time]
     #
     # @!attribute [rw] timezone
-    #   Specifies the time zone used when referring to the date and time of
-    #   a scheduled-triggered flow, such as `America/New_York`.
+    #   Specifies the time zone used when referring to the dates and times
+    #   of a scheduled flow, such as `America/New_York`. This time zone is
+    #   only a descriptive label. It doesn't affect how Amazon AppFlow
+    #   interprets the timestamps that you specify to schedule the flow.
+    #
+    #   If you want to schedule a flow by using times in a particular time
+    #   zone, indicate the time zone as a UTC offset in your timestamps. For
+    #   example, the UTC offsets for the `America/New_York` timezone are
+    #   `-04:00` EDT and `-05:00 EST`.
     #   @return [String]
     #
     # @!attribute [rw] schedule_offset
@@ -5694,6 +5727,11 @@ module Aws::Appflow
     #   connector in the first flow run.
     #   @return [Time]
     #
+    # @!attribute [rw] flow_error_deactivation_threshold
+    #   Defines how many times a scheduled flow fails consecutively before
+    #   Amazon AppFlow deactivates it.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appflow-2020-08-23/ScheduledTriggerProperties AWS API Documentation
     #
     class ScheduledTriggerProperties < Struct.new(
@@ -5703,7 +5741,8 @@ module Aws::Appflow
       :schedule_end_time,
       :timezone,
       :schedule_offset,
-      :first_execution_from)
+      :first_execution_from,
+      :flow_error_deactivation_threshold)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6735,6 +6774,7 @@ module Aws::Appflow
     #             timezone: "Timezone",
     #             schedule_offset: 1,
     #             first_execution_from: Time.now,
+    #             flow_error_deactivation_threshold: 1,
     #           },
     #         },
     #       }
@@ -6775,6 +6815,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       }
     #
@@ -7147,6 +7188,7 @@ module Aws::Appflow
     #               timezone: "Timezone",
     #               schedule_offset: 1,
     #               first_execution_from: Time.now,
+    #               flow_error_deactivation_threshold: 1,
     #             },
     #           },
     #         },
@@ -7249,6 +7291,7 @@ module Aws::Appflow
     #                   aggregation_config: {
     #                     aggregation_type: "None", # accepts None, SingleFile
     #                   },
+    #                   preserve_source_data_typing: false,
     #                 },
     #               },
     #               salesforce: {

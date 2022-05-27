@@ -171,6 +171,7 @@ module Aws::Appflow
     FlowArn = Shapes::StringShape.new(name: 'FlowArn')
     FlowDefinition = Shapes::StructureShape.new(name: 'FlowDefinition')
     FlowDescription = Shapes::StringShape.new(name: 'FlowDescription')
+    FlowErrorDeactivationThreshold = Shapes::IntegerShape.new(name: 'FlowErrorDeactivationThreshold')
     FlowExecutionList = Shapes::ListShape.new(name: 'FlowExecutionList')
     FlowList = Shapes::ListShape.new(name: 'FlowList')
     FlowName = Shapes::StringShape.new(name: 'FlowName')
@@ -196,6 +197,7 @@ module Aws::Appflow
     InforNexusSourceProperties = Shapes::StructureShape.new(name: 'InforNexusSourceProperties')
     InstanceUrl = Shapes::StringShape.new(name: 'InstanceUrl')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    JavaBoolean = Shapes::BooleanShape.new(name: 'JavaBoolean')
     KMSArn = Shapes::StringShape.new(name: 'KMSArn')
     Key = Shapes::StringShape.new(name: 'Key')
     Label = Shapes::StringShape.new(name: 'Label')
@@ -1117,6 +1119,7 @@ module Aws::Appflow
     S3OutputFormatConfig.add_member(:file_type, Shapes::ShapeRef.new(shape: FileType, location_name: "fileType"))
     S3OutputFormatConfig.add_member(:prefix_config, Shapes::ShapeRef.new(shape: PrefixConfig, location_name: "prefixConfig"))
     S3OutputFormatConfig.add_member(:aggregation_config, Shapes::ShapeRef.new(shape: AggregationConfig, location_name: "aggregationConfig"))
+    S3OutputFormatConfig.add_member(:preserve_source_data_typing, Shapes::ShapeRef.new(shape: JavaBoolean, location_name: "preserveSourceDataTyping"))
     S3OutputFormatConfig.struct_class = Types::S3OutputFormatConfig
 
     S3SourceProperties.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
@@ -1180,6 +1183,7 @@ module Aws::Appflow
     ScheduledTriggerProperties.add_member(:timezone, Shapes::ShapeRef.new(shape: Timezone, location_name: "timezone"))
     ScheduledTriggerProperties.add_member(:schedule_offset, Shapes::ShapeRef.new(shape: ScheduleOffset, location_name: "scheduleOffset", metadata: {"box"=>true}))
     ScheduledTriggerProperties.add_member(:first_execution_from, Shapes::ShapeRef.new(shape: Date, location_name: "firstExecutionFrom"))
+    ScheduledTriggerProperties.add_member(:flow_error_deactivation_threshold, Shapes::ShapeRef.new(shape: FlowErrorDeactivationThreshold, location_name: "flowErrorDeactivationThreshold", metadata: {"box"=>true}))
     ScheduledTriggerProperties.struct_class = Types::ScheduledTriggerProperties
 
     SchedulingFrequencyTypeList.member = Shapes::ShapeRef.new(shape: ScheduleFrequencyType)

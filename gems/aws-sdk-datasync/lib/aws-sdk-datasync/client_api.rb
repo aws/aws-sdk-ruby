@@ -81,7 +81,9 @@ module Aws::DataSync
     Ec2SecurityGroupArn = Shapes::StringShape.new(name: 'Ec2SecurityGroupArn')
     Ec2SecurityGroupArnList = Shapes::ListShape.new(name: 'Ec2SecurityGroupArnList')
     Ec2SubnetArn = Shapes::StringShape.new(name: 'Ec2SubnetArn')
+    EfsAccessPointArn = Shapes::StringShape.new(name: 'EfsAccessPointArn')
     EfsFilesystemArn = Shapes::StringShape.new(name: 'EfsFilesystemArn')
+    EfsInTransitEncryption = Shapes::StringShape.new(name: 'EfsInTransitEncryption')
     EfsSubdirectory = Shapes::StringShape.new(name: 'EfsSubdirectory')
     Endpoint = Shapes::StringShape.new(name: 'Endpoint')
     EndpointType = Shapes::StringShape.new(name: 'EndpointType')
@@ -252,6 +254,9 @@ module Aws::DataSync
     CreateLocationEfsRequest.add_member(:efs_filesystem_arn, Shapes::ShapeRef.new(shape: EfsFilesystemArn, required: true, location_name: "EfsFilesystemArn"))
     CreateLocationEfsRequest.add_member(:ec2_config, Shapes::ShapeRef.new(shape: Ec2Config, required: true, location_name: "Ec2Config"))
     CreateLocationEfsRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
+    CreateLocationEfsRequest.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: EfsAccessPointArn, location_name: "AccessPointArn"))
+    CreateLocationEfsRequest.add_member(:file_system_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
+    CreateLocationEfsRequest.add_member(:in_transit_encryption, Shapes::ShapeRef.new(shape: EfsInTransitEncryption, location_name: "InTransitEncryption"))
     CreateLocationEfsRequest.struct_class = Types::CreateLocationEfsRequest
 
     CreateLocationEfsResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
@@ -402,6 +407,9 @@ module Aws::DataSync
     DescribeLocationEfsResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationEfsResponse.add_member(:ec2_config, Shapes::ShapeRef.new(shape: Ec2Config, location_name: "Ec2Config"))
     DescribeLocationEfsResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Time, location_name: "CreationTime"))
+    DescribeLocationEfsResponse.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: EfsAccessPointArn, location_name: "AccessPointArn"))
+    DescribeLocationEfsResponse.add_member(:file_system_access_role_arn, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "FileSystemAccessRoleArn"))
+    DescribeLocationEfsResponse.add_member(:in_transit_encryption, Shapes::ShapeRef.new(shape: EfsInTransitEncryption, location_name: "InTransitEncryption"))
     DescribeLocationEfsResponse.struct_class = Types::DescribeLocationEfsResponse
 
     DescribeLocationFsxLustreRequest.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, required: true, location_name: "LocationArn"))

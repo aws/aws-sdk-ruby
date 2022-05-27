@@ -109,6 +109,7 @@ module Aws
   autoload :EKS, 'aws-sdk-eks'
   autoload :EMR, 'aws-sdk-emr'
   autoload :EMRContainers, 'aws-sdk-emrcontainers'
+  autoload :EMRServerless, 'aws-sdk-emrserverless'
   autoload :ElastiCache, 'aws-sdk-elasticache'
   autoload :ElasticBeanstalk, 'aws-sdk-elasticbeanstalk'
   autoload :ElasticInference, 'aws-sdk-elasticinference'

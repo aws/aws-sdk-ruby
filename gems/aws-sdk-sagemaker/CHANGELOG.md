@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2022-05-27)
+------------------
+
+* Feature - Amazon SageMaker Notebook Instances now allows configuration of Instance Metadata Service version and Amazon SageMaker Studio now supports G5 instance types.
+
 1.125.0 (2022-05-25)
 ------------------
 

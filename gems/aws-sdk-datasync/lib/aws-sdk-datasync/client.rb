@@ -508,50 +508,53 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Creates an endpoint for an Amazon EFS file system.
+    # Creates an endpoint for an Amazon EFS file system that DataSync can
+    # access for a transfer. For more information, see [Creating a location
+    # for Amazon EFS][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/create-efs-location.html
     #
     # @option params [String] :subdirectory
-    #   A subdirectory in the location’s path. This subdirectory in the EFS
-    #   file system is used to read data from the EFS source location or write
-    #   data to the EFS destination. By default, DataSync uses the root
-    #   directory.
+    #   Specifies a mount path for your Amazon EFS file system. This is where
+    #   DataSync reads or writes data (depending on if this is a source or
+    #   destination location). By default, DataSync uses the root directory,
+    #   but you can also include subdirectories.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
-    #   `/path/to/folder`.
+    #   <note markdown="1"> You must specify a value with forward slashes (for example,
+    #   `/path/to/folder`).
     #
     #    </note>
     #
     # @option params [required, String] :efs_filesystem_arn
-    #   The Amazon Resource Name (ARN) for the Amazon EFS file system.
+    #   Specifies the ARN for the Amazon EFS file system.
     #
     # @option params [required, Types::Ec2Config] :ec2_config
-    #   The subnet and security group that the Amazon EFS file system uses.
-    #   The security group that you provide needs to be able to communicate
-    #   with the security group on the mount target in the subnet specified.
-    #
-    #   The exact relationship between security group M (of the mount target)
-    #   and security group S (which you provide for DataSync to use at this
-    #   stage) is as follows:
-    #
-    #   * Security group M (which you associate with the mount target) must
-    #     allow inbound access for the Transmission Control Protocol (TCP) on
-    #     the NFS port (2049) from security group S. You can enable inbound
-    #     connections either by IP address (CIDR range) or security group.
-    #
-    #   * Security group S (provided to DataSync to access EFS) should have a
-    #     rule that enables outbound connections to the NFS port on one of the
-    #     file system’s mount targets. You can enable outbound connections
-    #     either by IP address (CIDR range) or security group.
-    #
-    #     For information about security groups and mount targets, see
-    #     Security Groups for Amazon EC2 Instances and Mount Targets in the
-    #     *Amazon EFS User Guide.*
+    #   Specifies the subnet and security groups DataSync uses to access your
+    #   Amazon EFS file system.
     #
     # @option params [Array<Types::TagListEntry>] :tags
-    #   The key-value pair that represents a tag that you want to add to the
-    #   resource. The value can be an empty string. This value helps you
-    #   manage, filter, and search for your resources. We recommend that you
-    #   create a name tag for your location.
+    #   Specifies the key-value pair that represents a tag that you want to
+    #   add to the resource. The value can be an empty string. This value
+    #   helps you manage, filter, and search for your resources. We recommend
+    #   that you create a name tag for your location.
+    #
+    # @option params [String] :access_point_arn
+    #   Specifies the Amazon Resource Name (ARN) of the access point that
+    #   DataSync uses to access the Amazon EFS file system.
+    #
+    # @option params [String] :file_system_access_role_arn
+    #   Specifies an Identity and Access Management (IAM) role that DataSync
+    #   assumes when mounting the Amazon EFS file system.
+    #
+    # @option params [String] :in_transit_encryption
+    #   Specifies whether you want DataSync to use TLS encryption when
+    #   transferring data to or from your Amazon EFS file system.
+    #
+    #   If you specify an access point using `AccessPointArn` or an IAM role
+    #   using `FileSystemAccessRoleArn`, you must set this parameter to
+    #   `TLS1_2`.
     #
     # @return [Types::CreateLocationEfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -572,6 +575,9 @@ module Aws::DataSync
     #         value: "TagValue",
     #       },
     #     ],
+    #     access_point_arn: "EfsAccessPointArn",
+    #     file_system_access_role_arn: "IamRoleArn",
+    #     in_transit_encryption: "NONE", # accepts NONE, TLS1_2
     #   })
     #
     # @example Response structure
@@ -1562,11 +1568,12 @@ module Aws::DataSync
       req.send_request(options)
     end
 
-    # Returns metadata, such as the path information about an Amazon EFS
-    # location.
+    # Returns metadata about your DataSync location for an Amazon EFS file
+    # system.
     #
     # @option params [required, String] :location_arn
-    #   The Amazon Resource Name (ARN) of the EFS location to describe.
+    #   The Amazon Resource Name (ARN) of the Amazon EFS file system location
+    #   that you want information about.
     #
     # @return [Types::DescribeLocationEfsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1574,6 +1581,9 @@ module Aws::DataSync
     #   * {Types::DescribeLocationEfsResponse#location_uri #location_uri} => String
     #   * {Types::DescribeLocationEfsResponse#ec2_config #ec2_config} => Types::Ec2Config
     #   * {Types::DescribeLocationEfsResponse#creation_time #creation_time} => Time
+    #   * {Types::DescribeLocationEfsResponse#access_point_arn #access_point_arn} => String
+    #   * {Types::DescribeLocationEfsResponse#file_system_access_role_arn #file_system_access_role_arn} => String
+    #   * {Types::DescribeLocationEfsResponse#in_transit_encryption #in_transit_encryption} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1589,6 +1599,9 @@ module Aws::DataSync
     #   resp.ec2_config.security_group_arns #=> Array
     #   resp.ec2_config.security_group_arns[0] #=> String
     #   resp.creation_time #=> Time
+    #   resp.access_point_arn #=> String
+    #   resp.file_system_access_role_arn #=> String
+    #   resp.in_transit_encryption #=> String, one of "NONE", "TLS1_2"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfs AWS API Documentation
     #
@@ -3022,7 +3035,7 @@ module Aws::DataSync
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.47.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.132.0 (2022-05-27)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-emrserverless` gem.
+
 3.131.1 (2022-05-26)
 ------------------
 

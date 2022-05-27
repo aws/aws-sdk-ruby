@@ -199,55 +199,57 @@ module Aws::DataSync
     #             value: "TagValue",
     #           },
     #         ],
+    #         access_point_arn: "EfsAccessPointArn",
+    #         file_system_access_role_arn: "IamRoleArn",
+    #         in_transit_encryption: "NONE", # accepts NONE, TLS1_2
     #       }
     #
     # @!attribute [rw] subdirectory
-    #   A subdirectory in the location’s path. This subdirectory in the EFS
-    #   file system is used to read data from the EFS source location or
-    #   write data to the EFS destination. By default, DataSync uses the
-    #   root directory.
+    #   Specifies a mount path for your Amazon EFS file system. This is
+    #   where DataSync reads or writes data (depending on if this is a
+    #   source or destination location). By default, DataSync uses the root
+    #   directory, but you can also include subdirectories.
     #
-    #   <note markdown="1"> `Subdirectory` must be specified with forward slashes. For example,
-    #   `/path/to/folder`.
+    #   <note markdown="1"> You must specify a value with forward slashes (for example,
+    #   `/path/to/folder`).
     #
     #    </note>
     #   @return [String]
     #
     # @!attribute [rw] efs_filesystem_arn
-    #   The Amazon Resource Name (ARN) for the Amazon EFS file system.
+    #   Specifies the ARN for the Amazon EFS file system.
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   The subnet and security group that the Amazon EFS file system uses.
-    #   The security group that you provide needs to be able to communicate
-    #   with the security group on the mount target in the subnet specified.
-    #
-    #   The exact relationship between security group M (of the mount
-    #   target) and security group S (which you provide for DataSync to use
-    #   at this stage) is as follows:
-    #
-    #   * Security group M (which you associate with the mount target) must
-    #     allow inbound access for the Transmission Control Protocol (TCP)
-    #     on the NFS port (2049) from security group S. You can enable
-    #     inbound connections either by IP address (CIDR range) or security
-    #     group.
-    #
-    #   * Security group S (provided to DataSync to access EFS) should have
-    #     a rule that enables outbound connections to the NFS port on one of
-    #     the file system’s mount targets. You can enable outbound
-    #     connections either by IP address (CIDR range) or security group.
-    #
-    #     For information about security groups and mount targets, see
-    #     Security Groups for Amazon EC2 Instances and Mount Targets in the
-    #     *Amazon EFS User Guide.*
+    #   Specifies the subnet and security groups DataSync uses to access
+    #   your Amazon EFS file system.
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] tags
-    #   The key-value pair that represents a tag that you want to add to the
-    #   resource. The value can be an empty string. This value helps you
-    #   manage, filter, and search for your resources. We recommend that you
-    #   create a name tag for your location.
+    #   Specifies the key-value pair that represents a tag that you want to
+    #   add to the resource. The value can be an empty string. This value
+    #   helps you manage, filter, and search for your resources. We
+    #   recommend that you create a name tag for your location.
     #   @return [Array<Types::TagListEntry>]
+    #
+    # @!attribute [rw] access_point_arn
+    #   Specifies the Amazon Resource Name (ARN) of the access point that
+    #   DataSync uses to access the Amazon EFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_access_role_arn
+    #   Specifies an Identity and Access Management (IAM) role that DataSync
+    #   assumes when mounting the Amazon EFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_transit_encryption
+    #   Specifies whether you want DataSync to use TLS encryption when
+    #   transferring data to or from your Amazon EFS file system.
+    #
+    #   If you specify an access point using `AccessPointArn` or an IAM role
+    #   using `FileSystemAccessRoleArn`, you must set this parameter to
+    #   `TLS1_2`.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationEfsRequest AWS API Documentation
     #
@@ -255,7 +257,10 @@ module Aws::DataSync
       :subdirectory,
       :efs_filesystem_arn,
       :ec2_config,
-      :tags)
+      :tags,
+      :access_point_arn,
+      :file_system_access_role_arn,
+      :in_transit_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -264,7 +269,7 @@ module Aws::DataSync
     #
     # @!attribute [rw] location_arn
     #   The Amazon Resource Name (ARN) of the Amazon EFS file system
-    #   location that is created.
+    #   location that you create.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/CreateLocationEfsResponse AWS API Documentation
@@ -1424,7 +1429,8 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the EFS location to describe.
+    #   The Amazon Resource Name (ARN) of the Amazon EFS file system
+    #   location that you want information about.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsRequest AWS API Documentation
@@ -1438,24 +1444,36 @@ module Aws::DataSync
     # DescribeLocationEfsResponse
     #
     # @!attribute [rw] location_arn
-    #   The Amazon Resource Name (ARN) of the EFS location that was
-    #   described.
+    #   The ARN of the Amazon EFS file system location.
     #   @return [String]
     #
     # @!attribute [rw] location_uri
-    #   The URL of the EFS location that was described.
+    #   The URL of the Amazon EFS file system location.
     #   @return [String]
     #
     # @!attribute [rw] ec2_config
-    #   The subnet that DataSync uses to access target EFS file system. The
-    #   subnet must have at least one mount target for that file system. The
-    #   security group that you provide needs to be able to communicate with
-    #   the security group on the mount target in the subnet specified.
+    #   The subnet and security groups that DataSync uses to access your
+    #   Amazon EFS file system.
     #   @return [Types::Ec2Config]
     #
     # @!attribute [rw] creation_time
-    #   The time that the EFS location was created.
+    #   The time that the location was created.
     #   @return [Time]
+    #
+    # @!attribute [rw] access_point_arn
+    #   The ARN of the access point that DataSync uses to access the Amazon
+    #   EFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_access_role_arn
+    #   The Identity and Access Management (IAM) role that DataSync assumes
+    #   when mounting the Amazon EFS file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] in_transit_encryption
+    #   Whether DataSync uses TLS encryption when transferring data to or
+    #   from your Amazon EFS file system.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/DescribeLocationEfsResponse AWS API Documentation
     #
@@ -1463,7 +1481,10 @@ module Aws::DataSync
       :location_arn,
       :location_uri,
       :ec2_config,
-      :creation_time)
+      :creation_time,
+      :access_point_arn,
+      :file_system_access_role_arn,
+      :in_transit_encryption)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2298,10 +2319,8 @@ module Aws::DataSync
       include Aws::Structure
     end
 
-    # The subnet that DataSync uses to access target EFS file system. The
-    # subnet must have at least one mount target for that file system. The
-    # security group that you provide needs to be able to communicate with
-    # the security group on the mount target in the subnet specified.
+    # The subnet and security groups that DataSync uses to access your
+    # Amazon EFS file system.
     #
     # @note When making an API call, you may pass Ec2Config
     #   data as a hash:
@@ -2312,13 +2331,30 @@ module Aws::DataSync
     #       }
     #
     # @!attribute [rw] subnet_arn
-    #   The ARN of the subnet that DataSync uses to access the target EFS
-    #   file system.
+    #   Specifies the ARN of a subnet where DataSync creates the [network
+    #   interfaces][1] for managing traffic during your transfer.
+    #
+    #   The subnet must be located:
+    #
+    #   * In the same virtual private cloud (VPC) as the Amazon EFS file
+    #     system.
+    #
+    #   * In the same Availability Zone as at least one mount target for the
+    #     Amazon EFS file system.
+    #
+    #   <note markdown="1"> You don't need to specify a subnet that includes a file system
+    #   mount target.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   The Amazon Resource Names (ARNs) of the security groups that are
-    #   configured for the Amazon EC2 resource.
+    #   Specifies the Amazon Resource Names (ARNs) of the security groups
+    #   associated with an Amazon EFS file system's mount target.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datasync-2018-11-09/Ec2Config AWS API Documentation

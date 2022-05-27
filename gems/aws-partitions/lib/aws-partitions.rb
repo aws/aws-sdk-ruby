@@ -327,7 +327,7 @@ module Aws
             'EKS' => 'eks',
             'EMR' => 'elasticmapreduce',
             'EMRContainers' => 'emr-containers',
-            'EMRServerlessWebService' => 'emr-serverless',
+            'EMRServerless' => 'emr-serverless',
             'ElastiCache' => 'elasticache',
             'ElasticBeanstalk' => 'elasticbeanstalk',
             'ElasticInference' => 'api.elastic-inference',

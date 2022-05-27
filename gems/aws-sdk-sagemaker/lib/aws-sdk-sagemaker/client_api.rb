@@ -759,6 +759,7 @@ module Aws::SageMaker
     InputDataConfig = Shapes::ListShape.new(name: 'InputDataConfig')
     InputMode = Shapes::StringShape.new(name: 'InputMode')
     InputModes = Shapes::ListShape.new(name: 'InputModes')
+    InstanceMetadataServiceConfiguration = Shapes::StructureShape.new(name: 'InstanceMetadataServiceConfiguration')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerParameterRange = Shapes::StructureShape.new(name: 'IntegerParameterRange')
@@ -976,6 +977,7 @@ module Aws::SageMaker
     MetricSetSource = Shapes::StringShape.new(name: 'MetricSetSource')
     MetricValue = Shapes::FloatShape.new(name: 'MetricValue')
     MetricsSource = Shapes::StructureShape.new(name: 'MetricsSource')
+    MinimumInstanceMetadataServiceVersion = Shapes::StringShape.new(name: 'MinimumInstanceMetadataServiceVersion')
     ModelApprovalStatus = Shapes::StringShape.new(name: 'ModelApprovalStatus')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
     ModelArtifacts = Shapes::StructureShape.new(name: 'ModelArtifacts')
@@ -2510,6 +2512,7 @@ module Aws::SageMaker
     CreateNotebookInstanceInput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
     CreateNotebookInstanceInput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
     CreateNotebookInstanceInput.add_member(:platform_identifier, Shapes::ShapeRef.new(shape: PlatformIdentifier, location_name: "PlatformIdentifier"))
+    CreateNotebookInstanceInput.add_member(:instance_metadata_service_configuration, Shapes::ShapeRef.new(shape: InstanceMetadataServiceConfiguration, location_name: "InstanceMetadataServiceConfiguration"))
     CreateNotebookInstanceInput.struct_class = Types::CreateNotebookInstanceInput
 
     CreateNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))
@@ -3550,6 +3553,7 @@ module Aws::SageMaker
     DescribeNotebookInstanceOutput.add_member(:additional_code_repositories, Shapes::ShapeRef.new(shape: AdditionalCodeRepositoryNamesOrUrls, location_name: "AdditionalCodeRepositories"))
     DescribeNotebookInstanceOutput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
     DescribeNotebookInstanceOutput.add_member(:platform_identifier, Shapes::ShapeRef.new(shape: PlatformIdentifier, location_name: "PlatformIdentifier"))
+    DescribeNotebookInstanceOutput.add_member(:instance_metadata_service_configuration, Shapes::ShapeRef.new(shape: InstanceMetadataServiceConfiguration, location_name: "InstanceMetadataServiceConfiguration"))
     DescribeNotebookInstanceOutput.struct_class = Types::DescribeNotebookInstanceOutput
 
     DescribePipelineDefinitionForExecutionRequest.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, required: true, location_name: "PipelineExecutionArn"))
@@ -4384,6 +4388,9 @@ module Aws::SageMaker
     InputDataConfig.member = Shapes::ShapeRef.new(shape: Channel)
 
     InputModes.member = Shapes::ShapeRef.new(shape: TrainingInputMode)
+
+    InstanceMetadataServiceConfiguration.add_member(:minimum_instance_metadata_service_version, Shapes::ShapeRef.new(shape: MinimumInstanceMetadataServiceVersion, required: true, location_name: "MinimumInstanceMetadataServiceVersion"))
+    InstanceMetadataServiceConfiguration.struct_class = Types::InstanceMetadataServiceConfiguration
 
     IntegerParameterRange.add_member(:name, Shapes::ShapeRef.new(shape: ParameterKey, required: true, location_name: "Name"))
     IntegerParameterRange.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))
@@ -6987,6 +6994,7 @@ module Aws::SageMaker
     UpdateNotebookInstanceInput.add_member(:disassociate_default_code_repository, Shapes::ShapeRef.new(shape: DisassociateDefaultCodeRepository, location_name: "DisassociateDefaultCodeRepository"))
     UpdateNotebookInstanceInput.add_member(:disassociate_additional_code_repositories, Shapes::ShapeRef.new(shape: DisassociateAdditionalCodeRepositories, location_name: "DisassociateAdditionalCodeRepositories"))
     UpdateNotebookInstanceInput.add_member(:root_access, Shapes::ShapeRef.new(shape: RootAccess, location_name: "RootAccess"))
+    UpdateNotebookInstanceInput.add_member(:instance_metadata_service_configuration, Shapes::ShapeRef.new(shape: InstanceMetadataServiceConfiguration, location_name: "InstanceMetadataServiceConfiguration"))
     UpdateNotebookInstanceInput.struct_class = Types::UpdateNotebookInstanceInput
 
     UpdateNotebookInstanceLifecycleConfigInput.add_member(:notebook_instance_lifecycle_config_name, Shapes::ShapeRef.new(shape: NotebookInstanceLifecycleConfigName, required: true, location_name: "NotebookInstanceLifecycleConfigName"))

@@ -355,7 +355,9 @@ module Aws::Appflow
     # Services account. There is a soft quota of 100 connector profiles per
     # Amazon Web Services account. If you need more connector profiles than
     # this quota allows, you can submit a request to the Amazon AppFlow team
-    # through the Amazon AppFlow support channel.
+    # through the Amazon AppFlow support channel. In each connector profile
+    # that you create, you can provide the credentials and properties for
+    # only one connector.
     #
     # @option params [required, String] :connector_profile_name
     #   The name of the connector profile. The name is unique for each
@@ -691,6 +693,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       },
     #     },
@@ -793,6 +796,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -1123,7 +1127,7 @@ module Aws::Appflow
     end
 
     # Provides details regarding the entity used with the connector, with a
-    # description of the data model for each entity.
+    # description of the data model for each field in that entity.
     #
     # @option params [required, String] :connector_entity_name
     #   The entity name for that connector.
@@ -1530,6 +1534,7 @@ module Aws::Appflow
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_type #=> String, one of "FILENAME", "PATH", "PATH_AND_FILENAME"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.prefix_config.prefix_format #=> String, one of "YEAR", "MONTH", "DAY", "HOUR", "MINUTE"
     #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.aggregation_config.aggregation_type #=> String, one of "None", "SingleFile"
+    #   resp.destination_flow_config_list[0].destination_connector_properties.s3.s3_output_format_config.preserve_source_data_typing #=> Boolean
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.object #=> String
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names #=> Array
     #   resp.destination_flow_config_list[0].destination_connector_properties.salesforce.id_field_names[0] #=> String
@@ -1599,6 +1604,7 @@ module Aws::Appflow
     #   resp.trigger_config.trigger_properties.scheduled.timezone #=> String
     #   resp.trigger_config.trigger_properties.scheduled.schedule_offset #=> Integer
     #   resp.trigger_config.trigger_properties.scheduled.first_execution_from #=> Time
+    #   resp.trigger_config.trigger_properties.scheduled.flow_error_deactivation_threshold #=> Integer
     #   resp.tasks #=> Array
     #   resp.tasks[0].source_fields #=> Array
     #   resp.tasks[0].source_fields[0] #=> String
@@ -2384,6 +2390,7 @@ module Aws::Appflow
     #           timezone: "Timezone",
     #           schedule_offset: 1,
     #           first_execution_from: Time.now,
+    #           flow_error_deactivation_threshold: 1,
     #         },
     #       },
     #     },
@@ -2486,6 +2493,7 @@ module Aws::Appflow
     #               aggregation_config: {
     #                 aggregation_type: "None", # accepts None, SingleFile
     #               },
+    #               preserve_source_data_typing: false,
     #             },
     #           },
     #           salesforce: {
@@ -2648,7 +2656,7 @@ module Aws::Appflow
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-appflow'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
