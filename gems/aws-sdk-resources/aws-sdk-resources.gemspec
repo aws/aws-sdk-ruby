@@ -119,7 +119,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency('aws-sdk-eks', '~> 1')
   spec.add_dependency('aws-sdk-emr', '~> 1')
   spec.add_dependency('aws-sdk-emrcontainers', '~> 1')
-  spec.add_dependency('aws-sdk-emrserverlesswebservice', '~> 1')
   spec.add_dependency('aws-sdk-elasticache', '~> 1')
   spec.add_dependency('aws-sdk-elasticbeanstalk', '~> 1')
   spec.add_dependency('aws-sdk-elasticinference', '~> 1')
