@@ -613,7 +613,6 @@ RubyGems.org page under "LINKS" section.
 | CloudWatch RUM                                        | Aws::CloudWatchRUM                       | aws-sdk-cloudwatchrum                       | 2018-05-10  |
 | CodeArtifact                                          | Aws::CodeArtifact                        | aws-sdk-codeartifact                        | 2018-09-22  |
 | EC2 Image Builder                                     | Aws::Imagebuilder                        | aws-sdk-imagebuilder                        | 2019-12-02  |
-| EMR Serverless Web Service                            | Aws::EMRServerlessWebService             | aws-sdk-emrserverlesswebservice             | 2021-07-13  |
 | Elastic Disaster Recovery Service                     | Aws::Drs                                 | aws-sdk-drs                                 | 2020-02-26  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancing                | aws-sdk-elasticloadbalancing                | 2012-06-01  |
 | Elastic Load Balancing                                | Aws::ElasticLoadBalancingV2              | aws-sdk-elasticloadbalancingv2              | 2015-12-01  |
