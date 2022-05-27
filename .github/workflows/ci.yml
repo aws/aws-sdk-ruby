@@ -9,6 +9,9 @@ on:
     branches:
       - version-3
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-18.04
