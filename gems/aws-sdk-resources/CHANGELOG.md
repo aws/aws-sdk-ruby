@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove dependency on the `aws-sdk-emrserverlesswebservice` gem. This gem will be republished under a different name.
+
 3.131.0 (2022-05-26)
 ------------------
 
