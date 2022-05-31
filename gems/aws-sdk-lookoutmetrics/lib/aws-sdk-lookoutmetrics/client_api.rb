@@ -358,6 +358,7 @@ module Aws::LookoutMetrics
     BinaryListAttributeValue.member = Shapes::ShapeRef.new(shape: BinaryAttributeValue)
 
     CloudWatchConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "RoleArn"))
+    CloudWatchConfig.add_member(:back_test_configuration, Shapes::ShapeRef.new(shape: BackTestConfiguration, location_name: "BackTestConfiguration"))
     CloudWatchConfig.struct_class = Types::CloudWatchConfig
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: Message, required: true, location_name: "Message"))

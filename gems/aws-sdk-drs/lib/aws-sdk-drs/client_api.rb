@@ -15,11 +15,19 @@ module Aws::Drs
 
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    Account = Shapes::StructureShape.new(name: 'Account')
+    AccountID = Shapes::StringShape.new(name: 'AccountID')
+    AccountIDs = Shapes::ListShape.new(name: 'AccountIDs')
+    Accounts = Shapes::ListShape.new(name: 'Accounts')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BoundedString = Shapes::StringShape.new(name: 'BoundedString')
     CPU = Shapes::StructureShape.new(name: 'CPU')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConversionMap = Shapes::MapShape.new(name: 'ConversionMap')
+    ConversionProperties = Shapes::StructureShape.new(name: 'ConversionProperties')
     Cpus = Shapes::ListShape.new(name: 'Cpus')
+    CreateExtendedSourceServerRequest = Shapes::StructureShape.new(name: 'CreateExtendedSourceServerRequest')
+    CreateExtendedSourceServerResponse = Shapes::StructureShape.new(name: 'CreateExtendedSourceServerResponse')
     CreateReplicationConfigurationTemplateRequest = Shapes::StructureShape.new(name: 'CreateReplicationConfigurationTemplateRequest')
     DataReplicationError = Shapes::StructureShape.new(name: 'DataReplicationError')
     DataReplicationErrorString = Shapes::StringShape.new(name: 'DataReplicationErrorString')
@@ -67,6 +75,7 @@ module Aws::Drs
     EC2InstanceType = Shapes::StringShape.new(name: 'EC2InstanceType')
     EbsSnapshotsList = Shapes::ListShape.new(name: 'EbsSnapshotsList')
     EbsVolumeID = Shapes::StringShape.new(name: 'EbsVolumeID')
+    ExtensionStatus = Shapes::StringShape.new(name: 'ExtensionStatus')
     FailbackReplicationError = Shapes::StringShape.new(name: 'FailbackReplicationError')
     FailbackState = Shapes::StringShape.new(name: 'FailbackState')
     GetFailbackReplicationConfigurationRequest = Shapes::StructureShape.new(name: 'GetFailbackReplicationConfigurationRequest')
@@ -99,8 +108,14 @@ module Aws::Drs
     LifeCycle = Shapes::StructureShape.new(name: 'LifeCycle')
     LifeCycleLastLaunch = Shapes::StructureShape.new(name: 'LifeCycleLastLaunch')
     LifeCycleLastLaunchInitiated = Shapes::StructureShape.new(name: 'LifeCycleLastLaunchInitiated')
+    ListExtensibleSourceServersRequest = Shapes::StructureShape.new(name: 'ListExtensibleSourceServersRequest')
+    ListExtensibleSourceServersResponse = Shapes::StructureShape.new(name: 'ListExtensibleSourceServersResponse')
+    ListStagingAccountsRequest = Shapes::StructureShape.new(name: 'ListStagingAccountsRequest')
+    ListStagingAccountsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListStagingAccountsRequestMaxResultsInteger')
+    ListStagingAccountsResponse = Shapes::StructureShape.new(name: 'ListStagingAccountsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
+    MaxResultsReplicatingSourceServers = Shapes::IntegerShape.new(name: 'MaxResultsReplicatingSourceServers')
     NetworkInterface = Shapes::StructureShape.new(name: 'NetworkInterface')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
     OS = Shapes::StructureShape.new(name: 'OS')
@@ -152,9 +167,13 @@ module Aws::Drs
     SmallBoundedString = Shapes::StringShape.new(name: 'SmallBoundedString')
     SourceProperties = Shapes::StructureShape.new(name: 'SourceProperties')
     SourceServer = Shapes::StructureShape.new(name: 'SourceServer')
+    SourceServerARN = Shapes::StringShape.new(name: 'SourceServerARN')
     SourceServerID = Shapes::StringShape.new(name: 'SourceServerID')
     SourceServerIDs = Shapes::ListShape.new(name: 'SourceServerIDs')
     SourceServersList = Shapes::ListShape.new(name: 'SourceServersList')
+    StagingArea = Shapes::StructureShape.new(name: 'StagingArea')
+    StagingSourceServer = Shapes::StructureShape.new(name: 'StagingSourceServer')
+    StagingSourceServersList = Shapes::ListShape.new(name: 'StagingSourceServersList')
     StartFailbackLaunchRequest = Shapes::StructureShape.new(name: 'StartFailbackLaunchRequest')
     StartFailbackLaunchResponse = Shapes::StructureShape.new(name: 'StartFailbackLaunchResponse')
     StartFailbackRequestRecoveryInstanceIDs = Shapes::ListShape.new(name: 'StartFailbackRequestRecoveryInstanceIDs')
@@ -184,11 +203,20 @@ module Aws::Drs
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VolumeToConversionMap = Shapes::MapShape.new(name: 'VolumeToConversionMap')
+    VolumeToSizeMap = Shapes::MapShape.new(name: 'VolumeToSizeMap')
     ebsSnapshot = Shapes::StringShape.new(name: 'ebsSnapshot')
 
     AccessDeniedException.add_member(:code, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "code"))
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
+
+    Account.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "accountID"))
+    Account.struct_class = Types::Account
+
+    AccountIDs.member = Shapes::ShapeRef.new(shape: AccountID)
+
+    Accounts.member = Shapes::ShapeRef.new(shape: Account)
 
     CPU.add_member(:cores, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "cores"))
     CPU.add_member(:model_name, Shapes::ShapeRef.new(shape: BoundedString, location_name: "modelName"))
@@ -200,7 +228,24 @@ module Aws::Drs
     ConflictException.add_member(:resource_type, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "resourceType"))
     ConflictException.struct_class = Types::ConflictException
 
+    ConversionMap.key = Shapes::ShapeRef.new(shape: ebsSnapshot)
+    ConversionMap.value = Shapes::ShapeRef.new(shape: ebsSnapshot)
+
+    ConversionProperties.add_member(:data_timestamp, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "dataTimestamp"))
+    ConversionProperties.add_member(:force_uefi, Shapes::ShapeRef.new(shape: Boolean, location_name: "forceUefi"))
+    ConversionProperties.add_member(:root_volume_name, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rootVolumeName"))
+    ConversionProperties.add_member(:volume_to_conversion_map, Shapes::ShapeRef.new(shape: VolumeToConversionMap, location_name: "volumeToConversionMap"))
+    ConversionProperties.add_member(:volume_to_volume_size, Shapes::ShapeRef.new(shape: VolumeToSizeMap, location_name: "volumeToVolumeSize"))
+    ConversionProperties.struct_class = Types::ConversionProperties
+
     Cpus.member = Shapes::ShapeRef.new(shape: CPU)
+
+    CreateExtendedSourceServerRequest.add_member(:source_server_arn, Shapes::ShapeRef.new(shape: SourceServerARN, required: true, location_name: "sourceServerArn"))
+    CreateExtendedSourceServerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateExtendedSourceServerRequest.struct_class = Types::CreateExtendedSourceServerRequest
+
+    CreateExtendedSourceServerResponse.add_member(:source_server, Shapes::ShapeRef.new(shape: SourceServer, location_name: "sourceServer"))
+    CreateExtendedSourceServerResponse.struct_class = Types::CreateExtendedSourceServerResponse
 
     CreateReplicationConfigurationTemplateRequest.add_member(:associate_default_security_group, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "associateDefaultSecurityGroup"))
     CreateReplicationConfigurationTemplateRequest.add_member(:bandwidth_throttling, Shapes::ShapeRef.new(shape: PositiveInteger, required: true, location_name: "bandwidthThrottling"))
@@ -277,7 +322,7 @@ module Aws::Drs
     DescribeJobLogItemsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeJobLogItemsResponse.struct_class = Types::DescribeJobLogItemsResponse
 
-    DescribeJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeJobsRequestFilters, required: true, location_name: "filters"))
+    DescribeJobsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeJobsRequestFilters, location_name: "filters"))
     DescribeJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
     DescribeJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeJobsRequest.struct_class = Types::DescribeJobsRequest
@@ -295,7 +340,7 @@ module Aws::Drs
 
     DescribeRecoveryInstancesItems.member = Shapes::ShapeRef.new(shape: RecoveryInstance)
 
-    DescribeRecoveryInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeRecoveryInstancesRequestFilters, required: true, location_name: "filters"))
+    DescribeRecoveryInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeRecoveryInstancesRequestFilters, location_name: "filters"))
     DescribeRecoveryInstancesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
     DescribeRecoveryInstancesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeRecoveryInstancesRequest.struct_class = Types::DescribeRecoveryInstancesRequest
@@ -325,20 +370,21 @@ module Aws::Drs
 
     DescribeReplicationConfigurationTemplatesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
     DescribeReplicationConfigurationTemplatesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
-    DescribeReplicationConfigurationTemplatesRequest.add_member(:replication_configuration_template_i_ds, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplateIDs, required: true, location_name: "replicationConfigurationTemplateIDs"))
+    DescribeReplicationConfigurationTemplatesRequest.add_member(:replication_configuration_template_i_ds, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplateIDs, location_name: "replicationConfigurationTemplateIDs"))
     DescribeReplicationConfigurationTemplatesRequest.struct_class = Types::DescribeReplicationConfigurationTemplatesRequest
 
     DescribeReplicationConfigurationTemplatesResponse.add_member(:items, Shapes::ShapeRef.new(shape: ReplicationConfigurationTemplates, location_name: "items"))
     DescribeReplicationConfigurationTemplatesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeReplicationConfigurationTemplatesResponse.struct_class = Types::DescribeReplicationConfigurationTemplatesResponse
 
-    DescribeSourceServersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestFilters, required: true, location_name: "filters"))
+    DescribeSourceServersRequest.add_member(:filters, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestFilters, location_name: "filters"))
     DescribeSourceServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: StrictlyPositiveInteger, location_name: "maxResults"))
     DescribeSourceServersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     DescribeSourceServersRequest.struct_class = Types::DescribeSourceServersRequest
 
     DescribeSourceServersRequestFilters.add_member(:hardware_id, Shapes::ShapeRef.new(shape: BoundedString, location_name: "hardwareId"))
     DescribeSourceServersRequestFilters.add_member(:source_server_i_ds, Shapes::ShapeRef.new(shape: DescribeSourceServersRequestFiltersIDs, location_name: "sourceServerIDs"))
+    DescribeSourceServersRequestFilters.add_member(:staging_account_i_ds, Shapes::ShapeRef.new(shape: AccountIDs, location_name: "stagingAccountIDs"))
     DescribeSourceServersRequestFilters.struct_class = Types::DescribeSourceServersRequestFilters
 
     DescribeSourceServersRequestFiltersIDs.member = Shapes::ShapeRef.new(shape: SourceServerID)
@@ -408,6 +454,7 @@ module Aws::Drs
     JobLog.add_member(:log_date_time, Shapes::ShapeRef.new(shape: ISO8601DatetimeString, location_name: "logDateTime"))
     JobLog.struct_class = Types::JobLog
 
+    JobLogEventData.add_member(:conversion_properties, Shapes::ShapeRef.new(shape: ConversionProperties, location_name: "conversionProperties"))
     JobLogEventData.add_member(:conversion_server_id, Shapes::ShapeRef.new(shape: EC2InstanceID, location_name: "conversionServerID"))
     JobLogEventData.add_member(:raw_error, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "rawError"))
     JobLogEventData.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
@@ -445,6 +492,23 @@ module Aws::Drs
     LifeCycleLastLaunchInitiated.add_member(:job_id, Shapes::ShapeRef.new(shape: JobID, location_name: "jobID"))
     LifeCycleLastLaunchInitiated.add_member(:type, Shapes::ShapeRef.new(shape: LastLaunchType, location_name: "type"))
     LifeCycleLastLaunchInitiated.struct_class = Types::LifeCycleLastLaunchInitiated
+
+    ListExtensibleSourceServersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResultsReplicatingSourceServers, location_name: "maxResults"))
+    ListExtensibleSourceServersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExtensibleSourceServersRequest.add_member(:staging_account_id, Shapes::ShapeRef.new(shape: AccountID, required: true, location_name: "stagingAccountID"))
+    ListExtensibleSourceServersRequest.struct_class = Types::ListExtensibleSourceServersRequest
+
+    ListExtensibleSourceServersResponse.add_member(:items, Shapes::ShapeRef.new(shape: StagingSourceServersList, location_name: "items"))
+    ListExtensibleSourceServersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListExtensibleSourceServersResponse.struct_class = Types::ListExtensibleSourceServersResponse
+
+    ListStagingAccountsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListStagingAccountsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListStagingAccountsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListStagingAccountsRequest.struct_class = Types::ListStagingAccountsRequest
+
+    ListStagingAccountsResponse.add_member(:accounts, Shapes::ShapeRef.new(shape: Accounts, location_name: "accounts"))
+    ListStagingAccountsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListStagingAccountsResponse.struct_class = Types::ListStagingAccountsResponse
 
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
@@ -648,12 +712,26 @@ module Aws::Drs
     SourceServer.add_member(:recovery_instance_id, Shapes::ShapeRef.new(shape: RecoveryInstanceID, location_name: "recoveryInstanceId"))
     SourceServer.add_member(:source_properties, Shapes::ShapeRef.new(shape: SourceProperties, location_name: "sourceProperties"))
     SourceServer.add_member(:source_server_id, Shapes::ShapeRef.new(shape: SourceServerID, location_name: "sourceServerID"))
+    SourceServer.add_member(:staging_area, Shapes::ShapeRef.new(shape: StagingArea, location_name: "stagingArea"))
     SourceServer.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     SourceServer.struct_class = Types::SourceServer
 
     SourceServerIDs.member = Shapes::ShapeRef.new(shape: SourceServerID)
 
     SourceServersList.member = Shapes::ShapeRef.new(shape: SourceServer)
+
+    StagingArea.add_member(:error_message, Shapes::ShapeRef.new(shape: LargeBoundedString, location_name: "errorMessage"))
+    StagingArea.add_member(:staging_account_id, Shapes::ShapeRef.new(shape: AccountID, location_name: "stagingAccountID"))
+    StagingArea.add_member(:staging_source_server_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "stagingSourceServerArn"))
+    StagingArea.add_member(:status, Shapes::ShapeRef.new(shape: ExtensionStatus, location_name: "status"))
+    StagingArea.struct_class = Types::StagingArea
+
+    StagingSourceServer.add_member(:arn, Shapes::ShapeRef.new(shape: SourceServerARN, location_name: "arn"))
+    StagingSourceServer.add_member(:hostname, Shapes::ShapeRef.new(shape: BoundedString, location_name: "hostname"))
+    StagingSourceServer.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    StagingSourceServer.struct_class = Types::StagingSourceServer
+
+    StagingSourceServersList.member = Shapes::ShapeRef.new(shape: StagingSourceServer)
 
     StartFailbackLaunchRequest.add_member(:recovery_instance_i_ds, Shapes::ShapeRef.new(shape: StartFailbackRequestRecoveryInstanceIDs, required: true, location_name: "recoveryInstanceIDs"))
     StartFailbackLaunchRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -772,6 +850,12 @@ module Aws::Drs
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
 
+    VolumeToConversionMap.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
+    VolumeToConversionMap.value = Shapes::ShapeRef.new(shape: ConversionMap)
+
+    VolumeToSizeMap.key = Shapes::ShapeRef.new(shape: LargeBoundedString)
+    VolumeToSizeMap.value = Shapes::ShapeRef.new(shape: PositiveInteger)
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -790,6 +874,21 @@ module Aws::Drs
         "signingName" => "drs",
         "uid" => "drs-2020-02-26",
       }
+
+      api.add_operation(:create_extended_source_server, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateExtendedSourceServer"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateExtendedSourceServer"
+        o.input = Shapes::ShapeRef.new(shape: CreateExtendedSourceServerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateExtendedSourceServerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+      end)
 
       api.add_operation(:create_replication_configuration_template, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateReplicationConfigurationTemplate"
@@ -1027,6 +1126,7 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
       end)
 
@@ -1040,6 +1140,44 @@ module Aws::Drs
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_extensible_source_servers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExtensibleSourceServers"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListExtensibleSourceServers"
+        o.input = Shapes::ShapeRef.new(shape: ListExtensibleSourceServersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListExtensibleSourceServersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_staging_accounts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStagingAccounts"
+        o.http_method = "GET"
+        o.http_request_uri = "/ListStagingAccounts"
+        o.input = Shapes::ShapeRef.new(shape: ListStagingAccountsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListStagingAccountsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UninitializedAccountException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|

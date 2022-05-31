@@ -982,6 +982,10 @@ module Aws::IoTSiteWise
     #   hierarchy specifies allowed parent/child asset relationships.
     #   @return [Array<Types::AssetHierarchy>]
     #
+    # @!attribute [rw] description
+    #   A description for the asset.
+    #   @return [String]
+    #
     class AssetSummary < Struct.new(
       :id,
       :arn,
@@ -990,7 +994,8 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :status,
-      :hierarchies)
+      :hierarchies,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1123,6 +1128,10 @@ module Aws::IoTSiteWise
     #   hierarchy specifies allowed parent/child asset relationships.
     #   @return [Array<Types::AssetHierarchy>]
     #
+    # @!attribute [rw] description
+    #   A description for the asset.
+    #   @return [String]
+    #
     class AssociatedAssetsSummary < Struct.new(
       :id,
       :arn,
@@ -1131,7 +1140,8 @@ module Aws::IoTSiteWise
       :creation_date,
       :last_update_date,
       :status,
-      :hierarchies)
+      :hierarchies,
+      :description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2550,6 +2560,7 @@ module Aws::IoTSiteWise
     #         tags: {
     #           "TagKey" => "TagValue",
     #         },
+    #         asset_description: "Description",
     #       }
     #
     # @!attribute [rw] asset_name
@@ -2579,11 +2590,16 @@ module Aws::IoTSiteWise
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] asset_description
+    #   A description for the asset.
+    #   @return [String]
+    #
     class CreateAssetRequest < Struct.new(
       :asset_name,
       :asset_model_id,
       :client_token,
-      :tags)
+      :tags,
+      :asset_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3634,6 +3650,10 @@ module Aws::IoTSiteWise
     #   error message.
     #   @return [Types::AssetStatus]
     #
+    # @!attribute [rw] asset_description
+    #   A description for the asset.
+    #   @return [String]
+    #
     class DescribeAssetResponse < Struct.new(
       :asset_id,
       :asset_arn,
@@ -3644,7 +3664,8 @@ module Aws::IoTSiteWise
       :asset_composite_models,
       :asset_creation_date,
       :asset_last_update_date,
-      :asset_status)
+      :asset_status,
+      :asset_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4093,7 +4114,7 @@ module Aws::IoTSiteWise
     #     hot tier. The hot tier is a service-managed database.
     #
     #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
-    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     cold tier and the hot tier. The cold tier is a customer-managed
     #     Amazon S3 bucket.
     #   @return [String]
     #
@@ -6649,7 +6670,7 @@ module Aws::IoTSiteWise
     #     hot tier. The hot tier is a service-managed database.
     #
     #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
-    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     cold tier and the hot tier. The cold tier is a customer-managed
     #     Amazon S3 bucket.
     #   @return [String]
     #
@@ -6703,7 +6724,7 @@ module Aws::IoTSiteWise
     #     hot tier. The hot tier is a service-managed database.
     #
     #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
-    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     cold tier and the hot tier. The cold tier is a customer-managed
     #     Amazon S3 bucket.
     #   @return [String]
     #
@@ -7628,6 +7649,7 @@ module Aws::IoTSiteWise
     #         asset_id: "ID", # required
     #         asset_name: "Name", # required
     #         client_token: "ClientToken",
+    #         asset_description: "Description",
     #       }
     #
     # @!attribute [rw] asset_id
@@ -7647,10 +7669,15 @@ module Aws::IoTSiteWise
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] asset_description
+    #   A description for the asset.
+    #   @return [String]
+    #
     class UpdateAssetRequest < Struct.new(
       :asset_id,
       :asset_name,
-      :client_token)
+      :client_token,
+      :asset_description)
       SENSITIVE = []
       include Aws::Structure
     end

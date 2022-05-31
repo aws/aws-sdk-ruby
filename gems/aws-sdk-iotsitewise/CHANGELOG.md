@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.42.0 (2022-05-31)
+------------------
+
+* Feature - This release adds the following new optional field to the IoT SiteWise asset resource: assetDescription.
+
 1.41.0 (2022-04-21)
 ------------------
 

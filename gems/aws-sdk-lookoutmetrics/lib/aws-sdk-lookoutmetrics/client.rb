@@ -604,6 +604,9 @@ module Aws::LookoutMetrics
     #       },
     #       cloud_watch_config: {
     #         role_arn: "Arn",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
     #       },
     #       rds_source_config: {
     #         db_instance_identifier: "RDSDatabaseIdentifier",
@@ -944,6 +947,7 @@ module Aws::LookoutMetrics
     #   resp.metric_source.app_flow_config.role_arn #=> String
     #   resp.metric_source.app_flow_config.flow_name #=> String
     #   resp.metric_source.cloud_watch_config.role_arn #=> String
+    #   resp.metric_source.cloud_watch_config.back_test_configuration.run_back_test_mode #=> Boolean
     #   resp.metric_source.rds_source_config.db_instance_identifier #=> String
     #   resp.metric_source.rds_source_config.database_host #=> String
     #   resp.metric_source.rds_source_config.database_port #=> Integer
@@ -1778,6 +1782,9 @@ module Aws::LookoutMetrics
     #       },
     #       cloud_watch_config: {
     #         role_arn: "Arn",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
     #       },
     #       rds_source_config: {
     #         db_instance_identifier: "RDSDatabaseIdentifier",
@@ -1845,7 +1852,7 @@ module Aws::LookoutMetrics
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-lookoutmetrics'
-      context[:gem_version] = '1.18.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

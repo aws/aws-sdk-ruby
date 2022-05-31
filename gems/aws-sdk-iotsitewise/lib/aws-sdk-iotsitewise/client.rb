@@ -959,6 +959,9 @@ module Aws::IoTSiteWise
     #
     #   [1]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
     #
+    # @option params [String] :asset_description
+    #   A description for the asset.
+    #
     # @return [Types::CreateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAssetResponse#asset_id #asset_id} => String
@@ -974,6 +977,7 @@ module Aws::IoTSiteWise
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     asset_description: "Description",
     #   })
     #
     # @example Response structure
@@ -1922,6 +1926,7 @@ module Aws::IoTSiteWise
     #   * {Types::DescribeAssetResponse#asset_creation_date #asset_creation_date} => Time
     #   * {Types::DescribeAssetResponse#asset_last_update_date #asset_last_update_date} => Time
     #   * {Types::DescribeAssetResponse#asset_status #asset_status} => Types::AssetStatus
+    #   * {Types::DescribeAssetResponse#asset_description #asset_description} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1968,6 +1973,7 @@ module Aws::IoTSiteWise
     #   resp.asset_status.error.details #=> Array
     #   resp.asset_status.error.details[0].code #=> String, one of "INCOMPATIBLE_COMPUTE_LOCATION", "INCOMPATIBLE_FORWARDING_CONFIGURATION"
     #   resp.asset_status.error.details[0].message #=> String
+    #   resp.asset_description #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3335,6 +3341,7 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].description #=> String
     #   resp.next_token #=> String
     #
     # @overload list_assets(params = {})
@@ -3426,6 +3433,7 @@ module Aws::IoTSiteWise
     #   resp.asset_summaries[0].hierarchies #=> Array
     #   resp.asset_summaries[0].hierarchies[0].id #=> String
     #   resp.asset_summaries[0].hierarchies[0].name #=> String
+    #   resp.asset_summaries[0].description #=> String
     #   resp.next_token #=> String
     #
     # @overload list_associated_assets(params = {})
@@ -3826,7 +3834,7 @@ module Aws::IoTSiteWise
     #     hot tier. The hot tier is a service-managed database.
     #
     #   * `MULTI_LAYER_STORAGE` – IoT SiteWise saves your data in both the
-    #     cold tier and the cold tier. The cold tier is a customer-managed
+    #     cold tier and the hot tier. The cold tier is a customer-managed
     #     Amazon S3 bucket.
     #
     # @option params [Types::MultiLayerStorage] :multi_layer_storage
@@ -4054,6 +4062,9 @@ module Aws::IoTSiteWise
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [String] :asset_description
+    #   A description for the asset.
+    #
     # @return [Types::UpdateAssetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateAssetResponse#asset_status #asset_status} => Types::AssetStatus
@@ -4064,6 +4075,7 @@ module Aws::IoTSiteWise
     #     asset_id: "ID", # required
     #     asset_name: "Name", # required
     #     client_token: "ClientToken",
+    #     asset_description: "Description",
     #   })
     #
     # @example Response structure
@@ -4663,7 +4675,7 @@ module Aws::IoTSiteWise
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.41.0'
+      context[:gem_version] = '1.42.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

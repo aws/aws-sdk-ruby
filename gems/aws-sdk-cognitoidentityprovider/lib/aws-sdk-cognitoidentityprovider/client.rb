@@ -1221,9 +1221,11 @@ module Aws::CognitoIdentityProvider
     #   `AdminInitiateAuth` calls.
     #
     # @option params [Types::ContextDataType] :context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @return [Types::AdminInitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1791,9 +1793,11 @@ module Aws::CognitoIdentityProvider
     #   `AdminRespondToAuthChallenge` calls.
     #
     # @option params [Types::ContextDataType] :context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -2282,19 +2286,31 @@ module Aws::CognitoIdentityProvider
       req.send_request(options)
     end
 
-    # Returns a unique generated shared secret key code for the user
-    # account. The request takes an access token or a session string, but
-    # not both.
+    # Begins setup of time-based one-time password multi-factor
+    # authentication (TOTP MFA) for a user, with a unique private key that
+    # Amazon Cognito generates and returns in the API response. You can
+    # authorize an `AssociateSoftwareToken` request with either the user's
+    # access token, or a session string from a challenge response that you
+    # received from Amazon Cognito.
     #
-    # <note markdown="1"> Calling AssociateSoftwareToken immediately disassociates the existing
-    # software token from the user account. If the user doesn't
-    # subsequently verify the software token, their account is set up to
-    # authenticate without MFA. If MFA config is set to Optional at the user
-    # pool level, the user can then log in without MFA. However, if MFA is
-    # set to Required for the user pool, the user is asked to set up a new
-    # software token MFA during sign-in.
+    # <note markdown="1"> Amazon Cognito disassociates an existing software token when you
+    # verify the new token in a [ VerifySoftwareToken][1] API request. If
+    # you don't verify the software token and your user pool doesn't
+    # require MFA, the user can then authenticate with user name and
+    # password credentials alone. If your user pool requires TOTP MFA,
+    # Amazon Cognito generates an `MFA_SETUP` or `SOFTWARE_TOKEN_SETUP`
+    # challenge each time your user signs. Complete setup with
+    # `AssociateSoftwareToken` and `VerifySoftwareToken`.
+    #
+    #  After you set up software token MFA for your user, Amazon Cognito
+    # generates a `SOFTWARE_TOKEN_MFA` challenge when they authenticate.
+    # Respond to this challenge with your user's TOTP.
     #
     #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_VerifySoftwareToken.html
     #
     # @option params [String] :access_token
     #   A valid access token that Amazon Cognito issued to the user whose
@@ -2439,9 +2455,11 @@ module Aws::CognitoIdentityProvider
     #   `ConfirmForgotPassword` calls.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -2494,6 +2512,7 @@ module Aws::CognitoIdentityProvider
     #       analytics_endpoint_id: "StringType",
     #     },
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     client_metadata: {
@@ -2541,9 +2560,11 @@ module Aws::CognitoIdentityProvider
     #   `ConfirmSignUp` calls.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -2595,6 +2616,7 @@ module Aws::CognitoIdentityProvider
     #       analytics_endpoint_id: "StringType",
     #     },
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     client_metadata: {
@@ -3015,6 +3037,16 @@ module Aws::CognitoIdentityProvider
     #   Specifies MFA configuration details.
     #
     # @option params [Types::UserAttributeUpdateSettingsType] :user_attribute_update_settings
+    #   The settings for updates to user attributes. These settings include
+    #   the property `AttributesRequireVerificationBeforeUpdate`, a user-pool
+    #   setting that tells Amazon Cognito how to handle changes to the value
+    #   of your users' email address and phone number attributes. For more
+    #   information, see [ Verifying updates to to email addresses and phone
+    #   numbers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates
     #
     # @option params [Types::DeviceConfigurationType] :device_configuration
     #   The device configuration.
@@ -3524,6 +3556,19 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
     #
+    # @option params [Boolean] :enable_propagate_additional_user_context_data
+    #   Activates the propagation of additional user context data. For more
+    #   information about propagation of user context data, see [ Adding
+    #   advanced security to a user pool][1]. If you don’t include this
+    #   parameter, you can't send device fingerprint information, including
+    #   source IP address, to Amazon Cognito advanced security. You can only
+    #   activate `EnablePropagateAdditionalUserContextData` in an app client
+    #   that has a client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #
     # @return [Types::CreateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -3561,6 +3606,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #     enable_token_revocation: false,
+    #     enable_propagate_additional_user_context_data: false,
     #   })
     #
     # @example Response structure
@@ -3602,6 +3648,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
+    #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/CreateUserPoolClient AWS API Documentation
     #
@@ -4228,6 +4275,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
+    #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/DescribeUserPoolClient AWS API Documentation
     #
@@ -4349,9 +4397,11 @@ module Aws::CognitoIdentityProvider
     #   the message.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [required, String] :username
     #   The user name of the user for whom you want to enter a code to reset a
@@ -4408,6 +4458,7 @@ module Aws::CognitoIdentityProvider
     #     client_id: "ClientIdType", # required
     #     secret_hash: "SecretHashType",
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     username: "UsernameType", # required
@@ -5019,9 +5070,11 @@ module Aws::CognitoIdentityProvider
     #   metrics for `InitiateAuth` calls.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @return [Types::InitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5045,6 +5098,7 @@ module Aws::CognitoIdentityProvider
     #       analytics_endpoint_id: "StringType",
     #     },
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #   })
@@ -5683,9 +5737,11 @@ module Aws::CognitoIdentityProvider
     #   the message.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [required, String] :username
     #   The `username` attribute of the user to whom you want to resend a
@@ -5742,6 +5798,7 @@ module Aws::CognitoIdentityProvider
     #     client_id: "ClientIdType", # required
     #     secret_hash: "SecretHashType",
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     username: "UsernameType", # required
@@ -5868,9 +5925,11 @@ module Aws::CognitoIdentityProvider
     #   metrics for `RespondToAuthChallenge` calls.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -5931,6 +5990,7 @@ module Aws::CognitoIdentityProvider
     #       analytics_endpoint_id: "StringType",
     #     },
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     client_metadata: {
@@ -6416,9 +6476,11 @@ module Aws::CognitoIdentityProvider
     #   metrics for `SignUp` calls.
     #
     # @option params [Types::UserContextDataType] :user_context_data
-    #   Contextual data such as the user's device fingerprint, IP address, or
-    #   location used for evaluating the risk of an unexpected event by Amazon
-    #   Cognito advanced security.
+    #   Contextual data about your user session, such as the device
+    #   fingerprint, IP address, or location. Amazon Cognito advanced security
+    #   evaluates the risk of an authentication event based on the context
+    #   that your app generates and passes to Amazon Cognito when it makes API
+    #   requests.
     #
     # @option params [Hash<String,String>] :client_metadata
     #   A map of custom key-value pairs that you can provide as input for any
@@ -6486,6 +6548,7 @@ module Aws::CognitoIdentityProvider
     #       analytics_endpoint_id: "StringType",
     #     },
     #     user_context_data: {
+    #       ip_address: "StringType",
     #       encoded_data: "StringType",
     #     },
     #     client_metadata: {
@@ -7096,6 +7159,16 @@ module Aws::CognitoIdentityProvider
     #   The contents of the SMS authentication message.
     #
     # @option params [Types::UserAttributeUpdateSettingsType] :user_attribute_update_settings
+    #   The settings for updates to user attributes. These settings include
+    #   the property `AttributesRequireVerificationBeforeUpdate`, a user-pool
+    #   setting that tells Amazon Cognito how to handle changes to the value
+    #   of your users' email address and phone number attributes. For more
+    #   information, see [ Verifying updates to to email addresses and phone
+    #   numbers][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html#user-pool-settings-verifications-verify-attribute-updates
     #
     # @option params [String] :mfa_configuration
     #   Possible values include:
@@ -7482,6 +7555,19 @@ module Aws::CognitoIdentityProvider
     #
     #   [1]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_RevokeToken.html
     #
+    # @option params [Boolean] :enable_propagate_additional_user_context_data
+    #   Activates the propagation of additional user context data. For more
+    #   information about propagation of user context data, see [ Adding
+    #   advanced security to a user pool][1]. If you don’t include this
+    #   parameter, you can't send device fingerprint information, including
+    #   source IP address, to Amazon Cognito advanced security. You can only
+    #   activate `EnablePropagateAdditionalUserContextData` in an app client
+    #   that has a client secret.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
+    #
     # @return [Types::UpdateUserPoolClientResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateUserPoolClientResponse#user_pool_client #user_pool_client} => Types::UserPoolClientType
@@ -7519,6 +7605,7 @@ module Aws::CognitoIdentityProvider
     #     },
     #     prevent_user_existence_errors: "LEGACY", # accepts LEGACY, ENABLED
     #     enable_token_revocation: false,
+    #     enable_propagate_additional_user_context_data: false,
     #   })
     #
     # @example Response structure
@@ -7560,6 +7647,7 @@ module Aws::CognitoIdentityProvider
     #   resp.user_pool_client.analytics_configuration.user_data_shared #=> Boolean
     #   resp.user_pool_client.prevent_user_existence_errors #=> String, one of "LEGACY", "ENABLED"
     #   resp.user_pool_client.enable_token_revocation #=> Boolean
+    #   resp.user_pool_client.enable_propagate_additional_user_context_data #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cognito-idp-2016-04-18/UpdateUserPoolClient AWS API Documentation
     #
@@ -7755,7 +7843,7 @@ module Aws::CognitoIdentityProvider
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-cognitoidentityprovider'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

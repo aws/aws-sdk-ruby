@@ -351,6 +351,93 @@ module Aws::Drs
 
     # @!group API Operations
 
+    # Create an extended source server in the target Account based on the
+    # source server in staging account.
+    #
+    # @option params [required, String] :source_server_arn
+    #   This defines the ARN of the source server in staging Account based on
+    #   which you want to create an extended source server.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A list of tags associated with the extended source server.
+    #
+    # @return [Types::CreateExtendedSourceServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateExtendedSourceServerResponse#source_server #source_server} => Types::SourceServer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_extended_source_server({
+    #     source_server_arn: "SourceServerARN", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_server.arn #=> String
+    #   resp.source_server.data_replication_info.data_replication_error.error #=> String, one of "AGENT_NOT_SEEN", "SNAPSHOTS_FAILURE", "NOT_CONVERGING", "UNSTABLE_NETWORK", "FAILED_TO_CREATE_SECURITY_GROUP", "FAILED_TO_LAUNCH_REPLICATION_SERVER", "FAILED_TO_BOOT_REPLICATION_SERVER", "FAILED_TO_AUTHENTICATE_WITH_SERVICE", "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE", "FAILED_TO_CREATE_STAGING_DISKS", "FAILED_TO_ATTACH_STAGING_DISKS", "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT", "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER", "FAILED_TO_START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_error.raw_error #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.next_attempt_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.start_date_time #=> String
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps #=> Array
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].name #=> String, one of "WAIT", "CREATE_SECURITY_GROUP", "LAUNCH_REPLICATION_SERVER", "BOOT_REPLICATION_SERVER", "AUTHENTICATE_WITH_SERVICE", "DOWNLOAD_REPLICATION_SOFTWARE", "CREATE_STAGING_DISKS", "ATTACH_STAGING_DISKS", "PAIR_REPLICATION_SERVER_WITH_AGENT", "CONNECT_AGENT_TO_REPLICATION_SERVER", "START_DATA_TRANSFER"
+    #   resp.source_server.data_replication_info.data_replication_initiation.steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "SUCCEEDED", "FAILED", "SKIPPED"
+    #   resp.source_server.data_replication_info.data_replication_state #=> String, one of "STOPPED", "INITIATING", "INITIAL_SYNC", "BACKLOG", "CREATING_SNAPSHOT", "CONTINUOUS", "PAUSED", "RESCAN", "STALLED", "DISCONNECTED"
+    #   resp.source_server.data_replication_info.eta_date_time #=> String
+    #   resp.source_server.data_replication_info.lag_duration #=> String
+    #   resp.source_server.data_replication_info.replicated_disks #=> Array
+    #   resp.source_server.data_replication_info.replicated_disks[0].backlogged_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].device_name #=> String
+    #   resp.source_server.data_replication_info.replicated_disks[0].replicated_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].rescanned_storage_bytes #=> Integer
+    #   resp.source_server.data_replication_info.replicated_disks[0].total_storage_bytes #=> Integer
+    #   resp.source_server.last_launch_result #=> String, one of "NOT_STARTED", "PENDING", "SUCCEEDED", "FAILED"
+    #   resp.source_server.life_cycle.added_to_service_date_time #=> String
+    #   resp.source_server.life_cycle.elapsed_replication_duration #=> String
+    #   resp.source_server.life_cycle.first_byte_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.api_call_date_time #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.job_id #=> String
+    #   resp.source_server.life_cycle.last_launch.initiated.type #=> String, one of "RECOVERY", "DRILL"
+    #   resp.source_server.life_cycle.last_seen_by_service_date_time #=> String
+    #   resp.source_server.recovery_instance_id #=> String
+    #   resp.source_server.source_properties.cpus #=> Array
+    #   resp.source_server.source_properties.cpus[0].cores #=> Integer
+    #   resp.source_server.source_properties.cpus[0].model_name #=> String
+    #   resp.source_server.source_properties.disks #=> Array
+    #   resp.source_server.source_properties.disks[0].bytes #=> Integer
+    #   resp.source_server.source_properties.disks[0].device_name #=> String
+    #   resp.source_server.source_properties.identification_hints.aws_instance_id #=> String
+    #   resp.source_server.source_properties.identification_hints.fqdn #=> String
+    #   resp.source_server.source_properties.identification_hints.hostname #=> String
+    #   resp.source_server.source_properties.identification_hints.vm_ware_uuid #=> String
+    #   resp.source_server.source_properties.last_updated_date_time #=> String
+    #   resp.source_server.source_properties.network_interfaces #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips #=> Array
+    #   resp.source_server.source_properties.network_interfaces[0].ips[0] #=> String
+    #   resp.source_server.source_properties.network_interfaces[0].is_primary #=> Boolean
+    #   resp.source_server.source_properties.network_interfaces[0].mac_address #=> String
+    #   resp.source_server.source_properties.os.full_string #=> String
+    #   resp.source_server.source_properties.ram_bytes #=> Integer
+    #   resp.source_server.source_properties.recommended_instance_type #=> String
+    #   resp.source_server.source_server_id #=> String
+    #   resp.source_server.staging_area.error_message #=> String
+    #   resp.source_server.staging_area.staging_account_id #=> String
+    #   resp.source_server.staging_area.staging_source_server_arn #=> String
+    #   resp.source_server.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
+    #   resp.source_server.tags #=> Hash
+    #   resp.source_server.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/CreateExtendedSourceServer AWS API Documentation
+    #
+    # @overload create_extended_source_server(params = {})
+    # @param [Hash] params ({})
+    def create_extended_source_server(params = {}, options = {})
+      req = build_request(:create_extended_source_server, params)
+      req.send_request(options)
+    end
+
     # Creates a new ReplicationConfigurationTemplate.
     #
     # @option params [required, Boolean] :associate_default_security_group
@@ -609,6 +696,14 @@ module Aws::Drs
     #
     #   resp.items #=> Array
     #   resp.items[0].event #=> String, one of "JOB_START", "SERVER_SKIPPED", "CLEANUP_START", "CLEANUP_END", "CLEANUP_FAIL", "SNAPSHOT_START", "SNAPSHOT_END", "SNAPSHOT_FAIL", "USING_PREVIOUS_SNAPSHOT", "USING_PREVIOUS_SNAPSHOT_FAILED", "CONVERSION_START", "CONVERSION_END", "CONVERSION_FAIL", "LAUNCH_START", "LAUNCH_FAILED", "JOB_CANCEL", "JOB_END"
+    #   resp.items[0].event_data.conversion_properties.data_timestamp #=> String
+    #   resp.items[0].event_data.conversion_properties.force_uefi #=> Boolean
+    #   resp.items[0].event_data.conversion_properties.root_volume_name #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map #=> Hash
+    #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"] #=> Hash
+    #   resp.items[0].event_data.conversion_properties.volume_to_conversion_map["LargeBoundedString"]["ebsSnapshot"] #=> String
+    #   resp.items[0].event_data.conversion_properties.volume_to_volume_size #=> Hash
+    #   resp.items[0].event_data.conversion_properties.volume_to_volume_size["LargeBoundedString"] #=> Integer
     #   resp.items[0].event_data.conversion_server_id #=> String
     #   resp.items[0].event_data.raw_error #=> String
     #   resp.items[0].event_data.source_server_id #=> String
@@ -633,7 +728,7 @@ module Aws::Drs
     # TerminateDiagnosticInstances, which are APIs available only to
     # *Support* and only used in response to relevant support tickets.
     #
-    # @option params [required, Types::DescribeJobsRequestFilters] :filters
+    # @option params [Types::DescribeJobsRequestFilters] :filters
     #   A set of filters by which to return Jobs.
     #
     # @option params [Integer] :max_results
@@ -652,7 +747,7 @@ module Aws::Drs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_jobs({
-    #     filters: { # required
+    #     filters: {
     #       from_date: "ISO8601DatetimeString",
     #       job_i_ds: ["JobID"],
     #       to_date: "ISO8601DatetimeString",
@@ -667,7 +762,7 @@ module Aws::Drs
     #   resp.items[0].arn #=> String
     #   resp.items[0].creation_date_time #=> String
     #   resp.items[0].end_date_time #=> String
-    #   resp.items[0].initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES"
+    #   resp.items[0].initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
     #   resp.items[0].job_id #=> String
     #   resp.items[0].participating_servers #=> Array
     #   resp.items[0].participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
@@ -676,7 +771,7 @@ module Aws::Drs
     #   resp.items[0].status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
-    #   resp.items[0].type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.items[0].type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/DescribeJobs AWS API Documentation
@@ -690,7 +785,7 @@ module Aws::Drs
 
     # Lists all Recovery Instances or multiple Recovery Instances by ID.
     #
-    # @option params [required, Types::DescribeRecoveryInstancesRequestFilters] :filters
+    # @option params [Types::DescribeRecoveryInstancesRequestFilters] :filters
     #   A set of filters by which to return Recovery Instances.
     #
     # @option params [Integer] :max_results
@@ -709,7 +804,7 @@ module Aws::Drs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_recovery_instances({
-    #     filters: { # required
+    #     filters: {
     #       recovery_instance_i_ds: ["RecoveryInstanceID"],
     #       source_server_i_ds: ["SourceServerID"],
     #     },
@@ -850,7 +945,7 @@ module Aws::Drs
     # @option params [String] :next_token
     #   The token of the next Replication Configuration Template to retrieve.
     #
-    # @option params [required, Array<String>] :replication_configuration_template_i_ds
+    # @option params [Array<String>] :replication_configuration_template_i_ds
     #   The IDs of the Replication Configuration Templates to retrieve. An
     #   empty list means all Replication Configuration Templates.
     #
@@ -866,7 +961,7 @@ module Aws::Drs
     #   resp = client.describe_replication_configuration_templates({
     #     max_results: 1,
     #     next_token: "PaginationToken",
-    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"], # required
+    #     replication_configuration_template_i_ds: ["ReplicationConfigurationTemplateID"],
     #   })
     #
     # @example Response structure
@@ -909,7 +1004,7 @@ module Aws::Drs
 
     # Lists all Source Servers or multiple Source Servers filtered by ID.
     #
-    # @option params [required, Types::DescribeSourceServersRequestFilters] :filters
+    # @option params [Types::DescribeSourceServersRequestFilters] :filters
     #   A set of filters by which to return Source Servers.
     #
     # @option params [Integer] :max_results
@@ -928,9 +1023,10 @@ module Aws::Drs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_source_servers({
-    #     filters: { # required
+    #     filters: {
     #       hardware_id: "BoundedString",
     #       source_server_i_ds: ["SourceServerID"],
+    #       staging_account_i_ds: ["AccountID"],
     #     },
     #     max_results: 1,
     #     next_token: "PaginationToken",
@@ -985,6 +1081,10 @@ module Aws::Drs
     #   resp.items[0].source_properties.ram_bytes #=> Integer
     #   resp.items[0].source_properties.recommended_instance_type #=> String
     #   resp.items[0].source_server_id #=> String
+    #   resp.items[0].staging_area.error_message #=> String
+    #   resp.items[0].staging_area.staging_account_id #=> String
+    #   resp.items[0].staging_area.staging_source_server_arn #=> String
+    #   resp.items[0].staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.items[0].tags #=> Hash
     #   resp.items[0].tags["TagKey"] #=> String
     #   resp.next_token #=> String
@@ -1059,6 +1159,7 @@ module Aws::Drs
     #   * {Types::SourceServer#recovery_instance_id #recovery_instance_id} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1115,6 +1216,10 @@ module Aws::Drs
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_server_id #=> String
+    #   resp.staging_area.error_message #=> String
+    #   resp.staging_area.staging_account_id #=> String
+    #   resp.staging_area.staging_source_server_arn #=> String
+    #   resp.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1289,6 +1394,92 @@ module Aws::Drs
       req.send_request(options)
     end
 
+    # Returns a list of source servers on a staging account that are
+    # extensible, which means that: a. The source server is not already
+    # extended into this Account. b. The source server on the Account we’re
+    # reading from is not an extension of another source server.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of extensible source servers to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token of the next extensible source server to retrieve.
+    #
+    # @option params [required, String] :staging_account_id
+    #   The Id of the staging Account to retrieve extensible source servers
+    #   from.
+    #
+    # @return [Types::ListExtensibleSourceServersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListExtensibleSourceServersResponse#items #items} => Array&lt;Types::StagingSourceServer&gt;
+    #   * {Types::ListExtensibleSourceServersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_extensible_source_servers({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     staging_account_id: "AccountID", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].arn #=> String
+    #   resp.items[0].hostname #=> String
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListExtensibleSourceServers AWS API Documentation
+    #
+    # @overload list_extensible_source_servers(params = {})
+    # @param [Hash] params ({})
+    def list_extensible_source_servers(params = {}, options = {})
+      req = build_request(:list_extensible_source_servers, params)
+      req.send_request(options)
+    end
+
+    # Returns an array of staging accounts for existing extended source
+    # servers.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of staging Accounts to retrieve.
+    #
+    # @option params [String] :next_token
+    #   The token of the next staging Account to retrieve.
+    #
+    # @return [Types::ListStagingAccountsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStagingAccountsResponse#accounts #accounts} => Array&lt;Types::Account&gt;
+    #   * {Types::ListStagingAccountsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_staging_accounts({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.accounts #=> Array
+    #   resp.accounts[0].account_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/ListStagingAccounts AWS API Documentation
+    #
+    # @overload list_staging_accounts(params = {})
+    # @param [Hash] params ({})
+    def list_staging_accounts(params = {}, options = {})
+      req = build_request(:list_staging_accounts, params)
+      req.send_request(options)
+    end
+
     # List all tags for your Elastic Disaster Recovery resources.
     #
     # @option params [required, String] :resource_arn
@@ -1335,6 +1526,7 @@ module Aws::Drs
     #   * {Types::SourceServer#recovery_instance_id #recovery_instance_id} => String
     #   * {Types::SourceServer#source_properties #source_properties} => Types::SourceProperties
     #   * {Types::SourceServer#source_server_id #source_server_id} => String
+    #   * {Types::SourceServer#staging_area #staging_area} => Types::StagingArea
     #   * {Types::SourceServer#tags #tags} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
@@ -1391,6 +1583,10 @@ module Aws::Drs
     #   resp.source_properties.ram_bytes #=> Integer
     #   resp.source_properties.recommended_instance_type #=> String
     #   resp.source_server_id #=> String
+    #   resp.staging_area.error_message #=> String
+    #   resp.staging_area.staging_account_id #=> String
+    #   resp.staging_area.staging_source_server_arn #=> String
+    #   resp.staging_area.status #=> String, one of "EXTENDED", "EXTENSION_ERROR", "NOT_EXTENDED"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1433,7 +1629,7 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
@@ -1442,7 +1638,7 @@ module Aws::Drs
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartFailbackLaunch AWS API Documentation
     #
@@ -1490,7 +1686,7 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
@@ -1499,7 +1695,7 @@ module Aws::Drs
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/StartRecovery AWS API Documentation
     #
@@ -1588,7 +1784,7 @@ module Aws::Drs
     #   resp.job.arn #=> String
     #   resp.job.creation_date_time #=> String
     #   resp.job.end_date_time #=> String
-    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES"
+    #   resp.job.initiated_by #=> String, one of "START_RECOVERY", "START_DRILL", "FAILBACK", "DIAGNOSTIC", "TERMINATE_RECOVERY_INSTANCES", "TARGET_ACCOUNT"
     #   resp.job.job_id #=> String
     #   resp.job.participating_servers #=> Array
     #   resp.job.participating_servers[0].launch_status #=> String, one of "PENDING", "IN_PROGRESS", "LAUNCHED", "FAILED", "TERMINATED"
@@ -1597,7 +1793,7 @@ module Aws::Drs
     #   resp.job.status #=> String, one of "PENDING", "STARTED", "COMPLETED"
     #   resp.job.tags #=> Hash
     #   resp.job.tags["TagKey"] #=> String
-    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE"
+    #   resp.job.type #=> String, one of "LAUNCH", "TERMINATE", "CREATE_CONVERTED_SNAPSHOT"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/drs-2020-02-26/TerminateRecoveryInstances AWS API Documentation
     #
@@ -2051,7 +2247,7 @@ module Aws::Drs
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-drs'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

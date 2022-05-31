@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2022-05-31)
+------------------
+
+* Feature - Adding backtest mode to detectors using the Cloudwatch data source.
+
 1.18.0 (2022-05-25)
 ------------------
 

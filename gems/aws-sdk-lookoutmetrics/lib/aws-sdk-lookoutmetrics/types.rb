@@ -667,6 +667,9 @@ module Aws::LookoutMetrics
     #
     #       {
     #         role_arn: "Arn",
+    #         back_test_configuration: {
+    #           run_back_test_mode: false, # required
+    #         },
     #       }
     #
     # @!attribute [rw] role_arn
@@ -674,10 +677,15 @@ module Aws::LookoutMetrics
     #   access data in Amazon CloudWatch.
     #   @return [String]
     #
+    # @!attribute [rw] back_test_configuration
+    #   Settings for backtest mode.
+    #   @return [Types::BackTestConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lookoutmetrics-2017-07-25/CloudWatchConfig AWS API Documentation
     #
     class CloudWatchConfig < Struct.new(
-      :role_arn)
+      :role_arn,
+      :back_test_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -907,6 +915,9 @@ module Aws::LookoutMetrics
     #           },
     #           cloud_watch_config: {
     #             role_arn: "Arn",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
+    #             },
     #           },
     #           rds_source_config: {
     #             db_instance_identifier: "RDSDatabaseIdentifier",
@@ -2515,6 +2526,9 @@ module Aws::LookoutMetrics
     #         },
     #         cloud_watch_config: {
     #           role_arn: "Arn",
+    #           back_test_configuration: {
+    #             run_back_test_mode: false, # required
+    #           },
     #         },
     #         rds_source_config: {
     #           db_instance_identifier: "RDSDatabaseIdentifier",
@@ -3207,6 +3221,9 @@ module Aws::LookoutMetrics
     #           },
     #           cloud_watch_config: {
     #             role_arn: "Arn",
+    #             back_test_configuration: {
+    #               run_back_test_mode: false, # required
+    #             },
     #           },
     #           rds_source_config: {
     #             db_instance_identifier: "RDSDatabaseIdentifier",

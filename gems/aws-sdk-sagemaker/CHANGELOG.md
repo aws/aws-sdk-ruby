@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2022-05-31)
+------------------
+
+* Feature - Amazon SageMaker Notebook Instances now support Jupyter Lab 3.
+
 1.126.0 (2022-05-27)
 ------------------
 

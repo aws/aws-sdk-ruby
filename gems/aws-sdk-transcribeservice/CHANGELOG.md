@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2022-05-31)
+------------------
+
+* Feature - Amazon Transcribe now supports automatic language identification for multi-lingual audio in batch mode.
+
 1.74.0 (2022-03-24)
 ------------------
 
