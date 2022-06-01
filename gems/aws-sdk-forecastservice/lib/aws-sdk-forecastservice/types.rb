@@ -767,6 +767,7 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         format: "Format",
     #       }
     #
     # @!attribute [rw] dataset_import_job_name
@@ -880,6 +881,11 @@ module Aws::ForecastService
     #     of `aws` do not count against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] format
+    #   The format of the imported data, CSV or PARQUET. The default value
+    #   is CSV.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateDatasetImportJobRequest AWS API Documentation
     #
     class CreateDatasetImportJobRequest < Struct.new(
@@ -890,7 +896,8 @@ module Aws::ForecastService
       :time_zone,
       :use_geolocation_for_time_zone,
       :geolocation_format,
-      :tags)
+      :tags,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1068,6 +1075,7 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         format: "Format",
     #       }
     #
     # @!attribute [rw] explainability_export_name
@@ -1115,13 +1123,18 @@ module Aws::ForecastService
     #     prefix.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateExplainabilityExportRequest AWS API Documentation
     #
     class CreateExplainabilityExportRequest < Struct.new(
       :explainability_export_name,
       :explainability_arn,
       :destination,
-      :tags)
+      :tags,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1296,6 +1309,7 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         format: "Format",
     #       }
     #
     # @!attribute [rw] forecast_export_job_name
@@ -1351,13 +1365,19 @@ module Aws::ForecastService
     #     of `aws` do not count against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET. The default value
+    #   is CSV.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastExportJobRequest AWS API Documentation
     #
     class CreateForecastExportJobRequest < Struct.new(
       :forecast_export_job_name,
       :forecast_arn,
       :destination,
-      :tags)
+      :tags,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1387,6 +1407,26 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         time_series_selector: {
+    #           time_series_identifiers: {
+    #             data_source: {
+    #               s3_config: { # required
+    #                 path: "S3Path", # required
+    #                 role_arn: "Arn", # required
+    #                 kms_key_arn: "KMSKeyArn",
+    #               },
+    #             },
+    #             schema: {
+    #               attributes: [
+    #                 {
+    #                   attribute_name: "Name",
+    #                   attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #                 },
+    #               ],
+    #             },
+    #             format: "Format",
+    #           },
+    #         },
     #       }
     #
     # @!attribute [rw] forecast_name
@@ -1444,13 +1484,27 @@ module Aws::ForecastService
     #     of `aws` do not count against your tags per resource limit.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] time_series_selector
+    #   Defines the set of time series that are used to create the forecasts
+    #   in a `TimeSeriesIdentifiers` object.
+    #
+    #   The `TimeSeriesIdentifiers` object needs the following information:
+    #
+    #   * `DataSource`
+    #
+    #   * `Format`
+    #
+    #   * `Schema`
+    #   @return [Types::TimeSeriesSelector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreateForecastRequest AWS API Documentation
     #
     class CreateForecastRequest < Struct.new(
       :forecast_name,
       :predictor_arn,
       :forecast_types,
-      :tags)
+      :tags,
+      :time_series_selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1538,6 +1592,7 @@ module Aws::ForecastService
     #             value: "TagValue", # required
     #           },
     #         ],
+    #         format: "Format",
     #       }
     #
     # @!attribute [rw] predictor_backtest_export_job_name
@@ -1586,13 +1641,19 @@ module Aws::ForecastService
     #     prefix.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET. The default value
+    #   is CSV.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/CreatePredictorBacktestExportJobRequest AWS API Documentation
     #
     class CreatePredictorBacktestExportJobRequest < Struct.new(
       :predictor_backtest_export_job_name,
       :predictor_arn,
       :destination,
-      :tags)
+      :tags,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2758,6 +2819,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] format
+    #   The format of the imported data, CSV or PARQUET.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetImportJobResponse AWS API Documentation
     #
     class DescribeDatasetImportJobResponse < Struct.new(
@@ -2775,7 +2840,8 @@ module Aws::ForecastService
       :status,
       :message,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2924,7 +2990,7 @@ module Aws::ForecastService
     #   @return [String]
     #
     # @!attribute [rw] explainability_arn
-    #   The Amazon Resource Name (ARN) of the Explainability.
+    #   The Amazon Resource Name (ARN) of the Explainability export.
     #   @return [String]
     #
     # @!attribute [rw] destination
@@ -2969,6 +3035,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityExportResponse AWS API Documentation
     #
     class DescribeExplainabilityExportResponse < Struct.new(
@@ -2979,7 +3049,8 @@ module Aws::ForecastService
       :message,
       :status,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3183,6 +3254,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastExportJobResponse AWS API Documentation
     #
     class DescribeForecastExportJobResponse < Struct.new(
@@ -3193,7 +3268,8 @@ module Aws::ForecastService
       :message,
       :status,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3283,6 +3359,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] time_series_selector
+    #   The time series to include in the forecast.
+    #   @return [Types::TimeSeriesSelector]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastResponse AWS API Documentation
     #
     class DescribeForecastResponse < Struct.new(
@@ -3295,7 +3375,8 @@ module Aws::ForecastService
       :status,
       :message,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :time_series_selector)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3458,6 +3539,10 @@ module Aws::ForecastService
     #   * `ACTIVE` or `CREATE_FAILED` - When the job finished or failed.
     #   @return [Time]
     #
+    # @!attribute [rw] format
+    #   The format of the exported data, CSV or PARQUET.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJobResponse AWS API Documentation
     #
     class DescribePredictorBacktestExportJobResponse < Struct.new(
@@ -3468,7 +3553,8 @@ module Aws::ForecastService
       :message,
       :status,
       :creation_time,
-      :last_modification_time)
+      :last_modification_time,
+      :format)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3829,8 +3915,8 @@ module Aws::ForecastService
     #   use `ALL`. To create an Explainability for specific time series in
     #   your datasets, use `SPECIFIC`.
     #
-    #   Specify time series by uploading a CSV file to an Amazon S3 bucket
-    #   and set the location within the DataDestination data type.
+    #   Specify time series by uploading a CSV or Parquet file to an Amazon
+    #   S3 bucket and set the location within the DataDestination data type.
     #   @return [String]
     #
     # @!attribute [rw] time_point_granularity
@@ -6805,6 +6891,103 @@ module Aws::ForecastService
       :day_of_month,
       :day_of_week,
       :hour)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about the import file that contains the time series for which
+    # you want to create forecasts.
+    #
+    # @note When making an API call, you may pass TimeSeriesIdentifiers
+    #   data as a hash:
+    #
+    #       {
+    #         data_source: {
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         schema: {
+    #           attributes: [
+    #             {
+    #               attribute_name: "Name",
+    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #             },
+    #           ],
+    #         },
+    #         format: "Format",
+    #       }
+    #
+    # @!attribute [rw] data_source
+    #   The source of your data, an AWS Identity and Access Management (IAM)
+    #   role that allows Amazon Forecast to access the data and, optionally,
+    #   an AWS Key Management Service (KMS) key.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] schema
+    #   Defines the fields of a dataset.
+    #   @return [Types::Schema]
+    #
+    # @!attribute [rw] format
+    #   The format of the data, either CSV or PARQUET.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeSeriesIdentifiers AWS API Documentation
+    #
+    class TimeSeriesIdentifiers < Struct.new(
+      :data_source,
+      :schema,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the set of time series that are used to create the forecasts
+    # in a `TimeSeriesIdentifiers` object.
+    #
+    # The `TimeSeriesIdentifiers` object needs the following information:
+    #
+    # * `DataSource`
+    #
+    # * `Format`
+    #
+    # * `Schema`
+    #
+    # @note When making an API call, you may pass TimeSeriesSelector
+    #   data as a hash:
+    #
+    #       {
+    #         time_series_identifiers: {
+    #           data_source: {
+    #             s3_config: { # required
+    #               path: "S3Path", # required
+    #               role_arn: "Arn", # required
+    #               kms_key_arn: "KMSKeyArn",
+    #             },
+    #           },
+    #           schema: {
+    #             attributes: [
+    #               {
+    #                 attribute_name: "Name",
+    #                 attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #               },
+    #             ],
+    #           },
+    #           format: "Format",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] time_series_identifiers
+    #   Details about the import file that contains the time series for
+    #   which you want to create forecasts.
+    #   @return [Types::TimeSeriesIdentifiers]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/TimeSeriesSelector AWS API Documentation
+    #
+    class TimeSeriesSelector < Struct.new(
+      :time_series_identifiers)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -132,6 +132,7 @@ module Aws::ForecastService
     ForecastType = Shapes::StringShape.new(name: 'ForecastType')
     ForecastTypes = Shapes::ListShape.new(name: 'ForecastTypes')
     Forecasts = Shapes::ListShape.new(name: 'Forecasts')
+    Format = Shapes::StringShape.new(name: 'Format')
     Frequency = Shapes::StringShape.new(name: 'Frequency')
     GeolocationFormat = Shapes::StringShape.new(name: 'GeolocationFormat')
     GetAccuracyMetricsRequest = Shapes::StructureShape.new(name: 'GetAccuracyMetricsRequest')
@@ -233,6 +234,8 @@ module Aws::ForecastService
     TimeAlignmentBoundary = Shapes::StructureShape.new(name: 'TimeAlignmentBoundary')
     TimePointGranularity = Shapes::StringShape.new(name: 'TimePointGranularity')
     TimeSeriesGranularity = Shapes::StringShape.new(name: 'TimeSeriesGranularity')
+    TimeSeriesIdentifiers = Shapes::StructureShape.new(name: 'TimeSeriesIdentifiers')
+    TimeSeriesSelector = Shapes::StructureShape.new(name: 'TimeSeriesSelector')
     TimeZone = Shapes::StringShape.new(name: 'TimeZone')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TimestampFormat = Shapes::StringShape.new(name: 'TimestampFormat')
@@ -324,6 +327,7 @@ module Aws::ForecastService
     CreateDatasetImportJobRequest.add_member(:use_geolocation_for_time_zone, Shapes::ShapeRef.new(shape: UseGeolocationForTimeZone, location_name: "UseGeolocationForTimeZone"))
     CreateDatasetImportJobRequest.add_member(:geolocation_format, Shapes::ShapeRef.new(shape: GeolocationFormat, location_name: "GeolocationFormat"))
     CreateDatasetImportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateDatasetImportJobRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     CreateDatasetImportJobRequest.struct_class = Types::CreateDatasetImportJobRequest
 
     CreateDatasetImportJobResponse.add_member(:dataset_import_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "DatasetImportJobArn"))
@@ -345,6 +349,7 @@ module Aws::ForecastService
     CreateExplainabilityExportRequest.add_member(:explainability_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExplainabilityArn"))
     CreateExplainabilityExportRequest.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, required: true, location_name: "Destination"))
     CreateExplainabilityExportRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateExplainabilityExportRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     CreateExplainabilityExportRequest.struct_class = Types::CreateExplainabilityExportRequest
 
     CreateExplainabilityExportResponse.add_member(:explainability_export_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ExplainabilityExportArn"))
@@ -368,6 +373,7 @@ module Aws::ForecastService
     CreateForecastExportJobRequest.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ForecastArn"))
     CreateForecastExportJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, required: true, location_name: "Destination"))
     CreateForecastExportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateForecastExportJobRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     CreateForecastExportJobRequest.struct_class = Types::CreateForecastExportJobRequest
 
     CreateForecastExportJobResponse.add_member(:forecast_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastExportJobArn"))
@@ -377,6 +383,7 @@ module Aws::ForecastService
     CreateForecastRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
     CreateForecastRequest.add_member(:forecast_types, Shapes::ShapeRef.new(shape: ForecastTypes, location_name: "ForecastTypes"))
     CreateForecastRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateForecastRequest.add_member(:time_series_selector, Shapes::ShapeRef.new(shape: TimeSeriesSelector, location_name: "TimeSeriesSelector"))
     CreateForecastRequest.struct_class = Types::CreateForecastRequest
 
     CreateForecastResponse.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "ForecastArn"))
@@ -394,6 +401,7 @@ module Aws::ForecastService
     CreatePredictorBacktestExportJobRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
     CreatePredictorBacktestExportJobRequest.add_member(:destination, Shapes::ShapeRef.new(shape: DataDestination, required: true, location_name: "Destination"))
     CreatePredictorBacktestExportJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreatePredictorBacktestExportJobRequest.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     CreatePredictorBacktestExportJobRequest.struct_class = Types::CreatePredictorBacktestExportJobRequest
 
     CreatePredictorBacktestExportJobResponse.add_member(:predictor_backtest_export_job_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "PredictorBacktestExportJobArn"))
@@ -546,6 +554,7 @@ module Aws::ForecastService
     DescribeDatasetImportJobResponse.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     DescribeDatasetImportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeDatasetImportJobResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribeDatasetImportJobResponse.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     DescribeDatasetImportJobResponse.struct_class = Types::DescribeDatasetImportJobResponse
 
     DescribeDatasetRequest.add_member(:dataset_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "DatasetArn"))
@@ -574,6 +583,7 @@ module Aws::ForecastService
     DescribeExplainabilityExportResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     DescribeExplainabilityExportResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeExplainabilityExportResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribeExplainabilityExportResponse.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     DescribeExplainabilityExportResponse.struct_class = Types::DescribeExplainabilityExportResponse
 
     DescribeExplainabilityRequest.add_member(:explainability_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ExplainabilityArn"))
@@ -606,6 +616,7 @@ module Aws::ForecastService
     DescribeForecastExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     DescribeForecastExportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeForecastExportJobResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribeForecastExportJobResponse.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     DescribeForecastExportJobResponse.struct_class = Types::DescribeForecastExportJobResponse
 
     DescribeForecastRequest.add_member(:forecast_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "ForecastArn"))
@@ -621,6 +632,7 @@ module Aws::ForecastService
     DescribeForecastResponse.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     DescribeForecastResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribeForecastResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribeForecastResponse.add_member(:time_series_selector, Shapes::ShapeRef.new(shape: TimeSeriesSelector, location_name: "TimeSeriesSelector"))
     DescribeForecastResponse.struct_class = Types::DescribeForecastResponse
 
     DescribeMonitorRequest.add_member(:monitor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "MonitorArn"))
@@ -650,6 +662,7 @@ module Aws::ForecastService
     DescribePredictorBacktestExportJobResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "Status"))
     DescribePredictorBacktestExportJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
     DescribePredictorBacktestExportJobResponse.add_member(:last_modification_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModificationTime"))
+    DescribePredictorBacktestExportJobResponse.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
     DescribePredictorBacktestExportJobResponse.struct_class = Types::DescribePredictorBacktestExportJobResponse
 
     DescribePredictorRequest.add_member(:predictor_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "PredictorArn"))
@@ -1106,6 +1119,14 @@ module Aws::ForecastService
     TimeAlignmentBoundary.add_member(:day_of_week, Shapes::ShapeRef.new(shape: DayOfWeek, location_name: "DayOfWeek"))
     TimeAlignmentBoundary.add_member(:hour, Shapes::ShapeRef.new(shape: Hour, location_name: "Hour"))
     TimeAlignmentBoundary.struct_class = Types::TimeAlignmentBoundary
+
+    TimeSeriesIdentifiers.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, location_name: "DataSource"))
+    TimeSeriesIdentifiers.add_member(:schema, Shapes::ShapeRef.new(shape: Schema, location_name: "Schema"))
+    TimeSeriesIdentifiers.add_member(:format, Shapes::ShapeRef.new(shape: Format, location_name: "Format"))
+    TimeSeriesIdentifiers.struct_class = Types::TimeSeriesIdentifiers
+
+    TimeSeriesSelector.add_member(:time_series_identifiers, Shapes::ShapeRef.new(shape: TimeSeriesIdentifiers, location_name: "TimeSeriesIdentifiers"))
+    TimeSeriesSelector.struct_class = Types::TimeSeriesSelector
 
     TrainingParameters.key = Shapes::ShapeRef.new(shape: ParameterKey)
     TrainingParameters.value = Shapes::ShapeRef.new(shape: ParameterValue)

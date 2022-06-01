@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2022-06-01)
+------------------
+
+* Feature - Added Format field to Import and Export APIs in Amazon Forecast. Added TimeSeriesSelector to Create Forecast API.
+
 1.35.0 (2022-05-26)
 ------------------
 

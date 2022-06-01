@@ -33,13 +33,73 @@ module Aws::ChimeSDKMeetings
     #   The join token used by the Amazon Chime SDK attendee.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   The capabilities (audio, video, or content) assigned to an attendee.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/Attendee AWS API Documentation
     #
     class Attendee < Struct.new(
       :external_user_id,
       :attendee_id,
-      :join_token)
+      :join_token,
+      :capabilities)
       SENSITIVE = [:external_user_id, :join_token]
+      include Aws::Structure
+    end
+
+    # The media capabilities of an attendee, including audio, video and
+    # content.
+    #
+    # @note When making an API call, you may pass AttendeeCapabilities
+    #   data as a hash:
+    #
+    #       {
+    #         audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       }
+    #
+    # @!attribute [rw] audio
+    #   The audio capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @!attribute [rw] video
+    #   The video capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content capability assigned to an attendee.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AttendeeCapabilities AWS API Documentation
+    #
+    class AttendeeCapabilities < Struct.new(
+      :audio,
+      :video,
+      :content)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that contains one or more attendee IDs.
+    #
+    # @note When making an API call, you may pass AttendeeIdItem
+    #   data as a hash:
+    #
+    #       {
+    #         attendee_id: "GuidString", # required
+    #       }
+    #
+    # @!attribute [rw] attendee_id
+    #   A list of one or more attendee IDs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/AttendeeIdItem AWS API Documentation
+    #
+    class AttendeeIdItem < Struct.new(
+      :attendee_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -97,6 +157,11 @@ module Aws::ChimeSDKMeetings
     #         attendees: [ # required
     #           {
     #             external_user_id: "ExternalUserId", # required
+    #             capabilities: {
+    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #             },
     #           },
     #         ],
     #       }
@@ -138,6 +203,68 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass BatchUpdateAttendeeCapabilitiesExceptRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         excluded_attendee_ids: [ # required
+    #           {
+    #             attendee_id: "GuidString", # required
+    #           },
+    #         ],
+    #         capabilities: { # required
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The ID of the meeting associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] excluded_attendee_ids
+    #   The `AttendeeIDs` that you want to exclude from one or more
+    #   capabilities.
+    #   @return [Array<Types::AttendeeIdItem>]
+    #
+    # @!attribute [rw] capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   update.
+    #   @return [Types::AttendeeCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/BatchUpdateAttendeeCapabilitiesExceptRequest AWS API Documentation
+    #
+    class BatchUpdateAttendeeCapabilitiesExceptRequest < Struct.new(
+      :meeting_id,
+      :excluded_attendee_ids,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Multiple instances of the same request have been made simultaneously.
+    #
+    # @!attribute [rw] code
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ConflictException AWS API Documentation
+    #
+    class ConflictException < Struct.new(
+      :code,
+      :message,
+      :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The list of errors returned when errors are encountered during the
     # BatchCreateAttendee and CreateAttendee actions. This includes external
     # user IDs, error codes, and error messages.
@@ -171,6 +298,11 @@ module Aws::ChimeSDKMeetings
     #       {
     #         meeting_id: "GuidString", # required
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       }
     #
     # @!attribute [rw] meeting_id
@@ -182,11 +314,18 @@ module Aws::ChimeSDKMeetings
     #   the attendee to an identity managed by a builder application.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   grant an attendee. If you don't specify capabilities, all users
+    #   have send and receive capabilities on all media channels by default.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendeeRequest AWS API Documentation
     #
     class CreateAttendeeRequest < Struct.new(
       :meeting_id,
-      :external_user_id)
+      :external_user_id,
+      :capabilities)
       SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
@@ -199,6 +338,11 @@ module Aws::ChimeSDKMeetings
     #
     #       {
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       }
     #
     # @!attribute [rw] external_user_id
@@ -206,10 +350,15 @@ module Aws::ChimeSDKMeetings
     #   the attendee to an identity managed by a builder application.
     #   @return [String]
     #
+    # @!attribute [rw] capabilities
+    #   A list of one or more capabilities.
+    #   @return [Types::AttendeeCapabilities]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendeeRequestItem AWS API Documentation
     #
     class CreateAttendeeRequestItem < Struct.new(
-      :external_user_id)
+      :external_user_id,
+      :capabilities)
       SENSITIVE = [:external_user_id]
       include Aws::Structure
     end
@@ -339,6 +488,11 @@ module Aws::ChimeSDKMeetings
     #         attendees: [ # required
     #           {
     #             external_user_id: "ExternalUserId", # required
+    #             capabilities: {
+    #               audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #               content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #             },
     #           },
     #         ],
     #         primary_meeting_id: "PrimaryMeetingId",
@@ -950,7 +1104,7 @@ module Aws::ChimeSDKMeetings
     #   @return [String]
     #
     # @!attribute [rw] request_id
-    #   The request id associated with the call responsible for the
+    #   The request ID associated with the call responsible for the
     #   exception.
     #   @return [String]
     #
@@ -999,7 +1153,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The service encountered an unexpected error.
+    # The service is currently unavailable.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -1119,7 +1273,7 @@ module Aws::ChimeSDKMeetings
       include Aws::Structure
     end
 
-    # The number of customer requests exceeds the request rate limit.
+    # The number of requests exceeds the limit.
     #
     # @!attribute [rw] code
     #   @return [String]
@@ -1236,6 +1390,61 @@ module Aws::ChimeSDKMeetings
       :code,
       :message,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateAttendeeCapabilitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         meeting_id: "GuidString", # required
+    #         attendee_id: "GuidString", # required
+    #         capabilities: { # required
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
+    #       }
+    #
+    # @!attribute [rw] meeting_id
+    #   The ID of the meeting associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] attendee_id
+    #   The ID of the attendee associated with the update request.
+    #   @return [String]
+    #
+    # @!attribute [rw] capabilities
+    #   The capabilties that you want to update.
+    #   @return [Types::AttendeeCapabilities]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilitiesRequest AWS API Documentation
+    #
+    class UpdateAttendeeCapabilitiesRequest < Struct.new(
+      :meeting_id,
+      :attendee_id,
+      :capabilities)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attendee
+    #   An Amazon Chime SDK meeting attendee. Includes a unique `AttendeeId`
+    #   and `JoinToken`. The `JoinToken` allows a client to authenticate and
+    #   join as the specified attendee. The `JoinToken` expires when the
+    #   meeting ends, or when DeleteAttendee is called. After that, the
+    #   attendee is unable to join the meeting.
+    #
+    #   We recommend securely transferring each `JoinToken` from your server
+    #   application to the client so that no other client has access to the
+    #   token except for the one authorized to represent the attendee.
+    #   @return [Types::Attendee]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilitiesResponse AWS API Documentation
+    #
+    class UpdateAttendeeCapabilitiesResponse < Struct.new(
+      :attendee)
       SENSITIVE = []
       include Aws::Structure
     end

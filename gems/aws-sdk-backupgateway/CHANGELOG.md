@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.4.0 (2022-06-01)
+------------------
+
+* Feature - Adds GetGateway and UpdateGatewaySoftwareNow API and adds hypervisor name to UpdateHypervisor API
+
 1.3.0 (2022-02-24)
 ------------------
 

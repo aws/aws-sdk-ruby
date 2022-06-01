@@ -378,6 +378,11 @@ module Aws::ChimeSDKMeetings
     #     attendees: [ # required
     #       {
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       },
     #     ],
     #   })
@@ -388,6 +393,9 @@ module Aws::ChimeSDKMeetings
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
     #   resp.attendees[0].join_token #=> String
+    #   resp.attendees[0].capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
     #   resp.errors #=> Array
     #   resp.errors[0].external_user_id #=> String
     #   resp.errors[0].error_code #=> String
@@ -399,6 +407,47 @@ module Aws::ChimeSDKMeetings
     # @param [Hash] params ({})
     def batch_create_attendee(params = {}, options = {})
       req = build_request(:batch_create_attendee, params)
+      req.send_request(options)
+    end
+
+    # Updates `AttendeeCapabilities` except the capabilities listed in an
+    # `ExcludedAttendeeIds` table.
+    #
+    # @option params [required, String] :meeting_id
+    #   The ID of the meeting associated with the update request.
+    #
+    # @option params [required, Array<Types::AttendeeIdItem>] :excluded_attendee_ids
+    #   The `AttendeeIDs` that you want to exclude from one or more
+    #   capabilities.
+    #
+    # @option params [required, Types::AttendeeCapabilities] :capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   update.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_attendee_capabilities_except({
+    #     meeting_id: "GuidString", # required
+    #     excluded_attendee_ids: [ # required
+    #       {
+    #         attendee_id: "GuidString", # required
+    #       },
+    #     ],
+    #     capabilities: { # required
+    #       audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/BatchUpdateAttendeeCapabilitiesExcept AWS API Documentation
+    #
+    # @overload batch_update_attendee_capabilities_except(params = {})
+    # @param [Hash] params ({})
+    def batch_update_attendee_capabilities_except(params = {}, options = {})
+      req = build_request(:batch_update_attendee_capabilities_except, params)
       req.send_request(options)
     end
 
@@ -417,6 +466,11 @@ module Aws::ChimeSDKMeetings
     #   The Amazon Chime SDK external user ID. An idempotency token. Links the
     #   attendee to an identity managed by a builder application.
     #
+    # @option params [Types::AttendeeCapabilities] :capabilities
+    #   The capabilities (`audio`, `video`, or `content`) that you want to
+    #   grant an attendee. If you don't specify capabilities, all users have
+    #   send and receive capabilities on all media channels by default.
+    #
     # @return [Types::CreateAttendeeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateAttendeeResponse#attendee #attendee} => Types::Attendee
@@ -426,6 +480,11 @@ module Aws::ChimeSDKMeetings
     #   resp = client.create_attendee({
     #     meeting_id: "GuidString", # required
     #     external_user_id: "ExternalUserId", # required
+    #     capabilities: {
+    #       audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #     },
     #   })
     #
     # @example Response structure
@@ -433,6 +492,9 @@ module Aws::ChimeSDKMeetings
     #   resp.attendee.external_user_id #=> String
     #   resp.attendee.attendee_id #=> String
     #   resp.attendee.join_token #=> String
+    #   resp.attendee.capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/CreateAttendee AWS API Documentation
     #
@@ -618,6 +680,11 @@ module Aws::ChimeSDKMeetings
     #     attendees: [ # required
     #       {
     #         external_user_id: "ExternalUserId", # required
+    #         capabilities: {
+    #           audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #           content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #         },
     #       },
     #     ],
     #     primary_meeting_id: "PrimaryMeetingId",
@@ -643,6 +710,9 @@ module Aws::ChimeSDKMeetings
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
     #   resp.attendees[0].join_token #=> String
+    #   resp.attendees[0].capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
     #   resp.errors #=> Array
     #   resp.errors[0].external_user_id #=> String
     #   resp.errors[0].error_code #=> String
@@ -751,6 +821,9 @@ module Aws::ChimeSDKMeetings
     #   resp.attendee.external_user_id #=> String
     #   resp.attendee.attendee_id #=> String
     #   resp.attendee.join_token #=> String
+    #   resp.attendee.capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/GetAttendee AWS API Documentation
     #
@@ -846,6 +919,9 @@ module Aws::ChimeSDKMeetings
     #   resp.attendees[0].external_user_id #=> String
     #   resp.attendees[0].attendee_id #=> String
     #   resp.attendees[0].join_token #=> String
+    #   resp.attendees[0].capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendees[0].capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/ListAttendees AWS API Documentation
@@ -932,6 +1008,51 @@ module Aws::ChimeSDKMeetings
       req.send_request(options)
     end
 
+    # The capabilties that you want to update.
+    #
+    # @option params [required, String] :meeting_id
+    #   The ID of the meeting associated with the update request.
+    #
+    # @option params [required, String] :attendee_id
+    #   The ID of the attendee associated with the update request.
+    #
+    # @option params [required, Types::AttendeeCapabilities] :capabilities
+    #   The capabilties that you want to update.
+    #
+    # @return [Types::UpdateAttendeeCapabilitiesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAttendeeCapabilitiesResponse#attendee #attendee} => Types::Attendee
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_attendee_capabilities({
+    #     meeting_id: "GuidString", # required
+    #     attendee_id: "GuidString", # required
+    #     capabilities: { # required
+    #       audio: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       video: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #       content: "SendReceive", # required, accepts SendReceive, Send, Receive, None
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attendee.external_user_id #=> String
+    #   resp.attendee.attendee_id #=> String
+    #   resp.attendee.join_token #=> String
+    #   resp.attendee.capabilities.audio #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.video #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #   resp.attendee.capabilities.content #=> String, one of "SendReceive", "Send", "Receive", "None"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/chime-sdk-meetings-2021-07-15/UpdateAttendeeCapabilities AWS API Documentation
+    #
+    # @overload update_attendee_capabilities(params = {})
+    # @param [Hash] params ({})
+    def update_attendee_capabilities(params = {}, options = {})
+      req = build_request(:update_attendee_capabilities, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -945,7 +1066,7 @@ module Aws::ChimeSDKMeetings
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-chimesdkmeetings'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

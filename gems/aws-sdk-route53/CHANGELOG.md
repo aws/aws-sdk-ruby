@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2022-06-01)
+------------------
+
+* Feature - Add new APIs to support Route 53 IP Based Routing
+
 1.62.0 (2022-02-24)
 ------------------
 

@@ -878,11 +878,11 @@ module Aws::ForecastService
     # data and processes it in an internal AWS system. For more information,
     # see [Set up permissions][2].
     #
-    # The training data must be in CSV format. The delimiter must be a comma
-    # (,).
+    # The training data must be in CSV or Parquet format. The delimiter must
+    # be a comma (,).
     #
-    # You can specify the path to a specific CSV file, the S3 bucket, or to
-    # a folder in the S3 bucket. For the latter two cases, Amazon Forecast
+    # You can specify the path to a specific file, the S3 bucket, or to a
+    # folder in the S3 bucket. For the latter two cases, Amazon Forecast
     # imports all files up to the limit of 10,000 files.
     #
     # Because dataset imports are not aggregated, your most recent dataset
@@ -1002,6 +1002,10 @@ module Aws::ForecastService
     #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
     #     count against your tags per resource limit.
     #
+    # @option params [String] :format
+    #   The format of the imported data, CSV or PARQUET. The default value is
+    #   CSV.
+    #
     # @return [Types::CreateDatasetImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDatasetImportJobResponse#dataset_import_job_arn #dataset_import_job_arn} => String
@@ -1028,6 +1032,7 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     format: "Format",
     #   })
     #
     # @example Response structure
@@ -1297,6 +1302,9 @@ module Aws::ForecastService
     #     only the key prefix of `aws` do not count against your tags per
     #     resource limit. You cannot edit or delete tag keys with this prefix.
     #
+    # @option params [String] :format
+    #   The format of the exported data, CSV or PARQUET.
+    #
     # @return [Types::CreateExplainabilityExportResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateExplainabilityExportResponse#explainability_export_arn #explainability_export_arn} => String
@@ -1319,6 +1327,7 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     format: "Format",
     #   })
     #
     # @example Response structure
@@ -1360,6 +1369,14 @@ module Aws::ForecastService
     # status.
     #
     #  </note>
+    #
+    # By default, a forecast includes predictions for every item (`item_id`)
+    # in the dataset group that was used to train the predictor. However,
+    # you can use the `TimeSeriesSelector` object to generate a forecast on
+    # a subset of time series. Forecast creation is skipped for any time
+    # series that you specify that are not in the input dataset. The
+    # forecast export file will not contain these time series or their
+    # forecasted values.
     #
     # @option params [required, String] :forecast_name
     #   A name for the forecast.
@@ -1412,6 +1429,18 @@ module Aws::ForecastService
     #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
     #     count against your tags per resource limit.
     #
+    # @option params [Types::TimeSeriesSelector] :time_series_selector
+    #   Defines the set of time series that are used to create the forecasts
+    #   in a `TimeSeriesIdentifiers` object.
+    #
+    #   The `TimeSeriesIdentifiers` object needs the following information:
+    #
+    #   * `DataSource`
+    #
+    #   * `Format`
+    #
+    #   * `Schema`
+    #
     # @return [Types::CreateForecastResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateForecastResponse#forecast_arn #forecast_arn} => String
@@ -1428,6 +1457,26 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     time_series_selector: {
+    #       time_series_identifiers: {
+    #         data_source: {
+    #           s3_config: { # required
+    #             path: "S3Path", # required
+    #             role_arn: "Arn", # required
+    #             kms_key_arn: "KMSKeyArn",
+    #           },
+    #         },
+    #         schema: {
+    #           attributes: [
+    #             {
+    #               attribute_name: "Name",
+    #               attribute_type: "string", # accepts string, integer, float, timestamp, geolocation
+    #             },
+    #           ],
+    #         },
+    #         format: "Format",
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1517,6 +1566,10 @@ module Aws::ForecastService
     #     the limit of 50 tags. Tags with only the key prefix of `aws` do not
     #     count against your tags per resource limit.
     #
+    # @option params [String] :format
+    #   The format of the exported data, CSV or PARQUET. The default value is
+    #   CSV.
+    #
     # @return [Types::CreateForecastExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateForecastExportJobResponse#forecast_export_job_arn #forecast_export_job_arn} => String
@@ -1539,6 +1592,7 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     format: "Format",
     #   })
     #
     # @example Response structure
@@ -1925,7 +1979,8 @@ module Aws::ForecastService
 
     # Exports backtest forecasts and accuracy metrics generated by the
     # CreateAutoPredictor or CreatePredictor operations. Two folders
-    # containing CSV files are exported to your specified S3 bucket.
+    # containing CSV or Parquet files are exported to your specified S3
+    # bucket.
     #
     # The export file names will match the following conventions:
     #
@@ -1985,6 +2040,10 @@ module Aws::ForecastService
     #     only the key prefix of `aws` do not count against your tags per
     #     resource limit. You cannot edit or delete tag keys with this prefix.
     #
+    # @option params [String] :format
+    #   The format of the exported data, CSV or PARQUET. The default value is
+    #   CSV.
+    #
     # @return [Types::CreatePredictorBacktestExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreatePredictorBacktestExportJobResponse#predictor_backtest_export_job_arn #predictor_backtest_export_job_arn} => String
@@ -2007,6 +2066,7 @@ module Aws::ForecastService
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     format: "Format",
     #   })
     #
     # @example Response structure
@@ -2591,6 +2651,7 @@ module Aws::ForecastService
     #   * {Types::DescribeDatasetImportJobResponse#message #message} => String
     #   * {Types::DescribeDatasetImportJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeDatasetImportJobResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeDatasetImportJobResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2629,6 +2690,7 @@ module Aws::ForecastService
     #   resp.message #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeDatasetImportJob AWS API Documentation
     #
@@ -2715,6 +2777,7 @@ module Aws::ForecastService
     #   * {Types::DescribeExplainabilityExportResponse#status #status} => String
     #   * {Types::DescribeExplainabilityExportResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeExplainabilityExportResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeExplainabilityExportResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2734,6 +2797,7 @@ module Aws::ForecastService
     #   resp.status #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeExplainabilityExport AWS API Documentation
     #
@@ -2775,6 +2839,7 @@ module Aws::ForecastService
     #   * {Types::DescribeForecastResponse#message #message} => String
     #   * {Types::DescribeForecastResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeForecastResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeForecastResponse#time_series_selector #time_series_selector} => Types::TimeSeriesSelector
     #
     # @example Request syntax with placeholder values
     #
@@ -2795,6 +2860,13 @@ module Aws::ForecastService
     #   resp.message #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.time_series_selector.time_series_identifiers.data_source.s3_config.path #=> String
+    #   resp.time_series_selector.time_series_identifiers.data_source.s3_config.role_arn #=> String
+    #   resp.time_series_selector.time_series_identifiers.data_source.s3_config.kms_key_arn #=> String
+    #   resp.time_series_selector.time_series_identifiers.schema.attributes #=> Array
+    #   resp.time_series_selector.time_series_identifiers.schema.attributes[0].attribute_name #=> String
+    #   resp.time_series_selector.time_series_identifiers.schema.attributes[0].attribute_type #=> String, one of "string", "integer", "float", "timestamp", "geolocation"
+    #   resp.time_series_selector.time_series_identifiers.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecast AWS API Documentation
     #
@@ -2833,6 +2905,7 @@ module Aws::ForecastService
     #   * {Types::DescribeForecastExportJobResponse#status #status} => String
     #   * {Types::DescribeForecastExportJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribeForecastExportJobResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribeForecastExportJobResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -2852,6 +2925,7 @@ module Aws::ForecastService
     #   resp.status #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribeForecastExportJob AWS API Documentation
     #
@@ -3091,6 +3165,7 @@ module Aws::ForecastService
     #   * {Types::DescribePredictorBacktestExportJobResponse#status #status} => String
     #   * {Types::DescribePredictorBacktestExportJobResponse#creation_time #creation_time} => Time
     #   * {Types::DescribePredictorBacktestExportJobResponse#last_modification_time #last_modification_time} => Time
+    #   * {Types::DescribePredictorBacktestExportJobResponse#format #format} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3110,6 +3185,7 @@ module Aws::ForecastService
     #   resp.status #=> String
     #   resp.creation_time #=> Time
     #   resp.last_modification_time #=> Time
+    #   resp.format #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/forecast-2018-06-26/DescribePredictorBacktestExportJob AWS API Documentation
     #
@@ -4293,7 +4369,7 @@ module Aws::ForecastService
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-forecastservice'
-      context[:gem_version] = '1.35.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

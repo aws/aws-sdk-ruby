@@ -30,8 +30,11 @@ module Aws::BackupGateway
     DisassociateGatewayFromServerOutput = Shapes::StructureShape.new(name: 'DisassociateGatewayFromServerOutput')
     Gateway = Shapes::StructureShape.new(name: 'Gateway')
     GatewayArn = Shapes::StringShape.new(name: 'GatewayArn')
+    GatewayDetails = Shapes::StructureShape.new(name: 'GatewayDetails')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
     Gateways = Shapes::ListShape.new(name: 'Gateways')
+    GetGatewayInput = Shapes::StructureShape.new(name: 'GetGatewayInput')
+    GetGatewayOutput = Shapes::StructureShape.new(name: 'GetGatewayOutput')
     Host = Shapes::StringShape.new(name: 'Host')
     HourOfDay = Shapes::IntegerShape.new(name: 'HourOfDay')
     Hypervisor = Shapes::StructureShape.new(name: 'Hypervisor')
@@ -75,12 +78,15 @@ module Aws::BackupGateway
     UntagResourceOutput = Shapes::StructureShape.new(name: 'UntagResourceOutput')
     UpdateGatewayInformationInput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationInput')
     UpdateGatewayInformationOutput = Shapes::StructureShape.new(name: 'UpdateGatewayInformationOutput')
+    UpdateGatewaySoftwareNowInput = Shapes::StructureShape.new(name: 'UpdateGatewaySoftwareNowInput')
+    UpdateGatewaySoftwareNowOutput = Shapes::StructureShape.new(name: 'UpdateGatewaySoftwareNowOutput')
     UpdateHypervisorInput = Shapes::StructureShape.new(name: 'UpdateHypervisorInput')
     UpdateHypervisorOutput = Shapes::StructureShape.new(name: 'UpdateHypervisorOutput')
     Username = Shapes::StringShape.new(name: 'Username')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     VirtualMachine = Shapes::StructureShape.new(name: 'VirtualMachine')
     VirtualMachines = Shapes::ListShape.new(name: 'VirtualMachines')
+    VpcEndpoint = Shapes::StringShape.new(name: 'VpcEndpoint')
     string = Shapes::StringShape.new(name: 'string')
 
     AccessDeniedException.add_member(:error_code, Shapes::ShapeRef.new(shape: string, required: true, location_name: "ErrorCode"))
@@ -132,7 +138,22 @@ module Aws::BackupGateway
     Gateway.add_member(:last_seen_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSeenTime"))
     Gateway.struct_class = Types::Gateway
 
+    GatewayDetails.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
+    GatewayDetails.add_member(:gateway_display_name, Shapes::ShapeRef.new(shape: Name, location_name: "GatewayDisplayName"))
+    GatewayDetails.add_member(:gateway_type, Shapes::ShapeRef.new(shape: GatewayType, location_name: "GatewayType"))
+    GatewayDetails.add_member(:hypervisor_id, Shapes::ShapeRef.new(shape: HypervisorId, location_name: "HypervisorId"))
+    GatewayDetails.add_member(:last_seen_time, Shapes::ShapeRef.new(shape: Time, location_name: "LastSeenTime"))
+    GatewayDetails.add_member(:next_update_availability_time, Shapes::ShapeRef.new(shape: Time, location_name: "NextUpdateAvailabilityTime"))
+    GatewayDetails.add_member(:vpc_endpoint, Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "VpcEndpoint"))
+    GatewayDetails.struct_class = Types::GatewayDetails
+
     Gateways.member = Shapes::ShapeRef.new(shape: Gateway)
+
+    GetGatewayInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
+    GetGatewayInput.struct_class = Types::GetGatewayInput
+
+    GetGatewayOutput.add_member(:gateway, Shapes::ShapeRef.new(shape: GatewayDetails, location_name: "Gateway"))
+    GetGatewayOutput.struct_class = Types::GetGatewayOutput
 
     Hypervisor.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     Hypervisor.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, location_name: "HypervisorArn"))
@@ -240,8 +261,15 @@ module Aws::BackupGateway
     UpdateGatewayInformationOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
     UpdateGatewayInformationOutput.struct_class = Types::UpdateGatewayInformationOutput
 
+    UpdateGatewaySoftwareNowInput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "GatewayArn"))
+    UpdateGatewaySoftwareNowInput.struct_class = Types::UpdateGatewaySoftwareNowInput
+
+    UpdateGatewaySoftwareNowOutput.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, location_name: "GatewayArn"))
+    UpdateGatewaySoftwareNowOutput.struct_class = Types::UpdateGatewaySoftwareNowOutput
+
     UpdateHypervisorInput.add_member(:host, Shapes::ShapeRef.new(shape: Host, location_name: "Host"))
     UpdateHypervisorInput.add_member(:hypervisor_arn, Shapes::ShapeRef.new(shape: ServerArn, required: true, location_name: "HypervisorArn"))
+    UpdateHypervisorInput.add_member(:name, Shapes::ShapeRef.new(shape: Name, location_name: "Name"))
     UpdateHypervisorInput.add_member(:password, Shapes::ShapeRef.new(shape: Password, location_name: "Password"))
     UpdateHypervisorInput.add_member(:username, Shapes::ShapeRef.new(shape: Username, location_name: "Username"))
     UpdateHypervisorInput.struct_class = Types::UpdateHypervisorInput
@@ -334,6 +362,17 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: DisassociateGatewayFromServerOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_gateway, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetGateway"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetGatewayInput)
+        o.output = Shapes::ShapeRef.new(shape: GetGatewayOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
@@ -462,6 +501,17 @@ module Aws::BackupGateway
         o.output = Shapes::ShapeRef.new(shape: UpdateGatewayInformationOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_gateway_software_now, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateGatewaySoftwareNow"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateGatewaySoftwareNowInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateGatewaySoftwareNowOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)

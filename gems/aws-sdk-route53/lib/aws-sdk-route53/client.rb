@@ -496,6 +496,82 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Creates, changes, or deletes CIDR blocks within a collection. Contains
+    # authoritative IP information mapping blocks to one or multiple
+    # locations.
+    #
+    # A change request can update multiple locations in a collection at a
+    # time, which is helpful if you want to move one or more CIDR blocks
+    # from one location to another in one transaction, without downtime.
+    #
+    # **Limits**
+    #
+    # The max number of CIDR blocks included in the request is 1000. As a
+    # result, big updates require multiple API calls.
+    #
+    # <b> PUT and DELETE\_IF\_EXISTS</b>
+    #
+    # Use `ChangeCidrCollection` to perform the following actions:
+    #
+    # * `PUT`\: Create a CIDR block within the specified collection.
+    #
+    # * ` DELETE_IF_EXISTS`\: Delete an existing CIDR block from the
+    #   collection.
+    #
+    # @option params [required, String] :id
+    #   The UUID of the CIDR collection to update.
+    #
+    # @option params [Integer] :collection_version
+    #   A sequential counter that Amazon Route 53 sets to 1 when you create a
+    #   collection and increments it by 1 each time you update the collection.
+    #
+    #   We recommend that you use `ListCidrCollection` to get the current
+    #   value of `CollectionVersion` for the collection that you want to
+    #   update, and then include that value with the change request. This
+    #   prevents Route 53 from overwriting an intervening update:
+    #
+    #   * If the value in the request matches the value of `CollectionVersion`
+    #     in the collection, Route 53 updates the collection.
+    #
+    #   * If the value of `CollectionVersion` in the collection is greater
+    #     than the value in the request, the collection was changed after you
+    #     got the version number. Route 53 does not update the collection, and
+    #     it returns a `CidrCollectionVersionMismatch` error.
+    #
+    # @option params [required, Array<Types::CidrCollectionChange>] :changes
+    #   Information about changes to a CIDR collection.
+    #
+    # @return [Types::ChangeCidrCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ChangeCidrCollectionResponse#id #id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.change_cidr_collection({
+    #     id: "UUID", # required
+    #     collection_version: 1,
+    #     changes: [ # required
+    #       {
+    #         location_name: "CidrLocationNameDefaultNotAllowed", # required
+    #         action: "PUT", # required, accepts PUT, DELETE_IF_EXISTS
+    #         cidr_list: ["Cidr"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ChangeCidrCollection AWS API Documentation
+    #
+    # @overload change_cidr_collection(params = {})
+    # @param [Hash] params ({})
+    def change_cidr_collection(params = {}, options = {})
+      req = build_request(:change_cidr_collection, params)
+      req.send_request(options)
+    end
+
     # Creates, changes, or deletes a resource record set, which contains
     # authoritative DNS information for a specified domain name or subdomain
     # name. For example, you can use `ChangeResourceRecordSets` to create a
@@ -1224,6 +1300,10 @@ module Aws::Route53
     #             },
     #             health_check_id: "HealthCheckId",
     #             traffic_policy_instance_id: "TrafficPolicyInstanceId",
+    #             cidr_routing_config: {
+    #               collection_id: "UUID", # required
+    #               location_name: "CidrLocationNameDefaultAllowed", # required
+    #             },
     #           },
     #         },
     #       ],
@@ -1327,6 +1407,46 @@ module Aws::Route53
     # @param [Hash] params ({})
     def change_tags_for_resource(params = {}, options = {})
       req = build_request(:change_tags_for_resource, params)
+      req.send_request(options)
+    end
+
+    # Creates a CIDR collection in the current Amazon Web Services account.
+    #
+    # @option params [required, String] :name
+    #   A unique identifier for the account that can be used to reference the
+    #   collection from other API calls.
+    #
+    # @option params [required, String] :caller_reference
+    #   A client-specific token that allows requests to be securely retried so
+    #   that the intended outcome will only occur once, retries receive a
+    #   similar response, and there are no additional edge cases to handle.
+    #
+    # @return [Types::CreateCidrCollectionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCidrCollectionResponse#collection #collection} => Types::CidrCollection
+    #   * {Types::CreateCidrCollectionResponse#location #location} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_cidr_collection({
+    #     name: "CollectionName", # required
+    #     caller_reference: "CidrNonce", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.collection.arn #=> String
+    #   resp.collection.id #=> String
+    #   resp.collection.name #=> String
+    #   resp.collection.version #=> Integer
+    #   resp.location #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/CreateCidrCollection AWS API Documentation
+    #
+    # @overload create_cidr_collection(params = {})
+    # @param [Hash] params ({})
+    def create_cidr_collection(params = {}, options = {})
+      req = build_request(:create_cidr_collection, params)
       req.send_request(options)
     end
 
@@ -1492,8 +1612,8 @@ module Aws::Route53
     # vice versa. Instead, you must create a new hosted zone with the same
     # name and create new resource record sets.
     #
-    # For more information about charges for hosted zones, see [Amazon Route
-    # 53 Pricing][1].
+    # For more information about charges for hosted zones, see [Amazon
+    # Route 53 Pricing][1].
     #
     # Note the following:
     #
@@ -1502,7 +1622,7 @@ module Aws::Route53
     #
     # * For public hosted zones, Route 53 automatically creates a default
     #   SOA record and four NS records for the zone. For more information
-    #   about SOA and NS records, see [NS and SOA Records that Route 53
+    #   about SOA and NS records, see [NS and SOA Records that Route 53
     #   Creates for a Hosted Zone][2] in the *Amazon Route 53 Developer
     #   Guide*.
     #
@@ -1510,15 +1630,15 @@ module Aws::Route53
     #   zones, you can optionally associate a reusable delegation set with
     #   the hosted zone. See the `DelegationSetId` element.
     #
-    # * If your domain is registered with a registrar other than Route 53,
+    # * If your domain is registered with a registrar other than Route 53,
     #   you must update the name servers with your registrar to make Route
     #   53 the DNS service for the domain. For more information, see
-    #   [Migrating DNS Service for an Existing Domain to Amazon Route 53][3]
+    #   [Migrating DNS Service for an Existing Domain to Amazon Route 53][3]
     #   in the *Amazon Route 53 Developer Guide*.
     #
     # When you submit a `CreateHostedZone` request, the initial status of
     # the hosted zone is `PENDING`. For public hosted zones, this means that
-    # the NS and SOA records are not yet available on all Route 53 DNS
+    # the NS and SOA records are not yet available on all Route 53 DNS
     # servers. When the NS and SOA records are available, the status of the
     # zone changes to `INSYNC`.
     #
@@ -1552,14 +1672,14 @@ module Aws::Route53
     #
     # @option params [required, String] :name
     #   The name of the domain. Specify a fully qualified domain name, for
-    #   example, *www.example.com*. The trailing dot is optional; Amazon Route
-    #   53 assumes that the domain name is fully qualified. This means that
-    #   Route 53 treats *www.example.com* (without a trailing dot) and
+    #   example, *www.example.com*. The trailing dot is optional; Amazon
+    #   Route 53 assumes that the domain name is fully qualified. This means
+    #   that Route 53 treats *www.example.com* (without a trailing dot) and
     #   *www.example.com.* (with a trailing dot) as identical.
     #
     #   If you're creating a public hosted zone, this is the name you have
     #   registered with your DNS registrar. If your domain name is registered
-    #   with a registrar other than Route 53, change the name servers for your
+    #   with a registrar other than Route 53, change the name servers for your
     #   domain to the set of `NameServers` that `CreateHostedZone` returns in
     #   `DelegationSet`.
     #
@@ -1598,7 +1718,7 @@ module Aws::Route53
     #
     # @option params [String] :delegation_set_id
     #   If you want to associate a reusable delegation set with this hosted
-    #   zone, the ID that Amazon Route 53 assigned to the reusable delegation
+    #   zone, the ID that Amazon Route 53 assigned to the reusable delegation
     #   set when you created it. For more information about reusable
     #   delegation sets, see [CreateReusableDelegationSet][1].
     #
@@ -2333,6 +2453,29 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Deletes a CIDR collection in the current Amazon Web Services account.
+    # The collection must be empty before it can be deleted.
+    #
+    # @option params [required, String] :id
+    #   The UUID of the collection to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_cidr_collection({
+    #     id: "UUID", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/DeleteCidrCollection AWS API Documentation
+    #
+    # @overload delete_cidr_collection(params = {})
+    # @param [Hash] params ({})
+    def delete_cidr_collection(params = {}, options = {})
+      req = build_request(:delete_cidr_collection, params)
+      req.send_request(options)
+    end
+
     # Deletes a health check.
     #
     # Amazon Route 53 does not prevent you from deleting a health check even
@@ -2379,7 +2522,7 @@ module Aws::Route53
     #
     # If the hosted zone was created by another service, such as Cloud Map,
     # see [Deleting Public Hosted Zones That Were Created by Another
-    # Service][1] in the *Amazon Route 53 Developer Guide* for information
+    # Service][1] in the *Amazon Route 53 Developer Guide* for information
     # about how to delete it. (The process is the same for public and
     # private hosted zones that were created by another service.)
     #
@@ -2400,9 +2543,9 @@ module Aws::Route53
     # If you want to avoid the monthly charge for the hosted zone, you can
     # transfer DNS service for the domain to a free DNS service. When you
     # transfer DNS service, you have to update the name servers for the
-    # domain registration. If the domain is registered with Route 53, see
+    # domain registration. If the domain is registered with Route 53, see
     # [UpdateDomainNameservers][2] for information about how to replace
-    # Route 53 name servers with name servers for the new DNS service. If
+    # Route 53 name servers with name servers for the new DNS service. If
     # the domain is registered with another registrar, use the method
     # provided by the registrar to update name servers for the domain
     # registration. For more information, perform an internet search on
@@ -2412,7 +2555,7 @@ module Aws::Route53
     # record and NS resource record sets. If the hosted zone contains other
     # resource record sets, you must delete them before you can delete the
     # hosted zone. If you try to delete a hosted zone that contains other
-    # resource record sets, the request fails, and Route 53 returns a
+    # resource record sets, the request fails, and Route 53 returns a
     # `HostedZoneNotEmpty` error. For information about deleting records
     # from your hosted zone, see [ChangeResourceRecordSets][3].
     #
@@ -2934,7 +3077,7 @@ module Aws::Route53
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_change({
-    #     id: "ResourceId", # required
+    #     id: "ChangeId", # required
     #   })
     #
     # @example Response structure
@@ -3680,6 +3823,145 @@ module Aws::Route53
       req.send_request(options)
     end
 
+    # Returns a paginated list of location objects and their CIDR blocks.
+    #
+    # @option params [required, String] :collection_id
+    #   The UUID of the CIDR collection.
+    #
+    # @option params [String] :location_name
+    #   The name of the CIDR collection location.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    # @option params [String] :max_results
+    #   Maximum number of results you want returned.
+    #
+    # @return [Types::ListCidrBlocksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCidrBlocksResponse#next_token #next_token} => String
+    #   * {Types::ListCidrBlocksResponse#cidr_blocks #cidr_blocks} => Array&lt;Types::CidrBlockSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cidr_blocks({
+    #     collection_id: "UUID", # required
+    #     location_name: "CidrLocationNameDefaultNotAllowed",
+    #     next_token: "PaginationToken",
+    #     max_results: "MaxResults",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cidr_blocks #=> Array
+    #   resp.cidr_blocks[0].cidr_block #=> String
+    #   resp.cidr_blocks[0].location_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrBlocks AWS API Documentation
+    #
+    # @overload list_cidr_blocks(params = {})
+    # @param [Hash] params ({})
+    def list_cidr_blocks(params = {}, options = {})
+      req = build_request(:list_cidr_blocks, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of CIDR collections in the Amazon Web
+    # Services account (metadata only).
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of CIDR collections to return in the response.
+    #
+    # @return [Types::ListCidrCollectionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCidrCollectionsResponse#next_token #next_token} => String
+    #   * {Types::ListCidrCollectionsResponse#cidr_collections #cidr_collections} => Array&lt;Types::CollectionSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cidr_collections({
+    #     next_token: "PaginationToken",
+    #     max_results: "MaxResults",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cidr_collections #=> Array
+    #   resp.cidr_collections[0].arn #=> String
+    #   resp.cidr_collections[0].id #=> String
+    #   resp.cidr_collections[0].name #=> String
+    #   resp.cidr_collections[0].version #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrCollections AWS API Documentation
+    #
+    # @overload list_cidr_collections(params = {})
+    # @param [Hash] params ({})
+    def list_cidr_collections(params = {}, options = {})
+      req = build_request(:list_cidr_collections, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of CIDR locations for the given collection
+    # (metadata only, does not include CIDR blocks).
+    #
+    # @option params [required, String] :collection_id
+    #   The CIDR collection ID.
+    #
+    # @option params [String] :next_token
+    #   An opaque pagination token to indicate where the service is to begin
+    #   enumerating results.
+    #
+    #   If no value is provided, the listing of results starts from the
+    #   beginning.
+    #
+    # @option params [String] :max_results
+    #   The maximum number of CIDR collection locations to return in the
+    #   response.
+    #
+    # @return [Types::ListCidrLocationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCidrLocationsResponse#next_token #next_token} => String
+    #   * {Types::ListCidrLocationsResponse#cidr_locations #cidr_locations} => Array&lt;Types::LocationSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_cidr_locations({
+    #     collection_id: "UUID", # required
+    #     next_token: "PaginationToken",
+    #     max_results: "MaxResults",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.cidr_locations #=> Array
+    #   resp.cidr_locations[0].location_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53-2013-04-01/ListCidrLocations AWS API Documentation
+    #
+    # @overload list_cidr_locations(params = {})
+    # @param [Hash] params ({})
+    def list_cidr_locations(params = {}, options = {})
+      req = build_request(:list_cidr_locations, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of supported geographic locations.
     #
     # Countries are listed first, and continents are listed last. If Amazon
@@ -4420,6 +4702,8 @@ module Aws::Route53
     #   resp.resource_record_sets[0].alias_target.evaluate_target_health #=> Boolean
     #   resp.resource_record_sets[0].health_check_id #=> String
     #   resp.resource_record_sets[0].traffic_policy_instance_id #=> String
+    #   resp.resource_record_sets[0].cidr_routing_config.collection_id #=> String
+    #   resp.resource_record_sets[0].cidr_routing_config.location_name #=> String
     #   resp.is_truncated #=> Boolean
     #   resp.next_record_name #=> String
     #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA", "CAA", "DS"
@@ -5759,7 +6043,7 @@ module Aws::Route53
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-route53'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
