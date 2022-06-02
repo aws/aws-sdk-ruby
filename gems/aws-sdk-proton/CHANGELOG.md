@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2022-06-02)
+------------------
+
+* Feature - Add new "Components" API to enable users to Create, Delete and Update AWS Proton components.
+
 1.15.0 (2022-04-04)
 ------------------
 

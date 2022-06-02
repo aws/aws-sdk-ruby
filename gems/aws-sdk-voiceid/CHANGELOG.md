@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.8.0 (2022-06-02)
+------------------
+
+* Feature - Added a new attribute ServerSideEncryptionUpdateDetails to Domain and DomainSummary.
+
 1.7.0 (2022-05-25)
 ------------------
 

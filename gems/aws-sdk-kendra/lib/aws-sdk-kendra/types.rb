@@ -2112,7 +2112,7 @@ module Aws::Kendra
     #       {
     #         name: "DataSourceName", # required
     #         index_id: "IndexId", # required
-    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA
+    #         type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB
     #         configuration: {
     #           s3_configuration: {
     #             bucket_name: "S3BucketName", # required
@@ -2593,6 +2593,99 @@ module Aws::Kendra
     #               subnet_ids: ["SubnetId"], # required
     #               security_group_ids: ["VpcSecurityGroupId"], # required
     #             },
+    #           },
+    #           git_hub_configuration: {
+    #             saa_s_configuration: {
+    #               organization_name: "OrganizationName", # required
+    #               host_url: "Url", # required
+    #             },
+    #             on_premise_configuration: {
+    #               host_url: "Url", # required
+    #               organization_name: "OrganizationName", # required
+    #               ssl_certificate_s3_path: { # required
+    #                 bucket: "S3BucketName", # required
+    #                 key: "S3ObjectKey", # required
+    #               },
+    #             },
+    #             type: "SAAS", # accepts SAAS, ON_PREMISE
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             git_hub_document_crawl_properties: {
+    #               crawl_repository_documents: false,
+    #               crawl_issue: false,
+    #               crawl_issue_comment: false,
+    #               crawl_issue_comment_attachment: false,
+    #               crawl_pull_request: false,
+    #               crawl_pull_request_comment: false,
+    #               crawl_pull_request_comment_attachment: false,
+    #             },
+    #             repository_filter: ["RepositoryName"],
+    #             inclusion_folder_name_patterns: ["String"],
+    #             inclusion_file_type_patterns: ["String"],
+    #             inclusion_file_name_patterns: ["String"],
+    #             exclusion_folder_name_patterns: ["String"],
+    #             exclusion_file_type_patterns: ["String"],
+    #             exclusion_file_name_patterns: ["String"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             git_hub_repository_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_commit_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         description: "Description",
@@ -3950,6 +4043,99 @@ module Aws::Kendra
     #             security_group_ids: ["VpcSecurityGroupId"], # required
     #           },
     #         },
+    #         git_hub_configuration: {
+    #           saa_s_configuration: {
+    #             organization_name: "OrganizationName", # required
+    #             host_url: "Url", # required
+    #           },
+    #           on_premise_configuration: {
+    #             host_url: "Url", # required
+    #             organization_name: "OrganizationName", # required
+    #             ssl_certificate_s3_path: { # required
+    #               bucket: "S3BucketName", # required
+    #               key: "S3ObjectKey", # required
+    #             },
+    #           },
+    #           type: "SAAS", # accepts SAAS, ON_PREMISE
+    #           secret_arn: "SecretArn", # required
+    #           use_change_log: false,
+    #           git_hub_document_crawl_properties: {
+    #             crawl_repository_documents: false,
+    #             crawl_issue: false,
+    #             crawl_issue_comment: false,
+    #             crawl_issue_comment_attachment: false,
+    #             crawl_pull_request: false,
+    #             crawl_pull_request_comment: false,
+    #             crawl_pull_request_comment_attachment: false,
+    #           },
+    #           repository_filter: ["RepositoryName"],
+    #           inclusion_folder_name_patterns: ["String"],
+    #           inclusion_file_type_patterns: ["String"],
+    #           inclusion_file_name_patterns: ["String"],
+    #           exclusion_folder_name_patterns: ["String"],
+    #           exclusion_file_type_patterns: ["String"],
+    #           exclusion_file_name_patterns: ["String"],
+    #           vpc_configuration: {
+    #             subnet_ids: ["SubnetId"], # required
+    #             security_group_ids: ["VpcSecurityGroupId"], # required
+    #           },
+    #           git_hub_repository_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_commit_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_document_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_comment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_issue_attachment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_comment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_document_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #           git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #             {
+    #               data_source_field_name: "DataSourceFieldName", # required
+    #               date_field_format: "DataSourceDateFieldFormat",
+    #               index_field_name: "IndexFieldName", # required
+    #             },
+    #           ],
+    #         },
     #       }
     #
     # @!attribute [rw] s3_configuration
@@ -4027,6 +4213,11 @@ module Aws::Kendra
     #   data source.
     #   @return [Types::JiraConfiguration]
     #
+    # @!attribute [rw] git_hub_configuration
+    #   Provides the configuration information to connect to GitHub as your
+    #   data source.
+    #   @return [Types::GitHubConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/DataSourceConfiguration AWS API Documentation
     #
     class DataSourceConfiguration < Struct.new(
@@ -4044,7 +4235,8 @@ module Aws::Kendra
       :slack_configuration,
       :box_configuration,
       :quip_configuration,
-      :jira_configuration)
+      :jira_configuration,
+      :git_hub_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5623,6 +5815,12 @@ module Aws::Kendra
     #
     # @!attribute [rw] id
     #   A unique identifier of the document in the index.
+    #
+    #   Note, each document ID must be unique per index. You cannot create a
+    #   data source to index your documents with their unique IDs and then
+    #   use the `BatchPutDocument` API to index the same documents, or vice
+    #   versa. You can delete a data source and then use the
+    #   `BatchPutDocument` API to index the same documents, or vice versa.
     #   @return [String]
     #
     # @!attribute [rw] title
@@ -6831,6 +7029,413 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to GitHub as your
+    # data source.
+    #
+    # @note When making an API call, you may pass GitHubConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] saa_s_configuration
+    #   Configuration information to connect to GitHub Enterprise Cloud
+    #   (SaaS).
+    #   @return [Types::SaaSConfiguration]
+    #
+    # @!attribute [rw] on_premise_configuration
+    #   Configuration information to connect to GitHub Enterprise Server (on
+    #   premises).
+    #   @return [Types::OnPremiseConfiguration]
+    #
+    # @!attribute [rw] type
+    #   The type of GitHub service you want to connect to—GitHub Enterprise
+    #   Cloud (SaaS) or GitHub Enterprise Server (on premises).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The Amazon Resource Name (ARN) of an Secrets Manager secret that
+    #   contains the key-value pairs required to connect to your GitHub. The
+    #   secret must contain a JSON structure with the following keys:
+    #
+    #   * githubToken—The access token created in GitHub. For more
+    #     information on creating a token in GitHub, see [Authentication for
+    #     a GitHub data source][1].
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication
+    #   @return [String]
+    #
+    # @!attribute [rw] use_change_log
+    #   `TRUE` to use the GitHub change log to determine which documents
+    #   require updating in the index. Depending on the GitHub change log's
+    #   size, it may take longer for Amazon Kendra to use the change log
+    #   than to scan all of your documents in GitHub.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] git_hub_document_crawl_properties
+    #   Configuration information to include certain types of GitHub
+    #   content. You can configure to index repository files only, or also
+    #   include issues and pull requests, comments, and comment attachments.
+    #   @return [Types::GitHubDocumentCrawlProperties]
+    #
+    # @!attribute [rw] repository_filter
+    #   A list of names of the specific repositories you want to index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_folder_name_patterns
+    #   A list of regular expression patterns to include certain folder
+    #   names in your GitHub repository or repositories. Folder names that
+    #   match the patterns are included in the index. Folder names that
+    #   don't match the patterns are excluded from the index. If a folder
+    #   matches both an inclusion and exclusion pattern, the exclusion
+    #   pattern takes precedence and the folder isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_file_type_patterns
+    #   A list of regular expression patterns to include certain file types
+    #   in your GitHub repository or repositories. File types that match the
+    #   patterns are included in the index. File types that don't match the
+    #   patterns are excluded from the index. If a file matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] inclusion_file_name_patterns
+    #   A list of regular expression patterns to include certain file names
+    #   in your GitHub repository or repositories. File names that match the
+    #   patterns are included in the index. File names that don't match the
+    #   patterns are excluded from the index. If a file matches both an
+    #   inclusion and exclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_folder_name_patterns
+    #   A list of regular expression patterns to exclude certain folder
+    #   names in your GitHub repository or repositories. Folder names that
+    #   match the patterns are excluded from the index. Folder names that
+    #   don't match the patterns are included in the index. If a folder
+    #   matches both an exclusion and inclusion pattern, the exclusion
+    #   pattern takes precedence and the folder isn't included in the
+    #   index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_file_type_patterns
+    #   A list of regular expression patterns to exclude certain file types
+    #   in your GitHub repository or repositories. File types that match the
+    #   patterns are excluded from the index. File types that don't match
+    #   the patterns are included in the index. If a file matches both an
+    #   exclusion and inclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] exclusion_file_name_patterns
+    #   A list of regular expression patterns to exclude certain file names
+    #   in your GitHub repository or repositories. File names that match the
+    #   patterns are excluded from the index. File names that don't match
+    #   the patterns are included in the index. If a file matches both an
+    #   exclusion and inclusion pattern, the exclusion pattern takes
+    #   precedence and the file isn't included in the index.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] vpc_configuration
+    #   Configuration information of an Amazon Virtual Private Cloud to
+    #   connect to your GitHub. For more information, see [Configuring a
+    #   VPC][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
+    #   @return [Types::DataSourceVpcConfiguration]
+    #
+    # @!attribute [rw] git_hub_repository_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map GitHub
+    #   repository attributes or field names to Amazon Kendra index field
+    #   names. To create custom fields, use the `UpdateIndex` API before you
+    #   map to GitHub fields. For more information, see [Mapping data source
+    #   fields][1]. The GitHub data source field names must exist in your
+    #   GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_commit_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub commits to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to GitHub fields. For more information, see [Mapping
+    #   data source fields][1]. The GitHub data source field names must
+    #   exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_document_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issues to Amazon Kendra index
+    #   field names. To create custom fields, use the `UpdateIndex` API
+    #   before you map to GitHub fields. For more information, see [Mapping
+    #   data source fields][1]. The GitHub data source field names must
+    #   exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_comment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issue comments to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to GitHub fields. For more information, see
+    #   [Mapping data source fields][1]. The GitHub data source field names
+    #   must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_issue_attachment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub issue attachments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_comment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull request comments to Amazon
+    #   Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_document_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull requests to Amazon Kendra
+    #   index field names. To create custom fields, use the `UpdateIndex`
+    #   API before you map to GitHub fields. For more information, see
+    #   [Mapping data source fields][1]. The GitHub data source field names
+    #   must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @!attribute [rw] git_hub_pull_request_document_attachment_configuration_field_mappings
+    #   A list of `DataSourceToIndexFieldMapping` objects that map
+    #   attributes or field names of GitHub pull request attachments to
+    #   Amazon Kendra index field names. To create custom fields, use the
+    #   `UpdateIndex` API before you map to GitHub fields. For more
+    #   information, see [Mapping data source fields][1]. The GitHub data
+    #   source field names must exist in your GitHub custom metadata.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html
+    #   @return [Array<Types::DataSourceToIndexFieldMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GitHubConfiguration AWS API Documentation
+    #
+    class GitHubConfiguration < Struct.new(
+      :saa_s_configuration,
+      :on_premise_configuration,
+      :type,
+      :secret_arn,
+      :use_change_log,
+      :git_hub_document_crawl_properties,
+      :repository_filter,
+      :inclusion_folder_name_patterns,
+      :inclusion_file_type_patterns,
+      :inclusion_file_name_patterns,
+      :exclusion_folder_name_patterns,
+      :exclusion_file_type_patterns,
+      :exclusion_file_name_patterns,
+      :vpc_configuration,
+      :git_hub_repository_configuration_field_mappings,
+      :git_hub_commit_configuration_field_mappings,
+      :git_hub_issue_document_configuration_field_mappings,
+      :git_hub_issue_comment_configuration_field_mappings,
+      :git_hub_issue_attachment_configuration_field_mappings,
+      :git_hub_pull_request_comment_configuration_field_mappings,
+      :git_hub_pull_request_document_configuration_field_mappings,
+      :git_hub_pull_request_document_attachment_configuration_field_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to include certain types of
+    # GitHub content. You can configure to index repository files only, or
+    # also include issues and pull requests, comments, and comment
+    # attachments.
+    #
+    # @note When making an API call, you may pass GitHubDocumentCrawlProperties
+    #   data as a hash:
+    #
+    #       {
+    #         crawl_repository_documents: false,
+    #         crawl_issue: false,
+    #         crawl_issue_comment: false,
+    #         crawl_issue_comment_attachment: false,
+    #         crawl_pull_request: false,
+    #         crawl_pull_request_comment: false,
+    #         crawl_pull_request_comment_attachment: false,
+    #       }
+    #
+    # @!attribute [rw] crawl_repository_documents
+    #   `TRUE` to index all files with a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue
+    #   `TRUE` to index all issues within a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue_comment
+    #   `TRUE` to index all comments on issues.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_issue_comment_attachment
+    #   `TRUE` to include all comment attachments for issues.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request
+    #   `TRUE` to index all pull requests within a repository.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request_comment
+    #   `TRUE` to index all comments on pull requests.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] crawl_pull_request_comment_attachment
+    #   `TRUE` to include all comment attachments for pull requests.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/GitHubDocumentCrawlProperties AWS API Documentation
+    #
+    class GitHubDocumentCrawlProperties < Struct.new(
+      :crawl_repository_documents,
+      :crawl_issue,
+      :crawl_issue_comment,
+      :crawl_issue_comment_attachment,
+      :crawl_pull_request,
+      :crawl_pull_request_comment,
+      :crawl_pull_request_comment_attachment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides the configuration information to connect to Google Drive as
     # your data source.
     #
@@ -7355,6 +7960,9 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to Jira as your data
+    # source.
+    #
     # @note When making an API call, you may pass JiraConfiguration
     #   data as a hash:
     #
@@ -7421,8 +8029,7 @@ module Aws::Kendra
     #   source. The secret must contain a JSON structure with the following
     #   keys:
     #
-    #   * jira-id—The Active Directory user name, along with the Domain Name
-    #     System (DNS) domain name. For example, *user@corp.example.com*.
+    #   * jira-id—The ID of the Jira account.
     #
     #   * jiraCredentials—The password of the Jira account user.
     #   @return [String]
@@ -8320,6 +8927,47 @@ module Aws::Kendra
     #
     class MemberUser < Struct.new(
       :user_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides the configuration information to connect to GitHub Enterprise
+    # Server (on premises).
+    #
+    # @note When making an API call, you may pass OnPremiseConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         host_url: "Url", # required
+    #         organization_name: "OrganizationName", # required
+    #         ssl_certificate_s3_path: { # required
+    #           bucket: "S3BucketName", # required
+    #           key: "S3ObjectKey", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] host_url
+    #   The GitHub host URL or API endpoint URL. For example,
+    #   *https://on-prem-host-url/api/v3/*
+    #   @return [String]
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization of the GitHub Enterprise Server
+    #   (in-premise) account you want to connect to. You can find your
+    #   organization name by logging into GitHub desktop and selecting
+    #   **Your organizations** under your profile picture dropdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_certificate_s3_path
+    #   Information required to find a specific file in an Amazon S3 bucket.
+    #   @return [Types::S3Path]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/OnPremiseConfiguration AWS API Documentation
+    #
+    class OnPremiseConfiguration < Struct.new(
+      :host_url,
+      :organization_name,
+      :ssl_certificate_s3_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9588,6 +10236,38 @@ module Aws::Kendra
       include Aws::Structure
     end
 
+    # Provides the configuration information to connect to GitHub Enterprise
+    # Cloud (SaaS).
+    #
+    # @note When making an API call, you may pass SaaSConfiguration
+    #   data as a hash:
+    #
+    #       {
+    #         organization_name: "OrganizationName", # required
+    #         host_url: "Url", # required
+    #       }
+    #
+    # @!attribute [rw] organization_name
+    #   The name of the organization of the GitHub Enterprise Cloud (SaaS)
+    #   account you want to connect to. You can find your organization name
+    #   by logging into GitHub desktop and selecting **Your organizations**
+    #   under your profile picture dropdown.
+    #   @return [String]
+    #
+    # @!attribute [rw] host_url
+    #   The GitHub host URL or API endpoint URL. For example,
+    #   *https://api.github.com*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/SaaSConfiguration AWS API Documentation
+    #
+    class SaaSConfiguration < Struct.new(
+      :organization_name,
+      :host_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration information for syncing a Salesforce chatter feed.
     # The contents of the object comes from the Salesforce FeedItem table.
     #
@@ -10191,9 +10871,8 @@ module Aws::Kendra
       include Aws::Structure
     end
 
-    # Provides the identifier of the KMScustomer master key (CMK) used to
-    # encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support
-    # asymmetric CMKs.
+    # Provides the identifier of the KMS key used to encrypt data indexed by
+    # Amazon Kendra. Amazon Kendra doesn't support asymmetric keys.
     #
     # @note When making an API call, you may pass ServerSideEncryptionConfiguration
     #   data as a hash:
@@ -10203,8 +10882,8 @@ module Aws::Kendra
     #       }
     #
     # @!attribute [rw] kms_key_id
-    #   The identifier of the KMScustomer master key (CMK). Amazon Kendra
-    #   doesn't support asymmetric CMKs.
+    #   The identifier of the KMS key. Amazon Kendra doesn't support
+    #   asymmetric keys.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kendra-2019-02-03/ServerSideEncryptionConfiguration AWS API Documentation
@@ -11930,6 +12609,99 @@ module Aws::Kendra
     #               subnet_ids: ["SubnetId"], # required
     #               security_group_ids: ["VpcSecurityGroupId"], # required
     #             },
+    #           },
+    #           git_hub_configuration: {
+    #             saa_s_configuration: {
+    #               organization_name: "OrganizationName", # required
+    #               host_url: "Url", # required
+    #             },
+    #             on_premise_configuration: {
+    #               host_url: "Url", # required
+    #               organization_name: "OrganizationName", # required
+    #               ssl_certificate_s3_path: { # required
+    #                 bucket: "S3BucketName", # required
+    #                 key: "S3ObjectKey", # required
+    #               },
+    #             },
+    #             type: "SAAS", # accepts SAAS, ON_PREMISE
+    #             secret_arn: "SecretArn", # required
+    #             use_change_log: false,
+    #             git_hub_document_crawl_properties: {
+    #               crawl_repository_documents: false,
+    #               crawl_issue: false,
+    #               crawl_issue_comment: false,
+    #               crawl_issue_comment_attachment: false,
+    #               crawl_pull_request: false,
+    #               crawl_pull_request_comment: false,
+    #               crawl_pull_request_comment_attachment: false,
+    #             },
+    #             repository_filter: ["RepositoryName"],
+    #             inclusion_folder_name_patterns: ["String"],
+    #             inclusion_file_type_patterns: ["String"],
+    #             inclusion_file_name_patterns: ["String"],
+    #             exclusion_folder_name_patterns: ["String"],
+    #             exclusion_file_type_patterns: ["String"],
+    #             exclusion_file_name_patterns: ["String"],
+    #             vpc_configuration: {
+    #               subnet_ids: ["SubnetId"], # required
+    #               security_group_ids: ["VpcSecurityGroupId"], # required
+    #             },
+    #             git_hub_repository_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_commit_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_issue_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_comment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
+    #             git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #               {
+    #                 data_source_field_name: "DataSourceFieldName", # required
+    #                 date_field_format: "DataSourceDateFieldFormat",
+    #                 index_field_name: "IndexFieldName", # required
+    #               },
+    #             ],
     #           },
     #         },
     #         description: "Description",

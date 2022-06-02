@@ -526,7 +526,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Information about the attachment reference if the `referenceType` is
+    # Information about a reference when the `referenceType` is
     # `ATTACHMENT`. Otherwise, null.
     #
     # @!attribute [rw] name
@@ -534,11 +534,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Contains the location path of the attachment reference.
+    #   The location path of the attachment reference.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Status of an attachment reference type.
+    #   Status of the attachment reference type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AttachmentReference AWS API Documentation
@@ -1889,6 +1889,140 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass CreateTaskTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         name: "TaskTemplateName", # required
+    #         description: "TaskTemplateDescription",
+    #         contact_flow_id: "ContactFlowId",
+    #         constraints: {
+    #           required_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #           read_only_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #           invisible_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         defaults: {
+    #           default_field_values: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #               default_value: "TaskTemplateFieldValue",
+    #             },
+    #           ],
+    #         },
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         fields: [ # required
+    #           {
+    #             id: { # required
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #             description: "TaskTemplateFieldDescription",
+    #             type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #             single_select_options: ["TaskTemplateSingleSelectOption"],
+    #           },
+    #         ],
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow that runs by default when a task is
+    #   created by referencing this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraints
+    #   Constraints that are applicable to the fields listed.
+    #   @return [Types::TaskTemplateConstraints]
+    #
+    # @!attribute [rw] defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #   @return [Types::TaskTemplateDefaults]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   Fields that are part of the template.
+    #   @return [Array<Types::TaskTemplateField>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplateRequest AWS API Documentation
+    #
+    class CreateTaskTemplateRequest < Struct.new(
+      :instance_id,
+      :name,
+      :description,
+      :contact_flow_id,
+      :constraints,
+      :defaults,
+      :status,
+      :fields,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the task template resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the task template resource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplateResponse AWS API Documentation
+    #
+    class CreateTaskTemplateResponse < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass CreateUseCaseRequest
     #   data as a hash:
     #
@@ -2326,6 +2460,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is `DATE`.
+    # Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the date reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A valid date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DateReference AWS API Documentation
+    #
+    class DateReference < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a default vocabulary.
     #
     # @!attribute [rw] instance_id
@@ -2541,6 +2695,36 @@ module Aws::Connect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @note When making an API call, you may pass DeleteTaskTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         task_template_id: "TaskTemplateId", # required
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_template_id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTaskTemplateRequest AWS API Documentation
+    #
+    class DeleteTaskTemplateRequest < Struct.new(
+      :instance_id,
+      :task_template_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTaskTemplateResponse AWS API Documentation
+    #
+    class DeleteTaskTemplateResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteUseCaseRequest
     #   data as a hash:
@@ -3634,6 +3818,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is `EMAIL`.
+    # Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the email reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A valid email address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EmailReference AWS API Documentation
+    #
+    class EmailReference < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The encryption configuration.
     #
     # @note When making an API call, you may pass EncryptionConfig
@@ -4270,6 +4474,118 @@ module Aws::Connect
     class GetMetricDataResponse < Struct.new(
       :next_token,
       :metric_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass GetTaskTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         task_template_id: "TaskTemplateId", # required
+    #         snapshot_version: "SnapshotVersion",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] task_template_id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_version
+    #   The system generated version of a task template that is associated
+    #   with a task, when the task is created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplateRequest AWS API Documentation
+    #
+    class GetTaskTemplateRequest < Struct.new(
+      :instance_id,
+      :task_template_id,
+      :snapshot_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow that runs by default when a task is
+    #   created by referencing this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraints
+    #   Constraints that are applicable to the fields listed.
+    #   @return [Types::TaskTemplateConstraints]
+    #
+    # @!attribute [rw] defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #   @return [Types::TaskTemplateDefaults]
+    #
+    # @!attribute [rw] fields
+    #   Fields that are part of the template.
+    #   @return [Array<Types::TaskTemplateField>]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the task template was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the task template was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags used to organize, track, or control access for this
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplateResponse AWS API Documentation
+    #
+    class GetTaskTemplateResponse < Struct.new(
+      :instance_id,
+      :id,
+      :arn,
+      :name,
+      :description,
+      :contact_flow_id,
+      :constraints,
+      :defaults,
+      :fields,
+      :status,
+      :last_modified_time,
+      :created_time,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5088,6 +5404,29 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # A field that is invisible to an agent.
+    #
+    # @note When making an API call, you may pass InvisibleFieldInfo
+    #   data as a hash:
+    #
+    #       {
+    #         id: {
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the invisible field.
+    #   @return [Types::TaskTemplateFieldIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/InvisibleFieldInfo AWS API Documentation
+    #
+    class InvisibleFieldInfo < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration information of a Kinesis Data Firehose delivery stream.
     #
     # @note When making an API call, you may pass KinesisFirehoseConfig
@@ -5543,7 +5882,7 @@ module Aws::Connect
     #       {
     #         instance_id: "InstanceId", # required
     #         contact_id: "ContactId", # required
-    #         reference_types: ["URL"], # required, accepts URL, ATTACHMENT
+    #         reference_types: ["URL"], # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #         next_token: "NextToken",
     #       }
     #
@@ -6746,6 +7085,81 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass ListTaskTemplatesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         name: "TaskTemplateName",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   It is not expected that you set this because the value returned in
+    #   the previous response is always null.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #
+    #   It is not expected that you set this.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTaskTemplatesRequest AWS API Documentation
+    #
+    class ListTaskTemplatesRequest < Struct.new(
+      :instance_id,
+      :next_token,
+      :max_results,
+      :status,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] task_templates
+    #   Provides details about a list of task templates belonging to an
+    #   instance.
+    #   @return [Array<Types::TaskTemplateMetadata>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #
+    #   This is always returned as a null in the response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTaskTemplatesResponse AWS API Documentation
+    #
+    class ListTaskTemplatesResponse < Struct.new(
+      :task_templates,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides summary information about the use cases for the specified
     # integration association.
     #
@@ -6947,6 +7361,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is `NUMBER`.
+    # Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the number reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A valid number.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/NumberReference AWS API Documentation
+    #
+    class NumberReference < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The outbound caller ID name, number, and outbound whisper flow.
     #
     # @note When making an API call, you may pass OutboundCallerConfig
@@ -7124,6 +7558,45 @@ module Aws::Connect
       :id,
       :arn,
       :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] property_list
+    #   @return [Array<Types::PropertyValidationExceptionProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PropertyValidationException AWS API Documentation
+    #
+    class PropertyValidationException < Struct.new(
+      :message,
+      :property_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about why a property is not valid.
+    #
+    # @!attribute [rw] property_path
+    #   The full property path.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   Why the property is not valid.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A message describing why the property is not valid.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PropertyValidationExceptionProperty AWS API Documentation
+    #
+    class PropertyValidationExceptionProperty < Struct.new(
+      :property_path,
+      :reason,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7441,15 +7914,39 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # A link that an agent selects to complete a given task. You can have up
-    # to 4,096 UTF-8 bytes across all references for a contact.
+    # Indicates a field that is read-only to an agent.
+    #
+    # @note When making an API call, you may pass ReadOnlyFieldInfo
+    #   data as a hash:
+    #
+    #       {
+    #         id: {
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of the read-only field.
+    #   @return [Types::TaskTemplateFieldIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReadOnlyFieldInfo AWS API Documentation
+    #
+    class ReadOnlyFieldInfo < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Well-formed data on a contact, used by agents to complete a contact
+    # request. You can have up to 4,096 UTF-8 bytes across all references
+    # for a contact.
     #
     # @note When making an API call, you may pass Reference
     #   data as a hash:
     #
     #       {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       }
     #
     # @!attribute [rw] value
@@ -7459,8 +7956,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The type of the reference. Only `URL` type can be added or updated
-    #   on a contact.
+    #   The type of the reference.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/Reference AWS API Documentation
@@ -7479,20 +7975,44 @@ module Aws::Connect
     # @note ReferenceSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ReferenceSummary corresponding to the set member.
     #
     # @!attribute [rw] url
-    #   Information about the URL reference if the `referenceType` is `URL`.
+    #   Information about the reference when the `referenceType` is `URL`.
     #   Otherwise, null.
     #   @return [Types::UrlReference]
     #
     # @!attribute [rw] attachment
-    #   Information about the attachment reference if the `referenceType` is
+    #   Information about the reference when the `referenceType` is
     #   `ATTACHMENT`. Otherwise, null.
     #   @return [Types::AttachmentReference]
+    #
+    # @!attribute [rw] string
+    #   Information about a reference when the `referenceType` is `STRING`.
+    #   Otherwise, null.
+    #   @return [Types::StringReference]
+    #
+    # @!attribute [rw] number
+    #   Information about a reference when the `referenceType` is `NUMBER`.
+    #   Otherwise, null.
+    #   @return [Types::NumberReference]
+    #
+    # @!attribute [rw] date
+    #   Information about a reference when the `referenceType` is `DATE`.
+    #   Otherwise, null.
+    #   @return [Types::DateReference]
+    #
+    # @!attribute [rw] email
+    #   Information about a reference when the `referenceType` is `EMAIL`.
+    #   Otherwise, null.
+    #   @return [Types::EmailReference]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReferenceSummary AWS API Documentation
     #
     class ReferenceSummary < Struct.new(
       :url,
       :attachment,
+      :string,
+      :number,
+      :date,
+      :email,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7500,6 +8020,10 @@ module Aws::Connect
 
       class Url < ReferenceSummary; end
       class Attachment < ReferenceSummary; end
+      class String < ReferenceSummary; end
+      class Number < ReferenceSummary; end
+      class Date < ReferenceSummary; end
+      class Email < ReferenceSummary; end
       class Unknown < ReferenceSummary; end
     end
 
@@ -7528,6 +8052,29 @@ module Aws::Connect
     class ReleasePhoneNumberRequest < Struct.new(
       :phone_number_id,
       :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a required field.
+    #
+    # @note When making an API call, you may pass RequiredFieldInfo
+    #   data as a hash:
+    #
+    #       {
+    #         id: {
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the field.
+    #   @return [Types::TaskTemplateFieldIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RequiredFieldInfo AWS API Documentation
+    #
+    class RequiredFieldInfo < Struct.new(
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8567,7 +9114,7 @@ module Aws::Connect
     #       {
     #         instance_id: "InstanceId", # required
     #         previous_contact_id: "ContactId",
-    #         contact_flow_id: "ContactFlowId", # required
+    #         contact_flow_id: "ContactFlowId",
     #         attributes: {
     #           "AttributeName" => "AttributeValue",
     #         },
@@ -8575,12 +9122,14 @@ module Aws::Connect
     #         references: {
     #           "ReferenceKey" => {
     #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL, ATTACHMENT
+    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #           },
     #         },
     #         description: "Description",
     #         client_token: "ClientToken",
     #         scheduled_time: Time.now,
+    #         task_template_id: "TaskTemplateId",
+    #         quick_connect_id: "QuickConnectId",
     #       }
     #
     # @!attribute [rw] instance_id
@@ -8642,6 +9191,14 @@ module Aws::Connect
     #   the past. It must be within up to 6 days in future.
     #   @return [Time]
     #
+    # @!attribute [rw] task_template_id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] quick_connect_id
+    #   The identifier for the quick connect.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactRequest AWS API Documentation
     #
     class StartTaskContactRequest < Struct.new(
@@ -8653,7 +9210,9 @@ module Aws::Connect
       :references,
       :description,
       :client_token,
-      :scheduled_time)
+      :scheduled_time,
+      :task_template_id,
+      :quick_connect_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8810,6 +9369,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a reference when the `referenceType` is `STRING`.
+    # Otherwise, null.
+    #
+    # @!attribute [rw] name
+    #   Identifier of the string reference.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A valid string.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StringReference AWS API Documentation
+    #
+    class StringReference < Struct.new(
+      :name,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass SuspendContactRecordingRequest
     #   data as a hash:
     #
@@ -8903,6 +9482,223 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Describes constraints that apply to the template fields.
+    #
+    # @note When making an API call, you may pass TaskTemplateConstraints
+    #   data as a hash:
+    #
+    #       {
+    #         required_fields: [
+    #           {
+    #             id: {
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #           },
+    #         ],
+    #         read_only_fields: [
+    #           {
+    #             id: {
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #           },
+    #         ],
+    #         invisible_fields: [
+    #           {
+    #             id: {
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] required_fields
+    #   Lists the fields that are required to be filled by agents.
+    #   @return [Array<Types::RequiredFieldInfo>]
+    #
+    # @!attribute [rw] read_only_fields
+    #   Lists the fields that are read-only to agents, and cannot be edited.
+    #   @return [Array<Types::ReadOnlyFieldInfo>]
+    #
+    # @!attribute [rw] invisible_fields
+    #   Lists the fields that are invisible to agents.
+    #   @return [Array<Types::InvisibleFieldInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateConstraints AWS API Documentation
+    #
+    class TaskTemplateConstraints < Struct.new(
+      :required_fields,
+      :read_only_fields,
+      :invisible_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a default field and its corresponding value.
+    #
+    # @note When making an API call, you may pass TaskTemplateDefaultFieldValue
+    #   data as a hash:
+    #
+    #       {
+    #         id: {
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         default_value: "TaskTemplateFieldValue",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   Identifier of a field.
+    #   @return [Types::TaskTemplateFieldIdentifier]
+    #
+    # @!attribute [rw] default_value
+    #   Default value for the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateDefaultFieldValue AWS API Documentation
+    #
+    class TaskTemplateDefaultFieldValue < Struct.new(
+      :id,
+      :default_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes default values for fields on a template.
+    #
+    # @note When making an API call, you may pass TaskTemplateDefaults
+    #   data as a hash:
+    #
+    #       {
+    #         default_field_values: [
+    #           {
+    #             id: {
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #             default_value: "TaskTemplateFieldValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] default_field_values
+    #   Default value for the field.
+    #   @return [Array<Types::TaskTemplateDefaultFieldValue>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateDefaults AWS API Documentation
+    #
+    class TaskTemplateDefaults < Struct.new(
+      :default_field_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a single task template field.
+    #
+    # @note When making an API call, you may pass TaskTemplateField
+    #   data as a hash:
+    #
+    #       {
+    #         id: { # required
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         description: "TaskTemplateFieldDescription",
+    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #         single_select_options: ["TaskTemplateSingleSelectOption"],
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the field.
+    #   @return [Types::TaskTemplateFieldIdentifier]
+    #
+    # @!attribute [rw] description
+    #   The description of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   Indicates the type of field.
+    #   @return [String]
+    #
+    # @!attribute [rw] single_select_options
+    #   A list of options for a single select field.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateField AWS API Documentation
+    #
+    class TaskTemplateField < Struct.new(
+      :id,
+      :description,
+      :type,
+      :single_select_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The identifier of the task template field.
+    #
+    # @note When making an API call, you may pass TaskTemplateFieldIdentifier
+    #   data as a hash:
+    #
+    #       {
+    #         name: "TaskTemplateFieldName",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the task template field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateFieldIdentifier AWS API Documentation
+    #
+    class TaskTemplateFieldIdentifier < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about the task template.
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the task template was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the task template was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateMetadata AWS API Documentation
+    #
+    class TaskTemplateMetadata < Struct.new(
+      :id,
+      :arn,
+      :name,
+      :description,
+      :status,
+      :last_modified_time,
+      :created_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the threshold for service level metrics.
     #
     # @note When making an API call, you may pass Threshold
@@ -8940,6 +9736,77 @@ module Aws::Connect
     #
     class ThrottlingException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass TransferContactRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         contact_id: "ContactId", # required
+    #         queue_id: "QueueId",
+    #         user_id: "AgentResourceId",
+    #         contact_flow_id: "ContactFlowId", # required
+    #         client_token: "ClientToken",
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect
+    #   @return [String]
+    #
+    # @!attribute [rw] queue_id
+    #   The identifier for the queue.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the contact flow.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TransferContactRequest AWS API Documentation
+    #
+    class TransferContactRequest < Struct.new(
+      :instance_id,
+      :contact_id,
+      :queue_id,
+      :user_id,
+      :contact_flow_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_arn
+    #   The Amazon Resource Name (ARN) of the contact.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TransferContactResponse AWS API Documentation
+    #
+    class TransferContactResponse < Struct.new(
+      :contact_id,
+      :contact_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9282,7 +10149,7 @@ module Aws::Connect
     #         references: {
     #           "ReferenceKey" => {
     #             value: "ReferenceValue", # required
-    #             type: "URL", # required, accepts URL, ATTACHMENT
+    #             type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #           },
     #         },
     #       }
@@ -9306,7 +10173,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] references
-    #   A formatted URL that is shown to an agent in the Contact Control
+    #   Well-formed data on contact, shown to agents on Contact Control
     #   Panel (CCP).
     #   @return [Hash<String,Types::Reference>]
     #
@@ -10022,6 +10889,192 @@ module Aws::Connect
       :permissions,
       :security_profile_id,
       :instance_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateTaskTemplateRequest
+    #   data as a hash:
+    #
+    #       {
+    #         task_template_id: "TaskTemplateId", # required
+    #         instance_id: "InstanceId", # required
+    #         name: "TaskTemplateName",
+    #         description: "TaskTemplateDescription",
+    #         contact_flow_id: "ContactFlowId",
+    #         constraints: {
+    #           required_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #           read_only_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #           invisible_fields: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         defaults: {
+    #           default_field_values: [
+    #             {
+    #               id: {
+    #                 name: "TaskTemplateFieldName",
+    #               },
+    #               default_value: "TaskTemplateFieldValue",
+    #             },
+    #           ],
+    #         },
+    #         status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #         fields: [
+    #           {
+    #             id: { # required
+    #               name: "TaskTemplateFieldName",
+    #             },
+    #             description: "TaskTemplateFieldDescription",
+    #             type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #             single_select_options: ["TaskTemplateSingleSelectOption"],
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] task_template_id
+    #   A unique identifier for the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow that runs by default when a task is
+    #   created by referencing this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraints
+    #   Constraints that are applicable to the fields listed.
+    #   @return [Types::TaskTemplateConstraints]
+    #
+    # @!attribute [rw] defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #   @return [Types::TaskTemplateDefaults]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] fields
+    #   Fields that are part of the template.
+    #   @return [Array<Types::TaskTemplateField>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTaskTemplateRequest AWS API Documentation
+    #
+    class UpdateTaskTemplateRequest < Struct.new(
+      :task_template_id,
+      :instance_id,
+      :name,
+      :description,
+      :contact_flow_id,
+      :constraints,
+      :defaults,
+      :status,
+      :fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier of the task template resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the task template resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the task template.
+    #   @return [String]
+    #
+    # @!attribute [rw] contact_flow_id
+    #   The identifier of the flow that runs by default when a task is
+    #   created by referencing this template.
+    #   @return [String]
+    #
+    # @!attribute [rw] constraints
+    #   Constraints that are applicable to the fields listed.
+    #   @return [Types::TaskTemplateConstraints]
+    #
+    # @!attribute [rw] defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #   @return [Types::TaskTemplateDefaults]
+    #
+    # @!attribute [rw] fields
+    #   Fields that are part of the template.
+    #   @return [Array<Types::TaskTemplateField>]
+    #
+    # @!attribute [rw] status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to
+    #   it. Tasks can only be created from `ACTIVE` templates. If a template
+    #   is marked as `INACTIVE`, then a task that refers to this template
+    #   cannot be created.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the task template was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the task template was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTaskTemplateResponse AWS API Documentation
+    #
+    class UpdateTaskTemplateResponse < Struct.new(
+      :instance_id,
+      :id,
+      :arn,
+      :name,
+      :description,
+      :contact_flow_id,
+      :constraints,
+      :defaults,
+      :fields,
+      :status,
+      :last_modified_time,
+      :created_time)
       SENSITIVE = []
       include Aws::Structure
     end

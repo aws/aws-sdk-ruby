@@ -234,6 +234,8 @@ module Aws::Kendra
     GetQuerySuggestionsResponse = Shapes::StructureShape.new(name: 'GetQuerySuggestionsResponse')
     GetSnapshotsRequest = Shapes::StructureShape.new(name: 'GetSnapshotsRequest')
     GetSnapshotsResponse = Shapes::StructureShape.new(name: 'GetSnapshotsResponse')
+    GitHubConfiguration = Shapes::StructureShape.new(name: 'GitHubConfiguration')
+    GitHubDocumentCrawlProperties = Shapes::StructureShape.new(name: 'GitHubDocumentCrawlProperties')
     GoogleDriveConfiguration = Shapes::StructureShape.new(name: 'GoogleDriveConfiguration')
     GroupAttributeField = Shapes::StringShape.new(name: 'GroupAttributeField')
     GroupId = Shapes::StringShape.new(name: 'GroupId')
@@ -331,12 +333,14 @@ module Aws::Kendra
     NameType = Shapes::StringShape.new(name: 'NameType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     ObjectBoolean = Shapes::BooleanShape.new(name: 'ObjectBoolean')
+    OnPremiseConfiguration = Shapes::StructureShape.new(name: 'OnPremiseConfiguration')
     OneDriveConfiguration = Shapes::StructureShape.new(name: 'OneDriveConfiguration')
     OneDriveUser = Shapes::StringShape.new(name: 'OneDriveUser')
     OneDriveUserList = Shapes::ListShape.new(name: 'OneDriveUserList')
     OneDriveUsers = Shapes::StructureShape.new(name: 'OneDriveUsers')
     Order = Shapes::StringShape.new(name: 'Order')
     OrganizationId = Shapes::StringShape.new(name: 'OrganizationId')
+    OrganizationName = Shapes::StringShape.new(name: 'OrganizationName')
     Persona = Shapes::StringShape.new(name: 'Persona')
     PersonasSummary = Shapes::StructureShape.new(name: 'PersonasSummary')
     PersonasSummaryList = Shapes::ListShape.new(name: 'PersonasSummaryList')
@@ -374,6 +378,8 @@ module Aws::Kendra
     RelevanceFeedback = Shapes::StructureShape.new(name: 'RelevanceFeedback')
     RelevanceFeedbackList = Shapes::ListShape.new(name: 'RelevanceFeedbackList')
     RelevanceType = Shapes::StringShape.new(name: 'RelevanceType')
+    RepositoryName = Shapes::StringShape.new(name: 'RepositoryName')
+    RepositoryNames = Shapes::ListShape.new(name: 'RepositoryNames')
     ResourceAlreadyExistException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistException')
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -384,6 +390,7 @@ module Aws::Kendra
     S3DataSourceConfiguration = Shapes::StructureShape.new(name: 'S3DataSourceConfiguration')
     S3ObjectKey = Shapes::StringShape.new(name: 'S3ObjectKey')
     S3Path = Shapes::StructureShape.new(name: 'S3Path')
+    SaaSConfiguration = Shapes::StructureShape.new(name: 'SaaSConfiguration')
     SalesforceChatterFeedConfiguration = Shapes::StructureShape.new(name: 'SalesforceChatterFeedConfiguration')
     SalesforceChatterFeedIncludeFilterType = Shapes::StringShape.new(name: 'SalesforceChatterFeedIncludeFilterType')
     SalesforceChatterFeedIncludeFilterTypes = Shapes::ListShape.new(name: 'SalesforceChatterFeedIncludeFilterTypes')
@@ -443,6 +450,7 @@ module Aws::Kendra
     StopDataSourceSyncJobRequest = Shapes::StructureShape.new(name: 'StopDataSourceSyncJobRequest')
     StorageCapacityUnit = Shapes::IntegerShape.new(name: 'StorageCapacityUnit')
     String = Shapes::StringShape.new(name: 'String')
+    StringList = Shapes::ListShape.new(name: 'StringList')
     SubmitFeedbackRequest = Shapes::StructureShape.new(name: 'SubmitFeedbackRequest')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
     SubnetIdList = Shapes::ListShape.new(name: 'SubnetIdList')
@@ -477,6 +485,7 @@ module Aws::Kendra
     Title = Shapes::StringShape.new(name: 'Title')
     Token = Shapes::StringShape.new(name: 'Token')
     TopDocumentAttributeValueCountPairsSize = Shapes::IntegerShape.new(name: 'TopDocumentAttributeValueCountPairsSize')
+    Type = Shapes::StringShape.new(name: 'Type')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
@@ -839,6 +848,7 @@ module Aws::Kendra
     DataSourceConfiguration.add_member(:box_configuration, Shapes::ShapeRef.new(shape: BoxConfiguration, location_name: "BoxConfiguration"))
     DataSourceConfiguration.add_member(:quip_configuration, Shapes::ShapeRef.new(shape: QuipConfiguration, location_name: "QuipConfiguration"))
     DataSourceConfiguration.add_member(:jira_configuration, Shapes::ShapeRef.new(shape: JiraConfiguration, location_name: "JiraConfiguration"))
+    DataSourceConfiguration.add_member(:git_hub_configuration, Shapes::ShapeRef.new(shape: GitHubConfiguration, location_name: "GitHubConfiguration"))
     DataSourceConfiguration.struct_class = Types::DataSourceConfiguration
 
     DataSourceGroup.add_member(:group_id, Shapes::ShapeRef.new(shape: PrincipalName, required: true, location_name: "GroupId"))
@@ -1283,6 +1293,39 @@ module Aws::Kendra
     GetSnapshotsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetSnapshotsResponse.struct_class = Types::GetSnapshotsResponse
 
+    GitHubConfiguration.add_member(:saa_s_configuration, Shapes::ShapeRef.new(shape: SaaSConfiguration, location_name: "SaaSConfiguration"))
+    GitHubConfiguration.add_member(:on_premise_configuration, Shapes::ShapeRef.new(shape: OnPremiseConfiguration, location_name: "OnPremiseConfiguration"))
+    GitHubConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: Type, location_name: "Type"))
+    GitHubConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
+    GitHubConfiguration.add_member(:use_change_log, Shapes::ShapeRef.new(shape: Boolean, location_name: "UseChangeLog"))
+    GitHubConfiguration.add_member(:git_hub_document_crawl_properties, Shapes::ShapeRef.new(shape: GitHubDocumentCrawlProperties, location_name: "GitHubDocumentCrawlProperties"))
+    GitHubConfiguration.add_member(:repository_filter, Shapes::ShapeRef.new(shape: RepositoryNames, location_name: "RepositoryFilter"))
+    GitHubConfiguration.add_member(:inclusion_folder_name_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "InclusionFolderNamePatterns"))
+    GitHubConfiguration.add_member(:inclusion_file_type_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "InclusionFileTypePatterns"))
+    GitHubConfiguration.add_member(:inclusion_file_name_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "InclusionFileNamePatterns"))
+    GitHubConfiguration.add_member(:exclusion_folder_name_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "ExclusionFolderNamePatterns"))
+    GitHubConfiguration.add_member(:exclusion_file_type_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "ExclusionFileTypePatterns"))
+    GitHubConfiguration.add_member(:exclusion_file_name_patterns, Shapes::ShapeRef.new(shape: StringList, location_name: "ExclusionFileNamePatterns"))
+    GitHubConfiguration.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: DataSourceVpcConfiguration, location_name: "VpcConfiguration"))
+    GitHubConfiguration.add_member(:git_hub_repository_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubRepositoryConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_commit_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubCommitConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_issue_document_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubIssueDocumentConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_issue_comment_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubIssueCommentConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_issue_attachment_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubIssueAttachmentConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_pull_request_comment_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubPullRequestCommentConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_pull_request_document_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubPullRequestDocumentConfigurationFieldMappings"))
+    GitHubConfiguration.add_member(:git_hub_pull_request_document_attachment_configuration_field_mappings, Shapes::ShapeRef.new(shape: DataSourceToIndexFieldMappingList, location_name: "GitHubPullRequestDocumentAttachmentConfigurationFieldMappings"))
+    GitHubConfiguration.struct_class = Types::GitHubConfiguration
+
+    GitHubDocumentCrawlProperties.add_member(:crawl_repository_documents, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlRepositoryDocuments"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_issue, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlIssue"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_issue_comment, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlIssueComment"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_issue_comment_attachment, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlIssueCommentAttachment"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_pull_request, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlPullRequest"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_pull_request_comment, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlPullRequestComment"))
+    GitHubDocumentCrawlProperties.add_member(:crawl_pull_request_comment_attachment, Shapes::ShapeRef.new(shape: Boolean, location_name: "CrawlPullRequestCommentAttachment"))
+    GitHubDocumentCrawlProperties.struct_class = Types::GitHubDocumentCrawlProperties
+
     GoogleDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     GoogleDriveConfiguration.add_member(:inclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "InclusionPatterns"))
     GoogleDriveConfiguration.add_member(:exclusion_patterns, Shapes::ShapeRef.new(shape: DataSourceInclusionsExclusionsStrings, location_name: "ExclusionPatterns"))
@@ -1507,6 +1550,11 @@ module Aws::Kendra
 
     MemberUsers.member = Shapes::ShapeRef.new(shape: MemberUser)
 
+    OnPremiseConfiguration.add_member(:host_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "HostUrl"))
+    OnPremiseConfiguration.add_member(:organization_name, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "OrganizationName"))
+    OnPremiseConfiguration.add_member(:ssl_certificate_s3_path, Shapes::ShapeRef.new(shape: S3Path, required: true, location_name: "SslCertificateS3Path"))
+    OnPremiseConfiguration.struct_class = Types::OnPremiseConfiguration
+
     OneDriveConfiguration.add_member(:tenant_domain, Shapes::ShapeRef.new(shape: TenantDomain, required: true, location_name: "TenantDomain"))
     OneDriveConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: SecretArn, required: true, location_name: "SecretArn"))
     OneDriveConfiguration.add_member(:one_drive_users, Shapes::ShapeRef.new(shape: OneDriveUsers, required: true, location_name: "OneDriveUsers"))
@@ -1631,6 +1679,8 @@ module Aws::Kendra
 
     RelevanceFeedbackList.member = Shapes::ShapeRef.new(shape: RelevanceFeedback)
 
+    RepositoryNames.member = Shapes::ShapeRef.new(shape: RepositoryName)
+
     ResourceAlreadyExistException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "Message"))
     ResourceAlreadyExistException.struct_class = Types::ResourceAlreadyExistException
 
@@ -1654,6 +1704,10 @@ module Aws::Kendra
     S3Path.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketName, required: true, location_name: "Bucket"))
     S3Path.add_member(:key, Shapes::ShapeRef.new(shape: S3ObjectKey, required: true, location_name: "Key"))
     S3Path.struct_class = Types::S3Path
+
+    SaaSConfiguration.add_member(:organization_name, Shapes::ShapeRef.new(shape: OrganizationName, required: true, location_name: "OrganizationName"))
+    SaaSConfiguration.add_member(:host_url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "HostUrl"))
+    SaaSConfiguration.struct_class = Types::SaaSConfiguration
 
     SalesforceChatterFeedConfiguration.add_member(:document_data_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, required: true, location_name: "DocumentDataFieldName"))
     SalesforceChatterFeedConfiguration.add_member(:document_title_field_name, Shapes::ShapeRef.new(shape: DataSourceFieldName, location_name: "DocumentTitleFieldName"))
@@ -1831,6 +1885,8 @@ module Aws::Kendra
     StopDataSourceSyncJobRequest.add_member(:id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location_name: "Id"))
     StopDataSourceSyncJobRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     StopDataSourceSyncJobRequest.struct_class = Types::StopDataSourceSyncJobRequest
+
+    StringList.member = Shapes::ShapeRef.new(shape: String)
 
     SubmitFeedbackRequest.add_member(:index_id, Shapes::ShapeRef.new(shape: IndexId, required: true, location_name: "IndexId"))
     SubmitFeedbackRequest.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, required: true, location_name: "QueryId"))

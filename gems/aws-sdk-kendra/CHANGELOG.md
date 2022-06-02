@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2022-06-02)
+------------------
+
+* Feature - Amazon Kendra now provides a data source connector for GitHub. For more information, see https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html
+
 1.51.0 (2022-05-12)
 ------------------
 

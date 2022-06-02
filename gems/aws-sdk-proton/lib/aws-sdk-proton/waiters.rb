@@ -69,6 +69,8 @@ module Aws::Proton
   #
   # | waiter_name                             | params                                    | :delay   | :max_attempts |
   # | --------------------------------------- | ----------------------------------------- | -------- | ------------- |
+  # | component_deleted                       | {Client#get_component}                    | 5        | 999           |
+  # | component_deployed                      | {Client#get_component}                    | 5        | 999           |
   # | environment_deployed                    | {Client#get_environment}                  | 5        | 999           |
   # | environment_template_version_registered | {Client#get_environment_template_version} | 2        | 150           |
   # | service_created                         | {Client#get_service}                      | 5        | 999           |
@@ -79,6 +81,95 @@ module Aws::Proton
   # | service_updated                         | {Client#get_service}                      | 5        | 999           |
   #
   module Waiters
+
+    # Wait until a Component is deleted. Use this after invoking DeleteComponent
+    class ComponentDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (999)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 999,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_component,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "component.deployment_status",
+                "state" => "failure",
+                "expected" => "DELETE_FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_component)
+      # @return (see Client#get_component)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a Component is deployed. Use this after invoking CreateComponent or UpdateComponent
+    class ComponentDeployed
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (999)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 999,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_component,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "component.deployment_status",
+                "state" => "success",
+                "expected" => "SUCCEEDED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "component.deployment_status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_component)
+      # @return (see Client#get_component)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     # Wait until an Environment is deployed. Use this after invoking CreateEnvironment or UpdateEnvironment
     class EnvironmentDeployed

@@ -63,8 +63,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -77,6 +77,8 @@ module Aws::CodeArtifact
     #   following values are supported:
     #
     #   * `public:npmjs` - for the npm public repository.
+    #
+    #   * `public:nuget-org` - for the NuGet Gallery.
     #
     #   * `public:pypi` - for the Python Package Index.
     #
@@ -124,7 +126,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource.
+    #   The type of Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ConflictException AWS API Documentation
@@ -162,8 +164,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] source_repository
@@ -176,15 +178,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the package that is copied. The valid package types
-    #   are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   The format of the package that is copied.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -308,10 +302,11 @@ module Aws::CodeArtifact
     #       }
     #
     # @!attribute [rw] domain
-    #   The name of the domain to create. All domain names in an AWS Region
-    #   that are in the same AWS account must be unique. The domain name is
-    #   used as the prefix in DNS hostnames. Do not use sensitive
-    #   information in a domain name because it is publicly discoverable.
+    #   The name of the domain to create. All domain names in an Amazon Web
+    #   Services Region that are in the same Amazon Web Services account
+    #   must be unique. The domain name is used as the prefix in DNS
+    #   hostnames. Do not use sensitive information in a domain name because
+    #   it is publicly discoverable.
     #   @return [String]
     #
     # @!attribute [rw] encryption_key
@@ -320,13 +315,13 @@ module Aws::CodeArtifact
     #   Resource Name (ARN), a key alias, or a key alias ARN. To specify an
     #   `encryptionKey`, your IAM role must have `kms:DescribeKey` and
     #   `kms:CreateGrant` permissions on the encryption key that is used.
-    #   For more information, see [DescribeKey][1] in the *AWS Key
-    #   Management Service API Reference* and [AWS KMS API Permissions
-    #   Reference][2] in the *AWS Key Management Service Developer Guide*.
+    #   For more information, see [DescribeKey][1] in the *Key Management
+    #   Service API Reference* and [Key Management Service API Permissions
+    #   Reference][2] in the *Key Management Service Developer Guide*.
     #
     #   CodeArtifact supports only symmetric CMKs. Do not associate an
     #   asymmetric CMK with your domain. For more information, see [Using
-    #   symmetric and asymmetric keys][3] in the *AWS Key Management Service
+    #   symmetric and asymmetric keys][3] in the *Key Management Service
     #   Developer Guide*.
     #
     #
@@ -389,8 +384,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -404,7 +399,7 @@ module Aws::CodeArtifact
     # @!attribute [rw] upstreams
     #   A list of upstream repositories to associate with the repository.
     #   The order of the upstream repositories in the list determines their
-    #   priority order when AWS CodeArtifact looks for a requested package
+    #   priority order when CodeArtifact looks for a requested package
     #   version. For more information, see [Working with upstream
     #   repositories][1].
     #
@@ -458,8 +453,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] policy_revision
@@ -504,8 +499,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeleteDomainRequest AWS API Documentation
@@ -549,8 +544,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -559,13 +554,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the package versions to delete. The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   The format of the package versions to delete.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -590,18 +579,7 @@ module Aws::CodeArtifact
     #   @return [Array<String>]
     #
     # @!attribute [rw] expected_status
-    #   The expected status of the package version to delete. Valid values
-    #   are:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
+    #   The expected status of the package version to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DeletePackageVersionsRequest AWS API Documentation
@@ -620,7 +598,8 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] successful_versions
-    #   A list of the package versions that were successfully deleted.
+    #   A list of the package versions that were successfully deleted. The
+    #   status of every successful version will be `Deleted`.
     #   @return [Hash<String,Types::SuccessfulPackageVersionInfo>]
     #
     # @!attribute [rw] failed_versions
@@ -665,8 +644,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -718,8 +697,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -762,8 +741,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DescribeDomainRequest AWS API Documentation
@@ -808,8 +787,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -818,13 +797,6 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   A format that specifies the type of the requested package version.
-    #   The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -892,8 +864,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -939,8 +911,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -999,8 +971,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1010,13 +982,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   A format that specifies the type of package versions you want to
-    #   dispose. The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   dispose.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1044,18 +1010,7 @@ module Aws::CodeArtifact
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] expected_status
-    #   The expected status of the package version to dispose. Valid values
-    #   are:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
+    #   The expected status of the package version to dispose.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/DisposePackageVersionsRequest AWS API Documentation
@@ -1114,7 +1069,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The AWS account ID that owns the domain.
+    #   The Amazon Web Services account ID that owns the domain.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1122,11 +1077,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of a domain. The valid values are
-    #
-    #   * `Active`
-    #
-    #   * `Deleted`
+    #   The current status of a domain.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -1135,8 +1086,8 @@ module Aws::CodeArtifact
     #   @return [Time]
     #
     # @!attribute [rw] encryption_key
-    #   The ARN of an AWS Key Management Service (AWS KMS) key associated
-    #   with a domain.
+    #   The ARN of an Key Management Service (KMS) key associated with a
+    #   domain.
     #   @return [String]
     #
     # @!attribute [rw] repository_count
@@ -1181,8 +1132,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -1190,12 +1141,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A string that contains the status of the domain. The valid values
-    #   are:
-    #
-    #   * `Active`
-    #
-    #   * `Deleted`
+    #   A string that contains the status of the domain.
     #   @return [String]
     #
     # @!attribute [rw] created_time
@@ -1234,8 +1180,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] duration_seconds
@@ -1287,8 +1233,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetDomainPermissionsPolicyRequest AWS API Documentation
@@ -1333,8 +1279,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1344,13 +1290,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
-    #   requested asset file. The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   requested asset file.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1445,8 +1385,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1456,13 +1396,12 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   A format that specifies the type of the package version with the
-    #   requested readme file. The valid values are:
+    #   requested readme file.
     #
-    #   * `npm`
+    #   <note markdown="1"> Although `maven` is listed as a valid value, CodeArtifact does not
+    #   support displaying readme files for Maven packages.
     #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1501,14 +1440,7 @@ module Aws::CodeArtifact
     end
 
     # @!attribute [rw] format
-    #   The format of the package with the requested readme file. Valid
-    #   format types are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   The format of the package with the requested readme file.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1567,8 +1499,9 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain
-    #   that contains the repository. It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain that contains the repository. It does not include
+    #   dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1577,13 +1510,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   Returns which endpoint of a repository to return. A repository has
-    #   one endpoint for each package format:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   one endpoint for each package format.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/GetRepositoryEndpointRequest AWS API Documentation
@@ -1624,8 +1551,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1656,7 +1583,7 @@ module Aws::CodeArtifact
     end
 
     # The operation did not succeed because of an error that occurred inside
-    # AWS CodeArtifact.
+    # CodeArtifact.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -1759,8 +1686,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1770,14 +1697,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   The format of the package that contains the returned package version
-    #   assets. The valid package types are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   assets.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1904,8 +1824,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -1914,15 +1834,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the package with the requested dependencies. The valid
-    #   package types are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   The format of the package with the requested dependencies.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -1968,13 +1880,7 @@ module Aws::CodeArtifact
 
     # @!attribute [rw] format
     #   A format that specifies the type of the package that contains the
-    #   returned dependencies. The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   returned dependencies.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2052,8 +1958,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -2061,14 +1967,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the returned packages. The valid package types are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   The format of the returned packages.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2090,17 +1989,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] status
     #   A string that specifies the status of the package versions to
-    #   include in the returned list. It can be one of the following:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
+    #   include in the returned list.
     #   @return [String]
     #
     # @!attribute [rw] sort_by
@@ -2147,13 +2036,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   A format of the package. Valid package format values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   A format of the package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2218,8 +2101,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -2227,14 +2110,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] format
-    #   The format of the packages. The valid package types are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   The format of the packages.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2319,13 +2195,13 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] administrator_account
     #   Filter the list of repositories to only include those that are
-    #   managed by the AWS account ID.
+    #   managed by the Amazon Web Services account ID.
     #   @return [String]
     #
     # @!attribute [rw] repository_prefix
@@ -2513,13 +2389,7 @@ module Aws::CodeArtifact
     # [1]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html
     #
     # @!attribute [rw] format
-    #   The format of the package. Valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   The format of the package.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2551,14 +2421,7 @@ module Aws::CodeArtifact
     # Details about a package version.
     #
     # @!attribute [rw] format
-    #   The format of the package version. The valid package formats are:
-    #
-    #   * `npm`\: A Node Package Manager (npm) package.
-    #
-    #   * `pypi`\: A Python Package Index (PyPI) package.
-    #
-    #   * `maven`\: A Maven package that contains compiled code in a
-    #     distributable format, such as a JAR file.
+    #   The format of the package version.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -2617,18 +2480,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   A string that contains the status of the package version. It can be
-    #   one of the following:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
+    #   A string that contains the status of the package version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageVersionDescription AWS API Documentation
@@ -2700,16 +2552,6 @@ module Aws::CodeArtifact
     # @!attribute [rw] status
     #   A string that contains the status of the package version. It can be
     #   one of the following:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/PackageVersionSummary AWS API Documentation
@@ -2737,8 +2579,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] policy_revision
@@ -2792,8 +2634,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -2836,21 +2678,21 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # The details of a repository stored in AWS CodeArtifact. A CodeArtifact
+    # The details of a repository stored in CodeArtifact. A CodeArtifact
     # repository contains a set of package versions, each of which maps to a
     # set of assets. Repositories are polyglot—a single repository can
     # contain packages of any supported type. Each repository exposes
     # endpoints for fetching and publishing packages using tools like the
     # `npm` CLI, the Maven CLI (`mvn`), and `pip`. You can create up to 100
-    # repositories per AWS account.
+    # repositories per Amazon Web Services account.
     #
     # @!attribute [rw] name
     #   The name of the repository.
     #   @return [String]
     #
     # @!attribute [rw] administrator_account
-    #   The 12-digit account number of the AWS account that manages the
-    #   repository.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   manages the repository.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -2858,8 +2700,9 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain
-    #   that contains the repository. It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain that contains the repository. It does not include
+    #   dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2873,7 +2716,7 @@ module Aws::CodeArtifact
     # @!attribute [rw] upstreams
     #   A list of upstream repositories to associate with the repository.
     #   The order of the upstream repositories in the list determines their
-    #   priority order when AWS CodeArtifact looks for a requested package
+    #   priority order when CodeArtifact looks for a requested package
     #   version. For more information, see [Working with upstream
     #   repositories][1].
     #
@@ -2917,6 +2760,8 @@ module Aws::CodeArtifact
     #
     #   * `maven`\: A Maven package that contains compiled code in a
     #     distributable format, such as a JAR file.
+    #
+    #   * `nuget`\: A NuGet package.
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -2947,7 +2792,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] administrator_account
-    #   The AWS account ID that manages the repository.
+    #   The Amazon Web Services account ID that manages the repository.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
@@ -2955,8 +2800,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] arn
@@ -2991,7 +2836,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource.
+    #   The type of Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ResourceNotFoundException AWS API Documentation
@@ -3004,8 +2849,8 @@ module Aws::CodeArtifact
       include Aws::Structure
     end
 
-    # An AWS CodeArtifact resource policy that contains a resource ARN,
-    # document details, and a revision.
+    # An CodeArtifact resource policy that contains a resource ARN, document
+    # details, and a revision.
     #
     # @!attribute [rw] resource_arn
     #   The ARN of the resource associated with the resource policy
@@ -3040,7 +2885,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of AWS resource.
+    #   The type of Amazon Web Services resource.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/ServiceQuotaExceededException AWS API Documentation
@@ -3060,17 +2905,7 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of a package version. Valid statuses are:
-    #
-    #   * `Published`
-    #
-    #   * `Unfinished`
-    #
-    #   * `Unlisted`
-    #
-    #   * `Archived`
-    #
-    #   * `Disposed`
+    #   The status of a package version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codeartifact-2018-09-22/SuccessfulPackageVersionInfo AWS API Documentation
@@ -3083,7 +2918,7 @@ module Aws::CodeArtifact
     end
 
     # A tag is a key-value pair that can be used to manage, search for, or
-    # filter resources in AWS CodeArtifact.
+    # filter resources in CodeArtifact.
     #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
@@ -3218,8 +3053,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -3229,13 +3064,7 @@ module Aws::CodeArtifact
     #
     # @!attribute [rw] format
     #   A format that specifies the type of the package with the statuses to
-    #   update. The valid values are:
-    #
-    #   * `npm`
-    #
-    #   * `pypi`
-    #
-    #   * `maven`
+    #   update.
     #   @return [String]
     #
     # @!attribute [rw] namespace
@@ -3332,8 +3161,8 @@ module Aws::CodeArtifact
     #   @return [String]
     #
     # @!attribute [rw] domain_owner
-    #   The 12-digit account number of the AWS account that owns the domain.
-    #   It does not include dashes or spaces.
+    #   The 12-digit account number of the Amazon Web Services account that
+    #   owns the domain. It does not include dashes or spaces.
     #   @return [String]
     #
     # @!attribute [rw] repository
@@ -3347,7 +3176,7 @@ module Aws::CodeArtifact
     # @!attribute [rw] upstreams
     #   A list of upstream repositories to associate with the repository.
     #   The order of the upstream repositories in the list determines their
-    #   priority order when AWS CodeArtifact looks for a requested package
+    #   priority order when CodeArtifact looks for a requested package
     #   version. For more information, see [Working with upstream
     #   repositories][1].
     #

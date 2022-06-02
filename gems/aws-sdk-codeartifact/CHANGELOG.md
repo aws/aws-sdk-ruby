@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.20.0 (2022-06-02)
+------------------
+
+* Feature - Documentation updates for CodeArtifact
+
 1.19.0 (2022-02-24)
 ------------------
 

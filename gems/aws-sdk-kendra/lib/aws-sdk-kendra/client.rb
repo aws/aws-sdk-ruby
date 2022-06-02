@@ -925,7 +925,7 @@ module Aws::Kendra
     #   resp = client.create_data_source({
     #     name: "DataSourceName", # required
     #     index_id: "IndexId", # required
-    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA
+    #     type: "S3", # required, accepts S3, SHAREPOINT, DATABASE, SALESFORCE, ONEDRIVE, SERVICENOW, CUSTOM, CONFLUENCE, GOOGLEDRIVE, WEBCRAWLER, WORKDOCS, FSX, SLACK, BOX, QUIP, JIRA, GITHUB
     #     configuration: {
     #       s3_configuration: {
     #         bucket_name: "S3BucketName", # required
@@ -1406,6 +1406,99 @@ module Aws::Kendra
     #           subnet_ids: ["SubnetId"], # required
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
+    #       },
+    #       git_hub_configuration: {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
     #       },
     #     },
     #     description: "Description",
@@ -2274,7 +2367,7 @@ module Aws::Kendra
     #   resp.id #=> String
     #   resp.index_id #=> String
     #   resp.name #=> String
-    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA"
+    #   resp.type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB"
     #   resp.configuration.s3_configuration.bucket_name #=> String
     #   resp.configuration.s3_configuration.inclusion_prefixes #=> Array
     #   resp.configuration.s3_configuration.inclusion_prefixes[0] #=> String
@@ -2629,6 +2722,72 @@ module Aws::Kendra
     #   resp.configuration.jira_configuration.vpc_configuration.subnet_ids[0] #=> String
     #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids #=> Array
     #   resp.configuration.jira_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.saa_s_configuration.organization_name #=> String
+    #   resp.configuration.git_hub_configuration.saa_s_configuration.host_url #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.host_url #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.organization_name #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.ssl_certificate_s3_path.bucket #=> String
+    #   resp.configuration.git_hub_configuration.on_premise_configuration.ssl_certificate_s3_path.key #=> String
+    #   resp.configuration.git_hub_configuration.type #=> String, one of "SAAS", "ON_PREMISE"
+    #   resp.configuration.git_hub_configuration.secret_arn #=> String
+    #   resp.configuration.git_hub_configuration.use_change_log #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_repository_documents #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue_comment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_issue_comment_attachment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request_comment #=> Boolean
+    #   resp.configuration.git_hub_configuration.git_hub_document_crawl_properties.crawl_pull_request_comment_attachment #=> Boolean
+    #   resp.configuration.git_hub_configuration.repository_filter #=> Array
+    #   resp.configuration.git_hub_configuration.repository_filter[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_folder_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_folder_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_file_type_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_file_type_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.inclusion_file_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.inclusion_file_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_folder_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_folder_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_file_type_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_file_type_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.exclusion_file_name_patterns #=> Array
+    #   resp.configuration.git_hub_configuration.exclusion_file_name_patterns[0] #=> String
+    #   resp.configuration.git_hub_configuration.vpc_configuration.subnet_ids #=> Array
+    #   resp.configuration.git_hub_configuration.vpc_configuration.subnet_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.vpc_configuration.security_group_ids #=> Array
+    #   resp.configuration.git_hub_configuration.vpc_configuration.security_group_ids[0] #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_repository_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_commit_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_document_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_comment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_issue_attachment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_comment_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_configuration_field_mappings[0].index_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings #=> Array
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].data_source_field_name #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].date_field_format #=> String
+    #   resp.configuration.git_hub_configuration.git_hub_pull_request_document_attachment_configuration_field_mappings[0].index_field_name #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.description #=> String
@@ -3463,7 +3622,7 @@ module Aws::Kendra
     #   resp.summary_items #=> Array
     #   resp.summary_items[0].name #=> String
     #   resp.summary_items[0].id #=> String
-    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA"
+    #   resp.summary_items[0].type #=> String, one of "S3", "SHAREPOINT", "DATABASE", "SALESFORCE", "ONEDRIVE", "SERVICENOW", "CUSTOM", "CONFLUENCE", "GOOGLEDRIVE", "WEBCRAWLER", "WORKDOCS", "FSX", "SLACK", "BOX", "QUIP", "JIRA", "GITHUB"
     #   resp.summary_items[0].created_at #=> Time
     #   resp.summary_items[0].updated_at #=> Time
     #   resp.summary_items[0].status #=> String, one of "CREATING", "DELETING", "FAILED", "UPDATING", "ACTIVE"
@@ -5101,6 +5260,99 @@ module Aws::Kendra
     #           security_group_ids: ["VpcSecurityGroupId"], # required
     #         },
     #       },
+    #       git_hub_configuration: {
+    #         saa_s_configuration: {
+    #           organization_name: "OrganizationName", # required
+    #           host_url: "Url", # required
+    #         },
+    #         on_premise_configuration: {
+    #           host_url: "Url", # required
+    #           organization_name: "OrganizationName", # required
+    #           ssl_certificate_s3_path: { # required
+    #             bucket: "S3BucketName", # required
+    #             key: "S3ObjectKey", # required
+    #           },
+    #         },
+    #         type: "SAAS", # accepts SAAS, ON_PREMISE
+    #         secret_arn: "SecretArn", # required
+    #         use_change_log: false,
+    #         git_hub_document_crawl_properties: {
+    #           crawl_repository_documents: false,
+    #           crawl_issue: false,
+    #           crawl_issue_comment: false,
+    #           crawl_issue_comment_attachment: false,
+    #           crawl_pull_request: false,
+    #           crawl_pull_request_comment: false,
+    #           crawl_pull_request_comment_attachment: false,
+    #         },
+    #         repository_filter: ["RepositoryName"],
+    #         inclusion_folder_name_patterns: ["String"],
+    #         inclusion_file_type_patterns: ["String"],
+    #         inclusion_file_name_patterns: ["String"],
+    #         exclusion_folder_name_patterns: ["String"],
+    #         exclusion_file_type_patterns: ["String"],
+    #         exclusion_file_name_patterns: ["String"],
+    #         vpc_configuration: {
+    #           subnet_ids: ["SubnetId"], # required
+    #           security_group_ids: ["VpcSecurityGroupId"], # required
+    #         },
+    #         git_hub_repository_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_commit_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_issue_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_comment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #         git_hub_pull_request_document_attachment_configuration_field_mappings: [
+    #           {
+    #             data_source_field_name: "DataSourceFieldName", # required
+    #             date_field_format: "DataSourceDateFieldFormat",
+    #             index_field_name: "IndexFieldName", # required
+    #           },
+    #         ],
+    #       },
     #     },
     #     description: "Description",
     #     schedule: "ScanSchedule",
@@ -5571,7 +5823,7 @@ module Aws::Kendra
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-kendra'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

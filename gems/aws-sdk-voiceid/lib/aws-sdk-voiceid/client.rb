@@ -378,10 +378,10 @@ module Aws::VoiceID
     #   The name of the domain.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The configuration, containing the KMS Key Identifier, to be used by
+    #   The configuration, containing the KMS key identifier, to be used by
     #   Voice ID for the server-side encryption of your data. Refer to [
-    #   Amazon Connect VoiceID encryption at rest][1] for more details on how
-    #   the KMS Key is used.
+    #   Amazon Connect Voice ID encryption at rest][1] for more details on how
+    #   the KMS key is used.
     #
     #
     #
@@ -420,6 +420,9 @@ module Aws::VoiceID
     #   resp.domain.domain_status #=> String, one of "ACTIVE", "PENDING", "SUSPENDED"
     #   resp.domain.name #=> String
     #   resp.domain.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.message #=> String
+    #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/CreateDomain AWS API Documentation
@@ -431,7 +434,7 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Deletes the specified domain from the Amazon Connect Voice ID system.
+    # Deletes the specified domain from Voice ID.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain you want to delete.
@@ -453,8 +456,7 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Deletes the specified fraudster from the Amazon Connect Voice ID
-    # system.
+    # Deletes the specified fraudster from Voice ID.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain containing the fraudster.
@@ -480,7 +482,7 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Deletes the specified speaker from the Amazon Connect Voice ID system.
+    # Deletes the specified speaker from Voice ID.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain containing the speaker.
@@ -530,6 +532,9 @@ module Aws::VoiceID
     #   resp.domain.domain_status #=> String, one of "ACTIVE", "PENDING", "SUSPENDED"
     #   resp.domain.name #=> String
     #   resp.domain.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.message #=> String
+    #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/DescribeDomain AWS API Documentation
@@ -804,6 +809,9 @@ module Aws::VoiceID
     #   resp.domain_summaries[0].domain_status #=> String, one of "ACTIVE", "PENDING", "SUSPENDED"
     #   resp.domain_summaries[0].name #=> String
     #   resp.domain_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.domain_summaries[0].server_side_encryption_update_details.message #=> String
+    #   resp.domain_summaries[0].server_side_encryption_update_details.old_kms_key_id #=> String
+    #   resp.domain_summaries[0].server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain_summaries[0].updated_at #=> Time
     #   resp.next_token #=> String
     #
@@ -1023,13 +1031,13 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Opts out a speaker from Voice ID system. A speaker can be opted out
-    # regardless of whether or not they already exist in the system. If they
+    # Opts out a speaker from Voice ID. A speaker can be opted out
+    # regardless of whether or not they already exist in Voice ID. If they
     # don't yet exist, a new speaker is created in an opted out state. If
     # they already exist, their existing status is overridden and they are
     # opted out. Enrollment and evaluation authentication requests are
     # rejected for opted out speakers, and opted out speakers have no voice
-    # embeddings stored in the system.
+    # embeddings stored in Voice ID.
     #
     # @option params [required, String] :domain_id
     #   The identifier of the domain containing the speaker.
@@ -1100,7 +1108,7 @@ module Aws::VoiceID
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
     #   The output data config containing the S3 location where Voice ID
-    #   writes the job output file; you must also include a KMS Key ID to
+    #   writes the job output file; you must also include a KMS key ID to
     #   encrypt the file.
     #
     # @option params [Types::RegistrationConfig] :registration_config
@@ -1185,8 +1193,8 @@ module Aws::VoiceID
     #
     # @option params [Types::EnrollmentConfig] :enrollment_config
     #   The enrollment config that contains details such as the action to take
-    #   when a speaker is already enrolled in the Voice ID system or when a
-    #   speaker is identified as a fraudster.
+    #   when a speaker is already enrolled in Voice ID or when a speaker is
+    #   identified as a fraudster.
     #
     # @option params [required, Types::InputDataConfig] :input_data_config
     #   The input data config containing the S3 location for the input
@@ -1197,7 +1205,7 @@ module Aws::VoiceID
     #
     # @option params [required, Types::OutputDataConfig] :output_data_config
     #   The output data config containing the S3 location where Voice ID
-    #   writes the job output file; you must also include a KMS Key ID to
+    #   writes the job output file; you must also include a KMS key ID to
     #   encrypt the file.
     #
     # @return [Types::StartSpeakerEnrollmentJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1255,8 +1263,7 @@ module Aws::VoiceID
       req.send_request(options)
     end
 
-    # Tags an Amazon Connect Voice ID resource with the provided list of
-    # tags.
+    # Tags a Voice ID resource with the provided list of tags.
     #
     # @option params [required, String] :resource_arn
     #   The Amazon Resource Name (ARN) of the Voice ID resource you want to
@@ -1330,7 +1337,7 @@ module Aws::VoiceID
     #   The name of the domain.
     #
     # @option params [required, Types::ServerSideEncryptionConfiguration] :server_side_encryption_configuration
-    #   The configuration, containing the KMS Key Identifier, to be used by
+    #   The configuration, containing the KMS key identifier, to be used by
     #   Voice ID for the server-side encryption of your data. Note that all
     #   the existing data in the domain are still encrypted using the existing
     #   key, only the data added to domain after updating the key is encrypted
@@ -1360,6 +1367,9 @@ module Aws::VoiceID
     #   resp.domain.domain_status #=> String, one of "ACTIVE", "PENDING", "SUSPENDED"
     #   resp.domain.name #=> String
     #   resp.domain.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.message #=> String
+    #   resp.domain.server_side_encryption_update_details.old_kms_key_id #=> String
+    #   resp.domain.server_side_encryption_update_details.update_status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.domain.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/voice-id-2021-09-27/UpdateDomain AWS API Documentation
@@ -1384,7 +1394,7 @@ module Aws::VoiceID
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-voiceid'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.8.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

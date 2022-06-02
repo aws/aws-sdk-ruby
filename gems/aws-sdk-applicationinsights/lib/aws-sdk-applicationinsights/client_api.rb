@@ -84,6 +84,7 @@ module Aws::ApplicationInsights
     Feedback = Shapes::MapShape.new(name: 'Feedback')
     FeedbackKey = Shapes::StringShape.new(name: 'FeedbackKey')
     FeedbackValue = Shapes::StringShape.new(name: 'FeedbackValue')
+    GroupingType = Shapes::StringShape.new(name: 'GroupingType')
     HealthEventArn = Shapes::StringShape.new(name: 'HealthEventArn')
     HealthEventDescription = Shapes::StringShape.new(name: 'HealthEventDescription')
     HealthEventTypeCategory = Shapes::StringShape.new(name: 'HealthEventTypeCategory')
@@ -235,6 +236,7 @@ module Aws::ApplicationInsights
     CreateApplicationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateApplicationRequest.add_member(:auto_config_enabled, Shapes::ShapeRef.new(shape: AutoConfigEnabled, location_name: "AutoConfigEnabled"))
     CreateApplicationRequest.add_member(:auto_create, Shapes::ShapeRef.new(shape: AutoCreate, location_name: "AutoCreate"))
+    CreateApplicationRequest.add_member(:grouping_type, Shapes::ShapeRef.new(shape: GroupingType, location_name: "GroupingType"))
     CreateApplicationRequest.struct_class = Types::CreateApplicationRequest
 
     CreateApplicationResponse.add_member(:application_info, Shapes::ShapeRef.new(shape: ApplicationInfo, location_name: "ApplicationInfo"))

@@ -1425,6 +1425,118 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Creates a new task template in the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :name
+    #   The name of the task template.
+    #
+    # @option params [String] :description
+    #   The description of the task template.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow that runs by default when a task is created
+    #   by referencing this template.
+    #
+    # @option params [Types::TaskTemplateConstraints] :constraints
+    #   Constraints that are applicable to the fields listed.
+    #
+    # @option params [Types::TaskTemplateDefaults] :defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [required, Array<Types::TaskTemplateField>] :fields
+    #   Fields that are part of the template.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateTaskTemplateResponse#id #id} => String
+    #   * {Types::CreateTaskTemplateResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_task_template({
+    #     instance_id: "InstanceId", # required
+    #     name: "TaskTemplateName", # required
+    #     description: "TaskTemplateDescription",
+    #     contact_flow_id: "ContactFlowId",
+    #     constraints: {
+    #       required_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       read_only_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       invisible_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     defaults: {
+    #       default_field_values: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #           default_value: "TaskTemplateFieldValue",
+    #         },
+    #       ],
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     fields: [ # required
+    #       {
+    #         id: { # required
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         description: "TaskTemplateFieldDescription",
+    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #         single_select_options: ["TaskTemplateSingleSelectOption"],
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreateTaskTemplate AWS API Documentation
+    #
+    # @overload create_task_template(params = {})
+    # @param [Hash] params ({})
+    def create_task_template(params = {}, options = {})
+      req = build_request(:create_task_template, params)
+      req.send_request(options)
+    end
+
     # Creates a use case for an integration association.
     #
     # @option params [required, String] :instance_id
@@ -1898,6 +2010,33 @@ module Aws::Connect
     # @param [Hash] params ({})
     def delete_security_profile(params = {}, options = {})
       req = build_request(:delete_security_profile, params)
+      req.send_request(options)
+    end
+
+    # Deletes the task template.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_task_template({
+    #     instance_id: "InstanceId", # required
+    #     task_template_id: "TaskTemplateId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeleteTaskTemplate AWS API Documentation
+    #
+    # @overload delete_task_template(params = {})
+    # @param [Hash] params ({})
+    def delete_task_template(params = {}, options = {})
+      req = build_request(:delete_task_template, params)
       req.send_request(options)
     end
 
@@ -3679,6 +3818,82 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets details about a specific task template in the specified Amazon
+    # Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [String] :snapshot_version
+    #   The system generated version of a task template that is associated
+    #   with a task, when the task is created.
+    #
+    # @return [Types::GetTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTaskTemplateResponse#instance_id #instance_id} => String
+    #   * {Types::GetTaskTemplateResponse#id #id} => String
+    #   * {Types::GetTaskTemplateResponse#arn #arn} => String
+    #   * {Types::GetTaskTemplateResponse#name #name} => String
+    #   * {Types::GetTaskTemplateResponse#description #description} => String
+    #   * {Types::GetTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
+    #   * {Types::GetTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
+    #   * {Types::GetTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
+    #   * {Types::GetTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
+    #   * {Types::GetTaskTemplateResponse#status #status} => String
+    #   * {Types::GetTaskTemplateResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetTaskTemplateResponse#created_time #created_time} => Time
+    #   * {Types::GetTaskTemplateResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_task_template({
+    #     instance_id: "InstanceId", # required
+    #     task_template_id: "TaskTemplateId", # required
+    #     snapshot_version: "SnapshotVersion",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.contact_flow_id #=> String
+    #   resp.constraints.required_fields #=> Array
+    #   resp.constraints.required_fields[0].id.name #=> String
+    #   resp.constraints.read_only_fields #=> Array
+    #   resp.constraints.read_only_fields[0].id.name #=> String
+    #   resp.constraints.invisible_fields #=> Array
+    #   resp.constraints.invisible_fields[0].id.name #=> String
+    #   resp.defaults.default_field_values #=> Array
+    #   resp.defaults.default_field_values[0].id.name #=> String
+    #   resp.defaults.default_field_values[0].default_value #=> String
+    #   resp.fields #=> Array
+    #   resp.fields[0].id.name #=> String
+    #   resp.fields[0].description #=> String
+    #   resp.fields[0].type #=> String, one of "NAME", "DESCRIPTION", "SCHEDULED_TIME", "QUICK_CONNECT", "URL", "NUMBER", "TEXT", "TEXT_AREA", "DATE_TIME", "BOOLEAN", "SINGLE_SELECT", "EMAIL"
+    #   resp.fields[0].single_select_options #=> Array
+    #   resp.fields[0].single_select_options[0] #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_modified_time #=> Time
+    #   resp.created_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetTaskTemplate AWS API Documentation
+    #
+    # @overload get_task_template(params = {})
+    # @param [Hash] params ({})
+    def get_task_template(params = {}, options = {})
+      req = build_request(:get_task_template, params)
+      req.send_request(options)
+    end
+
     # This API is in preview release for Amazon Connect and is subject to
     # change.
     #
@@ -3987,7 +4202,7 @@ module Aws::Connect
     #   resp = client.list_contact_references({
     #     instance_id: "InstanceId", # required
     #     contact_id: "ContactId", # required
-    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT
+    #     reference_types: ["URL"], # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #     next_token: "NextToken",
     #   })
     #
@@ -3999,6 +4214,14 @@ module Aws::Connect
     #   resp.reference_summary_list[0].attachment.name #=> String
     #   resp.reference_summary_list[0].attachment.value #=> String
     #   resp.reference_summary_list[0].attachment.status #=> String, one of "APPROVED", "REJECTED"
+    #   resp.reference_summary_list[0].string.name #=> String
+    #   resp.reference_summary_list[0].string.value #=> String
+    #   resp.reference_summary_list[0].number.name #=> String
+    #   resp.reference_summary_list[0].number.value #=> String
+    #   resp.reference_summary_list[0].date.name #=> String
+    #   resp.reference_summary_list[0].date.value #=> String
+    #   resp.reference_summary_list[0].email.name #=> String
+    #   resp.reference_summary_list[0].email.value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListContactReferences AWS API Documentation
@@ -5097,6 +5320,72 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Lists task templates for the specified Amazon Connect instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    #   It is not expected that you set this because the value returned in the
+    #   previous response is always null.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    #   It is not expected that you set this.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [String] :name
+    #   The name of the task template.
+    #
+    # @return [Types::ListTaskTemplatesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTaskTemplatesResponse#task_templates #task_templates} => Array&lt;Types::TaskTemplateMetadata&gt;
+    #   * {Types::ListTaskTemplatesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_task_templates({
+    #     instance_id: "InstanceId", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     name: "TaskTemplateName",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.task_templates #=> Array
+    #   resp.task_templates[0].id #=> String
+    #   resp.task_templates[0].arn #=> String
+    #   resp.task_templates[0].name #=> String
+    #   resp.task_templates[0].description #=> String
+    #   resp.task_templates[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.task_templates[0].last_modified_time #=> Time
+    #   resp.task_templates[0].created_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListTaskTemplates AWS API Documentation
+    #
+    # @overload list_task_templates(params = {})
+    # @param [Hash] params ({})
+    def list_task_templates(params = {}, options = {})
+      req = build_request(:list_task_templates, params)
+      req.send_request(options)
+    end
+
     # Lists the use cases for the integration association.
     #
     # @option params [required, String] :instance_id
@@ -5965,7 +6254,7 @@ module Aws::Connect
     # @option params [String] :previous_contact_id
     #   The identifier of the previous chat, voice, or task contact.
     #
-    # @option params [required, String] :contact_flow_id
+    # @option params [String] :contact_flow_id
     #   The identifier of the contact flow for initiating the tasks. To see
     #   the ContactFlowId in the Amazon Connect console user interface, on the
     #   navigation menu go to **Routing**, **Contact Flows**. Choose the
@@ -6008,6 +6297,12 @@ module Aws::Connect
     #   the inbound contact flow. The scheduled time cannot be in the past. It
     #   must be within up to 6 days in future.
     #
+    # @option params [String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [String] :quick_connect_id
+    #   The identifier for the quick connect.
+    #
     # @return [Types::StartTaskContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartTaskContactResponse#contact_id #contact_id} => String
@@ -6017,7 +6312,7 @@ module Aws::Connect
     #   resp = client.start_task_contact({
     #     instance_id: "InstanceId", # required
     #     previous_contact_id: "ContactId",
-    #     contact_flow_id: "ContactFlowId", # required
+    #     contact_flow_id: "ContactFlowId",
     #     attributes: {
     #       "AttributeName" => "AttributeValue",
     #     },
@@ -6025,12 +6320,14 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       },
     #     },
     #     description: "Description",
     #     client_token: "ClientToken",
     #     scheduled_time: Time.now,
+    #     task_template_id: "TaskTemplateId",
+    #     quick_connect_id: "QuickConnectId",
     #   })
     #
     # @example Response structure
@@ -6200,8 +6497,8 @@ module Aws::Connect
     # Adds the specified tags to the specified resource.
     #
     # The supported resource types are users, routing profiles, queues,
-    # quick connects, contact flows, agent status, hours of operation, and
-    # phone number.
+    # quick connects, contact flows, agent status, hours of operation, phone
+    # number, security profiles, and task templates.
     #
     # For sample policies that use tags, see [Amazon Connect Identity-Based
     # Policy Examples][1] in the *Amazon Connect Administrator Guide*.
@@ -6234,6 +6531,79 @@ module Aws::Connect
     # @param [Hash] params ({})
     def tag_resource(params = {}, options = {})
       req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Transfers contacts from one agent or queue to another agent or queue
+    # at any point after a contact is created. You can transfer a contact to
+    # another queue by providing the contact flow which orchestrates the
+    # contact to the destination queue. This gives you more control over
+    # contact handling and helps you adhere to the service level agreement
+    # (SLA) guaranteed to your customers.
+    #
+    # Note the following requirements:
+    #
+    # * Transfer is supported for only `TASK` contacts.
+    #
+    # * Do not use both `QueueId` and `UserId` in the same call.
+    #
+    # * The following contact flow types are supported: Inbound contact
+    #   flow, Transfer to agent flow, and Transfer to queue flow.
+    #
+    # * The `TransferContact` API can be called only on active contacts.
+    #
+    # * A contact cannot be transferred more than 11 times.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, String] :contact_id
+    #   The identifier of the contact in this instance of Amazon Connect
+    #
+    # @option params [String] :queue_id
+    #   The identifier for the queue.
+    #
+    # @option params [String] :user_id
+    #   The identifier for the user.
+    #
+    # @option params [required, String] :contact_flow_id
+    #   The identifier of the contact flow.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::TransferContactResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::TransferContactResponse#contact_id #contact_id} => String
+    #   * {Types::TransferContactResponse#contact_arn #contact_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.transfer_contact({
+    #     instance_id: "InstanceId", # required
+    #     contact_id: "ContactId", # required
+    #     queue_id: "QueueId",
+    #     user_id: "AgentResourceId",
+    #     contact_flow_id: "ContactFlowId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.contact_id #=> String
+    #   resp.contact_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TransferContact AWS API Documentation
+    #
+    # @overload transfer_contact(params = {})
+    # @param [Hash] params ({})
+    def transfer_contact(params = {}, options = {})
+      req = build_request(:transfer_contact, params)
       req.send_request(options)
     end
 
@@ -6338,7 +6708,7 @@ module Aws::Connect
     #   The description of the contact.
     #
     # @option params [Hash<String,Types::Reference>] :references
-    #   A formatted URL that is shown to an agent in the Contact Control Panel
+    #   Well-formed data on contact, shown to agents on Contact Control Panel
     #   (CCP).
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -6353,7 +6723,7 @@ module Aws::Connect
     #     references: {
     #       "ReferenceKey" => {
     #         value: "ReferenceValue", # required
-    #         type: "URL", # required, accepts URL, ATTACHMENT
+    #         type: "URL", # required, accepts URL, ATTACHMENT, NUMBER, STRING, DATE, EMAIL
     #       },
     #     },
     #   })
@@ -7321,6 +7691,148 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Updates details about a specific task template in the specified Amazon
+    # Connect instance. This operation does not support partial updates.
+    # Instead it does a full update of template content.
+    #
+    # @option params [required, String] :task_template_id
+    #   A unique identifier for the task template.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [String] :name
+    #   The name of the task template.
+    #
+    # @option params [String] :description
+    #   The description of the task template.
+    #
+    # @option params [String] :contact_flow_id
+    #   The identifier of the flow that runs by default when a task is created
+    #   by referencing this template.
+    #
+    # @option params [Types::TaskTemplateConstraints] :constraints
+    #   Constraints that are applicable to the fields listed.
+    #
+    # @option params [Types::TaskTemplateDefaults] :defaults
+    #   The default values for fields when a task is created by referencing
+    #   this template.
+    #
+    # @option params [String] :status
+    #   Marks a template as `ACTIVE` or `INACTIVE` for a task to refer to it.
+    #   Tasks can only be created from `ACTIVE` templates. If a template is
+    #   marked as `INACTIVE`, then a task that refers to this template cannot
+    #   be created.
+    #
+    # @option params [Array<Types::TaskTemplateField>] :fields
+    #   Fields that are part of the template.
+    #
+    # @return [Types::UpdateTaskTemplateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTaskTemplateResponse#instance_id #instance_id} => String
+    #   * {Types::UpdateTaskTemplateResponse#id #id} => String
+    #   * {Types::UpdateTaskTemplateResponse#arn #arn} => String
+    #   * {Types::UpdateTaskTemplateResponse#name #name} => String
+    #   * {Types::UpdateTaskTemplateResponse#description #description} => String
+    #   * {Types::UpdateTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
+    #   * {Types::UpdateTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
+    #   * {Types::UpdateTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
+    #   * {Types::UpdateTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
+    #   * {Types::UpdateTaskTemplateResponse#status #status} => String
+    #   * {Types::UpdateTaskTemplateResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::UpdateTaskTemplateResponse#created_time #created_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_task_template({
+    #     task_template_id: "TaskTemplateId", # required
+    #     instance_id: "InstanceId", # required
+    #     name: "TaskTemplateName",
+    #     description: "TaskTemplateDescription",
+    #     contact_flow_id: "ContactFlowId",
+    #     constraints: {
+    #       required_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       read_only_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #       invisible_fields: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #         },
+    #       ],
+    #     },
+    #     defaults: {
+    #       default_field_values: [
+    #         {
+    #           id: {
+    #             name: "TaskTemplateFieldName",
+    #           },
+    #           default_value: "TaskTemplateFieldValue",
+    #         },
+    #       ],
+    #     },
+    #     status: "ACTIVE", # accepts ACTIVE, INACTIVE
+    #     fields: [
+    #       {
+    #         id: { # required
+    #           name: "TaskTemplateFieldName",
+    #         },
+    #         description: "TaskTemplateFieldDescription",
+    #         type: "NAME", # accepts NAME, DESCRIPTION, SCHEDULED_TIME, QUICK_CONNECT, URL, NUMBER, TEXT, TEXT_AREA, DATE_TIME, BOOLEAN, SINGLE_SELECT, EMAIL
+    #         single_select_options: ["TaskTemplateSingleSelectOption"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.instance_id #=> String
+    #   resp.id #=> String
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.contact_flow_id #=> String
+    #   resp.constraints.required_fields #=> Array
+    #   resp.constraints.required_fields[0].id.name #=> String
+    #   resp.constraints.read_only_fields #=> Array
+    #   resp.constraints.read_only_fields[0].id.name #=> String
+    #   resp.constraints.invisible_fields #=> Array
+    #   resp.constraints.invisible_fields[0].id.name #=> String
+    #   resp.defaults.default_field_values #=> Array
+    #   resp.defaults.default_field_values[0].id.name #=> String
+    #   resp.defaults.default_field_values[0].default_value #=> String
+    #   resp.fields #=> Array
+    #   resp.fields[0].id.name #=> String
+    #   resp.fields[0].description #=> String
+    #   resp.fields[0].type #=> String, one of "NAME", "DESCRIPTION", "SCHEDULED_TIME", "QUICK_CONNECT", "URL", "NUMBER", "TEXT", "TEXT_AREA", "DATE_TIME", "BOOLEAN", "SINGLE_SELECT", "EMAIL"
+    #   resp.fields[0].single_select_options #=> Array
+    #   resp.fields[0].single_select_options[0] #=> String
+    #   resp.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.last_modified_time #=> Time
+    #   resp.created_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateTaskTemplate AWS API Documentation
+    #
+    # @overload update_task_template(params = {})
+    # @param [Hash] params ({})
+    def update_task_template(params = {}, options = {})
+      req = build_request(:update_task_template, params)
+      req.send_request(options)
+    end
+
     # Assigns the specified hierarchy group to the specified user.
     #
     # @option params [String] :hierarchy_group_id
@@ -7585,7 +8097,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.71.0'
+      context[:gem_version] = '1.72.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
