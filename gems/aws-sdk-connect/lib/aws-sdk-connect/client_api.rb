@@ -16,6 +16,8 @@ module Aws::Connect
     ARN = Shapes::StringShape.new(name: 'ARN')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AfterContactWorkTimeLimit = Shapes::IntegerShape.new(name: 'AfterContactWorkTimeLimit')
+    AgentContactReference = Shapes::StructureShape.new(name: 'AgentContactReference')
+    AgentContactReferenceList = Shapes::ListShape.new(name: 'AgentContactReferenceList')
     AgentFirstName = Shapes::StringShape.new(name: 'AgentFirstName')
     AgentInfo = Shapes::StructureShape.new(name: 'AgentInfo')
     AgentLastName = Shapes::StringShape.new(name: 'AgentLastName')
@@ -25,6 +27,7 @@ module Aws::Connect
     AgentStatusId = Shapes::StringShape.new(name: 'AgentStatusId')
     AgentStatusName = Shapes::StringShape.new(name: 'AgentStatusName')
     AgentStatusOrderNumber = Shapes::IntegerShape.new(name: 'AgentStatusOrderNumber')
+    AgentStatusReference = Shapes::StructureShape.new(name: 'AgentStatusReference')
     AgentStatusState = Shapes::StringShape.new(name: 'AgentStatusState')
     AgentStatusSummary = Shapes::StructureShape.new(name: 'AgentStatusSummary')
     AgentStatusSummaryList = Shapes::ListShape.new(name: 'AgentStatusSummaryList')
@@ -62,6 +65,7 @@ module Aws::Connect
     BucketName = Shapes::StringShape.new(name: 'BucketName')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     Channel = Shapes::StringShape.new(name: 'Channel')
+    ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
     Channels = Shapes::ListShape.new(name: 'Channels')
     ChatContent = Shapes::StringShape.new(name: 'ChatContent')
     ChatContentType = Shapes::StringShape.new(name: 'ChatContentType')
@@ -77,6 +81,7 @@ module Aws::Connect
     Comparison = Shapes::StringShape.new(name: 'Comparison')
     Concurrency = Shapes::IntegerShape.new(name: 'Concurrency')
     Contact = Shapes::StructureShape.new(name: 'Contact')
+    ContactFilter = Shapes::StructureShape.new(name: 'ContactFilter')
     ContactFlow = Shapes::StructureShape.new(name: 'ContactFlow')
     ContactFlowContent = Shapes::StringShape.new(name: 'ContactFlowContent')
     ContactFlowDescription = Shapes::StringShape.new(name: 'ContactFlowDescription')
@@ -101,6 +106,8 @@ module Aws::Connect
     ContactInitiationMethod = Shapes::StringShape.new(name: 'ContactInitiationMethod')
     ContactNotFoundException = Shapes::StructureShape.new(name: 'ContactNotFoundException')
     ContactReferences = Shapes::MapShape.new(name: 'ContactReferences')
+    ContactState = Shapes::StringShape.new(name: 'ContactState')
+    ContactStates = Shapes::ListShape.new(name: 'ContactStates')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
     CreateAgentStatusRequest = Shapes::StructureShape.new(name: 'CreateAgentStatusRequest')
     CreateAgentStatusResponse = Shapes::StructureShape.new(name: 'CreateAgentStatusResponse')
@@ -222,6 +229,8 @@ module Aws::Connect
     GetContactAttributesResponse = Shapes::StructureShape.new(name: 'GetContactAttributesResponse')
     GetCurrentMetricDataRequest = Shapes::StructureShape.new(name: 'GetCurrentMetricDataRequest')
     GetCurrentMetricDataResponse = Shapes::StructureShape.new(name: 'GetCurrentMetricDataResponse')
+    GetCurrentUserDataRequest = Shapes::StructureShape.new(name: 'GetCurrentUserDataRequest')
+    GetCurrentUserDataResponse = Shapes::StructureShape.new(name: 'GetCurrentUserDataResponse')
     GetFederationTokenRequest = Shapes::StructureShape.new(name: 'GetFederationTokenRequest')
     GetFederationTokenResponse = Shapes::StructureShape.new(name: 'GetFederationTokenResponse')
     GetMetricDataRequest = Shapes::StructureShape.new(name: 'GetMetricDataRequest')
@@ -237,11 +246,13 @@ module Aws::Connect
     HierarchyGroupName = Shapes::StringShape.new(name: 'HierarchyGroupName')
     HierarchyGroupSummary = Shapes::StructureShape.new(name: 'HierarchyGroupSummary')
     HierarchyGroupSummaryList = Shapes::ListShape.new(name: 'HierarchyGroupSummaryList')
+    HierarchyGroupSummaryReference = Shapes::StructureShape.new(name: 'HierarchyGroupSummaryReference')
     HierarchyLevel = Shapes::StructureShape.new(name: 'HierarchyLevel')
     HierarchyLevelId = Shapes::StringShape.new(name: 'HierarchyLevelId')
     HierarchyLevelName = Shapes::StringShape.new(name: 'HierarchyLevelName')
     HierarchyLevelUpdate = Shapes::StructureShape.new(name: 'HierarchyLevelUpdate')
     HierarchyPath = Shapes::StructureShape.new(name: 'HierarchyPath')
+    HierarchyPathReference = Shapes::StructureShape.new(name: 'HierarchyPathReference')
     HierarchyStructure = Shapes::StructureShape.new(name: 'HierarchyStructure')
     HierarchyStructureUpdate = Shapes::StructureShape.new(name: 'HierarchyStructureUpdate')
     HistoricalMetric = Shapes::StructureShape.new(name: 'HistoricalMetric')
@@ -276,6 +287,7 @@ module Aws::Connect
     InstanceStorageResourceType = Shapes::StringShape.new(name: 'InstanceStorageResourceType')
     InstanceSummary = Shapes::StructureShape.new(name: 'InstanceSummary')
     InstanceSummaryList = Shapes::ListShape.new(name: 'InstanceSummaryList')
+    IntegerCount = Shapes::IntegerShape.new(name: 'IntegerCount')
     IntegrationAssociationId = Shapes::StringShape.new(name: 'IntegrationAssociationId')
     IntegrationAssociationSummary = Shapes::StructureShape.new(name: 'IntegrationAssociationSummary')
     IntegrationAssociationSummaryList = Shapes::ListShape.new(name: 'IntegrationAssociationSummaryList')
@@ -471,6 +483,7 @@ module Aws::Connect
     RoutingProfileQueueConfigSummaryList = Shapes::ListShape.new(name: 'RoutingProfileQueueConfigSummaryList')
     RoutingProfileQueueReference = Shapes::StructureShape.new(name: 'RoutingProfileQueueReference')
     RoutingProfileQueueReferenceList = Shapes::ListShape.new(name: 'RoutingProfileQueueReferenceList')
+    RoutingProfileReference = Shapes::StructureShape.new(name: 'RoutingProfileReference')
     RoutingProfileSummary = Shapes::StructureShape.new(name: 'RoutingProfileSummary')
     RoutingProfileSummaryList = Shapes::ListShape.new(name: 'RoutingProfileSummaryList')
     S3Config = Shapes::StructureShape.new(name: 'S3Config')
@@ -610,12 +623,16 @@ module Aws::Connect
     UseCaseSummaryList = Shapes::ListShape.new(name: 'UseCaseSummaryList')
     UseCaseType = Shapes::StringShape.new(name: 'UseCaseType')
     User = Shapes::StructureShape.new(name: 'User')
+    UserData = Shapes::StructureShape.new(name: 'UserData')
+    UserDataFilters = Shapes::StructureShape.new(name: 'UserDataFilters')
+    UserDataList = Shapes::ListShape.new(name: 'UserDataList')
     UserId = Shapes::StringShape.new(name: 'UserId')
     UserIdentityInfo = Shapes::StructureShape.new(name: 'UserIdentityInfo')
     UserIdentityInfoLite = Shapes::StructureShape.new(name: 'UserIdentityInfoLite')
     UserNotFoundException = Shapes::StructureShape.new(name: 'UserNotFoundException')
     UserPhoneConfig = Shapes::StructureShape.new(name: 'UserPhoneConfig')
     UserQuickConnectConfig = Shapes::StructureShape.new(name: 'UserQuickConnectConfig')
+    UserReference = Shapes::StructureShape.new(name: 'UserReference')
     UserSearchConditionList = Shapes::ListShape.new(name: 'UserSearchConditionList')
     UserSearchCriteria = Shapes::StructureShape.new(name: 'UserSearchCriteria')
     UserSearchFilter = Shapes::StructureShape.new(name: 'UserSearchFilter')
@@ -642,6 +659,17 @@ module Aws::Connect
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AgentContactReference.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, location_name: "ContactId"))
+    AgentContactReference.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "Channel"))
+    AgentContactReference.add_member(:initiation_method, Shapes::ShapeRef.new(shape: ContactInitiationMethod, location_name: "InitiationMethod"))
+    AgentContactReference.add_member(:agent_contact_state, Shapes::ShapeRef.new(shape: ContactState, location_name: "AgentContactState"))
+    AgentContactReference.add_member(:state_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StateStartTimestamp"))
+    AgentContactReference.add_member(:connected_to_agent_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ConnectedToAgentTimestamp"))
+    AgentContactReference.add_member(:queue, Shapes::ShapeRef.new(shape: QueueReference, location_name: "Queue"))
+    AgentContactReference.struct_class = Types::AgentContactReference
+
+    AgentContactReferenceList.member = Shapes::ShapeRef.new(shape: AgentContactReference)
+
     AgentInfo.add_member(:id, Shapes::ShapeRef.new(shape: AgentResourceId, location_name: "Id"))
     AgentInfo.add_member(:connected_to_agent_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ConnectedToAgentTimestamp"))
     AgentInfo.struct_class = Types::AgentInfo
@@ -655,6 +683,10 @@ module Aws::Connect
     AgentStatus.add_member(:state, Shapes::ShapeRef.new(shape: AgentStatusState, location_name: "State"))
     AgentStatus.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     AgentStatus.struct_class = Types::AgentStatus
+
+    AgentStatusReference.add_member(:status_start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StatusStartTimestamp"))
+    AgentStatusReference.add_member(:status_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "StatusArn"))
+    AgentStatusReference.struct_class = Types::AgentStatusReference
 
     AgentStatusSummary.add_member(:id, Shapes::ShapeRef.new(shape: AgentStatusId, location_name: "Id"))
     AgentStatusSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
@@ -745,6 +777,9 @@ module Aws::Connect
 
     AvailableNumbersList.member = Shapes::ShapeRef.new(shape: AvailableNumberSummary)
 
+    ChannelToCountMap.key = Shapes::ShapeRef.new(shape: Channel)
+    ChannelToCountMap.value = Shapes::ShapeRef.new(shape: IntegerCount)
+
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
 
     ChatMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: ChatContentType, required: true, location_name: "ContentType"))
@@ -791,6 +826,9 @@ module Aws::Connect
     Contact.add_member(:last_update_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastUpdateTimestamp"))
     Contact.add_member(:scheduled_timestamp, Shapes::ShapeRef.new(shape: timestamp, location_name: "ScheduledTimestamp"))
     Contact.struct_class = Types::Contact
+
+    ContactFilter.add_member(:contact_states, Shapes::ShapeRef.new(shape: ContactStates, location_name: "ContactStates"))
+    ContactFilter.struct_class = Types::ContactFilter
 
     ContactFlow.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     ContactFlow.add_member(:id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "Id"))
@@ -839,6 +877,8 @@ module Aws::Connect
 
     ContactReferences.key = Shapes::ShapeRef.new(shape: ReferenceKey)
     ContactReferences.value = Shapes::ShapeRef.new(shape: Reference)
+
+    ContactStates.member = Shapes::ShapeRef.new(shape: ContactState)
 
     ControlPlaneTagFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: TagOrConditionList, location_name: "OrConditions"))
     ControlPlaneTagFilter.add_member(:and_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "AndConditions"))
@@ -1326,6 +1366,16 @@ module Aws::Connect
     GetCurrentMetricDataResponse.add_member(:data_snapshot_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "DataSnapshotTime"))
     GetCurrentMetricDataResponse.struct_class = Types::GetCurrentMetricDataResponse
 
+    GetCurrentUserDataRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    GetCurrentUserDataRequest.add_member(:filters, Shapes::ShapeRef.new(shape: UserDataFilters, required: true, location_name: "Filters"))
+    GetCurrentUserDataRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCurrentUserDataRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location_name: "MaxResults", metadata: {"box"=>true}))
+    GetCurrentUserDataRequest.struct_class = Types::GetCurrentUserDataRequest
+
+    GetCurrentUserDataResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetCurrentUserDataResponse.add_member(:user_data_list, Shapes::ShapeRef.new(shape: UserDataList, location_name: "UserDataList"))
+    GetCurrentUserDataResponse.struct_class = Types::GetCurrentUserDataResponse
+
     GetFederationTokenRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     GetFederationTokenRequest.struct_class = Types::GetFederationTokenRequest
 
@@ -1387,6 +1437,10 @@ module Aws::Connect
 
     HierarchyGroupSummaryList.member = Shapes::ShapeRef.new(shape: HierarchyGroupSummary)
 
+    HierarchyGroupSummaryReference.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "Id"))
+    HierarchyGroupSummaryReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    HierarchyGroupSummaryReference.struct_class = Types::HierarchyGroupSummaryReference
+
     HierarchyLevel.add_member(:id, Shapes::ShapeRef.new(shape: HierarchyLevelId, location_name: "Id"))
     HierarchyLevel.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     HierarchyLevel.add_member(:name, Shapes::ShapeRef.new(shape: HierarchyLevelName, location_name: "Name"))
@@ -1401,6 +1455,13 @@ module Aws::Connect
     HierarchyPath.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyGroupSummary, location_name: "LevelFour"))
     HierarchyPath.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyGroupSummary, location_name: "LevelFive"))
     HierarchyPath.struct_class = Types::HierarchyPath
+
+    HierarchyPathReference.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelOne"))
+    HierarchyPathReference.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelTwo"))
+    HierarchyPathReference.add_member(:level_three, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelThree"))
+    HierarchyPathReference.add_member(:level_four, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFour"))
+    HierarchyPathReference.add_member(:level_five, Shapes::ShapeRef.new(shape: HierarchyGroupSummaryReference, location_name: "LevelFive"))
+    HierarchyPathReference.struct_class = Types::HierarchyPathReference
 
     HierarchyStructure.add_member(:level_one, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelOne"))
     HierarchyStructure.add_member(:level_two, Shapes::ShapeRef.new(shape: HierarchyLevel, location_name: "LevelTwo"))
@@ -2087,6 +2148,10 @@ module Aws::Connect
 
     RoutingProfileQueueReferenceList.member = Shapes::ShapeRef.new(shape: RoutingProfileQueueReference)
 
+    RoutingProfileReference.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
+    RoutingProfileReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    RoutingProfileReference.struct_class = Types::RoutingProfileReference
+
     RoutingProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: RoutingProfileId, location_name: "Id"))
     RoutingProfileSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
     RoutingProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: RoutingProfileName, location_name: "Name"))
@@ -2581,6 +2646,22 @@ module Aws::Connect
     User.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
     User.struct_class = Types::User
 
+    UserData.add_member(:user, Shapes::ShapeRef.new(shape: UserReference, location_name: "User"))
+    UserData.add_member(:routing_profile, Shapes::ShapeRef.new(shape: RoutingProfileReference, location_name: "RoutingProfile"))
+    UserData.add_member(:hierarchy_path, Shapes::ShapeRef.new(shape: HierarchyPathReference, location_name: "HierarchyPath"))
+    UserData.add_member(:status, Shapes::ShapeRef.new(shape: AgentStatusReference, location_name: "Status"))
+    UserData.add_member(:available_slots_by_channel, Shapes::ShapeRef.new(shape: ChannelToCountMap, location_name: "AvailableSlotsByChannel"))
+    UserData.add_member(:max_slots_by_channel, Shapes::ShapeRef.new(shape: ChannelToCountMap, location_name: "MaxSlotsByChannel"))
+    UserData.add_member(:active_slots_by_channel, Shapes::ShapeRef.new(shape: ChannelToCountMap, location_name: "ActiveSlotsByChannel"))
+    UserData.add_member(:contacts, Shapes::ShapeRef.new(shape: AgentContactReferenceList, location_name: "Contacts"))
+    UserData.struct_class = Types::UserData
+
+    UserDataFilters.add_member(:queues, Shapes::ShapeRef.new(shape: Queues, location_name: "Queues"))
+    UserDataFilters.add_member(:contact_filter, Shapes::ShapeRef.new(shape: ContactFilter, location_name: "ContactFilter"))
+    UserDataFilters.struct_class = Types::UserDataFilters
+
+    UserDataList.member = Shapes::ShapeRef.new(shape: UserData)
+
     UserIdentityInfo.add_member(:first_name, Shapes::ShapeRef.new(shape: AgentFirstName, location_name: "FirstName"))
     UserIdentityInfo.add_member(:last_name, Shapes::ShapeRef.new(shape: AgentLastName, location_name: "LastName"))
     UserIdentityInfo.add_member(:email, Shapes::ShapeRef.new(shape: Email, location_name: "Email"))
@@ -2602,6 +2683,10 @@ module Aws::Connect
     UserQuickConnectConfig.add_member(:user_id, Shapes::ShapeRef.new(shape: UserId, required: true, location_name: "UserId"))
     UserQuickConnectConfig.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, required: true, location_name: "ContactFlowId"))
     UserQuickConnectConfig.struct_class = Types::UserQuickConnectConfig
+
+    UserReference.add_member(:id, Shapes::ShapeRef.new(shape: UserId, location_name: "Id"))
+    UserReference.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, location_name: "Arn"))
+    UserReference.struct_class = Types::UserReference
 
     UserSearchConditionList.member = Shapes::ShapeRef.new(shape: UserSearchCriteria)
 
@@ -3569,6 +3654,25 @@ module Aws::Connect
         o.http_request_uri = "/metrics/current/{InstanceId}"
         o.input = Shapes::ShapeRef.new(shape: GetCurrentMetricDataRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCurrentMetricDataResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_current_user_data, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCurrentUserData"
+        o.http_method = "POST"
+        o.http_request_uri = "/metrics/userdata/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: GetCurrentUserDataRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCurrentUserDataResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)

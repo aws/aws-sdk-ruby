@@ -23,6 +23,59 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the [contact][1] associated to the user.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html
+    #
+    # @!attribute [rw] contact_id
+    #   The identifier of the contact in this instance of Amazon Connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel
+    #   The channel of the contact.
+    #   @return [String]
+    #
+    # @!attribute [rw] initiation_method
+    #   How the contact was initiated.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_contact_state
+    #   The [state of the contact][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
+    #   @return [String]
+    #
+    # @!attribute [rw] state_start_timestamp
+    #   The epoch timestamp when the contact state started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] connected_to_agent_timestamp
+    #   The time at which the contact was connected to an agent.
+    #   @return [Time]
+    #
+    # @!attribute [rw] queue
+    #   Contains information about a queue resource for which metrics are
+    #   returned.
+    #   @return [Types::QueueReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentContactReference AWS API Documentation
+    #
+    class AgentContactReference < Struct.new(
+      :contact_id,
+      :channel,
+      :initiation_method,
+      :agent_contact_state,
+      :state_start_timestamp,
+      :connected_to_agent_timestamp,
+      :queue)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agent who accepted the contact.
     #
     # @!attribute [rw] id
@@ -88,6 +141,25 @@ module Aws::Connect
       :display_order,
       :state,
       :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the agent's status.
+    #
+    # @!attribute [rw] status_start_timestamp
+    #   The start timestamp of the agent's status.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status_arn
+    #   The Amazon Resource Name (ARN) of the agent's status.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AgentStatusReference AWS API Documentation
+    #
+    class AgentStatusReference < Struct.new(
+      :status_start_timestamp,
+      :status_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -858,6 +930,36 @@ module Aws::Connect
       :disconnect_timestamp,
       :last_update_timestamp,
       :scheduled_timestamp)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Filters user data based on the contact information that is associated
+    # to the users. It contains a list of [contact states][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
+    #
+    # @note When making an API call, you may pass ContactFilter
+    #   data as a hash:
+    #
+    #       {
+    #         contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
+    #       }
+    #
+    # @!attribute [rw] contact_states
+    #   A list of up to 9 [contact states][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ContactFilter AWS API Documentation
+    #
+    class ContactFilter < Struct.new(
+      :contact_states)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4149,6 +4251,71 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # @note When making an API call, you may pass GetCurrentUserDataRequest
+    #   data as a hash:
+    #
+    #       {
+    #         instance_id: "InstanceId", # required
+    #         filters: { # required
+    #           queues: ["QueueId"],
+    #           contact_filter: {
+    #             contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
+    #           },
+    #         },
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters up to 100 `Queues`, or up to 9 `ContactStates`. The user
+    #   data is retrieved only for those users who are associated with the
+    #   queues and have contacts that are in the specified `ContactState`.
+    #   @return [Types::UserDataFilters]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserDataRequest AWS API Documentation
+    #
+    class GetCurrentUserDataRequest < Struct.new(
+      :instance_id,
+      :filters,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_data_list
+    #   A list of the user data that is returned.
+    #   @return [Array<Types::UserData>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserDataResponse AWS API Documentation
+    #
+    class GetCurrentUserDataResponse < Struct.new(
+      :next_token,
+      :user_data_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @note When making an API call, you may pass GetFederationTokenRequest
     #   data as a hash:
     #
@@ -4682,6 +4849,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the hierarchy group.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the hierarchy group.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the hierarchy group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyGroupSummaryReference AWS API Documentation
+    #
+    class HierarchyGroupSummaryReference < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a hierarchy level.
     #
     # @!attribute [rw] id
@@ -4753,6 +4939,40 @@ module Aws::Connect
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyPath AWS API Documentation
     #
     class HierarchyPath < Struct.new(
+      :level_one,
+      :level_two,
+      :level_three,
+      :level_four,
+      :level_five)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the levels in the hierarchy group.
+    #
+    # @!attribute [rw] level_one
+    #   Information about level one.
+    #   @return [Types::HierarchyGroupSummaryReference]
+    #
+    # @!attribute [rw] level_two
+    #   Information about level two.
+    #   @return [Types::HierarchyGroupSummaryReference]
+    #
+    # @!attribute [rw] level_three
+    #   Information about level three.
+    #   @return [Types::HierarchyGroupSummaryReference]
+    #
+    # @!attribute [rw] level_four
+    #   Information about level four.
+    #   @return [Types::HierarchyGroupSummaryReference]
+    #
+    # @!attribute [rw] level_five
+    #   Information about level five.
+    #   @return [Types::HierarchyGroupSummaryReference]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/HierarchyPathReference AWS API Documentation
+    #
+    class HierarchyPathReference < Struct.new(
       :level_one,
       :level_two,
       :level_three,
@@ -8345,6 +8565,25 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about the routing profile assigned to the user.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the routing profile.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the routing profile.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/RoutingProfileReference AWS API Documentation
+    #
+    class RoutingProfileReference < Struct.new(
+      :id,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains summary information about a routing profile.
     #
     # @!attribute [rw] id
@@ -9758,7 +9997,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect
+    #   The identifier of the contact in this instance of Amazon Connect.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -9795,7 +10034,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect
+    #   The identifier of the contact in this instance of Amazon Connect.
     #   @return [String]
     #
     # @!attribute [rw] contact_arn
@@ -11429,6 +11668,99 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Data for a user.
+    #
+    # @!attribute [rw] user
+    #   Information about the user for the data that is returned. It
+    #   contains resourceId and ARN of the user.
+    #   @return [Types::UserReference]
+    #
+    # @!attribute [rw] routing_profile
+    #   Information about the routing profile that is assigned to the user.
+    #   @return [Types::RoutingProfileReference]
+    #
+    # @!attribute [rw] hierarchy_path
+    #   Contains information about the levels of a hierarchy group assigned
+    #   to a user.
+    #   @return [Types::HierarchyPathReference]
+    #
+    # @!attribute [rw] status
+    #   The status of the agent that they manually set in their Contact
+    #   Control Panel (CCP), or that the supervisor manually changes in the
+    #   real-time metrics report.
+    #   @return [Types::AgentStatusReference]
+    #
+    # @!attribute [rw] available_slots_by_channel
+    #   A map of available slots by channel. The key is a channel name. The
+    #   value is an integer: the available number of slots.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] max_slots_by_channel
+    #   A map of maximum slots by channel. The key is a channel name. The
+    #   value is an integer: the maximum number of slots. This is calculated
+    #   from [MediaConcurrency][1] of the RoutingProfile assigned to the
+    #   agent.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_MediaConcurrency.html
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] active_slots_by_channel
+    #   A map of active slots by channel. The key is a channel name. The
+    #   value is an integer: the number of active slots.
+    #   @return [Hash<String,Integer>]
+    #
+    # @!attribute [rw] contacts
+    #   A list of contact reference information.
+    #   @return [Array<Types::AgentContactReference>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserData AWS API Documentation
+    #
+    class UserData < Struct.new(
+      :user,
+      :routing_profile,
+      :hierarchy_path,
+      :status,
+      :available_slots_by_channel,
+      :max_slots_by_channel,
+      :active_slots_by_channel,
+      :contacts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for the user data.
+    #
+    # @note When making an API call, you may pass UserDataFilters
+    #   data as a hash:
+    #
+    #       {
+    #         queues: ["QueueId"],
+    #         contact_filter: {
+    #           contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
+    #         },
+    #       }
+    #
+    # @!attribute [rw] queues
+    #   Contains information about a queue resource for which metrics are
+    #   returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] contact_filter
+    #   A filter for the user data based on the contact information that is
+    #   associated to the user. It contains a list of contact states.
+    #   @return [Types::ContactFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserDataFilters AWS API Documentation
+    #
+    class UserDataFilters < Struct.new(
+      :queues,
+      :contact_filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the identity of a user.
     #
     # @note When making an API call, you may pass UserIdentityInfo
@@ -11562,6 +11894,25 @@ module Aws::Connect
     class UserQuickConnectConfig < Struct.new(
       :user_id,
       :contact_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about the user.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the user.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) for the user.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UserReference AWS API Documentation
+    #
+    class UserReference < Struct.new(
+      :id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2022-06-06)
+------------------
+
+* Feature - This release adds support for searching channels by members via the SearchChannels API, removes required restrictions for Name and Mode in UpdateChannel API and enhances CreateChannel API by exposing member and moderator list as well as channel id as optional parameters.
+
 1.10.0 (2022-02-24)
 ------------------
 

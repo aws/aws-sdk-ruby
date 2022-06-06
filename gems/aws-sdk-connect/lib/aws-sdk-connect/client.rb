@@ -3488,6 +3488,92 @@ module Aws::Connect
       req.send_request(options)
     end
 
+    # Gets the real-time active user data from the specified Amazon Connect
+    # instance.
+    #
+    # @option params [required, String] :instance_id
+    #   The identifier of the Amazon Connect instance. You can find the
+    #   instanceId in the ARN of the instance.
+    #
+    # @option params [required, Types::UserDataFilters] :filters
+    #   Filters up to 100 `Queues`, or up to 9 `ContactStates`. The user data
+    #   is retrieved only for those users who are associated with the queues
+    #   and have contacts that are in the specified `ContactState`.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::GetCurrentUserDataResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCurrentUserDataResponse#next_token #next_token} => String
+    #   * {Types::GetCurrentUserDataResponse#user_data_list #user_data_list} => Array&lt;Types::UserData&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_current_user_data({
+    #     instance_id: "InstanceId", # required
+    #     filters: { # required
+    #       queues: ["QueueId"],
+    #       contact_filter: {
+    #         contact_states: ["INCOMING"], # accepts INCOMING, PENDING, CONNECTING, CONNECTED, CONNECTED_ONHOLD, MISSED, ERROR, ENDED, REJECTED
+    #       },
+    #     },
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.user_data_list #=> Array
+    #   resp.user_data_list[0].user.id #=> String
+    #   resp.user_data_list[0].user.arn #=> String
+    #   resp.user_data_list[0].routing_profile.id #=> String
+    #   resp.user_data_list[0].routing_profile.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_one.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_one.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_two.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_two.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_three.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_three.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_four.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_four.arn #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_five.id #=> String
+    #   resp.user_data_list[0].hierarchy_path.level_five.arn #=> String
+    #   resp.user_data_list[0].status.status_start_timestamp #=> Time
+    #   resp.user_data_list[0].status.status_arn #=> String
+    #   resp.user_data_list[0].available_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].available_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].max_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].max_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].active_slots_by_channel #=> Hash
+    #   resp.user_data_list[0].active_slots_by_channel["Channel"] #=> Integer
+    #   resp.user_data_list[0].contacts #=> Array
+    #   resp.user_data_list[0].contacts[0].contact_id #=> String
+    #   resp.user_data_list[0].contacts[0].channel #=> String, one of "VOICE", "CHAT", "TASK"
+    #   resp.user_data_list[0].contacts[0].initiation_method #=> String, one of "INBOUND", "OUTBOUND", "TRANSFER", "QUEUE_TRANSFER", "CALLBACK", "API"
+    #   resp.user_data_list[0].contacts[0].agent_contact_state #=> String, one of "INCOMING", "PENDING", "CONNECTING", "CONNECTED", "CONNECTED_ONHOLD", "MISSED", "ERROR", "ENDED", "REJECTED"
+    #   resp.user_data_list[0].contacts[0].state_start_timestamp #=> Time
+    #   resp.user_data_list[0].contacts[0].connected_to_agent_timestamp #=> Time
+    #   resp.user_data_list[0].contacts[0].queue.id #=> String
+    #   resp.user_data_list[0].contacts[0].queue.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/GetCurrentUserData AWS API Documentation
+    #
+    # @overload get_current_user_data(params = {})
+    # @param [Hash] params ({})
+    def get_current_user_data(params = {}, options = {})
+      req = build_request(:get_current_user_data, params)
+      req.send_request(options)
+    end
+
     # Retrieves a token for federation.
     #
     # <note markdown="1"> This API doesn't support root users. If you try to invoke
@@ -6559,7 +6645,7 @@ module Aws::Connect
     #   instanceId in the ARN of the instance.
     #
     # @option params [required, String] :contact_id
-    #   The identifier of the contact in this instance of Amazon Connect
+    #   The identifier of the contact in this instance of Amazon Connect.
     #
     # @option params [String] :queue_id
     #   The identifier for the queue.
@@ -8097,7 +8183,7 @@ module Aws::Connect
         params: params,
         config: config)
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.73.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

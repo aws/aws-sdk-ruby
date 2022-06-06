@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2022-06-06)
+------------------
+
+* Feature - This release adds a new API, GetCurrentUserData, which returns real-time details about users' current activity.
+
 1.72.0 (2022-06-02)
 ------------------
 

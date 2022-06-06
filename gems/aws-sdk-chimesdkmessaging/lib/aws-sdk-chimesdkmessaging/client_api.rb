@@ -35,6 +35,8 @@ module Aws::ChimeSDKMessaging
     ChannelFlowExecutionOrder = Shapes::IntegerShape.new(name: 'ChannelFlowExecutionOrder')
     ChannelFlowSummary = Shapes::StructureShape.new(name: 'ChannelFlowSummary')
     ChannelFlowSummaryList = Shapes::ListShape.new(name: 'ChannelFlowSummaryList')
+    ChannelId = Shapes::StringShape.new(name: 'ChannelId')
+    ChannelMemberArns = Shapes::ListShape.new(name: 'ChannelMemberArns')
     ChannelMembership = Shapes::StructureShape.new(name: 'ChannelMembership')
     ChannelMembershipForAppInstanceUserSummary = Shapes::StructureShape.new(name: 'ChannelMembershipForAppInstanceUserSummary')
     ChannelMembershipForAppInstanceUserSummaryList = Shapes::ListShape.new(name: 'ChannelMembershipForAppInstanceUserSummaryList')
@@ -54,6 +56,7 @@ module Aws::ChimeSDKMessaging
     ChannelModeratedByAppInstanceUserSummary = Shapes::StructureShape.new(name: 'ChannelModeratedByAppInstanceUserSummary')
     ChannelModeratedByAppInstanceUserSummaryList = Shapes::ListShape.new(name: 'ChannelModeratedByAppInstanceUserSummaryList')
     ChannelModerator = Shapes::StructureShape.new(name: 'ChannelModerator')
+    ChannelModeratorArns = Shapes::ListShape.new(name: 'ChannelModeratorArns')
     ChannelModeratorSummary = Shapes::StructureShape.new(name: 'ChannelModeratorSummary')
     ChannelModeratorSummaryList = Shapes::ListShape.new(name: 'ChannelModeratorSummaryList')
     ChannelPrivacy = Shapes::StringShape.new(name: 'ChannelPrivacy')
@@ -160,6 +163,14 @@ module Aws::ChimeSDKMessaging
     RedactChannelMessageResponse = Shapes::StructureShape.new(name: 'RedactChannelMessageResponse')
     ResourceLimitExceededException = Shapes::StructureShape.new(name: 'ResourceLimitExceededException')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
+    SearchChannelsRequest = Shapes::StructureShape.new(name: 'SearchChannelsRequest')
+    SearchChannelsResponse = Shapes::StructureShape.new(name: 'SearchChannelsResponse')
+    SearchField = Shapes::StructureShape.new(name: 'SearchField')
+    SearchFieldKey = Shapes::StringShape.new(name: 'SearchFieldKey')
+    SearchFieldOperator = Shapes::StringShape.new(name: 'SearchFieldOperator')
+    SearchFieldValue = Shapes::StringShape.new(name: 'SearchFieldValue')
+    SearchFieldValues = Shapes::ListShape.new(name: 'SearchFieldValues')
+    SearchFields = Shapes::ListShape.new(name: 'SearchFields')
     SendChannelMessageRequest = Shapes::StructureShape.new(name: 'SendChannelMessageRequest')
     SendChannelMessageResponse = Shapes::StructureShape.new(name: 'SendChannelMessageResponse')
     ServiceFailureException = Shapes::StructureShape.new(name: 'ServiceFailureException')
@@ -279,6 +290,8 @@ module Aws::ChimeSDKMessaging
 
     ChannelFlowSummaryList.member = Shapes::ShapeRef.new(shape: ChannelFlowSummary)
 
+    ChannelMemberArns.member = Shapes::ShapeRef.new(shape: ChimeArn)
+
     ChannelMembership.add_member(:invited_by, Shapes::ShapeRef.new(shape: Identity, location_name: "InvitedBy"))
     ChannelMembership.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMembershipType, location_name: "Type"))
     ChannelMembership.add_member(:member, Shapes::ShapeRef.new(shape: Identity, location_name: "Member"))
@@ -353,6 +366,8 @@ module Aws::ChimeSDKMessaging
     ChannelModerator.add_member(:created_by, Shapes::ShapeRef.new(shape: Identity, location_name: "CreatedBy"))
     ChannelModerator.struct_class = Types::ChannelModerator
 
+    ChannelModeratorArns.member = Shapes::ShapeRef.new(shape: ChimeArn)
+
     ChannelModeratorSummary.add_member(:moderator, Shapes::ShapeRef.new(shape: Identity, location_name: "Moderator"))
     ChannelModeratorSummary.struct_class = Types::ChannelModeratorSummary
 
@@ -418,6 +433,9 @@ module Aws::ChimeSDKMessaging
     CreateChannelRequest.add_member(:client_request_token, Shapes::ShapeRef.new(shape: ClientRequestToken, required: true, location_name: "ClientRequestToken", metadata: {"idempotencyToken"=>true}))
     CreateChannelRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
+    CreateChannelRequest.add_member(:channel_id, Shapes::ShapeRef.new(shape: ChannelId, location_name: "ChannelId"))
+    CreateChannelRequest.add_member(:member_arns, Shapes::ShapeRef.new(shape: ChannelMemberArns, location_name: "MemberArns"))
+    CreateChannelRequest.add_member(:moderator_arns, Shapes::ShapeRef.new(shape: ChannelModeratorArns, location_name: "ModeratorArns"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, location_name: "ChannelArn"))
@@ -717,6 +735,25 @@ module Aws::ChimeSDKMessaging
     ResourceLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
     ResourceLimitExceededException.struct_class = Types::ResourceLimitExceededException
 
+    SearchChannelsRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, location: "header", location_name: "x-amz-chime-bearer"))
+    SearchChannelsRequest.add_member(:fields, Shapes::ShapeRef.new(shape: SearchFields, required: true, location_name: "Fields"))
+    SearchChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    SearchChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    SearchChannelsRequest.struct_class = Types::SearchChannelsRequest
+
+    SearchChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelSummaryList, location_name: "Channels"))
+    SearchChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    SearchChannelsResponse.struct_class = Types::SearchChannelsResponse
+
+    SearchField.add_member(:key, Shapes::ShapeRef.new(shape: SearchFieldKey, required: true, location_name: "Key"))
+    SearchField.add_member(:values, Shapes::ShapeRef.new(shape: SearchFieldValues, required: true, location_name: "Values"))
+    SearchField.add_member(:operator, Shapes::ShapeRef.new(shape: SearchFieldOperator, required: true, location_name: "Operator"))
+    SearchField.struct_class = Types::SearchField
+
+    SearchFieldValues.member = Shapes::ShapeRef.new(shape: SearchFieldValue)
+
+    SearchFields.member = Shapes::ShapeRef.new(shape: SearchField)
+
     SendChannelMessageRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
     SendChannelMessageRequest.add_member(:content, Shapes::ShapeRef.new(shape: NonEmptyContent, required: true, location_name: "Content"))
     SendChannelMessageRequest.add_member(:type, Shapes::ShapeRef.new(shape: ChannelMessageType, required: true, location_name: "Type"))
@@ -793,8 +830,8 @@ module Aws::ChimeSDKMessaging
     UpdateChannelReadMarkerResponse.struct_class = Types::UpdateChannelReadMarkerResponse
 
     UpdateChannelRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "uri", location_name: "channelArn"))
-    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, required: true, location_name: "Name"))
-    UpdateChannelRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, required: true, location_name: "Mode"))
+    UpdateChannelRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyResourceName, location_name: "Name"))
+    UpdateChannelRequest.add_member(:mode, Shapes::ShapeRef.new(shape: ChannelMode, location_name: "Mode"))
     UpdateChannelRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
     UpdateChannelRequest.add_member(:chime_bearer, Shapes::ShapeRef.new(shape: ChimeArn, required: true, location: "header", location_name: "x-amz-chime-bearer"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
@@ -1420,10 +1457,31 @@ module Aws::ChimeSDKMessaging
         o.output = Shapes::ShapeRef.new(shape: RedactChannelMessageResponse)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+      end)
+
+      api.add_operation(:search_channels, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SearchChannels"
+        o.http_method = "POST"
+        o.http_request_uri = "/channels?operation=search"
+        o.input = Shapes::ShapeRef.new(shape: SearchChannelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: SearchChannelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottledClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceFailureException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:send_channel_message, Seahorse::Model::Operation.new.tap do |o|
